@@ -6,7 +6,7 @@ GlobalSizingParams
 .. currentmodule:: ansys.meshing.prime
 
 .. autoclass:: GlobalSizingParams
-   
+
    
    
    .. rubric:: Methods

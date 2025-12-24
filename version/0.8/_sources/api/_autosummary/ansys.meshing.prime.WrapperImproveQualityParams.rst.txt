@@ -6,7 +6,7 @@ WrapperImproveQualityParams
 .. currentmodule:: ansys.meshing.prime
 
 .. autoclass:: WrapperImproveQualityParams
-   
+
    
    
    .. rubric:: Methods

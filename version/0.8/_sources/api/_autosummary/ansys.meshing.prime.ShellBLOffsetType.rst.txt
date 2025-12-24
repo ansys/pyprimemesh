@@ -6,7 +6,7 @@ ShellBLOffsetType
 .. currentmodule:: ansys.meshing.prime
 
 .. autoclass:: ShellBLOffsetType
-   
+
    
    
    .. rubric:: Methods

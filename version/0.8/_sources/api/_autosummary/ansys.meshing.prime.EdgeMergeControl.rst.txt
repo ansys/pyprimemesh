@@ -6,7 +6,7 @@ EdgeMergeControl
 .. currentmodule:: ansys.meshing.prime
 
 .. autoclass:: EdgeMergeControl
-   
+
    
    
    .. rubric:: Methods

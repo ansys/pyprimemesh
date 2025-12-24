@@ -6,7 +6,7 @@ CdbAnalysisType
 .. currentmodule:: ansys.meshing.prime
 
 .. autoclass:: CdbAnalysisType
-   
+
    
    
    .. rubric:: Methods

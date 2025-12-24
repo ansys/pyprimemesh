@@ -6,7 +6,7 @@ MergeBoundaryNodesParams
 .. currentmodule:: ansys.meshing.prime
 
 .. autoclass:: MergeBoundaryNodesParams
-   
+
    
    
    .. rubric:: Methods

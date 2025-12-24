@@ -6,7 +6,7 @@ ScopeDefinition
 .. currentmodule:: ansys.meshing.prime
 
 .. autoclass:: ScopeDefinition
-   
+
    
    
    .. rubric:: Methods

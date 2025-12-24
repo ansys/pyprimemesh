@@ -6,7 +6,7 @@ CreateBOIParams
 .. currentmodule:: ansys.meshing.prime
 
 .. autoclass:: CreateBOIParams
-   
+
    
    
    .. rubric:: Methods

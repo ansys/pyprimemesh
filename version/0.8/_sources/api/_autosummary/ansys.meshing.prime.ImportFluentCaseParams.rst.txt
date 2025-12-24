@@ -6,7 +6,7 @@ ImportFluentCaseParams
 .. currentmodule:: ansys.meshing.prime
 
 .. autoclass:: ImportFluentCaseParams
-   
+
    
    
    .. rubric:: Methods

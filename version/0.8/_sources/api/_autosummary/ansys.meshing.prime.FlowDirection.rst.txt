@@ -6,7 +6,7 @@ FlowDirection
 .. currentmodule:: ansys.meshing.prime
 
 .. autoclass:: FlowDirection
-   
+
    
    
    .. rubric:: Methods

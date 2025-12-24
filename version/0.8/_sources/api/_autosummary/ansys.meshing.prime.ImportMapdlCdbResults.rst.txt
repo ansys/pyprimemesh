@@ -6,7 +6,7 @@ ImportMapdlCdbResults
 .. currentmodule:: ansys.meshing.prime
 
 .. autoclass:: ImportMapdlCdbResults
-   
+
    
    
    .. rubric:: Methods
@@ -28,6 +28,7 @@ ImportMapdlCdbResults
       :toctree:
    
       ImportMapdlCdbResults.error_code
+      ImportMapdlCdbResults.warning_codes
    
    
 

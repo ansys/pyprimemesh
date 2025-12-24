@@ -6,7 +6,7 @@ WrapperPatchFlowRegionsParams
 .. currentmodule:: ansys.meshing.prime
 
 .. autoclass:: WrapperPatchFlowRegionsParams
-   
+
    
    
    .. rubric:: Methods
@@ -30,6 +30,9 @@ WrapperPatchFlowRegionsParams
       WrapperPatchFlowRegionsParams.base_size
       WrapperPatchFlowRegionsParams.dead_regions
       WrapperPatchFlowRegionsParams.number_of_threads
+      WrapperPatchFlowRegionsParams.patch_at_live
+      WrapperPatchFlowRegionsParams.size_field_ids
+      WrapperPatchFlowRegionsParams.sizing_method
       WrapperPatchFlowRegionsParams.suggested_part_name
    
    

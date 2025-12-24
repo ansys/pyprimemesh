@@ -6,7 +6,7 @@ SurfaceDiagnosticSummaryParams
 .. currentmodule:: ansys.meshing.prime
 
 .. autoclass:: SurfaceDiagnosticSummaryParams
-   
+
    
    
    .. rubric:: Methods

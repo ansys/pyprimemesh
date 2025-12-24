@@ -6,7 +6,7 @@ SweepType
 .. currentmodule:: ansys.meshing.prime
 
 .. autoclass:: SweepType
-   
+
    
    
    .. rubric:: Methods

@@ -6,7 +6,7 @@ WrapperCloseGapsParams
 .. currentmodule:: ansys.meshing.prime
 
 .. autoclass:: WrapperCloseGapsParams
-   
+
    
    
    .. rubric:: Methods

@@ -6,7 +6,7 @@ SurfaceFeatureType
 .. currentmodule:: ansys.meshing.prime
 
 .. autoclass:: SurfaceFeatureType
-   
+
    
    
    .. rubric:: Methods

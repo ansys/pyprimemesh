@@ -6,7 +6,7 @@ LSDynaFileFormatType
 .. currentmodule:: ansys.meshing.prime
 
 .. autoclass:: LSDynaFileFormatType
-   
+
    
    
    .. rubric:: Methods

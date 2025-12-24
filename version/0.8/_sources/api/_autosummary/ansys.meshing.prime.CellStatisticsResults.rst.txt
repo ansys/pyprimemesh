@@ -6,7 +6,7 @@ CellStatisticsResults
 .. currentmodule:: ansys.meshing.prime
 
 .. autoclass:: CellStatisticsResults
-   
+
    
    
    .. rubric:: Methods

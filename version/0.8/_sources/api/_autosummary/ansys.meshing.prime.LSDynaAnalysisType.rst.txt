@@ -6,7 +6,7 @@ LSDynaAnalysisType
 .. currentmodule:: ansys.meshing.prime
 
 .. autoclass:: LSDynaAnalysisType
-   
+
    
    
    .. rubric:: Methods

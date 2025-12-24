@@ -6,7 +6,7 @@ EdgeConnectivityResults
 .. currentmodule:: ansys.meshing.prime
 
 .. autoclass:: EdgeConnectivityResults
-   
+
    
    
    .. rubric:: Methods

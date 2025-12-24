@@ -6,7 +6,7 @@ LengthUnit
 .. currentmodule:: ansys.meshing.prime
 
 .. autoclass:: LengthUnit
-   
+
    
    
    .. rubric:: Methods

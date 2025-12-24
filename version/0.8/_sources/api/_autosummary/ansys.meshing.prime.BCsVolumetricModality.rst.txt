@@ -6,7 +6,7 @@ BCsVolumetricModality
 .. currentmodule:: ansys.meshing.prime
 
 .. autoclass:: BCsVolumetricModality
-   
+
    
    
    .. rubric:: Methods

@@ -6,7 +6,7 @@ CollapseParams
 .. currentmodule:: ansys.meshing.prime
 
 .. autoclass:: CollapseParams
-   
+
    
    
    .. rubric:: Methods

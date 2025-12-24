@@ -6,7 +6,7 @@ PeriodicControlSummaryResult
 .. currentmodule:: ansys.meshing.prime
 
 .. autoclass:: PeriodicControlSummaryResult
-   
+
    
    
    .. rubric:: Methods

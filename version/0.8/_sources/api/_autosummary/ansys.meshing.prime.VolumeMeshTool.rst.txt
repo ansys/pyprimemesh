@@ -6,7 +6,7 @@ VolumeMeshTool
 .. currentmodule:: ansys.meshing.prime
 
 .. autoclass:: VolumeMeshTool
-   
+
    
    
    .. rubric:: Methods
@@ -15,8 +15,10 @@ VolumeMeshTool
       :toctree:
    
       
+      VolumeMeshTool.assign_mesh_regions
       VolumeMeshTool.check_mesh
       VolumeMeshTool.copy_cell_zonelets
+      VolumeMeshTool.get_parts_for_points
       VolumeMeshTool.improve_by_auto_node_move
    
    

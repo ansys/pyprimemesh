@@ -6,7 +6,7 @@ MergePartsResults
 .. currentmodule:: ansys.meshing.prime
 
 .. autoclass:: MergePartsResults
-   
+
    
    
    .. rubric:: Methods

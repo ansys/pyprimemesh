@@ -6,7 +6,7 @@ IntersectionMask
 .. currentmodule:: ansys.meshing.prime
 
 .. autoclass:: IntersectionMask
-   
+
    
    
    .. rubric:: Methods

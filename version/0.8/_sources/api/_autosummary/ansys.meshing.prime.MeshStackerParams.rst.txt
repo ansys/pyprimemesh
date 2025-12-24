@@ -6,7 +6,7 @@ MeshStackerParams
 .. currentmodule:: ansys.meshing.prime
 
 .. autoclass:: MeshStackerParams
-   
+
    
    
    .. rubric:: Methods
@@ -32,6 +32,7 @@ MeshStackerParams
       MeshStackerParams.lateral_defeature_tolerance
       MeshStackerParams.max_offset_size
       MeshStackerParams.origin
+      MeshStackerParams.seed_faces
       MeshStackerParams.size_control_ids
       MeshStackerParams.stacking_defeature_tolerance
    

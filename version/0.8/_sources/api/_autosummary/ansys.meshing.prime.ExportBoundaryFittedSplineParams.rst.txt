@@ -6,7 +6,7 @@ ExportBoundaryFittedSplineParams
 .. currentmodule:: ansys.meshing.prime
 
 .. autoclass:: ExportBoundaryFittedSplineParams
-   
+
    
    
    .. rubric:: Methods

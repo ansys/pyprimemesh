@@ -6,7 +6,7 @@ BCPairType
 .. currentmodule:: ansys.meshing.prime
 
 .. autoclass:: BCPairType
-   
+
    
    
    .. rubric:: Methods

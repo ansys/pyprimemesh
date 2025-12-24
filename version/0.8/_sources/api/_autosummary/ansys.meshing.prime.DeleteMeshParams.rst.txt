@@ -6,7 +6,7 @@ DeleteMeshParams
 .. currentmodule:: ansys.meshing.prime
 
 .. autoclass:: DeleteMeshParams
-   
+
    
    
    .. rubric:: Methods

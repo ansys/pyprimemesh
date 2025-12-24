@@ -6,7 +6,7 @@ AddThicknessResults
 .. currentmodule:: ansys.meshing.prime
 
 .. autoclass:: AddThicknessResults
-   
+
    
    
    .. rubric:: Methods

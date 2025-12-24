@@ -6,7 +6,7 @@ SetFeatureRecoveriesResults
 .. currentmodule:: ansys.meshing.prime
 
 .. autoclass:: SetFeatureRecoveriesResults
-   
+
    
    
    .. rubric:: Methods

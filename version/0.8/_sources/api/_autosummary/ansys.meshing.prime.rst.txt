@@ -50,6 +50,7 @@ ansys.meshing.prime
    BCPairType
    BCsVolumetricModality
    BOIType
+   BodyQueryType
    BoiSizingParams
    BoundaryFittedSpline
    BoundaryFittedSplineParams
@@ -74,6 +75,8 @@ ansys.meshing.prime
    CollapseParams
    CollapseResults
    CollapseTool
+   ComponentChildrenParams
+   ComponentChildrenResults
    ComputeTopoVolumesResults
    ComputeVolumesParams
    ComputeVolumesResults
@@ -131,6 +134,7 @@ ansys.meshing.prime
    ExportBoundaryFittedSplineParams
    ExportFluentCaseParams
    ExportFluentMeshingMeshParams
+   ExportLSDynaIGAResults
    ExportLSDynaIgaKeywordFileParams
    ExportLSDynaKeywordFileParams
    ExportLSDynaResults
@@ -168,8 +172,11 @@ ansys.meshing.prime
    HexCoreCellElementType
    HexCoreParams
    HexCoreTransitionLayerType
+   HexToSpline
+   HexToSplineParams
    IGAResults
    IGASpline
+   IGAUnstructuredSplineSolid
    IGAUnstructuredSplineSurf
    ImportAbaqusParams
    ImportAbaqusResults
@@ -187,6 +194,7 @@ ansys.meshing.prime
    JoinSeparateMethod
    LSDynaAnalysisType
    LSDynaFileFormatType
+   LabelExportParams
    LeakPreventionParams
    LengthUnit
    LocalSurferParams
@@ -247,6 +255,7 @@ ansys.meshing.prime
    RefineAtContactsParams
    RefineAtContactsResults
    RefineSplineParams
+   RefineTetMeshParams
    RemoveLabelResults
    RemoveZoneResults
    RepairEdgesParams
@@ -257,6 +266,7 @@ ansys.meshing.prime
    Scaffolder
    ScaffolderMergeResults
    ScaffolderParams
+   ScaffolderRepairMode
    ScaffolderResults
    ScaffolderSplitResults
    ScopeDefinition
@@ -300,7 +310,9 @@ ansys.meshing.prime
    SmoothDihedralFaceNodesResults
    SmoothType
    SoftSizingParams
+   SoiSizingParams
    SolverType
+   SplineContinuityType
    SplineFeatureCaptureType
    SplineRefinementType
    SplitParams
@@ -325,6 +337,7 @@ ansys.meshing.prime
    SurferParams
    SurferResults
    SweepType
+   TetMeshSplineParams
    TetParams
    ThinStripType
    ThinVolumeControl
@@ -339,6 +352,10 @@ ansys.meshing.prime
    TransformResults
    TriangulateParams
    TriangulateResults
+   TrimmedSolidSplineCutMode
+   TrimmedSpline
+   TrimmedSplineResults
+   UniformSolidSplineCreationParams
    VTComposer
    VTComposerParams
    VTComposerResults
@@ -369,6 +386,7 @@ ansys.meshing.prime
    WrapperPatchFlowRegionsParams
    WrapperPatchFlowRegionsResult
    WriteSizeFieldParams
+   ZoneMeshResult
    ZoneType
 
 

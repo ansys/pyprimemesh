@@ -6,7 +6,7 @@ MaterialPointType
 .. currentmodule:: ansys.meshing.prime
 
 .. autoclass:: MaterialPointType
-   
+
    
    
    .. rubric:: Methods

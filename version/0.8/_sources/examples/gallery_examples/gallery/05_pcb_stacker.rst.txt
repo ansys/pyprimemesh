@@ -77,7 +77,7 @@ Get the client model and instantiate meshing utilities from the ``lucid`` class.
 
  .. code-block:: none
 
-    using server from docker : The container name %s ansys-prime-server-6
+    using server from docker : The container name  ansys-prime-server-5c0f96a3-6df4-4fea-ba28-abe7a920d6c1
 
 
 
@@ -372,7 +372,7 @@ Write a CDB file.
     This get_abaqus_simulation_data is a beta API. The behavior and implementation may change in future.
 
     Exported file:
-     /tmp/tmpmq37urfq/pcb.cdb
+     /tmp/tmpbukxpk2y/pcb.cdb
 
 
 
@@ -398,7 +398,7 @@ Exit PyPrimeMesh
 
 .. rst-class:: sphx-glr-timing
 
-   **Total running time of the script:** (0 minutes 33.999 seconds)
+   **Total running time of the script:** (0 minutes 39.451 seconds)
 
 
 .. _sphx_glr_download_examples_gallery_examples_gallery_05_pcb_stacker.py:

@@ -6,7 +6,7 @@ WrapParams
 .. currentmodule:: ansys.meshing.prime
 
 .. autoclass:: WrapParams
-   
+
    
    
    .. rubric:: Methods

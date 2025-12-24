@@ -6,7 +6,7 @@ SearchBySelfIntersectionParams
 .. currentmodule:: ansys.meshing.prime
 
 .. autoclass:: SearchBySelfIntersectionParams
-   
+
    
    
    .. rubric:: Methods

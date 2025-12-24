@@ -6,7 +6,7 @@ CadRefacetingParams
 .. currentmodule:: ansys.meshing.prime
 
 .. autoclass:: CadRefacetingParams
-   
+
    
    
    .. rubric:: Methods

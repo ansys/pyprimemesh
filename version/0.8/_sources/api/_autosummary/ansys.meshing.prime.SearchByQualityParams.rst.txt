@@ -6,7 +6,7 @@ SearchByQualityParams
 .. currentmodule:: ansys.meshing.prime
 
 .. autoclass:: SearchByQualityParams
-   
+
    
    
    .. rubric:: Methods

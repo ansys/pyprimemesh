@@ -32,7 +32,7 @@
 <link href="../../_static/styles/pydata-sphinx-theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
 
     <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=8f2a1f02" />
-    <link rel="stylesheet" type="text/css" href="../../_static/styles/ansys-sphinx-theme.css?v=fbf3eb5d" />
+    <link rel="stylesheet" type="text/css" href="../../_static/styles/ansys-sphinx-theme.css?v=9e79609d" />
     <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
     <link rel="stylesheet" type="text/css" href="../../_static/jupyter-sphinx.css" />
     <link rel="stylesheet" type="text/css" href="../../_static/thebelab.css" />
@@ -40,7 +40,7 @@
     <link rel="stylesheet" type="text/css" href="../../_static/sg_gallery-binder.css?v=f4aeca0c" />
     <link rel="stylesheet" type="text/css" href="../../_static/sg_gallery-dataframe.css?v=2082cf3c" />
     <link rel="stylesheet" type="text/css" href="../../_static/sg_gallery-rendered-html.css?v=1277b6f3" />
-    <link rel="stylesheet" type="text/css" href="../../_static/styles/ansys-sphinx-theme.css?v=fbf3eb5d" />
+    <link rel="stylesheet" type="text/css" href="../../_static/styles/ansys-sphinx-theme.css?v=9e79609d" />
     <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.23/css/jquery.dataTables.min.css" />
     <link rel="stylesheet" type="text/css" href="https://www.nerdfonts.com/assets/css/webfont.css" />
     <link rel="stylesheet" type="text/css" href="../../_static/sphinx-design.min.css?v=95c83b7e" />
@@ -59,7 +59,7 @@
   
     <link href="../../_static/css/breadcrumbs.css" rel="stylesheet" />
   
-    <script src="../../_static/documentation_options.js?v=ec16d22d"></script>
+    <script src="../../_static/documentation_options.js?v=24ea0de7"></script>
     <script src="../../_static/doctools.js?v=9bcbadda"></script>
     <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="../../_static/clipboard.min.js?v=a7894cd8"></script>
@@ -73,7 +73,7 @@
     <script>
         DOCUMENTATION_OPTIONS.theme_version = '0.16.1';
         DOCUMENTATION_OPTIONS.theme_switcher_json_url = 'https://prime.docs.pyansys.com/versions.json';
-        DOCUMENTATION_OPTIONS.theme_switcher_version_match = '0.8';
+        DOCUMENTATION_OPTIONS.theme_switcher_version_match = 'dev';
         DOCUMENTATION_OPTIONS.show_version_warning_banner =
             false;
         </script>
@@ -82,10 +82,13 @@
     <link rel="search" title="Search" href="../../search.html" />
     <link rel="next" title="surface_mesh_with_size_controls" href="ansys.meshing.prime.lucid.Mesh.surface_mesh_with_size_controls.html" />
     <link rel="prev" title="read" href="ansys.meshing.prime.lucid.Mesh.read.html" />
+  
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
-  <meta name="docsearch:version" content="0.8.1" />
-  <link rel="canonical" href="https://prime.docs.pyansys.com/version/stable/api/_autosummary/ansys.meshing.prime.lucid.Mesh.surface_mesh.html" />
+  <meta name="docsearch:version" content="0.10.0.dev2" />
+  <meta property="og:site_name" content="PyAnsys" />
+  <meta name="physics" content="CAD" />
+  <meta name="physics" content="Meshing" />
   </head>
   
   
@@ -166,9 +169,15 @@
     <div class="me-auto navbar-header-items__center">
       
         <div class="navbar-item">
+
 <nav>
   <ul class="bd-navbar-elements navbar-nav">
     
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../index.html" title="PyPrimeMesh home">Home</a>
+</li>
+
+
 <li class="nav-item ">
   <a class="nav-link nav-internal" href="../../getting_started/index.html">
     Getting started
@@ -196,23 +205,34 @@
   </a>
 </li>
 
-
-<li class="nav-item ">
-  <a class="nav-link nav-internal" href="../../contributing/index.html">
+            <li class="nav-item dropdown">
+                <button class="btn dropdown-toggle nav-item" type="button"
+                data-bs-toggle="dropdown" aria-expanded="false"
+                aria-controls="pst-nav-more-links">
+                    More
+                </button>
+                <ul id="pst-nav-more-links" class="dropdown-menu">
+                    
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="../../contributing/index.html">
     Contribute
   </a>
 </li>
 
+                </ul>
+            </li>
+            
   </ul>
-</nav></div>
+</nav>
+</div>
       
     </div>
     
     
     <div class="navbar-header-items__end">
       
-        <div class="navbar-item navbar-persistent--container">
-          
+      
+        <div class="navbar-item">
 <div class="search-bar pst-js-only" id="search-bar">
   <form class="bd-search d-flex align-items-center" action="../../search.html" method="get">
     <i class="fa-solid fa-magnifying-glass"></i>
@@ -224,9 +244,7 @@
     </span>
   </form>
   <div id="static-search-results" class="static-search-results" style="display:none;" tabindex="0"></div>
-</div>
-        </div>
-      
+</div></div>
       
         <div class="navbar-item">
 <div class="version-switcher__container dropdown pst-js-only">
@@ -289,21 +307,6 @@
   </div>
   
   
-    <div class="navbar-persistent--mobile">
-<div class="search-bar pst-js-only" id="search-bar">
-  <form class="bd-search d-flex align-items-center" action="../../search.html" method="get">
-    <i class="fa-solid fa-magnifying-glass"></i>
-    <input type="search" class="form-control" name="q" placeholder="Search the docs ..."
-      aria-label="Search the docs ..." autocomplete="off" autocorrect="off"
-      autocapitalize="off" spellcheck="false" />
-    <span class="search-button__kbd-shortcut">
-      <kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd>
-    </span>
-  </form>
-  <div id="static-search-results" class="static-search-results" style="display:none;" tabindex="0"></div>
-</div>
-    </div>
-  
 
   
     <button class="pst-navbar-icon sidebar-toggle secondary-toggle" aria-label="On this page">
@@ -350,9 +353,15 @@
           
           
             <div class="navbar-item">
+
 <nav>
   <ul class="bd-navbar-elements navbar-nav">
     
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../index.html" title="PyPrimeMesh home">Home</a>
+</li>
+
+
 <li class="nav-item ">
   <a class="nav-link nav-internal" href="../../getting_started/index.html">
     Getting started
@@ -388,7 +397,8 @@
 </li>
 
   </ul>
-</nav></div>
+</nav>
+</div>
           
         
       </div>
@@ -396,6 +406,20 @@
     
     
       <div class="sidebar-header-items__end">
+        
+          <div class="navbar-item">
+<div class="search-bar pst-js-only" id="search-bar">
+  <form class="bd-search d-flex align-items-center" action="../../search.html" method="get">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <input type="search" class="form-control" name="q" placeholder="Search the docs ..."
+      aria-label="Search the docs ..." autocomplete="off" autocorrect="off"
+      autocapitalize="off" spellcheck="false" />
+    <span class="search-button__kbd-shortcut">
+      <kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd>
+    </span>
+  </form>
+  <div id="static-search-results" class="static-search-results" style="display:none;" tabindex="0"></div>
+</div></div>
         
           <div class="navbar-item">
 <div class="version-switcher__container dropdown pst-js-only">
@@ -465,6 +489,7 @@
   <div class="bd-toc-item navbar-nav"><ul class="current nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="ansys.meshing.prime.html">ansys.meshing.prime</a></li>
 <li class="toctree-l1"><a class="reference internal" href="ansys.meshing.prime.examples.html">ansys.meshing.prime.examples</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ansys.meshing.prime.graphics.html">ansys.meshing.prime.graphics</a></li>
 <li class="toctree-l1 current active has-children"><a class="reference internal" href="ansys.meshing.prime.lucid.html">ansys.meshing.prime.lucid</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
 <li class="toctree-l2"><a class="reference internal" href="ansys.meshing.prime.lucid.LabelToZoneMethod.html">LabelToZoneMethod</a></li>
 <li class="toctree-l2 current active has-children"><a class="reference internal" href="ansys.meshing.prime.lucid.Mesh.html">Mesh</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
@@ -475,6 +500,7 @@
 <li class="toctree-l3"><a class="reference internal" href="ansys.meshing.prime.lucid.Mesh.create_flow_volume.html">create_flow_volume</a></li>
 <li class="toctree-l3"><a class="reference internal" href="ansys.meshing.prime.lucid.Mesh.create_zones_from_labels.html">create_zones_from_labels</a></li>
 <li class="toctree-l3"><a class="reference internal" href="ansys.meshing.prime.lucid.Mesh.delete_topology.html">delete_topology</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ansys.meshing.prime.lucid.Mesh.from_geometry.html">from_geometry</a></li>
 <li class="toctree-l3"><a class="reference internal" href="ansys.meshing.prime.lucid.Mesh.merge_parts.html">merge_parts</a></li>
 <li class="toctree-l3"><a class="reference internal" href="ansys.meshing.prime.lucid.Mesh.read.html">read</a></li>
 <li class="toctree-l3 current active"><a class="current reference internal" href="#">surface_mesh</a></li>
@@ -600,22 +626,22 @@ is used to generate a constant size mesh.</p>
 <section id="examples-using-mesh-surface-mesh">
 <h2>Examples using Mesh.surface_mesh<a class="headerlink" href="#examples-using-mesh-surface-mesh" title="Link to this heading">#</a></h2>
 <div class="sphx-glr-thumbnails"><div class="sphx-glr-thumbcontainer" tooltip="Summary: This example shows how mesh and geometry formats are converted during import and export."><img alt="" src="../../_images/sphx_glr_00_lucid_file_IO_thumb.png" />
-<p><a class="reference internal" href="../../examples/gallery_examples/gallery/00_lucid_file_IO.html#sphx-glr-examples-gallery-examples-gallery-00-lucid-file-io-py"><span class="std std-ref">Convert data when importing and exporting mesh and CAD formats</span></a></p>
+<p><a class="reference internal" href="../../examples/gallery_examples/gallery/00_lucid_file_IO.html"><span class="doc">Convert data when importing and exporting mesh and CAD formats</span></a></p>
   <div class="sphx-glr-thumbnail-title">Convert data when importing and exporting mesh and CAD formats</div>
 </div><div class="sphx-glr-thumbcontainer" tooltip="Summary: This example demonstrates how to mesh a mixing elbow for a flow analysis."><img alt="" src="../../_images/sphx_glr_02_lucid_mixing_elbow_thumb.png" />
-<p><a class="reference internal" href="../../examples/gallery_examples/gallery/02_lucid_mixing_elbow.html#sphx-glr-examples-gallery-examples-gallery-02-lucid-mixing-elbow-py"><span class="std std-ref">Mesh a mixing elbow for a flow analysis</span></a></p>
+<p><a class="reference internal" href="../../examples/gallery_examples/gallery/02_lucid_mixing_elbow.html"><span class="doc">Mesh a mixing elbow for a flow analysis</span></a></p>
   <div class="sphx-glr-thumbnail-title">Mesh a mixing elbow for a flow analysis</div>
 </div><div class="sphx-glr-thumbcontainer" tooltip="Summary: This example demonstrates how to mesh a pipe T-section for both structural thermal and fluid flow simulation."><img alt="" src="../../_images/sphx_glr_03_lucid_pipe_tee_thumb.png" />
-<p><a class="reference internal" href="../../examples/gallery_examples/gallery/03_lucid_pipe_tee.html#sphx-glr-examples-gallery-examples-gallery-03-lucid-pipe-tee-py"><span class="std std-ref">Mesh a pipe T-section for structural thermal and fluid flow analysis</span></a></p>
+<p><a class="reference internal" href="../../examples/gallery_examples/gallery/03_lucid_pipe_tee.html"><span class="doc">Mesh a pipe T-section for structural thermal and fluid flow analysis</span></a></p>
   <div class="sphx-glr-thumbnail-title">Mesh a pipe T-section for structural thermal and fluid flow analysis</div>
 </div><div class="sphx-glr-thumbcontainer" tooltip="Summary: This example demonstrates how to mesh a printed circuit board with mainly hexahedral elements for structural thermal simulation using the volume sweeper."><img alt="" src="../../_images/sphx_glr_05_pcb_stacker_thumb.png" />
-<p><a class="reference internal" href="../../examples/gallery_examples/gallery/05_pcb_stacker.html#sphx-glr-examples-gallery-examples-gallery-05-pcb-stacker-py"><span class="std std-ref">Mesh a PCB for structural thermal analysis</span></a></p>
+<p><a class="reference internal" href="../../examples/gallery_examples/gallery/05_pcb_stacker.html"><span class="doc">Mesh a PCB for structural thermal analysis</span></a></p>
   <div class="sphx-glr-thumbnail-title">Mesh a PCB for structural thermal analysis</div>
 </div><div class="sphx-glr-thumbcontainer" tooltip="Summary: This example demonstrates how to mesh a thin solid with hexahedral and prism cells."><img alt="" src="../../_images/sphx_glr_07_saddle_bracket_thumb.png" />
-<p><a class="reference internal" href="../../examples/gallery_examples/gallery/07_saddle_bracket.html#sphx-glr-examples-gallery-examples-gallery-07-saddle-bracket-py"><span class="std std-ref">Mesh a saddle bracket for a structural analysis</span></a></p>
+<p><a class="reference internal" href="../../examples/gallery_examples/gallery/07_saddle_bracket.html"><span class="doc">Mesh a saddle bracket for a structural analysis</span></a></p>
   <div class="sphx-glr-thumbnail-title">Mesh a saddle bracket for a structural analysis</div>
 </div><div class="sphx-glr-thumbcontainer" tooltip="A block comment must be included at the top of any new example. Each example must have a reference tag in this format:"><img alt="" src="../../_images/sphx_glr_example_template_thumb.png" />
-<p><a class="reference internal" href="../../examples/gallery_examples/misc/example_template.html#sphx-glr-examples-gallery-examples-misc-example-template-py"><span class="std std-ref">Add a new example</span></a></p>
+<p><a class="reference internal" href="../../examples/gallery_examples/misc/example_template.html"><span class="doc">Add a new example</span></a></p>
   <div class="sphx-glr-thumbnail-title">Add a new example</div>
 </div></div></section>
 </section>
@@ -691,12 +717,15 @@ is used to generate a constant size mesh.</p>
 
 <script>
 // Passing the search options to the search.js file
-const SEARCH_OPTIONS = JSON.parse('{"keys": ["title", "text"], "limit": 10, "threshold": 0.2}');
+const SEARCH_OPTIONS = JSON.parse('{"keys": ["title", "text", "objectID"], "limit": 10, "threshold": 0.2}');
 const SEARCH_FILE = "../../_static/search.json";
+const ADVANCE_SEARCH_PATH = "../../search.html";
+const EXTRA_SOURCES = JSON.parse('""');
 </script>
 
 
 <script src="../../_static/js/search.js"></script>
+
   
   <footer class="bd-footer">
 <div class="bd-footer__inner bd-page-width">
@@ -732,7 +761,7 @@ const SEARCH_FILE = "../../_static/search.json";
   <a href="https://sphinxdocs.ansys.com/version/stable/index.html"
     >Ansys Sphinx Theme</a
   >
-  1.4.2. <br />Last updated on
+  1.6.4. <br />Last updated on
   <span id="ast_build_date"></span>
 </p>
 <script>

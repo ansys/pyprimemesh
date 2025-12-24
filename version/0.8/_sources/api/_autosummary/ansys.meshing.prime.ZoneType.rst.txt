@@ -6,7 +6,7 @@ ZoneType
 .. currentmodule:: ansys.meshing.prime
 
 .. autoclass:: ZoneType
-   
+
    
    
    .. rubric:: Methods

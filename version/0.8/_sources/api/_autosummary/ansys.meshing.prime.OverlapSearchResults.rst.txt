@@ -6,7 +6,7 @@ OverlapSearchResults
 .. currentmodule:: ansys.meshing.prime
 
 .. autoclass:: OverlapSearchResults
-   
+
    
    
    .. rubric:: Methods

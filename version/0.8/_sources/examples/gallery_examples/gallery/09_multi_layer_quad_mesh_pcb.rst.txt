@@ -125,7 +125,7 @@ Instantiate meshing utilities from the ``lucid`` class.
 
  .. code-block:: none
 
-    using server from docker : The container name %s ansys-prime-server-10
+    using server from docker : The container name  ansys-prime-server-501bd53c-d330-4c44-904f-1849f96810ec
 
 
 
@@ -562,7 +562,7 @@ Create a temporary folder and use it to output the mesh to a CAS file.
 
 
     Exported file:
-     /tmp/tmpr7nej24b/multi_layer_quad_mesh_pcb.cas
+     /tmp/tmp8myqk5cy/multi_layer_quad_mesh_pcb.cas
 
 
 
@@ -588,7 +588,7 @@ Exit PyPrimeMesh
 
 .. rst-class:: sphx-glr-timing
 
-   **Total running time of the script:** (1 minutes 49.773 seconds)
+   **Total running time of the script:** (1 minutes 17.843 seconds)
 
 
 .. _sphx_glr_download_examples_gallery_examples_gallery_09_multi_layer_quad_mesh_pcb.py:

@@ -31,7 +31,7 @@
 <link href="_static/styles/pydata-sphinx-theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
 
     <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=8f2a1f02" />
-    <link rel="stylesheet" type="text/css" href="_static/styles/ansys-sphinx-theme.css?v=fbf3eb5d" />
+    <link rel="stylesheet" type="text/css" href="_static/styles/ansys-sphinx-theme.css?v=9e79609d" />
     <link rel="stylesheet" type="text/css" href="_static/copybutton.css?v=76b2166b" />
     <link rel="stylesheet" type="text/css" href="_static/jupyter-sphinx.css" />
     <link rel="stylesheet" type="text/css" href="_static/thebelab.css" />
@@ -39,7 +39,7 @@
     <link rel="stylesheet" type="text/css" href="_static/sg_gallery-binder.css?v=f4aeca0c" />
     <link rel="stylesheet" type="text/css" href="_static/sg_gallery-dataframe.css?v=2082cf3c" />
     <link rel="stylesheet" type="text/css" href="_static/sg_gallery-rendered-html.css?v=1277b6f3" />
-    <link rel="stylesheet" type="text/css" href="_static/styles/ansys-sphinx-theme.css?v=fbf3eb5d" />
+    <link rel="stylesheet" type="text/css" href="_static/styles/ansys-sphinx-theme.css?v=9e79609d" />
     <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.23/css/jquery.dataTables.min.css" />
     <link rel="stylesheet" type="text/css" href="https://www.nerdfonts.com/assets/css/webfont.css" />
     <link rel="stylesheet" type="text/css" href="_static/sphinx-design.min.css?v=95c83b7e" />
@@ -58,7 +58,7 @@
   
     <link href="_static/css/breadcrumbs.css" rel="stylesheet" />
   
-    <script src="_static/documentation_options.js?v=ec16d22d"></script>
+    <script src="_static/documentation_options.js?v=24ea0de7"></script>
     <script src="_static/doctools.js?v=9bcbadda"></script>
     <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="_static/clipboard.min.js?v=a7894cd8"></script>
@@ -72,17 +72,20 @@
     <script>
         DOCUMENTATION_OPTIONS.theme_version = '0.16.1';
         DOCUMENTATION_OPTIONS.theme_switcher_json_url = 'https://prime.docs.pyansys.com/versions.json';
-        DOCUMENTATION_OPTIONS.theme_switcher_version_match = '0.8';
+        DOCUMENTATION_OPTIONS.theme_switcher_version_match = 'dev';
         DOCUMENTATION_OPTIONS.show_version_warning_banner =
             false;
         </script>
     <link rel="icon" href="_static/ansys-favicon.png"/>
     <link rel="index" title="Index" href="#" />
     <link rel="search" title="Search" href="search.html" />
+  
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
-  <meta name="docsearch:version" content="0.8.1" />
-  <link rel="canonical" href="https://prime.docs.pyansys.com/version/stable/genindex.html" />
+  <meta name="docsearch:version" content="0.10.0.dev2" />
+  <meta property="og:site_name" content="PyAnsys" />
+  <meta name="physics" content="CAD" />
+  <meta name="physics" content="Meshing" />
   </head>
   
   
@@ -163,9 +166,15 @@
     <div class="me-auto navbar-header-items__center">
       
         <div class="navbar-item">
+
 <nav>
   <ul class="bd-navbar-elements navbar-nav">
     
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="index.html" title="PyPrimeMesh home">Home</a>
+</li>
+
+
 <li class="nav-item ">
   <a class="nav-link nav-internal" href="getting_started/index.html">
     Getting started
@@ -193,23 +202,34 @@
   </a>
 </li>
 
-
-<li class="nav-item ">
-  <a class="nav-link nav-internal" href="contributing/index.html">
+            <li class="nav-item dropdown">
+                <button class="btn dropdown-toggle nav-item" type="button"
+                data-bs-toggle="dropdown" aria-expanded="false"
+                aria-controls="pst-nav-more-links">
+                    More
+                </button>
+                <ul id="pst-nav-more-links" class="dropdown-menu">
+                    
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="contributing/index.html">
     Contribute
   </a>
 </li>
 
+                </ul>
+            </li>
+            
   </ul>
-</nav></div>
+</nav>
+</div>
       
     </div>
     
     
     <div class="navbar-header-items__end">
       
-        <div class="navbar-item navbar-persistent--container">
-          
+      
+        <div class="navbar-item">
 <div class="search-bar pst-js-only" id="search-bar">
   <form class="bd-search d-flex align-items-center" action="search.html" method="get">
     <i class="fa-solid fa-magnifying-glass"></i>
@@ -221,9 +241,7 @@
     </span>
   </form>
   <div id="static-search-results" class="static-search-results" style="display:none;" tabindex="0"></div>
-</div>
-        </div>
-      
+</div></div>
       
         <div class="navbar-item">
 <div class="version-switcher__container dropdown pst-js-only">
@@ -286,21 +304,6 @@
   </div>
   
   
-    <div class="navbar-persistent--mobile">
-<div class="search-bar pst-js-only" id="search-bar">
-  <form class="bd-search d-flex align-items-center" action="search.html" method="get">
-    <i class="fa-solid fa-magnifying-glass"></i>
-    <input type="search" class="form-control" name="q" placeholder="Search the docs ..."
-      aria-label="Search the docs ..." autocomplete="off" autocorrect="off"
-      autocapitalize="off" spellcheck="false" />
-    <span class="search-button__kbd-shortcut">
-      <kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd>
-    </span>
-  </form>
-  <div id="static-search-results" class="static-search-results" style="display:none;" tabindex="0"></div>
-</div>
-    </div>
-  
 
   
     <button class="pst-navbar-icon sidebar-toggle secondary-toggle" aria-label="On this page">
@@ -349,9 +352,15 @@
           
           
             <div class="navbar-item">
+
 <nav>
   <ul class="bd-navbar-elements navbar-nav">
     
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="index.html" title="PyPrimeMesh home">Home</a>
+</li>
+
+
 <li class="nav-item ">
   <a class="nav-link nav-internal" href="getting_started/index.html">
     Getting started
@@ -387,7 +396,8 @@
 </li>
 
   </ul>
-</nav></div>
+</nav>
+</div>
           
         
       </div>
@@ -395,6 +405,20 @@
     
     
       <div class="sidebar-header-items__end">
+        
+          <div class="navbar-item">
+<div class="search-bar pst-js-only" id="search-bar">
+  <form class="bd-search d-flex align-items-center" action="search.html" method="get">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <input type="search" class="form-control" name="q" placeholder="Search the docs ..."
+      aria-label="Search the docs ..." autocomplete="off" autocorrect="off"
+      autocapitalize="off" spellcheck="false" />
+    <span class="search-button__kbd-shortcut">
+      <kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd>
+    </span>
+  </form>
+  <div id="static-search-results" class="static-search-results" style="display:none;" tabindex="0"></div>
+</div></div>
         
           <div class="navbar-item">
 <div class="version-switcher__container dropdown pst-js-only">
@@ -576,6 +600,12 @@
 </li>
       <li><a href="api/_autosummary/ansys.meshing.prime.Part.add_labels_on_zonelets.html#ansys.meshing.prime.Part.add_labels_on_zonelets">add_labels_on_zonelets() (ansys.meshing.prime.Part method)</a>
 </li>
+      <li><a href="api/_autosummary/ansys.meshing.prime.graphics.PrimePlotter.add_model.html#ansys.meshing.prime.graphics.PrimePlotter.add_model">add_model() (ansys.meshing.prime.graphics.PrimePlotter method)</a>
+</li>
+      <li><a href="api/_autosummary/ansys.meshing.prime.graphics.PrimePlotter.add_model_pd.html#ansys.meshing.prime.graphics.PrimePlotter.add_model_pd">add_model_pd() (ansys.meshing.prime.graphics.PrimePlotter method)</a>
+</li>
+      <li><a href="api/_autosummary/ansys.meshing.prime.graphics.PrimePlotter.add_scope.html#ansys.meshing.prime.graphics.PrimePlotter.add_scope">add_scope() (ansys.meshing.prime.graphics.PrimePlotter method)</a>
+</li>
       <li><a href="api/_autosummary/ansys.meshing.prime.SurfaceUtilities.add_thickness.html#ansys.meshing.prime.SurfaceUtilities.add_thickness">add_thickness() (ansys.meshing.prime.SurfaceUtilities method)</a>
 </li>
       <li><a href="api/_autosummary/ansys.meshing.prime.Part.add_topo_entities_to_zone.html#ansys.meshing.prime.Part.add_topo_entities_to_zone">add_topo_entities_to_zone() (ansys.meshing.prime.Part method)</a>
@@ -613,6 +643,8 @@
       <li><a href="api/_autosummary/ansys.meshing.prime.BCsVolumetricModality.ALL.html#ansys.meshing.prime.BCsVolumetricModality.ALL">ALL (ansys.meshing.prime.BCsVolumetricModality attribute)</a>
 
       <ul>
+        <li><a href="api/_autosummary/ansys.meshing.prime.BodyQueryType.ALL.html#ansys.meshing.prime.BodyQueryType.ALL">(ansys.meshing.prime.BodyQueryType attribute)</a>
+</li>
         <li><a href="api/_autosummary/ansys.meshing.prime.ThinStripType.ALL.html#ansys.meshing.prime.ThinStripType.ALL">(ansys.meshing.prime.ThinStripType attribute)</a>
 </li>
       </ul></li>
@@ -685,6 +717,8 @@
 </li>
         <li><a href="api/_autosummary/ansys.meshing.prime.BCsVolumetricModality.as_integer_ratio.html#ansys.meshing.prime.BCsVolumetricModality.as_integer_ratio">(ansys.meshing.prime.BCsVolumetricModality method)</a>
 </li>
+        <li><a href="api/_autosummary/ansys.meshing.prime.BodyQueryType.as_integer_ratio.html#ansys.meshing.prime.BodyQueryType.as_integer_ratio">(ansys.meshing.prime.BodyQueryType method)</a>
+</li>
         <li><a href="api/_autosummary/ansys.meshing.prime.BOIType.as_integer_ratio.html#ansys.meshing.prime.BOIType.as_integer_ratio">(ansys.meshing.prime.BOIType method)</a>
 </li>
         <li><a href="api/_autosummary/ansys.meshing.prime.CadFaceter.as_integer_ratio.html#ansys.meshing.prime.CadFaceter.as_integer_ratio">(ansys.meshing.prime.CadFaceter method)</a>
@@ -747,6 +781,8 @@
 </li>
         <li><a href="api/_autosummary/ansys.meshing.prime.PrismControlOffsetType.as_integer_ratio.html#ansys.meshing.prime.PrismControlOffsetType.as_integer_ratio">(ansys.meshing.prime.PrismControlOffsetType method)</a>
 </li>
+        <li><a href="api/_autosummary/ansys.meshing.prime.ScaffolderRepairMode.as_integer_ratio.html#ansys.meshing.prime.ScaffolderRepairMode.as_integer_ratio">(ansys.meshing.prime.ScaffolderRepairMode method)</a>
+</li>
         <li><a href="api/_autosummary/ansys.meshing.prime.ScopeEntity.as_integer_ratio.html#ansys.meshing.prime.ScopeEntity.as_integer_ratio">(ansys.meshing.prime.ScopeEntity method)</a>
 </li>
         <li><a href="api/_autosummary/ansys.meshing.prime.ScopeEvaluationType.as_integer_ratio.html#ansys.meshing.prime.ScopeEvaluationType.as_integer_ratio">(ansys.meshing.prime.ScopeEvaluationType method)</a>
@@ -765,6 +801,8 @@
 </li>
         <li><a href="api/_autosummary/ansys.meshing.prime.SolverType.as_integer_ratio.html#ansys.meshing.prime.SolverType.as_integer_ratio">(ansys.meshing.prime.SolverType method)</a>
 </li>
+        <li><a href="api/_autosummary/ansys.meshing.prime.SplineContinuityType.as_integer_ratio.html#ansys.meshing.prime.SplineContinuityType.as_integer_ratio">(ansys.meshing.prime.SplineContinuityType method)</a>
+</li>
         <li><a href="api/_autosummary/ansys.meshing.prime.SplineFeatureCaptureType.as_integer_ratio.html#ansys.meshing.prime.SplineFeatureCaptureType.as_integer_ratio">(ansys.meshing.prime.SplineFeatureCaptureType method)</a>
 </li>
         <li><a href="api/_autosummary/ansys.meshing.prime.SplineRefinementType.as_integer_ratio.html#ansys.meshing.prime.SplineRefinementType.as_integer_ratio">(ansys.meshing.prime.SplineRefinementType method)</a>
@@ -778,6 +816,8 @@
         <li><a href="api/_autosummary/ansys.meshing.prime.ThinStripType.as_integer_ratio.html#ansys.meshing.prime.ThinStripType.as_integer_ratio">(ansys.meshing.prime.ThinStripType method)</a>
 </li>
         <li><a href="api/_autosummary/ansys.meshing.prime.TopoSearchField.as_integer_ratio.html#ansys.meshing.prime.TopoSearchField.as_integer_ratio">(ansys.meshing.prime.TopoSearchField method)</a>
+</li>
+        <li><a href="api/_autosummary/ansys.meshing.prime.TrimmedSolidSplineCutMode.as_integer_ratio.html#ansys.meshing.prime.TrimmedSolidSplineCutMode.as_integer_ratio">(ansys.meshing.prime.TrimmedSolidSplineCutMode method)</a>
 </li>
         <li><a href="api/_autosummary/ansys.meshing.prime.VolumeFillType.as_integer_ratio.html#ansys.meshing.prime.VolumeFillType.as_integer_ratio">(ansys.meshing.prime.VolumeFillType method)</a>
 </li>
@@ -806,6 +846,8 @@
       </ul></li>
       <li><a href="api/_autosummary/ansys.meshing.prime.PartCreationType.ASSEMBLY.html#ansys.meshing.prime.PartCreationType.ASSEMBLY">ASSEMBLY (ansys.meshing.prime.PartCreationType attribute)</a>
 </li>
+      <li><a href="api/_autosummary/ansys.meshing.prime.VolumeMeshTool.assign_mesh_regions.html#ansys.meshing.prime.VolumeMeshTool.assign_mesh_regions">assign_mesh_regions() (ansys.meshing.prime.VolumeMeshTool method)</a>
+</li>
       <li><a href="api/_autosummary/ansys.meshing.prime.CreateMaterialPointResults.assigned_name.html#ansys.meshing.prime.CreateMaterialPointResults.assigned_name">assigned_name (ansys.meshing.prime.CreateMaterialPointResults property)</a>
 
       <ul>
@@ -820,6 +862,8 @@
         <li><a href="api/_autosummary/ansys.meshing.prime.FillHolesAtPlaneResults.assigned_zone_name.html#ansys.meshing.prime.FillHolesAtPlaneResults.assigned_zone_name">(ansys.meshing.prime.FillHolesAtPlaneResults property)</a>
 </li>
       </ul></li>
+      <li><a href="api/_autosummary/ansys.meshing.prime.SmoothType.AUTO.html#ansys.meshing.prime.SmoothType.AUTO">AUTO (ansys.meshing.prime.SmoothType attribute)</a>
+</li>
       <li><a href="api/_autosummary/ansys.meshing.prime.AutoMesh.html#ansys.meshing.prime.AutoMesh">AutoMesh (class in ansys.meshing.prime)</a>
 </li>
       <li><a href="api/_autosummary/ansys.meshing.prime.ErrorCode.AUTOMESHFAILED.html#ansys.meshing.prime.ErrorCode.AUTOMESHFAILED">AUTOMESHFAILED (ansys.meshing.prime.ErrorCode attribute)</a>
@@ -862,6 +906,8 @@
 <h2 id="B">B</h2>
 <table style="width: 100%" class="indextable genindextable"><tr>
   <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="api/_autosummary/ansys.meshing.prime.graphics.PrimePlotter.backend.html#ansys.meshing.prime.graphics.PrimePlotter.backend">backend (ansys.meshing.prime.graphics.PrimePlotter property)</a>
+</li>
       <li><a href="api/_autosummary/ansys.meshing.prime.IGAUnstructuredSplineSurf.bad_spline_points_indices.html#ansys.meshing.prime.IGAUnstructuredSplineSurf.bad_spline_points_indices">bad_spline_points_indices (ansys.meshing.prime.IGAUnstructuredSplineSurf property)</a>
 </li>
       <li><a href="api/_autosummary/ansys.meshing.prime.MeshStackerResults.base_face_ids.html#ansys.meshing.prime.MeshStackerResults.base_face_ids">base_face_ids (ansys.meshing.prime.MeshStackerResults property)</a>
@@ -890,6 +936,8 @@
         <li><a href="api/_autosummary/ansys.meshing.prime.BCPairType.bit_count.html#ansys.meshing.prime.BCPairType.bit_count">(ansys.meshing.prime.BCPairType method)</a>
 </li>
         <li><a href="api/_autosummary/ansys.meshing.prime.BCsVolumetricModality.bit_count.html#ansys.meshing.prime.BCsVolumetricModality.bit_count">(ansys.meshing.prime.BCsVolumetricModality method)</a>
+</li>
+        <li><a href="api/_autosummary/ansys.meshing.prime.BodyQueryType.bit_count.html#ansys.meshing.prime.BodyQueryType.bit_count">(ansys.meshing.prime.BodyQueryType method)</a>
 </li>
         <li><a href="api/_autosummary/ansys.meshing.prime.BOIType.bit_count.html#ansys.meshing.prime.BOIType.bit_count">(ansys.meshing.prime.BOIType method)</a>
 </li>
@@ -953,6 +1001,8 @@
 </li>
         <li><a href="api/_autosummary/ansys.meshing.prime.PrismControlOffsetType.bit_count.html#ansys.meshing.prime.PrismControlOffsetType.bit_count">(ansys.meshing.prime.PrismControlOffsetType method)</a>
 </li>
+        <li><a href="api/_autosummary/ansys.meshing.prime.ScaffolderRepairMode.bit_count.html#ansys.meshing.prime.ScaffolderRepairMode.bit_count">(ansys.meshing.prime.ScaffolderRepairMode method)</a>
+</li>
         <li><a href="api/_autosummary/ansys.meshing.prime.ScopeEntity.bit_count.html#ansys.meshing.prime.ScopeEntity.bit_count">(ansys.meshing.prime.ScopeEntity method)</a>
 </li>
         <li><a href="api/_autosummary/ansys.meshing.prime.ScopeEvaluationType.bit_count.html#ansys.meshing.prime.ScopeEvaluationType.bit_count">(ansys.meshing.prime.ScopeEvaluationType method)</a>
@@ -971,6 +1021,8 @@
 </li>
         <li><a href="api/_autosummary/ansys.meshing.prime.SolverType.bit_count.html#ansys.meshing.prime.SolverType.bit_count">(ansys.meshing.prime.SolverType method)</a>
 </li>
+        <li><a href="api/_autosummary/ansys.meshing.prime.SplineContinuityType.bit_count.html#ansys.meshing.prime.SplineContinuityType.bit_count">(ansys.meshing.prime.SplineContinuityType method)</a>
+</li>
         <li><a href="api/_autosummary/ansys.meshing.prime.SplineFeatureCaptureType.bit_count.html#ansys.meshing.prime.SplineFeatureCaptureType.bit_count">(ansys.meshing.prime.SplineFeatureCaptureType method)</a>
 </li>
         <li><a href="api/_autosummary/ansys.meshing.prime.SplineRefinementType.bit_count.html#ansys.meshing.prime.SplineRefinementType.bit_count">(ansys.meshing.prime.SplineRefinementType method)</a>
@@ -984,6 +1036,8 @@
         <li><a href="api/_autosummary/ansys.meshing.prime.ThinStripType.bit_count.html#ansys.meshing.prime.ThinStripType.bit_count">(ansys.meshing.prime.ThinStripType method)</a>
 </li>
         <li><a href="api/_autosummary/ansys.meshing.prime.TopoSearchField.bit_count.html#ansys.meshing.prime.TopoSearchField.bit_count">(ansys.meshing.prime.TopoSearchField method)</a>
+</li>
+        <li><a href="api/_autosummary/ansys.meshing.prime.TrimmedSolidSplineCutMode.bit_count.html#ansys.meshing.prime.TrimmedSolidSplineCutMode.bit_count">(ansys.meshing.prime.TrimmedSolidSplineCutMode method)</a>
 </li>
         <li><a href="api/_autosummary/ansys.meshing.prime.VolumeFillType.bit_count.html#ansys.meshing.prime.VolumeFillType.bit_count">(ansys.meshing.prime.VolumeFillType method)</a>
 </li>
@@ -1002,6 +1056,8 @@
         <li><a href="api/_autosummary/ansys.meshing.prime.BCPairType.bit_length.html#ansys.meshing.prime.BCPairType.bit_length">(ansys.meshing.prime.BCPairType method)</a>
 </li>
         <li><a href="api/_autosummary/ansys.meshing.prime.BCsVolumetricModality.bit_length.html#ansys.meshing.prime.BCsVolumetricModality.bit_length">(ansys.meshing.prime.BCsVolumetricModality method)</a>
+</li>
+        <li><a href="api/_autosummary/ansys.meshing.prime.BodyQueryType.bit_length.html#ansys.meshing.prime.BodyQueryType.bit_length">(ansys.meshing.prime.BodyQueryType method)</a>
 </li>
         <li><a href="api/_autosummary/ansys.meshing.prime.BOIType.bit_length.html#ansys.meshing.prime.BOIType.bit_length">(ansys.meshing.prime.BOIType method)</a>
 </li>
@@ -1065,6 +1121,8 @@
 </li>
         <li><a href="api/_autosummary/ansys.meshing.prime.PrismControlOffsetType.bit_length.html#ansys.meshing.prime.PrismControlOffsetType.bit_length">(ansys.meshing.prime.PrismControlOffsetType method)</a>
 </li>
+        <li><a href="api/_autosummary/ansys.meshing.prime.ScaffolderRepairMode.bit_length.html#ansys.meshing.prime.ScaffolderRepairMode.bit_length">(ansys.meshing.prime.ScaffolderRepairMode method)</a>
+</li>
         <li><a href="api/_autosummary/ansys.meshing.prime.ScopeEntity.bit_length.html#ansys.meshing.prime.ScopeEntity.bit_length">(ansys.meshing.prime.ScopeEntity method)</a>
 </li>
         <li><a href="api/_autosummary/ansys.meshing.prime.ScopeEvaluationType.bit_length.html#ansys.meshing.prime.ScopeEvaluationType.bit_length">(ansys.meshing.prime.ScopeEvaluationType method)</a>
@@ -1083,6 +1141,8 @@
 </li>
         <li><a href="api/_autosummary/ansys.meshing.prime.SolverType.bit_length.html#ansys.meshing.prime.SolverType.bit_length">(ansys.meshing.prime.SolverType method)</a>
 </li>
+        <li><a href="api/_autosummary/ansys.meshing.prime.SplineContinuityType.bit_length.html#ansys.meshing.prime.SplineContinuityType.bit_length">(ansys.meshing.prime.SplineContinuityType method)</a>
+</li>
         <li><a href="api/_autosummary/ansys.meshing.prime.SplineFeatureCaptureType.bit_length.html#ansys.meshing.prime.SplineFeatureCaptureType.bit_length">(ansys.meshing.prime.SplineFeatureCaptureType method)</a>
 </li>
         <li><a href="api/_autosummary/ansys.meshing.prime.SplineRefinementType.bit_length.html#ansys.meshing.prime.SplineRefinementType.bit_length">(ansys.meshing.prime.SplineRefinementType method)</a>
@@ -1096,6 +1156,8 @@
         <li><a href="api/_autosummary/ansys.meshing.prime.ThinStripType.bit_length.html#ansys.meshing.prime.ThinStripType.bit_length">(ansys.meshing.prime.ThinStripType method)</a>
 </li>
         <li><a href="api/_autosummary/ansys.meshing.prime.TopoSearchField.bit_length.html#ansys.meshing.prime.TopoSearchField.bit_length">(ansys.meshing.prime.TopoSearchField method)</a>
+</li>
+        <li><a href="api/_autosummary/ansys.meshing.prime.TrimmedSolidSplineCutMode.bit_length.html#ansys.meshing.prime.TrimmedSolidSplineCutMode.bit_length">(ansys.meshing.prime.TrimmedSolidSplineCutMode method)</a>
 </li>
         <li><a href="api/_autosummary/ansys.meshing.prime.VolumeFillType.bit_length.html#ansys.meshing.prime.VolumeFillType.bit_length">(ansys.meshing.prime.VolumeFillType method)</a>
 </li>
@@ -1111,6 +1173,12 @@
   </ul></td>
   <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="api/_autosummary/ansys.meshing.prime.PartCreationType.BODY.html#ansys.meshing.prime.PartCreationType.BODY">BODY (ansys.meshing.prime.PartCreationType attribute)</a>
+</li>
+      <li><a href="api/_autosummary/ansys.meshing.prime.ComponentChildrenResults.body_ids.html#ansys.meshing.prime.ComponentChildrenResults.body_ids">body_ids (ansys.meshing.prime.ComponentChildrenResults property)</a>
+</li>
+      <li><a href="api/_autosummary/ansys.meshing.prime.ComponentChildrenResults.body_names.html#ansys.meshing.prime.ComponentChildrenResults.body_names">body_names (ansys.meshing.prime.ComponentChildrenResults property)</a>
+</li>
+      <li><a href="api/_autosummary/ansys.meshing.prime.BodyQueryType.html#ansys.meshing.prime.BodyQueryType">BodyQueryType (class in ansys.meshing.prime)</a>
 </li>
       <li><a href="api/_autosummary/ansys.meshing.prime.SizingType.BOI.html#ansys.meshing.prime.SizingType.BOI">BOI (ansys.meshing.prime.SizingType attribute)</a>
 </li>
@@ -1204,8 +1272,16 @@
         <li><a href="api/_autosummary/ansys.meshing.prime.SFPeriodicParams.center.html#ansys.meshing.prime.SFPeriodicParams.center">(ansys.meshing.prime.SFPeriodicParams property)</a>
 </li>
       </ul></li>
-      <li><a href="api/_autosummary/ansys.meshing.prime.ExportFluentCaseParams.cff_format.html#ansys.meshing.prime.ExportFluentCaseParams.cff_format">cff_format (ansys.meshing.prime.ExportFluentCaseParams property)</a>
+      <li><a href="api/_autosummary/ansys.meshing.prime.SoiSizingParams.centers.html#ansys.meshing.prime.SoiSizingParams.centers">centers (ansys.meshing.prime.SoiSizingParams property)</a>
 </li>
+      <li><a href="api/_autosummary/ansys.meshing.prime.ZoneMeshResult.centroids.html#ansys.meshing.prime.ZoneMeshResult.centroids">centroids (ansys.meshing.prime.ZoneMeshResult property)</a>
+</li>
+      <li><a href="api/_autosummary/ansys.meshing.prime.ExportFluentCaseParams.cff_format.html#ansys.meshing.prime.ExportFluentCaseParams.cff_format">cff_format (ansys.meshing.prime.ExportFluentCaseParams property)</a>
+
+      <ul>
+        <li><a href="api/_autosummary/ansys.meshing.prime.ExportFluentMeshingMeshParams.cff_format.html#ansys.meshing.prime.ExportFluentMeshingMeshParams.cff_format">(ansys.meshing.prime.ExportFluentMeshingMeshParams property)</a>
+</li>
+      </ul></li>
       <li><a href="api/_autosummary/ansys.meshing.prime.SubtractVolumesParams.check_cutters.html#ansys.meshing.prime.SubtractVolumesParams.check_cutters">check_cutters (ansys.meshing.prime.SubtractVolumesParams property)</a>
 </li>
       <li><a href="api/_autosummary/ansys.meshing.prime.SurfaceSearch.check_face_deviation.html#ansys.meshing.prime.SurfaceSearch.check_face_deviation">check_face_deviation() (ansys.meshing.prime.SurfaceSearch method)</a>
@@ -1260,6 +1336,14 @@
 </li>
       <li><a href="api/_autosummary/ansys.meshing.prime.SeparateBlocksFormatType.COMPACT.html#ansys.meshing.prime.SeparateBlocksFormatType.COMPACT">COMPACT (ansys.meshing.prime.SeparateBlocksFormatType attribute)</a>
 </li>
+      <li><a href="api/_autosummary/ansys.meshing.prime.ComponentChildrenResults.component_ids.html#ansys.meshing.prime.ComponentChildrenResults.component_ids">component_ids (ansys.meshing.prime.ComponentChildrenResults property)</a>
+</li>
+      <li><a href="api/_autosummary/ansys.meshing.prime.ComponentChildrenResults.component_names.html#ansys.meshing.prime.ComponentChildrenResults.component_names">component_names (ansys.meshing.prime.ComponentChildrenResults property)</a>
+</li>
+      <li><a href="api/_autosummary/ansys.meshing.prime.ComponentChildrenParams.html#ansys.meshing.prime.ComponentChildrenParams">ComponentChildrenParams (class in ansys.meshing.prime)</a>
+</li>
+      <li><a href="api/_autosummary/ansys.meshing.prime.ComponentChildrenResults.html#ansys.meshing.prime.ComponentChildrenResults">ComponentChildrenResults (class in ansys.meshing.prime)</a>
+</li>
       <li><a href="api/_autosummary/ansys.meshing.prime.Part.compute_closed_volumes.html#ansys.meshing.prime.Part.compute_closed_volumes">compute_closed_volumes() (ansys.meshing.prime.Part method)</a>
 </li>
       <li><a href="api/_autosummary/ansys.meshing.prime.SurfaceDiagnosticSummaryParams.compute_duplicate_faces.html#ansys.meshing.prime.SurfaceDiagnosticSummaryParams.compute_duplicate_faces">compute_duplicate_faces (ansys.meshing.prime.SurfaceDiagnosticSummaryParams property)</a>
@@ -1294,6 +1378,8 @@
         <li><a href="api/_autosummary/ansys.meshing.prime.BCPairType.conjugate.html#ansys.meshing.prime.BCPairType.conjugate">(ansys.meshing.prime.BCPairType method)</a>
 </li>
         <li><a href="api/_autosummary/ansys.meshing.prime.BCsVolumetricModality.conjugate.html#ansys.meshing.prime.BCsVolumetricModality.conjugate">(ansys.meshing.prime.BCsVolumetricModality method)</a>
+</li>
+        <li><a href="api/_autosummary/ansys.meshing.prime.BodyQueryType.conjugate.html#ansys.meshing.prime.BodyQueryType.conjugate">(ansys.meshing.prime.BodyQueryType method)</a>
 </li>
         <li><a href="api/_autosummary/ansys.meshing.prime.BOIType.conjugate.html#ansys.meshing.prime.BOIType.conjugate">(ansys.meshing.prime.BOIType method)</a>
 </li>
@@ -1357,6 +1443,8 @@
 </li>
         <li><a href="api/_autosummary/ansys.meshing.prime.PrismControlOffsetType.conjugate.html#ansys.meshing.prime.PrismControlOffsetType.conjugate">(ansys.meshing.prime.PrismControlOffsetType method)</a>
 </li>
+        <li><a href="api/_autosummary/ansys.meshing.prime.ScaffolderRepairMode.conjugate.html#ansys.meshing.prime.ScaffolderRepairMode.conjugate">(ansys.meshing.prime.ScaffolderRepairMode method)</a>
+</li>
         <li><a href="api/_autosummary/ansys.meshing.prime.ScopeEntity.conjugate.html#ansys.meshing.prime.ScopeEntity.conjugate">(ansys.meshing.prime.ScopeEntity method)</a>
 </li>
         <li><a href="api/_autosummary/ansys.meshing.prime.ScopeEvaluationType.conjugate.html#ansys.meshing.prime.ScopeEvaluationType.conjugate">(ansys.meshing.prime.ScopeEvaluationType method)</a>
@@ -1375,6 +1463,8 @@
 </li>
         <li><a href="api/_autosummary/ansys.meshing.prime.SolverType.conjugate.html#ansys.meshing.prime.SolverType.conjugate">(ansys.meshing.prime.SolverType method)</a>
 </li>
+        <li><a href="api/_autosummary/ansys.meshing.prime.SplineContinuityType.conjugate.html#ansys.meshing.prime.SplineContinuityType.conjugate">(ansys.meshing.prime.SplineContinuityType method)</a>
+</li>
         <li><a href="api/_autosummary/ansys.meshing.prime.SplineFeatureCaptureType.conjugate.html#ansys.meshing.prime.SplineFeatureCaptureType.conjugate">(ansys.meshing.prime.SplineFeatureCaptureType method)</a>
 </li>
         <li><a href="api/_autosummary/ansys.meshing.prime.SplineRefinementType.conjugate.html#ansys.meshing.prime.SplineRefinementType.conjugate">(ansys.meshing.prime.SplineRefinementType method)</a>
@@ -1388,6 +1478,8 @@
         <li><a href="api/_autosummary/ansys.meshing.prime.ThinStripType.conjugate.html#ansys.meshing.prime.ThinStripType.conjugate">(ansys.meshing.prime.ThinStripType method)</a>
 </li>
         <li><a href="api/_autosummary/ansys.meshing.prime.TopoSearchField.conjugate.html#ansys.meshing.prime.TopoSearchField.conjugate">(ansys.meshing.prime.TopoSearchField method)</a>
+</li>
+        <li><a href="api/_autosummary/ansys.meshing.prime.TrimmedSolidSplineCutMode.conjugate.html#ansys.meshing.prime.TrimmedSolidSplineCutMode.conjugate">(ansys.meshing.prime.TrimmedSolidSplineCutMode method)</a>
 </li>
         <li><a href="api/_autosummary/ansys.meshing.prime.VolumeFillType.conjugate.html#ansys.meshing.prime.VolumeFillType.conjugate">(ansys.meshing.prime.VolumeFillType method)</a>
 </li>
@@ -1415,6 +1507,8 @@
       <li><a href="api/_autosummary/ansys.meshing.prime.ConnectFacesParams.html#ansys.meshing.prime.ConnectFacesParams">ConnectFacesParams (class in ansys.meshing.prime)</a>
 </li>
       <li><a href="api/_autosummary/ansys.meshing.prime.ConnectResults.html#ansys.meshing.prime.ConnectResults">ConnectResults (class in ansys.meshing.prime)</a>
+</li>
+      <li><a href="api/_autosummary/ansys.meshing.prime.ScaffolderRepairMode.CONSERVATIVE.html#ansys.meshing.prime.ScaffolderRepairMode.CONSERVATIVE">CONSERVATIVE (ansys.meshing.prime.ScaffolderRepairMode attribute)</a>
 </li>
       <li><a href="api/_autosummary/ansys.meshing.prime.ExportMapdlCdbParams.consider_general_connectors_as_spot_weld.html#ansys.meshing.prime.ExportMapdlCdbParams.consider_general_connectors_as_spot_weld">consider_general_connectors_as_spot_weld (ansys.meshing.prime.ExportMapdlCdbParams property)</a>
 </li>
@@ -1452,6 +1546,12 @@
 </li>
       <li><a href="api/_autosummary/ansys.meshing.prime.ContactPreventionParams.html#ansys.meshing.prime.ContactPreventionParams">ContactPreventionParams (class in ansys.meshing.prime)</a>
 </li>
+      <li><a href="api/_autosummary/ansys.meshing.prime.HexToSplineParams.continuity.html#ansys.meshing.prime.HexToSplineParams.continuity">continuity (ansys.meshing.prime.HexToSplineParams property)</a>
+
+      <ul>
+        <li><a href="api/_autosummary/ansys.meshing.prime.QuadToSplineParams.continuity.html#ansys.meshing.prime.QuadToSplineParams.continuity">(ansys.meshing.prime.QuadToSplineParams property)</a>
+</li>
+      </ul></li>
       <li><a href="api/_autosummary/ansys.meshing.prime.Model.control_data.html#ansys.meshing.prime.Model.control_data">control_data (ansys.meshing.prime.Model property)</a>
 </li>
       <li><a href="api/_autosummary/ansys.meshing.prime.BoundaryFittedSplineParams.control_point_selection_type.html#ansys.meshing.prime.BoundaryFittedSplineParams.control_point_selection_type">control_point_selection_type (ansys.meshing.prime.BoundaryFittedSplineParams property)</a>
@@ -1469,6 +1569,8 @@
       <li><a href="api/_autosummary/ansys.meshing.prime.ErrorCode.CONTROLNOTFOUND.html#ansys.meshing.prime.ErrorCode.CONTROLNOTFOUND">CONTROLNOTFOUND (ansys.meshing.prime.ErrorCode attribute)</a>
 </li>
       <li><a href="api/_autosummary/ansys.meshing.prime.ControlPointSelection.html#ansys.meshing.prime.ControlPointSelection">ControlPointSelection (class in ansys.meshing.prime)</a>
+</li>
+      <li><a href="api/_autosummary/ansys.meshing.prime.HexToSpline.convert_hex_to_spline.html#ansys.meshing.prime.HexToSpline.convert_hex_to_spline">convert_hex_to_spline() (ansys.meshing.prime.HexToSpline method)</a>
 </li>
       <li><a href="api/_autosummary/ansys.meshing.prime.QuadToSpline.convert_quad_to_spline.html#ansys.meshing.prime.QuadToSpline.convert_quad_to_spline">convert_quad_to_spline() (ansys.meshing.prime.QuadToSpline method)</a>
 </li>
@@ -1488,8 +1590,12 @@
 </li>
       <li><a href="api/_autosummary/ansys.meshing.prime.CopyZoneletsResults.html#ansys.meshing.prime.CopyZoneletsResults">CopyZoneletsResults (class in ansys.meshing.prime)</a>
 </li>
-      <li><a href="api/_autosummary/ansys.meshing.prime.QuadToSplineParams.corner_angle.html#ansys.meshing.prime.QuadToSplineParams.corner_angle">corner_angle (ansys.meshing.prime.QuadToSplineParams property)</a>
+      <li><a href="api/_autosummary/ansys.meshing.prime.HexToSplineParams.corner_angle.html#ansys.meshing.prime.HexToSplineParams.corner_angle">corner_angle (ansys.meshing.prime.HexToSplineParams property)</a>
+
+      <ul>
+        <li><a href="api/_autosummary/ansys.meshing.prime.QuadToSplineParams.corner_angle.html#ansys.meshing.prime.QuadToSplineParams.corner_angle">(ansys.meshing.prime.QuadToSplineParams property)</a>
 </li>
+      </ul></li>
       <li><a href="api/_autosummary/ansys.meshing.prime.VolumeSweeper.create_base_face.html#ansys.meshing.prime.VolumeSweeper.create_base_face">create_base_face() (ansys.meshing.prime.VolumeSweeper method)</a>
 </li>
       <li><a href="api/_autosummary/ansys.meshing.prime.SurfaceUtilities.create_boi.html#ansys.meshing.prime.SurfaceUtilities.create_boi">create_boi() (ansys.meshing.prime.SurfaceUtilities method)</a>
@@ -1524,7 +1630,11 @@
 </li>
       <li><a href="api/_autosummary/ansys.meshing.prime.ControlData.create_size_control.html#ansys.meshing.prime.ControlData.create_size_control">create_size_control() (ansys.meshing.prime.ControlData method)</a>
 </li>
+      <li><a href="api/_autosummary/ansys.meshing.prime.TrimmedSpline.create_tet_mesh_on_trimmed_solid_spline.html#ansys.meshing.prime.TrimmedSpline.create_tet_mesh_on_trimmed_solid_spline">create_tet_mesh_on_trimmed_solid_spline() (ansys.meshing.prime.TrimmedSpline method)</a>
+</li>
       <li><a href="api/_autosummary/ansys.meshing.prime.ControlData.create_thin_volume_control.html#ansys.meshing.prime.ControlData.create_thin_volume_control">create_thin_volume_control() (ansys.meshing.prime.ControlData method)</a>
+</li>
+      <li><a href="api/_autosummary/ansys.meshing.prime.TrimmedSpline.create_trimmed_uniform_solid_spline_by_brep_mapping.html#ansys.meshing.prime.TrimmedSpline.create_trimmed_uniform_solid_spline_by_brep_mapping">create_trimmed_uniform_solid_spline_by_brep_mapping() (ansys.meshing.prime.TrimmedSpline method)</a>
 </li>
       <li><a href="api/_autosummary/ansys.meshing.prime.ControlData.create_volume_control.html#ansys.meshing.prime.ControlData.create_volume_control">create_volume_control() (ansys.meshing.prime.ControlData method)</a>
 </li>
@@ -1600,6 +1710,10 @@
 </li>
       <li><a href="api/_autosummary/ansys.meshing.prime.SearchByFoldsParams.critical_angle.html#ansys.meshing.prime.SearchByFoldsParams.critical_angle">critical_angle (ansys.meshing.prime.SearchByFoldsParams property)</a>
 </li>
+      <li><a href="api/_autosummary/ansys.meshing.prime.SplineContinuityType.CUBICC0.html#ansys.meshing.prime.SplineContinuityType.CUBICC0">CUBICC0 (ansys.meshing.prime.SplineContinuityType attribute)</a>
+</li>
+      <li><a href="api/_autosummary/ansys.meshing.prime.SplineContinuityType.CUBICC1.html#ansys.meshing.prime.SplineContinuityType.CUBICC1">CUBICC1 (ansys.meshing.prime.SplineContinuityType attribute)</a>
+</li>
       <li><a href="api/_autosummary/ansys.meshing.prime.SizingType.CURVATURE.html#ansys.meshing.prime.SizingType.CURVATURE">CURVATURE (ansys.meshing.prime.SizingType attribute)</a>
 </li>
       <li><a href="api/_autosummary/ansys.meshing.prime.ShellBLOffsetType.CURVATUREBASED.html#ansys.meshing.prime.ShellBLOffsetType.CURVATUREBASED">CURVATUREBASED (ansys.meshing.prime.ShellBLOffsetType attribute)</a>
@@ -1634,16 +1748,38 @@
 </li>
       <li><a href="api/_autosummary/ansys.meshing.prime.DeadRegion.html#ansys.meshing.prime.DeadRegion">DeadRegion (class in ansys.meshing.prime)</a>
 </li>
+      <li><a href="api/_autosummary/ansys.meshing.prime.TetMeshSplineParams.decimation_factor.html#ansys.meshing.prime.TetMeshSplineParams.decimation_factor">decimation_factor (ansys.meshing.prime.TetMeshSplineParams property)</a>
+</li>
+      <li><a href="api/_autosummary/ansys.meshing.prime.ScaffolderRepairMode.DEFAULT.html#ansys.meshing.prime.ScaffolderRepairMode.DEFAULT">DEFAULT (ansys.meshing.prime.ScaffolderRepairMode attribute)</a>
+</li>
       <li><a href="api/_autosummary/ansys.meshing.prime.AutoQuadMesher.defeature_topology.html#ansys.meshing.prime.AutoQuadMesher.defeature_topology">defeature_topology() (ansys.meshing.prime.AutoQuadMesher method)</a>
 </li>
       <li><a href="api/_autosummary/ansys.meshing.prime.DefeatureTopologyParams.html#ansys.meshing.prime.DefeatureTopologyParams">DefeatureTopologyParams (class in ansys.meshing.prime)</a>
 </li>
+      <li><a href="api/_autosummary/ansys.meshing.prime.IGAUnstructuredSplineSolid.degree.html#ansys.meshing.prime.IGAUnstructuredSplineSolid.degree">degree (ansys.meshing.prime.IGAUnstructuredSplineSolid property)</a>
+
+      <ul>
+        <li><a href="api/_autosummary/ansys.meshing.prime.IGAUnstructuredSplineSurf.degree.html#ansys.meshing.prime.IGAUnstructuredSplineSurf.degree">(ansys.meshing.prime.IGAUnstructuredSplineSurf property)</a>
+</li>
+      </ul></li>
       <li><a href="api/_autosummary/ansys.meshing.prime.BoundaryFittedSplineParams.degree_u.html#ansys.meshing.prime.BoundaryFittedSplineParams.degree_u">degree_u (ansys.meshing.prime.BoundaryFittedSplineParams property)</a>
+
+      <ul>
+        <li><a href="api/_autosummary/ansys.meshing.prime.UniformSolidSplineCreationParams.degree_u.html#ansys.meshing.prime.UniformSolidSplineCreationParams.degree_u">(ansys.meshing.prime.UniformSolidSplineCreationParams property)</a>
 </li>
+      </ul></li>
       <li><a href="api/_autosummary/ansys.meshing.prime.BoundaryFittedSplineParams.degree_v.html#ansys.meshing.prime.BoundaryFittedSplineParams.degree_v">degree_v (ansys.meshing.prime.BoundaryFittedSplineParams property)</a>
+
+      <ul>
+        <li><a href="api/_autosummary/ansys.meshing.prime.UniformSolidSplineCreationParams.degree_v.html#ansys.meshing.prime.UniformSolidSplineCreationParams.degree_v">(ansys.meshing.prime.UniformSolidSplineCreationParams property)</a>
 </li>
+      </ul></li>
       <li><a href="api/_autosummary/ansys.meshing.prime.BoundaryFittedSplineParams.degree_w.html#ansys.meshing.prime.BoundaryFittedSplineParams.degree_w">degree_w (ansys.meshing.prime.BoundaryFittedSplineParams property)</a>
+
+      <ul>
+        <li><a href="api/_autosummary/ansys.meshing.prime.UniformSolidSplineCreationParams.degree_w.html#ansys.meshing.prime.UniformSolidSplineCreationParams.degree_w">(ansys.meshing.prime.UniformSolidSplineCreationParams property)</a>
 </li>
+      </ul></li>
       <li><a href="api/_autosummary/ansys.meshing.prime.MeshStackerParams.delete_base.html#ansys.meshing.prime.MeshStackerParams.delete_base">delete_base (ansys.meshing.prime.MeshStackerParams property)</a>
 </li>
       <li><a href="api/_autosummary/ansys.meshing.prime.ControlData.delete_controls.html#ansys.meshing.prime.ControlData.delete_controls">delete_controls() (ansys.meshing.prime.ControlData method)</a>
@@ -1759,6 +1895,8 @@
 </li>
         <li><a href="api/_autosummary/ansys.meshing.prime.BCsVolumetricModality.denominator.html#ansys.meshing.prime.BCsVolumetricModality.denominator">(ansys.meshing.prime.BCsVolumetricModality attribute)</a>
 </li>
+        <li><a href="api/_autosummary/ansys.meshing.prime.BodyQueryType.denominator.html#ansys.meshing.prime.BodyQueryType.denominator">(ansys.meshing.prime.BodyQueryType attribute)</a>
+</li>
         <li><a href="api/_autosummary/ansys.meshing.prime.BOIType.denominator.html#ansys.meshing.prime.BOIType.denominator">(ansys.meshing.prime.BOIType attribute)</a>
 </li>
         <li><a href="api/_autosummary/ansys.meshing.prime.CadFaceter.denominator.html#ansys.meshing.prime.CadFaceter.denominator">(ansys.meshing.prime.CadFaceter attribute)</a>
@@ -1821,6 +1959,8 @@
 </li>
         <li><a href="api/_autosummary/ansys.meshing.prime.PrismControlOffsetType.denominator.html#ansys.meshing.prime.PrismControlOffsetType.denominator">(ansys.meshing.prime.PrismControlOffsetType attribute)</a>
 </li>
+        <li><a href="api/_autosummary/ansys.meshing.prime.ScaffolderRepairMode.denominator.html#ansys.meshing.prime.ScaffolderRepairMode.denominator">(ansys.meshing.prime.ScaffolderRepairMode attribute)</a>
+</li>
         <li><a href="api/_autosummary/ansys.meshing.prime.ScopeEntity.denominator.html#ansys.meshing.prime.ScopeEntity.denominator">(ansys.meshing.prime.ScopeEntity attribute)</a>
 </li>
         <li><a href="api/_autosummary/ansys.meshing.prime.ScopeEvaluationType.denominator.html#ansys.meshing.prime.ScopeEvaluationType.denominator">(ansys.meshing.prime.ScopeEvaluationType attribute)</a>
@@ -1839,6 +1979,8 @@
 </li>
         <li><a href="api/_autosummary/ansys.meshing.prime.SolverType.denominator.html#ansys.meshing.prime.SolverType.denominator">(ansys.meshing.prime.SolverType attribute)</a>
 </li>
+        <li><a href="api/_autosummary/ansys.meshing.prime.SplineContinuityType.denominator.html#ansys.meshing.prime.SplineContinuityType.denominator">(ansys.meshing.prime.SplineContinuityType attribute)</a>
+</li>
         <li><a href="api/_autosummary/ansys.meshing.prime.SplineFeatureCaptureType.denominator.html#ansys.meshing.prime.SplineFeatureCaptureType.denominator">(ansys.meshing.prime.SplineFeatureCaptureType attribute)</a>
 </li>
         <li><a href="api/_autosummary/ansys.meshing.prime.SplineRefinementType.denominator.html#ansys.meshing.prime.SplineRefinementType.denominator">(ansys.meshing.prime.SplineRefinementType attribute)</a>
@@ -1852,6 +1994,8 @@
         <li><a href="api/_autosummary/ansys.meshing.prime.ThinStripType.denominator.html#ansys.meshing.prime.ThinStripType.denominator">(ansys.meshing.prime.ThinStripType attribute)</a>
 </li>
         <li><a href="api/_autosummary/ansys.meshing.prime.TopoSearchField.denominator.html#ansys.meshing.prime.TopoSearchField.denominator">(ansys.meshing.prime.TopoSearchField attribute)</a>
+</li>
+        <li><a href="api/_autosummary/ansys.meshing.prime.TrimmedSolidSplineCutMode.denominator.html#ansys.meshing.prime.TrimmedSolidSplineCutMode.denominator">(ansys.meshing.prime.TrimmedSolidSplineCutMode attribute)</a>
 </li>
         <li><a href="api/_autosummary/ansys.meshing.prime.VolumeFillType.denominator.html#ansys.meshing.prime.VolumeFillType.denominator">(ansys.meshing.prime.VolumeFillType attribute)</a>
 </li>
@@ -2066,6 +2210,8 @@
 </li>
       <li><a href="api/_autosummary/ansys.meshing.prime.MergeZoneletsParams.element_count_limit.html#ansys.meshing.prime.MergeZoneletsParams.element_count_limit">element_count_limit (ansys.meshing.prime.MergeZoneletsParams property)</a>
 </li>
+      <li><a href="api/_autosummary/ansys.meshing.prime.ZoneMeshResult.element_ids.html#ansys.meshing.prime.ZoneMeshResult.element_ids">element_ids (ansys.meshing.prime.ZoneMeshResult property)</a>
+</li>
       <li><a href="api/_autosummary/ansys.meshing.prime.CellQualityMeasure.ELEMENTQUALITY.html#ansys.meshing.prime.CellQualityMeasure.ELEMENTQUALITY">ELEMENTQUALITY (ansys.meshing.prime.CellQualityMeasure attribute)</a>
 
       <ul>
@@ -2160,6 +2306,8 @@
         <li><a href="api/_autosummary/ansys.meshing.prime.DeleteZoneResults.error_code.html#ansys.meshing.prime.DeleteZoneResults.error_code">(ansys.meshing.prime.DeleteZoneResults property)</a>
 </li>
         <li><a href="api/_autosummary/ansys.meshing.prime.EdgeConnectivityResults.error_code.html#ansys.meshing.prime.EdgeConnectivityResults.error_code">(ansys.meshing.prime.EdgeConnectivityResults property)</a>
+</li>
+        <li><a href="api/_autosummary/ansys.meshing.prime.ExportLSDynaIGAResults.error_code.html#ansys.meshing.prime.ExportLSDynaIGAResults.error_code">(ansys.meshing.prime.ExportLSDynaIGAResults property)</a>
 </li>
         <li><a href="api/_autosummary/ansys.meshing.prime.ExportLSDynaResults.error_code.html#ansys.meshing.prime.ExportLSDynaResults.error_code">(ansys.meshing.prime.ExportLSDynaResults property)</a>
 </li>
@@ -2279,6 +2427,8 @@
 </li>
         <li><a href="api/_autosummary/ansys.meshing.prime.TriangulateResults.error_code.html#ansys.meshing.prime.TriangulateResults.error_code">(ansys.meshing.prime.TriangulateResults property)</a>
 </li>
+        <li><a href="api/_autosummary/ansys.meshing.prime.TrimmedSplineResults.error_code.html#ansys.meshing.prime.TrimmedSplineResults.error_code">(ansys.meshing.prime.TrimmedSplineResults property)</a>
+</li>
         <li><a href="api/_autosummary/ansys.meshing.prime.VolumeMeshToolResults.error_code.html#ansys.meshing.prime.VolumeMeshToolResults.error_code">(ansys.meshing.prime.VolumeMeshToolResults property)</a>
 </li>
         <li><a href="api/_autosummary/ansys.meshing.prime.VolumeQualitySummaryResults.error_code.html#ansys.meshing.prime.VolumeQualitySummaryResults.error_code">(ansys.meshing.prime.VolumeQualitySummaryResults property)</a>
@@ -2311,6 +2461,8 @@
       <li><a href="api/_autosummary/ansys.meshing.prime.ErrorCode.html#ansys.meshing.prime.ErrorCode">ErrorCode (class in ansys.meshing.prime)</a>
 </li>
       <li><a href="api/_autosummary/ansys.meshing.prime.ScopeDefinition.evaluation_type.html#ansys.meshing.prime.ScopeDefinition.evaluation_type">evaluation_type (ansys.meshing.prime.ScopeDefinition property)</a>
+</li>
+      <li><a href="api/_autosummary/ansys.meshing.prime.TrimmedSolidSplineCutMode.EXACT.html#ansys.meshing.prime.TrimmedSolidSplineCutMode.EXACT">EXACT (ansys.meshing.prime.TrimmedSolidSplineCutMode attribute)</a>
 </li>
       <li><a href="api/_autosummary/ansys.meshing.prime.ThinStripType.EXCLUDEVSHAPE.html#ansys.meshing.prime.ThinStripType.EXCLUDEVSHAPE">EXCLUDEVSHAPE (ansys.meshing.prime.ThinStripType attribute)</a>
 </li>
@@ -2347,6 +2499,8 @@
       <li><a href="api/_autosummary/ansys.meshing.prime.ErrorCode.EXPORTFLUENTMESHINGMSHFAILED.html#ansys.meshing.prime.ErrorCode.EXPORTFLUENTMESHINGMSHFAILED">EXPORTFLUENTMESHINGMSHFAILED (ansys.meshing.prime.ErrorCode attribute)</a>
 </li>
       <li><a href="api/_autosummary/ansys.meshing.prime.ExportLSDynaIgaKeywordFileParams.html#ansys.meshing.prime.ExportLSDynaIgaKeywordFileParams">ExportLSDynaIgaKeywordFileParams (class in ansys.meshing.prime)</a>
+</li>
+      <li><a href="api/_autosummary/ansys.meshing.prime.ExportLSDynaIGAResults.html#ansys.meshing.prime.ExportLSDynaIGAResults">ExportLSDynaIGAResults (class in ansys.meshing.prime)</a>
 </li>
       <li><a href="api/_autosummary/ansys.meshing.prime.ExportLSDynaKeywordFileParams.html#ansys.meshing.prime.ExportLSDynaKeywordFileParams">ExportLSDynaKeywordFileParams (class in ansys.meshing.prime)</a>
 </li>
@@ -2497,13 +2651,21 @@
       <li><a href="api/_autosummary/ansys.meshing.prime.ExtractFeatureParams.feature_angle.html#ansys.meshing.prime.ExtractFeatureParams.feature_angle">feature_angle (ansys.meshing.prime.ExtractFeatureParams property)</a>
 
       <ul>
+        <li><a href="api/_autosummary/ansys.meshing.prime.HexToSplineParams.feature_angle.html#ansys.meshing.prime.HexToSplineParams.feature_angle">(ansys.meshing.prime.HexToSplineParams property)</a>
+</li>
         <li><a href="api/_autosummary/ansys.meshing.prime.QuadToSplineParams.feature_angle.html#ansys.meshing.prime.QuadToSplineParams.feature_angle">(ansys.meshing.prime.QuadToSplineParams property)</a>
 </li>
         <li><a href="api/_autosummary/ansys.meshing.prime.SearchByThinStripParams.feature_angle.html#ansys.meshing.prime.SearchByThinStripParams.feature_angle">(ansys.meshing.prime.SearchByThinStripParams property)</a>
 </li>
-      </ul></li>
-      <li><a href="api/_autosummary/ansys.meshing.prime.QuadToSplineParams.feature_capture_type.html#ansys.meshing.prime.QuadToSplineParams.feature_capture_type">feature_capture_type (ansys.meshing.prime.QuadToSplineParams property)</a>
+        <li><a href="api/_autosummary/ansys.meshing.prime.TetMeshSplineParams.feature_angle.html#ansys.meshing.prime.TetMeshSplineParams.feature_angle">(ansys.meshing.prime.TetMeshSplineParams property)</a>
 </li>
+      </ul></li>
+      <li><a href="api/_autosummary/ansys.meshing.prime.HexToSplineParams.feature_capture_type.html#ansys.meshing.prime.HexToSplineParams.feature_capture_type">feature_capture_type (ansys.meshing.prime.HexToSplineParams property)</a>
+
+      <ul>
+        <li><a href="api/_autosummary/ansys.meshing.prime.QuadToSplineParams.feature_capture_type.html#ansys.meshing.prime.QuadToSplineParams.feature_capture_type">(ansys.meshing.prime.QuadToSplineParams property)</a>
+</li>
+      </ul></li>
       <li><a href="api/_autosummary/ansys.meshing.prime.CollapseParams.feature_type.html#ansys.meshing.prime.CollapseParams.feature_type">feature_type (ansys.meshing.prime.CollapseParams property)</a>
 
       <ul>
@@ -2576,6 +2738,8 @@
 </li>
       <li><a href="api/_autosummary/ansys.meshing.prime.DetectAndTreatHolesParams.fragmented_edge_tolerance.html#ansys.meshing.prime.DetectAndTreatHolesParams.fragmented_edge_tolerance">fragmented_edge_tolerance (ansys.meshing.prime.DetectAndTreatHolesParams property)</a>
 </li>
+      <li><a href="api/_autosummary/ansys.meshing.prime.BodyQueryType.FREE.html#ansys.meshing.prime.BodyQueryType.FREE">FREE (ansys.meshing.prime.BodyQueryType attribute)</a>
+</li>
       <li><a href="api/_autosummary/ansys.meshing.prime.MergeNodeType.FREEFREE.html#ansys.meshing.prime.MergeNodeType.FREEFREE">FREEFREE (ansys.meshing.prime.MergeNodeType attribute)</a>
 
       <ul>
@@ -2606,6 +2770,8 @@
         <li><a href="api/_autosummary/ansys.meshing.prime.BCPairType.from_bytes.html#ansys.meshing.prime.BCPairType.from_bytes">(ansys.meshing.prime.BCPairType class method)</a>
 </li>
         <li><a href="api/_autosummary/ansys.meshing.prime.BCsVolumetricModality.from_bytes.html#ansys.meshing.prime.BCsVolumetricModality.from_bytes">(ansys.meshing.prime.BCsVolumetricModality class method)</a>
+</li>
+        <li><a href="api/_autosummary/ansys.meshing.prime.BodyQueryType.from_bytes.html#ansys.meshing.prime.BodyQueryType.from_bytes">(ansys.meshing.prime.BodyQueryType class method)</a>
 </li>
         <li><a href="api/_autosummary/ansys.meshing.prime.BOIType.from_bytes.html#ansys.meshing.prime.BOIType.from_bytes">(ansys.meshing.prime.BOIType class method)</a>
 </li>
@@ -2669,6 +2835,8 @@
 </li>
         <li><a href="api/_autosummary/ansys.meshing.prime.PrismControlOffsetType.from_bytes.html#ansys.meshing.prime.PrismControlOffsetType.from_bytes">(ansys.meshing.prime.PrismControlOffsetType class method)</a>
 </li>
+        <li><a href="api/_autosummary/ansys.meshing.prime.ScaffolderRepairMode.from_bytes.html#ansys.meshing.prime.ScaffolderRepairMode.from_bytes">(ansys.meshing.prime.ScaffolderRepairMode class method)</a>
+</li>
         <li><a href="api/_autosummary/ansys.meshing.prime.ScopeEntity.from_bytes.html#ansys.meshing.prime.ScopeEntity.from_bytes">(ansys.meshing.prime.ScopeEntity class method)</a>
 </li>
         <li><a href="api/_autosummary/ansys.meshing.prime.ScopeEvaluationType.from_bytes.html#ansys.meshing.prime.ScopeEvaluationType.from_bytes">(ansys.meshing.prime.ScopeEvaluationType class method)</a>
@@ -2687,6 +2855,8 @@
 </li>
         <li><a href="api/_autosummary/ansys.meshing.prime.SolverType.from_bytes.html#ansys.meshing.prime.SolverType.from_bytes">(ansys.meshing.prime.SolverType class method)</a>
 </li>
+        <li><a href="api/_autosummary/ansys.meshing.prime.SplineContinuityType.from_bytes.html#ansys.meshing.prime.SplineContinuityType.from_bytes">(ansys.meshing.prime.SplineContinuityType class method)</a>
+</li>
         <li><a href="api/_autosummary/ansys.meshing.prime.SplineFeatureCaptureType.from_bytes.html#ansys.meshing.prime.SplineFeatureCaptureType.from_bytes">(ansys.meshing.prime.SplineFeatureCaptureType class method)</a>
 </li>
         <li><a href="api/_autosummary/ansys.meshing.prime.SplineRefinementType.from_bytes.html#ansys.meshing.prime.SplineRefinementType.from_bytes">(ansys.meshing.prime.SplineRefinementType class method)</a>
@@ -2701,6 +2871,8 @@
 </li>
         <li><a href="api/_autosummary/ansys.meshing.prime.TopoSearchField.from_bytes.html#ansys.meshing.prime.TopoSearchField.from_bytes">(ansys.meshing.prime.TopoSearchField class method)</a>
 </li>
+        <li><a href="api/_autosummary/ansys.meshing.prime.TrimmedSolidSplineCutMode.from_bytes.html#ansys.meshing.prime.TrimmedSolidSplineCutMode.from_bytes">(ansys.meshing.prime.TrimmedSolidSplineCutMode class method)</a>
+</li>
         <li><a href="api/_autosummary/ansys.meshing.prime.VolumeFillType.from_bytes.html#ansys.meshing.prime.VolumeFillType.from_bytes">(ansys.meshing.prime.VolumeFillType class method)</a>
 </li>
         <li><a href="api/_autosummary/ansys.meshing.prime.VolumeNamingType.from_bytes.html#ansys.meshing.prime.VolumeNamingType.from_bytes">(ansys.meshing.prime.VolumeNamingType class method)</a>
@@ -2712,6 +2884,8 @@
         <li><a href="api/_autosummary/ansys.meshing.prime.ZoneType.from_bytes.html#ansys.meshing.prime.ZoneType.from_bytes">(ansys.meshing.prime.ZoneType class method)</a>
 </li>
       </ul></li>
+      <li><a href="api/_autosummary/ansys.meshing.prime.lucid.Mesh.from_geometry.html#ansys.meshing.prime.lucid.Mesh.from_geometry">from_geometry() (ansys.meshing.prime.lucid.Mesh method)</a>
+</li>
       <li><a href="api/_autosummary/ansys.meshing.prime.LengthUnit.FT.html#ansys.meshing.prime.LengthUnit.FT">FT (ansys.meshing.prime.LengthUnit attribute)</a>
 </li>
       <li><a href="api/_autosummary/ansys.meshing.prime.FuseParams.fuse_edges_only.html#ansys.meshing.prime.FuseParams.fuse_edges_only">fuse_edges_only (ansys.meshing.prime.FuseParams property)</a>
@@ -2780,6 +2954,10 @@
 </li>
       <li><a href="api/_autosummary/ansys.meshing.prime.Part.get_cell_zonelets.html#ansys.meshing.prime.Part.get_cell_zonelets">get_cell_zonelets() (ansys.meshing.prime.Part method)</a>
 </li>
+      <li><a href="api/_autosummary/ansys.meshing.prime.Part.get_component_children_by_path.html#ansys.meshing.prime.Part.get_component_children_by_path">get_component_children_by_path() (ansys.meshing.prime.Part method)</a>
+</li>
+      <li><a href="api/_autosummary/ansys.meshing.prime.Part.get_components_by_path_expression.html#ansys.meshing.prime.Part.get_components_by_path_expression">get_components_by_path_expression() (ansys.meshing.prime.Part method)</a>
+</li>
       <li><a href="api/_autosummary/ansys.meshing.prime.SizeControl.get_curvature_sizing_params.html#ansys.meshing.prime.SizeControl.get_curvature_sizing_params">get_curvature_sizing_params() (ansys.meshing.prime.SizeControl method)</a>
 </li>
       <li><a href="api/_autosummary/ansys.meshing.prime.ShellBLControl.get_edge_scope.html#ansys.meshing.prime.ShellBLControl.get_edge_scope">get_edge_scope() (ansys.meshing.prime.ShellBLControl method)</a>
@@ -2800,6 +2978,8 @@
         <li><a href="api/_autosummary/ansys.meshing.prime.Part.get_face_zonelets.html#ansys.meshing.prime.Part.get_face_zonelets">(ansys.meshing.prime.Part method)</a>
 </li>
       </ul></li>
+      <li><a href="api/_autosummary/ansys.meshing.prime.Part.get_face_zonelets_of_component_body_name_pattern.html#ansys.meshing.prime.Part.get_face_zonelets_of_component_body_name_pattern">get_face_zonelets_of_component_body_name_pattern() (ansys.meshing.prime.Part method)</a>
+</li>
       <li><a href="api/_autosummary/ansys.meshing.prime.Part.get_face_zonelets_of_label_name_pattern.html#ansys.meshing.prime.Part.get_face_zonelets_of_label_name_pattern">get_face_zonelets_of_label_name_pattern() (ansys.meshing.prime.Part method)</a>
 </li>
       <li><a href="api/_autosummary/ansys.meshing.prime.Part.get_face_zonelets_of_volumes.html#ansys.meshing.prime.Part.get_face_zonelets_of_volumes">get_face_zonelets_of_volumes() (ansys.meshing.prime.Part method)</a>
@@ -2818,8 +2998,12 @@
 </li>
       <li><a href="api/_autosummary/ansys.meshing.prime.Model.get_global_sizing_params.html#ansys.meshing.prime.Model.get_global_sizing_params">get_global_sizing_params() (ansys.meshing.prime.Model method)</a>
 </li>
-      <li><a href="api/_autosummary/ansys.meshing.prime.ShellBLControl.get_growth_params.html#ansys.meshing.prime.ShellBLControl.get_growth_params">get_growth_params() (ansys.meshing.prime.ShellBLControl method)</a>
+      <li><a href="api/_autosummary/ansys.meshing.prime.PrismControl.get_growth_params.html#ansys.meshing.prime.PrismControl.get_growth_params">get_growth_params() (ansys.meshing.prime.PrismControl method)</a>
+
+      <ul>
+        <li><a href="api/_autosummary/ansys.meshing.prime.ShellBLControl.get_growth_params.html#ansys.meshing.prime.ShellBLControl.get_growth_params">(ansys.meshing.prime.ShellBLControl method)</a>
 </li>
+      </ul></li>
       <li><a href="api/_autosummary/ansys.meshing.prime.SizeControl.get_hard_sizing_params.html#ansys.meshing.prime.SizeControl.get_hard_sizing_params">get_hard_sizing_params() (ansys.meshing.prime.SizeControl method)</a>
 </li>
       <li><a href="api/_autosummary/ansys.meshing.prime.Part.get_labels.html#ansys.meshing.prime.Part.get_labels">get_labels() (ansys.meshing.prime.Part method)</a>
@@ -2858,11 +3042,15 @@
 </li>
       <li><a href="api/_autosummary/ansys.meshing.prime.lucid.SurfaceScope.get_parts.html#ansys.meshing.prime.lucid.SurfaceScope.get_parts">get_parts() (ansys.meshing.prime.lucid.SurfaceScope method)</a>
 </li>
+      <li><a href="api/_autosummary/ansys.meshing.prime.VolumeMeshTool.get_parts_for_points.html#ansys.meshing.prime.VolumeMeshTool.get_parts_for_points">get_parts_for_points() (ansys.meshing.prime.VolumeMeshTool method)</a>
+</li>
       <li><a href="api/_autosummary/ansys.meshing.prime.ControlData.get_periodic_control_by_name.html#ansys.meshing.prime.ControlData.get_periodic_control_by_name">get_periodic_control_by_name() (ansys.meshing.prime.ControlData method)</a>
 </li>
       <li><a href="api/_autosummary/ansys.meshing.prime.ControlData.get_prism_control_by_name.html#ansys.meshing.prime.ControlData.get_prism_control_by_name">get_prism_control_by_name() (ansys.meshing.prime.ControlData method)</a>
 </li>
       <li><a href="api/_autosummary/ansys.meshing.prime.SizeControl.get_proximity_sizing_params.html#ansys.meshing.prime.SizeControl.get_proximity_sizing_params">get_proximity_sizing_params() (ansys.meshing.prime.SizeControl method)</a>
+</li>
+      <li><a href="api/_autosummary/ansys.meshing.prime.graphics.PrimePlotter.get_scalar_colors.html#ansys.meshing.prime.graphics.PrimePlotter.get_scalar_colors">get_scalar_colors() (ansys.meshing.prime.graphics.PrimePlotter method)</a>
 </li>
       <li><a href="api/_autosummary/ansys.meshing.prime.PeriodicControl.get_scope.html#ansys.meshing.prime.PeriodicControl.get_scope">get_scope() (ansys.meshing.prime.PeriodicControl method)</a>
 
@@ -2872,8 +3060,6 @@
         <li><a href="api/_autosummary/ansys.meshing.prime.VolumeControl.get_scope.html#ansys.meshing.prime.VolumeControl.get_scope">(ansys.meshing.prime.VolumeControl method)</a>
 </li>
       </ul></li>
-  </ul></td>
-  <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="api/_autosummary/ansys.meshing.prime.lucid.SurfaceScope.get_scope_definition.html#ansys.meshing.prime.lucid.SurfaceScope.get_scope_definition">get_scope_definition() (ansys.meshing.prime.lucid.SurfaceScope method)</a>
 
       <ul>
@@ -2882,6 +3068,8 @@
       </ul></li>
       <li><a href="api/_autosummary/ansys.meshing.prime.ControlData.get_scope_face_zonelets.html#ansys.meshing.prime.ControlData.get_scope_face_zonelets">get_scope_face_zonelets() (ansys.meshing.prime.ControlData method)</a>
 </li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="api/_autosummary/ansys.meshing.prime.ControlData.get_scope_parts.html#ansys.meshing.prime.ControlData.get_scope_parts">get_scope_parts() (ansys.meshing.prime.ControlData method)</a>
 </li>
       <li><a href="api/_autosummary/ansys.meshing.prime.Model.get_scoped_polydata.html#ansys.meshing.prime.Model.get_scoped_polydata">get_scoped_polydata() (ansys.meshing.prime.Model method)</a>
@@ -2897,6 +3085,10 @@
       <li><a href="api/_autosummary/ansys.meshing.prime.SizeControl.get_sizing_type.html#ansys.meshing.prime.SizeControl.get_sizing_type">get_sizing_type() (ansys.meshing.prime.SizeControl method)</a>
 </li>
       <li><a href="api/_autosummary/ansys.meshing.prime.SizeControl.get_soft_sizing_params.html#ansys.meshing.prime.SizeControl.get_soft_sizing_params">get_soft_sizing_params() (ansys.meshing.prime.SizeControl method)</a>
+</li>
+      <li><a href="api/_autosummary/ansys.meshing.prime.SizeControl.get_soi_sizing_params.html#ansys.meshing.prime.SizeControl.get_soi_sizing_params">get_soi_sizing_params() (ansys.meshing.prime.SizeControl method)</a>
+</li>
+      <li><a href="api/_autosummary/ansys.meshing.prime.ThinVolumeControl.get_source_scope.html#ansys.meshing.prime.ThinVolumeControl.get_source_scope">get_source_scope() (ansys.meshing.prime.ThinVolumeControl method)</a>
 </li>
       <li><a href="api/_autosummary/ansys.meshing.prime.Part.get_splines.html#ansys.meshing.prime.Part.get_splines">get_splines() (ansys.meshing.prime.Part method)</a>
 </li>
@@ -2920,6 +3112,8 @@
         <li><a href="api/_autosummary/ansys.meshing.prime.ShellBLControl.get_surface_scope.html#ansys.meshing.prime.ShellBLControl.get_surface_scope">(ansys.meshing.prime.ShellBLControl method)</a>
 </li>
       </ul></li>
+      <li><a href="api/_autosummary/ansys.meshing.prime.ThinVolumeControl.get_target_scope.html#ansys.meshing.prime.ThinVolumeControl.get_target_scope">get_target_scope() (ansys.meshing.prime.ThinVolumeControl method)</a>
+</li>
       <li><a href="api/_autosummary/ansys.meshing.prime.ControlData.get_thin_volume_control_by_name.html#ansys.meshing.prime.ControlData.get_thin_volume_control_by_name">get_thin_volume_control_by_name() (ansys.meshing.prime.ControlData method)</a>
 </li>
       <li><a href="api/_autosummary/ansys.meshing.prime.Part.get_topo_edges.html#ansys.meshing.prime.Part.get_topo_edges">get_topo_edges() (ansys.meshing.prime.Part method)</a>
@@ -2934,11 +3128,23 @@
         <li><a href="api/_autosummary/ansys.meshing.prime.Part.get_topo_faces.html#ansys.meshing.prime.Part.get_topo_faces">(ansys.meshing.prime.Part method)</a>
 </li>
       </ul></li>
+      <li><a href="api/_autosummary/ansys.meshing.prime.Part.get_topo_faces_of_component_body_name_pattern.html#ansys.meshing.prime.Part.get_topo_faces_of_component_body_name_pattern">get_topo_faces_of_component_body_name_pattern() (ansys.meshing.prime.Part method)</a>
+</li>
       <li><a href="api/_autosummary/ansys.meshing.prime.Part.get_topo_faces_of_label_name_pattern.html#ansys.meshing.prime.Part.get_topo_faces_of_label_name_pattern">get_topo_faces_of_label_name_pattern() (ansys.meshing.prime.Part method)</a>
+</li>
+      <li><a href="api/_autosummary/ansys.meshing.prime.Part.get_topo_faces_of_topo_volumes.html#ansys.meshing.prime.Part.get_topo_faces_of_topo_volumes">get_topo_faces_of_topo_volumes() (ansys.meshing.prime.Part method)</a>
 </li>
       <li><a href="api/_autosummary/ansys.meshing.prime.Part.get_topo_faces_of_zone_name_pattern.html#ansys.meshing.prime.Part.get_topo_faces_of_zone_name_pattern">get_topo_faces_of_zone_name_pattern() (ansys.meshing.prime.Part method)</a>
 </li>
       <li><a href="api/_autosummary/ansys.meshing.prime.Part.get_topo_volumes.html#ansys.meshing.prime.Part.get_topo_volumes">get_topo_volumes() (ansys.meshing.prime.Part method)</a>
+</li>
+      <li><a href="api/_autosummary/ansys.meshing.prime.Part.get_topo_volumes_of_label_name_pattern.html#ansys.meshing.prime.Part.get_topo_volumes_of_label_name_pattern">get_topo_volumes_of_label_name_pattern() (ansys.meshing.prime.Part method)</a>
+</li>
+      <li><a href="api/_autosummary/ansys.meshing.prime.TopoData.get_topo_volumes_of_topo_faces.html#ansys.meshing.prime.TopoData.get_topo_volumes_of_topo_faces">get_topo_volumes_of_topo_faces() (ansys.meshing.prime.TopoData method)</a>
+</li>
+      <li><a href="api/_autosummary/ansys.meshing.prime.Part.get_topo_volumes_of_zone_name_pattern.html#ansys.meshing.prime.Part.get_topo_volumes_of_zone_name_pattern">get_topo_volumes_of_zone_name_pattern() (ansys.meshing.prime.Part method)</a>
+</li>
+      <li><a href="api/_autosummary/ansys.meshing.prime.Part.get_unstructured_spline_solid.html#ansys.meshing.prime.Part.get_unstructured_spline_solid">get_unstructured_spline_solid() (ansys.meshing.prime.Part method)</a>
 </li>
       <li><a href="api/_autosummary/ansys.meshing.prime.Part.get_unstructured_spline_surface.html#ansys.meshing.prime.Part.get_unstructured_spline_surface">get_unstructured_spline_surface() (ansys.meshing.prime.Part method)</a>
 </li>
@@ -2949,7 +3155,11 @@
       <li><a href="api/_autosummary/ansys.meshing.prime.VolumeSearch.get_volume_quality_summary.html#ansys.meshing.prime.VolumeSearch.get_volume_quality_summary">get_volume_quality_summary() (ansys.meshing.prime.VolumeSearch method)</a>
 </li>
       <li><a href="api/_autosummary/ansys.meshing.prime.PrismControl.get_volume_scope.html#ansys.meshing.prime.PrismControl.get_volume_scope">get_volume_scope() (ansys.meshing.prime.PrismControl method)</a>
+
+      <ul>
+        <li><a href="api/_autosummary/ansys.meshing.prime.ThinVolumeControl.get_volume_scope.html#ansys.meshing.prime.ThinVolumeControl.get_volume_scope">(ansys.meshing.prime.ThinVolumeControl method)</a>
 </li>
+      </ul></li>
       <li><a href="api/_autosummary/ansys.meshing.prime.Part.get_volume_zone_of_volume.html#ansys.meshing.prime.Part.get_volume_zone_of_volume">get_volume_zone_of_volume() (ansys.meshing.prime.Part method)</a>
 </li>
       <li><a href="api/_autosummary/ansys.meshing.prime.Part.get_volume_zones.html#ansys.meshing.prime.Part.get_volume_zones">get_volume_zones() (ansys.meshing.prime.Part method)</a>
@@ -2976,6 +3186,8 @@
 </li>
       <li><a href="api/_autosummary/ansys.meshing.prime.GlobalSizingParams.html#ansys.meshing.prime.GlobalSizingParams">GlobalSizingParams (class in ansys.meshing.prime)</a>
 </li>
+      <li><a href="api/_autosummary/ansys.meshing.prime.graphics.Graphics.html#ansys.meshing.prime.graphics.Graphics">Graphics (class in ansys.meshing.prime.graphics)</a>
+</li>
       <li><a href="api/_autosummary/ansys.meshing.prime.CreateContactPatchParams.grouping_tolerance.html#ansys.meshing.prime.CreateContactPatchParams.grouping_tolerance">grouping_tolerance (ansys.meshing.prime.CreateContactPatchParams property)</a>
 </li>
       <li><a href="api/_autosummary/ansys.meshing.prime.BoiSizingParams.growth_rate.html#ansys.meshing.prime.BoiSizingParams.growth_rate">growth_rate (ansys.meshing.prime.BoiSizingParams property)</a>
@@ -3000,6 +3212,8 @@
         <li><a href="api/_autosummary/ansys.meshing.prime.ShellBLControlGrowthParams.growth_rate.html#ansys.meshing.prime.ShellBLControlGrowthParams.growth_rate">(ansys.meshing.prime.ShellBLControlGrowthParams property)</a>
 </li>
         <li><a href="api/_autosummary/ansys.meshing.prime.SoftSizingParams.growth_rate.html#ansys.meshing.prime.SoftSizingParams.growth_rate">(ansys.meshing.prime.SoftSizingParams property)</a>
+</li>
+        <li><a href="api/_autosummary/ansys.meshing.prime.SoiSizingParams.growth_rate.html#ansys.meshing.prime.SoiSizingParams.growth_rate">(ansys.meshing.prime.SoiSizingParams property)</a>
 </li>
         <li><a href="api/_autosummary/ansys.meshing.prime.SurferParams.growth_rate.html#ansys.meshing.prime.SurferParams.growth_rate">(ansys.meshing.prime.SurferParams property)</a>
 </li>
@@ -3028,12 +3242,12 @@
 </li>
       <li><a href="api/_autosummary/ansys.meshing.prime.CheckMeshResults.has_non_positive_volumes.html#ansys.meshing.prime.CheckMeshResults.has_non_positive_volumes">has_non_positive_volumes (ansys.meshing.prime.CheckMeshResults property)</a>
 </li>
-  </ul></td>
-  <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="api/_autosummary/ansys.meshing.prime.HexCoreCellElementType.HEXANDPOLY.html#ansys.meshing.prime.HexCoreCellElementType.HEXANDPOLY">HEXANDPOLY (ansys.meshing.prime.HexCoreCellElementType attribute)</a>
 </li>
       <li><a href="api/_autosummary/ansys.meshing.prime.AutoMeshParams.hexcore.html#ansys.meshing.prime.AutoMeshParams.hexcore">hexcore (ansys.meshing.prime.AutoMeshParams property)</a>
 </li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="api/_autosummary/ansys.meshing.prime.HexCoreCellElementType.html#ansys.meshing.prime.HexCoreCellElementType">HexCoreCellElementType (class in ansys.meshing.prime)</a>
 </li>
       <li><a href="api/_autosummary/ansys.meshing.prime.HexCoreParams.html#ansys.meshing.prime.HexCoreParams">HexCoreParams (class in ansys.meshing.prime)</a>
@@ -3044,9 +3258,15 @@
 </li>
       <li><a href="api/_autosummary/ansys.meshing.prime.HexCoreTransitionLayerType.html#ansys.meshing.prime.HexCoreTransitionLayerType">HexCoreTransitionLayerType (class in ansys.meshing.prime)</a>
 </li>
+      <li><a href="api/_autosummary/ansys.meshing.prime.HexToSpline.html#ansys.meshing.prime.HexToSpline">HexToSpline (class in ansys.meshing.prime)</a>
+</li>
+      <li><a href="api/_autosummary/ansys.meshing.prime.HexToSplineParams.html#ansys.meshing.prime.HexToSplineParams">HexToSplineParams (class in ansys.meshing.prime)</a>
+</li>
       <li><a href="api/_autosummary/ansys.meshing.prime.DetectAndTreatHolesParams.hole_proximity_tolerance.html#ansys.meshing.prime.DetectAndTreatHolesParams.hole_proximity_tolerance">hole_proximity_tolerance (ansys.meshing.prime.DetectAndTreatHolesParams property)</a>
 </li>
       <li><a href="api/_autosummary/ansys.meshing.prime.DeadRegion.hole_size.html#ansys.meshing.prime.DeadRegion.hole_size">hole_size (ansys.meshing.prime.DeadRegion property)</a>
+</li>
+      <li><a href="api/_autosummary/ansys.meshing.prime.TrimmedSolidSplineCutMode.HYBRID.html#ansys.meshing.prime.TrimmedSolidSplineCutMode.HYBRID">HYBRID (ansys.meshing.prime.TrimmedSolidSplineCutMode attribute)</a>
 </li>
   </ul></td>
 </tr></table>
@@ -3062,6 +3282,8 @@
         <li><a href="api/_autosummary/ansys.meshing.prime.CreateMaterialPointResults.id.html#ansys.meshing.prime.CreateMaterialPointResults.id">(ansys.meshing.prime.CreateMaterialPointResults property)</a>
 </li>
         <li><a href="api/_autosummary/ansys.meshing.prime.IGASpline.id.html#ansys.meshing.prime.IGASpline.id">(ansys.meshing.prime.IGASpline property)</a>
+</li>
+        <li><a href="api/_autosummary/ansys.meshing.prime.IGAUnstructuredSplineSolid.id.html#ansys.meshing.prime.IGAUnstructuredSplineSolid.id">(ansys.meshing.prime.IGAUnstructuredSplineSolid property)</a>
 </li>
         <li><a href="api/_autosummary/ansys.meshing.prime.IGAUnstructuredSplineSurf.id.html#ansys.meshing.prime.IGAUnstructuredSplineSurf.id">(ansys.meshing.prime.IGAUnstructuredSplineSurf property)</a>
 </li>
@@ -3150,6 +3372,8 @@
 </li>
       <li><a href="api/_autosummary/ansys.meshing.prime.IGASpline.html#ansys.meshing.prime.IGASpline">IGASpline (class in ansys.meshing.prime)</a>
 </li>
+      <li><a href="api/_autosummary/ansys.meshing.prime.IGAUnstructuredSplineSolid.html#ansys.meshing.prime.IGAUnstructuredSplineSolid">IGAUnstructuredSplineSolid (class in ansys.meshing.prime)</a>
+</li>
       <li><a href="api/_autosummary/ansys.meshing.prime.IGAUnstructuredSplineSurf.html#ansys.meshing.prime.IGAUnstructuredSplineSurf">IGAUnstructuredSplineSurf (class in ansys.meshing.prime)</a>
 </li>
       <li><a href="api/_autosummary/ansys.meshing.prime.SplineFeatureCaptureType.IGNORE.html#ansys.meshing.prime.SplineFeatureCaptureType.IGNORE">IGNORE (ansys.meshing.prime.SplineFeatureCaptureType attribute)</a>
@@ -3166,6 +3390,8 @@
         <li><a href="api/_autosummary/ansys.meshing.prime.BCPairType.imag.html#ansys.meshing.prime.BCPairType.imag">(ansys.meshing.prime.BCPairType attribute)</a>
 </li>
         <li><a href="api/_autosummary/ansys.meshing.prime.BCsVolumetricModality.imag.html#ansys.meshing.prime.BCsVolumetricModality.imag">(ansys.meshing.prime.BCsVolumetricModality attribute)</a>
+</li>
+        <li><a href="api/_autosummary/ansys.meshing.prime.BodyQueryType.imag.html#ansys.meshing.prime.BodyQueryType.imag">(ansys.meshing.prime.BodyQueryType attribute)</a>
 </li>
         <li><a href="api/_autosummary/ansys.meshing.prime.BOIType.imag.html#ansys.meshing.prime.BOIType.imag">(ansys.meshing.prime.BOIType attribute)</a>
 </li>
@@ -3229,6 +3455,8 @@
 </li>
         <li><a href="api/_autosummary/ansys.meshing.prime.PrismControlOffsetType.imag.html#ansys.meshing.prime.PrismControlOffsetType.imag">(ansys.meshing.prime.PrismControlOffsetType attribute)</a>
 </li>
+        <li><a href="api/_autosummary/ansys.meshing.prime.ScaffolderRepairMode.imag.html#ansys.meshing.prime.ScaffolderRepairMode.imag">(ansys.meshing.prime.ScaffolderRepairMode attribute)</a>
+</li>
         <li><a href="api/_autosummary/ansys.meshing.prime.ScopeEntity.imag.html#ansys.meshing.prime.ScopeEntity.imag">(ansys.meshing.prime.ScopeEntity attribute)</a>
 </li>
         <li><a href="api/_autosummary/ansys.meshing.prime.ScopeEvaluationType.imag.html#ansys.meshing.prime.ScopeEvaluationType.imag">(ansys.meshing.prime.ScopeEvaluationType attribute)</a>
@@ -3247,6 +3475,8 @@
 </li>
         <li><a href="api/_autosummary/ansys.meshing.prime.SolverType.imag.html#ansys.meshing.prime.SolverType.imag">(ansys.meshing.prime.SolverType attribute)</a>
 </li>
+        <li><a href="api/_autosummary/ansys.meshing.prime.SplineContinuityType.imag.html#ansys.meshing.prime.SplineContinuityType.imag">(ansys.meshing.prime.SplineContinuityType attribute)</a>
+</li>
         <li><a href="api/_autosummary/ansys.meshing.prime.SplineFeatureCaptureType.imag.html#ansys.meshing.prime.SplineFeatureCaptureType.imag">(ansys.meshing.prime.SplineFeatureCaptureType attribute)</a>
 </li>
         <li><a href="api/_autosummary/ansys.meshing.prime.SplineRefinementType.imag.html#ansys.meshing.prime.SplineRefinementType.imag">(ansys.meshing.prime.SplineRefinementType attribute)</a>
@@ -3260,6 +3490,8 @@
         <li><a href="api/_autosummary/ansys.meshing.prime.ThinStripType.imag.html#ansys.meshing.prime.ThinStripType.imag">(ansys.meshing.prime.ThinStripType attribute)</a>
 </li>
         <li><a href="api/_autosummary/ansys.meshing.prime.TopoSearchField.imag.html#ansys.meshing.prime.TopoSearchField.imag">(ansys.meshing.prime.TopoSearchField attribute)</a>
+</li>
+        <li><a href="api/_autosummary/ansys.meshing.prime.TrimmedSolidSplineCutMode.imag.html#ansys.meshing.prime.TrimmedSolidSplineCutMode.imag">(ansys.meshing.prime.TrimmedSolidSplineCutMode attribute)</a>
 </li>
         <li><a href="api/_autosummary/ansys.meshing.prime.VolumeFillType.imag.html#ansys.meshing.prime.VolumeFillType.imag">(ansys.meshing.prime.VolumeFillType attribute)</a>
 </li>
@@ -3308,15 +3540,17 @@
 </li>
       <li><a href="api/_autosummary/ansys.meshing.prime.ImportFluentMeshingMeshParams.html#ansys.meshing.prime.ImportFluentMeshingMeshParams">ImportFluentMeshingMeshParams (class in ansys.meshing.prime)</a>
 </li>
-  </ul></td>
-  <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="api/_autosummary/ansys.meshing.prime.ImportFluentMeshingMeshResults.html#ansys.meshing.prime.ImportFluentMeshingMeshResults">ImportFluentMeshingMeshResults (class in ansys.meshing.prime)</a>
 </li>
       <li><a href="api/_autosummary/ansys.meshing.prime.ErrorCode.IMPORTFLUENTMESHINGMSHFAILED.html#ansys.meshing.prime.ErrorCode.IMPORTFLUENTMESHINGMSHFAILED">IMPORTFLUENTMESHINGMSHFAILED (ansys.meshing.prime.ErrorCode attribute)</a>
 </li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="api/_autosummary/ansys.meshing.prime.ImportMapdlCdbParams.html#ansys.meshing.prime.ImportMapdlCdbParams">ImportMapdlCdbParams (class in ansys.meshing.prime)</a>
 </li>
       <li><a href="api/_autosummary/ansys.meshing.prime.ImportMapdlCdbResults.html#ansys.meshing.prime.ImportMapdlCdbResults">ImportMapdlCdbResults (class in ansys.meshing.prime)</a>
+</li>
+      <li><a href="api/_autosummary/ansys.meshing.prime.WarningCode.IMPORTOFNODALCOMPONENTASLABELSKIPPED.html#ansys.meshing.prime.WarningCode.IMPORTOFNODALCOMPONENTASLABELSKIPPED">IMPORTOFNODALCOMPONENTASLABELSKIPPED (ansys.meshing.prime.WarningCode attribute)</a>
 </li>
       <li><a href="api/_autosummary/ansys.meshing.prime.WrapParams.imprint_iterations.html#ansys.meshing.prime.WrapParams.imprint_iterations">imprint_iterations (ansys.meshing.prime.WrapParams property)</a>
 </li>
@@ -3332,6 +3566,8 @@
 </li>
       <li><a href="api/_autosummary/ansys.meshing.prime.Wrapper.improve_quality.html#ansys.meshing.prime.Wrapper.improve_quality">improve_quality() (ansys.meshing.prime.Wrapper method)</a>
 </li>
+      <li><a href="api/_autosummary/ansys.meshing.prime.ErrorCode.IMPROVESURFACEMESHQUALITYFAILED.html#ansys.meshing.prime.ErrorCode.IMPROVESURFACEMESHQUALITYFAILED">IMPROVESURFACEMESHQUALITYFAILED (ansys.meshing.prime.ErrorCode attribute)</a>
+</li>
       <li><a href="api/_autosummary/ansys.meshing.prime.LengthUnit.IN.html#ansys.meshing.prime.LengthUnit.IN">IN (ansys.meshing.prime.LengthUnit attribute)</a>
 </li>
       <li><a href="api/_autosummary/ansys.meshing.prime.ErrorCode.INCLUDEKFILENOTFOUND.html#ansys.meshing.prime.ErrorCode.INCLUDEKFILENOTFOUND">INCLUDEKFILENOTFOUND (ansys.meshing.prime.ErrorCode attribute)</a>
@@ -3345,6 +3581,8 @@
       <li><a href="api/_autosummary/ansys.meshing.prime.SmoothType.INFLATE.html#ansys.meshing.prime.SmoothType.INFLATE">INFLATE (ansys.meshing.prime.SmoothType attribute)</a>
 </li>
       <li><a href="api/_autosummary/ansys.meshing.prime.WrapperImproveQualityParams.inflate_dihedral_face_nodes.html#ansys.meshing.prime.WrapperImproveQualityParams.inflate_dihedral_face_nodes">inflate_dihedral_face_nodes (ansys.meshing.prime.WrapperImproveQualityParams property)</a>
+</li>
+      <li><a href="api/_autosummary/ansys.meshing.prime.graphics.PrimePlotter.info_actor_map.html#ansys.meshing.prime.graphics.PrimePlotter.info_actor_map">info_actor_map (ansys.meshing.prime.graphics.PrimePlotter property)</a>
 </li>
       <li><a href="api/_autosummary/ansys.meshing.prime.FileIO.initialize_cdb_export_params.html#ansys.meshing.prime.FileIO.initialize_cdb_export_params">initialize_cdb_export_params() (ansys.meshing.prime.FileIO method)</a>
 </li>
@@ -3372,11 +3610,17 @@
 </li>
       <li><a href="api/_autosummary/ansys.meshing.prime.IntersectParams.html#ansys.meshing.prime.IntersectParams">IntersectParams (class in ansys.meshing.prime)</a>
 </li>
-      <li><a href="api/_autosummary/ansys.meshing.prime.IGAUnstructuredSplineSurf.invalid_jacobian_elements_count.html#ansys.meshing.prime.IGAUnstructuredSplineSurf.invalid_jacobian_elements_count">invalid_jacobian_elements_count (ansys.meshing.prime.IGAUnstructuredSplineSurf property)</a>
+      <li><a href="api/_autosummary/ansys.meshing.prime.IGAUnstructuredSplineSolid.invalid_jacobian_elements_count.html#ansys.meshing.prime.IGAUnstructuredSplineSolid.invalid_jacobian_elements_count">invalid_jacobian_elements_count (ansys.meshing.prime.IGAUnstructuredSplineSolid property)</a>
+
+      <ul>
+        <li><a href="api/_autosummary/ansys.meshing.prime.IGAUnstructuredSplineSurf.invalid_jacobian_elements_count.html#ansys.meshing.prime.IGAUnstructuredSplineSurf.invalid_jacobian_elements_count">(ansys.meshing.prime.IGAUnstructuredSplineSurf property)</a>
 </li>
+      </ul></li>
       <li><a href="api/_autosummary/ansys.meshing.prime.TopoSearchField.INVALIDBOUNDARYTOPOFACES.html#ansys.meshing.prime.TopoSearchField.INVALIDBOUNDARYTOPOFACES">INVALIDBOUNDARYTOPOFACES (ansys.meshing.prime.TopoSearchField attribute)</a>
 </li>
       <li><a href="api/_autosummary/ansys.meshing.prime.ErrorCode.INVALIDCELLQUALITYLIMIT.html#ansys.meshing.prime.ErrorCode.INVALIDCELLQUALITYLIMIT">INVALIDCELLQUALITYLIMIT (ansys.meshing.prime.ErrorCode attribute)</a>
+</li>
+      <li><a href="api/_autosummary/ansys.meshing.prime.ErrorCode.INVALIDCMBLOCKFORMAT.html#ansys.meshing.prime.ErrorCode.INVALIDCMBLOCKFORMAT">INVALIDCMBLOCKFORMAT (ansys.meshing.prime.ErrorCode attribute)</a>
 </li>
       <li><a href="api/_autosummary/ansys.meshing.prime.ErrorCode.INVALIDCONTROLPARAMS.html#ansys.meshing.prime.ErrorCode.INVALIDCONTROLPARAMS">INVALIDCONTROLPARAMS (ansys.meshing.prime.ErrorCode attribute)</a>
 </li>
@@ -3395,6 +3639,8 @@
       <li><a href="api/_autosummary/ansys.meshing.prime.ErrorCode.INVALIDGROWTHRATE.html#ansys.meshing.prime.ErrorCode.INVALIDGROWTHRATE">INVALIDGROWTHRATE (ansys.meshing.prime.ErrorCode attribute)</a>
 </li>
       <li><a href="api/_autosummary/ansys.meshing.prime.ErrorCode.INVALIDINPUTPART.html#ansys.meshing.prime.ErrorCode.INVALIDINPUTPART">INVALIDINPUTPART (ansys.meshing.prime.ErrorCode attribute)</a>
+</li>
+      <li><a href="api/_autosummary/ansys.meshing.prime.ErrorCode.INVALIDINPUTPOINT.html#ansys.meshing.prime.ErrorCode.INVALIDINPUTPOINT">INVALIDINPUTPOINT (ansys.meshing.prime.ErrorCode attribute)</a>
 </li>
       <li><a href="api/_autosummary/ansys.meshing.prime.ErrorCode.INVALIDINPUTVOLUMES.html#ansys.meshing.prime.ErrorCode.INVALIDINPUTVOLUMES">INVALIDINPUTVOLUMES (ansys.meshing.prime.ErrorCode attribute)</a>
 </li>
@@ -3450,6 +3696,8 @@
         <li><a href="api/_autosummary/ansys.meshing.prime.BCPairType.is_integer.html#ansys.meshing.prime.BCPairType.is_integer">(ansys.meshing.prime.BCPairType method)</a>
 </li>
         <li><a href="api/_autosummary/ansys.meshing.prime.BCsVolumetricModality.is_integer.html#ansys.meshing.prime.BCsVolumetricModality.is_integer">(ansys.meshing.prime.BCsVolumetricModality method)</a>
+</li>
+        <li><a href="api/_autosummary/ansys.meshing.prime.BodyQueryType.is_integer.html#ansys.meshing.prime.BodyQueryType.is_integer">(ansys.meshing.prime.BodyQueryType method)</a>
 </li>
         <li><a href="api/_autosummary/ansys.meshing.prime.BOIType.is_integer.html#ansys.meshing.prime.BOIType.is_integer">(ansys.meshing.prime.BOIType method)</a>
 </li>
@@ -3513,6 +3761,8 @@
 </li>
         <li><a href="api/_autosummary/ansys.meshing.prime.PrismControlOffsetType.is_integer.html#ansys.meshing.prime.PrismControlOffsetType.is_integer">(ansys.meshing.prime.PrismControlOffsetType method)</a>
 </li>
+        <li><a href="api/_autosummary/ansys.meshing.prime.ScaffolderRepairMode.is_integer.html#ansys.meshing.prime.ScaffolderRepairMode.is_integer">(ansys.meshing.prime.ScaffolderRepairMode method)</a>
+</li>
         <li><a href="api/_autosummary/ansys.meshing.prime.ScopeEntity.is_integer.html#ansys.meshing.prime.ScopeEntity.is_integer">(ansys.meshing.prime.ScopeEntity method)</a>
 </li>
         <li><a href="api/_autosummary/ansys.meshing.prime.ScopeEvaluationType.is_integer.html#ansys.meshing.prime.ScopeEvaluationType.is_integer">(ansys.meshing.prime.ScopeEvaluationType method)</a>
@@ -3531,6 +3781,8 @@
 </li>
         <li><a href="api/_autosummary/ansys.meshing.prime.SolverType.is_integer.html#ansys.meshing.prime.SolverType.is_integer">(ansys.meshing.prime.SolverType method)</a>
 </li>
+        <li><a href="api/_autosummary/ansys.meshing.prime.SplineContinuityType.is_integer.html#ansys.meshing.prime.SplineContinuityType.is_integer">(ansys.meshing.prime.SplineContinuityType method)</a>
+</li>
         <li><a href="api/_autosummary/ansys.meshing.prime.SplineFeatureCaptureType.is_integer.html#ansys.meshing.prime.SplineFeatureCaptureType.is_integer">(ansys.meshing.prime.SplineFeatureCaptureType method)</a>
 </li>
         <li><a href="api/_autosummary/ansys.meshing.prime.SplineRefinementType.is_integer.html#ansys.meshing.prime.SplineRefinementType.is_integer">(ansys.meshing.prime.SplineRefinementType method)</a>
@@ -3544,6 +3796,8 @@
         <li><a href="api/_autosummary/ansys.meshing.prime.ThinStripType.is_integer.html#ansys.meshing.prime.ThinStripType.is_integer">(ansys.meshing.prime.ThinStripType method)</a>
 </li>
         <li><a href="api/_autosummary/ansys.meshing.prime.TopoSearchField.is_integer.html#ansys.meshing.prime.TopoSearchField.is_integer">(ansys.meshing.prime.TopoSearchField method)</a>
+</li>
+        <li><a href="api/_autosummary/ansys.meshing.prime.TrimmedSolidSplineCutMode.is_integer.html#ansys.meshing.prime.TrimmedSolidSplineCutMode.is_integer">(ansys.meshing.prime.TrimmedSolidSplineCutMode method)</a>
 </li>
         <li><a href="api/_autosummary/ansys.meshing.prime.VolumeFillType.is_integer.html#ansys.meshing.prime.VolumeFillType.is_integer">(ansys.meshing.prime.VolumeFillType method)</a>
 </li>
@@ -3604,7 +3858,11 @@
   <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="api/_autosummary/ansys.meshing.prime.FixInvalidNormalNodeParams.label.html#ansys.meshing.prime.FixInvalidNormalNodeParams.label">label (ansys.meshing.prime.FixInvalidNormalNodeParams property)</a>
 </li>
+      <li><a href="api/_autosummary/ansys.meshing.prime.ExportMapdlCdbParams.label_export_params.html#ansys.meshing.prime.ExportMapdlCdbParams.label_export_params">label_export_params (ansys.meshing.prime.ExportMapdlCdbParams property)</a>
+</li>
       <li><a href="api/_autosummary/ansys.meshing.prime.ScopeDefinition.label_expression.html#ansys.meshing.prime.ScopeDefinition.label_expression">label_expression (ansys.meshing.prime.ScopeDefinition property)</a>
+</li>
+      <li><a href="api/_autosummary/ansys.meshing.prime.LabelExportParams.label_expression_for_nodal_components.html#ansys.meshing.prime.LabelExportParams.label_expression_for_nodal_components">label_expression_for_nodal_components (ansys.meshing.prime.LabelExportParams property)</a>
 </li>
       <li><a href="api/_autosummary/ansys.meshing.prime.CreateIntersectionEdgeLoopsParams.label_name.html#ansys.meshing.prime.CreateIntersectionEdgeLoopsParams.label_name">label_name (ansys.meshing.prime.CreateIntersectionEdgeLoopsParams property)</a>
 
@@ -3612,6 +3870,8 @@
         <li><a href="api/_autosummary/ansys.meshing.prime.ExtractFeatureParams.label_name.html#ansys.meshing.prime.ExtractFeatureParams.label_name">(ansys.meshing.prime.ExtractFeatureParams property)</a>
 </li>
       </ul></li>
+      <li><a href="api/_autosummary/ansys.meshing.prime.LabelExportParams.html#ansys.meshing.prime.LabelExportParams">LabelExportParams (class in ansys.meshing.prime)</a>
+</li>
       <li><a href="api/_autosummary/ansys.meshing.prime.ScopeEvaluationType.LABELS.html#ansys.meshing.prime.ScopeEvaluationType.LABELS">LABELS (ansys.meshing.prime.ScopeEvaluationType attribute)</a>
 </li>
       <li><a href="api/_autosummary/ansys.meshing.prime.lucid.LabelToZoneMethod.html#ansys.meshing.prime.lucid.LabelToZoneMethod">LabelToZoneMethod (class in ansys.meshing.prime.lucid)</a>
@@ -3630,10 +3890,10 @@
 </li>
       <li><a href="api/_autosummary/ansys.meshing.prime.launch_prime.html#ansys.meshing.prime.launch_prime">launch_prime() (in module ansys.meshing.prime)</a>
 </li>
-      <li><a href="api/_autosummary/ansys.meshing.prime.launch_server_process.html#ansys.meshing.prime.launch_server_process">launch_server_process() (in module ansys.meshing.prime)</a>
-</li>
   </ul></td>
   <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="api/_autosummary/ansys.meshing.prime.launch_server_process.html#ansys.meshing.prime.launch_server_process">launch_server_process() (in module ansys.meshing.prime)</a>
+</li>
       <li><a href="api/_autosummary/ansys.meshing.prime.LeakPreventionParams.html#ansys.meshing.prime.LeakPreventionParams">LeakPreventionParams (class in ansys.meshing.prime)</a>
 </li>
       <li><a href="api/_autosummary/ansys.meshing.prime.ImportCadParams.length_unit.html#ansys.meshing.prime.ImportCadParams.length_unit">length_unit (ansys.meshing.prime.ImportCadParams property)</a>
@@ -3677,6 +3937,10 @@
       <li><a href="api/_autosummary/ansys.meshing.prime.JoinParams.match_angle.html#ansys.meshing.prime.JoinParams.match_angle">match_angle (ansys.meshing.prime.JoinParams property)</a>
 </li>
       <li><a href="api/_autosummary/ansys.meshing.prime.Morpher.match_morph.html#ansys.meshing.prime.Morpher.match_morph">match_morph() (ansys.meshing.prime.Morpher method)</a>
+</li>
+      <li><a href="api/_autosummary/ansys.meshing.prime.ErrorCode.MATCHMORPH_BCPAIRINPUTTYPEMISMATCH.html#ansys.meshing.prime.ErrorCode.MATCHMORPH_BCPAIRINPUTTYPEMISMATCH">MATCHMORPH_BCPAIRINPUTTYPEMISMATCH (ansys.meshing.prime.ErrorCode attribute)</a>
+</li>
+      <li><a href="api/_autosummary/ansys.meshing.prime.ErrorCode.MATCHMORPH_INVALIDSOURCEINPUT.html#ansys.meshing.prime.ErrorCode.MATCHMORPH_INVALIDSOURCEINPUT">MATCHMORPH_INVALIDSOURCEINPUT (ansys.meshing.prime.ErrorCode attribute)</a>
 </li>
       <li><a href="api/_autosummary/ansys.meshing.prime.MatchMorphParams.html#ansys.meshing.prime.MatchMorphParams">MatchMorphParams (class in ansys.meshing.prime)</a>
 </li>
@@ -3730,6 +3994,8 @@
         <li><a href="api/_autosummary/ansys.meshing.prime.ProximitySizingParams.max.html#ansys.meshing.prime.ProximitySizingParams.max">(ansys.meshing.prime.ProximitySizingParams property)</a>
 </li>
         <li><a href="api/_autosummary/ansys.meshing.prime.SoftSizingParams.max.html#ansys.meshing.prime.SoftSizingParams.max">(ansys.meshing.prime.SoftSizingParams property)</a>
+</li>
+        <li><a href="api/_autosummary/ansys.meshing.prime.SoiSizingParams.max.html#ansys.meshing.prime.SoiSizingParams.max">(ansys.meshing.prime.SoiSizingParams property)</a>
 </li>
       </ul></li>
       <li><a href="api/_autosummary/ansys.meshing.prime.LocalSurferParams.max_angle.html#ansys.meshing.prime.LocalSurferParams.max_angle">max_angle (ansys.meshing.prime.LocalSurferParams property)</a>
@@ -3856,10 +4122,10 @@
 </li>
       <li><a href="api/_autosummary/ansys.meshing.prime.MergePartsResults.html#ansys.meshing.prime.MergePartsResults">MergePartsResults (class in ansys.meshing.prime)</a>
 </li>
-      <li><a href="api/_autosummary/ansys.meshing.prime.ErrorCode.MERGEPARTSWANDWOTOPO.html#ansys.meshing.prime.ErrorCode.MERGEPARTSWANDWOTOPO">MERGEPARTSWANDWOTOPO (ansys.meshing.prime.ErrorCode attribute)</a>
-</li>
   </ul></td>
   <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="api/_autosummary/ansys.meshing.prime.ErrorCode.MERGEPARTSWANDWOTOPO.html#ansys.meshing.prime.ErrorCode.MERGEPARTSWANDWOTOPO">MERGEPARTSWANDWOTOPO (ansys.meshing.prime.ErrorCode attribute)</a>
+</li>
       <li><a href="api/_autosummary/ansys.meshing.prime.ErrorCode.MERGESMALLZONELETSSUPPORTEDFORFACEZONELETS.html#ansys.meshing.prime.ErrorCode.MERGESMALLZONELETSSUPPORTEDFORFACEZONELETS">MERGESMALLZONELETSSUPPORTEDFORFACEZONELETS (ansys.meshing.prime.ErrorCode attribute)</a>
 </li>
       <li><a href="api/_autosummary/ansys.meshing.prime.ErrorCode.MERGEVOLUMESFAILED.html#ansys.meshing.prime.ErrorCode.MERGEVOLUMESFAILED">MERGEVOLUMESFAILED (ansys.meshing.prime.ErrorCode attribute)</a>
@@ -3889,6 +4155,8 @@
       <li><a href="api/_autosummary/ansys.meshing.prime.DetectAndTreatHolesParams.mesh_offset_faces.html#ansys.meshing.prime.DetectAndTreatHolesParams.mesh_offset_faces">mesh_offset_faces (ansys.meshing.prime.DetectAndTreatHolesParams property)</a>
 </li>
       <li><a href="api/_autosummary/ansys.meshing.prime.Surfer.mesh_topo_faces.html#ansys.meshing.prime.Surfer.mesh_topo_faces">mesh_topo_faces() (ansys.meshing.prime.Surfer method)</a>
+</li>
+      <li><a href="api/_autosummary/ansys.meshing.prime.ErrorCode.MESHDECOUPLEDFAILED.html#ansys.meshing.prime.ErrorCode.MESHDECOUPLEDFAILED">MESHDECOUPLEDFAILED (ansys.meshing.prime.ErrorCode attribute)</a>
 </li>
       <li><a href="api/_autosummary/ansys.meshing.prime.SizingType.MESHED.html#ansys.meshing.prime.SizingType.MESHED">MESHED (ansys.meshing.prime.SizingType attribute)</a>
 </li>
@@ -3982,6 +4250,8 @@
       </ul></li>
       <li><a href="api/_autosummary/ansys.meshing.prime.LengthUnit.MM.html#ansys.meshing.prime.LengthUnit.MM">MM (ansys.meshing.prime.LengthUnit attribute)</a>
 </li>
+      <li><a href="api/_autosummary/ansys.meshing.prime.TetMeshSplineParams.mode.html#ansys.meshing.prime.TetMeshSplineParams.mode">mode (ansys.meshing.prime.TetMeshSplineParams property)</a>
+</li>
       <li><a href="api/_autosummary/ansys.meshing.prime.Client.model.html#ansys.meshing.prime.Client.model">model (ansys.meshing.prime.Client property)</a>
 </li>
       <li><a href="api/_autosummary/ansys.meshing.prime.PartCreationType.MODEL.html#ansys.meshing.prime.PartCreationType.MODEL">MODEL (ansys.meshing.prime.PartCreationType attribute)</a>
@@ -3998,11 +4268,7 @@
 </li>
       <li><a href="api/_autosummary/ansys.meshing.prime.Morpher.html#ansys.meshing.prime.Morpher">Morpher (class in ansys.meshing.prime)</a>
 </li>
-      <li><a href="api/_autosummary/ansys.meshing.prime.ErrorCode.MORPHER_BCPAIRINPUTTYPEMISMATCH.html#ansys.meshing.prime.ErrorCode.MORPHER_BCPAIRINPUTTYPEMISMATCH">MORPHER_BCPAIRINPUTTYPEMISMATCH (ansys.meshing.prime.ErrorCode attribute)</a>
-</li>
       <li><a href="api/_autosummary/ansys.meshing.prime.ErrorCode.MORPHER_COMPUTEBCS.html#ansys.meshing.prime.ErrorCode.MORPHER_COMPUTEBCS">MORPHER_COMPUTEBCS (ansys.meshing.prime.ErrorCode attribute)</a>
-</li>
-      <li><a href="api/_autosummary/ansys.meshing.prime.ErrorCode.MORPHER_MATCHMORPHINVALIDSOURCEINPUT.html#ansys.meshing.prime.ErrorCode.MORPHER_MATCHMORPHINVALIDSOURCEINPUT">MORPHER_MATCHMORPHINVALIDSOURCEINPUT (ansys.meshing.prime.ErrorCode attribute)</a>
 </li>
       <li><a href="api/_autosummary/ansys.meshing.prime.MorphSolveParams.html#ansys.meshing.prime.MorphSolveParams">MorphSolveParams (class in ansys.meshing.prime)</a>
 </li>
@@ -4010,7 +4276,7 @@
 </li>
       <li><a href="api/_autosummary/ansys.meshing.prime.AutoMeshParams.multi_zone_control_ids.html#ansys.meshing.prime.AutoMeshParams.multi_zone_control_ids">multi_zone_control_ids (ansys.meshing.prime.AutoMeshParams property)</a>
 </li>
-      <li><a href="api/_autosummary/ansys.meshing.prime.ControlData.multi_zone_controls.html#ansys.meshing.prime.ControlData.multi_zone_controls">multi_zone_controls() (ansys.meshing.prime.ControlData method)</a>
+      <li><a href="api/_autosummary/ansys.meshing.prime.ControlData.multi_zone_controls.html#ansys.meshing.prime.ControlData.multi_zone_controls">multi_zone_controls (ansys.meshing.prime.ControlData property)</a>
 </li>
       <li><a href="api/_autosummary/ansys.meshing.prime.MultiZoneControl.html#ansys.meshing.prime.MultiZoneControl">MultiZoneControl (class in ansys.meshing.prime)</a>
 </li>
@@ -4019,6 +4285,10 @@
       <li><a href="api/_autosummary/ansys.meshing.prime.MultiZoneMapMeshParams.html#ansys.meshing.prime.MultiZoneMapMeshParams">MultiZoneMapMeshParams (class in ansys.meshing.prime)</a>
 </li>
       <li><a href="api/_autosummary/ansys.meshing.prime.ErrorCode.MULTIZONEMESHER_BLOCKINGFAILED.html#ansys.meshing.prime.ErrorCode.MULTIZONEMESHER_BLOCKINGFAILED">MULTIZONEMESHER_BLOCKINGFAILED (ansys.meshing.prime.ErrorCode attribute)</a>
+</li>
+      <li><a href="api/_autosummary/ansys.meshing.prime.WarningCode.MULTIZONEMESHER_DEFEATUREDTOPOEDGES.html#ansys.meshing.prime.WarningCode.MULTIZONEMESHER_DEFEATUREDTOPOEDGES">MULTIZONEMESHER_DEFEATUREDTOPOEDGES (ansys.meshing.prime.WarningCode attribute)</a>
+</li>
+      <li><a href="api/_autosummary/ansys.meshing.prime.WarningCode.MULTIZONEMESHER_DEFEATUREDTOPOFACES.html#ansys.meshing.prime.WarningCode.MULTIZONEMESHER_DEFEATUREDTOPOFACES">MULTIZONEMESHER_DEFEATUREDTOPOFACES (ansys.meshing.prime.WarningCode attribute)</a>
 </li>
       <li><a href="api/_autosummary/ansys.meshing.prime.ErrorCode.MULTIZONEMESHER_MESHINGFAILED.html#ansys.meshing.prime.ErrorCode.MULTIZONEMESHER_MESHINGFAILED">MULTIZONEMESHER_MESHINGFAILED (ansys.meshing.prime.ErrorCode attribute)</a>
 </li>
@@ -4051,6 +4321,12 @@
       <li><a href="api/_autosummary/ansys.meshing.prime.PartSummaryResults.n_cells.html#ansys.meshing.prime.PartSummaryResults.n_cells">n_cells (ansys.meshing.prime.PartSummaryResults property)</a>
 </li>
       <li><a href="api/_autosummary/ansys.meshing.prime.CollapseResults.n_collapsed.html#ansys.meshing.prime.CollapseResults.n_collapsed">n_collapsed (ansys.meshing.prime.CollapseResults property)</a>
+</li>
+      <li><a href="api/_autosummary/ansys.meshing.prime.UniformSolidSplineCreationParams.n_control_points_u.html#ansys.meshing.prime.UniformSolidSplineCreationParams.n_control_points_u">n_control_points_u (ansys.meshing.prime.UniformSolidSplineCreationParams property)</a>
+</li>
+      <li><a href="api/_autosummary/ansys.meshing.prime.UniformSolidSplineCreationParams.n_control_points_v.html#ansys.meshing.prime.UniformSolidSplineCreationParams.n_control_points_v">n_control_points_v (ansys.meshing.prime.UniformSolidSplineCreationParams property)</a>
+</li>
+      <li><a href="api/_autosummary/ansys.meshing.prime.UniformSolidSplineCreationParams.n_control_points_w.html#ansys.meshing.prime.UniformSolidSplineCreationParams.n_control_points_w">n_control_points_w (ansys.meshing.prime.UniformSolidSplineCreationParams property)</a>
 </li>
       <li><a href="api/_autosummary/ansys.meshing.prime.DeleteFringesAndOverlapsResults.n_deleted.html#ansys.meshing.prime.DeleteFringesAndOverlapsResults.n_deleted">n_deleted (ansys.meshing.prime.DeleteFringesAndOverlapsResults property)</a>
 </li>
@@ -4234,6 +4510,12 @@
 </li>
       <li><a href="api/_autosummary/ansys.meshing.prime.ComputeTopoVolumesResults.new_topo_volumes.html#ansys.meshing.prime.ComputeTopoVolumesResults.new_topo_volumes">new_topo_volumes (ansys.meshing.prime.ComputeTopoVolumesResults property)</a>
 </li>
+      <li><a href="api/_autosummary/ansys.meshing.prime.RefineTetMeshParams.nisr.html#ansys.meshing.prime.RefineTetMeshParams.nisr">nisr (ansys.meshing.prime.RefineTetMeshParams property)</a>
+</li>
+      <li><a href="api/_autosummary/ansys.meshing.prime.RefineTetMeshParams.niss.html#ansys.meshing.prime.RefineTetMeshParams.niss">niss (ansys.meshing.prime.RefineTetMeshParams property)</a>
+</li>
+      <li><a href="api/_autosummary/ansys.meshing.prime.RefineTetMeshParams.nist.html#ansys.meshing.prime.RefineTetMeshParams.nist">nist (ansys.meshing.prime.RefineTetMeshParams property)</a>
+</li>
       <li><a href="api/_autosummary/ansys.meshing.prime.LengthUnit.NM.html#ansys.meshing.prime.LengthUnit.NM">NM (ansys.meshing.prime.LengthUnit attribute)</a>
 </li>
       <li><a href="api/_autosummary/ansys.meshing.prime.PrismParams.no_imprint_zonelets.html#ansys.meshing.prime.PrismParams.no_imprint_zonelets">no_imprint_zonelets (ansys.meshing.prime.PrismParams property)</a>
@@ -4282,7 +4564,11 @@
         <li><a href="api/_autosummary/ansys.meshing.prime.SurfaceFeatureType.NONE.html#ansys.meshing.prime.SurfaceFeatureType.NONE">(ansys.meshing.prime.SurfaceFeatureType attribute)</a>
 </li>
       </ul></li>
+      <li><a href="api/_autosummary/ansys.meshing.prime.BodyQueryType.NONFREE.html#ansys.meshing.prime.BodyQueryType.NONFREE">NONFREE (ansys.meshing.prime.BodyQueryType attribute)</a>
+</li>
       <li><a href="api/_autosummary/ansys.meshing.prime.CurvatureSizingParams.normal_angle.html#ansys.meshing.prime.CurvatureSizingParams.normal_angle">normal_angle (ansys.meshing.prime.CurvatureSizingParams property)</a>
+</li>
+      <li><a href="api/_autosummary/ansys.meshing.prime.ErrorCode.NOTSUPPORTEDFORDISTRIBUTEMESHING.html#ansys.meshing.prime.ErrorCode.NOTSUPPORTEDFORDISTRIBUTEMESHING">NOTSUPPORTEDFORDISTRIBUTEMESHING (ansys.meshing.prime.ErrorCode attribute)</a>
 </li>
       <li><a href="api/_autosummary/ansys.meshing.prime.ErrorCode.NOTSUPPORTEDFORHIGHERORDERMESHPART.html#ansys.meshing.prime.ErrorCode.NOTSUPPORTEDFORHIGHERORDERMESHPART">NOTSUPPORTEDFORHIGHERORDERMESHPART (ansys.meshing.prime.ErrorCode attribute)</a>
 </li>
@@ -4332,7 +4618,7 @@
       </ul></li>
       <li><a href="api/_autosummary/ansys.meshing.prime.TopoSearchField.NUMBEROFFIELDS.html#ansys.meshing.prime.TopoSearchField.NUMBEROFFIELDS">NUMBEROFFIELDS (ansys.meshing.prime.TopoSearchField attribute)</a>
 </li>
-      <li><a href="api/_autosummary/ansys.meshing.prime.ErrorCode.NUMENMETHODNOTFCOUND.html#ansys.meshing.prime.ErrorCode.NUMENMETHODNOTFCOUND">NUMENMETHODNOTFCOUND (ansys.meshing.prime.ErrorCode attribute)</a>
+      <li><a href="api/_autosummary/ansys.meshing.prime.ErrorCode.NUMENMETHODNOTFOUND.html#ansys.meshing.prime.ErrorCode.NUMENMETHODNOTFOUND">NUMENMETHODNOTFOUND (ansys.meshing.prime.ErrorCode attribute)</a>
 </li>
       <li><a href="api/_autosummary/ansys.meshing.prime.AdvancedSurferSetup.numerator.html#ansys.meshing.prime.AdvancedSurferSetup.numerator">numerator (ansys.meshing.prime.AdvancedSurferSetup attribute)</a>
 
@@ -4340,6 +4626,8 @@
         <li><a href="api/_autosummary/ansys.meshing.prime.BCPairType.numerator.html#ansys.meshing.prime.BCPairType.numerator">(ansys.meshing.prime.BCPairType attribute)</a>
 </li>
         <li><a href="api/_autosummary/ansys.meshing.prime.BCsVolumetricModality.numerator.html#ansys.meshing.prime.BCsVolumetricModality.numerator">(ansys.meshing.prime.BCsVolumetricModality attribute)</a>
+</li>
+        <li><a href="api/_autosummary/ansys.meshing.prime.BodyQueryType.numerator.html#ansys.meshing.prime.BodyQueryType.numerator">(ansys.meshing.prime.BodyQueryType attribute)</a>
 </li>
         <li><a href="api/_autosummary/ansys.meshing.prime.BOIType.numerator.html#ansys.meshing.prime.BOIType.numerator">(ansys.meshing.prime.BOIType attribute)</a>
 </li>
@@ -4403,6 +4691,8 @@
 </li>
         <li><a href="api/_autosummary/ansys.meshing.prime.PrismControlOffsetType.numerator.html#ansys.meshing.prime.PrismControlOffsetType.numerator">(ansys.meshing.prime.PrismControlOffsetType attribute)</a>
 </li>
+        <li><a href="api/_autosummary/ansys.meshing.prime.ScaffolderRepairMode.numerator.html#ansys.meshing.prime.ScaffolderRepairMode.numerator">(ansys.meshing.prime.ScaffolderRepairMode attribute)</a>
+</li>
         <li><a href="api/_autosummary/ansys.meshing.prime.ScopeEntity.numerator.html#ansys.meshing.prime.ScopeEntity.numerator">(ansys.meshing.prime.ScopeEntity attribute)</a>
 </li>
         <li><a href="api/_autosummary/ansys.meshing.prime.ScopeEvaluationType.numerator.html#ansys.meshing.prime.ScopeEvaluationType.numerator">(ansys.meshing.prime.ScopeEvaluationType attribute)</a>
@@ -4421,6 +4711,8 @@
 </li>
         <li><a href="api/_autosummary/ansys.meshing.prime.SolverType.numerator.html#ansys.meshing.prime.SolverType.numerator">(ansys.meshing.prime.SolverType attribute)</a>
 </li>
+        <li><a href="api/_autosummary/ansys.meshing.prime.SplineContinuityType.numerator.html#ansys.meshing.prime.SplineContinuityType.numerator">(ansys.meshing.prime.SplineContinuityType attribute)</a>
+</li>
         <li><a href="api/_autosummary/ansys.meshing.prime.SplineFeatureCaptureType.numerator.html#ansys.meshing.prime.SplineFeatureCaptureType.numerator">(ansys.meshing.prime.SplineFeatureCaptureType attribute)</a>
 </li>
         <li><a href="api/_autosummary/ansys.meshing.prime.SplineRefinementType.numerator.html#ansys.meshing.prime.SplineRefinementType.numerator">(ansys.meshing.prime.SplineRefinementType attribute)</a>
@@ -4434,6 +4726,8 @@
         <li><a href="api/_autosummary/ansys.meshing.prime.ThinStripType.numerator.html#ansys.meshing.prime.ThinStripType.numerator">(ansys.meshing.prime.ThinStripType attribute)</a>
 </li>
         <li><a href="api/_autosummary/ansys.meshing.prime.TopoSearchField.numerator.html#ansys.meshing.prime.TopoSearchField.numerator">(ansys.meshing.prime.TopoSearchField attribute)</a>
+</li>
+        <li><a href="api/_autosummary/ansys.meshing.prime.TrimmedSolidSplineCutMode.numerator.html#ansys.meshing.prime.TrimmedSolidSplineCutMode.numerator">(ansys.meshing.prime.TrimmedSolidSplineCutMode attribute)</a>
 </li>
         <li><a href="api/_autosummary/ansys.meshing.prime.VolumeFillType.numerator.html#ansys.meshing.prime.VolumeFillType.numerator">(ansys.meshing.prime.VolumeFillType attribute)</a>
 </li>
@@ -4530,6 +4824,8 @@
 </li>
       <li><a href="api/_autosummary/ansys.meshing.prime.WarningCode.OVERRIDESOFTSIZINGPARAMS.html#ansys.meshing.prime.WarningCode.OVERRIDESOFTSIZINGPARAMS">OVERRIDESOFTSIZINGPARAMS (ansys.meshing.prime.WarningCode attribute)</a>
 </li>
+      <li><a href="api/_autosummary/ansys.meshing.prime.WarningCode.OVERRIDESOISIZINGPARAMS.html#ansys.meshing.prime.WarningCode.OVERRIDESOISIZINGPARAMS">OVERRIDESOISIZINGPARAMS (ansys.meshing.prime.WarningCode attribute)</a>
+</li>
       <li><a href="api/_autosummary/ansys.meshing.prime.WarningCode.OVERRIDESUGGESTEDNAME.html#ansys.meshing.prime.WarningCode.OVERRIDESUGGESTEDNAME">OVERRIDESUGGESTEDNAME (ansys.meshing.prime.WarningCode attribute)</a>
 </li>
       <li><a href="api/_autosummary/ansys.meshing.prime.WarningCode.OVERRIDESURFACESCOPEENTITY.html#ansys.meshing.prime.WarningCode.OVERRIDESURFACESCOPEENTITY">OVERRIDESURFACESCOPEENTITY (ansys.meshing.prime.WarningCode attribute)</a>
@@ -4602,6 +4898,8 @@
 </li>
       <li><a href="api/_autosummary/ansys.meshing.prime.PartZonelets.html#ansys.meshing.prime.PartZonelets">PartZonelets (class in ansys.meshing.prime)</a>
 </li>
+      <li><a href="api/_autosummary/ansys.meshing.prime.WrapperPatchFlowRegionsParams.patch_at_live.html#ansys.meshing.prime.WrapperPatchFlowRegionsParams.patch_at_live">patch_at_live (ansys.meshing.prime.WrapperPatchFlowRegionsParams property)</a>
+</li>
       <li><a href="api/_autosummary/ansys.meshing.prime.Wrapper.patch_flow_regions.html#ansys.meshing.prime.Wrapper.patch_flow_regions">patch_flow_regions() (ansys.meshing.prime.Wrapper method)</a>
 </li>
       <li><a href="api/_autosummary/ansys.meshing.prime.ErrorCode.PATHNOTFOUND.html#ansys.meshing.prime.ErrorCode.PATHNOTFOUND">PATHNOTFOUND (ansys.meshing.prime.ErrorCode attribute)</a>
@@ -4636,6 +4934,10 @@
 </li>
       <li><a href="api/_autosummary/ansys.meshing.prime.ErrorCode.PLANECOLLINEARPOINTS.html#ansys.meshing.prime.ErrorCode.PLANECOLLINEARPOINTS">PLANECOLLINEARPOINTS (ansys.meshing.prime.ErrorCode attribute)</a>
 </li>
+      <li><a href="api/_autosummary/ansys.meshing.prime.graphics.PrimePlotter.plot.html#ansys.meshing.prime.graphics.PrimePlotter.plot">plot() (ansys.meshing.prime.graphics.PrimePlotter method)</a>
+</li>
+      <li><a href="api/_autosummary/ansys.meshing.prime.graphics.PrimePlotter.plot_iter.html#ansys.meshing.prime.graphics.PrimePlotter.plot_iter">plot_iter() (ansys.meshing.prime.graphics.PrimePlotter method)</a>
+</li>
       <li><a href="api/_autosummary/ansys.meshing.prime.ErrorCode.PLUGINLOADFAILURE.html#ansys.meshing.prime.ErrorCode.PLUGINLOADFAILURE">PLUGINLOADFAILURE (ansys.meshing.prime.ErrorCode attribute)</a>
 </li>
       <li><a href="api/_autosummary/ansys.meshing.prime.VolumeFillType.POLY.html#ansys.meshing.prime.VolumeFillType.POLY">POLY (ansys.meshing.prime.VolumeFillType attribute)</a>
@@ -4644,7 +4946,11 @@
 </li>
       <li><a href="api/_autosummary/ansys.meshing.prime.ExportMapdlCdbParams.pre_solution_settings.html#ansys.meshing.prime.ExportMapdlCdbParams.pre_solution_settings">pre_solution_settings (ansys.meshing.prime.ExportMapdlCdbParams property)</a>
 </li>
+      <li><a href="api/_autosummary/ansys.meshing.prime.ErrorCode.PREPAREFORVOLUMEMESHINGFAILED.html#ansys.meshing.prime.ErrorCode.PREPAREFORVOLUMEMESHINGFAILED">PREPAREFORVOLUMEMESHINGFAILED (ansys.meshing.prime.ErrorCode attribute)</a>
+</li>
       <li><a href="api/_autosummary/ansys.meshing.prime.CollapseParams.preserve_quality.html#ansys.meshing.prime.CollapseParams.preserve_quality">preserve_quality (ansys.meshing.prime.CollapseParams property)</a>
+</li>
+      <li><a href="api/_autosummary/ansys.meshing.prime.graphics.PrimePlotter.html#ansys.meshing.prime.graphics.PrimePlotter">PrimePlotter (class in ansys.meshing.prime.graphics)</a>
 </li>
       <li><a href="api/_autosummary/ansys.meshing.prime.PrimeRuntimeError.html#ansys.meshing.prime.PrimeRuntimeError">PrimeRuntimeError</a>
 </li>
@@ -4694,6 +5000,10 @@
         <li><a href="api/_autosummary/ansys.meshing.prime.CollapseParams.print_default.html#ansys.meshing.prime.CollapseParams.print_default">(ansys.meshing.prime.CollapseParams static method)</a>
 </li>
         <li><a href="api/_autosummary/ansys.meshing.prime.CollapseResults.print_default.html#ansys.meshing.prime.CollapseResults.print_default">(ansys.meshing.prime.CollapseResults static method)</a>
+</li>
+        <li><a href="api/_autosummary/ansys.meshing.prime.ComponentChildrenParams.print_default.html#ansys.meshing.prime.ComponentChildrenParams.print_default">(ansys.meshing.prime.ComponentChildrenParams static method)</a>
+</li>
+        <li><a href="api/_autosummary/ansys.meshing.prime.ComponentChildrenResults.print_default.html#ansys.meshing.prime.ComponentChildrenResults.print_default">(ansys.meshing.prime.ComponentChildrenResults static method)</a>
 </li>
         <li><a href="api/_autosummary/ansys.meshing.prime.ComputeTopoVolumesResults.print_default.html#ansys.meshing.prime.ComputeTopoVolumesResults.print_default">(ansys.meshing.prime.ComputeTopoVolumesResults static method)</a>
 </li>
@@ -4793,6 +5103,8 @@
 </li>
         <li><a href="api/_autosummary/ansys.meshing.prime.ExportLSDynaIgaKeywordFileParams.print_default.html#ansys.meshing.prime.ExportLSDynaIgaKeywordFileParams.print_default">(ansys.meshing.prime.ExportLSDynaIgaKeywordFileParams static method)</a>
 </li>
+        <li><a href="api/_autosummary/ansys.meshing.prime.ExportLSDynaIGAResults.print_default.html#ansys.meshing.prime.ExportLSDynaIGAResults.print_default">(ansys.meshing.prime.ExportLSDynaIGAResults static method)</a>
+</li>
         <li><a href="api/_autosummary/ansys.meshing.prime.ExportLSDynaKeywordFileParams.print_default.html#ansys.meshing.prime.ExportLSDynaKeywordFileParams.print_default">(ansys.meshing.prime.ExportLSDynaKeywordFileParams static method)</a>
 </li>
         <li><a href="api/_autosummary/ansys.meshing.prime.ExportLSDynaResults.print_default.html#ansys.meshing.prime.ExportLSDynaResults.print_default">(ansys.meshing.prime.ExportLSDynaResults static method)</a>
@@ -4851,9 +5163,13 @@
 </li>
         <li><a href="api/_autosummary/ansys.meshing.prime.HexCoreParams.print_default.html#ansys.meshing.prime.HexCoreParams.print_default">(ansys.meshing.prime.HexCoreParams static method)</a>
 </li>
+        <li><a href="api/_autosummary/ansys.meshing.prime.HexToSplineParams.print_default.html#ansys.meshing.prime.HexToSplineParams.print_default">(ansys.meshing.prime.HexToSplineParams static method)</a>
+</li>
         <li><a href="api/_autosummary/ansys.meshing.prime.IGAResults.print_default.html#ansys.meshing.prime.IGAResults.print_default">(ansys.meshing.prime.IGAResults static method)</a>
 </li>
         <li><a href="api/_autosummary/ansys.meshing.prime.IGASpline.print_default.html#ansys.meshing.prime.IGASpline.print_default">(ansys.meshing.prime.IGASpline static method)</a>
+</li>
+        <li><a href="api/_autosummary/ansys.meshing.prime.IGAUnstructuredSplineSolid.print_default.html#ansys.meshing.prime.IGAUnstructuredSplineSolid.print_default">(ansys.meshing.prime.IGAUnstructuredSplineSolid static method)</a>
 </li>
         <li><a href="api/_autosummary/ansys.meshing.prime.IGAUnstructuredSplineSurf.print_default.html#ansys.meshing.prime.IGAUnstructuredSplineSurf.print_default">(ansys.meshing.prime.IGAUnstructuredSplineSurf static method)</a>
 </li>
@@ -4880,6 +5196,8 @@
         <li><a href="api/_autosummary/ansys.meshing.prime.IntersectParams.print_default.html#ansys.meshing.prime.IntersectParams.print_default">(ansys.meshing.prime.IntersectParams static method)</a>
 </li>
         <li><a href="api/_autosummary/ansys.meshing.prime.JoinParams.print_default.html#ansys.meshing.prime.JoinParams.print_default">(ansys.meshing.prime.JoinParams static method)</a>
+</li>
+        <li><a href="api/_autosummary/ansys.meshing.prime.LabelExportParams.print_default.html#ansys.meshing.prime.LabelExportParams.print_default">(ansys.meshing.prime.LabelExportParams static method)</a>
 </li>
         <li><a href="api/_autosummary/ansys.meshing.prime.LeakPreventionParams.print_default.html#ansys.meshing.prime.LeakPreventionParams.print_default">(ansys.meshing.prime.LeakPreventionParams static method)</a>
 </li>
@@ -4971,6 +5289,8 @@
 </li>
         <li><a href="api/_autosummary/ansys.meshing.prime.RefineSplineParams.print_default.html#ansys.meshing.prime.RefineSplineParams.print_default">(ansys.meshing.prime.RefineSplineParams static method)</a>
 </li>
+        <li><a href="api/_autosummary/ansys.meshing.prime.RefineTetMeshParams.print_default.html#ansys.meshing.prime.RefineTetMeshParams.print_default">(ansys.meshing.prime.RefineTetMeshParams static method)</a>
+</li>
         <li><a href="api/_autosummary/ansys.meshing.prime.RemoveLabelResults.print_default.html#ansys.meshing.prime.RemoveLabelResults.print_default">(ansys.meshing.prime.RemoveLabelResults static method)</a>
 </li>
         <li><a href="api/_autosummary/ansys.meshing.prime.RemoveZoneResults.print_default.html#ansys.meshing.prime.RemoveZoneResults.print_default">(ansys.meshing.prime.RemoveZoneResults static method)</a>
@@ -5053,6 +5373,8 @@
 </li>
         <li><a href="api/_autosummary/ansys.meshing.prime.SoftSizingParams.print_default.html#ansys.meshing.prime.SoftSizingParams.print_default">(ansys.meshing.prime.SoftSizingParams static method)</a>
 </li>
+        <li><a href="api/_autosummary/ansys.meshing.prime.SoiSizingParams.print_default.html#ansys.meshing.prime.SoiSizingParams.print_default">(ansys.meshing.prime.SoiSizingParams static method)</a>
+</li>
         <li><a href="api/_autosummary/ansys.meshing.prime.SplitParams.print_default.html#ansys.meshing.prime.SplitParams.print_default">(ansys.meshing.prime.SplitParams static method)</a>
 </li>
         <li><a href="api/_autosummary/ansys.meshing.prime.StitchParams.print_default.html#ansys.meshing.prime.StitchParams.print_default">(ansys.meshing.prime.StitchParams static method)</a>
@@ -5085,6 +5407,8 @@
 </li>
         <li><a href="api/_autosummary/ansys.meshing.prime.SurferResults.print_default.html#ansys.meshing.prime.SurferResults.print_default">(ansys.meshing.prime.SurferResults static method)</a>
 </li>
+        <li><a href="api/_autosummary/ansys.meshing.prime.TetMeshSplineParams.print_default.html#ansys.meshing.prime.TetMeshSplineParams.print_default">(ansys.meshing.prime.TetMeshSplineParams static method)</a>
+</li>
         <li><a href="api/_autosummary/ansys.meshing.prime.TetParams.print_default.html#ansys.meshing.prime.TetParams.print_default">(ansys.meshing.prime.TetParams static method)</a>
 </li>
         <li><a href="api/_autosummary/ansys.meshing.prime.ThinVolumeMeshParams.print_default.html#ansys.meshing.prime.ThinVolumeMeshParams.print_default">(ansys.meshing.prime.ThinVolumeMeshParams static method)</a>
@@ -5100,6 +5424,10 @@
         <li><a href="api/_autosummary/ansys.meshing.prime.TriangulateParams.print_default.html#ansys.meshing.prime.TriangulateParams.print_default">(ansys.meshing.prime.TriangulateParams static method)</a>
 </li>
         <li><a href="api/_autosummary/ansys.meshing.prime.TriangulateResults.print_default.html#ansys.meshing.prime.TriangulateResults.print_default">(ansys.meshing.prime.TriangulateResults static method)</a>
+</li>
+        <li><a href="api/_autosummary/ansys.meshing.prime.TrimmedSplineResults.print_default.html#ansys.meshing.prime.TrimmedSplineResults.print_default">(ansys.meshing.prime.TrimmedSplineResults static method)</a>
+</li>
+        <li><a href="api/_autosummary/ansys.meshing.prime.UniformSolidSplineCreationParams.print_default.html#ansys.meshing.prime.UniformSolidSplineCreationParams.print_default">(ansys.meshing.prime.UniformSolidSplineCreationParams static method)</a>
 </li>
         <li><a href="api/_autosummary/ansys.meshing.prime.VolumeControlParams.print_default.html#ansys.meshing.prime.VolumeControlParams.print_default">(ansys.meshing.prime.VolumeControlParams static method)</a>
 </li>
@@ -5138,6 +5466,8 @@
         <li><a href="api/_autosummary/ansys.meshing.prime.WrapResult.print_default.html#ansys.meshing.prime.WrapResult.print_default">(ansys.meshing.prime.WrapResult static method)</a>
 </li>
         <li><a href="api/_autosummary/ansys.meshing.prime.WriteSizeFieldParams.print_default.html#ansys.meshing.prime.WriteSizeFieldParams.print_default">(ansys.meshing.prime.WriteSizeFieldParams static method)</a>
+</li>
+        <li><a href="api/_autosummary/ansys.meshing.prime.ZoneMeshResult.print_default.html#ansys.meshing.prime.ZoneMeshResult.print_default">(ansys.meshing.prime.ZoneMeshResult static method)</a>
 </li>
       </ul></li>
   </ul></td>
@@ -5192,9 +5522,11 @@
       </ul></li>
       <li><a href="api/_autosummary/ansys.meshing.prime.ProjectOnGeometryParams.project_on_facets_if_cadnot_found.html#ansys.meshing.prime.ProjectOnGeometryParams.project_on_facets_if_cadnot_found">project_on_facets_if_cadnot_found (ansys.meshing.prime.ProjectOnGeometryParams property)</a>
 </li>
-      <li><a href="api/_autosummary/ansys.meshing.prime.OptimizeQuadMeshParams.project_on_geometry.html#ansys.meshing.prime.OptimizeQuadMeshParams.project_on_geometry">project_on_geometry (ansys.meshing.prime.OptimizeQuadMeshParams property)</a>
+      <li><a href="api/_autosummary/ansys.meshing.prime.HexToSplineParams.project_on_geometry.html#ansys.meshing.prime.HexToSplineParams.project_on_geometry">project_on_geometry (ansys.meshing.prime.HexToSplineParams property)</a>
 
       <ul>
+        <li><a href="api/_autosummary/ansys.meshing.prime.OptimizeQuadMeshParams.project_on_geometry.html#ansys.meshing.prime.OptimizeQuadMeshParams.project_on_geometry">(ansys.meshing.prime.OptimizeQuadMeshParams property)</a>
+</li>
         <li><a href="api/_autosummary/ansys.meshing.prime.QuadToSplineParams.project_on_geometry.html#ansys.meshing.prime.QuadToSplineParams.project_on_geometry">(ansys.meshing.prime.QuadToSplineParams property)</a>
 </li>
         <li><a href="api/_autosummary/ansys.meshing.prime.RefineAtContactsParams.project_on_geometry.html#ansys.meshing.prime.RefineAtContactsParams.project_on_geometry">(ansys.meshing.prime.RefineAtContactsParams property)</a>
@@ -5206,8 +5538,12 @@
 </li>
       <li><a href="api/_autosummary/ansys.meshing.prime.SurfaceUtilities.project_topo_faces_on_geometry.html#ansys.meshing.prime.SurfaceUtilities.project_topo_faces_on_geometry">project_topo_faces_on_geometry() (ansys.meshing.prime.SurfaceUtilities method)</a>
 </li>
-      <li><a href="api/_autosummary/ansys.meshing.prime.QuadToSplineParams.projection_scope.html#ansys.meshing.prime.QuadToSplineParams.projection_scope">projection_scope (ansys.meshing.prime.QuadToSplineParams property)</a>
+      <li><a href="api/_autosummary/ansys.meshing.prime.HexToSplineParams.projection_scope.html#ansys.meshing.prime.HexToSplineParams.projection_scope">projection_scope (ansys.meshing.prime.HexToSplineParams property)</a>
+
+      <ul>
+        <li><a href="api/_autosummary/ansys.meshing.prime.QuadToSplineParams.projection_scope.html#ansys.meshing.prime.QuadToSplineParams.projection_scope">(ansys.meshing.prime.QuadToSplineParams property)</a>
 </li>
+      </ul></li>
       <li><a href="api/_autosummary/ansys.meshing.prime.ErrorCode.PROJECTONCADGEOMETRYFAILED.html#ansys.meshing.prime.ErrorCode.PROJECTONCADGEOMETRYFAILED">PROJECTONCADGEOMETRYFAILED (ansys.meshing.prime.ErrorCode attribute)</a>
 </li>
       <li><a href="api/_autosummary/ansys.meshing.prime.ProjectOnGeometryParams.html#ansys.meshing.prime.ProjectOnGeometryParams">ProjectOnGeometryParams (class in ansys.meshing.prime)</a>
@@ -5230,6 +5566,8 @@
   <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="api/_autosummary/ansys.meshing.prime.TetParams.quadratic.html#ansys.meshing.prime.TetParams.quadratic">quadratic (ansys.meshing.prime.TetParams property)</a>
 </li>
+      <li><a href="api/_autosummary/ansys.meshing.prime.SplineContinuityType.QUADRATICC0.html#ansys.meshing.prime.SplineContinuityType.QUADRATICC0">QUADRATICC0 (ansys.meshing.prime.SplineContinuityType attribute)</a>
+</li>
       <li><a href="api/_autosummary/ansys.meshing.prime.ErrorCode.QUADRATICMESH_WRITEMESHFAILED.html#ansys.meshing.prime.ErrorCode.QUADRATICMESH_WRITEMESHFAILED">QUADRATICMESH_WRITEMESHFAILED (ansys.meshing.prime.ErrorCode attribute)</a>
 </li>
       <li><a href="api/_autosummary/ansys.meshing.prime.ErrorCode.QUADRATICMESHSUPPORTEDONLYFORTETS.html#ansys.meshing.prime.ErrorCode.QUADRATICMESHSUPPORTEDONLYFORTETS">QUADRATICMESHSUPPORTEDONLYFORTETS (ansys.meshing.prime.ErrorCode attribute)</a>
@@ -5242,6 +5580,8 @@
 </li>
       <li><a href="api/_autosummary/ansys.meshing.prime.QuadToSplineParams.html#ansys.meshing.prime.QuadToSplineParams">QuadToSplineParams (class in ansys.meshing.prime)</a>
 </li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="api/_autosummary/ansys.meshing.prime.SearchByQualityParams.quality_limit.html#ansys.meshing.prime.SearchByQualityParams.quality_limit">quality_limit (ansys.meshing.prime.SearchByQualityParams property)</a>
 
       <ul>
@@ -5256,8 +5596,6 @@
         <li><a href="api/_autosummary/ansys.meshing.prime.VolumeQualitySummaryParams.quality_limit.html#ansys.meshing.prime.VolumeQualitySummaryParams.quality_limit">(ansys.meshing.prime.VolumeQualitySummaryParams property)</a>
 </li>
       </ul></li>
-  </ul></td>
-  <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="api/_autosummary/ansys.meshing.prime.AutoNodeMoveParams.quality_measure.html#ansys.meshing.prime.AutoNodeMoveParams.quality_measure">quality_measure (ansys.meshing.prime.AutoNodeMoveParams property)</a>
 </li>
       <li><a href="api/_autosummary/ansys.meshing.prime.SurfaceQualitySummaryResults.quality_results.html#ansys.meshing.prime.SurfaceQualitySummaryResults.quality_results">quality_results (ansys.meshing.prime.SurfaceQualitySummaryResults property)</a>
@@ -5270,6 +5608,8 @@
 <h2 id="R">R</h2>
 <table style="width: 100%" class="indextable genindextable"><tr>
   <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="api/_autosummary/ansys.meshing.prime.SoiSizingParams.radius.html#ansys.meshing.prime.SoiSizingParams.radius">radius (ansys.meshing.prime.SoiSizingParams property)</a>
+</li>
       <li><a href="api/_autosummary/ansys.meshing.prime.lucid.Mesh.read.html#ansys.meshing.prime.lucid.Mesh.read">read() (ansys.meshing.prime.lucid.Mesh method)</a>
 </li>
       <li><a href="api/_autosummary/ansys.meshing.prime.FileIO.read_pmdat.html#ansys.meshing.prime.FileIO.read_pmdat">read_pmdat() (ansys.meshing.prime.FileIO method)</a>
@@ -5298,6 +5638,8 @@
         <li><a href="api/_autosummary/ansys.meshing.prime.BCPairType.real.html#ansys.meshing.prime.BCPairType.real">(ansys.meshing.prime.BCPairType attribute)</a>
 </li>
         <li><a href="api/_autosummary/ansys.meshing.prime.BCsVolumetricModality.real.html#ansys.meshing.prime.BCsVolumetricModality.real">(ansys.meshing.prime.BCsVolumetricModality attribute)</a>
+</li>
+        <li><a href="api/_autosummary/ansys.meshing.prime.BodyQueryType.real.html#ansys.meshing.prime.BodyQueryType.real">(ansys.meshing.prime.BodyQueryType attribute)</a>
 </li>
         <li><a href="api/_autosummary/ansys.meshing.prime.BOIType.real.html#ansys.meshing.prime.BOIType.real">(ansys.meshing.prime.BOIType attribute)</a>
 </li>
@@ -5361,6 +5703,8 @@
 </li>
         <li><a href="api/_autosummary/ansys.meshing.prime.PrismControlOffsetType.real.html#ansys.meshing.prime.PrismControlOffsetType.real">(ansys.meshing.prime.PrismControlOffsetType attribute)</a>
 </li>
+        <li><a href="api/_autosummary/ansys.meshing.prime.ScaffolderRepairMode.real.html#ansys.meshing.prime.ScaffolderRepairMode.real">(ansys.meshing.prime.ScaffolderRepairMode attribute)</a>
+</li>
         <li><a href="api/_autosummary/ansys.meshing.prime.ScopeEntity.real.html#ansys.meshing.prime.ScopeEntity.real">(ansys.meshing.prime.ScopeEntity attribute)</a>
 </li>
         <li><a href="api/_autosummary/ansys.meshing.prime.ScopeEvaluationType.real.html#ansys.meshing.prime.ScopeEvaluationType.real">(ansys.meshing.prime.ScopeEvaluationType attribute)</a>
@@ -5379,6 +5723,8 @@
 </li>
         <li><a href="api/_autosummary/ansys.meshing.prime.SolverType.real.html#ansys.meshing.prime.SolverType.real">(ansys.meshing.prime.SolverType attribute)</a>
 </li>
+        <li><a href="api/_autosummary/ansys.meshing.prime.SplineContinuityType.real.html#ansys.meshing.prime.SplineContinuityType.real">(ansys.meshing.prime.SplineContinuityType attribute)</a>
+</li>
         <li><a href="api/_autosummary/ansys.meshing.prime.SplineFeatureCaptureType.real.html#ansys.meshing.prime.SplineFeatureCaptureType.real">(ansys.meshing.prime.SplineFeatureCaptureType attribute)</a>
 </li>
         <li><a href="api/_autosummary/ansys.meshing.prime.SplineRefinementType.real.html#ansys.meshing.prime.SplineRefinementType.real">(ansys.meshing.prime.SplineRefinementType attribute)</a>
@@ -5392,6 +5738,8 @@
         <li><a href="api/_autosummary/ansys.meshing.prime.ThinStripType.real.html#ansys.meshing.prime.ThinStripType.real">(ansys.meshing.prime.ThinStripType attribute)</a>
 </li>
         <li><a href="api/_autosummary/ansys.meshing.prime.TopoSearchField.real.html#ansys.meshing.prime.TopoSearchField.real">(ansys.meshing.prime.TopoSearchField attribute)</a>
+</li>
+        <li><a href="api/_autosummary/ansys.meshing.prime.TrimmedSolidSplineCutMode.real.html#ansys.meshing.prime.TrimmedSolidSplineCutMode.real">(ansys.meshing.prime.TrimmedSolidSplineCutMode attribute)</a>
 </li>
         <li><a href="api/_autosummary/ansys.meshing.prime.VolumeFillType.real.html#ansys.meshing.prime.VolumeFillType.real">(ansys.meshing.prime.VolumeFillType attribute)</a>
 </li>
@@ -5424,6 +5772,8 @@
 </li>
       <li><a href="api/_autosummary/ansys.meshing.prime.BoundaryFittedSpline.refine_spline.html#ansys.meshing.prime.BoundaryFittedSpline.refine_spline">refine_spline() (ansys.meshing.prime.BoundaryFittedSpline method)</a>
 </li>
+      <li><a href="api/_autosummary/ansys.meshing.prime.TrimmedSpline.refine_tet_mesh.html#ansys.meshing.prime.TrimmedSpline.refine_tet_mesh">refine_tet_mesh() (ansys.meshing.prime.TrimmedSpline method)</a>
+</li>
       <li><a href="api/_autosummary/ansys.meshing.prime.ErrorCode.REFINEATCONTACTSFAILED.html#ansys.meshing.prime.ErrorCode.REFINEATCONTACTSFAILED">REFINEATCONTACTSFAILED (ansys.meshing.prime.ErrorCode attribute)</a>
 </li>
       <li><a href="api/_autosummary/ansys.meshing.prime.RefineAtContactsParams.html#ansys.meshing.prime.RefineAtContactsParams">RefineAtContactsParams (class in ansys.meshing.prime)</a>
@@ -5437,6 +5787,8 @@
       <li><a href="api/_autosummary/ansys.meshing.prime.BoundaryFittedSplineParams.refinement_fraction_w.html#ansys.meshing.prime.BoundaryFittedSplineParams.refinement_fraction_w">refinement_fraction_w (ansys.meshing.prime.BoundaryFittedSplineParams property)</a>
 </li>
       <li><a href="api/_autosummary/ansys.meshing.prime.RefineSplineParams.html#ansys.meshing.prime.RefineSplineParams">RefineSplineParams (class in ansys.meshing.prime)</a>
+</li>
+      <li><a href="api/_autosummary/ansys.meshing.prime.RefineTetMeshParams.html#ansys.meshing.prime.RefineTetMeshParams">RefineTetMeshParams (class in ansys.meshing.prime)</a>
 </li>
       <li><a href="api/_autosummary/ansys.meshing.prime.ErrorCode.REFRESHSIZEFIELDSFAILED.html#ansys.meshing.prime.ErrorCode.REFRESHSIZEFIELDSFAILED">REFRESHSIZEFIELDSFAILED (ansys.meshing.prime.ErrorCode attribute)</a>
 </li>
@@ -5494,6 +5846,8 @@
 </li>
       <li><a href="api/_autosummary/ansys.meshing.prime.RepairTopologyParams.repair_edges_params.html#ansys.meshing.prime.RepairTopologyParams.repair_edges_params">repair_edges_params (ansys.meshing.prime.RepairTopologyParams property)</a>
 </li>
+      <li><a href="api/_autosummary/ansys.meshing.prime.ScaffolderParams.repair_mode.html#ansys.meshing.prime.ScaffolderParams.repair_mode">repair_mode (ansys.meshing.prime.ScaffolderParams property)</a>
+</li>
       <li><a href="api/_autosummary/ansys.meshing.prime.AutoQuadMesher.repair_topology.html#ansys.meshing.prime.AutoQuadMesher.repair_topology">repair_topology() (ansys.meshing.prime.AutoQuadMesher method)</a>
 </li>
       <li><a href="api/_autosummary/ansys.meshing.prime.RepairEdgesParams.html#ansys.meshing.prime.RepairEdgesParams">RepairEdgesParams (class in ansys.meshing.prime)</a>
@@ -5547,6 +5901,8 @@
       <li><a href="api/_autosummary/ansys.meshing.prime.ScaffolderMergeResults.html#ansys.meshing.prime.ScaffolderMergeResults">ScaffolderMergeResults (class in ansys.meshing.prime)</a>
 </li>
       <li><a href="api/_autosummary/ansys.meshing.prime.ScaffolderParams.html#ansys.meshing.prime.ScaffolderParams">ScaffolderParams (class in ansys.meshing.prime)</a>
+</li>
+      <li><a href="api/_autosummary/ansys.meshing.prime.ScaffolderRepairMode.html#ansys.meshing.prime.ScaffolderRepairMode">ScaffolderRepairMode (class in ansys.meshing.prime)</a>
 </li>
       <li><a href="api/_autosummary/ansys.meshing.prime.ScaffolderResults.html#ansys.meshing.prime.ScaffolderResults">ScaffolderResults (class in ansys.meshing.prime)</a>
 </li>
@@ -5620,6 +5976,8 @@
 </li>
       <li><a href="api/_autosummary/ansys.meshing.prime.CdbAnalysisType.SEATRETRACTOR.html#ansys.meshing.prime.CdbAnalysisType.SEATRETRACTOR">SEATRETRACTOR (ansys.meshing.prime.CdbAnalysisType attribute)</a>
 </li>
+      <li><a href="api/_autosummary/ansys.meshing.prime.MeshStackerParams.seed_faces.html#ansys.meshing.prime.MeshStackerParams.seed_faces">seed_faces (ansys.meshing.prime.MeshStackerParams property)</a>
+</li>
       <li><a href="api/_autosummary/ansys.meshing.prime.TopoSearchField.SELFINTERSECTINGTOPOFACES.html#ansys.meshing.prime.TopoSearchField.SELFINTERSECTINGTOPOFACES">SELFINTERSECTINGTOPOFACES (ansys.meshing.prime.TopoSearchField attribute)</a>
 </li>
       <li><a href="api/_autosummary/ansys.meshing.prime.FuseParams.separate.html#ansys.meshing.prime.FuseParams.separate">separate (ansys.meshing.prime.FuseParams property)</a>
@@ -5688,6 +6046,10 @@
         <li><a href="api/_autosummary/ansys.meshing.prime.CollapseParams.set_default.html#ansys.meshing.prime.CollapseParams.set_default">(ansys.meshing.prime.CollapseParams static method)</a>
 </li>
         <li><a href="api/_autosummary/ansys.meshing.prime.CollapseResults.set_default.html#ansys.meshing.prime.CollapseResults.set_default">(ansys.meshing.prime.CollapseResults static method)</a>
+</li>
+        <li><a href="api/_autosummary/ansys.meshing.prime.ComponentChildrenParams.set_default.html#ansys.meshing.prime.ComponentChildrenParams.set_default">(ansys.meshing.prime.ComponentChildrenParams static method)</a>
+</li>
+        <li><a href="api/_autosummary/ansys.meshing.prime.ComponentChildrenResults.set_default.html#ansys.meshing.prime.ComponentChildrenResults.set_default">(ansys.meshing.prime.ComponentChildrenResults static method)</a>
 </li>
         <li><a href="api/_autosummary/ansys.meshing.prime.ComputeTopoVolumesResults.set_default.html#ansys.meshing.prime.ComputeTopoVolumesResults.set_default">(ansys.meshing.prime.ComputeTopoVolumesResults static method)</a>
 </li>
@@ -5787,6 +6149,8 @@
 </li>
         <li><a href="api/_autosummary/ansys.meshing.prime.ExportLSDynaIgaKeywordFileParams.set_default.html#ansys.meshing.prime.ExportLSDynaIgaKeywordFileParams.set_default">(ansys.meshing.prime.ExportLSDynaIgaKeywordFileParams static method)</a>
 </li>
+        <li><a href="api/_autosummary/ansys.meshing.prime.ExportLSDynaIGAResults.set_default.html#ansys.meshing.prime.ExportLSDynaIGAResults.set_default">(ansys.meshing.prime.ExportLSDynaIGAResults static method)</a>
+</li>
         <li><a href="api/_autosummary/ansys.meshing.prime.ExportLSDynaKeywordFileParams.set_default.html#ansys.meshing.prime.ExportLSDynaKeywordFileParams.set_default">(ansys.meshing.prime.ExportLSDynaKeywordFileParams static method)</a>
 </li>
         <li><a href="api/_autosummary/ansys.meshing.prime.ExportLSDynaResults.set_default.html#ansys.meshing.prime.ExportLSDynaResults.set_default">(ansys.meshing.prime.ExportLSDynaResults static method)</a>
@@ -5845,9 +6209,13 @@
 </li>
         <li><a href="api/_autosummary/ansys.meshing.prime.HexCoreParams.set_default.html#ansys.meshing.prime.HexCoreParams.set_default">(ansys.meshing.prime.HexCoreParams static method)</a>
 </li>
+        <li><a href="api/_autosummary/ansys.meshing.prime.HexToSplineParams.set_default.html#ansys.meshing.prime.HexToSplineParams.set_default">(ansys.meshing.prime.HexToSplineParams static method)</a>
+</li>
         <li><a href="api/_autosummary/ansys.meshing.prime.IGAResults.set_default.html#ansys.meshing.prime.IGAResults.set_default">(ansys.meshing.prime.IGAResults static method)</a>
 </li>
         <li><a href="api/_autosummary/ansys.meshing.prime.IGASpline.set_default.html#ansys.meshing.prime.IGASpline.set_default">(ansys.meshing.prime.IGASpline static method)</a>
+</li>
+        <li><a href="api/_autosummary/ansys.meshing.prime.IGAUnstructuredSplineSolid.set_default.html#ansys.meshing.prime.IGAUnstructuredSplineSolid.set_default">(ansys.meshing.prime.IGAUnstructuredSplineSolid static method)</a>
 </li>
         <li><a href="api/_autosummary/ansys.meshing.prime.IGAUnstructuredSplineSurf.set_default.html#ansys.meshing.prime.IGAUnstructuredSplineSurf.set_default">(ansys.meshing.prime.IGAUnstructuredSplineSurf static method)</a>
 </li>
@@ -5874,6 +6242,8 @@
         <li><a href="api/_autosummary/ansys.meshing.prime.IntersectParams.set_default.html#ansys.meshing.prime.IntersectParams.set_default">(ansys.meshing.prime.IntersectParams static method)</a>
 </li>
         <li><a href="api/_autosummary/ansys.meshing.prime.JoinParams.set_default.html#ansys.meshing.prime.JoinParams.set_default">(ansys.meshing.prime.JoinParams static method)</a>
+</li>
+        <li><a href="api/_autosummary/ansys.meshing.prime.LabelExportParams.set_default.html#ansys.meshing.prime.LabelExportParams.set_default">(ansys.meshing.prime.LabelExportParams static method)</a>
 </li>
         <li><a href="api/_autosummary/ansys.meshing.prime.LeakPreventionParams.set_default.html#ansys.meshing.prime.LeakPreventionParams.set_default">(ansys.meshing.prime.LeakPreventionParams static method)</a>
 </li>
@@ -5965,6 +6335,8 @@
 </li>
         <li><a href="api/_autosummary/ansys.meshing.prime.RefineSplineParams.set_default.html#ansys.meshing.prime.RefineSplineParams.set_default">(ansys.meshing.prime.RefineSplineParams static method)</a>
 </li>
+        <li><a href="api/_autosummary/ansys.meshing.prime.RefineTetMeshParams.set_default.html#ansys.meshing.prime.RefineTetMeshParams.set_default">(ansys.meshing.prime.RefineTetMeshParams static method)</a>
+</li>
         <li><a href="api/_autosummary/ansys.meshing.prime.RemoveLabelResults.set_default.html#ansys.meshing.prime.RemoveLabelResults.set_default">(ansys.meshing.prime.RemoveLabelResults static method)</a>
 </li>
         <li><a href="api/_autosummary/ansys.meshing.prime.RemoveZoneResults.set_default.html#ansys.meshing.prime.RemoveZoneResults.set_default">(ansys.meshing.prime.RemoveZoneResults static method)</a>
@@ -6047,6 +6419,8 @@
 </li>
         <li><a href="api/_autosummary/ansys.meshing.prime.SoftSizingParams.set_default.html#ansys.meshing.prime.SoftSizingParams.set_default">(ansys.meshing.prime.SoftSizingParams static method)</a>
 </li>
+        <li><a href="api/_autosummary/ansys.meshing.prime.SoiSizingParams.set_default.html#ansys.meshing.prime.SoiSizingParams.set_default">(ansys.meshing.prime.SoiSizingParams static method)</a>
+</li>
         <li><a href="api/_autosummary/ansys.meshing.prime.SplitParams.set_default.html#ansys.meshing.prime.SplitParams.set_default">(ansys.meshing.prime.SplitParams static method)</a>
 </li>
         <li><a href="api/_autosummary/ansys.meshing.prime.StitchParams.set_default.html#ansys.meshing.prime.StitchParams.set_default">(ansys.meshing.prime.StitchParams static method)</a>
@@ -6079,6 +6453,8 @@
 </li>
         <li><a href="api/_autosummary/ansys.meshing.prime.SurferResults.set_default.html#ansys.meshing.prime.SurferResults.set_default">(ansys.meshing.prime.SurferResults static method)</a>
 </li>
+        <li><a href="api/_autosummary/ansys.meshing.prime.TetMeshSplineParams.set_default.html#ansys.meshing.prime.TetMeshSplineParams.set_default">(ansys.meshing.prime.TetMeshSplineParams static method)</a>
+</li>
         <li><a href="api/_autosummary/ansys.meshing.prime.TetParams.set_default.html#ansys.meshing.prime.TetParams.set_default">(ansys.meshing.prime.TetParams static method)</a>
 </li>
         <li><a href="api/_autosummary/ansys.meshing.prime.ThinVolumeMeshParams.set_default.html#ansys.meshing.prime.ThinVolumeMeshParams.set_default">(ansys.meshing.prime.ThinVolumeMeshParams static method)</a>
@@ -6094,6 +6470,10 @@
         <li><a href="api/_autosummary/ansys.meshing.prime.TriangulateParams.set_default.html#ansys.meshing.prime.TriangulateParams.set_default">(ansys.meshing.prime.TriangulateParams static method)</a>
 </li>
         <li><a href="api/_autosummary/ansys.meshing.prime.TriangulateResults.set_default.html#ansys.meshing.prime.TriangulateResults.set_default">(ansys.meshing.prime.TriangulateResults static method)</a>
+</li>
+        <li><a href="api/_autosummary/ansys.meshing.prime.TrimmedSplineResults.set_default.html#ansys.meshing.prime.TrimmedSplineResults.set_default">(ansys.meshing.prime.TrimmedSplineResults static method)</a>
+</li>
+        <li><a href="api/_autosummary/ansys.meshing.prime.UniformSolidSplineCreationParams.set_default.html#ansys.meshing.prime.UniformSolidSplineCreationParams.set_default">(ansys.meshing.prime.UniformSolidSplineCreationParams static method)</a>
 </li>
         <li><a href="api/_autosummary/ansys.meshing.prime.VolumeControlParams.set_default.html#ansys.meshing.prime.VolumeControlParams.set_default">(ansys.meshing.prime.VolumeControlParams static method)</a>
 </li>
@@ -6132,6 +6512,8 @@
         <li><a href="api/_autosummary/ansys.meshing.prime.WrapResult.set_default.html#ansys.meshing.prime.WrapResult.set_default">(ansys.meshing.prime.WrapResult static method)</a>
 </li>
         <li><a href="api/_autosummary/ansys.meshing.prime.WriteSizeFieldParams.set_default.html#ansys.meshing.prime.WriteSizeFieldParams.set_default">(ansys.meshing.prime.WriteSizeFieldParams static method)</a>
+</li>
+        <li><a href="api/_autosummary/ansys.meshing.prime.ZoneMeshResult.set_default.html#ansys.meshing.prime.ZoneMeshResult.set_default">(ansys.meshing.prime.ZoneMeshResult static method)</a>
 </li>
       </ul></li>
   </ul></td>
@@ -6186,12 +6568,16 @@
 </li>
       <li><a href="api/_autosummary/ansys.meshing.prime.SizeControl.set_soft_sizing_params.html#ansys.meshing.prime.SizeControl.set_soft_sizing_params">set_soft_sizing_params() (ansys.meshing.prime.SizeControl method)</a>
 </li>
+      <li><a href="api/_autosummary/ansys.meshing.prime.SizeControl.set_soi_sizing_params.html#ansys.meshing.prime.SizeControl.set_soi_sizing_params">set_soi_sizing_params() (ansys.meshing.prime.SizeControl method)</a>
+</li>
       <li><a href="api/_autosummary/ansys.meshing.prime.ThinVolumeControl.set_source_scope.html#ansys.meshing.prime.ThinVolumeControl.set_source_scope">set_source_scope() (ansys.meshing.prime.ThinVolumeControl method)</a>
 </li>
       <li><a href="api/_autosummary/ansys.meshing.prime.Part.set_suggested_name.html#ansys.meshing.prime.Part.set_suggested_name">set_suggested_name() (ansys.meshing.prime.Part method)</a>
 
       <ul>
         <li><a href="api/_autosummary/ansys.meshing.prime.PeriodicControl.set_suggested_name.html#ansys.meshing.prime.PeriodicControl.set_suggested_name">(ansys.meshing.prime.PeriodicControl method)</a>
+</li>
+        <li><a href="api/_autosummary/ansys.meshing.prime.PrismControl.set_suggested_name.html#ansys.meshing.prime.PrismControl.set_suggested_name">(ansys.meshing.prime.PrismControl method)</a>
 </li>
         <li><a href="api/_autosummary/ansys.meshing.prime.SizeControl.set_suggested_name.html#ansys.meshing.prime.SizeControl.set_suggested_name">(ansys.meshing.prime.SizeControl method)</a>
 </li>
@@ -6280,6 +6666,8 @@
 </li>
       <li><a href="api/_autosummary/ansys.meshing.prime.ErrorCode.SHELLBLWRONGTOPO.html#ansys.meshing.prime.ErrorCode.SHELLBLWRONGTOPO">SHELLBLWRONGTOPO (ansys.meshing.prime.ErrorCode attribute)</a>
 </li>
+      <li><a href="api/_autosummary/ansys.meshing.prime.graphics.PrimePlotter.show.html#ansys.meshing.prime.graphics.PrimePlotter.show">show() (ansys.meshing.prime.graphics.PrimePlotter method)</a>
+</li>
       <li><a href="api/_autosummary/ansys.meshing.prime.CreateBOIParams.side_scale.html#ansys.meshing.prime.CreateBOIParams.side_scale">side_scale (ansys.meshing.prime.CreateBOIParams property)</a>
 </li>
       <li><a href="api/_autosummary/ansys.meshing.prime.FuseParams.side_tolerance.html#ansys.meshing.prime.FuseParams.side_tolerance">side_tolerance (ansys.meshing.prime.FuseParams property)</a>
@@ -6317,6 +6705,8 @@
       <ul>
         <li><a href="api/_autosummary/ansys.meshing.prime.WrapParams.size_field_ids.html#ansys.meshing.prime.WrapParams.size_field_ids">(ansys.meshing.prime.WrapParams property)</a>
 </li>
+        <li><a href="api/_autosummary/ansys.meshing.prime.WrapperPatchFlowRegionsParams.size_field_ids.html#ansys.meshing.prime.WrapperPatchFlowRegionsParams.size_field_ids">(ansys.meshing.prime.WrapperPatchFlowRegionsParams property)</a>
+</li>
       </ul></li>
       <li><a href="api/_autosummary/ansys.meshing.prime.AutoMeshParams.size_field_type.html#ansys.meshing.prime.AutoMeshParams.size_field_type">size_field_type (ansys.meshing.prime.AutoMeshParams property)</a>
 
@@ -6353,7 +6743,11 @@
       <li><a href="api/_autosummary/ansys.meshing.prime.ErrorCode.SIZEFIELDTYPENOTSUPPORTED.html#ansys.meshing.prime.ErrorCode.SIZEFIELDTYPENOTSUPPORTED">SIZEFIELDTYPENOTSUPPORTED (ansys.meshing.prime.ErrorCode attribute)</a>
 </li>
       <li><a href="api/_autosummary/ansys.meshing.prime.WrapParams.sizing_method.html#ansys.meshing.prime.WrapParams.sizing_method">sizing_method (ansys.meshing.prime.WrapParams property)</a>
+
+      <ul>
+        <li><a href="api/_autosummary/ansys.meshing.prime.WrapperPatchFlowRegionsParams.sizing_method.html#ansys.meshing.prime.WrapperPatchFlowRegionsParams.sizing_method">(ansys.meshing.prime.WrapperPatchFlowRegionsParams property)</a>
 </li>
+      </ul></li>
       <li><a href="api/_autosummary/ansys.meshing.prime.SizingType.html#ansys.meshing.prime.SizingType">SizingType (class in ansys.meshing.prime)</a>
 </li>
       <li><a href="api/_autosummary/ansys.meshing.prime.CellQualityMeasure.SKEWNESS.html#ansys.meshing.prime.CellQualityMeasure.SKEWNESS">SKEWNESS (ansys.meshing.prime.CellQualityMeasure attribute)</a>
@@ -6390,6 +6784,10 @@
 </li>
       <li><a href="api/_autosummary/ansys.meshing.prime.SoftSizingParams.html#ansys.meshing.prime.SoftSizingParams">SoftSizingParams (class in ansys.meshing.prime)</a>
 </li>
+      <li><a href="api/_autosummary/ansys.meshing.prime.SizingType.SOI.html#ansys.meshing.prime.SizingType.SOI">SOI (ansys.meshing.prime.SizingType attribute)</a>
+</li>
+      <li><a href="api/_autosummary/ansys.meshing.prime.SoiSizingParams.html#ansys.meshing.prime.SoiSizingParams">SoiSizingParams (class in ansys.meshing.prime)</a>
+</li>
       <li><a href="api/_autosummary/ansys.meshing.prime.CellZoneletType.SOLID.html#ansys.meshing.prime.CellZoneletType.SOLID">SOLID (ansys.meshing.prime.CellZoneletType attribute)</a>
 </li>
       <li><a href="api/_autosummary/ansys.meshing.prime.QuadToSplineParams.solid_shell.html#ansys.meshing.prime.QuadToSplineParams.solid_shell">solid_shell (ansys.meshing.prime.QuadToSplineParams property)</a>
@@ -6423,6 +6821,8 @@
       <li><a href="api/_autosummary/ansys.meshing.prime.IGAUnstructuredSplineSurf.spline_refinement_level.html#ansys.meshing.prime.IGAUnstructuredSplineSurf.spline_refinement_level">spline_refinement_level (ansys.meshing.prime.IGAUnstructuredSplineSurf property)</a>
 </li>
       <li><a href="api/_autosummary/ansys.meshing.prime.RefineSplineParams.spline_refinement_type.html#ansys.meshing.prime.RefineSplineParams.spline_refinement_type">spline_refinement_type (ansys.meshing.prime.RefineSplineParams property)</a>
+</li>
+      <li><a href="api/_autosummary/ansys.meshing.prime.SplineContinuityType.html#ansys.meshing.prime.SplineContinuityType">SplineContinuityType (class in ansys.meshing.prime)</a>
 </li>
       <li><a href="api/_autosummary/ansys.meshing.prime.SplineFeatureCaptureType.html#ansys.meshing.prime.SplineFeatureCaptureType">SplineFeatureCaptureType (class in ansys.meshing.prime)</a>
 </li>
@@ -6674,6 +7074,8 @@
 </li>
       <li><a href="api/_autosummary/ansys.meshing.prime.ErrorCode.TETIMPROVEFAILED.html#ansys.meshing.prime.ErrorCode.TETIMPROVEFAILED">TETIMPROVEFAILED (ansys.meshing.prime.ErrorCode attribute)</a>
 </li>
+      <li><a href="api/_autosummary/ansys.meshing.prime.TetMeshSplineParams.html#ansys.meshing.prime.TetMeshSplineParams">TetMeshSplineParams (class in ansys.meshing.prime)</a>
+</li>
       <li><a href="api/_autosummary/ansys.meshing.prime.TetParams.html#ansys.meshing.prime.TetParams">TetParams (class in ansys.meshing.prime)</a>
 </li>
       <li><a href="api/_autosummary/ansys.meshing.prime.AddThicknessParams.thickness.html#ansys.meshing.prime.AddThicknessParams.thickness">thickness (ansys.meshing.prime.AddThicknessParams property)</a>
@@ -6730,6 +7132,8 @@
         <li><a href="api/_autosummary/ansys.meshing.prime.BCPairType.to_bytes.html#ansys.meshing.prime.BCPairType.to_bytes">(ansys.meshing.prime.BCPairType method)</a>
 </li>
         <li><a href="api/_autosummary/ansys.meshing.prime.BCsVolumetricModality.to_bytes.html#ansys.meshing.prime.BCsVolumetricModality.to_bytes">(ansys.meshing.prime.BCsVolumetricModality method)</a>
+</li>
+        <li><a href="api/_autosummary/ansys.meshing.prime.BodyQueryType.to_bytes.html#ansys.meshing.prime.BodyQueryType.to_bytes">(ansys.meshing.prime.BodyQueryType method)</a>
 </li>
         <li><a href="api/_autosummary/ansys.meshing.prime.BOIType.to_bytes.html#ansys.meshing.prime.BOIType.to_bytes">(ansys.meshing.prime.BOIType method)</a>
 </li>
@@ -6793,6 +7197,8 @@
 </li>
         <li><a href="api/_autosummary/ansys.meshing.prime.PrismControlOffsetType.to_bytes.html#ansys.meshing.prime.PrismControlOffsetType.to_bytes">(ansys.meshing.prime.PrismControlOffsetType method)</a>
 </li>
+        <li><a href="api/_autosummary/ansys.meshing.prime.ScaffolderRepairMode.to_bytes.html#ansys.meshing.prime.ScaffolderRepairMode.to_bytes">(ansys.meshing.prime.ScaffolderRepairMode method)</a>
+</li>
         <li><a href="api/_autosummary/ansys.meshing.prime.ScopeEntity.to_bytes.html#ansys.meshing.prime.ScopeEntity.to_bytes">(ansys.meshing.prime.ScopeEntity method)</a>
 </li>
         <li><a href="api/_autosummary/ansys.meshing.prime.ScopeEvaluationType.to_bytes.html#ansys.meshing.prime.ScopeEvaluationType.to_bytes">(ansys.meshing.prime.ScopeEvaluationType method)</a>
@@ -6811,6 +7217,8 @@
 </li>
         <li><a href="api/_autosummary/ansys.meshing.prime.SolverType.to_bytes.html#ansys.meshing.prime.SolverType.to_bytes">(ansys.meshing.prime.SolverType method)</a>
 </li>
+        <li><a href="api/_autosummary/ansys.meshing.prime.SplineContinuityType.to_bytes.html#ansys.meshing.prime.SplineContinuityType.to_bytes">(ansys.meshing.prime.SplineContinuityType method)</a>
+</li>
         <li><a href="api/_autosummary/ansys.meshing.prime.SplineFeatureCaptureType.to_bytes.html#ansys.meshing.prime.SplineFeatureCaptureType.to_bytes">(ansys.meshing.prime.SplineFeatureCaptureType method)</a>
 </li>
         <li><a href="api/_autosummary/ansys.meshing.prime.SplineRefinementType.to_bytes.html#ansys.meshing.prime.SplineRefinementType.to_bytes">(ansys.meshing.prime.SplineRefinementType method)</a>
@@ -6824,6 +7232,8 @@
         <li><a href="api/_autosummary/ansys.meshing.prime.ThinStripType.to_bytes.html#ansys.meshing.prime.ThinStripType.to_bytes">(ansys.meshing.prime.ThinStripType method)</a>
 </li>
         <li><a href="api/_autosummary/ansys.meshing.prime.TopoSearchField.to_bytes.html#ansys.meshing.prime.TopoSearchField.to_bytes">(ansys.meshing.prime.TopoSearchField method)</a>
+</li>
+        <li><a href="api/_autosummary/ansys.meshing.prime.TrimmedSolidSplineCutMode.to_bytes.html#ansys.meshing.prime.TrimmedSolidSplineCutMode.to_bytes">(ansys.meshing.prime.TrimmedSolidSplineCutMode method)</a>
 </li>
         <li><a href="api/_autosummary/ansys.meshing.prime.VolumeFillType.to_bytes.html#ansys.meshing.prime.VolumeFillType.to_bytes">(ansys.meshing.prime.VolumeFillType method)</a>
 </li>
@@ -6844,6 +7254,8 @@
         <li><a href="api/_autosummary/ansys.meshing.prime.JoinParams.tolerance.html#ansys.meshing.prime.JoinParams.tolerance">(ansys.meshing.prime.JoinParams property)</a>
 </li>
         <li><a href="api/_autosummary/ansys.meshing.prime.MergeBoundaryNodesParams.tolerance.html#ansys.meshing.prime.MergeBoundaryNodesParams.tolerance">(ansys.meshing.prime.MergeBoundaryNodesParams property)</a>
+</li>
+        <li><a href="api/_autosummary/ansys.meshing.prime.RefineTetMeshParams.tolerance.html#ansys.meshing.prime.RefineTetMeshParams.tolerance">(ansys.meshing.prime.RefineTetMeshParams property)</a>
 </li>
         <li><a href="api/_autosummary/ansys.meshing.prime.SmoothDihedralFaceNodesParams.tolerance.html#ansys.meshing.prime.SmoothDihedralFaceNodesParams.tolerance">(ansys.meshing.prime.SmoothDihedralFaceNodesParams property)</a>
 </li>
@@ -6920,6 +7332,12 @@
 </li>
       <li><a href="api/_autosummary/ansys.meshing.prime.ErrorCode.TRIANGULATIONFAILED.html#ansys.meshing.prime.ErrorCode.TRIANGULATIONFAILED">TRIANGULATIONFAILED (ansys.meshing.prime.ErrorCode attribute)</a>
 </li>
+      <li><a href="api/_autosummary/ansys.meshing.prime.TrimmedSolidSplineCutMode.html#ansys.meshing.prime.TrimmedSolidSplineCutMode">TrimmedSolidSplineCutMode (class in ansys.meshing.prime)</a>
+</li>
+      <li><a href="api/_autosummary/ansys.meshing.prime.TrimmedSpline.html#ansys.meshing.prime.TrimmedSpline">TrimmedSpline (class in ansys.meshing.prime)</a>
+</li>
+      <li><a href="api/_autosummary/ansys.meshing.prime.TrimmedSplineResults.html#ansys.meshing.prime.TrimmedSplineResults">TrimmedSplineResults (class in ansys.meshing.prime)</a>
+</li>
       <li><a href="api/_autosummary/ansys.meshing.prime.FuseOption.TRIMONESIDE.html#ansys.meshing.prime.FuseOption.TRIMONESIDE">TRIMONESIDE (ansys.meshing.prime.FuseOption attribute)</a>
 </li>
       <li><a href="api/_autosummary/ansys.meshing.prime.FuseOption.TRIMTWOSIDES.html#ansys.meshing.prime.FuseOption.TRIMTWOSIDES">TRIMTWOSIDES (ansys.meshing.prime.FuseOption attribute)</a>
@@ -6948,6 +7366,8 @@
         <li><a href="api/_autosummary/ansys.meshing.prime.ShellBLOffsetType.UNIFORM.html#ansys.meshing.prime.ShellBLOffsetType.UNIFORM">(ansys.meshing.prime.ShellBLOffsetType attribute)</a>
 </li>
       </ul></li>
+      <li><a href="api/_autosummary/ansys.meshing.prime.UniformSolidSplineCreationParams.html#ansys.meshing.prime.UniformSolidSplineCreationParams">UniformSolidSplineCreationParams (class in ansys.meshing.prime)</a>
+</li>
       <li><a href="api/_autosummary/ansys.meshing.prime.ErrorCode.UNITEZONELETSFAILED.html#ansys.meshing.prime.ErrorCode.UNITEZONELETSFAILED">UNITEZONELETSFAILED (ansys.meshing.prime.ErrorCode attribute)</a>
 </li>
       <li><a href="api/_autosummary/ansys.meshing.prime.ErrorCode.UNKNOWN.html#ansys.meshing.prime.ErrorCode.UNKNOWN">UNKNOWN (ansys.meshing.prime.ErrorCode attribute)</a>
@@ -6990,8 +7410,12 @@
       </ul></li>
       <li><a href="api/_autosummary/ansys.meshing.prime.CurvatureSizingParams.use_cad_curvature.html#ansys.meshing.prime.CurvatureSizingParams.use_cad_curvature">use_cad_curvature (ansys.meshing.prime.CurvatureSizingParams property)</a>
 </li>
-      <li><a href="api/_autosummary/ansys.meshing.prime.QuadToSplineParams.use_projection_scope.html#ansys.meshing.prime.QuadToSplineParams.use_projection_scope">use_projection_scope (ansys.meshing.prime.QuadToSplineParams property)</a>
+      <li><a href="api/_autosummary/ansys.meshing.prime.HexToSplineParams.use_projection_scope.html#ansys.meshing.prime.HexToSplineParams.use_projection_scope">use_projection_scope (ansys.meshing.prime.HexToSplineParams property)</a>
+
+      <ul>
+        <li><a href="api/_autosummary/ansys.meshing.prime.QuadToSplineParams.use_projection_scope.html#ansys.meshing.prime.QuadToSplineParams.use_projection_scope">(ansys.meshing.prime.QuadToSplineParams property)</a>
 </li>
+      </ul></li>
       <li><a href="api/_autosummary/ansys.meshing.prime.MultiZoneSizingParams.use_volumetric_size_field.html#ansys.meshing.prime.MultiZoneSizingParams.use_volumetric_size_field">use_volumetric_size_field (ansys.meshing.prime.MultiZoneSizingParams property)</a>
 </li>
   </ul></td>
@@ -7165,6 +7589,8 @@
 </li>
         <li><a href="api/_autosummary/ansys.meshing.prime.CreateShellBLResults.warning_codes.html#ansys.meshing.prime.CreateShellBLResults.warning_codes">(ansys.meshing.prime.CreateShellBLResults property)</a>
 </li>
+        <li><a href="api/_autosummary/ansys.meshing.prime.ExportLSDynaIGAResults.warning_codes.html#ansys.meshing.prime.ExportLSDynaIGAResults.warning_codes">(ansys.meshing.prime.ExportLSDynaIGAResults property)</a>
+</li>
         <li><a href="api/_autosummary/ansys.meshing.prime.ExportLSDynaResults.warning_codes.html#ansys.meshing.prime.ExportLSDynaResults.warning_codes">(ansys.meshing.prime.ExportLSDynaResults property)</a>
 </li>
         <li><a href="api/_autosummary/ansys.meshing.prime.ExportMapdlCdbResults.warning_codes.html#ansys.meshing.prime.ExportMapdlCdbResults.warning_codes">(ansys.meshing.prime.ExportMapdlCdbResults property)</a>
@@ -7178,6 +7604,8 @@
         <li><a href="api/_autosummary/ansys.meshing.prime.FuseResults.warning_codes.html#ansys.meshing.prime.FuseResults.warning_codes">(ansys.meshing.prime.FuseResults property)</a>
 </li>
         <li><a href="api/_autosummary/ansys.meshing.prime.ImportAbaqusResults.warning_codes.html#ansys.meshing.prime.ImportAbaqusResults.warning_codes">(ansys.meshing.prime.ImportAbaqusResults property)</a>
+</li>
+        <li><a href="api/_autosummary/ansys.meshing.prime.ImportMapdlCdbResults.warning_codes.html#ansys.meshing.prime.ImportMapdlCdbResults.warning_codes">(ansys.meshing.prime.ImportMapdlCdbResults property)</a>
 </li>
         <li><a href="api/_autosummary/ansys.meshing.prime.LocalSurferResults.warning_codes.html#ansys.meshing.prime.LocalSurferResults.warning_codes">(ansys.meshing.prime.LocalSurferResults property)</a>
 </li>
@@ -7218,6 +7646,8 @@
 </li>
       <li><a href="api/_autosummary/ansys.meshing.prime.ControlData.wrapper_controls.html#ansys.meshing.prime.ControlData.wrapper_controls">wrapper_controls (ansys.meshing.prime.ControlData property)</a>
 </li>
+      <li><a href="api/_autosummary/ansys.meshing.prime.WarningCode.WRAPPER_PATCHFLOWREGIONS_NOHOLESFOUND.html#ansys.meshing.prime.WarningCode.WRAPPER_PATCHFLOWREGIONS_NOHOLESFOUND">WRAPPER_PATCHFLOWREGIONS_NOHOLESFOUND (ansys.meshing.prime.WarningCode attribute)</a>
+</li>
       <li><a href="api/_autosummary/ansys.meshing.prime.WarningCode.WRAPPER_SIZECONTROLNOTDEFINED.html#ansys.meshing.prime.WarningCode.WRAPPER_SIZECONTROLNOTDEFINED">WRAPPER_SIZECONTROLNOTDEFINED (ansys.meshing.prime.WarningCode attribute)</a>
 </li>
       <li><a href="api/_autosummary/ansys.meshing.prime.WarningCode.WRAPPER_SIZECONTROLNOTSUPPORTED.html#ansys.meshing.prime.WarningCode.WRAPPER_SIZECONTROLNOTSUPPORTED">WRAPPER_SIZECONTROLNOTSUPPORTED (ansys.meshing.prime.WarningCode attribute)</a>
@@ -7240,10 +7670,10 @@
 </li>
       <li><a href="api/_autosummary/ansys.meshing.prime.ErrorCode.WRAPPERCONNECTFAILED.html#ansys.meshing.prime.ErrorCode.WRAPPERCONNECTFAILED">WRAPPERCONNECTFAILED (ansys.meshing.prime.ErrorCode attribute)</a>
 </li>
-      <li><a href="api/_autosummary/ansys.meshing.prime.WrapperControl.html#ansys.meshing.prime.WrapperControl">WrapperControl (class in ansys.meshing.prime)</a>
-</li>
   </ul></td>
   <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="api/_autosummary/ansys.meshing.prime.WrapperControl.html#ansys.meshing.prime.WrapperControl">WrapperControl (class in ansys.meshing.prime)</a>
+</li>
       <li><a href="api/_autosummary/ansys.meshing.prime.ErrorCode.WRAPPERCONTROL_INVALIDCONTACTPREVENTIONCONTROLID.html#ansys.meshing.prime.ErrorCode.WRAPPERCONTROL_INVALIDCONTACTPREVENTIONCONTROLID">WRAPPERCONTROL_INVALIDCONTACTPREVENTIONCONTROLID (ansys.meshing.prime.ErrorCode attribute)</a>
 </li>
       <li><a href="api/_autosummary/ansys.meshing.prime.ErrorCode.WRAPPERCONTROL_INVALIDCONTACTPREVENTIONCONTROLINPUTS.html#ansys.meshing.prime.ErrorCode.WRAPPERCONTROL_INVALIDCONTACTPREVENTIONCONTROLINPUTS">WRAPPERCONTROL_INVALIDCONTACTPREVENTIONCONTROLINPUTS (ansys.meshing.prime.ErrorCode attribute)</a>
@@ -7317,6 +7747,8 @@
       <li><a href="api/_autosummary/ansys.meshing.prime.ExportMapdlCdbParams.write_cells.html#ansys.meshing.prime.ExportMapdlCdbParams.write_cells">write_cells (ansys.meshing.prime.ExportMapdlCdbParams property)</a>
 </li>
       <li><a href="api/_autosummary/ansys.meshing.prime.ExportMapdlCdbParams.write_component_based_ties.html#ansys.meshing.prime.ExportMapdlCdbParams.write_component_based_ties">write_component_based_ties (ansys.meshing.prime.ExportMapdlCdbParams property)</a>
+</li>
+      <li><a href="api/_autosummary/ansys.meshing.prime.ExportMapdlCdbParams.write_components_with_element_blocks.html#ansys.meshing.prime.ExportMapdlCdbParams.write_components_with_element_blocks">write_components_with_element_blocks (ansys.meshing.prime.ExportMapdlCdbParams property)</a>
 </li>
       <li><a href="api/_autosummary/ansys.meshing.prime.WriteSizeFieldParams.write_only_active_size_fields.html#ansys.meshing.prime.WriteSizeFieldParams.write_only_active_size_fields">write_only_active_size_fields (ansys.meshing.prime.WriteSizeFieldParams property)</a>
 </li>
@@ -7416,12 +7848,22 @@
 </li>
       <li><a href="api/_autosummary/ansys.meshing.prime.OverlapPairs.zone_id0.html#ansys.meshing.prime.OverlapPairs.zone_id0">zone_id0 (ansys.meshing.prime.OverlapPairs property)</a>
 </li>
-  </ul></td>
-  <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="api/_autosummary/ansys.meshing.prime.OverlapPairs.zone_id1.html#ansys.meshing.prime.OverlapPairs.zone_id1">zone_id1 (ansys.meshing.prime.OverlapPairs property)</a>
 </li>
-      <li><a href="api/_autosummary/ansys.meshing.prime.ExtractTopoVolumesParams.zone_name.html#ansys.meshing.prime.ExtractTopoVolumesParams.zone_name">zone_name (ansys.meshing.prime.ExtractTopoVolumesParams property)</a>
+      <li><a href="api/_autosummary/ansys.meshing.prime.ExportLSDynaResults.zone_mesh_results.html#ansys.meshing.prime.ExportLSDynaResults.zone_mesh_results">zone_mesh_results (ansys.meshing.prime.ExportLSDynaResults property)</a>
+
+      <ul>
+        <li><a href="api/_autosummary/ansys.meshing.prime.ExportMapdlCdbResults.zone_mesh_results.html#ansys.meshing.prime.ExportMapdlCdbResults.zone_mesh_results">(ansys.meshing.prime.ExportMapdlCdbResults property)</a>
 </li>
+      </ul></li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="api/_autosummary/ansys.meshing.prime.ExtractTopoVolumesParams.zone_name.html#ansys.meshing.prime.ExtractTopoVolumesParams.zone_name">zone_name (ansys.meshing.prime.ExtractTopoVolumesParams property)</a>
+
+      <ul>
+        <li><a href="api/_autosummary/ansys.meshing.prime.ZoneMeshResult.zone_name.html#ansys.meshing.prime.ZoneMeshResult.zone_name">(ansys.meshing.prime.ZoneMeshResult property)</a>
+</li>
+      </ul></li>
       <li><a href="api/_autosummary/ansys.meshing.prime.QuadToSplineParams.zone_name_shell_thickness_pairs.html#ansys.meshing.prime.QuadToSplineParams.zone_name_shell_thickness_pairs">zone_name_shell_thickness_pairs (ansys.meshing.prime.QuadToSplineParams property)</a>
 </li>
       <li><a href="api/_autosummary/ansys.meshing.prime.SurfaceFeatureType.ZONEBOUNDARY.html#ansys.meshing.prime.SurfaceFeatureType.ZONEBOUNDARY">ZONEBOUNDARY (ansys.meshing.prime.SurfaceFeatureType attribute)</a>
@@ -7429,6 +7871,8 @@
       <li><a href="api/_autosummary/ansys.meshing.prime.SurfaceFeatureType.ZONELETBOUNDARY.html#ansys.meshing.prime.SurfaceFeatureType.ZONELETBOUNDARY">ZONELETBOUNDARY (ansys.meshing.prime.SurfaceFeatureType attribute)</a>
 </li>
       <li><a href="api/_autosummary/ansys.meshing.prime.ErrorCode.ZONELETSARENOTOFSAMEDIMENSION.html#ansys.meshing.prime.ErrorCode.ZONELETSARENOTOFSAMEDIMENSION">ZONELETSARENOTOFSAMEDIMENSION (ansys.meshing.prime.ErrorCode attribute)</a>
+</li>
+      <li><a href="api/_autosummary/ansys.meshing.prime.ZoneMeshResult.html#ansys.meshing.prime.ZoneMeshResult">ZoneMeshResult (class in ansys.meshing.prime)</a>
 </li>
       <li><a href="api/_autosummary/ansys.meshing.prime.ErrorCode.ZONENOTFOUND.html#ansys.meshing.prime.ErrorCode.ZONENOTFOUND">ZONENOTFOUND (ansys.meshing.prime.ErrorCode attribute)</a>
 </li>
@@ -7487,12 +7931,15 @@
 
 <script>
 // Passing the search options to the search.js file
-const SEARCH_OPTIONS = JSON.parse('{"keys": ["title", "text"], "limit": 10, "threshold": 0.2}');
+const SEARCH_OPTIONS = JSON.parse('{"keys": ["title", "text", "objectID"], "limit": 10, "threshold": 0.2}');
 const SEARCH_FILE = "_static/search.json";
+const ADVANCE_SEARCH_PATH = "search.html";
+const EXTRA_SOURCES = JSON.parse('""');
 </script>
 
 
 <script src="_static/js/search.js"></script>
+
   
   <footer class="bd-footer">
 <div class="bd-footer__inner bd-page-width">
@@ -7528,7 +7975,7 @@ const SEARCH_FILE = "_static/search.json";
   <a href="https://sphinxdocs.ansys.com/version/stable/index.html"
     >Ansys Sphinx Theme</a
   >
-  1.4.2. <br />Last updated on
+  1.6.4. <br />Last updated on
   <span id="ast_build_date"></span>
 </p>
 <script>

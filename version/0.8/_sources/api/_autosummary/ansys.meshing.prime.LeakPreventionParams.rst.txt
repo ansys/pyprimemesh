@@ -6,7 +6,7 @@ LeakPreventionParams
 .. currentmodule:: ansys.meshing.prime
 
 .. autoclass:: LeakPreventionParams
-   
+
    
    
    .. rubric:: Methods

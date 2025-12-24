@@ -6,7 +6,7 @@ FaceQualityMeasure
 .. currentmodule:: ansys.meshing.prime
 
 .. autoclass:: FaceQualityMeasure
-   
+
    
    
    .. rubric:: Methods

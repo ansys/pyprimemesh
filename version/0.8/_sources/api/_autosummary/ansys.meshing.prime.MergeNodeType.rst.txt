@@ -6,7 +6,7 @@ MergeNodeType
 .. currentmodule:: ansys.meshing.prime
 
 .. autoclass:: MergeNodeType
-   
+
    
    
    .. rubric:: Methods

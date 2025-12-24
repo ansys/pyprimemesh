@@ -6,7 +6,7 @@ ExportLSDynaResults
 .. currentmodule:: ansys.meshing.prime
 
 .. autoclass:: ExportLSDynaResults
-   
+
    
    
    .. rubric:: Methods
@@ -30,6 +30,7 @@ ExportLSDynaResults
       ExportLSDynaResults.error_code
       ExportLSDynaResults.summary_log
       ExportLSDynaResults.warning_codes
+      ExportLSDynaResults.zone_mesh_results
    
    
 

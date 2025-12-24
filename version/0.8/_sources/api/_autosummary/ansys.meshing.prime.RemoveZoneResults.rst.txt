@@ -6,7 +6,7 @@ RemoveZoneResults
 .. currentmodule:: ansys.meshing.prime
 
 .. autoclass:: RemoveZoneResults
-   
+
    
    
    .. rubric:: Methods

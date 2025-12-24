@@ -6,7 +6,7 @@ DeleteUnwettedResult
 .. currentmodule:: ansys.meshing.prime
 
 .. autoclass:: DeleteUnwettedResult
-   
+
    
    
    .. rubric:: Methods

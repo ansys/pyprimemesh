@@ -6,7 +6,7 @@ MatchMorphParams
 .. currentmodule:: ansys.meshing.prime
 
 .. autoclass:: MatchMorphParams
-   
+
    
    
    .. rubric:: Methods

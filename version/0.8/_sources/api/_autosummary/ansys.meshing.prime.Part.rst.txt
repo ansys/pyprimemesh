@@ -6,7 +6,7 @@ Part
 .. currentmodule:: ansys.meshing.prime
 
 .. autoclass:: Part
-   
+
    
    
    .. rubric:: Methods
@@ -30,11 +30,14 @@ Part
       Part.get_adjacent_face_zonelets_of_face_zonelets
       Part.get_adjacent_volumes_of_volumes
       Part.get_cell_zonelets
+      Part.get_component_children_by_path
+      Part.get_components_by_path_expression
       Part.get_edge_zonelets
       Part.get_edge_zonelets_of_label_name_pattern
       Part.get_edge_zones
       Part.get_face_zone_of_zonelet
       Part.get_face_zonelets
+      Part.get_face_zonelets_of_component_body_name_pattern
       Part.get_face_zonelets_of_label_name_pattern
       Part.get_face_zonelets_of_volumes
       Part.get_face_zonelets_of_zone_name_pattern
@@ -48,9 +51,14 @@ Part
       Part.get_topo_edges
       Part.get_topo_edges_of_label_name_pattern
       Part.get_topo_faces
+      Part.get_topo_faces_of_component_body_name_pattern
       Part.get_topo_faces_of_label_name_pattern
+      Part.get_topo_faces_of_topo_volumes
       Part.get_topo_faces_of_zone_name_pattern
       Part.get_topo_volumes
+      Part.get_topo_volumes_of_label_name_pattern
+      Part.get_topo_volumes_of_zone_name_pattern
+      Part.get_unstructured_spline_solid
       Part.get_unstructured_spline_surface
       Part.get_volume_zone_of_volume
       Part.get_volume_zones

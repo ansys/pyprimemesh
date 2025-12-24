@@ -6,7 +6,7 @@ MergeZoneletsResults
 .. currentmodule:: ansys.meshing.prime
 
 .. autoclass:: MergeZoneletsResults
-   
+
    
    
    .. rubric:: Methods

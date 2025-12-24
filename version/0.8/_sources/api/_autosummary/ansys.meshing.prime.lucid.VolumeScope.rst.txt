@@ -6,7 +6,7 @@ VolumeScope
 .. currentmodule:: ansys.meshing.prime.lucid
 
 .. autoclass:: VolumeScope
-   
+
    
    
    .. rubric:: Methods

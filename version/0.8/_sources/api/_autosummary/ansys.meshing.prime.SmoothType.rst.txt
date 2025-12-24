@@ -6,7 +6,7 @@ SmoothType
 .. currentmodule:: ansys.meshing.prime
 
 .. autoclass:: SmoothType
-   
+
    
    
    .. rubric:: Methods
@@ -38,6 +38,7 @@ SmoothType
       SmoothType.denominator
       SmoothType.SMOOTH
       SmoothType.INFLATE
+      SmoothType.AUTO
    
    
 

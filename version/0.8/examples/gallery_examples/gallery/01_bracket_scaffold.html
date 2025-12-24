@@ -32,7 +32,7 @@
 <link href="../../../_static/styles/pydata-sphinx-theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
 
     <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=8f2a1f02" />
-    <link rel="stylesheet" type="text/css" href="../../../_static/styles/ansys-sphinx-theme.css?v=fbf3eb5d" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/styles/ansys-sphinx-theme.css?v=9e79609d" />
     <link rel="stylesheet" type="text/css" href="../../../_static/copybutton.css?v=76b2166b" />
     <link rel="stylesheet" type="text/css" href="../../../_static/jupyter-sphinx.css" />
     <link rel="stylesheet" type="text/css" href="../../../_static/thebelab.css" />
@@ -40,7 +40,7 @@
     <link rel="stylesheet" type="text/css" href="../../../_static/sg_gallery-binder.css?v=f4aeca0c" />
     <link rel="stylesheet" type="text/css" href="../../../_static/sg_gallery-dataframe.css?v=2082cf3c" />
     <link rel="stylesheet" type="text/css" href="../../../_static/sg_gallery-rendered-html.css?v=1277b6f3" />
-    <link rel="stylesheet" type="text/css" href="../../../_static/styles/ansys-sphinx-theme.css?v=fbf3eb5d" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/styles/ansys-sphinx-theme.css?v=9e79609d" />
     <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.23/css/jquery.dataTables.min.css" />
     <link rel="stylesheet" type="text/css" href="https://www.nerdfonts.com/assets/css/webfont.css" />
     <link rel="stylesheet" type="text/css" href="../../../_static/sphinx-design.min.css?v=95c83b7e" />
@@ -59,7 +59,7 @@
   
     <link href="../../../_static/css/breadcrumbs.css" rel="stylesheet" />
   
-    <script src="../../../_static/documentation_options.js?v=ec16d22d"></script>
+    <script src="../../../_static/documentation_options.js?v=24ea0de7"></script>
     <script src="../../../_static/doctools.js?v=9bcbadda"></script>
     <script src="../../../_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="../../../_static/clipboard.min.js?v=a7894cd8"></script>
@@ -73,7 +73,7 @@
     <script>
         DOCUMENTATION_OPTIONS.theme_version = '0.16.1';
         DOCUMENTATION_OPTIONS.theme_switcher_json_url = 'https://prime.docs.pyansys.com/versions.json';
-        DOCUMENTATION_OPTIONS.theme_switcher_version_match = '0.8';
+        DOCUMENTATION_OPTIONS.theme_switcher_version_match = 'dev';
         DOCUMENTATION_OPTIONS.show_version_warning_banner =
             false;
         </script>
@@ -82,10 +82,13 @@
     <link rel="search" title="Search" href="../../../search.html" />
     <link rel="next" title="Mesh a mixing elbow for a flow analysis" href="02_lucid_mixing_elbow.html" />
     <link rel="prev" title="Convert data when importing and exporting mesh and CAD formats" href="00_lucid_file_IO.html" />
+  
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
-  <meta name="docsearch:version" content="0.8.1" />
-  <link rel="canonical" href="https://prime.docs.pyansys.com/version/stable/examples/gallery_examples/gallery/01_bracket_scaffold.html" />
+  <meta name="docsearch:version" content="0.10.0.dev2" />
+  <meta property="og:site_name" content="PyAnsys" />
+  <meta name="physics" content="CAD" />
+  <meta name="physics" content="Meshing" />
   </head>
   
   
@@ -166,9 +169,15 @@
     <div class="me-auto navbar-header-items__center">
       
         <div class="navbar-item">
+
 <nav>
   <ul class="bd-navbar-elements navbar-nav">
     
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../index.html" title="PyPrimeMesh home">Home</a>
+</li>
+
+
 <li class="nav-item ">
   <a class="nav-link nav-internal" href="../../../getting_started/index.html">
     Getting started
@@ -196,23 +205,34 @@
   </a>
 </li>
 
-
-<li class="nav-item ">
-  <a class="nav-link nav-internal" href="../../../contributing/index.html">
+            <li class="nav-item dropdown">
+                <button class="btn dropdown-toggle nav-item" type="button"
+                data-bs-toggle="dropdown" aria-expanded="false"
+                aria-controls="pst-nav-more-links">
+                    More
+                </button>
+                <ul id="pst-nav-more-links" class="dropdown-menu">
+                    
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="../../../contributing/index.html">
     Contribute
   </a>
 </li>
 
+                </ul>
+            </li>
+            
   </ul>
-</nav></div>
+</nav>
+</div>
       
     </div>
     
     
     <div class="navbar-header-items__end">
       
-        <div class="navbar-item navbar-persistent--container">
-          
+      
+        <div class="navbar-item">
 <div class="search-bar pst-js-only" id="search-bar">
   <form class="bd-search d-flex align-items-center" action="../../../search.html" method="get">
     <i class="fa-solid fa-magnifying-glass"></i>
@@ -224,9 +244,7 @@
     </span>
   </form>
   <div id="static-search-results" class="static-search-results" style="display:none;" tabindex="0"></div>
-</div>
-        </div>
-      
+</div></div>
       
         <div class="navbar-item">
 <div class="version-switcher__container dropdown pst-js-only">
@@ -289,21 +307,6 @@
   </div>
   
   
-    <div class="navbar-persistent--mobile">
-<div class="search-bar pst-js-only" id="search-bar">
-  <form class="bd-search d-flex align-items-center" action="../../../search.html" method="get">
-    <i class="fa-solid fa-magnifying-glass"></i>
-    <input type="search" class="form-control" name="q" placeholder="Search the docs ..."
-      aria-label="Search the docs ..." autocomplete="off" autocorrect="off"
-      autocapitalize="off" spellcheck="false" />
-    <span class="search-button__kbd-shortcut">
-      <kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd>
-    </span>
-  </form>
-  <div id="static-search-results" class="static-search-results" style="display:none;" tabindex="0"></div>
-</div>
-    </div>
-  
 
   
     <button class="pst-navbar-icon sidebar-toggle secondary-toggle" aria-label="On this page">
@@ -350,9 +353,15 @@
           
           
             <div class="navbar-item">
+
 <nav>
   <ul class="bd-navbar-elements navbar-nav">
     
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../index.html" title="PyPrimeMesh home">Home</a>
+</li>
+
+
 <li class="nav-item ">
   <a class="nav-link nav-internal" href="../../../getting_started/index.html">
     Getting started
@@ -388,7 +397,8 @@
 </li>
 
   </ul>
-</nav></div>
+</nav>
+</div>
           
         
       </div>
@@ -396,6 +406,20 @@
     
     
       <div class="sidebar-header-items__end">
+        
+          <div class="navbar-item">
+<div class="search-bar pst-js-only" id="search-bar">
+  <form class="bd-search d-flex align-items-center" action="../../../search.html" method="get">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <input type="search" class="form-control" name="q" placeholder="Search the docs ..."
+      aria-label="Search the docs ..." autocomplete="off" autocorrect="off"
+      autocapitalize="off" spellcheck="false" />
+    <span class="search-button__kbd-shortcut">
+      <kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd>
+    </span>
+  </form>
+  <div id="static-search-results" class="static-search-results" style="display:none;" tabindex="0"></div>
+</div></div>
         
           <div class="navbar-item">
 <div class="version-switcher__container dropdown pst-js-only">
@@ -475,9 +499,10 @@
 <li class="toctree-l2"><a class="reference internal" href="08_lucid_generic_f1_rear_wing.html">Mesh a generic F1 car rear wing for external aero simulation</a></li>
 <li class="toctree-l2"><a class="reference internal" href="09_multi_layer_quad_mesh_pcb.html">Mesh a generic PCB geometry with multiple hexa layers</a></li>
 <li class="toctree-l2"><a class="reference internal" href="10_wheel_ground_contact_patch.html">Create a contact patch for wrapping between a wheel and ground interface</a></li>
-<li class="toctree-l2"><a class="reference internal" href="11_solder_ball.html">Mesh a set of solder balls (beta)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="12_import_from_pygeometry.html">Import a geometry from PyGeometry</a></li>
 </ul>
 </details></li>
+<li class="toctree-l1"><a class="reference internal" href="../gallery_beta/index.html">Examples using beta APIs</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../misc/index.html">Miscellaneous examples</a></li>
 </ul>
 </div>
@@ -595,7 +620,7 @@ Connect the PyPrimeMesh client and get the model.</p>
 <span class="n">model</span> <span class="o">=</span> <span class="n">prime_client</span><span class="o">.</span><span class="n">model</span>
 </pre></div>
 </div>
-<div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>using server from docker : The container name %s ansys-prime-server-2
+<div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>using server from docker : The container name  ansys-prime-server-bbc97f77-410f-47e1-904d-2c50527aed64
 </pre></div>
 </div>
 </section>
@@ -620,7 +645,7 @@ Create the part per the CAD model for the topology-based connection.</p>
 <span class="p">)</span>
 </pre></div>
 </div>
-<div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>&lt;ansys.meshing.prime.autogen.fileiostructs.ImportCadResults object at 0x7f0614bda870&gt;
+<div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>&lt;ansys.meshing.prime.autogen.fileiostructs.ImportCadResults object at 0x7f7b8199bc50&gt;
 </pre></div>
 </div>
 </section>
@@ -653,9 +678,7 @@ Static Scene</label><div class="sd-tab-content docutils">
 <input id="sd-tab-item-1" name="sd-tab-set-0" type="radio">
 <label class="sd-tab-label" for="sd-tab-item-1">
 Interactive Scene</label><div class="sd-tab-content docutils">
-
-    <iframe src='../../../_static/static_viewer.html?fileURL=../_images/examples/gallery_examples/gallery/images/sphx_glr_01_bracket_scaffold_001.vtksz' width='100%%' height='400px' frameborder='0'></iframe>
-</div>
+<iframe src='../../../_static/static_viewer.html?fileURL=../_images/examples/gallery_examples/gallery/images/sphx_glr_01_bracket_scaffold_001.vtksz' width='100%%' height='400px' frameborder='0'></iframe></div>
 </div>
 <div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>message :
 Part Name: bracket_mid_surface-3
@@ -764,9 +787,7 @@ Static Scene</label><div class="sd-tab-content docutils">
 <input id="sd-tab-item-3" name="sd-tab-set-1" type="radio">
 <label class="sd-tab-label" for="sd-tab-item-3">
 Interactive Scene</label><div class="sd-tab-content docutils">
-
-    <iframe src='../../../_static/static_viewer.html?fileURL=../_images/examples/gallery_examples/gallery/images/sphx_glr_01_bracket_scaffold_002.vtksz' width='100%%' height='400px' frameborder='0'></iframe>
-</div>
+<iframe src='../../../_static/static_viewer.html?fileURL=../_images/examples/gallery_examples/gallery/images/sphx_glr_01_bracket_scaffold_002.vtksz' width='100%%' height='400px' frameborder='0'></iframe></div>
 </div>
 </section>
 <section id="write-mesh">
@@ -780,9 +801,9 @@ Interactive Scene</label><div class="sd-tab-content docutils">
 </pre></div>
 </div>
 <div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>This get_abaqus_simulation_data is a beta API. The behavior and implementation may change in future.
-/home/runner/work/pyprimemesh/pyprimemesh/examples/gallery/01_bracket_scaffold.py:167: PrimeRuntimeWarning: Export of a zonelet skipped while exporting a label as element component. Disable the parameter enable_face_based_labels in ExportMapdlCdbParams to export the label as node component.
-  file_io.export_mapdl_cdb(mapdl_cdb, params=prime.ExportMapdlCdbParams(model))
-MAPDL case exported at /tmp/tmpv_cnzi1j/bracket_scaffold.cdb
+/home/runner/work/pyprimemesh/pyprimemesh/.venv/lib/python3.13/site-packages/ansys/meshing/prime/core/fileio.py:339: PrimeRuntimeWarning: Skipped the export of label as element component because the labelled topology or zonelets are not a part of any zone. Refer label_export_params to export desired labels as nodal components.
+  result = super().export_mapdl_cdb(temp_file_name, params)
+MAPDL case exported at /tmp/tmpqpzxdbyr/bracket_scaffold.cdb
 </pre></div>
 </div>
 </section>
@@ -791,7 +812,7 @@ MAPDL case exported at /tmp/tmpv_cnzi1j/bracket_scaffold.cdb
 <div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="n">prime_client</span><span class="o">.</span><span class="n">exit</span><span class="p">()</span>
 </pre></div>
 </div>
-<p class="sphx-glr-timing"><strong>Total running time of the script:</strong> (0 minutes 16.365 seconds)</p>
+<p class="sphx-glr-timing"><strong>Total running time of the script:</strong> (0 minutes 31.105 seconds)</p>
 <div class="sphx-glr-footer sphx-glr-footer-example docutils container" id="sphx-glr-download-examples-gallery-examples-gallery-01-bracket-scaffold-py">
 <div class="sphx-glr-download sphx-glr-download-jupyter docutils container">
 <p><a class="reference download internal" download="" href="../../../_downloads/9405f8e16c9be839932448414b63bb21/01_bracket_scaffold.ipynb"><code class="xref download docutils literal notranslate"><span class="pre">Download</span> <span class="pre">Jupyter</span> <span class="pre">notebook:</span> <span class="pre">01_bracket_scaffold.ipynb</span></code></a></p>
@@ -885,12 +906,15 @@ MAPDL case exported at /tmp/tmpv_cnzi1j/bracket_scaffold.cdb
 
 <script>
 // Passing the search options to the search.js file
-const SEARCH_OPTIONS = JSON.parse('{"keys": ["title", "text"], "limit": 10, "threshold": 0.2}');
+const SEARCH_OPTIONS = JSON.parse('{"keys": ["title", "text", "objectID"], "limit": 10, "threshold": 0.2}');
 const SEARCH_FILE = "../../../_static/search.json";
+const ADVANCE_SEARCH_PATH = "../../../search.html";
+const EXTRA_SOURCES = JSON.parse('""');
 </script>
 
 
 <script src="../../../_static/js/search.js"></script>
+
   
   <footer class="bd-footer">
 <div class="bd-footer__inner bd-page-width">
@@ -926,7 +950,7 @@ const SEARCH_FILE = "../../../_static/search.json";
   <a href="https://sphinxdocs.ansys.com/version/stable/index.html"
     >Ansys Sphinx Theme</a
   >
-  1.4.2. <br />Last updated on
+  1.6.4. <br />Last updated on
   <span id="ast_build_date"></span>
 </p>
 <script>

@@ -6,7 +6,7 @@ ImportCadResults
 .. currentmodule:: ansys.meshing.prime
 
 .. autoclass:: ImportCadResults
-   
+
    
    
    .. rubric:: Methods

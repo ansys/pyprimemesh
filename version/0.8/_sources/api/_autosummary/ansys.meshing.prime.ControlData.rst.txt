@@ -6,7 +6,7 @@ ControlData
 .. currentmodule:: ansys.meshing.prime
 
 .. autoclass:: ControlData
-   
+
    
    
    .. rubric:: Methods
@@ -36,7 +36,6 @@ ControlData
       ControlData.get_thin_volume_control_by_name
       ControlData.get_volume_control_by_name
       ControlData.get_wrapper_control_by_name
-      ControlData.multi_zone_controls
    
    
 
@@ -48,6 +47,7 @@ ControlData
       :toctree:
    
       ControlData.id
+      ControlData.multi_zone_controls
       ControlData.name
       ControlData.periodic_controls
       ControlData.prism_controls

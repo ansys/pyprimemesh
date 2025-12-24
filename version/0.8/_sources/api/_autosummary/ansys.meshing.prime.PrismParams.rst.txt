@@ -6,7 +6,7 @@ PrismParams
 .. currentmodule:: ansys.meshing.prime
 
 .. autoclass:: PrismParams
-   
+
    
    
    .. rubric:: Methods

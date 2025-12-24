@@ -6,7 +6,7 @@ EdgeConnectType
 .. currentmodule:: ansys.meshing.prime
 
 .. autoclass:: EdgeConnectType
-   
+
    
    
    .. rubric:: Methods

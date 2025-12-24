@@ -84,7 +84,7 @@ Instantiate meshing utilities from the ``lucid`` class.
 
  .. code-block:: none
 
-    using server from docker : The container name %s ansys-prime-server-1
+    using server from docker : The container name  ansys-prime-server-96218b28-cc9c-4b0f-aab2-a4dbe671735d
 
 
 
@@ -331,7 +331,7 @@ This configuration allows retaining the topology data along with mesh data.
 
 
     Exported file:
-     /tmp/tmpckvh35pb/pyprime_block_mesh.pmdat
+     /tmp/tmpak2wual4/pyprime_block_mesh.pmdat
 
 
 
@@ -367,7 +367,7 @@ containing nodes.
     This get_abaqus_simulation_data is a beta API. The behavior and implementation may change in future.
 
     Exported file:
-     /tmp/tmpckvh35pb/pyprime_block_mesh.cdb
+     /tmp/tmpak2wual4/pyprime_block_mesh.cdb
 
 
 
@@ -437,7 +437,7 @@ automatically when export to Fluent(MSH or CAS) formats.
 
 
     Exported file:
-     /tmp/tmpckvh35pb/pyprime_block_mesh.cas
+     /tmp/tmpak2wual4/pyprime_block_mesh.cas
 
 
 
@@ -653,7 +653,7 @@ There are no labels present in the mesh file.
         0 Edge Zones
             Edge Zone Name(s) : []
         2 Face Zones
-            Face Zone Name(s) : [wall, my_group]
+            Face Zone Name(s) : [my_group, wall]
         1 Volume Zones
             Volume Zone Name(s) : [solid]
 
@@ -663,8 +663,8 @@ There are no labels present in the mesh file.
         Bounding box (-16 0 -17)
                      (12 28 11)
 
-    wall
     my_group
+    wall
 
 
 
@@ -690,7 +690,7 @@ Exit PyPrimeMesh
 
 .. rst-class:: sphx-glr-timing
 
-   **Total running time of the script:** (0 minutes 23.054 seconds)
+   **Total running time of the script:** (0 minutes 30.923 seconds)
 
 
 .. _sphx_glr_download_examples_gallery_examples_gallery_00_lucid_file_IO.py:

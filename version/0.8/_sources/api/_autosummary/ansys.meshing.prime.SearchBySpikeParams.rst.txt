@@ -6,7 +6,7 @@ SearchBySpikeParams
 .. currentmodule:: ansys.meshing.prime
 
 .. autoclass:: SearchBySpikeParams
-   
+
    
    
    .. rubric:: Methods

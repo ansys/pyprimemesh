@@ -6,7 +6,7 @@ CadRefacetingMaxEdgeSizeLimit
 .. currentmodule:: ansys.meshing.prime
 
 .. autoclass:: CadRefacetingMaxEdgeSizeLimit
-   
+
    
    
    .. rubric:: Methods

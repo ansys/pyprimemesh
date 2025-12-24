@@ -6,7 +6,7 @@ FuseResults
 .. currentmodule:: ansys.meshing.prime
 
 .. autoclass:: FuseResults
-   
+
    
    
    .. rubric:: Methods

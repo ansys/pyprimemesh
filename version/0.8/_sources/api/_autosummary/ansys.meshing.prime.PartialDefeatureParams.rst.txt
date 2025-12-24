@@ -6,7 +6,7 @@ PartialDefeatureParams
 .. currentmodule:: ansys.meshing.prime
 
 .. autoclass:: PartialDefeatureParams
-   
+
    
    
    .. rubric:: Methods

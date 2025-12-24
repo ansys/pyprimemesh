@@ -6,7 +6,7 @@ ScopeExpressionType
 .. currentmodule:: ansys.meshing.prime
 
 .. autoclass:: ScopeExpressionType
-   
+
    
    
    .. rubric:: Methods

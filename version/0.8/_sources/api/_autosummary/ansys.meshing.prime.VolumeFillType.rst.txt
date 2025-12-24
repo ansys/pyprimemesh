@@ -6,7 +6,7 @@ VolumeFillType
 .. currentmodule:: ansys.meshing.prime
 
 .. autoclass:: VolumeFillType
-   
+
    
    
    .. rubric:: Methods

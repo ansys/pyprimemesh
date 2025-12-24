@@ -6,7 +6,7 @@ CellZoneletType
 .. currentmodule:: ansys.meshing.prime
 
 .. autoclass:: CellZoneletType
-   
+
    
    
    .. rubric:: Methods

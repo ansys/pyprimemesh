@@ -6,7 +6,7 @@ FaceConnectivityResults
 .. currentmodule:: ansys.meshing.prime
 
 .. autoclass:: FaceConnectivityResults
-   
+
    
    
    .. rubric:: Methods

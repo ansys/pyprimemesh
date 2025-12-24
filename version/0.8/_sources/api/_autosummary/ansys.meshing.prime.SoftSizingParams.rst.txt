@@ -6,7 +6,7 @@ SoftSizingParams
 .. currentmodule:: ansys.meshing.prime
 
 .. autoclass:: SoftSizingParams
-   
+
    
    
    .. rubric:: Methods

@@ -6,7 +6,7 @@ ScopeEntity
 .. currentmodule:: ansys.meshing.prime
 
 .. autoclass:: ScopeEntity
-   
+
    
    
    .. rubric:: Methods

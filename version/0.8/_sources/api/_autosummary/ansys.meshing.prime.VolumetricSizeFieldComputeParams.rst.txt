@@ -6,7 +6,7 @@ VolumetricSizeFieldComputeParams
 .. currentmodule:: ansys.meshing.prime
 
 .. autoclass:: VolumetricSizeFieldComputeParams
-   
+
    
    
    .. rubric:: Methods

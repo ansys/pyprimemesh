@@ -6,7 +6,7 @@ TriangulateParams
 .. currentmodule:: ansys.meshing.prime
 
 .. autoclass:: TriangulateParams
-   
+
    
    
    .. rubric:: Methods

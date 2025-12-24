@@ -6,7 +6,7 @@ Mesh
 .. currentmodule:: ansys.meshing.prime.lucid
 
 .. autoclass:: Mesh
-   
+
    
    
    .. rubric:: Methods
@@ -22,6 +22,7 @@ Mesh
       Mesh.create_flow_volume
       Mesh.create_zones_from_labels
       Mesh.delete_topology
+      Mesh.from_geometry
       Mesh.merge_parts
       Mesh.read
       Mesh.surface_mesh

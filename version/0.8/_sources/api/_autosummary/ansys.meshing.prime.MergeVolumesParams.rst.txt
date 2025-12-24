@@ -6,7 +6,7 @@ MergeVolumesParams
 .. currentmodule:: ansys.meshing.prime
 
 .. autoclass:: MergeVolumesParams
-   
+
    
    
    .. rubric:: Methods

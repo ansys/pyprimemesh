@@ -6,7 +6,7 @@ HexCoreTransitionLayerType
 .. currentmodule:: ansys.meshing.prime
 
 .. autoclass:: HexCoreTransitionLayerType
-   
+
    
    
    .. rubric:: Methods

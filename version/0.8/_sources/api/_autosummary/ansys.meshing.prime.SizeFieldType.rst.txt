@@ -6,7 +6,7 @@ SizeFieldType
 .. currentmodule:: ansys.meshing.prime
 
 .. autoclass:: SizeFieldType
-   
+
    
    
    .. rubric:: Methods

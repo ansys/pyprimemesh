@@ -6,7 +6,7 @@ TetParams
 .. currentmodule:: ansys.meshing.prime
 
 .. autoclass:: TetParams
-   
+
    
    
    .. rubric:: Methods

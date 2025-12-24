@@ -6,7 +6,7 @@ VolumeSweeper
 .. currentmodule:: ansys.meshing.prime
 
 .. autoclass:: VolumeSweeper
-   
+
    
    
    .. rubric:: Methods

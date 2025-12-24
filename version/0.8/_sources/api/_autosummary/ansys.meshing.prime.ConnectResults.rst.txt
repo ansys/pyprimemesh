@@ -6,7 +6,7 @@ ConnectResults
 .. currentmodule:: ansys.meshing.prime
 
 .. autoclass:: ConnectResults
-   
+
    
    
    .. rubric:: Methods

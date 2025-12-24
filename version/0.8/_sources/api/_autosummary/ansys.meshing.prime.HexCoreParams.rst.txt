@@ -6,7 +6,7 @@ HexCoreParams
 .. currentmodule:: ansys.meshing.prime
 
 .. autoclass:: HexCoreParams
-   
+
    
    
    .. rubric:: Methods

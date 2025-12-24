@@ -6,7 +6,7 @@ SetParamsResults
 .. currentmodule:: ansys.meshing.prime
 
 .. autoclass:: SetParamsResults
-   
+
    
    
    .. rubric:: Methods

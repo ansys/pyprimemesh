@@ -80,7 +80,7 @@ Instantiate meshing utilities from the ``lucid`` class.
 
  .. code-block:: none
 
-    using server from docker : The container name %s ansys-prime-server-3
+    using server from docker : The container name  ansys-prime-server-197916ef-bb28-41b5-95d9-0e6fd3e0dca3
 
 
 
@@ -254,17 +254,17 @@ Print mesh statistics
                      (203.169 203.2 50.8)
 
         Mesh Summary: 
-            38522 Nodes 
-            3249 Poly Faces 
+            39179 Nodes 
+            3297 Poly Faces 
             0 Quad Faces 
             0 Tri Faces 
-            3249 Faces 
-            12090 Poly Cells 
+            3297 Faces 
+            12314 Poly Cells 
             0 Hex Cells 
             0 Prism Cells 
             0 Pyramid Cells 
             0 Tet Cells 
-            12090 Cells 
+            12314 Cells 
         0 out of 9 TopoFaces are unmeshed
 
     n_topo_edges :  13
@@ -277,18 +277,18 @@ Print mesh statistics
     n_face_zones :  2
     n_volume_zones :  1
     n_labels :  2
-    n_nodes :  38522
-    n_faces :  3249
-    n_cells :  12090
+    n_nodes :  39179
+    n_faces :  3297
+    n_cells :  12314
     n_tri_faces :  0
-    n_poly_faces :  3249
+    n_poly_faces :  3297
     n_quad_faces :  0
     n_second_order_tri_faces :  0
     n_second_order_quad_faces :  0
     n_tet_cells :  0
     n_pyra_cells :  0
     n_prism_cells :  0
-    n_poly_cells :  12090
+    n_poly_cells :  12314
     n_hex_cells :  0
     n_second_order_tet_cells :  0
     n_second_order_pyra_cells :  0
@@ -296,7 +296,7 @@ Print mesh statistics
     n_second_order_hex_cells :  0
     n_unmeshed_topo_faces :  0
 
-    Maximum skewness:  0.680207
+    Maximum skewness:  0.678945
 
 
 
@@ -328,7 +328,7 @@ Write a CAS file for use in the Fluent solver.
 
 
     Exported file:
-     /tmp/tmp0ps3ne9s/mixing_elbow.cas
+     /tmp/tmp3yr2b4wo/mixing_elbow.cas
 
 
 
@@ -354,7 +354,7 @@ Exit PyPrimeMesh
 
 .. rst-class:: sphx-glr-timing
 
-   **Total running time of the script:** (0 minutes 15.520 seconds)
+   **Total running time of the script:** (0 minutes 28.391 seconds)
 
 
 .. _sphx_glr_download_examples_gallery_examples_gallery_02_lucid_mixing_elbow.py:

@@ -6,7 +6,7 @@ IGAResults
 .. currentmodule:: ansys.meshing.prime
 
 .. autoclass:: IGAResults
-   
+
    
    
    .. rubric:: Methods

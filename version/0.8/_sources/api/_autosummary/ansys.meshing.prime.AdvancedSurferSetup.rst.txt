@@ -6,7 +6,7 @@ AdvancedSurferSetup
 .. currentmodule:: ansys.meshing.prime
 
 .. autoclass:: AdvancedSurferSetup
-   
+
    
    
    .. rubric:: Methods

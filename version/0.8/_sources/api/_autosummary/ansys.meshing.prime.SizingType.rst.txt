@@ -6,7 +6,7 @@ SizingType
 .. currentmodule:: ansys.meshing.prime
 
 .. autoclass:: SizingType
-   
+
    
    
    .. rubric:: Methods
@@ -42,6 +42,7 @@ SizingType
       SizingType.SOFT
       SizingType.MESHED
       SizingType.BOI
+      SizingType.SOI
    
    
 

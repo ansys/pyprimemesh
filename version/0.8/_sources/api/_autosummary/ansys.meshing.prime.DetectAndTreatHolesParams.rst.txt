@@ -6,7 +6,7 @@ DetectAndTreatHolesParams
 .. currentmodule:: ansys.meshing.prime
 
 .. autoclass:: DetectAndTreatHolesParams
-   
+
    
    
    .. rubric:: Methods

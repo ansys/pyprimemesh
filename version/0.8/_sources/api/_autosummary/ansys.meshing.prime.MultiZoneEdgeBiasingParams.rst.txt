@@ -6,7 +6,7 @@ MultiZoneEdgeBiasingParams
 .. currentmodule:: ansys.meshing.prime
 
 .. autoclass:: MultiZoneEdgeBiasingParams
-   
+
    
    
    .. rubric:: Methods

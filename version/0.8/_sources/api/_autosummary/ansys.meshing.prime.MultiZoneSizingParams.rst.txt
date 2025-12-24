@@ -6,7 +6,7 @@ MultiZoneSizingParams
 .. currentmodule:: ansys.meshing.prime
 
 .. autoclass:: MultiZoneSizingParams
-   
+
    
    
    .. rubric:: Methods

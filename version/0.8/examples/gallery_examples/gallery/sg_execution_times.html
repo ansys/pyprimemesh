@@ -32,7 +32,7 @@
 <link href="../../../_static/styles/pydata-sphinx-theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
 
     <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=8f2a1f02" />
-    <link rel="stylesheet" type="text/css" href="../../../_static/styles/ansys-sphinx-theme.css?v=fbf3eb5d" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/styles/ansys-sphinx-theme.css?v=9e79609d" />
     <link rel="stylesheet" type="text/css" href="../../../_static/copybutton.css?v=76b2166b" />
     <link rel="stylesheet" type="text/css" href="../../../_static/jupyter-sphinx.css" />
     <link rel="stylesheet" type="text/css" href="../../../_static/thebelab.css" />
@@ -40,7 +40,7 @@
     <link rel="stylesheet" type="text/css" href="../../../_static/sg_gallery-binder.css?v=f4aeca0c" />
     <link rel="stylesheet" type="text/css" href="../../../_static/sg_gallery-dataframe.css?v=2082cf3c" />
     <link rel="stylesheet" type="text/css" href="../../../_static/sg_gallery-rendered-html.css?v=1277b6f3" />
-    <link rel="stylesheet" type="text/css" href="../../../_static/styles/ansys-sphinx-theme.css?v=fbf3eb5d" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/styles/ansys-sphinx-theme.css?v=9e79609d" />
     <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.23/css/jquery.dataTables.min.css" />
     <link rel="stylesheet" type="text/css" href="https://www.nerdfonts.com/assets/css/webfont.css" />
     <link rel="stylesheet" type="text/css" href="../../../_static/sphinx-design.min.css?v=95c83b7e" />
@@ -59,7 +59,7 @@
   
     <link href="../../../_static/css/breadcrumbs.css" rel="stylesheet" />
   
-    <script src="../../../_static/documentation_options.js?v=ec16d22d"></script>
+    <script src="../../../_static/documentation_options.js?v=24ea0de7"></script>
     <script src="../../../_static/doctools.js?v=9bcbadda"></script>
     <script src="../../../_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="../../../_static/clipboard.min.js?v=a7894cd8"></script>
@@ -73,17 +73,20 @@
     <script>
         DOCUMENTATION_OPTIONS.theme_version = '0.16.1';
         DOCUMENTATION_OPTIONS.theme_switcher_json_url = 'https://prime.docs.pyansys.com/versions.json';
-        DOCUMENTATION_OPTIONS.theme_switcher_version_match = '0.8';
+        DOCUMENTATION_OPTIONS.theme_switcher_version_match = 'dev';
         DOCUMENTATION_OPTIONS.show_version_warning_banner =
             false;
         </script>
     <link rel="icon" href="../../../_static/ansys-favicon.png"/>
     <link rel="index" title="Index" href="../../../genindex.html" />
     <link rel="search" title="Search" href="../../../search.html" />
+  
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
-  <meta name="docsearch:version" content="0.8.1" />
-  <link rel="canonical" href="https://prime.docs.pyansys.com/version/stable/examples/gallery_examples/gallery/sg_execution_times.html" />
+  <meta name="docsearch:version" content="0.10.0.dev2" />
+  <meta property="og:site_name" content="PyAnsys" />
+  <meta name="physics" content="CAD" />
+  <meta name="physics" content="Meshing" />
   </head>
   
   
@@ -164,9 +167,15 @@
     <div class="me-auto navbar-header-items__center">
       
         <div class="navbar-item">
+
 <nav>
   <ul class="bd-navbar-elements navbar-nav">
     
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../index.html" title="PyPrimeMesh home">Home</a>
+</li>
+
+
 <li class="nav-item ">
   <a class="nav-link nav-internal" href="../../../getting_started/index.html">
     Getting started
@@ -194,23 +203,34 @@
   </a>
 </li>
 
-
-<li class="nav-item ">
-  <a class="nav-link nav-internal" href="../../../contributing/index.html">
+            <li class="nav-item dropdown">
+                <button class="btn dropdown-toggle nav-item" type="button"
+                data-bs-toggle="dropdown" aria-expanded="false"
+                aria-controls="pst-nav-more-links">
+                    More
+                </button>
+                <ul id="pst-nav-more-links" class="dropdown-menu">
+                    
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="../../../contributing/index.html">
     Contribute
   </a>
 </li>
 
+                </ul>
+            </li>
+            
   </ul>
-</nav></div>
+</nav>
+</div>
       
     </div>
     
     
     <div class="navbar-header-items__end">
       
-        <div class="navbar-item navbar-persistent--container">
-          
+      
+        <div class="navbar-item">
 <div class="search-bar pst-js-only" id="search-bar">
   <form class="bd-search d-flex align-items-center" action="../../../search.html" method="get">
     <i class="fa-solid fa-magnifying-glass"></i>
@@ -222,9 +242,7 @@
     </span>
   </form>
   <div id="static-search-results" class="static-search-results" style="display:none;" tabindex="0"></div>
-</div>
-        </div>
-      
+</div></div>
       
         <div class="navbar-item">
 <div class="version-switcher__container dropdown pst-js-only">
@@ -287,21 +305,6 @@
   </div>
   
   
-    <div class="navbar-persistent--mobile">
-<div class="search-bar pst-js-only" id="search-bar">
-  <form class="bd-search d-flex align-items-center" action="../../../search.html" method="get">
-    <i class="fa-solid fa-magnifying-glass"></i>
-    <input type="search" class="form-control" name="q" placeholder="Search the docs ..."
-      aria-label="Search the docs ..." autocomplete="off" autocorrect="off"
-      autocapitalize="off" spellcheck="false" />
-    <span class="search-button__kbd-shortcut">
-      <kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd>
-    </span>
-  </form>
-  <div id="static-search-results" class="static-search-results" style="display:none;" tabindex="0"></div>
-</div>
-    </div>
-  
 
   
     <button class="pst-navbar-icon sidebar-toggle secondary-toggle" aria-label="On this page">
@@ -350,9 +353,15 @@
           
           
             <div class="navbar-item">
+
 <nav>
   <ul class="bd-navbar-elements navbar-nav">
     
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../index.html" title="PyPrimeMesh home">Home</a>
+</li>
+
+
 <li class="nav-item ">
   <a class="nav-link nav-internal" href="../../../getting_started/index.html">
     Getting started
@@ -388,7 +397,8 @@
 </li>
 
   </ul>
-</nav></div>
+</nav>
+</div>
           
         
       </div>
@@ -396,6 +406,20 @@
     
     
       <div class="sidebar-header-items__end">
+        
+          <div class="navbar-item">
+<div class="search-bar pst-js-only" id="search-bar">
+  <form class="bd-search d-flex align-items-center" action="../../../search.html" method="get">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <input type="search" class="form-control" name="q" placeholder="Search the docs ..."
+      aria-label="Search the docs ..." autocomplete="off" autocorrect="off"
+      autocapitalize="off" spellcheck="false" />
+    <span class="search-button__kbd-shortcut">
+      <kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd>
+    </span>
+  </form>
+  <div id="static-search-results" class="static-search-results" style="display:none;" tabindex="0"></div>
+</div></div>
         
           <div class="navbar-item">
 <div class="version-switcher__container dropdown pst-js-only">
@@ -520,7 +544,7 @@
                   
   <section id="computation-times">
 <span id="sphx-glr-examples-gallery-examples-gallery-sg-execution-times"></span><h1>Computation times<a class="headerlink" href="#computation-times" title="Link to this heading">#</a></h1>
-<p><strong>18:06.602</strong> total execution time for 12 files <strong>from examples/gallery_examples/gallery</strong>:</p>
+<p><strong>16:00.386</strong> total execution time for 12 files <strong>from examples/gallery_examples/gallery</strong>:</p>
 <div class="docutils container">
 <style scoped>
 <link href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.3.0/css/bootstrap.min.css" rel="stylesheet" />
@@ -542,51 +566,51 @@ $(document).ready( function () {
 </thead>
 <tbody>
 <tr class="row-even"><td><p><a class="reference internal" href="04_lucid_toy_car.html#sphx-glr-examples-gallery-examples-gallery-04-lucid-toy-car-py"><span class="std std-ref">Wrap a toy car for a flow analysis</span></a> (<code class="docutils literal notranslate"><span class="pre">04_lucid_toy_car.py</span></code>)</p></td>
-<td><p>03:35.493</p></td>
+<td><p>03:43.900</p></td>
 <td><p>0.0</p></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="11_solder_ball.html#sphx-glr-examples-gallery-examples-gallery-11-solder-ball-py"><span class="std std-ref">Mesh a set of solder balls (beta)</span></a> (<code class="docutils literal notranslate"><span class="pre">11_solder_ball.py</span></code>)</p></td>
-<td><p>03:16.779</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="10_wheel_ground_contact_patch.html#sphx-glr-examples-gallery-examples-gallery-10-wheel-ground-contact-patch-py"><span class="std std-ref">Create a contact patch for wrapping between a wheel and ground interface</span></a> (<code class="docutils literal notranslate"><span class="pre">10_wheel_ground_contact_patch.py</span></code>)</p></td>
+<td><p>02:38.473</p></td>
 <td><p>0.0</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="10_wheel_ground_contact_patch.html#sphx-glr-examples-gallery-examples-gallery-10-wheel-ground-contact-patch-py"><span class="std std-ref">Create a contact patch for wrapping between a wheel and ground interface</span></a> (<code class="docutils literal notranslate"><span class="pre">10_wheel_ground_contact_patch.py</span></code>)</p></td>
-<td><p>02:54.346</p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="03_lucid_pipe_tee.html#sphx-glr-examples-gallery-examples-gallery-03-lucid-pipe-tee-py"><span class="std std-ref">Mesh a pipe T-section for structural thermal and fluid flow analysis</span></a> (<code class="docutils literal notranslate"><span class="pre">03_lucid_pipe_tee.py</span></code>)</p></td>
+<td><p>02:37.367</p></td>
 <td><p>0.0</p></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="09_multi_layer_quad_mesh_pcb.html#sphx-glr-examples-gallery-examples-gallery-09-multi-layer-quad-mesh-pcb-py"><span class="std std-ref">Mesh a generic PCB geometry with multiple hexa layers</span></a> (<code class="docutils literal notranslate"><span class="pre">09_multi_layer_quad_mesh_pcb.py</span></code>)</p></td>
-<td><p>01:49.773</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="08_lucid_generic_f1_rear_wing.html#sphx-glr-examples-gallery-examples-gallery-08-lucid-generic-f1-rear-wing-py"><span class="std std-ref">Mesh a generic F1 car rear wing for external aero simulation</span></a> (<code class="docutils literal notranslate"><span class="pre">08_lucid_generic_f1_rear_wing.py</span></code>)</p></td>
+<td><p>01:47.444</p></td>
 <td><p>0.0</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="08_lucid_generic_f1_rear_wing.html#sphx-glr-examples-gallery-examples-gallery-08-lucid-generic-f1-rear-wing-py"><span class="std std-ref">Mesh a generic F1 car rear wing for external aero simulation</span></a> (<code class="docutils literal notranslate"><span class="pre">08_lucid_generic_f1_rear_wing.py</span></code>)</p></td>
-<td><p>01:32.014</p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="09_multi_layer_quad_mesh_pcb.html#sphx-glr-examples-gallery-examples-gallery-09-multi-layer-quad-mesh-pcb-py"><span class="std std-ref">Mesh a generic PCB geometry with multiple hexa layers</span></a> (<code class="docutils literal notranslate"><span class="pre">09_multi_layer_quad_mesh_pcb.py</span></code>)</p></td>
+<td><p>01:17.843</p></td>
 <td><p>0.0</p></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="03_lucid_pipe_tee.html#sphx-glr-examples-gallery-examples-gallery-03-lucid-pipe-tee-py"><span class="std std-ref">Mesh a pipe T-section for structural thermal and fluid flow analysis</span></a> (<code class="docutils literal notranslate"><span class="pre">03_lucid_pipe_tee.py</span></code>)</p></td>
-<td><p>01:30.079</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="06_blade_morph.html#sphx-glr-examples-gallery-examples-gallery-06-blade-morph-py"><span class="std std-ref">Morph a hexahedral mesh of a turbine blade to a new shape</span></a> (<code class="docutils literal notranslate"><span class="pre">06_blade_morph.py</span></code>)</p></td>
+<td><p>01:12.484</p></td>
 <td><p>0.0</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="06_blade_morph.html#sphx-glr-examples-gallery-examples-gallery-06-blade-morph-py"><span class="std std-ref">Morph a hexahedral mesh of a turbine blade to a new shape</span></a> (<code class="docutils literal notranslate"><span class="pre">06_blade_morph.py</span></code>)</p></td>
-<td><p>01:30.020</p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="05_pcb_stacker.html#sphx-glr-examples-gallery-examples-gallery-05-pcb-stacker-py"><span class="std std-ref">Mesh a PCB for structural thermal analysis</span></a> (<code class="docutils literal notranslate"><span class="pre">05_pcb_stacker.py</span></code>)</p></td>
+<td><p>00:39.451</p></td>
 <td><p>0.0</p></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="05_pcb_stacker.html#sphx-glr-examples-gallery-examples-gallery-05-pcb-stacker-py"><span class="std std-ref">Mesh a PCB for structural thermal analysis</span></a> (<code class="docutils literal notranslate"><span class="pre">05_pcb_stacker.py</span></code>)</p></td>
-<td><p>00:33.999</p></td>
-<td><p>0.0</p></td>
-</tr>
-<tr class="row-even"><td><p><a class="reference internal" href="07_saddle_bracket.html#sphx-glr-examples-gallery-examples-gallery-07-saddle-bracket-py"><span class="std std-ref">Mesh a saddle bracket for a structural analysis</span></a> (<code class="docutils literal notranslate"><span class="pre">07_saddle_bracket.py</span></code>)</p></td>
-<td><p>00:29.161</p></td>
-<td><p>0.0</p></td>
-</tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="00_lucid_file_IO.html#sphx-glr-examples-gallery-examples-gallery-00-lucid-file-io-py"><span class="std std-ref">Convert data when importing and exporting mesh and CAD formats</span></a> (<code class="docutils literal notranslate"><span class="pre">00_lucid_file_IO.py</span></code>)</p></td>
-<td><p>00:23.054</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="07_saddle_bracket.html#sphx-glr-examples-gallery-examples-gallery-07-saddle-bracket-py"><span class="std std-ref">Mesh a saddle bracket for a structural analysis</span></a> (<code class="docutils literal notranslate"><span class="pre">07_saddle_bracket.py</span></code>)</p></td>
+<td><p>00:33.005</p></td>
 <td><p>0.0</p></td>
 </tr>
 <tr class="row-even"><td><p><a class="reference internal" href="01_bracket_scaffold.html#sphx-glr-examples-gallery-examples-gallery-01-bracket-scaffold-py"><span class="std std-ref">Mesh a mid-surfaced bracket for a structural analysis</span></a> (<code class="docutils literal notranslate"><span class="pre">01_bracket_scaffold.py</span></code>)</p></td>
-<td><p>00:16.365</p></td>
+<td><p>00:31.105</p></td>
 <td><p>0.0</p></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="02_lucid_mixing_elbow.html#sphx-glr-examples-gallery-examples-gallery-02-lucid-mixing-elbow-py"><span class="std std-ref">Mesh a mixing elbow for a flow analysis</span></a> (<code class="docutils literal notranslate"><span class="pre">02_lucid_mixing_elbow.py</span></code>)</p></td>
-<td><p>00:15.520</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="00_lucid_file_IO.html#sphx-glr-examples-gallery-examples-gallery-00-lucid-file-io-py"><span class="std std-ref">Convert data when importing and exporting mesh and CAD formats</span></a> (<code class="docutils literal notranslate"><span class="pre">00_lucid_file_IO.py</span></code>)</p></td>
+<td><p>00:30.923</p></td>
+<td><p>0.0</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="02_lucid_mixing_elbow.html#sphx-glr-examples-gallery-examples-gallery-02-lucid-mixing-elbow-py"><span class="std std-ref">Mesh a mixing elbow for a flow analysis</span></a> (<code class="docutils literal notranslate"><span class="pre">02_lucid_mixing_elbow.py</span></code>)</p></td>
+<td><p>00:28.391</p></td>
+<td><p>0.0</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="12_import_from_pygeometry.html#sphx-glr-examples-gallery-examples-gallery-12-import-from-pygeometry-py"><span class="std std-ref">Import a geometry from PyGeometry</span></a> (<code class="docutils literal notranslate"><span class="pre">12_import_from_pygeometry.py</span></code>)</p></td>
+<td><p>00:00.000</p></td>
 <td><p>0.0</p></td>
 </tr>
 </tbody>
@@ -653,12 +677,15 @@ $(document).ready( function () {
 
 <script>
 // Passing the search options to the search.js file
-const SEARCH_OPTIONS = JSON.parse('{"keys": ["title", "text"], "limit": 10, "threshold": 0.2}');
+const SEARCH_OPTIONS = JSON.parse('{"keys": ["title", "text", "objectID"], "limit": 10, "threshold": 0.2}');
 const SEARCH_FILE = "../../../_static/search.json";
+const ADVANCE_SEARCH_PATH = "../../../search.html";
+const EXTRA_SOURCES = JSON.parse('""');
 </script>
 
 
 <script src="../../../_static/js/search.js"></script>
+
   
   <footer class="bd-footer">
 <div class="bd-footer__inner bd-page-width">
@@ -694,7 +721,7 @@ const SEARCH_FILE = "../../../_static/search.json";
   <a href="https://sphinxdocs.ansys.com/version/stable/index.html"
     >Ansys Sphinx Theme</a
   >
-  1.4.2. <br />Last updated on
+  1.6.4. <br />Last updated on
   <span id="ast_build_date"></span>
 </p>
 <script>

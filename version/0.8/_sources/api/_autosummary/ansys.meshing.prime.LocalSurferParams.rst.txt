@@ -6,7 +6,7 @@ LocalSurferParams
 .. currentmodule:: ansys.meshing.prime
 
 .. autoclass:: LocalSurferParams
-   
+
    
    
    .. rubric:: Methods

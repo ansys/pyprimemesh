@@ -6,7 +6,7 @@ SplineFeatureCaptureType
 .. currentmodule:: ansys.meshing.prime
 
 .. autoclass:: SplineFeatureCaptureType
-   
+
    
    
    .. rubric:: Methods

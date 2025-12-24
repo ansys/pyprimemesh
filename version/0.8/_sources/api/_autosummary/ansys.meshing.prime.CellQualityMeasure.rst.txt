@@ -6,7 +6,7 @@ CellQualityMeasure
 .. currentmodule:: ansys.meshing.prime
 
 .. autoclass:: CellQualityMeasure
-   
+
    
    
    .. rubric:: Methods

@@ -6,7 +6,7 @@ MatchPair
 .. currentmodule:: ansys.meshing.prime
 
 .. autoclass:: MatchPair
-   
+
    
    
    .. rubric:: Methods

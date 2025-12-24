@@ -6,7 +6,7 @@ StitchParams
 .. currentmodule:: ansys.meshing.prime
 
 .. autoclass:: StitchParams
-   
+
    
    
    .. rubric:: Methods

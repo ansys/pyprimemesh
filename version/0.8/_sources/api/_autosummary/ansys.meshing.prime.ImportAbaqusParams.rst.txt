@@ -6,7 +6,7 @@ ImportAbaqusParams
 .. currentmodule:: ansys.meshing.prime
 
 .. autoclass:: ImportAbaqusParams
-   
+
    
    
    .. rubric:: Methods

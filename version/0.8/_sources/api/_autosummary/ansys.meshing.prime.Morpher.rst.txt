@@ -6,7 +6,7 @@ Morpher
 .. currentmodule:: ansys.meshing.prime
 
 .. autoclass:: Morpher
-   
+
    
    
    .. rubric:: Methods

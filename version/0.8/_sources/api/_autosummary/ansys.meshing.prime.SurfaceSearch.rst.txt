@@ -6,7 +6,7 @@ SurfaceSearch
 .. currentmodule:: ansys.meshing.prime
 
 .. autoclass:: SurfaceSearch
-   
+
    
    
    .. rubric:: Methods

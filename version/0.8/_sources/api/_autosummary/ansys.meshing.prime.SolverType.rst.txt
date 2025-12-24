@@ -6,7 +6,7 @@ SolverType
 .. currentmodule:: ansys.meshing.prime
 
 .. autoclass:: SolverType
-   
+
    
    
    .. rubric:: Methods

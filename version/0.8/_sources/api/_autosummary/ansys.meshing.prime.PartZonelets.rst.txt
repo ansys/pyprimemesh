@@ -6,7 +6,7 @@ PartZonelets
 .. currentmodule:: ansys.meshing.prime
 
 .. autoclass:: PartZonelets
-   
+
    
    
    .. rubric:: Methods

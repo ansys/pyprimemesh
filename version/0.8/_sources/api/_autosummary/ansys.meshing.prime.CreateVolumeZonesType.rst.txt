@@ -6,7 +6,7 @@ CreateVolumeZonesType
 .. currentmodule:: ansys.meshing.prime
 
 .. autoclass:: CreateVolumeZonesType
-   
+
    
    
    .. rubric:: Methods

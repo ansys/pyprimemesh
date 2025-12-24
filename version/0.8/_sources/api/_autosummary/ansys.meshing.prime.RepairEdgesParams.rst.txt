@@ -6,7 +6,7 @@ RepairEdgesParams
 .. currentmodule:: ansys.meshing.prime
 
 .. autoclass:: RepairEdgesParams
-   
+
    
    
    .. rubric:: Methods

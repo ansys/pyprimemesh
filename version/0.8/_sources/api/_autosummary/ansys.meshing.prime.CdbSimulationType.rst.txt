@@ -6,7 +6,7 @@ CdbSimulationType
 .. currentmodule:: ansys.meshing.prime
 
 .. autoclass:: CdbSimulationType
-   
+
    
    
    .. rubric:: Methods

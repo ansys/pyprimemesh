@@ -6,7 +6,7 @@ CreateContactPatchResults
 .. currentmodule:: ansys.meshing.prime
 
 .. autoclass:: CreateContactPatchResults
-   
+
    
    
    .. rubric:: Methods

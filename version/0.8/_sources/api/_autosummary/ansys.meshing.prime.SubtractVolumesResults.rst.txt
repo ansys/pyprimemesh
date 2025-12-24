@@ -6,7 +6,7 @@ SubtractVolumesResults
 .. currentmodule:: ansys.meshing.prime
 
 .. autoclass:: SubtractVolumesResults
-   
+
    
    
    .. rubric:: Methods

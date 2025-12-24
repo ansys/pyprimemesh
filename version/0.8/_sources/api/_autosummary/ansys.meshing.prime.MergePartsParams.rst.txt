@@ -6,7 +6,7 @@ MergePartsParams
 .. currentmodule:: ansys.meshing.prime
 
 .. autoclass:: MergePartsParams
-   
+
    
    
    .. rubric:: Methods

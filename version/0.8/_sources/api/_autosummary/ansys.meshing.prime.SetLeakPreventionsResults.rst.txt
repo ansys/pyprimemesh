@@ -6,7 +6,7 @@ SetLeakPreventionsResults
 .. currentmodule:: ansys.meshing.prime
 
 .. autoclass:: SetLeakPreventionsResults
-   
+
    
    
    .. rubric:: Methods

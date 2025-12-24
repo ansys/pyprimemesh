@@ -6,7 +6,7 @@ JoinSeparateMethod
 .. currentmodule:: ansys.meshing.prime
 
 .. autoclass:: JoinSeparateMethod
-   
+
    
    
    .. rubric:: Methods

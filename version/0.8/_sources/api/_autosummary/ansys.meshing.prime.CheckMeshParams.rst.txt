@@ -6,7 +6,7 @@ CheckMeshParams
 .. currentmodule:: ansys.meshing.prime
 
 .. autoclass:: CheckMeshParams
-   
+
    
    
    .. rubric:: Methods

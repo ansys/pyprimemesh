@@ -6,7 +6,7 @@ WrapRegion
 .. currentmodule:: ansys.meshing.prime
 
 .. autoclass:: WrapRegion
-   
+
    
    
    .. rubric:: Methods

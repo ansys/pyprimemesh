@@ -84,7 +84,7 @@ Get the client model and instantiate meshing utilities from the ``lucid`` class.
 
  .. code-block:: none
 
-    using server from docker : The container name %s ansys-prime-server-4
+    using server from docker : The container name  ansys-prime-server-6749b45e-1534-4092-b02f-6da33d890924
 
 
 
@@ -376,7 +376,7 @@ applying load boundary conditions in the solver.
 
     This get_abaqus_simulation_data is a beta API. The behavior and implementation may change in future.
 
-    Exported Structural Mesh:  /tmp/tmp_gg9_1bf/pipe_tee.cdb
+    Exported Structural Mesh:  /tmp/tmpfrf_o8mo/pipe_tee.cdb
 
 
 
@@ -470,8 +470,8 @@ geometry after wrapping unless ``keep_input`` is set as ``True``.
         13 Label(s)
             Names: [___geom_features___, __extracted__features__, cap_in1, cap_in2, cap_out, in1_inlet, in2_inlet, outlet_main, solid_coupling_in1, solid_coupling_in2, solid_coupling_out, solid_tee, unreferenced]
 
-        Bounding box (-126.974 -360.99 -126.99)
-                     (126.983 356.616 374.65)
+        Bounding box (-127 -360.99 -126.981)
+                     (126.961 356.616 374.65)
 
 
 
@@ -564,8 +564,8 @@ You can clearly see the prism layers that were specified by the Prism control.
         13 Label(s)
             Names: [___geom_features___, __extracted__features__, cap_in1, cap_in2, cap_out, in1_inlet, in2_inlet, outlet_main, solid_coupling_in1, solid_coupling_in2, solid_coupling_out, solid_tee, unreferenced]
 
-        Bounding box (-126.974 -360.99 -126.99)
-                     (126.983 356.616 374.65)
+        Bounding box (-127 -360.99 -126.981)
+                     (126.961 356.616 374.65)
 
 
 
@@ -597,7 +597,7 @@ Write a MSH file for the Fluent solver.
  .. code-block:: none
 
 
-    Exported Fluid Mesh:  /tmp/tmpm09mfyf4/pipe_tee.msh
+    Exported Fluid Mesh:  /tmp/tmp9m6dheu_/pipe_tee.msh
 
 
 
@@ -623,7 +623,7 @@ Exit PyPrimeMesh
 
 .. rst-class:: sphx-glr-timing
 
-   **Total running time of the script:** (1 minutes 30.079 seconds)
+   **Total running time of the script:** (2 minutes 37.367 seconds)
 
 
 .. _sphx_glr_download_examples_gallery_examples_gallery_03_lucid_pipe_tee.py:

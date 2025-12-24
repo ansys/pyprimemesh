@@ -6,7 +6,7 @@ PartCreationType
 .. currentmodule:: ansys.meshing.prime
 
 .. autoclass:: PartCreationType
-   
+
    
    
    .. rubric:: Methods

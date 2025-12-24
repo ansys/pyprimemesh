@@ -6,7 +6,7 @@ ExportFluentCaseParams
 .. currentmodule:: ansys.meshing.prime
 
 .. autoclass:: ExportFluentCaseParams
-   
+
    
    
    .. rubric:: Methods

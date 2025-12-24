@@ -6,7 +6,7 @@ CheckFaceDeviationResults
 .. currentmodule:: ansys.meshing.prime
 
 .. autoclass:: CheckFaceDeviationResults
-   
+
    
    
    .. rubric:: Methods

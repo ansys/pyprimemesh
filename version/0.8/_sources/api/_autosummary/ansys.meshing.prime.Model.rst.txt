@@ -6,7 +6,7 @@ Model
 .. currentmodule:: ansys.meshing.prime
 
 .. autoclass:: Model
-   
+
    
    
    .. rubric:: Methods

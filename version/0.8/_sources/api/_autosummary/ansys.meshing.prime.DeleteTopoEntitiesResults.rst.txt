@@ -6,7 +6,7 @@ DeleteTopoEntitiesResults
 .. currentmodule:: ansys.meshing.prime
 
 .. autoclass:: DeleteTopoEntitiesResults
-   
+
    
    
    .. rubric:: Methods

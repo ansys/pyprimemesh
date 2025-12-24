@@ -6,7 +6,7 @@ CadFaceter
 .. currentmodule:: ansys.meshing.prime
 
 .. autoclass:: CadFaceter
-   
+
    
    
    .. rubric:: Methods

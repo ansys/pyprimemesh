@@ -6,7 +6,7 @@ ExtractFeatureParams
 .. currentmodule:: ansys.meshing.prime
 
 .. autoclass:: ExtractFeatureParams
-   
+
    
    
    .. rubric:: Methods

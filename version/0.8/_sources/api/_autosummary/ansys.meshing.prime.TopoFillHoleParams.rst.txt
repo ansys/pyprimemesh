@@ -6,7 +6,7 @@ TopoFillHoleParams
 .. currentmodule:: ansys.meshing.prime
 
 .. autoclass:: TopoFillHoleParams
-   
+
    
    
    .. rubric:: Methods

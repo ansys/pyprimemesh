@@ -6,7 +6,7 @@ DeleteMaterialPointResults
 .. currentmodule:: ansys.meshing.prime
 
 .. autoclass:: DeleteMaterialPointResults
-   
+
    
    
    .. rubric:: Methods

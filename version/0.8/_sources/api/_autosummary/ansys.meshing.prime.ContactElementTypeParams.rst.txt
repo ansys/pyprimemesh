@@ -6,7 +6,7 @@ ContactElementTypeParams
 .. currentmodule:: ansys.meshing.prime
 
 .. autoclass:: ContactElementTypeParams
-   
+
    
    
    .. rubric:: Methods

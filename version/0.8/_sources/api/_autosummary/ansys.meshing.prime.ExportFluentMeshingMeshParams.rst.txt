@@ -6,7 +6,7 @@ ExportFluentMeshingMeshParams
 .. currentmodule:: ansys.meshing.prime
 
 .. autoclass:: ExportFluentMeshingMeshParams
-   
+
    
    
    .. rubric:: Methods
@@ -21,6 +21,13 @@ ExportFluentMeshingMeshParams
    
 
    
+   
+   .. rubric:: Attributes
+
+   .. autosummary::
+      :toctree:
+   
+      ExportFluentMeshingMeshParams.cff_format
    
    
 

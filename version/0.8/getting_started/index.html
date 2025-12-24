@@ -32,7 +32,7 @@
 <link href="../_static/styles/pydata-sphinx-theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
 
     <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=8f2a1f02" />
-    <link rel="stylesheet" type="text/css" href="../_static/styles/ansys-sphinx-theme.css?v=fbf3eb5d" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/ansys-sphinx-theme.css?v=9e79609d" />
     <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
     <link rel="stylesheet" type="text/css" href="../_static/jupyter-sphinx.css" />
     <link rel="stylesheet" type="text/css" href="../_static/thebelab.css" />
@@ -40,7 +40,7 @@
     <link rel="stylesheet" type="text/css" href="../_static/sg_gallery-binder.css?v=f4aeca0c" />
     <link rel="stylesheet" type="text/css" href="../_static/sg_gallery-dataframe.css?v=2082cf3c" />
     <link rel="stylesheet" type="text/css" href="../_static/sg_gallery-rendered-html.css?v=1277b6f3" />
-    <link rel="stylesheet" type="text/css" href="../_static/styles/ansys-sphinx-theme.css?v=fbf3eb5d" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/ansys-sphinx-theme.css?v=9e79609d" />
     <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.23/css/jquery.dataTables.min.css" />
     <link rel="stylesheet" type="text/css" href="https://www.nerdfonts.com/assets/css/webfont.css" />
     <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
@@ -59,7 +59,7 @@
   
     <link href="../_static/css/breadcrumbs.css" rel="stylesheet" />
   
-    <script src="../_static/documentation_options.js?v=ec16d22d"></script>
+    <script src="../_static/documentation_options.js?v=24ea0de7"></script>
     <script src="../_static/doctools.js?v=9bcbadda"></script>
     <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
@@ -73,7 +73,7 @@
     <script>
         DOCUMENTATION_OPTIONS.theme_version = '0.16.1';
         DOCUMENTATION_OPTIONS.theme_switcher_json_url = 'https://prime.docs.pyansys.com/versions.json';
-        DOCUMENTATION_OPTIONS.theme_switcher_version_match = '0.8';
+        DOCUMENTATION_OPTIONS.theme_switcher_version_match = 'dev';
         DOCUMENTATION_OPTIONS.show_version_warning_banner =
             false;
         </script>
@@ -81,11 +81,14 @@
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
     <link rel="next" title="User guide" href="../user_guide/index.html" />
-    <link rel="prev" title="PyPrimeMesh documentation 0.8.1" href="../index.html" />
+    <link rel="prev" title="PyPrimeMesh documentation 0.10.0.dev2" href="../index.html" />
+  
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
-  <meta name="docsearch:version" content="0.8.1" />
-  <link rel="canonical" href="https://prime.docs.pyansys.com/version/stable/getting_started/index.html" />
+  <meta name="docsearch:version" content="0.10.0.dev2" />
+  <meta property="og:site_name" content="PyAnsys" />
+  <meta name="physics" content="CAD" />
+  <meta name="physics" content="Meshing" />
   </head>
   
   
@@ -166,9 +169,15 @@
     <div class="me-auto navbar-header-items__center">
       
         <div class="navbar-item">
+
 <nav>
   <ul class="bd-navbar-elements navbar-nav">
     
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../index.html" title="PyPrimeMesh home">Home</a>
+</li>
+
+
 <li class="nav-item current active">
   <a class="nav-link nav-internal" href="#">
     Getting started
@@ -196,23 +205,34 @@
   </a>
 </li>
 
-
-<li class="nav-item ">
-  <a class="nav-link nav-internal" href="../contributing/index.html">
+            <li class="nav-item dropdown">
+                <button class="btn dropdown-toggle nav-item" type="button"
+                data-bs-toggle="dropdown" aria-expanded="false"
+                aria-controls="pst-nav-more-links">
+                    More
+                </button>
+                <ul id="pst-nav-more-links" class="dropdown-menu">
+                    
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="../contributing/index.html">
     Contribute
   </a>
 </li>
 
+                </ul>
+            </li>
+            
   </ul>
-</nav></div>
+</nav>
+</div>
       
     </div>
     
     
     <div class="navbar-header-items__end">
       
-        <div class="navbar-item navbar-persistent--container">
-          
+      
+        <div class="navbar-item">
 <div class="search-bar pst-js-only" id="search-bar">
   <form class="bd-search d-flex align-items-center" action="../search.html" method="get">
     <i class="fa-solid fa-magnifying-glass"></i>
@@ -224,9 +244,7 @@
     </span>
   </form>
   <div id="static-search-results" class="static-search-results" style="display:none;" tabindex="0"></div>
-</div>
-        </div>
-      
+</div></div>
       
         <div class="navbar-item">
 <div class="version-switcher__container dropdown pst-js-only">
@@ -289,21 +307,6 @@
   </div>
   
   
-    <div class="navbar-persistent--mobile">
-<div class="search-bar pst-js-only" id="search-bar">
-  <form class="bd-search d-flex align-items-center" action="../search.html" method="get">
-    <i class="fa-solid fa-magnifying-glass"></i>
-    <input type="search" class="form-control" name="q" placeholder="Search the docs ..."
-      aria-label="Search the docs ..." autocomplete="off" autocorrect="off"
-      autocapitalize="off" spellcheck="false" />
-    <span class="search-button__kbd-shortcut">
-      <kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd>
-    </span>
-  </form>
-  <div id="static-search-results" class="static-search-results" style="display:none;" tabindex="0"></div>
-</div>
-    </div>
-  
 
   
     <button class="pst-navbar-icon sidebar-toggle secondary-toggle" aria-label="On this page">
@@ -350,9 +353,15 @@
           
           
             <div class="navbar-item">
+
 <nav>
   <ul class="bd-navbar-elements navbar-nav">
     
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../index.html" title="PyPrimeMesh home">Home</a>
+</li>
+
+
 <li class="nav-item current active">
   <a class="nav-link nav-internal" href="#">
     Getting started
@@ -388,7 +397,8 @@
 </li>
 
   </ul>
-</nav></div>
+</nav>
+</div>
           
         
       </div>
@@ -396,6 +406,20 @@
     
     
       <div class="sidebar-header-items__end">
+        
+          <div class="navbar-item">
+<div class="search-bar pst-js-only" id="search-bar">
+  <form class="bd-search d-flex align-items-center" action="../search.html" method="get">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <input type="search" class="form-control" name="q" placeholder="Search the docs ..."
+      aria-label="Search the docs ..." autocomplete="off" autocorrect="off"
+      autocapitalize="off" spellcheck="false" />
+    <span class="search-button__kbd-shortcut">
+      <kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd>
+    </span>
+  </form>
+  <div id="static-search-results" class="static-search-results" style="display:none;" tabindex="0"></div>
+</div></div>
         
           <div class="navbar-item">
 <div class="version-switcher__container dropdown pst-js-only">
@@ -555,6 +579,7 @@ That is, the PyPrimeMesh client is only compatible with its corresponding Ansys 
 <p>0.6.x</p>
 <p>0.7.x</p>
 <p>0.8.x</p>
+<p>0.9.x</p>
 </td>
 <td><p>23.1.0 (2023 R1)</p>
 <p>23.1.1 (2023 R1 SP1)</p>
@@ -562,7 +587,9 @@ That is, the PyPrimeMesh client is only compatible with its corresponding Ansys 
 <p>24.1.0 (2024 R1)</p>
 <p>24.2.0 (2024 R2)</p>
 <p>25.1.0 (2025 R1)</p>
-<p>25.1.1 (2025 R1 SP1)</p>
+<p>25.1.1 (2025 R1 SP1)/
+25.1.2 (2025 R1 SP2)</p>
+<p>25.2.0 (2025 R2)</p>
 </td>
 <td><p>3.7 to 3.11</p>
 <p>3.7 to 3.11</p>
@@ -571,15 +598,16 @@ That is, the PyPrimeMesh client is only compatible with its corresponding Ansys 
 <p>3.8 to 3.11</p>
 <p>3.10 to 3.12</p>
 <p>3.10 to 3.12</p>
+<p>3.10 to 3.13</p>
 </td>
 </tr>
 </tbody>
 </table>
 </div>
 <section id="installation">
-<h2>Installation<a class="headerlink" href="#installation" title="Link to this heading">#</a></h2>
+<span id="id1"></span><h2>Installation<a class="headerlink" href="#installation" title="Link to this heading">#</a></h2>
 <p>The <code class="docutils literal notranslate"><span class="pre">ansys-meshing-prime</span></code> package currently supports Python 3.10
-to Python 3.12 on the Windows and Linux operating systems.</p>
+to Python 3.13 on the Windows and Linux operating systems.</p>
 <p>You can install PyPrimeMesh with all dependencies directly from <a class="reference external" href="https://pypi.org/">PyPI</a>  with this command:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">pip</span> <span class="n">install</span> <span class="n">ansys</span><span class="o">-</span><span class="n">meshing</span><span class="o">-</span><span class="n">prime</span><span class="p">[</span><span class="nb">all</span><span class="p">]</span>
 </pre></div>
@@ -682,7 +710,7 @@ for the Ansys Prime Server and install this image.</p>
 <li><p>Pull the Ansys Prime Server locally using Docker using the following command:</p></li>
 </ol>
 <blockquote>
-<div><div class="highlight-pycon notranslate"><div class="highlight"><pre><span></span><span class="go">docker pull ghcr.io/ansys/prime:25.1.0</span>
+<div><div class="highlight-pycon notranslate"><div class="highlight"><pre><span></span><span class="go">docker pull ghcr.io/ansys/prime:25.2.0</span>
 </pre></div>
 </div>
 </div></blockquote>
@@ -717,7 +745,7 @@ The docker folder has the linux/Dockerfile that builds the Linux-based Docker im
 </div></blockquote>
 <p>For example,</p>
 <blockquote>
-<div><div class="highlight-pycon notranslate"><div class="highlight"><pre><span></span><span class="go">$AWP_ROOT251/commonfiles/CPython/3_10/linx64/Release/python/bin/python  build_docker_linux.py $AWP_ROOT251</span>
+<div><div class="highlight-pycon notranslate"><div class="highlight"><pre><span></span><span class="go">$AWP_ROOT252/commonfiles/CPython/3_10/linx64/Release/python/bin/python  build_docker_linux.py $AWP_ROOT252</span>
 </pre></div>
 </div>
 </div></blockquote>
@@ -753,12 +781,14 @@ You should set the following mandatory environment variable for launching the An
 </div></blockquote>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
-<p>Docker image creation is supported from 2025 R1 version.</p>
+<p>PyPrimeMesh supports Docker image creation from 2025 R1 version.</p>
 </div>
 </section>
 <section id="launching-ansys-prime-server">
 <h5>Launching Ansys Prime Server<a class="headerlink" href="#launching-ansys-prime-server" title="Link to this heading">#</a></h5>
-<p>Ansys Prime Server can be launched as follows:</p>
+<p>Ensure that you have installed <code class="docutils literal notranslate"><span class="pre">ansys-meshing-prime</span></code> package before launching Ansys Prime Server.
+To install <code class="docutils literal notranslate"><span class="pre">ansys-meshing-prime</span></code> package, refer <a class="reference internal" href="#installation"><span class="std std-ref">Installation</span></a>.
+Ansys Prime Server can be launched as follows:</p>
 <div class="highlight-pycon notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span><span class="w"> </span><span class="nn">ansys.meshing</span><span class="w"> </span><span class="kn">import</span> <span class="n">prime</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">client</span> <span class="o">=</span> <span class="n">prime</span><span class="o">.</span><span class="n">launch_prime</span><span class="p">()</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">model</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="n">model</span>
@@ -858,12 +888,15 @@ You should set the following mandatory environment variable for launching the An
 
 <script>
 // Passing the search options to the search.js file
-const SEARCH_OPTIONS = JSON.parse('{"keys": ["title", "text"], "limit": 10, "threshold": 0.2}');
+const SEARCH_OPTIONS = JSON.parse('{"keys": ["title", "text", "objectID"], "limit": 10, "threshold": 0.2}');
 const SEARCH_FILE = "../_static/search.json";
+const ADVANCE_SEARCH_PATH = "../search.html";
+const EXTRA_SOURCES = JSON.parse('""');
 </script>
 
 
 <script src="../_static/js/search.js"></script>
+
   
   <footer class="bd-footer">
 <div class="bd-footer__inner bd-page-width">
@@ -899,7 +932,7 @@ const SEARCH_FILE = "../_static/search.json";
   <a href="https://sphinxdocs.ansys.com/version/stable/index.html"
     >Ansys Sphinx Theme</a
   >
-  1.4.2. <br />Last updated on
+  1.6.4. <br />Last updated on
   <span id="ast_build_date"></span>
 </p>
 <script>

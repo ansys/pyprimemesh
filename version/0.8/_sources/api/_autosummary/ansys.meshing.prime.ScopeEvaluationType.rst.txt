@@ -6,7 +6,7 @@ ScopeEvaluationType
 .. currentmodule:: ansys.meshing.prime
 
 .. autoclass:: ScopeEvaluationType
-   
+
    
    
    .. rubric:: Methods
