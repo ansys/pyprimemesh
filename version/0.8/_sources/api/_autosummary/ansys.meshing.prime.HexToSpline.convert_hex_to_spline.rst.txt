@@ -1,0 +1,11 @@
+convert\_hex\_to\_spline
+========================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. automethod:: ansys.meshing.prime.HexToSpline.convert_hex_to_spline
+
+.. minigallery::
+   :add-heading: Examples using HexToSpline.convert_hex_to_spline
+
+   ansys.meshing.prime.HexToSpline.convert_hex_to_spline
