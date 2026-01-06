@@ -6,7 +6,7 @@ Scaffolder
 .. currentmodule:: ansys.meshing.prime
 
 .. autoclass:: Scaffolder
-
+   
    
    
    .. rubric:: Methods

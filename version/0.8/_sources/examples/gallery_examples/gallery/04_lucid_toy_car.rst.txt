@@ -82,7 +82,7 @@ Instantiate meshing utilities from the ``lucid`` class.
 
  .. code-block:: none
 
-    using server from docker : The container name  ansys-prime-server-e418956f-45f7-4f02-ac97-2615703db767
+    using server from docker : The container name  ansys-prime-server-5
 
 
 
@@ -463,10 +463,10 @@ as surface mesh.
     Number of multi edges 0
     Number of self intersections 0
 
-    Max value of  Skewness :  0.885063
+    Max value of  Skewness :  0.888453
     Faces above limit:  0
 
-    Max value of  AspectRatio :  9.6834
+    Max value of  AspectRatio :  11.18
     Faces above limit:  0
 
 
@@ -512,7 +512,7 @@ created: ``LabelA``, ``LabelB``, and ``LabelA_LabelB``.
         0 Edge Zones
             Edge Zone Name(s) : []
         21 Face Zones
-            Face Zone Name(s) : [surface, surface.1, cabin, exhaust, engine, unreferenced_wheel_1, tunnel_unreferenced, outlet_tunnel, ground_overlap_floor_tunnel, inlet_tunnel, outer_unreferenced, __wrap__.2_engine_unreferenced, component21_unreferenced, component22_unreferenced, component24_unreferenced, component25_unreferenced, __wrap__.1_exhaust_unreferenced, __wrap___cabin_unreferenced, unreferenced_wheel_2, unreferenced_wheel_3, unreferenced_wheel_4]
+            Face Zone Name(s) : [surface, surface.1, cabin, exhaust, engine, __wrap__.2_engine_unreferenced, __wrap__.1_exhaust_unreferenced, __wrap___cabin_unreferenced, unreferenced_wheel_2, unreferenced_wheel_3, unreferenced_wheel_4, unreferenced_wheel_1, outer_unreferenced, component24_unreferenced, component21_unreferenced, tunnel_unreferenced, ground_overlap_floor_tunnel, outlet_tunnel, component25_unreferenced, inlet_tunnel, component22_unreferenced]
         6 Volume Zones
             Volume Zone Name(s) : [__wrap__.2, __wrap__.1, __wrap__, component25, component24, tunnel.1]
 
@@ -611,7 +611,7 @@ After volume meshing, you can see that you have a cell zonelet in the part summa
         0 Edge Zones
             Edge Zone Name(s) : []
         21 Face Zones
-            Face Zone Name(s) : [surface, surface.1, cabin, exhaust, engine, unreferenced_wheel_1, tunnel_unreferenced, outlet_tunnel, ground_overlap_floor_tunnel, inlet_tunnel, outer_unreferenced, __wrap__.2_engine_unreferenced, component21_unreferenced, component22_unreferenced, component24_unreferenced, component25_unreferenced, __wrap__.1_exhaust_unreferenced, __wrap___cabin_unreferenced, unreferenced_wheel_2, unreferenced_wheel_3, unreferenced_wheel_4]
+            Face Zone Name(s) : [surface, surface.1, cabin, exhaust, engine, __wrap__.2_engine_unreferenced, __wrap__.1_exhaust_unreferenced, __wrap___cabin_unreferenced, unreferenced_wheel_2, unreferenced_wheel_3, unreferenced_wheel_4, unreferenced_wheel_1, outer_unreferenced, component24_unreferenced, component21_unreferenced, tunnel_unreferenced, ground_overlap_floor_tunnel, outlet_tunnel, component25_unreferenced, inlet_tunnel, component22_unreferenced]
         6 Volume Zones
             Volume Zone Name(s) : [__wrap__.2, __wrap__.1, __wrap__, component25, component24, tunnel.1]
 
@@ -679,10 +679,10 @@ Print statistics on the generated mesh.
     Invalid shape: False
     Left handed faces: False
 
-    No. of cells :  3384560
+    No. of cells :  3387075
 
-    Max value of  Skewness :  0.998898
-    Cells above limit:  43
+    Max value of  Skewness :  0.992412
+    Cells above limit:  35
 
 
 
@@ -750,7 +750,7 @@ to improve the mesh.
     Invalid shape: False
     Left handed faces: False
 
-    Max value of  Skewness :  0.949938
+    Max value of  Skewness :  0.949307
     Cells above limit:  0
 
 
@@ -782,7 +782,7 @@ Write a CAS file for use in the Fluent solver.
 
 
     Exported file:
-     /tmp/tmpu2zgd2pm/toy_car_lucid.cas
+     /tmp/tmp2dfl3r58/toy_car_lucid.cas
 
 
 
@@ -808,7 +808,7 @@ Exit PyPrimeMesh
 
 .. rst-class:: sphx-glr-timing
 
-   **Total running time of the script:** (3 minutes 43.900 seconds)
+   **Total running time of the script:** (3 minutes 48.353 seconds)
 
 
 .. _sphx_glr_download_examples_gallery_examples_gallery_04_lucid_toy_car.py:

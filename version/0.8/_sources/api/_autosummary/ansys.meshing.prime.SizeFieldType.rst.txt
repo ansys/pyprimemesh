@@ -6,7 +6,7 @@ SizeFieldType
 .. currentmodule:: ansys.meshing.prime
 
 .. autoclass:: SizeFieldType
-
+   
    
    
    .. rubric:: Methods
@@ -20,8 +20,6 @@ SizeFieldType
       SizeFieldType.to_bytes
       SizeFieldType.from_bytes
       SizeFieldType.as_integer_ratio
-      SizeFieldType.is_integer
-      
    
    
 

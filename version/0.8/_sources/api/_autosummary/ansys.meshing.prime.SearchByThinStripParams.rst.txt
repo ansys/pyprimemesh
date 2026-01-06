@@ -6,7 +6,7 @@ SearchByThinStripParams
 .. currentmodule:: ansys.meshing.prime
 
 .. autoclass:: SearchByThinStripParams
-
+   
    
    
    .. rubric:: Methods

@@ -6,7 +6,7 @@ ExtractTopoVolumesParams
 .. currentmodule:: ansys.meshing.prime
 
 .. autoclass:: ExtractTopoVolumesParams
-
+   
    
    
    .. rubric:: Methods

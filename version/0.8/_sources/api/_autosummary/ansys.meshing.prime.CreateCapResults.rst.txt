@@ -6,7 +6,7 @@ CreateCapResults
 .. currentmodule:: ansys.meshing.prime
 
 .. autoclass:: CreateCapResults
-
+   
    
    
    .. rubric:: Methods

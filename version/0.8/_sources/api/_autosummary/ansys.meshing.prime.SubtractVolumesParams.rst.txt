@@ -6,7 +6,7 @@ SubtractVolumesParams
 .. currentmodule:: ansys.meshing.prime
 
 .. autoclass:: SubtractVolumesParams
-
+   
    
    
    .. rubric:: Methods

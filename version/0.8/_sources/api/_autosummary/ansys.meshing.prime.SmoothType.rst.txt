@@ -6,7 +6,7 @@ SmoothType
 .. currentmodule:: ansys.meshing.prime
 
 .. autoclass:: SmoothType
-
+   
    
    
    .. rubric:: Methods
@@ -20,8 +20,6 @@ SmoothType
       SmoothType.to_bytes
       SmoothType.from_bytes
       SmoothType.as_integer_ratio
-      SmoothType.is_integer
-      
    
    
 
@@ -38,7 +36,6 @@ SmoothType
       SmoothType.denominator
       SmoothType.SMOOTH
       SmoothType.INFLATE
-      SmoothType.AUTO
    
    
 

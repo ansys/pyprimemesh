@@ -32,7 +32,7 @@
 <link href="../../../_static/styles/pydata-sphinx-theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
 
     <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=8f2a1f02" />
-    <link rel="stylesheet" type="text/css" href="../../../_static/styles/ansys-sphinx-theme.css?v=9e79609d" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/styles/ansys-sphinx-theme.css?v=fbf3eb5d" />
     <link rel="stylesheet" type="text/css" href="../../../_static/copybutton.css?v=76b2166b" />
     <link rel="stylesheet" type="text/css" href="../../../_static/jupyter-sphinx.css" />
     <link rel="stylesheet" type="text/css" href="../../../_static/thebelab.css" />
@@ -40,7 +40,7 @@
     <link rel="stylesheet" type="text/css" href="../../../_static/sg_gallery-binder.css?v=f4aeca0c" />
     <link rel="stylesheet" type="text/css" href="../../../_static/sg_gallery-dataframe.css?v=2082cf3c" />
     <link rel="stylesheet" type="text/css" href="../../../_static/sg_gallery-rendered-html.css?v=1277b6f3" />
-    <link rel="stylesheet" type="text/css" href="../../../_static/styles/ansys-sphinx-theme.css?v=9e79609d" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/styles/ansys-sphinx-theme.css?v=fbf3eb5d" />
     <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.23/css/jquery.dataTables.min.css" />
     <link rel="stylesheet" type="text/css" href="https://www.nerdfonts.com/assets/css/webfont.css" />
     <link rel="stylesheet" type="text/css" href="../../../_static/sphinx-design.min.css?v=95c83b7e" />
@@ -59,7 +59,7 @@
   
     <link href="../../../_static/css/breadcrumbs.css" rel="stylesheet" />
   
-    <script src="../../../_static/documentation_options.js?v=24ea0de7"></script>
+    <script src="../../../_static/documentation_options.js?v=dbee5847"></script>
     <script src="../../../_static/doctools.js?v=9bcbadda"></script>
     <script src="../../../_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="../../../_static/clipboard.min.js?v=a7894cd8"></script>
@@ -73,7 +73,7 @@
     <script>
         DOCUMENTATION_OPTIONS.theme_version = '0.16.1';
         DOCUMENTATION_OPTIONS.theme_switcher_json_url = 'https://prime.docs.pyansys.com/versions.json';
-        DOCUMENTATION_OPTIONS.theme_switcher_version_match = 'dev';
+        DOCUMENTATION_OPTIONS.theme_switcher_version_match = '0.8';
         DOCUMENTATION_OPTIONS.show_version_warning_banner =
             false;
         </script>
@@ -82,13 +82,9 @@
     <link rel="search" title="Search" href="../../../search.html" />
     <link rel="next" title="Mesh a generic PCB geometry with multiple hexa layers" href="09_multi_layer_quad_mesh_pcb.html" />
     <link rel="prev" title="Mesh a saddle bracket for a structural analysis" href="07_saddle_bracket.html" />
-  
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
-  <meta name="docsearch:version" content="0.10.0.dev2" />
-  <meta property="og:site_name" content="PyAnsys" />
-  <meta name="physics" content="CAD" />
-  <meta name="physics" content="Meshing" />
+  <meta name="docsearch:version" content="0.8.2" />
   </head>
   
   
@@ -169,15 +165,9 @@
     <div class="me-auto navbar-header-items__center">
       
         <div class="navbar-item">
-
 <nav>
   <ul class="bd-navbar-elements navbar-nav">
     
-<li class="nav-item ">
-  <a class="nav-link nav-internal" href="../../../index.html" title="PyPrimeMesh home">Home</a>
-</li>
-
-
 <li class="nav-item ">
   <a class="nav-link nav-internal" href="../../../getting_started/index.html">
     Getting started
@@ -205,34 +195,23 @@
   </a>
 </li>
 
-            <li class="nav-item dropdown">
-                <button class="btn dropdown-toggle nav-item" type="button"
-                data-bs-toggle="dropdown" aria-expanded="false"
-                aria-controls="pst-nav-more-links">
-                    More
-                </button>
-                <ul id="pst-nav-more-links" class="dropdown-menu">
-                    
-<li class=" ">
-  <a class="nav-link dropdown-item nav-internal" href="../../../contributing/index.html">
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../contributing/index.html">
     Contribute
   </a>
 </li>
 
-                </ul>
-            </li>
-            
   </ul>
-</nav>
-</div>
+</nav></div>
       
     </div>
     
     
     <div class="navbar-header-items__end">
       
-      
-        <div class="navbar-item">
+        <div class="navbar-item navbar-persistent--container">
+          
 <div class="search-bar pst-js-only" id="search-bar">
   <form class="bd-search d-flex align-items-center" action="../../../search.html" method="get">
     <i class="fa-solid fa-magnifying-glass"></i>
@@ -244,7 +223,9 @@
     </span>
   </form>
   <div id="static-search-results" class="static-search-results" style="display:none;" tabindex="0"></div>
-</div></div>
+</div>
+        </div>
+      
       
         <div class="navbar-item">
 <div class="version-switcher__container dropdown pst-js-only">
@@ -307,6 +288,21 @@
   </div>
   
   
+    <div class="navbar-persistent--mobile">
+<div class="search-bar pst-js-only" id="search-bar">
+  <form class="bd-search d-flex align-items-center" action="../../../search.html" method="get">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <input type="search" class="form-control" name="q" placeholder="Search the docs ..."
+      aria-label="Search the docs ..." autocomplete="off" autocorrect="off"
+      autocapitalize="off" spellcheck="false" />
+    <span class="search-button__kbd-shortcut">
+      <kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd>
+    </span>
+  </form>
+  <div id="static-search-results" class="static-search-results" style="display:none;" tabindex="0"></div>
+</div>
+    </div>
+  
 
   
     <button class="pst-navbar-icon sidebar-toggle secondary-toggle" aria-label="On this page">
@@ -353,15 +349,9 @@
           
           
             <div class="navbar-item">
-
 <nav>
   <ul class="bd-navbar-elements navbar-nav">
     
-<li class="nav-item ">
-  <a class="nav-link nav-internal" href="../../../index.html" title="PyPrimeMesh home">Home</a>
-</li>
-
-
 <li class="nav-item ">
   <a class="nav-link nav-internal" href="../../../getting_started/index.html">
     Getting started
@@ -397,8 +387,7 @@
 </li>
 
   </ul>
-</nav>
-</div>
+</nav></div>
           
         
       </div>
@@ -406,20 +395,6 @@
     
     
       <div class="sidebar-header-items__end">
-        
-          <div class="navbar-item">
-<div class="search-bar pst-js-only" id="search-bar">
-  <form class="bd-search d-flex align-items-center" action="../../../search.html" method="get">
-    <i class="fa-solid fa-magnifying-glass"></i>
-    <input type="search" class="form-control" name="q" placeholder="Search the docs ..."
-      aria-label="Search the docs ..." autocomplete="off" autocorrect="off"
-      autocapitalize="off" spellcheck="false" />
-    <span class="search-button__kbd-shortcut">
-      <kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd>
-    </span>
-  </form>
-  <div id="static-search-results" class="static-search-results" style="display:none;" tabindex="0"></div>
-</div></div>
         
           <div class="navbar-item">
 <div class="version-switcher__container dropdown pst-js-only">
@@ -499,10 +474,9 @@
 <li class="toctree-l2 current active"><a class="current reference internal" href="#">Mesh a generic F1 car rear wing for external aero simulation</a></li>
 <li class="toctree-l2"><a class="reference internal" href="09_multi_layer_quad_mesh_pcb.html">Mesh a generic PCB geometry with multiple hexa layers</a></li>
 <li class="toctree-l2"><a class="reference internal" href="10_wheel_ground_contact_patch.html">Create a contact patch for wrapping between a wheel and ground interface</a></li>
-<li class="toctree-l2"><a class="reference internal" href="12_import_from_pygeometry.html">Import a geometry from PyGeometry</a></li>
+<li class="toctree-l2"><a class="reference internal" href="11_solder_ball.html">Mesh a set of solder balls (beta)</a></li>
 </ul>
 </details></li>
-<li class="toctree-l1"><a class="reference internal" href="../gallery_beta/index.html">Examples using beta APIs</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../misc/index.html">Miscellaneous examples</a></li>
 </ul>
 </div>
@@ -631,7 +605,7 @@ Instantiate meshing utilities from the <code class="docutils literal notranslate
 <span class="n">mesh_util</span> <span class="o">=</span> <span class="n">prime</span><span class="o">.</span><span class="n">lucid</span><span class="o">.</span><span class="n">Mesh</span><span class="p">(</span><span class="n">model</span><span class="o">=</span><span class="n">model</span><span class="p">)</span>
 </pre></div>
 </div>
-<div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>using server from docker : The container name  ansys-prime-server-42edad7e-6e9d-4a9b-8138-4f8419550d4c
+<div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>using server from docker : The container name  ansys-prime-server-9
 </pre></div>
 </div>
 </section>
@@ -663,7 +637,9 @@ Static Scene</label><div class="sd-tab-content docutils">
 <input id="sd-tab-item-1" name="sd-tab-set-0" type="radio">
 <label class="sd-tab-label" for="sd-tab-item-1">
 Interactive Scene</label><div class="sd-tab-content docutils">
-<iframe src='../../../_static/static_viewer.html?fileURL=../_images/examples/gallery_examples/gallery/images/sphx_glr_08_lucid_generic_f1_rear_wing_001.vtksz' width='100%%' height='400px' frameborder='0'></iframe></div>
+
+    <iframe src='../../../_static/static_viewer.html?fileURL=../_images/examples/gallery_examples/gallery/images/sphx_glr_08_lucid_generic_f1_rear_wing_001.vtksz' width='100%%' height='400px' frameborder='0'></iframe>
+</div>
 </div>
 </section>
 <section id="merge-parts">
@@ -755,7 +731,7 @@ the growth and refinement of the volume mesh.</p>
 <span class="p">)</span>
 </pre></div>
 </div>
-<div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>&lt;ansys.meshing.prime.autogen.sizefieldstructs.VolumetricSizeFieldComputeResults object at 0x7fc3dc7f7750&gt;
+<div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>&lt;ansys.meshing.prime.autogen.sizefieldstructs.VolumetricSizeFieldComputeResults object at 0x7f3eceefbe80&gt;
 </pre></div>
 </div>
 </section>
@@ -783,7 +759,9 @@ Static Scene</label><div class="sd-tab-content docutils">
 <input id="sd-tab-item-3" name="sd-tab-set-1" type="radio">
 <label class="sd-tab-label" for="sd-tab-item-3">
 Interactive Scene</label><div class="sd-tab-content docutils">
-<iframe src='../../../_static/static_viewer.html?fileURL=../_images/examples/gallery_examples/gallery/images/sphx_glr_08_lucid_generic_f1_rear_wing_002.vtksz' width='100%%' height='400px' frameborder='0'></iframe></div>
+
+    <iframe src='../../../_static/static_viewer.html?fileURL=../_images/examples/gallery_examples/gallery/images/sphx_glr_08_lucid_generic_f1_rear_wing_002.vtksz' width='100%%' height='400px' frameborder='0'></iframe>
+</div>
 </div>
 </section>
 <section id="compute-volumetric-regions">
@@ -816,7 +794,7 @@ for <code class="docutils literal notranslate"><span class="pre">f1_rw_enclosure
 <span class="p">)</span>
 </pre></div>
 </div>
-<div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>&lt;ansys.meshing.prime.autogen.controlstructs.SetScopeResults object at 0x7fc3dc6ae330&gt;
+<div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>&lt;ansys.meshing.prime.autogen.controlstructs.SetScopeResults object at 0x7f3eceefb7c0&gt;
 </pre></div>
 </div>
 </section>
@@ -870,7 +848,7 @@ be <code class="docutils literal notranslate"><span class="pre">uniform</span></
 <span class="n">volume_mesh</span><span class="o">.</span><span class="n">mesh</span><span class="p">(</span><span class="n">part</span><span class="o">.</span><span class="n">id</span><span class="p">,</span> <span class="n">auto_mesh_param</span><span class="p">)</span>
 </pre></div>
 </div>
-<div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>&lt;ansys.meshing.prime.autogen.automeshstructs.AutoMeshResults object at 0x7fc3dc7f7750&gt;
+<div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>&lt;ansys.meshing.prime.autogen.automeshstructs.AutoMeshResults object at 0x7f3eceefb790&gt;
 </pre></div>
 </div>
 </section>
@@ -917,7 +895,9 @@ Static Scene</label><div class="sd-tab-content docutils">
 <input id="sd-tab-item-5" name="sd-tab-set-2" type="radio">
 <label class="sd-tab-label" for="sd-tab-item-5">
 Interactive Scene</label><div class="sd-tab-content docutils">
-<iframe src='../../../_static/static_viewer.html?fileURL=../_images/examples/gallery_examples/gallery/images/sphx_glr_08_lucid_generic_f1_rear_wing_003.vtksz' width='100%%' height='400px' frameborder='0'></iframe></div>
+
+    <iframe src='../../../_static/static_viewer.html?fileURL=../_images/examples/gallery_examples/gallery/images/sphx_glr_08_lucid_generic_f1_rear_wing_003.vtksz' width='100%%' height='400px' frameborder='0'></iframe>
+</div>
 </div>
 <div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>message :
 Part Name: f1_car_rear_wing
@@ -940,17 +920,17 @@ Part ID: 6
                  (500 900 1200)
 
     Mesh Summary:
-        1604547 Nodes
-        73398 Poly Faces
+        1608351 Nodes
+        73946 Poly Faces
         0 Quad Faces
         0 Tri Faces
-        73398 Faces
-        589375 Poly Cells
+        73946 Faces
+        590371 Poly Cells
         0 Hex Cells
         0 Prism Cells
         0 Pyramid Cells
         0 Tet Cells
-        589375 Cells
+        590371 Cells
 
 n_topo_edges :  0
 n_topo_faces :  0
@@ -962,18 +942,18 @@ n_edge_zones :  0
 n_face_zones :  4
 n_volume_zones :  2
 n_labels :  4
-n_nodes :  1604547
-n_faces :  73398
-n_cells :  589375
+n_nodes :  1608351
+n_faces :  73946
+n_cells :  590371
 n_tri_faces :  0
-n_poly_faces :  73398
+n_poly_faces :  73946
 n_quad_faces :  0
 n_second_order_tri_faces :  0
 n_second_order_quad_faces :  0
 n_tet_cells :  0
 n_pyra_cells :  0
 n_prism_cells :  0
-n_poly_cells :  589375
+n_poly_cells :  590371
 n_hex_cells :  0
 n_second_order_tet_cells :  0
 n_second_order_pyra_cells :  0
@@ -981,14 +961,14 @@ n_second_order_prism_cells :  0
 n_second_order_hex_cells :  0
 n_unmeshed_topo_faces :  0
 
-Maximum inverse-orthoginal quality of the volume mesh :  0.868199
+Maximum inverse-orthoginal quality of the volume mesh :  0.873838
 
 Mesh check
 has_non_positive_volumes :  False
 has_non_positive_areas :  False
 has_invalid_shape :  False
 has_left_handed_faces :  False
-error_code :  0
+error_code :  ErrorCode.NOERROR
 warning_codes :  []
 </pre></div>
 </div>
@@ -1004,10 +984,10 @@ warning_codes :  []
     <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Exported file:</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">,</span> <a href="https://docs.python.org/3.11/library/stdtypes.html#str" title="builtins.str" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">mesh_file</span></a><span class="p">)</span>
 </pre></div>
 </div>
-<div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>/tmp/tmpuwzq3hjo
+<div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>/tmp/tmp_bfpk0p5
 
 Exported file:
- /tmp/tmpuwzq3hjo/f1_rear_wing_vol_mesh.cas
+ /tmp/tmp_bfpk0p5/f1_rear_wing_vol_mesh.cas
 </pre></div>
 </div>
 </section>
@@ -1016,7 +996,7 @@ Exported file:
 <div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="n">prime_client</span><span class="o">.</span><span class="n">exit</span><span class="p">()</span>
 </pre></div>
 </div>
-<p class="sphx-glr-timing"><strong>Total running time of the script:</strong> (1 minutes 47.444 seconds)</p>
+<p class="sphx-glr-timing"><strong>Total running time of the script:</strong> (1 minutes 39.550 seconds)</p>
 <div class="sphx-glr-footer sphx-glr-footer-example docutils container" id="sphx-glr-download-examples-gallery-examples-gallery-08-lucid-generic-f1-rear-wing-py">
 <div class="sphx-glr-download sphx-glr-download-jupyter docutils container">
 <p><a class="reference download internal" download="" href="../../../_downloads/3aa5e670a2d68fee9a2f4814e4a26998/08_lucid_generic_f1_rear_wing.ipynb"><code class="xref download docutils literal notranslate"><span class="pre">Download</span> <span class="pre">Jupyter</span> <span class="pre">notebook:</span> <span class="pre">08_lucid_generic_f1_rear_wing.ipynb</span></code></a></p>
@@ -1116,15 +1096,12 @@ Exported file:
 
 <script>
 // Passing the search options to the search.js file
-const SEARCH_OPTIONS = JSON.parse('{"keys": ["title", "text", "objectID"], "limit": 10, "threshold": 0.2}');
+const SEARCH_OPTIONS = JSON.parse('{"keys": ["title", "text"], "limit": 10, "threshold": 0.2}');
 const SEARCH_FILE = "../../../_static/search.json";
-const ADVANCE_SEARCH_PATH = "../../../search.html";
-const EXTRA_SOURCES = JSON.parse('""');
 </script>
 
 
 <script src="../../../_static/js/search.js"></script>
-
   
   <footer class="bd-footer">
 <div class="bd-footer__inner bd-page-width">
@@ -1144,7 +1121,7 @@ const EXTRA_SOURCES = JSON.parse('""');
         <div class="footer-item">
 
   <p class="sphinx-version">
-    Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 8.2.3.
+    Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 8.1.3.
     <br/>
   </p>
 </div>
@@ -1160,7 +1137,7 @@ const EXTRA_SOURCES = JSON.parse('""');
   <a href="https://sphinxdocs.ansys.com/version/stable/index.html"
     >Ansys Sphinx Theme</a
   >
-  1.6.4. <br />Last updated on
+  1.4.2. <br />Last updated on
   <span id="ast_build_date"></span>
 </p>
 <script>

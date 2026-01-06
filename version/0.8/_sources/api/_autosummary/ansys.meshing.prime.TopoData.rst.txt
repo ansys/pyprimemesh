@@ -6,7 +6,7 @@ TopoData
 .. currentmodule:: ansys.meshing.prime
 
 .. autoclass:: TopoData
-
+   
    
    
    .. rubric:: Methods
@@ -23,7 +23,6 @@ TopoData
       TopoData.get_mesh_zonelets_of_topo_edges
       TopoData.get_mesh_zonelets_of_topo_faces
       TopoData.get_topo_edges_of_topo_faces
-      TopoData.get_topo_volumes_of_topo_faces
    
    
 

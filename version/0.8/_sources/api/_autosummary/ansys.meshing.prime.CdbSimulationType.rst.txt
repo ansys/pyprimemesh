@@ -6,7 +6,7 @@ CdbSimulationType
 .. currentmodule:: ansys.meshing.prime
 
 .. autoclass:: CdbSimulationType
-
+   
    
    
    .. rubric:: Methods
@@ -20,8 +20,6 @@ CdbSimulationType
       CdbSimulationType.to_bytes
       CdbSimulationType.from_bytes
       CdbSimulationType.as_integer_ratio
-      CdbSimulationType.is_integer
-      
    
    
 

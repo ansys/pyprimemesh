@@ -6,7 +6,7 @@ SplineFeatureCaptureType
 .. currentmodule:: ansys.meshing.prime
 
 .. autoclass:: SplineFeatureCaptureType
-
+   
    
    
    .. rubric:: Methods
@@ -20,8 +20,6 @@ SplineFeatureCaptureType
       SplineFeatureCaptureType.to_bytes
       SplineFeatureCaptureType.from_bytes
       SplineFeatureCaptureType.as_integer_ratio
-      SplineFeatureCaptureType.is_integer
-      
    
    
 

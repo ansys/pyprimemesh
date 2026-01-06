@@ -6,7 +6,7 @@ CheckTopologyParams
 .. currentmodule:: ansys.meshing.prime
 
 .. autoclass:: CheckTopologyParams
-
+   
    
    
    .. rubric:: Methods

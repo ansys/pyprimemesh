@@ -6,7 +6,7 @@ PrismControl
 .. currentmodule:: ansys.meshing.prime
 
 .. autoclass:: PrismControl
-
+   
    
    
    .. rubric:: Methods
@@ -15,11 +15,9 @@ PrismControl
       :toctree:
    
       
-      PrismControl.get_growth_params
       PrismControl.get_surface_scope
       PrismControl.get_volume_scope
       PrismControl.set_growth_params
-      PrismControl.set_suggested_name
       PrismControl.set_surface_scope
       PrismControl.set_volume_scope
    

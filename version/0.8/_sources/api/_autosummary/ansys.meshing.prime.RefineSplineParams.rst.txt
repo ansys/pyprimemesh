@@ -6,7 +6,7 @@ RefineSplineParams
 .. currentmodule:: ansys.meshing.prime
 
 .. autoclass:: RefineSplineParams
-
+   
    
    
    .. rubric:: Methods

@@ -6,7 +6,7 @@ FlowDirection
 .. currentmodule:: ansys.meshing.prime
 
 .. autoclass:: FlowDirection
-
+   
    
    
    .. rubric:: Methods
@@ -20,8 +20,6 @@ FlowDirection
       FlowDirection.to_bytes
       FlowDirection.from_bytes
       FlowDirection.as_integer_ratio
-      FlowDirection.is_integer
-      
    
    
 

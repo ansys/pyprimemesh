@@ -6,7 +6,7 @@ SizingType
 .. currentmodule:: ansys.meshing.prime
 
 .. autoclass:: SizingType
-
+   
    
    
    .. rubric:: Methods
@@ -20,8 +20,6 @@ SizingType
       SizingType.to_bytes
       SizingType.from_bytes
       SizingType.as_integer_ratio
-      SizingType.is_integer
-      
    
    
 
@@ -42,7 +40,6 @@ SizingType
       SizingType.SOFT
       SizingType.MESHED
       SizingType.BOI
-      SizingType.SOI
    
    
 

@@ -6,7 +6,7 @@ SetSizingResults
 .. currentmodule:: ansys.meshing.prime
 
 .. autoclass:: SetSizingResults
-
+   
    
    
    .. rubric:: Methods

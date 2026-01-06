@@ -6,7 +6,7 @@ Client
 .. currentmodule:: ansys.meshing.prime
 
 .. autoclass:: Client
-
+   
    
    
    .. rubric:: Methods

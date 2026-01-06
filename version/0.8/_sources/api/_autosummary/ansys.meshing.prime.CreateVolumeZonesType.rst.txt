@@ -6,7 +6,7 @@ CreateVolumeZonesType
 .. currentmodule:: ansys.meshing.prime
 
 .. autoclass:: CreateVolumeZonesType
-
+   
    
    
    .. rubric:: Methods
@@ -20,8 +20,6 @@ CreateVolumeZonesType
       CreateVolumeZonesType.to_bytes
       CreateVolumeZonesType.from_bytes
       CreateVolumeZonesType.as_integer_ratio
-      CreateVolumeZonesType.is_integer
-      
    
    
 

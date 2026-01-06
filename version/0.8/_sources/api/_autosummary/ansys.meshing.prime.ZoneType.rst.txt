@@ -6,7 +6,7 @@ ZoneType
 .. currentmodule:: ansys.meshing.prime
 
 .. autoclass:: ZoneType
-
+   
    
    
    .. rubric:: Methods
@@ -20,8 +20,6 @@ ZoneType
       ZoneType.to_bytes
       ZoneType.from_bytes
       ZoneType.as_integer_ratio
-      ZoneType.is_integer
-      
    
    
 

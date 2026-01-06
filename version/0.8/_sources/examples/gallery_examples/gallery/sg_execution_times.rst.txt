@@ -6,7 +6,7 @@
 
 Computation times
 =================
-**16:00.386** total execution time for 12 files **from examples/gallery_examples/gallery**:
+**19:40.494** total execution time for 12 files **from examples/gallery_examples/gallery**:
 
 .. container::
 
@@ -33,38 +33,38 @@ Computation times
      - Time
      - Mem (MB)
    * - :ref:`sphx_glr_examples_gallery_examples_gallery_04_lucid_toy_car.py` (``04_lucid_toy_car.py``)
-     - 03:43.900
+     - 03:48.353
+     - 0.0
+   * - :ref:`sphx_glr_examples_gallery_examples_gallery_11_solder_ball.py` (``11_solder_ball.py``)
+     - 03:21.251
      - 0.0
    * - :ref:`sphx_glr_examples_gallery_examples_gallery_10_wheel_ground_contact_patch.py` (``10_wheel_ground_contact_patch.py``)
-     - 02:38.473
-     - 0.0
-   * - :ref:`sphx_glr_examples_gallery_examples_gallery_03_lucid_pipe_tee.py` (``03_lucid_pipe_tee.py``)
-     - 02:37.367
-     - 0.0
-   * - :ref:`sphx_glr_examples_gallery_examples_gallery_08_lucid_generic_f1_rear_wing.py` (``08_lucid_generic_f1_rear_wing.py``)
-     - 01:47.444
+     - 03:05.061
      - 0.0
    * - :ref:`sphx_glr_examples_gallery_examples_gallery_09_multi_layer_quad_mesh_pcb.py` (``09_multi_layer_quad_mesh_pcb.py``)
-     - 01:17.843
+     - 01:56.013
+     - 0.0
+   * - :ref:`sphx_glr_examples_gallery_examples_gallery_03_lucid_pipe_tee.py` (``03_lucid_pipe_tee.py``)
+     - 01:44.187
+     - 0.0
+   * - :ref:`sphx_glr_examples_gallery_examples_gallery_08_lucid_generic_f1_rear_wing.py` (``08_lucid_generic_f1_rear_wing.py``)
+     - 01:39.550
      - 0.0
    * - :ref:`sphx_glr_examples_gallery_examples_gallery_06_blade_morph.py` (``06_blade_morph.py``)
-     - 01:12.484
+     - 01:36.222
      - 0.0
    * - :ref:`sphx_glr_examples_gallery_examples_gallery_05_pcb_stacker.py` (``05_pcb_stacker.py``)
-     - 00:39.451
+     - 00:40.715
      - 0.0
    * - :ref:`sphx_glr_examples_gallery_examples_gallery_07_saddle_bracket.py` (``07_saddle_bracket.py``)
-     - 00:33.005
-     - 0.0
-   * - :ref:`sphx_glr_examples_gallery_examples_gallery_01_bracket_scaffold.py` (``01_bracket_scaffold.py``)
-     - 00:31.105
+     - 00:35.080
      - 0.0
    * - :ref:`sphx_glr_examples_gallery_examples_gallery_00_lucid_file_IO.py` (``00_lucid_file_IO.py``)
-     - 00:30.923
+     - 00:27.617
+     - 0.0
+   * - :ref:`sphx_glr_examples_gallery_examples_gallery_01_bracket_scaffold.py` (``01_bracket_scaffold.py``)
+     - 00:23.705
      - 0.0
    * - :ref:`sphx_glr_examples_gallery_examples_gallery_02_lucid_mixing_elbow.py` (``02_lucid_mixing_elbow.py``)
-     - 00:28.391
-     - 0.0
-   * - :ref:`sphx_glr_examples_gallery_examples_gallery_12_import_from_pygeometry.py` (``12_import_from_pygeometry.py``)
-     - 00:00.000
+     - 00:22.740
      - 0.0

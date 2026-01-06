@@ -6,7 +6,7 @@ LocalSurferResults
 .. currentmodule:: ansys.meshing.prime
 
 .. autoclass:: LocalSurferResults
-
+   
    
    
    .. rubric:: Methods

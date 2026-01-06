@@ -6,7 +6,7 @@ SetScopeResults
 .. currentmodule:: ansys.meshing.prime
 
 .. autoclass:: SetScopeResults
-
+   
    
    
    .. rubric:: Methods

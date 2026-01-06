@@ -6,7 +6,7 @@ CellStatisticsParams
 .. currentmodule:: ansys.meshing.prime
 
 .. autoclass:: CellStatisticsParams
-
+   
    
    
    .. rubric:: Methods

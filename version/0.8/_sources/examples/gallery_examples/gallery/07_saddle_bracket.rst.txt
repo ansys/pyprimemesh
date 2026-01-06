@@ -81,7 +81,7 @@ Connect the PyPrimeMesh client and get the model.
 
  .. code-block:: none
 
-    using server from docker : The container name  ansys-prime-server-e1d15f41-081b-493b-b189-557a701ff7e9
+    using server from docker : The container name  ansys-prime-server-8
 
 
 
@@ -339,7 +339,7 @@ thin volume control to be used.
  .. code-block:: none
 
 
-    <ansys.meshing.prime.autogen.partstructs.DeleteTopoEntitiesResults object at 0x7fa0403fd450>
+    <ansys.meshing.prime.autogen.partstructs.DeleteTopoEntitiesResults object at 0x7f3ecc5c3d90>
 
 
 
@@ -545,11 +545,11 @@ Write a CDB file for use in the MAPDL solver.
  .. code-block:: none
 
     This get_abaqus_simulation_data is a beta API. The behavior and implementation may change in future.
-    /home/runner/work/pyprimemesh/pyprimemesh/.venv/lib/python3.13/site-packages/ansys/meshing/prime/core/fileio.py:339: PrimeRuntimeWarning: Skipped the export of label as element component because the labelled topology or zonelets are not a part of any zone. Refer label_export_params to export desired labels as nodal components.
+    /home/runner/work/pyprimemesh/pyprimemesh/.venv/lib/python3.10/site-packages/ansys/meshing/prime/core/fileio.py:337: PrimeRuntimeWarning: Export of a zonelet skipped while exporting a label as element component. Disable the parameter enable_face_based_labels in ExportMapdlCdbParams to export the label as node component.
       result = super().export_mapdl_cdb(temp_file_name, params)
 
     Exported file:
-     /tmp/tmp9jhoby05/saddle_bracket.cdb
+     /tmp/tmp4ym47wn9/saddle_bracket.cdb
 
 
 
@@ -575,7 +575,7 @@ Exit PyPrimeMesh
 
 .. rst-class:: sphx-glr-timing
 
-   **Total running time of the script:** (0 minutes 33.005 seconds)
+   **Total running time of the script:** (0 minutes 35.080 seconds)
 
 
 .. _sphx_glr_download_examples_gallery_examples_gallery_07_saddle_bracket.py:

@@ -6,7 +6,7 @@ StitchType
 .. currentmodule:: ansys.meshing.prime
 
 .. autoclass:: StitchType
-
+   
    
    
    .. rubric:: Methods
@@ -20,8 +20,6 @@ StitchType
       StitchType.to_bytes
       StitchType.from_bytes
       StitchType.as_integer_ratio
-      StitchType.is_integer
-      
    
    
 

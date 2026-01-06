@@ -32,7 +32,7 @@
 <link href="../../_static/styles/pydata-sphinx-theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
 
     <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=8f2a1f02" />
-    <link rel="stylesheet" type="text/css" href="../../_static/styles/ansys-sphinx-theme.css?v=9e79609d" />
+    <link rel="stylesheet" type="text/css" href="../../_static/styles/ansys-sphinx-theme.css?v=fbf3eb5d" />
     <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
     <link rel="stylesheet" type="text/css" href="../../_static/jupyter-sphinx.css" />
     <link rel="stylesheet" type="text/css" href="../../_static/thebelab.css" />
@@ -40,7 +40,7 @@
     <link rel="stylesheet" type="text/css" href="../../_static/sg_gallery-binder.css?v=f4aeca0c" />
     <link rel="stylesheet" type="text/css" href="../../_static/sg_gallery-dataframe.css?v=2082cf3c" />
     <link rel="stylesheet" type="text/css" href="../../_static/sg_gallery-rendered-html.css?v=1277b6f3" />
-    <link rel="stylesheet" type="text/css" href="../../_static/styles/ansys-sphinx-theme.css?v=9e79609d" />
+    <link rel="stylesheet" type="text/css" href="../../_static/styles/ansys-sphinx-theme.css?v=fbf3eb5d" />
     <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.23/css/jquery.dataTables.min.css" />
     <link rel="stylesheet" type="text/css" href="https://www.nerdfonts.com/assets/css/webfont.css" />
     <link rel="stylesheet" type="text/css" href="../../_static/sphinx-design.min.css?v=95c83b7e" />
@@ -59,7 +59,7 @@
   
     <link href="../../_static/css/breadcrumbs.css" rel="stylesheet" />
   
-    <script src="../../_static/documentation_options.js?v=24ea0de7"></script>
+    <script src="../../_static/documentation_options.js?v=dbee5847"></script>
     <script src="../../_static/doctools.js?v=9bcbadda"></script>
     <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="../../_static/clipboard.min.js?v=a7894cd8"></script>
@@ -73,7 +73,7 @@
     <script>
         DOCUMENTATION_OPTIONS.theme_version = '0.16.1';
         DOCUMENTATION_OPTIONS.theme_switcher_json_url = 'https://prime.docs.pyansys.com/versions.json';
-        DOCUMENTATION_OPTIONS.theme_switcher_version_match = 'dev';
+        DOCUMENTATION_OPTIONS.theme_switcher_version_match = '0.8';
         DOCUMENTATION_OPTIONS.show_version_warning_banner =
             false;
         </script>
@@ -82,13 +82,9 @@
     <link rel="search" title="Search" href="../../search.html" />
     <link rel="next" title="VolumeMeshTool" href="ansys.meshing.prime.VolumeMeshTool.html" />
     <link rel="prev" title="HEXCORETET" href="ansys.meshing.prime.VolumeFillType.HEXCORETET.html" />
-  
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
-  <meta name="docsearch:version" content="0.10.0.dev2" />
-  <meta property="og:site_name" content="PyAnsys" />
-  <meta name="physics" content="CAD" />
-  <meta name="physics" content="Meshing" />
+  <meta name="docsearch:version" content="0.8.2" />
   </head>
   
   
@@ -169,15 +165,9 @@
     <div class="me-auto navbar-header-items__center">
       
         <div class="navbar-item">
-
 <nav>
   <ul class="bd-navbar-elements navbar-nav">
     
-<li class="nav-item ">
-  <a class="nav-link nav-internal" href="../../index.html" title="PyPrimeMesh home">Home</a>
-</li>
-
-
 <li class="nav-item ">
   <a class="nav-link nav-internal" href="../../getting_started/index.html">
     Getting started
@@ -205,34 +195,23 @@
   </a>
 </li>
 
-            <li class="nav-item dropdown">
-                <button class="btn dropdown-toggle nav-item" type="button"
-                data-bs-toggle="dropdown" aria-expanded="false"
-                aria-controls="pst-nav-more-links">
-                    More
-                </button>
-                <ul id="pst-nav-more-links" class="dropdown-menu">
-                    
-<li class=" ">
-  <a class="nav-link dropdown-item nav-internal" href="../../contributing/index.html">
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../contributing/index.html">
     Contribute
   </a>
 </li>
 
-                </ul>
-            </li>
-            
   </ul>
-</nav>
-</div>
+</nav></div>
       
     </div>
     
     
     <div class="navbar-header-items__end">
       
-      
-        <div class="navbar-item">
+        <div class="navbar-item navbar-persistent--container">
+          
 <div class="search-bar pst-js-only" id="search-bar">
   <form class="bd-search d-flex align-items-center" action="../../search.html" method="get">
     <i class="fa-solid fa-magnifying-glass"></i>
@@ -244,7 +223,9 @@
     </span>
   </form>
   <div id="static-search-results" class="static-search-results" style="display:none;" tabindex="0"></div>
-</div></div>
+</div>
+        </div>
+      
       
         <div class="navbar-item">
 <div class="version-switcher__container dropdown pst-js-only">
@@ -307,6 +288,21 @@
   </div>
   
   
+    <div class="navbar-persistent--mobile">
+<div class="search-bar pst-js-only" id="search-bar">
+  <form class="bd-search d-flex align-items-center" action="../../search.html" method="get">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <input type="search" class="form-control" name="q" placeholder="Search the docs ..."
+      aria-label="Search the docs ..." autocomplete="off" autocorrect="off"
+      autocapitalize="off" spellcheck="false" />
+    <span class="search-button__kbd-shortcut">
+      <kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd>
+    </span>
+  </form>
+  <div id="static-search-results" class="static-search-results" style="display:none;" tabindex="0"></div>
+</div>
+    </div>
+  
 
   
     <button class="pst-navbar-icon sidebar-toggle secondary-toggle" aria-label="On this page">
@@ -353,15 +349,9 @@
           
           
             <div class="navbar-item">
-
 <nav>
   <ul class="bd-navbar-elements navbar-nav">
     
-<li class="nav-item ">
-  <a class="nav-link nav-internal" href="../../index.html" title="PyPrimeMesh home">Home</a>
-</li>
-
-
 <li class="nav-item ">
   <a class="nav-link nav-internal" href="../../getting_started/index.html">
     Getting started
@@ -397,8 +387,7 @@
 </li>
 
   </ul>
-</nav>
-</div>
+</nav></div>
           
         
       </div>
@@ -406,20 +395,6 @@
     
     
       <div class="sidebar-header-items__end">
-        
-          <div class="navbar-item">
-<div class="search-bar pst-js-only" id="search-bar">
-  <form class="bd-search d-flex align-items-center" action="../../search.html" method="get">
-    <i class="fa-solid fa-magnifying-glass"></i>
-    <input type="search" class="form-control" name="q" placeholder="Search the docs ..."
-      aria-label="Search the docs ..." autocomplete="off" autocorrect="off"
-      autocapitalize="off" spellcheck="false" />
-    <span class="search-button__kbd-shortcut">
-      <kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd>
-    </span>
-  </form>
-  <div id="static-search-results" class="static-search-results" style="display:none;" tabindex="0"></div>
-</div></div>
         
           <div class="navbar-item">
 <div class="version-switcher__container dropdown pst-js-only">
@@ -512,7 +487,6 @@
 <li class="toctree-l2"><a class="reference internal" href="ansys.meshing.prime.BCPairType.html">BCPairType</a></li>
 <li class="toctree-l2"><a class="reference internal" href="ansys.meshing.prime.BCsVolumetricModality.html">BCsVolumetricModality</a></li>
 <li class="toctree-l2"><a class="reference internal" href="ansys.meshing.prime.BOIType.html">BOIType</a></li>
-<li class="toctree-l2"><a class="reference internal" href="ansys.meshing.prime.BodyQueryType.html">BodyQueryType</a></li>
 <li class="toctree-l2"><a class="reference internal" href="ansys.meshing.prime.BoiSizingParams.html">BoiSizingParams</a></li>
 <li class="toctree-l2"><a class="reference internal" href="ansys.meshing.prime.BoundaryFittedSpline.html">BoundaryFittedSpline</a></li>
 <li class="toctree-l2"><a class="reference internal" href="ansys.meshing.prime.BoundaryFittedSplineParams.html">BoundaryFittedSplineParams</a></li>
@@ -537,8 +511,6 @@
 <li class="toctree-l2"><a class="reference internal" href="ansys.meshing.prime.CollapseParams.html">CollapseParams</a></li>
 <li class="toctree-l2"><a class="reference internal" href="ansys.meshing.prime.CollapseResults.html">CollapseResults</a></li>
 <li class="toctree-l2"><a class="reference internal" href="ansys.meshing.prime.CollapseTool.html">CollapseTool</a></li>
-<li class="toctree-l2"><a class="reference internal" href="ansys.meshing.prime.ComponentChildrenParams.html">ComponentChildrenParams</a></li>
-<li class="toctree-l2"><a class="reference internal" href="ansys.meshing.prime.ComponentChildrenResults.html">ComponentChildrenResults</a></li>
 <li class="toctree-l2"><a class="reference internal" href="ansys.meshing.prime.ComputeTopoVolumesResults.html">ComputeTopoVolumesResults</a></li>
 <li class="toctree-l2"><a class="reference internal" href="ansys.meshing.prime.ComputeVolumesParams.html">ComputeVolumesParams</a></li>
 <li class="toctree-l2"><a class="reference internal" href="ansys.meshing.prime.ComputeVolumesResults.html">ComputeVolumesResults</a></li>
@@ -596,7 +568,6 @@
 <li class="toctree-l2"><a class="reference internal" href="ansys.meshing.prime.ExportBoundaryFittedSplineParams.html">ExportBoundaryFittedSplineParams</a></li>
 <li class="toctree-l2"><a class="reference internal" href="ansys.meshing.prime.ExportFluentCaseParams.html">ExportFluentCaseParams</a></li>
 <li class="toctree-l2"><a class="reference internal" href="ansys.meshing.prime.ExportFluentMeshingMeshParams.html">ExportFluentMeshingMeshParams</a></li>
-<li class="toctree-l2"><a class="reference internal" href="ansys.meshing.prime.ExportLSDynaIGAResults.html">ExportLSDynaIGAResults</a></li>
 <li class="toctree-l2"><a class="reference internal" href="ansys.meshing.prime.ExportLSDynaIgaKeywordFileParams.html">ExportLSDynaIgaKeywordFileParams</a></li>
 <li class="toctree-l2"><a class="reference internal" href="ansys.meshing.prime.ExportLSDynaKeywordFileParams.html">ExportLSDynaKeywordFileParams</a></li>
 <li class="toctree-l2"><a class="reference internal" href="ansys.meshing.prime.ExportLSDynaResults.html">ExportLSDynaResults</a></li>
@@ -634,11 +605,8 @@
 <li class="toctree-l2"><a class="reference internal" href="ansys.meshing.prime.HexCoreCellElementType.html">HexCoreCellElementType</a></li>
 <li class="toctree-l2"><a class="reference internal" href="ansys.meshing.prime.HexCoreParams.html">HexCoreParams</a></li>
 <li class="toctree-l2"><a class="reference internal" href="ansys.meshing.prime.HexCoreTransitionLayerType.html">HexCoreTransitionLayerType</a></li>
-<li class="toctree-l2"><a class="reference internal" href="ansys.meshing.prime.HexToSpline.html">HexToSpline</a></li>
-<li class="toctree-l2"><a class="reference internal" href="ansys.meshing.prime.HexToSplineParams.html">HexToSplineParams</a></li>
 <li class="toctree-l2"><a class="reference internal" href="ansys.meshing.prime.IGAResults.html">IGAResults</a></li>
 <li class="toctree-l2"><a class="reference internal" href="ansys.meshing.prime.IGASpline.html">IGASpline</a></li>
-<li class="toctree-l2"><a class="reference internal" href="ansys.meshing.prime.IGAUnstructuredSplineSolid.html">IGAUnstructuredSplineSolid</a></li>
 <li class="toctree-l2"><a class="reference internal" href="ansys.meshing.prime.IGAUnstructuredSplineSurf.html">IGAUnstructuredSplineSurf</a></li>
 <li class="toctree-l2"><a class="reference internal" href="ansys.meshing.prime.ImportAbaqusParams.html">ImportAbaqusParams</a></li>
 <li class="toctree-l2"><a class="reference internal" href="ansys.meshing.prime.ImportAbaqusResults.html">ImportAbaqusResults</a></li>
@@ -656,7 +624,6 @@
 <li class="toctree-l2"><a class="reference internal" href="ansys.meshing.prime.JoinSeparateMethod.html">JoinSeparateMethod</a></li>
 <li class="toctree-l2"><a class="reference internal" href="ansys.meshing.prime.LSDynaAnalysisType.html">LSDynaAnalysisType</a></li>
 <li class="toctree-l2"><a class="reference internal" href="ansys.meshing.prime.LSDynaFileFormatType.html">LSDynaFileFormatType</a></li>
-<li class="toctree-l2"><a class="reference internal" href="ansys.meshing.prime.LabelExportParams.html">LabelExportParams</a></li>
 <li class="toctree-l2"><a class="reference internal" href="ansys.meshing.prime.LeakPreventionParams.html">LeakPreventionParams</a></li>
 <li class="toctree-l2"><a class="reference internal" href="ansys.meshing.prime.LengthUnit.html">LengthUnit</a></li>
 <li class="toctree-l2"><a class="reference internal" href="ansys.meshing.prime.LocalSurferParams.html">LocalSurferParams</a></li>
@@ -717,7 +684,6 @@
 <li class="toctree-l2"><a class="reference internal" href="ansys.meshing.prime.RefineAtContactsParams.html">RefineAtContactsParams</a></li>
 <li class="toctree-l2"><a class="reference internal" href="ansys.meshing.prime.RefineAtContactsResults.html">RefineAtContactsResults</a></li>
 <li class="toctree-l2"><a class="reference internal" href="ansys.meshing.prime.RefineSplineParams.html">RefineSplineParams</a></li>
-<li class="toctree-l2"><a class="reference internal" href="ansys.meshing.prime.RefineTetMeshParams.html">RefineTetMeshParams</a></li>
 <li class="toctree-l2"><a class="reference internal" href="ansys.meshing.prime.RemoveLabelResults.html">RemoveLabelResults</a></li>
 <li class="toctree-l2"><a class="reference internal" href="ansys.meshing.prime.RemoveZoneResults.html">RemoveZoneResults</a></li>
 <li class="toctree-l2"><a class="reference internal" href="ansys.meshing.prime.RepairEdgesParams.html">RepairEdgesParams</a></li>
@@ -728,7 +694,6 @@
 <li class="toctree-l2"><a class="reference internal" href="ansys.meshing.prime.Scaffolder.html">Scaffolder</a></li>
 <li class="toctree-l2"><a class="reference internal" href="ansys.meshing.prime.ScaffolderMergeResults.html">ScaffolderMergeResults</a></li>
 <li class="toctree-l2"><a class="reference internal" href="ansys.meshing.prime.ScaffolderParams.html">ScaffolderParams</a></li>
-<li class="toctree-l2"><a class="reference internal" href="ansys.meshing.prime.ScaffolderRepairMode.html">ScaffolderRepairMode</a></li>
 <li class="toctree-l2"><a class="reference internal" href="ansys.meshing.prime.ScaffolderResults.html">ScaffolderResults</a></li>
 <li class="toctree-l2"><a class="reference internal" href="ansys.meshing.prime.ScaffolderSplitResults.html">ScaffolderSplitResults</a></li>
 <li class="toctree-l2"><a class="reference internal" href="ansys.meshing.prime.ScopeDefinition.html">ScopeDefinition</a></li>
@@ -772,9 +737,7 @@
 <li class="toctree-l2"><a class="reference internal" href="ansys.meshing.prime.SmoothDihedralFaceNodesResults.html">SmoothDihedralFaceNodesResults</a></li>
 <li class="toctree-l2"><a class="reference internal" href="ansys.meshing.prime.SmoothType.html">SmoothType</a></li>
 <li class="toctree-l2"><a class="reference internal" href="ansys.meshing.prime.SoftSizingParams.html">SoftSizingParams</a></li>
-<li class="toctree-l2"><a class="reference internal" href="ansys.meshing.prime.SoiSizingParams.html">SoiSizingParams</a></li>
 <li class="toctree-l2"><a class="reference internal" href="ansys.meshing.prime.SolverType.html">SolverType</a></li>
-<li class="toctree-l2"><a class="reference internal" href="ansys.meshing.prime.SplineContinuityType.html">SplineContinuityType</a></li>
 <li class="toctree-l2"><a class="reference internal" href="ansys.meshing.prime.SplineFeatureCaptureType.html">SplineFeatureCaptureType</a></li>
 <li class="toctree-l2"><a class="reference internal" href="ansys.meshing.prime.SplineRefinementType.html">SplineRefinementType</a></li>
 <li class="toctree-l2"><a class="reference internal" href="ansys.meshing.prime.SplitParams.html">SplitParams</a></li>
@@ -799,7 +762,6 @@
 <li class="toctree-l2"><a class="reference internal" href="ansys.meshing.prime.SurferParams.html">SurferParams</a></li>
 <li class="toctree-l2"><a class="reference internal" href="ansys.meshing.prime.SurferResults.html">SurferResults</a></li>
 <li class="toctree-l2"><a class="reference internal" href="ansys.meshing.prime.SweepType.html">SweepType</a></li>
-<li class="toctree-l2"><a class="reference internal" href="ansys.meshing.prime.TetMeshSplineParams.html">TetMeshSplineParams</a></li>
 <li class="toctree-l2"><a class="reference internal" href="ansys.meshing.prime.TetParams.html">TetParams</a></li>
 <li class="toctree-l2"><a class="reference internal" href="ansys.meshing.prime.ThinStripType.html">ThinStripType</a></li>
 <li class="toctree-l2"><a class="reference internal" href="ansys.meshing.prime.ThinVolumeControl.html">ThinVolumeControl</a></li>
@@ -814,10 +776,6 @@
 <li class="toctree-l2"><a class="reference internal" href="ansys.meshing.prime.TransformResults.html">TransformResults</a></li>
 <li class="toctree-l2"><a class="reference internal" href="ansys.meshing.prime.TriangulateParams.html">TriangulateParams</a></li>
 <li class="toctree-l2"><a class="reference internal" href="ansys.meshing.prime.TriangulateResults.html">TriangulateResults</a></li>
-<li class="toctree-l2"><a class="reference internal" href="ansys.meshing.prime.TrimmedSolidSplineCutMode.html">TrimmedSolidSplineCutMode</a></li>
-<li class="toctree-l2"><a class="reference internal" href="ansys.meshing.prime.TrimmedSpline.html">TrimmedSpline</a></li>
-<li class="toctree-l2"><a class="reference internal" href="ansys.meshing.prime.TrimmedSplineResults.html">TrimmedSplineResults</a></li>
-<li class="toctree-l2"><a class="reference internal" href="ansys.meshing.prime.UniformSolidSplineCreationParams.html">UniformSolidSplineCreationParams</a></li>
 <li class="toctree-l2"><a class="reference internal" href="ansys.meshing.prime.VTComposer.html">VTComposer</a></li>
 <li class="toctree-l2"><a class="reference internal" href="ansys.meshing.prime.VTComposerParams.html">VTComposerParams</a></li>
 <li class="toctree-l2"><a class="reference internal" href="ansys.meshing.prime.VTComposerResults.html">VTComposerResults</a></li>
@@ -830,7 +788,6 @@
 <li class="toctree-l3"><a class="reference internal" href="ansys.meshing.prime.VolumeFillType.to_bytes.html">to_bytes</a></li>
 <li class="toctree-l3"><a class="reference internal" href="ansys.meshing.prime.VolumeFillType.from_bytes.html">from_bytes</a></li>
 <li class="toctree-l3"><a class="reference internal" href="ansys.meshing.prime.VolumeFillType.as_integer_ratio.html">as_integer_ratio</a></li>
-<li class="toctree-l3"><a class="reference internal" href="ansys.meshing.prime.VolumeFillType.is_integer.html">is_integer</a></li>
 <li class="toctree-l3"><a class="reference internal" href="ansys.meshing.prime.VolumeFillType.real.html">real</a></li>
 <li class="toctree-l3"><a class="reference internal" href="ansys.meshing.prime.VolumeFillType.imag.html">imag</a></li>
 <li class="toctree-l3"><a class="reference internal" href="ansys.meshing.prime.VolumeFillType.numerator.html">numerator</a></li>
@@ -865,14 +822,12 @@
 <li class="toctree-l2"><a class="reference internal" href="ansys.meshing.prime.WrapperPatchFlowRegionsParams.html">WrapperPatchFlowRegionsParams</a></li>
 <li class="toctree-l2"><a class="reference internal" href="ansys.meshing.prime.WrapperPatchFlowRegionsResult.html">WrapperPatchFlowRegionsResult</a></li>
 <li class="toctree-l2"><a class="reference internal" href="ansys.meshing.prime.WriteSizeFieldParams.html">WriteSizeFieldParams</a></li>
-<li class="toctree-l2"><a class="reference internal" href="ansys.meshing.prime.ZoneMeshResult.html">ZoneMeshResult</a></li>
 <li class="toctree-l2"><a class="reference internal" href="ansys.meshing.prime.ZoneType.html">ZoneType</a></li>
 <li class="toctree-l2"><a class="reference internal" href="ansys.meshing.prime.PrimeRuntimeError.html">PrimeRuntimeError</a></li>
 <li class="toctree-l2"><a class="reference internal" href="ansys.meshing.prime.PrimeRuntimeWarning.html">PrimeRuntimeWarning</a></li>
 </ul>
 </details></li>
 <li class="toctree-l1"><a class="reference internal" href="ansys.meshing.prime.examples.html">ansys.meshing.prime.examples</a></li>
-<li class="toctree-l1"><a class="reference internal" href="ansys.meshing.prime.graphics.html">ansys.meshing.prime.graphics</a></li>
 <li class="toctree-l1"><a class="reference internal" href="ansys.meshing.prime.lucid.html">ansys.meshing.prime.lucid</a></li>
 </ul>
 </div>
@@ -1032,15 +987,12 @@
 
 <script>
 // Passing the search options to the search.js file
-const SEARCH_OPTIONS = JSON.parse('{"keys": ["title", "text", "objectID"], "limit": 10, "threshold": 0.2}');
+const SEARCH_OPTIONS = JSON.parse('{"keys": ["title", "text"], "limit": 10, "threshold": 0.2}');
 const SEARCH_FILE = "../../_static/search.json";
-const ADVANCE_SEARCH_PATH = "../../search.html";
-const EXTRA_SOURCES = JSON.parse('""');
 </script>
 
 
 <script src="../../_static/js/search.js"></script>
-
   
   <footer class="bd-footer">
 <div class="bd-footer__inner bd-page-width">
@@ -1060,7 +1012,7 @@ const EXTRA_SOURCES = JSON.parse('""');
         <div class="footer-item">
 
   <p class="sphinx-version">
-    Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 8.2.3.
+    Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 8.1.3.
     <br/>
   </p>
 </div>
@@ -1076,7 +1028,7 @@ const EXTRA_SOURCES = JSON.parse('""');
   <a href="https://sphinxdocs.ansys.com/version/stable/index.html"
     >Ansys Sphinx Theme</a
   >
-  1.6.4. <br />Last updated on
+  1.4.2. <br />Last updated on
   <span id="ast_build_date"></span>
 </p>
 <script>

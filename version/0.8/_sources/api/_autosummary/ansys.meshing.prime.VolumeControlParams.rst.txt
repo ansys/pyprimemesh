@@ -6,7 +6,7 @@ VolumeControlParams
 .. currentmodule:: ansys.meshing.prime
 
 .. autoclass:: VolumeControlParams
-
+   
    
    
    .. rubric:: Methods

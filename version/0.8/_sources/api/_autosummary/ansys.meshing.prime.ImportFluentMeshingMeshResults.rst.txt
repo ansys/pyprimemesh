@@ -6,7 +6,7 @@ ImportFluentMeshingMeshResults
 .. currentmodule:: ansys.meshing.prime
 
 .. autoclass:: ImportFluentMeshingMeshResults
-
+   
    
    
    .. rubric:: Methods

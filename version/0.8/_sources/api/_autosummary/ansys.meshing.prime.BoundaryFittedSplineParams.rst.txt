@@ -6,7 +6,7 @@ BoundaryFittedSplineParams
 .. currentmodule:: ansys.meshing.prime
 
 .. autoclass:: BoundaryFittedSplineParams
-
+   
    
    
    .. rubric:: Methods

@@ -6,7 +6,7 @@ QuadToSplineParams
 .. currentmodule:: ansys.meshing.prime
 
 .. autoclass:: QuadToSplineParams
-
+   
    
    
    .. rubric:: Methods
@@ -27,7 +27,6 @@ QuadToSplineParams
    .. autosummary::
       :toctree:
    
-      QuadToSplineParams.continuity
       QuadToSplineParams.corner_angle
       QuadToSplineParams.feature_angle
       QuadToSplineParams.feature_capture_type

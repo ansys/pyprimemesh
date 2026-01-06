@@ -6,7 +6,7 @@ AddLabelResults
 .. currentmodule:: ansys.meshing.prime
 
 .. autoclass:: AddLabelResults
-
+   
    
    
    .. rubric:: Methods

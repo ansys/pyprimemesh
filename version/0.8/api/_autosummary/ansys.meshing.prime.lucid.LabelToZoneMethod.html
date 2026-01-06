@@ -32,7 +32,7 @@
 <link href="../../_static/styles/pydata-sphinx-theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
 
     <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=8f2a1f02" />
-    <link rel="stylesheet" type="text/css" href="../../_static/styles/ansys-sphinx-theme.css?v=9e79609d" />
+    <link rel="stylesheet" type="text/css" href="../../_static/styles/ansys-sphinx-theme.css?v=fbf3eb5d" />
     <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
     <link rel="stylesheet" type="text/css" href="../../_static/jupyter-sphinx.css" />
     <link rel="stylesheet" type="text/css" href="../../_static/thebelab.css" />
@@ -40,7 +40,7 @@
     <link rel="stylesheet" type="text/css" href="../../_static/sg_gallery-binder.css?v=f4aeca0c" />
     <link rel="stylesheet" type="text/css" href="../../_static/sg_gallery-dataframe.css?v=2082cf3c" />
     <link rel="stylesheet" type="text/css" href="../../_static/sg_gallery-rendered-html.css?v=1277b6f3" />
-    <link rel="stylesheet" type="text/css" href="../../_static/styles/ansys-sphinx-theme.css?v=9e79609d" />
+    <link rel="stylesheet" type="text/css" href="../../_static/styles/ansys-sphinx-theme.css?v=fbf3eb5d" />
     <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.23/css/jquery.dataTables.min.css" />
     <link rel="stylesheet" type="text/css" href="https://www.nerdfonts.com/assets/css/webfont.css" />
     <link rel="stylesheet" type="text/css" href="../../_static/sphinx-design.min.css?v=95c83b7e" />
@@ -59,7 +59,7 @@
   
     <link href="../../_static/css/breadcrumbs.css" rel="stylesheet" />
   
-    <script src="../../_static/documentation_options.js?v=24ea0de7"></script>
+    <script src="../../_static/documentation_options.js?v=dbee5847"></script>
     <script src="../../_static/doctools.js?v=9bcbadda"></script>
     <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="../../_static/clipboard.min.js?v=a7894cd8"></script>
@@ -73,7 +73,7 @@
     <script>
         DOCUMENTATION_OPTIONS.theme_version = '0.16.1';
         DOCUMENTATION_OPTIONS.theme_switcher_json_url = 'https://prime.docs.pyansys.com/versions.json';
-        DOCUMENTATION_OPTIONS.theme_switcher_version_match = 'dev';
+        DOCUMENTATION_OPTIONS.theme_switcher_version_match = '0.8';
         DOCUMENTATION_OPTIONS.show_version_warning_banner =
             false;
         </script>
@@ -82,13 +82,9 @@
     <link rel="search" title="Search" href="../../search.html" />
     <link rel="next" title="conjugate" href="ansys.meshing.prime.lucid.LabelToZoneMethod.conjugate.html" />
     <link rel="prev" title="ansys.meshing.prime.lucid" href="ansys.meshing.prime.lucid.html" />
-  
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
-  <meta name="docsearch:version" content="0.10.0.dev2" />
-  <meta property="og:site_name" content="PyAnsys" />
-  <meta name="physics" content="CAD" />
-  <meta name="physics" content="Meshing" />
+  <meta name="docsearch:version" content="0.8.2" />
   </head>
   
   
@@ -169,15 +165,9 @@
     <div class="me-auto navbar-header-items__center">
       
         <div class="navbar-item">
-
 <nav>
   <ul class="bd-navbar-elements navbar-nav">
     
-<li class="nav-item ">
-  <a class="nav-link nav-internal" href="../../index.html" title="PyPrimeMesh home">Home</a>
-</li>
-
-
 <li class="nav-item ">
   <a class="nav-link nav-internal" href="../../getting_started/index.html">
     Getting started
@@ -205,34 +195,23 @@
   </a>
 </li>
 
-            <li class="nav-item dropdown">
-                <button class="btn dropdown-toggle nav-item" type="button"
-                data-bs-toggle="dropdown" aria-expanded="false"
-                aria-controls="pst-nav-more-links">
-                    More
-                </button>
-                <ul id="pst-nav-more-links" class="dropdown-menu">
-                    
-<li class=" ">
-  <a class="nav-link dropdown-item nav-internal" href="../../contributing/index.html">
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../contributing/index.html">
     Contribute
   </a>
 </li>
 
-                </ul>
-            </li>
-            
   </ul>
-</nav>
-</div>
+</nav></div>
       
     </div>
     
     
     <div class="navbar-header-items__end">
       
-      
-        <div class="navbar-item">
+        <div class="navbar-item navbar-persistent--container">
+          
 <div class="search-bar pst-js-only" id="search-bar">
   <form class="bd-search d-flex align-items-center" action="../../search.html" method="get">
     <i class="fa-solid fa-magnifying-glass"></i>
@@ -244,7 +223,9 @@
     </span>
   </form>
   <div id="static-search-results" class="static-search-results" style="display:none;" tabindex="0"></div>
-</div></div>
+</div>
+        </div>
+      
       
         <div class="navbar-item">
 <div class="version-switcher__container dropdown pst-js-only">
@@ -307,6 +288,21 @@
   </div>
   
   
+    <div class="navbar-persistent--mobile">
+<div class="search-bar pst-js-only" id="search-bar">
+  <form class="bd-search d-flex align-items-center" action="../../search.html" method="get">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <input type="search" class="form-control" name="q" placeholder="Search the docs ..."
+      aria-label="Search the docs ..." autocomplete="off" autocorrect="off"
+      autocapitalize="off" spellcheck="false" />
+    <span class="search-button__kbd-shortcut">
+      <kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd>
+    </span>
+  </form>
+  <div id="static-search-results" class="static-search-results" style="display:none;" tabindex="0"></div>
+</div>
+    </div>
+  
 
   
     <button class="pst-navbar-icon sidebar-toggle secondary-toggle" aria-label="On this page">
@@ -353,15 +349,9 @@
           
           
             <div class="navbar-item">
-
 <nav>
   <ul class="bd-navbar-elements navbar-nav">
     
-<li class="nav-item ">
-  <a class="nav-link nav-internal" href="../../index.html" title="PyPrimeMesh home">Home</a>
-</li>
-
-
 <li class="nav-item ">
   <a class="nav-link nav-internal" href="../../getting_started/index.html">
     Getting started
@@ -397,8 +387,7 @@
 </li>
 
   </ul>
-</nav>
-</div>
+</nav></div>
           
         
       </div>
@@ -406,20 +395,6 @@
     
     
       <div class="sidebar-header-items__end">
-        
-          <div class="navbar-item">
-<div class="search-bar pst-js-only" id="search-bar">
-  <form class="bd-search d-flex align-items-center" action="../../search.html" method="get">
-    <i class="fa-solid fa-magnifying-glass"></i>
-    <input type="search" class="form-control" name="q" placeholder="Search the docs ..."
-      aria-label="Search the docs ..." autocomplete="off" autocorrect="off"
-      autocapitalize="off" spellcheck="false" />
-    <span class="search-button__kbd-shortcut">
-      <kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd>
-    </span>
-  </form>
-  <div id="static-search-results" class="static-search-results" style="display:none;" tabindex="0"></div>
-</div></div>
         
           <div class="navbar-item">
 <div class="version-switcher__container dropdown pst-js-only">
@@ -489,7 +464,6 @@
   <div class="bd-toc-item navbar-nav"><ul class="current nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="ansys.meshing.prime.html">ansys.meshing.prime</a></li>
 <li class="toctree-l1"><a class="reference internal" href="ansys.meshing.prime.examples.html">ansys.meshing.prime.examples</a></li>
-<li class="toctree-l1"><a class="reference internal" href="ansys.meshing.prime.graphics.html">ansys.meshing.prime.graphics</a></li>
 <li class="toctree-l1 current active has-children"><a class="reference internal" href="ansys.meshing.prime.lucid.html">ansys.meshing.prime.lucid</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
 <li class="toctree-l2 current active has-children"><a class="current reference internal" href="#">LabelToZoneMethod</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l3"><a class="reference internal" href="ansys.meshing.prime.lucid.LabelToZoneMethod.conjugate.html">conjugate</a></li>
@@ -498,7 +472,6 @@
 <li class="toctree-l3"><a class="reference internal" href="ansys.meshing.prime.lucid.LabelToZoneMethod.to_bytes.html">to_bytes</a></li>
 <li class="toctree-l3"><a class="reference internal" href="ansys.meshing.prime.lucid.LabelToZoneMethod.from_bytes.html">from_bytes</a></li>
 <li class="toctree-l3"><a class="reference internal" href="ansys.meshing.prime.lucid.LabelToZoneMethod.as_integer_ratio.html">as_integer_ratio</a></li>
-<li class="toctree-l3"><a class="reference internal" href="ansys.meshing.prime.lucid.LabelToZoneMethod.is_integer.html">is_integer</a></li>
 <li class="toctree-l3"><a class="reference internal" href="ansys.meshing.prime.lucid.LabelToZoneMethod.real.html">real</a></li>
 <li class="toctree-l3"><a class="reference internal" href="ansys.meshing.prime.lucid.LabelToZoneMethod.imag.html">imag</a></li>
 <li class="toctree-l3"><a class="reference internal" href="ansys.meshing.prime.lucid.LabelToZoneMethod.numerator.html">numerator</a></li>
@@ -589,12 +562,12 @@
 <h1>LabelToZoneMethod<a class="headerlink" href="#labeltozonemethod" title="Link to this heading">#</a></h1>
 <dl class="py class">
 <dt class="sig sig-object py" id="ansys.meshing.prime.lucid.LabelToZoneMethod">
-<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">ansys.meshing.prime.lucid.</span></span><span class="sig-name descname"><span class="pre">LabelToZoneMethod</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">values</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#ansys.meshing.prime.lucid.LabelToZoneMethod" title="Link to this definition">#</a></dt>
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">ansys.meshing.prime.lucid.</span></span><span class="sig-name descname"><span class="pre">LabelToZoneMethod</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">value</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#ansys.meshing.prime.lucid.LabelToZoneMethod" title="Link to this definition">#</a></dt>
 <dd><p>Provides for creating zones from labels.</p>
 <p class="rubric">Methods</p>
-<div class="pst-scrollable-table-container"><table class="autosummary longtable table">
+<div class="pst-scrollable-table-container"><table class="autosummary longtable table autosummary">
 <tbody>
-<tr class="row-odd"><td><p><a class="reference internal" href="ansys.meshing.prime.lucid.LabelToZoneMethod.conjugate.html#ansys.meshing.prime.lucid.LabelToZoneMethod.conjugate" title="ansys.meshing.prime.lucid.LabelToZoneMethod.conjugate"><code class="xref py py-obj docutils literal notranslate"><span class="pre">LabelToZoneMethod.conjugate</span></code></a>(/)</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="ansys.meshing.prime.lucid.LabelToZoneMethod.conjugate.html#ansys.meshing.prime.lucid.LabelToZoneMethod.conjugate" title="ansys.meshing.prime.lucid.LabelToZoneMethod.conjugate"><code class="xref py py-obj docutils literal notranslate"><span class="pre">LabelToZoneMethod.conjugate</span></code></a></p></td>
 <td><p>Returns self, the complex conjugate of any int.</p></td>
 </tr>
 <tr class="row-even"><td><p><a class="reference internal" href="ansys.meshing.prime.lucid.LabelToZoneMethod.bit_length.html#ansys.meshing.prime.lucid.LabelToZoneMethod.bit_length" title="ansys.meshing.prime.lucid.LabelToZoneMethod.bit_length"><code class="xref py py-obj docutils literal notranslate"><span class="pre">LabelToZoneMethod.bit_length</span></code></a>(/)</p></td>
@@ -603,23 +576,20 @@
 <tr class="row-odd"><td><p><a class="reference internal" href="ansys.meshing.prime.lucid.LabelToZoneMethod.bit_count.html#ansys.meshing.prime.lucid.LabelToZoneMethod.bit_count" title="ansys.meshing.prime.lucid.LabelToZoneMethod.bit_count"><code class="xref py py-obj docutils literal notranslate"><span class="pre">LabelToZoneMethod.bit_count</span></code></a>(/)</p></td>
 <td><p>Number of ones in the binary representation of the absolute value of self.</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="ansys.meshing.prime.lucid.LabelToZoneMethod.to_bytes.html#ansys.meshing.prime.lucid.LabelToZoneMethod.to_bytes" title="ansys.meshing.prime.lucid.LabelToZoneMethod.to_bytes"><code class="xref py py-obj docutils literal notranslate"><span class="pre">LabelToZoneMethod.to_bytes</span></code></a>(/[, length, ...])</p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="ansys.meshing.prime.lucid.LabelToZoneMethod.to_bytes.html#ansys.meshing.prime.lucid.LabelToZoneMethod.to_bytes" title="ansys.meshing.prime.lucid.LabelToZoneMethod.to_bytes"><code class="xref py py-obj docutils literal notranslate"><span class="pre">LabelToZoneMethod.to_bytes</span></code></a>(/, length, ...[, ...])</p></td>
 <td><p>Return an array of bytes representing an integer.</p></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="ansys.meshing.prime.lucid.LabelToZoneMethod.from_bytes.html#ansys.meshing.prime.lucid.LabelToZoneMethod.from_bytes" title="ansys.meshing.prime.lucid.LabelToZoneMethod.from_bytes"><code class="xref py py-obj docutils literal notranslate"><span class="pre">LabelToZoneMethod.from_bytes</span></code></a>(/, bytes[, ...])</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="ansys.meshing.prime.lucid.LabelToZoneMethod.from_bytes.html#ansys.meshing.prime.lucid.LabelToZoneMethod.from_bytes" title="ansys.meshing.prime.lucid.LabelToZoneMethod.from_bytes"><code class="xref py py-obj docutils literal notranslate"><span class="pre">LabelToZoneMethod.from_bytes</span></code></a>(/, bytes, ...)</p></td>
 <td><p>Return the integer represented by the given array of bytes.</p></td>
 </tr>
 <tr class="row-even"><td><p><a class="reference internal" href="ansys.meshing.prime.lucid.LabelToZoneMethod.as_integer_ratio.html#ansys.meshing.prime.lucid.LabelToZoneMethod.as_integer_ratio" title="ansys.meshing.prime.lucid.LabelToZoneMethod.as_integer_ratio"><code class="xref py py-obj docutils literal notranslate"><span class="pre">LabelToZoneMethod.as_integer_ratio</span></code></a>(/)</p></td>
-<td><p>Return a pair of integers, whose ratio is equal to the original int.</p></td>
-</tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="ansys.meshing.prime.lucid.LabelToZoneMethod.is_integer.html#ansys.meshing.prime.lucid.LabelToZoneMethod.is_integer" title="ansys.meshing.prime.lucid.LabelToZoneMethod.is_integer"><code class="xref py py-obj docutils literal notranslate"><span class="pre">LabelToZoneMethod.is_integer</span></code></a>(/)</p></td>
-<td><p>Returns True.</p></td>
+<td><p>Return integer ratio.</p></td>
 </tr>
 </tbody>
 </table>
 </div>
 <p class="rubric">Attributes</p>
-<div class="pst-scrollable-table-container"><table class="autosummary longtable table">
+<div class="pst-scrollable-table-container"><table class="autosummary longtable table autosummary">
 <tbody>
 <tr class="row-odd"><td><p><a class="reference internal" href="ansys.meshing.prime.lucid.LabelToZoneMethod.real.html#ansys.meshing.prime.lucid.LabelToZoneMethod.real" title="ansys.meshing.prime.lucid.LabelToZoneMethod.real"><code class="xref py py-obj docutils literal notranslate"><span class="pre">LabelToZoneMethod.real</span></code></a></p></td>
 <td><p>the real part of a complex number</p></td>
@@ -713,15 +683,12 @@
 
 <script>
 // Passing the search options to the search.js file
-const SEARCH_OPTIONS = JSON.parse('{"keys": ["title", "text", "objectID"], "limit": 10, "threshold": 0.2}');
+const SEARCH_OPTIONS = JSON.parse('{"keys": ["title", "text"], "limit": 10, "threshold": 0.2}');
 const SEARCH_FILE = "../../_static/search.json";
-const ADVANCE_SEARCH_PATH = "../../search.html";
-const EXTRA_SOURCES = JSON.parse('""');
 </script>
 
 
 <script src="../../_static/js/search.js"></script>
-
   
   <footer class="bd-footer">
 <div class="bd-footer__inner bd-page-width">
@@ -741,7 +708,7 @@ const EXTRA_SOURCES = JSON.parse('""');
         <div class="footer-item">
 
   <p class="sphinx-version">
-    Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 8.2.3.
+    Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 8.1.3.
     <br/>
   </p>
 </div>
@@ -757,7 +724,7 @@ const EXTRA_SOURCES = JSON.parse('""');
   <a href="https://sphinxdocs.ansys.com/version/stable/index.html"
     >Ansys Sphinx Theme</a
   >
-  1.6.4. <br />Last updated on
+  1.4.2. <br />Last updated on
   <span id="ast_build_date"></span>
 </p>
 <script>

@@ -6,7 +6,7 @@ ShellBLParams
 .. currentmodule:: ansys.meshing.prime
 
 .. autoclass:: ShellBLParams
-
+   
    
    
    .. rubric:: Methods

@@ -6,7 +6,7 @@ CreateMaterialPointResults
 .. currentmodule:: ansys.meshing.prime
 
 .. autoclass:: CreateMaterialPointResults
-
+   
    
    
    .. rubric:: Methods

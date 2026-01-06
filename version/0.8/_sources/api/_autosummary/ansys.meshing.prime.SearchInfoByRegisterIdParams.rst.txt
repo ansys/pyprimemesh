@@ -6,7 +6,7 @@ SearchInfoByRegisterIdParams
 .. currentmodule:: ansys.meshing.prime
 
 .. autoclass:: SearchInfoByRegisterIdParams
-
+   
    
    
    .. rubric:: Methods

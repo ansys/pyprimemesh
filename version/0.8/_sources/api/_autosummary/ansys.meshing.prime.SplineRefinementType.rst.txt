@@ -6,7 +6,7 @@ SplineRefinementType
 .. currentmodule:: ansys.meshing.prime
 
 .. autoclass:: SplineRefinementType
-
+   
    
    
    .. rubric:: Methods
@@ -20,8 +20,6 @@ SplineRefinementType
       SplineRefinementType.to_bytes
       SplineRefinementType.from_bytes
       SplineRefinementType.as_integer_ratio
-      SplineRefinementType.is_integer
-      
    
    
 

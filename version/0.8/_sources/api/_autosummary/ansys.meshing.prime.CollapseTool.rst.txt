@@ -6,7 +6,7 @@ CollapseTool
 .. currentmodule:: ansys.meshing.prime
 
 .. autoclass:: CollapseTool
-
+   
    
    
    .. rubric:: Methods

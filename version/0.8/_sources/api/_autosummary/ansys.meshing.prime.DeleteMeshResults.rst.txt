@@ -6,7 +6,7 @@ DeleteMeshResults
 .. currentmodule:: ansys.meshing.prime
 
 .. autoclass:: DeleteMeshResults
-
+   
    
    
    .. rubric:: Methods

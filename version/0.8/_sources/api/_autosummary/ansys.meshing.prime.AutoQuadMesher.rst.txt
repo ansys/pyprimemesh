@@ -6,7 +6,7 @@ AutoQuadMesher
 .. currentmodule:: ansys.meshing.prime
 
 .. autoclass:: AutoQuadMesher
-
+   
    
    
    .. rubric:: Methods

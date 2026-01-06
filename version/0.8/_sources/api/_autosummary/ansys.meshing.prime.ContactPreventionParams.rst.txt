@@ -6,7 +6,7 @@ ContactPreventionParams
 .. currentmodule:: ansys.meshing.prime
 
 .. autoclass:: ContactPreventionParams
-
+   
    
    
    .. rubric:: Methods

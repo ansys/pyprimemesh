@@ -32,7 +32,7 @@
 <link href="../../_static/styles/pydata-sphinx-theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
 
     <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=8f2a1f02" />
-    <link rel="stylesheet" type="text/css" href="../../_static/styles/ansys-sphinx-theme.css?v=9e79609d" />
+    <link rel="stylesheet" type="text/css" href="../../_static/styles/ansys-sphinx-theme.css?v=fbf3eb5d" />
     <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
     <link rel="stylesheet" type="text/css" href="../../_static/jupyter-sphinx.css" />
     <link rel="stylesheet" type="text/css" href="../../_static/thebelab.css" />
@@ -40,7 +40,7 @@
     <link rel="stylesheet" type="text/css" href="../../_static/sg_gallery-binder.css?v=f4aeca0c" />
     <link rel="stylesheet" type="text/css" href="../../_static/sg_gallery-dataframe.css?v=2082cf3c" />
     <link rel="stylesheet" type="text/css" href="../../_static/sg_gallery-rendered-html.css?v=1277b6f3" />
-    <link rel="stylesheet" type="text/css" href="../../_static/styles/ansys-sphinx-theme.css?v=9e79609d" />
+    <link rel="stylesheet" type="text/css" href="../../_static/styles/ansys-sphinx-theme.css?v=fbf3eb5d" />
     <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.23/css/jquery.dataTables.min.css" />
     <link rel="stylesheet" type="text/css" href="https://www.nerdfonts.com/assets/css/webfont.css" />
     <link rel="stylesheet" type="text/css" href="../../_static/sphinx-design.min.css?v=95c83b7e" />
@@ -59,7 +59,7 @@
   
     <link href="../../_static/css/breadcrumbs.css" rel="stylesheet" />
   
-    <script src="../../_static/documentation_options.js?v=24ea0de7"></script>
+    <script src="../../_static/documentation_options.js?v=dbee5847"></script>
     <script src="../../_static/doctools.js?v=9bcbadda"></script>
     <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="../../_static/clipboard.min.js?v=a7894cd8"></script>
@@ -73,7 +73,7 @@
     <script>
         DOCUMENTATION_OPTIONS.theme_version = '0.16.1';
         DOCUMENTATION_OPTIONS.theme_switcher_json_url = 'https://prime.docs.pyansys.com/versions.json';
-        DOCUMENTATION_OPTIONS.theme_switcher_version_match = 'dev';
+        DOCUMENTATION_OPTIONS.theme_switcher_version_match = '0.8';
         DOCUMENTATION_OPTIONS.show_version_warning_banner =
             false;
         </script>
@@ -82,13 +82,9 @@
     <link rel="search" title="Search" href="../../search.html" />
     <link rel="next" title="conjugate" href="ansys.meshing.prime.WarningCode.conjugate.html" />
     <link rel="prev" title="size_field_id" href="ansys.meshing.prime.VolumetricSizeFieldComputeResults.size_field_id.html" />
-  
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
-  <meta name="docsearch:version" content="0.10.0.dev2" />
-  <meta property="og:site_name" content="PyAnsys" />
-  <meta name="physics" content="CAD" />
-  <meta name="physics" content="Meshing" />
+  <meta name="docsearch:version" content="0.8.2" />
   </head>
   
   
@@ -169,15 +165,9 @@
     <div class="me-auto navbar-header-items__center">
       
         <div class="navbar-item">
-
 <nav>
   <ul class="bd-navbar-elements navbar-nav">
     
-<li class="nav-item ">
-  <a class="nav-link nav-internal" href="../../index.html" title="PyPrimeMesh home">Home</a>
-</li>
-
-
 <li class="nav-item ">
   <a class="nav-link nav-internal" href="../../getting_started/index.html">
     Getting started
@@ -205,34 +195,23 @@
   </a>
 </li>
 
-            <li class="nav-item dropdown">
-                <button class="btn dropdown-toggle nav-item" type="button"
-                data-bs-toggle="dropdown" aria-expanded="false"
-                aria-controls="pst-nav-more-links">
-                    More
-                </button>
-                <ul id="pst-nav-more-links" class="dropdown-menu">
-                    
-<li class=" ">
-  <a class="nav-link dropdown-item nav-internal" href="../../contributing/index.html">
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../contributing/index.html">
     Contribute
   </a>
 </li>
 
-                </ul>
-            </li>
-            
   </ul>
-</nav>
-</div>
+</nav></div>
       
     </div>
     
     
     <div class="navbar-header-items__end">
       
-      
-        <div class="navbar-item">
+        <div class="navbar-item navbar-persistent--container">
+          
 <div class="search-bar pst-js-only" id="search-bar">
   <form class="bd-search d-flex align-items-center" action="../../search.html" method="get">
     <i class="fa-solid fa-magnifying-glass"></i>
@@ -244,7 +223,9 @@
     </span>
   </form>
   <div id="static-search-results" class="static-search-results" style="display:none;" tabindex="0"></div>
-</div></div>
+</div>
+        </div>
+      
       
         <div class="navbar-item">
 <div class="version-switcher__container dropdown pst-js-only">
@@ -307,6 +288,21 @@
   </div>
   
   
+    <div class="navbar-persistent--mobile">
+<div class="search-bar pst-js-only" id="search-bar">
+  <form class="bd-search d-flex align-items-center" action="../../search.html" method="get">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <input type="search" class="form-control" name="q" placeholder="Search the docs ..."
+      aria-label="Search the docs ..." autocomplete="off" autocorrect="off"
+      autocapitalize="off" spellcheck="false" />
+    <span class="search-button__kbd-shortcut">
+      <kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd>
+    </span>
+  </form>
+  <div id="static-search-results" class="static-search-results" style="display:none;" tabindex="0"></div>
+</div>
+    </div>
+  
 
   
     <button class="pst-navbar-icon sidebar-toggle secondary-toggle" aria-label="On this page">
@@ -353,15 +349,9 @@
           
           
             <div class="navbar-item">
-
 <nav>
   <ul class="bd-navbar-elements navbar-nav">
     
-<li class="nav-item ">
-  <a class="nav-link nav-internal" href="../../index.html" title="PyPrimeMesh home">Home</a>
-</li>
-
-
 <li class="nav-item ">
   <a class="nav-link nav-internal" href="../../getting_started/index.html">
     Getting started
@@ -397,8 +387,7 @@
 </li>
 
   </ul>
-</nav>
-</div>
+</nav></div>
           
         
       </div>
@@ -406,20 +395,6 @@
     
     
       <div class="sidebar-header-items__end">
-        
-          <div class="navbar-item">
-<div class="search-bar pst-js-only" id="search-bar">
-  <form class="bd-search d-flex align-items-center" action="../../search.html" method="get">
-    <i class="fa-solid fa-magnifying-glass"></i>
-    <input type="search" class="form-control" name="q" placeholder="Search the docs ..."
-      aria-label="Search the docs ..." autocomplete="off" autocorrect="off"
-      autocapitalize="off" spellcheck="false" />
-    <span class="search-button__kbd-shortcut">
-      <kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd>
-    </span>
-  </form>
-  <div id="static-search-results" class="static-search-results" style="display:none;" tabindex="0"></div>
-</div></div>
         
           <div class="navbar-item">
 <div class="version-switcher__container dropdown pst-js-only">
@@ -512,7 +487,6 @@
 <li class="toctree-l2"><a class="reference internal" href="ansys.meshing.prime.BCPairType.html">BCPairType</a></li>
 <li class="toctree-l2"><a class="reference internal" href="ansys.meshing.prime.BCsVolumetricModality.html">BCsVolumetricModality</a></li>
 <li class="toctree-l2"><a class="reference internal" href="ansys.meshing.prime.BOIType.html">BOIType</a></li>
-<li class="toctree-l2"><a class="reference internal" href="ansys.meshing.prime.BodyQueryType.html">BodyQueryType</a></li>
 <li class="toctree-l2"><a class="reference internal" href="ansys.meshing.prime.BoiSizingParams.html">BoiSizingParams</a></li>
 <li class="toctree-l2"><a class="reference internal" href="ansys.meshing.prime.BoundaryFittedSpline.html">BoundaryFittedSpline</a></li>
 <li class="toctree-l2"><a class="reference internal" href="ansys.meshing.prime.BoundaryFittedSplineParams.html">BoundaryFittedSplineParams</a></li>
@@ -537,8 +511,6 @@
 <li class="toctree-l2"><a class="reference internal" href="ansys.meshing.prime.CollapseParams.html">CollapseParams</a></li>
 <li class="toctree-l2"><a class="reference internal" href="ansys.meshing.prime.CollapseResults.html">CollapseResults</a></li>
 <li class="toctree-l2"><a class="reference internal" href="ansys.meshing.prime.CollapseTool.html">CollapseTool</a></li>
-<li class="toctree-l2"><a class="reference internal" href="ansys.meshing.prime.ComponentChildrenParams.html">ComponentChildrenParams</a></li>
-<li class="toctree-l2"><a class="reference internal" href="ansys.meshing.prime.ComponentChildrenResults.html">ComponentChildrenResults</a></li>
 <li class="toctree-l2"><a class="reference internal" href="ansys.meshing.prime.ComputeTopoVolumesResults.html">ComputeTopoVolumesResults</a></li>
 <li class="toctree-l2"><a class="reference internal" href="ansys.meshing.prime.ComputeVolumesParams.html">ComputeVolumesParams</a></li>
 <li class="toctree-l2"><a class="reference internal" href="ansys.meshing.prime.ComputeVolumesResults.html">ComputeVolumesResults</a></li>
@@ -596,7 +568,6 @@
 <li class="toctree-l2"><a class="reference internal" href="ansys.meshing.prime.ExportBoundaryFittedSplineParams.html">ExportBoundaryFittedSplineParams</a></li>
 <li class="toctree-l2"><a class="reference internal" href="ansys.meshing.prime.ExportFluentCaseParams.html">ExportFluentCaseParams</a></li>
 <li class="toctree-l2"><a class="reference internal" href="ansys.meshing.prime.ExportFluentMeshingMeshParams.html">ExportFluentMeshingMeshParams</a></li>
-<li class="toctree-l2"><a class="reference internal" href="ansys.meshing.prime.ExportLSDynaIGAResults.html">ExportLSDynaIGAResults</a></li>
 <li class="toctree-l2"><a class="reference internal" href="ansys.meshing.prime.ExportLSDynaIgaKeywordFileParams.html">ExportLSDynaIgaKeywordFileParams</a></li>
 <li class="toctree-l2"><a class="reference internal" href="ansys.meshing.prime.ExportLSDynaKeywordFileParams.html">ExportLSDynaKeywordFileParams</a></li>
 <li class="toctree-l2"><a class="reference internal" href="ansys.meshing.prime.ExportLSDynaResults.html">ExportLSDynaResults</a></li>
@@ -634,11 +605,8 @@
 <li class="toctree-l2"><a class="reference internal" href="ansys.meshing.prime.HexCoreCellElementType.html">HexCoreCellElementType</a></li>
 <li class="toctree-l2"><a class="reference internal" href="ansys.meshing.prime.HexCoreParams.html">HexCoreParams</a></li>
 <li class="toctree-l2"><a class="reference internal" href="ansys.meshing.prime.HexCoreTransitionLayerType.html">HexCoreTransitionLayerType</a></li>
-<li class="toctree-l2"><a class="reference internal" href="ansys.meshing.prime.HexToSpline.html">HexToSpline</a></li>
-<li class="toctree-l2"><a class="reference internal" href="ansys.meshing.prime.HexToSplineParams.html">HexToSplineParams</a></li>
 <li class="toctree-l2"><a class="reference internal" href="ansys.meshing.prime.IGAResults.html">IGAResults</a></li>
 <li class="toctree-l2"><a class="reference internal" href="ansys.meshing.prime.IGASpline.html">IGASpline</a></li>
-<li class="toctree-l2"><a class="reference internal" href="ansys.meshing.prime.IGAUnstructuredSplineSolid.html">IGAUnstructuredSplineSolid</a></li>
 <li class="toctree-l2"><a class="reference internal" href="ansys.meshing.prime.IGAUnstructuredSplineSurf.html">IGAUnstructuredSplineSurf</a></li>
 <li class="toctree-l2"><a class="reference internal" href="ansys.meshing.prime.ImportAbaqusParams.html">ImportAbaqusParams</a></li>
 <li class="toctree-l2"><a class="reference internal" href="ansys.meshing.prime.ImportAbaqusResults.html">ImportAbaqusResults</a></li>
@@ -656,7 +624,6 @@
 <li class="toctree-l2"><a class="reference internal" href="ansys.meshing.prime.JoinSeparateMethod.html">JoinSeparateMethod</a></li>
 <li class="toctree-l2"><a class="reference internal" href="ansys.meshing.prime.LSDynaAnalysisType.html">LSDynaAnalysisType</a></li>
 <li class="toctree-l2"><a class="reference internal" href="ansys.meshing.prime.LSDynaFileFormatType.html">LSDynaFileFormatType</a></li>
-<li class="toctree-l2"><a class="reference internal" href="ansys.meshing.prime.LabelExportParams.html">LabelExportParams</a></li>
 <li class="toctree-l2"><a class="reference internal" href="ansys.meshing.prime.LeakPreventionParams.html">LeakPreventionParams</a></li>
 <li class="toctree-l2"><a class="reference internal" href="ansys.meshing.prime.LengthUnit.html">LengthUnit</a></li>
 <li class="toctree-l2"><a class="reference internal" href="ansys.meshing.prime.LocalSurferParams.html">LocalSurferParams</a></li>
@@ -717,7 +684,6 @@
 <li class="toctree-l2"><a class="reference internal" href="ansys.meshing.prime.RefineAtContactsParams.html">RefineAtContactsParams</a></li>
 <li class="toctree-l2"><a class="reference internal" href="ansys.meshing.prime.RefineAtContactsResults.html">RefineAtContactsResults</a></li>
 <li class="toctree-l2"><a class="reference internal" href="ansys.meshing.prime.RefineSplineParams.html">RefineSplineParams</a></li>
-<li class="toctree-l2"><a class="reference internal" href="ansys.meshing.prime.RefineTetMeshParams.html">RefineTetMeshParams</a></li>
 <li class="toctree-l2"><a class="reference internal" href="ansys.meshing.prime.RemoveLabelResults.html">RemoveLabelResults</a></li>
 <li class="toctree-l2"><a class="reference internal" href="ansys.meshing.prime.RemoveZoneResults.html">RemoveZoneResults</a></li>
 <li class="toctree-l2"><a class="reference internal" href="ansys.meshing.prime.RepairEdgesParams.html">RepairEdgesParams</a></li>
@@ -728,7 +694,6 @@
 <li class="toctree-l2"><a class="reference internal" href="ansys.meshing.prime.Scaffolder.html">Scaffolder</a></li>
 <li class="toctree-l2"><a class="reference internal" href="ansys.meshing.prime.ScaffolderMergeResults.html">ScaffolderMergeResults</a></li>
 <li class="toctree-l2"><a class="reference internal" href="ansys.meshing.prime.ScaffolderParams.html">ScaffolderParams</a></li>
-<li class="toctree-l2"><a class="reference internal" href="ansys.meshing.prime.ScaffolderRepairMode.html">ScaffolderRepairMode</a></li>
 <li class="toctree-l2"><a class="reference internal" href="ansys.meshing.prime.ScaffolderResults.html">ScaffolderResults</a></li>
 <li class="toctree-l2"><a class="reference internal" href="ansys.meshing.prime.ScaffolderSplitResults.html">ScaffolderSplitResults</a></li>
 <li class="toctree-l2"><a class="reference internal" href="ansys.meshing.prime.ScopeDefinition.html">ScopeDefinition</a></li>
@@ -772,9 +737,7 @@
 <li class="toctree-l2"><a class="reference internal" href="ansys.meshing.prime.SmoothDihedralFaceNodesResults.html">SmoothDihedralFaceNodesResults</a></li>
 <li class="toctree-l2"><a class="reference internal" href="ansys.meshing.prime.SmoothType.html">SmoothType</a></li>
 <li class="toctree-l2"><a class="reference internal" href="ansys.meshing.prime.SoftSizingParams.html">SoftSizingParams</a></li>
-<li class="toctree-l2"><a class="reference internal" href="ansys.meshing.prime.SoiSizingParams.html">SoiSizingParams</a></li>
 <li class="toctree-l2"><a class="reference internal" href="ansys.meshing.prime.SolverType.html">SolverType</a></li>
-<li class="toctree-l2"><a class="reference internal" href="ansys.meshing.prime.SplineContinuityType.html">SplineContinuityType</a></li>
 <li class="toctree-l2"><a class="reference internal" href="ansys.meshing.prime.SplineFeatureCaptureType.html">SplineFeatureCaptureType</a></li>
 <li class="toctree-l2"><a class="reference internal" href="ansys.meshing.prime.SplineRefinementType.html">SplineRefinementType</a></li>
 <li class="toctree-l2"><a class="reference internal" href="ansys.meshing.prime.SplitParams.html">SplitParams</a></li>
@@ -799,7 +762,6 @@
 <li class="toctree-l2"><a class="reference internal" href="ansys.meshing.prime.SurferParams.html">SurferParams</a></li>
 <li class="toctree-l2"><a class="reference internal" href="ansys.meshing.prime.SurferResults.html">SurferResults</a></li>
 <li class="toctree-l2"><a class="reference internal" href="ansys.meshing.prime.SweepType.html">SweepType</a></li>
-<li class="toctree-l2"><a class="reference internal" href="ansys.meshing.prime.TetMeshSplineParams.html">TetMeshSplineParams</a></li>
 <li class="toctree-l2"><a class="reference internal" href="ansys.meshing.prime.TetParams.html">TetParams</a></li>
 <li class="toctree-l2"><a class="reference internal" href="ansys.meshing.prime.ThinStripType.html">ThinStripType</a></li>
 <li class="toctree-l2"><a class="reference internal" href="ansys.meshing.prime.ThinVolumeControl.html">ThinVolumeControl</a></li>
@@ -814,10 +776,6 @@
 <li class="toctree-l2"><a class="reference internal" href="ansys.meshing.prime.TransformResults.html">TransformResults</a></li>
 <li class="toctree-l2"><a class="reference internal" href="ansys.meshing.prime.TriangulateParams.html">TriangulateParams</a></li>
 <li class="toctree-l2"><a class="reference internal" href="ansys.meshing.prime.TriangulateResults.html">TriangulateResults</a></li>
-<li class="toctree-l2"><a class="reference internal" href="ansys.meshing.prime.TrimmedSolidSplineCutMode.html">TrimmedSolidSplineCutMode</a></li>
-<li class="toctree-l2"><a class="reference internal" href="ansys.meshing.prime.TrimmedSpline.html">TrimmedSpline</a></li>
-<li class="toctree-l2"><a class="reference internal" href="ansys.meshing.prime.TrimmedSplineResults.html">TrimmedSplineResults</a></li>
-<li class="toctree-l2"><a class="reference internal" href="ansys.meshing.prime.UniformSolidSplineCreationParams.html">UniformSolidSplineCreationParams</a></li>
 <li class="toctree-l2"><a class="reference internal" href="ansys.meshing.prime.VTComposer.html">VTComposer</a></li>
 <li class="toctree-l2"><a class="reference internal" href="ansys.meshing.prime.VTComposerParams.html">VTComposerParams</a></li>
 <li class="toctree-l2"><a class="reference internal" href="ansys.meshing.prime.VTComposerResults.html">VTComposerResults</a></li>
@@ -842,7 +800,6 @@
 <li class="toctree-l3"><a class="reference internal" href="ansys.meshing.prime.WarningCode.to_bytes.html">to_bytes</a></li>
 <li class="toctree-l3"><a class="reference internal" href="ansys.meshing.prime.WarningCode.from_bytes.html">from_bytes</a></li>
 <li class="toctree-l3"><a class="reference internal" href="ansys.meshing.prime.WarningCode.as_integer_ratio.html">as_integer_ratio</a></li>
-<li class="toctree-l3"><a class="reference internal" href="ansys.meshing.prime.WarningCode.is_integer.html">is_integer</a></li>
 <li class="toctree-l3"><a class="reference internal" href="ansys.meshing.prime.WarningCode.real.html">real</a></li>
 <li class="toctree-l3"><a class="reference internal" href="ansys.meshing.prime.WarningCode.imag.html">imag</a></li>
 <li class="toctree-l3"><a class="reference internal" href="ansys.meshing.prime.WarningCode.numerator.html">numerator</a></li>
@@ -856,7 +813,6 @@
 <li class="toctree-l3"><a class="reference internal" href="ansys.meshing.prime.WarningCode.OVERRIDEPROXIMITYSIZINGPARAMS.html">OVERRIDEPROXIMITYSIZINGPARAMS</a></li>
 <li class="toctree-l3"><a class="reference internal" href="ansys.meshing.prime.WarningCode.OVERRIDEBOISIZINGPARAMS.html">OVERRIDEBOISIZINGPARAMS</a></li>
 <li class="toctree-l3"><a class="reference internal" href="ansys.meshing.prime.WarningCode.OVERRIDEMESHEDSIZINGPARAMS.html">OVERRIDEMESHEDSIZINGPARAMS</a></li>
-<li class="toctree-l3"><a class="reference internal" href="ansys.meshing.prime.WarningCode.OVERRIDESOISIZINGPARAMS.html">OVERRIDESOISIZINGPARAMS</a></li>
 <li class="toctree-l3"><a class="reference internal" href="ansys.meshing.prime.WarningCode.INVALIDSIZECONTROLSCOPE.html">INVALIDSIZECONTROLSCOPE</a></li>
 <li class="toctree-l3"><a class="reference internal" href="ansys.meshing.prime.WarningCode.OVERRIDEGROWTHRATEPARAM.html">OVERRIDEGROWTHRATEPARAM</a></li>
 <li class="toctree-l3"><a class="reference internal" href="ansys.meshing.prime.WarningCode.OVERRIDESUGGESTEDNAME.html">OVERRIDESUGGESTEDNAME</a></li>
@@ -886,7 +842,6 @@
 <li class="toctree-l3"><a class="reference internal" href="ansys.meshing.prime.WarningCode.WRAPPER_SMALLERSIZEATFEAURES.html">WRAPPER_SMALLERSIZEATFEAURES</a></li>
 <li class="toctree-l3"><a class="reference internal" href="ansys.meshing.prime.WarningCode.WRAPPER_SMALLERCONTACTPREVENTIONSIZE.html">WRAPPER_SMALLERCONTACTPREVENTIONSIZE</a></li>
 <li class="toctree-l3"><a class="reference internal" href="ansys.meshing.prime.WarningCode.MATERIALPOINTWITHSAMENAMEEXISTS.html">MATERIALPOINTWITHSAMENAMEEXISTS</a></li>
-<li class="toctree-l3"><a class="reference internal" href="ansys.meshing.prime.WarningCode.WRAPPER_PATCHFLOWREGIONS_NOHOLESFOUND.html">WRAPPER_PATCHFLOWREGIONS_NOHOLESFOUND</a></li>
 <li class="toctree-l3"><a class="reference internal" href="ansys.meshing.prime.WarningCode.ENTITIESNOTBELONGTOANYZONE.html">ENTITIESNOTBELONGTOANYZONE</a></li>
 <li class="toctree-l3"><a class="reference internal" href="ansys.meshing.prime.WarningCode.INVALIDENTITIESNOTADDEDTOZONE.html">INVALIDENTITIESNOTADDEDTOZONE</a></li>
 <li class="toctree-l3"><a class="reference internal" href="ansys.meshing.prime.WarningCode.LOCALSURFERNOFACEREGISTERED.html">LOCALSURFERNOFACEREGISTERED</a></li>
@@ -902,7 +857,6 @@
 <li class="toctree-l3"><a class="reference internal" href="ansys.meshing.prime.WarningCode.WRITINGCONTACTPAIRSSKIPPED.html">WRITINGCONTACTPAIRSSKIPPED</a></li>
 <li class="toctree-l3"><a class="reference internal" href="ansys.meshing.prime.WarningCode.WRITINGTIESSKIPPED.html">WRITINGTIESSKIPPED</a></li>
 <li class="toctree-l3"><a class="reference internal" href="ansys.meshing.prime.WarningCode.WRITINGZONELETOFLABELTOELEMENTCOMPONENTSKIPPED.html">WRITINGZONELETOFLABELTOELEMENTCOMPONENTSKIPPED</a></li>
-<li class="toctree-l3"><a class="reference internal" href="ansys.meshing.prime.WarningCode.IMPORTOFNODALCOMPONENTASLABELSKIPPED.html">IMPORTOFNODALCOMPONENTASLABELSKIPPED</a></li>
 <li class="toctree-l3"><a class="reference internal" href="ansys.meshing.prime.WarningCode.VT_SKIPPEDPROTECTEDENTITIES.html">VT_SKIPPEDPROTECTEDENTITIES</a></li>
 <li class="toctree-l3"><a class="reference internal" href="ansys.meshing.prime.WarningCode.VT_SKIPPEDFEATUREENTITIES.html">VT_SKIPPEDFEATUREENTITIES</a></li>
 <li class="toctree-l3"><a class="reference internal" href="ansys.meshing.prime.WarningCode.VT_SKIPPEDFREEEDGES.html">VT_SKIPPEDFREEEDGES</a></li>
@@ -911,8 +865,6 @@
 <li class="toctree-l3"><a class="reference internal" href="ansys.meshing.prime.WarningCode.VT_CANNOTMERGENODES.html">VT_CANNOTMERGENODES</a></li>
 <li class="toctree-l3"><a class="reference internal" href="ansys.meshing.prime.WarningCode.VT_REMESHFACEFAILED.html">VT_REMESHFACEFAILED</a></li>
 <li class="toctree-l3"><a class="reference internal" href="ansys.meshing.prime.WarningCode.MULTIZONEMESHER_SURFACESCOPEVOLUMESCOPEINCONSISTENCY.html">MULTIZONEMESHER_SURFACESCOPEVOLUMESCOPEINCONSISTENCY</a></li>
-<li class="toctree-l3"><a class="reference internal" href="ansys.meshing.prime.WarningCode.MULTIZONEMESHER_DEFEATUREDTOPOEDGES.html">MULTIZONEMESHER_DEFEATUREDTOPOEDGES</a></li>
-<li class="toctree-l3"><a class="reference internal" href="ansys.meshing.prime.WarningCode.MULTIZONEMESHER_DEFEATUREDTOPOFACES.html">MULTIZONEMESHER_DEFEATUREDTOPOFACES</a></li>
 </ul>
 </details></li>
 <li class="toctree-l2"><a class="reference internal" href="ansys.meshing.prime.WrapParams.html">WrapParams</a></li>
@@ -927,14 +879,12 @@
 <li class="toctree-l2"><a class="reference internal" href="ansys.meshing.prime.WrapperPatchFlowRegionsParams.html">WrapperPatchFlowRegionsParams</a></li>
 <li class="toctree-l2"><a class="reference internal" href="ansys.meshing.prime.WrapperPatchFlowRegionsResult.html">WrapperPatchFlowRegionsResult</a></li>
 <li class="toctree-l2"><a class="reference internal" href="ansys.meshing.prime.WriteSizeFieldParams.html">WriteSizeFieldParams</a></li>
-<li class="toctree-l2"><a class="reference internal" href="ansys.meshing.prime.ZoneMeshResult.html">ZoneMeshResult</a></li>
 <li class="toctree-l2"><a class="reference internal" href="ansys.meshing.prime.ZoneType.html">ZoneType</a></li>
 <li class="toctree-l2"><a class="reference internal" href="ansys.meshing.prime.PrimeRuntimeError.html">PrimeRuntimeError</a></li>
 <li class="toctree-l2"><a class="reference internal" href="ansys.meshing.prime.PrimeRuntimeWarning.html">PrimeRuntimeWarning</a></li>
 </ul>
 </details></li>
 <li class="toctree-l1"><a class="reference internal" href="ansys.meshing.prime.examples.html">ansys.meshing.prime.examples</a></li>
-<li class="toctree-l1"><a class="reference internal" href="ansys.meshing.prime.graphics.html">ansys.meshing.prime.graphics</a></li>
 <li class="toctree-l1"><a class="reference internal" href="ansys.meshing.prime.lucid.html">ansys.meshing.prime.lucid</a></li>
 </ul>
 </div>
@@ -1014,12 +964,12 @@
 <h1>WarningCode<a class="headerlink" href="#warningcode" title="Link to this heading">#</a></h1>
 <dl class="py class">
 <dt class="sig sig-object py" id="ansys.meshing.prime.WarningCode">
-<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">ansys.meshing.prime.</span></span><span class="sig-name descname"><span class="pre">WarningCode</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">values</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#ansys.meshing.prime.WarningCode" title="Link to this definition">#</a></dt>
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">ansys.meshing.prime.</span></span><span class="sig-name descname"><span class="pre">WarningCode</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">value</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#ansys.meshing.prime.WarningCode" title="Link to this definition">#</a></dt>
 <dd><p>Warning codes associated with the PyPrimeMesh operation.</p>
 <p class="rubric">Methods</p>
-<div class="pst-scrollable-table-container"><table class="autosummary longtable table">
+<div class="pst-scrollable-table-container"><table class="autosummary longtable table autosummary">
 <tbody>
-<tr class="row-odd"><td><p><a class="reference internal" href="ansys.meshing.prime.WarningCode.conjugate.html#ansys.meshing.prime.WarningCode.conjugate" title="ansys.meshing.prime.WarningCode.conjugate"><code class="xref py py-obj docutils literal notranslate"><span class="pre">WarningCode.conjugate</span></code></a>(/)</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="ansys.meshing.prime.WarningCode.conjugate.html#ansys.meshing.prime.WarningCode.conjugate" title="ansys.meshing.prime.WarningCode.conjugate"><code class="xref py py-obj docutils literal notranslate"><span class="pre">WarningCode.conjugate</span></code></a></p></td>
 <td><p>Returns self, the complex conjugate of any int.</p></td>
 </tr>
 <tr class="row-even"><td><p><a class="reference internal" href="ansys.meshing.prime.WarningCode.bit_length.html#ansys.meshing.prime.WarningCode.bit_length" title="ansys.meshing.prime.WarningCode.bit_length"><code class="xref py py-obj docutils literal notranslate"><span class="pre">WarningCode.bit_length</span></code></a>(/)</p></td>
@@ -1028,23 +978,20 @@
 <tr class="row-odd"><td><p><a class="reference internal" href="ansys.meshing.prime.WarningCode.bit_count.html#ansys.meshing.prime.WarningCode.bit_count" title="ansys.meshing.prime.WarningCode.bit_count"><code class="xref py py-obj docutils literal notranslate"><span class="pre">WarningCode.bit_count</span></code></a>(/)</p></td>
 <td><p>Number of ones in the binary representation of the absolute value of self.</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="ansys.meshing.prime.WarningCode.to_bytes.html#ansys.meshing.prime.WarningCode.to_bytes" title="ansys.meshing.prime.WarningCode.to_bytes"><code class="xref py py-obj docutils literal notranslate"><span class="pre">WarningCode.to_bytes</span></code></a>(/[, length, byteorder, ...])</p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="ansys.meshing.prime.WarningCode.to_bytes.html#ansys.meshing.prime.WarningCode.to_bytes" title="ansys.meshing.prime.WarningCode.to_bytes"><code class="xref py py-obj docutils literal notranslate"><span class="pre">WarningCode.to_bytes</span></code></a>(/, length, byteorder, *)</p></td>
 <td><p>Return an array of bytes representing an integer.</p></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="ansys.meshing.prime.WarningCode.from_bytes.html#ansys.meshing.prime.WarningCode.from_bytes" title="ansys.meshing.prime.WarningCode.from_bytes"><code class="xref py py-obj docutils literal notranslate"><span class="pre">WarningCode.from_bytes</span></code></a>(/, bytes[, ...])</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="ansys.meshing.prime.WarningCode.from_bytes.html#ansys.meshing.prime.WarningCode.from_bytes" title="ansys.meshing.prime.WarningCode.from_bytes"><code class="xref py py-obj docutils literal notranslate"><span class="pre">WarningCode.from_bytes</span></code></a>(/, bytes, byteorder, *)</p></td>
 <td><p>Return the integer represented by the given array of bytes.</p></td>
 </tr>
 <tr class="row-even"><td><p><a class="reference internal" href="ansys.meshing.prime.WarningCode.as_integer_ratio.html#ansys.meshing.prime.WarningCode.as_integer_ratio" title="ansys.meshing.prime.WarningCode.as_integer_ratio"><code class="xref py py-obj docutils literal notranslate"><span class="pre">WarningCode.as_integer_ratio</span></code></a>(/)</p></td>
-<td><p>Return a pair of integers, whose ratio is equal to the original int.</p></td>
-</tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="ansys.meshing.prime.WarningCode.is_integer.html#ansys.meshing.prime.WarningCode.is_integer" title="ansys.meshing.prime.WarningCode.is_integer"><code class="xref py py-obj docutils literal notranslate"><span class="pre">WarningCode.is_integer</span></code></a>(/)</p></td>
-<td><p>Returns True.</p></td>
+<td><p>Return integer ratio.</p></td>
 </tr>
 </tbody>
 </table>
 </div>
 <p class="rubric">Attributes</p>
-<div class="pst-scrollable-table-container"><table class="autosummary longtable table">
+<div class="pst-scrollable-table-container"><table class="autosummary longtable table autosummary">
 <tbody>
 <tr class="row-odd"><td><p><a class="reference internal" href="ansys.meshing.prime.WarningCode.real.html#ansys.meshing.prime.WarningCode.real" title="ansys.meshing.prime.WarningCode.real"><code class="xref py py-obj docutils literal notranslate"><span class="pre">WarningCode.real</span></code></a></p></td>
 <td><p>the real part of a complex number</p></td>
@@ -1085,98 +1032,92 @@
 <tr class="row-odd"><td><p><a class="reference internal" href="ansys.meshing.prime.WarningCode.OVERRIDEMESHEDSIZINGPARAMS.html#ansys.meshing.prime.WarningCode.OVERRIDEMESHEDSIZINGPARAMS" title="ansys.meshing.prime.WarningCode.OVERRIDEMESHEDSIZINGPARAMS"><code class="xref py py-obj docutils literal notranslate"><span class="pre">WarningCode.OVERRIDEMESHEDSIZINGPARAMS</span></code></a></p></td>
 <td><p>Overriding meshed sizing parameters.</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="ansys.meshing.prime.WarningCode.OVERRIDESOISIZINGPARAMS.html#ansys.meshing.prime.WarningCode.OVERRIDESOISIZINGPARAMS" title="ansys.meshing.prime.WarningCode.OVERRIDESOISIZINGPARAMS"><code class="xref py py-obj docutils literal notranslate"><span class="pre">WarningCode.OVERRIDESOISIZINGPARAMS</span></code></a></p></td>
-<td><p>Overriding SOI sizing parameters.</p></td>
-</tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="ansys.meshing.prime.WarningCode.INVALIDSIZECONTROLSCOPE.html#ansys.meshing.prime.WarningCode.INVALIDSIZECONTROLSCOPE" title="ansys.meshing.prime.WarningCode.INVALIDSIZECONTROLSCOPE"><code class="xref py py-obj docutils literal notranslate"><span class="pre">WarningCode.INVALIDSIZECONTROLSCOPE</span></code></a></p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="ansys.meshing.prime.WarningCode.INVALIDSIZECONTROLSCOPE.html#ansys.meshing.prime.WarningCode.INVALIDSIZECONTROLSCOPE" title="ansys.meshing.prime.WarningCode.INVALIDSIZECONTROLSCOPE"><code class="xref py py-obj docutils literal notranslate"><span class="pre">WarningCode.INVALIDSIZECONTROLSCOPE</span></code></a></p></td>
 <td><p>Invalid size control type provided.</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="ansys.meshing.prime.WarningCode.OVERRIDEGROWTHRATEPARAM.html#ansys.meshing.prime.WarningCode.OVERRIDEGROWTHRATEPARAM" title="ansys.meshing.prime.WarningCode.OVERRIDEGROWTHRATEPARAM"><code class="xref py py-obj docutils literal notranslate"><span class="pre">WarningCode.OVERRIDEGROWTHRATEPARAM</span></code></a></p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="ansys.meshing.prime.WarningCode.OVERRIDEGROWTHRATEPARAM.html#ansys.meshing.prime.WarningCode.OVERRIDEGROWTHRATEPARAM" title="ansys.meshing.prime.WarningCode.OVERRIDEGROWTHRATEPARAM"><code class="xref py py-obj docutils literal notranslate"><span class="pre">WarningCode.OVERRIDEGROWTHRATEPARAM</span></code></a></p></td>
 <td><p>Overriding growth rate parameter.</p></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="ansys.meshing.prime.WarningCode.OVERRIDESUGGESTEDNAME.html#ansys.meshing.prime.WarningCode.OVERRIDESUGGESTEDNAME" title="ansys.meshing.prime.WarningCode.OVERRIDESUGGESTEDNAME"><code class="xref py py-obj docutils literal notranslate"><span class="pre">WarningCode.OVERRIDESUGGESTEDNAME</span></code></a></p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="ansys.meshing.prime.WarningCode.OVERRIDESUGGESTEDNAME.html#ansys.meshing.prime.WarningCode.OVERRIDESUGGESTEDNAME" title="ansys.meshing.prime.WarningCode.OVERRIDESUGGESTEDNAME"><code class="xref py py-obj docutils literal notranslate"><span class="pre">WarningCode.OVERRIDESUGGESTEDNAME</span></code></a></p></td>
 <td><p>Override name by suggested name.</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="ansys.meshing.prime.WarningCode.OVERRIDESURFACESCOPEENTITY.html#ansys.meshing.prime.WarningCode.OVERRIDESURFACESCOPEENTITY" title="ansys.meshing.prime.WarningCode.OVERRIDESURFACESCOPEENTITY"><code class="xref py py-obj docutils literal notranslate"><span class="pre">WarningCode.OVERRIDESURFACESCOPEENTITY</span></code></a></p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="ansys.meshing.prime.WarningCode.OVERRIDESURFACESCOPEENTITY.html#ansys.meshing.prime.WarningCode.OVERRIDESURFACESCOPEENTITY" title="ansys.meshing.prime.WarningCode.OVERRIDESURFACESCOPEENTITY"><code class="xref py py-obj docutils literal notranslate"><span class="pre">WarningCode.OVERRIDESURFACESCOPEENTITY</span></code></a></p></td>
 <td><p>Override surface scope entity.</p></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="ansys.meshing.prime.WarningCode.OVERRIDEVOLUMESCOPEENTITY.html#ansys.meshing.prime.WarningCode.OVERRIDEVOLUMESCOPEENTITY" title="ansys.meshing.prime.WarningCode.OVERRIDEVOLUMESCOPEENTITY"><code class="xref py py-obj docutils literal notranslate"><span class="pre">WarningCode.OVERRIDEVOLUMESCOPEENTITY</span></code></a></p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="ansys.meshing.prime.WarningCode.OVERRIDEVOLUMESCOPEENTITY.html#ansys.meshing.prime.WarningCode.OVERRIDEVOLUMESCOPEENTITY" title="ansys.meshing.prime.WarningCode.OVERRIDEVOLUMESCOPEENTITY"><code class="xref py py-obj docutils literal notranslate"><span class="pre">WarningCode.OVERRIDEVOLUMESCOPEENTITY</span></code></a></p></td>
 <td><p>Override volume scope entity.</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="ansys.meshing.prime.WarningCode.MAXOFPRISMCONTROLSMINASPECTRATIO.html#ansys.meshing.prime.WarningCode.MAXOFPRISMCONTROLSMINASPECTRATIO" title="ansys.meshing.prime.WarningCode.MAXOFPRISMCONTROLSMINASPECTRATIO"><code class="xref py py-obj docutils literal notranslate"><span class="pre">WarningCode.MAXOFPRISMCONTROLSMINASPECTRATIO</span></code></a></p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="ansys.meshing.prime.WarningCode.MAXOFPRISMCONTROLSMINASPECTRATIO.html#ansys.meshing.prime.WarningCode.MAXOFPRISMCONTROLSMINASPECTRATIO" title="ansys.meshing.prime.WarningCode.MAXOFPRISMCONTROLSMINASPECTRATIO"><code class="xref py py-obj docutils literal notranslate"><span class="pre">WarningCode.MAXOFPRISMCONTROLSMINASPECTRATIO</span></code></a></p></td>
 <td><p>Maximum value of min aspect ratio from selected prism controls is considered for all selected prism controls.</p></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="ansys.meshing.prime.WarningCode.OVERRIDEEDGESCOPEENTITY.html#ansys.meshing.prime.WarningCode.OVERRIDEEDGESCOPEENTITY" title="ansys.meshing.prime.WarningCode.OVERRIDEEDGESCOPEENTITY"><code class="xref py py-obj docutils literal notranslate"><span class="pre">WarningCode.OVERRIDEEDGESCOPEENTITY</span></code></a></p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="ansys.meshing.prime.WarningCode.OVERRIDEEDGESCOPEENTITY.html#ansys.meshing.prime.WarningCode.OVERRIDEEDGESCOPEENTITY" title="ansys.meshing.prime.WarningCode.OVERRIDEEDGESCOPEENTITY"><code class="xref py py-obj docutils literal notranslate"><span class="pre">WarningCode.OVERRIDEEDGESCOPEENTITY</span></code></a></p></td>
 <td><p>Override edge scope entity.</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="ansys.meshing.prime.WarningCode.SHELLBLGAPFACTORMINLIMIT.html#ansys.meshing.prime.WarningCode.SHELLBLGAPFACTORMINLIMIT" title="ansys.meshing.prime.WarningCode.SHELLBLGAPFACTORMINLIMIT"><code class="xref py py-obj docutils literal notranslate"><span class="pre">WarningCode.SHELLBLGAPFACTORMINLIMIT</span></code></a></p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="ansys.meshing.prime.WarningCode.SHELLBLGAPFACTORMINLIMIT.html#ansys.meshing.prime.WarningCode.SHELLBLGAPFACTORMINLIMIT" title="ansys.meshing.prime.WarningCode.SHELLBLGAPFACTORMINLIMIT"><code class="xref py py-obj docutils literal notranslate"><span class="pre">WarningCode.SHELLBLGAPFACTORMINLIMIT</span></code></a></p></td>
 <td><p>Adjusted ShellBL gap factor to 0.001.</p></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="ansys.meshing.prime.WarningCode.PARTNOTINPARTSCOPE.html#ansys.meshing.prime.WarningCode.PARTNOTINPARTSCOPE" title="ansys.meshing.prime.WarningCode.PARTNOTINPARTSCOPE"><code class="xref py py-obj docutils literal notranslate"><span class="pre">WarningCode.PARTNOTINPARTSCOPE</span></code></a></p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="ansys.meshing.prime.WarningCode.PARTNOTINPARTSCOPE.html#ansys.meshing.prime.WarningCode.PARTNOTINPARTSCOPE" title="ansys.meshing.prime.WarningCode.PARTNOTINPARTSCOPE"><code class="xref py py-obj docutils literal notranslate"><span class="pre">WarningCode.PARTNOTINPARTSCOPE</span></code></a></p></td>
 <td><p>Selected part is not in the part scope of the periodic control.</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="ansys.meshing.prime.WarningCode.NUMERICPARTNAMERENAMETOALPHANUMERIC.html#ansys.meshing.prime.WarningCode.NUMERICPARTNAMERENAMETOALPHANUMERIC" title="ansys.meshing.prime.WarningCode.NUMERICPARTNAMERENAMETOALPHANUMERIC"><code class="xref py py-obj docutils literal notranslate"><span class="pre">WarningCode.NUMERICPARTNAMERENAMETOALPHANUMERIC</span></code></a></p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="ansys.meshing.prime.WarningCode.NUMERICPARTNAMERENAMETOALPHANUMERIC.html#ansys.meshing.prime.WarningCode.NUMERICPARTNAMERENAMETOALPHANUMERIC" title="ansys.meshing.prime.WarningCode.NUMERICPARTNAMERENAMETOALPHANUMERIC"><code class="xref py py-obj docutils literal notranslate"><span class="pre">WarningCode.NUMERICPARTNAMERENAMETOALPHANUMERIC</span></code></a></p></td>
 <td><p>Numeric part name renamed to alphanumeric name.</p></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="ansys.meshing.prime.WarningCode.SURFERLAYEREDQUADFAILED.html#ansys.meshing.prime.WarningCode.SURFERLAYEREDQUADFAILED" title="ansys.meshing.prime.WarningCode.SURFERLAYEREDQUADFAILED"><code class="xref py py-obj docutils literal notranslate"><span class="pre">WarningCode.SURFERLAYEREDQUADFAILED</span></code></a></p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="ansys.meshing.prime.WarningCode.SURFERLAYEREDQUADFAILED.html#ansys.meshing.prime.WarningCode.SURFERLAYEREDQUADFAILED" title="ansys.meshing.prime.WarningCode.SURFERLAYEREDQUADFAILED"><code class="xref py py-obj docutils literal notranslate"><span class="pre">WarningCode.SURFERLAYEREDQUADFAILED</span></code></a></p></td>
 <td><p>Layered quad failed with surfer.</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="ansys.meshing.prime.WarningCode.SURFERDEGENERATEFACE.html#ansys.meshing.prime.WarningCode.SURFERDEGENERATEFACE" title="ansys.meshing.prime.WarningCode.SURFERDEGENERATEFACE"><code class="xref py py-obj docutils literal notranslate"><span class="pre">WarningCode.SURFERDEGENERATEFACE</span></code></a></p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="ansys.meshing.prime.WarningCode.SURFERDEGENERATEFACE.html#ansys.meshing.prime.WarningCode.SURFERDEGENERATEFACE" title="ansys.meshing.prime.WarningCode.SURFERDEGENERATEFACE"><code class="xref py py-obj docutils literal notranslate"><span class="pre">WarningCode.SURFERDEGENERATEFACE</span></code></a></p></td>
 <td><p>Degenerate input.</p></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="ansys.meshing.prime.WarningCode.ALIGN_OPERATIONINTERRUPTED.html#ansys.meshing.prime.WarningCode.ALIGN_OPERATIONINTERRUPTED" title="ansys.meshing.prime.WarningCode.ALIGN_OPERATIONINTERRUPTED"><code class="xref py py-obj docutils literal notranslate"><span class="pre">WarningCode.ALIGN_OPERATIONINTERRUPTED</span></code></a></p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="ansys.meshing.prime.WarningCode.ALIGN_OPERATIONINTERRUPTED.html#ansys.meshing.prime.WarningCode.ALIGN_OPERATIONINTERRUPTED" title="ansys.meshing.prime.WarningCode.ALIGN_OPERATIONINTERRUPTED"><code class="xref py py-obj docutils literal notranslate"><span class="pre">WarningCode.ALIGN_OPERATIONINTERRUPTED</span></code></a></p></td>
 <td><p>Align operation interrupted.</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="ansys.meshing.prime.WarningCode.FUSEOVERLAPREMOVALINCOMPLETE.html#ansys.meshing.prime.WarningCode.FUSEOVERLAPREMOVALINCOMPLETE" title="ansys.meshing.prime.WarningCode.FUSEOVERLAPREMOVALINCOMPLETE"><code class="xref py py-obj docutils literal notranslate"><span class="pre">WarningCode.FUSEOVERLAPREMOVALINCOMPLETE</span></code></a></p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="ansys.meshing.prime.WarningCode.FUSEOVERLAPREMOVALINCOMPLETE.html#ansys.meshing.prime.WarningCode.FUSEOVERLAPREMOVALINCOMPLETE" title="ansys.meshing.prime.WarningCode.FUSEOVERLAPREMOVALINCOMPLETE"><code class="xref py py-obj docutils literal notranslate"><span class="pre">WarningCode.FUSEOVERLAPREMOVALINCOMPLETE</span></code></a></p></td>
 <td><p>Self intersections found.</p></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="ansys.meshing.prime.WarningCode.REMOVEOVERLAPWITHINTERSECT.html#ansys.meshing.prime.WarningCode.REMOVEOVERLAPWITHINTERSECT" title="ansys.meshing.prime.WarningCode.REMOVEOVERLAPWITHINTERSECT"><code class="xref py py-obj docutils literal notranslate"><span class="pre">WarningCode.REMOVEOVERLAPWITHINTERSECT</span></code></a></p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="ansys.meshing.prime.WarningCode.REMOVEOVERLAPWITHINTERSECT.html#ansys.meshing.prime.WarningCode.REMOVEOVERLAPWITHINTERSECT" title="ansys.meshing.prime.WarningCode.REMOVEOVERLAPWITHINTERSECT"><code class="xref py py-obj docutils literal notranslate"><span class="pre">WarningCode.REMOVEOVERLAPWITHINTERSECT</span></code></a></p></td>
 <td><p>Self intersections found.</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="ansys.meshing.prime.WarningCode.IGA_NOGEOMZONELETFORSPLINEFITTING.html#ansys.meshing.prime.WarningCode.IGA_NOGEOMZONELETFORSPLINEFITTING" title="ansys.meshing.prime.WarningCode.IGA_NOGEOMZONELETFORSPLINEFITTING"><code class="xref py py-obj docutils literal notranslate"><span class="pre">WarningCode.IGA_NOGEOMZONELETFORSPLINEFITTING</span></code></a></p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="ansys.meshing.prime.WarningCode.IGA_NOGEOMZONELETFORSPLINEFITTING.html#ansys.meshing.prime.WarningCode.IGA_NOGEOMZONELETFORSPLINEFITTING" title="ansys.meshing.prime.WarningCode.IGA_NOGEOMZONELETFORSPLINEFITTING"><code class="xref py py-obj docutils literal notranslate"><span class="pre">WarningCode.IGA_NOGEOMZONELETFORSPLINEFITTING</span></code></a></p></td>
 <td><p>Invalid input for IGA.</p></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="ansys.meshing.prime.WarningCode.NOHOLESFOUNDONPLANE.html#ansys.meshing.prime.WarningCode.NOHOLESFOUNDONPLANE" title="ansys.meshing.prime.WarningCode.NOHOLESFOUNDONPLANE"><code class="xref py py-obj docutils literal notranslate"><span class="pre">WarningCode.NOHOLESFOUNDONPLANE</span></code></a></p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="ansys.meshing.prime.WarningCode.NOHOLESFOUNDONPLANE.html#ansys.meshing.prime.WarningCode.NOHOLESFOUNDONPLANE" title="ansys.meshing.prime.WarningCode.NOHOLESFOUNDONPLANE"><code class="xref py py-obj docutils literal notranslate"><span class="pre">WarningCode.NOHOLESFOUNDONPLANE</span></code></a></p></td>
 <td><p>Provides warning when no closed holes are found in the given face zonelets at given plane.</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="ansys.meshing.prime.WarningCode.NOVOLUMESCOMPUTED.html#ansys.meshing.prime.WarningCode.NOVOLUMESCOMPUTED" title="ansys.meshing.prime.WarningCode.NOVOLUMESCOMPUTED"><code class="xref py py-obj docutils literal notranslate"><span class="pre">WarningCode.NOVOLUMESCOMPUTED</span></code></a></p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="ansys.meshing.prime.WarningCode.NOVOLUMESCOMPUTED.html#ansys.meshing.prime.WarningCode.NOVOLUMESCOMPUTED" title="ansys.meshing.prime.WarningCode.NOVOLUMESCOMPUTED"><code class="xref py py-obj docutils literal notranslate"><span class="pre">WarningCode.NOVOLUMESCOMPUTED</span></code></a></p></td>
 <td><p>There are no volumes found.</p></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="ansys.meshing.prime.WarningCode.EXTERNALOPENFACEZONELETSFOUND.html#ansys.meshing.prime.WarningCode.EXTERNALOPENFACEZONELETSFOUND" title="ansys.meshing.prime.WarningCode.EXTERNALOPENFACEZONELETSFOUND"><code class="xref py py-obj docutils literal notranslate"><span class="pre">WarningCode.EXTERNALOPENFACEZONELETSFOUND</span></code></a></p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="ansys.meshing.prime.WarningCode.EXTERNALOPENFACEZONELETSFOUND.html#ansys.meshing.prime.WarningCode.EXTERNALOPENFACEZONELETSFOUND" title="ansys.meshing.prime.WarningCode.EXTERNALOPENFACEZONELETSFOUND"><code class="xref py py-obj docutils literal notranslate"><span class="pre">WarningCode.EXTERNALOPENFACEZONELETSFOUND</span></code></a></p></td>
 <td><p>External open face zonelets found when computing volumes.</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="ansys.meshing.prime.WarningCode.NOVOLUMESENCLOSINGMATERIALPOINT.html#ansys.meshing.prime.WarningCode.NOVOLUMESENCLOSINGMATERIALPOINT" title="ansys.meshing.prime.WarningCode.NOVOLUMESENCLOSINGMATERIALPOINT"><code class="xref py py-obj docutils literal notranslate"><span class="pre">WarningCode.NOVOLUMESENCLOSINGMATERIALPOINT</span></code></a></p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="ansys.meshing.prime.WarningCode.NOVOLUMESENCLOSINGMATERIALPOINT.html#ansys.meshing.prime.WarningCode.NOVOLUMESENCLOSINGMATERIALPOINT" title="ansys.meshing.prime.WarningCode.NOVOLUMESENCLOSINGMATERIALPOINT"><code class="xref py py-obj docutils literal notranslate"><span class="pre">WarningCode.NOVOLUMESENCLOSINGMATERIALPOINT</span></code></a></p></td>
 <td><p>No computed volumes enclosing material point.</p></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="ansys.meshing.prime.WarningCode.EXTERNALOPENTOPOFACESFOUND.html#ansys.meshing.prime.WarningCode.EXTERNALOPENTOPOFACESFOUND" title="ansys.meshing.prime.WarningCode.EXTERNALOPENTOPOFACESFOUND"><code class="xref py py-obj docutils literal notranslate"><span class="pre">WarningCode.EXTERNALOPENTOPOFACESFOUND</span></code></a></p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="ansys.meshing.prime.WarningCode.EXTERNALOPENTOPOFACESFOUND.html#ansys.meshing.prime.WarningCode.EXTERNALOPENTOPOFACESFOUND" title="ansys.meshing.prime.WarningCode.EXTERNALOPENTOPOFACESFOUND"><code class="xref py py-obj docutils literal notranslate"><span class="pre">WarningCode.EXTERNALOPENTOPOFACESFOUND</span></code></a></p></td>
 <td><p>External open topofaces found when computing topovolumes.</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="ansys.meshing.prime.WarningCode.FACEZONELETSWITHOUTVOLUMES.html#ansys.meshing.prime.WarningCode.FACEZONELETSWITHOUTVOLUMES" title="ansys.meshing.prime.WarningCode.FACEZONELETSWITHOUTVOLUMES"><code class="xref py py-obj docutils literal notranslate"><span class="pre">WarningCode.FACEZONELETSWITHOUTVOLUMES</span></code></a></p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="ansys.meshing.prime.WarningCode.FACEZONELETSWITHOUTVOLUMES.html#ansys.meshing.prime.WarningCode.FACEZONELETSWITHOUTVOLUMES" title="ansys.meshing.prime.WarningCode.FACEZONELETSWITHOUTVOLUMES"><code class="xref py py-obj docutils literal notranslate"><span class="pre">WarningCode.FACEZONELETSWITHOUTVOLUMES</span></code></a></p></td>
 <td><p>Face zonelets have no volume associated to them.</p></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="ansys.meshing.prime.WarningCode.JOINEDZONELETSFROMMULTIPLEVOLUMES.html#ansys.meshing.prime.WarningCode.JOINEDZONELETSFROMMULTIPLEVOLUMES" title="ansys.meshing.prime.WarningCode.JOINEDZONELETSFROMMULTIPLEVOLUMES"><code class="xref py py-obj docutils literal notranslate"><span class="pre">WarningCode.JOINEDZONELETSFROMMULTIPLEVOLUMES</span></code></a></p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="ansys.meshing.prime.WarningCode.JOINEDZONELETSFROMMULTIPLEVOLUMES.html#ansys.meshing.prime.WarningCode.JOINEDZONELETSFROMMULTIPLEVOLUMES" title="ansys.meshing.prime.WarningCode.JOINEDZONELETSFROMMULTIPLEVOLUMES"><code class="xref py py-obj docutils literal notranslate"><span class="pre">WarningCode.JOINEDZONELETSFROMMULTIPLEVOLUMES</span></code></a></p></td>
 <td><p>Joined zonelets from more than two volumes.</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="ansys.meshing.prime.WarningCode.FAILEDTOUPDATEVOLUMES.html#ansys.meshing.prime.WarningCode.FAILEDTOUPDATEVOLUMES" title="ansys.meshing.prime.WarningCode.FAILEDTOUPDATEVOLUMES"><code class="xref py py-obj docutils literal notranslate"><span class="pre">WarningCode.FAILEDTOUPDATEVOLUMES</span></code></a></p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="ansys.meshing.prime.WarningCode.FAILEDTOUPDATEVOLUMES.html#ansys.meshing.prime.WarningCode.FAILEDTOUPDATEVOLUMES" title="ansys.meshing.prime.WarningCode.FAILEDTOUPDATEVOLUMES"><code class="xref py py-obj docutils literal notranslate"><span class="pre">WarningCode.FAILEDTOUPDATEVOLUMES</span></code></a></p></td>
 <td><p>Volumes are not updated after performing the operation.</p></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="ansys.meshing.prime.WarningCode.WRAPPER_SIZECONTROLNOTDEFINED.html#ansys.meshing.prime.WarningCode.WRAPPER_SIZECONTROLNOTDEFINED" title="ansys.meshing.prime.WarningCode.WRAPPER_SIZECONTROLNOTDEFINED"><code class="xref py py-obj docutils literal notranslate"><span class="pre">WarningCode.WRAPPER_SIZECONTROLNOTDEFINED</span></code></a></p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="ansys.meshing.prime.WarningCode.WRAPPER_SIZECONTROLNOTDEFINED.html#ansys.meshing.prime.WarningCode.WRAPPER_SIZECONTROLNOTDEFINED" title="ansys.meshing.prime.WarningCode.WRAPPER_SIZECONTROLNOTDEFINED"><code class="xref py py-obj docutils literal notranslate"><span class="pre">WarningCode.WRAPPER_SIZECONTROLNOTDEFINED</span></code></a></p></td>
 <td><p>No size controls provided for wrapper.</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="ansys.meshing.prime.WarningCode.WRAPPER_SIZECONTROLNOTSUPPORTED.html#ansys.meshing.prime.WarningCode.WRAPPER_SIZECONTROLNOTSUPPORTED" title="ansys.meshing.prime.WarningCode.WRAPPER_SIZECONTROLNOTSUPPORTED"><code class="xref py py-obj docutils literal notranslate"><span class="pre">WarningCode.WRAPPER_SIZECONTROLNOTSUPPORTED</span></code></a></p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="ansys.meshing.prime.WarningCode.WRAPPER_SIZECONTROLNOTSUPPORTED.html#ansys.meshing.prime.WarningCode.WRAPPER_SIZECONTROLNOTSUPPORTED" title="ansys.meshing.prime.WarningCode.WRAPPER_SIZECONTROLNOTSUPPORTED"><code class="xref py py-obj docutils literal notranslate"><span class="pre">WarningCode.WRAPPER_SIZECONTROLNOTSUPPORTED</span></code></a></p></td>
 <td><p>Size control is not supported in wrapper.</p></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="ansys.meshing.prime.WarningCode.WRAPPER_SMALLERSIZEATFEAURES.html#ansys.meshing.prime.WarningCode.WRAPPER_SMALLERSIZEATFEAURES" title="ansys.meshing.prime.WarningCode.WRAPPER_SMALLERSIZEATFEAURES"><code class="xref py py-obj docutils literal notranslate"><span class="pre">WarningCode.WRAPPER_SMALLERSIZEATFEAURES</span></code></a></p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="ansys.meshing.prime.WarningCode.WRAPPER_SMALLERSIZEATFEAURES.html#ansys.meshing.prime.WarningCode.WRAPPER_SMALLERSIZEATFEAURES" title="ansys.meshing.prime.WarningCode.WRAPPER_SMALLERSIZEATFEAURES"><code class="xref py py-obj docutils literal notranslate"><span class="pre">WarningCode.WRAPPER_SMALLERSIZEATFEAURES</span></code></a></p></td>
 <td><p>Size at features is smaller than base size.</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="ansys.meshing.prime.WarningCode.WRAPPER_SMALLERCONTACTPREVENTIONSIZE.html#ansys.meshing.prime.WarningCode.WRAPPER_SMALLERCONTACTPREVENTIONSIZE" title="ansys.meshing.prime.WarningCode.WRAPPER_SMALLERCONTACTPREVENTIONSIZE"><code class="xref py py-obj docutils literal notranslate"><span class="pre">WarningCode.WRAPPER_SMALLERCONTACTPREVENTIONSIZE</span></code></a></p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="ansys.meshing.prime.WarningCode.WRAPPER_SMALLERCONTACTPREVENTIONSIZE.html#ansys.meshing.prime.WarningCode.WRAPPER_SMALLERCONTACTPREVENTIONSIZE" title="ansys.meshing.prime.WarningCode.WRAPPER_SMALLERCONTACTPREVENTIONSIZE"><code class="xref py py-obj docutils literal notranslate"><span class="pre">WarningCode.WRAPPER_SMALLERCONTACTPREVENTIONSIZE</span></code></a></p></td>
 <td><p>Contact prevention size is smaller than base size.</p></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="ansys.meshing.prime.WarningCode.MATERIALPOINTWITHSAMENAMEEXISTS.html#ansys.meshing.prime.WarningCode.MATERIALPOINTWITHSAMENAMEEXISTS" title="ansys.meshing.prime.WarningCode.MATERIALPOINTWITHSAMENAMEEXISTS"><code class="xref py py-obj docutils literal notranslate"><span class="pre">WarningCode.MATERIALPOINTWITHSAMENAMEEXISTS</span></code></a></p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="ansys.meshing.prime.WarningCode.MATERIALPOINTWITHSAMENAMEEXISTS.html#ansys.meshing.prime.WarningCode.MATERIALPOINTWITHSAMENAMEEXISTS" title="ansys.meshing.prime.WarningCode.MATERIALPOINTWITHSAMENAMEEXISTS"><code class="xref py py-obj docutils literal notranslate"><span class="pre">WarningCode.MATERIALPOINTWITHSAMENAMEEXISTS</span></code></a></p></td>
 <td><p>Material point with the same name exists.</p></td>
-</tr>
-<tr class="row-even"><td><p><a class="reference internal" href="ansys.meshing.prime.WarningCode.WRAPPER_PATCHFLOWREGIONS_NOHOLESFOUND.html#ansys.meshing.prime.WarningCode.WRAPPER_PATCHFLOWREGIONS_NOHOLESFOUND" title="ansys.meshing.prime.WarningCode.WRAPPER_PATCHFLOWREGIONS_NOHOLESFOUND"><code class="xref py py-obj docutils literal notranslate"><span class="pre">WarningCode.WRAPPER_PATCHFLOWREGIONS_NOHOLESFOUND</span></code></a></p></td>
-<td><p>No holes detected to patch.</p></td>
 </tr>
 <tr class="row-odd"><td><p><a class="reference internal" href="ansys.meshing.prime.WarningCode.ENTITIESNOTBELONGTOANYZONE.html#ansys.meshing.prime.WarningCode.ENTITIESNOTBELONGTOANYZONE" title="ansys.meshing.prime.WarningCode.ENTITIESNOTBELONGTOANYZONE"><code class="xref py py-obj docutils literal notranslate"><span class="pre">WarningCode.ENTITIESNOTBELONGTOANYZONE</span></code></a></p></td>
 <td><p>Entities do not belong to any zone.</p></td>
@@ -1221,40 +1162,31 @@
 <td><p>Writing of ties skipped.</p></td>
 </tr>
 <tr class="row-odd"><td><p><a class="reference internal" href="ansys.meshing.prime.WarningCode.WRITINGZONELETOFLABELTOELEMENTCOMPONENTSKIPPED.html#ansys.meshing.prime.WarningCode.WRITINGZONELETOFLABELTOELEMENTCOMPONENTSKIPPED" title="ansys.meshing.prime.WarningCode.WRITINGZONELETOFLABELTOELEMENTCOMPONENTSKIPPED"><code class="xref py py-obj docutils literal notranslate"><span class="pre">WarningCode.WRITINGZONELETOFLABELTOELEMENTCOMPONENTSKIPPED</span></code></a></p></td>
-<td><p>Export of label as element component skipped.</p></td>
+<td><p>Writing of zonelet skipped while exporting label as element component.</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="ansys.meshing.prime.WarningCode.IMPORTOFNODALCOMPONENTASLABELSKIPPED.html#ansys.meshing.prime.WarningCode.IMPORTOFNODALCOMPONENTASLABELSKIPPED" title="ansys.meshing.prime.WarningCode.IMPORTOFNODALCOMPONENTASLABELSKIPPED"><code class="xref py py-obj docutils literal notranslate"><span class="pre">WarningCode.IMPORTOFNODALCOMPONENTASLABELSKIPPED</span></code></a></p></td>
-<td><p>Import of nodal component as label skipped.</p></td>
-</tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="ansys.meshing.prime.WarningCode.VT_SKIPPEDPROTECTEDENTITIES.html#ansys.meshing.prime.WarningCode.VT_SKIPPEDPROTECTEDENTITIES" title="ansys.meshing.prime.WarningCode.VT_SKIPPEDPROTECTEDENTITIES"><code class="xref py py-obj docutils literal notranslate"><span class="pre">WarningCode.VT_SKIPPEDPROTECTEDENTITIES</span></code></a></p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="ansys.meshing.prime.WarningCode.VT_SKIPPEDPROTECTEDENTITIES.html#ansys.meshing.prime.WarningCode.VT_SKIPPEDPROTECTEDENTITIES" title="ansys.meshing.prime.WarningCode.VT_SKIPPEDPROTECTEDENTITIES"><code class="xref py py-obj docutils literal notranslate"><span class="pre">WarningCode.VT_SKIPPEDPROTECTEDENTITIES</span></code></a></p></td>
 <td><p>Input contains protected entities which have been skipped.</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="ansys.meshing.prime.WarningCode.VT_SKIPPEDFEATUREENTITIES.html#ansys.meshing.prime.WarningCode.VT_SKIPPEDFEATUREENTITIES" title="ansys.meshing.prime.WarningCode.VT_SKIPPEDFEATUREENTITIES"><code class="xref py py-obj docutils literal notranslate"><span class="pre">WarningCode.VT_SKIPPEDFEATUREENTITIES</span></code></a></p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="ansys.meshing.prime.WarningCode.VT_SKIPPEDFEATUREENTITIES.html#ansys.meshing.prime.WarningCode.VT_SKIPPEDFEATUREENTITIES" title="ansys.meshing.prime.WarningCode.VT_SKIPPEDFEATUREENTITIES"><code class="xref py py-obj docutils literal notranslate"><span class="pre">WarningCode.VT_SKIPPEDFEATUREENTITIES</span></code></a></p></td>
 <td><p>Input contains feature entities which have been skipped.</p></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="ansys.meshing.prime.WarningCode.VT_SKIPPEDFREEEDGES.html#ansys.meshing.prime.WarningCode.VT_SKIPPEDFREEEDGES" title="ansys.meshing.prime.WarningCode.VT_SKIPPEDFREEEDGES"><code class="xref py py-obj docutils literal notranslate"><span class="pre">WarningCode.VT_SKIPPEDFREEEDGES</span></code></a></p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="ansys.meshing.prime.WarningCode.VT_SKIPPEDFREEEDGES.html#ansys.meshing.prime.WarningCode.VT_SKIPPEDFREEEDGES" title="ansys.meshing.prime.WarningCode.VT_SKIPPEDFREEEDGES"><code class="xref py py-obj docutils literal notranslate"><span class="pre">WarningCode.VT_SKIPPEDFREEEDGES</span></code></a></p></td>
 <td><p>Input contains free edges which have been skipped.</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="ansys.meshing.prime.WarningCode.VT_SKIPPEDNONMANIFOLDEDGES.html#ansys.meshing.prime.WarningCode.VT_SKIPPEDNONMANIFOLDEDGES" title="ansys.meshing.prime.WarningCode.VT_SKIPPEDNONMANIFOLDEDGES"><code class="xref py py-obj docutils literal notranslate"><span class="pre">WarningCode.VT_SKIPPEDNONMANIFOLDEDGES</span></code></a></p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="ansys.meshing.prime.WarningCode.VT_SKIPPEDNONMANIFOLDEDGES.html#ansys.meshing.prime.WarningCode.VT_SKIPPEDNONMANIFOLDEDGES" title="ansys.meshing.prime.WarningCode.VT_SKIPPEDNONMANIFOLDEDGES"><code class="xref py py-obj docutils literal notranslate"><span class="pre">WarningCode.VT_SKIPPEDNONMANIFOLDEDGES</span></code></a></p></td>
 <td><p>Input contains non-manifold edges which have been skipped.</p></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="ansys.meshing.prime.WarningCode.VT_SKIPPEDENTITIESINDIFFERENTZONES.html#ansys.meshing.prime.WarningCode.VT_SKIPPEDENTITIESINDIFFERENTZONES" title="ansys.meshing.prime.WarningCode.VT_SKIPPEDENTITIESINDIFFERENTZONES"><code class="xref py py-obj docutils literal notranslate"><span class="pre">WarningCode.VT_SKIPPEDENTITIESINDIFFERENTZONES</span></code></a></p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="ansys.meshing.prime.WarningCode.VT_SKIPPEDENTITIESINDIFFERENTZONES.html#ansys.meshing.prime.WarningCode.VT_SKIPPEDENTITIESINDIFFERENTZONES" title="ansys.meshing.prime.WarningCode.VT_SKIPPEDENTITIESINDIFFERENTZONES"><code class="xref py py-obj docutils literal notranslate"><span class="pre">WarningCode.VT_SKIPPEDENTITIESINDIFFERENTZONES</span></code></a></p></td>
 <td><p>Input contains entities in different zones which have been skipped.</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="ansys.meshing.prime.WarningCode.VT_CANNOTMERGENODES.html#ansys.meshing.prime.WarningCode.VT_CANNOTMERGENODES" title="ansys.meshing.prime.WarningCode.VT_CANNOTMERGENODES"><code class="xref py py-obj docutils literal notranslate"><span class="pre">WarningCode.VT_CANNOTMERGENODES</span></code></a></p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="ansys.meshing.prime.WarningCode.VT_CANNOTMERGENODES.html#ansys.meshing.prime.WarningCode.VT_CANNOTMERGENODES" title="ansys.meshing.prime.WarningCode.VT_CANNOTMERGENODES"><code class="xref py py-obj docutils literal notranslate"><span class="pre">WarningCode.VT_CANNOTMERGENODES</span></code></a></p></td>
 <td><p>Cannot merge nodes during VT operation.</p></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="ansys.meshing.prime.WarningCode.VT_REMESHFACEFAILED.html#ansys.meshing.prime.WarningCode.VT_REMESHFACEFAILED" title="ansys.meshing.prime.WarningCode.VT_REMESHFACEFAILED"><code class="xref py py-obj docutils literal notranslate"><span class="pre">WarningCode.VT_REMESHFACEFAILED</span></code></a></p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="ansys.meshing.prime.WarningCode.VT_REMESHFACEFAILED.html#ansys.meshing.prime.WarningCode.VT_REMESHFACEFAILED" title="ansys.meshing.prime.WarningCode.VT_REMESHFACEFAILED"><code class="xref py py-obj docutils literal notranslate"><span class="pre">WarningCode.VT_REMESHFACEFAILED</span></code></a></p></td>
 <td><p>Failed to remesh face(s) during VT operation.</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="ansys.meshing.prime.WarningCode.MULTIZONEMESHER_SURFACESCOPEVOLUMESCOPEINCONSISTENCY.html#ansys.meshing.prime.WarningCode.MULTIZONEMESHER_SURFACESCOPEVOLUMESCOPEINCONSISTENCY" title="ansys.meshing.prime.WarningCode.MULTIZONEMESHER_SURFACESCOPEVOLUMESCOPEINCONSISTENCY"><code class="xref py py-obj docutils literal notranslate"><span class="pre">WarningCode.MULTIZONEMESHER_SURFACESCOPEVOLUMESCOPEINCONSISTENCY</span></code></a></p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="ansys.meshing.prime.WarningCode.MULTIZONEMESHER_SURFACESCOPEVOLUMESCOPEINCONSISTENCY.html#ansys.meshing.prime.WarningCode.MULTIZONEMESHER_SURFACESCOPEVOLUMESCOPEINCONSISTENCY" title="ansys.meshing.prime.WarningCode.MULTIZONEMESHER_SURFACESCOPEVOLUMESCOPEINCONSISTENCY"><code class="xref py py-obj docutils literal notranslate"><span class="pre">WarningCode.MULTIZONEMESHER_SURFACESCOPEVOLUMESCOPEINCONSISTENCY</span></code></a></p></td>
 <td><p>MultiZone warning codes</p></td>
-</tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="ansys.meshing.prime.WarningCode.MULTIZONEMESHER_DEFEATUREDTOPOEDGES.html#ansys.meshing.prime.WarningCode.MULTIZONEMESHER_DEFEATUREDTOPOEDGES" title="ansys.meshing.prime.WarningCode.MULTIZONEMESHER_DEFEATUREDTOPOEDGES"><code class="xref py py-obj docutils literal notranslate"><span class="pre">WarningCode.MULTIZONEMESHER_DEFEATUREDTOPOEDGES</span></code></a></p></td>
-<td><p>TopoEdges that got defeatured in the MultiZone mesh.</p></td>
-</tr>
-<tr class="row-even"><td><p><a class="reference internal" href="ansys.meshing.prime.WarningCode.MULTIZONEMESHER_DEFEATUREDTOPOFACES.html#ansys.meshing.prime.WarningCode.MULTIZONEMESHER_DEFEATUREDTOPOFACES" title="ansys.meshing.prime.WarningCode.MULTIZONEMESHER_DEFEATUREDTOPOFACES"><code class="xref py py-obj docutils literal notranslate"><span class="pre">WarningCode.MULTIZONEMESHER_DEFEATUREDTOPOFACES</span></code></a></p></td>
-<td><p>TopoFaces that got defeatured in the MultiZone mesh.</p></td>
 </tr>
 </tbody>
 </table>
@@ -1333,15 +1265,12 @@
 
 <script>
 // Passing the search options to the search.js file
-const SEARCH_OPTIONS = JSON.parse('{"keys": ["title", "text", "objectID"], "limit": 10, "threshold": 0.2}');
+const SEARCH_OPTIONS = JSON.parse('{"keys": ["title", "text"], "limit": 10, "threshold": 0.2}');
 const SEARCH_FILE = "../../_static/search.json";
-const ADVANCE_SEARCH_PATH = "../../search.html";
-const EXTRA_SOURCES = JSON.parse('""');
 </script>
 
 
 <script src="../../_static/js/search.js"></script>
-
   
   <footer class="bd-footer">
 <div class="bd-footer__inner bd-page-width">
@@ -1361,7 +1290,7 @@ const EXTRA_SOURCES = JSON.parse('""');
         <div class="footer-item">
 
   <p class="sphinx-version">
-    Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 8.2.3.
+    Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 8.1.3.
     <br/>
   </p>
 </div>
@@ -1377,7 +1306,7 @@ const EXTRA_SOURCES = JSON.parse('""');
   <a href="https://sphinxdocs.ansys.com/version/stable/index.html"
     >Ansys Sphinx Theme</a
   >
-  1.6.4. <br />Last updated on
+  1.4.2. <br />Last updated on
   <span id="ast_build_date"></span>
 </p>
 <script>

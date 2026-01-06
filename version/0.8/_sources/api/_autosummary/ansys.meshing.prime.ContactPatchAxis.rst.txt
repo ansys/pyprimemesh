@@ -6,7 +6,7 @@ ContactPatchAxis
 .. currentmodule:: ansys.meshing.prime
 
 .. autoclass:: ContactPatchAxis
-
+   
    
    
    .. rubric:: Methods
@@ -20,8 +20,6 @@ ContactPatchAxis
       ContactPatchAxis.to_bytes
       ContactPatchAxis.from_bytes
       ContactPatchAxis.as_integer_ratio
-      ContactPatchAxis.is_integer
-      
    
    
 

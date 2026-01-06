@@ -32,7 +32,7 @@
 <link href="../../../_static/styles/pydata-sphinx-theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
 
     <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=8f2a1f02" />
-    <link rel="stylesheet" type="text/css" href="../../../_static/styles/ansys-sphinx-theme.css?v=9e79609d" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/styles/ansys-sphinx-theme.css?v=fbf3eb5d" />
     <link rel="stylesheet" type="text/css" href="../../../_static/copybutton.css?v=76b2166b" />
     <link rel="stylesheet" type="text/css" href="../../../_static/jupyter-sphinx.css" />
     <link rel="stylesheet" type="text/css" href="../../../_static/thebelab.css" />
@@ -40,7 +40,7 @@
     <link rel="stylesheet" type="text/css" href="../../../_static/sg_gallery-binder.css?v=f4aeca0c" />
     <link rel="stylesheet" type="text/css" href="../../../_static/sg_gallery-dataframe.css?v=2082cf3c" />
     <link rel="stylesheet" type="text/css" href="../../../_static/sg_gallery-rendered-html.css?v=1277b6f3" />
-    <link rel="stylesheet" type="text/css" href="../../../_static/styles/ansys-sphinx-theme.css?v=9e79609d" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/styles/ansys-sphinx-theme.css?v=fbf3eb5d" />
     <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.23/css/jquery.dataTables.min.css" />
     <link rel="stylesheet" type="text/css" href="https://www.nerdfonts.com/assets/css/webfont.css" />
     <link rel="stylesheet" type="text/css" href="../../../_static/sphinx-design.min.css?v=95c83b7e" />
@@ -59,7 +59,7 @@
   
     <link href="../../../_static/css/breadcrumbs.css" rel="stylesheet" />
   
-    <script src="../../../_static/documentation_options.js?v=24ea0de7"></script>
+    <script src="../../../_static/documentation_options.js?v=dbee5847"></script>
     <script src="../../../_static/doctools.js?v=9bcbadda"></script>
     <script src="../../../_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="../../../_static/clipboard.min.js?v=a7894cd8"></script>
@@ -73,7 +73,7 @@
     <script>
         DOCUMENTATION_OPTIONS.theme_version = '0.16.1';
         DOCUMENTATION_OPTIONS.theme_switcher_json_url = 'https://prime.docs.pyansys.com/versions.json';
-        DOCUMENTATION_OPTIONS.theme_switcher_version_match = 'dev';
+        DOCUMENTATION_OPTIONS.theme_switcher_version_match = '0.8';
         DOCUMENTATION_OPTIONS.show_version_warning_banner =
             false;
         </script>
@@ -82,13 +82,9 @@
     <link rel="search" title="Search" href="../../../search.html" />
     <link rel="next" title="Mesh a PCB for structural thermal analysis" href="05_pcb_stacker.html" />
     <link rel="prev" title="Mesh a pipe T-section for structural thermal and fluid flow analysis" href="03_lucid_pipe_tee.html" />
-  
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
-  <meta name="docsearch:version" content="0.10.0.dev2" />
-  <meta property="og:site_name" content="PyAnsys" />
-  <meta name="physics" content="CAD" />
-  <meta name="physics" content="Meshing" />
+  <meta name="docsearch:version" content="0.8.2" />
   </head>
   
   
@@ -169,15 +165,9 @@
     <div class="me-auto navbar-header-items__center">
       
         <div class="navbar-item">
-
 <nav>
   <ul class="bd-navbar-elements navbar-nav">
     
-<li class="nav-item ">
-  <a class="nav-link nav-internal" href="../../../index.html" title="PyPrimeMesh home">Home</a>
-</li>
-
-
 <li class="nav-item ">
   <a class="nav-link nav-internal" href="../../../getting_started/index.html">
     Getting started
@@ -205,34 +195,23 @@
   </a>
 </li>
 
-            <li class="nav-item dropdown">
-                <button class="btn dropdown-toggle nav-item" type="button"
-                data-bs-toggle="dropdown" aria-expanded="false"
-                aria-controls="pst-nav-more-links">
-                    More
-                </button>
-                <ul id="pst-nav-more-links" class="dropdown-menu">
-                    
-<li class=" ">
-  <a class="nav-link dropdown-item nav-internal" href="../../../contributing/index.html">
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../contributing/index.html">
     Contribute
   </a>
 </li>
 
-                </ul>
-            </li>
-            
   </ul>
-</nav>
-</div>
+</nav></div>
       
     </div>
     
     
     <div class="navbar-header-items__end">
       
-      
-        <div class="navbar-item">
+        <div class="navbar-item navbar-persistent--container">
+          
 <div class="search-bar pst-js-only" id="search-bar">
   <form class="bd-search d-flex align-items-center" action="../../../search.html" method="get">
     <i class="fa-solid fa-magnifying-glass"></i>
@@ -244,7 +223,9 @@
     </span>
   </form>
   <div id="static-search-results" class="static-search-results" style="display:none;" tabindex="0"></div>
-</div></div>
+</div>
+        </div>
+      
       
         <div class="navbar-item">
 <div class="version-switcher__container dropdown pst-js-only">
@@ -307,6 +288,21 @@
   </div>
   
   
+    <div class="navbar-persistent--mobile">
+<div class="search-bar pst-js-only" id="search-bar">
+  <form class="bd-search d-flex align-items-center" action="../../../search.html" method="get">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <input type="search" class="form-control" name="q" placeholder="Search the docs ..."
+      aria-label="Search the docs ..." autocomplete="off" autocorrect="off"
+      autocapitalize="off" spellcheck="false" />
+    <span class="search-button__kbd-shortcut">
+      <kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd>
+    </span>
+  </form>
+  <div id="static-search-results" class="static-search-results" style="display:none;" tabindex="0"></div>
+</div>
+    </div>
+  
 
   
     <button class="pst-navbar-icon sidebar-toggle secondary-toggle" aria-label="On this page">
@@ -353,15 +349,9 @@
           
           
             <div class="navbar-item">
-
 <nav>
   <ul class="bd-navbar-elements navbar-nav">
     
-<li class="nav-item ">
-  <a class="nav-link nav-internal" href="../../../index.html" title="PyPrimeMesh home">Home</a>
-</li>
-
-
 <li class="nav-item ">
   <a class="nav-link nav-internal" href="../../../getting_started/index.html">
     Getting started
@@ -397,8 +387,7 @@
 </li>
 
   </ul>
-</nav>
-</div>
+</nav></div>
           
         
       </div>
@@ -406,20 +395,6 @@
     
     
       <div class="sidebar-header-items__end">
-        
-          <div class="navbar-item">
-<div class="search-bar pst-js-only" id="search-bar">
-  <form class="bd-search d-flex align-items-center" action="../../../search.html" method="get">
-    <i class="fa-solid fa-magnifying-glass"></i>
-    <input type="search" class="form-control" name="q" placeholder="Search the docs ..."
-      aria-label="Search the docs ..." autocomplete="off" autocorrect="off"
-      autocapitalize="off" spellcheck="false" />
-    <span class="search-button__kbd-shortcut">
-      <kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd>
-    </span>
-  </form>
-  <div id="static-search-results" class="static-search-results" style="display:none;" tabindex="0"></div>
-</div></div>
         
           <div class="navbar-item">
 <div class="version-switcher__container dropdown pst-js-only">
@@ -499,10 +474,9 @@
 <li class="toctree-l2"><a class="reference internal" href="08_lucid_generic_f1_rear_wing.html">Mesh a generic F1 car rear wing for external aero simulation</a></li>
 <li class="toctree-l2"><a class="reference internal" href="09_multi_layer_quad_mesh_pcb.html">Mesh a generic PCB geometry with multiple hexa layers</a></li>
 <li class="toctree-l2"><a class="reference internal" href="10_wheel_ground_contact_patch.html">Create a contact patch for wrapping between a wheel and ground interface</a></li>
-<li class="toctree-l2"><a class="reference internal" href="12_import_from_pygeometry.html">Import a geometry from PyGeometry</a></li>
+<li class="toctree-l2"><a class="reference internal" href="11_solder_ball.html">Mesh a set of solder balls (beta)</a></li>
 </ul>
 </details></li>
-<li class="toctree-l1"><a class="reference internal" href="../gallery_beta/index.html">Examples using beta APIs</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../misc/index.html">Miscellaneous examples</a></li>
 </ul>
 </div>
@@ -627,7 +601,7 @@ Instantiate meshing utilities from the <code class="docutils literal notranslate
 <span class="n">mesh_util</span> <span class="o">=</span> <span class="n">prime</span><span class="o">.</span><span class="n">lucid</span><span class="o">.</span><span class="n">Mesh</span><span class="p">(</span><span class="n">model</span><span class="p">)</span>
 </pre></div>
 </div>
-<div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>using server from docker : The container name  ansys-prime-server-e418956f-45f7-4f02-ac97-2615703db767
+<div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>using server from docker : The container name  ansys-prime-server-5
 </pre></div>
 </div>
 </section>
@@ -657,7 +631,9 @@ Static Scene</label><div class="sd-tab-content docutils">
 <input id="sd-tab-item-1" name="sd-tab-set-0" type="radio">
 <label class="sd-tab-label" for="sd-tab-item-1">
 Interactive Scene</label><div class="sd-tab-content docutils">
-<iframe src='../../../_static/static_viewer.html?fileURL=../_images/examples/gallery_examples/gallery/images/sphx_glr_04_lucid_toy_car_001.vtksz' width='100%%' height='400px' frameborder='0'></iframe></div>
+
+    <iframe src='../../../_static/static_viewer.html?fileURL=../_images/examples/gallery_examples/gallery/images/sphx_glr_04_lucid_toy_car_001.vtksz' width='100%%' height='400px' frameborder='0'></iframe>
+</div>
 </div>
 </section>
 <section id="close-holes">
@@ -697,7 +673,9 @@ Static Scene</label><div class="sd-tab-content docutils">
 <input id="sd-tab-item-3" name="sd-tab-set-1" type="radio">
 <label class="sd-tab-label" for="sd-tab-item-3">
 Interactive Scene</label><div class="sd-tab-content docutils">
-<iframe src='../../../_static/static_viewer.html?fileURL=../_images/examples/gallery_examples/gallery/images/sphx_glr_04_lucid_toy_car_002.vtksz' width='100%%' height='400px' frameborder='0'></iframe></div>
+
+    <iframe src='../../../_static/static_viewer.html?fileURL=../_images/examples/gallery_examples/gallery/images/sphx_glr_04_lucid_toy_car_002.vtksz' width='100%%' height='400px' frameborder='0'></iframe>
+</div>
 </div>
 <div class="sd-tab-set docutils">
 <input checked="checked" id="sd-tab-item-4" name="sd-tab-set-2" type="radio">
@@ -707,7 +685,9 @@ Static Scene</label><div class="sd-tab-content docutils">
 <input id="sd-tab-item-5" name="sd-tab-set-2" type="radio">
 <label class="sd-tab-label" for="sd-tab-item-5">
 Interactive Scene</label><div class="sd-tab-content docutils">
-<iframe src='../../../_static/static_viewer.html?fileURL=../_images/examples/gallery_examples/gallery/images/sphx_glr_04_lucid_toy_car_003.vtksz' width='100%%' height='400px' frameborder='0'></iframe></div>
+
+    <iframe src='../../../_static/static_viewer.html?fileURL=../_images/examples/gallery_examples/gallery/images/sphx_glr_04_lucid_toy_car_003.vtksz' width='100%%' height='400px' frameborder='0'></iframe>
+</div>
 </div>
 <div class="sd-tab-set docutils">
 <input checked="checked" id="sd-tab-item-6" name="sd-tab-set-3" type="radio">
@@ -717,7 +697,9 @@ Static Scene</label><div class="sd-tab-content docutils">
 <input id="sd-tab-item-7" name="sd-tab-set-3" type="radio">
 <label class="sd-tab-label" for="sd-tab-item-7">
 Interactive Scene</label><div class="sd-tab-content docutils">
-<iframe src='../../../_static/static_viewer.html?fileURL=../_images/examples/gallery_examples/gallery/images/sphx_glr_04_lucid_toy_car_004.vtksz' width='100%%' height='400px' frameborder='0'></iframe></div>
+
+    <iframe src='../../../_static/static_viewer.html?fileURL=../_images/examples/gallery_examples/gallery/images/sphx_glr_04_lucid_toy_car_004.vtksz' width='100%%' height='400px' frameborder='0'></iframe>
+</div>
 </div>
 <div class="sd-tab-set docutils">
 <input checked="checked" id="sd-tab-item-8" name="sd-tab-set-4" type="radio">
@@ -727,7 +709,9 @@ Static Scene</label><div class="sd-tab-content docutils">
 <input id="sd-tab-item-9" name="sd-tab-set-4" type="radio">
 <label class="sd-tab-label" for="sd-tab-item-9">
 Interactive Scene</label><div class="sd-tab-content docutils">
-<iframe src='../../../_static/static_viewer.html?fileURL=../_images/examples/gallery_examples/gallery/images/sphx_glr_04_lucid_toy_car_005.vtksz' width='100%%' height='400px' frameborder='0'></iframe></div>
+
+    <iframe src='../../../_static/static_viewer.html?fileURL=../_images/examples/gallery_examples/gallery/images/sphx_glr_04_lucid_toy_car_005.vtksz' width='100%%' height='400px' frameborder='0'></iframe>
+</div>
 </div>
 <div class="sd-tab-set docutils">
 <input checked="checked" id="sd-tab-item-10" name="sd-tab-set-5" type="radio">
@@ -737,7 +721,9 @@ Static Scene</label><div class="sd-tab-content docutils">
 <input id="sd-tab-item-11" name="sd-tab-set-5" type="radio">
 <label class="sd-tab-label" for="sd-tab-item-11">
 Interactive Scene</label><div class="sd-tab-content docutils">
-<iframe src='../../../_static/static_viewer.html?fileURL=../_images/examples/gallery_examples/gallery/images/sphx_glr_04_lucid_toy_car_006.vtksz' width='100%%' height='400px' frameborder='0'></iframe></div>
+
+    <iframe src='../../../_static/static_viewer.html?fileURL=../_images/examples/gallery_examples/gallery/images/sphx_glr_04_lucid_toy_car_006.vtksz' width='100%%' height='400px' frameborder='0'></iframe>
+</div>
 </div>
 <div class="sd-tab-set docutils">
 <input checked="checked" id="sd-tab-item-12" name="sd-tab-set-6" type="radio">
@@ -747,7 +733,9 @@ Static Scene</label><div class="sd-tab-content docutils">
 <input id="sd-tab-item-13" name="sd-tab-set-6" type="radio">
 <label class="sd-tab-label" for="sd-tab-item-13">
 Interactive Scene</label><div class="sd-tab-content docutils">
-<iframe src='../../../_static/static_viewer.html?fileURL=../_images/examples/gallery_examples/gallery/images/sphx_glr_04_lucid_toy_car_007.vtksz' width='100%%' height='400px' frameborder='0'></iframe></div>
+
+    <iframe src='../../../_static/static_viewer.html?fileURL=../_images/examples/gallery_examples/gallery/images/sphx_glr_04_lucid_toy_car_007.vtksz' width='100%%' height='400px' frameborder='0'></iframe>
+</div>
 </div>
 </section>
 <section id="extract-fluid-using-a-wrapper">
@@ -829,10 +817,10 @@ as surface mesh.</p>
 Number of multi edges 0
 Number of self intersections 0
 
-Max value of  Skewness :  0.885063
+Max value of  Skewness :  0.888453
 Faces above limit:  0
 
-Max value of  AspectRatio :  9.6834
+Max value of  AspectRatio :  11.18
 Faces above limit:  0
 </pre></div>
 </div>
@@ -862,7 +850,7 @@ Part ID: 23
     0 Edge Zones
         Edge Zone Name(s) : []
     21 Face Zones
-        Face Zone Name(s) : [surface, surface.1, cabin, exhaust, engine, unreferenced_wheel_1, tunnel_unreferenced, outlet_tunnel, ground_overlap_floor_tunnel, inlet_tunnel, outer_unreferenced, __wrap__.2_engine_unreferenced, component21_unreferenced, component22_unreferenced, component24_unreferenced, component25_unreferenced, __wrap__.1_exhaust_unreferenced, __wrap___cabin_unreferenced, unreferenced_wheel_2, unreferenced_wheel_3, unreferenced_wheel_4]
+        Face Zone Name(s) : [surface, surface.1, cabin, exhaust, engine, __wrap__.2_engine_unreferenced, __wrap__.1_exhaust_unreferenced, __wrap___cabin_unreferenced, unreferenced_wheel_2, unreferenced_wheel_3, unreferenced_wheel_4, unreferenced_wheel_1, outer_unreferenced, component24_unreferenced, component21_unreferenced, tunnel_unreferenced, ground_overlap_floor_tunnel, outlet_tunnel, component25_unreferenced, inlet_tunnel, component22_unreferenced]
     6 Volume Zones
         Volume Zone Name(s) : [__wrap__.2, __wrap__.1, __wrap__, component25, component24, tunnel.1]
 
@@ -914,7 +902,9 @@ Static Scene</label><div class="sd-tab-content docutils">
 <input id="sd-tab-item-15" name="sd-tab-set-7" type="radio">
 <label class="sd-tab-label" for="sd-tab-item-15">
 Interactive Scene</label><div class="sd-tab-content docutils">
-<iframe src='../../../_static/static_viewer.html?fileURL=../_images/examples/gallery_examples/gallery/images/sphx_glr_04_lucid_toy_car_008.vtksz' width='100%%' height='400px' frameborder='0'></iframe></div>
+
+    <iframe src='../../../_static/static_viewer.html?fileURL=../_images/examples/gallery_examples/gallery/images/sphx_glr_04_lucid_toy_car_008.vtksz' width='100%%' height='400px' frameborder='0'></iframe>
+</div>
 </div>
 <div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>Part Summary:
 
@@ -927,7 +917,7 @@ Part ID: 23
     0 Edge Zones
         Edge Zone Name(s) : []
     21 Face Zones
-        Face Zone Name(s) : [surface, surface.1, cabin, exhaust, engine, unreferenced_wheel_1, tunnel_unreferenced, outlet_tunnel, ground_overlap_floor_tunnel, inlet_tunnel, outer_unreferenced, __wrap__.2_engine_unreferenced, component21_unreferenced, component22_unreferenced, component24_unreferenced, component25_unreferenced, __wrap__.1_exhaust_unreferenced, __wrap___cabin_unreferenced, unreferenced_wheel_2, unreferenced_wheel_3, unreferenced_wheel_4]
+        Face Zone Name(s) : [surface, surface.1, cabin, exhaust, engine, __wrap__.2_engine_unreferenced, __wrap__.1_exhaust_unreferenced, __wrap___cabin_unreferenced, unreferenced_wheel_2, unreferenced_wheel_3, unreferenced_wheel_4, unreferenced_wheel_1, outer_unreferenced, component24_unreferenced, component21_unreferenced, tunnel_unreferenced, ground_overlap_floor_tunnel, outlet_tunnel, component25_unreferenced, inlet_tunnel, component22_unreferenced]
     6 Volume Zones
         Volume Zone Name(s) : [__wrap__.2, __wrap__.1, __wrap__, component25, component24, tunnel.1]
 
@@ -978,10 +968,10 @@ Non positive areas: False
 Invalid shape: False
 Left handed faces: False
 
-No. of cells :  3384560
+No. of cells :  3387075
 
-Max value of  Skewness :  0.998898
-Cells above limit:  43
+Max value of  Skewness :  0.992412
+Cells above limit:  35
 </pre></div>
 </div>
 </section>
@@ -1033,7 +1023,7 @@ Non positive areas: False
 Invalid shape: False
 Left handed faces: False
 
-Max value of  Skewness :  0.949938
+Max value of  Skewness :  0.949307
 Cells above limit:  0
 </pre></div>
 </div>
@@ -1049,7 +1039,7 @@ Cells above limit:  0
 </pre></div>
 </div>
 <div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>Exported file:
- /tmp/tmpu2zgd2pm/toy_car_lucid.cas
+ /tmp/tmp2dfl3r58/toy_car_lucid.cas
 </pre></div>
 </div>
 </section>
@@ -1058,7 +1048,7 @@ Cells above limit:  0
 <div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="n">prime_client</span><span class="o">.</span><span class="n">exit</span><span class="p">()</span>
 </pre></div>
 </div>
-<p class="sphx-glr-timing"><strong>Total running time of the script:</strong> (3 minutes 43.900 seconds)</p>
+<p class="sphx-glr-timing"><strong>Total running time of the script:</strong> (3 minutes 48.353 seconds)</p>
 <div class="sphx-glr-footer sphx-glr-footer-example docutils container" id="sphx-glr-download-examples-gallery-examples-gallery-04-lucid-toy-car-py">
 <div class="sphx-glr-download sphx-glr-download-jupyter docutils container">
 <p><a class="reference download internal" download="" href="../../../_downloads/c31154301c8f4c33ef191e1e3499a027/04_lucid_toy_car.ipynb"><code class="xref download docutils literal notranslate"><span class="pre">Download</span> <span class="pre">Jupyter</span> <span class="pre">notebook:</span> <span class="pre">04_lucid_toy_car.ipynb</span></code></a></p>
@@ -1156,15 +1146,12 @@ Cells above limit:  0
 
 <script>
 // Passing the search options to the search.js file
-const SEARCH_OPTIONS = JSON.parse('{"keys": ["title", "text", "objectID"], "limit": 10, "threshold": 0.2}');
+const SEARCH_OPTIONS = JSON.parse('{"keys": ["title", "text"], "limit": 10, "threshold": 0.2}');
 const SEARCH_FILE = "../../../_static/search.json";
-const ADVANCE_SEARCH_PATH = "../../../search.html";
-const EXTRA_SOURCES = JSON.parse('""');
 </script>
 
 
 <script src="../../../_static/js/search.js"></script>
-
   
   <footer class="bd-footer">
 <div class="bd-footer__inner bd-page-width">
@@ -1184,7 +1171,7 @@ const EXTRA_SOURCES = JSON.parse('""');
         <div class="footer-item">
 
   <p class="sphinx-version">
-    Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 8.2.3.
+    Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 8.1.3.
     <br/>
   </p>
 </div>
@@ -1200,7 +1187,7 @@ const EXTRA_SOURCES = JSON.parse('""');
   <a href="https://sphinxdocs.ansys.com/version/stable/index.html"
     >Ansys Sphinx Theme</a
   >
-  1.6.4. <br />Last updated on
+  1.4.2. <br />Last updated on
   <span id="ast_build_date"></span>
 </p>
 <script>

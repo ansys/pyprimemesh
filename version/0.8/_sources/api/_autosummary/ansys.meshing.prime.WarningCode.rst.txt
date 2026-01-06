@@ -6,7 +6,7 @@ WarningCode
 .. currentmodule:: ansys.meshing.prime
 
 .. autoclass:: WarningCode
-
+   
    
    
    .. rubric:: Methods
@@ -20,8 +20,6 @@ WarningCode
       WarningCode.to_bytes
       WarningCode.from_bytes
       WarningCode.as_integer_ratio
-      WarningCode.is_integer
-      
    
    
 
@@ -45,7 +43,6 @@ WarningCode
       WarningCode.OVERRIDEPROXIMITYSIZINGPARAMS
       WarningCode.OVERRIDEBOISIZINGPARAMS
       WarningCode.OVERRIDEMESHEDSIZINGPARAMS
-      WarningCode.OVERRIDESOISIZINGPARAMS
       WarningCode.INVALIDSIZECONTROLSCOPE
       WarningCode.OVERRIDEGROWTHRATEPARAM
       WarningCode.OVERRIDESUGGESTEDNAME
@@ -75,7 +72,6 @@ WarningCode
       WarningCode.WRAPPER_SMALLERSIZEATFEAURES
       WarningCode.WRAPPER_SMALLERCONTACTPREVENTIONSIZE
       WarningCode.MATERIALPOINTWITHSAMENAMEEXISTS
-      WarningCode.WRAPPER_PATCHFLOWREGIONS_NOHOLESFOUND
       WarningCode.ENTITIESNOTBELONGTOANYZONE
       WarningCode.INVALIDENTITIESNOTADDEDTOZONE
       WarningCode.LOCALSURFERNOFACEREGISTERED
@@ -91,7 +87,6 @@ WarningCode
       WarningCode.WRITINGCONTACTPAIRSSKIPPED
       WarningCode.WRITINGTIESSKIPPED
       WarningCode.WRITINGZONELETOFLABELTOELEMENTCOMPONENTSKIPPED
-      WarningCode.IMPORTOFNODALCOMPONENTASLABELSKIPPED
       WarningCode.VT_SKIPPEDPROTECTEDENTITIES
       WarningCode.VT_SKIPPEDFEATUREENTITIES
       WarningCode.VT_SKIPPEDFREEEDGES
@@ -100,8 +95,6 @@ WarningCode
       WarningCode.VT_CANNOTMERGENODES
       WarningCode.VT_REMESHFACEFAILED
       WarningCode.MULTIZONEMESHER_SURFACESCOPEVOLUMESCOPEINCONSISTENCY
-      WarningCode.MULTIZONEMESHER_DEFEATUREDTOPOEDGES
-      WarningCode.MULTIZONEMESHER_DEFEATUREDTOPOFACES
    
    
 

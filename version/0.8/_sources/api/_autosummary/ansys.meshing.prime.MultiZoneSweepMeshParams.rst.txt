@@ -6,7 +6,7 @@ MultiZoneSweepMeshParams
 .. currentmodule:: ansys.meshing.prime
 
 .. autoclass:: MultiZoneSweepMeshParams
-
+   
    
    
    .. rubric:: Methods

@@ -6,7 +6,7 @@ CopyZoneletsParams
 .. currentmodule:: ansys.meshing.prime
 
 .. autoclass:: CopyZoneletsParams
-
+   
    
    
    .. rubric:: Methods

@@ -6,7 +6,7 @@ VolumeQualitySummaryParams
 .. currentmodule:: ansys.meshing.prime
 
 .. autoclass:: VolumeQualitySummaryParams
-
+   
    
    
    .. rubric:: Methods

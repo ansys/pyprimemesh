@@ -6,7 +6,7 @@ SearchByFoldsResults
 .. currentmodule:: ansys.meshing.prime
 
 .. autoclass:: SearchByFoldsResults
-
+   
    
    
    .. rubric:: Methods

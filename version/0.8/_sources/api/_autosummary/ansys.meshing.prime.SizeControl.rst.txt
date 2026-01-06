@@ -6,7 +6,7 @@ SizeControl
 .. currentmodule:: ansys.meshing.prime
 
 .. autoclass:: SizeControl
-
+   
    
    
    .. rubric:: Methods
@@ -23,7 +23,6 @@ SizeControl
       SizeControl.get_scope
       SizeControl.get_sizing_type
       SizeControl.get_soft_sizing_params
-      SizeControl.get_soi_sizing_params
       SizeControl.get_summary
       SizeControl.set_boi_sizing_params
       SizeControl.set_curvature_sizing_params
@@ -32,7 +31,6 @@ SizeControl
       SizeControl.set_proximity_sizing_params
       SizeControl.set_scope
       SizeControl.set_soft_sizing_params
-      SizeControl.set_soi_sizing_params
       SizeControl.set_suggested_name
    
    

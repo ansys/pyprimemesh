@@ -6,7 +6,7 @@ LSDynaFileFormatType
 .. currentmodule:: ansys.meshing.prime
 
 .. autoclass:: LSDynaFileFormatType
-
+   
    
    
    .. rubric:: Methods
@@ -20,8 +20,6 @@ LSDynaFileFormatType
       LSDynaFileFormatType.to_bytes
       LSDynaFileFormatType.from_bytes
       LSDynaFileFormatType.as_integer_ratio
-      LSDynaFileFormatType.is_integer
-      
    
    
 

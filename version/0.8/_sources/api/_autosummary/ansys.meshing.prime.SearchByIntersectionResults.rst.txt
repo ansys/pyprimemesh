@@ -6,7 +6,7 @@ SearchByIntersectionResults
 .. currentmodule:: ansys.meshing.prime
 
 .. autoclass:: SearchByIntersectionResults
-
+   
    
    
    .. rubric:: Methods

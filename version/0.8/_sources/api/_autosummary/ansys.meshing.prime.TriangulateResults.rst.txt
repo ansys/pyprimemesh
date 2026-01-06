@@ -6,7 +6,7 @@ TriangulateResults
 .. currentmodule:: ansys.meshing.prime
 
 .. autoclass:: TriangulateResults
-
+   
    
    
    .. rubric:: Methods

@@ -6,7 +6,7 @@ SweepType
 .. currentmodule:: ansys.meshing.prime
 
 .. autoclass:: SweepType
-
+   
    
    
    .. rubric:: Methods
@@ -20,8 +20,6 @@ SweepType
       SweepType.to_bytes
       SweepType.from_bytes
       SweepType.as_integer_ratio
-      SweepType.is_integer
-      
    
    
 

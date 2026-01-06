@@ -6,7 +6,7 @@ ComputeVolumesParams
 .. currentmodule:: ansys.meshing.prime
 
 .. autoclass:: ComputeVolumesParams
-
+   
    
    
    .. rubric:: Methods

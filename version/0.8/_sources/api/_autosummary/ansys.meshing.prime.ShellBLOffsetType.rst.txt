@@ -6,7 +6,7 @@ ShellBLOffsetType
 .. currentmodule:: ansys.meshing.prime
 
 .. autoclass:: ShellBLOffsetType
-
+   
    
    
    .. rubric:: Methods
@@ -20,8 +20,6 @@ ShellBLOffsetType
       ShellBLOffsetType.to_bytes
       ShellBLOffsetType.from_bytes
       ShellBLOffsetType.as_integer_ratio
-      ShellBLOffsetType.is_integer
-      
    
    
 

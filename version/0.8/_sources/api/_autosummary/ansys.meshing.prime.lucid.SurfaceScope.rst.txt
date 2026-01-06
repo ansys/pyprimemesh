@@ -6,7 +6,7 @@ SurfaceScope
 .. currentmodule:: ansys.meshing.prime.lucid
 
 .. autoclass:: SurfaceScope
-
+   
    
    
    .. rubric:: Methods

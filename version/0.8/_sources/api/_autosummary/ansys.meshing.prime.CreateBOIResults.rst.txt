@@ -6,7 +6,7 @@ CreateBOIResults
 .. currentmodule:: ansys.meshing.prime
 
 .. autoclass:: CreateBOIResults
-
+   
    
    
    .. rubric:: Methods

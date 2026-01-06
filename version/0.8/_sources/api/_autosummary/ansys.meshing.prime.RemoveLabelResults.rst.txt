@@ -6,7 +6,7 @@ RemoveLabelResults
 .. currentmodule:: ansys.meshing.prime
 
 .. autoclass:: RemoveLabelResults
-
+   
    
    
    .. rubric:: Methods

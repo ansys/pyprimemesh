@@ -6,7 +6,7 @@ IntersectParams
 .. currentmodule:: ansys.meshing.prime
 
 .. autoclass:: IntersectParams
-
+   
    
    
    .. rubric:: Methods

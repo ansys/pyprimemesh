@@ -6,7 +6,7 @@ AutoNodeMoveParams
 .. currentmodule:: ansys.meshing.prime
 
 .. autoclass:: AutoNodeMoveParams
-
+   
    
    
    .. rubric:: Methods

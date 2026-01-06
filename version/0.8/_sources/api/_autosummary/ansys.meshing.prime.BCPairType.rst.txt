@@ -6,7 +6,7 @@ BCPairType
 .. currentmodule:: ansys.meshing.prime
 
 .. autoclass:: BCPairType
-
+   
    
    
    .. rubric:: Methods
@@ -20,8 +20,6 @@ BCPairType
       BCPairType.to_bytes
       BCPairType.from_bytes
       BCPairType.as_integer_ratio
-      BCPairType.is_integer
-      
    
    
 

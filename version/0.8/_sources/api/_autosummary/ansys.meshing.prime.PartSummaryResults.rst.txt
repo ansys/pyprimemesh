@@ -6,7 +6,7 @@ PartSummaryResults
 .. currentmodule:: ansys.meshing.prime
 
 .. autoclass:: PartSummaryResults
-
+   
    
    
    .. rubric:: Methods

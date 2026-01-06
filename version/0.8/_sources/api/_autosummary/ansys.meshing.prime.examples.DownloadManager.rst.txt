@@ -6,7 +6,7 @@ DownloadManager
 .. currentmodule:: ansys.meshing.prime.examples
 
 .. autoclass:: DownloadManager
-
+   
    
    
    .. rubric:: Methods

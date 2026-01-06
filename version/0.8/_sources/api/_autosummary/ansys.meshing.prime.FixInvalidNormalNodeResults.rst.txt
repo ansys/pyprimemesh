@@ -6,7 +6,7 @@ FixInvalidNormalNodeResults
 .. currentmodule:: ansys.meshing.prime
 
 .. autoclass:: FixInvalidNormalNodeResults
-
+   
    
    
    .. rubric:: Methods

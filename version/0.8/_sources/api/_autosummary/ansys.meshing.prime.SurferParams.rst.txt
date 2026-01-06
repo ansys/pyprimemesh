@@ -6,7 +6,7 @@ SurferParams
 .. currentmodule:: ansys.meshing.prime
 
 .. autoclass:: SurferParams
-
+   
    
    
    .. rubric:: Methods

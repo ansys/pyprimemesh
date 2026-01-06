@@ -90,7 +90,7 @@ Instantiate meshing utilities from the ``lucid`` class.
 
  .. code-block:: none
 
-    using server from docker : The container name  ansys-prime-server-eea90943-5a3f-455a-8314-4cbe38091d2c
+    using server from docker : The container name  ansys-prime-server-11
 
 
 
@@ -119,13 +119,13 @@ as all the topo faces of the wheel part.
 
     ###################
     # Visualize results
-    # ~~~~~~~~~~~~~~~~~
+    # =================
     # .. code-block:: python
     #
     #   display = PrimePlotter()
     #   display.plot(model, scope=prime.ScopeDefinition(model, label_expression="ground, wheel"))
     #   display.show()
-    #
+
     print(model)
 
 
@@ -206,7 +206,7 @@ requires face zonelets from mesh parts as input.
  .. code-block:: none
 
 
-    [<ansys.meshing.prime.autogen.partstructs.DeleteTopoEntitiesResults object at 0x7fdf823a3610>, <ansys.meshing.prime.autogen.partstructs.DeleteTopoEntitiesResults object at 0x7fdf822b8d60>]
+    [<ansys.meshing.prime.autogen.partstructs.DeleteTopoEntitiesResults object at 0x7f3ece701300>, <ansys.meshing.prime.autogen.partstructs.DeleteTopoEntitiesResults object at 0x7f3ece700c70>]
 
 
 
@@ -263,7 +263,7 @@ gaps between contact regions.
     #          model, scope=prime.ScopeDefinition(model, label_expression="ground, patch*, wheel")
     #   )
     #   display.show()
-    #
+
 
 
 
@@ -272,7 +272,7 @@ gaps between contact regions.
 
  .. code-block:: none
 
-    0
+    ErrorCode.NOERROR
     Part Summary:
 
     Part Name: enclosure
@@ -371,10 +371,10 @@ patch, ground, and wheel.
 
 
 
-.. GENERATED FROM PYTHON SOURCE LINES 194-205
+.. GENERATED FROM PYTHON SOURCE LINES 194-204
 
 Open a pyvistaqt window
-~~~~~~~~~~~~~~~~~~~~~~~
+=======================
 .. code-block:: python
 
     display = PrimePlotter()
@@ -384,10 +384,10 @@ Open a pyvistaqt window
     )
     display.show()
 
-
-.. GENERATED FROM PYTHON SOURCE LINES 205-207
+.. GENERATED FROM PYTHON SOURCE LINES 204-207
 
 .. code-block:: Python
+
 
     print(model)
 
@@ -404,7 +404,7 @@ Open a pyvistaqt window
     Part Name: __wrap__
     Part ID: 5
         1 Edge Zonelets
-        618 Face Zonelets
+        617 Face Zonelets
         0 Cell Zonelets
 
         0 Edge Zones
@@ -496,34 +496,34 @@ Apply five layers of prisms to the wheel, patch, and ground. Mesh with polyhedra
     Part Name: __wrap__
     Part ID: 5
         1 Edge Zonelets
-        618 Face Zonelets
+        617 Face Zonelets
         1 Cell Zonelets
 
         0 Edge Zones
             Edge Zone Name(s) : []
         8 Face Zones
-            Face Zone Name(s) : [wheel_wheel_body, enclosure_side_left, enclosure_top, enclosure_ground, enclosure_front, enclosure_side_right, back_enclosure, __contact_patch___patch___contact_patch__]
+            Face Zone Name(s) : [__contact_patch___patch___contact_patch__, wheel_wheel_body, back_enclosure, enclosure_top, enclosure_front, enclosure_side_left, enclosure_ground, enclosure_side_right]
         1 Volume Zones
             Volume Zone Name(s) : [enclosure.1]
 
         14 Label(s)
             Names: [___geom_features___, __contact_patch__, __extracted__features__, __intersect_loops__, back, enclosure, front, ground, patch___contact_patch__, side_left, side_right, top, wheel, wheel_body]
 
-        Bounding box (-6.00691e-19 -2.30926e-12 -20)
+        Bounding box (-1.22259e-18 -2.30926e-12 -20)
                      (453.2 774.6 655.059)
 
         Mesh Summary: 
-            994704 Nodes 
-            58136 Poly Faces 
+            1029675 Nodes 
+            64423 Poly Faces 
             0 Quad Faces 
             0 Tri Faces 
-            58136 Faces 
-            363861 Poly Cells 
+            64423 Faces 
+            397911 Poly Cells 
             0 Hex Cells 
             0 Prism Cells 
             0 Pyramid Cells 
             0 Tet Cells 
-            363861 Cells 
+            397911 Cells 
 
 
 
@@ -557,7 +557,7 @@ Write a CAS file for use in the Fluent solver.
 
  .. code-block:: none
 
-    Fluent case exported at /tmp/tmpvyqqtgs2/wheel_ground_contact.cas.h5
+    Fluent case exported at /tmp/tmpjdawj9ze/wheel_ground_contact.cas.h5
 
 
 
@@ -583,7 +583,7 @@ Exit the PyPrimeMesh session
 
 .. rst-class:: sphx-glr-timing
 
-   **Total running time of the script:** (2 minutes 38.473 seconds)
+   **Total running time of the script:** (3 minutes 5.061 seconds)
 
 
 .. _sphx_glr_download_examples_gallery_examples_gallery_10_wheel_ground_contact_patch.py:

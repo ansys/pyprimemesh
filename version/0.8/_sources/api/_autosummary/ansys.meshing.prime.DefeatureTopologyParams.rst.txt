@@ -6,7 +6,7 @@ DefeatureTopologyParams
 .. currentmodule:: ansys.meshing.prime
 
 .. autoclass:: DefeatureTopologyParams
-
+   
    
    
    .. rubric:: Methods

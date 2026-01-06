@@ -6,7 +6,7 @@ FaceQualityMeasure
 .. currentmodule:: ansys.meshing.prime
 
 .. autoclass:: FaceQualityMeasure
-
+   
    
    
    .. rubric:: Methods
@@ -20,8 +20,6 @@ FaceQualityMeasure
       FaceQualityMeasure.to_bytes
       FaceQualityMeasure.from_bytes
       FaceQualityMeasure.as_integer_ratio
-      FaceQualityMeasure.is_integer
-      
    
    
 

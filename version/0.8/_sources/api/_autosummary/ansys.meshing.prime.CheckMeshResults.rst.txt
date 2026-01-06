@@ -6,7 +6,7 @@ CheckMeshResults
 .. currentmodule:: ansys.meshing.prime
 
 .. autoclass:: CheckMeshResults
-
+   
    
    
    .. rubric:: Methods

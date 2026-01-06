@@ -6,7 +6,7 @@ SetNameResults
 .. currentmodule:: ansys.meshing.prime
 
 .. autoclass:: SetNameResults
-
+   
    
    
    .. rubric:: Methods

@@ -6,7 +6,7 @@ CadRefacetingResolution
 .. currentmodule:: ansys.meshing.prime
 
 .. autoclass:: CadRefacetingResolution
-
+   
    
    
    .. rubric:: Methods
@@ -20,8 +20,6 @@ CadRefacetingResolution
       CadRefacetingResolution.to_bytes
       CadRefacetingResolution.from_bytes
       CadRefacetingResolution.as_integer_ratio
-      CadRefacetingResolution.is_integer
-      
    
    
 

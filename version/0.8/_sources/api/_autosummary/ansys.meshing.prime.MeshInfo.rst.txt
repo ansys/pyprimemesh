@@ -6,7 +6,7 @@ MeshInfo
 .. currentmodule:: ansys.meshing.prime
 
 .. autoclass:: MeshInfo
-
+   
    
    
    .. rubric:: Methods

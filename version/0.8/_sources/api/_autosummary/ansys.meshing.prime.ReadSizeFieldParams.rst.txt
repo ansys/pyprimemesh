@@ -6,7 +6,7 @@ ReadSizeFieldParams
 .. currentmodule:: ansys.meshing.prime
 
 .. autoclass:: ReadSizeFieldParams
-
+   
    
    
    .. rubric:: Methods

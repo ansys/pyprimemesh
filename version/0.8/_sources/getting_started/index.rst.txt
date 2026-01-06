@@ -33,19 +33,14 @@ This table provides compatibility information:
 |                            |                            |                          |
 | 0.7.x                      | 25.1.0 (2025 R1)           | 3.10 to 3.12             |
 |                            |                            |                          |
-| 0.8.x                      | 25.1.1 (2025 R1 SP1)/      | 3.10 to 3.12             |
-|                            | 25.1.2 (2025 R1 SP2)       |                          |
-|                            |                            |                          |
-| 0.9.x                      | 25.2.0 (2025 R2)           | 3.10 to 3.13             |
+| 0.8.x                      | 25.1.1 (2025 R1 SP1)       | 3.10 to 3.12             |
 +----------------------------+----------------------------+--------------------------+
-
-.. _Installation:
 
 Installation
 ------------
 
 The ``ansys-meshing-prime`` package currently supports Python 3.10
-to Python 3.13 on the Windows and Linux operating systems.
+to Python 3.12 on the Windows and Linux operating systems.
 
 You can install PyPrimeMesh with all dependencies directly from `PyPI <https://pypi.org/>`_  with this command:
 
@@ -70,6 +65,60 @@ To install a basic version of the client, use this command instead:
 
    pip install -e .
 
+Connecting through gRPC
+-----------------------
+
+PyPrimeMesh uses gRPC to provide secure communications between client and server.
+When you run the client and server on the same machine:
+
+- For Linux OS, PyPrimeMesh uses UDS (Unix Domain Socket) for communications.
+  
+- For Windows OS, PyPrimeMesh uses interceptor to validate gRPC connections, 
+  ensures the client is running on the same Windows user account as the server and authenticates the client.
+
+When you launch PyPrimeMesh, gRPC  establishes a connection between the Client and Server
+through the secure option. **Secure** is the default option when you use launch_prime(). 
+You should always use the **Secure** option to establish a secured connection between the client and server.
+
+When you want to make an insecure connection between the client and server,
+you may need to specify the connection type as follows:
+
+.. code-block:: python
+
+   client = prime.launch_prime(
+       connection_type=prime.internals.config.ConnectionType.GRPC_INSECURE
+   )
+
+.. note::   
+   Insecure option is not recommended.
+
+Connect securely using certificates
+--------------------------------------
+
+PyPrimeMesh offers secure connection using certificates. For secure connection with mutual TLS (mTLS), you may pass a client certificate directory and server certificate directory using client_certs_dir and server_certs_dir respectively to launch_prime().
+
+client_certs_dir should contain the following files:
+
+- client.crt
+  
+- client.key
+  
+- ca.crt
+  
+server_certs_dir should contain the following files:
+
+- server.crt
+  
+- server.key
+  
+- ca.crt
+
+.. note::
+   - Ensure that ca.crt file is the same for the client and the server. You should not modify the 
+     file names in the client_certs_dir and server_certs_dir respectively.
+
+   - The path of input the files must be the same for server and client and should be on the shared network.
+  
 
 Dependencies
 ------------
@@ -168,7 +217,7 @@ for the Ansys Prime Server and install this image.
 
    .. code-block:: pycon
 
-        docker pull ghcr.io/ansys/prime:25.2.0
+        docker pull ghcr.io/ansys/prime:25.1.0
 
 
 Build the Ansys Prime Server linux container
@@ -207,7 +256,7 @@ For example,
 
    .. code-block:: pycon
 
-      $AWP_ROOT252/commonfiles/CPython/3_10/linx64/Release/python/bin/python  build_docker_linux.py $AWP_ROOT252
+      $AWP_ROOT251/commonfiles/CPython/3_10/linx64/Release/python/bin/python  build_docker_linux.py $AWP_ROOT251
 
 3. Check that the image has been created successfully. 
 
@@ -243,12 +292,11 @@ Define the following general environment variables prior to using the Ansys Prim
       export ANSYSLMD_LICENSE_FILE=<valid license server>
 
 .. note::
-   PyPrimeMesh supports Docker image creation from 2025 R1 version.
+   Docker image creation is supported from 2025 R1 version.
 
 Launching Ansys Prime Server 
 ''''''''''''''''''''''''''''''
-Ensure that you have installed ``ansys-meshing-prime`` package before launching Ansys Prime Server. 
-To install ``ansys-meshing-prime`` package, refer :ref:`Installation`.
+
 Ansys Prime Server can be launched as follows:
 
 .. code-block:: pycon

@@ -66,7 +66,7 @@ The recommended data formats to be included in the example are:
 
 Supporting input files should be added in:
 
-`Github Example Data Repository <https://github.com/ansys/example-data/tree/main/pyprimemesh>`_
+`Github Example Data Repository <https://github.com/ansys/example-data/tree/master/pyprimemesh>`_
 
 Referencing files as enum and creating download function in:
 
@@ -107,7 +107,7 @@ After this preamble is the first code block:
 
  .. code-block:: none
 
-    using server from docker : The container name  ansys-prime-server-9be0a0a0-a9ed-49cb-9000-e4f14a51ccd6
+    using server from docker : The container name  ansys-prime-server-13
     Part Summary:
 
     Part Name: flow_volume
@@ -254,7 +254,7 @@ Stop Ansys Prime Server
 
 .. rst-class:: sphx-glr-timing
 
-   **Total running time of the script:** (0 minutes 23.287 seconds)
+   **Total running time of the script:** (0 minutes 25.474 seconds)
 
 
 .. _sphx_glr_download_examples_gallery_examples_misc_example_template.py:

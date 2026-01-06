@@ -6,7 +6,7 @@ ConnectFacesParams
 .. currentmodule:: ansys.meshing.prime
 
 .. autoclass:: ConnectFacesParams
-
+   
    
    
    .. rubric:: Methods

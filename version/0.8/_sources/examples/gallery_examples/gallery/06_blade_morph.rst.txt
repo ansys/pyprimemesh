@@ -78,7 +78,7 @@ Get the client model and instantiate meshing utilities from the ``lucid`` class.
 
  .. code-block:: none
 
-    using server from docker : The container name  ansys-prime-server-9519598b-169e-4b09-aa53-8a9b3de54f0e
+    using server from docker : The container name  ansys-prime-server-7
 
 
 
@@ -313,7 +313,7 @@ file.
     This get_abaqus_simulation_data is a beta API. The behavior and implementation may change in future.
 
     Exported file:
-     /tmp/tmprla3mzfl/morphed_turbine_blade.cdb
+     /tmp/tmpho8zyvlt/morphed_turbine_blade.cdb
 
 
 
@@ -339,7 +339,7 @@ Exit PyPrimeMesh
 
 .. rst-class:: sphx-glr-timing
 
-   **Total running time of the script:** (1 minutes 12.484 seconds)
+   **Total running time of the script:** (1 minutes 36.222 seconds)
 
 
 .. _sphx_glr_download_examples_gallery_examples_gallery_06_blade_morph.py:

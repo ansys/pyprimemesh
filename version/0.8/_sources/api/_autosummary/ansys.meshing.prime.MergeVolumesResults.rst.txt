@@ -6,7 +6,7 @@ MergeVolumesResults
 .. currentmodule:: ansys.meshing.prime
 
 .. autoclass:: MergeVolumesResults
-
+   
    
    
    .. rubric:: Methods

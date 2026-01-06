@@ -6,7 +6,7 @@ SubtractZoneletsParams
 .. currentmodule:: ansys.meshing.prime
 
 .. autoclass:: SubtractZoneletsParams
-
+   
    
    
    .. rubric:: Methods

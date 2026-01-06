@@ -6,7 +6,7 @@ DeadRegion
 .. currentmodule:: ansys.meshing.prime
 
 .. autoclass:: DeadRegion
-
+   
    
    
    .. rubric:: Methods

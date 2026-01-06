@@ -6,7 +6,7 @@ VolumeNamingType
 .. currentmodule:: ansys.meshing.prime
 
 .. autoclass:: VolumeNamingType
-
+   
    
    
    .. rubric:: Methods
@@ -20,8 +20,6 @@ VolumeNamingType
       VolumeNamingType.to_bytes
       VolumeNamingType.from_bytes
       VolumeNamingType.as_integer_ratio
-      VolumeNamingType.is_integer
-      
    
    
 

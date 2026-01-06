@@ -6,7 +6,7 @@ ControlPointSelection
 .. currentmodule:: ansys.meshing.prime
 
 .. autoclass:: ControlPointSelection
-
+   
    
    
    .. rubric:: Methods
@@ -20,8 +20,6 @@ ControlPointSelection
       ControlPointSelection.to_bytes
       ControlPointSelection.from_bytes
       ControlPointSelection.as_integer_ratio
-      ControlPointSelection.is_integer
-      
    
    
 

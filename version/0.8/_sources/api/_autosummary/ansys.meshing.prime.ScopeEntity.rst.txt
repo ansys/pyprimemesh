@@ -6,7 +6,7 @@ ScopeEntity
 .. currentmodule:: ansys.meshing.prime
 
 .. autoclass:: ScopeEntity
-
+   
    
    
    .. rubric:: Methods
@@ -20,8 +20,6 @@ ScopeEntity
       ScopeEntity.to_bytes
       ScopeEntity.from_bytes
       ScopeEntity.as_integer_ratio
-      ScopeEntity.is_integer
-      
    
    
 

@@ -6,7 +6,7 @@ ThinVolumeMeshParams
 .. currentmodule:: ansys.meshing.prime
 
 .. autoclass:: ThinVolumeMeshParams
-
+   
    
    
    .. rubric:: Methods

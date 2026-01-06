@@ -6,7 +6,7 @@ ImportMapdlCdbParams
 .. currentmodule:: ansys.meshing.prime
 
 .. autoclass:: ImportMapdlCdbParams
-
+   
    
    
    .. rubric:: Methods

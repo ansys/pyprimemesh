@@ -6,7 +6,7 @@ PeriodicControl
 .. currentmodule:: ansys.meshing.prime
 
 .. autoclass:: PeriodicControl
-
+   
    
    
    .. rubric:: Methods

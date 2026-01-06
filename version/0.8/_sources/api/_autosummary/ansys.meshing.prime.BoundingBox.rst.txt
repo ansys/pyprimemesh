@@ -6,7 +6,7 @@ BoundingBox
 .. currentmodule:: ansys.meshing.prime
 
 .. autoclass:: BoundingBox
-
+   
    
    
    .. rubric:: Methods

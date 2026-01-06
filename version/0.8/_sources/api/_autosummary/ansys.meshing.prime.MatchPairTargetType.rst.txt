@@ -6,7 +6,7 @@ MatchPairTargetType
 .. currentmodule:: ansys.meshing.prime
 
 .. autoclass:: MatchPairTargetType
-
+   
    
    
    .. rubric:: Methods
@@ -20,8 +20,6 @@ MatchPairTargetType
       MatchPairTargetType.to_bytes
       MatchPairTargetType.from_bytes
       MatchPairTargetType.as_integer_ratio
-      MatchPairTargetType.is_integer
-      
    
    
 

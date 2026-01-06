@@ -6,7 +6,7 @@ DetectHolesParams
 .. currentmodule:: ansys.meshing.prime
 
 .. autoclass:: DetectHolesParams
-
+   
    
    
    .. rubric:: Methods

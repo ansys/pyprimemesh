@@ -6,7 +6,7 @@ SurfaceUtilities
 .. currentmodule:: ansys.meshing.prime
 
 .. autoclass:: SurfaceUtilities
-
+   
    
    
    .. rubric:: Methods

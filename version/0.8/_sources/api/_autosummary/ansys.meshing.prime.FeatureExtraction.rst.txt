@@ -6,7 +6,7 @@ FeatureExtraction
 .. currentmodule:: ansys.meshing.prime
 
 .. autoclass:: FeatureExtraction
-
+   
    
    
    .. rubric:: Methods

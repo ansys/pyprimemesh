@@ -6,7 +6,7 @@ RepairTopologyParams
 .. currentmodule:: ansys.meshing.prime
 
 .. autoclass:: RepairTopologyParams
-
+   
    
    
    .. rubric:: Methods

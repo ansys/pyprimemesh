@@ -6,7 +6,7 @@ ResolveIntersectionsParams
 .. currentmodule:: ansys.meshing.prime
 
 .. autoclass:: ResolveIntersectionsParams
-
+   
    
    
    .. rubric:: Methods

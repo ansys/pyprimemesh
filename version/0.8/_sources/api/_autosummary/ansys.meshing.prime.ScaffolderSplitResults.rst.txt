@@ -6,7 +6,7 @@ ScaffolderSplitResults
 .. currentmodule:: ansys.meshing.prime
 
 .. autoclass:: ScaffolderSplitResults
-
+   
    
    
    .. rubric:: Methods

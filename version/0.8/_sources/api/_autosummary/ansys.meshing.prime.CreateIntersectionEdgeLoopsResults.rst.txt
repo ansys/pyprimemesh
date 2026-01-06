@@ -6,7 +6,7 @@ CreateIntersectionEdgeLoopsResults
 .. currentmodule:: ansys.meshing.prime
 
 .. autoclass:: CreateIntersectionEdgeLoopsResults
-
+   
    
    
    .. rubric:: Methods

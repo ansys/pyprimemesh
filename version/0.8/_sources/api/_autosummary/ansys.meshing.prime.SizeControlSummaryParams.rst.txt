@@ -6,7 +6,7 @@ SizeControlSummaryParams
 .. currentmodule:: ansys.meshing.prime
 
 .. autoclass:: SizeControlSummaryParams
-
+   
    
    
    .. rubric:: Methods

@@ -6,7 +6,7 @@ FeatureRecoveryParams
 .. currentmodule:: ansys.meshing.prime
 
 .. autoclass:: FeatureRecoveryParams
-
+   
    
    
    .. rubric:: Methods

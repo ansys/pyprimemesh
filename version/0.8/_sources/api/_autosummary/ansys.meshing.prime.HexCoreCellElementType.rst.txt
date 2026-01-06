@@ -6,7 +6,7 @@ HexCoreCellElementType
 .. currentmodule:: ansys.meshing.prime
 
 .. autoclass:: HexCoreCellElementType
-
+   
    
    
    .. rubric:: Methods
@@ -20,8 +20,6 @@ HexCoreCellElementType
       HexCoreCellElementType.to_bytes
       HexCoreCellElementType.from_bytes
       HexCoreCellElementType.as_integer_ratio
-      HexCoreCellElementType.is_integer
-      
    
    
 

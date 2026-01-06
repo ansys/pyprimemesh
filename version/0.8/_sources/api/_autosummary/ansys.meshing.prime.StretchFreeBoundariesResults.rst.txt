@@ -6,7 +6,7 @@ StretchFreeBoundariesResults
 .. currentmodule:: ansys.meshing.prime
 
 .. autoclass:: StretchFreeBoundariesResults
-
+   
    
    
    .. rubric:: Methods

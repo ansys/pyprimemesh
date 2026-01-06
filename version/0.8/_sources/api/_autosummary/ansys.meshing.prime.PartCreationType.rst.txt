@@ -6,7 +6,7 @@ PartCreationType
 .. currentmodule:: ansys.meshing.prime
 
 .. autoclass:: PartCreationType
-
+   
    
    
    .. rubric:: Methods
@@ -20,8 +20,6 @@ PartCreationType
       PartCreationType.to_bytes
       PartCreationType.from_bytes
       PartCreationType.as_integer_ratio
-      PartCreationType.is_integer
-      
    
    
 

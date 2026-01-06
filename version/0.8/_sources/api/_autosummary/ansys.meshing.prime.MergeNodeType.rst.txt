@@ -6,7 +6,7 @@ MergeNodeType
 .. currentmodule:: ansys.meshing.prime
 
 .. autoclass:: MergeNodeType
-
+   
    
    
    .. rubric:: Methods
@@ -20,8 +20,6 @@ MergeNodeType
       MergeNodeType.to_bytes
       MergeNodeType.from_bytes
       MergeNodeType.as_integer_ratio
-      MergeNodeType.is_integer
-      
    
    
 

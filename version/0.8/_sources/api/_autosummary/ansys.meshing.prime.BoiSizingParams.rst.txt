@@ -6,7 +6,7 @@ BoiSizingParams
 .. currentmodule:: ansys.meshing.prime
 
 .. autoclass:: BoiSizingParams
-
+   
    
    
    .. rubric:: Methods

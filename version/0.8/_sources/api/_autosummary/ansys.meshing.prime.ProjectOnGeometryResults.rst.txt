@@ -6,7 +6,7 @@ ProjectOnGeometryResults
 .. currentmodule:: ansys.meshing.prime
 
 .. autoclass:: ProjectOnGeometryResults
-
+   
    
    
    .. rubric:: Methods

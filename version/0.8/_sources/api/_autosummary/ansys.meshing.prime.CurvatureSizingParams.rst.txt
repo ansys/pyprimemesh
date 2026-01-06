@@ -6,7 +6,7 @@ CurvatureSizingParams
 .. currentmodule:: ansys.meshing.prime
 
 .. autoclass:: CurvatureSizingParams
-
+   
    
    
    .. rubric:: Methods

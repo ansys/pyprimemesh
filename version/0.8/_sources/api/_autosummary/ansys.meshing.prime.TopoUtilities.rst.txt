@@ -6,7 +6,7 @@ TopoUtilities
 .. currentmodule:: ansys.meshing.prime
 
 .. autoclass:: TopoUtilities
-
+   
    
    
    .. rubric:: Methods

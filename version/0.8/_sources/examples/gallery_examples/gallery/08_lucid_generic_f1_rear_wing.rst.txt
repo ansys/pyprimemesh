@@ -88,7 +88,7 @@ Instantiate meshing utilities from the ``lucid`` class.
 
  .. code-block:: none
 
-    using server from docker : The container name  ansys-prime-server-42edad7e-6e9d-4a9b-8138-4f8419550d4c
+    using server from docker : The container name  ansys-prime-server-9
 
 
 
@@ -288,7 +288,7 @@ the growth and refinement of the volume mesh.
  .. code-block:: none
 
 
-    <ansys.meshing.prime.autogen.sizefieldstructs.VolumetricSizeFieldComputeResults object at 0x7fc3dc7f7750>
+    <ansys.meshing.prime.autogen.sizefieldstructs.VolumetricSizeFieldComputeResults object at 0x7f3eceefbe80>
 
 
 
@@ -408,7 +408,7 @@ for ``f1_rw_enclosure``.
  .. code-block:: none
 
 
-    <ansys.meshing.prime.autogen.controlstructs.SetScopeResults object at 0x7fc3dc6ae330>
+    <ansys.meshing.prime.autogen.controlstructs.SetScopeResults object at 0x7f3eceefb7c0>
 
 
 
@@ -491,7 +491,7 @@ Volume mesh with hexcore polyhedral elements and boundary layer refinement.
  .. code-block:: none
 
 
-    <ansys.meshing.prime.autogen.automeshstructs.AutoMeshResults object at 0x7fc3dc7f7750>
+    <ansys.meshing.prime.autogen.automeshstructs.AutoMeshResults object at 0x7f3eceefb790>
 
 
 
@@ -592,17 +592,17 @@ Print mesh statistics
                      (500 900 1200)
 
         Mesh Summary: 
-            1604547 Nodes 
-            73398 Poly Faces 
+            1608351 Nodes 
+            73946 Poly Faces 
             0 Quad Faces 
             0 Tri Faces 
-            73398 Faces 
-            589375 Poly Cells 
+            73946 Faces 
+            590371 Poly Cells 
             0 Hex Cells 
             0 Prism Cells 
             0 Pyramid Cells 
             0 Tet Cells 
-            589375 Cells 
+            590371 Cells 
 
     n_topo_edges :  0
     n_topo_faces :  0
@@ -614,18 +614,18 @@ Print mesh statistics
     n_face_zones :  4
     n_volume_zones :  2
     n_labels :  4
-    n_nodes :  1604547
-    n_faces :  73398
-    n_cells :  589375
+    n_nodes :  1608351
+    n_faces :  73946
+    n_cells :  590371
     n_tri_faces :  0
-    n_poly_faces :  73398
+    n_poly_faces :  73946
     n_quad_faces :  0
     n_second_order_tri_faces :  0
     n_second_order_quad_faces :  0
     n_tet_cells :  0
     n_pyra_cells :  0
     n_prism_cells :  0
-    n_poly_cells :  589375
+    n_poly_cells :  590371
     n_hex_cells :  0
     n_second_order_tet_cells :  0
     n_second_order_pyra_cells :  0
@@ -633,14 +633,14 @@ Print mesh statistics
     n_second_order_hex_cells :  0
     n_unmeshed_topo_faces :  0
 
-    Maximum inverse-orthoginal quality of the volume mesh :  0.868199
+    Maximum inverse-orthoginal quality of the volume mesh :  0.873838
 
     Mesh check
     has_non_positive_volumes :  False
     has_non_positive_areas :  False
     has_invalid_shape :  False
     has_left_handed_faces :  False
-    error_code :  0
+    error_code :  ErrorCode.NOERROR
     warning_codes :  []
 
 
@@ -672,10 +672,10 @@ Export as CAS file for external aero simulations.
 
  .. code-block:: none
 
-    /tmp/tmpuwzq3hjo
+    /tmp/tmp_bfpk0p5
 
     Exported file:
-     /tmp/tmpuwzq3hjo/f1_rear_wing_vol_mesh.cas
+     /tmp/tmp_bfpk0p5/f1_rear_wing_vol_mesh.cas
 
 
 
@@ -701,7 +701,7 @@ Exit PyPrimeMesh
 
 .. rst-class:: sphx-glr-timing
 
-   **Total running time of the script:** (1 minutes 47.444 seconds)
+   **Total running time of the script:** (1 minutes 39.550 seconds)
 
 
 .. _sphx_glr_download_examples_gallery_examples_gallery_08_lucid_generic_f1_rear_wing.py:

@@ -6,7 +6,7 @@ IGAUnstructuredSplineSurf
 .. currentmodule:: ansys.meshing.prime
 
 .. autoclass:: IGAUnstructuredSplineSurf
-
+   
    
    
    .. rubric:: Methods
@@ -30,7 +30,6 @@ IGAUnstructuredSplineSurf
       IGAUnstructuredSplineSurf.average_mesh_size
       IGAUnstructuredSplineSurf.bad_spline_points_indices
       IGAUnstructuredSplineSurf.control_points
-      IGAUnstructuredSplineSurf.degree
       IGAUnstructuredSplineSurf.deviation_array
       IGAUnstructuredSplineSurf.elements_count
       IGAUnstructuredSplineSurf.id

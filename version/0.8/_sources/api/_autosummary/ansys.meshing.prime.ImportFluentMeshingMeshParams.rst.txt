@@ -6,7 +6,7 @@ ImportFluentMeshingMeshParams
 .. currentmodule:: ansys.meshing.prime
 
 .. autoclass:: ImportFluentMeshingMeshParams
-
+   
    
    
    .. rubric:: Methods

@@ -6,7 +6,7 @@ VolumetricScaffolderParams
 .. currentmodule:: ansys.meshing.prime
 
 .. autoclass:: VolumetricScaffolderParams
-
+   
    
    
    .. rubric:: Methods

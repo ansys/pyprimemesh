@@ -6,7 +6,7 @@ MaterialPointType
 .. currentmodule:: ansys.meshing.prime
 
 .. autoclass:: MaterialPointType
-
+   
    
    
    .. rubric:: Methods
@@ -20,8 +20,6 @@ MaterialPointType
       MaterialPointType.to_bytes
       MaterialPointType.from_bytes
       MaterialPointType.as_integer_ratio
-      MaterialPointType.is_integer
-      
    
    
 

@@ -6,7 +6,7 @@ ScopeZoneletParams
 .. currentmodule:: ansys.meshing.prime
 
 .. autoclass:: ScopeZoneletParams
-
+   
    
    
    .. rubric:: Methods

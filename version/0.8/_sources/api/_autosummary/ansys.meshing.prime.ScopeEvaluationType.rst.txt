@@ -6,7 +6,7 @@ ScopeEvaluationType
 .. currentmodule:: ansys.meshing.prime
 
 .. autoclass:: ScopeEvaluationType
-
+   
    
    
    .. rubric:: Methods
@@ -20,8 +20,6 @@ ScopeEvaluationType
       ScopeEvaluationType.to_bytes
       ScopeEvaluationType.from_bytes
       ScopeEvaluationType.as_integer_ratio
-      ScopeEvaluationType.is_integer
-      
    
    
 

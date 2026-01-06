@@ -6,7 +6,7 @@ CellZoneletType
 .. currentmodule:: ansys.meshing.prime
 
 .. autoclass:: CellZoneletType
-
+   
    
    
    .. rubric:: Methods
@@ -20,8 +20,6 @@ CellZoneletType
       CellZoneletType.to_bytes
       CellZoneletType.from_bytes
       CellZoneletType.as_integer_ratio
-      CellZoneletType.is_integer
-      
    
    
 

@@ -6,7 +6,7 @@ SolverType
 .. currentmodule:: ansys.meshing.prime
 
 .. autoclass:: SolverType
-
+   
    
    
    .. rubric:: Methods
@@ -20,8 +20,6 @@ SolverType
       SolverType.to_bytes
       SolverType.from_bytes
       SolverType.as_integer_ratio
-      SolverType.is_integer
-      
    
    
 

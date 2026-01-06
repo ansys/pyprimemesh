@@ -6,7 +6,7 @@ WrapperImproveResult
 .. currentmodule:: ansys.meshing.prime
 
 .. autoclass:: WrapperImproveResult
-
+   
    
    
    .. rubric:: Methods

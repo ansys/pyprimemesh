@@ -6,7 +6,7 @@ ThinVolumeControl
 .. currentmodule:: ansys.meshing.prime
 
 .. autoclass:: ThinVolumeControl
-
+   
    
    
    .. rubric:: Methods
@@ -15,9 +15,6 @@ ThinVolumeControl
       :toctree:
    
       
-      ThinVolumeControl.get_source_scope
-      ThinVolumeControl.get_target_scope
-      ThinVolumeControl.get_volume_scope
       ThinVolumeControl.set_source_scope
       ThinVolumeControl.set_target_scope
       ThinVolumeControl.set_thin_volume_mesh_params

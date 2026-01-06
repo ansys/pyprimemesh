@@ -6,7 +6,7 @@ WrapRegion
 .. currentmodule:: ansys.meshing.prime
 
 .. autoclass:: WrapRegion
-
+   
    
    
    .. rubric:: Methods
@@ -20,8 +20,6 @@ WrapRegion
       WrapRegion.to_bytes
       WrapRegion.from_bytes
       WrapRegion.as_integer_ratio
-      WrapRegion.is_integer
-      
    
    
 

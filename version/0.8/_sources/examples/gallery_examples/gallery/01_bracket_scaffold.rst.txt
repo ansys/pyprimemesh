@@ -77,7 +77,7 @@ Connect the PyPrimeMesh client and get the model.
 
  .. code-block:: none
 
-    using server from docker : The container name  ansys-prime-server-bbc97f77-410f-47e1-904d-2c50527aed64
+    using server from docker : The container name  ansys-prime-server-2
 
 
 
@@ -119,7 +119,7 @@ Create the part per the CAD model for the topology-based connection.
  .. code-block:: none
 
 
-    <ansys.meshing.prime.autogen.fileiostructs.ImportCadResults object at 0x7f7b8199bc50>
+    <ansys.meshing.prime.autogen.fileiostructs.ImportCadResults object at 0x7f3f5f1e5720>
 
 
 
@@ -277,7 +277,7 @@ Scaffold the topofaces, topoedges, or both with connection parameters.
  .. code-block:: none
 
     n_incomplete_topo_faces :  0
-    error_code :  0
+    error_code :  ErrorCode.NOERROR
 
 
 
@@ -368,9 +368,9 @@ Write a CDB file for use in the APDL solver.
  .. code-block:: none
 
     This get_abaqus_simulation_data is a beta API. The behavior and implementation may change in future.
-    /home/runner/work/pyprimemesh/pyprimemesh/.venv/lib/python3.13/site-packages/ansys/meshing/prime/core/fileio.py:339: PrimeRuntimeWarning: Skipped the export of label as element component because the labelled topology or zonelets are not a part of any zone. Refer label_export_params to export desired labels as nodal components.
+    /home/runner/work/pyprimemesh/pyprimemesh/.venv/lib/python3.10/site-packages/ansys/meshing/prime/core/fileio.py:337: PrimeRuntimeWarning: Export of a zonelet skipped while exporting a label as element component. Disable the parameter enable_face_based_labels in ExportMapdlCdbParams to export the label as node component.
       result = super().export_mapdl_cdb(temp_file_name, params)
-    MAPDL case exported at /tmp/tmpqpzxdbyr/bracket_scaffold.cdb
+    MAPDL case exported at /tmp/tmpyc_4dywc/bracket_scaffold.cdb
 
 
 
@@ -396,7 +396,7 @@ Exit the PyPrimeMesh session
 
 .. rst-class:: sphx-glr-timing
 
-   **Total running time of the script:** (0 minutes 31.105 seconds)
+   **Total running time of the script:** (0 minutes 23.705 seconds)
 
 
 .. _sphx_glr_download_examples_gallery_examples_gallery_01_bracket_scaffold.py:

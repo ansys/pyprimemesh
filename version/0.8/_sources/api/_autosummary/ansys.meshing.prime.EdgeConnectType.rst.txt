@@ -6,7 +6,7 @@ EdgeConnectType
 .. currentmodule:: ansys.meshing.prime
 
 .. autoclass:: EdgeConnectType
-
+   
    
    
    .. rubric:: Methods
@@ -20,8 +20,6 @@ EdgeConnectType
       EdgeConnectType.to_bytes
       EdgeConnectType.from_bytes
       EdgeConnectType.as_integer_ratio
-      EdgeConnectType.is_integer
-      
    
    
 

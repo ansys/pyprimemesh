@@ -6,7 +6,7 @@ JoinSeparateMethod
 .. currentmodule:: ansys.meshing.prime
 
 .. autoclass:: JoinSeparateMethod
-
+   
    
    
    .. rubric:: Methods
@@ -20,8 +20,6 @@ JoinSeparateMethod
       JoinSeparateMethod.to_bytes
       JoinSeparateMethod.from_bytes
       JoinSeparateMethod.as_integer_ratio
-      JoinSeparateMethod.is_integer
-      
    
    
 

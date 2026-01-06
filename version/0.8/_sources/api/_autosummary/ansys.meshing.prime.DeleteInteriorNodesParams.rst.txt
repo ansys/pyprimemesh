@@ -6,7 +6,7 @@ DeleteInteriorNodesParams
 .. currentmodule:: ansys.meshing.prime
 
 .. autoclass:: DeleteInteriorNodesParams
-
+   
    
    
    .. rubric:: Methods

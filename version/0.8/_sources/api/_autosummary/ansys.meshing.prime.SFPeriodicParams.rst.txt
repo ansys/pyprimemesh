@@ -6,7 +6,7 @@ SFPeriodicParams
 .. currentmodule:: ansys.meshing.prime
 
 .. autoclass:: SFPeriodicParams
-
+   
    
    
    .. rubric:: Methods

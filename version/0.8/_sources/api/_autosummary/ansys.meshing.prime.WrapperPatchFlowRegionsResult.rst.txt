@@ -6,7 +6,7 @@ WrapperPatchFlowRegionsResult
 .. currentmodule:: ansys.meshing.prime
 
 .. autoclass:: WrapperPatchFlowRegionsResult
-
+   
    
    
    .. rubric:: Methods

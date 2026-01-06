@@ -6,7 +6,7 @@ RefineAtContactsResults
 .. currentmodule:: ansys.meshing.prime
 
 .. autoclass:: RefineAtContactsResults
-
+   
    
    
    .. rubric:: Methods

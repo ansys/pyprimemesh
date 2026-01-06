@@ -6,7 +6,7 @@ SurfaceFeatureType
 .. currentmodule:: ansys.meshing.prime
 
 .. autoclass:: SurfaceFeatureType
-
+   
    
    
    .. rubric:: Methods
@@ -20,8 +20,6 @@ SurfaceFeatureType
       SurfaceFeatureType.to_bytes
       SurfaceFeatureType.from_bytes
       SurfaceFeatureType.as_integer_ratio
-      SurfaceFeatureType.is_integer
-      
    
    
 

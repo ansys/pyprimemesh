@@ -6,7 +6,7 @@ DetectNonCircularHolesParams
 .. currentmodule:: ansys.meshing.prime
 
 .. autoclass:: DetectNonCircularHolesParams
-
+   
    
    
    .. rubric:: Methods

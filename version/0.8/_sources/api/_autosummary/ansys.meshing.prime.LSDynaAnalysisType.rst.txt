@@ -6,7 +6,7 @@ LSDynaAnalysisType
 .. currentmodule:: ansys.meshing.prime
 
 .. autoclass:: LSDynaAnalysisType
-
+   
    
    
    .. rubric:: Methods
@@ -20,8 +20,6 @@ LSDynaAnalysisType
       LSDynaAnalysisType.to_bytes
       LSDynaAnalysisType.from_bytes
       LSDynaAnalysisType.as_integer_ratio
-      LSDynaAnalysisType.is_integer
-      
    
    
 

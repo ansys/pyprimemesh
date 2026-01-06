@@ -6,7 +6,7 @@ OptimizeQuadMeshParams
 .. currentmodule:: ansys.meshing.prime
 
 .. autoclass:: OptimizeQuadMeshParams
-
+   
    
    
    .. rubric:: Methods

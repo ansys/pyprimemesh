@@ -6,7 +6,7 @@ ExportMapdlCdbResults
 .. currentmodule:: ansys.meshing.prime
 
 .. autoclass:: ExportMapdlCdbResults
-
+   
    
    
    .. rubric:: Methods
@@ -30,7 +30,6 @@ ExportMapdlCdbResults
       ExportMapdlCdbResults.error_code
       ExportMapdlCdbResults.summary_log
       ExportMapdlCdbResults.warning_codes
-      ExportMapdlCdbResults.zone_mesh_results
    
    
 

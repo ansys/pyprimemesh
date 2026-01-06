@@ -6,7 +6,7 @@ BCsVolumetricModality
 .. currentmodule:: ansys.meshing.prime
 
 .. autoclass:: BCsVolumetricModality
-
+   
    
    
    .. rubric:: Methods
@@ -20,8 +20,6 @@ BCsVolumetricModality
       BCsVolumetricModality.to_bytes
       BCsVolumetricModality.from_bytes
       BCsVolumetricModality.as_integer_ratio
-      BCsVolumetricModality.is_integer
-      
    
    
 

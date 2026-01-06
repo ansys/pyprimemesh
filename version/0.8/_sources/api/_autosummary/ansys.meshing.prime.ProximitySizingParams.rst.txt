@@ -6,7 +6,7 @@ ProximitySizingParams
 .. currentmodule:: ansys.meshing.prime
 
 .. autoclass:: ProximitySizingParams
-
+   
    
    
    .. rubric:: Methods
