@@ -49,9 +49,9 @@ repos:
     additional_dependencies: [toml]
     exclude: "tests/|examples/|__init__.py"
 
-- repo: https://github.com/ansys/pre-commit-hooks
-  rev: v0.2.8
-  hooks:
-    - id: add-license-headers
-      args:
-          - LICENSE
+# - repo: https://github.com/ansys/pre-commit-hooks
+#   rev: v0.2.8
+#   hooks:
+#     - id: add-license-headers
+#       args:
+#           - LICENSE

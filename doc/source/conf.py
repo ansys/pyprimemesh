@@ -69,6 +69,10 @@ html_theme_options = {
         "title": "PyPrimeMesh cheat sheet",
         "version": __version__,
     },
+    "static_search": {
+        "limit": 10,
+        "minMatchCharLength": 2,
+    },
 }
 
 # Sphinx extensions
