@@ -334,7 +334,7 @@ class PrimePlotter(Plotter):
         if plottable_object is not None:
             self.plot(plottable_object, name_filter=name_filter, scope=scope, **plotting_options)
         self._backend.show(
-            object=plottable_object,
+            plottable_object=plottable_object,
             screenshot=screenshot,
             name_filter=name_filter,
             **plotting_options,

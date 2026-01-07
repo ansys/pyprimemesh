@@ -3494,11 +3494,15 @@ class ExportMapdlCdbParams(CoreObject):
 
         **This is a beta parameter**. **The behavior and name may change in the future**.
     reorder_spotweldsurface: bool, optional
-        Parameters to choose the logic of spotweld computation. When false, computes spotwelds by prioritzing proximity of surface to spotweld. When true, computes spotwelds by prioritizing proximity of boundary surface to spotweld.
+        Option to choose the logic of spotweld computation. When the value is true, computes spotwelds by prioritizing proximity of boundary surface to spotweld. When the value is false, computes spotwelds by prioritizing proximity of surface to spotweld. The default value is true.
 
         **This is a beta parameter**. **The behavior and name may change in the future**.
     skip_comments: bool, optional
-        Parameter to skip export of comments to the exported file.
+        Option to skip export of comments to the exported file. When the value is true, skips writing comments. When the value is false, writes comments to the exported file. The default value is false.
+
+        **This is a beta parameter**. **The behavior and name may change in the future**.
+    initial_counters: Dict[str, Union[str, int, float, bool]], optional
+        Parameter to specify the starting counter values for export
 
         **This is a beta parameter**. **The behavior and name may change in the future**.
     json_data: dict, optional
@@ -3537,7 +3541,8 @@ class ExportMapdlCdbParams(CoreObject):
             write_thickness_file: bool,
             contact_element_types: ContactElementTypeParams,
             reorder_spotweldsurface: bool,
-            skip_comments: bool):
+            skip_comments: bool,
+            initial_counters: Dict[str, Union[str, int, float, bool]]):
         self._config_settings = config_settings
         self._pre_solution_settings = pre_solution_settings
         self._material_properties = material_properties
@@ -3564,6 +3569,7 @@ class ExportMapdlCdbParams(CoreObject):
         self._contact_element_types = contact_element_types
         self._reorder_spotweldsurface = reorder_spotweldsurface
         self._skip_comments = skip_comments
+        self._initial_counters = initial_counters
 
     def __init__(
             self,
@@ -3594,6 +3600,7 @@ class ExportMapdlCdbParams(CoreObject):
             contact_element_types: ContactElementTypeParams = None,
             reorder_spotweldsurface: bool = None,
             skip_comments: bool = None,
+            initial_counters: Dict[str, Union[str, int, float, bool]] = None,
             json_data : dict = None,
              **kwargs):
         """Initialize a ``ExportMapdlCdbParams`` object.
@@ -3699,11 +3706,15 @@ class ExportMapdlCdbParams(CoreObject):
 
             **This is a beta parameter**. **The behavior and name may change in the future**.
         reorder_spotweldsurface: bool, optional
-            Parameters to choose the logic of spotweld computation. When false, computes spotwelds by prioritzing proximity of surface to spotweld. When true, computes spotwelds by prioritizing proximity of boundary surface to spotweld.
+            Option to choose the logic of spotweld computation. When the value is true, computes spotwelds by prioritizing proximity of boundary surface to spotweld. When the value is false, computes spotwelds by prioritizing proximity of surface to spotweld. The default value is true.
 
             **This is a beta parameter**. **The behavior and name may change in the future**.
         skip_comments: bool, optional
-            Parameter to skip export of comments to the exported file.
+            Option to skip export of comments to the exported file. When the value is true, skips writing comments. When the value is false, writes comments to the exported file. The default value is false.
+
+            **This is a beta parameter**. **The behavior and name may change in the future**.
+        initial_counters: Dict[str, Union[str, int, float, bool]], optional
+            Parameter to specify the starting counter values for export
 
             **This is a beta parameter**. **The behavior and name may change in the future**.
         json_data: dict, optional
@@ -3740,9 +3751,10 @@ class ExportMapdlCdbParams(CoreObject):
                 json_data["writeThicknessFile"] if "writeThicknessFile" in json_data else None,
                 ContactElementTypeParams(model = model, json_data = json_data["contactElementTypes"] if "contactElementTypes" in json_data else None),
                 json_data["reorderSpotweldsurface"] if "reorderSpotweldsurface" in json_data else None,
-                json_data["skipComments"] if "skipComments" in json_data else None)
+                json_data["skipComments"] if "skipComments" in json_data else None,
+                json_data["initialCounters"] if "initialCounters" in json_data else None)
         else:
-            all_field_specified = all(arg is not None for arg in [config_settings, pre_solution_settings, material_properties, boundary_conditions, analysis_settings, write_cells, enable_face_based_labels, label_export_params, write_by_zones, consider_general_connectors_as_spot_weld, analysis_type, simulation_type, analysis_settings_file_name, write_separate_blocks, write_components_with_element_blocks, separate_blocks_format_type, export_tie_as_cntgen, export_coupling_as_sfcgen, export_fasteners_as_swgen, export_rigid_bodies_as_rbgen, write_component_based_ties, mortar_contact_for_ties, write_thickness_file, contact_element_types, reorder_spotweldsurface, skip_comments])
+            all_field_specified = all(arg is not None for arg in [config_settings, pre_solution_settings, material_properties, boundary_conditions, analysis_settings, write_cells, enable_face_based_labels, label_export_params, write_by_zones, consider_general_connectors_as_spot_weld, analysis_type, simulation_type, analysis_settings_file_name, write_separate_blocks, write_components_with_element_blocks, separate_blocks_format_type, export_tie_as_cntgen, export_coupling_as_sfcgen, export_fasteners_as_swgen, export_rigid_bodies_as_rbgen, write_component_based_ties, mortar_contact_for_ties, write_thickness_file, contact_element_types, reorder_spotweldsurface, skip_comments, initial_counters])
             if all_field_specified:
                 self.__initialize(
                     config_settings,
@@ -3770,7 +3782,8 @@ class ExportMapdlCdbParams(CoreObject):
                     write_thickness_file,
                     contact_element_types,
                     reorder_spotweldsurface,
-                    skip_comments)
+                    skip_comments,
+                    initial_counters)
             else:
                 if model is None:
                     raise ValueError("Invalid assignment. Either pass a model or specify all properties.")
@@ -3803,7 +3816,8 @@ class ExportMapdlCdbParams(CoreObject):
                         write_thickness_file if write_thickness_file is not None else ( ExportMapdlCdbParams._default_params["write_thickness_file"] if "write_thickness_file" in ExportMapdlCdbParams._default_params else (json_data["writeThicknessFile"] if "writeThicknessFile" in json_data else None)),
                         contact_element_types if contact_element_types is not None else ( ExportMapdlCdbParams._default_params["contact_element_types"] if "contact_element_types" in ExportMapdlCdbParams._default_params else ContactElementTypeParams(model = model, json_data = (json_data["contactElementTypes"] if "contactElementTypes" in json_data else None))),
                         reorder_spotweldsurface if reorder_spotweldsurface is not None else ( ExportMapdlCdbParams._default_params["reorder_spotweldsurface"] if "reorder_spotweldsurface" in ExportMapdlCdbParams._default_params else (json_data["reorderSpotweldsurface"] if "reorderSpotweldsurface" in json_data else None)),
-                        skip_comments if skip_comments is not None else ( ExportMapdlCdbParams._default_params["skip_comments"] if "skip_comments" in ExportMapdlCdbParams._default_params else (json_data["skipComments"] if "skipComments" in json_data else None)))
+                        skip_comments if skip_comments is not None else ( ExportMapdlCdbParams._default_params["skip_comments"] if "skip_comments" in ExportMapdlCdbParams._default_params else (json_data["skipComments"] if "skipComments" in json_data else None)),
+                        initial_counters if initial_counters is not None else ( ExportMapdlCdbParams._default_params["initial_counters"] if "initial_counters" in ExportMapdlCdbParams._default_params else (json_data["initialCounters"] if "initialCounters" in json_data else None)))
         self._custom_params = kwargs
         if model is not None:
             [ model._logger.warning(f'Unsupported argument : {key}') for key in kwargs ]
@@ -3838,7 +3852,8 @@ class ExportMapdlCdbParams(CoreObject):
             write_thickness_file: bool = None,
             contact_element_types: ContactElementTypeParams = None,
             reorder_spotweldsurface: bool = None,
-            skip_comments: bool = None):
+            skip_comments: bool = None,
+            initial_counters: Dict[str, Union[str, int, float, bool]] = None):
         """Set the default values of the ``ExportMapdlCdbParams`` object.
 
         Parameters
@@ -3892,9 +3907,11 @@ class ExportMapdlCdbParams(CoreObject):
         contact_element_types: ContactElementTypeParams, optional
             Parameters for choosing element types for contact surfaces in TIEs and CONTACT PAIRs.
         reorder_spotweldsurface: bool, optional
-            Parameters to choose the logic of spotweld computation. When false, computes spotwelds by prioritzing proximity of surface to spotweld. When true, computes spotwelds by prioritizing proximity of boundary surface to spotweld.
+            Option to choose the logic of spotweld computation. When the value is true, computes spotwelds by prioritizing proximity of boundary surface to spotweld. When the value is false, computes spotwelds by prioritizing proximity of surface to spotweld. The default value is true.
         skip_comments: bool, optional
-            Parameter to skip export of comments to the exported file.
+            Option to skip export of comments to the exported file. When the value is true, skips writing comments. When the value is false, writes comments to the exported file. The default value is false.
+        initial_counters: Dict[str, Union[str, int, float, bool]], optional
+            Parameter to specify the starting counter values for export
         """
         args = locals()
         [ExportMapdlCdbParams._default_params.update({ key: value }) for key, value in args.items() if value is not None]
@@ -3965,11 +3982,13 @@ class ExportMapdlCdbParams(CoreObject):
             json_data["reorderSpotweldsurface"] = self._reorder_spotweldsurface
         if self._skip_comments is not None:
             json_data["skipComments"] = self._skip_comments
+        if self._initial_counters is not None:
+            json_data["initialCounters"] = self._initial_counters
         [ json_data.update({ utils.to_camel_case(key) : value }) for key, value in self._custom_params.items()]
         return json_data
 
     def __str__(self) -> str:
-        message = "config_settings :  %s\npre_solution_settings :  %s\nmaterial_properties :  %s\nboundary_conditions :  %s\nanalysis_settings :  %s\nwrite_cells :  %s\nenable_face_based_labels :  %s\nlabel_export_params :  %s\nwrite_by_zones :  %s\nconsider_general_connectors_as_spot_weld :  %s\nanalysis_type :  %s\nsimulation_type :  %s\nanalysis_settings_file_name :  %s\nwrite_separate_blocks :  %s\nwrite_components_with_element_blocks :  %s\nseparate_blocks_format_type :  %s\nexport_tie_as_cntgen :  %s\nexport_coupling_as_sfcgen :  %s\nexport_fasteners_as_swgen :  %s\nexport_rigid_bodies_as_rbgen :  %s\nwrite_component_based_ties :  %s\nmortar_contact_for_ties :  %s\nwrite_thickness_file :  %s\ncontact_element_types :  %s\nreorder_spotweldsurface :  %s\nskip_comments :  %s" % (self._config_settings, self._pre_solution_settings, self._material_properties, self._boundary_conditions, self._analysis_settings, self._write_cells, self._enable_face_based_labels, '{ ' + str(self._label_export_params) + ' }', self._write_by_zones, self._consider_general_connectors_as_spot_weld, self._analysis_type, self._simulation_type, self._analysis_settings_file_name, self._write_separate_blocks, self._write_components_with_element_blocks, self._separate_blocks_format_type, self._export_tie_as_cntgen, self._export_coupling_as_sfcgen, self._export_fasteners_as_swgen, self._export_rigid_bodies_as_rbgen, self._write_component_based_ties, self._mortar_contact_for_ties, self._write_thickness_file, '{ ' + str(self._contact_element_types) + ' }', self._reorder_spotweldsurface, self._skip_comments)
+        message = "config_settings :  %s\npre_solution_settings :  %s\nmaterial_properties :  %s\nboundary_conditions :  %s\nanalysis_settings :  %s\nwrite_cells :  %s\nenable_face_based_labels :  %s\nlabel_export_params :  %s\nwrite_by_zones :  %s\nconsider_general_connectors_as_spot_weld :  %s\nanalysis_type :  %s\nsimulation_type :  %s\nanalysis_settings_file_name :  %s\nwrite_separate_blocks :  %s\nwrite_components_with_element_blocks :  %s\nseparate_blocks_format_type :  %s\nexport_tie_as_cntgen :  %s\nexport_coupling_as_sfcgen :  %s\nexport_fasteners_as_swgen :  %s\nexport_rigid_bodies_as_rbgen :  %s\nwrite_component_based_ties :  %s\nmortar_contact_for_ties :  %s\nwrite_thickness_file :  %s\ncontact_element_types :  %s\nreorder_spotweldsurface :  %s\nskip_comments :  %s\ninitial_counters :  %s" % (self._config_settings, self._pre_solution_settings, self._material_properties, self._boundary_conditions, self._analysis_settings, self._write_cells, self._enable_face_based_labels, '{ ' + str(self._label_export_params) + ' }', self._write_by_zones, self._consider_general_connectors_as_spot_weld, self._analysis_type, self._simulation_type, self._analysis_settings_file_name, self._write_separate_blocks, self._write_components_with_element_blocks, self._separate_blocks_format_type, self._export_tie_as_cntgen, self._export_coupling_as_sfcgen, self._export_fasteners_as_swgen, self._export_rigid_bodies_as_rbgen, self._write_component_based_ties, self._mortar_contact_for_ties, self._write_thickness_file, '{ ' + str(self._contact_element_types) + ' }', self._reorder_spotweldsurface, self._skip_comments, self._initial_counters)
         message += ''.join('\n' + str(key) + ' : ' + str(value) for key, value in self._custom_params.items())
         return message
 
@@ -4263,7 +4282,7 @@ class ExportMapdlCdbParams(CoreObject):
 
     @property
     def reorder_spotweldsurface(self) -> bool:
-        """Parameters to choose the logic of spotweld computation. When false, computes spotwelds by prioritzing proximity of surface to spotweld. When true, computes spotwelds by prioritizing proximity of boundary surface to spotweld.
+        """Option to choose the logic of spotweld computation. When the value is true, computes spotwelds by prioritizing proximity of boundary surface to spotweld. When the value is false, computes spotwelds by prioritizing proximity of surface to spotweld. The default value is true.
 
         **This is a beta parameter**. **The behavior and name may change in the future**.
         """
@@ -4275,7 +4294,7 @@ class ExportMapdlCdbParams(CoreObject):
 
     @property
     def skip_comments(self) -> bool:
-        """Parameter to skip export of comments to the exported file.
+        """Option to skip export of comments to the exported file. When the value is true, skips writing comments. When the value is false, writes comments to the exported file. The default value is false.
 
         **This is a beta parameter**. **The behavior and name may change in the future**.
         """
@@ -4284,6 +4303,18 @@ class ExportMapdlCdbParams(CoreObject):
     @skip_comments.setter
     def skip_comments(self, value: bool):
         self._skip_comments = value
+
+    @property
+    def initial_counters(self) -> Dict[str, Union[str, int, float, bool]]:
+        """Parameter to specify the starting counter values for export
+
+        **This is a beta parameter**. **The behavior and name may change in the future**.
+        """
+        return self._initial_counters
+
+    @initial_counters.setter
+    def initial_counters(self, value: Dict[str, Union[str, int, float, bool]]):
+        self._initial_counters = value
 
 class ExportMapdlCdbResults(CoreObject):
     """Results associated with the MAPDL CDB export.
@@ -5429,6 +5460,10 @@ class ImportAbaqusParams(CoreObject):
     ----------
     model: Model
         Model to create a ``ImportAbaqusParams`` object with default parameters.
+    initial_counters: Dict[str, Union[str, int, float, bool]], optional
+        Parameter to specify the starting counter values for import
+
+        **This is a beta parameter**. **The behavior and name may change in the future**.
     json_data: dict, optional
         JSON dictionary to create a ``ImportAbaqusParams`` object with provided parameters.
 
@@ -5439,12 +5474,14 @@ class ImportAbaqusParams(CoreObject):
     _default_params = {}
 
     def __initialize(
-            self):
-        pass
+            self,
+            initial_counters: Dict[str, Union[str, int, float, bool]]):
+        self._initial_counters = initial_counters
 
     def __init__(
             self,
             model: CommunicationManager=None,
+            initial_counters: Dict[str, Union[str, int, float, bool]] = None,
             json_data : dict = None,
              **kwargs):
         """Initialize a ``ImportAbaqusParams`` object.
@@ -5453,6 +5490,10 @@ class ImportAbaqusParams(CoreObject):
         ----------
         model: Model
             Model to create a ``ImportAbaqusParams`` object with default parameters.
+        initial_counters: Dict[str, Union[str, int, float, bool]], optional
+            Parameter to specify the starting counter values for import
+
+            **This is a beta parameter**. **The behavior and name may change in the future**.
         json_data: dict, optional
             JSON dictionary to create a ``ImportAbaqusParams`` object with provided parameters.
 
@@ -5461,18 +5502,21 @@ class ImportAbaqusParams(CoreObject):
         >>> import_abaqus_params = prime.ImportAbaqusParams(model = model)
         """
         if json_data:
-            self.__initialize()
+            self.__initialize(
+                json_data["initialCounters"] if "initialCounters" in json_data else None)
         else:
-            all_field_specified = all(arg is not None for arg in [])
+            all_field_specified = all(arg is not None for arg in [initial_counters])
             if all_field_specified:
-                self.__initialize()
+                self.__initialize(
+                    initial_counters)
             else:
                 if model is None:
                     raise ValueError("Invalid assignment. Either pass a model or specify all properties.")
                 else:
                     param_json = model._communicator.initialize_params(model, "ImportAbaqusParams")
                     json_data = param_json["ImportAbaqusParams"] if "ImportAbaqusParams" in param_json else {}
-                    self.__initialize()
+                    self.__initialize(
+                        initial_counters if initial_counters is not None else ( ImportAbaqusParams._default_params["initial_counters"] if "initial_counters" in ImportAbaqusParams._default_params else (json_data["initialCounters"] if "initialCounters" in json_data else None)))
         self._custom_params = kwargs
         if model is not None:
             [ model._logger.warning(f'Unsupported argument : {key}') for key in kwargs ]
@@ -5481,9 +5525,14 @@ class ImportAbaqusParams(CoreObject):
         self._freeze()
 
     @staticmethod
-    def set_default():
+    def set_default(
+            initial_counters: Dict[str, Union[str, int, float, bool]] = None):
         """Set the default values of the ``ImportAbaqusParams`` object.
 
+        Parameters
+        ----------
+        initial_counters: Dict[str, Union[str, int, float, bool]], optional
+            Parameter to specify the starting counter values for import
         """
         args = locals()
         [ImportAbaqusParams._default_params.update({ key: value }) for key, value in args.items() if value is not None]
@@ -5502,15 +5551,27 @@ class ImportAbaqusParams(CoreObject):
 
     def _jsonify(self) -> Dict[str, Any]:
         json_data = {}
+        if self._initial_counters is not None:
+            json_data["initialCounters"] = self._initial_counters
         [ json_data.update({ utils.to_camel_case(key) : value }) for key, value in self._custom_params.items()]
         return json_data
 
     def __str__(self) -> str:
-        message = "" % ()
+        message = "initial_counters :  %s" % (self._initial_counters)
         message += ''.join('\n' + str(key) + ' : ' + str(value) for key, value in self._custom_params.items())
-        if len(message) == 0:
-            message = 'The object has no parameters to print.'
         return message
+
+    @property
+    def initial_counters(self) -> Dict[str, Union[str, int, float, bool]]:
+        """Parameter to specify the starting counter values for import
+
+        **This is a beta parameter**. **The behavior and name may change in the future**.
+        """
+        return self._initial_counters
+
+    @initial_counters.setter
+    def initial_counters(self, value: Dict[str, Union[str, int, float, bool]]):
+        self._initial_counters = value
 
 class ImportAbaqusResults(CoreObject):
     """Results of Abaqus import operation.

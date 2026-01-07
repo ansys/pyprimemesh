@@ -44,7 +44,6 @@ __FILE_CHECK = True
 
 from ansys.meshing.prime.internals.logger import PrimeLogger
 
-
 class ConnectionType(Enum):
     GRPC_SECURE = 1
     GRPC_INSECURE = 2

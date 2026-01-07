@@ -77,6 +77,7 @@ prime_error_messages = {
     ErrorCode.MICROSTRUCTUREREMESHNOTSUPPORTED: "Surface remesh operation is not supported.",
     ErrorCode.MICROSTRUCTURESMOOTHNOTSUPPORTED: "Smoothing operation is not supported.",
     ErrorCode.MICROSTRUCTUREWRONGAPICALLSEQUENCE: "Wrong API call sequence.",
+    ErrorCode.JSONKEYNOTFOUND: "Json key not found.",
     ErrorCode.NUMENMETHODNOTFOUND: "Could not find numen method.",
     ErrorCode.PREPAREFORVOLUMEMESHINGFAILED: "Prepare for volume meshing failed.",
     ErrorCode.NOTSUPPORTEDFORDISTRIBUTEMESHING: "Method not supported for distributed meshing.",
