@@ -58,7 +58,15 @@ class TetMeshSplineParams(CoreObject):
 
         **This is a beta parameter**. **The behavior and name may change in the future**.
     decimation_factor: float, optional
-        Decimation factor used in meshing of the solid spline.
+        Decimation factor used in meshing of the trimmed solid spline.
+
+        **This is a beta parameter**. **The behavior and name may change in the future**.
+    tolerance_ratio: float, optional
+        Tolerance ratio used in meshing of the trimmed solid spline.
+
+        **This is a beta parameter**. **The behavior and name may change in the future**.
+    enable_post_processing: bool, optional
+        Enables post processing of generated tet mesh.
 
         **This is a beta parameter**. **The behavior and name may change in the future**.
     json_data: dict, optional
@@ -74,10 +82,14 @@ class TetMeshSplineParams(CoreObject):
             self,
             feature_angle: float,
             mode: TrimmedSolidSplineCutMode,
-            decimation_factor: float):
+            decimation_factor: float,
+            tolerance_ratio: float,
+            enable_post_processing: bool):
         self._feature_angle = feature_angle
         self._mode = TrimmedSolidSplineCutMode(mode)
         self._decimation_factor = decimation_factor
+        self._tolerance_ratio = tolerance_ratio
+        self._enable_post_processing = enable_post_processing
 
     def __init__(
             self,
@@ -85,6 +97,8 @@ class TetMeshSplineParams(CoreObject):
             feature_angle: float = None,
             mode: TrimmedSolidSplineCutMode = None,
             decimation_factor: float = None,
+            tolerance_ratio: float = None,
+            enable_post_processing: bool = None,
             json_data : dict = None,
              **kwargs):
         """Initialize a ``TetMeshSplineParams`` object.
@@ -102,7 +116,15 @@ class TetMeshSplineParams(CoreObject):
 
             **This is a beta parameter**. **The behavior and name may change in the future**.
         decimation_factor: float, optional
-            Decimation factor used in meshing of the solid spline.
+            Decimation factor used in meshing of the trimmed solid spline.
+
+            **This is a beta parameter**. **The behavior and name may change in the future**.
+        tolerance_ratio: float, optional
+            Tolerance ratio used in meshing of the trimmed solid spline.
+
+            **This is a beta parameter**. **The behavior and name may change in the future**.
+        enable_post_processing: bool, optional
+            Enables post processing of generated tet mesh.
 
             **This is a beta parameter**. **The behavior and name may change in the future**.
         json_data: dict, optional
@@ -116,14 +138,18 @@ class TetMeshSplineParams(CoreObject):
             self.__initialize(
                 json_data["featureAngle"] if "featureAngle" in json_data else None,
                 TrimmedSolidSplineCutMode(json_data["mode"] if "mode" in json_data else None),
-                json_data["decimationFactor"] if "decimationFactor" in json_data else None)
+                json_data["decimationFactor"] if "decimationFactor" in json_data else None,
+                json_data["toleranceRatio"] if "toleranceRatio" in json_data else None,
+                json_data["enablePostProcessing"] if "enablePostProcessing" in json_data else None)
         else:
-            all_field_specified = all(arg is not None for arg in [feature_angle, mode, decimation_factor])
+            all_field_specified = all(arg is not None for arg in [feature_angle, mode, decimation_factor, tolerance_ratio, enable_post_processing])
             if all_field_specified:
                 self.__initialize(
                     feature_angle,
                     mode,
-                    decimation_factor)
+                    decimation_factor,
+                    tolerance_ratio,
+                    enable_post_processing)
             else:
                 if model is None:
                     raise ValueError("Invalid assignment. Either pass a model or specify all properties.")
@@ -133,10 +159,12 @@ class TetMeshSplineParams(CoreObject):
                     self.__initialize(
                         feature_angle if feature_angle is not None else ( TetMeshSplineParams._default_params["feature_angle"] if "feature_angle" in TetMeshSplineParams._default_params else (json_data["featureAngle"] if "featureAngle" in json_data else None)),
                         mode if mode is not None else ( TetMeshSplineParams._default_params["mode"] if "mode" in TetMeshSplineParams._default_params else TrimmedSolidSplineCutMode(json_data["mode"] if "mode" in json_data else None)),
-                        decimation_factor if decimation_factor is not None else ( TetMeshSplineParams._default_params["decimation_factor"] if "decimation_factor" in TetMeshSplineParams._default_params else (json_data["decimationFactor"] if "decimationFactor" in json_data else None)))
+                        decimation_factor if decimation_factor is not None else ( TetMeshSplineParams._default_params["decimation_factor"] if "decimation_factor" in TetMeshSplineParams._default_params else (json_data["decimationFactor"] if "decimationFactor" in json_data else None)),
+                        tolerance_ratio if tolerance_ratio is not None else ( TetMeshSplineParams._default_params["tolerance_ratio"] if "tolerance_ratio" in TetMeshSplineParams._default_params else (json_data["toleranceRatio"] if "toleranceRatio" in json_data else None)),
+                        enable_post_processing if enable_post_processing is not None else ( TetMeshSplineParams._default_params["enable_post_processing"] if "enable_post_processing" in TetMeshSplineParams._default_params else (json_data["enablePostProcessing"] if "enablePostProcessing" in json_data else None)))
         self._custom_params = kwargs
         if model is not None:
-            [ model._logger.warning(f'Unsupported argument : {key}') for key in kwargs ]
+            [ model._logger.debug(f'Unsupported argument : {key}') for key in kwargs ]
         [setattr(type(self), key, property(lambda self, key = key:  self._custom_params[key] if key in self._custom_params else None,
         lambda self, value, key = key : self._custom_params.update({ key: value }))) for key in kwargs]
         self._freeze()
@@ -145,7 +173,9 @@ class TetMeshSplineParams(CoreObject):
     def set_default(
             feature_angle: float = None,
             mode: TrimmedSolidSplineCutMode = None,
-            decimation_factor: float = None):
+            decimation_factor: float = None,
+            tolerance_ratio: float = None,
+            enable_post_processing: bool = None):
         """Set the default values of the ``TetMeshSplineParams`` object.
 
         Parameters
@@ -155,7 +185,11 @@ class TetMeshSplineParams(CoreObject):
         mode: TrimmedSolidSplineCutMode, optional
             Cut mode to specify rule for mesh cell selection in the volume mesh.
         decimation_factor: float, optional
-            Decimation factor used in meshing of the solid spline.
+            Decimation factor used in meshing of the trimmed solid spline.
+        tolerance_ratio: float, optional
+            Tolerance ratio used in meshing of the trimmed solid spline.
+        enable_post_processing: bool, optional
+            Enables post processing of generated tet mesh.
         """
         args = locals()
         [TetMeshSplineParams._default_params.update({ key: value }) for key, value in args.items() if value is not None]
@@ -180,11 +214,15 @@ class TetMeshSplineParams(CoreObject):
             json_data["mode"] = self._mode
         if self._decimation_factor is not None:
             json_data["decimationFactor"] = self._decimation_factor
+        if self._tolerance_ratio is not None:
+            json_data["toleranceRatio"] = self._tolerance_ratio
+        if self._enable_post_processing is not None:
+            json_data["enablePostProcessing"] = self._enable_post_processing
         [ json_data.update({ utils.to_camel_case(key) : value }) for key, value in self._custom_params.items()]
         return json_data
 
     def __str__(self) -> str:
-        message = "feature_angle :  %s\nmode :  %s\ndecimation_factor :  %s" % (self._feature_angle, self._mode, self._decimation_factor)
+        message = "feature_angle :  %s\nmode :  %s\ndecimation_factor :  %s\ntolerance_ratio :  %s\nenable_post_processing :  %s" % (self._feature_angle, self._mode, self._decimation_factor, self._tolerance_ratio, self._enable_post_processing)
         message += ''.join('\n' + str(key) + ' : ' + str(value) for key, value in self._custom_params.items())
         return message
 
@@ -214,7 +252,7 @@ class TetMeshSplineParams(CoreObject):
 
     @property
     def decimation_factor(self) -> float:
-        """Decimation factor used in meshing of the solid spline.
+        """Decimation factor used in meshing of the trimmed solid spline.
 
         **This is a beta parameter**. **The behavior and name may change in the future**.
         """
@@ -223,6 +261,30 @@ class TetMeshSplineParams(CoreObject):
     @decimation_factor.setter
     def decimation_factor(self, value: float):
         self._decimation_factor = value
+
+    @property
+    def tolerance_ratio(self) -> float:
+        """Tolerance ratio used in meshing of the trimmed solid spline.
+
+        **This is a beta parameter**. **The behavior and name may change in the future**.
+        """
+        return self._tolerance_ratio
+
+    @tolerance_ratio.setter
+    def tolerance_ratio(self, value: float):
+        self._tolerance_ratio = value
+
+    @property
+    def enable_post_processing(self) -> bool:
+        """Enables post processing of generated tet mesh.
+
+        **This is a beta parameter**. **The behavior and name may change in the future**.
+        """
+        return self._enable_post_processing
+
+    @enable_post_processing.setter
+    def enable_post_processing(self, value: bool):
+        self._enable_post_processing = value
 
 class RefineTetMeshParams(CoreObject):
     """Parameters for meshing the solid spline.
@@ -332,7 +394,7 @@ class RefineTetMeshParams(CoreObject):
                         tolerance if tolerance is not None else ( RefineTetMeshParams._default_params["tolerance"] if "tolerance" in RefineTetMeshParams._default_params else (json_data["tolerance"] if "tolerance" in json_data else None)))
         self._custom_params = kwargs
         if model is not None:
-            [ model._logger.warning(f'Unsupported argument : {key}') for key in kwargs ]
+            [ model._logger.debug(f'Unsupported argument : {key}') for key in kwargs ]
         [setattr(type(self), key, property(lambda self, key = key:  self._custom_params[key] if key in self._custom_params else None,
         lambda self, value, key = key : self._custom_params.update({ key: value }))) for key in kwargs]
         self._freeze()
@@ -573,7 +635,7 @@ class UniformSolidSplineCreationParams(CoreObject):
                         degree_w if degree_w is not None else ( UniformSolidSplineCreationParams._default_params["degree_w"] if "degree_w" in UniformSolidSplineCreationParams._default_params else (json_data["degreeW"] if "degreeW" in json_data else None)))
         self._custom_params = kwargs
         if model is not None:
-            [ model._logger.warning(f'Unsupported argument : {key}') for key in kwargs ]
+            [ model._logger.debug(f'Unsupported argument : {key}') for key in kwargs ]
         [setattr(type(self), key, property(lambda self, key = key:  self._custom_params[key] if key in self._custom_params else None,
         lambda self, value, key = key : self._custom_params.update({ key: value }))) for key in kwargs]
         self._freeze()
@@ -778,7 +840,7 @@ class TrimmedSplineResults(CoreObject):
                         error_code if error_code is not None else ( TrimmedSplineResults._default_params["error_code"] if "error_code" in TrimmedSplineResults._default_params else ErrorCode(json_data["errorCode"] if "errorCode" in json_data else None)))
         self._custom_params = kwargs
         if model is not None:
-            [ model._logger.warning(f'Unsupported argument : {key}') for key in kwargs ]
+            [ model._logger.debug(f'Unsupported argument : {key}') for key in kwargs ]
         [setattr(type(self), key, property(lambda self, key = key:  self._custom_params[key] if key in self._custom_params else None,
         lambda self, value, key = key : self._custom_params.update({ key: value }))) for key in kwargs]
         self._freeze()

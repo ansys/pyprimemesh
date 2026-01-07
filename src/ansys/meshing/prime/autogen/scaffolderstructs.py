@@ -234,7 +234,7 @@ class ScaffolderParams(CoreObject):
                         triangles_coplanar_angle_cos if triangles_coplanar_angle_cos is not None else ( ScaffolderParams._default_params["triangles_coplanar_angle_cos"] if "triangles_coplanar_angle_cos" in ScaffolderParams._default_params else (json_data["trianglesCoplanarAngleCos"] if "trianglesCoplanarAngleCos" in json_data else None)))
         self._custom_params = kwargs
         if model is not None:
-            [ model._logger.warning(f'Unsupported argument : {key}') for key in kwargs ]
+            [ model._logger.debug(f'Unsupported argument : {key}') for key in kwargs ]
         [setattr(type(self), key, property(lambda self, key = key:  self._custom_params[key] if key in self._custom_params else None,
         lambda self, value, key = key : self._custom_params.update({ key: value }))) for key in kwargs]
         self._freeze()
@@ -490,7 +490,7 @@ class VolumetricScaffolderParams(CoreObject):
                         only_check_exact_overlaps if only_check_exact_overlaps is not None else ( VolumetricScaffolderParams._default_params["only_check_exact_overlaps"] if "only_check_exact_overlaps" in VolumetricScaffolderParams._default_params else (json_data["onlyCheckExactOverlaps"] if "onlyCheckExactOverlaps" in json_data else None)))
         self._custom_params = kwargs
         if model is not None:
-            [ model._logger.warning(f'Unsupported argument : {key}') for key in kwargs ]
+            [ model._logger.debug(f'Unsupported argument : {key}') for key in kwargs ]
         [setattr(type(self), key, property(lambda self, key = key:  self._custom_params[key] if key in self._custom_params else None,
         lambda self, value, key = key : self._custom_params.update({ key: value }))) for key in kwargs]
         self._freeze()
@@ -629,7 +629,7 @@ class ScaffolderResults(CoreObject):
                         error_code if error_code is not None else ( ScaffolderResults._default_params["error_code"] if "error_code" in ScaffolderResults._default_params else ErrorCode(json_data["errorCode"] if "errorCode" in json_data else None)))
         self._custom_params = kwargs
         if model is not None:
-            [ model._logger.warning(f'Unsupported argument : {key}') for key in kwargs ]
+            [ model._logger.debug(f'Unsupported argument : {key}') for key in kwargs ]
         [setattr(type(self), key, property(lambda self, key = key:  self._custom_params[key] if key in self._custom_params else None,
         lambda self, value, key = key : self._custom_params.update({ key: value }))) for key in kwargs]
         self._freeze()
@@ -768,7 +768,7 @@ class ScaffolderSplitResults(CoreObject):
                         error_code if error_code is not None else ( ScaffolderSplitResults._default_params["error_code"] if "error_code" in ScaffolderSplitResults._default_params else ErrorCode(json_data["errorCode"] if "errorCode" in json_data else None)))
         self._custom_params = kwargs
         if model is not None:
-            [ model._logger.warning(f'Unsupported argument : {key}') for key in kwargs ]
+            [ model._logger.debug(f'Unsupported argument : {key}') for key in kwargs ]
         [setattr(type(self), key, property(lambda self, key = key:  self._custom_params[key] if key in self._custom_params else None,
         lambda self, value, key = key : self._custom_params.update({ key: value }))) for key in kwargs]
         self._freeze()
@@ -907,7 +907,7 @@ class ScaffolderMergeResults(CoreObject):
                         error_code if error_code is not None else ( ScaffolderMergeResults._default_params["error_code"] if "error_code" in ScaffolderMergeResults._default_params else ErrorCode(json_data["errorCode"] if "errorCode" in json_data else None)))
         self._custom_params = kwargs
         if model is not None:
-            [ model._logger.warning(f'Unsupported argument : {key}') for key in kwargs ]
+            [ model._logger.debug(f'Unsupported argument : {key}') for key in kwargs ]
         [setattr(type(self), key, property(lambda self, key = key:  self._custom_params[key] if key in self._custom_params else None,
         lambda self, value, key = key : self._custom_params.update({ key: value }))) for key in kwargs]
         self._freeze()

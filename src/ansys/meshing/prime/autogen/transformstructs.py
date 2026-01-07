@@ -92,7 +92,7 @@ class TransformResults(CoreObject):
                         error_code if error_code is not None else ( TransformResults._default_params["error_code"] if "error_code" in TransformResults._default_params else ErrorCode(json_data["errorCode"] if "errorCode" in json_data else None)))
         self._custom_params = kwargs
         if model is not None:
-            [ model._logger.warning(f'Unsupported argument : {key}') for key in kwargs ]
+            [ model._logger.debug(f'Unsupported argument : {key}') for key in kwargs ]
         [setattr(type(self), key, property(lambda self, key = key:  self._custom_params[key] if key in self._custom_params else None,
         lambda self, value, key = key : self._custom_params.update({ key: value }))) for key in kwargs]
         self._freeze()
@@ -206,7 +206,7 @@ class TransformParams(CoreObject):
                         transformation_matrix if transformation_matrix is not None else ( TransformParams._default_params["transformation_matrix"] if "transformation_matrix" in TransformParams._default_params else (json_data["transformationMatrix"] if "transformationMatrix" in json_data else None)))
         self._custom_params = kwargs
         if model is not None:
-            [ model._logger.warning(f'Unsupported argument : {key}') for key in kwargs ]
+            [ model._logger.debug(f'Unsupported argument : {key}') for key in kwargs ]
         [setattr(type(self), key, property(lambda self, key = key:  self._custom_params[key] if key in self._custom_params else None,
         lambda self, value, key = key : self._custom_params.update({ key: value }))) for key in kwargs]
         self._freeze()

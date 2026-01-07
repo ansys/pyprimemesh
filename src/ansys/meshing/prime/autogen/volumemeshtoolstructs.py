@@ -42,7 +42,7 @@ class AutoNodeMoveParams(CoreObject):
     target_quality: float, optional
         Specify target quality used for the mesh improvement based on specified quality measure.
     dihedral_angle: float, optional
-        Dihedral angle used to mantain features of boundary face zonelets.
+        Dihedral angle used to maintain features of boundary face zonelets.
     n_iterations_per_node: int, optional
         Number of iterations per node to be moved.
     restrict_boundary_nodes_along_surface: bool, optional
@@ -95,7 +95,7 @@ class AutoNodeMoveParams(CoreObject):
         target_quality: float, optional
             Specify target quality used for the mesh improvement based on specified quality measure.
         dihedral_angle: float, optional
-            Dihedral angle used to mantain features of boundary face zonelets.
+            Dihedral angle used to maintain features of boundary face zonelets.
         n_iterations_per_node: int, optional
             Number of iterations per node to be moved.
         restrict_boundary_nodes_along_surface: bool, optional
@@ -142,7 +142,7 @@ class AutoNodeMoveParams(CoreObject):
                         n_attempts if n_attempts is not None else ( AutoNodeMoveParams._default_params["n_attempts"] if "n_attempts" in AutoNodeMoveParams._default_params else (json_data["nAttempts"] if "nAttempts" in json_data else None)))
         self._custom_params = kwargs
         if model is not None:
-            [ model._logger.warning(f'Unsupported argument : {key}') for key in kwargs ]
+            [ model._logger.debug(f'Unsupported argument : {key}') for key in kwargs ]
         [setattr(type(self), key, property(lambda self, key = key:  self._custom_params[key] if key in self._custom_params else None,
         lambda self, value, key = key : self._custom_params.update({ key: value }))) for key in kwargs]
         self._freeze()
@@ -164,7 +164,7 @@ class AutoNodeMoveParams(CoreObject):
         target_quality: float, optional
             Specify target quality used for the mesh improvement based on specified quality measure.
         dihedral_angle: float, optional
-            Dihedral angle used to mantain features of boundary face zonelets.
+            Dihedral angle used to maintain features of boundary face zonelets.
         n_iterations_per_node: int, optional
             Number of iterations per node to be moved.
         restrict_boundary_nodes_along_surface: bool, optional
@@ -231,7 +231,7 @@ class AutoNodeMoveParams(CoreObject):
 
     @property
     def dihedral_angle(self) -> float:
-        """Dihedral angle used to mantain features of boundary face zonelets.
+        """Dihedral angle used to maintain features of boundary face zonelets.
         """
         return self._dihedral_angle
 
@@ -322,7 +322,7 @@ class CheckMeshParams(CoreObject):
                     self.__initialize()
         self._custom_params = kwargs
         if model is not None:
-            [ model._logger.warning(f'Unsupported argument : {key}') for key in kwargs ]
+            [ model._logger.debug(f'Unsupported argument : {key}') for key in kwargs ]
         [setattr(type(self), key, property(lambda self, key = key:  self._custom_params[key] if key in self._custom_params else None,
         lambda self, value, key = key : self._custom_params.update({ key: value }))) for key in kwargs]
         self._freeze()
@@ -421,7 +421,7 @@ class VolumeMeshToolResults(CoreObject):
                         error_code if error_code is not None else ( VolumeMeshToolResults._default_params["error_code"] if "error_code" in VolumeMeshToolResults._default_params else ErrorCode(json_data["error_code"] if "error_code" in json_data else None)))
         self._custom_params = kwargs
         if model is not None:
-            [ model._logger.warning(f'Unsupported argument : {key}') for key in kwargs ]
+            [ model._logger.debug(f'Unsupported argument : {key}') for key in kwargs ]
         [setattr(type(self), key, property(lambda self, key = key:  self._custom_params[key] if key in self._custom_params else None,
         lambda self, value, key = key : self._custom_params.update({ key: value }))) for key in kwargs]
         self._freeze()
@@ -585,7 +585,7 @@ class CheckMeshResults(CoreObject):
                         warning_codes if warning_codes is not None else ( CheckMeshResults._default_params["warning_codes"] if "warning_codes" in CheckMeshResults._default_params else [WarningCode(data) for data in (json_data["warningCodes"] if "warningCodes" in json_data else None)]))
         self._custom_params = kwargs
         if model is not None:
-            [ model._logger.warning(f'Unsupported argument : {key}') for key in kwargs ]
+            [ model._logger.debug(f'Unsupported argument : {key}') for key in kwargs ]
         [setattr(type(self), key, property(lambda self, key = key:  self._custom_params[key] if key in self._custom_params else None,
         lambda self, value, key = key : self._custom_params.update({ key: value }))) for key in kwargs]
         self._freeze()

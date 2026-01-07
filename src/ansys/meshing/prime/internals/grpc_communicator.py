@@ -22,6 +22,7 @@
 """Module for communications with the gRPC server."""
 __all__ = ['GRPCCommunicator']
 from typing import Optional
+import os
 
 import grpc
 from ansys.api.meshing.prime.v1 import prime_pb2, prime_pb2_grpc
@@ -36,10 +37,54 @@ from ansys.meshing.prime.internals.error_handling import (
     communicator_error_handler,
     error_code_handler,
 )
+from ansys.meshing.prime.internals import cyberchannel
 
 # Keep some buffer for gRPC metadata that it may want to send
 BUFFER_MESSAGE_LENGTH = defaults.max_message_length() - 100
 
+
+def get_secure_channel(client_certs_dir: str, server_host: str, server_port: int):
+    """Creates a secure gRPC channel using the provided TLS files.
+
+    Parameters
+    ----------
+    tls_client_files : list
+        List of paths to the TLS files. The list should contain:
+        - client certificate file path
+        - client key file path
+        - CA certificate file path
+    Returns
+    -------
+    grpc.Channel
+        A secure gRPC channel.
+    """
+    target = f"{server_host}:{server_port}"
+
+    if not os.path.exists(client_certs_dir):
+        raise FileNotFoundError(f"Client certificates directory does not exist: {client_certs_dir}")
+    
+    cert_file = f"{client_certs_dir}/client.crt"
+    key_file = f"{client_certs_dir}/client.key"
+    ca_file = f"{client_certs_dir}/ca.crt"
+
+    with open(cert_file, 'rb') as f:
+        certificate_chain = f.read()
+    with open(key_file, 'rb') as f:
+        private_key = f.read()
+    with open(ca_file, 'rb') as f:
+        root_certificates = f.read()
+
+    try:
+        creds = grpc.ssl_channel_credentials(
+            root_certificates=root_certificates,
+            private_key=private_key,
+            certificate_chain=certificate_chain
+        )
+    except Exception as e:
+        raise RuntimeError(f"Failed to create SSL channel credentials: {e}")
+    
+    channel = grpc.secure_channel(target, creds)
+    return channel
 
 def make_chunks(data, chunk_size):
     n = max(1, chunk_size)
@@ -79,7 +124,10 @@ class GRPCCommunicator(Communicator):
         Maximum time to wait for connection. The default is ``10.0``.
     credentials : Any, optional
         Credentials for connecting to the server. The default is ``None``.
-
+    uds_id : Optional[str], optional
+        Id for the Unix Domain Socket (UDS). The default is ``None``.
+    client_certs_dir : Optional[str], optional
+        Directory containing client certificates for mutual TLS. The default is ``None``.
     Raises
     ------
     ConnectionError
@@ -92,21 +140,25 @@ class GRPCCommunicator(Communicator):
         port: Optional[int] = None,
         timeout: float = 10.0,
         credentials=None,
+        uds_id: Optional[str] = None,
+        client_certs_dir: Optional[str] = None,
+        transport_mode: Optional[str] = None,
         **kwargs,
     ):
         """Initialize the server connection."""
         import os
 
         self._channel = kwargs.get('channel', None)
-        self._models = []
         if self._channel is None:
-            ip_addr = f"{ip}:{port}"
-            channel_options = grpc_utils.get_default_channel_args()
-            if credentials is None:
-                self._channel = grpc.insecure_channel(ip_addr, options=channel_options)
-            else:
-                self._channel = grpc.secure_channel(ip_addr, credentials, options=channel_options)
+            self._channel = cyberchannel.create_channel(
+               transport_mode=transport_mode,
+               host=ip,
+               port=port,
+               uds_service="pyprimemesh",
+               uds_id=uds_id,
+               certs_dir=client_certs_dir)
 
+        self._models = []
         if 'PYPRIMEMESH_DEVELOPER_MODE' not in os.environ:
             timeout = None
 
@@ -277,9 +329,32 @@ class GRPCCommunicator(Communicator):
             return result
         else:
             raise RuntimeError("No connection with server")
+        
+    def finalize(self):
+        """Finalize the connection with the server.
+
+        Raises
+        ------
+        RuntimeError
+            If unable to connect to the server.
+        """
+        if self._stub is not None:
+            try:
+                response = self._stub.Finalize(prime_pb2.FinalizeRequest())
+                message = get_response(response, '')
+            except Exception:
+                # It is possible that the server is already down
+                # when this is called.
+                # In that case, we can just ignore the error.
+                # The channel will be closed anyway.
+                pass
+        else:
+            raise RuntimeError("No connection with server")
 
     def close(self):
         """Close opened channels."""
+        if self._stub is not None:
+            self.finalize()
         self._stub = None
         if self._channel is not None:
             self._channel.close()

@@ -152,7 +152,7 @@ class FixInvalidNormalNodeParams(CoreObject):
                         label if label is not None else ( FixInvalidNormalNodeParams._default_params["label"] if "label" in FixInvalidNormalNodeParams._default_params else (json_data["label"] if "label" in json_data else None)))
         self._custom_params = kwargs
         if model is not None:
-            [ model._logger.warning(f'Unsupported argument : {key}') for key in kwargs ]
+            [ model._logger.debug(f'Unsupported argument : {key}') for key in kwargs ]
         [setattr(type(self), key, property(lambda self, key = key:  self._custom_params[key] if key in self._custom_params else None,
         lambda self, value, key = key : self._custom_params.update({ key: value }))) for key in kwargs]
         self._freeze()
@@ -296,7 +296,7 @@ class FixInvalidNormalNodeResults(CoreObject):
                         error_code if error_code is not None else ( FixInvalidNormalNodeResults._default_params["error_code"] if "error_code" in FixInvalidNormalNodeResults._default_params else ErrorCode(json_data["errorCode"] if "errorCode" in json_data else None)))
         self._custom_params = kwargs
         if model is not None:
-            [ model._logger.warning(f'Unsupported argument : {key}') for key in kwargs ]
+            [ model._logger.debug(f'Unsupported argument : {key}') for key in kwargs ]
         [setattr(type(self), key, property(lambda self, key = key:  self._custom_params[key] if key in self._custom_params else None,
         lambda self, value, key = key : self._custom_params.update({ key: value }))) for key in kwargs]
         self._freeze()
@@ -428,7 +428,7 @@ class ProjectOnGeometryParams(CoreObject):
                         project_on_facets_if_cadnot_found if project_on_facets_if_cadnot_found is not None else ( ProjectOnGeometryParams._default_params["project_on_facets_if_cadnot_found"] if "project_on_facets_if_cadnot_found" in ProjectOnGeometryParams._default_params else (json_data["projectOnFacetsIfCADNotFound"] if "projectOnFacetsIfCADNotFound" in json_data else None)))
         self._custom_params = kwargs
         if model is not None:
-            [ model._logger.warning(f'Unsupported argument : {key}') for key in kwargs ]
+            [ model._logger.debug(f'Unsupported argument : {key}') for key in kwargs ]
         [setattr(type(self), key, property(lambda self, key = key:  self._custom_params[key] if key in self._custom_params else None,
         lambda self, value, key = key : self._custom_params.update({ key: value }))) for key in kwargs]
         self._freeze()
@@ -507,7 +507,7 @@ class ProjectOnGeometryResults(CoreObject):
     model: Model
         Model to create a ``ProjectOnGeometryResults`` object with default parameters.
     success: bool, optional
-        Defines the operation was successful or not.
+        Indicates whether the operation is successful or not. True if successful, else false.
 
         **This is a beta parameter**. **The behavior and name may change in the future**.
     error_code: ErrorCode, optional
@@ -551,7 +551,7 @@ class ProjectOnGeometryResults(CoreObject):
         model: Model
             Model to create a ``ProjectOnGeometryResults`` object with default parameters.
         success: bool, optional
-            Defines the operation was successful or not.
+            Indicates whether the operation is successful or not. True if successful, else false.
 
             **This is a beta parameter**. **The behavior and name may change in the future**.
         error_code: ErrorCode, optional
@@ -593,7 +593,7 @@ class ProjectOnGeometryResults(CoreObject):
                         warning_codes if warning_codes is not None else ( ProjectOnGeometryResults._default_params["warning_codes"] if "warning_codes" in ProjectOnGeometryResults._default_params else [WarningCode(data) for data in (json_data["warningCodes"] if "warningCodes" in json_data else None)]))
         self._custom_params = kwargs
         if model is not None:
-            [ model._logger.warning(f'Unsupported argument : {key}') for key in kwargs ]
+            [ model._logger.debug(f'Unsupported argument : {key}') for key in kwargs ]
         [setattr(type(self), key, property(lambda self, key = key:  self._custom_params[key] if key in self._custom_params else None,
         lambda self, value, key = key : self._custom_params.update({ key: value }))) for key in kwargs]
         self._freeze()
@@ -608,7 +608,7 @@ class ProjectOnGeometryResults(CoreObject):
         Parameters
         ----------
         success: bool, optional
-            Defines the operation was successful or not.
+            Indicates whether the operation is successful or not. True if successful, else false.
         error_code: ErrorCode, optional
             Error code associated with failure of operation.
         warning_codes: List[WarningCode], optional
@@ -647,7 +647,7 @@ class ProjectOnGeometryResults(CoreObject):
 
     @property
     def success(self) -> bool:
-        """Defines the operation was successful or not.
+        """Indicates whether the operation is successful or not. True if successful, else false.
 
         **This is a beta parameter**. **The behavior and name may change in the future**.
         """
@@ -753,7 +753,7 @@ class FillHolesAtPlaneParams(CoreObject):
                         suggested_zone_name if suggested_zone_name is not None else ( FillHolesAtPlaneParams._default_params["suggested_zone_name"] if "suggested_zone_name" in FillHolesAtPlaneParams._default_params else (json_data["suggestedZoneName"] if "suggestedZoneName" in json_data else None)))
         self._custom_params = kwargs
         if model is not None:
-            [ model._logger.warning(f'Unsupported argument : {key}') for key in kwargs ]
+            [ model._logger.debug(f'Unsupported argument : {key}') for key in kwargs ]
         [setattr(type(self), key, property(lambda self, key = key:  self._custom_params[key] if key in self._custom_params else None,
         lambda self, value, key = key : self._custom_params.update({ key: value }))) for key in kwargs]
         self._freeze()
@@ -922,7 +922,7 @@ class FillHolesAtPlaneResults(CoreObject):
                         created_zone_id if created_zone_id is not None else ( FillHolesAtPlaneResults._default_params["created_zone_id"] if "created_zone_id" in FillHolesAtPlaneResults._default_params else (json_data["createdZoneId"] if "createdZoneId" in json_data else None)))
         self._custom_params = kwargs
         if model is not None:
-            [ model._logger.warning(f'Unsupported argument : {key}') for key in kwargs ]
+            [ model._logger.debug(f'Unsupported argument : {key}') for key in kwargs ]
         [setattr(type(self), key, property(lambda self, key = key:  self._custom_params[key] if key in self._custom_params else None,
         lambda self, value, key = key : self._custom_params.update({ key: value }))) for key in kwargs]
         self._freeze()
@@ -1087,7 +1087,7 @@ class CreateCapParams(CoreObject):
                     self.__initialize()
         self._custom_params = kwargs
         if model is not None:
-            [ model._logger.warning(f'Unsupported argument : {key}') for key in kwargs ]
+            [ model._logger.debug(f'Unsupported argument : {key}') for key in kwargs ]
         [setattr(type(self), key, property(lambda self, key = key:  self._custom_params[key] if key in self._custom_params else None,
         lambda self, value, key = key : self._custom_params.update({ key: value }))) for key in kwargs]
         self._freeze()
@@ -1196,7 +1196,7 @@ class CreateCapResults(CoreObject):
                         created_face_zonelets if created_face_zonelets is not None else ( CreateCapResults._default_params["created_face_zonelets"] if "created_face_zonelets" in CreateCapResults._default_params else (json_data["createdFaceZonelets"] if "createdFaceZonelets" in json_data else None)))
         self._custom_params = kwargs
         if model is not None:
-            [ model._logger.warning(f'Unsupported argument : {key}') for key in kwargs ]
+            [ model._logger.debug(f'Unsupported argument : {key}') for key in kwargs ]
         [setattr(type(self), key, property(lambda self, key = key:  self._custom_params[key] if key in self._custom_params else None,
         lambda self, value, key = key : self._custom_params.update({ key: value }))) for key in kwargs]
         self._freeze()
@@ -1316,7 +1316,7 @@ class DeleteUnwettedParams(CoreObject):
                     self.__initialize()
         self._custom_params = kwargs
         if model is not None:
-            [ model._logger.warning(f'Unsupported argument : {key}') for key in kwargs ]
+            [ model._logger.debug(f'Unsupported argument : {key}') for key in kwargs ]
         [setattr(type(self), key, property(lambda self, key = key:  self._custom_params[key] if key in self._custom_params else None,
         lambda self, value, key = key : self._custom_params.update({ key: value }))) for key in kwargs]
         self._freeze()
@@ -1415,7 +1415,7 @@ class DeleteUnwettedResult(CoreObject):
                         error_code if error_code is not None else ( DeleteUnwettedResult._default_params["error_code"] if "error_code" in DeleteUnwettedResult._default_params else ErrorCode(json_data["errorCode"] if "errorCode" in json_data else None)))
         self._custom_params = kwargs
         if model is not None:
-            [ model._logger.warning(f'Unsupported argument : {key}') for key in kwargs ]
+            [ model._logger.debug(f'Unsupported argument : {key}') for key in kwargs ]
         [setattr(type(self), key, property(lambda self, key = key:  self._custom_params[key] if key in self._custom_params else None,
         lambda self, value, key = key : self._custom_params.update({ key: value }))) for key in kwargs]
         self._freeze()
@@ -1529,7 +1529,7 @@ class ResolveIntersectionsParams(CoreObject):
                         number_of_threads if number_of_threads is not None else ( ResolveIntersectionsParams._default_params["number_of_threads"] if "number_of_threads" in ResolveIntersectionsParams._default_params else (json_data["numberOfThreads"] if "numberOfThreads" in json_data else None)))
         self._custom_params = kwargs
         if model is not None:
-            [ model._logger.warning(f'Unsupported argument : {key}') for key in kwargs ]
+            [ model._logger.debug(f'Unsupported argument : {key}') for key in kwargs ]
         [setattr(type(self), key, property(lambda self, key = key:  self._custom_params[key] if key in self._custom_params else None,
         lambda self, value, key = key : self._custom_params.update({ key: value }))) for key in kwargs]
         self._freeze()
@@ -1589,7 +1589,7 @@ class ResolveIntersectionResult(CoreObject):
     model: Model
         Model to create a ``ResolveIntersectionResult`` object with default parameters.
     error_code: ErrorCode, optional
-        Errror code associated with a resolve intersections operation.
+        Error code associated with a resolve intersections operation.
     json_data: dict, optional
         JSON dictionary to create a ``ResolveIntersectionResult`` object with provided parameters.
 
@@ -1617,7 +1617,7 @@ class ResolveIntersectionResult(CoreObject):
         model: Model
             Model to create a ``ResolveIntersectionResult`` object with default parameters.
         error_code: ErrorCode, optional
-            Errror code associated with a resolve intersections operation.
+            Error code associated with a resolve intersections operation.
         json_data: dict, optional
             JSON dictionary to create a ``ResolveIntersectionResult`` object with provided parameters.
 
@@ -1643,7 +1643,7 @@ class ResolveIntersectionResult(CoreObject):
                         error_code if error_code is not None else ( ResolveIntersectionResult._default_params["error_code"] if "error_code" in ResolveIntersectionResult._default_params else ErrorCode(json_data["errorCode"] if "errorCode" in json_data else None)))
         self._custom_params = kwargs
         if model is not None:
-            [ model._logger.warning(f'Unsupported argument : {key}') for key in kwargs ]
+            [ model._logger.debug(f'Unsupported argument : {key}') for key in kwargs ]
         [setattr(type(self), key, property(lambda self, key = key:  self._custom_params[key] if key in self._custom_params else None,
         lambda self, value, key = key : self._custom_params.update({ key: value }))) for key in kwargs]
         self._freeze()
@@ -1656,7 +1656,7 @@ class ResolveIntersectionResult(CoreObject):
         Parameters
         ----------
         error_code: ErrorCode, optional
-            Errror code associated with a resolve intersections operation.
+            Error code associated with a resolve intersections operation.
         """
         args = locals()
         [ResolveIntersectionResult._default_params.update({ key: value }) for key, value in args.items() if value is not None]
@@ -1687,7 +1687,7 @@ class ResolveIntersectionResult(CoreObject):
 
     @property
     def error_code(self) -> ErrorCode:
-        """Errror code associated with a resolve intersections operation.
+        """Error code associated with a resolve intersections operation.
         """
         return self._error_code
 
@@ -1777,7 +1777,7 @@ class SubtractZoneletsParams(CoreObject):
                         trace_edges if trace_edges is not None else ( SubtractZoneletsParams._default_params["trace_edges"] if "trace_edges" in SubtractZoneletsParams._default_params else (json_data["traceEdges"] if "traceEdges" in json_data else None)))
         self._custom_params = kwargs
         if model is not None:
-            [ model._logger.warning(f'Unsupported argument : {key}') for key in kwargs ]
+            [ model._logger.debug(f'Unsupported argument : {key}') for key in kwargs ]
         [setattr(type(self), key, property(lambda self, key = key:  self._custom_params[key] if key in self._custom_params else None,
         lambda self, value, key = key : self._custom_params.update({ key: value }))) for key in kwargs]
         self._freeze()
@@ -1931,7 +1931,7 @@ class SubtractZoneletsResults(CoreObject):
                         error_code if error_code is not None else ( SubtractZoneletsResults._default_params["error_code"] if "error_code" in SubtractZoneletsResults._default_params else ErrorCode(json_data["errorCode"] if "errorCode" in json_data else None)))
         self._custom_params = kwargs
         if model is not None:
-            [ model._logger.warning(f'Unsupported argument : {key}') for key in kwargs ]
+            [ model._logger.debug(f'Unsupported argument : {key}') for key in kwargs ]
         [setattr(type(self), key, property(lambda self, key = key:  self._custom_params[key] if key in self._custom_params else None,
         lambda self, value, key = key : self._custom_params.update({ key: value }))) for key in kwargs]
         self._freeze()
@@ -2080,7 +2080,7 @@ class SmoothDihedralFaceNodesParams(CoreObject):
                         type if type is not None else ( SmoothDihedralFaceNodesParams._default_params["type"] if "type" in SmoothDihedralFaceNodesParams._default_params else SmoothType(json_data["type"] if "type" in json_data else None)))
         self._custom_params = kwargs
         if model is not None:
-            [ model._logger.warning(f'Unsupported argument : {key}') for key in kwargs ]
+            [ model._logger.debug(f'Unsupported argument : {key}') for key in kwargs ]
         [setattr(type(self), key, property(lambda self, key = key:  self._custom_params[key] if key in self._custom_params else None,
         lambda self, value, key = key : self._custom_params.update({ key: value }))) for key in kwargs]
         self._freeze()
@@ -2234,7 +2234,7 @@ class SmoothDihedralFaceNodesResults(CoreObject):
                         error_code if error_code is not None else ( SmoothDihedralFaceNodesResults._default_params["error_code"] if "error_code" in SmoothDihedralFaceNodesResults._default_params else ErrorCode(json_data["errorCode"] if "errorCode" in json_data else None)))
         self._custom_params = kwargs
         if model is not None:
-            [ model._logger.warning(f'Unsupported argument : {key}') for key in kwargs ]
+            [ model._logger.debug(f'Unsupported argument : {key}') for key in kwargs ]
         [setattr(type(self), key, property(lambda self, key = key:  self._custom_params[key] if key in self._custom_params else None,
         lambda self, value, key = key : self._custom_params.update({ key: value }))) for key in kwargs]
         self._freeze()
@@ -2393,7 +2393,7 @@ class RefineAtContactsParams(CoreObject):
                         project_on_geometry if project_on_geometry is not None else ( RefineAtContactsParams._default_params["project_on_geometry"] if "project_on_geometry" in RefineAtContactsParams._default_params else (json_data["projectOnGeometry"] if "projectOnGeometry" in json_data else None)))
         self._custom_params = kwargs
         if model is not None:
-            [ model._logger.warning(f'Unsupported argument : {key}') for key in kwargs ]
+            [ model._logger.debug(f'Unsupported argument : {key}') for key in kwargs ]
         [setattr(type(self), key, property(lambda self, key = key:  self._custom_params[key] if key in self._custom_params else None,
         lambda self, value, key = key : self._custom_params.update({ key: value }))) for key in kwargs]
         self._freeze()
@@ -2572,7 +2572,7 @@ class RefineAtContactsResults(CoreObject):
                         error_code if error_code is not None else ( RefineAtContactsResults._default_params["error_code"] if "error_code" in RefineAtContactsResults._default_params else ErrorCode(json_data["errorCode"] if "errorCode" in json_data else None)))
         self._custom_params = kwargs
         if model is not None:
-            [ model._logger.warning(f'Unsupported argument : {key}') for key in kwargs ]
+            [ model._logger.debug(f'Unsupported argument : {key}') for key in kwargs ]
         [setattr(type(self), key, property(lambda self, key = key:  self._custom_params[key] if key in self._custom_params else None,
         lambda self, value, key = key : self._custom_params.update({ key: value }))) for key in kwargs]
         self._freeze()
@@ -2746,7 +2746,7 @@ class AddThicknessParams(CoreObject):
                         fix_intersections if fix_intersections is not None else ( AddThicknessParams._default_params["fix_intersections"] if "fix_intersections" in AddThicknessParams._default_params else (json_data["fixIntersections"] if "fixIntersections" in json_data else None)))
         self._custom_params = kwargs
         if model is not None:
-            [ model._logger.warning(f'Unsupported argument : {key}') for key in kwargs ]
+            [ model._logger.debug(f'Unsupported argument : {key}') for key in kwargs ]
         [setattr(type(self), key, property(lambda self, key = key:  self._custom_params[key] if key in self._custom_params else None,
         lambda self, value, key = key : self._custom_params.update({ key: value }))) for key in kwargs]
         self._freeze()
@@ -2915,7 +2915,7 @@ class AddThicknessResults(CoreObject):
                         part_id if part_id is not None else ( AddThicknessResults._default_params["part_id"] if "part_id" in AddThicknessResults._default_params else (json_data["partId"] if "partId" in json_data else None)))
         self._custom_params = kwargs
         if model is not None:
-            [ model._logger.warning(f'Unsupported argument : {key}') for key in kwargs ]
+            [ model._logger.debug(f'Unsupported argument : {key}') for key in kwargs ]
         [setattr(type(self), key, property(lambda self, key = key:  self._custom_params[key] if key in self._custom_params else None,
         lambda self, value, key = key : self._custom_params.update({ key: value }))) for key in kwargs]
         self._freeze()
@@ -3134,7 +3134,7 @@ class CreateBOIParams(CoreObject):
                         number_of_threads if number_of_threads is not None else ( CreateBOIParams._default_params["number_of_threads"] if "number_of_threads" in CreateBOIParams._default_params else (json_data["numberOfThreads"] if "numberOfThreads" in json_data else None)))
         self._custom_params = kwargs
         if model is not None:
-            [ model._logger.warning(f'Unsupported argument : {key}') for key in kwargs ]
+            [ model._logger.debug(f'Unsupported argument : {key}') for key in kwargs ]
         [setattr(type(self), key, property(lambda self, key = key:  self._custom_params[key] if key in self._custom_params else None,
         lambda self, value, key = key : self._custom_params.update({ key: value }))) for key in kwargs]
         self._freeze()
@@ -3393,7 +3393,7 @@ class CreateBOIResults(CoreObject):
                         part_id if part_id is not None else ( CreateBOIResults._default_params["part_id"] if "part_id" in CreateBOIResults._default_params else (json_data["partId"] if "partId" in json_data else None)))
         self._custom_params = kwargs
         if model is not None:
-            [ model._logger.warning(f'Unsupported argument : {key}') for key in kwargs ]
+            [ model._logger.debug(f'Unsupported argument : {key}') for key in kwargs ]
         [setattr(type(self), key, property(lambda self, key = key:  self._custom_params[key] if key in self._custom_params else None,
         lambda self, value, key = key : self._custom_params.update({ key: value }))) for key in kwargs]
         self._freeze()
@@ -3562,7 +3562,7 @@ class CreateContactPatchParams(CoreObject):
                         suggested_label_prefix if suggested_label_prefix is not None else ( CreateContactPatchParams._default_params["suggested_label_prefix"] if "suggested_label_prefix" in CreateContactPatchParams._default_params else (json_data["suggestedLabelPrefix"] if "suggestedLabelPrefix" in json_data else None)))
         self._custom_params = kwargs
         if model is not None:
-            [ model._logger.warning(f'Unsupported argument : {key}') for key in kwargs ]
+            [ model._logger.debug(f'Unsupported argument : {key}') for key in kwargs ]
         [setattr(type(self), key, property(lambda self, key = key:  self._custom_params[key] if key in self._custom_params else None,
         lambda self, value, key = key : self._custom_params.update({ key: value }))) for key in kwargs]
         self._freeze()
@@ -3746,7 +3746,7 @@ class CreateContactPatchResults(CoreObject):
                         part_id if part_id is not None else ( CreateContactPatchResults._default_params["part_id"] if "part_id" in CreateContactPatchResults._default_params else (json_data["partId"] if "partId" in json_data else None)))
         self._custom_params = kwargs
         if model is not None:
-            [ model._logger.warning(f'Unsupported argument : {key}') for key in kwargs ]
+            [ model._logger.debug(f'Unsupported argument : {key}') for key in kwargs ]
         [setattr(type(self), key, property(lambda self, key = key:  self._custom_params[key] if key in self._custom_params else None,
         lambda self, value, key = key : self._custom_params.update({ key: value }))) for key in kwargs]
         self._freeze()
@@ -3866,7 +3866,7 @@ class StretchFreeBoundariesParams(CoreObject):
                     self.__initialize()
         self._custom_params = kwargs
         if model is not None:
-            [ model._logger.warning(f'Unsupported argument : {key}') for key in kwargs ]
+            [ model._logger.debug(f'Unsupported argument : {key}') for key in kwargs ]
         [setattr(type(self), key, property(lambda self, key = key:  self._custom_params[key] if key in self._custom_params else None,
         lambda self, value, key = key : self._custom_params.update({ key: value }))) for key in kwargs]
         self._freeze()
@@ -3965,7 +3965,7 @@ class StretchFreeBoundariesResults(CoreObject):
                         error_code if error_code is not None else ( StretchFreeBoundariesResults._default_params["error_code"] if "error_code" in StretchFreeBoundariesResults._default_params else ErrorCode(json_data["errorCode"] if "errorCode" in json_data else None)))
         self._custom_params = kwargs
         if model is not None:
-            [ model._logger.warning(f'Unsupported argument : {key}') for key in kwargs ]
+            [ model._logger.debug(f'Unsupported argument : {key}') for key in kwargs ]
         [setattr(type(self), key, property(lambda self, key = key:  self._custom_params[key] if key in self._custom_params else None,
         lambda self, value, key = key : self._custom_params.update({ key: value }))) for key in kwargs]
         self._freeze()
@@ -4070,7 +4070,7 @@ class TriangulateParams(CoreObject):
                     self.__initialize()
         self._custom_params = kwargs
         if model is not None:
-            [ model._logger.warning(f'Unsupported argument : {key}') for key in kwargs ]
+            [ model._logger.debug(f'Unsupported argument : {key}') for key in kwargs ]
         [setattr(type(self), key, property(lambda self, key = key:  self._custom_params[key] if key in self._custom_params else None,
         lambda self, value, key = key : self._custom_params.update({ key: value }))) for key in kwargs]
         self._freeze()
@@ -4187,7 +4187,7 @@ class TriangulateResults(CoreObject):
                         n_faces_triangulated if n_faces_triangulated is not None else ( TriangulateResults._default_params["n_faces_triangulated"] if "n_faces_triangulated" in TriangulateResults._default_params else (json_data["nFacesTriangulated"] if "nFacesTriangulated" in json_data else None)))
         self._custom_params = kwargs
         if model is not None:
-            [ model._logger.warning(f'Unsupported argument : {key}') for key in kwargs ]
+            [ model._logger.debug(f'Unsupported argument : {key}') for key in kwargs ]
         [setattr(type(self), key, property(lambda self, key = key:  self._custom_params[key] if key in self._custom_params else None,
         lambda self, value, key = key : self._custom_params.update({ key: value }))) for key in kwargs]
         self._freeze()
