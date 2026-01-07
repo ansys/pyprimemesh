@@ -1,4 +1,4 @@
-# Copyright (C) 2024 - 2025 ANSYS, Inc. and/or its affiliates.
+# Copyright (C) 2024 - 2026 ANSYS, Inc. and/or its affiliates.
 # SPDX-License-Identifier: MIT
 #
 # Permission is hereby granted, free of charge, to any person obtaining a copy
@@ -43,6 +43,7 @@ __HAS_PIM = False
 __FILE_CHECK = True
 
 from ansys.meshing.prime.internals.logger import PrimeLogger
+
 
 class ConnectionType(Enum):
     GRPC_SECURE = 1

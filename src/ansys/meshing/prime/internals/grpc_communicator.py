@@ -1,4 +1,4 @@
-# Copyright (C) 2024 - 2025 ANSYS, Inc. and/or its affiliates.
+# Copyright (C) 2024 - 2026 ANSYS, Inc. and/or its affiliates.
 # SPDX-License-Identifier: MIT
 #
 # Permission is hereby granted, free of charge, to any person obtaining a copy
@@ -21,8 +21,8 @@
 
 """Module for communications with the gRPC server."""
 __all__ = ['GRPCCommunicator']
-from typing import Optional
 import os
+from typing import Optional
 
 import grpc
 from ansys.api.meshing.prime.v1 import prime_pb2, prime_pb2_grpc
@@ -61,7 +61,7 @@ def get_secure_channel(client_certs_dir: str, server_host: str, server_port: int
 
     if not os.path.exists(client_certs_dir):
         raise FileNotFoundError(f"Client certificates directory does not exist: {client_certs_dir}")
-    
+
     cert_file = f"{client_certs_dir}/client.crt"
     key_file = f"{client_certs_dir}/client.key"
     ca_file = f"{client_certs_dir}/ca.crt"
@@ -81,7 +81,7 @@ def get_secure_channel(client_certs_dir: str, server_host: str, server_port: int
         )
     except Exception as e:
         raise RuntimeError(f"Failed to create SSL channel credentials: {e}")
-    
+
     channel = grpc.secure_channel(target, creds)
     return channel
 

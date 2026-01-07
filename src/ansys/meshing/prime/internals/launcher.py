@@ -1,4 +1,4 @@
-# Copyright (C) 2024 - 2025 ANSYS, Inc. and/or its affiliates.
+# Copyright (C) 2024 - 2026 ANSYS, Inc. and/or its affiliates.
 # SPDX-License-Identifier: MIT
 #
 # Permission is hereby granted, free of charge, to any person obtaining a copy
@@ -24,8 +24,8 @@ import logging
 import os
 import subprocess
 import sys
-from typing import Optional
 import uuid
+from typing import Optional
 
 import ansys.meshing.prime.internals.config as config
 import ansys.meshing.prime.internals.defaults as defaults
@@ -280,7 +280,7 @@ def launch_prime(
 
     channel = None
     if ip not in ["127.0.0.1", "localhost"] and \
-        connection_type == config.ConnectionType.GRPC_SECURE: 
+        connection_type == config.ConnectionType.GRPC_SECURE:
         if client_certs_dir is None or server_certs_dir is None:
             raise RuntimeError(f"Please provide certificate directory for remote connections.")
         missing = [f for f in [f"{client_certs_dir}/client.crt",
@@ -289,7 +289,7 @@ def launch_prime(
                                if not os.path.exists(f)]
         if missing:
             raise RuntimeError(f"Missing required client TLS file(s) for mutual TLS: {', '.join(missing)}")
-        
+
     launch_container = bool(int(os.environ.get('PYPRIMEMESH_LAUNCH_CONTAINER', '0')))
     if launch_container:
         container_name = utils.make_unique_container_name('ansys-prime-server')
