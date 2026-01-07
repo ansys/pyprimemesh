@@ -256,6 +256,7 @@ def launch_prime_github_container(
         '-e',
         f'ANSYSLMD_LICENSE_FILE={license_file}',
     ]
+
     graphics_port = int(os.environ.get('PRIME_GRAPHICS_PORT', '0'))
     if graphics_port > 0:
         print(f'PyPrimeMesh: using Prime graphics port {graphics_port}')
@@ -276,7 +277,6 @@ def launch_prime_github_container(
         or os.environ.get('PRIME_MODE', '').upper() == "GRPC_INSECURE"
     ):
         prime_arguments.append('--secure=no')
-
     subprocess.run(docker_command + prime_arguments, stdout=subprocess.DEVNULL)
 
 

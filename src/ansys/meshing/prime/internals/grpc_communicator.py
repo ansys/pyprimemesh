@@ -77,14 +77,13 @@ def get_secure_channel(client_certs_dir: str, server_host: str, server_port: int
         creds = grpc.ssl_channel_credentials(
             root_certificates=root_certificates,
             private_key=private_key,
-            certificate_chain=certificate_chain,
+            certificate_chain=certificate_chain
         )
     except Exception as e:
         raise RuntimeError(f"Failed to create SSL channel credentials: {e}")
 
     channel = grpc.secure_channel(target, creds)
     return channel
-
 
 def make_chunks(data, chunk_size):
     n = max(1, chunk_size)
@@ -150,7 +149,9 @@ class GRPCCommunicator(Communicator):
         self._channel = kwargs.get('channel', None)
         if self._channel is None and client_certs_dir is not None:
             self._channel = get_secure_channel(
-                client_certs_dir=client_certs_dir, server_host=ip, server_port=port
+                client_certs_dir=client_certs_dir,
+                server_host=ip,
+                server_port=port
             )
 
         self._models = []

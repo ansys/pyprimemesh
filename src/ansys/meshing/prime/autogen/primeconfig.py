@@ -704,7 +704,9 @@ class ErrorCode(enum.IntEnum):
     """VT operation failed.
 
     **This is a beta parameter**. **The behavior and name may change in the future**."""
-    NUMENMETHODNOTFOUND = 3801
+    JSONKEYNOTFOUND = 3801
+    """JSON key not found."""
+    NUMENMETHODNOTFOUND = 3901
     """Could not find numen method."""
     CELLSEPARATIONFAILED = 6000
     """Cell separation failed."""

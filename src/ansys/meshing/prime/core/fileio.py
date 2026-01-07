@@ -21,6 +21,7 @@
 
 """Module for mangaging file inputs and outputs."""
 import json
+import traceback
 from typing import List
 
 # isort: split
@@ -325,18 +326,32 @@ class FileIO(_FileIO):
         >>> results = file_io.export_mapdl_cdb("/tmp/file.cdb", params)
         """
         with utils.file_write_context(self._model, file_name) as temp_file_name:
-            part_id = 1
-            if len(self._model.parts) > 0:
-                part_id = self._model.parts[0].id
-            sim_data_str = super().get_abaqus_simulation_data(part_id)
-            if params.config_settings == None:
+            # part_id = 1
+            # if len(self._model.parts) > 0:
+            #    part_id = self._model.parts[0].id
+            sim_data_str = super().get_abaqus_simulation_data(0)
+            if params.config_settings is None:
                 params.config_settings = ''
-            all_mat_cmds, analysis_settings = mapdlcdbexportutils.generate_mapdl_commands(
-                self._model, sim_data_str, params
-            )
+            generate_mapdl_commands_error = None
+            generate_mapdl_commands_traceback = None
+            try:
+                all_mat_cmds, analysis_settings = mapdlcdbexportutils.generate_mapdl_commands(
+                    self._model, sim_data_str, params
+                )
+            except Exception as e:
+                generate_mapdl_commands_error = e
+                generate_mapdl_commands_traceback = traceback.format_exc()
+                all_mat_cmds, analysis_settings = "", ""
             params.material_properties = all_mat_cmds + params.material_properties
             params.analysis_settings = analysis_settings
             result = super().export_mapdl_cdb(temp_file_name, params)
+            if generate_mapdl_commands_error is not None:
+                self._model.python_logger.warning(
+                    "Failed to generate MAPDL material/analysis commands. "
+                    "Export proceeded with empty settings. \nError: %s\n%s",
+                    generate_mapdl_commands_error,
+                    generate_mapdl_commands_traceback,
+                )
         return result
 
     def initialize_cdb_export_params(
@@ -567,10 +582,10 @@ class FileIO(_FileIO):
 
         """
         with utils.file_write_context(self._model, file_name) as temp_file_name:
-            part_id = 1
-            if len(self._model.parts) > 0:
-                part_id = self._model.parts[0].id
-            sim_data = json.loads(super().get_abaqus_simulation_data(part_id))
+            # part_id = 1
+            # if len(self._model.parts) > 0:
+            #    part_id = self._model.parts[0].id
+            sim_data = json.loads(super().get_abaqus_simulation_data(0))
             if sim_data is not None:
                 mp = dynaexportutils.MaterialProcessor(self._model, sim_data)
                 all_mat_cmds = mp.get_all_material_commands()
