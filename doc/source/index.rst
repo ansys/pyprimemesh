@@ -1,4 +1,5 @@
-.. title:: PyPrimeMesh
+PyPrimeMesh documentation |version|
+===================================
 
 PyPrimeMesh is a Python client library for the Ansys Prime Server. You are looking at the documentation for version |version|.
 
@@ -11,34 +12,28 @@ PyPrimeMesh is a Python client library for the Ansys Prime Server. You are looki
         :link-type: doc
 
         Learn how to run the Linux Docker container and how to
-		launch and connect to the Ansys Prime Server.
+        launch and connect to the Ansys Prime Server.
 
     .. grid-item-card:: User guide :fa:`book-open-reader`
         :link: user_guide/index
         :link-type: doc
 
         Understand key concepts and approaches for creating and
-		modifying meshes for use with various solvers.
+        modifying meshes for use with various solvers.
 
-    .. jinja:: main_toctree
+    .. grid-item-card:: API reference :fa:`book-bookmark`
+        :link: api/index
+        :link-type: doc
 
-        {% if build_api %}
-        .. grid-item-card:: API reference :fa:`book-bookmark`
-            :link: api/index
-            :link-type: doc
+        Understand PyPrimeMesh API endpoints, their capabilities,
+        and how to interact with them programmatically.
 
-            Understand PyPrimeMesh API endpoints, their capabilities,
-            and how to interact with them programmatically.
-        {% endif %}
+    .. grid-item-card:: Examples :fa:`scroll`
+        :link: examples
+        :link-type: doc
 
-        {% if build_examples %}
-        .. grid-item-card:: Examples :fa:`scroll`
-            :link: examples
-            :link-type: doc
-
-            Explore examples that show how to use PyPrimeMesh to
-            perform many different types of operations.
-        {% endif %}
+        Explore examples that show how to use PyPrimeMesh to
+        perform many different types of operations.
 
     .. grid-item-card:: Contribute :fa:`people-group`
         :link: contributing
