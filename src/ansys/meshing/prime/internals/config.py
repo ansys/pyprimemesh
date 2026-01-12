@@ -44,6 +44,7 @@ __FILE_CHECK = True
 
 from ansys.meshing.prime.internals.logger import PrimeLogger
 
+
 class ConnectionType(Enum):
     """Type of connection to be established.
     Default is secure connection.

@@ -21,11 +21,11 @@
 
 """Module for client communication implementations."""
 
+import json
 import logging
 import os
 import platform
 import time
-import json
 from pathlib import Path
 from typing import Optional
 
@@ -81,8 +81,8 @@ class Client(object):
         local = kwargs.get('local', False)
         if local and server_process is not None:
             raise ValueError('Local client cannot be instantiated with a server process')
-        
-        
+
+
         if connection_type == config.ConnectionType.GRPC_INSECURE:
             print("Warning (Client): Modification of these configurations is not recommended.")
             print("Refer the documentation for your installed product for additional information.")
@@ -115,14 +115,14 @@ class Client(object):
                                     transport_mode = "wnua"
                                 else:
                                     transport_mode = "uds"
-                                    
+
                     self._comm = GRPCCommunicator(
                         ip=ip, port=port, timeout=timeout,
                         credentials=credentials,
                         client_certs_dir=client_certs_dir,
                         transport_mode=transport_mode,
                         uds_id=uds_id)
-                    
+
                     setattr(self, 'port', port)
                 except ImportError as err:
                     logging.getLogger('PyPrimeMesh').error(

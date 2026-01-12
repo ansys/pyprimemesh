@@ -3638,7 +3638,7 @@ class _StepProcessor:
                     """No Assign Command is needed when AIRL, AUTO for Modal Analysis"""
                     temp_frequency_analysis_commands = frequency_analysis_commands.split('\n')[5:]
                     temp_frequency_analysis_commands.insert (
-                        0, 
+                        0,
                         f'! -------------------------- STEP: {self._step_counter} -----------------------\n'
                     )
                     frequency_analysis_commands = '\n'.join(temp_frequency_analysis_commands)

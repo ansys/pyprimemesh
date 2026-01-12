@@ -21,8 +21,8 @@
 
 """Module for communications with the gRPC server."""
 __all__ = ['GRPCCommunicator']
-from typing import Optional
 import os
+from typing import Optional
 
 import grpc
 from ansys.api.meshing.prime.v1 import prime_pb2, prime_pb2_grpc
@@ -32,12 +32,12 @@ import ansys.meshing.prime.internals.defaults as defaults
 import ansys.meshing.prime.internals.grpc_utils as grpc_utils
 import ansys.meshing.prime.internals.json_utils as json
 from ansys.meshing.prime.core.model import Model
+from ansys.meshing.prime.internals import cyberchannel
 from ansys.meshing.prime.internals.communicator import Communicator
 from ansys.meshing.prime.internals.error_handling import (
     communicator_error_handler,
     error_code_handler,
 )
-from ansys.meshing.prime.internals import cyberchannel
 
 # Keep some buffer for gRPC metadata that it may want to send
 BUFFER_MESSAGE_LENGTH = defaults.max_message_length() - 100
@@ -62,7 +62,7 @@ def get_secure_channel(client_certs_dir: str, server_host: str, server_port: int
 
     if not os.path.exists(client_certs_dir):
         raise FileNotFoundError(f"Client certificates directory does not exist: {client_certs_dir}")
-    
+
     cert_file = f"{client_certs_dir}/client.crt"
     key_file = f"{client_certs_dir}/client.key"
     ca_file = f"{client_certs_dir}/ca.crt"
@@ -82,7 +82,7 @@ def get_secure_channel(client_certs_dir: str, server_host: str, server_port: int
         )
     except Exception as e:
         raise RuntimeError(f"Failed to create SSL channel credentials: {e}")
-    
+
     channel = grpc.secure_channel(target, creds)
     return channel
 
@@ -329,7 +329,7 @@ class GRPCCommunicator(Communicator):
             return result
         else:
             raise RuntimeError("No connection with server")
-        
+
     def finalize(self):
         """Finalize the connection with the server.
 

@@ -24,8 +24,8 @@ import logging
 import os
 import subprocess
 import sys
-from typing import Optional
 import uuid
+from typing import Optional
 
 import ansys.meshing.prime.internals.config as config
 import ansys.meshing.prime.internals.defaults as defaults
@@ -33,9 +33,10 @@ import ansys.meshing.prime.internals.utils as utils
 from ansys.meshing.prime.internals.client import Client
 
 try:
-    from ansys.meshing.prime.internals import cyberchannel
     import ansys.platform.instancemanagement as pypim
     from simple_upload_server.client import Client as FileClient
+
+    from ansys.meshing.prime.internals import cyberchannel
 
     config.set_has_pim(pypim.is_configured())
 except:
@@ -282,7 +283,7 @@ def launch_prime(
 
     channel = None
     if ip not in ["127.0.0.1", "localhost"] and \
-        connection_type == config.ConnectionType.GRPC_SECURE: 
+        connection_type == config.ConnectionType.GRPC_SECURE:
         if client_certs_dir is None or server_certs_dir is None:
             raise RuntimeError(f"Please provide certificate directory for remote connections.")
         missing = [f for f in [f"{client_certs_dir}/client.crt",
@@ -291,7 +292,7 @@ def launch_prime(
                                if not os.path.exists(f)]
         if missing:
             raise RuntimeError(f"Missing required client TLS file(s) for mutual TLS: {', '.join(missing)}")
-        
+
     launch_container = bool(int(os.environ.get('PYPRIMEMESH_LAUNCH_CONTAINER', '0')))
     if launch_container:
         container_name = utils.make_unique_container_name('ansys-prime-server')

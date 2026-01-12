@@ -20,9 +20,9 @@
 # SOFTWARE.
 
 """Module for mangaging file inputs and outputs."""
+import copy
 import json
 import traceback
-import copy
 from typing import List
 
 # isort: split
