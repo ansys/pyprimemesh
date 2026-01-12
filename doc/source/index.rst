@@ -29,14 +29,14 @@ PyPrimeMesh is a Python client library for the Ansys Prime Server. You are looki
         and how to interact with them programmatically.
 
     .. grid-item-card:: Examples :fa:`scroll`
-        :link: examples
+        :link: examples/index
         :link-type: doc
 
         Explore examples that show how to use PyPrimeMesh to
         perform many different types of operations.
 
     .. grid-item-card:: Contribute :fa:`people-group`
-        :link: contributing
+        :link: contributing/index
         :link-type: doc
 
         Learn how to contribute to the PyPrimeMesh codebase
@@ -52,8 +52,8 @@ PyPrimeMesh is a Python client library for the Ansys Prime Server. You are looki
        getting_started/index
        user_guide/index
        api/index
-       examples
-       contributing
+       examples/index
+       contributing/index
 
 
 Introduction
