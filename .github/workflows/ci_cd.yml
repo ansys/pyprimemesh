@@ -57,7 +57,6 @@ jobs:
         uses: ansys/actions/build-wheelhouse@v6
         with:
           library-name: ${{ env.PACKAGE_NAME }}
-          library-namespace: ${{ env.PACKAGE_NAMESPACE }}
           operating-system: ${{ matrix.os }}
           python-version: ${{ matrix.python-version }}
 
@@ -78,6 +77,11 @@ jobs:
 
       - name: Setup headless display
         uses: pyvista/setup-headless-display-action@v4
+
+      - name: Pin PyVista and VTK
+        run: |
+          python -m pip install --upgrade pip
+          python -m pip install "pyvista==0.38.1" "vtk==9.2.5"
 
       - name: "Run Ansys documentation building action"
         uses: ansys/actions/doc-build@v10
@@ -111,6 +115,11 @@ jobs:
           path: tests/graphics/image_cache
           key: pyvista-image-cache-${{ runner.os }}-v-${{ env.RESET_IMAGE_CACHE }}-${{ hashFiles('pyproject.toml') }}
           restore-keys: pyvista-image-cache-${{ runner.os }}-v-${{ env.RESET_IMAGE_CACHE }}
+
+      - name: Pin PyVista and VTK
+        run: |
+          python -m pip install --upgrade pip
+          python -m pip install "pyvista==0.38.1" "vtk==9.2.5"
 
       - name: "Run pytest"
         uses: ansys/actions/tests-pytest@v6
@@ -184,4 +193,3 @@ jobs:
         with:
           cname: ${{ env.DOCUMENTATION_CNAME }}
           token: ${{ secrets.GITHUB_TOKEN }}
-          python-version: ${{ env.MAIN_PYTHON_VERSION }}
