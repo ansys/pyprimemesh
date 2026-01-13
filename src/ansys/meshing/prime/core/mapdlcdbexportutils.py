@@ -930,7 +930,7 @@ class _MaterialProcessor:
         else:
             self._logger.warning(
                 f"Only TIME=PRONY is processed for VISCOELASTIC material. "
-                f"Material {material} is not processed completly."
+                f"Material {material} is not processed completely."
             )
 
         return viscoelastic_data
@@ -1481,7 +1481,7 @@ class _MaterialProcessor:
         if 'TEST DATA INPUT' in parameters:
             self._logger.warning(
                 f"Uniaxial test data for HYPERELASTIC material is not processed"
-                f"Material {material} is not processed completly."
+                f"Material {material} is not processed completely."
             )
             return hyperelastic_data
 

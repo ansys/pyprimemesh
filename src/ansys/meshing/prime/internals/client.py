@@ -192,7 +192,7 @@ class Client(object):
             return result['Results']
 
     def _generate_server_term_scripts(self, hostNames, pids):
-        """Generates shell and batch scripts to kill processes on specified hostnames.
+        """Generate shell and batch scripts to kill processes on specified hostnames.
 
         Parameters
         ----------

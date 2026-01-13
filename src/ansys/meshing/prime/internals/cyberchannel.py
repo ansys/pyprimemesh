@@ -45,9 +45,8 @@ import logging
 import os
 from dataclasses import dataclass
 from pathlib import Path
-from typing import cast
+from typing import TypeGuard, cast
 from warnings import warn
-from typing import TypeGuard
 
 import grpc
 
