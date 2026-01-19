@@ -1,4 +1,5 @@
 """Sphinx documentation configuration file."""
+
 import glob
 import os
 import subprocess

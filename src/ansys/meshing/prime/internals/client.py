@@ -38,6 +38,7 @@ from ansys.meshing.prime.internals.utils import terminate_process
 
 __all__ = ['Client']
 
+
 class Client(object):
     """Provides the ``Client`` class for PyPrimeMesh.
 
@@ -82,7 +83,6 @@ class Client(object):
         if local and server_process is not None:
             raise ValueError('Local client cannot be instantiated with a server process')
 
-
         if connection_type == config.ConnectionType.GRPC_INSECURE:
             print("Warning (Client): Modification of these configurations is not recommended.")
             print("Refer the documentation for your installed product for additional information.")
@@ -90,10 +90,12 @@ class Client(object):
         self._local = local
         self._process = server_process
         self._comm = None
-        self._cleanup_script_path : Path = None
+        self._cleanup_script_path: Path = None
         if not local:
-            if connection_type == config.ConnectionType.GRPC_SECURE or \
-                connection_type == config.ConnectionType.GRPC_INSECURE:
+            if (
+                connection_type == config.ConnectionType.GRPC_SECURE
+                or connection_type == config.ConnectionType.GRPC_INSECURE
+            ):
                 try:
                     from ansys.meshing.prime.internals.grpc_communicator import (
                         GRPCCommunicator,
@@ -117,11 +119,14 @@ class Client(object):
                                     transport_mode = "uds"
 
                     self._comm = GRPCCommunicator(
-                        ip=ip, port=port, timeout=timeout,
+                        ip=ip,
+                        port=port,
+                        timeout=timeout,
                         credentials=credentials,
                         client_certs_dir=client_certs_dir,
                         transport_mode=transport_mode,
-                        uds_id=uds_id)
+                        uds_id=uds_id,
+                    )
 
                     setattr(self, 'port', port)
                 except ImportError as err:
@@ -157,10 +162,11 @@ class Client(object):
                     f'Failed to load prime_communicator with message: {err.msg}'
                 )
         model = self.model
-        results = json.loads(model._comm.serve(model,
-                                               "PrimeMesh::Model/GetServerProcessInformation",
-                                               model._object_id,
-                                               args={}))
+        results = json.loads(
+            model._comm.serve(
+                model, "PrimeMesh::Model/GetServerProcessInformation", model._object_id, args={}
+            )
+        )
         #
         self._generate_server_term_scripts(results['hostNames'], results['pids'])
 
@@ -208,8 +214,9 @@ class Client(object):
         # --- Input Validation ---
         current_hostname = platform.node().lower()
         if not hostNames or not pids or len(hostNames) != len(pids):
-            logging.getLogger('PyPrimeMesh').info("Found invalid hostnames and PIDs," \
-            "skipped server post kill scripts creation.")
+            logging.getLogger('PyPrimeMesh').info(
+                "Found invalid hostnames and PIDs," "skipped server post kill scripts creation."
+            )
             return None, None
         if os.name == "nt":
             script_content = "@echo off\n"
@@ -248,9 +255,10 @@ class Client(object):
         # Timestamp and process information
         current_dir = Path(os.getcwd())
         script_base_name = f"cleanup-prime-{current_hostname}-{os.getpid()}-{int(time.time())}"
-        #logging.getLogger('PyPrimeMesh').info(f"Current directory: {current_dir}")
+        # logging.getLogger('PyPrimeMesh').info(f"Current directory: {current_dir}")
         self._cleanup_script_path = (current_dir / f"{script_base_name}").with_suffix(
-            '.bat' if os.name == "nt" else '.sh')
+            '.bat' if os.name == "nt" else '.sh'
+        )
         # --- File Writing ---
         try:
             # Write the shell script

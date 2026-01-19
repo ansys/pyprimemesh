@@ -129,6 +129,7 @@ def cleanup_script_files(shell_script, batch_script) -> bool:
             success = False
     return success
 
+
 def terminate_process(process: subprocess, unique_id: str = None):
     """Terminates a process.
 
@@ -153,26 +154,42 @@ def terminate_process(process: subprocess, unique_id: str = None):
         if os.path.exists(batch_script):
             try:
                 subprocess.run([batch_script], check=True, shell=True)
-                logging.getLogger('PyPrimeMesh').info("Prime server process successfully terminated.")
+                logging.getLogger('PyPrimeMesh').info(
+                    "Prime server process successfully terminated."
+                )
             except subprocess.CalledProcessError as e:
-                logging.getLogger('PyPrimeMesh').error(f"Error: Failed to terminate prime server process. Details: {e}")
+                logging.getLogger('PyPrimeMesh').error(
+                    f"Error: Failed to terminate prime server process. Details: {e}"
+                )
             except FileNotFoundError:
-                logging.getLogger('PyPrimeMesh').warning(f"Warning: Prime server process might still be running.")
+                logging.getLogger('PyPrimeMesh').warning(
+                    f"Warning: Prime server process might still be running."
+                )
         else:
-            logging.getLogger('PyPrimeMesh').warning(f"Warning: Cannot terminate prime server on Windows.")
+            logging.getLogger('PyPrimeMesh').warning(
+                f"Warning: Cannot terminate prime server on Windows."
+            )
     else:  # Unix-like (Linux, etc..)
         if os.path.exists(shell_script):
             try:
                 if not os.access(shell_script, os.X_OK):
                     os.chmod(shell_script, 0o755)
                 subprocess.run(["bash", shell_script], check=True)
-                logging.getLogger('PyPrimeMesh').info("Prime server process successfully terminated.")
+                logging.getLogger('PyPrimeMesh').info(
+                    "Prime server process successfully terminated."
+                )
             except subprocess.CalledProcessError as e:
-                logging.getLogger('PyPrimeMesh').error(f"Error: Failed to terminate prime server process. Details: {e}")
+                logging.getLogger('PyPrimeMesh').error(
+                    f"Error: Failed to terminate prime server process. Details: {e}"
+                )
             except FileNotFoundError:
-                logging.getLogger('PyPrimeMesh').warning(f"Warning: Prime server process might still be running.")
+                logging.getLogger('PyPrimeMesh').warning(
+                    f"Warning: Prime server process might still be running."
+                )
         else:
-            logging.getLogger('PyPrimeMesh').warning(f"Warning: Cannot terminate prime server on Unix-like system.")
+            logging.getLogger('PyPrimeMesh').warning(
+                f"Warning: Cannot terminate prime server on Unix-like system."
+            )
 
     cleanup_successful = cleanup_script_files(shell_script, batch_script)
 
@@ -317,7 +334,10 @@ def launch_prime_github_container(
         '--port',
         f'{port}',
     ]
-    print('Warning: Secure connection is not supported yet for Prime containers, using insecure connection.')
+    print(
+        'Warning: Secure connection is not supported yet '
+        'for Prime containers, using insecure connection.'
+    )
     prime_arguments.append('--secure=no')
     subprocess.run(docker_command + prime_arguments, stdout=subprocess.DEVNULL)
 

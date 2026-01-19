@@ -29,7 +29,6 @@ from ansys.api.meshing.prime.v1 import prime_pb2, prime_pb2_grpc
 
 import ansys.meshing.prime.internals.config as config
 import ansys.meshing.prime.internals.defaults as defaults
-import ansys.meshing.prime.internals.grpc_utils as grpc_utils
 import ansys.meshing.prime.internals.json_utils as json
 from ansys.meshing.prime.core.model import Model
 from ansys.meshing.prime.internals import cyberchannel
@@ -78,13 +77,14 @@ def get_secure_channel(client_certs_dir: str, server_host: str, server_port: int
         creds = grpc.ssl_channel_credentials(
             root_certificates=root_certificates,
             private_key=private_key,
-            certificate_chain=certificate_chain
+            certificate_chain=certificate_chain,
         )
     except Exception as e:
         raise RuntimeError(f"Failed to create SSL channel credentials: {e}")
 
     channel = grpc.secure_channel(target, creds)
     return channel
+
 
 def make_chunks(data, chunk_size):
     n = max(1, chunk_size)
@@ -151,12 +151,13 @@ class GRPCCommunicator(Communicator):
         self._channel = kwargs.get('channel', None)
         if self._channel is None:
             self._channel = cyberchannel.create_channel(
-               transport_mode=transport_mode,
-               host=ip,
-               port=port,
-               uds_service="pyprimemesh",
-               uds_id=uds_id,
-               certs_dir=client_certs_dir)
+                transport_mode=transport_mode,
+                host=ip,
+                port=port,
+                uds_service="pyprimemesh",
+                uds_id=uds_id,
+                certs_dir=client_certs_dir,
+            )
 
         self._models = []
         if 'PYPRIMEMESH_DEVELOPER_MODE' not in os.environ:

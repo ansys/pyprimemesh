@@ -233,8 +233,8 @@ def launch_prime(
     port: int = defaults.port(),
     timeout: float = defaults.connection_timeout(),
     connection_type: config.ConnectionType = config.ConnectionType.GRPC_SECURE,
-    client_certs_dir : Optional[str] = None,
-    server_certs_dir : Optional[str] = None,
+    client_certs_dir: Optional[str] = None,
+    server_certs_dir: Optional[str] = None,
     n_procs: Optional[int] = None,
     version: Optional[str] = None,
     **kwargs,
@@ -282,23 +282,32 @@ def launch_prime(
         port = utils.get_available_local_port(port)
 
     channel = None
-    if ip not in ["127.0.0.1", "localhost"] and \
-        connection_type == config.ConnectionType.GRPC_SECURE:
+    if (
+        ip not in ["127.0.0.1", "localhost"]
+        and connection_type == config.ConnectionType.GRPC_SECURE
+    ):
         if client_certs_dir is None or server_certs_dir is None:
             raise RuntimeError(f"Please provide certificate directory for remote connections.")
-        missing = [f for f in [f"{client_certs_dir}/client.crt",
-                               f"{client_certs_dir}/client.key",
-                               f"{client_certs_dir}/ca.crt"]
-                               if not os.path.exists(f)]
+        missing = [
+            f
+            for f in [
+                f"{client_certs_dir}/client.crt",
+                f"{client_certs_dir}/client.key",
+                f"{client_certs_dir}/ca.crt",
+            ]
+            if not os.path.exists(f)
+        ]
         if missing:
-            raise RuntimeError(f"Missing required client TLS file(s) for mutual TLS: {', '.join(missing)}")
+            raise RuntimeError(
+                f"Missing required client TLS file(s) for mutual TLS: {', '.join(missing)}"
+            )
 
     launch_container = bool(int(os.environ.get('PYPRIMEMESH_LAUNCH_CONTAINER', '0')))
     if launch_container:
         container_name = utils.make_unique_container_name('ansys-prime-server')
         utils.launch_prime_github_container(port=port, name=container_name, version=version)
         config.set_using_container(True)
-        client = Client(port=port, timeout=timeout, client_certs_dir = client_certs_dir)
+        client = Client(port=port, timeout=timeout, client_certs_dir=client_certs_dir)
         client.container_name = container_name
         print('using server from docker : The container name ', container_name)
         return client
@@ -312,11 +321,14 @@ def launch_prime(
         socket_filename = "pyprimemesh-" + uds_id + ".sock"
 
     server = launch_server_process(
-        prime_root=prime_root, ip=ip, port=port, n_procs=n_procs,
+        prime_root=prime_root,
+        ip=ip,
+        port=port,
+        n_procs=n_procs,
         connection_type=connection_type,
-        uds_file = None if os.name == 'nt' else f"unix:{uds_folder / socket_filename}",
+        uds_file=None if os.name == 'nt' else f"unix:{uds_folder / socket_filename}",
         server_certs_dir=server_certs_dir,
-        **kwargs
+        **kwargs,
     )
 
     return Client(
@@ -327,5 +339,5 @@ def launch_prime(
         uds_id=uds_id,
         connection_type=connection_type,
         client_certs_dir=client_certs_dir,
-        channel=channel
+        channel=channel,
     )

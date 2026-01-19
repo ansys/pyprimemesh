@@ -19,7 +19,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
-"""Module for mangaging file inputs and outputs."""
+"""Module for managing file inputs and outputs."""
 import copy
 import json
 import traceback
@@ -331,7 +331,7 @@ class FileIO(_FileIO):
             # part_id = 1
             # if len(self._model.parts) > 0:
             #    part_id = self._model.parts[0].id
-            args = {"partId" : 0}
+            args = {"partId": 0}
             command_name = "PrimeMesh::FileIO/GetAbaqusSimulationData"
             sim_data_str = self._comm.serve(self._model, command_name, self._object_id, args=args)
             if params.config_settings is None:

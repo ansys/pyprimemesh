@@ -2584,9 +2584,9 @@ class MaterialProcessor:
                         if zone_details['Material'] in self._material_assignedTo_zones:
                             try:
                                 zoneId = zone_details['id']
-                                self._material_assignedTo_zones[
-                                    zone_details['Material']
-                                ].append(zoneId)
+                                self._material_assignedTo_zones[zone_details['Material']].append(
+                                    zoneId
+                                )
                             except:
                                 self._logger.warning(f'Zone {zone} does not have id for it ')
                                 pass

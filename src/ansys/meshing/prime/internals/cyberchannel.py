@@ -45,7 +45,7 @@ import logging
 import os
 from dataclasses import dataclass
 from pathlib import Path
-from typing import TypeGuard, cast
+from typing import cast
 from warnings import warn
 
 import grpc
@@ -55,11 +55,13 @@ LOOPBACK_HOSTS = ("localhost", "127.0.0.1")
 
 logger = logging.getLogger(__name__)
 
+
 @dataclass
 class CertificateFiles:
     cert_file: str | Path | None = None
     key_file: str | Path | None = None
     ca_file: str | Path | None = None
+
 
 def create_channel(
     transport_mode: str,
@@ -118,11 +120,16 @@ def create_channel(
         The created gRPC channel
 
     """
+
     def check_host_port(transport_mode, host, port) -> tuple[str, str, str]:
         if host is None:
-            raise ValueError(f"When using {transport_mode.lower()} transport mode, 'host' must be provided.")
+            raise ValueError(
+                f"When using {transport_mode.lower()} transport mode, 'host' must be provided."
+            )
         if port is None:
-            raise ValueError(f"When using {transport_mode.lower()} transport mode, 'port' must be provided.")
+            raise ValueError(
+                f"When using {transport_mode.lower()} transport mode, 'port' must be provided."
+            )
         return transport_mode, host, port
 
     match transport_mode.lower():
@@ -132,7 +139,7 @@ def create_channel(
         case "uds":
             return create_uds_channel(uds_service, uds_dir, uds_id, grpc_options)
         case "wnua":
-            host = host or "localhost" # Default to localhost if not provided
+            host = host or "localhost"  # Default to localhost if not provided
             if host not in LOOPBACK_HOSTS:
                 raise ValueError("Remote host connections are not supported with WNUA.")
             transport_mode, host, port = check_host_port(transport_mode, host, port)
@@ -319,7 +326,12 @@ def create_mtls_channel(
 
     """
     certs_folder = None
-    if cert_files is not None and cert_files.cert_file is not None and cert_files.key_file is not None and cert_files.ca_file is not None:
+    if (
+        cert_files is not None
+        and cert_files.cert_file is not None
+        and cert_files.key_file is not None
+        and cert_files.ca_file is not None
+    ):
         cert_file = Path(cert_files.cert_file).resolve()
         key_file = Path(cert_files.key_file).resolve()
         ca_file = Path(cert_files.ca_file).resolve()
@@ -346,8 +358,10 @@ def create_mtls_channel(
     except FileNotFoundError as e:
         error_message = f"Certificate file not found: {e.filename}. "
         if certs_folder is not None:
-            error_message += f"Ensure that the certificates are present in the '{certs_folder}' folder or " \
-            "set the 'ANSYS_GRPC_CERTIFICATES' environment variable."
+            error_message += (
+                f"Ensure that the certificates are present in the '{certs_folder}' folder or "
+                "set the 'ANSYS_GRPC_CERTIFICATES' environment variable."
+            )
         raise FileNotFoundError(error_message) from e
 
     # Create SSL credentials
