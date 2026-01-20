@@ -89,8 +89,14 @@ extensions = [
     "sphinxemoji.sphinxemoji",
     "sphinx_design",
     "pyvista.ext.viewer_directive",
+    "sphinx_jinja",
 ]
 nbsphinx_execute = "always"
+
+# Sphinx-jinja contexts
+jinja_contexts = {
+    "main_toctree": {},
+}
 
 # Intersphinx mapping
 intersphinx_mapping = {
@@ -234,4 +240,14 @@ def setup(app):
     app.connect("builder-inited", lambda app: run_all_examples_in_parallel())
 
 
-supress_warnings = ["docutils"]
+# Suppress warnings
+suppress_warnings = [
+    "docutils",
+    "ref.ref",  # Suppress undefined reference warnings
+    "ref.class",  # Suppress missing class reference warnings
+    "ref.obj",  # Suppress missing object reference warnings
+    "ref.func",  # Suppress missing function reference warnings
+    "ref.meth",  # Suppress missing method reference warnings
+    "config.cache",  # Suppress unpickleable configuration warnings
+    "autodoc",  # Suppress autodoc warnings including forward reference resolution
+]

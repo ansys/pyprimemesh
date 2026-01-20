@@ -1,4 +1,4 @@
-# Copyright (C) 2024 - 2025 ANSYS, Inc. and/or its affiliates.
+# Copyright (C) 2024 - 2026 ANSYS, Inc. and/or its affiliates.
 # SPDX-License-Identifier: MIT
 #
 #
@@ -46,7 +46,7 @@ class HidePicked(PlotterWidget):
         """Initialize the widget."""
         super().__init__(prime_plotter._backend._pl.scene)
         self.prime_plotter = prime_plotter
-        self._picked_dict = self.prime_plotter._backend._picked_dict
+        self._picked_dict = self.prime_plotter._backend._custom_picker._picked_dict
         self._object_actors_map = self.prime_plotter._backend._object_to_actors_map
         self._button = self.prime_plotter._backend._pl.scene.add_checkbox_button_widget(
             self.callback,
