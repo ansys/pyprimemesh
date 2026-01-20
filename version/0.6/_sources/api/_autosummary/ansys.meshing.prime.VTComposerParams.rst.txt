@@ -1,0 +1,34 @@
+.. vale off
+
+VTComposerParams
+================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoclass:: VTComposerParams
+   
+   
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+      :toctree:
+   
+      
+      VTComposerParams.print_default
+      VTComposerParams.set_default
+   
+   
+
+   
+   
+   .. rubric:: Attributes
+
+   .. autosummary::
+      :toctree:
+   
+      VTComposerParams.thin_stripes_tol
+   
+   
+
+.. vale on

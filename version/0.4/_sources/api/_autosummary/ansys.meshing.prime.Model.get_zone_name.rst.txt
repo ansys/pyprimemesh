@@ -1,0 +1,6 @@
+﻿get\_zone\_name
+===============
+
+.. currentmodule:: ansys.meshing.prime
+
+.. automethod:: Model.get_zone_name

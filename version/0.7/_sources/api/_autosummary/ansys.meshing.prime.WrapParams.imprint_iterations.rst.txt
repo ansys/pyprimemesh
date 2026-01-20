@@ -1,0 +1,6 @@
+imprint\_iterations
+===================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoproperty:: WrapParams.imprint_iterations

@@ -1,0 +1,6 @@
+add\_labels\_on\_topo\_entities
+===============================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. automethod:: Part.add_labels_on_topo_entities

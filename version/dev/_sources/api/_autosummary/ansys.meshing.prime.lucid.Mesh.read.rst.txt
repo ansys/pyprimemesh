@@ -1,0 +1,11 @@
+read
+====
+
+.. currentmodule:: ansys.meshing.prime.lucid
+
+.. automethod:: ansys.meshing.prime.lucid.Mesh.read
+
+.. minigallery::
+   :add-heading: Examples using Mesh.read
+
+   ansys.meshing.prime.lucid.Mesh.read

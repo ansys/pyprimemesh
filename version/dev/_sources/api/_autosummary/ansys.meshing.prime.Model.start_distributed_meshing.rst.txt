@@ -1,0 +1,11 @@
+start\_distributed\_meshing
+===========================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. automethod:: ansys.meshing.prime.Model.start_distributed_meshing
+
+.. minigallery::
+   :add-heading: Examples using Model.start_distributed_meshing
+
+   ansys.meshing.prime.Model.start_distributed_meshing

@@ -1,0 +1,6 @@
+﻿material\_point\_name
+=====================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoproperty:: WrapperCloseGapsParams.material_point_name

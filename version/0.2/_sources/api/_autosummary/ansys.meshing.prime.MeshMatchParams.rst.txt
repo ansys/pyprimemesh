@@ -1,0 +1,23 @@
+MeshMatchParams
+===============
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoclass:: MeshMatchParams
+   
+   
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+      :toctree:
+   
+      
+      MeshMatchParams.print_default
+      MeshMatchParams.set_default
+   
+   
+
+   
+   
+   

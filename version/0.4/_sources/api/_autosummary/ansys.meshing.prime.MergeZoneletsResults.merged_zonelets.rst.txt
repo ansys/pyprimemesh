@@ -1,0 +1,6 @@
+﻿merged\_zonelets
+================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoproperty:: MergeZoneletsResults.merged_zonelets

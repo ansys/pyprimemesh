@@ -1,0 +1,11 @@
+conjugate
+=========
+
+.. currentmodule:: ansys.meshing.prime
+
+.. automethod:: ansys.meshing.prime.MergeNodeType.conjugate
+
+.. minigallery::
+   :add-heading: Examples using MergeNodeType.conjugate
+
+   ansys.meshing.prime.MergeNodeType.conjugate

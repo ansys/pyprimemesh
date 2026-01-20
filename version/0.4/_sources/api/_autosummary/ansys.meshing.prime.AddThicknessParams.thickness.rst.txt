@@ -1,0 +1,6 @@
+﻿thickness
+=========
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoproperty:: AddThicknessParams.thickness

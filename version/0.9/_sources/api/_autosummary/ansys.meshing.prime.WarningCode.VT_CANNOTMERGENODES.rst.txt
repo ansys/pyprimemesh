@@ -1,0 +1,6 @@
+VT\_CANNOTMERGENODES
+====================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoattribute:: WarningCode.VT_CANNOTMERGENODES

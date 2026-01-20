@@ -1,0 +1,38 @@
+.. vale off
+
+PrismControl
+============
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoclass:: PrismControl
+   
+   
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+      :toctree:
+   
+      
+      PrismControl.get_surface_scope
+      PrismControl.get_volume_scope
+      PrismControl.set_growth_params
+      PrismControl.set_surface_scope
+      PrismControl.set_volume_scope
+   
+   
+
+   
+   
+   .. rubric:: Attributes
+
+   .. autosummary::
+      :toctree:
+   
+      PrismControl.id
+      PrismControl.name
+   
+   
+
+.. vale on

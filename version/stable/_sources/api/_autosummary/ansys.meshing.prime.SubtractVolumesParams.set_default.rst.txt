@@ -1,0 +1,11 @@
+set\_default
+============
+
+.. currentmodule:: ansys.meshing.prime
+
+.. automethod:: ansys.meshing.prime.SubtractVolumesParams.set_default
+
+.. minigallery::
+   :add-heading: Examples using SubtractVolumesParams.set_default
+
+   ansys.meshing.prime.SubtractVolumesParams.set_default

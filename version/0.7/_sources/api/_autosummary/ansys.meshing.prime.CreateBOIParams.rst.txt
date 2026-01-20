@@ -1,0 +1,48 @@
+.. vale off
+
+CreateBOIParams
+===============
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoclass:: CreateBOIParams
+   
+   
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+      :toctree:
+   
+      
+      CreateBOIParams.print_default
+      CreateBOIParams.set_default
+   
+   
+
+   
+   
+   .. rubric:: Attributes
+
+   .. autosummary::
+      :toctree:
+   
+      CreateBOIParams.boi_type
+      CreateBOIParams.flow_dir
+      CreateBOIParams.number_of_threads
+      CreateBOIParams.perform_initial_wrap
+      CreateBOIParams.side_scale
+      CreateBOIParams.suggested_label_prefix
+      CreateBOIParams.suggested_part_name
+      CreateBOIParams.wake_levels
+      CreateBOIParams.wake_scale
+      CreateBOIParams.wrap_size
+   
+   
+
+.. minigallery::
+    :add-heading: Examples using CreateBOIParams
+
+    ansys.meshing.prime.CreateBOIParams
+
+.. vale on

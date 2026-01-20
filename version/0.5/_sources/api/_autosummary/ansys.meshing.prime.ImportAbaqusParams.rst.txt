@@ -1,0 +1,27 @@
+.. vale off
+
+ImportAbaqusParams
+==================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoclass:: ImportAbaqusParams
+   
+   
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+      :toctree:
+   
+      
+      ImportAbaqusParams.print_default
+      ImportAbaqusParams.set_default
+   
+   
+
+   
+   
+   
+
+.. vale on

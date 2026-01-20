@@ -1,0 +1,6 @@
+delete\_base
+============
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoproperty:: MeshStackerParams.delete_base

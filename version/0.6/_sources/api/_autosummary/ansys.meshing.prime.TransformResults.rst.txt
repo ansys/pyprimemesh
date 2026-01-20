@@ -1,0 +1,34 @@
+.. vale off
+
+TransformResults
+================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoclass:: TransformResults
+   
+   
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+      :toctree:
+   
+      
+      TransformResults.print_default
+      TransformResults.set_default
+   
+   
+
+   
+   
+   .. rubric:: Attributes
+
+   .. autosummary::
+      :toctree:
+   
+      TransformResults.error_code
+   
+   
+
+.. vale on

@@ -1,0 +1,48 @@
+.. vale off
+
+ZoneType
+========
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoclass:: ZoneType
+   
+   
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+      :toctree:
+   
+      ZoneType.conjugate
+      ZoneType.bit_length
+      ZoneType.bit_count
+      ZoneType.to_bytes
+      ZoneType.from_bytes
+      ZoneType.as_integer_ratio
+   
+   
+
+   
+   
+   .. rubric:: Attributes
+
+   .. autosummary::
+      :toctree:
+   
+      ZoneType.real
+      ZoneType.imag
+      ZoneType.numerator
+      ZoneType.denominator
+      ZoneType.EDGE
+      ZoneType.FACE
+      ZoneType.VOLUME
+   
+   
+
+.. minigallery::
+    :add-heading: Examples using ZoneType
+
+    ansys.meshing.prime.ZoneType
+
+.. vale on

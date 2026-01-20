@@ -1,0 +1,6 @@
+﻿MEDIUM
+======
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoattribute:: CadRefacetingResolution.MEDIUM

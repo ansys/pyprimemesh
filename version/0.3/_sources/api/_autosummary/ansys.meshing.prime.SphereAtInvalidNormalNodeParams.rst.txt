@@ -1,0 +1,27 @@
+.. vale off
+
+SphereAtInvalidNormalNodeParams
+===============================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoclass:: SphereAtInvalidNormalNodeParams
+   
+   
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+      :toctree:
+   
+      
+      SphereAtInvalidNormalNodeParams.print_default
+      SphereAtInvalidNormalNodeParams.set_default
+   
+   
+
+   
+   
+   
+
+.. vale on

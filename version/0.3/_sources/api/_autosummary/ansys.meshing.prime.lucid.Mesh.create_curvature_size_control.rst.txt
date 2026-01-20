@@ -1,0 +1,6 @@
+create\_curvature\_size\_control
+================================
+
+.. currentmodule:: ansys.meshing.prime.lucid
+
+.. automethod:: Mesh.create_curvature_size_control

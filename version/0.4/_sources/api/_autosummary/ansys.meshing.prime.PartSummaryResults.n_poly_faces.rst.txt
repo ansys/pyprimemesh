@@ -1,0 +1,6 @@
+﻿n\_poly\_faces
+==============
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoproperty:: PartSummaryResults.n_poly_faces

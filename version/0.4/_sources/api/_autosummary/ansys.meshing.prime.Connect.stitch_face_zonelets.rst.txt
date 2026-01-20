@@ -1,0 +1,6 @@
+﻿stitch\_face\_zonelets
+======================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. automethod:: Connect.stitch_face_zonelets

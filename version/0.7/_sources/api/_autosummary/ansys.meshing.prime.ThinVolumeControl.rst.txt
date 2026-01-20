@@ -1,0 +1,42 @@
+.. vale off
+
+ThinVolumeControl
+=================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoclass:: ThinVolumeControl
+   
+   
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+      :toctree:
+   
+      
+      ThinVolumeControl.set_source_scope
+      ThinVolumeControl.set_target_scope
+      ThinVolumeControl.set_thin_volume_mesh_params
+      ThinVolumeControl.set_volume_scope
+   
+   
+
+   
+   
+   .. rubric:: Attributes
+
+   .. autosummary::
+      :toctree:
+   
+      ThinVolumeControl.id
+      ThinVolumeControl.name
+   
+   
+
+.. minigallery::
+    :add-heading: Examples using ThinVolumeControl
+
+    ansys.meshing.prime.ThinVolumeControl
+
+.. vale on

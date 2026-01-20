@@ -1,0 +1,6 @@
+﻿ids
+===
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoproperty:: SetFeatureRecoveriesResults.ids

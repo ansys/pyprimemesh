@@ -1,0 +1,6 @@
+name
+====
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoproperty:: MultiZoneControl.name

@@ -1,0 +1,46 @@
+.. vale off
+
+ScaffolderParams
+================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoclass:: ScaffolderParams
+   
+   
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+      :toctree:
+   
+      
+      ScaffolderParams.print_default
+      ScaffolderParams.set_default
+   
+   
+
+   
+   
+   .. rubric:: Attributes
+
+   .. autosummary::
+      :toctree:
+   
+      ScaffolderParams.absolute_dist_tol
+      ScaffolderParams.constant_mesh_size
+      ScaffolderParams.edge_merge_control
+      ScaffolderParams.intersection_control_mask
+      ScaffolderParams.remove_holes_critical_radius
+      ScaffolderParams.remove_slivers_abs_dist_tol_ratio
+      ScaffolderParams.size_field_type
+      ScaffolderParams.triangles_coplanar_angle_cos
+   
+   
+
+.. minigallery::
+    :add-heading: Examples using ScaffolderParams
+
+    ansys.meshing.prime.ScaffolderParams
+
+.. vale on

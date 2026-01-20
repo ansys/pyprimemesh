@@ -1,0 +1,6 @@
+﻿first\_height
+=============
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoproperty:: PrismControlGrowthParams.first_height

@@ -1,0 +1,6 @@
+DEAD
+====
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoattribute:: MaterialPointType.DEAD

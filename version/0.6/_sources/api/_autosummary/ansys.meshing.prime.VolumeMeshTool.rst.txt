@@ -1,0 +1,28 @@
+.. vale off
+
+VolumeMeshTool
+==============
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoclass:: VolumeMeshTool
+   
+   
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+      :toctree:
+   
+      
+      VolumeMeshTool.check_mesh
+      VolumeMeshTool.copy_cell_zonelets
+      VolumeMeshTool.improve_by_auto_node_move
+   
+   
+
+   
+   
+   
+
+.. vale on

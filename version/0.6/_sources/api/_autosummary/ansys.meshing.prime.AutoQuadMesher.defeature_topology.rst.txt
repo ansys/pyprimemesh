@@ -1,0 +1,6 @@
+defeature\_topology
+===================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. automethod:: AutoQuadMesher.defeature_topology

@@ -1,0 +1,11 @@
+get\_topo\_edges
+================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. automethod:: ansys.meshing.prime.Part.get_topo_edges
+
+.. minigallery::
+   :add-heading: Examples using Part.get_topo_edges
+
+   ansys.meshing.prime.Part.get_topo_edges

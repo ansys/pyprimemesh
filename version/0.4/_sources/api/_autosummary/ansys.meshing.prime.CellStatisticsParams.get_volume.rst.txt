@@ -1,0 +1,6 @@
+﻿get\_volume
+===========
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoproperty:: CellStatisticsParams.get_volume

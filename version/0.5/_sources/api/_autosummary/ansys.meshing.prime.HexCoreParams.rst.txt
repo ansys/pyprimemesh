@@ -1,0 +1,40 @@
+.. vale off
+
+HexCoreParams
+=============
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoclass:: HexCoreParams
+   
+   
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+      :toctree:
+   
+      
+      HexCoreParams.print_default
+      HexCoreParams.set_default
+   
+   
+
+   
+   
+   .. rubric:: Attributes
+
+   .. autosummary::
+      :toctree:
+   
+      HexCoreParams.buffer_layers
+      HexCoreParams.cell_element_type
+      HexCoreParams.enable_region_based_hexcore
+      HexCoreParams.rel_peel_layer_offset
+      HexCoreParams.surface_mesh_size_scaling
+      HexCoreParams.transition_layer_type
+      HexCoreParams.transition_size_field_type
+   
+   
+
+.. vale on

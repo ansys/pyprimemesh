@@ -1,0 +1,6 @@
+print\_default
+==============
+
+.. currentmodule:: ansys.meshing.prime
+
+.. automethod:: PrismStairStep.print_default

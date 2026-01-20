@@ -1,0 +1,26 @@
+.. vale off
+
+SolverType
+==========
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoclass:: SolverType
+   
+   
+   
+   
+
+   
+   
+   .. rubric:: Attributes
+
+   .. autosummary::
+      :toctree:
+   
+      SolverType.FLUENT
+      SolverType.MAPDL
+   
+   
+
+.. vale on

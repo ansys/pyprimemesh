@@ -1,0 +1,22 @@
+SplineRefinementType
+====================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoclass:: SplineRefinementType
+   
+   
+   
+   
+
+   
+   
+   .. rubric:: Attributes
+
+   .. autosummary::
+      :toctree:
+   
+      SplineRefinementType.H
+      SplineRefinementType.P
+   
+   

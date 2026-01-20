@@ -1,0 +1,6 @@
+ymax
+====
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoproperty:: BoundingBox.ymax

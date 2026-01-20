@@ -1,0 +1,11 @@
+set\_suggested\_zone\_name
+==========================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. automethod:: ansys.meshing.prime.Model.set_suggested_zone_name
+
+.. minigallery::
+   :add-heading: Examples using Model.set_suggested_zone_name
+
+   ansys.meshing.prime.Model.set_suggested_zone_name

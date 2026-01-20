@@ -1,0 +1,30 @@
+MaterialPointManager
+====================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoclass:: MaterialPointManager
+   
+   
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+      :toctree:
+   
+      
+      MaterialPointManager.create_material_point
+   
+   
+
+   
+   
+   .. rubric:: Attributes
+
+   .. autosummary::
+      :toctree:
+   
+      MaterialPointManager.id
+      MaterialPointManager.name
+   
+   

@@ -1,0 +1,6 @@
+MESHHASNONPOSITIVEAREAS
+=======================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoattribute:: WarningCode.MESHHASNONPOSITIVEAREAS

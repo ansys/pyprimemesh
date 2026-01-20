@@ -1,0 +1,6 @@
+delete\_shadowed\_topo\_faces
+=============================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. automethod:: Scaffolder.delete_shadowed_topo_faces

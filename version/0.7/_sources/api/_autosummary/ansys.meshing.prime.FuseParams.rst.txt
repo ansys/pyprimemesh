@@ -1,0 +1,50 @@
+.. vale off
+
+FuseParams
+==========
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoclass:: FuseParams
+   
+   
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+      :toctree:
+   
+      
+      FuseParams.print_default
+      FuseParams.set_default
+   
+   
+
+   
+   
+   .. rubric:: Attributes
+
+   .. autosummary::
+      :toctree:
+   
+      FuseParams.angle
+      FuseParams.check_interior
+      FuseParams.check_orientation
+      FuseParams.dump_mesh
+      FuseParams.fuse_edges_only
+      FuseParams.fuse_option
+      FuseParams.gap_tolerance
+      FuseParams.local_remesh
+      FuseParams.n_layers
+      FuseParams.separate
+      FuseParams.side_tolerance
+      FuseParams.use_absolute_tolerance
+   
+   
+
+.. minigallery::
+    :add-heading: Examples using FuseParams
+
+    ansys.meshing.prime.FuseParams
+
+.. vale on

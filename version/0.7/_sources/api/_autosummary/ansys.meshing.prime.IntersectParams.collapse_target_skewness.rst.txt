@@ -1,0 +1,6 @@
+collapse\_target\_skewness
+==========================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoproperty:: IntersectParams.collapse_target_skewness

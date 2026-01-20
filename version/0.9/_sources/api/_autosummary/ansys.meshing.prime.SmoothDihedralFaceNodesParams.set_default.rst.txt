@@ -1,0 +1,11 @@
+set\_default
+============
+
+.. currentmodule:: ansys.meshing.prime
+
+.. automethod:: ansys.meshing.prime.SmoothDihedralFaceNodesParams.set_default
+
+.. minigallery::
+   :add-heading: Examples using SmoothDihedralFaceNodesParams.set_default
+
+   ansys.meshing.prime.SmoothDihedralFaceNodesParams.set_default

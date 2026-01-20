@@ -1,0 +1,11 @@
+set\_default
+============
+
+.. currentmodule:: ansys.meshing.prime
+
+.. automethod:: ansys.meshing.prime.SearchByIntersectionResults.set_default
+
+.. minigallery::
+   :add-heading: Examples using SearchByIntersectionResults.set_default
+
+   ansys.meshing.prime.SearchByIntersectionResults.set_default

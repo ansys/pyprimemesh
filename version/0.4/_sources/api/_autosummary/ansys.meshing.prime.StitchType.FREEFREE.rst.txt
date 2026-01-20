@@ -1,0 +1,6 @@
+﻿FREEFREE
+========
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoattribute:: StitchType.FREEFREE

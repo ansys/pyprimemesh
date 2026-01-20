@@ -1,0 +1,35 @@
+Mesh
+====
+
+.. currentmodule:: ansys.meshing.prime.lucid
+
+.. autoclass:: Mesh
+   
+   
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+      :toctree:
+   
+      
+      Mesh.compute_volumes
+      Mesh.connect_faces
+      Mesh.create_constant_size_control
+      Mesh.create_curvature_size_control
+      Mesh.create_flow_volume
+      Mesh.create_zones_from_labels
+      Mesh.delete_topology
+      Mesh.merge_parts
+      Mesh.read
+      Mesh.surface_mesh
+      Mesh.surface_mesh_with_size_controls
+      Mesh.volume_mesh
+      Mesh.wrap
+      Mesh.write
+   
+   
+
+   
+   
+   

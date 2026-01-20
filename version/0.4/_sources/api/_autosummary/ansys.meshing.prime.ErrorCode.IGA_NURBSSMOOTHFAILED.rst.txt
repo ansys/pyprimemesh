@@ -1,0 +1,6 @@
+﻿IGA\_NURBSSMOOTHFAILED
+======================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoattribute:: ErrorCode.IGA_NURBSSMOOTHFAILED

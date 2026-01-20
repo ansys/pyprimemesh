@@ -1,0 +1,11 @@
+conjugate
+=========
+
+.. currentmodule:: ansys.meshing.prime
+
+.. automethod:: ansys.meshing.prime.BCPairType.conjugate
+
+.. minigallery::
+   :add-heading: Examples using BCPairType.conjugate
+
+   ansys.meshing.prime.BCPairType.conjugate

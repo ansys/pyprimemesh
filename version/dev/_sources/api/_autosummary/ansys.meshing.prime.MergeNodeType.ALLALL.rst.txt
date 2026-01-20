@@ -1,0 +1,6 @@
+ALLALL
+======
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoattribute:: MergeNodeType.ALLALL

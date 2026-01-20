@@ -1,0 +1,6 @@
+multi\_zone\_controls
+=====================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. automethod:: ControlData.multi_zone_controls

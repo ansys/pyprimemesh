@@ -1,0 +1,6 @@
+THINVOLUMECONTROLINVALIDSOURCESCOPE
+===================================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoattribute:: ErrorCode.THINVOLUMECONTROLINVALIDSOURCESCOPE

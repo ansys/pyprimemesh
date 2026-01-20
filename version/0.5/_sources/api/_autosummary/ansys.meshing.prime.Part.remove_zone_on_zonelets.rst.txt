@@ -1,0 +1,6 @@
+remove\_zone\_on\_zonelets
+==========================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. automethod:: Part.remove_zone_on_zonelets

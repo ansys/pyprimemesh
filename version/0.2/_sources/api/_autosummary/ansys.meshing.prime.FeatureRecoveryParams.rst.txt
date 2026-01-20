@@ -1,0 +1,32 @@
+FeatureRecoveryParams
+=====================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoclass:: FeatureRecoveryParams
+   
+   
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+      :toctree:
+   
+      
+      FeatureRecoveryParams.print_default
+      FeatureRecoveryParams.set_default
+   
+   
+
+   
+   
+   .. rubric:: Attributes
+
+   .. autosummary::
+      :toctree:
+   
+      FeatureRecoveryParams.enable_feature_octree_refinement
+      FeatureRecoveryParams.scope
+      FeatureRecoveryParams.size_at_features
+   
+   

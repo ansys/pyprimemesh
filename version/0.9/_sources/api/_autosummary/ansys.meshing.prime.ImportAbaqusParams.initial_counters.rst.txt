@@ -1,0 +1,6 @@
+initial\_counters
+=================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoproperty:: ImportAbaqusParams.initial_counters

@@ -1,0 +1,6 @@
+﻿resolve\_invalid\_node\_normals
+===============================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoproperty:: WrapperImproveQualityParams.resolve_invalid_node_normals

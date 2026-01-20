@@ -1,0 +1,6 @@
+﻿download\_f1\_rw\_drs\_stl
+==========================
+
+.. currentmodule:: ansys.meshing.prime.examples
+
+.. autofunction:: download_f1_rw_drs_stl

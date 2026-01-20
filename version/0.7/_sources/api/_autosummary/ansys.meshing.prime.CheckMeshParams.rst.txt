@@ -1,0 +1,32 @@
+.. vale off
+
+CheckMeshParams
+===============
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoclass:: CheckMeshParams
+   
+   
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+      :toctree:
+   
+      
+      CheckMeshParams.print_default
+      CheckMeshParams.set_default
+   
+   
+
+   
+   
+   
+
+.. minigallery::
+    :add-heading: Examples using CheckMeshParams
+
+    ansys.meshing.prime.CheckMeshParams
+
+.. vale on

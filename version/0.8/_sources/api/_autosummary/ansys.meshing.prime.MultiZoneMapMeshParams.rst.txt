@@ -1,0 +1,39 @@
+.. vale off
+
+MultiZoneMapMeshParams
+======================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoclass:: MultiZoneMapMeshParams
+   
+   
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+      :toctree:
+   
+      
+      MultiZoneMapMeshParams.print_default
+      MultiZoneMapMeshParams.set_default
+   
+   
+
+   
+   
+   .. rubric:: Attributes
+
+   .. autosummary::
+      :toctree:
+   
+      MultiZoneMapMeshParams.scope
+   
+   
+
+.. minigallery::
+    :add-heading: Examples using MultiZoneMapMeshParams
+
+    ansys.meshing.prime.MultiZoneMapMeshParams
+
+.. vale on
