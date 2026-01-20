@@ -2,19 +2,6 @@ This project uses [towncrier](https://towncrier.readthedocs.io/) and the changes
 
 <!-- towncrier release notes start -->
 
-## [0.9.4](https://github.com/ansys/pyprimemesh/releases/tag/v0.9.4) - December 12, 2025
-
-
-### Miscellaneous
-
-- Updates to release/0.9 [#1187](https://github.com/ansys/pyprimemesh/pull/1187)
-- Changes to update the version [#1193](https://github.com/ansys/pyprimemesh/pull/1193)
-
-
-### Maintenance
-
-- Updates to docker file and connection type option for user [#1194](https://github.com/ansys/pyprimemesh/pull/1194)
-
 ## [0.9.3](https://github.com/ansys/pyprimemesh/releases/tag/v0.9.3) - September 23, 2025
 
 
