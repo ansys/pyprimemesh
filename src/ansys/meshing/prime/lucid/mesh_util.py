@@ -83,7 +83,10 @@ class Mesh:
         self._logger = model.python_logger
 
     def from_geometry(
-        self, design: "ansys.geometry.core.Design", import_type: ImportTypes = ImportTypes.FMD
+        self,
+        design: "ansys.geometry.core.Design",
+        import_type: ImportTypes = ImportTypes.FMD,
+        append: bool = False,
     ):
         """Import geometry from an Ansys Design object.
 
@@ -93,6 +96,8 @@ class Mesh:
             Ansys Design object to import geometry from.
         import_type : ImportTypes, optional
             Type of import. The default is ImportTypes.FMD.
+        append: bool, optional
+            Append imported CAD into existing model when true.
         """
         with tempfile.TemporaryDirectory() as tmpdir:
             if import_type == ImportTypes.FMD:
@@ -107,7 +112,7 @@ class Mesh:
                 file_path = design.export_to_parasolid_text(tmpdir)
             elif import_type == ImportTypes.SCDOCX:
                 file_path = design.export_to_scdocx(tmpdir)
-            self.read(str(file_path))
+            self.read(str(file_path, append=append))
 
     def read(
         self, file_name: str, append: bool = False, cad_reader_route: prime.CadReaderRoute = None
