@@ -7,7 +7,7 @@ import sys
 from datetime import datetime
 os.environ["PRIME_MODE"] = "GRPC_INSECURE"
 
-# os.environ['PYVISTA_BUILDING_GALLERY'] = 'True'
+os.environ['PYVISTA_BUILDING_GALLERY'] = 'True'
 os.environ["SPHINX_GALLERY_CONF_FORCE_FRESH"] = "0"
 
 import ansys.tools.visualization_interface as viz_interface
