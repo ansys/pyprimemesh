@@ -101,6 +101,7 @@ def get_child_processes(process):
             children += get_child_processes(int(pid))
     return children
 
+
 def terminate_process(process: subprocess):
     """Terminates a process.
 
