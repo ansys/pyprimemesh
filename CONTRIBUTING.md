@@ -9,30 +9,4 @@ The following contribution information is specific to PyPrimeMesh.
 
 [Contributing]: https://dev.docs.pyansys.com/how-to/contributing.html
 
-## Run tests locally
-
-Run tests locally with this command:
-
-```bash
-    pytest
-```
-
-Note that you must have access to PyPrimeMesh to run the tests.
-Some of the graphical-related tests must have a previously generated image cache, so
-you might get errors due to this.
-
-## Build documentation
-
-To build PyPrimeMesh documentation, run this command.
-
-In Windows:
-```bash
-    ./doc/make.bat html
-    ./doc/make.bat pdf
-```
-
-In Linux:
-```bash
-    make html
-    make pdf
-```
+<!-- Begin content specific to your library here. -->
