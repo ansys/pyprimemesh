@@ -104,8 +104,7 @@ jobs:
   testing:
     name: Run Unit Tests
     if: github.event.action != 'closed'
-    needs: [ smoke-tests ]
-    runs-on: ubuntu-latest
+    runs-on: public-ubuntu-latest-16-cores
 
     steps:
       - name: Login in Github Container registry
