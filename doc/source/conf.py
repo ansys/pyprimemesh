@@ -8,17 +8,16 @@ from datetime import datetime
 
 os.environ["PRIME_MODE"] = "GRPC_INSECURE"
 
-os.environ['PYVISTA_BUILDING_GALLERY'] = 'True'
 os.environ["SPHINX_GALLERY_CONF_FORCE_FRESH"] = "0"
 
 import ansys.tools.visualization_interface as viz_interface
 import pyvista
+from ansys_sphinx_theme import ansys_favicon, get_version_match, pyansys_logo_black
 from joblib import Parallel, delayed
 from pyvista.plotting.utilities.sphinx_gallery import DynamicScraper
 from sphinx_gallery.sorting import FileNameSortKey
 
 from ansys.meshing.prime import __version__
-from ansys_sphinx_theme import ansys_favicon, get_version_match, pyansys_logo_black
 
 viz_interface.DOCUMENTATION_BUILD = True
 
@@ -67,11 +66,6 @@ html_theme_options = {
             "icon": "fa fa-comment fa-fw",
         },
     ],
-    "cheatsheet": {
-        "file": "cheatsheet/cheat_sheet.qmd",
-        "title": "PyPrimeMesh cheat sheet",
-        "version": __version__,
-    },
 }
 
 # Sphinx extensions
@@ -188,6 +182,13 @@ sphinx_gallery_conf = {
     "thumbnail_size": (350, 350),
     "parallel": True,
     "run_stale_examples": False,
+    # Code to execute before each example in parallel subprocesses
+    # This ensures PyVista knows it's building gallery documentation
+    "first_notebook_cell": (
+        "import os\n"
+        "os.environ['PYVISTA_BUILDING_GALLERY'] = 'true'\n"
+        "os.environ['PYVISTA_OFF_SCREEN'] = 'true'"
+    ),
 }
 
 
@@ -240,7 +241,10 @@ def setup(app):
     app : sphinx.application.Sphinx
         The Sphinx application object.
     """
-    app.connect("builder-inited", lambda app: run_all_examples_in_parallel())
+    # Commented out: Let sphinx-gallery handle example execution instead
+    # This manual execution runs in subprocesses that don't inherit pyvista.BUILDING_GALLERY
+    # app.connect("builder-inited", lambda app: run_all_examples_in_parallel())
+    pass
 
 
 # Suppress warnings
