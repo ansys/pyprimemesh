@@ -85,7 +85,7 @@ extensions = [
     "sphinx_autodoc_typehints",
     "sphinxemoji.sphinxemoji",
     "sphinx_design",
-    "pyvista.ext.viewer_directive",
+    # "pyvista.ext.viewer_directive",
     "sphinx_jinja",
 ]
 nbsphinx_execute = "always"
