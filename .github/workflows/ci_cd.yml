@@ -101,11 +101,55 @@ jobs:
           operating-system: ${{ matrix.os }}
           python-version: ${{ matrix.python-version }}
 
+  testing:
+    name: Run Unit Tests
+    if: github.event.action != 'closed'
+    needs: [ smoke-tests ]
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Login in Github Container registry
+        uses: docker/login-action@v3
+        with:
+          registry: ghcr.io
+          username: ansys-bot
+          password: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Pull Ansys Prime Server
+        run: docker pull ${{ env.DOCKER_IMAGE_NAME }}:${{ env.DOCKER_IMAGE_TAG }}
+
+      - name: Restore images cache
+        uses: actions/cache@v5
+        with:
+          path: tests/graphics/image_cache
+          key: pyvista-image-cache-${{ runner.os }}-v-${{ env.RESET_IMAGE_CACHE }}-${{ hashFiles('pyproject.toml') }}
+          restore-keys: pyvista-image-cache-${{ runner.os }}-v-${{ env.RESET_IMAGE_CACHE }}
+
+      - name: "Run pytest"
+        uses: ansys/actions/tests-pytest@v10
+        env:
+          PYPRIMEMESH_LAUNCH_CONTAINER: 1
+          PYPRIMEMESH_IMAGE_TAG: ${{ env.DOCKER_IMAGE_TAG }}
+          ANSYSLMD_LICENSE_FILE: '1055@${{ secrets.LICENSE_SERVER }}'
+        with:
+          python-version: ${{ env.MAIN_PYTHON_VERSION }}
+
+      - name: Upload PyVista generated images (cache and results)
+        if: always()
+        uses: actions/upload-artifact@v6
+        with:
+          name: pytest-pyvista-images-${{ runner.os }}
+          path: tests/graphics/image_cache
+          retention-days: 7
+
+      - uses: codecov/codecov-action@v5
+        name: 'Upload coverage to CodeCov'
+
   docs:
     name: Documentation
     if: github.event.action != 'closed'
     runs-on: public-ubuntu-latest-16-cores
-    needs: [docs-style]
+    needs: [docs-style, testing]
     steps:
       - name: Login in Github Container registry
         uses: docker/login-action@v3
@@ -150,49 +194,7 @@ jobs:
   #         bot-email: ${{ secrets.PYANSYS_CI_BOT_EMAIL }}
   #         maximum-pr-doc-deployments: 20
 
-  testing:
-    name: Run Unit Tests
-    if: github.event.action != 'closed'
-    needs: [ smoke-tests ]
-    runs-on: ubuntu-latest
 
-    steps:
-      - name: Login in Github Container registry
-        uses: docker/login-action@v3
-        with:
-          registry: ghcr.io
-          username: ansys-bot
-          password: ${{ secrets.GITHUB_TOKEN }}
-
-      - name: Pull Ansys Prime Server
-        run: docker pull ${{ env.DOCKER_IMAGE_NAME }}:${{ env.DOCKER_IMAGE_TAG }}
-
-      - name: Restore images cache
-        uses: actions/cache@v5
-        with:
-          path: tests/graphics/image_cache
-          key: pyvista-image-cache-${{ runner.os }}-v-${{ env.RESET_IMAGE_CACHE }}-${{ hashFiles('pyproject.toml') }}
-          restore-keys: pyvista-image-cache-${{ runner.os }}-v-${{ env.RESET_IMAGE_CACHE }}
-
-      - name: "Run pytest"
-        uses: ansys/actions/tests-pytest@v10
-        env:
-          PYPRIMEMESH_LAUNCH_CONTAINER: 1
-          PYPRIMEMESH_IMAGE_TAG: ${{ env.DOCKER_IMAGE_TAG }}
-          ANSYSLMD_LICENSE_FILE: '1055@${{ secrets.LICENSE_SERVER }}'
-        with:
-          python-version: ${{ env.MAIN_PYTHON_VERSION }}
-
-      - name: Upload PyVista generated images (cache and results)
-        if: always()
-        uses: actions/upload-artifact@v6
-        with:
-          name: pytest-pyvista-images-${{ runner.os }}
-          path: tests/graphics/image_cache
-          retention-days: 7
-
-      - uses: codecov/codecov-action@v5
-        name: 'Upload coverage to CodeCov'
 
   package:
     name: Package library
