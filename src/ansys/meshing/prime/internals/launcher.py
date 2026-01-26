@@ -310,7 +310,7 @@ def launch_prime(
             name=container_name,
             version=version,
             connection_type=connection_type,
-            connection_type = config.ConnectionType.GRPC_INSECURE,
+            connection_type=config.ConnectionType.GRPC_INSECURE,
         )
         config.set_using_container(True)
         client = Client(port=port, timeout=timeout, client_certs_dir=client_certs_dir)
