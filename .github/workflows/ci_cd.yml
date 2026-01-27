@@ -133,6 +133,7 @@ jobs:
           ANSYSLMD_LICENSE_FILE: '1055@${{ secrets.LICENSE_SERVER }}'
         with:
           python-version: ${{ env.MAIN_PYTHON_VERSION }}
+          pytest-extra-args: "-v -s"
 
       - name: Upload PyVista generated images (cache and results)
         if: always()
