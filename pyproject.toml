@@ -101,7 +101,7 @@ exclude = '''
 '''
 [tool.pytest.ini_options]
 minversion = "7.1"
-addopts = "-ra --cov=ansys.meshing.prime.core --cov=ansys.meshing.prime.internals --cov=ansys.meshing.prime.lucid --cov=ansys.meshing.prime.graphics --cov-report=term --cov-report=html:.cov/html --image_cache_dir tests/graphics/image_cache --add_missing_images"
+addopts = "-ra -s --cov=ansys.meshing.prime.core --cov=ansys.meshing.prime.internals --cov=ansys.meshing.prime.lucid --cov=ansys.meshing.prime.graphics --cov-report=term --cov-report=html:.cov/html --image_cache_dir tests/graphics/image_cache --add_missing_images"
 testpaths = [
     "tests",
 ]

@@ -282,6 +282,21 @@ def launch_prime_github_container(
 
     time.sleep(10)
 
+    # Get container logs
+    logs_result = subprocess.run(['docker', 'logs', name], capture_output=True, text=True)
+
+    # Print container logs to output
+    print(f"\n{'='*80}")
+    print(f"Docker container '{name}' logs:")
+    print(f"{'='*80}")
+    if logs_result.stdout:
+        print("STDOUT:")
+        print(logs_result.stdout)
+    if logs_result.stderr:
+        print("STDERR:")
+        print(logs_result.stderr)
+    print(f"{'='*80}\n")
+
     # Check if container is still running
     result = subprocess.run(
         ['docker', 'ps', '--filter', f'name={name}', '--format', '{{.Names}}'],
@@ -290,11 +305,8 @@ def launch_prime_github_container(
     )
 
     if name not in result.stdout:
-        # Container is not running, get the logs to see what went wrong
-        logs_result = subprocess.run(['docker', 'logs', name], capture_output=True, text=True)
-        error_msg = f"Container '{name}' failed to start or exited immediately.\n"
-        if logs_result.stdout or logs_result.stderr:
-            error_msg += f"Container logs:\n{logs_result.stdout}\n{logs_result.stderr}"
+        # Container is not running
+        error_msg = f"Container '{name}' failed to start or exited immediately. Check logs above."
         raise RuntimeError(error_msg)
 
 
