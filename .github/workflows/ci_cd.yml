@@ -127,11 +127,13 @@ jobs:
       - name: "Run pytest"
         uses: ansys/actions/tests-pytest@v10
         env:
+          PRIME_MODE: 'GRPC_INSECURE'
           PYPRIMEMESH_LAUNCH_CONTAINER: 1
           PYPRIMEMESH_IMAGE_TAG: ${{ env.DOCKER_IMAGE_TAG }}
           ANSYSLMD_LICENSE_FILE: '1055@${{ secrets.LICENSE_SERVER }}'
         with:
           python-version: ${{ env.MAIN_PYTHON_VERSION }}
+          pytest-extra-args: "-v -s"
 
       - name: Upload PyVista generated images (cache and results)
         if: always()
