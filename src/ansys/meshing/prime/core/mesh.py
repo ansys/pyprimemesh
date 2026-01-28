@@ -520,15 +520,21 @@ class Mesh(MeshInfo):
             splines = part.get_splines()
             part_polydata = {}
             face_polydata_list = [
-                self.get_face_polydata(part_id, face_fet_result, j)
-                for face_fet_result in facet_result.face_connectivity_result_per_part
-                for j in range(0, len(face_fet_result.face_zonelet_ids))
+                self.get_face_polydata(
+                    part_id, facet_result.face_connectivity_result_per_part[i], j
+                )
+                for j in range(
+                    0, len(facet_result.face_connectivity_result_per_part[i].face_zonelet_ids)
+                )
             ]
 
             edge_polydata_list = [
-                self.get_edge_polydata(part_id, edge_facet_result, j)
-                for edge_facet_result in facet_result.edge_connectivity_result_per_part
-                for j in range(0, len(edge_facet_result.edge_zonelet_ids))
+                self.get_edge_polydata(
+                    part_id, facet_result.edge_connectivity_result_per_part[i], j
+                )
+                for j in range(
+                    0, len(facet_result.edge_connectivity_result_per_part[i].edge_zonelet_ids)
+                )
             ]
 
             spline_cp_polydata_list = [self.get_spline_cp_polydata(part_ids[i], j) for j in splines]
