@@ -120,7 +120,7 @@ class MorphBCParams(CoreObject):
                         morph_region_box_extension if morph_region_box_extension is not None else ( MorphBCParams._default_params["morph_region_box_extension"] if "morph_region_box_extension" in MorphBCParams._default_params else (json_data["morphRegionBoxExtension"] if "morphRegionBoxExtension" in json_data else None)))
         self._custom_params = kwargs
         if model is not None:
-            [ model._logger.warning(f'Unsupported argument : {key}') for key in kwargs ]
+            [ model._logger.debug(f'Unsupported argument : {key}') for key in kwargs ]
         [setattr(type(self), key, property(lambda self, key = key:  self._custom_params[key] if key in self._custom_params else None,
         lambda self, value, key = key : self._custom_params.update({ key: value }))) for key in kwargs]
         self._freeze()

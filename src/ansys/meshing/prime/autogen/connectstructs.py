@@ -66,6 +66,26 @@ class FuseOption(enum.IntEnum):
     TRIMTWOSIDES = 4
     """Delete faces to be fused on both sides and merge nodes to be fused at middle locations (works only within a single part)."""
 
+class FuseType(enum.IntEnum):
+    """Type of fuse operation to perform.
+    """
+    SURFACEONLY = 0
+    """Fuses surface overlaps based on input parameters.
+
+    **This is a beta parameter**. **The behavior and name may change in the future**."""
+    SURFACEANDEDGES = 1
+    """Fuses surface and edge overlaps based on input parameters.
+
+    **This is a beta parameter**. **The behavior and name may change in the future**."""
+    EDGESONLY = 2
+    """Fuses edge overlaps based on input parameters.
+
+    **This is a beta parameter**. **The behavior and name may change in the future**."""
+    FREEEDGESONLY = 3
+    """Fuses free edge overlaps based on input parameters.
+
+    **This is a beta parameter**. **The behavior and name may change in the future**."""
+
 class OverlapPairs(CoreObject):
     """Provides ids of a pair of overlapping face zonelets.
 
@@ -138,7 +158,7 @@ class OverlapPairs(CoreObject):
                         zone_id1 if zone_id1 is not None else ( OverlapPairs._default_params["zone_id1"] if "zone_id1" in OverlapPairs._default_params else (json_data["zoneId1"] if "zoneId1" in json_data else None)))
         self._custom_params = kwargs
         if model is not None:
-            [ model._logger.warning(f'Unsupported argument : {key}') for key in kwargs ]
+            [ model._logger.debug(f'Unsupported argument : {key}') for key in kwargs ]
         [setattr(type(self), key, property(lambda self, key = key:  self._custom_params[key] if key in self._custom_params else None,
         lambda self, value, key = key : self._custom_params.update({ key: value }))) for key in kwargs]
         self._freeze()
@@ -287,7 +307,7 @@ class OverlapSearchResults(CoreObject):
                         error_code if error_code is not None else ( OverlapSearchResults._default_params["error_code"] if "error_code" in OverlapSearchResults._default_params else ErrorCode(json_data["errorCode"] if "errorCode" in json_data else None)))
         self._custom_params = kwargs
         if model is not None:
-            [ model._logger.warning(f'Unsupported argument : {key}') for key in kwargs ]
+            [ model._logger.debug(f'Unsupported argument : {key}') for key in kwargs ]
         [setattr(type(self), key, property(lambda self, key = key:  self._custom_params[key] if key in self._custom_params else None,
         lambda self, value, key = key : self._custom_params.update({ key: value }))) for key in kwargs]
         self._freeze()
@@ -441,7 +461,7 @@ class ConnectResults(CoreObject):
                         warning_codes if warning_codes is not None else ( ConnectResults._default_params["warning_codes"] if "warning_codes" in ConnectResults._default_params else [WarningCode(data) for data in (json_data["warningCodes"] if "warningCodes" in json_data else None)]))
         self._custom_params = kwargs
         if model is not None:
-            [ model._logger.warning(f'Unsupported argument : {key}') for key in kwargs ]
+            [ model._logger.debug(f'Unsupported argument : {key}') for key in kwargs ]
         [setattr(type(self), key, property(lambda self, key = key:  self._custom_params[key] if key in self._custom_params else None,
         lambda self, value, key = key : self._custom_params.update({ key: value }))) for key in kwargs]
         self._freeze()
@@ -610,7 +630,7 @@ class IntersectParams(CoreObject):
                         collapse_target_skewness if collapse_target_skewness is not None else ( IntersectParams._default_params["collapse_target_skewness"] if "collapse_target_skewness" in IntersectParams._default_params else (json_data["collapseTargetSkewness"] if "collapseTargetSkewness" in json_data else None)))
         self._custom_params = kwargs
         if model is not None:
-            [ model._logger.warning(f'Unsupported argument : {key}') for key in kwargs ]
+            [ model._logger.debug(f'Unsupported argument : {key}') for key in kwargs ]
         [setattr(type(self), key, property(lambda self, key = key:  self._custom_params[key] if key in self._custom_params else None,
         lambda self, value, key = key : self._custom_params.update({ key: value }))) for key in kwargs]
         self._freeze()
@@ -738,7 +758,7 @@ class JoinParams(CoreObject):
     match_angle: float, optional
         Match angle determines face pair inclination for overlap consideration.
     overlap_zone_name: str, optional
-        Zone id to be assigned to overlap zonelets belonging to different zones.
+        Name of face zone to which the overlap zonelets are assigned.
     json_data: dict, optional
         JSON dictionary to create a ``JoinParams`` object with provided parameters.
 
@@ -786,7 +806,7 @@ class JoinParams(CoreObject):
         match_angle: float, optional
             Match angle determines face pair inclination for overlap consideration.
         overlap_zone_name: str, optional
-            Zone id to be assigned to overlap zonelets belonging to different zones.
+            Name of face zone to which the overlap zonelets are assigned.
         json_data: dict, optional
             JSON dictionary to create a ``JoinParams`` object with provided parameters.
 
@@ -824,7 +844,7 @@ class JoinParams(CoreObject):
                         overlap_zone_name if overlap_zone_name is not None else ( JoinParams._default_params["overlap_zone_name"] if "overlap_zone_name" in JoinParams._default_params else (json_data["overlapZoneName"] if "overlapZoneName" in json_data else None)))
         self._custom_params = kwargs
         if model is not None:
-            [ model._logger.warning(f'Unsupported argument : {key}') for key in kwargs ]
+            [ model._logger.debug(f'Unsupported argument : {key}') for key in kwargs ]
         [setattr(type(self), key, property(lambda self, key = key:  self._custom_params[key] if key in self._custom_params else None,
         lambda self, value, key = key : self._custom_params.update({ key: value }))) for key in kwargs]
         self._freeze()
@@ -849,7 +869,7 @@ class JoinParams(CoreObject):
         match_angle: float, optional
             Match angle determines face pair inclination for overlap consideration.
         overlap_zone_name: str, optional
-            Zone id to be assigned to overlap zonelets belonging to different zones.
+            Name of face zone to which the overlap zonelets are assigned.
         """
         args = locals()
         [JoinParams._default_params.update({ key: value }) for key, value in args.items() if value is not None]
@@ -928,7 +948,7 @@ class JoinParams(CoreObject):
 
     @property
     def overlap_zone_name(self) -> str:
-        """Zone id to be assigned to overlap zonelets belonging to different zones.
+        """Name of face zone to which the overlap zonelets are assigned.
         """
         return self._overlap_zone_name
 
@@ -1022,7 +1042,7 @@ class SubtractVolumesParams(CoreObject):
                         keep_cutters if keep_cutters is not None else ( SubtractVolumesParams._default_params["keep_cutters"] if "keep_cutters" in SubtractVolumesParams._default_params else (json_data["keepCutters"] if "keepCutters" in json_data else None)))
         self._custom_params = kwargs
         if model is not None:
-            [ model._logger.warning(f'Unsupported argument : {key}') for key in kwargs ]
+            [ model._logger.debug(f'Unsupported argument : {key}') for key in kwargs ]
         [setattr(type(self), key, property(lambda self, key = key:  self._custom_params[key] if key in self._custom_params else None,
         lambda self, value, key = key : self._custom_params.update({ key: value }))) for key in kwargs]
         self._freeze()
@@ -1182,7 +1202,7 @@ class SubtractVolumesResults(CoreObject):
                         warning_codes if warning_codes is not None else ( SubtractVolumesResults._default_params["warning_codes"] if "warning_codes" in SubtractVolumesResults._default_params else [WarningCode(data) for data in (json_data["warningCodes"] if "warningCodes" in json_data else None)]))
         self._custom_params = kwargs
         if model is not None:
-            [ model._logger.warning(f'Unsupported argument : {key}') for key in kwargs ]
+            [ model._logger.debug(f'Unsupported argument : {key}') for key in kwargs ]
         [setattr(type(self), key, property(lambda self, key = key:  self._custom_params[key] if key in self._custom_params else None,
         lambda self, value, key = key : self._custom_params.update({ key: value }))) for key in kwargs]
         self._freeze()
@@ -1353,7 +1373,7 @@ class StitchParams(CoreObject):
                         type if type is not None else ( StitchParams._default_params["type"] if "type" in StitchParams._default_params else StitchType(json_data["type"] if "type" in json_data else None)))
         self._custom_params = kwargs
         if model is not None:
-            [ model._logger.warning(f'Unsupported argument : {key}') for key in kwargs ]
+            [ model._logger.debug(f'Unsupported argument : {key}') for key in kwargs ]
         [setattr(type(self), key, property(lambda self, key = key:  self._custom_params[key] if key in self._custom_params else None,
         lambda self, value, key = key : self._custom_params.update({ key: value }))) for key in kwargs]
         self._freeze()
@@ -1547,7 +1567,7 @@ class MergeBoundaryNodesParams(CoreObject):
                         merge_node_type if merge_node_type is not None else ( MergeBoundaryNodesParams._default_params["merge_node_type"] if "merge_node_type" in MergeBoundaryNodesParams._default_params else MergeNodeType(json_data["mergeNodeType"] if "mergeNodeType" in json_data else None)))
         self._custom_params = kwargs
         if model is not None:
-            [ model._logger.warning(f'Unsupported argument : {key}') for key in kwargs ]
+            [ model._logger.debug(f'Unsupported argument : {key}') for key in kwargs ]
         [setattr(type(self), key, property(lambda self, key = key:  self._custom_params[key] if key in self._custom_params else None,
         lambda self, value, key = key : self._custom_params.update({ key: value }))) for key in kwargs]
         self._freeze()
@@ -1691,7 +1711,7 @@ class MergeBoundaryNodesResults(CoreObject):
                         error_code if error_code is not None else ( MergeBoundaryNodesResults._default_params["error_code"] if "error_code" in MergeBoundaryNodesResults._default_params else ErrorCode(json_data["errorCode"] if "errorCode" in json_data else None)))
         self._custom_params = kwargs
         if model is not None:
-            [ model._logger.warning(f'Unsupported argument : {key}') for key in kwargs ]
+            [ model._logger.debug(f'Unsupported argument : {key}') for key in kwargs ]
         [setattr(type(self), key, property(lambda self, key = key:  self._custom_params[key] if key in self._custom_params else None,
         lambda self, value, key = key : self._custom_params.update({ key: value }))) for key in kwargs]
         self._freeze()
@@ -1794,8 +1814,8 @@ class FuseParams(CoreObject):
         Faces zonelets with angle less than the provided value are considered for fuse operation. Default value is 45 degrees.
 
         **This is a beta parameter**. **The behavior and name may change in the future**.
-    fuse_edges_only: bool, optional
-        Option to fuse edges. The default value is false. When fuse edges only is true, only edges are fused.
+    type: FuseType, optional
+        Option to select type of fuse operation. The default value is FuseType_SurfaceOnly which fuses surfaces only.
 
         **This is a beta parameter**. **The behavior and name may change in the future**.
     json_data: dict, optional
@@ -1820,7 +1840,7 @@ class FuseParams(CoreObject):
             n_layers: int,
             separate: bool,
             angle: float,
-            fuse_edges_only: bool):
+            type: FuseType):
         self._use_absolute_tolerance = use_absolute_tolerance
         self._gap_tolerance = gap_tolerance
         self._side_tolerance = side_tolerance
@@ -1832,7 +1852,7 @@ class FuseParams(CoreObject):
         self._n_layers = n_layers
         self._separate = separate
         self._angle = angle
-        self._fuse_edges_only = fuse_edges_only
+        self._type = FuseType(type)
 
     def __init__(
             self,
@@ -1848,7 +1868,7 @@ class FuseParams(CoreObject):
             n_layers: int = None,
             separate: bool = None,
             angle: float = None,
-            fuse_edges_only: bool = None,
+            type: FuseType = None,
             json_data : dict = None,
              **kwargs):
         """Initialize a ``FuseParams`` object.
@@ -1901,8 +1921,8 @@ class FuseParams(CoreObject):
             Faces zonelets with angle less than the provided value are considered for fuse operation. Default value is 45 degrees.
 
             **This is a beta parameter**. **The behavior and name may change in the future**.
-        fuse_edges_only: bool, optional
-            Option to fuse edges. The default value is false. When fuse edges only is true, only edges are fused.
+        type: FuseType, optional
+            Option to select type of fuse operation. The default value is FuseType_SurfaceOnly which fuses surfaces only.
 
             **This is a beta parameter**. **The behavior and name may change in the future**.
         json_data: dict, optional
@@ -1925,9 +1945,9 @@ class FuseParams(CoreObject):
                 json_data["nLayers"] if "nLayers" in json_data else None,
                 json_data["separate"] if "separate" in json_data else None,
                 json_data["angle"] if "angle" in json_data else None,
-                json_data["fuseEdgesOnly"] if "fuseEdgesOnly" in json_data else None)
+                FuseType(json_data["type"] if "type" in json_data else None))
         else:
-            all_field_specified = all(arg is not None for arg in [use_absolute_tolerance, gap_tolerance, side_tolerance, check_interior, fuse_option, check_orientation, dump_mesh, local_remesh, n_layers, separate, angle, fuse_edges_only])
+            all_field_specified = all(arg is not None for arg in [use_absolute_tolerance, gap_tolerance, side_tolerance, check_interior, fuse_option, check_orientation, dump_mesh, local_remesh, n_layers, separate, angle, type])
             if all_field_specified:
                 self.__initialize(
                     use_absolute_tolerance,
@@ -1941,7 +1961,7 @@ class FuseParams(CoreObject):
                     n_layers,
                     separate,
                     angle,
-                    fuse_edges_only)
+                    type)
             else:
                 if model is None:
                     raise ValueError("Invalid assignment. Either pass a model or specify all properties.")
@@ -1960,10 +1980,10 @@ class FuseParams(CoreObject):
                         n_layers if n_layers is not None else ( FuseParams._default_params["n_layers"] if "n_layers" in FuseParams._default_params else (json_data["nLayers"] if "nLayers" in json_data else None)),
                         separate if separate is not None else ( FuseParams._default_params["separate"] if "separate" in FuseParams._default_params else (json_data["separate"] if "separate" in json_data else None)),
                         angle if angle is not None else ( FuseParams._default_params["angle"] if "angle" in FuseParams._default_params else (json_data["angle"] if "angle" in json_data else None)),
-                        fuse_edges_only if fuse_edges_only is not None else ( FuseParams._default_params["fuse_edges_only"] if "fuse_edges_only" in FuseParams._default_params else (json_data["fuseEdgesOnly"] if "fuseEdgesOnly" in json_data else None)))
+                        type if type is not None else ( FuseParams._default_params["type"] if "type" in FuseParams._default_params else FuseType(json_data["type"] if "type" in json_data else None)))
         self._custom_params = kwargs
         if model is not None:
-            [ model._logger.warning(f'Unsupported argument : {key}') for key in kwargs ]
+            [ model._logger.debug(f'Unsupported argument : {key}') for key in kwargs ]
         [setattr(type(self), key, property(lambda self, key = key:  self._custom_params[key] if key in self._custom_params else None,
         lambda self, value, key = key : self._custom_params.update({ key: value }))) for key in kwargs]
         self._freeze()
@@ -1981,7 +2001,7 @@ class FuseParams(CoreObject):
             n_layers: int = None,
             separate: bool = None,
             angle: float = None,
-            fuse_edges_only: bool = None):
+            type: FuseType = None):
         """Set the default values of the ``FuseParams`` object.
 
         Parameters
@@ -2008,8 +2028,8 @@ class FuseParams(CoreObject):
             Option to separate fused regions. The default value is false. When separate is true, the fuse regions are separated into different zonelets.
         angle: float, optional
             Faces zonelets with angle less than the provided value are considered for fuse operation. Default value is 45 degrees.
-        fuse_edges_only: bool, optional
-            Option to fuse edges. The default value is false. When fuse edges only is true, only edges are fused.
+        type: FuseType, optional
+            Option to select type of fuse operation. The default value is FuseType_SurfaceOnly which fuses surfaces only.
         """
         args = locals()
         [FuseParams._default_params.update({ key: value }) for key, value in args.items() if value is not None]
@@ -2050,13 +2070,13 @@ class FuseParams(CoreObject):
             json_data["separate"] = self._separate
         if self._angle is not None:
             json_data["angle"] = self._angle
-        if self._fuse_edges_only is not None:
-            json_data["fuseEdgesOnly"] = self._fuse_edges_only
+        if self._type is not None:
+            json_data["type"] = self._type
         [ json_data.update({ utils.to_camel_case(key) : value }) for key, value in self._custom_params.items()]
         return json_data
 
     def __str__(self) -> str:
-        message = "use_absolute_tolerance :  %s\ngap_tolerance :  %s\nside_tolerance :  %s\ncheck_interior :  %s\nfuse_option :  %s\ncheck_orientation :  %s\ndump_mesh :  %s\nlocal_remesh :  %s\nn_layers :  %s\nseparate :  %s\nangle :  %s\nfuse_edges_only :  %s" % (self._use_absolute_tolerance, self._gap_tolerance, self._side_tolerance, self._check_interior, self._fuse_option, self._check_orientation, self._dump_mesh, self._local_remesh, self._n_layers, self._separate, self._angle, self._fuse_edges_only)
+        message = "use_absolute_tolerance :  %s\ngap_tolerance :  %s\nside_tolerance :  %s\ncheck_interior :  %s\nfuse_option :  %s\ncheck_orientation :  %s\ndump_mesh :  %s\nlocal_remesh :  %s\nn_layers :  %s\nseparate :  %s\nangle :  %s\ntype :  %s" % (self._use_absolute_tolerance, self._gap_tolerance, self._side_tolerance, self._check_interior, self._fuse_option, self._check_orientation, self._dump_mesh, self._local_remesh, self._n_layers, self._separate, self._angle, self._type)
         message += ''.join('\n' + str(key) + ' : ' + str(value) for key, value in self._custom_params.items())
         return message
 
@@ -2193,16 +2213,16 @@ class FuseParams(CoreObject):
         self._angle = value
 
     @property
-    def fuse_edges_only(self) -> bool:
-        """Option to fuse edges. The default value is false. When fuse edges only is true, only edges are fused.
+    def type(self) -> FuseType:
+        """Option to select type of fuse operation. The default value is FuseType_SurfaceOnly which fuses surfaces only.
 
         **This is a beta parameter**. **The behavior and name may change in the future**.
         """
-        return self._fuse_edges_only
+        return self._type
 
-    @fuse_edges_only.setter
-    def fuse_edges_only(self, value: bool):
-        self._fuse_edges_only = value
+    @type.setter
+    def type(self, value: FuseType):
+        self._type = value
 
 class FuseResults(CoreObject):
     """Results associated with the fuse operations.
@@ -2340,7 +2360,7 @@ class FuseResults(CoreObject):
                         intersecting_zonelet_pairs if intersecting_zonelet_pairs is not None else ( FuseResults._default_params["intersecting_zonelet_pairs"] if "intersecting_zonelet_pairs" in FuseResults._default_params else [OverlapPairs(model = model, json_data = data) for data in (json_data["intersectingZoneletPairs"] if "intersectingZoneletPairs" in json_data else None)]))
         self._custom_params = kwargs
         if model is not None:
-            [ model._logger.warning(f'Unsupported argument : {key}') for key in kwargs ]
+            [ model._logger.debug(f'Unsupported argument : {key}') for key in kwargs ]
         [setattr(type(self), key, property(lambda self, key = key:  self._custom_params[key] if key in self._custom_params else None,
         lambda self, value, key = key : self._custom_params.update({ key: value }))) for key in kwargs]
         self._freeze()

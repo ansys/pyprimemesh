@@ -230,7 +230,7 @@ class ControlData(_ControlData):
 
         Examples
         --------
-        >>> multizone = model.control_data.create_wrapper_control()
+        >>> multizone = model.control_data.create_multi_zone_control()
 
         """
         res = _ControlData.create_multi_zone_control(self)
@@ -322,7 +322,7 @@ class ControlData(_ControlData):
 
         Examples
         --------
-        >>> contorl_data = model.control_data
+        >>> control_data = model.control_data
         >>> thin_volume_control = control_data.get_thin_volume_control_by_name(
                                                      "ThinVolumeControl-1")
         """

@@ -94,8 +94,8 @@ def get_child_processes(process):
         )
         ps_out = ps_cmd.stdout.read().decode("utf-8")
         ps_cmd.wait()
-        cmd_name = ps_out.split()[0]
-        if "AnsysPrimeServer" in cmd_name:
+        ps_parts = ps_out.split()
+        if ps_parts and "AnsysPrimeServer" in ps_parts[0]:
             children.append(int(pid))
         else:
             children += get_child_processes(int(pid))
@@ -114,7 +114,6 @@ def terminate_process(process: subprocess):
     import sys
 
     if sys.platform.startswith('win32'):
-        # process.send_signal(signal.CTRL_C_EVENT)
         process.send_signal(signal.CTRL_BREAK_EVENT)
     else:
         for child in get_child_processes(process.pid):
@@ -198,8 +197,8 @@ def print_beta_api_warning(logger: logging.Logger, command: str):
     command : str
         Command to run.
     """
-    if logger.isEnabledFor(logging.WARNING):
-        logger.warning(
+    if logger.isEnabledFor(logging.DEBUG):
+        logger.debug(
             f"This {command} is a beta API. The behavior and implementation may change in future."
         )
 
@@ -210,6 +209,7 @@ def launch_prime_github_container(
     port: int = defaults.port(),
     name: str = "ansys-prime-server",
     version: Optional[str] = None,
+    connection_type: Optional['config.ConnectionType'] = None,
 ):
     """Launch a container.
 
@@ -226,6 +226,9 @@ def launch_prime_github_container(
         Name of the container. The default is ``"ansys-prime-server"``.
     version : str, optional
         Version of the container to retrieve. The default is ``None``.
+    connection_type : config.ConnectionType, optional
+        Type of connection to use. The default is ``None``, which defaults to
+        ``config.ConnectionType.GRPC_SECURE``.
 
     Raises
     ------
@@ -241,7 +244,6 @@ def launch_prime_github_container(
     docker_command = [
         'docker',
         'run',
-        '--shm-size=4g',
         '-d',
         '--rm',
         '--name',
@@ -253,6 +255,7 @@ def launch_prime_github_container(
         '-e',
         f'ANSYSLMD_LICENSE_FILE={license_file}',
     ]
+
     graphics_port = int(os.environ.get('PRIME_GRAPHICS_PORT', '0'))
     if graphics_port > 0:
         print(f'PyPrimeMesh: using Prime graphics port {graphics_port}')
@@ -262,7 +265,49 @@ def launch_prime_github_container(
         '--port',
         f'{port}',
     ]
+    # Set default connection type if not provided
+    if connection_type is None:
+        connection_type = config.ConnectionType.GRPC_SECURE
+
+    # Handle connection type
+    if (
+        connection_type == config.ConnectionType.GRPC_INSECURE
+        or os.environ.get('PRIME_MODE', '').upper() == "GRPC_INSECURE"
+    ):
+        prime_arguments.append('--secure=no')
     subprocess.run(docker_command + prime_arguments, stdout=subprocess.DEVNULL)
+
+    # Wait for container to start and verify it's still running
+    import time
+
+    time.sleep(10)
+
+    # Get container logs
+    logs_result = subprocess.run(['docker', 'logs', name], capture_output=True, text=True)
+
+    # Print container logs to output
+    print(f"\n{'='*80}")
+    print(f"Docker container '{name}' logs:")
+    print(f"{'='*80}")
+    if logs_result.stdout:
+        print("STDOUT:")
+        print(logs_result.stdout)
+    if logs_result.stderr:
+        print("STDERR:")
+        print(logs_result.stderr)
+    print(f"{'='*80}\n")
+
+    # Check if container is still running
+    result = subprocess.run(
+        ['docker', 'ps', '--filter', f'name={name}', '--format', '{{.Names}}'],
+        capture_output=True,
+        text=True,
+    )
+
+    if name not in result.stdout:
+        # Container is not running
+        error_msg = f"Container '{name}' failed to start or exited immediately. Check logs above."
+        raise RuntimeError(error_msg)
 
 
 def stop_prime_github_container(name):

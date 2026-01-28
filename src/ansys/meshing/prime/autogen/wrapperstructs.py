@@ -53,6 +53,8 @@ class WrapParams(CoreObject):
         Base size to define octree.
     size_control_ids: Iterable[int], optional
         Used to construct geodesic sizes for octree refinement.
+    feature_recovery_control_ids: Iterable[int], optional
+        Used to recover input features for wrapper imprint.
     size_field_ids: Iterable[int], optional
         Used to define size field based octree refinement.
     wrap_region: WrapRegion, optional
@@ -77,6 +79,7 @@ class WrapParams(CoreObject):
             sizing_method: SizeFieldType,
             base_size: float,
             size_control_ids: Iterable[int],
+            feature_recovery_control_ids: Iterable[int],
             size_field_ids: Iterable[int],
             wrap_region: WrapRegion,
             number_of_threads: int,
@@ -85,6 +88,7 @@ class WrapParams(CoreObject):
         self._sizing_method = SizeFieldType(sizing_method)
         self._base_size = base_size
         self._size_control_ids = size_control_ids if isinstance(size_control_ids, np.ndarray) else np.array(size_control_ids, dtype=np.int32) if size_control_ids is not None else None
+        self._feature_recovery_control_ids = feature_recovery_control_ids if isinstance(feature_recovery_control_ids, np.ndarray) else np.array(feature_recovery_control_ids, dtype=np.int32) if feature_recovery_control_ids is not None else None
         self._size_field_ids = size_field_ids if isinstance(size_field_ids, np.ndarray) else np.array(size_field_ids, dtype=np.int32) if size_field_ids is not None else None
         self._wrap_region = WrapRegion(wrap_region)
         self._number_of_threads = number_of_threads
@@ -97,6 +101,7 @@ class WrapParams(CoreObject):
             sizing_method: SizeFieldType = None,
             base_size: float = None,
             size_control_ids: Iterable[int] = None,
+            feature_recovery_control_ids: Iterable[int] = None,
             size_field_ids: Iterable[int] = None,
             wrap_region: WrapRegion = None,
             number_of_threads: int = None,
@@ -116,6 +121,8 @@ class WrapParams(CoreObject):
             Base size to define octree.
         size_control_ids: Iterable[int], optional
             Used to construct geodesic sizes for octree refinement.
+        feature_recovery_control_ids: Iterable[int], optional
+            Used to recover input features for wrapper imprint.
         size_field_ids: Iterable[int], optional
             Used to define size field based octree refinement.
         wrap_region: WrapRegion, optional
@@ -138,18 +145,20 @@ class WrapParams(CoreObject):
                 SizeFieldType(json_data["sizingMethod"] if "sizingMethod" in json_data else None),
                 json_data["baseSize"] if "baseSize" in json_data else None,
                 json_data["sizeControlIDs"] if "sizeControlIDs" in json_data else None,
+                json_data["featureRecoveryControlIDs"] if "featureRecoveryControlIDs" in json_data else None,
                 json_data["sizeFieldIDs"] if "sizeFieldIDs" in json_data else None,
                 WrapRegion(json_data["wrapRegion"] if "wrapRegion" in json_data else None),
                 json_data["numberOfThreads"] if "numberOfThreads" in json_data else None,
                 json_data["imprintRelativeRange"] if "imprintRelativeRange" in json_data else None,
                 json_data["imprintIterations"] if "imprintIterations" in json_data else None)
         else:
-            all_field_specified = all(arg is not None for arg in [sizing_method, base_size, size_control_ids, size_field_ids, wrap_region, number_of_threads, imprint_relative_range, imprint_iterations])
+            all_field_specified = all(arg is not None for arg in [sizing_method, base_size, size_control_ids, feature_recovery_control_ids, size_field_ids, wrap_region, number_of_threads, imprint_relative_range, imprint_iterations])
             if all_field_specified:
                 self.__initialize(
                     sizing_method,
                     base_size,
                     size_control_ids,
+                    feature_recovery_control_ids,
                     size_field_ids,
                     wrap_region,
                     number_of_threads,
@@ -165,6 +174,7 @@ class WrapParams(CoreObject):
                         sizing_method if sizing_method is not None else ( WrapParams._default_params["sizing_method"] if "sizing_method" in WrapParams._default_params else SizeFieldType(json_data["sizingMethod"] if "sizingMethod" in json_data else None)),
                         base_size if base_size is not None else ( WrapParams._default_params["base_size"] if "base_size" in WrapParams._default_params else (json_data["baseSize"] if "baseSize" in json_data else None)),
                         size_control_ids if size_control_ids is not None else ( WrapParams._default_params["size_control_ids"] if "size_control_ids" in WrapParams._default_params else (json_data["sizeControlIDs"] if "sizeControlIDs" in json_data else None)),
+                        feature_recovery_control_ids if feature_recovery_control_ids is not None else ( WrapParams._default_params["feature_recovery_control_ids"] if "feature_recovery_control_ids" in WrapParams._default_params else (json_data["featureRecoveryControlIDs"] if "featureRecoveryControlIDs" in json_data else None)),
                         size_field_ids if size_field_ids is not None else ( WrapParams._default_params["size_field_ids"] if "size_field_ids" in WrapParams._default_params else (json_data["sizeFieldIDs"] if "sizeFieldIDs" in json_data else None)),
                         wrap_region if wrap_region is not None else ( WrapParams._default_params["wrap_region"] if "wrap_region" in WrapParams._default_params else WrapRegion(json_data["wrapRegion"] if "wrapRegion" in json_data else None)),
                         number_of_threads if number_of_threads is not None else ( WrapParams._default_params["number_of_threads"] if "number_of_threads" in WrapParams._default_params else (json_data["numberOfThreads"] if "numberOfThreads" in json_data else None)),
@@ -172,7 +182,7 @@ class WrapParams(CoreObject):
                         imprint_iterations if imprint_iterations is not None else ( WrapParams._default_params["imprint_iterations"] if "imprint_iterations" in WrapParams._default_params else (json_data["imprintIterations"] if "imprintIterations" in json_data else None)))
         self._custom_params = kwargs
         if model is not None:
-            [ model._logger.warning(f'Unsupported argument : {key}') for key in kwargs ]
+            [ model._logger.debug(f'Unsupported argument : {key}') for key in kwargs ]
         [setattr(type(self), key, property(lambda self, key = key:  self._custom_params[key] if key in self._custom_params else None,
         lambda self, value, key = key : self._custom_params.update({ key: value }))) for key in kwargs]
         self._freeze()
@@ -182,6 +192,7 @@ class WrapParams(CoreObject):
             sizing_method: SizeFieldType = None,
             base_size: float = None,
             size_control_ids: Iterable[int] = None,
+            feature_recovery_control_ids: Iterable[int] = None,
             size_field_ids: Iterable[int] = None,
             wrap_region: WrapRegion = None,
             number_of_threads: int = None,
@@ -197,6 +208,8 @@ class WrapParams(CoreObject):
             Base size to define octree.
         size_control_ids: Iterable[int], optional
             Used to construct geodesic sizes for octree refinement.
+        feature_recovery_control_ids: Iterable[int], optional
+            Used to recover input features for wrapper imprint.
         size_field_ids: Iterable[int], optional
             Used to define size field based octree refinement.
         wrap_region: WrapRegion, optional
@@ -231,6 +244,8 @@ class WrapParams(CoreObject):
             json_data["baseSize"] = self._base_size
         if self._size_control_ids is not None:
             json_data["sizeControlIDs"] = self._size_control_ids
+        if self._feature_recovery_control_ids is not None:
+            json_data["featureRecoveryControlIDs"] = self._feature_recovery_control_ids
         if self._size_field_ids is not None:
             json_data["sizeFieldIDs"] = self._size_field_ids
         if self._wrap_region is not None:
@@ -245,7 +260,7 @@ class WrapParams(CoreObject):
         return json_data
 
     def __str__(self) -> str:
-        message = "sizing_method :  %s\nbase_size :  %s\nsize_control_ids :  %s\nsize_field_ids :  %s\nwrap_region :  %s\nnumber_of_threads :  %s\nimprint_relative_range :  %s\nimprint_iterations :  %s" % (self._sizing_method, self._base_size, self._size_control_ids, self._size_field_ids, self._wrap_region, self._number_of_threads, self._imprint_relative_range, self._imprint_iterations)
+        message = "sizing_method :  %s\nbase_size :  %s\nsize_control_ids :  %s\nfeature_recovery_control_ids :  %s\nsize_field_ids :  %s\nwrap_region :  %s\nnumber_of_threads :  %s\nimprint_relative_range :  %s\nimprint_iterations :  %s" % (self._sizing_method, self._base_size, self._size_control_ids, self._feature_recovery_control_ids, self._size_field_ids, self._wrap_region, self._number_of_threads, self._imprint_relative_range, self._imprint_iterations)
         message += ''.join('\n' + str(key) + ' : ' + str(value) for key, value in self._custom_params.items())
         return message
 
@@ -278,6 +293,16 @@ class WrapParams(CoreObject):
     @size_control_ids.setter
     def size_control_ids(self, value: Iterable[int]):
         self._size_control_ids = value
+
+    @property
+    def feature_recovery_control_ids(self) -> Iterable[int]:
+        """Used to recover input features for wrapper imprint.
+        """
+        return self._feature_recovery_control_ids
+
+    @feature_recovery_control_ids.setter
+    def feature_recovery_control_ids(self, value: Iterable[int]):
+        self._feature_recovery_control_ids = value
 
     @property
     def size_field_ids(self) -> Iterable[int]:
@@ -421,7 +446,7 @@ class WrapResult(CoreObject):
                         name if name is not None else ( WrapResult._default_params["name"] if "name" in WrapResult._default_params else (json_data["name"] if "name" in json_data else None)))
         self._custom_params = kwargs
         if model is not None:
-            [ model._logger.warning(f'Unsupported argument : {key}') for key in kwargs ]
+            [ model._logger.debug(f'Unsupported argument : {key}') for key in kwargs ]
         [setattr(type(self), key, property(lambda self, key = key:  self._custom_params[key] if key in self._custom_params else None,
         lambda self, value, key = key : self._custom_params.update({ key: value }))) for key in kwargs]
         self._freeze()
@@ -700,7 +725,7 @@ class WrapperImproveQualityParams(CoreObject):
                         number_of_threads if number_of_threads is not None else ( WrapperImproveQualityParams._default_params["number_of_threads"] if "number_of_threads" in WrapperImproveQualityParams._default_params else (json_data["numberOfThreads"] if "numberOfThreads" in json_data else None)))
         self._custom_params = kwargs
         if model is not None:
-            [ model._logger.warning(f'Unsupported argument : {key}') for key in kwargs ]
+            [ model._logger.debug(f'Unsupported argument : {key}') for key in kwargs ]
         [setattr(type(self), key, property(lambda self, key = key:  self._custom_params[key] if key in self._custom_params else None,
         lambda self, value, key = key : self._custom_params.update({ key: value }))) for key in kwargs]
         self._freeze()
@@ -1034,7 +1059,7 @@ class WrapperImproveResult(CoreObject):
                         unresolved_face_intersections if unresolved_face_intersections is not None else ( WrapperImproveResult._default_params["unresolved_face_intersections"] if "unresolved_face_intersections" in WrapperImproveResult._default_params else (json_data["unresolvedFaceIntersections"] if "unresolvedFaceIntersections" in json_data else None)))
         self._custom_params = kwargs
         if model is not None:
-            [ model._logger.warning(f'Unsupported argument : {key}') for key in kwargs ]
+            [ model._logger.debug(f'Unsupported argument : {key}') for key in kwargs ]
         [setattr(type(self), key, property(lambda self, key = key:  self._custom_params[key] if key in self._custom_params else None,
         lambda self, value, key = key : self._custom_params.update({ key: value }))) for key in kwargs]
         self._freeze()
@@ -1269,7 +1294,7 @@ class WrapperCloseGapsParams(CoreObject):
                         resolution_factor if resolution_factor is not None else ( WrapperCloseGapsParams._default_params["resolution_factor"] if "resolution_factor" in WrapperCloseGapsParams._default_params else (json_data["resolutionFactor"] if "resolutionFactor" in json_data else None)))
         self._custom_params = kwargs
         if model is not None:
-            [ model._logger.warning(f'Unsupported argument : {key}') for key in kwargs ]
+            [ model._logger.debug(f'Unsupported argument : {key}') for key in kwargs ]
         [setattr(type(self), key, property(lambda self, key = key:  self._custom_params[key] if key in self._custom_params else None,
         lambda self, value, key = key : self._custom_params.update({ key: value }))) for key in kwargs]
         self._freeze()
@@ -1483,7 +1508,7 @@ class WrapperCloseGapsResult(CoreObject):
                         part_id if part_id is not None else ( WrapperCloseGapsResult._default_params["part_id"] if "part_id" in WrapperCloseGapsResult._default_params else (json_data["partId"] if "partId" in json_data else None)))
         self._custom_params = kwargs
         if model is not None:
-            [ model._logger.warning(f'Unsupported argument : {key}') for key in kwargs ]
+            [ model._logger.debug(f'Unsupported argument : {key}') for key in kwargs ]
         [setattr(type(self), key, property(lambda self, key = key:  self._custom_params[key] if key in self._custom_params else None,
         lambda self, value, key = key : self._custom_params.update({ key: value }))) for key in kwargs]
         self._freeze()
@@ -1644,7 +1669,7 @@ class DeadRegion(CoreObject):
                         hole_size if hole_size is not None else ( DeadRegion._default_params["hole_size"] if "hole_size" in DeadRegion._default_params else (json_data["holeSize"] if "holeSize" in json_data else None)))
         self._custom_params = kwargs
         if model is not None:
-            [ model._logger.warning(f'Unsupported argument : {key}') for key in kwargs ]
+            [ model._logger.debug(f'Unsupported argument : {key}') for key in kwargs ]
         [setattr(type(self), key, property(lambda self, key = key:  self._custom_params[key] if key in self._custom_params else None,
         lambda self, value, key = key : self._custom_params.update({ key: value }))) for key in kwargs]
         self._freeze()
@@ -1829,11 +1854,11 @@ class WrapperPatchFlowRegionsParams(CoreObject):
 
             **This is a beta parameter**. **The behavior and name may change in the future**.
         sizing_method: SizeFieldType, optional
-            Used to define sizing method for patching.
+            Method used to define sizing method for patching.
 
             **This is a beta parameter**. **The behavior and name may change in the future**.
         size_field_ids: Iterable[int], optional
-            Used to define size field based octree refinement.
+            Ids used to define size field based octree refinement.
 
             **This is a beta parameter**. **The behavior and name may change in the future**.
         patch_at_live: bool, optional
@@ -1883,7 +1908,7 @@ class WrapperPatchFlowRegionsParams(CoreObject):
                         patch_at_live if patch_at_live is not None else ( WrapperPatchFlowRegionsParams._default_params["patch_at_live"] if "patch_at_live" in WrapperPatchFlowRegionsParams._default_params else (json_data["patchAtLive"] if "patchAtLive" in json_data else None)))
         self._custom_params = kwargs
         if model is not None:
-            [ model._logger.warning(f'Unsupported argument : {key}') for key in kwargs ]
+            [ model._logger.debug(f'Unsupported argument : {key}') for key in kwargs ]
         [setattr(type(self), key, property(lambda self, key = key:  self._custom_params[key] if key in self._custom_params else None,
         lambda self, value, key = key : self._custom_params.update({ key: value }))) for key in kwargs]
         self._freeze()
@@ -1910,9 +1935,9 @@ class WrapperPatchFlowRegionsParams(CoreObject):
         dead_regions: List[DeadRegion], optional
             List of dead regions.
         sizing_method: SizeFieldType, optional
-            Used to define sizing method for patching.
+            Method used to define sizing method for patching.
         size_field_ids: Iterable[int], optional
-            Used to define size field based octree refinement.
+            Ids used to define size field based octree refinement.
         patch_at_live: bool, optional
             Creates patches closer to live instead of dead.
         """
@@ -2005,7 +2030,7 @@ class WrapperPatchFlowRegionsParams(CoreObject):
 
     @property
     def sizing_method(self) -> SizeFieldType:
-        """Used to define sizing method for patching.
+        """Method used to define sizing method for patching.
 
         **This is a beta parameter**. **The behavior and name may change in the future**.
         """
@@ -2017,7 +2042,7 @@ class WrapperPatchFlowRegionsParams(CoreObject):
 
     @property
     def size_field_ids(self) -> Iterable[int]:
-        """Used to define size field based octree refinement.
+        """Ids used to define size field based octree refinement.
 
         **This is a beta parameter**. **The behavior and name may change in the future**.
         """
@@ -2147,7 +2172,7 @@ class WrapperPatchFlowRegionsResult(CoreObject):
                         name if name is not None else ( WrapperPatchFlowRegionsResult._default_params["name"] if "name" in WrapperPatchFlowRegionsResult._default_params else (json_data["name"] if "name" in json_data else None)))
         self._custom_params = kwargs
         if model is not None:
-            [ model._logger.warning(f'Unsupported argument : {key}') for key in kwargs ]
+            [ model._logger.debug(f'Unsupported argument : {key}') for key in kwargs ]
         [setattr(type(self), key, property(lambda self, key = key:  self._custom_params[key] if key in self._custom_params else None,
         lambda self, value, key = key : self._custom_params.update({ key: value }))) for key in kwargs]
         self._freeze()
