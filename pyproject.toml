@@ -27,12 +27,12 @@ dependencies = [
   "appdirs>=1.4.0",
   "importlib-metadata>=4.0,<5; python_version<='3.8'",
   "numpy<2.3", # temporary fix since breaks visualization
+  "docker"
 ]
 
 [project.optional-dependencies]
 graphics = [
   "ansys-tools-visualization-interface>=0.4.7,<1",
-  "docker"
 ]
 pygeometry = [
   "ansys-geometry-core>=0.7.6,<1",
