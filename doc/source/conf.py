@@ -1,11 +1,13 @@
 """Sphinx documentation configuration file."""
+
 import glob
 import os
 import subprocess
 import sys
 from datetime import datetime
 
-# os.environ['PYVISTA_BUILDING_GALLERY'] = 'True'
+os.environ["PRIME_MODE"] = "GRPC_INSECURE"
+
 os.environ["SPHINX_GALLERY_CONF_FORCE_FRESH"] = "0"
 
 import ansys.tools.visualization_interface as viz_interface
@@ -64,11 +66,6 @@ html_theme_options = {
             "icon": "fa fa-comment fa-fw",
         },
     ],
-    "cheatsheet": {
-        "file": "cheatsheet/cheat_sheet.qmd",
-        "title": "PyPrimeMesh cheat sheet",
-        "version": __version__,
-    },
 }
 
 # Sphinx extensions
@@ -88,7 +85,7 @@ extensions = [
     "sphinx_autodoc_typehints",
     "sphinxemoji.sphinxemoji",
     "sphinx_design",
-    "pyvista.ext.viewer_directive",
+    # "pyvista.ext.viewer_directive",
     "sphinx_jinja",
 ]
 nbsphinx_execute = "always"
@@ -185,6 +182,13 @@ sphinx_gallery_conf = {
     "thumbnail_size": (350, 350),
     "parallel": True,
     "run_stale_examples": False,
+    # Code to execute before each example in parallel subprocesses
+    # This ensures PyVista knows it's building gallery documentation
+    "first_notebook_cell": (
+        "import os\n"
+        "os.environ['PYVISTA_BUILDING_GALLERY'] = 'true'\n"
+        "os.environ['PYVISTA_OFF_SCREEN'] = 'true'"
+    ),
 }
 
 
@@ -237,7 +241,10 @@ def setup(app):
     app : sphinx.application.Sphinx
         The Sphinx application object.
     """
-    app.connect("builder-inited", lambda app: run_all_examples_in_parallel())
+    # Commented out: Let sphinx-gallery handle example execution instead
+    # This manual execution runs in subprocesses that don't inherit pyvista.BUILDING_GALLERY
+    # app.connect("builder-inited", lambda app: run_all_examples_in_parallel())
+    pass
 
 
 # Suppress warnings

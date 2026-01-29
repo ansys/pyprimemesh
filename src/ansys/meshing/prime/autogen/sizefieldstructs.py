@@ -112,7 +112,7 @@ class SFPeriodicParams(CoreObject):
                         center if center is not None else ( SFPeriodicParams._default_params["center"] if "center" in SFPeriodicParams._default_params else (json_data["center"] if "center" in json_data else None)))
         self._custom_params = kwargs
         if model is not None:
-            [ model._logger.warning(f'Unsupported argument : {key}') for key in kwargs ]
+            [ model._logger.debug(f'Unsupported argument : {key}') for key in kwargs ]
         [setattr(type(self), key, property(lambda self, key = key:  self._custom_params[key] if key in self._custom_params else None,
         lambda self, value, key = key : self._custom_params.update({ key: value }))) for key in kwargs]
         self._freeze()
@@ -266,7 +266,7 @@ class VolumetricSizeFieldComputeResults(CoreObject):
                         size_field_id if size_field_id is not None else ( VolumetricSizeFieldComputeResults._default_params["size_field_id"] if "size_field_id" in VolumetricSizeFieldComputeResults._default_params else (json_data["sizeFieldId"] if "sizeFieldId" in json_data else None)))
         self._custom_params = kwargs
         if model is not None:
-            [ model._logger.warning(f'Unsupported argument : {key}') for key in kwargs ]
+            [ model._logger.debug(f'Unsupported argument : {key}') for key in kwargs ]
         [setattr(type(self), key, property(lambda self, key = key:  self._custom_params[key] if key in self._custom_params else None,
         lambda self, value, key = key : self._custom_params.update({ key: value }))) for key in kwargs]
         self._freeze()
@@ -429,7 +429,7 @@ class VolumetricSizeFieldComputeParams(CoreObject):
                         growth_rate_lower_bound if growth_rate_lower_bound is not None else ( VolumetricSizeFieldComputeParams._default_params["growth_rate_lower_bound"] if "growth_rate_lower_bound" in VolumetricSizeFieldComputeParams._default_params else (json_data["growthRateLowerBound"] if "growthRateLowerBound" in json_data else None)))
         self._custom_params = kwargs
         if model is not None:
-            [ model._logger.warning(f'Unsupported argument : {key}') for key in kwargs ]
+            [ model._logger.debug(f'Unsupported argument : {key}') for key in kwargs ]
         [setattr(type(self), key, property(lambda self, key = key:  self._custom_params[key] if key in self._custom_params else None,
         lambda self, value, key = key : self._custom_params.update({ key: value }))) for key in kwargs]
         self._freeze()

@@ -146,7 +146,7 @@ class AutoMeshResults(CoreObject):
                         error_locations if error_locations is not None else ( AutoMeshResults._default_params["error_locations"] if "error_locations" in AutoMeshResults._default_params else (json_data["errorLocations"] if "errorLocations" in json_data else None)))
         self._custom_params = kwargs
         if model is not None:
-            [ model._logger.warning(f'Unsupported argument : {key}') for key in kwargs ]
+            [ model._logger.debug(f'Unsupported argument : {key}') for key in kwargs ]
         [setattr(type(self), key, property(lambda self, key = key:  self._custom_params[key] if key in self._custom_params else None,
         lambda self, value, key = key : self._custom_params.update({ key: value }))) for key in kwargs]
         self._freeze()
@@ -300,7 +300,7 @@ class PrismStairStep(CoreObject):
                         gap_factor_scale if gap_factor_scale is not None else ( PrismStairStep._default_params["gap_factor_scale"] if "gap_factor_scale" in PrismStairStep._default_params else (json_data["gapFactorScale"] if "gapFactorScale" in json_data else None)))
         self._custom_params = kwargs
         if model is not None:
-            [ model._logger.warning(f'Unsupported argument : {key}') for key in kwargs ]
+            [ model._logger.debug(f'Unsupported argument : {key}') for key in kwargs ]
         [setattr(type(self), key, property(lambda self, key = key:  self._custom_params[key] if key in self._custom_params else None,
         lambda self, value, key = key : self._custom_params.update({ key: value }))) for key in kwargs]
         self._freeze()
@@ -439,7 +439,7 @@ class PrismParams(CoreObject):
                         no_imprint_zonelets if no_imprint_zonelets is not None else ( PrismParams._default_params["no_imprint_zonelets"] if "no_imprint_zonelets" in PrismParams._default_params else (json_data["noImprintZonelets"] if "noImprintZonelets" in json_data else None)))
         self._custom_params = kwargs
         if model is not None:
-            [ model._logger.warning(f'Unsupported argument : {key}') for key in kwargs ]
+            [ model._logger.debug(f'Unsupported argument : {key}') for key in kwargs ]
         [setattr(type(self), key, property(lambda self, key = key:  self._custom_params[key] if key in self._custom_params else None,
         lambda self, value, key = key : self._custom_params.update({ key: value }))) for key in kwargs]
         self._freeze()
@@ -588,7 +588,7 @@ class SurfaceMeshSizeScaling(CoreObject):
                         size_range_max if size_range_max is not None else ( SurfaceMeshSizeScaling._default_params["size_range_max"] if "size_range_max" in SurfaceMeshSizeScaling._default_params else (json_data["sizeRangeMax"] if "sizeRangeMax" in json_data else None)))
         self._custom_params = kwargs
         if model is not None:
-            [ model._logger.warning(f'Unsupported argument : {key}') for key in kwargs ]
+            [ model._logger.debug(f'Unsupported argument : {key}') for key in kwargs ]
         [setattr(type(self), key, property(lambda self, key = key:  self._custom_params[key] if key in self._custom_params else None,
         lambda self, value, key = key : self._custom_params.update({ key: value }))) for key in kwargs]
         self._freeze()
@@ -792,7 +792,7 @@ class HexCoreParams(CoreObject):
                         enable_region_based_hexcore if enable_region_based_hexcore is not None else ( HexCoreParams._default_params["enable_region_based_hexcore"] if "enable_region_based_hexcore" in HexCoreParams._default_params else (json_data["enableRegionBasedHexcore"] if "enableRegionBasedHexcore" in json_data else None)))
         self._custom_params = kwargs
         if model is not None:
-            [ model._logger.warning(f'Unsupported argument : {key}') for key in kwargs ]
+            [ model._logger.debug(f'Unsupported argument : {key}') for key in kwargs ]
         [setattr(type(self), key, property(lambda self, key = key:  self._custom_params[key] if key in self._custom_params else None,
         lambda self, value, key = key : self._custom_params.update({ key: value }))) for key in kwargs]
         self._freeze()
@@ -996,7 +996,7 @@ class TetParams(CoreObject):
                         quadratic if quadratic is not None else ( TetParams._default_params["quadratic"] if "quadratic" in TetParams._default_params else (json_data["quadratic"] if "quadratic" in json_data else None)))
         self._custom_params = kwargs
         if model is not None:
-            [ model._logger.warning(f'Unsupported argument : {key}') for key in kwargs ]
+            [ model._logger.debug(f'Unsupported argument : {key}') for key in kwargs ]
         [setattr(type(self), key, property(lambda self, key = key:  self._custom_params[key] if key in self._custom_params else None,
         lambda self, value, key = key : self._custom_params.update({ key: value }))) for key in kwargs]
         self._freeze()
@@ -1210,7 +1210,7 @@ class AutoMeshParams(CoreObject):
                         periodic_control_ids if periodic_control_ids is not None else ( AutoMeshParams._default_params["periodic_control_ids"] if "periodic_control_ids" in AutoMeshParams._default_params else (json_data["periodicControlIds"] if "periodicControlIds" in json_data else None)))
         self._custom_params = kwargs
         if model is not None:
-            [ model._logger.warning(f'Unsupported argument : {key}') for key in kwargs ]
+            [ model._logger.debug(f'Unsupported argument : {key}') for key in kwargs ]
         [setattr(type(self), key, property(lambda self, key = key:  self._custom_params[key] if key in self._custom_params else None,
         lambda self, value, key = key : self._custom_params.update({ key: value }))) for key in kwargs]
         self._freeze()

@@ -108,7 +108,7 @@ Run tests locally with this command:
     pytest
 ```
 
-## License and aknowledgments
+## License and acknowledgments
 
 PyPrimeMesh is licensed under the MIT license.
 
