@@ -21,11 +21,8 @@
 
 """Module for client communication implementations."""
 
-import json
 import logging
 import os
-import platform
-import time
 from pathlib import Path
 from typing import Optional
 

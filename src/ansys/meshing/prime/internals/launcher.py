@@ -306,7 +306,10 @@ def launch_prime(
     if launch_container:
         container_name = utils.make_unique_container_name('ansys-prime-server')
         utils.launch_prime_github_container(
-            port=port, name=container_name, version=version, connection_type=connection_type
+            port=port,
+            name=container_name,
+            version=version,
+            connection_type=config.ConnectionType.GRPC_INSECURE,
         )
         config.set_using_container(True)
         client = Client(port=port, timeout=timeout, client_certs_dir=client_certs_dir)

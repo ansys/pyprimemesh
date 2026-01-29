@@ -277,6 +277,38 @@ def launch_prime_github_container(
         prime_arguments.append('--secure=no')
     subprocess.run(docker_command + prime_arguments, stdout=subprocess.DEVNULL)
 
+    # Wait for container to start and verify it's still running
+    import time
+
+    time.sleep(10)
+
+    # Get container logs
+    logs_result = subprocess.run(['docker', 'logs', name], capture_output=True, text=True)
+
+    # Print container logs to output
+    print(f"\n{'='*80}")
+    print(f"Docker container '{name}' logs:")
+    print(f"{'='*80}")
+    if logs_result.stdout:
+        print("STDOUT:")
+        print(logs_result.stdout)
+    if logs_result.stderr:
+        print("STDERR:")
+        print(logs_result.stderr)
+    print(f"{'='*80}\n")
+
+    # Check if container is still running
+    result = subprocess.run(
+        ['docker', 'ps', '--filter', f'name={name}', '--format', '{{.Names}}'],
+        capture_output=True,
+        text=True,
+    )
+
+    if name not in result.stdout:
+        # Container is not running
+        error_msg = f"Container '{name}' failed to start or exited immediately. Check logs above."
+        raise RuntimeError(error_msg)
+
 
 def stop_prime_github_container(name):
     """Stop a running container.

@@ -118,9 +118,9 @@ mesh_util = prime.lucid.Mesh(model=model)
 mesh_util.read(file_name=prime.examples.download_block_model_fmd())
 # mesh_util.read(file_name=prime.examples.download_block_model_scdoc())
 print(model)
-display = PrimePlotter()
-display.plot(model)
-display.show()
+# display = PrimePlotter()
+# display.plot(model)
+# display.show()
 
 ###############################################################################
 # Generate Mesh
@@ -144,15 +144,15 @@ display.show()
 # as the default meshing algorithms.
 
 mesh_util.surface_mesh(min_size=2.0)
-display = PrimePlotter()
-display.plot(model, update=True)
-display.show()
+# display = PrimePlotter()
+# display.plot(model, update=True)
+# display.show()
 
 part = model.get_part_by_name("pyprime_block_import")
 
-display = PrimePlotter()
-display.plot(model, prime.ScopeDefinition(model, label_expression="my_group"))
-display.show()
+# display = PrimePlotter()
+# display.plot(model, prime.ScopeDefinition(model, label_expression="my_group"))
+# display.show()
 
 mesh_util.volume_mesh()
 
