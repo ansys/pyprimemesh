@@ -194,6 +194,7 @@ jobs:
           needs-quarto: true
           sphinxopts: "-j auto --keep-going"
         env:
+          PRIME_MODE: 'GRPC_INSECURE'
           PYVISTA_BUILDING_GALLERY: 'True'
           PYPRIMEMESH_LAUNCH_CONTAINER: 1
           PYPRIMEMESH_SPHINX_BUILD: 1
