@@ -32,6 +32,7 @@ dependencies = [
 [project.optional-dependencies]
 graphics = [
   "ansys-tools-visualization-interface>=0.4.7,<1",
+  "docker"
 ]
 pygeometry = [
   "ansys-geometry-core>=0.7.6,<1",

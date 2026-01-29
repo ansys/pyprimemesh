@@ -278,9 +278,9 @@ for zone in part.get_face_zones():
         evaluation_type=prime.ScopeEvaluationType.ZONES,
         zone_expression=model.get_zone_name(zone),
     )
-    display = PrimePlotter()
-    display.plot(model, scope, update=True)
-    display.show()
+    # display = PrimePlotter()
+    # display.plot(model, scope, update=True)
+    # display.show()
 
 ###############################################################################
 # Exit PyPrimeMesh

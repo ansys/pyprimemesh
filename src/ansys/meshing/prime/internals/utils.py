@@ -30,6 +30,7 @@ from typing import List, Optional
 
 import ansys.meshing.prime.internals.config as config
 import ansys.meshing.prime.internals.defaults as defaults
+import docker
 
 _LOCAL_PORTS = []
 
@@ -241,30 +242,23 @@ def launch_prime_github_container(
         raise ValueError('Licensing information to launch container not found')
     if version is None:
         version = os.environ.get('PYPRIMEMESH_IMAGE_TAG', 'latest')
-    docker_command = [
-        'docker',
-        'run',
-        '-d',
-        '--rm',
-        '--name',
-        f'{name}',
-        '-p',
-        f'{port}:{port}',
-        '-v',
-        f'{mount_host}:{mount_image}',
-        '-e',
-        f'ANSYSLMD_LICENSE_FILE={license_file}',
-    ]
 
+    # Prepare port mappings
+    ports = {f'{port}/tcp': port}
     graphics_port = int(os.environ.get('PRIME_GRAPHICS_PORT', '0'))
     if graphics_port > 0:
         print(f'PyPrimeMesh: using Prime graphics port {graphics_port}')
-        docker_command += ['-p', f'{graphics_port}:{graphics_port}']
-    prime_arguments = [
-        f'{image_name}:{version}',
-        '--port',
-        f'{port}',
-    ]
+        ports[f'{graphics_port}/tcp'] = graphics_port
+
+    # Prepare volumes
+    volumes = {mount_host: {'bind': mount_image, 'mode': 'rw'}}
+
+    # Prepare environment variables
+    environment = {'ANSYSLMD_LICENSE_FILE': license_file}
+
+    # Prepare command arguments
+    command = ['--port', str(port)]
+
     # Set default connection type if not provided
     if connection_type is None:
         connection_type = config.ConnectionType.GRPC_SECURE
@@ -274,37 +268,43 @@ def launch_prime_github_container(
         connection_type == config.ConnectionType.GRPC_INSECURE
         or os.environ.get('PRIME_MODE', '').upper() == "GRPC_INSECURE"
     ):
-        prime_arguments.append('--secure=no')
-    subprocess.run(docker_command + prime_arguments, stdout=subprocess.DEVNULL)
+        command.append('--secure=no')
+
+    # Create and start container using Docker Python library
+    client = docker.from_env()
+    full_image_name = f'{image_name}:{version}'
+
+    container = client.containers.run(
+        full_image_name,
+        command=command,
+        detach=True,
+        remove=True,
+        name=name,
+        ports=ports,
+        volumes=volumes,
+        environment=environment,
+    )
 
     # Wait for container to start and verify it's still running
     import time
 
     time.sleep(10)
 
+    # Reload container to get updated status
+    container.reload()
+
     # Get container logs
-    logs_result = subprocess.run(['docker', 'logs', name], capture_output=True, text=True)
+    logs = container.logs().decode('utf-8')
 
     # Print container logs to output
     print(f"\n{'='*80}")
     print(f"Docker container '{name}' logs:")
     print(f"{'='*80}")
-    if logs_result.stdout:
-        print("STDOUT:")
-        print(logs_result.stdout)
-    if logs_result.stderr:
-        print("STDERR:")
-        print(logs_result.stderr)
+    print(logs)
     print(f"{'='*80}\n")
 
     # Check if container is still running
-    result = subprocess.run(
-        ['docker', 'ps', '--filter', f'name={name}', '--format', '{{.Names}}'],
-        capture_output=True,
-        text=True,
-    )
-
-    if name not in result.stdout:
+    if container.status != 'running':
         # Container is not running
         error_msg = f"Container '{name}' failed to start or exited immediately. Check logs above."
         raise RuntimeError(error_msg)
@@ -318,7 +318,12 @@ def stop_prime_github_container(name):
     name : str
         Name of the container.
     """
-    subprocess.run(['docker', 'stop', f'{name}'], stdout=subprocess.DEVNULL)
+    client = docker.from_env()
+    try:
+        container = client.containers.get(name)
+        container.stop()
+    except docker.errors.NotFound:
+        pass  # Container doesn't exist, nothing to stop
 
 
 @contextmanager
