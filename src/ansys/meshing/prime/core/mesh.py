@@ -134,7 +134,7 @@ class DisplayPolyData:
         The original (non-triangulated) mesh for edge extraction.
     """
 
-    def __init__(self, mesh: pv.PolyData, original_polydata: pv.PolyData = None, **kwargs):
+    def __init__(self, mesh: pv.PolyData, original_polydata: pv.PolyData = None):
         """Initialize the display polydata."""
         self._mesh = mesh
         self._original_polydata = original_polydata
