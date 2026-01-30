@@ -317,7 +317,7 @@ def launch_prime(
         config.set_using_container(True)
         client = Client(port=port, timeout=timeout, client_certs_dir=client_certs_dir)
         client.container_name = container_name
-        print('using server from docker : The container name ', container_name)
+        print('using server from docker : The container name ', container_name, flush=True)
         return client
 
     uds_id = None
