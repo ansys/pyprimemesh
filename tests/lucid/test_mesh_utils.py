@@ -79,6 +79,7 @@ def test_surface_mesh(mesh):
 
     mesh.surface_mesh_with_size_controls()
 
+
 @pytest.mark.skip(reason="Temporarily skipping this test")
 def test_connect_faces(mesh):
     mesh.connect_faces()
@@ -91,6 +92,7 @@ def test_compute_volumes(mesh):
 def test_volume_mesh(mesh):
     mesh.volume_mesh(quadratic=True)
     mesh.volume_mesh(prism_layers=True)
+
 
 @pytest.mark.skip(reason="Temporarily skipping this test")
 def test_wrap(mesh):
