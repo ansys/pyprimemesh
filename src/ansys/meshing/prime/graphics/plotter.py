@@ -225,7 +225,7 @@ class PrimePlotter(Plotter):
                             if original_edges is not None and original_edges.n_points > 0:
                                 self._backend.pv_interface.scene.add_mesh(
                                     original_edges,
-                                    color='black',
+                                    color="black",
                                     line_width=1,
                                     pickable=False,
                                 )
