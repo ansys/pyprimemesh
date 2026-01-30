@@ -294,7 +294,7 @@ def launch_prime_github_container(
     start_time = time.time()
     found_welcome = False
 
-    print(f"Waiting for Ansys Prime Server to start (timeout: {timeout}s)...")
+    print(f"Waiting for Ansys Prime Server to start (timeout: {timeout}s)...", flush=True)
 
     while time.time() - start_time < timeout:
         # Reload container to get updated status
@@ -319,21 +319,22 @@ def launch_prime_github_container(
         # Check for welcome message
         if welcome_message in logs:
             found_welcome = True
-            print(f"✓ Ansys Prime Server started successfully!")
+            print(f"✓ Ansys Prime Server started successfully!", flush=True)
             break
 
         # Wait a bit before checking again
         time.sleep(2)
 
     # Print container logs
-    print(f"\n{'='*80}")
-    print(f"Docker container '{name}' logs:")
-    print(f"{'='*80}")
-    print(logs)
-    print(f"{'='*80}\n")
+    print(f"\n{'='*80}", flush=True)
+    print(f"Docker container '{name}' logs:", flush=True)
+    print(f"{'='*80}", flush=True)
+    print(logs, flush=True)
+    print(f"{'='*80}\n", flush=True)
 
     # If we didn't find the welcome message, raise an error
     if not found_welcome:
+        print(f"✗ Ansys Prime Server failed to start.", flush=True)
         error_msg = (
             f"Timeout waiting for Ansys Prime Server to start. "
             f"Expected to find '{welcome_message}' in logs within {timeout} seconds. "
