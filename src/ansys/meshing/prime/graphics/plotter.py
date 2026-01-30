@@ -52,6 +52,15 @@ color_matrix = np.array(
     ]
 )
 
+# Polygon offset parameters for resolving z-fighting between faces and edge lines.
+# These values control how much polygons are pushed back in the depth buffer:
+# - FACTOR: Scales the maximum depth slope of the polygon (handles angled surfaces)
+# - UNITS: Adds a constant depth offset (handles co-planar geometry)
+# Values of 1.0 provide a good balance for most meshes without causing visual artifacts.
+# Increase if z-fighting persists; decrease if faces appear to "pop" behind edges.
+POLYGON_OFFSET_FACTOR = 1.0
+POLYGON_OFFSET_UNITS = 1.0
+
 
 class ColorByType(enum.IntEnum):
     """Contains the zone types to display."""
@@ -174,6 +183,8 @@ class PrimePlotter(Plotter):
         model : Model
             Model to add to the plotter.
         """
+        from ansys.meshing.prime.core.mesh import DisplayPolyData
+
         for part_id, part_polydata in model_pd.items():
             # proceed if scope won't be used or if the part is in the scope
             if "faces" in part_polydata.keys():
@@ -184,26 +195,34 @@ class PrimePlotter(Plotter):
                     colors = self.get_scalar_colors(face_mesh_info)
                     has_mesh = face_mesh_info.has_mesh
 
-                    if self._improved_surface_rendering:
+                    # Check if mesh is wrapped in DisplayPolyData for improved rendering
+                    mesh_obj = face_mesh_part.mesh
+                    is_display_polydata = isinstance(mesh_obj, DisplayPolyData)
+
+                    if self._improved_surface_rendering and is_display_polydata:
+                        # Get the triangulated mesh for rendering
+                        mesh_to_render = mesh_obj.mesh
+
                         # Render subdivided faces without edges (edges shown separately)
                         actor = self._backend.pv_interface.scene.add_mesh(
-                            face_mesh_part.mesh, show_edges=False, color=colors, pickable=True
+                            mesh_to_render, show_edges=False, color=colors, pickable=True
                         )
                         # Apply polygon offset to push faces back in depth buffer
                         # This prevents z-fighting with edge lines
                         actor.GetProperty().SetEdgeVisibility(False)
                         actor.GetMapper().SetResolveCoincidentTopologyToPolygonOffset()
                         actor.GetMapper().SetRelativeCoincidentTopologyPolygonOffsetParameters(
-                            1.0, 1.0
+                            POLYGON_OFFSET_FACTOR, POLYGON_OFFSET_UNITS
                         )
                         face_mesh_part.actor = actor
                         self._backend.pv_interface._object_to_actors_map[actor] = face_mesh_part
                         self._info_actor_map[actor] = face_mesh_info
 
-                        # Render original polygon edges if mesh has edges and original edges exist
-                        if has_mesh and hasattr(face_mesh_part.mesh, '_original_edges'):
-                            original_edges = face_mesh_part.mesh._original_edges
-                            if original_edges.n_points > 0:
+                        # Render original polygon edges if available
+                        # Edges are lazily extracted only when this code path is reached
+                        if has_mesh and mesh_obj.has_original_edges():
+                            original_edges = mesh_obj.get_original_edges()
+                            if original_edges is not None and original_edges.n_points > 0:
                                 self._backend.pv_interface.scene.add_mesh(
                                     original_edges,
                                     color='black',
@@ -211,9 +230,14 @@ class PrimePlotter(Plotter):
                                     pickable=False,
                                 )
                     else:
-                        # Original rendering approach without triangulation
+                        # Original rendering approach without improved surface rendering
+                        # Use the original (non-triangulated) polydata if available
+                        if is_display_polydata:
+                            mesh_to_render = mesh_obj.get_original_polydata()
+                        else:
+                            mesh_to_render = mesh_obj
                         actor = self._backend.pv_interface.scene.add_mesh(
-                            face_mesh_part.mesh, show_edges=has_mesh, color=colors, pickable=True
+                            mesh_to_render, show_edges=has_mesh, color=colors, pickable=True
                         )
                         face_mesh_part.actor = actor
                         self._backend.pv_interface._object_to_actors_map[actor] = face_mesh_part
