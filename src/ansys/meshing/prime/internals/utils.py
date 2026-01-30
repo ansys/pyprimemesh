@@ -242,7 +242,7 @@ def launch_prime_github_container(
         raise ValueError('Licensing information to launch container not found')
     if version is None:
         version = os.environ.get('PYPRIMEMESH_IMAGE_TAG', 'latest')
-
+    print(f'PyPrimeMesh: using image {image_name}:{version}')
     # Prepare port mappings
     ports = {f'{port}/tcp': port}
     graphics_port = int(os.environ.get('PRIME_GRAPHICS_PORT', '0'))
@@ -273,7 +273,7 @@ def launch_prime_github_container(
     # Create and start container using Docker Python library
     client = docker.from_env()
     full_image_name = f'{image_name}:{version}'
-
+    print("Running container with command:", ' '.join(command))
     container = client.containers.run(
         full_image_name,
         command=command,
