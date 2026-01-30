@@ -242,7 +242,7 @@ def launch_prime_github_container(
         raise ValueError('Licensing information to launch container not found')
     if version is None:
         version = os.environ.get('PYPRIMEMESH_IMAGE_TAG', 'latest')
-
+    print(f'PyPrimeMesh: using image {image_name}:{version}')
     # Prepare port mappings
     ports = {f'{port}/tcp': port}
     graphics_port = int(os.environ.get('PRIME_GRAPHICS_PORT', '0'))
@@ -273,7 +273,7 @@ def launch_prime_github_container(
     # Create and start container using Docker Python library
     client = docker.from_env()
     full_image_name = f'{image_name}:{version}'
-
+    print("Running container with command:", ' '.join(command))
     container = client.containers.run(
         full_image_name,
         command=command,
@@ -288,26 +288,58 @@ def launch_prime_github_container(
     # Wait for container to start and verify it's still running
     import time
 
-    time.sleep(10)
+    # Check for welcome message with timeout
+    welcome_message = "Welcome to Ansys Prime Meshing"
+    timeout = 60  # 1 minute timeout
+    start_time = time.time()
+    found_welcome = False
 
-    # Reload container to get updated status
-    container.reload()
+    print(f"Waiting for Ansys Prime Server to start (timeout: {timeout}s)...")
 
-    # Get container logs
-    logs = container.logs().decode('utf-8')
+    while time.time() - start_time < timeout:
+        # Reload container to get updated status
+        container.reload()
 
-    # Print container logs to output
+        # Check if container is still running
+        if container.status != 'running':
+            logs = container.logs().decode('utf-8')
+            print(f"\n{'='*80}")
+            print(f"Docker container '{name}' logs:")
+            print(f"{'='*80}")
+            print(logs)
+            print(f"{'='*80}\n")
+            error_msg = (
+                f"Container '{name}' failed to start or exited immediately. Check logs above."
+            )
+            raise RuntimeError(error_msg)
+
+        # Get container logs
+        logs = container.logs().decode('utf-8')
+
+        # Check for welcome message
+        if welcome_message in logs:
+            found_welcome = True
+            print(f"✓ Ansys Prime Server started successfully!")
+            break
+
+        # Wait a bit before checking again
+        time.sleep(2)
+
+    # Print container logs
     print(f"\n{'='*80}")
     print(f"Docker container '{name}' logs:")
     print(f"{'='*80}")
     print(logs)
     print(f"{'='*80}\n")
 
-    # Check if container is still running
-    if container.status != 'running':
-        # Container is not running
-        error_msg = f"Container '{name}' failed to start or exited immediately. Check logs above."
-        raise RuntimeError(error_msg)
+    # If we didn't find the welcome message, raise an error
+    if not found_welcome:
+        error_msg = (
+            f"Timeout waiting for Ansys Prime Server to start. "
+            f"Expected to find '{welcome_message}' in logs within {timeout} seconds. "
+            f"Check logs above."
+        )
+        raise TimeoutError(error_msg)
 
 
 def stop_prime_github_container(name):
