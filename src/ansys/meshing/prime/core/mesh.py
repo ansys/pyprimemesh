@@ -137,9 +137,6 @@ class DisplayPolyData:
     def __init__(self, mesh: pv.PolyData, original_polydata: pv.PolyData = None, **kwargs):
         """Initialize the display polydata."""
         self._mesh = mesh
-        # Backward compatibility: accept legacy 'original_mesh' keyword.
-        if original_polydata is None and "original_mesh" in kwargs:
-            original_polydata = kwargs["original_mesh"]
         self._original_polydata = original_polydata
         self._cached_original_edges = None
 
