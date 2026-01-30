@@ -406,7 +406,7 @@ class Mesh(MeshInfo):
         triangulated = original_polydata.triangulate()
 
         # Wrap in DisplayPolyData for clean access to original edges
-        display_mesh = DisplayPolyData(mesh=triangulated, original_mesh=original_polydata)
+        display_mesh = DisplayPolyData(mesh=triangulated, original_polydata=original_polydata)
 
         # Set colors on the triangulated mesh
         fcolor = np.array(self.get_face_color(part, ColorByType.ZONE))
