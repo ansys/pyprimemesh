@@ -71,8 +71,9 @@ import tempfile
 import ansys.meshing.prime as prime
 
 # from ansys.meshing.prime.graphics.plotter import PrimePlotter
-
+print("Launching Ansys Prime Server...", flush=True)
 prime_client = prime.launch_prime()
+print("Ansys Prime Server launched.", flush=True)
 model = prime_client.model
 mesh_util = prime.lucid.Mesh(model=model)
 
