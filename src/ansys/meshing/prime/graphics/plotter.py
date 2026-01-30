@@ -209,7 +209,6 @@ class PrimePlotter(Plotter):
                         )
                         # Apply polygon offset to push faces back in depth buffer
                         # This prevents z-fighting with edge lines
-                        actor.GetProperty().SetEdgeVisibility(False)
                         actor.GetMapper().SetResolveCoincidentTopologyToPolygonOffset()
                         actor.GetMapper().SetRelativeCoincidentTopologyPolygonOffsetParameters(
                             POLYGON_OFFSET_FACTOR, POLYGON_OFFSET_UNITS
