@@ -130,14 +130,17 @@ class DisplayPolyData:
     ----------
     mesh : pv.PolyData
         The triangulated mesh for rendering.
-    original_mesh : pv.PolyData, optional
+    original_polydata : pv.PolyData, optional
         The original (non-triangulated) mesh for edge extraction.
     """
 
-    def __init__(self, mesh: pv.PolyData, original_mesh: pv.PolyData = None):
+    def __init__(self, mesh: pv.PolyData, original_polydata: pv.PolyData = None, **kwargs):
         """Initialize the display polydata."""
         self._mesh = mesh
-        self._original_polydata = original_mesh
+        # Backward compatibility: accept legacy 'original_mesh' keyword.
+        if original_polydata is None and "original_mesh" in kwargs:
+            original_polydata = kwargs["original_mesh"]
+        self._original_polydata = original_polydata
         self._cached_original_edges = None
 
     @property
