@@ -323,6 +323,12 @@ class Mesh(MeshInfo):
 
         vertices, faces = self._get_vertices_and_surf_faces(face_facet_res, index)
         surf = pv.PolyData(vertices, faces)
+        # Extract original edges before triangulation to preserve polygon boundaries
+        original_edges = surf.extract_all_edges()
+        # Triangulate to improve rendering of non-planar polygons
+        surf = surf.triangulate()
+        # Store original edges for rendering
+        surf._original_edges = original_edges
         fcolor = np.array(self.get_face_color(part, ColorByType.ZONE))
         colors = np.tile(fcolor, (surf.n_faces_strict, 1))
         surf["colors"] = colors
