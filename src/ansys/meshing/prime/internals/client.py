@@ -209,8 +209,9 @@ class Client(object):
             assert self._local == False
             terminate_process(self._process)
         if config.using_container():
-            container_name = getattr(self, 'container_name')
-            utils.stop_prime_github_container(container_name)
+            container_name = getattr(self, 'container_name', None)
+            if container_name:
+                utils.stop_prime_github_container(container_name)
         elif config.has_pim():
             self.remote_instance.delete()
             self.pim_client.close()

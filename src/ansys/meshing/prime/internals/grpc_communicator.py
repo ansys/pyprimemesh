@@ -147,6 +147,13 @@ class GRPCCommunicator(Communicator):
     ):
         """Initialize the server connection."""
         import os
+        import time
+        from pathlib import Path
+
+        # Initialize attributes early to avoid AttributeError in __del__
+        self._channel = None
+        self._stub = None
+        self._models = []
 
         self._channel = kwargs.get('channel', None)
         if self._channel is None:
@@ -160,18 +167,86 @@ class GRPCCommunicator(Communicator):
                 certs_dir=client_certs_dir,
             )
             print("Cyber channel created.", flush=True)
-        self._models = []
+
         if 'PYPRIMEMESH_DEVELOPER_MODE' not in os.environ:
             timeout = 60.0
 
-        try:
-            print("Waiting for channel to be ready...", flush=True)
-            grpc.channel_ready_future(self._channel).result(timeout=timeout)
-            print("Channel is ready.", flush=True)
-        except grpc.FutureTimeoutError as err:
-            raise ConnectionError(
-                f'Failed to connect to Server in given timeout of {timeout} secs'
-            ) from err
+        # Health check: If using Unix Domain Socket, verify the socket file exists
+        if transport_mode == "uds":
+            # Determine socket path using same logic as cyberchannel
+            if os.name == 'nt':
+                uds_folder = Path(os.environ["USERPROFILE"]) / ".conn"
+            else:
+                uds_folder = Path(os.environ["HOME"]) / ".conn"
+
+            socket_filename = f"pyprimemesh-{uds_id}.sock" if uds_id else "pyprimemesh.sock"
+            socket_path = uds_folder / socket_filename
+
+            print(f"Health check: Verifying Unix socket at {socket_path}...", flush=True)
+            max_wait = 30.0  # Wait up to 30 seconds for socket to appear
+            wait_interval = 0.5
+            elapsed = 0.0
+
+            while elapsed < max_wait:
+                if socket_path.exists():
+                    print(f"Health check: Socket file found at {socket_path}", flush=True)
+                    # Additional check: try to stat the socket to ensure it's accessible
+                    try:
+                        socket_path.stat()
+                        print("Health check: Socket is accessible", flush=True)
+                    except Exception as e:
+                        print(f"Health check: Socket exists but not accessible: {e}", flush=True)
+                    break
+                time.sleep(wait_interval)
+                elapsed += wait_interval
+            else:
+                print(
+                    f"Warning: Socket file not found at {socket_path} after {max_wait}s", flush=True
+                )
+                print(f"Health check: Listing contents of {uds_folder}...", flush=True)
+                try:
+                    if uds_folder.exists():
+                        files = list(uds_folder.iterdir())
+                        print(
+                            f"Health check: Found {len(files)} files: {[f.name for f in files]}",
+                            flush=True,
+                        )
+                    else:
+                        print(f"Health check: Directory {uds_folder} does not exist", flush=True)
+                except Exception as e:
+                    print(f"Health check: Error listing directory: {e}", flush=True)
+
+        # Try to connect with retry logic
+        max_retries = 3
+        retry_delay = 2.0
+        last_error = None
+
+        for attempt in range(max_retries):
+            try:
+                if attempt > 0:
+                    print(
+                        f"Retry attempt {attempt + 1}/{max_retries} after {retry_delay}s delay...",
+                        flush=True,
+                    )
+                    time.sleep(retry_delay)
+                    retry_delay *= 2  # Exponential backoff
+
+                print("Waiting for channel to be ready...", flush=True)
+                grpc.channel_ready_future(self._channel).result(timeout=timeout)
+                print("Channel is ready.", flush=True)
+                break  # Success, exit retry loop
+            except grpc.FutureTimeoutError as err:
+                last_error = err
+                if attempt < max_retries - 1:
+                    print(
+                        f"Channel not ready, retrying... (attempt {attempt + 1}/{max_retries})",
+                        flush=True,
+                    )
+                else:
+                    raise ConnectionError(
+                        f'Failed to connect to Server in given timeout of {timeout} secs '
+                        f'after {max_retries} attempts'
+                    ) from err
 
         self._stub = prime_pb2_grpc.PrimeStub(self._channel)
         try:
