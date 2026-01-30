@@ -274,6 +274,7 @@ def launch_prime(
     ConnectionError
         When there is an error in connecting to the gRPC server.
     """
+    print("Launching Ansys Prime Server method...", flush=True)
     if config.has_pim():
         return launch_remote_prime(version=version, timeout=timeout)
 
@@ -303,8 +304,9 @@ def launch_prime(
             )
 
     launch_container = bool(int(os.environ.get('PYPRIMEMESH_LAUNCH_CONTAINER', '0')))
+    print(f'Launch container: {launch_container}', flush=True)
     if launch_container:
-        print("Launching container...")
+        print("Launching container...", flush=True)
         container_name = utils.make_unique_container_name('ansys-prime-server')
         utils.launch_prime_github_container(
             port=port,
