@@ -150,6 +150,7 @@ class GRPCCommunicator(Communicator):
 
         self._channel = kwargs.get('channel', None)
         if self._channel is None:
+            print("Creating cyber channel...", flush=True)
             self._channel = cyberchannel.create_channel(
                 transport_mode=transport_mode,
                 host=ip,
@@ -158,13 +159,15 @@ class GRPCCommunicator(Communicator):
                 uds_id=uds_id,
                 certs_dir=client_certs_dir,
             )
-
+            print("Cyber channel created.", flush=True)
         self._models = []
         if 'PYPRIMEMESH_DEVELOPER_MODE' not in os.environ:
-            timeout = None
+            timeout = 60.0
 
         try:
+            print("Waiting for channel to be ready...", flush=True)
             grpc.channel_ready_future(self._channel).result(timeout=timeout)
+            print("Channel is ready.", flush=True)
         except grpc.FutureTimeoutError as err:
             raise ConnectionError(
                 f'Failed to connect to Server in given timeout of {timeout} secs'
