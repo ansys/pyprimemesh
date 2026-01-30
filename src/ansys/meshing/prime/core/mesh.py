@@ -116,6 +116,79 @@ class DisplayMeshInfo:
         self.has_mesh = has_mesh
 
 
+class DisplayPolyData:
+    """Wrapper for PyVista PolyData with support for improved surface rendering.
+
+    This class wraps a PyVista PolyData object and provides methods for accessing
+    the original (non-triangulated) mesh and its edges for improved rendering
+    of non-planar polygon faces and quadratic elements.
+
+    Using composition rather than inheritance avoids potential conflicts with
+    PyVista's internal state management.
+
+    Parameters
+    ----------
+    mesh : pv.PolyData
+        The triangulated mesh for rendering.
+    original_polydata : pv.PolyData, optional
+        The original (non-triangulated) mesh for edge extraction.
+    """
+
+    def __init__(self, mesh: pv.PolyData, original_polydata: pv.PolyData = None):
+        """Initialize the display polydata."""
+        self._mesh = mesh
+        self._original_polydata = original_polydata
+        self._cached_original_edges = None
+
+    @property
+    def mesh(self) -> pv.PolyData:
+        """Get the triangulated mesh for rendering.
+
+        Returns
+        -------
+        pv.PolyData
+            The triangulated mesh.
+        """
+        return self._mesh
+
+    def get_original_polydata(self) -> pv.PolyData:
+        """Get the original (non-triangulated) polydata.
+
+        Returns
+        -------
+        pv.PolyData
+            The original polydata, or the triangulated mesh if not set.
+        """
+        return self._original_polydata if self._original_polydata is not None else self._mesh
+
+    def has_original_edges(self) -> bool:
+        """Check if original edges can be extracted.
+
+        Returns
+        -------
+        bool
+            True if original polydata is available for edge extraction.
+        """
+        return self._original_polydata is not None
+
+    def get_original_edges(self) -> pv.PolyData:
+        """Get the original polygon edges, lazily extracted and cached.
+
+        This extracts edges from the original (non-triangulated) mesh,
+        which preserves the true element boundaries for display.
+
+        Returns
+        -------
+        pv.PolyData
+            The edges of the original mesh, or None if not available.
+        """
+        if self._original_polydata is None:
+            return None
+        if self._cached_original_edges is None:
+            self._cached_original_edges = self._original_polydata.extract_all_edges()
+        return self._cached_original_edges
+
+
 def compute_distance(point1, point2) -> float:
     """Compute the distance between two points.
 
@@ -322,11 +395,21 @@ class Mesh(MeshInfo):
         part = self._model.get_part(part_id)
 
         vertices, faces = self._get_vertices_and_surf_faces(face_facet_res, index)
-        surf = pv.PolyData(vertices, faces)
+
+        # Create original polydata and store it for edge extraction
+        original_polydata = pv.PolyData(vertices, faces)
+
+        # Create triangulated mesh for improved rendering of non-planar polygons
+        triangulated = original_polydata.triangulate()
+
+        # Wrap in DisplayPolyData for clean access to original edges
+        display_mesh = DisplayPolyData(mesh=triangulated, original_polydata=original_polydata)
+
+        # Set colors on the triangulated mesh
         fcolor = np.array(self.get_face_color(part, ColorByType.ZONE))
-        colors = np.tile(fcolor, (surf.n_faces_strict, 1))
-        surf["colors"] = colors
-        surf._disp_mesh = self
+        colors = np.tile(fcolor, (display_mesh.mesh.n_faces_strict, 1))
+        display_mesh.mesh["colors"] = colors
+        display_mesh.mesh._disp_mesh = self
         has_mesh = True
         if face_facet_res.topo_face_ids[index] > 0:
             display_mesh_type = DisplayMeshType.TOPOFACE
@@ -336,8 +419,8 @@ class Mesh(MeshInfo):
             display_mesh_type = DisplayMeshType.FACEZONELET
             id = face_facet_res.face_zonelet_ids[index]
 
-        if surf.n_points > 0:
-            return MeshObjectPlot(part, surf), DisplayMeshInfo(
+        if display_mesh.mesh.n_points > 0:
+            return MeshObjectPlot(part, display_mesh), DisplayMeshInfo(
                 id=id,
                 part_id=part_id,
                 zone_id=face_facet_res.face_zone_ids[index],

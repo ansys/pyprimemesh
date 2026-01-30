@@ -52,6 +52,15 @@ color_matrix = np.array(
     ]
 )
 
+# Polygon offset parameters for resolving z-fighting between faces and edge lines.
+# These values control how much polygons are pushed back in the depth buffer:
+# - FACTOR: Scales the maximum depth slope of the polygon (handles angled surfaces)
+# - UNITS: Adds a constant depth offset (handles co-planar geometry)
+# Values of 1.0 provide a good balance for most meshes without causing visual artifacts.
+# Increase if z-fighting persists; decrease if faces appear to "pop" behind edges.
+POLYGON_OFFSET_FACTOR = 1.0
+POLYGON_OFFSET_UNITS = 1.0
+
 
 class ColorByType(enum.IntEnum):
     """Contains the zone types to display."""
@@ -73,14 +82,27 @@ class PrimePlotter(Plotter):
         Whether to use the Trame visualizer.
     allow_picking : Optional[bool], default: True.
         Whether to allow picking.
+    improved_surface_rendering : Optional[bool], default: True.
+        Whether to use improved rendering for non-planar polygon faces.
+        When True, surfaces are subdivided for accurate display of curved or
+        non-planar faces while preserving original mesh edges. This is
+        particularly useful for visualizing quadratic elements where mid-side
+        nodes create curved edges that would otherwise appear faceted.
+        When False, the original polygon mesh is rendered directly.
     """
 
     def __init__(
-        self, use_trame: Optional[bool] = None, allow_picking: Optional[bool] = True
+        self,
+        use_trame: Optional[bool] = None,
+        allow_picking: Optional[bool] = True,
+        improved_surface_rendering: Optional[bool] = True,
     ) -> None:
         """Initialize the widget."""
         self._backend = PyVistaBackend(use_trame=use_trame, allow_picking=allow_picking)
         super().__init__(backend=self._backend)
+
+        # Store rendering preference for non-planar surfaces
+        self._improved_surface_rendering = improved_surface_rendering
 
         # info of the actor to pass to picked info widget
         self._info_actor_map = {}
@@ -161,6 +183,8 @@ class PrimePlotter(Plotter):
         model : Model
             Model to add to the plotter.
         """
+        from ansys.meshing.prime.core.mesh import DisplayPolyData
+
         for part_id, part_polydata in model_pd.items():
             # proceed if scope won't be used or if the part is in the scope
             if "faces" in part_polydata.keys():
@@ -170,12 +194,53 @@ class PrimePlotter(Plotter):
                     # but we need the actor for the picked info widget
                     colors = self.get_scalar_colors(face_mesh_info)
                     has_mesh = face_mesh_info.has_mesh
-                    actor = self._backend.pv_interface.scene.add_mesh(
-                        face_mesh_part.mesh, show_edges=has_mesh, color=colors, pickable=True
-                    )
-                    face_mesh_part.actor = actor
-                    self._backend.pv_interface._object_to_actors_map[actor] = face_mesh_part
-                    self._info_actor_map[actor] = face_mesh_info
+
+                    # Check if mesh is wrapped in DisplayPolyData for improved rendering
+                    mesh_obj = face_mesh_part.mesh
+                    is_display_polydata = isinstance(mesh_obj, DisplayPolyData)
+
+                    if self._improved_surface_rendering and is_display_polydata:
+                        # Get the triangulated mesh for rendering
+                        mesh_to_render = mesh_obj.mesh
+
+                        # Render subdivided faces without edges (edges shown separately)
+                        actor = self._backend.pv_interface.scene.add_mesh(
+                            mesh_to_render, show_edges=False, color=colors, pickable=True
+                        )
+                        # Apply polygon offset to push faces back in depth buffer
+                        # This prevents z-fighting with edge lines
+                        actor.GetMapper().SetResolveCoincidentTopologyToPolygonOffset()
+                        actor.GetMapper().SetRelativeCoincidentTopologyPolygonOffsetParameters(
+                            POLYGON_OFFSET_FACTOR, POLYGON_OFFSET_UNITS
+                        )
+                        face_mesh_part.actor = actor
+                        self._backend.pv_interface._object_to_actors_map[actor] = face_mesh_part
+                        self._info_actor_map[actor] = face_mesh_info
+
+                        # Render original polygon edges if available
+                        # Edges are lazily extracted only when this code path is reached
+                        if has_mesh and mesh_obj.has_original_edges():
+                            original_edges = mesh_obj.get_original_edges()
+                            if original_edges is not None and original_edges.n_points > 0:
+                                self._backend.pv_interface.scene.add_mesh(
+                                    original_edges,
+                                    color="black",
+                                    line_width=1,
+                                    pickable=False,
+                                )
+                    else:
+                        # Original rendering approach without improved surface rendering
+                        # Use the original (non-triangulated) polydata if available
+                        if is_display_polydata:
+                            mesh_to_render = mesh_obj.get_original_polydata()
+                        else:
+                            mesh_to_render = mesh_obj
+                        actor = self._backend.pv_interface.scene.add_mesh(
+                            mesh_to_render, show_edges=has_mesh, color=colors, pickable=True
+                        )
+                        face_mesh_part.actor = actor
+                        self._backend.pv_interface._object_to_actors_map[actor] = face_mesh_part
+                        self._info_actor_map[actor] = face_mesh_info
 
             if "edges" in part_polydata.keys():
                 for edge_mesh_part in part_polydata["edges"]:
