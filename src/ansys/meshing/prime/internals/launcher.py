@@ -316,7 +316,12 @@ def launch_prime(
         )
         print('=== CONTAINER LAUNCHED SUCCESSFULLY ===.', flush=True)
         config.set_using_container(True)
-        client = Client(port=port, timeout=timeout, client_certs_dir=client_certs_dir)
+        client = Client(
+            port=port,
+            timeout=timeout,
+            client_certs_dir=client_certs_dir,
+            connection_type=config.ConnectionType.GRPC_INSECURE,
+        )
         print("Client created.", flush=True)
         client.container_name = container_name
         print('using server from docker : The container name ', container_name, flush=True)
