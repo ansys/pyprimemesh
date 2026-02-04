@@ -314,7 +314,6 @@ def launch_prime(
             version=version,
             connection_type=config.ConnectionType.GRPC_INSECURE,
         )
-        print('=== CONTAINER LAUNCHED SUCCESSFULLY ===.', flush=True)
         config.set_using_container(True)
         client = Client(
             port=port,

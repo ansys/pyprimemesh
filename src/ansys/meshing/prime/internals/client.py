@@ -114,7 +114,7 @@ class Client(object):
                                     transport_mode = "wnua"
                                 else:
                                     transport_mode = "uds"
-                    print("Before creating communicator.", flush=True)
+
                     self._comm = GRPCCommunicator(
                         ip=ip,
                         port=port,
@@ -124,7 +124,7 @@ class Client(object):
                         transport_mode=transport_mode,
                         uds_id=uds_id,
                     )
-                    print("After creating communicator.", flush=True)
+
                     setattr(self, 'port', port)
                 except ImportError as err:
                     logging.getLogger('PyPrimeMesh').error(
