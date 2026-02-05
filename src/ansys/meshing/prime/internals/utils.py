@@ -242,12 +242,12 @@ def launch_prime_github_container(
         raise ValueError('Licensing information to launch container not found')
     if version is None:
         version = os.environ.get('PYPRIMEMESH_IMAGE_TAG', 'latest')
-    print(f'PyPrimeMesh: using image {image_name}:{version}', flush=True)
+    logging.getLogger('PyPrimeMesh').info(f'PyPrimeMesh: using image {image_name}:{version}')
     # Prepare port mappings
     ports = {f'{port}/tcp': port}
     graphics_port = int(os.environ.get('PRIME_GRAPHICS_PORT', '0'))
     if graphics_port > 0:
-        print(f'PyPrimeMesh: using Prime graphics port {graphics_port}', flush=True)
+        logging.getLogger('PyPrimeMesh').info(f'PyPrimeMesh: using Prime graphics port {graphics_port}')
         ports[f'{graphics_port}/tcp'] = graphics_port
 
     # Prepare volumes
@@ -273,7 +273,7 @@ def launch_prime_github_container(
     # Create and start container using Docker Python library
     client = docker.from_env()
     full_image_name = f'{image_name}:{version}'
-    print("Running container with command:", ' '.join(command), flush=True)
+    logging.getLogger('PyPrimeMesh').info(f"Running container with command: {' '.join(command)}")
     container = client.containers.run(
         full_image_name,
         command=command,
@@ -294,7 +294,7 @@ def launch_prime_github_container(
     start_time = time.time()
     found_welcome = False
 
-    print(f"Waiting for Ansys Prime Server to start (timeout: {timeout}s)...")
+    logging.getLogger('PyPrimeMesh').info(f"Waiting for Ansys Prime Server to start (timeout: {timeout}s)...")
 
     while time.time() - start_time < timeout:
         # Reload container to get updated status
@@ -303,11 +303,9 @@ def launch_prime_github_container(
         # Check if container is still running
         if container.status != 'running':
             logs = container.logs().decode('utf-8')
-            print(f"\n{'='*80}")
-            print(f"Docker container '{name}' logs:")
-            print(f"{'='*80}")
-            print(logs)
-            print(f"{'='*80}\n")
+            logging.getLogger('PyPrimeMesh').error(f"Docker container '{name}' failed to start")
+            logging.getLogger('PyPrimeMesh').error("Container logs:")
+            logging.getLogger('PyPrimeMesh').error(logs)
             error_msg = (
                 f"Container '{name}' failed to start or exited immediately. Check logs above."
             )
@@ -319,18 +317,18 @@ def launch_prime_github_container(
         # Check for welcome message
         if welcome_message in logs:
             found_welcome = True
-            print(f"✓ Ansys Prime Server started successfully!")
+            logging.getLogger('PyPrimeMesh').info("✓ Ansys Prime Server started successfully!")
             break
 
         # Wait a bit before checking again
         time.sleep(2)
 
-    # Print container logs
-    print(f"\n{'='*80}")
-    print(f"Docker container '{name}' logs:")
-    print(f"{'='*80}")
-    print(logs)
-    print(f"{'='*80}\n")
+    # Log container information
+    if found_welcome:
+        logging.getLogger('PyPrimeMesh').debug(f"Docker container '{name}' started successfully")
+    else:
+        logging.getLogger('PyPrimeMesh').error(f"Docker container '{name}' logs:")
+        logging.getLogger('PyPrimeMesh').error(logs)
 
     # If we didn't find the welcome message, raise an error
     if not found_welcome:

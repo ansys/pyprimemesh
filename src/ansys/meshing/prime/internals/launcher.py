@@ -119,7 +119,7 @@ def launch_server_process(
     run_prime_script = f'runPrime.{script_ext}'
 
     exec_path = os.path.join(prime_root, run_prime_script)
-    print(f'Launching Ansys Prime Server from {prime_root}')
+    logging.getLogger('PyPrimeMesh').info(f'Launching Ansys Prime Server from {prime_root}')
     logging.getLogger('PyPrimeMesh').info('Using server from %s', prime_root)
     if not os.path.isfile(exec_path):
         raise FileNotFoundError(f'{run_prime_script} not found in {prime_root}')
@@ -274,7 +274,7 @@ def launch_prime(
     ConnectionError
         When there is an error in connecting to the gRPC server.
     """
-    print("Launching Ansys Prime Server method...", flush=True)
+    logging.getLogger('PyPrimeMesh').info("Launching Ansys Prime Server...")
     if config.has_pim():
         return launch_remote_prime(version=version, timeout=timeout)
 
@@ -304,9 +304,9 @@ def launch_prime(
             )
 
     launch_container = bool(int(os.environ.get('PYPRIMEMESH_LAUNCH_CONTAINER', '0')))
-    print(f'Launch container: {launch_container}', flush=True)
+    logging.getLogger('PyPrimeMesh').info(f'Launch container: {launch_container}')
     if launch_container:
-        print("Launching container...", flush=True)
+        logging.getLogger('PyPrimeMesh').info("Launching container...")
         container_name = utils.make_unique_container_name('ansys-prime-server')
         utils.launch_prime_github_container(
             port=port,
@@ -321,9 +321,9 @@ def launch_prime(
             client_certs_dir=client_certs_dir,
             connection_type=config.ConnectionType.GRPC_INSECURE,
         )
-        print("Client created.", flush=True)
+        logging.getLogger('PyPrimeMesh').info("Client created.")
         client.container_name = container_name
-        print('using server from docker : The container name ', container_name, flush=True)
+        logging.getLogger('PyPrimeMesh').info(f'Using server from docker: container name {container_name}')
         return client
 
     uds_id = None

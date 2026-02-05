@@ -21,6 +21,7 @@
 
 """Module for communications with the gRPC server."""
 __all__ = ['GRPCCommunicator']
+import logging
 import os
 from typing import Optional
 
@@ -154,10 +155,11 @@ class GRPCCommunicator(Communicator):
         self._channel = None
         self._stub = None
         self._models = []
+        self._logger = logging.getLogger("PyPrimeMesh")
 
         self._channel = kwargs.get('channel', None)
         if self._channel is None:
-            print("Creating cyber channel...", flush=True)
+            self._logger.debug("Creating cyber channel...")
             self._channel = cyberchannel.create_channel(
                 transport_mode=transport_mode,
                 host=ip,
@@ -166,7 +168,7 @@ class GRPCCommunicator(Communicator):
                 uds_id=uds_id,
                 certs_dir=client_certs_dir,
             )
-            print("Cyber channel created.", flush=True)
+            self._logger.debug("Cyber channel created.")
 
         if 'PYPRIMEMESH_DEVELOPER_MODE' not in os.environ:
             timeout = 60.0
@@ -182,39 +184,38 @@ class GRPCCommunicator(Communicator):
             socket_filename = f"pyprimemesh-{uds_id}.sock" if uds_id else "pyprimemesh.sock"
             socket_path = uds_folder / socket_filename
 
-            print(f"Health check: Verifying Unix socket at {socket_path}...", flush=True)
+            self._logger.debug(f"Health check: Verifying Unix socket at {socket_path}...")
             max_wait = 30.0  # Wait up to 30 seconds for socket to appear
             wait_interval = 0.5
             elapsed = 0.0
 
             while elapsed < max_wait:
                 if socket_path.exists():
-                    print(f"Health check: Socket file found at {socket_path}", flush=True)
+                    self._logger.debug(f"Health check: Socket file found at {socket_path}")
                     # Additional check: try to stat the socket to ensure it's accessible
                     try:
                         socket_path.stat()
-                        print("Health check: Socket is accessible", flush=True)
+                        self._logger.debug("Health check: Socket is accessible")
                     except Exception as e:
-                        print(f"Health check: Socket exists but not accessible: {e}", flush=True)
+                        self._logger.warning(f"Health check: Socket exists but not accessible: {e}")
                     break
                 time.sleep(wait_interval)
                 elapsed += wait_interval
             else:
-                print(
-                    f"Warning: Socket file not found at {socket_path} after {max_wait}s", flush=True
+                self._logger.warning(
+                    f"Socket file not found at {socket_path} after {max_wait}s"
                 )
-                print(f"Health check: Listing contents of {uds_folder}...", flush=True)
+                self._logger.debug(f"Health check: Listing contents of {uds_folder}...")
                 try:
                     if uds_folder.exists():
                         files = list(uds_folder.iterdir())
-                        print(
-                            f"Health check: Found {len(files)} files: {[f.name for f in files]}",
-                            flush=True,
+                        self._logger.debug(
+                            f"Health check: Found {len(files)} files: {[f.name for f in files]}"
                         )
                     else:
-                        print(f"Health check: Directory {uds_folder} does not exist", flush=True)
+                        self._logger.debug(f"Health check: Directory {uds_folder} does not exist")
                 except Exception as e:
-                    print(f"Health check: Error listing directory: {e}", flush=True)
+                    self._logger.debug(f"Health check: Error listing directory: {e}")
 
         # Try to connect with retry logic
         max_retries = 3
@@ -224,23 +225,21 @@ class GRPCCommunicator(Communicator):
         for attempt in range(max_retries):
             try:
                 if attempt > 0:
-                    print(
-                        f"Retry attempt {attempt + 1}/{max_retries} after {retry_delay}s delay...",
-                        flush=True,
+                    self._logger.info(
+                        f"Retry attempt {attempt + 1}/{max_retries} after {retry_delay}s delay..."
                     )
                     time.sleep(retry_delay)
                     retry_delay *= 2  # Exponential backoff
 
-                print("Waiting for channel to be ready...", flush=True)
+                self._logger.debug("Waiting for channel to be ready...")
                 grpc.channel_ready_future(self._channel).result(timeout=timeout)
-                print("Channel is ready.", flush=True)
+                self._logger.debug("Channel is ready.")
                 break  # Success, exit retry loop
             except grpc.FutureTimeoutError as err:
                 last_error = err
                 if attempt < max_retries - 1:
-                    print(
-                        f"Channel not ready, retrying... (attempt {attempt + 1}/{max_retries})",
-                        flush=True,
+                    self._logger.info(
+                        f"Channel not ready, retrying... (attempt {attempt + 1}/{max_retries})"
                     )
                 else:
                     raise ConnectionError(
@@ -258,7 +257,8 @@ class GRPCCommunicator(Communicator):
                 self._models = message['Results']
         except ConnectionError:
             raise
-        except:
+        except Exception as e:
+            self._logger.debug(f"Server initialization failed: {e}")
             pass
 
     @error_code_handler
