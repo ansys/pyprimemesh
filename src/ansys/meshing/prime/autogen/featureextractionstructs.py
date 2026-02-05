@@ -152,7 +152,7 @@ class ExtractFeatureParams(CoreObject):
                         number_of_threads if number_of_threads is not None else ( ExtractFeatureParams._default_params["number_of_threads"] if "number_of_threads" in ExtractFeatureParams._default_params else (json_data["numberOfThreads"] if "numberOfThreads" in json_data else None)))
         self._custom_params = kwargs
         if model is not None:
-            [ model._logger.warning(f'Unsupported argument : {key}') for key in kwargs ]
+            [ model._logger.debug(f'Unsupported argument : {key}') for key in kwargs ]
         [setattr(type(self), key, property(lambda self, key = key:  self._custom_params[key] if key in self._custom_params else None,
         lambda self, value, key = key : self._custom_params.update({ key: value }))) for key in kwargs]
         self._freeze()
@@ -376,7 +376,7 @@ class ExtractFeatureResults(CoreObject):
                         new_edge_zonelets if new_edge_zonelets is not None else ( ExtractFeatureResults._default_params["new_edge_zonelets"] if "new_edge_zonelets" in ExtractFeatureResults._default_params else (json_data["newEdgeZonelets"] if "newEdgeZonelets" in json_data else None)))
         self._custom_params = kwargs
         if model is not None:
-            [ model._logger.warning(f'Unsupported argument : {key}') for key in kwargs ]
+            [ model._logger.debug(f'Unsupported argument : {key}') for key in kwargs ]
         [setattr(type(self), key, property(lambda self, key = key:  self._custom_params[key] if key in self._custom_params else None,
         lambda self, value, key = key : self._custom_params.update({ key: value }))) for key in kwargs]
         self._freeze()
@@ -530,7 +530,7 @@ class ExtractedFeatureIds(CoreObject):
                         new_edge_zonelets if new_edge_zonelets is not None else ( ExtractedFeatureIds._default_params["new_edge_zonelets"] if "new_edge_zonelets" in ExtractedFeatureIds._default_params else (json_data["newEdgeZonelets"] if "newEdgeZonelets" in json_data else None)))
         self._custom_params = kwargs
         if model is not None:
-            [ model._logger.warning(f'Unsupported argument : {key}') for key in kwargs ]
+            [ model._logger.debug(f'Unsupported argument : {key}') for key in kwargs ]
         [setattr(type(self), key, property(lambda self, key = key:  self._custom_params[key] if key in self._custom_params else None,
         lambda self, value, key = key : self._custom_params.update({ key: value }))) for key in kwargs]
         self._freeze()
@@ -659,7 +659,7 @@ class CreateIntersectionEdgeLoopsParams(CoreObject):
                         label_name if label_name is not None else ( CreateIntersectionEdgeLoopsParams._default_params["label_name"] if "label_name" in CreateIntersectionEdgeLoopsParams._default_params else (json_data["labelName"] if "labelName" in json_data else None)))
         self._custom_params = kwargs
         if model is not None:
-            [ model._logger.warning(f'Unsupported argument : {key}') for key in kwargs ]
+            [ model._logger.debug(f'Unsupported argument : {key}') for key in kwargs ]
         [setattr(type(self), key, property(lambda self, key = key:  self._custom_params[key] if key in self._custom_params else None,
         lambda self, value, key = key : self._custom_params.update({ key: value }))) for key in kwargs]
         self._freeze()
@@ -793,7 +793,7 @@ class CreateIntersectionEdgeLoopsResults(CoreObject):
                         extracted_ids if extracted_ids is not None else ( CreateIntersectionEdgeLoopsResults._default_params["extracted_ids"] if "extracted_ids" in CreateIntersectionEdgeLoopsResults._default_params else [ExtractedFeatureIds(model = model, json_data = data) for data in (json_data["extractedIds"] if "extractedIds" in json_data else None)]))
         self._custom_params = kwargs
         if model is not None:
-            [ model._logger.warning(f'Unsupported argument : {key}') for key in kwargs ]
+            [ model._logger.debug(f'Unsupported argument : {key}') for key in kwargs ]
         [setattr(type(self), key, property(lambda self, key = key:  self._custom_params[key] if key in self._custom_params else None,
         lambda self, value, key = key : self._custom_params.update({ key: value }))) for key in kwargs]
         self._freeze()

@@ -58,7 +58,7 @@ class TetMeshSplineParams(CoreObject):
 
         **This is a beta parameter**. **The behavior and name may change in the future**.
     decimation_factor: float, optional
-        Decimation factor used in meshing of the solid spline.
+        Decimation factor used in meshing of the trimmed solid spline.
 
         **This is a beta parameter**. **The behavior and name may change in the future**.
     json_data: dict, optional
@@ -102,7 +102,7 @@ class TetMeshSplineParams(CoreObject):
 
             **This is a beta parameter**. **The behavior and name may change in the future**.
         decimation_factor: float, optional
-            Decimation factor used in meshing of the solid spline.
+            Decimation factor used in meshing of the trimmed solid spline.
 
             **This is a beta parameter**. **The behavior and name may change in the future**.
         json_data: dict, optional
@@ -136,7 +136,7 @@ class TetMeshSplineParams(CoreObject):
                         decimation_factor if decimation_factor is not None else ( TetMeshSplineParams._default_params["decimation_factor"] if "decimation_factor" in TetMeshSplineParams._default_params else (json_data["decimationFactor"] if "decimationFactor" in json_data else None)))
         self._custom_params = kwargs
         if model is not None:
-            [ model._logger.warning(f'Unsupported argument : {key}') for key in kwargs ]
+            [ model._logger.debug(f'Unsupported argument : {key}') for key in kwargs ]
         [setattr(type(self), key, property(lambda self, key = key:  self._custom_params[key] if key in self._custom_params else None,
         lambda self, value, key = key : self._custom_params.update({ key: value }))) for key in kwargs]
         self._freeze()
@@ -155,7 +155,7 @@ class TetMeshSplineParams(CoreObject):
         mode: TrimmedSolidSplineCutMode, optional
             Cut mode to specify rule for mesh cell selection in the volume mesh.
         decimation_factor: float, optional
-            Decimation factor used in meshing of the solid spline.
+            Decimation factor used in meshing of the trimmed solid spline.
         """
         args = locals()
         [TetMeshSplineParams._default_params.update({ key: value }) for key, value in args.items() if value is not None]
@@ -214,7 +214,7 @@ class TetMeshSplineParams(CoreObject):
 
     @property
     def decimation_factor(self) -> float:
-        """Decimation factor used in meshing of the solid spline.
+        """Decimation factor used in meshing of the trimmed solid spline.
 
         **This is a beta parameter**. **The behavior and name may change in the future**.
         """
@@ -332,7 +332,7 @@ class RefineTetMeshParams(CoreObject):
                         tolerance if tolerance is not None else ( RefineTetMeshParams._default_params["tolerance"] if "tolerance" in RefineTetMeshParams._default_params else (json_data["tolerance"] if "tolerance" in json_data else None)))
         self._custom_params = kwargs
         if model is not None:
-            [ model._logger.warning(f'Unsupported argument : {key}') for key in kwargs ]
+            [ model._logger.debug(f'Unsupported argument : {key}') for key in kwargs ]
         [setattr(type(self), key, property(lambda self, key = key:  self._custom_params[key] if key in self._custom_params else None,
         lambda self, value, key = key : self._custom_params.update({ key: value }))) for key in kwargs]
         self._freeze()
@@ -573,7 +573,7 @@ class UniformSolidSplineCreationParams(CoreObject):
                         degree_w if degree_w is not None else ( UniformSolidSplineCreationParams._default_params["degree_w"] if "degree_w" in UniformSolidSplineCreationParams._default_params else (json_data["degreeW"] if "degreeW" in json_data else None)))
         self._custom_params = kwargs
         if model is not None:
-            [ model._logger.warning(f'Unsupported argument : {key}') for key in kwargs ]
+            [ model._logger.debug(f'Unsupported argument : {key}') for key in kwargs ]
         [setattr(type(self), key, property(lambda self, key = key:  self._custom_params[key] if key in self._custom_params else None,
         lambda self, value, key = key : self._custom_params.update({ key: value }))) for key in kwargs]
         self._freeze()
@@ -778,7 +778,7 @@ class TrimmedSplineResults(CoreObject):
                         error_code if error_code is not None else ( TrimmedSplineResults._default_params["error_code"] if "error_code" in TrimmedSplineResults._default_params else ErrorCode(json_data["errorCode"] if "errorCode" in json_data else None)))
         self._custom_params = kwargs
         if model is not None:
-            [ model._logger.warning(f'Unsupported argument : {key}') for key in kwargs ]
+            [ model._logger.debug(f'Unsupported argument : {key}') for key in kwargs ]
         [setattr(type(self), key, property(lambda self, key = key:  self._custom_params[key] if key in self._custom_params else None,
         lambda self, value, key = key : self._custom_params.update({ key: value }))) for key in kwargs]
         self._freeze()

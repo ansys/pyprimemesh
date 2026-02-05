@@ -152,7 +152,7 @@ class MeshStackerResults(CoreObject):
                         size_control_ids if size_control_ids is not None else ( MeshStackerResults._default_params["size_control_ids"] if "size_control_ids" in MeshStackerResults._default_params else (json_data["sizeControlIds"] if "sizeControlIds" in json_data else None)))
         self._custom_params = kwargs
         if model is not None:
-            [ model._logger.warning(f'Unsupported argument : {key}') for key in kwargs ]
+            [ model._logger.debug(f'Unsupported argument : {key}') for key in kwargs ]
         [setattr(type(self), key, property(lambda self, key = key:  self._custom_params[key] if key in self._custom_params else None,
         lambda self, value, key = key : self._custom_params.update({ key: value }))) for key in kwargs]
         self._freeze()
@@ -430,7 +430,7 @@ class MeshStackerParams(CoreObject):
                         delete_base if delete_base is not None else ( MeshStackerParams._default_params["delete_base"] if "delete_base" in MeshStackerParams._default_params else (json_data["deleteBase"] if "deleteBase" in json_data else None)))
         self._custom_params = kwargs
         if model is not None:
-            [ model._logger.warning(f'Unsupported argument : {key}') for key in kwargs ]
+            [ model._logger.debug(f'Unsupported argument : {key}') for key in kwargs ]
         [setattr(type(self), key, property(lambda self, key = key:  self._custom_params[key] if key in self._custom_params else None,
         lambda self, value, key = key : self._custom_params.update({ key: value }))) for key in kwargs]
         self._freeze()

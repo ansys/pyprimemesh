@@ -216,6 +216,8 @@ class ErrorCode(enum.IntEnum):
     """Deleting mesh failed."""
     INCREMENTALVOLUMEMESHINGNOTSUPPORTED = 143
     """Incremental volume meshing is not supported."""
+    TOPOFACESPLITNOTSUPPORTED = 144
+    """ComputeTopoVolumes and ExtractTopoVolumes do not support topoface split."""
     OUTOFMEMORY = 200
     """Out of memory."""
     INTERRUPTED = 201
@@ -452,6 +454,10 @@ class ErrorCode(enum.IntEnum):
     """Failed to split and collapse face element(s)."""
     IMPROVESURFACEMESHQUALITYFAILED = 2102
     """Improve surface mesh quality failed."""
+    REMOVECUSPSFAILED = 2103
+    """Cusp removal failed."""
+    NOTSUPPORTEDFORREMOVECUSPS = 2104
+    """Parts with multiple volumes do not support Cusp removal."""
     IGA_NURBSOPFAILED = 2400
     """Spline operation failed."""
     IGA_INCORRECTCONTROLPOINTSIZEWRTDEGREE = 2401
@@ -490,8 +496,14 @@ class ErrorCode(enum.IntEnum):
     """Uniform trimmed spline creation failed."""
     IGA_QUADTOSPLINEBASISFAILED = 2421
     """Quad to spline operation failed."""
+    MULTIZONEMESHER_INVALIDPRISMPARAMETERS = 2599
+    """The prism parameters for MultiZone are invalid."""
+    MULTIZONEMESHER_GEOMETRYTRANSFERFAILED = 2600
+    """Geometry import of prime topology failed."""
     MULTIZONEMESHER_BLOCKINGFAILED = 2601
     """Creating MultiZone blocking failed."""
+    MULTIZONEMESHER_PRISMMESHINGFAILED = 2602
+    """Creating MultiZone boundary layers failed."""
     MULTIZONEMESHER_MESHINGFAILED = 2603
     """Generating MultiZone mesh failed."""
     MULTIZONEMESHER_MESHTRANSFERFAILED = 2604
@@ -704,7 +716,9 @@ class ErrorCode(enum.IntEnum):
     """VT operation failed.
 
     **This is a beta parameter**. **The behavior and name may change in the future**."""
-    NUMENMETHODNOTFOUND = 3801
+    JSONKEYNOTFOUND = 3801
+    """JSON key not found."""
+    NUMENMETHODNOTFOUND = 3901
     """Could not find numen method."""
     CELLSEPARATIONFAILED = 6000
     """Cell separation failed."""
@@ -951,7 +965,7 @@ class WarningCode(enum.IntEnum):
     NOCADGEOMETRYFOUND = 7500
     """CAD geometry not found for some or all topo entities. Skipped projection for those topo entities."""
     NOCADGEOMETRYPROJECTONFACETS = 7501
-    """CAD geometry not found for some or all topo entities. Projected on facets for those topo entites."""
+    """CAD geometry not found for some or all topo entities. Projected on facets for those topo entities."""
     DUPLICATEINPUT = 8001
     """Duplicate items in input."""
     UNPROCESSEDKEYWORDSINABAQUSFILE = 11001
@@ -1000,3 +1014,7 @@ class WarningCode(enum.IntEnum):
     """TopoEdges that got defeatured in the MultiZone mesh."""
     MULTIZONEMESHER_DEFEATUREDTOPOFACES = 110003
     """TopoFaces that got defeatured in the MultiZone mesh."""
+    MULTIZONEMESHER_DEFEATUREDPROTECTEDTOPOLOGY = 110004
+    """Protected toponodes or topoedges that got defeatured in the MultiZone mesh."""
+    REMOVECUSP_PARTWITHMULTIPLEVOLUMES = 130001
+    """Parts with multiple volumes do not support Cusp removal."""

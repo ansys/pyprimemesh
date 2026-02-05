@@ -112,7 +112,7 @@ class ThinVolumeMeshParams(CoreObject):
                         n_ignore_rings if n_ignore_rings is not None else ( ThinVolumeMeshParams._default_params["n_ignore_rings"] if "n_ignore_rings" in ThinVolumeMeshParams._default_params else (json_data["nIgnoreRings"] if "nIgnoreRings" in json_data else None)))
         self._custom_params = kwargs
         if model is not None:
-            [ model._logger.warning(f'Unsupported argument : {key}') for key in kwargs ]
+            [ model._logger.debug(f'Unsupported argument : {key}') for key in kwargs ]
         [setattr(type(self), key, property(lambda self, key = key:  self._custom_params[key] if key in self._custom_params else None,
         lambda self, value, key = key : self._custom_params.update({ key: value }))) for key in kwargs]
         self._freeze()

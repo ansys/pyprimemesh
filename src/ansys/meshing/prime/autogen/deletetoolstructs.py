@@ -122,7 +122,7 @@ class DeleteFringesAndOverlapsParams(CoreObject):
                         delete_overlaps if delete_overlaps is not None else ( DeleteFringesAndOverlapsParams._default_params["delete_overlaps"] if "delete_overlaps" in DeleteFringesAndOverlapsParams._default_params else (json_data["deleteOverlaps"] if "deleteOverlaps" in json_data else None)))
         self._custom_params = kwargs
         if model is not None:
-            [ model._logger.warning(f'Unsupported argument : {key}') for key in kwargs ]
+            [ model._logger.debug(f'Unsupported argument : {key}') for key in kwargs ]
         [setattr(type(self), key, property(lambda self, key = key:  self._custom_params[key] if key in self._custom_params else None,
         lambda self, value, key = key : self._custom_params.update({ key: value }))) for key in kwargs]
         self._freeze()
@@ -291,7 +291,7 @@ class DeleteFringesAndOverlapsResults(CoreObject):
                         n_deleted if n_deleted is not None else ( DeleteFringesAndOverlapsResults._default_params["n_deleted"] if "n_deleted" in DeleteFringesAndOverlapsResults._default_params else (json_data["nDeleted"] if "nDeleted" in json_data else None)))
         self._custom_params = kwargs
         if model is not None:
-            [ model._logger.warning(f'Unsupported argument : {key}') for key in kwargs ]
+            [ model._logger.debug(f'Unsupported argument : {key}') for key in kwargs ]
         [setattr(type(self), key, property(lambda self, key = key:  self._custom_params[key] if key in self._custom_params else None,
         lambda self, value, key = key : self._custom_params.update({ key: value }))) for key in kwargs]
         self._freeze()

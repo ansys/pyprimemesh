@@ -181,6 +181,34 @@ class VolumeControl(CoreObject):
         self._model._print_logs_after_command("get_params", VolumeControlParams(model = self._model, json_data = result))
         return VolumeControlParams(model = self._model, json_data = result)
 
+    def get_summary(self, params : VolumeControlSummaryParams) -> VolumeControlSummaryResults:
+        """ Gets the volume control summary along with the evaluated scope for the provided parameters.
+
+
+        Parameters
+        ----------
+        params : VolumeControlSummaryParams
+            Volume control summary parameters.
+
+        Returns
+        -------
+        VolumeControlSummaryResults
+            Return the VolumeControlSummaryResults.
+
+        Examples
+        --------
+        >>> results = volume_control.get_summary(prime.VolumeControlSummaryParams(model=model))
+
+        """
+        if not isinstance(params, VolumeControlSummaryParams):
+            raise TypeError("Invalid argument type passed for 'params'. Valid argument type is VolumeControlSummaryParams.")
+        args = {"params" : params._jsonify()}
+        command_name = "PrimeMesh::VolumeControl/GetSummary"
+        self._model._print_logs_before_command("get_summary", args)
+        result = self._comm.serve(self._model, command_name, self._object_id, args=args)
+        self._model._print_logs_after_command("get_summary", VolumeControlSummaryResults(model = self._model, json_data = result))
+        return VolumeControlSummaryResults(model = self._model, json_data = result)
+
     @property
     def id(self):
         """ Get the id of VolumeControl."""

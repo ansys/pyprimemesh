@@ -20,8 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
-"""Examples module for PyPrimeMesh.
-"""
+"""Examples module for PyPrimeMesh."""
 import os
 from enum import Enum
 from typing import Optional, Union

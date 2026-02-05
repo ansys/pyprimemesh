@@ -157,9 +157,9 @@ prime.Scaffolder(model, merged_part.id).split_topo_faces_by_mesh_region(
 )
 
 # This is a beta API. The behavior and implementation may change in future.
-result = model.topo_data.delete_mesh_on_topo_faces(
-    merged_part.get_topo_faces(), prime.DeleteMeshParams(model=model)
-)
+delete_mesh_params = prime.DeleteMeshParams(model=model)
+delete_mesh_params.delete_mesh_on_connected_topo_edges = True
+result = model.topo_data.delete_mesh_on_topo_faces(merged_part.get_topo_faces(), delete_mesh_params)
 
 scaffolder.merge_overlapping_topo_faces(merged_part.get_topo_faces(), params)
 

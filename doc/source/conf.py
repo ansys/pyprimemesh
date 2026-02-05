@@ -1,11 +1,15 @@
 """Sphinx documentation configuration file."""
+
 import glob
 import os
 import subprocess
 import sys
 from datetime import datetime
 
-# os.environ['PYVISTA_BUILDING_GALLERY'] = 'True'
+# Set PRIME_MODE if not already set (to avoid warnings during doc build)
+if "PRIME_MODE" not in os.environ:
+    os.environ["PRIME_MODE"] = "GRPC_INSECURE"
+
 os.environ["SPHINX_GALLERY_CONF_FORCE_FRESH"] = "0"
 
 import ansys.tools.visualization_interface as viz_interface
