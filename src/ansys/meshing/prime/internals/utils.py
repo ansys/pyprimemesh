@@ -275,7 +275,7 @@ def launch_prime_github_container(
         connection_type == config.ConnectionType.GRPC_INSECURE
         or os.environ.get('PRIME_MODE', '').upper() == "GRPC_INSECURE"
     ):
-        command.append('--secure=no')
+        docker_command.append('--secure=no')
     subprocess.run(docker_command + prime_arguments, stdout=subprocess.DEVNULL)
 
 
