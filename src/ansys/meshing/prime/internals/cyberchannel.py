@@ -235,7 +235,7 @@ def create_uds_channel(
     # Generate socket filename with optional ID
     socket_filename = f"{uds_service}-{uds_id}.sock" if uds_id else f"{uds_service}.sock"
     target = f"unix:{uds_folder / socket_filename}"
-    
+
     # Set default authority to "localhost" for UDS connection
     # This is needed to avoid issues with some gRPC implementations,
     # see https://github.com/grpc/grpc/issues/34305

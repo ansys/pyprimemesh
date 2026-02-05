@@ -323,7 +323,9 @@ def launch_prime(
         )
         logging.getLogger('PyPrimeMesh').info("Client created.")
         client.container_name = container_name
-        logging.getLogger('PyPrimeMesh').info(f'Using server from docker: container name {container_name}')
+        logging.getLogger('PyPrimeMesh').info(
+            f'Using server from docker: container name {container_name}'
+        )
         return client
 
     uds_id = None

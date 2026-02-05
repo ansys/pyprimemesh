@@ -202,9 +202,7 @@ class GRPCCommunicator(Communicator):
                 time.sleep(wait_interval)
                 elapsed += wait_interval
             else:
-                self._logger.warning(
-                    f"Socket file not found at {socket_path} after {max_wait}s"
-                )
+                self._logger.warning(f"Socket file not found at {socket_path} after {max_wait}s")
                 self._logger.debug(f"Health check: Listing contents of {uds_folder}...")
                 try:
                     if uds_folder.exists():

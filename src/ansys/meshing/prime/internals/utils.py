@@ -266,7 +266,7 @@ def launch_prime_github_container(
         '--port',
         f'{port}',
     ]
-	 # Set default connection type if not provided
+    # Set default connection type if not provided
     if connection_type is None:
         connection_type = config.ConnectionType.GRPC_SECURE
 
