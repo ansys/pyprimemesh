@@ -242,24 +242,31 @@ def launch_prime_github_container(
         raise ValueError('Licensing information to launch container not found')
     if version is None:
         version = os.environ.get('PYPRIMEMESH_IMAGE_TAG', 'latest')
-    logging.getLogger('PyPrimeMesh').info(f'PyPrimeMesh: using image {image_name}:{version}')
-    # Prepare port mappings
-    ports = {f'{port}/tcp': port}
+    docker_command = [
+        'docker',
+        'run',
+        '--shm-size=4g',
+        '-d',
+        '--rm',
+        '--name',
+        f'{name}',
+        '-p',
+        f'{port}:{port}',
+        '-v',
+        f'{mount_host}:{mount_image}',
+        '-e',
+        f'ANSYSLMD_LICENSE_FILE={license_file}',
+    ]
     graphics_port = int(os.environ.get('PRIME_GRAPHICS_PORT', '0'))
     if graphics_port > 0:
-        logging.getLogger('PyPrimeMesh').info(f'PyPrimeMesh: using Prime graphics port {graphics_port}')
-        ports[f'{graphics_port}/tcp'] = graphics_port
-
-    # Prepare volumes
-    volumes = {mount_host: {'bind': mount_image, 'mode': 'rw'}}
-
-    # Prepare environment variables
-    environment = {'ANSYSLMD_LICENSE_FILE': license_file}
-
-    # Prepare command arguments
-    command = ['--port', str(port)]
-
-    # Set default connection type if not provided
+        print(f'PyPrimeMesh: using Prime graphics port {graphics_port}')
+        docker_command += ['-p', f'{graphics_port}:{graphics_port}']
+    prime_arguments = [
+        f'{image_name}:{version}',
+        '--port',
+        f'{port}',
+    ]
+	 # Set default connection type if not provided
     if connection_type is None:
         connection_type = config.ConnectionType.GRPC_SECURE
 
@@ -269,75 +276,7 @@ def launch_prime_github_container(
         or os.environ.get('PRIME_MODE', '').upper() == "GRPC_INSECURE"
     ):
         command.append('--secure=no')
-
-    # Create and start container using Docker Python library
-    client = docker.from_env()
-    full_image_name = f'{image_name}:{version}'
-    logging.getLogger('PyPrimeMesh').info(f"Running container with command: {' '.join(command)}")
-    container = client.containers.run(
-        full_image_name,
-        command=command,
-        detach=True,
-        remove=True,
-        name=name,
-        ports=ports,
-        volumes=volumes,
-        environment=environment,
-    )
-
-    # Wait for container to start and verify it's still running
-    import time
-
-    # Check for welcome message with timeout
-    welcome_message = "Welcome to Ansys Prime Meshing"
-    timeout = 60  # 1 minute timeout
-    start_time = time.time()
-    found_welcome = False
-
-    logging.getLogger('PyPrimeMesh').info(f"Waiting for Ansys Prime Server to start (timeout: {timeout}s)...")
-
-    while time.time() - start_time < timeout:
-        # Reload container to get updated status
-        container.reload()
-
-        # Check if container is still running
-        if container.status != 'running':
-            logs = container.logs().decode('utf-8')
-            logging.getLogger('PyPrimeMesh').error(f"Docker container '{name}' failed to start")
-            logging.getLogger('PyPrimeMesh').error("Container logs:")
-            logging.getLogger('PyPrimeMesh').error(logs)
-            error_msg = (
-                f"Container '{name}' failed to start or exited immediately. Check logs above."
-            )
-            raise RuntimeError(error_msg)
-
-        # Get container logs
-        logs = container.logs().decode('utf-8')
-
-        # Check for welcome message
-        if welcome_message in logs:
-            found_welcome = True
-            logging.getLogger('PyPrimeMesh').info("✓ Ansys Prime Server started successfully!")
-            break
-
-        # Wait a bit before checking again
-        time.sleep(2)
-
-    # Log container information
-    if found_welcome:
-        logging.getLogger('PyPrimeMesh').debug(f"Docker container '{name}' started successfully")
-    else:
-        logging.getLogger('PyPrimeMesh').error(f"Docker container '{name}' logs:")
-        logging.getLogger('PyPrimeMesh').error(logs)
-
-    # If we didn't find the welcome message, raise an error
-    if not found_welcome:
-        error_msg = (
-            f"Timeout waiting for Ansys Prime Server to start. "
-            f"Expected to find '{welcome_message}' in logs within {timeout} seconds. "
-            f"Check logs above."
-        )
-        raise TimeoutError(error_msg)
+    subprocess.run(docker_command + prime_arguments, stdout=subprocess.DEVNULL)
 
 
 def stop_prime_github_container(name):

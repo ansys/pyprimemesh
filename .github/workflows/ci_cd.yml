@@ -137,16 +137,6 @@ jobs:
           python -m pip install --upgrade pip
           pip install .
 
-      - name: Run Lucid File I/O example
-        env:
-          PRIME_MODE: 'GRPC_INSECURE'
-          PYVISTA_BUILDING_GALLERY: 'True'
-          PYPRIMEMESH_SPHINX_BUILD: 1
-          PYPRIMEMESH_LAUNCH_CONTAINER: 1
-          PYPRIMEMESH_IMAGE_TAG: ${{ env.DOCKER_IMAGE_TAG }}
-          ANSYSLMD_LICENSE_FILE: '1055@${{ secrets.LICENSE_SERVER }}'
-        run: python examples/gallery/00_lucid_file_IO.py
-
       - name: "Run pytest"
         uses: ansys/actions/tests-pytest@v10
         env:
@@ -205,23 +195,20 @@ jobs:
           PYPRIMEMESH_IMAGE_TAG: ${{ env.DOCKER_IMAGE_TAG }}
           ANSYSLMD_LICENSE_FILE: '1055@${{ secrets.LICENSE_SERVER }}'
 
-  # Commented out because too many PRs open cause the gh-pages branch to be too large
-  # doc-deploy-pr:
-  #   name: "Deploy PR documentation"
-  #   runs-on: ubuntu-latest
-  #   needs: docs
-  #   # Run when the PR is closed i.e. when docs job is skipped
-  #   if: always() && (needs.docs.result == 'success' || needs.docs.result == 'skipped')
-  #   steps:
-  #     - uses: ansys/actions/doc-deploy-pr@v10
-  #       with:
-  #         cname: ${{ env.DOCUMENTATION_CNAME }}
-  #         token: ${{ secrets.GITHUB_TOKEN }}
-  #         bot-user: ${{ secrets.PYANSYS_CI_BOT_USERNAME }}
-  #         bot-email: ${{ secrets.PYANSYS_CI_BOT_EMAIL }}
-  #         maximum-pr-doc-deployments: 20
-
-
+  doc-deploy-pr:
+    name: "Deploy PR documentation"
+    runs-on: ubuntu-latest
+    needs: docs
+    # Run when the PR is closed i.e. when docs job is skipped
+    if: always() && (needs.docs.result == 'success' || needs.docs.result == 'skipped')
+    steps:
+      - uses: ansys/actions/doc-deploy-pr@v10
+        with:
+          cname: ${{ env.DOCUMENTATION_CNAME }}
+          token: ${{ secrets.GITHUB_TOKEN }}
+          bot-user: ${{ secrets.PYANSYS_CI_BOT_USERNAME }}
+          bot-email: ${{ secrets.PYANSYS_CI_BOT_EMAIL }}
+          maximum-pr-doc-deployments: 20
 
   package:
     name: Package library
