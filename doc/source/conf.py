@@ -14,12 +14,12 @@ os.environ["SPHINX_GALLERY_CONF_FORCE_FRESH"] = "0"
 
 import ansys.tools.visualization_interface as viz_interface
 import pyvista
+from ansys_sphinx_theme import ansys_favicon, get_version_match, pyansys_logo_black
 from joblib import Parallel, delayed
 from pyvista.plotting.utilities.sphinx_gallery import DynamicScraper
 from sphinx_gallery.sorting import FileNameSortKey
 
 from ansys.meshing.prime import __version__
-from ansys_sphinx_theme import ansys_favicon, get_version_match, pyansys_logo_black
 
 viz_interface.DOCUMENTATION_BUILD = True
 
@@ -68,6 +68,11 @@ html_theme_options = {
             "icon": "fa fa-comment fa-fw",
         },
     ],
+    "cheatsheet": {
+        "file": "cheatsheet/cheat_sheet.qmd",
+        "title": "PyPrimeMesh cheat sheet",
+        "version": __version__,
+    },
 }
 
 # Sphinx extensions
@@ -87,7 +92,7 @@ extensions = [
     "sphinx_autodoc_typehints",
     "sphinxemoji.sphinxemoji",
     "sphinx_design",
-    # "pyvista.ext.viewer_directive",
+    "pyvista.ext.viewer_directive",
     "sphinx_jinja",
 ]
 nbsphinx_execute = "always"
@@ -160,24 +165,6 @@ if not os.path.exists(pyvista.FIGURE_PATH):
     os.makedirs(pyvista.FIGURE_PATH)
 
 # Sphinx Gallery Options
-# Determine if running in CI/CD (Github Actions) or locally with containers
-# CI/CD can handle parallel execution better, local container may have resource conflicts
-is_ci_build = (
-    os.getenv("PYPRIMEMESH_SPHINX_BUILD", "0") == "1" and os.getenv("CI", "false") == "true"
-)
-is_local_container_build = os.getenv("PYPRIMEMESH_LAUNCH_CONTAINER", "0") == "1" and not is_ci_build
-gallery_parallel = 20 if is_ci_build else 1
-
-# Print build configuration for debugging
-print(f"Documentation build configuration:")
-print(f"  CI/CD Build: {is_ci_build}")
-print(f"  Local Container Build: {is_local_container_build}")
-print(f"  Sphinx-Gallery Parallel Jobs: {gallery_parallel}")
-print(f"  PYPRIMEMESH_SPHINX_BUILD: {os.getenv('PYPRIMEMESH_SPHINX_BUILD', 'not set')}")
-print(f"  CI: {os.getenv('CI', 'not set')}")
-print(f"  PYPRIMEMESH_LAUNCH_CONTAINER: {os.getenv('PYPRIMEMESH_LAUNCH_CONTAINER', 'not set')}")
-print("")
-
 sphinx_gallery_conf = {
     # convert rst to md for ipynb
     # "pypandoc": True,
@@ -200,15 +187,8 @@ sphinx_gallery_conf = {
     "exclude_implicit_doc": {"ansys\\.meshing\\.prime\\._.*"},  # ignore private submodules
     "image_scrapers": (DynamicScraper(), "matplotlib"),
     "thumbnail_size": (350, 350),
-    "parallel": gallery_parallel,
+    "parallel": True,
     "run_stale_examples": False,
-    # Code to execute before each example in parallel subprocesses
-    # This ensures PyVista knows it's building gallery documentation
-    "first_notebook_cell": (
-        "import os\n"
-        "os.environ['PYVISTA_BUILDING_GALLERY'] = 'true'\n"
-        "os.environ['PYVISTA_OFF_SCREEN'] = 'true'"
-    ),
 }
 
 
@@ -261,10 +241,7 @@ def setup(app):
     app : sphinx.application.Sphinx
         The Sphinx application object.
     """
-    # Commented out: Let sphinx-gallery handle example execution instead
-    # This manual execution runs in subprocesses that don't inherit pyvista.BUILDING_GALLERY
-    # app.connect("builder-inited", lambda app: run_all_examples_in_parallel())
-    pass
+    app.connect("builder-inited", lambda app: run_all_examples_in_parallel())
 
 
 # Suppress warnings

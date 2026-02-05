@@ -242,30 +242,21 @@ def launch_prime_github_container(
         raise ValueError('Licensing information to launch container not found')
     if version is None:
         version = os.environ.get('PYPRIMEMESH_IMAGE_TAG', 'latest')
-    docker_command = [
-        'docker',
-        'run',
-        '--shm-size=4g',
-        '-d',
-        '--rm',
-        '--name',
-        f'{name}',
-        '-p',
-        f'{port}:{port}',
-        '-v',
-        f'{mount_host}:{mount_image}',
-        '-e',
-        f'ANSYSLMD_LICENSE_FILE={license_file}',
-    ]
+    # Prepare port mappings
+    ports = {f'{port}/tcp': port}
     graphics_port = int(os.environ.get('PRIME_GRAPHICS_PORT', '0'))
     if graphics_port > 0:
-        print(f'PyPrimeMesh: using Prime graphics port {graphics_port}')
-        docker_command += ['-p', f'{graphics_port}:{graphics_port}']
-    prime_arguments = [
-        f'{image_name}:{version}',
-        '--port',
-        f'{port}',
-    ]
+        ports[f'{graphics_port}/tcp'] = graphics_port
+
+    # Prepare volumes
+    volumes = {mount_host: {'bind': mount_image, 'mode': 'rw'}}
+
+    # Prepare environment variables
+    environment = {'ANSYSLMD_LICENSE_FILE': license_file}
+
+    # Prepare command arguments
+    command = ['--port', str(port)]
+
     # Set default connection type if not provided
     if connection_type is None:
         connection_type = config.ConnectionType.GRPC_SECURE
@@ -275,8 +266,67 @@ def launch_prime_github_container(
         connection_type == config.ConnectionType.GRPC_INSECURE
         or os.environ.get('PRIME_MODE', '').upper() == "GRPC_INSECURE"
     ):
-        docker_command.append('--secure=no')
-    subprocess.run(docker_command + prime_arguments, stdout=subprocess.DEVNULL)
+        command.append('--secure=no')
+
+    # Create and start container using Docker Python library
+    client = docker.from_env()
+    full_image_name = f'{image_name}:{version}'
+    container = client.containers.run(
+        full_image_name,
+        command=command,
+        detach=True,
+        remove=True,
+        name=name,
+        ports=ports,
+        volumes=volumes,
+        environment=environment,
+    )
+
+    # Wait for container to start and verify it's still running
+    import time
+
+    # Check for welcome message with timeout
+    welcome_message = "Welcome to Ansys Prime Meshing"
+    timeout = 60  # 1 minute timeout
+    start_time = time.time()
+    found_welcome = False
+
+    while time.time() - start_time < timeout:
+        # Reload container to get updated status
+        container.reload()
+
+        # Check if container is still running
+        if container.status != 'running':
+            logs = container.logs().decode('utf-8')
+            print(f"\n{'='*80}")
+            print(f"Docker container '{name}' logs:")
+            print(f"{'='*80}")
+            print(logs)
+            print(f"{'='*80}\n")
+            error_msg = (
+                f"Container '{name}' failed to start or exited immediately. Check logs above."
+            )
+            raise RuntimeError(error_msg)
+
+        # Get container logs
+        logs = container.logs().decode('utf-8')
+
+        # Check for welcome message
+        if welcome_message in logs:
+            found_welcome = True
+            break
+
+        # Wait a bit before checking again
+        time.sleep(2)
+
+    # If we didn't find the welcome message, raise an error
+    if not found_welcome:
+        error_msg = (
+            f"Timeout waiting for Ansys Prime Server to start. "
+            f"Expected to find '{welcome_message}' in logs within {timeout} seconds. "
+            f"Check logs above."
+        )
+        raise TimeoutError(error_msg)
 
 
 def stop_prime_github_container(name):

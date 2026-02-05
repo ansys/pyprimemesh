@@ -69,11 +69,9 @@ import os
 import tempfile
 
 import ansys.meshing.prime as prime
+from ansys.meshing.prime.graphics.plotter import PrimePlotter
 
-# from ansys.meshing.prime.graphics.plotter import PrimePlotter
-print("Launching Ansys Prime Server...", flush=True)
 prime_client = prime.launch_prime()
-print("Ansys Prime Server launched.", flush=True)
 model = prime_client.model
 mesh_util = prime.lucid.Mesh(model=model)
 
@@ -120,9 +118,9 @@ mesh_util = prime.lucid.Mesh(model=model)
 mesh_util.read(file_name=prime.examples.download_block_model_fmd())
 # mesh_util.read(file_name=prime.examples.download_block_model_scdoc())
 print(model)
-# display = PrimePlotter()
-# display.plot(model)
-# display.show()
+display = PrimePlotter()
+display.plot(model)
+display.show()
 
 ###############################################################################
 # Generate Mesh
@@ -146,15 +144,15 @@ print(model)
 # as the default meshing algorithms.
 
 mesh_util.surface_mesh(min_size=2.0)
-# display = PrimePlotter()
-# display.plot(model, update=True)
-# display.show()
+display = PrimePlotter()
+display.plot(model, update=True)
+display.show()
 
 part = model.get_part_by_name("pyprime_block_import")
 
-# display = PrimePlotter()
-# display.plot(model, prime.ScopeDefinition(model, label_expression="my_group"))
-# display.show()
+display = PrimePlotter()
+display.plot(model, prime.ScopeDefinition(model, label_expression="my_group"))
+display.show()
 
 mesh_util.volume_mesh()
 
@@ -280,9 +278,9 @@ for zone in part.get_face_zones():
         evaluation_type=prime.ScopeEvaluationType.ZONES,
         zone_expression=model.get_zone_name(zone),
     )
-    # display = PrimePlotter()
-    # display.plot(model, scope, update=True)
-    # display.show()
+    display = PrimePlotter()
+    display.plot(model, scope, update=True)
+    display.show()
 
 ###############################################################################
 # Exit PyPrimeMesh
