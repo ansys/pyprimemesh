@@ -132,7 +132,6 @@ class PrimePlotter(Plotter):
             return color_matrix[mesh_info.part_id % num_colors].tolist()
         else:
             return color_matrix[mesh_info.zone_id % num_colors].tolist()
-    
 
     def add_model(
         self, model: Model, scope: prime.ScopeDefinition = None, update: bool = False
