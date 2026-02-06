@@ -26,14 +26,6 @@ prime.SurfaceUtilities(model).project_topo_faces_on_geometry(
     ),
 )
 
-model_pd = model.as_polydata()
-
-for part_id, part_polydata in model_pd.items():
-    if "faces" in part_polydata.keys():
-        for face_mesh_part, face_mesh_info in part_polydata["faces"]:
-            zone_name = face_mesh_info.zone_name
-            print(face_mesh_part.mesh)
-
 display = PrimePlotter()
 display.plot(model, update=True)
 display.show()
