@@ -220,7 +220,7 @@ class SurferParams(CoreObject):
                         enable_multi_threading if enable_multi_threading is not None else ( SurferParams._default_params["enable_multi_threading"] if "enable_multi_threading" in SurferParams._default_params else (json_data["enableMultiThreading"] if "enableMultiThreading" in json_data else None)))
         self._custom_params = kwargs
         if model is not None:
-            [ model._logger.warning(f'Unsupported argument : {key}') for key in kwargs ]
+            [ model._logger.debug(f'Unsupported argument : {key}') for key in kwargs ]
         [setattr(type(self), key, property(lambda self, key = key:  self._custom_params[key] if key in self._custom_params else None,
         lambda self, value, key = key : self._custom_params.update({ key: value }))) for key in kwargs]
         self._freeze()
@@ -529,7 +529,7 @@ class SurferResults(CoreObject):
                         topofaces_not_projected_on_geometry if topofaces_not_projected_on_geometry is not None else ( SurferResults._default_params["topofaces_not_projected_on_geometry"] if "topofaces_not_projected_on_geometry" in SurferResults._default_params else (json_data["topofacesNotProjectedOnGeometry"] if "topofacesNotProjectedOnGeometry" in json_data else None)))
         self._custom_params = kwargs
         if model is not None:
-            [ model._logger.warning(f'Unsupported argument : {key}') for key in kwargs ]
+            [ model._logger.debug(f'Unsupported argument : {key}') for key in kwargs ]
         [setattr(type(self), key, property(lambda self, key = key:  self._custom_params[key] if key in self._custom_params else None,
         lambda self, value, key = key : self._custom_params.update({ key: value }))) for key in kwargs]
         self._freeze()
@@ -738,7 +738,7 @@ class LocalSurferParams(CoreObject):
                         n_rings if n_rings is not None else ( LocalSurferParams._default_params["n_rings"] if "n_rings" in LocalSurferParams._default_params else (json_data["nRings"] if "nRings" in json_data else None)))
         self._custom_params = kwargs
         if model is not None:
-            [ model._logger.warning(f'Unsupported argument : {key}') for key in kwargs ]
+            [ model._logger.debug(f'Unsupported argument : {key}') for key in kwargs ]
         [setattr(type(self), key, property(lambda self, key = key:  self._custom_params[key] if key in self._custom_params else None,
         lambda self, value, key = key : self._custom_params.update({ key: value }))) for key in kwargs]
         self._freeze()
@@ -982,7 +982,7 @@ class LocalSurferResults(CoreObject):
                         warning_codes if warning_codes is not None else ( LocalSurferResults._default_params["warning_codes"] if "warning_codes" in LocalSurferResults._default_params else [WarningCode(data) for data in (json_data["warningCodes"] if "warningCodes" in json_data else None)]))
         self._custom_params = kwargs
         if model is not None:
-            [ model._logger.warning(f'Unsupported argument : {key}') for key in kwargs ]
+            [ model._logger.debug(f'Unsupported argument : {key}') for key in kwargs ]
         [setattr(type(self), key, property(lambda self, key = key:  self._custom_params[key] if key in self._custom_params else None,
         lambda self, value, key = key : self._custom_params.update({ key: value }))) for key in kwargs]
         self._freeze()
@@ -1129,7 +1129,7 @@ class CreateShellBLResults(CoreObject):
                         warning_codes if warning_codes is not None else ( CreateShellBLResults._default_params["warning_codes"] if "warning_codes" in CreateShellBLResults._default_params else [WarningCode(data) for data in (json_data["warningCodes"] if "warningCodes" in json_data else None)]))
         self._custom_params = kwargs
         if model is not None:
-            [ model._logger.warning(f'Unsupported argument : {key}') for key in kwargs ]
+            [ model._logger.debug(f'Unsupported argument : {key}') for key in kwargs ]
         [setattr(type(self), key, property(lambda self, key = key:  self._custom_params[key] if key in self._custom_params else None,
         lambda self, value, key = key : self._custom_params.update({ key: value }))) for key in kwargs]
         self._freeze()
@@ -1253,7 +1253,7 @@ class ShellBLParams(CoreObject):
                     self.__initialize()
         self._custom_params = kwargs
         if model is not None:
-            [ model._logger.warning(f'Unsupported argument : {key}') for key in kwargs ]
+            [ model._logger.debug(f'Unsupported argument : {key}') for key in kwargs ]
         [setattr(type(self), key, property(lambda self, key = key:  self._custom_params[key] if key in self._custom_params else None,
         lambda self, value, key = key : self._custom_params.update({ key: value }))) for key in kwargs]
         self._freeze()

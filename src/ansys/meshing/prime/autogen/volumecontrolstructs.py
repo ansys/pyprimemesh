@@ -102,7 +102,7 @@ class VolumeControlParams(CoreObject):
                         skip_hexcore if skip_hexcore is not None else ( VolumeControlParams._default_params["skip_hexcore"] if "skip_hexcore" in VolumeControlParams._default_params else (json_data["skipHexcore"] if "skipHexcore" in json_data else None)))
         self._custom_params = kwargs
         if model is not None:
-            [ model._logger.warning(f'Unsupported argument : {key}') for key in kwargs ]
+            [ model._logger.debug(f'Unsupported argument : {key}') for key in kwargs ]
         [setattr(type(self), key, property(lambda self, key = key:  self._custom_params[key] if key in self._custom_params else None,
         lambda self, value, key = key : self._custom_params.update({ key: value }))) for key in kwargs]
         self._freeze()
@@ -168,3 +168,207 @@ class VolumeControlParams(CoreObject):
     @skip_hexcore.setter
     def skip_hexcore(self, value: bool):
         self._skip_hexcore = value
+
+class VolumeControlSummaryParams(CoreObject):
+    """Volume control summary parameters.
+
+    Parameters
+    ----------
+    model: Model
+        Model to create a ``VolumeControlSummaryParams`` object with default parameters.
+    json_data: dict, optional
+        JSON dictionary to create a ``VolumeControlSummaryParams`` object with provided parameters.
+
+    Examples
+    --------
+    >>> volume_control_summary_params = prime.VolumeControlSummaryParams(model = model)
+    """
+    _default_params = {}
+
+    def __initialize(
+            self):
+        pass
+
+    def __init__(
+            self,
+            model: CommunicationManager=None,
+            json_data : dict = None,
+             **kwargs):
+        """Initialize a ``VolumeControlSummaryParams`` object.
+
+        Parameters
+        ----------
+        model: Model
+            Model to create a ``VolumeControlSummaryParams`` object with default parameters.
+        json_data: dict, optional
+            JSON dictionary to create a ``VolumeControlSummaryParams`` object with provided parameters.
+
+        Examples
+        --------
+        >>> volume_control_summary_params = prime.VolumeControlSummaryParams(model = model)
+        """
+        if json_data:
+            self.__initialize()
+        else:
+            all_field_specified = all(arg is not None for arg in [])
+            if all_field_specified:
+                self.__initialize()
+            else:
+                if model is None:
+                    raise ValueError("Invalid assignment. Either pass a model or specify all properties.")
+                else:
+                    param_json = model._communicator.initialize_params(model, "VolumeControlSummaryParams")
+                    json_data = param_json["VolumeControlSummaryParams"] if "VolumeControlSummaryParams" in param_json else {}
+                    self.__initialize()
+        self._custom_params = kwargs
+        if model is not None:
+            [ model._logger.debug(f'Unsupported argument : {key}') for key in kwargs ]
+        [setattr(type(self), key, property(lambda self, key = key:  self._custom_params[key] if key in self._custom_params else None,
+        lambda self, value, key = key : self._custom_params.update({ key: value }))) for key in kwargs]
+        self._freeze()
+
+    @staticmethod
+    def set_default():
+        """Set the default values of the ``VolumeControlSummaryParams`` object.
+
+        """
+        args = locals()
+        [VolumeControlSummaryParams._default_params.update({ key: value }) for key, value in args.items() if value is not None]
+
+    @staticmethod
+    def print_default():
+        """Print the default values of ``VolumeControlSummaryParams`` object.
+
+        Examples
+        --------
+        >>> VolumeControlSummaryParams.print_default()
+        """
+        message = ""
+        message += ''.join(str(key) + ' : ' + str(value) + '\n' for key, value in VolumeControlSummaryParams._default_params.items())
+        print(message)
+
+    def _jsonify(self) -> Dict[str, Any]:
+        json_data = {}
+        [ json_data.update({ utils.to_camel_case(key) : value }) for key, value in self._custom_params.items()]
+        return json_data
+
+    def __str__(self) -> str:
+        message = "" % ()
+        message += ''.join('\n' + str(key) + ' : ' + str(value) for key, value in self._custom_params.items())
+        if len(message) == 0:
+            message = 'The object has no parameters to print.'
+        return message
+
+class VolumeControlSummaryResults(CoreObject):
+    """Volume control summary parameters.
+
+    Parameters
+    ----------
+    model: Model
+        Model to create a ``VolumeControlSummaryResults`` object with default parameters.
+    summary: str, optional
+        Summary of control, including parameters and scope.
+    json_data: dict, optional
+        JSON dictionary to create a ``VolumeControlSummaryResults`` object with provided parameters.
+
+    Examples
+    --------
+    >>> volume_control_summary_results = prime.VolumeControlSummaryResults(model = model)
+    """
+    _default_params = {}
+
+    def __initialize(
+            self,
+            summary: str):
+        self._summary = summary
+
+    def __init__(
+            self,
+            model: CommunicationManager=None,
+            summary: str = None,
+            json_data : dict = None,
+             **kwargs):
+        """Initialize a ``VolumeControlSummaryResults`` object.
+
+        Parameters
+        ----------
+        model: Model
+            Model to create a ``VolumeControlSummaryResults`` object with default parameters.
+        summary: str, optional
+            Summary of control, including parameters and scope.
+        json_data: dict, optional
+            JSON dictionary to create a ``VolumeControlSummaryResults`` object with provided parameters.
+
+        Examples
+        --------
+        >>> volume_control_summary_results = prime.VolumeControlSummaryResults(model = model)
+        """
+        if json_data:
+            self.__initialize(
+                json_data["summary"] if "summary" in json_data else None)
+        else:
+            all_field_specified = all(arg is not None for arg in [summary])
+            if all_field_specified:
+                self.__initialize(
+                    summary)
+            else:
+                if model is None:
+                    raise ValueError("Invalid assignment. Either pass a model or specify all properties.")
+                else:
+                    param_json = model._communicator.initialize_params(model, "VolumeControlSummaryResults")
+                    json_data = param_json["VolumeControlSummaryResults"] if "VolumeControlSummaryResults" in param_json else {}
+                    self.__initialize(
+                        summary if summary is not None else ( VolumeControlSummaryResults._default_params["summary"] if "summary" in VolumeControlSummaryResults._default_params else (json_data["summary"] if "summary" in json_data else None)))
+        self._custom_params = kwargs
+        if model is not None:
+            [ model._logger.debug(f'Unsupported argument : {key}') for key in kwargs ]
+        [setattr(type(self), key, property(lambda self, key = key:  self._custom_params[key] if key in self._custom_params else None,
+        lambda self, value, key = key : self._custom_params.update({ key: value }))) for key in kwargs]
+        self._freeze()
+
+    @staticmethod
+    def set_default(
+            summary: str = None):
+        """Set the default values of the ``VolumeControlSummaryResults`` object.
+
+        Parameters
+        ----------
+        summary: str, optional
+            Summary of control, including parameters and scope.
+        """
+        args = locals()
+        [VolumeControlSummaryResults._default_params.update({ key: value }) for key, value in args.items() if value is not None]
+
+    @staticmethod
+    def print_default():
+        """Print the default values of ``VolumeControlSummaryResults`` object.
+
+        Examples
+        --------
+        >>> VolumeControlSummaryResults.print_default()
+        """
+        message = ""
+        message += ''.join(str(key) + ' : ' + str(value) + '\n' for key, value in VolumeControlSummaryResults._default_params.items())
+        print(message)
+
+    def _jsonify(self) -> Dict[str, Any]:
+        json_data = {}
+        if self._summary is not None:
+            json_data["summary"] = self._summary
+        [ json_data.update({ utils.to_camel_case(key) : value }) for key, value in self._custom_params.items()]
+        return json_data
+
+    def __str__(self) -> str:
+        message = "summary :  %s" % (self._summary)
+        message += ''.join('\n' + str(key) + ' : ' + str(value) for key, value in self._custom_params.items())
+        return message
+
+    @property
+    def summary(self) -> str:
+        """Summary of control, including parameters and scope.
+        """
+        return self._summary
+
+    @summary.setter
+    def summary(self, value: str):
+        self._summary = value

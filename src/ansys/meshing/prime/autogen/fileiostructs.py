@@ -64,7 +64,7 @@ class LengthUnit(enum.IntEnum):
     CM = 1
     """Denotes length unit is centimeters."""
     MM = 2
-    """Denotes length unit is milimeters."""
+    """Denotes length unit is millimeters."""
     UM = 3
     """Denotes length unit is micrometers."""
     NM = 4
@@ -230,7 +230,7 @@ class FileReadParams(CoreObject):
                         append if append is not None else ( FileReadParams._default_params["append"] if "append" in FileReadParams._default_params else (json_data["append"] if "append" in json_data else None)))
         self._custom_params = kwargs
         if model is not None:
-            [ model._logger.warning(f'Unsupported argument : {key}') for key in kwargs ]
+            [ model._logger.debug(f'Unsupported argument : {key}') for key in kwargs ]
         [setattr(type(self), key, property(lambda self, key = key:  self._custom_params[key] if key in self._custom_params else None,
         lambda self, value, key = key : self._custom_params.update({ key: value }))) for key in kwargs]
         self._freeze()
@@ -354,7 +354,7 @@ class SizeFieldFileReadResults(CoreObject):
                         size_field_ids if size_field_ids is not None else ( SizeFieldFileReadResults._default_params["size_field_ids"] if "size_field_ids" in SizeFieldFileReadResults._default_params else (json_data["sizeFieldIds"] if "sizeFieldIds" in json_data else None)))
         self._custom_params = kwargs
         if model is not None:
-            [ model._logger.warning(f'Unsupported argument : {key}') for key in kwargs ]
+            [ model._logger.debug(f'Unsupported argument : {key}') for key in kwargs ]
         [setattr(type(self), key, property(lambda self, key = key:  self._custom_params[key] if key in self._custom_params else None,
         lambda self, value, key = key : self._custom_params.update({ key: value }))) for key in kwargs]
         self._freeze()
@@ -483,7 +483,7 @@ class FileReadResults(CoreObject):
                         error_code if error_code is not None else ( FileReadResults._default_params["error_code"] if "error_code" in FileReadResults._default_params else ErrorCode(json_data["errorCode"] if "errorCode" in json_data else None)))
         self._custom_params = kwargs
         if model is not None:
-            [ model._logger.warning(f'Unsupported argument : {key}') for key in kwargs ]
+            [ model._logger.debug(f'Unsupported argument : {key}') for key in kwargs ]
         [setattr(type(self), key, property(lambda self, key = key:  self._custom_params[key] if key in self._custom_params else None,
         lambda self, value, key = key : self._custom_params.update({ key: value }))) for key in kwargs]
         self._freeze()
@@ -588,7 +588,7 @@ class FileWriteParams(CoreObject):
                     self.__initialize()
         self._custom_params = kwargs
         if model is not None:
-            [ model._logger.warning(f'Unsupported argument : {key}') for key in kwargs ]
+            [ model._logger.debug(f'Unsupported argument : {key}') for key in kwargs ]
         [setattr(type(self), key, property(lambda self, key = key:  self._custom_params[key] if key in self._custom_params else None,
         lambda self, value, key = key : self._custom_params.update({ key: value }))) for key in kwargs]
         self._freeze()
@@ -697,7 +697,7 @@ class FileWriteResults(CoreObject):
                         warning_codes if warning_codes is not None else ( FileWriteResults._default_params["warning_codes"] if "warning_codes" in FileWriteResults._default_params else [WarningCode(data) for data in (json_data["warningCodes"] if "warningCodes" in json_data else None)]))
         self._custom_params = kwargs
         if model is not None:
-            [ model._logger.warning(f'Unsupported argument : {key}') for key in kwargs ]
+            [ model._logger.debug(f'Unsupported argument : {key}') for key in kwargs ]
         [setattr(type(self), key, property(lambda self, key = key:  self._custom_params[key] if key in self._custom_params else None,
         lambda self, value, key = key : self._custom_params.update({ key: value }))) for key in kwargs]
         self._freeze()
@@ -826,7 +826,7 @@ class ReadSizeFieldParams(CoreObject):
                         append if append is not None else ( ReadSizeFieldParams._default_params["append"] if "append" in ReadSizeFieldParams._default_params else (json_data["append"] if "append" in json_data else None)))
         self._custom_params = kwargs
         if model is not None:
-            [ model._logger.warning(f'Unsupported argument : {key}') for key in kwargs ]
+            [ model._logger.debug(f'Unsupported argument : {key}') for key in kwargs ]
         [setattr(type(self), key, property(lambda self, key = key:  self._custom_params[key] if key in self._custom_params else None,
         lambda self, value, key = key : self._custom_params.update({ key: value }))) for key in kwargs]
         self._freeze()
@@ -940,7 +940,7 @@ class WriteSizeFieldParams(CoreObject):
                         write_only_active_size_fields if write_only_active_size_fields is not None else ( WriteSizeFieldParams._default_params["write_only_active_size_fields"] if "write_only_active_size_fields" in WriteSizeFieldParams._default_params else (json_data["writeOnlyActiveSizeFields"] if "writeOnlyActiveSizeFields" in json_data else None)))
         self._custom_params = kwargs
         if model is not None:
-            [ model._logger.warning(f'Unsupported argument : {key}') for key in kwargs ]
+            [ model._logger.debug(f'Unsupported argument : {key}') for key in kwargs ]
         [setattr(type(self), key, property(lambda self, key = key:  self._custom_params[key] if key in self._custom_params else None,
         lambda self, value, key = key : self._custom_params.update({ key: value }))) for key in kwargs]
         self._freeze()
@@ -1054,7 +1054,7 @@ class ExportFluentCaseParams(CoreObject):
                         cff_format if cff_format is not None else ( ExportFluentCaseParams._default_params["cff_format"] if "cff_format" in ExportFluentCaseParams._default_params else (json_data["cffFormat"] if "cffFormat" in json_data else None)))
         self._custom_params = kwargs
         if model is not None:
-            [ model._logger.warning(f'Unsupported argument : {key}') for key in kwargs ]
+            [ model._logger.debug(f'Unsupported argument : {key}') for key in kwargs ]
         [setattr(type(self), key, property(lambda self, key = key:  self._custom_params[key] if key in self._custom_params else None,
         lambda self, value, key = key : self._custom_params.update({ key: value }))) for key in kwargs]
         self._freeze()
@@ -1172,7 +1172,7 @@ class ExportFluentMeshingMeshParams(CoreObject):
                         cff_format if cff_format is not None else ( ExportFluentMeshingMeshParams._default_params["cff_format"] if "cff_format" in ExportFluentMeshingMeshParams._default_params else (json_data["cffFormat"] if "cffFormat" in json_data else None)))
         self._custom_params = kwargs
         if model is not None:
-            [ model._logger.warning(f'Unsupported argument : {key}') for key in kwargs ]
+            [ model._logger.debug(f'Unsupported argument : {key}') for key in kwargs ]
         [setattr(type(self), key, property(lambda self, key = key:  self._custom_params[key] if key in self._custom_params else None,
         lambda self, value, key = key : self._custom_params.update({ key: value }))) for key in kwargs]
         self._freeze()
@@ -1288,7 +1288,7 @@ class ExportSTLParams(CoreObject):
                         part_ids if part_ids is not None else ( ExportSTLParams._default_params["part_ids"] if "part_ids" in ExportSTLParams._default_params else (json_data["partIds"] if "partIds" in json_data else None)))
         self._custom_params = kwargs
         if model is not None:
-            [ model._logger.warning(f'Unsupported argument : {key}') for key in kwargs ]
+            [ model._logger.debug(f'Unsupported argument : {key}') for key in kwargs ]
         [setattr(type(self), key, property(lambda self, key = key:  self._custom_params[key] if key in self._custom_params else None,
         lambda self, value, key = key : self._custom_params.update({ key: value }))) for key in kwargs]
         self._freeze()
@@ -1452,7 +1452,7 @@ class CadRefacetingParams(CoreObject):
                         max_edge_size if max_edge_size is not None else ( CadRefacetingParams._default_params["max_edge_size"] if "max_edge_size" in CadRefacetingParams._default_params else (json_data["maxEdgeSize"] if "maxEdgeSize" in json_data else None)))
         self._custom_params = kwargs
         if model is not None:
-            [ model._logger.warning(f'Unsupported argument : {key}') for key in kwargs ]
+            [ model._logger.debug(f'Unsupported argument : {key}') for key in kwargs ]
         [setattr(type(self), key, property(lambda self, key = key:  self._custom_params[key] if key in self._custom_params else None,
         lambda self, value, key = key : self._custom_params.update({ key: value }))) for key in kwargs]
         self._freeze()
@@ -1589,7 +1589,7 @@ class ImportCadParams(CoreObject):
     append: bool, optional
         Append imported CAD into existing model when true.
     ansys_release: str, optional
-        Configures the Ansys release to be used for loading CAD data through non Native route. Supported formats for specifying Ansys release version are '25.2', '252', 'v252', '25R2'.
+        Configures the Ansys release to be used for loading CAD data through non Native route. Supported formats for specifying Ansys release version are '26.1', '261', 'v261', '26R1'.
     cad_reader_route: CadReaderRoute, optional
         Specify the available CAD reader routes. The available CAD reader routes are ProgramControlled, Native, WorkBench, SpaceClaim.
     part_creation_type: PartCreationType, optional
@@ -1667,7 +1667,7 @@ class ImportCadParams(CoreObject):
         append: bool, optional
             Append imported CAD into existing model when true.
         ansys_release: str, optional
-            Configures the Ansys release to be used for loading CAD data through non Native route. Supported formats for specifying Ansys release version are '25.2', '252', 'v252', '25R2'.
+            Configures the Ansys release to be used for loading CAD data through non Native route. Supported formats for specifying Ansys release version are '26.1', '261', 'v261', '26R1'.
         cad_reader_route: CadReaderRoute, optional
             Specify the available CAD reader routes. The available CAD reader routes are ProgramControlled, Native, WorkBench, SpaceClaim.
         part_creation_type: PartCreationType, optional
@@ -1741,7 +1741,7 @@ class ImportCadParams(CoreObject):
                         validate_shared_topology if validate_shared_topology is not None else ( ImportCadParams._default_params["validate_shared_topology"] if "validate_shared_topology" in ImportCadParams._default_params else (json_data["validateSharedTopology"] if "validateSharedTopology" in json_data else None)))
         self._custom_params = kwargs
         if model is not None:
-            [ model._logger.warning(f'Unsupported argument : {key}') for key in kwargs ]
+            [ model._logger.debug(f'Unsupported argument : {key}') for key in kwargs ]
         [setattr(type(self), key, property(lambda self, key = key:  self._custom_params[key] if key in self._custom_params else None,
         lambda self, value, key = key : self._custom_params.update({ key: value }))) for key in kwargs]
         self._freeze()
@@ -1766,7 +1766,7 @@ class ImportCadParams(CoreObject):
         append: bool, optional
             Append imported CAD into existing model when true.
         ansys_release: str, optional
-            Configures the Ansys release to be used for loading CAD data through non Native route. Supported formats for specifying Ansys release version are '25.2', '252', 'v252', '25R2'.
+            Configures the Ansys release to be used for loading CAD data through non Native route. Supported formats for specifying Ansys release version are '26.1', '261', 'v261', '26R1'.
         cad_reader_route: CadReaderRoute, optional
             Specify the available CAD reader routes. The available CAD reader routes are ProgramControlled, Native, WorkBench, SpaceClaim.
         part_creation_type: PartCreationType, optional
@@ -1845,7 +1845,7 @@ class ImportCadParams(CoreObject):
 
     @property
     def ansys_release(self) -> str:
-        """Configures the Ansys release to be used for loading CAD data through non Native route. Supported formats for specifying Ansys release version are '25.2', '252', 'v252', '25R2'.
+        """Configures the Ansys release to be used for loading CAD data through non Native route. Supported formats for specifying Ansys release version are '26.1', '261', 'v261', '26R1'.
         """
         return self._ansys_release
 
@@ -2015,7 +2015,7 @@ class ImportCadResults(CoreObject):
                         cad_parameters if cad_parameters is not None else ( ImportCadResults._default_params["cad_parameters"] if "cad_parameters" in ImportCadResults._default_params else (json_data["cadParameters"] if "cadParameters" in json_data else None)))
         self._custom_params = kwargs
         if model is not None:
-            [ model._logger.warning(f'Unsupported argument : {key}') for key in kwargs ]
+            [ model._logger.debug(f'Unsupported argument : {key}') for key in kwargs ]
         [setattr(type(self), key, property(lambda self, key = key:  self._custom_params[key] if key in self._custom_params else None,
         lambda self, value, key = key : self._custom_params.update({ key: value }))) for key in kwargs]
         self._freeze()
@@ -2154,7 +2154,7 @@ class ImportFluentMeshingMeshParams(CoreObject):
                         enable_multi_threading if enable_multi_threading is not None else ( ImportFluentMeshingMeshParams._default_params["enable_multi_threading"] if "enable_multi_threading" in ImportFluentMeshingMeshParams._default_params else (json_data["enableMultiThreading"] if "enableMultiThreading" in json_data else None)))
         self._custom_params = kwargs
         if model is not None:
-            [ model._logger.warning(f'Unsupported argument : {key}') for key in kwargs ]
+            [ model._logger.debug(f'Unsupported argument : {key}') for key in kwargs ]
         [setattr(type(self), key, property(lambda self, key = key:  self._custom_params[key] if key in self._custom_params else None,
         lambda self, value, key = key : self._custom_params.update({ key: value }))) for key in kwargs]
         self._freeze()
@@ -2293,7 +2293,7 @@ class ImportFluentMeshingMeshResults(CoreObject):
                         new_parts_created if new_parts_created is not None else ( ImportFluentMeshingMeshResults._default_params["new_parts_created"] if "new_parts_created" in ImportFluentMeshingMeshResults._default_params else (json_data["newPartsCreated"] if "newPartsCreated" in json_data else None)))
         self._custom_params = kwargs
         if model is not None:
-            [ model._logger.warning(f'Unsupported argument : {key}') for key in kwargs ]
+            [ model._logger.debug(f'Unsupported argument : {key}') for key in kwargs ]
         [setattr(type(self), key, property(lambda self, key = key:  self._custom_params[key] if key in self._custom_params else None,
         lambda self, value, key = key : self._custom_params.update({ key: value }))) for key in kwargs]
         self._freeze()
@@ -2422,7 +2422,7 @@ class ImportFluentCaseParams(CoreObject):
                         append if append is not None else ( ImportFluentCaseParams._default_params["append"] if "append" in ImportFluentCaseParams._default_params else (json_data["append"] if "append" in json_data else None)))
         self._custom_params = kwargs
         if model is not None:
-            [ model._logger.warning(f'Unsupported argument : {key}') for key in kwargs ]
+            [ model._logger.debug(f'Unsupported argument : {key}') for key in kwargs ]
         [setattr(type(self), key, property(lambda self, key = key:  self._custom_params[key] if key in self._custom_params else None,
         lambda self, value, key = key : self._custom_params.update({ key: value }))) for key in kwargs]
         self._freeze()
@@ -2536,7 +2536,7 @@ class ImportFluentCaseResults(CoreObject):
                         error_code if error_code is not None else ( ImportFluentCaseResults._default_params["error_code"] if "error_code" in ImportFluentCaseResults._default_params else ErrorCode(json_data["errorCode"] if "errorCode" in json_data else None)))
         self._custom_params = kwargs
         if model is not None:
-            [ model._logger.warning(f'Unsupported argument : {key}') for key in kwargs ]
+            [ model._logger.debug(f'Unsupported argument : {key}') for key in kwargs ]
         [setattr(type(self), key, property(lambda self, key = key:  self._custom_params[key] if key in self._custom_params else None,
         lambda self, value, key = key : self._custom_params.update({ key: value }))) for key in kwargs]
         self._freeze()
@@ -2685,7 +2685,7 @@ class ZoneMeshResult(CoreObject):
                         centroids if centroids is not None else ( ZoneMeshResult._default_params["centroids"] if "centroids" in ZoneMeshResult._default_params else (json_data["centroids"] if "centroids" in json_data else None)))
         self._custom_params = kwargs
         if model is not None:
-            [ model._logger.warning(f'Unsupported argument : {key}') for key in kwargs ]
+            [ model._logger.debug(f'Unsupported argument : {key}') for key in kwargs ]
         [setattr(type(self), key, property(lambda self, key = key:  self._custom_params[key] if key in self._custom_params else None,
         lambda self, value, key = key : self._custom_params.update({ key: value }))) for key in kwargs]
         self._freeze()
@@ -2845,7 +2845,7 @@ class ImportMapdlCdbParams(CoreObject):
                         append if append is not None else ( ImportMapdlCdbParams._default_params["append"] if "append" in ImportMapdlCdbParams._default_params else (json_data["append"] if "append" in json_data else None)))
         self._custom_params = kwargs
         if model is not None:
-            [ model._logger.warning(f'Unsupported argument : {key}') for key in kwargs ]
+            [ model._logger.debug(f'Unsupported argument : {key}') for key in kwargs ]
         [setattr(type(self), key, property(lambda self, key = key:  self._custom_params[key] if key in self._custom_params else None,
         lambda self, value, key = key : self._custom_params.update({ key: value }))) for key in kwargs]
         self._freeze()
@@ -2988,7 +2988,7 @@ class ImportMapdlCdbResults(CoreObject):
                         warning_codes if warning_codes is not None else ( ImportMapdlCdbResults._default_params["warning_codes"] if "warning_codes" in ImportMapdlCdbResults._default_params else [WarningCode(data) for data in (json_data["warningCodes"] if "warningCodes" in json_data else None)]))
         self._custom_params = kwargs
         if model is not None:
-            [ model._logger.warning(f'Unsupported argument : {key}') for key in kwargs ]
+            [ model._logger.debug(f'Unsupported argument : {key}') for key in kwargs ]
         [setattr(type(self), key, property(lambda self, key = key:  self._custom_params[key] if key in self._custom_params else None,
         lambda self, value, key = key : self._custom_params.update({ key: value }))) for key in kwargs]
         self._freeze()
@@ -3165,7 +3165,7 @@ class ContactElementTypeParams(CoreObject):
                         contact_pair_node_to_surf if contact_pair_node_to_surf is not None else ( ContactElementTypeParams._default_params["contact_pair_node_to_surf"] if "contact_pair_node_to_surf" in ContactElementTypeParams._default_params else (json_data["contactPairNodeToSurf"] if "contactPairNodeToSurf" in json_data else None)))
         self._custom_params = kwargs
         if model is not None:
-            [ model._logger.warning(f'Unsupported argument : {key}') for key in kwargs ]
+            [ model._logger.debug(f'Unsupported argument : {key}') for key in kwargs ]
         [setattr(type(self), key, property(lambda self, key = key:  self._custom_params[key] if key in self._custom_params else None,
         lambda self, value, key = key : self._custom_params.update({ key: value }))) for key in kwargs]
         self._freeze()
@@ -3336,7 +3336,7 @@ class LabelExportParams(CoreObject):
                         label_expression_for_nodal_components if label_expression_for_nodal_components is not None else ( LabelExportParams._default_params["label_expression_for_nodal_components"] if "label_expression_for_nodal_components" in LabelExportParams._default_params else (json_data["labelExpressionForNodalComponents"] if "labelExpressionForNodalComponents" in json_data else None)))
         self._custom_params = kwargs
         if model is not None:
-            [ model._logger.warning(f'Unsupported argument : {key}') for key in kwargs ]
+            [ model._logger.debug(f'Unsupported argument : {key}') for key in kwargs ]
         [setattr(type(self), key, property(lambda self, key = key:  self._custom_params[key] if key in self._custom_params else None,
         lambda self, value, key = key : self._custom_params.update({ key: value }))) for key in kwargs]
         self._freeze()
@@ -3461,6 +3461,14 @@ class ExportMapdlCdbParams(CoreObject):
         Controls the format type when writing separate element blocks. Only used when write_separate_blocks is true.
 
         **This is a beta parameter**. **The behavior and name may change in the future**.
+    export_tie_as_cntgen: bool, optional
+        Option to export ties as cntgen. When true, translates ties and contact pairs into compact cntgen blocks in the exported file. The default value is false.
+
+        **This is a beta parameter**. **The behavior and name may change in the future**.
+    export_coupling_as_sfcgen: bool, optional
+        Option to export coupling as sfcgen. When true, translates kinematic or distributing coupling into compact sfcgen blocks in the exported file. The default value is false.
+
+        **This is a beta parameter**. **The behavior and name may change in the future**.
     export_fasteners_as_swgen: bool, optional
         Option to export fasteners as swgen. When true, translates fasteners into compact swgen blocks in the exported file. The default value is false.
 
@@ -3477,12 +3485,28 @@ class ExportMapdlCdbParams(CoreObject):
         Option to enable mortar contact for ties. When true, changes the key options for tie surfaces. The default value is false.
 
         **This is a beta parameter**. **The behavior and name may change in the future**.
+    get_zone_mesh_results: bool, optional
+        Option to collect and return zone-wise mesh information for elements in the exported model. When true, exports zone-wise mesh information. The default value is false.
+
+        **This is a beta parameter**. **The behavior and name may change in the future**.
     write_thickness_file: bool, optional
         Option to write a thickness file for spotweld fatigue analysis. If true, writes a file named [exportedFilename].cdb.thick.txt containing thickness information.
 
         **This is a beta parameter**. **The behavior and name may change in the future**.
     contact_element_types: ContactElementTypeParams, optional
         Parameters for choosing element types for contact surfaces in TIEs and CONTACT PAIRs.
+
+        **This is a beta parameter**. **The behavior and name may change in the future**.
+    reorder_spotweldsurface: bool, optional
+        Option to choose the logic of spotweld computation. When the value is true, computes spotwelds by prioritizing proximity of boundary surface to spotweld. When the value is false, computes spotwelds by prioritizing proximity of surface to spotweld. The default value is true.
+
+        **This is a beta parameter**. **The behavior and name may change in the future**.
+    skip_comments: bool, optional
+        Option to skip export of comments to the exported file. When the value is true, skips writing comments. When the value is false, writes comments to the exported file. The default value is false.
+
+        **This is a beta parameter**. **The behavior and name may change in the future**.
+    initial_counters: Dict[str, Union[str, int, float, bool]], optional
+        Parameter to specify the starting counter values for export
 
         **This is a beta parameter**. **The behavior and name may change in the future**.
     json_data: dict, optional
@@ -3512,12 +3536,18 @@ class ExportMapdlCdbParams(CoreObject):
             write_separate_blocks: bool,
             write_components_with_element_blocks: bool,
             separate_blocks_format_type: SeparateBlocksFormatType,
+            export_tie_as_cntgen: bool,
+            export_coupling_as_sfcgen: bool,
             export_fasteners_as_swgen: bool,
             export_rigid_bodies_as_rbgen: bool,
             write_component_based_ties: bool,
             mortar_contact_for_ties: bool,
+            get_zone_mesh_results: bool,
             write_thickness_file: bool,
-            contact_element_types: ContactElementTypeParams):
+            contact_element_types: ContactElementTypeParams,
+            reorder_spotweldsurface: bool,
+            skip_comments: bool,
+            initial_counters: Dict[str, Union[str, int, float, bool]]):
         self._config_settings = config_settings
         self._pre_solution_settings = pre_solution_settings
         self._material_properties = material_properties
@@ -3534,12 +3564,18 @@ class ExportMapdlCdbParams(CoreObject):
         self._write_separate_blocks = write_separate_blocks
         self._write_components_with_element_blocks = write_components_with_element_blocks
         self._separate_blocks_format_type = SeparateBlocksFormatType(separate_blocks_format_type)
+        self._export_tie_as_cntgen = export_tie_as_cntgen
+        self._export_coupling_as_sfcgen = export_coupling_as_sfcgen
         self._export_fasteners_as_swgen = export_fasteners_as_swgen
         self._export_rigid_bodies_as_rbgen = export_rigid_bodies_as_rbgen
         self._write_component_based_ties = write_component_based_ties
         self._mortar_contact_for_ties = mortar_contact_for_ties
+        self._get_zone_mesh_results = get_zone_mesh_results
         self._write_thickness_file = write_thickness_file
         self._contact_element_types = contact_element_types
+        self._reorder_spotweldsurface = reorder_spotweldsurface
+        self._skip_comments = skip_comments
+        self._initial_counters = initial_counters
 
     def __init__(
             self,
@@ -3560,12 +3596,18 @@ class ExportMapdlCdbParams(CoreObject):
             write_separate_blocks: bool = None,
             write_components_with_element_blocks: bool = None,
             separate_blocks_format_type: SeparateBlocksFormatType = None,
+            export_tie_as_cntgen: bool = None,
+            export_coupling_as_sfcgen: bool = None,
             export_fasteners_as_swgen: bool = None,
             export_rigid_bodies_as_rbgen: bool = None,
             write_component_based_ties: bool = None,
             mortar_contact_for_ties: bool = None,
+            get_zone_mesh_results: bool = None,
             write_thickness_file: bool = None,
             contact_element_types: ContactElementTypeParams = None,
+            reorder_spotweldsurface: bool = None,
+            skip_comments: bool = None,
+            initial_counters: Dict[str, Union[str, int, float, bool]] = None,
             json_data : dict = None,
              **kwargs):
         """Initialize a ``ExportMapdlCdbParams`` object.
@@ -3638,6 +3680,14 @@ class ExportMapdlCdbParams(CoreObject):
             Controls the format type when writing separate element blocks. Only used when write_separate_blocks is true.
 
             **This is a beta parameter**. **The behavior and name may change in the future**.
+        export_tie_as_cntgen: bool, optional
+            Option to export ties as cntgen. When true, translates ties and contact pairs into compact cntgen blocks in the exported file. The default value is false.
+
+            **This is a beta parameter**. **The behavior and name may change in the future**.
+        export_coupling_as_sfcgen: bool, optional
+            Option to export coupling as sfcgen. When true, translates kinematic or distributing coupling into compact sfcgen blocks in the exported file. The default value is false.
+
+            **This is a beta parameter**. **The behavior and name may change in the future**.
         export_fasteners_as_swgen: bool, optional
             Option to export fasteners as swgen. When true, translates fasteners into compact swgen blocks in the exported file. The default value is false.
 
@@ -3654,12 +3704,28 @@ class ExportMapdlCdbParams(CoreObject):
             Option to enable mortar contact for ties. When true, changes the key options for tie surfaces. The default value is false.
 
             **This is a beta parameter**. **The behavior and name may change in the future**.
+        get_zone_mesh_results: bool, optional
+            Option to collect and return zone-wise mesh information for elements in the exported model. When true, exports zone-wise mesh information. The default value is false.
+
+            **This is a beta parameter**. **The behavior and name may change in the future**.
         write_thickness_file: bool, optional
             Option to write a thickness file for spotweld fatigue analysis. If true, writes a file named [exportedFilename].cdb.thick.txt containing thickness information.
 
             **This is a beta parameter**. **The behavior and name may change in the future**.
         contact_element_types: ContactElementTypeParams, optional
             Parameters for choosing element types for contact surfaces in TIEs and CONTACT PAIRs.
+
+            **This is a beta parameter**. **The behavior and name may change in the future**.
+        reorder_spotweldsurface: bool, optional
+            Option to choose the logic of spotweld computation. When the value is true, computes spotwelds by prioritizing proximity of boundary surface to spotweld. When the value is false, computes spotwelds by prioritizing proximity of surface to spotweld. The default value is true.
+
+            **This is a beta parameter**. **The behavior and name may change in the future**.
+        skip_comments: bool, optional
+            Option to skip export of comments to the exported file. When the value is true, skips writing comments. When the value is false, writes comments to the exported file. The default value is false.
+
+            **This is a beta parameter**. **The behavior and name may change in the future**.
+        initial_counters: Dict[str, Union[str, int, float, bool]], optional
+            Parameter to specify the starting counter values for export
 
             **This is a beta parameter**. **The behavior and name may change in the future**.
         json_data: dict, optional
@@ -3687,14 +3753,20 @@ class ExportMapdlCdbParams(CoreObject):
                 json_data["writeSeparateBlocks"] if "writeSeparateBlocks" in json_data else None,
                 json_data["writeComponentsWithElementBlocks"] if "writeComponentsWithElementBlocks" in json_data else None,
                 SeparateBlocksFormatType(json_data["separateBlocksFormatType"] if "separateBlocksFormatType" in json_data else None),
+                json_data["exportTieAsCntgen"] if "exportTieAsCntgen" in json_data else None,
+                json_data["exportCouplingAsSfcgen"] if "exportCouplingAsSfcgen" in json_data else None,
                 json_data["exportFastenersAsSwgen"] if "exportFastenersAsSwgen" in json_data else None,
                 json_data["exportRigidBodiesAsRbgen"] if "exportRigidBodiesAsRbgen" in json_data else None,
                 json_data["writeComponentBasedTies"] if "writeComponentBasedTies" in json_data else None,
                 json_data["mortarContactForTies"] if "mortarContactForTies" in json_data else None,
+                json_data["getZoneMeshResults"] if "getZoneMeshResults" in json_data else None,
                 json_data["writeThicknessFile"] if "writeThicknessFile" in json_data else None,
-                ContactElementTypeParams(model = model, json_data = json_data["contactElementTypes"] if "contactElementTypes" in json_data else None))
+                ContactElementTypeParams(model = model, json_data = json_data["contactElementTypes"] if "contactElementTypes" in json_data else None),
+                json_data["reorderSpotweldsurface"] if "reorderSpotweldsurface" in json_data else None,
+                json_data["skipComments"] if "skipComments" in json_data else None,
+                json_data["initialCounters"] if "initialCounters" in json_data else None)
         else:
-            all_field_specified = all(arg is not None for arg in [config_settings, pre_solution_settings, material_properties, boundary_conditions, analysis_settings, write_cells, enable_face_based_labels, label_export_params, write_by_zones, consider_general_connectors_as_spot_weld, analysis_type, simulation_type, analysis_settings_file_name, write_separate_blocks, write_components_with_element_blocks, separate_blocks_format_type, export_fasteners_as_swgen, export_rigid_bodies_as_rbgen, write_component_based_ties, mortar_contact_for_ties, write_thickness_file, contact_element_types])
+            all_field_specified = all(arg is not None for arg in [config_settings, pre_solution_settings, material_properties, boundary_conditions, analysis_settings, write_cells, enable_face_based_labels, label_export_params, write_by_zones, consider_general_connectors_as_spot_weld, analysis_type, simulation_type, analysis_settings_file_name, write_separate_blocks, write_components_with_element_blocks, separate_blocks_format_type, export_tie_as_cntgen, export_coupling_as_sfcgen, export_fasteners_as_swgen, export_rigid_bodies_as_rbgen, write_component_based_ties, mortar_contact_for_ties, get_zone_mesh_results, write_thickness_file, contact_element_types, reorder_spotweldsurface, skip_comments, initial_counters])
             if all_field_specified:
                 self.__initialize(
                     config_settings,
@@ -3713,12 +3785,18 @@ class ExportMapdlCdbParams(CoreObject):
                     write_separate_blocks,
                     write_components_with_element_blocks,
                     separate_blocks_format_type,
+                    export_tie_as_cntgen,
+                    export_coupling_as_sfcgen,
                     export_fasteners_as_swgen,
                     export_rigid_bodies_as_rbgen,
                     write_component_based_ties,
                     mortar_contact_for_ties,
+                    get_zone_mesh_results,
                     write_thickness_file,
-                    contact_element_types)
+                    contact_element_types,
+                    reorder_spotweldsurface,
+                    skip_comments,
+                    initial_counters)
             else:
                 if model is None:
                     raise ValueError("Invalid assignment. Either pass a model or specify all properties.")
@@ -3742,15 +3820,21 @@ class ExportMapdlCdbParams(CoreObject):
                         write_separate_blocks if write_separate_blocks is not None else ( ExportMapdlCdbParams._default_params["write_separate_blocks"] if "write_separate_blocks" in ExportMapdlCdbParams._default_params else (json_data["writeSeparateBlocks"] if "writeSeparateBlocks" in json_data else None)),
                         write_components_with_element_blocks if write_components_with_element_blocks is not None else ( ExportMapdlCdbParams._default_params["write_components_with_element_blocks"] if "write_components_with_element_blocks" in ExportMapdlCdbParams._default_params else (json_data["writeComponentsWithElementBlocks"] if "writeComponentsWithElementBlocks" in json_data else None)),
                         separate_blocks_format_type if separate_blocks_format_type is not None else ( ExportMapdlCdbParams._default_params["separate_blocks_format_type"] if "separate_blocks_format_type" in ExportMapdlCdbParams._default_params else SeparateBlocksFormatType(json_data["separateBlocksFormatType"] if "separateBlocksFormatType" in json_data else None)),
+                        export_tie_as_cntgen if export_tie_as_cntgen is not None else ( ExportMapdlCdbParams._default_params["export_tie_as_cntgen"] if "export_tie_as_cntgen" in ExportMapdlCdbParams._default_params else (json_data["exportTieAsCntgen"] if "exportTieAsCntgen" in json_data else None)),
+                        export_coupling_as_sfcgen if export_coupling_as_sfcgen is not None else ( ExportMapdlCdbParams._default_params["export_coupling_as_sfcgen"] if "export_coupling_as_sfcgen" in ExportMapdlCdbParams._default_params else (json_data["exportCouplingAsSfcgen"] if "exportCouplingAsSfcgen" in json_data else None)),
                         export_fasteners_as_swgen if export_fasteners_as_swgen is not None else ( ExportMapdlCdbParams._default_params["export_fasteners_as_swgen"] if "export_fasteners_as_swgen" in ExportMapdlCdbParams._default_params else (json_data["exportFastenersAsSwgen"] if "exportFastenersAsSwgen" in json_data else None)),
                         export_rigid_bodies_as_rbgen if export_rigid_bodies_as_rbgen is not None else ( ExportMapdlCdbParams._default_params["export_rigid_bodies_as_rbgen"] if "export_rigid_bodies_as_rbgen" in ExportMapdlCdbParams._default_params else (json_data["exportRigidBodiesAsRbgen"] if "exportRigidBodiesAsRbgen" in json_data else None)),
                         write_component_based_ties if write_component_based_ties is not None else ( ExportMapdlCdbParams._default_params["write_component_based_ties"] if "write_component_based_ties" in ExportMapdlCdbParams._default_params else (json_data["writeComponentBasedTies"] if "writeComponentBasedTies" in json_data else None)),
                         mortar_contact_for_ties if mortar_contact_for_ties is not None else ( ExportMapdlCdbParams._default_params["mortar_contact_for_ties"] if "mortar_contact_for_ties" in ExportMapdlCdbParams._default_params else (json_data["mortarContactForTies"] if "mortarContactForTies" in json_data else None)),
+                        get_zone_mesh_results if get_zone_mesh_results is not None else ( ExportMapdlCdbParams._default_params["get_zone_mesh_results"] if "get_zone_mesh_results" in ExportMapdlCdbParams._default_params else (json_data["getZoneMeshResults"] if "getZoneMeshResults" in json_data else None)),
                         write_thickness_file if write_thickness_file is not None else ( ExportMapdlCdbParams._default_params["write_thickness_file"] if "write_thickness_file" in ExportMapdlCdbParams._default_params else (json_data["writeThicknessFile"] if "writeThicknessFile" in json_data else None)),
-                        contact_element_types if contact_element_types is not None else ( ExportMapdlCdbParams._default_params["contact_element_types"] if "contact_element_types" in ExportMapdlCdbParams._default_params else ContactElementTypeParams(model = model, json_data = (json_data["contactElementTypes"] if "contactElementTypes" in json_data else None))))
+                        contact_element_types if contact_element_types is not None else ( ExportMapdlCdbParams._default_params["contact_element_types"] if "contact_element_types" in ExportMapdlCdbParams._default_params else ContactElementTypeParams(model = model, json_data = (json_data["contactElementTypes"] if "contactElementTypes" in json_data else None))),
+                        reorder_spotweldsurface if reorder_spotweldsurface is not None else ( ExportMapdlCdbParams._default_params["reorder_spotweldsurface"] if "reorder_spotweldsurface" in ExportMapdlCdbParams._default_params else (json_data["reorderSpotweldsurface"] if "reorderSpotweldsurface" in json_data else None)),
+                        skip_comments if skip_comments is not None else ( ExportMapdlCdbParams._default_params["skip_comments"] if "skip_comments" in ExportMapdlCdbParams._default_params else (json_data["skipComments"] if "skipComments" in json_data else None)),
+                        initial_counters if initial_counters is not None else ( ExportMapdlCdbParams._default_params["initial_counters"] if "initial_counters" in ExportMapdlCdbParams._default_params else (json_data["initialCounters"] if "initialCounters" in json_data else None)))
         self._custom_params = kwargs
         if model is not None:
-            [ model._logger.warning(f'Unsupported argument : {key}') for key in kwargs ]
+            [ model._logger.debug(f'Unsupported argument : {key}') for key in kwargs ]
         [setattr(type(self), key, property(lambda self, key = key:  self._custom_params[key] if key in self._custom_params else None,
         lambda self, value, key = key : self._custom_params.update({ key: value }))) for key in kwargs]
         self._freeze()
@@ -3773,12 +3857,18 @@ class ExportMapdlCdbParams(CoreObject):
             write_separate_blocks: bool = None,
             write_components_with_element_blocks: bool = None,
             separate_blocks_format_type: SeparateBlocksFormatType = None,
+            export_tie_as_cntgen: bool = None,
+            export_coupling_as_sfcgen: bool = None,
             export_fasteners_as_swgen: bool = None,
             export_rigid_bodies_as_rbgen: bool = None,
             write_component_based_ties: bool = None,
             mortar_contact_for_ties: bool = None,
+            get_zone_mesh_results: bool = None,
             write_thickness_file: bool = None,
-            contact_element_types: ContactElementTypeParams = None):
+            contact_element_types: ContactElementTypeParams = None,
+            reorder_spotweldsurface: bool = None,
+            skip_comments: bool = None,
+            initial_counters: Dict[str, Union[str, int, float, bool]] = None):
         """Set the default values of the ``ExportMapdlCdbParams`` object.
 
         Parameters
@@ -3815,6 +3905,10 @@ class ExportMapdlCdbParams(CoreObject):
             Controls whether component definitions should be written within individual element blocks. write_components_with_element_blocks only has effect when write_separate_blocks is true. When write_components_with_element_blocks is true, writes component commands for each element block. When write_components_with_element_blocks is false, writes components separately.
         separate_blocks_format_type: SeparateBlocksFormatType, optional
             Controls the format type when writing separate element blocks. Only used when write_separate_blocks is true.
+        export_tie_as_cntgen: bool, optional
+            Option to export ties as cntgen. When true, translates ties and contact pairs into compact cntgen blocks in the exported file. The default value is false.
+        export_coupling_as_sfcgen: bool, optional
+            Option to export coupling as sfcgen. When true, translates kinematic or distributing coupling into compact sfcgen blocks in the exported file. The default value is false.
         export_fasteners_as_swgen: bool, optional
             Option to export fasteners as swgen. When true, translates fasteners into compact swgen blocks in the exported file. The default value is false.
         export_rigid_bodies_as_rbgen: bool, optional
@@ -3823,10 +3917,18 @@ class ExportMapdlCdbParams(CoreObject):
             Option to write ties using component-based format. When true, writes ties using component selection and surface generation commands instead of explicit element definitions. The default value is false.
         mortar_contact_for_ties: bool, optional
             Option to enable mortar contact for ties. When true, changes the key options for tie surfaces. The default value is false.
+        get_zone_mesh_results: bool, optional
+            Option to collect and return zone-wise mesh information for elements in the exported model. When true, exports zone-wise mesh information. The default value is false.
         write_thickness_file: bool, optional
             Option to write a thickness file for spotweld fatigue analysis. If true, writes a file named [exportedFilename].cdb.thick.txt containing thickness information.
         contact_element_types: ContactElementTypeParams, optional
             Parameters for choosing element types for contact surfaces in TIEs and CONTACT PAIRs.
+        reorder_spotweldsurface: bool, optional
+            Option to choose the logic of spotweld computation. When the value is true, computes spotwelds by prioritizing proximity of boundary surface to spotweld. When the value is false, computes spotwelds by prioritizing proximity of surface to spotweld. The default value is true.
+        skip_comments: bool, optional
+            Option to skip export of comments to the exported file. When the value is true, skips writing comments. When the value is false, writes comments to the exported file. The default value is false.
+        initial_counters: Dict[str, Union[str, int, float, bool]], optional
+            Parameter to specify the starting counter values for export
         """
         args = locals()
         [ExportMapdlCdbParams._default_params.update({ key: value }) for key, value in args.items() if value is not None]
@@ -3877,6 +3979,10 @@ class ExportMapdlCdbParams(CoreObject):
             json_data["writeComponentsWithElementBlocks"] = self._write_components_with_element_blocks
         if self._separate_blocks_format_type is not None:
             json_data["separateBlocksFormatType"] = self._separate_blocks_format_type
+        if self._export_tie_as_cntgen is not None:
+            json_data["exportTieAsCntgen"] = self._export_tie_as_cntgen
+        if self._export_coupling_as_sfcgen is not None:
+            json_data["exportCouplingAsSfcgen"] = self._export_coupling_as_sfcgen
         if self._export_fasteners_as_swgen is not None:
             json_data["exportFastenersAsSwgen"] = self._export_fasteners_as_swgen
         if self._export_rigid_bodies_as_rbgen is not None:
@@ -3885,15 +3991,23 @@ class ExportMapdlCdbParams(CoreObject):
             json_data["writeComponentBasedTies"] = self._write_component_based_ties
         if self._mortar_contact_for_ties is not None:
             json_data["mortarContactForTies"] = self._mortar_contact_for_ties
+        if self._get_zone_mesh_results is not None:
+            json_data["getZoneMeshResults"] = self._get_zone_mesh_results
         if self._write_thickness_file is not None:
             json_data["writeThicknessFile"] = self._write_thickness_file
         if self._contact_element_types is not None:
             json_data["contactElementTypes"] = self._contact_element_types._jsonify()
+        if self._reorder_spotweldsurface is not None:
+            json_data["reorderSpotweldsurface"] = self._reorder_spotweldsurface
+        if self._skip_comments is not None:
+            json_data["skipComments"] = self._skip_comments
+        if self._initial_counters is not None:
+            json_data["initialCounters"] = self._initial_counters
         [ json_data.update({ utils.to_camel_case(key) : value }) for key, value in self._custom_params.items()]
         return json_data
 
     def __str__(self) -> str:
-        message = "config_settings :  %s\npre_solution_settings :  %s\nmaterial_properties :  %s\nboundary_conditions :  %s\nanalysis_settings :  %s\nwrite_cells :  %s\nenable_face_based_labels :  %s\nlabel_export_params :  %s\nwrite_by_zones :  %s\nconsider_general_connectors_as_spot_weld :  %s\nanalysis_type :  %s\nsimulation_type :  %s\nanalysis_settings_file_name :  %s\nwrite_separate_blocks :  %s\nwrite_components_with_element_blocks :  %s\nseparate_blocks_format_type :  %s\nexport_fasteners_as_swgen :  %s\nexport_rigid_bodies_as_rbgen :  %s\nwrite_component_based_ties :  %s\nmortar_contact_for_ties :  %s\nwrite_thickness_file :  %s\ncontact_element_types :  %s" % (self._config_settings, self._pre_solution_settings, self._material_properties, self._boundary_conditions, self._analysis_settings, self._write_cells, self._enable_face_based_labels, '{ ' + str(self._label_export_params) + ' }', self._write_by_zones, self._consider_general_connectors_as_spot_weld, self._analysis_type, self._simulation_type, self._analysis_settings_file_name, self._write_separate_blocks, self._write_components_with_element_blocks, self._separate_blocks_format_type, self._export_fasteners_as_swgen, self._export_rigid_bodies_as_rbgen, self._write_component_based_ties, self._mortar_contact_for_ties, self._write_thickness_file, '{ ' + str(self._contact_element_types) + ' }')
+        message = "config_settings :  %s\npre_solution_settings :  %s\nmaterial_properties :  %s\nboundary_conditions :  %s\nanalysis_settings :  %s\nwrite_cells :  %s\nenable_face_based_labels :  %s\nlabel_export_params :  %s\nwrite_by_zones :  %s\nconsider_general_connectors_as_spot_weld :  %s\nanalysis_type :  %s\nsimulation_type :  %s\nanalysis_settings_file_name :  %s\nwrite_separate_blocks :  %s\nwrite_components_with_element_blocks :  %s\nseparate_blocks_format_type :  %s\nexport_tie_as_cntgen :  %s\nexport_coupling_as_sfcgen :  %s\nexport_fasteners_as_swgen :  %s\nexport_rigid_bodies_as_rbgen :  %s\nwrite_component_based_ties :  %s\nmortar_contact_for_ties :  %s\nget_zone_mesh_results :  %s\nwrite_thickness_file :  %s\ncontact_element_types :  %s\nreorder_spotweldsurface :  %s\nskip_comments :  %s\ninitial_counters :  %s" % (self._config_settings, self._pre_solution_settings, self._material_properties, self._boundary_conditions, self._analysis_settings, self._write_cells, self._enable_face_based_labels, '{ ' + str(self._label_export_params) + ' }', self._write_by_zones, self._consider_general_connectors_as_spot_weld, self._analysis_type, self._simulation_type, self._analysis_settings_file_name, self._write_separate_blocks, self._write_components_with_element_blocks, self._separate_blocks_format_type, self._export_tie_as_cntgen, self._export_coupling_as_sfcgen, self._export_fasteners_as_swgen, self._export_rigid_bodies_as_rbgen, self._write_component_based_ties, self._mortar_contact_for_ties, self._get_zone_mesh_results, self._write_thickness_file, '{ ' + str(self._contact_element_types) + ' }', self._reorder_spotweldsurface, self._skip_comments, self._initial_counters)
         message += ''.join('\n' + str(key) + ' : ' + str(value) for key, value in self._custom_params.items())
         return message
 
@@ -4090,6 +4204,30 @@ class ExportMapdlCdbParams(CoreObject):
         self._separate_blocks_format_type = value
 
     @property
+    def export_tie_as_cntgen(self) -> bool:
+        """Option to export ties as cntgen. When true, translates ties and contact pairs into compact cntgen blocks in the exported file. The default value is false.
+
+        **This is a beta parameter**. **The behavior and name may change in the future**.
+        """
+        return self._export_tie_as_cntgen
+
+    @export_tie_as_cntgen.setter
+    def export_tie_as_cntgen(self, value: bool):
+        self._export_tie_as_cntgen = value
+
+    @property
+    def export_coupling_as_sfcgen(self) -> bool:
+        """Option to export coupling as sfcgen. When true, translates kinematic or distributing coupling into compact sfcgen blocks in the exported file. The default value is false.
+
+        **This is a beta parameter**. **The behavior and name may change in the future**.
+        """
+        return self._export_coupling_as_sfcgen
+
+    @export_coupling_as_sfcgen.setter
+    def export_coupling_as_sfcgen(self, value: bool):
+        self._export_coupling_as_sfcgen = value
+
+    @property
     def export_fasteners_as_swgen(self) -> bool:
         """Option to export fasteners as swgen. When true, translates fasteners into compact swgen blocks in the exported file. The default value is false.
 
@@ -4138,6 +4276,18 @@ class ExportMapdlCdbParams(CoreObject):
         self._mortar_contact_for_ties = value
 
     @property
+    def get_zone_mesh_results(self) -> bool:
+        """Option to collect and return zone-wise mesh information for elements in the exported model. When true, exports zone-wise mesh information. The default value is false.
+
+        **This is a beta parameter**. **The behavior and name may change in the future**.
+        """
+        return self._get_zone_mesh_results
+
+    @get_zone_mesh_results.setter
+    def get_zone_mesh_results(self, value: bool):
+        self._get_zone_mesh_results = value
+
+    @property
     def write_thickness_file(self) -> bool:
         """Option to write a thickness file for spotweld fatigue analysis. If true, writes a file named [exportedFilename].cdb.thick.txt containing thickness information.
 
@@ -4161,6 +4311,42 @@ class ExportMapdlCdbParams(CoreObject):
     def contact_element_types(self, value: ContactElementTypeParams):
         self._contact_element_types = value
 
+    @property
+    def reorder_spotweldsurface(self) -> bool:
+        """Option to choose the logic of spotweld computation. When the value is true, computes spotwelds by prioritizing proximity of boundary surface to spotweld. When the value is false, computes spotwelds by prioritizing proximity of surface to spotweld. The default value is true.
+
+        **This is a beta parameter**. **The behavior and name may change in the future**.
+        """
+        return self._reorder_spotweldsurface
+
+    @reorder_spotweldsurface.setter
+    def reorder_spotweldsurface(self, value: bool):
+        self._reorder_spotweldsurface = value
+
+    @property
+    def skip_comments(self) -> bool:
+        """Option to skip export of comments to the exported file. When the value is true, skips writing comments. When the value is false, writes comments to the exported file. The default value is false.
+
+        **This is a beta parameter**. **The behavior and name may change in the future**.
+        """
+        return self._skip_comments
+
+    @skip_comments.setter
+    def skip_comments(self, value: bool):
+        self._skip_comments = value
+
+    @property
+    def initial_counters(self) -> Dict[str, Union[str, int, float, bool]]:
+        """Parameter to specify the starting counter values for export
+
+        **This is a beta parameter**. **The behavior and name may change in the future**.
+        """
+        return self._initial_counters
+
+    @initial_counters.setter
+    def initial_counters(self, value: Dict[str, Union[str, int, float, bool]]):
+        self._initial_counters = value
+
 class ExportMapdlCdbResults(CoreObject):
     """Results associated with the MAPDL CDB export.
 
@@ -4170,6 +4356,10 @@ class ExportMapdlCdbResults(CoreObject):
         Model to create a ``ExportMapdlCdbResults`` object with default parameters.
     summary_log: str, optional
         Summary log for the export operation in json format.
+
+        **This is a beta parameter**. **The behavior and name may change in the future**.
+    formatted_summary_log: str, optional
+        Formatted summary log for the export operation.
 
         **This is a beta parameter**. **The behavior and name may change in the future**.
     zone_mesh_results: List[ZoneMeshResult], optional
@@ -4194,10 +4384,12 @@ class ExportMapdlCdbResults(CoreObject):
     def __initialize(
             self,
             summary_log: str,
+            formatted_summary_log: str,
             zone_mesh_results: List[ZoneMeshResult],
             error_code: ErrorCode,
             warning_codes: List[WarningCode]):
         self._summary_log = summary_log
+        self._formatted_summary_log = formatted_summary_log
         self._zone_mesh_results = zone_mesh_results
         self._error_code = ErrorCode(error_code)
         self._warning_codes = warning_codes
@@ -4206,6 +4398,7 @@ class ExportMapdlCdbResults(CoreObject):
             self,
             model: CommunicationManager=None,
             summary_log: str = None,
+            formatted_summary_log: str = None,
             zone_mesh_results: List[ZoneMeshResult] = None,
             error_code: ErrorCode = None,
             warning_codes: List[WarningCode] = None,
@@ -4219,6 +4412,10 @@ class ExportMapdlCdbResults(CoreObject):
             Model to create a ``ExportMapdlCdbResults`` object with default parameters.
         summary_log: str, optional
             Summary log for the export operation in json format.
+
+            **This is a beta parameter**. **The behavior and name may change in the future**.
+        formatted_summary_log: str, optional
+            Formatted summary log for the export operation.
 
             **This is a beta parameter**. **The behavior and name may change in the future**.
         zone_mesh_results: List[ZoneMeshResult], optional
@@ -4241,14 +4438,16 @@ class ExportMapdlCdbResults(CoreObject):
         if json_data:
             self.__initialize(
                 json_data["summaryLog"] if "summaryLog" in json_data else None,
+                json_data["formattedSummaryLog"] if "formattedSummaryLog" in json_data else None,
                 [ZoneMeshResult(model = model, json_data = data) for data in json_data["zoneMeshResults"]] if "zoneMeshResults" in json_data else None,
                 ErrorCode(json_data["errorCode"] if "errorCode" in json_data else None),
                 [WarningCode(data) for data in json_data["warningCodes"]] if "warningCodes" in json_data else None)
         else:
-            all_field_specified = all(arg is not None for arg in [summary_log, zone_mesh_results, error_code, warning_codes])
+            all_field_specified = all(arg is not None for arg in [summary_log, formatted_summary_log, zone_mesh_results, error_code, warning_codes])
             if all_field_specified:
                 self.__initialize(
                     summary_log,
+                    formatted_summary_log,
                     zone_mesh_results,
                     error_code,
                     warning_codes)
@@ -4260,12 +4459,13 @@ class ExportMapdlCdbResults(CoreObject):
                     json_data = param_json["ExportMapdlCdbResults"] if "ExportMapdlCdbResults" in param_json else {}
                     self.__initialize(
                         summary_log if summary_log is not None else ( ExportMapdlCdbResults._default_params["summary_log"] if "summary_log" in ExportMapdlCdbResults._default_params else (json_data["summaryLog"] if "summaryLog" in json_data else None)),
+                        formatted_summary_log if formatted_summary_log is not None else ( ExportMapdlCdbResults._default_params["formatted_summary_log"] if "formatted_summary_log" in ExportMapdlCdbResults._default_params else (json_data["formattedSummaryLog"] if "formattedSummaryLog" in json_data else None)),
                         zone_mesh_results if zone_mesh_results is not None else ( ExportMapdlCdbResults._default_params["zone_mesh_results"] if "zone_mesh_results" in ExportMapdlCdbResults._default_params else [ZoneMeshResult(model = model, json_data = data) for data in (json_data["zoneMeshResults"] if "zoneMeshResults" in json_data else None)]),
                         error_code if error_code is not None else ( ExportMapdlCdbResults._default_params["error_code"] if "error_code" in ExportMapdlCdbResults._default_params else ErrorCode(json_data["errorCode"] if "errorCode" in json_data else None)),
                         warning_codes if warning_codes is not None else ( ExportMapdlCdbResults._default_params["warning_codes"] if "warning_codes" in ExportMapdlCdbResults._default_params else [WarningCode(data) for data in (json_data["warningCodes"] if "warningCodes" in json_data else None)]))
         self._custom_params = kwargs
         if model is not None:
-            [ model._logger.warning(f'Unsupported argument : {key}') for key in kwargs ]
+            [ model._logger.debug(f'Unsupported argument : {key}') for key in kwargs ]
         [setattr(type(self), key, property(lambda self, key = key:  self._custom_params[key] if key in self._custom_params else None,
         lambda self, value, key = key : self._custom_params.update({ key: value }))) for key in kwargs]
         self._freeze()
@@ -4273,6 +4473,7 @@ class ExportMapdlCdbResults(CoreObject):
     @staticmethod
     def set_default(
             summary_log: str = None,
+            formatted_summary_log: str = None,
             zone_mesh_results: List[ZoneMeshResult] = None,
             error_code: ErrorCode = None,
             warning_codes: List[WarningCode] = None):
@@ -4282,6 +4483,8 @@ class ExportMapdlCdbResults(CoreObject):
         ----------
         summary_log: str, optional
             Summary log for the export operation in json format.
+        formatted_summary_log: str, optional
+            Formatted summary log for the export operation.
         zone_mesh_results: List[ZoneMeshResult], optional
             Zone-wise mesh information for elements in the exported model.
         error_code: ErrorCode, optional
@@ -4308,6 +4511,8 @@ class ExportMapdlCdbResults(CoreObject):
         json_data = {}
         if self._summary_log is not None:
             json_data["summaryLog"] = self._summary_log
+        if self._formatted_summary_log is not None:
+            json_data["formattedSummaryLog"] = self._formatted_summary_log
         if self._zone_mesh_results is not None:
             json_data["zoneMeshResults"] = [data._jsonify() for data in self._zone_mesh_results]
         if self._error_code is not None:
@@ -4318,7 +4523,7 @@ class ExportMapdlCdbResults(CoreObject):
         return json_data
 
     def __str__(self) -> str:
-        message = "summary_log :  %s\nzone_mesh_results :  %s\nerror_code :  %s\nwarning_codes :  %s" % (self._summary_log, '[' + ''.join('\n' + str(data) for data in self._zone_mesh_results) + ']', self._error_code, '[' + ''.join('\n' + str(data) for data in self._warning_codes) + ']')
+        message = "summary_log :  %s\nformatted_summary_log :  %s\nzone_mesh_results :  %s\nerror_code :  %s\nwarning_codes :  %s" % (self._summary_log, self._formatted_summary_log, '[' + ''.join('\n' + str(data) for data in self._zone_mesh_results) + ']', self._error_code, '[' + ''.join('\n' + str(data) for data in self._warning_codes) + ']')
         message += ''.join('\n' + str(key) + ' : ' + str(value) for key, value in self._custom_params.items())
         return message
 
@@ -4333,6 +4538,18 @@ class ExportMapdlCdbResults(CoreObject):
     @summary_log.setter
     def summary_log(self, value: str):
         self._summary_log = value
+
+    @property
+    def formatted_summary_log(self) -> str:
+        """Formatted summary log for the export operation.
+
+        **This is a beta parameter**. **The behavior and name may change in the future**.
+        """
+        return self._formatted_summary_log
+
+    @formatted_summary_log.setter
+    def formatted_summary_log(self, value: str):
+        self._formatted_summary_log = value
 
     @property
     def zone_mesh_results(self) -> List[ZoneMeshResult]:
@@ -4403,6 +4620,10 @@ class ExportLSDynaKeywordFileParams(CoreObject):
         Option to create D3Part card in output controls.
 
         **This is a beta parameter**. **The behavior and name may change in the future**.
+    get_zone_mesh_results: bool, optional
+        Option to collect and return zone-wise mesh information for elements in the exported model.
+
+        **This is a beta parameter**. **The behavior and name may change in the future**.
     json_data: dict, optional
         JSON dictionary to create a ``ExportLSDynaKeywordFileParams`` object with provided parameters.
 
@@ -4420,7 +4641,8 @@ class ExportLSDynaKeywordFileParams(CoreObject):
             analysis_type: LSDynaAnalysisType,
             compute_spotweld_thickness: bool,
             write_thickness_file: bool,
-            output_controls_d3_part: bool):
+            output_controls_d3_part: bool,
+            get_zone_mesh_results: bool):
         self._material_properties = material_properties
         self._database_keywords = database_keywords
         self._output_format = LSDynaFileFormatType(output_format)
@@ -4428,6 +4650,7 @@ class ExportLSDynaKeywordFileParams(CoreObject):
         self._compute_spotweld_thickness = compute_spotweld_thickness
         self._write_thickness_file = write_thickness_file
         self._output_controls_d3_part = output_controls_d3_part
+        self._get_zone_mesh_results = get_zone_mesh_results
 
     def __init__(
             self,
@@ -4439,6 +4662,7 @@ class ExportLSDynaKeywordFileParams(CoreObject):
             compute_spotweld_thickness: bool = None,
             write_thickness_file: bool = None,
             output_controls_d3_part: bool = None,
+            get_zone_mesh_results: bool = None,
             json_data : dict = None,
              **kwargs):
         """Initialize a ``ExportLSDynaKeywordFileParams`` object.
@@ -4475,6 +4699,10 @@ class ExportLSDynaKeywordFileParams(CoreObject):
             Option to create D3Part card in output controls.
 
             **This is a beta parameter**. **The behavior and name may change in the future**.
+        get_zone_mesh_results: bool, optional
+            Option to collect and return zone-wise mesh information for elements in the exported model.
+
+            **This is a beta parameter**. **The behavior and name may change in the future**.
         json_data: dict, optional
             JSON dictionary to create a ``ExportLSDynaKeywordFileParams`` object with provided parameters.
 
@@ -4490,9 +4718,10 @@ class ExportLSDynaKeywordFileParams(CoreObject):
                 LSDynaAnalysisType(json_data["analysisType"] if "analysisType" in json_data else None),
                 json_data["computeSpotweldThickness"] if "computeSpotweldThickness" in json_data else None,
                 json_data["writeThicknessFile"] if "writeThicknessFile" in json_data else None,
-                json_data["outputControlsD3Part"] if "outputControlsD3Part" in json_data else None)
+                json_data["outputControlsD3Part"] if "outputControlsD3Part" in json_data else None,
+                json_data["getZoneMeshResults"] if "getZoneMeshResults" in json_data else None)
         else:
-            all_field_specified = all(arg is not None for arg in [material_properties, database_keywords, output_format, analysis_type, compute_spotweld_thickness, write_thickness_file, output_controls_d3_part])
+            all_field_specified = all(arg is not None for arg in [material_properties, database_keywords, output_format, analysis_type, compute_spotweld_thickness, write_thickness_file, output_controls_d3_part, get_zone_mesh_results])
             if all_field_specified:
                 self.__initialize(
                     material_properties,
@@ -4501,7 +4730,8 @@ class ExportLSDynaKeywordFileParams(CoreObject):
                     analysis_type,
                     compute_spotweld_thickness,
                     write_thickness_file,
-                    output_controls_d3_part)
+                    output_controls_d3_part,
+                    get_zone_mesh_results)
             else:
                 if model is None:
                     raise ValueError("Invalid assignment. Either pass a model or specify all properties.")
@@ -4515,10 +4745,11 @@ class ExportLSDynaKeywordFileParams(CoreObject):
                         analysis_type if analysis_type is not None else ( ExportLSDynaKeywordFileParams._default_params["analysis_type"] if "analysis_type" in ExportLSDynaKeywordFileParams._default_params else LSDynaAnalysisType(json_data["analysisType"] if "analysisType" in json_data else None)),
                         compute_spotweld_thickness if compute_spotweld_thickness is not None else ( ExportLSDynaKeywordFileParams._default_params["compute_spotweld_thickness"] if "compute_spotweld_thickness" in ExportLSDynaKeywordFileParams._default_params else (json_data["computeSpotweldThickness"] if "computeSpotweldThickness" in json_data else None)),
                         write_thickness_file if write_thickness_file is not None else ( ExportLSDynaKeywordFileParams._default_params["write_thickness_file"] if "write_thickness_file" in ExportLSDynaKeywordFileParams._default_params else (json_data["writeThicknessFile"] if "writeThicknessFile" in json_data else None)),
-                        output_controls_d3_part if output_controls_d3_part is not None else ( ExportLSDynaKeywordFileParams._default_params["output_controls_d3_part"] if "output_controls_d3_part" in ExportLSDynaKeywordFileParams._default_params else (json_data["outputControlsD3Part"] if "outputControlsD3Part" in json_data else None)))
+                        output_controls_d3_part if output_controls_d3_part is not None else ( ExportLSDynaKeywordFileParams._default_params["output_controls_d3_part"] if "output_controls_d3_part" in ExportLSDynaKeywordFileParams._default_params else (json_data["outputControlsD3Part"] if "outputControlsD3Part" in json_data else None)),
+                        get_zone_mesh_results if get_zone_mesh_results is not None else ( ExportLSDynaKeywordFileParams._default_params["get_zone_mesh_results"] if "get_zone_mesh_results" in ExportLSDynaKeywordFileParams._default_params else (json_data["getZoneMeshResults"] if "getZoneMeshResults" in json_data else None)))
         self._custom_params = kwargs
         if model is not None:
-            [ model._logger.warning(f'Unsupported argument : {key}') for key in kwargs ]
+            [ model._logger.debug(f'Unsupported argument : {key}') for key in kwargs ]
         [setattr(type(self), key, property(lambda self, key = key:  self._custom_params[key] if key in self._custom_params else None,
         lambda self, value, key = key : self._custom_params.update({ key: value }))) for key in kwargs]
         self._freeze()
@@ -4531,7 +4762,8 @@ class ExportLSDynaKeywordFileParams(CoreObject):
             analysis_type: LSDynaAnalysisType = None,
             compute_spotweld_thickness: bool = None,
             write_thickness_file: bool = None,
-            output_controls_d3_part: bool = None):
+            output_controls_d3_part: bool = None,
+            get_zone_mesh_results: bool = None):
         """Set the default values of the ``ExportLSDynaKeywordFileParams`` object.
 
         Parameters
@@ -4550,6 +4782,8 @@ class ExportLSDynaKeywordFileParams(CoreObject):
             Option to write a thickness file for spotweld fatigue analysis. If true, writes a file named [exportedFilename].k.thick.txt containing thickness information.
         output_controls_d3_part: bool, optional
             Option to create D3Part card in output controls.
+        get_zone_mesh_results: bool, optional
+            Option to collect and return zone-wise mesh information for elements in the exported model.
         """
         args = locals()
         [ExportLSDynaKeywordFileParams._default_params.update({ key: value }) for key, value in args.items() if value is not None]
@@ -4582,11 +4816,13 @@ class ExportLSDynaKeywordFileParams(CoreObject):
             json_data["writeThicknessFile"] = self._write_thickness_file
         if self._output_controls_d3_part is not None:
             json_data["outputControlsD3Part"] = self._output_controls_d3_part
+        if self._get_zone_mesh_results is not None:
+            json_data["getZoneMeshResults"] = self._get_zone_mesh_results
         [ json_data.update({ utils.to_camel_case(key) : value }) for key, value in self._custom_params.items()]
         return json_data
 
     def __str__(self) -> str:
-        message = "material_properties :  %s\ndatabase_keywords :  %s\noutput_format :  %s\nanalysis_type :  %s\ncompute_spotweld_thickness :  %s\nwrite_thickness_file :  %s\noutput_controls_d3_part :  %s" % (self._material_properties, self._database_keywords, self._output_format, self._analysis_type, self._compute_spotweld_thickness, self._write_thickness_file, self._output_controls_d3_part)
+        message = "material_properties :  %s\ndatabase_keywords :  %s\noutput_format :  %s\nanalysis_type :  %s\ncompute_spotweld_thickness :  %s\nwrite_thickness_file :  %s\noutput_controls_d3_part :  %s\nget_zone_mesh_results :  %s" % (self._material_properties, self._database_keywords, self._output_format, self._analysis_type, self._compute_spotweld_thickness, self._write_thickness_file, self._output_controls_d3_part, self._get_zone_mesh_results)
         message += ''.join('\n' + str(key) + ' : ' + str(value) for key, value in self._custom_params.items())
         return message
 
@@ -4673,6 +4909,18 @@ class ExportLSDynaKeywordFileParams(CoreObject):
     @output_controls_d3_part.setter
     def output_controls_d3_part(self, value: bool):
         self._output_controls_d3_part = value
+
+    @property
+    def get_zone_mesh_results(self) -> bool:
+        """Option to collect and return zone-wise mesh information for elements in the exported model.
+
+        **This is a beta parameter**. **The behavior and name may change in the future**.
+        """
+        return self._get_zone_mesh_results
+
+    @get_zone_mesh_results.setter
+    def get_zone_mesh_results(self, value: bool):
+        self._get_zone_mesh_results = value
 
 class ExportLSDynaResults(CoreObject):
     """Results associated with the LS-DYNA export.
@@ -4782,7 +5030,7 @@ class ExportLSDynaResults(CoreObject):
                         warning_codes if warning_codes is not None else ( ExportLSDynaResults._default_params["warning_codes"] if "warning_codes" in ExportLSDynaResults._default_params else [WarningCode(data) for data in (json_data["warningCodes"] if "warningCodes" in json_data else None)]))
         self._custom_params = kwargs
         if model is not None:
-            [ model._logger.warning(f'Unsupported argument : {key}') for key in kwargs ]
+            [ model._logger.debug(f'Unsupported argument : {key}') for key in kwargs ]
         [setattr(type(self), key, property(lambda self, key = key:  self._custom_params[key] if key in self._custom_params else None,
         lambda self, value, key = key : self._custom_params.update({ key: value }))) for key in kwargs]
         self._freeze()
@@ -4967,7 +5215,7 @@ class ExportLSDynaIGAResults(CoreObject):
                         warning_codes if warning_codes is not None else ( ExportLSDynaIGAResults._default_params["warning_codes"] if "warning_codes" in ExportLSDynaIGAResults._default_params else [WarningCode(data) for data in (json_data["warningCodes"] if "warningCodes" in json_data else None)]))
         self._custom_params = kwargs
         if model is not None:
-            [ model._logger.warning(f'Unsupported argument : {key}') for key in kwargs ]
+            [ model._logger.debug(f'Unsupported argument : {key}') for key in kwargs ]
         [setattr(type(self), key, property(lambda self, key = key:  self._custom_params[key] if key in self._custom_params else None,
         lambda self, value, key = key : self._custom_params.update({ key: value }))) for key in kwargs]
         self._freeze()
@@ -5091,7 +5339,7 @@ class ExportLSDynaIgaKeywordFileParams(CoreObject):
                     self.__initialize()
         self._custom_params = kwargs
         if model is not None:
-            [ model._logger.warning(f'Unsupported argument : {key}') for key in kwargs ]
+            [ model._logger.debug(f'Unsupported argument : {key}') for key in kwargs ]
         [setattr(type(self), key, property(lambda self, key = key:  self._custom_params[key] if key in self._custom_params else None,
         lambda self, value, key = key : self._custom_params.update({ key: value }))) for key in kwargs]
         self._freeze()
@@ -5200,7 +5448,7 @@ class ExportBoundaryFittedSplineParams(CoreObject):
                         id_start if id_start is not None else ( ExportBoundaryFittedSplineParams._default_params["id_start"] if "id_start" in ExportBoundaryFittedSplineParams._default_params else (json_data["idStart"] if "idStart" in json_data else None)))
         self._custom_params = kwargs
         if model is not None:
-            [ model._logger.warning(f'Unsupported argument : {key}') for key in kwargs ]
+            [ model._logger.debug(f'Unsupported argument : {key}') for key in kwargs ]
         [setattr(type(self), key, property(lambda self, key = key:  self._custom_params[key] if key in self._custom_params else None,
         lambda self, value, key = key : self._custom_params.update({ key: value }))) for key in kwargs]
         self._freeze()
@@ -5274,6 +5522,10 @@ class ImportAbaqusParams(CoreObject):
     ----------
     model: Model
         Model to create a ``ImportAbaqusParams`` object with default parameters.
+    initial_counters: Dict[str, Union[str, int, float, bool]], optional
+        Parameter to specify the starting counter values for import
+
+        **This is a beta parameter**. **The behavior and name may change in the future**.
     json_data: dict, optional
         JSON dictionary to create a ``ImportAbaqusParams`` object with provided parameters.
 
@@ -5284,12 +5536,14 @@ class ImportAbaqusParams(CoreObject):
     _default_params = {}
 
     def __initialize(
-            self):
-        pass
+            self,
+            initial_counters: Dict[str, Union[str, int, float, bool]]):
+        self._initial_counters = initial_counters
 
     def __init__(
             self,
             model: CommunicationManager=None,
+            initial_counters: Dict[str, Union[str, int, float, bool]] = None,
             json_data : dict = None,
              **kwargs):
         """Initialize a ``ImportAbaqusParams`` object.
@@ -5298,6 +5552,10 @@ class ImportAbaqusParams(CoreObject):
         ----------
         model: Model
             Model to create a ``ImportAbaqusParams`` object with default parameters.
+        initial_counters: Dict[str, Union[str, int, float, bool]], optional
+            Parameter to specify the starting counter values for import
+
+            **This is a beta parameter**. **The behavior and name may change in the future**.
         json_data: dict, optional
             JSON dictionary to create a ``ImportAbaqusParams`` object with provided parameters.
 
@@ -5306,29 +5564,37 @@ class ImportAbaqusParams(CoreObject):
         >>> import_abaqus_params = prime.ImportAbaqusParams(model = model)
         """
         if json_data:
-            self.__initialize()
+            self.__initialize(
+                json_data["initialCounters"] if "initialCounters" in json_data else None)
         else:
-            all_field_specified = all(arg is not None for arg in [])
+            all_field_specified = all(arg is not None for arg in [initial_counters])
             if all_field_specified:
-                self.__initialize()
+                self.__initialize(
+                    initial_counters)
             else:
                 if model is None:
                     raise ValueError("Invalid assignment. Either pass a model or specify all properties.")
                 else:
                     param_json = model._communicator.initialize_params(model, "ImportAbaqusParams")
                     json_data = param_json["ImportAbaqusParams"] if "ImportAbaqusParams" in param_json else {}
-                    self.__initialize()
+                    self.__initialize(
+                        initial_counters if initial_counters is not None else ( ImportAbaqusParams._default_params["initial_counters"] if "initial_counters" in ImportAbaqusParams._default_params else (json_data["initialCounters"] if "initialCounters" in json_data else None)))
         self._custom_params = kwargs
         if model is not None:
-            [ model._logger.warning(f'Unsupported argument : {key}') for key in kwargs ]
+            [ model._logger.debug(f'Unsupported argument : {key}') for key in kwargs ]
         [setattr(type(self), key, property(lambda self, key = key:  self._custom_params[key] if key in self._custom_params else None,
         lambda self, value, key = key : self._custom_params.update({ key: value }))) for key in kwargs]
         self._freeze()
 
     @staticmethod
-    def set_default():
+    def set_default(
+            initial_counters: Dict[str, Union[str, int, float, bool]] = None):
         """Set the default values of the ``ImportAbaqusParams`` object.
 
+        Parameters
+        ----------
+        initial_counters: Dict[str, Union[str, int, float, bool]], optional
+            Parameter to specify the starting counter values for import
         """
         args = locals()
         [ImportAbaqusParams._default_params.update({ key: value }) for key, value in args.items() if value is not None]
@@ -5347,15 +5613,27 @@ class ImportAbaqusParams(CoreObject):
 
     def _jsonify(self) -> Dict[str, Any]:
         json_data = {}
+        if self._initial_counters is not None:
+            json_data["initialCounters"] = self._initial_counters
         [ json_data.update({ utils.to_camel_case(key) : value }) for key, value in self._custom_params.items()]
         return json_data
 
     def __str__(self) -> str:
-        message = "" % ()
+        message = "initial_counters :  %s" % (self._initial_counters)
         message += ''.join('\n' + str(key) + ' : ' + str(value) for key, value in self._custom_params.items())
-        if len(message) == 0:
-            message = 'The object has no parameters to print.'
         return message
+
+    @property
+    def initial_counters(self) -> Dict[str, Union[str, int, float, bool]]:
+        """Parameter to specify the starting counter values for import
+
+        **This is a beta parameter**. **The behavior and name may change in the future**.
+        """
+        return self._initial_counters
+
+    @initial_counters.setter
+    def initial_counters(self, value: Dict[str, Union[str, int, float, bool]]):
+        self._initial_counters = value
 
 class ImportAbaqusResults(CoreObject):
     """Results of Abaqus import operation.
@@ -5366,6 +5644,10 @@ class ImportAbaqusResults(CoreObject):
         Model to create a ``ImportAbaqusResults`` object with default parameters.
     summary_log: str, optional
         Summary log for the import operation in json format.
+
+        **This is a beta parameter**. **The behavior and name may change in the future**.
+    formatted_summary_log: str, optional
+        Formatted summary log for the import operation.
 
         **This is a beta parameter**. **The behavior and name may change in the future**.
     error_code: ErrorCode, optional
@@ -5386,9 +5668,11 @@ class ImportAbaqusResults(CoreObject):
     def __initialize(
             self,
             summary_log: str,
+            formatted_summary_log: str,
             error_code: ErrorCode,
             warning_codes: List[WarningCode]):
         self._summary_log = summary_log
+        self._formatted_summary_log = formatted_summary_log
         self._error_code = ErrorCode(error_code)
         self._warning_codes = warning_codes
 
@@ -5396,6 +5680,7 @@ class ImportAbaqusResults(CoreObject):
             self,
             model: CommunicationManager=None,
             summary_log: str = None,
+            formatted_summary_log: str = None,
             error_code: ErrorCode = None,
             warning_codes: List[WarningCode] = None,
             json_data : dict = None,
@@ -5408,6 +5693,10 @@ class ImportAbaqusResults(CoreObject):
             Model to create a ``ImportAbaqusResults`` object with default parameters.
         summary_log: str, optional
             Summary log for the import operation in json format.
+
+            **This is a beta parameter**. **The behavior and name may change in the future**.
+        formatted_summary_log: str, optional
+            Formatted summary log for the import operation.
 
             **This is a beta parameter**. **The behavior and name may change in the future**.
         error_code: ErrorCode, optional
@@ -5426,13 +5715,15 @@ class ImportAbaqusResults(CoreObject):
         if json_data:
             self.__initialize(
                 json_data["summaryLog"] if "summaryLog" in json_data else None,
+                json_data["formattedSummaryLog"] if "formattedSummaryLog" in json_data else None,
                 ErrorCode(json_data["errorCode"] if "errorCode" in json_data else None),
                 [WarningCode(data) for data in json_data["warningCodes"]] if "warningCodes" in json_data else None)
         else:
-            all_field_specified = all(arg is not None for arg in [summary_log, error_code, warning_codes])
+            all_field_specified = all(arg is not None for arg in [summary_log, formatted_summary_log, error_code, warning_codes])
             if all_field_specified:
                 self.__initialize(
                     summary_log,
+                    formatted_summary_log,
                     error_code,
                     warning_codes)
             else:
@@ -5443,11 +5734,12 @@ class ImportAbaqusResults(CoreObject):
                     json_data = param_json["ImportAbaqusResults"] if "ImportAbaqusResults" in param_json else {}
                     self.__initialize(
                         summary_log if summary_log is not None else ( ImportAbaqusResults._default_params["summary_log"] if "summary_log" in ImportAbaqusResults._default_params else (json_data["summaryLog"] if "summaryLog" in json_data else None)),
+                        formatted_summary_log if formatted_summary_log is not None else ( ImportAbaqusResults._default_params["formatted_summary_log"] if "formatted_summary_log" in ImportAbaqusResults._default_params else (json_data["formattedSummaryLog"] if "formattedSummaryLog" in json_data else None)),
                         error_code if error_code is not None else ( ImportAbaqusResults._default_params["error_code"] if "error_code" in ImportAbaqusResults._default_params else ErrorCode(json_data["errorCode"] if "errorCode" in json_data else None)),
                         warning_codes if warning_codes is not None else ( ImportAbaqusResults._default_params["warning_codes"] if "warning_codes" in ImportAbaqusResults._default_params else [WarningCode(data) for data in (json_data["warningCodes"] if "warningCodes" in json_data else None)]))
         self._custom_params = kwargs
         if model is not None:
-            [ model._logger.warning(f'Unsupported argument : {key}') for key in kwargs ]
+            [ model._logger.debug(f'Unsupported argument : {key}') for key in kwargs ]
         [setattr(type(self), key, property(lambda self, key = key:  self._custom_params[key] if key in self._custom_params else None,
         lambda self, value, key = key : self._custom_params.update({ key: value }))) for key in kwargs]
         self._freeze()
@@ -5455,6 +5747,7 @@ class ImportAbaqusResults(CoreObject):
     @staticmethod
     def set_default(
             summary_log: str = None,
+            formatted_summary_log: str = None,
             error_code: ErrorCode = None,
             warning_codes: List[WarningCode] = None):
         """Set the default values of the ``ImportAbaqusResults`` object.
@@ -5463,6 +5756,8 @@ class ImportAbaqusResults(CoreObject):
         ----------
         summary_log: str, optional
             Summary log for the import operation in json format.
+        formatted_summary_log: str, optional
+            Formatted summary log for the import operation.
         error_code: ErrorCode, optional
             Error code associated with failure of operation.
         warning_codes: List[WarningCode], optional
@@ -5487,6 +5782,8 @@ class ImportAbaqusResults(CoreObject):
         json_data = {}
         if self._summary_log is not None:
             json_data["summaryLog"] = self._summary_log
+        if self._formatted_summary_log is not None:
+            json_data["formattedSummaryLog"] = self._formatted_summary_log
         if self._error_code is not None:
             json_data["errorCode"] = self._error_code
         if self._warning_codes is not None:
@@ -5495,7 +5792,7 @@ class ImportAbaqusResults(CoreObject):
         return json_data
 
     def __str__(self) -> str:
-        message = "summary_log :  %s\nerror_code :  %s\nwarning_codes :  %s" % (self._summary_log, self._error_code, '[' + ''.join('\n' + str(data) for data in self._warning_codes) + ']')
+        message = "summary_log :  %s\nformatted_summary_log :  %s\nerror_code :  %s\nwarning_codes :  %s" % (self._summary_log, self._formatted_summary_log, self._error_code, '[' + ''.join('\n' + str(data) for data in self._warning_codes) + ']')
         message += ''.join('\n' + str(key) + ' : ' + str(value) for key, value in self._custom_params.items())
         return message
 
@@ -5510,6 +5807,18 @@ class ImportAbaqusResults(CoreObject):
     @summary_log.setter
     def summary_log(self, value: str):
         self._summary_log = value
+
+    @property
+    def formatted_summary_log(self) -> str:
+        """Formatted summary log for the import operation.
+
+        **This is a beta parameter**. **The behavior and name may change in the future**.
+        """
+        return self._formatted_summary_log
+
+    @formatted_summary_log.setter
+    def formatted_summary_log(self, value: str):
+        self._formatted_summary_log = value
 
     @property
     def error_code(self) -> ErrorCode:

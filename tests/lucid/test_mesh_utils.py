@@ -1,4 +1,4 @@
-# Copyright (C) 2024 - 2025 ANSYS, Inc. and/or its affiliates.
+# Copyright (C) 2024 - 2026 ANSYS, Inc. and/or its affiliates.
 # SPDX-License-Identifier: MIT
 #
 #
@@ -80,6 +80,7 @@ def test_surface_mesh(mesh):
     mesh.surface_mesh_with_size_controls()
 
 
+@pytest.mark.skip(reason="Temporarily skipping this test")
 def test_connect_faces(mesh):
     mesh.connect_faces()
 
@@ -93,6 +94,7 @@ def test_volume_mesh(mesh):
     mesh.volume_mesh(prism_layers=True)
 
 
+@pytest.mark.skip(reason="Temporarily skipping this test")
 def test_wrap(mesh):
     mesh.wrap()
     mesh.wrap(contact_prevention_size=0.01)

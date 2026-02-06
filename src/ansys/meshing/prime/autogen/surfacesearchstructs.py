@@ -102,7 +102,7 @@ class SearchBySpikeParams(CoreObject):
                         spike_angle if spike_angle is not None else ( SearchBySpikeParams._default_params["spike_angle"] if "spike_angle" in SearchBySpikeParams._default_params else (json_data["spikeAngle"] if "spikeAngle" in json_data else None)))
         self._custom_params = kwargs
         if model is not None:
-            [ model._logger.warning(f'Unsupported argument : {key}') for key in kwargs ]
+            [ model._logger.debug(f'Unsupported argument : {key}') for key in kwargs ]
         [setattr(type(self), key, property(lambda self, key = key:  self._custom_params[key] if key in self._custom_params else None,
         lambda self, value, key = key : self._custom_params.update({ key: value }))) for key in kwargs]
         self._freeze()
@@ -226,7 +226,7 @@ class SearchBySpikeResults(CoreObject):
                         error_code if error_code is not None else ( SearchBySpikeResults._default_params["error_code"] if "error_code" in SearchBySpikeResults._default_params else ErrorCode(json_data["errorCode"] if "errorCode" in json_data else None)))
         self._custom_params = kwargs
         if model is not None:
-            [ model._logger.warning(f'Unsupported argument : {key}') for key in kwargs ]
+            [ model._logger.debug(f'Unsupported argument : {key}') for key in kwargs ]
         [setattr(type(self), key, property(lambda self, key = key:  self._custom_params[key] if key in self._custom_params else None,
         lambda self, value, key = key : self._custom_params.update({ key: value }))) for key in kwargs]
         self._freeze()
@@ -355,7 +355,7 @@ class SearchByFoldsParams(CoreObject):
                         critical_angle if critical_angle is not None else ( SearchByFoldsParams._default_params["critical_angle"] if "critical_angle" in SearchByFoldsParams._default_params else (json_data["criticalAngle"] if "criticalAngle" in json_data else None)))
         self._custom_params = kwargs
         if model is not None:
-            [ model._logger.warning(f'Unsupported argument : {key}') for key in kwargs ]
+            [ model._logger.debug(f'Unsupported argument : {key}') for key in kwargs ]
         [setattr(type(self), key, property(lambda self, key = key:  self._custom_params[key] if key in self._custom_params else None,
         lambda self, value, key = key : self._custom_params.update({ key: value }))) for key in kwargs]
         self._freeze()
@@ -479,7 +479,7 @@ class SearchByFoldsResults(CoreObject):
                         error_code if error_code is not None else ( SearchByFoldsResults._default_params["error_code"] if "error_code" in SearchByFoldsResults._default_params else ErrorCode(json_data["errorCode"] if "errorCode" in json_data else None)))
         self._custom_params = kwargs
         if model is not None:
-            [ model._logger.warning(f'Unsupported argument : {key}') for key in kwargs ]
+            [ model._logger.debug(f'Unsupported argument : {key}') for key in kwargs ]
         [setattr(type(self), key, property(lambda self, key = key:  self._custom_params[key] if key in self._custom_params else None,
         lambda self, value, key = key : self._custom_params.update({ key: value }))) for key in kwargs]
         self._freeze()
@@ -618,7 +618,7 @@ class SearchByInvalidNormalsResults(CoreObject):
                         error_code if error_code is not None else ( SearchByInvalidNormalsResults._default_params["error_code"] if "error_code" in SearchByInvalidNormalsResults._default_params else ErrorCode(json_data["errorCode"] if "errorCode" in json_data else None)))
         self._custom_params = kwargs
         if model is not None:
-            [ model._logger.warning(f'Unsupported argument : {key}') for key in kwargs ]
+            [ model._logger.debug(f'Unsupported argument : {key}') for key in kwargs ]
         [setattr(type(self), key, property(lambda self, key = key:  self._custom_params[key] if key in self._custom_params else None,
         lambda self, value, key = key : self._custom_params.update({ key: value }))) for key in kwargs]
         self._freeze()
@@ -738,7 +738,7 @@ class SearchBySelfIntersectionParams(CoreObject):
                     self.__initialize()
         self._custom_params = kwargs
         if model is not None:
-            [ model._logger.warning(f'Unsupported argument : {key}') for key in kwargs ]
+            [ model._logger.debug(f'Unsupported argument : {key}') for key in kwargs ]
         [setattr(type(self), key, property(lambda self, key = key:  self._custom_params[key] if key in self._custom_params else None,
         lambda self, value, key = key : self._custom_params.update({ key: value }))) for key in kwargs]
         self._freeze()
@@ -847,7 +847,7 @@ class SearchByIntersectionResults(CoreObject):
                         error_code if error_code is not None else ( SearchByIntersectionResults._default_params["error_code"] if "error_code" in SearchByIntersectionResults._default_params else ErrorCode(json_data["errorCode"] if "errorCode" in json_data else None)))
         self._custom_params = kwargs
         if model is not None:
-            [ model._logger.warning(f'Unsupported argument : {key}') for key in kwargs ]
+            [ model._logger.debug(f'Unsupported argument : {key}') for key in kwargs ]
         [setattr(type(self), key, property(lambda self, key = key:  self._custom_params[key] if key in self._custom_params else None,
         lambda self, value, key = key : self._custom_params.update({ key: value }))) for key in kwargs]
         self._freeze()
@@ -986,7 +986,7 @@ class SearchByQualityParams(CoreObject):
                         face_quality_measure if face_quality_measure is not None else ( SearchByQualityParams._default_params["face_quality_measure"] if "face_quality_measure" in SearchByQualityParams._default_params else FaceQualityMeasure(json_data["faceQualityMeasure"] if "faceQualityMeasure" in json_data else None)))
         self._custom_params = kwargs
         if model is not None:
-            [ model._logger.warning(f'Unsupported argument : {key}') for key in kwargs ]
+            [ model._logger.debug(f'Unsupported argument : {key}') for key in kwargs ]
         [setattr(type(self), key, property(lambda self, key = key:  self._custom_params[key] if key in self._custom_params else None,
         lambda self, value, key = key : self._custom_params.update({ key: value }))) for key in kwargs]
         self._freeze()
@@ -1145,7 +1145,7 @@ class SearchByQualityResults(CoreObject):
                         min_quality if min_quality is not None else ( SearchByQualityResults._default_params["min_quality"] if "min_quality" in SearchByQualityResults._default_params else (json_data["minQuality"] if "minQuality" in json_data else None)))
         self._custom_params = kwargs
         if model is not None:
-            [ model._logger.warning(f'Unsupported argument : {key}') for key in kwargs ]
+            [ model._logger.debug(f'Unsupported argument : {key}') for key in kwargs ]
         [setattr(type(self), key, property(lambda self, key = key:  self._custom_params[key] if key in self._custom_params else None,
         lambda self, value, key = key : self._custom_params.update({ key: value }))) for key in kwargs]
         self._freeze()
@@ -1344,7 +1344,7 @@ class SearchByThinStripParams(CoreObject):
                         feature_angle if feature_angle is not None else ( SearchByThinStripParams._default_params["feature_angle"] if "feature_angle" in SearchByThinStripParams._default_params else (json_data["featureAngle"] if "featureAngle" in json_data else None)))
         self._custom_params = kwargs
         if model is not None:
-            [ model._logger.warning(f'Unsupported argument : {key}') for key in kwargs ]
+            [ model._logger.debug(f'Unsupported argument : {key}') for key in kwargs ]
         [setattr(type(self), key, property(lambda self, key = key:  self._custom_params[key] if key in self._custom_params else None,
         lambda self, value, key = key : self._custom_params.update({ key: value }))) for key in kwargs]
         self._freeze()
@@ -1528,7 +1528,7 @@ class SearchByThinStripResults(CoreObject):
                         error_code if error_code is not None else ( SearchByThinStripResults._default_params["error_code"] if "error_code" in SearchByThinStripResults._default_params else ErrorCode(json_data["errorCode"] if "errorCode" in json_data else None)))
         self._custom_params = kwargs
         if model is not None:
-            [ model._logger.warning(f'Unsupported argument : {key}') for key in kwargs ]
+            [ model._logger.debug(f'Unsupported argument : {key}') for key in kwargs ]
         [setattr(type(self), key, property(lambda self, key = key:  self._custom_params[key] if key in self._custom_params else None,
         lambda self, value, key = key : self._custom_params.update({ key: value }))) for key in kwargs]
         self._freeze()
@@ -1707,7 +1707,7 @@ class SurfaceQualityResult(CoreObject):
                         min_quality if min_quality is not None else ( SurfaceQualityResult._default_params["min_quality"] if "min_quality" in SurfaceQualityResult._default_params else (json_data["minQuality"] if "minQuality" in json_data else None)))
         self._custom_params = kwargs
         if model is not None:
-            [ model._logger.warning(f'Unsupported argument : {key}') for key in kwargs ]
+            [ model._logger.debug(f'Unsupported argument : {key}') for key in kwargs ]
         [setattr(type(self), key, property(lambda self, key = key:  self._custom_params[key] if key in self._custom_params else None,
         lambda self, value, key = key : self._custom_params.update({ key: value }))) for key in kwargs]
         self._freeze()
@@ -1916,7 +1916,7 @@ class SurfaceQualitySummaryResults(CoreObject):
                         summary if summary is not None else ( SurfaceQualitySummaryResults._default_params["summary"] if "summary" in SurfaceQualitySummaryResults._default_params else (json_data["summary"] if "summary" in json_data else None)))
         self._custom_params = kwargs
         if model is not None:
-            [ model._logger.warning(f'Unsupported argument : {key}') for key in kwargs ]
+            [ model._logger.debug(f'Unsupported argument : {key}') for key in kwargs ]
         [setattr(type(self), key, property(lambda self, key = key:  self._custom_params[key] if key in self._custom_params else None,
         lambda self, value, key = key : self._custom_params.update({ key: value }))) for key in kwargs]
         self._freeze()
@@ -2080,7 +2080,7 @@ class SurfaceQualitySummaryParams(CoreObject):
                         quality_limit if quality_limit is not None else ( SurfaceQualitySummaryParams._default_params["quality_limit"] if "quality_limit" in SurfaceQualitySummaryParams._default_params else (json_data["qualityLimit"] if "qualityLimit" in json_data else None)))
         self._custom_params = kwargs
         if model is not None:
-            [ model._logger.warning(f'Unsupported argument : {key}') for key in kwargs ]
+            [ model._logger.debug(f'Unsupported argument : {key}') for key in kwargs ]
         [setattr(type(self), key, property(lambda self, key = key:  self._custom_params[key] if key in self._custom_params else None,
         lambda self, value, key = key : self._custom_params.update({ key: value }))) for key in kwargs]
         self._freeze()
@@ -2264,7 +2264,7 @@ class SurfaceDiagnosticSummaryResults(CoreObject):
                         n_duplicate_faces if n_duplicate_faces is not None else ( SurfaceDiagnosticSummaryResults._default_params["n_duplicate_faces"] if "n_duplicate_faces" in SurfaceDiagnosticSummaryResults._default_params else (json_data["nDuplicateFaces"] if "nDuplicateFaces" in json_data else None)))
         self._custom_params = kwargs
         if model is not None:
-            [ model._logger.warning(f'Unsupported argument : {key}') for key in kwargs ]
+            [ model._logger.debug(f'Unsupported argument : {key}') for key in kwargs ]
         [setattr(type(self), key, property(lambda self, key = key:  self._custom_params[key] if key in self._custom_params else None,
         lambda self, value, key = key : self._custom_params.update({ key: value }))) for key in kwargs]
         self._freeze()
@@ -2478,7 +2478,7 @@ class SurfaceDiagnosticSummaryParams(CoreObject):
                         compute_duplicate_faces if compute_duplicate_faces is not None else ( SurfaceDiagnosticSummaryParams._default_params["compute_duplicate_faces"] if "compute_duplicate_faces" in SurfaceDiagnosticSummaryParams._default_params else (json_data["computeDuplicateFaces"] if "computeDuplicateFaces" in json_data else None)))
         self._custom_params = kwargs
         if model is not None:
-            [ model._logger.warning(f'Unsupported argument : {key}') for key in kwargs ]
+            [ model._logger.debug(f'Unsupported argument : {key}') for key in kwargs ]
         [setattr(type(self), key, property(lambda self, key = key:  self._custom_params[key] if key in self._custom_params else None,
         lambda self, value, key = key : self._custom_params.update({ key: value }))) for key in kwargs]
         self._freeze()
@@ -2643,7 +2643,7 @@ class SearchInfoByRegisterIdParams(CoreObject):
                     self.__initialize()
         self._custom_params = kwargs
         if model is not None:
-            [ model._logger.warning(f'Unsupported argument : {key}') for key in kwargs ]
+            [ model._logger.debug(f'Unsupported argument : {key}') for key in kwargs ]
         [setattr(type(self), key, property(lambda self, key = key:  self._custom_params[key] if key in self._custom_params else None,
         lambda self, value, key = key : self._custom_params.update({ key: value }))) for key in kwargs]
         self._freeze()
@@ -2688,13 +2688,13 @@ class SearchInfoByRegisterIdResults(CoreObject):
     model: Model
         Model to create a ``SearchInfoByRegisterIdResults`` object with default parameters.
     error_code: ErrorCode, optional
-        Error code associated with the retreiving information based on register id.
+        Error code associated with the retrieving information based on register id.
     n_found: int, optional
         Number of registered face elements.
     locations_found: Iterable[float], optional
         Locations of each cluster of registered face elements.
     face_zonelets_found: Iterable[int], optional
-        Ids of the face zonelets containing atleast one registered face element.
+        Ids of the face zonelets containing at least one registered face element.
     json_data: dict, optional
         JSON dictionary to create a ``SearchInfoByRegisterIdResults`` object with provided parameters.
 
@@ -2731,13 +2731,13 @@ class SearchInfoByRegisterIdResults(CoreObject):
         model: Model
             Model to create a ``SearchInfoByRegisterIdResults`` object with default parameters.
         error_code: ErrorCode, optional
-            Error code associated with the retreiving information based on register id.
+            Error code associated with the retrieving information based on register id.
         n_found: int, optional
             Number of registered face elements.
         locations_found: Iterable[float], optional
             Locations of each cluster of registered face elements.
         face_zonelets_found: Iterable[int], optional
-            Ids of the face zonelets containing atleast one registered face element.
+            Ids of the face zonelets containing at least one registered face element.
         json_data: dict, optional
             JSON dictionary to create a ``SearchInfoByRegisterIdResults`` object with provided parameters.
 
@@ -2772,7 +2772,7 @@ class SearchInfoByRegisterIdResults(CoreObject):
                         face_zonelets_found if face_zonelets_found is not None else ( SearchInfoByRegisterIdResults._default_params["face_zonelets_found"] if "face_zonelets_found" in SearchInfoByRegisterIdResults._default_params else (json_data["faceZoneletsFound"] if "faceZoneletsFound" in json_data else None)))
         self._custom_params = kwargs
         if model is not None:
-            [ model._logger.warning(f'Unsupported argument : {key}') for key in kwargs ]
+            [ model._logger.debug(f'Unsupported argument : {key}') for key in kwargs ]
         [setattr(type(self), key, property(lambda self, key = key:  self._custom_params[key] if key in self._custom_params else None,
         lambda self, value, key = key : self._custom_params.update({ key: value }))) for key in kwargs]
         self._freeze()
@@ -2788,13 +2788,13 @@ class SearchInfoByRegisterIdResults(CoreObject):
         Parameters
         ----------
         error_code: ErrorCode, optional
-            Error code associated with the retreiving information based on register id.
+            Error code associated with the retrieving information based on register id.
         n_found: int, optional
             Number of registered face elements.
         locations_found: Iterable[float], optional
             Locations of each cluster of registered face elements.
         face_zonelets_found: Iterable[int], optional
-            Ids of the face zonelets containing atleast one registered face element.
+            Ids of the face zonelets containing at least one registered face element.
         """
         args = locals()
         [SearchInfoByRegisterIdResults._default_params.update({ key: value }) for key, value in args.items() if value is not None]
@@ -2831,7 +2831,7 @@ class SearchInfoByRegisterIdResults(CoreObject):
 
     @property
     def error_code(self) -> ErrorCode:
-        """Error code associated with the retreiving information based on register id.
+        """Error code associated with the retrieving information based on register id.
         """
         return self._error_code
 
@@ -2861,7 +2861,7 @@ class SearchInfoByRegisterIdResults(CoreObject):
 
     @property
     def face_zonelets_found(self) -> Iterable[int]:
-        """Ids of the face zonelets containing atleast one registered face element.
+        """Ids of the face zonelets containing at least one registered face element.
         """
         return self._face_zonelets_found
 
@@ -2931,7 +2931,7 @@ class CheckFaceDeviationParams(CoreObject):
                         distance if distance is not None else ( CheckFaceDeviationParams._default_params["distance"] if "distance" in CheckFaceDeviationParams._default_params else (json_data["distance"] if "distance" in json_data else None)))
         self._custom_params = kwargs
         if model is not None:
-            [ model._logger.warning(f'Unsupported argument : {key}') for key in kwargs ]
+            [ model._logger.debug(f'Unsupported argument : {key}') for key in kwargs ]
         [setattr(type(self), key, property(lambda self, key = key:  self._custom_params[key] if key in self._custom_params else None,
         lambda self, value, key = key : self._custom_params.update({ key: value }))) for key in kwargs]
         self._freeze()
@@ -3055,7 +3055,7 @@ class CheckFaceDeviationResults(CoreObject):
                         maximum_deviation if maximum_deviation is not None else ( CheckFaceDeviationResults._default_params["maximum_deviation"] if "maximum_deviation" in CheckFaceDeviationResults._default_params else (json_data["maximumDeviation"] if "maximumDeviation" in json_data else None)))
         self._custom_params = kwargs
         if model is not None:
-            [ model._logger.warning(f'Unsupported argument : {key}') for key in kwargs ]
+            [ model._logger.debug(f'Unsupported argument : {key}') for key in kwargs ]
         [setattr(type(self), key, property(lambda self, key = key:  self._custom_params[key] if key in self._custom_params else None,
         lambda self, value, key = key : self._custom_params.update({ key: value }))) for key in kwargs]
         self._freeze()

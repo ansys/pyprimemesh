@@ -1,4 +1,4 @@
-# Copyright (C) 2024 - 2025 ANSYS, Inc. and/or its affiliates.
+# Copyright (C) 2024 - 2026 ANSYS, Inc. and/or its affiliates.
 # SPDX-License-Identifier: MIT
 #
 # Permission is hereby granted, free of charge, to any person obtaining a copy
@@ -20,11 +20,6 @@
 # SOFTWARE.
 
 """Module for LS-DYNA export utilities."""
-
-########################### [TODO] ##################################
-# [TODO] code quality of this file is not up to PyPrimeMesh standards,
-# please move the code to cpp or improve the code quality
-########################### [TODO] ##################################
 
 import ansys.meshing.prime as prime
 
@@ -1674,7 +1669,7 @@ class _MatPlasticityWithDamage:
         curve_id_1 = 0
         t = 0.0
         eppf = self._strain_at_dmg_ini
-        eppfr = self._damage_length + self._strain_at_dmg_ini
+        eppfr = self._damage_length / self._section_thickness + self._strain_at_dmg_ini
         header_data = self._header
         header_data[0] = mat_id
         header_data[1] = density
@@ -1995,8 +1990,8 @@ class _MatAddDamageDiem:
         self._data_dict = {}
         self._formatter = _FormatDynaCards(self._card_format)
         self._format_map = {"SHORT": 10, "LONG": 20}
-        self._header_title = ["mid", "ndiemc", "dinit", "deps", "numfjp"]
-        self._header = [1, 1.0, 0.0, 0.00001, 5]
+        self._header_title = ["mid", "ndiemc", "dinit", "deps", "numfip"]
+        self._header = [1, 1.0, 0.0, 0.00001, -100]
         self._data_line = {
             "D1_TITLE": ['dityp', 'p1', 'p2', 'p3', 'p4', 'p5'],
             "D1_DATA": [0.0, 0, 0.0, 0.0, 1.0, 0.0],
@@ -2311,6 +2306,7 @@ class MaterialProcessor:
         '_sim_data',
         '_raw_materials_data',
         '_zone_data',
+        '_part_data',
         '_mat_id',
         '_wt_factor',
         '_material_assignedTo_zones',
@@ -2333,6 +2329,7 @@ class MaterialProcessor:
         self._sim_data = sim_data
         self._raw_materials_data = sim_data['Materials']
         self._zone_data = sim_data['Zones']
+        self._part_data = sim_data['Parts']
         self._mat_id = 0
         self._wt_factor = 1.0
         self._material_assignedTo_zones = {}
@@ -2453,15 +2450,29 @@ class MaterialProcessor:
         return int(max_id)
 
     def _get_zone_with_id(self, _id):
-        for zone in self._zone_data:
-            zone_details = self._zone_data[zone]
-            try:
-                if zone_details['id'] == _id:
-                    zone_name = zone
-                    zone_details = zone_details
-                    return zone_name, zone_details
-            except:
-                pass
+        if self._zone_data is not None:
+            for zone in self._zone_data:
+                zone_details = self._zone_data[zone]
+                try:
+                    if zone_details['id'] == _id:
+                        zone_name = zone
+                        zone_details = zone_details
+                        return zone_name, zone_details
+                except:
+                    pass
+        elif self._part_data is not None:
+            for part in self._part_data:
+                part_info = self._part_data[part]
+                if part_info is not None and part_info['Zones'] is not None:
+                    for zone in part_info['Zones']:
+                        zone_details = part_info['Zones'][zone]
+                        try:
+                            if zone_details['id'] == _id:
+                                zone_name = zone
+                                zone_details = zone_details
+                                return zone_name, zone_details
+                        except:
+                            pass
         return None, {}
 
     def _is_material_used_with_shell(self, mat_name):
@@ -2535,27 +2546,57 @@ class MaterialProcessor:
         return thickness
 
     def _map_zone_type_with_material(self):
-        for zone in self._zone_data:
-            zone_details = self._zone_data[zone]
-            # self._logger.info(zone)
-            # self._logger.info(zone_details)
-            if 'Material' not in zone_details:
-                self._logger.warning(f'Warning: Material is not specified for zone {zone}')
-                continue
-            if zone_details['Material'] in self._material_assignedTo_zones:
-                try:
-                    zoneId = zone_details['id']
-                    self._material_assignedTo_zones[zone_details['Material']].append(zoneId)
-                except:
-                    self._logger.warning(f'Zone {zone} does not have id for it ')
-                    pass
-            else:
-                try:
-                    zoneId = zone_details['id']
-                    self._material_assignedTo_zones[zone_details['Material']] = [zoneId]
-                except:
-                    self._material_assignedTo_zones[zone_details['Material']] = []
-                    self._logger.warning(f'Zone {zone} does not have id for it ')
+        if self._zone_data is not None:
+            for zone in self._zone_data:
+                zone_details = self._zone_data[zone]
+                # self._logger.info(zone)
+                # self._logger.info(zone_details)
+                if 'Material' not in zone_details:
+                    self._logger.warning(f'Warning: Material is not specified for zone {zone}')
+                    continue
+                if zone_details['Material'] in self._material_assignedTo_zones:
+                    try:
+                        zoneId = zone_details['id']
+                        self._material_assignedTo_zones[zone_details['Material']].append(zoneId)
+                    except:
+                        self._logger.warning(f'Zone {zone} does not have id for it ')
+                        pass
+                else:
+                    try:
+                        zoneId = zone_details['id']
+                        self._material_assignedTo_zones[zone_details['Material']] = [zoneId]
+                    except:
+                        self._material_assignedTo_zones[zone_details['Material']] = []
+                        self._logger.warning(f'Zone {zone} does not have id for it ')
+        elif self._part_data is not None:
+            for part in self._part_data:
+                part_info = self._part_data[part]
+                if part_info is not None and part_info['Zones'] is not None:
+                    for zone in part_info['Zones']:
+                        zone_details = part_info['Zones'][zone]
+                        # self._logger.info(zone)
+                        # self._logger.info(zone_details)
+                        if 'Material' not in zone_details:
+                            self._logger.warning(
+                                f'Warning: Material is not specified for zone {zone}'
+                            )
+                            continue
+                        if zone_details['Material'] in self._material_assignedTo_zones:
+                            try:
+                                zoneId = zone_details['id']
+                                self._material_assignedTo_zones[zone_details['Material']].append(
+                                    zoneId
+                                )
+                            except:
+                                self._logger.warning(f'Zone {zone} does not have id for it ')
+                                pass
+                        else:
+                            try:
+                                zoneId = zone_details['id']
+                                self._material_assignedTo_zones[zone_details['Material']] = [zoneId]
+                            except:
+                                self._material_assignedTo_zones[zone_details['Material']] = []
+                                self._logger.warning(f'Zone {zone} does not have id for it ')
 
     def _get_mat_comands(self, mat_name):
         mat_data = self._raw_materials_data[mat_name]

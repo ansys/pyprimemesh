@@ -92,7 +92,7 @@ class CellStatisticsParams(CoreObject):
                         get_volume if get_volume is not None else ( CellStatisticsParams._default_params["get_volume"] if "get_volume" in CellStatisticsParams._default_params else (json_data["getVolume"] if "getVolume" in json_data else None)))
         self._custom_params = kwargs
         if model is not None:
-            [ model._logger.warning(f'Unsupported argument : {key}') for key in kwargs ]
+            [ model._logger.debug(f'Unsupported argument : {key}') for key in kwargs ]
         [setattr(type(self), key, property(lambda self, key = key:  self._custom_params[key] if key in self._custom_params else None,
         lambda self, value, key = key : self._custom_params.update({ key: value }))) for key in kwargs]
         self._freeze()
@@ -216,7 +216,7 @@ class CellStatisticsResults(CoreObject):
                         error_code if error_code is not None else ( CellStatisticsResults._default_params["error_code"] if "error_code" in CellStatisticsResults._default_params else ErrorCode(json_data["errorCode"] if "errorCode" in json_data else None)))
         self._custom_params = kwargs
         if model is not None:
-            [ model._logger.warning(f'Unsupported argument : {key}') for key in kwargs ]
+            [ model._logger.debug(f'Unsupported argument : {key}') for key in kwargs ]
         [setattr(type(self), key, property(lambda self, key = key:  self._custom_params[key] if key in self._custom_params else None,
         lambda self, value, key = key : self._custom_params.update({ key: value }))) for key in kwargs]
         self._freeze()
@@ -435,7 +435,7 @@ class FaceConnectivityResults(CoreObject):
                         face_list if face_list is not None else ( FaceConnectivityResults._default_params["face_list"] if "face_list" in FaceConnectivityResults._default_params else (json_data["faceList"] if "faceList" in json_data else None)))
         self._custom_params = kwargs
         if model is not None:
-            [ model._logger.warning(f'Unsupported argument : {key}') for key in kwargs ]
+            [ model._logger.debug(f'Unsupported argument : {key}') for key in kwargs ]
         [setattr(type(self), key, property(lambda self, key = key:  self._custom_params[key] if key in self._custom_params else None,
         lambda self, value, key = key : self._custom_params.update({ key: value }))) for key in kwargs]
         self._freeze()
@@ -774,7 +774,7 @@ class EdgeConnectivityResults(CoreObject):
                         num_edges_per_edge_zonelet if num_edges_per_edge_zonelet is not None else ( EdgeConnectivityResults._default_params["num_edges_per_edge_zonelet"] if "num_edges_per_edge_zonelet" in EdgeConnectivityResults._default_params else (json_data["numEdgesPerEdgeZonelet"] if "numEdgesPerEdgeZonelet" in json_data else None)))
         self._custom_params = kwargs
         if model is not None:
-            [ model._logger.warning(f'Unsupported argument : {key}') for key in kwargs ]
+            [ model._logger.debug(f'Unsupported argument : {key}') for key in kwargs ]
         [setattr(type(self), key, property(lambda self, key = key:  self._custom_params[key] if key in self._custom_params else None,
         lambda self, value, key = key : self._custom_params.update({ key: value }))) for key in kwargs]
         self._freeze()
@@ -1053,7 +1053,7 @@ class FaceAndEdgeConnectivityResults(CoreObject):
                         edge_connectivity_result_per_part if edge_connectivity_result_per_part is not None else ( FaceAndEdgeConnectivityResults._default_params["edge_connectivity_result_per_part"] if "edge_connectivity_result_per_part" in FaceAndEdgeConnectivityResults._default_params else [EdgeConnectivityResults(model = model, json_data = data) for data in (json_data["edgeConnectivityResultPerPart"] if "edgeConnectivityResultPerPart" in json_data else None)]))
         self._custom_params = kwargs
         if model is not None:
-            [ model._logger.warning(f'Unsupported argument : {key}') for key in kwargs ]
+            [ model._logger.debug(f'Unsupported argument : {key}') for key in kwargs ]
         [setattr(type(self), key, property(lambda self, key = key:  self._custom_params[key] if key in self._custom_params else None,
         lambda self, value, key = key : self._custom_params.update({ key: value }))) for key in kwargs]
         self._freeze()
@@ -1222,7 +1222,7 @@ class FaceAndEdgeConnectivityParams(CoreObject):
                         reorder_edge_zonelets_mid_nodes if reorder_edge_zonelets_mid_nodes is not None else ( FaceAndEdgeConnectivityParams._default_params["reorder_edge_zonelets_mid_nodes"] if "reorder_edge_zonelets_mid_nodes" in FaceAndEdgeConnectivityParams._default_params else (json_data["reorderEdgeZoneletsMidNodes"] if "reorderEdgeZoneletsMidNodes" in json_data else None)))
         self._custom_params = kwargs
         if model is not None:
-            [ model._logger.warning(f'Unsupported argument : {key}') for key in kwargs ]
+            [ model._logger.debug(f'Unsupported argument : {key}') for key in kwargs ]
         [setattr(type(self), key, property(lambda self, key = key:  self._custom_params[key] if key in self._custom_params else None,
         lambda self, value, key = key : self._custom_params.update({ key: value }))) for key in kwargs]
         self._freeze()

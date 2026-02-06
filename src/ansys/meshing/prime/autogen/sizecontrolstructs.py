@@ -156,7 +156,7 @@ class CurvatureSizingParams(CoreObject):
                         use_cad_curvature if use_cad_curvature is not None else ( CurvatureSizingParams._default_params["use_cad_curvature"] if "use_cad_curvature" in CurvatureSizingParams._default_params else (json_data["useCadCurvature"] if "useCadCurvature" in json_data else None)))
         self._custom_params = kwargs
         if model is not None:
-            [ model._logger.warning(f'Unsupported argument : {key}') for key in kwargs ]
+            [ model._logger.debug(f'Unsupported argument : {key}') for key in kwargs ]
         [setattr(type(self), key, property(lambda self, key = key:  self._custom_params[key] if key in self._custom_params else None,
         lambda self, value, key = key : self._custom_params.update({ key: value }))) for key in kwargs]
         self._freeze()
@@ -380,7 +380,7 @@ class ProximitySizingParams(CoreObject):
                         ignore_orientation if ignore_orientation is not None else ( ProximitySizingParams._default_params["ignore_orientation"] if "ignore_orientation" in ProximitySizingParams._default_params else (json_data["ignoreOrientation"] if "ignoreOrientation" in json_data else None)))
         self._custom_params = kwargs
         if model is not None:
-            [ model._logger.warning(f'Unsupported argument : {key}') for key in kwargs ]
+            [ model._logger.debug(f'Unsupported argument : {key}') for key in kwargs ]
         [setattr(type(self), key, property(lambda self, key = key:  self._custom_params[key] if key in self._custom_params else None,
         lambda self, value, key = key : self._custom_params.update({ key: value }))) for key in kwargs]
         self._freeze()
@@ -583,7 +583,7 @@ class SoftSizingParams(CoreObject):
                         growth_rate if growth_rate is not None else ( SoftSizingParams._default_params["growth_rate"] if "growth_rate" in SoftSizingParams._default_params else (json_data["growthRate"] if "growthRate" in json_data else None)))
         self._custom_params = kwargs
         if model is not None:
-            [ model._logger.warning(f'Unsupported argument : {key}') for key in kwargs ]
+            [ model._logger.debug(f'Unsupported argument : {key}') for key in kwargs ]
         [setattr(type(self), key, property(lambda self, key = key:  self._custom_params[key] if key in self._custom_params else None,
         lambda self, value, key = key : self._custom_params.update({ key: value }))) for key in kwargs]
         self._freeze()
@@ -724,7 +724,7 @@ class HardSizingParams(CoreObject):
                         growth_rate if growth_rate is not None else ( HardSizingParams._default_params["growth_rate"] if "growth_rate" in HardSizingParams._default_params else (json_data["growthRate"] if "growthRate" in json_data else None)))
         self._custom_params = kwargs
         if model is not None:
-            [ model._logger.warning(f'Unsupported argument : {key}') for key in kwargs ]
+            [ model._logger.debug(f'Unsupported argument : {key}') for key in kwargs ]
         [setattr(type(self), key, property(lambda self, key = key:  self._custom_params[key] if key in self._custom_params else None,
         lambda self, value, key = key : self._custom_params.update({ key: value }))) for key in kwargs]
         self._freeze()
@@ -853,7 +853,7 @@ class MeshedSizingParams(CoreObject):
                         growth_rate if growth_rate is not None else ( MeshedSizingParams._default_params["growth_rate"] if "growth_rate" in MeshedSizingParams._default_params else (json_data["growthRate"] if "growthRate" in json_data else None)))
         self._custom_params = kwargs
         if model is not None:
-            [ model._logger.warning(f'Unsupported argument : {key}') for key in kwargs ]
+            [ model._logger.debug(f'Unsupported argument : {key}') for key in kwargs ]
         [setattr(type(self), key, property(lambda self, key = key:  self._custom_params[key] if key in self._custom_params else None,
         lambda self, value, key = key : self._custom_params.update({ key: value }))) for key in kwargs]
         self._freeze()
@@ -980,7 +980,7 @@ class BoiSizingParams(CoreObject):
                         growth_rate if growth_rate is not None else ( BoiSizingParams._default_params["growth_rate"] if "growth_rate" in BoiSizingParams._default_params else (json_data["growthRate"] if "growthRate" in json_data else None)))
         self._custom_params = kwargs
         if model is not None:
-            [ model._logger.warning(f'Unsupported argument : {key}') for key in kwargs ]
+            [ model._logger.debug(f'Unsupported argument : {key}') for key in kwargs ]
         [setattr(type(self), key, property(lambda self, key = key:  self._custom_params[key] if key in self._custom_params else None,
         lambda self, value, key = key : self._custom_params.update({ key: value }))) for key in kwargs]
         self._freeze()
@@ -1155,7 +1155,7 @@ class SoiSizingParams(CoreObject):
                         growth_rate if growth_rate is not None else ( SoiSizingParams._default_params["growth_rate"] if "growth_rate" in SoiSizingParams._default_params else (json_data["growthRate"] if "growthRate" in json_data else None)))
         self._custom_params = kwargs
         if model is not None:
-            [ model._logger.warning(f'Unsupported argument : {key}') for key in kwargs ]
+            [ model._logger.debug(f'Unsupported argument : {key}') for key in kwargs ]
         [setattr(type(self), key, property(lambda self, key = key:  self._custom_params[key] if key in self._custom_params else None,
         lambda self, value, key = key : self._custom_params.update({ key: value }))) for key in kwargs]
         self._freeze()
@@ -1322,7 +1322,7 @@ class SizeControlSummaryResult(CoreObject):
                         message if message is not None else ( SizeControlSummaryResult._default_params["message"] if "message" in SizeControlSummaryResult._default_params else (json_data["message"] if "message" in json_data else None)))
         self._custom_params = kwargs
         if model is not None:
-            [ model._logger.warning(f'Unsupported argument : {key}') for key in kwargs ]
+            [ model._logger.debug(f'Unsupported argument : {key}') for key in kwargs ]
         [setattr(type(self), key, property(lambda self, key = key:  self._custom_params[key] if key in self._custom_params else None,
         lambda self, value, key = key : self._custom_params.update({ key: value }))) for key in kwargs]
         self._freeze()
@@ -1427,7 +1427,7 @@ class SizeControlSummaryParams(CoreObject):
                     self.__initialize()
         self._custom_params = kwargs
         if model is not None:
-            [ model._logger.warning(f'Unsupported argument : {key}') for key in kwargs ]
+            [ model._logger.debug(f'Unsupported argument : {key}') for key in kwargs ]
         [setattr(type(self), key, property(lambda self, key = key:  self._custom_params[key] if key in self._custom_params else None,
         lambda self, value, key = key : self._custom_params.update({ key: value }))) for key in kwargs]
         self._freeze()
@@ -1536,7 +1536,7 @@ class SetSizingResults(CoreObject):
                         error_code if error_code is not None else ( SetSizingResults._default_params["error_code"] if "error_code" in SetSizingResults._default_params else ErrorCode(json_data["errorCode"] if "errorCode" in json_data else None)))
         self._custom_params = kwargs
         if model is not None:
-            [ model._logger.warning(f'Unsupported argument : {key}') for key in kwargs ]
+            [ model._logger.debug(f'Unsupported argument : {key}') for key in kwargs ]
         [setattr(type(self), key, property(lambda self, key = key:  self._custom_params[key] if key in self._custom_params else None,
         lambda self, value, key = key : self._custom_params.update({ key: value }))) for key in kwargs]
         self._freeze()

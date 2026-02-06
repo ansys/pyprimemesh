@@ -76,6 +76,22 @@ class SweepType(enum.IntEnum):
 
     **This is a beta parameter**. **The behavior and name may change in the future**."""
 
+class MultizonePrismType(enum.IntEnum):
+    """Provides the multizone prism type//.name -> multizoneprismtype
+    """
+    UNIFORM = 2
+    """Prescribed first prism layer height.
+
+    **This is a beta parameter**. **The behavior and name may change in the future**."""
+    LASTASPECTRATIO = 4
+    """Prescribed last prism layer's aspect ratio.
+
+    **This is a beta parameter**. **The behavior and name may change in the future**."""
+    FIRSTASPECTRATIO = 5
+    """Prescribed first prism layer's aspect ratio.
+
+    **This is a beta parameter**. **The behavior and name may change in the future**."""
+
 class ScopeDefinition(CoreObject):
     """ScopeDefinition to scope entities based on entity and evaluation type.
 
@@ -178,7 +194,7 @@ class ScopeDefinition(CoreObject):
                         zone_expression if zone_expression is not None else ( ScopeDefinition._default_params["zone_expression"] if "zone_expression" in ScopeDefinition._default_params else (json_data["zoneExpression"] if "zoneExpression" in json_data else None)))
         self._custom_params = kwargs
         if model is not None:
-            [ model._logger.warning(f'Unsupported argument : {key}') for key in kwargs ]
+            [ model._logger.debug(f'Unsupported argument : {key}') for key in kwargs ]
         [setattr(type(self), key, property(lambda self, key = key:  self._custom_params[key] if key in self._custom_params else None,
         lambda self, value, key = key : self._custom_params.update({ key: value }))) for key in kwargs]
         self._freeze()
@@ -382,7 +398,7 @@ class LeakPreventionParams(CoreObject):
                         n_expansion_layers if n_expansion_layers is not None else ( LeakPreventionParams._default_params["n_expansion_layers"] if "n_expansion_layers" in LeakPreventionParams._default_params else (json_data["nExpansionLayers"] if "nExpansionLayers" in json_data else None)))
         self._custom_params = kwargs
         if model is not None:
-            [ model._logger.warning(f'Unsupported argument : {key}') for key in kwargs ]
+            [ model._logger.debug(f'Unsupported argument : {key}') for key in kwargs ]
         [setattr(type(self), key, property(lambda self, key = key:  self._custom_params[key] if key in self._custom_params else None,
         lambda self, value, key = key : self._custom_params.update({ key: value }))) for key in kwargs]
         self._freeze()
@@ -551,7 +567,7 @@ class SetLeakPreventionsResults(CoreObject):
                         ids if ids is not None else ( SetLeakPreventionsResults._default_params["ids"] if "ids" in SetLeakPreventionsResults._default_params else (json_data["ids"] if "ids" in json_data else None)))
         self._custom_params = kwargs
         if model is not None:
-            [ model._logger.warning(f'Unsupported argument : {key}') for key in kwargs ]
+            [ model._logger.debug(f'Unsupported argument : {key}') for key in kwargs ]
         [setattr(type(self), key, property(lambda self, key = key:  self._custom_params[key] if key in self._custom_params else None,
         lambda self, value, key = key : self._custom_params.update({ key: value }))) for key in kwargs]
         self._freeze()
@@ -700,7 +716,7 @@ class ContactPreventionParams(CoreObject):
                         size if size is not None else ( ContactPreventionParams._default_params["size"] if "size" in ContactPreventionParams._default_params else (json_data["size"] if "size" in json_data else None)))
         self._custom_params = kwargs
         if model is not None:
-            [ model._logger.warning(f'Unsupported argument : {key}') for key in kwargs ]
+            [ model._logger.debug(f'Unsupported argument : {key}') for key in kwargs ]
         [setattr(type(self), key, property(lambda self, key = key:  self._custom_params[key] if key in self._custom_params else None,
         lambda self, value, key = key : self._custom_params.update({ key: value }))) for key in kwargs]
         self._freeze()
@@ -854,7 +870,7 @@ class SetContactPreventionsResults(CoreObject):
                         ids if ids is not None else ( SetContactPreventionsResults._default_params["ids"] if "ids" in SetContactPreventionsResults._default_params else (json_data["ids"] if "ids" in json_data else None)))
         self._custom_params = kwargs
         if model is not None:
-            [ model._logger.warning(f'Unsupported argument : {key}') for key in kwargs ]
+            [ model._logger.debug(f'Unsupported argument : {key}') for key in kwargs ]
         [setattr(type(self), key, property(lambda self, key = key:  self._custom_params[key] if key in self._custom_params else None,
         lambda self, value, key = key : self._custom_params.update({ key: value }))) for key in kwargs]
         self._freeze()
@@ -1003,7 +1019,7 @@ class FeatureRecoveryParams(CoreObject):
                         size_at_features if size_at_features is not None else ( FeatureRecoveryParams._default_params["size_at_features"] if "size_at_features" in FeatureRecoveryParams._default_params else (json_data["sizeAtFeatures"] if "sizeAtFeatures" in json_data else None)))
         self._custom_params = kwargs
         if model is not None:
-            [ model._logger.warning(f'Unsupported argument : {key}') for key in kwargs ]
+            [ model._logger.debug(f'Unsupported argument : {key}') for key in kwargs ]
         [setattr(type(self), key, property(lambda self, key = key:  self._custom_params[key] if key in self._custom_params else None,
         lambda self, value, key = key : self._custom_params.update({ key: value }))) for key in kwargs]
         self._freeze()
@@ -1157,7 +1173,7 @@ class SetFeatureRecoveriesResults(CoreObject):
                         error_code if error_code is not None else ( SetFeatureRecoveriesResults._default_params["error_code"] if "error_code" in SetFeatureRecoveriesResults._default_params else ErrorCode(json_data["errorCode"] if "errorCode" in json_data else None)))
         self._custom_params = kwargs
         if model is not None:
-            [ model._logger.warning(f'Unsupported argument : {key}') for key in kwargs ]
+            [ model._logger.debug(f'Unsupported argument : {key}') for key in kwargs ]
         [setattr(type(self), key, property(lambda self, key = key:  self._custom_params[key] if key in self._custom_params else None,
         lambda self, value, key = key : self._custom_params.update({ key: value }))) for key in kwargs]
         self._freeze()
@@ -1277,7 +1293,7 @@ class ScopeZoneletParams(CoreObject):
                     self.__initialize()
         self._custom_params = kwargs
         if model is not None:
-            [ model._logger.warning(f'Unsupported argument : {key}') for key in kwargs ]
+            [ model._logger.debug(f'Unsupported argument : {key}') for key in kwargs ]
         [setattr(type(self), key, property(lambda self, key = key:  self._custom_params[key] if key in self._custom_params else None,
         lambda self, value, key = key : self._custom_params.update({ key: value }))) for key in kwargs]
         self._freeze()
@@ -1386,7 +1402,7 @@ class SetScopeResults(CoreObject):
                         warning_code if warning_code is not None else ( SetScopeResults._default_params["warning_code"] if "warning_code" in SetScopeResults._default_params else WarningCode(json_data["warningCode"] if "warningCode" in json_data else None)))
         self._custom_params = kwargs
         if model is not None:
-            [ model._logger.warning(f'Unsupported argument : {key}') for key in kwargs ]
+            [ model._logger.debug(f'Unsupported argument : {key}') for key in kwargs ]
         [setattr(type(self), key, property(lambda self, key = key:  self._custom_params[key] if key in self._custom_params else None,
         lambda self, value, key = key : self._custom_params.update({ key: value }))) for key in kwargs]
         self._freeze()
@@ -1525,7 +1541,7 @@ class SetParamsResults(CoreObject):
                         warning_code if warning_code is not None else ( SetParamsResults._default_params["warning_code"] if "warning_code" in SetParamsResults._default_params else WarningCode(json_data["warningCode"] if "warningCode" in json_data else None)))
         self._custom_params = kwargs
         if model is not None:
-            [ model._logger.warning(f'Unsupported argument : {key}') for key in kwargs ]
+            [ model._logger.debug(f'Unsupported argument : {key}') for key in kwargs ]
         [setattr(type(self), key, property(lambda self, key = key:  self._custom_params[key] if key in self._custom_params else None,
         lambda self, value, key = key : self._custom_params.update({ key: value }))) for key in kwargs]
         self._freeze()
@@ -1714,7 +1730,7 @@ class MultiZoneSweepMeshParams(CoreObject):
                         sweep_type if sweep_type is not None else ( MultiZoneSweepMeshParams._default_params["sweep_type"] if "sweep_type" in MultiZoneSweepMeshParams._default_params else SweepType(json_data["sweepType"] if "sweepType" in json_data else None)))
         self._custom_params = kwargs
         if model is not None:
-            [ model._logger.warning(f'Unsupported argument : {key}') for key in kwargs ]
+            [ model._logger.debug(f'Unsupported argument : {key}') for key in kwargs ]
         [setattr(type(self), key, property(lambda self, key = key:  self._custom_params[key] if key in self._custom_params else None,
         lambda self, value, key = key : self._custom_params.update({ key: value }))) for key in kwargs]
         self._freeze()
@@ -1944,7 +1960,7 @@ class MultiZoneEdgeBiasingParams(CoreObject):
                         n_divisions if n_divisions is not None else ( MultiZoneEdgeBiasingParams._default_params["n_divisions"] if "n_divisions" in MultiZoneEdgeBiasingParams._default_params else (json_data["nDivisions"] if "nDivisions" in json_data else None)))
         self._custom_params = kwargs
         if model is not None:
-            [ model._logger.warning(f'Unsupported argument : {key}') for key in kwargs ]
+            [ model._logger.debug(f'Unsupported argument : {key}') for key in kwargs ]
         [setattr(type(self), key, property(lambda self, key = key:  self._custom_params[key] if key in self._custom_params else None,
         lambda self, value, key = key : self._custom_params.update({ key: value }))) for key in kwargs]
         self._freeze()
@@ -2115,7 +2131,7 @@ class MultiZoneMapMeshParams(CoreObject):
                         scope if scope is not None else ( MultiZoneMapMeshParams._default_params["scope"] if "scope" in MultiZoneMapMeshParams._default_params else ScopeDefinition(model = model, json_data = (json_data["scope"] if "scope" in json_data else None))))
         self._custom_params = kwargs
         if model is not None:
-            [ model._logger.warning(f'Unsupported argument : {key}') for key in kwargs ]
+            [ model._logger.debug(f'Unsupported argument : {key}') for key in kwargs ]
         [setattr(type(self), key, property(lambda self, key = key:  self._custom_params[key] if key in self._custom_params else None,
         lambda self, value, key = key : self._custom_params.update({ key: value }))) for key in kwargs]
         self._freeze()
@@ -2277,7 +2293,7 @@ class MultiZoneSizingParams(CoreObject):
                         use_volumetric_size_field if use_volumetric_size_field is not None else ( MultiZoneSizingParams._default_params["use_volumetric_size_field"] if "use_volumetric_size_field" in MultiZoneSizingParams._default_params else (json_data["useVolumetricSizeField"] if "useVolumetricSizeField" in json_data else None)))
         self._custom_params = kwargs
         if model is not None:
-            [ model._logger.warning(f'Unsupported argument : {key}') for key in kwargs ]
+            [ model._logger.debug(f'Unsupported argument : {key}') for key in kwargs ]
         [setattr(type(self), key, property(lambda self, key = key:  self._custom_params[key] if key in self._custom_params else None,
         lambda self, value, key = key : self._custom_params.update({ key: value }))) for key in kwargs]
         self._freeze()

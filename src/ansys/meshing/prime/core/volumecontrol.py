@@ -1,4 +1,4 @@
-# Copyright (C) 2024 - 2025 ANSYS, Inc. and/or its affiliates.
+# Copyright (C) 2024 - 2026 ANSYS, Inc. and/or its affiliates.
 # SPDX-License-Identifier: MIT
 #
 # Permission is hereby granted, free of charge, to any person obtaining a copy
@@ -24,7 +24,7 @@ from ansys.meshing.prime.autogen.volumecontrol import VolumeControl as _VolumeCo
 
 # isort: split
 from ansys.meshing.prime.autogen.commonstructs import SetNameResults
-from ansys.meshing.prime.autogen.volumecontrolstructs import VolumeControlParams
+from ansys.meshing.prime.autogen.volumecontrolstructs import VolumeControlSummaryParams
 
 
 class VolumeControl(_VolumeControl):
@@ -56,10 +56,9 @@ class VolumeControl(_VolumeControl):
         str
             Class data in string format.
         """
-        params = VolumeControlParams(model=self._model)
-        # TODO: function get_summary() not implemented
+        params = VolumeControlSummaryParams(model=self._model)
         result = _VolumeControl.get_summary(self, params)
-        return result.message
+        return result.summary
 
     def set_suggested_name(self, name: str) -> SetNameResults:
         """Set the unique name for the volume control based on a suggested name.

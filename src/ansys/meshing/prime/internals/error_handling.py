@@ -1,4 +1,4 @@
-# Copyright (C) 2024 - 2025 ANSYS, Inc. and/or its affiliates.
+# Copyright (C) 2024 - 2026 ANSYS, Inc. and/or its affiliates.
 # SPDX-License-Identifier: MIT
 #
 # Permission is hereby granted, free of charge, to any person obtaining a copy
@@ -77,6 +77,7 @@ prime_error_messages = {
     ErrorCode.MICROSTRUCTUREREMESHNOTSUPPORTED: "Surface remesh operation is not supported.",
     ErrorCode.MICROSTRUCTURESMOOTHNOTSUPPORTED: "Smoothing operation is not supported.",
     ErrorCode.MICROSTRUCTUREWRONGAPICALLSEQUENCE: "Wrong API call sequence.",
+    ErrorCode.JSONKEYNOTFOUND: "Json key not found.",
     ErrorCode.NUMENMETHODNOTFOUND: "Could not find numen method.",
     ErrorCode.PREPAREFORVOLUMEMESHINGFAILED: "Prepare for volume meshing failed.",
     ErrorCode.NOTSUPPORTEDFORDISTRIBUTEMESHING: "Method not supported for distributed meshing.",
@@ -184,6 +185,8 @@ prime_error_messages = {
     ErrorCode.MATERIALPOINTWITHGIVENIDDOESNTEXIST: "Material point with given id does not exist.",
     ErrorCode.MATERIALPOINTWITHGIVENNAMEDOESNTEXIST: "Material point with the given name does not exist.",
     ErrorCode.IMPROVESURFACEMESHQUALITYFAILED: "Improve surface mesh quality failed.",
+    ErrorCode.REMOVECUSPSFAILED: "Cusp removal failed.",
+    ErrorCode.NOTSUPPORTEDFORREMOVECUSPS: "Parts with multiple volumes do not support Cusp removal.",
     ErrorCode.IGA_INCORRECTCONTROLPOINTSIZEWRTDEGREE: "Control Points size must be greater than degree.",
     ErrorCode.IGA_INCORRECTCONTROLPOINTSIZEWRTINPUT: "Control Points size cannot be greater than input mesh nodes.",
     ErrorCode.IGA_NURBSFITTINGFAILED: "Failed to fit spline.",
@@ -200,6 +203,9 @@ prime_error_messages = {
     ErrorCode.MULTIZONEMESHER_MULTIPLECONTROLSNOTSUPPORTED: "MultiZone does not support more than one control.",
     ErrorCode.MULTIZONEMESHER_NOVOLUMESFORGEOMETRYTRANSFER: "Incorrect volume scope provided.",
     ErrorCode.MULTIZONEMESHER_NOVOLUMESSCOPEDINCURRENTPART: "No volumes scoped for MultiZone meshing in the current part.",
+    ErrorCode.MULTIZONEMESHER_GEOMETRYTRANSFERFAILED: "The transfer of the geometry for MultiZone meshing failed.",
+    ErrorCode.MULTIZONEMESHER_INVALIDPRISMPARAMETERS: "The prism parameters for MultiZone are invalid.",
+    ErrorCode.MULTIZONEMESHER_PRISMMESHINGFAILED: "The creation of prism layers in the MultiZone mesh failed.",
     ErrorCode.BOIRESULTSFAILED: "BOI creation failed.",
     ErrorCode.CREATEBOI_INVALIDSCALE: "BOI creation failed. Scale factors should not be less than one.",
     ErrorCode.CREATEBOI_INVALIDFLOWDIRECTION: "BOI creation failed. Invalid flow or wake direction.",
@@ -389,6 +395,7 @@ prime_error_messages = {
     ErrorCode.INVALIDSHELLBLCONTROLS_INCORRECTSCOPEENTITY: "Invalid scope entity.",
     ErrorCode.PERIODICEDGESNOTSUPPORTEDFORSHELLBL: "Periodic surfaces selected for ShellBL generation are not supported.",
     ErrorCode.INVALIDINPUTPOINT: "Invalid input point.",
+    ErrorCode.TOPOFACESPLITNOTSUPPORTED: "ComputeTopoVolumes and ExtractTopoVolumes do not support topoface split.",
 }
 
 prime_warning_messages = {
@@ -452,12 +459,14 @@ prime_warning_messages = {
     WarningCode.MULTIZONEMESHER_SURFACESCOPEVOLUMESCOPEINCONSISTENCY: "Topofaces of the volumes scoped are more than the topofaces of the surface scoped.",
     WarningCode.MULTIZONEMESHER_DEFEATUREDTOPOFACES: "Topofaces that got defeatured in the MultiZone mesh.",
     WarningCode.MULTIZONEMESHER_DEFEATUREDTOPOEDGES: "Topoedges that got defeatured in the MultiZone mesh.",
+    WarningCode.MULTIZONEMESHER_DEFEATUREDPROTECTEDTOPOLOGY: "Protected toponodes or topoedges that got defeatured in the MultiZone mesh.",
     WarningCode.NOCADGEOMETRYFOUND: "CAD geometry not found for some or all topoentities. Skipped projection for those topoentities.",
     WarningCode.NOCADGEOMETRYPROJECTONFACETS: "CAD geometry not found for some or all topoentities. Mesh node projected on facets for those topoentities.",
     WarningCode.FUSEOVERLAPREMOVALINCOMPLETE: "Self intersections found. Use Fuse operation to remove it.",
     WarningCode.REMOVEOVERLAPWITHINTERSECT: "Self intersections found. Use Intersect operation to remove it.",
     WarningCode.OVERRIDEEDGESCOPEENTITY: "Override edge scope entity.",
     WarningCode.SHELLBLGAPFACTORMINLIMIT: "Adjusted ShellBL gap factor to 0.001. As 0.001 is minimum value supported.",
+    WarningCode.REMOVECUSP_PARTWITHMULTIPLEVOLUMES: "Parts with multiple volume do not support for cusp removal.",
 }
 
 

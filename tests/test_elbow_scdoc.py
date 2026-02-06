@@ -1,4 +1,4 @@
-# Copyright (C) 2024 - 2025 ANSYS, Inc. and/or its affiliates.
+# Copyright (C) 2024 - 2026 ANSYS, Inc. and/or its affiliates.
 # SPDX-License-Identifier: MIT
 #
 #
@@ -30,7 +30,10 @@ from ansys.meshing import prime
 from ansys.meshing.prime.graphics import PrimePlotter
 
 
-@pytest.mark.skipif(platform.system() != 'Windows', reason="Windows specific test.")
+@pytest.mark.skipif(
+    platform.system() != 'Windows' or os.environ.get("PYPRIMEMESH_LAUNCH_CONTAINER", "0") == "1",
+    reason="Windows specific test.",
+)
 def test_elbow_lucid(get_remote_client, get_examples):
     """Tests an use case with the elbow example."""
 

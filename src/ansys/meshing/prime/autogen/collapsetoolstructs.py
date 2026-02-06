@@ -136,7 +136,7 @@ class CollapseParams(CoreObject):
                         keep_edge_connectivity if keep_edge_connectivity is not None else ( CollapseParams._default_params["keep_edge_connectivity"] if "keep_edge_connectivity" in CollapseParams._default_params else (json_data["keepEdgeConnectivity"] if "keepEdgeConnectivity" in json_data else None)))
         self._custom_params = kwargs
         if model is not None:
-            [ model._logger.warning(f'Unsupported argument : {key}') for key in kwargs ]
+            [ model._logger.debug(f'Unsupported argument : {key}') for key in kwargs ]
         [setattr(type(self), key, property(lambda self, key = key:  self._custom_params[key] if key in self._custom_params else None,
         lambda self, value, key = key : self._custom_params.update({ key: value }))) for key in kwargs]
         self._freeze()
@@ -332,7 +332,7 @@ class CollapseResults(CoreObject):
                         n_splits if n_splits is not None else ( CollapseResults._default_params["n_splits"] if "n_splits" in CollapseResults._default_params else (json_data["nSplits"] if "nSplits" in json_data else None)))
         self._custom_params = kwargs
         if model is not None:
-            [ model._logger.warning(f'Unsupported argument : {key}') for key in kwargs ]
+            [ model._logger.debug(f'Unsupported argument : {key}') for key in kwargs ]
         [setattr(type(self), key, property(lambda self, key = key:  self._custom_params[key] if key in self._custom_params else None,
         lambda self, value, key = key : self._custom_params.update({ key: value }))) for key in kwargs]
         self._freeze()

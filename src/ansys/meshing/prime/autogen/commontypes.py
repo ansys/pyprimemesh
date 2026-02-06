@@ -74,6 +74,14 @@ class CellQualityMeasure(enum.IntEnum):
     """The Skewness metric ranges between 0 (best) and 1 (worst). A value of 0 indicates an equilateral cell (best) and a value of 1 indicates a completely degenerate cell (worst)."""
     ASPECTRATIO = 5
     """The Aspect Ratio metric is greater than 1. A value of 1 indicates an equilateral cell (best) and a value of 20(e.g) indicates a stretched cell (worst)."""
+    WARP = 7
+    """The warp metric ranges between 0 (best) and 2 (worst).
+
+    **This is a beta parameter**. **The behavior and name may change in the future**."""
+    ORTHOSKEW = 12
+    """The ortho skew metric ranges between 0 (best) and 2 (worst).
+
+    **This is a beta parameter**. **The behavior and name may change in the future**."""
     FLUENTASPECTRATIO = 13
     """The Fluent aspect Ratio metric is greater than 1. A value of 1 indicates an equilateral cell (best) and a value of 20(e.g) indicates a stretched cell (worst)."""
     INVERSEORTHOGONAL = 14
