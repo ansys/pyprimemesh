@@ -132,6 +132,19 @@ class PrimePlotter(Plotter):
             return color_matrix[mesh_info.part_id % num_colors].tolist()
         else:
             return color_matrix[mesh_info.zone_id % num_colors].tolist()
+        
+    def _process_connectivity(self, connectivity: np.ndarray, dimensions: np.ndarray) -> np.ndarray:
+        connectivity = np.asarray(connectivity)
+        starts = dimensions + np.arange(len(dimensions))
+        starts = starts[:-1]
+        block_lengths = connectivity[starts] + 1
+        group_id = np.repeat(np.arange(len(block_lengths)), block_lengths)
+        block_starts = np.repeat(np.cumsum(block_lengths) - block_lengths, block_lengths)
+        pos_in_block = np.arange(len(connectivity)) - block_starts
+        mask = pos_in_block != 0
+        new_pos = mask * (block_lengths[group_id] - pos_in_block)
+        new_indices = block_starts + new_pos
+        return connectivity[new_indices]
 
     def add_model(
         self, model: Model, scope: prime.ScopeDefinition = None, update: bool = False
@@ -149,6 +162,13 @@ class PrimePlotter(Plotter):
         """
         if scope is None:
             model_pd = model.as_polydata(update=update)
+            for part_polydata in model_pd.values():
+                if "faces" not in part_polydata.keys():
+                    continue
+                for face_object, _ in part_polydata["faces"]:
+                    mesh = face_object.mesh
+                    faces = self._process_connectivity(mesh.faces, mesh._offset_array)
+                    mesh.faces = faces
             self.add_model_pd(model_pd)
         else:
             self.add_scope(model, scope, update=update)
