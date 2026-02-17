@@ -25,7 +25,7 @@ import re
 from typing import Callable, Tuple
 
 NUMBER_RE = re.compile(
-    b'(-?(?:0|[1-9]\d*))(\.\d+)?([eE][-+]?\d+)?', (re.VERBOSE | re.MULTILINE | re.DOTALL)
+    b'(-?(?:0|[1-9]\d*))(\.\d+)?([eE][-+]?\d+)?', re.VERBOSE | re.MULTILINE | re.DOTALL
 )
 
 

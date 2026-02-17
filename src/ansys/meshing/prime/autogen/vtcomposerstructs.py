@@ -94,7 +94,7 @@ class VTComposerParams(CoreObject):
                         thin_stripes_tol if thin_stripes_tol is not None else ( VTComposerParams._default_params["thin_stripes_tol"] if "thin_stripes_tol" in VTComposerParams._default_params else (json_data["thinStripesTol"] if "thinStripesTol" in json_data else None)))
         self._custom_params = kwargs
         if model is not None:
-            [ model._logger.warning(f'Unsupported argument : {key}') for key in kwargs ]
+            [ model._logger.debug(f'Unsupported argument : {key}') for key in kwargs ]
         [setattr(type(self), key, property(lambda self, key = key:  self._custom_params[key] if key in self._custom_params else None,
         lambda self, value, key = key : self._custom_params.update({ key: value }))) for key in kwargs]
         self._freeze()
@@ -210,7 +210,7 @@ class VTComposerResults(CoreObject):
                         error_code if error_code is not None else ( VTComposerResults._default_params["error_code"] if "error_code" in VTComposerResults._default_params else ErrorCode(json_data["errorCode"] if "errorCode" in json_data else None)))
         self._custom_params = kwargs
         if model is not None:
-            [ model._logger.warning(f'Unsupported argument : {key}') for key in kwargs ]
+            [ model._logger.debug(f'Unsupported argument : {key}') for key in kwargs ]
         [setattr(type(self), key, property(lambda self, key = key:  self._custom_params[key] if key in self._custom_params else None,
         lambda self, value, key = key : self._custom_params.update({ key: value }))) for key in kwargs]
         self._freeze()

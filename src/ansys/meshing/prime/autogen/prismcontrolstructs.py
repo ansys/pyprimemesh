@@ -162,7 +162,7 @@ class PrismControlGrowthParams(CoreObject):
                         min_aspect_ratio if min_aspect_ratio is not None else ( PrismControlGrowthParams._default_params["min_aspect_ratio"] if "min_aspect_ratio" in PrismControlGrowthParams._default_params else (json_data["minAspectRatio"] if "minAspectRatio" in json_data else None)))
         self._custom_params = kwargs
         if model is not None:
-            [ model._logger.warning(f'Unsupported argument : {key}') for key in kwargs ]
+            [ model._logger.debug(f'Unsupported argument : {key}') for key in kwargs ]
         [setattr(type(self), key, property(lambda self, key = key:  self._custom_params[key] if key in self._custom_params else None,
         lambda self, value, key = key : self._custom_params.update({ key: value }))) for key in kwargs]
         self._freeze()

@@ -152,7 +152,7 @@ class VolumeQualityResultsPart(CoreObject):
                         min_quality if min_quality is not None else ( VolumeQualityResultsPart._default_params["min_quality"] if "min_quality" in VolumeQualityResultsPart._default_params else (json_data["minQuality"] if "minQuality" in json_data else None)))
         self._custom_params = kwargs
         if model is not None:
-            [ model._logger.warning(f'Unsupported argument : {key}') for key in kwargs ]
+            [ model._logger.debug(f'Unsupported argument : {key}') for key in kwargs ]
         [setattr(type(self), key, property(lambda self, key = key:  self._custom_params[key] if key in self._custom_params else None,
         lambda self, value, key = key : self._custom_params.update({ key: value }))) for key in kwargs]
         self._freeze()
@@ -376,7 +376,7 @@ class VolumeQualitySummaryResults(CoreObject):
                         message if message is not None else ( VolumeQualitySummaryResults._default_params["message"] if "message" in VolumeQualitySummaryResults._default_params else (json_data["message"] if "message" in json_data else None)))
         self._custom_params = kwargs
         if model is not None:
-            [ model._logger.warning(f'Unsupported argument : {key}') for key in kwargs ]
+            [ model._logger.debug(f'Unsupported argument : {key}') for key in kwargs ]
         [setattr(type(self), key, property(lambda self, key = key:  self._custom_params[key] if key in self._custom_params else None,
         lambda self, value, key = key : self._custom_params.update({ key: value }))) for key in kwargs]
         self._freeze()
@@ -540,7 +540,7 @@ class VolumeQualitySummaryParams(CoreObject):
                         quality_limit if quality_limit is not None else ( VolumeQualitySummaryParams._default_params["quality_limit"] if "quality_limit" in VolumeQualitySummaryParams._default_params else (json_data["qualityLimit"] if "qualityLimit" in json_data else None)))
         self._custom_params = kwargs
         if model is not None:
-            [ model._logger.warning(f'Unsupported argument : {key}') for key in kwargs ]
+            [ model._logger.debug(f'Unsupported argument : {key}') for key in kwargs ]
         [setattr(type(self), key, property(lambda self, key = key:  self._custom_params[key] if key in self._custom_params else None,
         lambda self, value, key = key : self._custom_params.update({ key: value }))) for key in kwargs]
         self._freeze()

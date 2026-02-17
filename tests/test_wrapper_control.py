@@ -31,7 +31,7 @@ def test_wrapper_control(get_remote_client):
     model.set_global_sizing_params(
         prime.GlobalSizingParams(model=model, min=2.0, max=20, growth_rate=1.2)
     )
-    # Test contanct preventation
+    # Test contact preventation
     params = prime.ContactPreventionParams(model=model)
     glob_sf_params = model.get_global_sizing_params()
     # Validate size for contact prevention params

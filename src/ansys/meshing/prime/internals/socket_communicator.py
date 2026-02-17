@@ -21,7 +21,6 @@
 
 """Module for communications with the socket server."""
 __all__ = ['SocketCommunicator']
-import json
 import socket
 from typing import Optional
 

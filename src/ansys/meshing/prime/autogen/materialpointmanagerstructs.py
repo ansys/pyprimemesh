@@ -100,7 +100,7 @@ class CreateMaterialPointParams(CoreObject):
                         type if type is not None else ( CreateMaterialPointParams._default_params["type"] if "type" in CreateMaterialPointParams._default_params else MaterialPointType(json_data["type"] if "type" in json_data else None)))
         self._custom_params = kwargs
         if model is not None:
-            [ model._logger.warning(f'Unsupported argument : {key}') for key in kwargs ]
+            [ model._logger.debug(f'Unsupported argument : {key}') for key in kwargs ]
         [setattr(type(self), key, property(lambda self, key = key:  self._custom_params[key] if key in self._custom_params else None,
         lambda self, value, key = key : self._custom_params.update({ key: value }))) for key in kwargs]
         self._freeze()
@@ -244,7 +244,7 @@ class CreateMaterialPointResults(CoreObject):
                         warning_codes if warning_codes is not None else ( CreateMaterialPointResults._default_params["warning_codes"] if "warning_codes" in CreateMaterialPointResults._default_params else [WarningCode(data) for data in (json_data["warningCodes"] if "warningCodes" in json_data else None)]))
         self._custom_params = kwargs
         if model is not None:
-            [ model._logger.warning(f'Unsupported argument : {key}') for key in kwargs ]
+            [ model._logger.debug(f'Unsupported argument : {key}') for key in kwargs ]
         [setattr(type(self), key, property(lambda self, key = key:  self._custom_params[key] if key in self._custom_params else None,
         lambda self, value, key = key : self._custom_params.update({ key: value }))) for key in kwargs]
         self._freeze()
@@ -403,7 +403,7 @@ class DeleteMaterialPointResults(CoreObject):
                         error_code if error_code is not None else ( DeleteMaterialPointResults._default_params["error_code"] if "error_code" in DeleteMaterialPointResults._default_params else ErrorCode(json_data["errorCode"] if "errorCode" in json_data else None)))
         self._custom_params = kwargs
         if model is not None:
-            [ model._logger.warning(f'Unsupported argument : {key}') for key in kwargs ]
+            [ model._logger.debug(f'Unsupported argument : {key}') for key in kwargs ]
         [setattr(type(self), key, property(lambda self, key = key:  self._custom_params[key] if key in self._custom_params else None,
         lambda self, value, key = key : self._custom_params.update({ key: value }))) for key in kwargs]
         self._freeze()
