@@ -102,7 +102,7 @@ class PartZonelets(CoreObject):
                         face_zonelets if face_zonelets is not None else ( PartZonelets._default_params["face_zonelets"] if "face_zonelets" in PartZonelets._default_params else (json_data["faceZonelets"] if "faceZonelets" in json_data else None)))
         self._custom_params = kwargs
         if model is not None:
-            [ model._logger.warning(f'Unsupported argument : {key}') for key in kwargs ]
+            [ model._logger.debug(f'Unsupported argument : {key}') for key in kwargs ]
         [setattr(type(self), key, property(lambda self, key = key:  self._custom_params[key] if key in self._custom_params else None,
         lambda self, value, key = key : self._custom_params.update({ key: value }))) for key in kwargs]
         self._freeze()
@@ -251,7 +251,7 @@ class SetNameResults(CoreObject):
                         error_code if error_code is not None else ( SetNameResults._default_params["error_code"] if "error_code" in SetNameResults._default_params else ErrorCode(json_data["errorCode"] if "errorCode" in json_data else None)))
         self._custom_params = kwargs
         if model is not None:
-            [ model._logger.warning(f'Unsupported argument : {key}') for key in kwargs ]
+            [ model._logger.debug(f'Unsupported argument : {key}') for key in kwargs ]
         [setattr(type(self), key, property(lambda self, key = key:  self._custom_params[key] if key in self._custom_params else None,
         lambda self, value, key = key : self._custom_params.update({ key: value }))) for key in kwargs]
         self._freeze()
@@ -395,7 +395,7 @@ class DeleteResults(CoreObject):
                         error_code if error_code is not None else ( DeleteResults._default_params["error_code"] if "error_code" in DeleteResults._default_params else ErrorCode(json_data["errorCode"] if "errorCode" in json_data else None)))
         self._custom_params = kwargs
         if model is not None:
-            [ model._logger.warning(f'Unsupported argument : {key}') for key in kwargs ]
+            [ model._logger.debug(f'Unsupported argument : {key}') for key in kwargs ]
         [setattr(type(self), key, property(lambda self, key = key:  self._custom_params[key] if key in self._custom_params else None,
         lambda self, value, key = key : self._custom_params.update({ key: value }))) for key in kwargs]
         self._freeze()
@@ -523,7 +523,7 @@ class CopyZoneletsParams(CoreObject):
                         copy_zones if copy_zones is not None else ( CopyZoneletsParams._default_params["copy_zones"] if "copy_zones" in CopyZoneletsParams._default_params else (json_data["copyZones"] if "copyZones" in json_data else None)))
         self._custom_params = kwargs
         if model is not None:
-            [ model._logger.warning(f'Unsupported argument : {key}') for key in kwargs ]
+            [ model._logger.debug(f'Unsupported argument : {key}') for key in kwargs ]
         [setattr(type(self), key, property(lambda self, key = key:  self._custom_params[key] if key in self._custom_params else None,
         lambda self, value, key = key : self._custom_params.update({ key: value }))) for key in kwargs]
         self._freeze()
@@ -674,7 +674,7 @@ class CopyZoneletsResults(CoreObject):
                         copied_face_zonelets if copied_face_zonelets is not None else ( CopyZoneletsResults._default_params["copied_face_zonelets"] if "copied_face_zonelets" in CopyZoneletsResults._default_params else (json_data["copiedFaceZonelets"] if "copiedFaceZonelets" in json_data else None)))
         self._custom_params = kwargs
         if model is not None:
-            [ model._logger.warning(f'Unsupported argument : {key}') for key in kwargs ]
+            [ model._logger.debug(f'Unsupported argument : {key}') for key in kwargs ]
         [setattr(type(self), key, property(lambda self, key = key:  self._custom_params[key] if key in self._custom_params else None,
         lambda self, value, key = key : self._custom_params.update({ key: value }))) for key in kwargs]
         self._freeze()

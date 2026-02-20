@@ -1,4 +1,4 @@
-# Copyright (C) 2024 - 2025 ANSYS, Inc. and/or its affiliates.
+# Copyright (C) 2024 - 2026 ANSYS, Inc. and/or its affiliates.
 # SPDX-License-Identifier: MIT
 #
 # Permission is hereby granted, free of charge, to any person obtaining a copy
@@ -23,6 +23,8 @@
 
 import logging
 import os
+from pathlib import Path
+from typing import Optional
 
 import ansys.meshing.prime.examples as examples
 import ansys.meshing.prime.internals.config as config
@@ -49,7 +51,10 @@ class Client(object):
         Maximum time to wait for connection. The default is ``defaults.connection_timeout()``.
     credentials : Any, optional
         Credentials to connect to the server. The default is ``None``.
-
+    uds_id : Optional[str], optional
+        Id for the Unix Domain Socket (UDS). The default is ``None``.
+    client_certs_dir : Optional[str]
+        Directory containing client certificates for mutual TLS.
     Raises
     ------
     ValueError
@@ -64,7 +69,9 @@ class Client(object):
         port: int = defaults.port(),
         timeout: float = defaults.connection_timeout(),
         credentials=None,
-        communicator_type="grpc",
+        connection_type: config.ConnectionType = config.ConnectionType.GRPC_SECURE,
+        uds_id: Optional[str] = None,
+        client_certs_dir: Optional[str] = None,
         **kwargs,
     ):
         """Initialize the client."""
@@ -72,24 +79,53 @@ class Client(object):
         local = kwargs.get('local', False)
         if local and server_process is not None:
             raise ValueError('Local client cannot be instantiated with a server process')
+
+        if connection_type == config.ConnectionType.GRPC_INSECURE:
+            print("Warning (Client): Modification of these configurations is not recommended.")
+            print("Refer the documentation for your installed product for additional information.")
+
         self._local = local
         self._process = server_process
         self._comm = None
+        self._cleanup_script_path: Path = None
         if not local:
-            if communicator_type == "grpc":
+            if (
+                connection_type == config.ConnectionType.GRPC_SECURE
+                or connection_type == config.ConnectionType.GRPC_INSECURE
+            ):
                 try:
                     from ansys.meshing.prime.internals.grpc_communicator import (
                         GRPCCommunicator,
                     )
 
                     channel = kwargs.get('channel', None)
+
                     if channel is not None:
                         self._comm = GRPCCommunicator(channel=channel, timeout=timeout)
                     else:
-                        self._comm = GRPCCommunicator(
-                            ip=ip, port=port, timeout=timeout, credentials=credentials
-                        )
-                        setattr(self, 'port', port)
+                        transport_mode = None
+                        if connection_type == config.ConnectionType.GRPC_INSECURE:
+                            transport_mode = "insecure"
+                        else:
+                            if client_certs_dir is not None:
+                                transport_mode = "mtls"
+                            else:
+                                if os.name == 'nt':
+                                    transport_mode = "wnua"
+                                else:
+                                    transport_mode = "uds"
+
+                    self._comm = GRPCCommunicator(
+                        ip=ip,
+                        port=port,
+                        timeout=timeout,
+                        credentials=credentials,
+                        client_certs_dir=client_certs_dir,
+                        transport_mode=transport_mode,
+                        uds_id=uds_id,
+                    )
+
+                    setattr(self, 'port', port)
                 except ImportError as err:
                     logging.getLogger('PyPrimeMesh').error(
                         f'Failed to load grpc_communicator with message: {err.msg}'
@@ -172,15 +208,13 @@ class Client(object):
         if self._process is not None:
             assert self._local == False
             terminate_process(self._process)
-            self._process = None
-
         if config.using_container():
-            container_name = getattr(self, 'container_name')
-            utils.stop_prime_github_container(container_name)
+            container_name = getattr(self, 'container_name', None)
+            if container_name:
+                utils.stop_prime_github_container(container_name)
         elif config.has_pim():
             self.remote_instance.delete()
             self.pim_client.close()
-
         clear_examples = bool(int(os.environ.get('PYPRIMEMESH_CLEAR_EXAMPLES', '1')))
         if clear_examples:
             download_manager = examples.DownloadManager()

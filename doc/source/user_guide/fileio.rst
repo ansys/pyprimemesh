@@ -293,7 +293,7 @@ Export solver mesh files
    export Fluent case ``(*.cas, *.cas.gz, *.cas.h5)`` files and set parameters for exporting files using the
    :class:`ExportFluentCaseParams <ansys.meshing.prime.ExportFluentCaseParams>` class.
 
- - The :func:`FileIO.export_fluent_meshing_meshes() <ansys.meshing.prime.FileIO.export_fluent_meshing_meshes>` method
+ - The :func:`FileIO.export_fluent_meshing_mesh() <ansys.meshing.prime.FileIO.export_fluent_meshing_mesh>` method
    allows you to export Fluent Meshing's mesh ``(*.msh)`` files and set parameters for exporting files
    using the :class:`ExportFluentMeshingMeshParams <ansys.meshing.prime.ExportFluentMeshingMeshParams>` class.
 

@@ -1683,7 +1683,7 @@ Return the ids of topofaces.
         return result
 
     def delete_topo_entities(self, params : DeleteTopoEntitiesParams) -> DeleteTopoEntitiesResults:
-        """ Delete topoentities of part controled by parameters.
+        """ Delete topoentities of part controlled by parameters.
 
 
         Parameters

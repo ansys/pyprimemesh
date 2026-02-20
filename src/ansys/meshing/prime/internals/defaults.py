@@ -1,4 +1,4 @@
-# Copyright (C) 2024 - 2025 ANSYS, Inc. and/or its affiliates.
+# Copyright (C) 2024 - 2026 ANSYS, Inc. and/or its affiliates.
 # SPDX-License-Identifier: MIT
 #
 # Permission is hereby granted, free of charge, to any person obtaining a copy
@@ -51,8 +51,7 @@ except ModuleNotFoundError:
         'PYPRIMEMESH_USER_DATA', os.path.join(tempfile.gettempdir(), USER_NAME)
     )
 
-if not os.path.exists(USER_DATA_PATH):  # pragma: no cover
-    os.makedirs(USER_DATA_PATH)
+os.makedirs(USER_DATA_PATH, exist_ok=True)
 
 EXAMPLES_PATH = os.path.join(USER_DATA_PATH, 'examples')
 if not os.path.exists(EXAMPLES_PATH):  # pragma: no cover

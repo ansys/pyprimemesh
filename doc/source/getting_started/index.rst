@@ -37,6 +37,8 @@ This table provides compatibility information:
 |                            | 25.1.2 (2025 R1 SP2)       |                          |
 |                            |                            |                          |
 | 0.9.x                      | 25.2.0 (2025 R2)           | 3.10 to 3.13             |
+|                            |                            |                          |
+| 0.10.x                     | 26.1.0 (2026 R1)           | 3.10 to 3.13             |
 +----------------------------+----------------------------+--------------------------+
 
 .. _Installation:
@@ -111,6 +113,8 @@ Hence, the app runs quickly and reliably from one computing environment to anoth
 Ansys Prime Server can be built as a Linux Docker container.
 Hence, you should have a linux machine to run the Ansys Prime Server.
 
+.. _docker_for_linux_containers:
+
 Docker for Linux containers
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 To run the Linux Docker container for the Ansys Prime Server, 
@@ -123,10 +127,11 @@ ensure that you follow these steps when installing the Docker:
 Your Docker engine supports running Linux Docker containers, you can build or install the Ansys Prime Server image.
 
 .. note::
-Ansys Prime Server uses Intel MPI library for performing meshing operations. Intel MPI library requires NUMA support.
-Docker desktop allows to run linux containers on windows using WSL. Existing Linux distributions used for WSL do not typically support NUMA.
-It is expected that a custom Linux distribution would be required for WSL to run the Ansys Prime Server container to support NUMA.
-Ansys does not recommend you to run the Ansys Prime Server image without NUMA support.
+
+   Ansys Prime Server uses Intel MPI library for performing meshing operations. Intel MPI library requires NUMA support.
+   Docker desktop allows to run linux containers on windows using WSL. Existing Linux distributions used for WSL do not typically support NUMA.
+   It is expected that a custom Linux distribution would be required for WSL to run the Ansys Prime Server container to support NUMA.
+   Ansys does not recommend you to run the Ansys Prime Server image without NUMA support.
 
 Build or install the Ansys Prime Server image
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -142,7 +147,8 @@ GitHub container registry
 ^^^^^^^^^^^^^^^^^^^^^^^^^
 
 .. note::
-You should have write access to the repository or should be a members of the Ansys organization.
+
+   You should have write access to the repository or should be a members of the Ansys organization.
 
 After installing Docker on your machine, follow these steps to download the Linux Docker container
 for the Ansys Prime Server and install this image.
@@ -187,7 +193,7 @@ You can build the docker image file as follows:
 Prerequisites
 ''''''''''''''
 
-Ensure that Docker is installed in your machine. If you do not have Docker available, see :ref:`Docker for Linux containers <Docker for Linux containers>`.
+Ensure that Docker is installed in your machine. If you do not have Docker available, see :ref:`docker_for_linux_containers`.
 
 
 Build from available Ansys installation

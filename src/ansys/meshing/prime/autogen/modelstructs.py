@@ -92,7 +92,7 @@ class MergePartsParams(CoreObject):
                         merged_part_suggested_name if merged_part_suggested_name is not None else ( MergePartsParams._default_params["merged_part_suggested_name"] if "merged_part_suggested_name" in MergePartsParams._default_params else (json_data["mergedPartSuggestedName"] if "mergedPartSuggestedName" in json_data else None)))
         self._custom_params = kwargs
         if model is not None:
-            [ model._logger.warning(f'Unsupported argument : {key}') for key in kwargs ]
+            [ model._logger.debug(f'Unsupported argument : {key}') for key in kwargs ]
         [setattr(type(self), key, property(lambda self, key = key:  self._custom_params[key] if key in self._custom_params else None,
         lambda self, value, key = key : self._custom_params.update({ key: value }))) for key in kwargs]
         self._freeze()
@@ -226,7 +226,7 @@ class MergePartsResults(CoreObject):
                         merged_part_id if merged_part_id is not None else ( MergePartsResults._default_params["merged_part_id"] if "merged_part_id" in MergePartsResults._default_params else (json_data["mergedPartId"] if "mergedPartId" in json_data else None)))
         self._custom_params = kwargs
         if model is not None:
-            [ model._logger.warning(f'Unsupported argument : {key}') for key in kwargs ]
+            [ model._logger.debug(f'Unsupported argument : {key}') for key in kwargs ]
         [setattr(type(self), key, property(lambda self, key = key:  self._custom_params[key] if key in self._custom_params else None,
         lambda self, value, key = key : self._custom_params.update({ key: value }))) for key in kwargs]
         self._freeze()
@@ -390,7 +390,7 @@ class GlobalSizingParams(CoreObject):
                         growth_rate if growth_rate is not None else ( GlobalSizingParams._default_params["growth_rate"] if "growth_rate" in GlobalSizingParams._default_params else (json_data["growthRate"] if "growthRate" in json_data else None)))
         self._custom_params = kwargs
         if model is not None:
-            [ model._logger.warning(f'Unsupported argument : {key}') for key in kwargs ]
+            [ model._logger.debug(f'Unsupported argument : {key}') for key in kwargs ]
         [setattr(type(self), key, property(lambda self, key = key:  self._custom_params[key] if key in self._custom_params else None,
         lambda self, value, key = key : self._custom_params.update({ key: value }))) for key in kwargs]
         self._freeze()
@@ -554,7 +554,7 @@ class CreateZoneResults(CoreObject):
                         assigned_name if assigned_name is not None else ( CreateZoneResults._default_params["assigned_name"] if "assigned_name" in CreateZoneResults._default_params else (json_data["assignedName"] if "assignedName" in json_data else None)))
         self._custom_params = kwargs
         if model is not None:
-            [ model._logger.warning(f'Unsupported argument : {key}') for key in kwargs ]
+            [ model._logger.debug(f'Unsupported argument : {key}') for key in kwargs ]
         [setattr(type(self), key, property(lambda self, key = key:  self._custom_params[key] if key in self._custom_params else None,
         lambda self, value, key = key : self._custom_params.update({ key: value }))) for key in kwargs]
         self._freeze()
@@ -698,7 +698,7 @@ class DeleteZoneResults(CoreObject):
                         error_code if error_code is not None else ( DeleteZoneResults._default_params["error_code"] if "error_code" in DeleteZoneResults._default_params else ErrorCode(json_data["errorCode"] if "errorCode" in json_data else None)))
         self._custom_params = kwargs
         if model is not None:
-            [ model._logger.warning(f'Unsupported argument : {key}') for key in kwargs ]
+            [ model._logger.debug(f'Unsupported argument : {key}') for key in kwargs ]
         [setattr(type(self), key, property(lambda self, key = key:  self._custom_params[key] if key in self._custom_params else None,
         lambda self, value, key = key : self._custom_params.update({ key: value }))) for key in kwargs]
         self._freeze()

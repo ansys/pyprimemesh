@@ -148,7 +148,7 @@ class IGAResults(CoreObject):
                         spline_ids if spline_ids is not None else ( IGAResults._default_params["spline_ids"] if "spline_ids" in IGAResults._default_params else (json_data["splineIds"] if "splineIds" in json_data else None)))
         self._custom_params = kwargs
         if model is not None:
-            [ model._logger.warning(f'Unsupported argument : {key}') for key in kwargs ]
+            [ model._logger.debug(f'Unsupported argument : {key}') for key in kwargs ]
         [setattr(type(self), key, property(lambda self, key = key:  self._custom_params[key] if key in self._custom_params else None,
         lambda self, value, key = key : self._custom_params.update({ key: value }))) for key in kwargs]
         self._freeze()
@@ -292,7 +292,7 @@ class IGASpline(CoreObject):
                         id if id is not None else ( IGASpline._default_params["id"] if "id" in IGASpline._default_params else (json_data["id"] if "id" in json_data else None)))
         self._custom_params = kwargs
         if model is not None:
-            [ model._logger.warning(f'Unsupported argument : {key}') for key in kwargs ]
+            [ model._logger.debug(f'Unsupported argument : {key}') for key in kwargs ]
         [setattr(type(self), key, property(lambda self, key = key:  self._custom_params[key] if key in self._custom_params else None,
         lambda self, value, key = key : self._custom_params.update({ key: value }))) for key in kwargs]
         self._freeze()
@@ -510,7 +510,7 @@ class IGAUnstructuredSplineSurf(CoreObject):
                         shell_thickness if shell_thickness is not None else ( IGAUnstructuredSplineSurf._default_params["shell_thickness"] if "shell_thickness" in IGAUnstructuredSplineSurf._default_params else (json_data["shellThickness"] if "shellThickness" in json_data else None)))
         self._custom_params = kwargs
         if model is not None:
-            [ model._logger.warning(f'Unsupported argument : {key}') for key in kwargs ]
+            [ model._logger.debug(f'Unsupported argument : {key}') for key in kwargs ]
         [setattr(type(self), key, property(lambda self, key = key:  self._custom_params[key] if key in self._custom_params else None,
         lambda self, value, key = key : self._custom_params.update({ key: value }))) for key in kwargs]
         self._freeze()
@@ -808,7 +808,7 @@ class IGAUnstructuredSplineSolid(CoreObject):
                         invalid_jacobian_elements_count if invalid_jacobian_elements_count is not None else ( IGAUnstructuredSplineSolid._default_params["invalid_jacobian_elements_count"] if "invalid_jacobian_elements_count" in IGAUnstructuredSplineSolid._default_params else (json_data["invalidJacobianElementsCount"] if "invalidJacobianElementsCount" in json_data else None)))
         self._custom_params = kwargs
         if model is not None:
-            [ model._logger.warning(f'Unsupported argument : {key}') for key in kwargs ]
+            [ model._logger.debug(f'Unsupported argument : {key}') for key in kwargs ]
         [setattr(type(self), key, property(lambda self, key = key:  self._custom_params[key] if key in self._custom_params else None,
         lambda self, value, key = key : self._custom_params.update({ key: value }))) for key in kwargs]
         self._freeze()
@@ -1058,7 +1058,7 @@ class BoundaryFittedSplineParams(CoreObject):
                         control_point_selection_type if control_point_selection_type is not None else ( BoundaryFittedSplineParams._default_params["control_point_selection_type"] if "control_point_selection_type" in BoundaryFittedSplineParams._default_params else ControlPointSelection(json_data["controlPointSelectionType"] if "controlPointSelectionType" in json_data else None)))
         self._custom_params = kwargs
         if model is not None:
-            [ model._logger.warning(f'Unsupported argument : {key}') for key in kwargs ]
+            [ model._logger.debug(f'Unsupported argument : {key}') for key in kwargs ]
         [setattr(type(self), key, property(lambda self, key = key:  self._custom_params[key] if key in self._custom_params else None,
         lambda self, value, key = key : self._custom_params.update({ key: value }))) for key in kwargs]
         self._freeze()
@@ -1466,7 +1466,7 @@ class QuadToSplineParams(CoreObject):
                         projection_scope if projection_scope is not None else ( QuadToSplineParams._default_params["projection_scope"] if "projection_scope" in QuadToSplineParams._default_params else ScopeDefinition(model = model, json_data = (json_data["projectionScope"] if "projectionScope" in json_data else None))))
         self._custom_params = kwargs
         if model is not None:
-            [ model._logger.warning(f'Unsupported argument : {key}') for key in kwargs ]
+            [ model._logger.debug(f'Unsupported argument : {key}') for key in kwargs ]
         [setattr(type(self), key, property(lambda self, key = key:  self._custom_params[key] if key in self._custom_params else None,
         lambda self, value, key = key : self._custom_params.update({ key: value }))) for key in kwargs]
         self._freeze()
@@ -1840,7 +1840,7 @@ class HexToSplineParams(CoreObject):
                         projection_scope if projection_scope is not None else ( HexToSplineParams._default_params["projection_scope"] if "projection_scope" in HexToSplineParams._default_params else ScopeDefinition(model = model, json_data = (json_data["projectionScope"] if "projectionScope" in json_data else None))))
         self._custom_params = kwargs
         if model is not None:
-            [ model._logger.warning(f'Unsupported argument : {key}') for key in kwargs ]
+            [ model._logger.debug(f'Unsupported argument : {key}') for key in kwargs ]
         [setattr(type(self), key, property(lambda self, key = key:  self._custom_params[key] if key in self._custom_params else None,
         lambda self, value, key = key : self._custom_params.update({ key: value }))) for key in kwargs]
         self._freeze()
@@ -2088,7 +2088,7 @@ class RefineSplineParams(CoreObject):
                         spline_refinement_type if spline_refinement_type is not None else ( RefineSplineParams._default_params["spline_refinement_type"] if "spline_refinement_type" in RefineSplineParams._default_params else SplineRefinementType(json_data["splineRefinementType"] if "splineRefinementType" in json_data else None)))
         self._custom_params = kwargs
         if model is not None:
-            [ model._logger.warning(f'Unsupported argument : {key}') for key in kwargs ]
+            [ model._logger.debug(f'Unsupported argument : {key}') for key in kwargs ]
         [setattr(type(self), key, property(lambda self, key = key:  self._custom_params[key] if key in self._custom_params else None,
         lambda self, value, key = key : self._custom_params.update({ key: value }))) for key in kwargs]
         self._freeze()

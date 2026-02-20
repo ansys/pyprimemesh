@@ -172,7 +172,7 @@ class DetectHolesParams(CoreObject):
                         allow_curved_topo_faces if allow_curved_topo_faces is not None else ( DetectHolesParams._default_params["allow_curved_topo_faces"] if "allow_curved_topo_faces" in DetectHolesParams._default_params else (json_data["allowCurvedTopoFaces"] if "allowCurvedTopoFaces" in json_data else None)))
         self._custom_params = kwargs
         if model is not None:
-            [ model._logger.warning(f'Unsupported argument : {key}') for key in kwargs ]
+            [ model._logger.debug(f'Unsupported argument : {key}') for key in kwargs ]
         [setattr(type(self), key, property(lambda self, key = key:  self._custom_params[key] if key in self._custom_params else None,
         lambda self, value, key = key : self._custom_params.update({ key: value }))) for key in kwargs]
         self._freeze()
@@ -402,7 +402,7 @@ class DetectCircularHolesParams(CoreObject):
                         merge_edge_allow_self_close if merge_edge_allow_self_close is not None else ( DetectCircularHolesParams._default_params["merge_edge_allow_self_close"] if "merge_edge_allow_self_close" in DetectCircularHolesParams._default_params else (json_data["mergeEdgeAllowSelfClose"] if "mergeEdgeAllowSelfClose" in json_data else None)))
         self._custom_params = kwargs
         if model is not None:
-            [ model._logger.warning(f'Unsupported argument : {key}') for key in kwargs ]
+            [ model._logger.debug(f'Unsupported argument : {key}') for key in kwargs ]
         [setattr(type(self), key, property(lambda self, key = key:  self._custom_params[key] if key in self._custom_params else None,
         lambda self, value, key = key : self._custom_params.update({ key: value }))) for key in kwargs]
         self._freeze()
@@ -615,7 +615,7 @@ class DetectNonCircularHolesParams(CoreObject):
                         merge_edge_allow_self_close if merge_edge_allow_self_close is not None else ( DetectNonCircularHolesParams._default_params["merge_edge_allow_self_close"] if "merge_edge_allow_self_close" in DetectNonCircularHolesParams._default_params else (json_data["mergeEdgeAllowSelfClose"] if "mergeEdgeAllowSelfClose" in json_data else None)))
         self._custom_params = kwargs
         if model is not None:
-            [ model._logger.warning(f'Unsupported argument : {key}') for key in kwargs ]
+            [ model._logger.debug(f'Unsupported argument : {key}') for key in kwargs ]
         [setattr(type(self), key, property(lambda self, key = key:  self._custom_params[key] if key in self._custom_params else None,
         lambda self, value, key = key : self._custom_params.update({ key: value }))) for key in kwargs]
         self._freeze()
@@ -828,7 +828,7 @@ class DetectAndTreatCircularFacesParams(CoreObject):
                         merge_face_normals_angle if merge_face_normals_angle is not None else ( DetectAndTreatCircularFacesParams._default_params["merge_face_normals_angle"] if "merge_face_normals_angle" in DetectAndTreatCircularFacesParams._default_params else (json_data["mergeFaceNormalsAngle"] if "mergeFaceNormalsAngle" in json_data else None)))
         self._custom_params = kwargs
         if model is not None:
-            [ model._logger.warning(f'Unsupported argument : {key}') for key in kwargs ]
+            [ model._logger.debug(f'Unsupported argument : {key}') for key in kwargs ]
         [setattr(type(self), key, property(lambda self, key = key:  self._custom_params[key] if key in self._custom_params else None,
         lambda self, value, key = key : self._custom_params.update({ key: value }))) for key in kwargs]
         self._freeze()
@@ -1013,7 +1013,7 @@ class ConnectFacesParams(CoreObject):
                         absolute_tolerance if absolute_tolerance is not None else ( ConnectFacesParams._default_params["absolute_tolerance"] if "absolute_tolerance" in ConnectFacesParams._default_params else (json_data["absoluteTolerance"] if "absoluteTolerance" in json_data else None)))
         self._custom_params = kwargs
         if model is not None:
-            [ model._logger.warning(f'Unsupported argument : {key}') for key in kwargs ]
+            [ model._logger.debug(f'Unsupported argument : {key}') for key in kwargs ]
         [setattr(type(self), key, property(lambda self, key = key:  self._custom_params[key] if key in self._custom_params else None,
         lambda self, value, key = key : self._custom_params.update({ key: value }))) for key in kwargs]
         self._freeze()
@@ -1164,7 +1164,7 @@ class RepairEdgesParams(CoreObject):
                         absolute_tolerance if absolute_tolerance is not None else ( RepairEdgesParams._default_params["absolute_tolerance"] if "absolute_tolerance" in RepairEdgesParams._default_params else (json_data["absoluteTolerance"] if "absoluteTolerance" in json_data else None)))
         self._custom_params = kwargs
         if model is not None:
-            [ model._logger.warning(f'Unsupported argument : {key}') for key in kwargs ]
+            [ model._logger.debug(f'Unsupported argument : {key}') for key in kwargs ]
         [setattr(type(self), key, property(lambda self, key = key:  self._custom_params[key] if key in self._custom_params else None,
         lambda self, value, key = key : self._custom_params.update({ key: value }))) for key in kwargs]
         self._freeze()
@@ -1329,7 +1329,7 @@ class PartialDefeatureParams(CoreObject):
                         merge_edge_allow_self_close if merge_edge_allow_self_close is not None else ( PartialDefeatureParams._default_params["merge_edge_allow_self_close"] if "merge_edge_allow_self_close" in PartialDefeatureParams._default_params else (json_data["mergeEdgeAllowSelfClose"] if "mergeEdgeAllowSelfClose" in json_data else None)))
         self._custom_params = kwargs
         if model is not None:
-            [ model._logger.warning(f'Unsupported argument : {key}') for key in kwargs ]
+            [ model._logger.debug(f'Unsupported argument : {key}') for key in kwargs ]
         [setattr(type(self), key, property(lambda self, key = key:  self._custom_params[key] if key in self._custom_params else None,
         lambda self, value, key = key : self._custom_params.update({ key: value }))) for key in kwargs]
         self._freeze()
@@ -1511,7 +1511,7 @@ class DeleteInteriorNodesParams(CoreObject):
                         edge_sharp_corner_angle if edge_sharp_corner_angle is not None else ( DeleteInteriorNodesParams._default_params["edge_sharp_corner_angle"] if "edge_sharp_corner_angle" in DeleteInteriorNodesParams._default_params else (json_data["edgeSharpCornerAngle"] if "edgeSharpCornerAngle" in json_data else None)))
         self._custom_params = kwargs
         if model is not None:
-            [ model._logger.warning(f'Unsupported argument : {key}') for key in kwargs ]
+            [ model._logger.debug(f'Unsupported argument : {key}') for key in kwargs ]
         [setattr(type(self), key, property(lambda self, key = key:  self._custom_params[key] if key in self._custom_params else None,
         lambda self, value, key = key : self._custom_params.update({ key: value }))) for key in kwargs]
         self._freeze()
@@ -1861,7 +1861,7 @@ class DetectAndTreatHolesParams(CoreObject):
                         surface_mesh_constant_size if surface_mesh_constant_size is not None else ( DetectAndTreatHolesParams._default_params["surface_mesh_constant_size"] if "surface_mesh_constant_size" in DetectAndTreatHolesParams._default_params else (json_data["surfaceMeshConstantSize"] if "surfaceMeshConstantSize" in json_data else None)))
         self._custom_params = kwargs
         if model is not None:
-            [ model._logger.warning(f'Unsupported argument : {key}') for key in kwargs ]
+            [ model._logger.debug(f'Unsupported argument : {key}') for key in kwargs ]
         [setattr(type(self), key, property(lambda self, key = key:  self._custom_params[key] if key in self._custom_params else None,
         lambda self, value, key = key : self._custom_params.update({ key: value }))) for key in kwargs]
         self._freeze()
@@ -2261,7 +2261,7 @@ class DetectAndTreatFeaturesParams(CoreObject):
                         treat_circular_faces_params if treat_circular_faces_params is not None else ( DetectAndTreatFeaturesParams._default_params["treat_circular_faces_params"] if "treat_circular_faces_params" in DetectAndTreatFeaturesParams._default_params else DetectAndTreatCircularFacesParams(model = model, json_data = (json_data["treatCircularFacesParams"] if "treatCircularFacesParams" in json_data else None))))
         self._custom_params = kwargs
         if model is not None:
-            [ model._logger.warning(f'Unsupported argument : {key}') for key in kwargs ]
+            [ model._logger.debug(f'Unsupported argument : {key}') for key in kwargs ]
         [setattr(type(self), key, property(lambda self, key = key:  self._custom_params[key] if key in self._custom_params else None,
         lambda self, value, key = key : self._custom_params.update({ key: value }))) for key in kwargs]
         self._freeze()
@@ -2558,7 +2558,7 @@ class RepairTopologyParams(CoreObject):
                         repair_edges_params if repair_edges_params is not None else ( RepairTopologyParams._default_params["repair_edges_params"] if "repair_edges_params" in RepairTopologyParams._default_params else RepairEdgesParams(model = model, json_data = (json_data["repairEdgesParams"] if "repairEdgesParams" in json_data else None))))
         self._custom_params = kwargs
         if model is not None:
-            [ model._logger.warning(f'Unsupported argument : {key}') for key in kwargs ]
+            [ model._logger.debug(f'Unsupported argument : {key}') for key in kwargs ]
         [setattr(type(self), key, property(lambda self, key = key:  self._custom_params[key] if key in self._custom_params else None,
         lambda self, value, key = key : self._custom_params.update({ key: value }))) for key in kwargs]
         self._freeze()
@@ -2929,7 +2929,7 @@ class DefeatureTopologyParams(CoreObject):
                         delete_interior_nodes_params if delete_interior_nodes_params is not None else ( DefeatureTopologyParams._default_params["delete_interior_nodes_params"] if "delete_interior_nodes_params" in DefeatureTopologyParams._default_params else DeleteInteriorNodesParams(model = model, json_data = (json_data["deleteInteriorNodesParams"] if "deleteInteriorNodesParams" in json_data else None))))
         self._custom_params = kwargs
         if model is not None:
-            [ model._logger.warning(f'Unsupported argument : {key}') for key in kwargs ]
+            [ model._logger.debug(f'Unsupported argument : {key}') for key in kwargs ]
         [setattr(type(self), key, property(lambda self, key = key:  self._custom_params[key] if key in self._custom_params else None,
         lambda self, value, key = key : self._custom_params.update({ key: value }))) for key in kwargs]
         self._freeze()
@@ -3238,7 +3238,7 @@ class OptimizeQuadMeshParams(CoreObject):
                         delete_interior_nodes_params if delete_interior_nodes_params is not None else ( OptimizeQuadMeshParams._default_params["delete_interior_nodes_params"] if "delete_interior_nodes_params" in OptimizeQuadMeshParams._default_params else DeleteInteriorNodesParams(model = model, json_data = (json_data["deleteInteriorNodesParams"] if "deleteInteriorNodesParams" in json_data else None))))
         self._custom_params = kwargs
         if model is not None:
-            [ model._logger.warning(f'Unsupported argument : {key}') for key in kwargs ]
+            [ model._logger.debug(f'Unsupported argument : {key}') for key in kwargs ]
         [setattr(type(self), key, property(lambda self, key = key:  self._custom_params[key] if key in self._custom_params else None,
         lambda self, value, key = key : self._custom_params.update({ key: value }))) for key in kwargs]
         self._freeze()
@@ -3443,7 +3443,7 @@ class CheckTopologyParams(CoreObject):
                         topo_search_field_mask if topo_search_field_mask is not None else ( CheckTopologyParams._default_params["topo_search_field_mask"] if "topo_search_field_mask" in CheckTopologyParams._default_params else (json_data["topoSearchFieldMask"] if "topoSearchFieldMask" in json_data else None)))
         self._custom_params = kwargs
         if model is not None:
-            [ model._logger.warning(f'Unsupported argument : {key}') for key in kwargs ]
+            [ model._logger.debug(f'Unsupported argument : {key}') for key in kwargs ]
         [setattr(type(self), key, property(lambda self, key = key:  self._custom_params[key] if key in self._custom_params else None,
         lambda self, value, key = key : self._custom_params.update({ key: value }))) for key in kwargs]
         self._freeze()
@@ -3591,7 +3591,7 @@ class AutoQuadMesherResults(CoreObject):
                         failed_topo_face_ids if failed_topo_face_ids is not None else ( AutoQuadMesherResults._default_params["failed_topo_face_ids"] if "failed_topo_face_ids" in AutoQuadMesherResults._default_params else (json_data["failedTopoFaceIds"] if "failedTopoFaceIds" in json_data else None)))
         self._custom_params = kwargs
         if model is not None:
-            [ model._logger.warning(f'Unsupported argument : {key}') for key in kwargs ]
+            [ model._logger.debug(f'Unsupported argument : {key}') for key in kwargs ]
         [setattr(type(self), key, property(lambda self, key = key:  self._custom_params[key] if key in self._custom_params else None,
         lambda self, value, key = key : self._custom_params.update({ key: value }))) for key in kwargs]
         self._freeze()

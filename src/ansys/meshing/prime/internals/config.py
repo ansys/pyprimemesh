@@ -1,4 +1,4 @@
-# Copyright (C) 2024 - 2025 ANSYS, Inc. and/or its affiliates.
+# Copyright (C) 2024 - 2026 ANSYS, Inc. and/or its affiliates.
 # SPDX-License-Identifier: MIT
 #
 # Permission is hereby granted, free of charge, to any person obtaining a copy
@@ -22,6 +22,7 @@
 """Configuration utility for PyPrimeMesh."""
 
 from contextlib import contextmanager
+from enum import Enum
 
 __all__ = [
     'enable_optimizing_numpy_arrays',
@@ -42,6 +43,20 @@ __HAS_PIM = False
 __FILE_CHECK = True
 
 from ansys.meshing.prime.internals.logger import PrimeLogger
+
+
+class ConnectionType(Enum):
+    """Type of connection to be established.
+
+    Default is secure connection.
+    """
+
+    GRPC_SECURE = 1
+    """Secure connection.
+    This option ensures secure connection between client and server.
+    """
+    GRPC_INSECURE = 2
+    """Insecure connection type."""
 
 
 def _optimize_vectors():

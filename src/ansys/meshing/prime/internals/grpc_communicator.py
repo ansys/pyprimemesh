@@ -1,4 +1,4 @@
-# Copyright (C) 2024 - 2025 ANSYS, Inc. and/or its affiliates.
+# Copyright (C) 2024 - 2026 ANSYS, Inc. and/or its affiliates.
 # SPDX-License-Identifier: MIT
 #
 # Permission is hereby granted, free of charge, to any person obtaining a copy
@@ -21,6 +21,8 @@
 
 """Module for communications with the gRPC server."""
 __all__ = ['GRPCCommunicator']
+import logging
+import os
 from typing import Optional
 
 import grpc
@@ -28,9 +30,9 @@ from ansys.api.meshing.prime.v1 import prime_pb2, prime_pb2_grpc
 
 import ansys.meshing.prime.internals.config as config
 import ansys.meshing.prime.internals.defaults as defaults
-import ansys.meshing.prime.internals.grpc_utils as grpc_utils
 import ansys.meshing.prime.internals.json_utils as json
 from ansys.meshing.prime.core.model import Model
+from ansys.meshing.prime.internals import cyberchannel
 from ansys.meshing.prime.internals.communicator import Communicator
 from ansys.meshing.prime.internals.error_handling import (
     communicator_error_handler,
@@ -39,6 +41,50 @@ from ansys.meshing.prime.internals.error_handling import (
 
 # Keep some buffer for gRPC metadata that it may want to send
 BUFFER_MESSAGE_LENGTH = defaults.max_message_length() - 100
+
+
+def get_secure_channel(client_certs_dir: str, server_host: str, server_port: int):
+    """Create a secure gRPC channel using the provided TLS files.
+
+    Parameters
+    ----------
+    tls_client_files : list
+        List of paths to the TLS files. The list should contain:
+        - client certificate file path
+        - client key file path
+        - CA certificate file path
+    Returns
+    -------
+    grpc.Channel
+        A secure gRPC channel.
+    """
+    target = f"{server_host}:{server_port}"
+
+    if not os.path.exists(client_certs_dir):
+        raise FileNotFoundError(f"Client certificates directory does not exist: {client_certs_dir}")
+
+    cert_file = f"{client_certs_dir}/client.crt"
+    key_file = f"{client_certs_dir}/client.key"
+    ca_file = f"{client_certs_dir}/ca.crt"
+
+    with open(cert_file, 'rb') as f:
+        certificate_chain = f.read()
+    with open(key_file, 'rb') as f:
+        private_key = f.read()
+    with open(ca_file, 'rb') as f:
+        root_certificates = f.read()
+
+    try:
+        creds = grpc.ssl_channel_credentials(
+            root_certificates=root_certificates,
+            private_key=private_key,
+            certificate_chain=certificate_chain,
+        )
+    except Exception as e:
+        raise RuntimeError(f"Failed to create SSL channel credentials: {e}")
+
+    channel = grpc.secure_channel(target, creds)
+    return channel
 
 
 def make_chunks(data, chunk_size):
@@ -79,7 +125,10 @@ class GRPCCommunicator(Communicator):
         Maximum time to wait for connection. The default is ``10.0``.
     credentials : Any, optional
         Credentials for connecting to the server. The default is ``None``.
-
+    uds_id : Optional[str], optional
+        Id for the Unix Domain Socket (UDS). The default is ``None``.
+    client_certs_dir : Optional[str], optional
+        Directory containing client certificates for mutual TLS. The default is ``None``.
     Raises
     ------
     ConnectionError
@@ -92,30 +141,109 @@ class GRPCCommunicator(Communicator):
         port: Optional[int] = None,
         timeout: float = 10.0,
         credentials=None,
+        uds_id: Optional[str] = None,
+        client_certs_dir: Optional[str] = None,
+        transport_mode: Optional[str] = None,
         **kwargs,
     ):
         """Initialize the server connection."""
         import os
+        import time
+        from pathlib import Path
+
+        # Initialize attributes early to avoid AttributeError in __del__
+        self._channel = None
+        self._stub = None
+        self._models = []
+        self._logger = logging.getLogger("PyPrimeMesh")
 
         self._channel = kwargs.get('channel', None)
-        self._models = []
         if self._channel is None:
-            ip_addr = f"{ip}:{port}"
-            channel_options = grpc_utils.get_default_channel_args()
-            if credentials is None:
-                self._channel = grpc.insecure_channel(ip_addr, options=channel_options)
-            else:
-                self._channel = grpc.secure_channel(ip_addr, credentials, options=channel_options)
+            self._logger.debug("Creating cyber channel...")
+            self._channel = cyberchannel.create_channel(
+                transport_mode=transport_mode,
+                host=ip,
+                port=port,
+                uds_service="pyprimemesh",
+                uds_id=uds_id,
+                certs_dir=client_certs_dir,
+            )
+            self._logger.debug("Cyber channel created.")
 
         if 'PYPRIMEMESH_DEVELOPER_MODE' not in os.environ:
-            timeout = None
+            timeout = 60.0
 
-        try:
-            grpc.channel_ready_future(self._channel).result(timeout=timeout)
-        except grpc.FutureTimeoutError as err:
-            raise ConnectionError(
-                f'Failed to connect to Server in given timeout of {timeout} secs'
-            ) from err
+        # Health check: If using Unix Domain Socket, verify the socket file exists
+        if transport_mode == "uds":
+            # Determine socket path using same logic as cyberchannel
+            if os.name == 'nt':
+                uds_folder = Path(os.environ["USERPROFILE"]) / ".conn"
+            else:
+                uds_folder = Path(os.environ["HOME"]) / ".conn"
+
+            socket_filename = f"pyprimemesh-{uds_id}.sock" if uds_id else "pyprimemesh.sock"
+            socket_path = uds_folder / socket_filename
+
+            self._logger.debug(f"Health check: Verifying Unix socket at {socket_path}...")
+            max_wait = 30.0  # Wait up to 30 seconds for socket to appear
+            wait_interval = 0.5
+            elapsed = 0.0
+
+            while elapsed < max_wait:
+                if socket_path.exists():
+                    self._logger.debug(f"Health check: Socket file found at {socket_path}")
+                    # Additional check: try to stat the socket to ensure it's accessible
+                    try:
+                        socket_path.stat()
+                        self._logger.debug("Health check: Socket is accessible")
+                    except Exception as e:
+                        self._logger.warning(f"Health check: Socket exists but not accessible: {e}")
+                    break
+                time.sleep(wait_interval)
+                elapsed += wait_interval
+            else:
+                self._logger.warning(f"Socket file not found at {socket_path} after {max_wait}s")
+                self._logger.debug(f"Health check: Listing contents of {uds_folder}...")
+                try:
+                    if uds_folder.exists():
+                        files = list(uds_folder.iterdir())
+                        self._logger.debug(
+                            f"Health check: Found {len(files)} files: {[f.name for f in files]}"
+                        )
+                    else:
+                        self._logger.debug(f"Health check: Directory {uds_folder} does not exist")
+                except Exception as e:
+                    self._logger.debug(f"Health check: Error listing directory: {e}")
+
+        # Try to connect with retry logic
+        max_retries = 3
+        retry_delay = 2.0
+        last_error = None
+
+        for attempt in range(max_retries):
+            try:
+                if attempt > 0:
+                    self._logger.info(
+                        f"Retry attempt {attempt + 1}/{max_retries} after {retry_delay}s delay..."
+                    )
+                    time.sleep(retry_delay)
+                    retry_delay *= 2  # Exponential backoff
+
+                self._logger.debug("Waiting for channel to be ready...")
+                grpc.channel_ready_future(self._channel).result(timeout=timeout)
+                self._logger.debug("Channel is ready.")
+                break  # Success, exit retry loop
+            except grpc.FutureTimeoutError as err:
+                last_error = err
+                if attempt < max_retries - 1:
+                    self._logger.info(
+                        f"Channel not ready, retrying... (attempt {attempt + 1}/{max_retries})"
+                    )
+                else:
+                    raise ConnectionError(
+                        f'Failed to connect to Server in given timeout of {timeout} secs '
+                        f'after {max_retries} attempts'
+                    ) from err
 
         self._stub = prime_pb2_grpc.PrimeStub(self._channel)
         try:
@@ -127,7 +255,8 @@ class GRPCCommunicator(Communicator):
                 self._models = message['Results']
         except ConnectionError:
             raise
-        except:
+        except Exception as e:
+            self._logger.debug(f"Server initialization failed: {e}")
             pass
 
     @error_code_handler
@@ -278,8 +407,31 @@ class GRPCCommunicator(Communicator):
         else:
             raise RuntimeError("No connection with server")
 
+    def finalize(self):
+        """Finalize the connection with the server.
+
+        Raises
+        ------
+        RuntimeError
+            If unable to connect to the server.
+        """
+        if self._stub is not None:
+            try:
+                response = self._stub.Finalize(prime_pb2.FinalizeRequest())
+                message = get_response(response, '')
+            except Exception:
+                # It is possible that the server is already down
+                # when this is called.
+                # In that case, we can just ignore the error.
+                # The channel will be closed anyway.
+                pass
+        else:
+            raise RuntimeError("No connection with server")
+
     def close(self):
         """Close opened channels."""
+        if self._stub is not None:
+            self.finalize()
         self._stub = None
         if self._channel is not None:
             self._channel.close()
