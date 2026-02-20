@@ -23,12 +23,25 @@
 """Module for meshing utility functions."""
 import enum
 import os
+import tempfile
 from typing import Iterable, List
 
 import ansys.meshing.prime as prime
 
 from .scope import SurfaceScope, VolumeScope
 from .utils import check_name_pattern
+
+
+class ImportTypes(enum.Enum):
+    """Allowed geometry import types."""
+
+    PMDB = 0
+    FMD = 1
+    IGES = 2
+    STEP = 3
+    PARA_BIN = 4
+    PARA_TEXT = 5
+    SCDOCX = 6
 
 
 class LabelToZoneMethod(enum.IntEnum):
