@@ -102,8 +102,11 @@ The following example shows the translation of Abaqus INP file to CDB file forma
     - Number of error and warnings that occurred while exporting the CDB file.
 
     - Maximum number of node ids and elements ids that are exported.
-	
-	| **Keyword**                    | **Options**                                                                                                                                                    |
+
+    The following table provides a reference for Abaqus input file keywords supported. It serves as a translation
+    reference for converting Abaqus INP format to APDL cdb format.
+
+	| **Keyword**                     | **Options**                                                                                                                                                    |
 	|--------------------------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------|
 	| HEADING                        | None                                                                                                                                                           |
 	| NODE                           | SYSTEM=R                                                                                                                                                       |
