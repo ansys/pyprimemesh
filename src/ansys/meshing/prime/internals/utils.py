@@ -333,12 +333,12 @@ def stop_prime_github_container(name):
 
     Parameters
     ----------
-    container : str
+    name : str
         Name of the container to stop.
     """
     try:
-        cont = _DOCKER_CLIENT.containers.get(container_name)
-        cont.stop()
+        container = _DOCKER_CLIENT.containers.get(name)
+        container.stop()
     except docker.errors.NotFound:
         pass
 
