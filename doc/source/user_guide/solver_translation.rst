@@ -106,7 +106,7 @@ The following example shows the translation of Abaqus INP file to CDB file forma
     The following table provides a reference for Abaqus input file keywords supported. It serves as a translation
     reference for converting Abaqus INP format to APDL cdb format.
 
-    .. list-table:: Supported Abaqus Keywords
+    .. list-table:: Supported Abaqus Keywords:
        :widths: 30 70
        :header-rows: 1
 
