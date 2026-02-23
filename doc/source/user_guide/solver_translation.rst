@@ -245,9 +245,9 @@ The following example shows the translation of Abaqus INP file to K file format:
     
         fileio = prime.FileIO(model=model) 
         import_results = fileio.import_abaqus_inp(
-           r"E:\test3\spot_weld_test.inp",
-           prime.ImportAbaqusParams(model),
-       )
+            r"E:\test3\spot_weld_test.inp",
+            prime.ImportAbaqusParams(model),
+        )
 
     The import_abaqus_inp imports the INP file as mesh, extracts simulation specific information from the INP file 
     and stores the information internally as a JSON document. 
