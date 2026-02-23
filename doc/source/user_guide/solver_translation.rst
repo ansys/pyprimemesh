@@ -106,67 +106,130 @@ The following example shows the translation of Abaqus INP file to CDB file forma
     The following table provides a reference for Abaqus input file keywords supported. It serves as a translation
     reference for converting Abaqus INP format to APDL cdb format.
 
-	| **Keyword**                     | **Options**                                                                                                                                                    |
-	|--------------------------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------|
-	| HEADING                        | None                                                                                                                                                           |
-	| NODE                           | SYSTEM=R                                                                                                                                                       |
-	| ELEMENT                        | TYPE=B31, C3D10, C3D4, C3D6, C3D6H, C3D8, C3D8H, C3D8R, C3D8RH, COH3D6, COH3D8, CONN3D2, DCOUP3D, M3D3, M3D4, MASS, R3D3, R3D4, ROTARYI, S3, S3R, S4, S4R, SPRINGA, STRI65 |
-	| KINEMATIC COUPLING             | None                                                                                                                                                           |
-	| MPC                            | None                                                                                                                                                           |
-	| ORIENTATION                    | DEFINITION=COORDINATES, NODES; SYSTEM=RECTANGULAR                                                                                                             |
-	| SOLID SECTION                  | None                                                                                                                                                           |
-	| SHELL SECTION                  | DENSITY=0; NODAL THICKNESS; OFFSET                                                                                                                            |
-	| COHESIVE SECTION               | RESPONSE=CONTINUUM, TRACTION SEPARATION; THICKNESS=SPECIFIED                                                                                                   |
-	| BEAM SECTION                   | SECTION=CIRC, PIPE                                                                                                                                             |
-	| CONNECTOR SECTION              | [CARTESIAN–CARDAN], [AXIAL], [CARTESIAN–ROTATION], [WELD], [CARTESIAN–EULER], [JOIN–REVOLUTE], [SLOT–ALIGN]                                                   |
-	| NSET                           | None                                                                                                                                                           |
-	| ELSET                          | GENERATE                                                                                                                                                       |
-	| SURFACE                        | TYPE=ELEMENT, NODE                                                                                                                                             |
-	| MATERIAL                       | None                                                                                                                                                           |
-	| DENSITY                        | None                                                                                                                                                           |
-	| DAMPING                        | STRUCTURAL=0                                                                                                                                                   |
-	| ELASTIC                        | TYPE=ISOTROPIC, TRACTION                                                                                                                                       |
-	| CONNECTOR BEHAVIOR             | None                                                                                                                                                           |
-	| CONNECTOR ELASTICITY           | NONLINEAR, RIGID                                                                                                                                                |
-	| CONNECTOR DAMPING              | NONLINEAR; TYPE=VISCOUS                                                                                                                                        |
-	| SPRING                         | None                                                                                                                                                           |
-	| MASS                           | None                                                                                                                                                           |
-	| ROTARY INERTIA                 | None                                                                                                                                                           |
-	| SECTION CONTROLS               | ELEMENT DELETION=YES; HOURGLASS=ENHANCED                                                                                                                       |
-	| FASTENER PROPERTY              | None                                                                                                                                                           |
-	| NONSTRUCTURAL MASS             | DISTRIBUTION=MASS PROPORTIONAL; UNITS=TOTAL MASS                                                                                                               |
-	| TIE                            | ADJUST=NO, YES                                                                                                                                                 |
-	| FASTENER                       | ADJUST ORIENTATION=NO                                                                                                                                          |
-	| AMPLITUDE                      | DEFINITION=EQUALLY SPACED, PERIODIC, TABULAR, periodic; FIXED INTERVAL=0,3; SMOOTH=0; TIME=STEP TIME, step time                                               |
-	| RIGID BODY                     | None                                                                                                                                                           |
-	| STEP                           | NLGEOM=NO, YES; PERTURBATION; UNSYMM=YES                                                                                                                       |
-	| STATIC                         | STABILIZE=0                                                                                                                                                    |
-	| BOUNDARY                       | BASE NAME=LOAD_FR, LOAD_RR; OP=NEW; TYPE=DISPLACEMENT                                                                                                          |
-	| CLOAD                          | FOLLOWER; LOADCASE=1; OP=NEW; REAL                                                                                                                             |
-	| DLOAD                          | OP=NEW                                                                                                                                                         |
-	| OUTPUT                         | FIELD, HISTORY, TIME INTERVAL=0                                                                                                                                |
-	| NODE OUTPUT                    | None                                                                                                                                                           |
-	| END STEP                       | None                                                                                                                                                           |
-	| DYNAMIC                        | APPLICATION=MODERATE DISSIPATION, QUASI                                                                                                                        |
-	| ELEMENT OUTPUT                 | POSITION=CENTROIDAL                                                                                                                                            |
-	| SYSTEM                         | None                                                                                                                                                           |
-	| TRANSFORM                      | TYPE=R                                                                                                                                                         |
-	| PLASTIC                        | None                                                                                                                                                           |
-	| HYPERELASTIC                   | MODULI=LONG TERM; N=3; NEO HOOKE; REDUCED POLYNOMIAL; YEOH                                                                                                     |
-	| SURFACE INTERACTION            | None                                                                                                                                                           |
-	| FRICTION                       | SLIP TOLERANCE=0                                                                                                                                               |
-	| CONTACT PAIR                   | ADJUST=0; SMALL SLIDING; SMOOTH=0; TYPE=NODE TO SURFACE, SURFACE TO SURFACE                                                                                    |
-	| MONITOR                        | DOF=1,2,3; NODE=FR_DR_JIG_PT, FR_DR_RH_JIG_PT, JIG_OS_CENTER, RR_DR_JIG_PT, RR_DR_RH_JIG_PT, node                                                              |
-	| NODE PRINT                    | None                                                                                                                                                           |
-	| MEMBRANE SECTION               | None                                                                                                                                                           |
-	| TIME POINT                     | None                                                                                                                                                           |
-	| CONTACT                        | None                                                                                                                                                           |
-	| CONTACT INCLUSIONS             | ALL EXTERIOR                                                                                                                                                   |
-	| CONTACT EXCLUSIONS             | None                                                                                                                                                           |
-	| CONTACT PROPERTY ASSIGNMENT    | None                                                                                                                                                           |
-	| DAMAGE INITIATION              | CRITERION=DUCTILE                                                                                                                                              |
-	| DAMAGE EVOLUTION               | TYPE=DISPLACEMENT                                                                                                                                              |
-	| FREQUENCY                      | DAMPING PROJECTION=ON; EIGENSOLVER=AMS; NORMALIZATION=MASS; RESIDUAL MODES; SIM
+    .. list-table:: Supported Abaqus Keywords
+       :widths: 30 70
+       :header-rows: 1
+
+       * - **Keyword**
+         - **Options**
+       * - HEADING
+         - None
+       * - NODE
+         - SYSTEM=R
+       * - ELEMENT
+         - TYPE=B31, C3D10, C3D4, C3D6, C3D6H, C3D8, C3D8H, C3D8R, C3D8RH, COH3D6, COH3D8, CONN3D2, DCOUP3D, M3D3, M3D4, MASS, R3D3, R3D4, ROTARYI, S3, S3R, S4, S4R, SPRINGA, STRI65
+       * - KINEMATIC COUPLING
+         - None
+       * - MPC
+         - None
+       * - ORIENTATION
+         - DEFINITION=COORDINATES, NODES; SYSTEM=RECTANGULAR
+       * - SOLID SECTION
+         - None
+       * - SHELL SECTION
+         - DENSITY=0; NODAL THICKNESS; OFFSET
+       * - COHESIVE SECTION
+         - RESPONSE=CONTINUUM, TRACTION SEPARATION; THICKNESS=SPECIFIED
+       * - BEAM SECTION
+         - SECTION=CIRC, PIPE
+       * - CONNECTOR SECTION
+         - [CARTESIAN–CARDAN], [AXIAL], [CARTESIAN–ROTATION], [WELD], [CARTESIAN–EULER], [JOIN–REVOLUTE], [SLOT–ALIGN]
+       * - NSET
+         - None
+       * - ELSET
+         - GENERATE
+       * - SURFACE
+         - TYPE=ELEMENT, NODE
+       * - MATERIAL
+         - None
+       * - DENSITY
+         - None
+       * - DAMPING
+         - STRUCTURAL=0
+       * - ELASTIC
+         - TYPE=ISOTROPIC, TRACTION
+       * - CONNECTOR BEHAVIOR
+         - None
+       * - CONNECTOR ELASTICITY
+         - NONLINEAR, RIGID
+       * - CONNECTOR DAMPING
+         - NONLINEAR; TYPE=VISCOUS
+       * - SPRING
+         - None
+       * - MASS
+         - None
+       * - ROTARY INERTIA
+         - None
+       * - SECTION CONTROLS
+         - ELEMENT DELETION=YES; HOURGLASS=ENHANCED
+       * - FASTENER PROPERTY
+         - None
+       * - NONSTRUCTURAL MASS
+         - DISTRIBUTION=MASS PROPORTIONAL; UNITS=TOTAL MASS
+       * - TIE
+         - ADJUST=NO, YES
+       * - FASTENER
+         - ADJUST ORIENTATION=NO
+       * - AMPLITUDE
+         - DEFINITION=EQUALLY SPACED, PERIODIC, TABULAR, periodic; FIXED INTERVAL=0,3; SMOOTH=0; TIME=STEP TIME, step time
+       * - RIGID BODY
+         - None
+       * - STEP
+         - NLGEOM=NO, YES; PERTURBATION; UNSYMM=YES
+       * - STATIC
+         - STABILIZE=0
+       * - BOUNDARY
+         - BASE NAME=LOAD_FR, LOAD_RR; OP=NEW; TYPE=DISPLACEMENT
+       * - CLOAD
+         - FOLLOWER; LOADCASE=1; OP=NEW; REAL
+       * - DLOAD
+         - OP=NEW
+       * - OUTPUT
+         - FIELD, HISTORY, TIME INTERVAL=0
+       * - NODE OUTPUT
+         - None
+       * - END STEP
+         - None
+       * - DYNAMIC
+         - APPLICATION=MODERATE DISSIPATION, QUASI
+       * - ELEMENT OUTPUT
+         - POSITION=CENTROIDAL
+       * - SYSTEM
+         - None
+       * - TRANSFORM
+         - TYPE=R
+       * - PLASTIC
+         - None
+       * - HYPERELASTIC
+         - MODULI=LONG TERM; N=3; NEO HOOKE; REDUCED POLYNOMIAL; YEOH
+       * - SURFACE INTERACTION
+         - None
+       * - FRICTION
+         - SLIP TOLERANCE=0
+       * - CONTACT PAIR
+         - ADJUST=0; SMALL SLIDING; SMOOTH=0; TYPE=NODE TO SURFACE, SURFACE TO SURFACE
+       * - MONITOR
+         - DOF=1,2,3; NODE=FR_DR_JIG_PT, FR_DR_RH_JIG_PT, JIG_OS_CENTER, RR_DR_JIG_PT, RR_DR_RH_JIG_PT, node
+       * - NODE PRINT
+         - None
+       * - MEMBRANE SECTION
+         - None
+       * - TIME POINT
+         - None
+       * - CONTACT
+         - None
+       * - CONTACT INCLUSIONS
+         - ALL EXTERIOR
+       * - CONTACT EXCLUSIONS
+         - None
+       * - CONTACT PROPERTY ASSIGNMENT
+         - None
+       * - DAMAGE INITIATION
+         - CRITERION=DUCTILE
+       * - DAMAGE EVOLUTION
+         - TYPE=DISPLACEMENT
+       * - FREQUENCY
+         - DAMPING PROJECTION=ON; EIGENSOLVER=AMS; NORMALIZATION=MASS; RESIDUAL MODES; SIMULATION=STEADY STATE
 
 Abaqus to LS-DYNA Conversion 
 -----------------------------
