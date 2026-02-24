@@ -243,7 +243,7 @@ The following example shows the translation of Abaqus INP file to K file format:
 
     .. code-block:: python
     
-        fileio = prime.FileIO(model=model) 
+        fileio = prime.FileIO(model=model)
         import_results = fileio.import_abaqus_inp(
             r"E:\test3\spot_weld_test.inp",
             prime.ImportAbaqusParams(model),
@@ -294,9 +294,9 @@ The following example shows the translation of Abaqus INP file to K file format:
 
     .. code-block:: python
 
-        main_k_file = os.path.join(file_name.split('.')[0] + '.k')
+        main_k_file = os.path.join(file_name.split(".")[0] + ".k")
         k_params = prime.ExportLSDynaKeywordFileParams(model=model)
-        export_K_result = prime.FileIO(model).export_lsdyna_keyword_file(main_k_file,k_params)
+        export_K_result = prime.FileIO(model).export_lsdyna_keyword_file(main_k_file, k_params)
         print(export_K_result)
 
 
