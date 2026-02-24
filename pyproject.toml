@@ -22,6 +22,7 @@ classifiers = [
 ]
 
 dependencies = [
+  "docker>=7.1.0", # TODO: Discuss if this should be optional
   "ansys-api-meshing-prime==0.2.0",
   "numpy>=1.14.0,<2.3", # temporary upper-bound fix since breaks visualization
   "appdirs>=1.4.0",
