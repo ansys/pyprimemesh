@@ -117,10 +117,10 @@ def test_from_geometry(mesh):
     from ansys.geometry.core.sketch import Sketch
     from pint import Quantity
 
-    modeler = launch_modeler()
+    modeler = launch_modeler(transport_mode="insecure")
     design_name = "ExtrudeProfile"
     design = modeler.create_design(design_name)
     sketch = Sketch()
     sketch.circle(Point2D([10, 10], UNITS.mm), Quantity(10, UNITS.mm))
-    body = design.extrude_sketch("SingleBody", sketch, Quantity(10, UNITS.mm))
-    mesh.from_geometry(body)
+    design.extrude_sketch("SingleBody", sketch, Quantity(10, UNITS.mm))
+    mesh.from_geometry(design)
