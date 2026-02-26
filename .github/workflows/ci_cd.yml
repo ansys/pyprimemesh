@@ -153,7 +153,7 @@ jobs:
   testing:
     name: Run Unit Tests
     if: github.event.action != 'closed'
-    # needs: [ smoke-tests ]
+    needs: [ smoke-tests ]
     runs-on: ubuntu-latest
 
     steps:
@@ -185,7 +185,6 @@ jobs:
           ANSYSLMD_LICENSE_FILE: '1055@${{ secrets.LICENSE_SERVER }}'
         with:
           python-version: ${{ env.MAIN_PYTHON_VERSION }}
-          pytest-extra-args: "-k 'test_from_geometry'"
       - name: Upload PyVista generated images (cache and results)
         if: always()
         uses: actions/upload-artifact@v6
