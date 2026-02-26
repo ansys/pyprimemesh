@@ -50,45 +50,45 @@ with a hole in the center:
 
 .. code-block:: python
 
-    from pint import Quantity
+from pint import Quantity
 
-    from ansys.geometry.core import launch_modeler
-    from ansys.geometry.core.math import Point2D
-    from ansys.geometry.core.misc import UNITS
-    from ansys.geometry.core.sketch import Sketch
-    from ansys.geometry.core.math import Point2D
-    from ansys.geometry.core.math.plane import Plane
-    from ansys.geometry.core.math.point import Point3D
+from ansys.geometry.core import launch_modeler
+from ansys.geometry.core.math import Point2D
+from ansys.geometry.core.misc import UNITS
+from ansys.geometry.core.sketch import Sketch
+from ansys.geometry.core.math import Point2D
+from ansys.geometry.core.math.plane import Plane
+from ansys.geometry.core.math.point import Point3D
 
-    modeler = launch_modeler(hidden=True)
+modeler = launch_modeler(hidden=True)
 
-    sketch = Sketch()
-    (
-        sketch.segment(Point2D([-4, 5], unit=UNITS.mm), Point2D([4, 5], unit=UNITS.mm))
-        .segment_to_point(Point2D([4, -5], unit=UNITS.mm))
-        .segment_to_point(Point2D([-4, -5], unit=UNITS.mm))
-        .segment_to_point(Point2D([-4, 5], unit=UNITS.mm))
-        .box(Point2D([0, 0], unit=UNITS.mm), Quantity(3, UNITS.mm), Quantity(3, UNITS.mm))
+sketch = Sketch()
+(
+    sketch.segment(Point2D([-4, 5], unit=UNITS.mm), Point2D([4, 5], unit=UNITS.mm))
+    .segment_to_point(Point2D([4, -5], unit=UNITS.mm))
+    .segment_to_point(Point2D([-4, -5], unit=UNITS.mm))
+    .segment_to_point(Point2D([-4, 5], unit=UNITS.mm))
+    .box(Point2D([0, 0], unit=UNITS.mm), Quantity(3, UNITS.mm), Quantity(3, UNITS.mm))
+)
+design = modeler.create_design("ExtrudedPlateNoHoles")
+body = design.extrude_sketch(f"PlateLayer", sketch, Quantity(2, UNITS.mm))
+sketch_hole = Sketch()
+sketch_hole.circle(Point2D([0, 0], unit=UNITS.mm), Quantity(0.5, UNITS.mm))
+
+hole_centers = [
+    Plane(Point3D([3, 4, 0], unit=UNITS.mm)),
+    Plane(Point3D([-3, 4, 0], unit=UNITS.mm)),
+    Plane(Point3D([-3, -4, 0], unit=UNITS.mm)),
+    Plane(Point3D([3, -4, 0], unit=UNITS.mm)),
+]
+for center in hole_centers:
+    sketch_hole.plane = center
+    design.extrude_sketch(
+        name=f"H_{center.origin.x}_{center.origin.y}",
+        sketch=sketch_hole,
+        distance=Quantity(2, UNITS.mm),
+        cut=True,
     )
-    design = modeler.create_design("ExtrudedPlateNoHoles")
-    body = design.extrude_sketch(f"PlateLayer", sketch, Quantity(2, UNITS.mm))
-    sketch_hole = Sketch()
-    sketch_hole.circle(Point2D([0, 0], unit=UNITS.mm), Quantity(0.5, UNITS.mm))
-
-    hole_centers = [
-        Plane(Point3D([3, 4, 0], unit=UNITS.mm)),
-        Plane(Point3D([-3, 4, 0], unit=UNITS.mm)),
-        Plane(Point3D([-3, -4, 0], unit=UNITS.mm)),
-        Plane(Point3D([3, -4, 0], unit=UNITS.mm)),
-    ]
-    for center in hole_centers:
-        sketch_hole.plane = center
-        design.extrude_sketch(
-            name=f"H_{center.origin.x}_{center.origin.y}",
-            sketch=sketch_hole,
-            distance=Quantity(2, UNITS.mm),
-            cut=True,
-        )
 
 
 Import the geometry into PyPrimeMesh
@@ -98,13 +98,13 @@ create a mesh:
 
 .. code-block:: python
 
-    import ansys.meshing.prime as prime
-    from ansys.meshing.prime.graphics.plotter import PrimePlotter
+import ansys.meshing.prime as prime
+from ansys.meshing.prime.graphics.plotter import PrimePlotter
 
-    prime_client = prime.launch_prime()
-    model = prime_client.model
-    mesh_util = prime.lucid.Mesh(model=model)
-    mesh_util.from_geometry(design)
+prime_client = prime.launch_prime()
+model = prime_client.model
+mesh_util = prime.lucid.Mesh(model=model)
+mesh_util.from_geometry(design)
 
 
 Mesh the geometry and display it
@@ -113,18 +113,18 @@ With the geometry imported, we can now mesh it and display the mesh:
 
 .. code-block:: python
 
-    model.set_global_sizing_params(
-        prime.GlobalSizingParams(model, min=0.2, max=10.0, growth_rate=1.2)
-    )
-    mesh_util.surface_mesh(min_size=0.2)
-    mesh_util.volume_mesh()
+model.set_global_sizing_params(
+    prime.GlobalSizingParams(model, min=0.2, max=10.0, growth_rate=1.2)
+)
+mesh_util.surface_mesh(min_size=0.2)
+mesh_util.volume_mesh()
 
-    # Print the results
-    model.parts[0].print_mesh = True
-    print(model)
-    display = PrimePlotter()
-    display.plot(model)
-    display.show()
-    modeler.close()
-    prime_client.exit()
+# Print the results
+model.parts[0].print_mesh = True
+print(model)
+display = PrimePlotter()
+display.plot(model)
+display.show()
+modeler.close()
+prime_client.exit()
 """

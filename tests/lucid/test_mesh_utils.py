@@ -117,7 +117,7 @@ def test_from_geometry(mesh):
     from ansys.geometry.core.sketch import Sketch
     from pint import Quantity
 
-    modeler = launch_modeler(transport_mode="insecure")
+    modeler = launch_modeler(transport_mode="insecure", port=654)
     design_name = "ExtrudeProfile"
     design = modeler.create_design(design_name)
     sketch = Sketch()
