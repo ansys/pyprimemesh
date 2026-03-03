@@ -110,6 +110,7 @@ def test_size_control(mesh):
     mesh.create_curvature_size_control(max=1.0, min=2.0)
 
 
+@pytest.mark.skipif(not os.getenv('CI'), reason="Only run in CI environment")
 def test_from_geometry(mesh):
     from ansys.geometry.core import launch_modeler
     from ansys.geometry.core.math import Point2D
