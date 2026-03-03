@@ -42,6 +42,7 @@ tests = [
   "pytest-cov==7.0.0",
   "pytest-pyvista==0.3.2",
   "pytest-xvfb==3.1.1",
+  "ansys-geometry-core>=0.7.6,<1",
   "pyvista[trame]==0.47.1",
 ]
 doc = [

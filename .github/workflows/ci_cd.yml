@@ -166,6 +166,9 @@ jobs:
 
       - name: Pull Ansys Prime Server
         run: docker pull ${{ env.DOCKER_IMAGE_NAME }}:${{ env.DOCKER_IMAGE_TAG }}
+      
+      - name: Pull Ansys Geometry Server
+        run: docker run -d --rm --name ans_geo -e LICENSE_SERVER=1055@${{ secrets.LICENSE_SERVER }} --dns "8.8.8.8" -p 654:50051 ghcr.io/ansys/geometry:core-linux-latest
 
       - name: Restore images cache
         uses: actions/cache@v5
@@ -182,7 +185,6 @@ jobs:
           ANSYSLMD_LICENSE_FILE: '1055@${{ secrets.LICENSE_SERVER }}'
         with:
           python-version: ${{ env.MAIN_PYTHON_VERSION }}
-
       - name: Upload PyVista generated images (cache and results)
         if: always()
         uses: actions/upload-artifact@v6
