@@ -65,6 +65,19 @@ color_matrix = np.array(
     ]
 )
 
+def _process_connectivity(connectivity: np.ndarray, dimensions: np.ndarray) -> np.ndarray:
+    connectivity = np.asarray(connectivity)
+    starts = dimensions + np.arange(len(dimensions))
+    starts = starts[:-1]
+    block_lengths = connectivity[starts] + 1
+    group_id = np.repeat(np.arange(len(block_lengths)), block_lengths)
+    block_starts = np.repeat(np.cumsum(block_lengths) - block_lengths, block_lengths)
+    pos_in_block = np.arange(len(connectivity)) - block_starts
+    mask = pos_in_block != 0
+    new_pos = mask * (block_lengths[group_id] - pos_in_block)
+    new_indices = block_starts + new_pos
+    return connectivity[new_indices]
+
 
 class DisplayMeshType(enum.IntEnum):
     """Contains the mesh types to display."""
@@ -515,14 +528,19 @@ class Mesh(MeshInfo):
             part = self._model.get_part(part_id)
             splines = part.get_splines()
             part_polydata = {}
-            face_polydata_list = [
-                self.get_face_polydata(
+
+            face_polydata_list = []
+            for j in range(
+                    0, len(facet_result.face_connectivity_result_per_part[i].face_zonelet_ids)
+                ):
+                face_polydata = self.get_face_polydata(
                     part_id, facet_result.face_connectivity_result_per_part[i], j
                 )
-                for j in range(
-                    0, len(facet_result.face_connectivity_result_per_part[i].face_zonelet_ids)
-                )
-            ]
+
+                faces = _process_connectivity(face_polydata[0].mesh.faces, face_polydata[0].mesh._offset_array)
+                face_polydata[0].mesh.faces = faces
+                face_polydata[0].mesh.compute_normals(consistent_normals=True, auto_orient_normals=False, inplace=True) 
+                face_polydata_list.append(face_polydata)
 
             edge_polydata_list = [
                 self.get_edge_polydata(
