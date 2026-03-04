@@ -2,6 +2,137 @@ This project uses [towncrier](https://towncrier.readthedocs.io/) and the changes
 
 <!-- towncrier release notes start -->
 
+## [0.10.0.dev30](https://github.com/ansys/pyprimemesh/releases/tag/v0.10.0.dev30) - March 04, 2026
+
+
+### Fixed
+
+- fix: Revert napoleon extension [#1052](https://github.com/ansys/pyprimemesh/pull/1052)
+- fix: unique container name [#1057](https://github.com/ansys/pyprimemesh/pull/1057)
+
+
+### Dependencies
+
+- build(deps): bump sphinx from 8.2.1 to 8.2.3 in the doc-dependencies group [#990](https://github.com/ansys/pyprimemesh/pull/990)
+- build(deps): bump ansys-sphinx-theme[autoapi] from 1.3.2 to 1.3.3 in the doc-dependencies group [#992](https://github.com/ansys/pyprimemesh/pull/992)
+- build(deps): bump the test-dependencies group across 1 directory with 2 updates [#993](https://github.com/ansys/pyprimemesh/pull/993), [#1060](https://github.com/ansys/pyprimemesh/pull/1060)
+- build(deps): bump ansys-sphinx-theme[autoapi] from 1.3.3 to 1.4.2 in the doc-dependencies group [#994](https://github.com/ansys/pyprimemesh/pull/994)
+- build(deps): bump pytest-cov from 6.0.0 to 6.1.1 in the test-dependencies group [#996](https://github.com/ansys/pyprimemesh/pull/996)
+- build(deps): bump ansys/actions from 8 to 9 [#999](https://github.com/ansys/pyprimemesh/pull/999)
+- build(deps): bump the pyvista group with 2 updates [#1005](https://github.com/ansys/pyprimemesh/pull/1005), [#1021](https://github.com/ansys/pyprimemesh/pull/1021)
+- build(deps): bump ansys-tools-visualization-interface from 0.8.3 to 0.9.1 in the general-dependencies group [#1006](https://github.com/ansys/pyprimemesh/pull/1006)
+- build(deps): bump pyvista/setup-headless-display-action from 3 to 4 [#1011](https://github.com/ansys/pyprimemesh/pull/1011)
+- build(deps): bump ansys-sphinx-theme[autoapi] from 1.4.2 to 1.4.4 in the doc-dependencies group [#1022](https://github.com/ansys/pyprimemesh/pull/1022)
+- build(deps): bump ansys-sphinx-theme[autoapi] from 1.4.4 to 1.5.2 in the doc-dependencies group [#1032](https://github.com/ansys/pyprimemesh/pull/1032)
+
+
+### Miscellaneous
+
+- Feat: Integrate geometry imports [#952](https://github.com/ansys/pyprimemesh/pull/952)
+- Update Dockerfile [#1015](https://github.com/ansys/pyprimemesh/pull/1015)
+- fix to remove %s string while printing the server name [#1026](https://github.com/ansys/pyprimemesh/pull/1026)
+- doc fix [#1033](https://github.com/ansys/pyprimemesh/pull/1033)
+- Doc: create beta example folder [#1040](https://github.com/ansys/pyprimemesh/pull/1040)
+- Build(deps): bump ansys/actions from 9 to 10 [#1048](https://github.com/ansys/pyprimemesh/pull/1048)
+- Build(deps): bump pytest from 8.4.0 to 8.4.1 in the test-dependencies group [#1065](https://github.com/ansys/pyprimemesh/pull/1065)
+- Chore: update security.md [#1068](https://github.com/ansys/pyprimemesh/pull/1068)
+- Doc: adding deep wiki link [#1071](https://github.com/ansys/pyprimemesh/pull/1071)
+- Build(deps): bump ansys-tools-visualization-interface from 0.9.2 to 0.10.0 in the general-dependencies group [#1073](https://github.com/ansys/pyprimemesh/pull/1073)
+- Fix: wrong param in primeplotter [#1075](https://github.com/ansys/pyprimemesh/pull/1075)
+- Updated the utils.py to sync ado side prime_graphics_port handling [#1081](https://github.com/ansys/pyprimemesh/pull/1081)
+- Updated the version before tagging [#1089](https://github.com/ansys/pyprimemesh/pull/1089)
+- Fix: release action migration [#1100](https://github.com/ansys/pyprimemesh/pull/1100)
+- Doc: add graphics docs [#1102](https://github.com/ansys/pyprimemesh/pull/1102)
+- Create solver_translation.rst [#1103](https://github.com/ansys/pyprimemesh/pull/1103)
+- Build(deps): bump pytest-pyvista from 0.1.9 to 0.2.0 in the test-dependencies group [#1106](https://github.com/ansys/pyprimemesh/pull/1106)
+- Chore: update changelog for v0.9.0 [#1111](https://github.com/ansys/pyprimemesh/pull/1111)
+- Build(deps): bump the pyvista group with 2 updates [#1112](https://github.com/ansys/pyprimemesh/pull/1112), [#1125](https://github.com/ansys/pyprimemesh/pull/1125)
+- Build(deps): bump numpydoc from 1.8.0 to 1.9.0 in the doc-dependencies group across 1 directory [#1114](https://github.com/ansys/pyprimemesh/pull/1114)
+- Chore: update CHANGELOG for v0.9.1 [#1122](https://github.com/ansys/pyprimemesh/pull/1122)
+- Build(deps): bump actions/checkout from 4 to 5 [#1124](https://github.com/ansys/pyprimemesh/pull/1124)
+- Maint: upload using trusted publisher [#1127](https://github.com/ansys/pyprimemesh/pull/1127)
+- Maint: fixed download stats badge [#1129](https://github.com/ansys/pyprimemesh/pull/1129)
+- Increased docker run shared memory size for MPI operability [#1131](https://github.com/ansys/pyprimemesh/pull/1131)
+- Build(deps): bump actions/download-artifact from 4.1.9 to 5.0.0 [#1132](https://github.com/ansys/pyprimemesh/pull/1132)
+- Docs: update ``html_context`` with PyAnsys tags [#1133](https://github.com/ansys/pyprimemesh/pull/1133)
+- Build(deps): bump joblib from 1.5.1 to 1.5.2 in the general-dependencies group [#1134](https://github.com/ansys/pyprimemesh/pull/1134)
+- Build(deps): bump ansys-sphinx-theme[autoapi] from 1.5.3 to 1.6.0 in the doc-dependencies group [#1135](https://github.com/ansys/pyprimemesh/pull/1135)
+- Build(deps): bump pypa/gh-action-pypi-publish from 1.12.4 to 1.13.0 [#1137](https://github.com/ansys/pyprimemesh/pull/1137)
+- Build(deps): bump the test-dependencies group with 2 updates [#1138](https://github.com/ansys/pyprimemesh/pull/1138)
+- Build(deps): bump actions/labeler from 5 to 6 [#1139](https://github.com/ansys/pyprimemesh/pull/1139)
+- Maint: Use merge queue [#1141](https://github.com/ansys/pyprimemesh/pull/1141)
+- Update tox.ini [#1145](https://github.com/ansys/pyprimemesh/pull/1145)
+- Fix: email link in README.md [#1146](https://github.com/ansys/pyprimemesh/pull/1146)
+- Fix: Avoid running vulnerabilities action on closed PRs [#1147](https://github.com/ansys/pyprimemesh/pull/1147)
+- Build(deps): bump ansys-sphinx-theme[autoapi] from 1.6.0 to 1.6.1 in the doc-dependencies group [#1148](https://github.com/ansys/pyprimemesh/pull/1148)
+- Chore: update CHANGELOG for v0.9.2 [#1157](https://github.com/ansys/pyprimemesh/pull/1157)
+- Chore: update CHANGELOG for v0.9.3 [#1161](https://github.com/ansys/pyprimemesh/pull/1161)
+- Build(deps): bump ansys-tools-visualization-interface from 0.11.0 to 0.12.0 in the general-dependencies group [#1167](https://github.com/ansys/pyprimemesh/pull/1167)
+- Build(deps): bump pytest-pyvista from 0.2.0 to 0.3.0 in the test-dependencies group [#1168](https://github.com/ansys/pyprimemesh/pull/1168)
+- Build(deps): bump peter-evans/create-or-update-comment from 4 to 5 [#1169](https://github.com/ansys/pyprimemesh/pull/1169)
+- Build(deps): bump ansys-sphinx-theme[autoapi] from 1.6.1 to 1.6.3 in the doc-dependencies group [#1170](https://github.com/ansys/pyprimemesh/pull/1170)
+- Build(deps): bump actions/download-artifact from 5.0.0 to 6.0.0 [#1172](https://github.com/ansys/pyprimemesh/pull/1172)
+- Build(deps): bump actions/upload-artifact from 4 to 5 [#1173](https://github.com/ansys/pyprimemesh/pull/1173)
+- CHORE:   Update missing or outdated files [#1175](https://github.com/ansys/pyprimemesh/pull/1175)
+- Build(deps-dev): bump the pyvista group with 2 updates [#1176](https://github.com/ansys/pyprimemesh/pull/1176), [#1216](https://github.com/ansys/pyprimemesh/pull/1216), [#1223](https://github.com/ansys/pyprimemesh/pull/1223)
+- Build(deps-dev): bump pytest from 8.4.2 to 9.0.0 in the test-dependencies group [#1177](https://github.com/ansys/pyprimemesh/pull/1177)
+- Build(deps): bump actions/checkout from 5 to 6 [#1185](https://github.com/ansys/pyprimemesh/pull/1185)
+- Build(deps-dev): bump the test-dependencies group across 1 directory with 2 updates [#1190](https://github.com/ansys/pyprimemesh/pull/1190)
+- Chore: update CHANGELOG for v0.9.4 [#1195](https://github.com/ansys/pyprimemesh/pull/1195)
+- Build(deps): bump actions/cache from 4 to 5 [#1197](https://github.com/ansys/pyprimemesh/pull/1197)
+- Build(deps): bump actions/download-artifact from 6.0.0 to 7.0.0 [#1198](https://github.com/ansys/pyprimemesh/pull/1198)
+- Build(deps): bump actions/upload-artifact from 5 to 6 [#1199](https://github.com/ansys/pyprimemesh/pull/1199)
+- Build(deps-dev): bump the doc-dependencies group across 1 directory with 4 updates [#1201](https://github.com/ansys/pyprimemesh/pull/1201)
+- Chore: update CHANGELOG for v0.8.2 [#1202](https://github.com/ansys/pyprimemesh/pull/1202)
+- Updates to home page [#1207](https://github.com/ansys/pyprimemesh/pull/1207)
+- Fix: Pre-commit [#1209](https://github.com/ansys/pyprimemesh/pull/1209)
+- Chore: update CHANGELOG for v0.9.5 [#1211](https://github.com/ansys/pyprimemesh/pull/1211)
+- Maint: Temporary disable PR doc deploy [#1214](https://github.com/ansys/pyprimemesh/pull/1214)
+- Build(deps): bump the general-dependencies group across 1 directory with 2 updates [#1215](https://github.com/ansys/pyprimemesh/pull/1215)
+- Doc: Fix tabs [#1217](https://github.com/ansys/pyprimemesh/pull/1217)
+- Doc/fix fileio typo [#1218](https://github.com/ansys/pyprimemesh/pull/1218)
+- Build(deps-dev): bump ansys-sphinx-theme[autoapi] from 1.6.4 to 1.7.0 in the doc-dependencies group [#1221](https://github.com/ansys/pyprimemesh/pull/1221)
+- Build: bump ansys-api-meshing-prime [#1224](https://github.com/ansys/pyprimemesh/pull/1224)
+- Added the solver_translation rst file changes [#1225](https://github.com/ansys/pyprimemesh/pull/1225)
+
+
+### Documentation
+
+- Update fileio.rst [#980](https://github.com/ansys/pyprimemesh/pull/980)
+- Update index.rst [#1008](https://github.com/ansys/pyprimemesh/pull/1008), [#1023](https://github.com/ansys/pyprimemesh/pull/1023)
+- Sraj/getting started [#1009](https://github.com/ansys/pyprimemesh/pull/1009)
+- Maint/python 3.13 [#1018](https://github.com/ansys/pyprimemesh/pull/1018)
+- Docker image [#1025](https://github.com/ansys/pyprimemesh/pull/1025)
+- Update shellblcontrolstructs.py [#1027](https://github.com/ansys/pyprimemesh/pull/1027)
+- Doc/changes [#1028](https://github.com/ansys/pyprimemesh/pull/1028)
+- Fix docstring [#1034](https://github.com/ansys/pyprimemesh/pull/1034)
+- doc: remove attributes from docs [#1035](https://github.com/ansys/pyprimemesh/pull/1035)
+- fix: Avoid bad `trame-vtk` version [#1037](https://github.com/ansys/pyprimemesh/pull/1037)
+- docs: remove extra colon in api docs [#1051](https://github.com/ansys/pyprimemesh/pull/1051)
+- Update ci_cd.yml [#1053](https://github.com/ansys/pyprimemesh/pull/1053)
+- doc: parallel gallery [#1054](https://github.com/ansys/pyprimemesh/pull/1054)
+- Doc/parallel gallery [#1058](https://github.com/ansys/pyprimemesh/pull/1058)
+
+
+### Maintenance
+
+- chore: update CHANGELOG for v0.8.0 [#988](https://github.com/ansys/pyprimemesh/pull/988)
+- docs: Update ``CONTRIBUTORS.md`` with the latest contributors [#995](https://github.com/ansys/pyprimemesh/pull/995), [#1045](https://github.com/ansys/pyprimemesh/pull/1045)
+- Sync ADO Changes for 252 [#1010](https://github.com/ansys/pyprimemesh/pull/1010)
+- Maint/migrate examples to main [#1017](https://github.com/ansys/pyprimemesh/pull/1017)
+- Update LICENSE [#1019](https://github.com/ansys/pyprimemesh/pull/1019)
+- chore: update CHANGELOG for v0.8.1 [#1020](https://github.com/ansys/pyprimemesh/pull/1020)
+- sync up client side changes from release/release-252 [#1029](https://github.com/ansys/pyprimemesh/pull/1029)
+- revert the pyproj toml file [#1031](https://github.com/ansys/pyprimemesh/pull/1031)
+- maint: check vulnerabilities [#1038](https://github.com/ansys/pyprimemesh/pull/1038)
+- maint: create pull_request_template.md [#1039](https://github.com/ansys/pyprimemesh/pull/1039)
+- maint: deploy pr docs [#1041](https://github.com/ansys/pyprimemesh/pull/1041)
+- maint: temporary numpy fix [#1050](https://github.com/ansys/pyprimemesh/pull/1050)
+- Feature: enable parallel execution of example scripts before sphinx build [#1059](https://github.com/ansys/pyprimemesh/pull/1059)
+- Fix: broken method links in api [#1092](https://github.com/ansys/pyprimemesh/pull/1092)
+- Fix: search bar [#1113](https://github.com/ansys/pyprimemesh/pull/1113)
+- Ado sync for 26R1 [#1210](https://github.com/ansys/pyprimemesh/pull/1210)
+
 ## [0.9.5](https://github.com/ansys/pyprimemesh/releases/tag/v0.9.5) - January 07, 2026
 
 
