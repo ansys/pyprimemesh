@@ -1,0 +1,40 @@
+.. vale off
+
+MeshStackerResults
+==================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoclass:: MeshStackerResults
+   
+   
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+      :toctree:
+   
+      
+      MeshStackerResults.print_default
+      MeshStackerResults.set_default
+   
+   
+
+   
+   
+   .. rubric:: Attributes
+
+   .. autosummary::
+      :toctree:
+   
+      MeshStackerResults.base_face_ids
+      MeshStackerResults.error_code
+      MeshStackerResults.error_codes_per_topo_volume
+      MeshStackerResults.non_stackable_edges
+      MeshStackerResults.non_stackable_faces
+      MeshStackerResults.size_control_ids
+      MeshStackerResults.small_features
+   
+   
+
+.. vale on

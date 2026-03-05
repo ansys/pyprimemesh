@@ -1,0 +1,6 @@
+﻿locations\_found
+================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoproperty:: SearchInfoByRegisterIdResults.locations_found

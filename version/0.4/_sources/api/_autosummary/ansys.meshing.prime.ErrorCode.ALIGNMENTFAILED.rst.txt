@@ -1,0 +1,6 @@
+﻿ALIGNMENTFAILED
+===============
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoattribute:: ErrorCode.ALIGNMENTFAILED

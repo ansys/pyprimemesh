@@ -1,0 +1,31 @@
+SearchByFoldsResults
+====================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoclass:: SearchByFoldsResults
+   
+   
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+      :toctree:
+   
+      
+      SearchByFoldsResults.print_default
+      SearchByFoldsResults.set_default
+   
+   
+
+   
+   
+   .. rubric:: Attributes
+
+   .. autosummary::
+      :toctree:
+   
+      SearchByFoldsResults.error_code
+      SearchByFoldsResults.n_found
+   
+   

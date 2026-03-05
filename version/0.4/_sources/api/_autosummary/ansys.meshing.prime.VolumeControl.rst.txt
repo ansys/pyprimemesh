@@ -1,0 +1,38 @@
+.. vale off
+
+VolumeControl
+=============
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoclass:: VolumeControl
+   
+   
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+      :toctree:
+   
+      
+      VolumeControl.get_params
+      VolumeControl.get_scope
+      VolumeControl.set_params
+      VolumeControl.set_scope
+      VolumeControl.set_suggested_name
+   
+   
+
+   
+   
+   .. rubric:: Attributes
+
+   .. autosummary::
+      :toctree:
+   
+      VolumeControl.id
+      VolumeControl.name
+   
+   
+
+.. vale on

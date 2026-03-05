@@ -1,0 +1,6 @@
+error\_locations
+================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoproperty:: ComputeVolumesResults.error_locations

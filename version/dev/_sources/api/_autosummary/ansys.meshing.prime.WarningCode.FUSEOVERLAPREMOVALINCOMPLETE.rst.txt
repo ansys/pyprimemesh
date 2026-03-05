@@ -1,0 +1,6 @@
+FUSEOVERLAPREMOVALINCOMPLETE
+============================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoattribute:: WarningCode.FUSEOVERLAPREMOVALINCOMPLETE

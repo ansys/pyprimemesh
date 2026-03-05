@@ -1,0 +1,6 @@
+﻿n\_expansion\_layers
+====================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoproperty:: LeakPreventionParams.n_expansion_layers

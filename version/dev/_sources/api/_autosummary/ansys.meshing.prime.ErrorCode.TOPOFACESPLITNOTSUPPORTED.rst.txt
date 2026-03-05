@@ -1,0 +1,6 @@
+TOPOFACESPLITNOTSUPPORTED
+=========================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoattribute:: ErrorCode.TOPOFACESPLITNOTSUPPORTED

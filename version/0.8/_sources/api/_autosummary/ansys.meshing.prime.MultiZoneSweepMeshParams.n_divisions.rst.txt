@@ -1,0 +1,6 @@
+n\_divisions
+============
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoproperty:: MultiZoneSweepMeshParams.n_divisions

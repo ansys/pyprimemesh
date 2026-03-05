@@ -1,0 +1,39 @@
+.. vale off
+
+StretchFreeBoundariesResults
+============================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoclass:: StretchFreeBoundariesResults
+   
+   
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+      :toctree:
+   
+      
+      StretchFreeBoundariesResults.print_default
+      StretchFreeBoundariesResults.set_default
+   
+   
+
+   
+   
+   .. rubric:: Attributes
+
+   .. autosummary::
+      :toctree:
+   
+      StretchFreeBoundariesResults.error_code
+   
+   
+
+.. minigallery::
+    :add-heading: Examples using StretchFreeBoundariesResults
+
+    ansys.meshing.prime.StretchFreeBoundariesResults
+
+.. vale on

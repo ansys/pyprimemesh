@@ -1,0 +1,6 @@
+READSHELLBLCONTROLFAILED
+========================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoattribute:: ErrorCode.READSHELLBLCONTROLFAILED

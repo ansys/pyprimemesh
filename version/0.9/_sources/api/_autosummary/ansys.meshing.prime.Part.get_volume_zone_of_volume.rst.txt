@@ -1,0 +1,11 @@
+get\_volume\_zone\_of\_volume
+=============================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. automethod:: ansys.meshing.prime.Part.get_volume_zone_of_volume
+
+.. minigallery::
+   :add-heading: Examples using Part.get_volume_zone_of_volume
+
+   ansys.meshing.prime.Part.get_volume_zone_of_volume

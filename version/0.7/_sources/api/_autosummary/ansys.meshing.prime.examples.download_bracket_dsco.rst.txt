@@ -1,0 +1,11 @@
+download\_bracket\_dsco
+=======================
+
+.. currentmodule:: ansys.meshing.prime.examples
+
+.. autofunction:: ansys.meshing.prime.examples.download_bracket_dsco
+
+.. minigallery::
+    :add-heading: Examples using download_bracket_dsco
+
+    ansys.meshing.prime.examples.download_bracket_dsco

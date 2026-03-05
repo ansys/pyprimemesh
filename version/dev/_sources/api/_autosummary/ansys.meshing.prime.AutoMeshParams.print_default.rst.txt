@@ -1,0 +1,11 @@
+print\_default
+==============
+
+.. currentmodule:: ansys.meshing.prime
+
+.. automethod:: ansys.meshing.prime.AutoMeshParams.print_default
+
+.. minigallery::
+   :add-heading: Examples using AutoMeshParams.print_default
+
+   ansys.meshing.prime.AutoMeshParams.print_default

@@ -1,0 +1,6 @@
+id\_offset
+==========
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoproperty:: ExportBoundaryFittedSplineParams.id_offset

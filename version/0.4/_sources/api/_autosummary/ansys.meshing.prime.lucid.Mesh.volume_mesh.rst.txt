@@ -1,0 +1,6 @@
+﻿volume\_mesh
+============
+
+.. currentmodule:: ansys.meshing.prime.lucid
+
+.. automethod:: Mesh.volume_mesh

@@ -1,0 +1,6 @@
+target\_type
+============
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoproperty:: MatchPair.target_type

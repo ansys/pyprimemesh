@@ -1,0 +1,11 @@
+set\_leak\_preventions
+======================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. automethod:: ansys.meshing.prime.WrapperControl.set_leak_preventions
+
+.. minigallery::
+   :add-heading: Examples using WrapperControl.set_leak_preventions
+
+   ansys.meshing.prime.WrapperControl.set_leak_preventions

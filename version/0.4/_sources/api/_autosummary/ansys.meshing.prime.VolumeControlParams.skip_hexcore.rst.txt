@@ -1,0 +1,6 @@
+﻿skip\_hexcore
+=============
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoproperty:: VolumeControlParams.skip_hexcore

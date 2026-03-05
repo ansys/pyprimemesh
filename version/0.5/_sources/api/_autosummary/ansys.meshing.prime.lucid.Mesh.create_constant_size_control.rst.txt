@@ -1,0 +1,6 @@
+create\_constant\_size\_control
+===============================
+
+.. currentmodule:: ansys.meshing.prime.lucid
+
+.. automethod:: Mesh.create_constant_size_control

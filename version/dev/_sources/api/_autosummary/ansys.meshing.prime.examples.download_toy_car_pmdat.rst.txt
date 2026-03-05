@@ -1,0 +1,11 @@
+download\_toy\_car\_pmdat
+=========================
+
+.. currentmodule:: ansys.meshing.prime.examples
+
+.. autofunction:: ansys.meshing.prime.examples.download_toy_car_pmdat
+
+.. minigallery::
+    :add-heading: Examples using download_toy_car_pmdat
+
+    ansys.meshing.prime.examples.download_toy_car_pmdat

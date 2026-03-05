@@ -1,0 +1,51 @@
+.. vale off
+
+
+TrimmedSolidSplineCutMode
+=========================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoclass:: TrimmedSolidSplineCutMode
+
+   
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+      :toctree:
+
+   
+      TrimmedSolidSplineCutMode.conjugate
+      TrimmedSolidSplineCutMode.bit_length
+      TrimmedSolidSplineCutMode.bit_count
+      TrimmedSolidSplineCutMode.to_bytes
+      TrimmedSolidSplineCutMode.from_bytes
+      TrimmedSolidSplineCutMode.as_integer_ratio
+      TrimmedSolidSplineCutMode.is_integer
+      
+   
+   
+
+   
+   
+   .. rubric:: Attributes
+
+   .. autosummary::
+      :toctree:
+   
+      TrimmedSolidSplineCutMode.real
+      TrimmedSolidSplineCutMode.imag
+      TrimmedSolidSplineCutMode.numerator
+      TrimmedSolidSplineCutMode.denominator
+      TrimmedSolidSplineCutMode.HYBRID
+      TrimmedSolidSplineCutMode.EXACT
+   
+   
+
+.. minigallery::
+    :add-heading: Examples using TrimmedSolidSplineCutMode
+
+    ansys.meshing.prime.TrimmedSolidSplineCutMode
+
+.. vale on

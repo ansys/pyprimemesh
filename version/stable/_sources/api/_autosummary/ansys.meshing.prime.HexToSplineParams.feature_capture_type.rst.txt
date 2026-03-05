@@ -1,0 +1,6 @@
+feature\_capture\_type
+======================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoproperty:: HexToSplineParams.feature_capture_type

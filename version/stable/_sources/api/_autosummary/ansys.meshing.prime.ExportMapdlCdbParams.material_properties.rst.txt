@@ -1,0 +1,6 @@
+material\_properties
+====================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoproperty:: ExportMapdlCdbParams.material_properties

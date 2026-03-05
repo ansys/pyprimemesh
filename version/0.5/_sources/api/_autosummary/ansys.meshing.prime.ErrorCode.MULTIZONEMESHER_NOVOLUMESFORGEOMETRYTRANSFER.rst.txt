@@ -1,0 +1,6 @@
+MULTIZONEMESHER\_NOVOLUMESFORGEOMETRYTRANSFER
+=============================================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoattribute:: ErrorCode.MULTIZONEMESHER_NOVOLUMESFORGEOMETRYTRANSFER

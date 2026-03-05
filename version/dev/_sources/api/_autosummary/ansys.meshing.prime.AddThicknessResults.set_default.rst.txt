@@ -1,0 +1,11 @@
+set\_default
+============
+
+.. currentmodule:: ansys.meshing.prime
+
+.. automethod:: ansys.meshing.prime.AddThicknessResults.set_default
+
+.. minigallery::
+   :add-heading: Examples using AddThicknessResults.set_default
+
+   ansys.meshing.prime.AddThicknessResults.set_default

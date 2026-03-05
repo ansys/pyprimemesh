@@ -1,0 +1,40 @@
+.. vale off
+
+DeleteFringesAndOverlapsResults
+===============================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoclass:: DeleteFringesAndOverlapsResults
+   
+   
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+      :toctree:
+   
+      
+      DeleteFringesAndOverlapsResults.print_default
+      DeleteFringesAndOverlapsResults.set_default
+   
+   
+
+   
+   
+   .. rubric:: Attributes
+
+   .. autosummary::
+      :toctree:
+   
+      DeleteFringesAndOverlapsResults.error_code
+      DeleteFringesAndOverlapsResults.n_deleted
+   
+   
+
+.. minigallery::
+    :add-heading: Examples using DeleteFringesAndOverlapsResults
+
+    ansys.meshing.prime.DeleteFringesAndOverlapsResults
+
+.. vale on

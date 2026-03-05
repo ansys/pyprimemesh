@@ -1,0 +1,6 @@
+restrict\_boundary\_nodes\_along\_surface
+=========================================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoproperty:: AutoNodeMoveParams.restrict_boundary_nodes_along_surface

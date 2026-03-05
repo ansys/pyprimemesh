@@ -1,0 +1,25 @@
+Scaffolder
+==========
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoclass:: Scaffolder
+   
+   
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+      :toctree:
+   
+      
+      Scaffolder.delete_shadowed_topo_faces
+      Scaffolder.merge_overlapping_topo_faces
+      Scaffolder.scaffold_topo_faces_and_beams
+      Scaffolder.split_topo_faces_by_mesh_region
+   
+   
+
+   
+   
+   

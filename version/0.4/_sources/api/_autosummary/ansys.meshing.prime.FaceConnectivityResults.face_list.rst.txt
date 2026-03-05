@@ -1,0 +1,6 @@
+﻿face\_list
+==========
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoproperty:: FaceConnectivityResults.face_list

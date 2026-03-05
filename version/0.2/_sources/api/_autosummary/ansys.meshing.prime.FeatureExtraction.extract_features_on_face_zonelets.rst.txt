@@ -1,0 +1,6 @@
+extract\_features\_on\_face\_zonelets
+=====================================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. automethod:: FeatureExtraction.extract_features_on_face_zonelets

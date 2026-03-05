@@ -1,0 +1,6 @@
+create\_zones\_from\_labels
+===========================
+
+.. currentmodule:: ansys.meshing.prime.lucid
+
+.. automethod:: Mesh.create_zones_from_labels

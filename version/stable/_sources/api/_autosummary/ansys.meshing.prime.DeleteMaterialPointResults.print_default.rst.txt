@@ -1,0 +1,11 @@
+print\_default
+==============
+
+.. currentmodule:: ansys.meshing.prime
+
+.. automethod:: ansys.meshing.prime.DeleteMaterialPointResults.print_default
+
+.. minigallery::
+   :add-heading: Examples using DeleteMaterialPointResults.print_default
+
+   ansys.meshing.prime.DeleteMaterialPointResults.print_default

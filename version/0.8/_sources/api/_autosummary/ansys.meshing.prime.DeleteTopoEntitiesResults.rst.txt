@@ -1,0 +1,39 @@
+.. vale off
+
+DeleteTopoEntitiesResults
+=========================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoclass:: DeleteTopoEntitiesResults
+   
+   
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+      :toctree:
+   
+      
+      DeleteTopoEntitiesResults.print_default
+      DeleteTopoEntitiesResults.set_default
+   
+   
+
+   
+   
+   .. rubric:: Attributes
+
+   .. autosummary::
+      :toctree:
+   
+      DeleteTopoEntitiesResults.error_code
+   
+   
+
+.. minigallery::
+    :add-heading: Examples using DeleteTopoEntitiesResults
+
+    ansys.meshing.prime.DeleteTopoEntitiesResults
+
+.. vale on

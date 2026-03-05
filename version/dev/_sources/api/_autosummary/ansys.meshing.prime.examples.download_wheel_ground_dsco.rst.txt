@@ -1,0 +1,11 @@
+download\_wheel\_ground\_dsco
+=============================
+
+.. currentmodule:: ansys.meshing.prime.examples
+
+.. autofunction:: ansys.meshing.prime.examples.download_wheel_ground_dsco
+
+.. minigallery::
+    :add-heading: Examples using download_wheel_ground_dsco
+
+    ansys.meshing.prime.examples.download_wheel_ground_dsco

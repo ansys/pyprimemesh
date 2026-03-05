@@ -1,0 +1,6 @@
+SIZECHANGE
+==========
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoattribute:: FaceQualityMeasure.SIZECHANGE

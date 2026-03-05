@@ -1,0 +1,6 @@
+size\_at\_features
+==================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoproperty:: FeatureRecoveryParams.size_at_features

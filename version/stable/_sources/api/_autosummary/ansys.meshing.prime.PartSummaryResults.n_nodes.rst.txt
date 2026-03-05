@@ -1,0 +1,6 @@
+n\_nodes
+========
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoproperty:: PartSummaryResults.n_nodes

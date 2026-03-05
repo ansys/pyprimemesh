@@ -1,0 +1,11 @@
+to\_bytes
+=========
+
+.. currentmodule:: ansys.meshing.prime
+
+.. automethod:: ansys.meshing.prime.ErrorCode.to_bytes
+
+.. minigallery::
+   :add-heading: Examples using ErrorCode.to_bytes
+
+   ansys.meshing.prime.ErrorCode.to_bytes

@@ -1,0 +1,11 @@
+as\_integer\_ratio
+==================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. automethod:: ansys.meshing.prime.MatchPairTargetType.as_integer_ratio
+
+.. minigallery::
+   :add-heading: Examples using MatchPairTargetType.as_integer_ratio
+
+   ansys.meshing.prime.MatchPairTargetType.as_integer_ratio

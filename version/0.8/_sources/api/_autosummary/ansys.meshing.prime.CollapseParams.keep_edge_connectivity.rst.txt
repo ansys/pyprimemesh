@@ -1,0 +1,6 @@
+keep\_edge\_connectivity
+========================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoproperty:: CollapseParams.keep_edge_connectivity

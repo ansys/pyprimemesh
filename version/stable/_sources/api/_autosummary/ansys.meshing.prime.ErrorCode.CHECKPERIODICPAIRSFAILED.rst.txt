@@ -1,0 +1,6 @@
+CHECKPERIODICPAIRSFAILED
+========================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoattribute:: ErrorCode.CHECKPERIODICPAIRSFAILED

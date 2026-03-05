@@ -1,0 +1,32 @@
+.. vale off
+
+BoundaryFittedSpline
+====================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoclass:: BoundaryFittedSpline
+   
+   
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+      :toctree:
+   
+      
+      BoundaryFittedSpline.create_boundary_fitted_spline
+      BoundaryFittedSpline.refine_spline
+   
+   
+
+   
+   
+   
+
+.. minigallery::
+    :add-heading: Examples using BoundaryFittedSpline
+
+    ansys.meshing.prime.BoundaryFittedSpline
+
+.. vale on

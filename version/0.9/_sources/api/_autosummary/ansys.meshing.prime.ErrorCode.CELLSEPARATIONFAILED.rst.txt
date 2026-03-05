@@ -1,0 +1,6 @@
+CELLSEPARATIONFAILED
+====================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoattribute:: ErrorCode.CELLSEPARATIONFAILED

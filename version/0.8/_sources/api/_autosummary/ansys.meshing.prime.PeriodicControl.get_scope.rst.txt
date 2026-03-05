@@ -1,0 +1,11 @@
+get\_scope
+==========
+
+.. currentmodule:: ansys.meshing.prime
+
+.. automethod:: ansys.meshing.prime.PeriodicControl.get_scope
+
+.. minigallery::
+   :add-heading: Examples using PeriodicControl.get_scope
+
+   ansys.meshing.prime.PeriodicControl.get_scope

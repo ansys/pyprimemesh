@@ -1,0 +1,28 @@
+.. vale off
+
+ScopeEntity
+===========
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoclass:: ScopeEntity
+   
+   
+   
+   
+
+   
+   
+   .. rubric:: Attributes
+
+   .. autosummary::
+      :toctree:
+   
+      ScopeEntity.FACEZONELETS
+      ScopeEntity.EDGEZONELETS
+      ScopeEntity.FACEANDEDGEZONELETS
+      ScopeEntity.VOLUME
+   
+   
+
+.. vale on

@@ -1,0 +1,6 @@
+﻿IGA\_NOFACEZONELETS
+===================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoattribute:: ErrorCode.IGA_NOFACEZONELETS

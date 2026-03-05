@@ -1,0 +1,40 @@
+.. vale off
+
+CreateBOIResults
+================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoclass:: CreateBOIResults
+   
+   
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+      :toctree:
+   
+      
+      CreateBOIResults.print_default
+      CreateBOIResults.set_default
+   
+   
+
+   
+   
+   .. rubric:: Attributes
+
+   .. autosummary::
+      :toctree:
+   
+      CreateBOIResults.error_code
+      CreateBOIResults.part_id
+   
+   
+
+.. minigallery::
+    :add-heading: Examples using CreateBOIResults
+
+    ansys.meshing.prime.CreateBOIResults
+
+.. vale on

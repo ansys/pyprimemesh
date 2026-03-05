@@ -1,0 +1,38 @@
+.. vale off
+
+FuseResults
+===========
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoclass:: FuseResults
+   
+   
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+      :toctree:
+   
+      
+      FuseResults.print_default
+      FuseResults.set_default
+   
+   
+
+   
+   
+   .. rubric:: Attributes
+
+   .. autosummary::
+      :toctree:
+   
+      FuseResults.error_code
+      FuseResults.fused_area
+      FuseResults.fused_pairs
+      FuseResults.intersecting_locations
+      FuseResults.warning_codes
+   
+   
+
+.. vale on

@@ -1,0 +1,48 @@
+.. vale off
+
+RepairTopologyParams
+====================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoclass:: RepairTopologyParams
+   
+   
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+      :toctree:
+   
+      
+      RepairTopologyParams.print_default
+      RepairTopologyParams.set_default
+   
+   
+
+   
+   
+   .. rubric:: Attributes
+
+   .. autosummary::
+      :toctree:
+   
+      RepairTopologyParams.connect_faces
+      RepairTopologyParams.connect_faces_params
+      RepairTopologyParams.edge_connect_type
+      RepairTopologyParams.fillet_max_radius
+      RepairTopologyParams.merge_edge_allow_self_close
+      RepairTopologyParams.repair_edges
+      RepairTopologyParams.repair_edges_params
+      RepairTopologyParams.smallest_edge_length
+      RepairTopologyParams.split_topo_edges_at_apex_point
+      RepairTopologyParams.suppress_shared_edges_when_merging
+   
+   
+
+.. minigallery::
+    :add-heading: Examples using RepairTopologyParams
+
+    ansys.meshing.prime.RepairTopologyParams
+
+.. vale on

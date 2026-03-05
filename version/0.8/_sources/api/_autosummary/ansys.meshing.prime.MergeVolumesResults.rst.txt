@@ -1,0 +1,40 @@
+.. vale off
+
+MergeVolumesResults
+===================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoclass:: MergeVolumesResults
+   
+   
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+      :toctree:
+   
+      
+      MergeVolumesResults.print_default
+      MergeVolumesResults.set_default
+   
+   
+
+   
+   
+   .. rubric:: Attributes
+
+   .. autosummary::
+      :toctree:
+   
+      MergeVolumesResults.error_code
+      MergeVolumesResults.merged_volumes
+   
+   
+
+.. minigallery::
+    :add-heading: Examples using MergeVolumesResults
+
+    ansys.meshing.prime.MergeVolumesResults
+
+.. vale on

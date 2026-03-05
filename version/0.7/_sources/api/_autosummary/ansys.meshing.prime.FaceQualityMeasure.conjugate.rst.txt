@@ -1,0 +1,11 @@
+conjugate
+=========
+
+.. currentmodule:: ansys.meshing.prime
+
+.. automethod:: ansys.meshing.prime.FaceQualityMeasure.conjugate
+
+.. minigallery::
+   :add-heading: Examples using FaceQualityMeasure.conjugate
+
+   ansys.meshing.prime.FaceQualityMeasure.conjugate

@@ -1,0 +1,6 @@
+UNPROCESSEDKEYWORDSINABAQUSFILE
+===============================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoattribute:: WarningCode.UNPROCESSEDKEYWORDSINABAQUSFILE

@@ -1,0 +1,6 @@
+get\_curvature\_sizing\_params
+==============================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. automethod:: SizeControl.get_curvature_sizing_params

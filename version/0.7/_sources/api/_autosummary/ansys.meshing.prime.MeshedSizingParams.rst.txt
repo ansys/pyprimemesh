@@ -1,0 +1,39 @@
+.. vale off
+
+MeshedSizingParams
+==================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoclass:: MeshedSizingParams
+   
+   
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+      :toctree:
+   
+      
+      MeshedSizingParams.print_default
+      MeshedSizingParams.set_default
+   
+   
+
+   
+   
+   .. rubric:: Attributes
+
+   .. autosummary::
+      :toctree:
+   
+      MeshedSizingParams.growth_rate
+   
+   
+
+.. minigallery::
+    :add-heading: Examples using MeshedSizingParams
+
+    ansys.meshing.prime.MeshedSizingParams
+
+.. vale on

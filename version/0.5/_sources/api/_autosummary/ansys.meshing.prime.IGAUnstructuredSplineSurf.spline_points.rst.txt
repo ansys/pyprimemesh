@@ -1,0 +1,6 @@
+spline\_points
+==============
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoproperty:: IGAUnstructuredSplineSurf.spline_points

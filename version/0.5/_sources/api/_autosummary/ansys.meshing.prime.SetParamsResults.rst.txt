@@ -1,0 +1,35 @@
+.. vale off
+
+SetParamsResults
+================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoclass:: SetParamsResults
+   
+   
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+      :toctree:
+   
+      
+      SetParamsResults.print_default
+      SetParamsResults.set_default
+   
+   
+
+   
+   
+   .. rubric:: Attributes
+
+   .. autosummary::
+      :toctree:
+   
+      SetParamsResults.error_code
+      SetParamsResults.warning_code
+   
+   
+
+.. vale on

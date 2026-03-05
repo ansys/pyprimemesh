@@ -1,0 +1,6 @@
+﻿get\_part\_zonelets
+===================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. automethod:: ControlData.get_part_zonelets

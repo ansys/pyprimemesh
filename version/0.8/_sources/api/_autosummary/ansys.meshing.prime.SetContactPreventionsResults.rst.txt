@@ -1,0 +1,40 @@
+.. vale off
+
+SetContactPreventionsResults
+============================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoclass:: SetContactPreventionsResults
+   
+   
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+      :toctree:
+   
+      
+      SetContactPreventionsResults.print_default
+      SetContactPreventionsResults.set_default
+   
+   
+
+   
+   
+   .. rubric:: Attributes
+
+   .. autosummary::
+      :toctree:
+   
+      SetContactPreventionsResults.error_code
+      SetContactPreventionsResults.ids
+   
+   
+
+.. minigallery::
+    :add-heading: Examples using SetContactPreventionsResults
+
+    ansys.meshing.prime.SetContactPreventionsResults
+
+.. vale on

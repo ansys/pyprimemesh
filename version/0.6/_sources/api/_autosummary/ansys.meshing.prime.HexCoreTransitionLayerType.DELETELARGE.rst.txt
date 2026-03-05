@@ -1,0 +1,6 @@
+DELETELARGE
+===========
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoattribute:: HexCoreTransitionLayerType.DELETELARGE

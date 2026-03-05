@@ -1,0 +1,6 @@
+﻿morphable\_layers
+=================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoproperty:: MorphBCParams.morphable_layers

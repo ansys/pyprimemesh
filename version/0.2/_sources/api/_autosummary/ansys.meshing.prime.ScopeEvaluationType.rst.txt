@@ -1,0 +1,22 @@
+ScopeEvaluationType
+===================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoclass:: ScopeEvaluationType
+   
+   
+   
+   
+
+   
+   
+   .. rubric:: Attributes
+
+   .. autosummary::
+      :toctree:
+   
+      ScopeEvaluationType.LABELS
+      ScopeEvaluationType.ZONES
+   
+   

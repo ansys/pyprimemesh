@@ -1,0 +1,6 @@
+ZONES
+=====
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoattribute:: ScopeEvaluationType.ZONES

@@ -1,0 +1,6 @@
+n\_face\_zones
+==============
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoproperty:: PartSummaryResults.n_face_zones

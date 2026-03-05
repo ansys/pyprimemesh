@@ -1,0 +1,6 @@
+STACKER\_FACESEPARATIONFAILED
+=============================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoattribute:: ErrorCode.STACKER_FACESEPARATIONFAILED

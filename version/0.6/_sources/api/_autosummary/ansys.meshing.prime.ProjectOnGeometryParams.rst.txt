@@ -1,0 +1,35 @@
+.. vale off
+
+ProjectOnGeometryParams
+=======================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoclass:: ProjectOnGeometryParams
+   
+   
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+      :toctree:
+   
+      
+      ProjectOnGeometryParams.print_default
+      ProjectOnGeometryParams.set_default
+   
+   
+
+   
+   
+   .. rubric:: Attributes
+
+   .. autosummary::
+      :toctree:
+   
+      ProjectOnGeometryParams.project_on_facets_if_cadnot_found
+      ProjectOnGeometryParams.project_only_mid_nodes
+   
+   
+
+.. vale on

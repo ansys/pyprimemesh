@@ -1,0 +1,37 @@
+.. vale off
+
+DetectAndTreatFeaturesParams
+============================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoclass:: DetectAndTreatFeaturesParams
+   
+   
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+      :toctree:
+   
+      
+      DetectAndTreatFeaturesParams.print_default
+      DetectAndTreatFeaturesParams.set_default
+   
+   
+
+   
+   
+   .. rubric:: Attributes
+
+   .. autosummary::
+      :toctree:
+   
+      DetectAndTreatFeaturesParams.detect_and_treat_circular_faces
+      DetectAndTreatFeaturesParams.detect_and_treat_holes
+      DetectAndTreatFeaturesParams.treat_circular_faces_params
+      DetectAndTreatFeaturesParams.treat_holes_params
+   
+   
+
+.. vale on

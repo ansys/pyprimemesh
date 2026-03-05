@@ -1,0 +1,53 @@
+.. vale off
+
+
+CadRefacetingResolution
+=======================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoclass:: CadRefacetingResolution
+
+   
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+      :toctree:
+
+   
+      CadRefacetingResolution.conjugate
+      CadRefacetingResolution.bit_length
+      CadRefacetingResolution.bit_count
+      CadRefacetingResolution.to_bytes
+      CadRefacetingResolution.from_bytes
+      CadRefacetingResolution.as_integer_ratio
+      CadRefacetingResolution.is_integer
+      
+   
+   
+
+   
+   
+   .. rubric:: Attributes
+
+   .. autosummary::
+      :toctree:
+   
+      CadRefacetingResolution.real
+      CadRefacetingResolution.imag
+      CadRefacetingResolution.numerator
+      CadRefacetingResolution.denominator
+      CadRefacetingResolution.COARSE
+      CadRefacetingResolution.MEDIUM
+      CadRefacetingResolution.FINE
+      CadRefacetingResolution.CUSTOM
+   
+   
+
+.. minigallery::
+    :add-heading: Examples using CadRefacetingResolution
+
+    ansys.meshing.prime.CadRefacetingResolution
+
+.. vale on

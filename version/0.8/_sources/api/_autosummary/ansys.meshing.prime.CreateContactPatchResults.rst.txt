@@ -1,0 +1,40 @@
+.. vale off
+
+CreateContactPatchResults
+=========================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoclass:: CreateContactPatchResults
+   
+   
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+      :toctree:
+   
+      
+      CreateContactPatchResults.print_default
+      CreateContactPatchResults.set_default
+   
+   
+
+   
+   
+   .. rubric:: Attributes
+
+   .. autosummary::
+      :toctree:
+   
+      CreateContactPatchResults.error_code
+      CreateContactPatchResults.part_id
+   
+   
+
+.. minigallery::
+    :add-heading: Examples using CreateContactPatchResults
+
+    ansys.meshing.prime.CreateContactPatchResults
+
+.. vale on

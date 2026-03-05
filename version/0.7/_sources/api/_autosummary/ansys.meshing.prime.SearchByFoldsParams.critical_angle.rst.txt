@@ -1,0 +1,6 @@
+critical\_angle
+===============
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoproperty:: SearchByFoldsParams.critical_angle

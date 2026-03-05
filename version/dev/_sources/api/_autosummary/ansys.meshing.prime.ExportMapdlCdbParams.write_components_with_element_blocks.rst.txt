@@ -1,0 +1,6 @@
+write\_components\_with\_element\_blocks
+========================================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoproperty:: ExportMapdlCdbParams.write_components_with_element_blocks

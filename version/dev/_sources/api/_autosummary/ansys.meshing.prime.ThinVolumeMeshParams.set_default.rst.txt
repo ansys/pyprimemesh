@@ -1,0 +1,11 @@
+set\_default
+============
+
+.. currentmodule:: ansys.meshing.prime
+
+.. automethod:: ansys.meshing.prime.ThinVolumeMeshParams.set_default
+
+.. minigallery::
+   :add-heading: Examples using ThinVolumeMeshParams.set_default
+
+   ansys.meshing.prime.ThinVolumeMeshParams.set_default

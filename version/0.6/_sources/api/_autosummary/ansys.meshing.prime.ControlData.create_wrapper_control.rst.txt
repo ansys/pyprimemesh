@@ -1,0 +1,6 @@
+create\_wrapper\_control
+========================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. automethod:: ControlData.create_wrapper_control

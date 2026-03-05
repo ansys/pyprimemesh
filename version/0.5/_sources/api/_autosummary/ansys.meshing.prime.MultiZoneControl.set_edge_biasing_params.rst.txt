@@ -1,0 +1,6 @@
+set\_edge\_biasing\_params
+==========================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. automethod:: MultiZoneControl.set_edge_biasing_params

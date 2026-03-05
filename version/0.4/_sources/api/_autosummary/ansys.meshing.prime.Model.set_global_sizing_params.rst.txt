@@ -1,0 +1,6 @@
+﻿set\_global\_sizing\_params
+===========================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. automethod:: Model.set_global_sizing_params

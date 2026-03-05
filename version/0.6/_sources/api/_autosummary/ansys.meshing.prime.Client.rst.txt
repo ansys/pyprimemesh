@@ -1,0 +1,34 @@
+.. vale off
+
+Client
+======
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoclass:: Client
+   
+   
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+      :toctree:
+   
+      
+      Client.exit
+      Client.run_on_server
+   
+   
+
+   
+   
+   .. rubric:: Attributes
+
+   .. autosummary::
+      :toctree:
+   
+      Client.model
+   
+   
+
+.. vale on

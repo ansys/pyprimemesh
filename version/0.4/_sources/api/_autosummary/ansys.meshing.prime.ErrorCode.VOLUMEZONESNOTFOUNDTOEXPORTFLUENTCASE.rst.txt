@@ -1,0 +1,6 @@
+﻿VOLUMEZONESNOTFOUNDTOEXPORTFLUENTCASE
+=====================================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoattribute:: ErrorCode.VOLUMEZONESNOTFOUNDTOEXPORTFLUENTCASE

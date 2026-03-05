@@ -1,0 +1,11 @@
+set\_default
+============
+
+.. currentmodule:: ansys.meshing.prime
+
+.. automethod:: ansys.meshing.prime.SurfaceDiagnosticSummaryParams.set_default
+
+.. minigallery::
+   :add-heading: Examples using SurfaceDiagnosticSummaryParams.set_default
+
+   ansys.meshing.prime.SurfaceDiagnosticSummaryParams.set_default

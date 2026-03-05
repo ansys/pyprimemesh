@@ -1,0 +1,46 @@
+.. vale off
+
+DefeatureTopologyParams
+=======================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoclass:: DefeatureTopologyParams
+   
+   
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+      :toctree:
+   
+      
+      DefeatureTopologyParams.print_default
+      DefeatureTopologyParams.set_default
+   
+   
+
+   
+   
+   .. rubric:: Attributes
+
+   .. autosummary::
+      :toctree:
+   
+      DefeatureTopologyParams.aggressive_edge_merge
+      DefeatureTopologyParams.allow_curved_topo_faces
+      DefeatureTopologyParams.delete_interior_nodes
+      DefeatureTopologyParams.delete_interior_nodes_params
+      DefeatureTopologyParams.fillet_spanning_angle
+      DefeatureTopologyParams.partial_defeature
+      DefeatureTopologyParams.partial_defeature_params
+      DefeatureTopologyParams.thin_stripes_tolerance
+   
+   
+
+.. minigallery::
+    :add-heading: Examples using DefeatureTopologyParams
+
+    ansys.meshing.prime.DefeatureTopologyParams
+
+.. vale on

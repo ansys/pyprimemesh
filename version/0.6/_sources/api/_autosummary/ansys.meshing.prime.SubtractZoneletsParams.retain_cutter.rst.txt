@@ -1,0 +1,6 @@
+retain\_cutter
+==============
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoproperty:: SubtractZoneletsParams.retain_cutter

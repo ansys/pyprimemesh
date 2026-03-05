@@ -1,0 +1,11 @@
+bit\_count
+==========
+
+.. currentmodule:: ansys.meshing.prime
+
+.. automethod:: ansys.meshing.prime.SurfaceFeatureType.bit_count
+
+.. minigallery::
+   :add-heading: Examples using SurfaceFeatureType.bit_count
+
+   ansys.meshing.prime.SurfaceFeatureType.bit_count

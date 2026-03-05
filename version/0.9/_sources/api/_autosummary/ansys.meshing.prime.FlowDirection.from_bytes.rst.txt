@@ -1,0 +1,11 @@
+from\_bytes
+===========
+
+.. currentmodule:: ansys.meshing.prime
+
+.. automethod:: ansys.meshing.prime.FlowDirection.from_bytes
+
+.. minigallery::
+   :add-heading: Examples using FlowDirection.from_bytes
+
+   ansys.meshing.prime.FlowDirection.from_bytes

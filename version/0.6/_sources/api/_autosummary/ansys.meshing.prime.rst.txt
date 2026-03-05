@@ -1,0 +1,383 @@
+﻿.. vale off
+
+ansys.meshing.prime
+===================
+
+.. currentmodule:: ansys.meshing.prime
+
+
+
+
+
+
+
+.. autosummary::
+   :toctree:
+   :caption: Functions
+
+
+   disable_optimizing_numpy_arrays
+   enable_log_output
+   enable_optimizing_numpy_arrays
+   is_optimizing_numpy_arrays
+   launch_prime
+   launch_server_process
+   local_model
+   numpy_array_optimization_disabled
+   numpy_array_optimization_enabled
+
+
+
+
+
+.. autosummary:: 
+   :toctree:
+   :caption: Classes
+
+
+   AddLabelResults
+   AddThicknessParams
+   AddThicknessResults
+   AddToZoneResults
+   AdvancedSurferSetup
+   AutoMesh
+   AutoMeshParams
+   AutoMeshResults
+   AutoNodeMoveParams
+   AutoQuadMesher
+   AutoQuadMesherResults
+   BCPair
+   BCPairType
+   BCsVolumetricModality
+   BOIType
+   BoiSizingParams
+   BoundaryFittedSpline
+   BoundaryFittedSplineParams
+   BoundingBox
+   CadFaceter
+   CadReaderRoute
+   CadRefacetingMaxEdgeSizeLimit
+   CadRefacetingParams
+   CadRefacetingResolution
+   CdbSimulationType
+   CellQualityMeasure
+   CellStatisticsParams
+   CellStatisticsResults
+   CellZoneletType
+   CheckFaceDeviationParams
+   CheckFaceDeviationResults
+   CheckMeshParams
+   CheckMeshResults
+   CheckTopologyParams
+   Client
+   CollapseParams
+   CollapseResults
+   CollapseTool
+   ComputeTopoVolumesResults
+   ComputeVolumesParams
+   ComputeVolumesResults
+   Connect
+   ConnectFacesParams
+   ConnectResults
+   ContactPatchAxis
+   ContactPreventionParams
+   ControlData
+   ControlPointSelection
+   CopyZoneletsParams
+   CopyZoneletsResults
+   CreateBOIParams
+   CreateBOIResults
+   CreateCapParams
+   CreateCapResults
+   CreateContactPatchParams
+   CreateContactPatchResults
+   CreateIntersectionEdgeLoopsParams
+   CreateIntersectionEdgeLoopsResults
+   CreateMaterialPointParams
+   CreateMaterialPointResults
+   CreateVolumeZonesType
+   CreateZoneResults
+   CurvatureSizingParams
+   DeadRegion
+   DefeatureTopologyParams
+   DeleteFringesAndOverlapsParams
+   DeleteFringesAndOverlapsResults
+   DeleteInteriorNodesParams
+   DeleteMaterialPointResults
+   DeleteMeshParams
+   DeleteMeshResults
+   DeleteResults
+   DeleteTool
+   DeleteTopoEntitiesParams
+   DeleteTopoEntitiesResults
+   DeleteUnwettedParams
+   DeleteUnwettedResult
+   DeleteVolumesParams
+   DeleteVolumesResults
+   DeleteZoneResults
+   DetectAndTreatCircularFacesParams
+   DetectAndTreatFeaturesParams
+   DetectAndTreatHolesParams
+   DetectCircularHolesParams
+   DetectHolesParams
+   DetectNonCircularHolesParams
+   EdgeConnectType
+   EdgeConnectivityResults
+   EdgeMergeControl
+   ErrorCode
+   ExportBoundaryFittedSplineParams
+   ExportFluentCaseParams
+   ExportFluentMeshingMeshParams
+   ExportLSDynaIgaKeywordFileParams
+   ExportLSDynaKeywordFileParams
+   ExportLSDynaResults
+   ExportMapdlCdbParams
+   ExportMapdlCdbResults
+   ExportSTLParams
+   ExtractFeatureParams
+   ExtractFeatureResults
+   ExtractTopoVolumesParams
+   ExtractTopoVolumesResults
+   ExtractVolumesParams
+   ExtractVolumesResults
+   ExtractedFeatureIds
+   FaceAndEdgeConnectivityParams
+   FaceAndEdgeConnectivityResults
+   FaceConnectivityResults
+   FaceQualityMeasure
+   FeatureExtraction
+   FeatureRecoveryParams
+   FileIO
+   FileReadParams
+   FileReadResults
+   FileWriteParams
+   FileWriteResults
+   FillHolesAtPlaneParams
+   FillHolesAtPlaneResults
+   FixInvalidNormalNodeParams
+   FixInvalidNormalNodeResults
+   FlowDirection
+   FuseOption
+   FuseParams
+   FuseResults
+   GlobalSizingParams
+   HardSizingParams
+   HexCoreCellElementType
+   HexCoreParams
+   HexCoreTransitionLayerType
+   IGAResults
+   IGASpline
+   IGAUnstructuredSplineSurf
+   ImportAbaqusParams
+   ImportAbaqusResults
+   ImportCadParams
+   ImportCadResults
+   ImportFluentCaseParams
+   ImportFluentCaseResults
+   ImportFluentMeshingMeshParams
+   ImportFluentMeshingMeshResults
+   ImportMapdlCdbParams
+   ImportMapdlCdbResults
+   IntersectParams
+   IntersectionMask
+   JoinParams
+   JoinSeparateMethod
+   LSDynaAnalysisType
+   LSDynaFileFormatType
+   LeakPreventionParams
+   LengthUnit
+   LocalSurferParams
+   LocalSurferResults
+   MatchMorphParams
+   MatchMorphResults
+   MatchPair
+   MatchPairTargetType
+   MaterialPointManager
+   MaterialPointType
+   MergeBoundaryNodesParams
+   MergeBoundaryNodesResults
+   MergeNodeType
+   MergePartsParams
+   MergePartsResults
+   MergeVolumesParams
+   MergeVolumesResults
+   MergeZoneletsParams
+   MergeZoneletsResults
+   MeshInfo
+   MeshStackerParams
+   MeshStackerResults
+   MeshedSizingParams
+   Model
+   MorphBCParams
+   MorphSolveParams
+   Morpher
+   MultiZoneControl
+   MultiZoneEdgeBiasingParams
+   MultiZoneMapMeshParams
+   MultiZoneSizingParams
+   MultiZoneSweepMeshParams
+   NamePatternParams
+   OptimizeQuadMeshParams
+   OverlapPairs
+   OverlapSearchResults
+   Part
+   PartCreationType
+   PartSummaryParams
+   PartSummaryResults
+   PartZonelets
+   PartialDefeatureParams
+   PeriodicControl
+   PeriodicControlParams
+   PeriodicControlSummaryParams
+   PeriodicControlSummaryResult
+   PrismControl
+   PrismControlGrowthParams
+   PrismControlOffsetType
+   PrismParams
+   PrismStairStep
+   ProjectOnGeometryParams
+   ProjectOnGeometryResults
+   ProximitySizingParams
+   QuadToSpline
+   QuadToSplineParams
+   ReadSizeFieldParams
+   RefineAtContactsParams
+   RefineAtContactsResults
+   RefineSplineParams
+   RemoveLabelResults
+   RemoveZoneResults
+   RepairEdgesParams
+   RepairTopologyParams
+   ResolveIntersectionResult
+   ResolveIntersectionsParams
+   SFPeriodicParams
+   Scaffolder
+   ScaffolderMergeResults
+   ScaffolderParams
+   ScaffolderResults
+   ScaffolderSplitResults
+   ScopeDefinition
+   ScopeEntity
+   ScopeEvaluationType
+   ScopeExpressionType
+   ScopeZoneletParams
+   SearchByFoldsParams
+   SearchByFoldsResults
+   SearchByIntersectionResults
+   SearchByInvalidNormalsResults
+   SearchByQualityParams
+   SearchByQualityResults
+   SearchBySelfIntersectionParams
+   SearchBySpikeParams
+   SearchBySpikeResults
+   SearchByThinStripParams
+   SearchByThinStripResults
+   SearchInfoByRegisterIdParams
+   SearchInfoByRegisterIdResults
+   SetContactPreventionsResults
+   SetFeatureRecoveriesResults
+   SetLeakPreventionsResults
+   SetNameResults
+   SetParamsResults
+   SetScopeResults
+   SetSizingResults
+   SizeControl
+   SizeControlSummaryParams
+   SizeControlSummaryResult
+   SizeField
+   SizeFieldFileReadResults
+   SizeFieldType
+   SizingType
+   SmoothDihedralFaceNodesParams
+   SmoothDihedralFaceNodesResults
+   SmoothType
+   SoftSizingParams
+   SolverType
+   SplineFeatureCaptureType
+   SplineRefinementType
+   SplitParams
+   StitchParams
+   StitchType
+   StretchFreeBoundariesParams
+   StretchFreeBoundariesResults
+   SubtractVolumesParams
+   SubtractVolumesResults
+   SubtractZoneletsParams
+   SubtractZoneletsResults
+   SurfaceDiagnosticSummaryParams
+   SurfaceDiagnosticSummaryResults
+   SurfaceFeatureType
+   SurfaceMeshSizeScaling
+   SurfaceQualityResult
+   SurfaceQualitySummaryParams
+   SurfaceQualitySummaryResults
+   SurfaceSearch
+   SurfaceUtilities
+   Surfer
+   SurferParams
+   SurferResults
+   TetParams
+   ThinStripType
+   ThinVolumeControl
+   ThinVolumeMeshParams
+   TopoData
+   TopoFillHoleParams
+   TopoFillHoleResult
+   TopoSearchField
+   TopoUtilities
+   Transform
+   TransformParams
+   TransformResults
+   TriangulateParams
+   TriangulateResults
+   VTComposer
+   VTComposerParams
+   VTComposerResults
+   VolumeControl
+   VolumeControlParams
+   VolumeFillType
+   VolumeMeshTool
+   VolumeMeshToolResults
+   VolumeNamingType
+   VolumeQualityResultsPart
+   VolumeQualitySummaryParams
+   VolumeQualitySummaryResults
+   VolumeSearch
+   VolumeSweeper
+   VolumetricScaffolderParams
+   VolumetricSizeFieldComputeParams
+   VolumetricSizeFieldComputeResults
+   WarningCode
+   WrapParams
+   WrapRegion
+   WrapResult
+   Wrapper
+   WrapperCloseGapsParams
+   WrapperCloseGapsResult
+   WrapperControl
+   WrapperImproveQualityParams
+   WrapperImproveResult
+   WrapperPatchFlowRegionsParams
+   WrapperPatchFlowRegionsResult
+   WriteSizeFieldParams
+   ZoneType
+
+
+
+
+
+.. autosummary:: 
+   :toctree:
+   :caption: Classes
+
+
+   PrimeRuntimeError
+   PrimeRuntimeWarning
+
+
+
+
+
+
+
+.. vale on

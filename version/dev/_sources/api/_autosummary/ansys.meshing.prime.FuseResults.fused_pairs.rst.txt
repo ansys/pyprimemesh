@@ -1,0 +1,6 @@
+fused\_pairs
+============
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoproperty:: FuseResults.fused_pairs

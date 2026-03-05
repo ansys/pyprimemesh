@@ -1,0 +1,6 @@
+﻿IGA\_INCORRECTCONTROLPOINTSIZEWRTDEGREE
+=======================================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoattribute:: ErrorCode.IGA_INCORRECTCONTROLPOINTSIZEWRTDEGREE

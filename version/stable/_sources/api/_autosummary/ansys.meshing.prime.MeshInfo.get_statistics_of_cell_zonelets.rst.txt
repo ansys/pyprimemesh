@@ -1,0 +1,11 @@
+get\_statistics\_of\_cell\_zonelets
+===================================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. automethod:: ansys.meshing.prime.MeshInfo.get_statistics_of_cell_zonelets
+
+.. minigallery::
+   :add-heading: Examples using MeshInfo.get_statistics_of_cell_zonelets
+
+   ansys.meshing.prime.MeshInfo.get_statistics_of_cell_zonelets

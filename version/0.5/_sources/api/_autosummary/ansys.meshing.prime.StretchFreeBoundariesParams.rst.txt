@@ -1,0 +1,27 @@
+.. vale off
+
+StretchFreeBoundariesParams
+===========================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoclass:: StretchFreeBoundariesParams
+   
+   
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+      :toctree:
+   
+      
+      StretchFreeBoundariesParams.print_default
+      StretchFreeBoundariesParams.set_default
+   
+   
+
+   
+   
+   
+
+.. vale on

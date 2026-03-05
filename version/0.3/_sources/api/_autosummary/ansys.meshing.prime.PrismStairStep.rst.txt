@@ -1,0 +1,27 @@
+.. vale off
+
+PrismStairStep
+==============
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoclass:: PrismStairStep
+   
+   
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+      :toctree:
+   
+      
+      PrismStairStep.print_default
+      PrismStairStep.set_default
+   
+   
+
+   
+   
+   
+
+.. vale on

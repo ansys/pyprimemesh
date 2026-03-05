@@ -1,0 +1,41 @@
+.. vale off
+
+MergePartsResults
+=================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoclass:: MergePartsResults
+   
+   
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+      :toctree:
+   
+      
+      MergePartsResults.print_default
+      MergePartsResults.set_default
+   
+   
+
+   
+   
+   .. rubric:: Attributes
+
+   .. autosummary::
+      :toctree:
+   
+      MergePartsResults.error_code
+      MergePartsResults.merged_part_assigned_name
+      MergePartsResults.merged_part_id
+   
+   
+
+.. minigallery::
+    :add-heading: Examples using MergePartsResults
+
+    ansys.meshing.prime.MergePartsResults
+
+.. vale on

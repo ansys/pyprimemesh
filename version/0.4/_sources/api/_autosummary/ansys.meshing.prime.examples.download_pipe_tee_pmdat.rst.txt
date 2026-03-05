@@ -1,0 +1,6 @@
+﻿download\_pipe\_tee\_pmdat
+==========================
+
+.. currentmodule:: ansys.meshing.prime.examples
+
+.. autofunction:: download_pipe_tee_pmdat

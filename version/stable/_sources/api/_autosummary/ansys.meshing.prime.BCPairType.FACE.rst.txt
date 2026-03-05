@@ -1,0 +1,6 @@
+FACE
+====
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoattribute:: BCPairType.FACE

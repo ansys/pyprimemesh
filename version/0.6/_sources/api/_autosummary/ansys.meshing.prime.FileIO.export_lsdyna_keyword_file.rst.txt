@@ -1,0 +1,6 @@
+export\_lsdyna\_keyword\_file
+=============================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. automethod:: FileIO.export_lsdyna_keyword_file

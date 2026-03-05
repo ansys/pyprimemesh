@@ -1,0 +1,6 @@
+lateral\_defeature\_tolerance
+=============================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoproperty:: MeshStackerParams.lateral_defeature_tolerance

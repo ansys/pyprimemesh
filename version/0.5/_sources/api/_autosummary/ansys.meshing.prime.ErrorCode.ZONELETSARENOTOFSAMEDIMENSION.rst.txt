@@ -1,0 +1,6 @@
+ZONELETSARENOTOFSAMEDIMENSION
+=============================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoattribute:: ErrorCode.ZONELETSARENOTOFSAMEDIMENSION

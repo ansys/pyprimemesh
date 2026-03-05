@@ -1,0 +1,6 @@
+FEATUREORZONELETBOUNDARY
+========================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoattribute:: SurfaceFeatureType.FEATUREORZONELETBOUNDARY

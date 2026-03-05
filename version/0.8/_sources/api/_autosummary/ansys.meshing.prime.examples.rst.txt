@@ -1,0 +1,88 @@
+﻿.. vale off
+
+ansys.meshing.prime.examples
+============================
+
+.. currentmodule:: ansys.meshing.prime.examples
+
+
+
+
+
+
+
+.. autosummary::
+   :toctree:
+   :caption: Functions
+
+
+   download_block_model_fmd
+   download_block_model_pmdat
+   download_block_model_scdoc
+   download_bracket_dsco
+   download_bracket_fmd
+   download_bracket_scdoc
+   download_deformed_blade_dsco
+   download_deformed_blade_fmd
+   download_deformed_blade_scdoc
+   download_elbow_dsco
+   download_elbow_fmd
+   download_elbow_pmdat
+   download_elbow_scdoc
+   download_f1_rw_drs_stl
+   download_f1_rw_enclosure_stl
+   download_f1_rw_end_plates_stl
+   download_f1_rw_main_plane_stl
+   download_multi_layer_quad_mesh_pcb_dsco
+   download_multi_layer_quad_mesh_pcb_fmd
+   download_multi_layer_quad_mesh_pcb_pmdat
+   download_multi_layer_quad_mesh_pcb_pmdb
+   download_multi_layer_quad_mesh_pcb_scdoc
+   download_pcb_pmdat
+   download_pcb_scdoc
+   download_pipe_tee_dsco
+   download_pipe_tee_fmd
+   download_pipe_tee_pmdat
+   download_pipe_tee_scdoc
+   download_saddle_bracket_dsco
+   download_saddle_bracket_fmd
+   download_saddle_bracket_scdoc
+   download_solder_ball_fmd
+   download_solder_ball_target_fmd
+   download_test_examples
+   download_toy_car_dsco
+   download_toy_car_fmd
+   download_toy_car_pmdat
+   download_toy_car_scdoc
+   download_turbine_blade_cdb
+   download_wheel_ground_dsco
+   download_wheel_ground_fmd
+   download_wheel_ground_scdoc
+
+
+
+
+
+.. autosummary:: 
+   :toctree:
+   :caption: Classes
+
+
+   DownloadManager
+
+
+
+
+
+
+
+
+
+
+
+.. minigallery::
+   :add-heading: Examples using examples
+
+   ansys.meshing.prime.examples
+
+.. vale on

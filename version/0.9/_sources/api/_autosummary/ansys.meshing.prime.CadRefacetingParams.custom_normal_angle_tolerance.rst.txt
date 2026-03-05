@@ -1,0 +1,6 @@
+custom\_normal\_angle\_tolerance
+================================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoproperty:: CadRefacetingParams.custom_normal_angle_tolerance

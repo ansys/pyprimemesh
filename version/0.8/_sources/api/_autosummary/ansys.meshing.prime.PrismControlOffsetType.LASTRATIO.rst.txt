@@ -1,0 +1,6 @@
+LASTRATIO
+=========
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoattribute:: PrismControlOffsetType.LASTRATIO

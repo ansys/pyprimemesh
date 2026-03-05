@@ -1,0 +1,36 @@
+.. vale off
+
+ScaffolderParams
+================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoclass:: ScaffolderParams
+   
+   
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+      :toctree:
+   
+      
+      ScaffolderParams.print_default
+      ScaffolderParams.set_default
+   
+   
+
+   
+   
+   .. rubric:: Attributes
+
+   .. autosummary::
+      :toctree:
+   
+      ScaffolderParams.absolute_dist_tol
+      ScaffolderParams.constant_mesh_size
+      ScaffolderParams.intersection_control_mask
+   
+   
+
+.. vale on

@@ -1,0 +1,11 @@
+bit\_count
+==========
+
+.. currentmodule:: ansys.meshing.prime
+
+.. automethod:: ansys.meshing.prime.ScaffolderRepairMode.bit_count
+
+.. minigallery::
+   :add-heading: Examples using ScaffolderRepairMode.bit_count
+
+   ansys.meshing.prime.ScaffolderRepairMode.bit_count

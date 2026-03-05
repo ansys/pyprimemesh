@@ -1,0 +1,6 @@
+WRAPPERPATCHFLOWREGIONS\_TOOSMALLHOLESIZE
+=========================================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoattribute:: ErrorCode.WRAPPERPATCHFLOWREGIONS_TOOSMALLHOLESIZE

@@ -1,0 +1,6 @@
+IMPLICIT
+========
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoattribute:: CdbSimulationType.IMPLICIT

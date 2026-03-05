@@ -1,0 +1,6 @@
+target\_quality
+===============
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoproperty:: AutoNodeMoveParams.target_quality

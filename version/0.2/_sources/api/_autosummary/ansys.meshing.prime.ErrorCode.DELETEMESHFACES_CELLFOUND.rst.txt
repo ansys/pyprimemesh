@@ -1,0 +1,6 @@
+DELETEMESHFACES\_CELLFOUND
+==========================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoattribute:: ErrorCode.DELETEMESHFACES_CELLFOUND

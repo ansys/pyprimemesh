@@ -1,0 +1,1041 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../../../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Data conversion when importing and exporting mesh and CAD formats &#8212; PyPrimeMesh</title>
+
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../../_static/styles/theme.css?digest=5b4479735964841361fd" rel="stylesheet" />
+<link href="../../../_static/styles/bootstrap.css?digest=5b4479735964841361fd" rel="stylesheet" />
+<link href="../../../_static/styles/pydata-sphinx-theme.css?digest=5b4479735964841361fd" rel="stylesheet" />
+
+  
+  <link href="../../../_static/vendor/fontawesome/6.1.2/css/all.min.css?digest=5b4479735964841361fd" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../../../_static/vendor/fontawesome/6.1.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../../_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../../_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=649a27d8" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/jupyter-sphinx.css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/thebelab.css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/sg_gallery.css?v=61a4c737" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/sg_gallery-binder.css?v=f4aeca0c" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/sg_gallery-dataframe.css?v=2082cf3c" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/sg_gallery-rendered-html.css?v=1277b6f3" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/css/ansys_sphinx_theme.css?v=450015ff" />
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.23/css/jquery.dataTables.min.css" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../../_static/scripts/bootstrap.js?digest=5b4479735964841361fd" />
+<link rel="preload" as="script" href="../../../_static/scripts/pydata-sphinx-theme.js?digest=5b4479735964841361fd" />
+  <script src="../../../_static/vendor/fontawesome/6.1.2/js/all.min.js?digest=5b4479735964841361fd"></script>
+ 
+<link href="../../../_static/css/breadcrumbs.css" rel="stylesheet" />
+
+    <script src="../../../_static/documentation_options.js?v=b9afe91b"></script>
+    <script src="../../../_static/doctools.js?v=888ff710"></script>
+    <script src="../../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../../../_static/copybutton.js?v=f281be69"></script>
+    <script src="../../../_static/thebelab-helper.js"></script>
+    <script src="../../../_static/js/table.js?v=b64f5182"></script>
+    <script src="https://cdn.datatables.net/1.10.23/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@jupyter-widgets/html-manager@^1.0.1/dist/embed-amd.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'examples/gallery_examples/gallery/00_lucid_file_IO';</script>
+    <script>
+        DOCUMENTATION_OPTIONS.theme_version = '0.14.4';
+        DOCUMENTATION_OPTIONS.theme_switcher_json_url = 'https://prime.docs.pyansys.com/versions.json';
+        DOCUMENTATION_OPTIONS.theme_switcher_version_match = '0.5';
+        DOCUMENTATION_OPTIONS.show_version_warning_banner = false;
+        </script>
+    <link rel="icon" href="../../../_static/ansys-favicon.png"/>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" />
+    <link rel="next" title="Meshing a mid-surfaced bracket for a structural analysis" href="01_bracket_scaffold.html" />
+    <link rel="prev" title="Examples" href="index.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  <link rel="canonical" href="https://prime.docs.pyansys.com/version/stable/examples/gallery_examples/gallery/00_lucid_file_IO.html" />
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <a class="skip-link" href="#main-content">Skip to main content</a>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>
+    Back to top
+  </button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__primary"
+          id="__primary"/>
+  <label class="overlay overlay-primary" for="__primary"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__secondary"
+          id="__secondary"/>
+  <label class="overlay overlay-secondary" for="__secondary"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container"><!-- Debugging: html_theme_options =  -->
+
+<!-- If there is no MiliSearch enabled, use the PyData search -->
+<form class="bd-search d-flex align-items-center"
+      action="../../../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search the docs ..."
+         aria-label="Search the docs ..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+   
+    <nav class="bd-header navbar navbar-expand-lg bd-navbar">
+<div class="bd-header__inner bd-page-width">
+  <label class="sidebar-toggle primary-toggle" for="__primary">
+    <span class="fa-solid fa-bars"></span>
+  </label>
+  
+  
+  <div class="col-lg-3 navbar-header-items__start">
+    
+      <div class="navbar-item">
+
+  
+
+<a class="navbar-brand logo" href="../../../index.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../../../_static/pyansys-logo-black-cropped.png" class="logo__image only-light" alt="PyPrimeMesh - Home"/>
+    <script>document.write(`<img src="../../../_static/pyansys-logo-black-cropped.png" class="logo__image only-dark" alt="PyPrimeMesh - Home"/>`);</script>
+  
+  
+</a></div>
+    
+  </div>
+  
+  <div class="col-lg-9 navbar-header-items">
+    
+    <div class="me-auto navbar-header-items__center">
+      
+        <div class="navbar-item">
+<nav class="navbar-nav">
+  <p class="sidebar-header-items__title"
+     role="heading"
+     aria-level="1"
+     aria-label="Site Navigation">
+    Site Navigation
+  </p>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../../../getting_started/index.html">
+                        Getting started
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../../../user_guide/index.html">
+                        User guide
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../../index.html">
+                        Examples
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../../../api/index.html">
+                        API reference
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../../../contributing/index.html">
+                        Contribute
+                      </a>
+                    </li>
+                
+  </ul>
+</nav></div>
+      
+    </div>
+    
+    
+    <div class="navbar-header-items__end">
+      
+        <div class="navbar-item navbar-persistent--container">
+          
+
+ <script>
+ document.write(`
+   <button class="btn navbar-btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script>
+        </div>
+      
+      
+        <div class="navbar-item">
+<script>
+document.write(`
+  <div class="version-switcher__container dropdown">
+    <button id="pst-version-switcher-button-2"
+      type="button"
+      class="version-switcher__button btn btn-sm navbar-btn dropdown-toggle"
+      data-bs-toggle="dropdown"
+      aria-haspopup="listbox"
+      aria-controls="pst-version-switcher-list-2"
+      aria-label="Version switcher list"
+    >
+      Choose version  <!-- this text may get changed later by javascript -->
+      <span class="caret"></span>
+    </button>
+    <div id="pst-version-switcher-list-2"
+      class="version-switcher__menu dropdown-menu list-group-flush py-0"
+      role="listbox" aria-labelledby="pst-version-switcher-button-2">
+      <!-- dropdown will be populated by javascript on page load -->
+    </div>
+  </div>
+`);
+</script></div>
+      
+        <div class="navbar-item">
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch nav-link" data-mode="light"><i class="fa-solid fa-sun fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="dark"><i class="fa-solid fa-moon fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="auto"><i class="fa-solid fa-circle-half-stroke fa-lg"></i></span>
+  </button>
+`);
+</script></div>
+      
+        <div class="navbar-item"><ul class="navbar-icon-links navbar-nav"
+    aria-label="Icon Links">
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/ansys/pyprimemesh" title="GitHub" class="nav-link" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><span><i class="fa-brands fa-square-github fa-lg" aria-hidden="true"></i></span>
+            <span class="sr-only">GitHub</span></a>
+        </li>
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/ansys/pyprimemesh/discussions" title="Support" class="nav-link" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><span><i class="fa fa-comment fa-fw fa-lg" aria-hidden="true"></i></span>
+            <span class="sr-only">Support</span></a>
+        </li>
+</ul></div>
+      
+    </div>
+    
+  </div>
+  
+  
+    <div class="navbar-persistent--mobile">
+
+ <script>
+ document.write(`
+   <button class="btn navbar-btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script>
+    </div>
+  
+
+  
+    <label class="sidebar-toggle secondary-toggle" for="__secondary" tabindex="0">
+      <span class="fa-solid fa-outdent"></span>
+    </label>
+  
+</div>
+
+    </nav>
+    <div id="announcement_msg"></div>
+<script>
+  fetch("announcement.html")
+    .then((response) => {
+      if (!response.ok) {
+        throw new Error(`HTTP error: ${response.status}`);
+      }
+      return response.text();
+    })
+    .then(
+      (text) => (document.getElementById("announcement_msg").innerHTML = text),
+    )
+    .catch((error) => console.error(`Fetch problem: ${error.message}`));
+</script>  
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+      <div class="sidebar-header-items__center">
+        
+          <div class="navbar-item">
+<nav class="navbar-nav">
+  <p class="sidebar-header-items__title"
+     role="heading"
+     aria-level="1"
+     aria-label="Site Navigation">
+    Site Navigation
+  </p>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../../../getting_started/index.html">
+                        Getting started
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../../../user_guide/index.html">
+                        User guide
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../../index.html">
+                        Examples
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../../../api/index.html">
+                        API reference
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../../../contributing/index.html">
+                        Contribute
+                      </a>
+                    </li>
+                
+  </ul>
+</nav></div>
+        
+      </div>
+    
+    
+    
+      <div class="sidebar-header-items__end">
+        
+          <div class="navbar-item">
+<script>
+document.write(`
+  <div class="version-switcher__container dropdown">
+    <button id="pst-version-switcher-button-3"
+      type="button"
+      class="version-switcher__button btn btn-sm navbar-btn dropdown-toggle"
+      data-bs-toggle="dropdown"
+      aria-haspopup="listbox"
+      aria-controls="pst-version-switcher-list-3"
+      aria-label="Version switcher list"
+    >
+      Choose version  <!-- this text may get changed later by javascript -->
+      <span class="caret"></span>
+    </button>
+    <div id="pst-version-switcher-list-3"
+      class="version-switcher__menu dropdown-menu list-group-flush py-0"
+      role="listbox" aria-labelledby="pst-version-switcher-button-3">
+      <!-- dropdown will be populated by javascript on page load -->
+    </div>
+  </div>
+`);
+</script></div>
+        
+          <div class="navbar-item">
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch nav-link" data-mode="light"><i class="fa-solid fa-sun fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="dark"><i class="fa-solid fa-moon fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="auto"><i class="fa-solid fa-circle-half-stroke fa-lg"></i></span>
+  </button>
+`);
+</script></div>
+        
+          <div class="navbar-item"><ul class="navbar-icon-links navbar-nav"
+    aria-label="Icon Links">
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/ansys/pyprimemesh" title="GitHub" class="nav-link" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><span><i class="fa-brands fa-square-github fa-lg" aria-hidden="true"></i></span>
+            <span class="sr-only">GitHub</span></a>
+        </li>
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/ansys/pyprimemesh/discussions" title="Support" class="nav-link" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><span><i class="fa fa-comment fa-fw fa-lg" aria-hidden="true"></i></span>
+            <span class="sr-only">Support</span></a>
+        </li>
+</ul></div>
+        
+      </div>
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+<nav class="bd-docs-nav bd-links"
+     aria-label="Section Navigation">
+  <p class="bd-links__title" role="heading" aria-level="1">Section Navigation</p>
+  <div class="bd-toc-item navbar-nav"><ul class="current nav bd-sidenav">
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Data conversion when importing and exporting mesh and CAD formats</a></li>
+<li class="toctree-l1"><a class="reference internal" href="01_bracket_scaffold.html">Meshing a mid-surfaced bracket for a structural analysis</a></li>
+<li class="toctree-l1"><a class="reference internal" href="02_lucid_mixing_elbow.html">Meshing a mixing elbow for a flow analysis</a></li>
+<li class="toctree-l1"><a class="reference internal" href="03_lucid_pipe_tee.html">Meshing a pipe T-section for structural thermal and fluid flow analysis</a></li>
+<li class="toctree-l1"><a class="reference internal" href="04_lucid_toy_car.html">Wrapping a toy car for a flow analysis</a></li>
+<li class="toctree-l1"><a class="reference internal" href="05_pcb_stacker.html">Meshing a PCB for structural thermal analysis</a></li>
+<li class="toctree-l1"><a class="reference internal" href="06_blade_morph.html">Morphing a hexahedral mesh of a turbine blade to a new shape</a></li>
+<li class="toctree-l1"><a class="reference internal" href="07_saddle_bracket.html">Meshing a saddle bracket for a structural analysis</a></li>
+<li class="toctree-l1"><a class="reference internal" href="08_lucid_generic_f1_rear_wing.html">Meshing a generic F1 car rear wing for external aero simulation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="09_multi_layer_quad_mesh_pcb.html">Meshing a generic PCB geometry with multiple hexa layers</a></li>
+</ul>
+</div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main">
+        
+        
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item">
+<nav aria-label="Breadcrumb">
+  <ul class="bd-breadcrumbs">
+         
+    <li class="breadcrumb-item breadcrumb-home">
+      <a href="https://docs.pyansys.com/" class="nav-link">PyAnsys</a>
+    </li>
+     
+    <li class="breadcrumb-item">
+      <a
+        href="../../../index.html"
+        class="nav-link"
+        aria-label="Home"
+      >
+        <i class="fa-solid fa-home"></i>
+      </a>
+    </li>
+     
+    <li class="breadcrumb-item">
+      <a href="../../index.html" class="nav-link">Examples</a>
+    </li>
+     
+    <li class="breadcrumb-item">
+      <a href="index.html" class="nav-link">Examples</a>
+    </li>
+      
+    <li class="breadcrumb-item active" aria-current="page">Data conversion when importing and exporting mesh and CAD formats</li>
+    
+  </ul>
+</nav>
+</div>
+      
+    </div>
+  
+  
+</div>
+</div>
+              
+              
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article" role="main">
+                  
+  <div class="sphx-glr-download-link-note admonition note">
+<p class="admonition-title">Note</p>
+<p><a class="reference internal" href="#sphx-glr-download-examples-gallery-examples-gallery-00-lucid-file-io-py"><span class="std std-ref">Go to the end</span></a>
+to download the full example code</p>
+</div>
+<section class="sphx-glr-example-title" id="data-conversion-when-importing-and-exporting-mesh-and-cad-formats">
+<span id="ref-file-io"></span><span id="sphx-glr-examples-gallery-examples-gallery-00-lucid-file-io-py"></span><h1>Data conversion when importing and exporting mesh and CAD formats<a class="headerlink" href="#data-conversion-when-importing-and-exporting-mesh-and-cad-formats" title="Link to this heading">#</a></h1>
+<p><strong>Summary</strong>: This example shows how mesh and geometry formats are converted
+during import and export.</p>
+<section id="objective">
+<h2>Objective<a class="headerlink" href="#objective" title="Link to this heading">#</a></h2>
+<p>The objective is to illustrate how data is converted and passed during import
+and export of mesh and geometry.</p>
+<a class="reference internal image-reference" href="../../../_images/part_type_new.png"><img alt="Part Structure" class="align-center" src="../../../_images/part_type_new.png" style="width: 800px;" /></a>
+</section>
+<section id="procedure">
+<h2>Procedure<a class="headerlink" href="#procedure" title="Link to this heading">#</a></h2>
+<ul class="simple">
+<li><p>Launch an Ansys Prime Server instance and instantiate the meshing utilities
+from the <code class="docutils literal notranslate"><span class="pre">lucid</span></code> class.</p></li>
+<li><p>Import CAD geometry and review the imported entities.</p></li>
+<li><p>Generate surface mesh with a constant mesh size of 2mm.</p></li>
+<li><p>Generate volume mesh using tetrahedral elements and default settings .</p></li>
+<li><p>Review the entities to be exported to solvers.</p></li>
+<li><p>Export the mesh file as pmdat, cdb and cas format.</p></li>
+<li><p>Import the created solver files to review the entities as they are coming from the solvers.</p></li>
+<li><p>Exit the PyPrimeMesh session.</p></li>
+</ul>
+</section>
+<section id="launch-ansys-prime-server">
+<h2>Launch Ansys Prime Server<a class="headerlink" href="#launch-ansys-prime-server" title="Link to this heading">#</a></h2>
+<p>Import all necessary modules and
+launch an instance of Ansys Prime Server.
+Connect the PyPrimeMesh client and get the model.
+Instantiate meshing utilities from the <code class="docutils literal notranslate"><span class="pre">lucid</span></code> class.</p>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">os</span>
+<span class="kn">import</span> <span class="nn">tempfile</span>
+
+<span class="kn">import</span> <span class="nn">ansys.meshing.prime</span> <span class="k">as</span> <span class="nn">prime</span>
+<span class="kn">from</span> <span class="nn">ansys.meshing.prime.graphics</span> <span class="kn">import</span> <span class="n">Graphics</span>
+
+<span class="n">prime_client</span> <span class="o">=</span> <span class="n">prime</span><span class="o">.</span><span class="n">launch_prime</span><span class="p">()</span>
+<span class="n">model</span> <span class="o">=</span> <span class="n">prime_client</span><span class="o">.</span><span class="n">model</span>
+<span class="n">mesh_util</span> <span class="o">=</span> <span class="n">prime</span><span class="o">.</span><span class="n">lucid</span><span class="o">.</span><span class="n">Mesh</span><span class="p">(</span><span class="n">model</span><span class="o">=</span><span class="n">model</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>/opt/hostedtoolcache/Python/3.10.13/x64/lib/python3.10/site-packages/pyvista/plotting/plotting/__init__.py:23: PyVistaDeprecationWarning: The `pyvista.plotting.plotting` module has been deprecated. `Plotter` is now imported as: `from pyvista.plotting import Plotter`.
+  warnings.warn(
+</pre></div>
+</div>
+</section>
+<section id="import-geometry">
+<h2>Import geometry<a class="headerlink" href="#import-geometry" title="Link to this heading">#</a></h2>
+<p>Download the CAD file “pyprime_block_import.fmd” and import its geometry
+into PyPrimeMesh.</p>
+<p>Display part details by printing the model. The TopoPart’s
+name from model details is <strong>pyprime_block_import</strong>.</p>
+<p>After import of CAD model, within the topopart the facets from the CAD
+exists in the form of geom data. This can be seen in the image below.</p>
+<a class="reference internal image-reference" href="../../../_images/00_after_cad_import.png"><img alt="TopoPart after import of CAD file “pyprime_block_import.fmd”." class="align-center" src="../../../_images/00_after_cad_import.png" style="width: 800px;" /></a>
+<p>The topology consists of the following TopoEntities , they are TopoEdges, TopoFaces
+and TopoVolumes.</p>
+<ul class="simple">
+<li><p>TopoEdge represent the curves/edges present in the CAD.
+In this case there are <strong>17 edges</strong> present in SpaceClaim are imported
+as <strong>17 TopoEdges</strong>.</p></li>
+<li><p>TopoFace represent the surfaces/faces present in the CAD.
+The <strong>8 CAD Faces</strong> present in SpaceClaim are imported as <strong>8 Topofaces</strong> in
+PyPrimeMesh.</p></li>
+<li><p>TopoVolume represent the solid volumes present in the CAD.
+Since there is only <strong>one solid body</strong> in SpaceClaim, this is imported as <strong>one Topovolume</strong>
+in PyPrimeMesh.</p></li>
+</ul>
+<p>Named selections or groups in the CAD become labels after import. In this example ,
+the Named Selection / Group named <strong>my_group</strong> in Spaceclaim is imported as a label
+in PyPrimeMesh.</p>
+<p>After CAD import the solid body, surface body or an edge body  present in SCDM would be defined
+as Volume Zones, Face Zones and Edge Zones in PyPrimeMesh. In the CAD model , there exist a
+<strong>single solid body named “solid”</strong> which after import becomes as a <strong>Volume Zone named solid</strong>.</p>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="n">mesh_util</span><span class="o">.</span><span class="n">read</span><span class="p">(</span><span class="n">file_name</span><span class="o">=</span><span class="n">prime</span><span class="o">.</span><span class="n">examples</span><span class="o">.</span><span class="n">download_block_model_fmd</span><span class="p">())</span>
+<span class="c1"># mesh_util.read(file_name=prime.examples.download_block_model_scdoc())</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">model</span><span class="p">)</span>
+<span class="n">display</span> <span class="o">=</span> <span class="n">Graphics</span><span class="p">(</span><span class="n">model</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>Part Summary:
+
+Part Name: pyprime_block_import
+Part ID: 2
+    17 Topo Edges
+    8 Topo Faces
+    1 Topo Volumes
+
+    0 Edge Zones
+        Edge Zone Name(s) : []
+    0 Face Zones
+        Face Zone Name(s) : []
+    1 Volume Zones
+        Volume Zone Name(s) : [solid]
+
+    1 Label(s)
+        Names: [my_group]
+
+    Bounding box (-16 0 -17)
+                 (12 28 11)
+</pre></div>
+</div>
+</section>
+<section id="generate-mesh">
+<h2>Generate Mesh<a class="headerlink" href="#generate-mesh" title="Link to this heading">#</a></h2>
+<p>The topo part currently has no mesh associated with it and contains only
+geometry.</p>
+<p>Using the Lucid API <code class="docutils literal notranslate"><span class="pre">surface_mesh</span></code>, users can generate a conformal mesh on the topofaces.
+A conformal mesh with a constant mesh size of 2mm is generated. After mesh generation, the
+mesh data is available within the TopoPart.</p>
+<p>This can be seen in the image below</p>
+<a class="reference internal image-reference" href="../../../_images/00_after_mesh_generation.png"><img alt="TopoPart after mesh generation." class="align-center" src="../../../_images/00_after_mesh_generation.png" style="width: 800px;" /></a>
+<p>The mesh for a group of topo faces labeled “my_group” is displayed by defining the
+label expression in the display scope. The Volume Mesh is generated keeping the volume fill
+as the default meshing algorithms.</p>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="n">mesh_util</span><span class="o">.</span><span class="n">surface_mesh</span><span class="p">(</span><span class="n">min_size</span><span class="o">=</span><span class="mf">2.0</span><span class="p">)</span>
+<span class="n">display</span> <span class="o">=</span> <span class="n">Graphics</span><span class="p">(</span><span class="n">model</span><span class="p">)</span>
+<span class="n">display</span><span class="p">()</span>
+<span class="n">part</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">get_part_by_name</span><span class="p">(</span><span class="s2">&quot;pyprime_block_import&quot;</span><span class="p">)</span>
+<span class="n">display</span><span class="p">(</span><span class="n">scope</span><span class="o">=</span><span class="n">prime</span><span class="o">.</span><span class="n">ScopeDefinition</span><span class="p">(</span><span class="n">model</span><span class="p">,</span> <span class="n">label_expression</span><span class="o">=</span><span class="s2">&quot;my_group&quot;</span><span class="p">))</span>
+<span class="n">mesh_util</span><span class="o">.</span><span class="n">volume_mesh</span><span class="p">()</span>
+</pre></div>
+</div>
+<ul class="sphx-glr-horizontal">
+<li><img src="../../../_images/sphx_glr_00_lucid_file_IO_001.png" srcset="../../../_images/sphx_glr_00_lucid_file_IO_001.png" alt="00 lucid file IO" class = "sphx-glr-multi-img"/></li>
+<li><img src="../../../_images/sphx_glr_00_lucid_file_IO_002.png" srcset="../../../_images/sphx_glr_00_lucid_file_IO_002.png" alt="00 lucid file IO" class = "sphx-glr-multi-img"/></li>
+</ul>
+<div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>/opt/hostedtoolcache/Python/3.10.13/x64/lib/python3.10/site-packages/pyvista/core/pointset.py:1129: PyVistaDeprecationWarning: The current behavior of `pv.PolyData.n_faces` has been deprecated.
+                Use `pv.PolyData.n_cells` or `pv.PolyData.n_faces_strict` instead.
+                See the documentation in &#39;`pv.PolyData.n_faces` for more information.
+  warnings.warn(
+</pre></div>
+</div>
+</section>
+<section id="export-mesh-as-pyprimemesh-pmdat-native-format-mesh-file">
+<h2>Export mesh as PyPrimeMesh (.pmdat) native format mesh file<a class="headerlink" href="#export-mesh-as-pyprimemesh-pmdat-native-format-mesh-file" title="Link to this heading">#</a></h2>
+<p>PyPrimeMesh allows user to export mesh in its native format name pmdat.
+This configuration allows retaining the topology data along with mesh data.</p>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><a href="https://docs.python.org/3.11/library/tempfile.html#tempfile.TemporaryDirectory" title="tempfile.TemporaryDirectory" class="sphx-glr-backref-module-tempfile sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">temp_folder</span></a> <span class="o">=</span> <a href="https://docs.python.org/3.11/library/tempfile.html#tempfile.TemporaryDirectory" title="tempfile.TemporaryDirectory" class="sphx-glr-backref-module-tempfile sphx-glr-backref-type-py-class"><span class="n">tempfile</span><span class="o">.</span><span class="n">TemporaryDirectory</span></a><span class="p">()</span>
+<a href="https://docs.python.org/3.11/library/stdtypes.html#str" title="builtins.str" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">mesh_file_pmdat</span></a> <span class="o">=</span> <a href="https://docs.python.org/3.11/library/os.path.html#os.path.join" title="os.path.join" class="sphx-glr-backref-module-os-path sphx-glr-backref-type-py-function"><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span></a><span class="p">(</span><a href="https://docs.python.org/3.11/library/stdtypes.html#str" title="builtins.str" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">temp_folder</span><span class="o">.</span><span class="n">name</span></a><span class="p">,</span> <span class="s2">&quot;pyprime_block_mesh.pmdat&quot;</span><span class="p">)</span>
+<span class="n">mesh_util</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><a href="https://docs.python.org/3.11/library/stdtypes.html#str" title="builtins.str" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">mesh_file_pmdat</span></a><span class="p">)</span>
+<span class="k">assert</span> <a href="https://docs.python.org/3.11/library/os.path.html#os.path.exists" title="os.path.exists" class="sphx-glr-backref-module-os-path sphx-glr-backref-type-py-function"><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span></a><span class="p">(</span><a href="https://docs.python.org/3.11/library/stdtypes.html#str" title="builtins.str" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">mesh_file_pmdat</span></a><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Exported file:</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">,</span> <a href="https://docs.python.org/3.11/library/stdtypes.html#str" title="builtins.str" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">mesh_file_pmdat</span></a><span class="p">)</span>
+</pre></div>
+</div>
+<div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>Exported file:
+ /tmp/tmpqbk1eau3/pyprime_block_mesh.pmdat
+</pre></div>
+</div>
+</section>
+<section id="export-mesh-as-ansys-mapdl-cdb-format-mesh-file">
+<h2>Export mesh as Ansys MAPDL (.cdb) format mesh file<a class="headerlink" href="#export-mesh-as-ansys-mapdl-cdb-format-mesh-file" title="Link to this heading">#</a></h2>
+<p>PyPrimeMesh allows export of mesh as Ansys MAPDL (.cdb) format mesh file. While exporting
+the mesh to Ansys MAPDL, the labels present in session are converted to components
+containing nodes.</p>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><a href="https://docs.python.org/3.11/library/stdtypes.html#str" title="builtins.str" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">mesh_file_cdb</span></a> <span class="o">=</span> <a href="https://docs.python.org/3.11/library/os.path.html#os.path.join" title="os.path.join" class="sphx-glr-backref-module-os-path sphx-glr-backref-type-py-function"><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span></a><span class="p">(</span><a href="https://docs.python.org/3.11/library/stdtypes.html#str" title="builtins.str" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">temp_folder</span><span class="o">.</span><span class="n">name</span></a><span class="p">,</span> <span class="s2">&quot;pyprime_block_mesh.cdb&quot;</span><span class="p">)</span>
+<span class="n">mesh_util</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><a href="https://docs.python.org/3.11/library/stdtypes.html#str" title="builtins.str" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">mesh_file_cdb</span></a><span class="p">)</span>
+<span class="k">assert</span> <a href="https://docs.python.org/3.11/library/os.path.html#os.path.exists" title="os.path.exists" class="sphx-glr-backref-module-os-path sphx-glr-backref-type-py-function"><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span></a><span class="p">(</span><a href="https://docs.python.org/3.11/library/stdtypes.html#str" title="builtins.str" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">mesh_file_cdb</span></a><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Exported file:</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">,</span> <a href="https://docs.python.org/3.11/library/stdtypes.html#str" title="builtins.str" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">mesh_file_cdb</span></a><span class="p">)</span>
+</pre></div>
+</div>
+<div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>Exported file:
+ /tmp/tmpqbk1eau3/pyprime_block_mesh.cdb
+</pre></div>
+</div>
+</section>
+<section id="export-mesh-ansys-fluent-cas-format-mesh-file">
+<h2>Export mesh Ansys Fluent (CAS) format mesh file<a class="headerlink" href="#export-mesh-ansys-fluent-cas-format-mesh-file" title="Link to this heading">#</a></h2>
+<p>Zones in PyPrimeMesh can be defined as a collection of either topo or zonelet entities that
+we can assign properties to in a solver when exported as mesh , for example “if the user
+wishes to assign a material to a region of the model they can define a volume zone for
+multiple topo volumes or cell zonelets so they can apply the property.</p>
+<p>Hence while exporting the mesh as (MSH or CAS) file to the Fluent solver, the
+boundary conditions for the zones needs to be defined. For this reason the topo
+entities / zonelets associated with a labels are converted to volume/face/edge zones
+respectively.</p>
+<p>The property of a zone is that a zonelet or TopoEntity can only be present in a single zone.
+The topo entities / zonelets that are not associated with their respective zones types are
+merged together during export to Fluent formats. The topology data present is removed
+automatically when export to Fluent(MSH or CAS) formats.</p>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="n">mesh_util</span><span class="o">.</span><span class="n">create_zones_from_labels</span><span class="p">(</span><span class="s2">&quot;my_group&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">model</span><span class="p">)</span>
+
+<span class="c1"># Export as Fluent (*.cas) format mesh file</span>
+<a href="https://docs.python.org/3.11/library/stdtypes.html#str" title="builtins.str" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">mesh_file_cas</span></a> <span class="o">=</span> <a href="https://docs.python.org/3.11/library/os.path.html#os.path.join" title="os.path.join" class="sphx-glr-backref-module-os-path sphx-glr-backref-type-py-function"><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span></a><span class="p">(</span><a href="https://docs.python.org/3.11/library/stdtypes.html#str" title="builtins.str" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">temp_folder</span><span class="o">.</span><span class="n">name</span></a><span class="p">,</span> <span class="s2">&quot;pyprime_block_mesh.cas&quot;</span><span class="p">)</span>
+<span class="n">mesh_util</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><a href="https://docs.python.org/3.11/library/stdtypes.html#str" title="builtins.str" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">mesh_file_cas</span></a><span class="p">)</span>
+<span class="k">assert</span> <a href="https://docs.python.org/3.11/library/os.path.html#os.path.exists" title="os.path.exists" class="sphx-glr-backref-module-os-path sphx-glr-backref-type-py-function"><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span></a><span class="p">(</span><a href="https://docs.python.org/3.11/library/stdtypes.html#str" title="builtins.str" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">mesh_file_cas</span></a><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Exported file:</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">,</span> <a href="https://docs.python.org/3.11/library/stdtypes.html#str" title="builtins.str" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">mesh_file_cas</span></a><span class="p">)</span>
+</pre></div>
+</div>
+<div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>Part Summary:
+
+Part Name: pyprime_block_import
+Part ID: 2
+    17 Topo Edges
+    8 Topo Faces
+    1 Topo Volumes
+
+    0 Edge Zones
+        Edge Zone Name(s) : []
+    1 Face Zones
+        Face Zone Name(s) : [my_group]
+    1 Volume Zones
+        Volume Zone Name(s) : [solid]
+
+    1 Label(s)
+        Names: [my_group]
+
+    Bounding box (-16 0 -17)
+                 (12 28 11)
+
+
+Exported file:
+ /tmp/tmpqbk1eau3/pyprime_block_mesh.cas
+</pre></div>
+</div>
+</section>
+<section id="reading-ansys-pyprimemesh-native-mesh-file-pmdat">
+<h2>Reading Ansys PyPrimeMesh native mesh file (pmdat)<a class="headerlink" href="#reading-ansys-pyprimemesh-native-mesh-file-pmdat" title="Link to this heading">#</a></h2>
+<p>Read the exported PyPrimeMesh(pmdat) native mesh format file, it is observed that
+part topology contains both geom data as well as mesh data. This is seen in the image below</p>
+<a class="reference internal image-reference" href="../../../_images/00_import_pmdat.png"><img alt="TopoPart after reading mesh part." class="align-center" src="../../../_images/00_import_pmdat.png" style="width: 800px;" /></a>
+<p>Meshed zonelets (that contain the mesh data) are only created once the topo part
+is converted to a mesh part by deleting the topo entities. Here , while deleting the topology
+we are deleting the geom data (face) and retaining the mesh data for solve purpose.
+When deleting the topoogy , the TopoPart is converted to MeshPart and the topo entities
+are converted to their respective zonelet type in MeshPart, this is shown as follows;</p>
+<ul class="simple">
+<li><p><strong>01 TopoVolumes -&gt;  01 Cell Zonelets</strong></p></li>
+<li><p><strong>08 TopoFaces -&gt;  08 Face Zonelets</strong></p></li>
+<li><p><strong>17 TopoEdges -&gt; 17 Edge Zonelets</strong></p></li>
+</ul>
+<p>The zones association with topoentities would change to their
+corresponding equivalent zonelet type in MeshParts.</p>
+<a class="reference internal image-reference" href="../../../_images/00_after_delete_topology.png"><img alt="MeshPart after deleting topology." class="align-center" src="../../../_images/00_after_delete_topology.png" style="width: 800px;" /></a>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="n">mesh_util</span><span class="o">.</span><span class="n">read</span><span class="p">(</span><a href="https://docs.python.org/3.11/library/stdtypes.html#str" title="builtins.str" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">mesh_file_pmdat</span></a><span class="p">,</span> <span class="n">append</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">model</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">part</span> <span class="ow">in</span> <span class="n">model</span><span class="o">.</span><span class="n">parts</span><span class="p">:</span>
+    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">part</span><span class="o">.</span><span class="n">get_topo_faces</span><span class="p">())</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="n">part</span><span class="o">.</span><span class="n">delete_topo_entities</span><span class="p">(</span>
+            <span class="n">prime</span><span class="o">.</span><span class="n">DeleteTopoEntitiesParams</span><span class="p">(</span>
+                <span class="n">model</span><span class="p">,</span> <span class="n">delete_geom_zonelets</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">delete_mesh_zonelets</span><span class="o">=</span><span class="kc">False</span>
+            <span class="p">)</span>
+        <span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">model</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>Part Summary:
+
+Part Name: pyprime_block_import
+Part ID: 2
+    17 Topo Edges
+    8 Topo Faces
+    1 Topo Volumes
+
+    0 Edge Zones
+        Edge Zone Name(s) : []
+    0 Face Zones
+        Face Zone Name(s) : []
+    1 Volume Zones
+        Volume Zone Name(s) : [solid]
+
+    1 Label(s)
+        Names: [my_group]
+
+    Bounding box (-16 0 -17)
+                 (12 28 11)
+
+Part Summary:
+
+Part Name: pyprime_block_import
+Part ID: 2
+    17 Edge Zonelets
+    8 Face Zonelets
+    1 Cell Zonelets
+
+    0 Edge Zones
+        Edge Zone Name(s) : []
+    0 Face Zones
+        Face Zone Name(s) : []
+    1 Volume Zones
+        Volume Zone Name(s) : [solid]
+
+    1 Label(s)
+        Names: [my_group]
+
+    Bounding box (-16 0 -17)
+                 (12 28 11)
+</pre></div>
+</div>
+</section>
+<section id="reading-ansys-fluent-cas-format-mesh-file">
+<h2>Reading Ansys Fluent (.cas) format mesh file<a class="headerlink" href="#reading-ansys-fluent-cas-format-mesh-file" title="Link to this heading">#</a></h2>
+<p>Read the exported Fluent format mesh file.</p>
+<a class="reference internal image-reference" href="../../../_images/00_import_cas.png"><img alt="After import of cas mesh file." class="align-center" src="../../../_images/00_import_cas.png" style="width: 800px;" /></a>
+<p>It would be observed that
+the zone name <strong>my_group</strong> is retained and the remaining face zonelets that are not
+associated with a face zone(s) are merged to create a new zone named <strong>wall</strong>.
+There are no labels present in the mesh file.</p>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="n">mesh_util</span><span class="o">.</span><span class="n">read</span><span class="p">(</span><a href="https://docs.python.org/3.11/library/stdtypes.html#str" title="builtins.str" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">mesh_file_cas</span></a><span class="p">,</span> <span class="n">append</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">model</span><span class="p">)</span>
+<span class="n">part</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">parts</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+<span class="k">for</span> <a href="https://docs.python.org/3.11/library/functions.html#int" title="builtins.int" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">zone</span></a> <span class="ow">in</span> <span class="n">part</span><span class="o">.</span><span class="n">get_face_zones</span><span class="p">():</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">model</span><span class="o">.</span><span class="n">get_zone_name</span><span class="p">(</span><a href="https://docs.python.org/3.11/library/functions.html#int" title="builtins.int" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">zone</span></a><span class="p">))</span>
+    <span class="n">scope</span> <span class="o">=</span> <span class="n">prime</span><span class="o">.</span><span class="n">ScopeDefinition</span><span class="p">(</span>
+        <span class="n">model</span><span class="p">,</span>
+        <span class="n">evaluation_type</span><span class="o">=</span><span class="n">prime</span><span class="o">.</span><span class="n">ScopeEvaluationType</span><span class="o">.</span><span class="n">ZONES</span><span class="p">,</span>
+        <span class="n">zone_expression</span><span class="o">=</span><span class="n">model</span><span class="o">.</span><span class="n">get_zone_name</span><span class="p">(</span><a href="https://docs.python.org/3.11/library/functions.html#int" title="builtins.int" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">zone</span></a><span class="p">),</span>
+    <span class="p">)</span>
+    <span class="n">display</span><span class="p">(</span><span class="n">scope</span><span class="o">=</span><span class="n">scope</span><span class="p">)</span>
+</pre></div>
+</div>
+<ul class="sphx-glr-horizontal">
+<li><img src="../../../_images/sphx_glr_00_lucid_file_IO_003.png" srcset="../../../_images/sphx_glr_00_lucid_file_IO_003.png" alt="00 lucid file IO" class = "sphx-glr-multi-img"/></li>
+<li><img src="../../../_images/sphx_glr_00_lucid_file_IO_004.png" srcset="../../../_images/sphx_glr_00_lucid_file_IO_004.png" alt="00 lucid file IO" class = "sphx-glr-multi-img"/></li>
+</ul>
+<div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>Part Summary:
+
+Part Name: pyprime_block_mesh
+Part ID: 2
+    0 Edge Zonelets
+    2 Face Zonelets
+    1 Cell Zonelets
+
+    0 Edge Zones
+        Edge Zone Name(s) : []
+    2 Face Zones
+        Face Zone Name(s) : [my_group, wall]
+    1 Volume Zones
+        Volume Zone Name(s) : [solid]
+
+    0 Label(s)
+        Names: []
+
+    Bounding box (-16 0 -17)
+                 (12 28 11)
+
+my_group
+wall
+</pre></div>
+</div>
+</section>
+<section id="exit-pyprimemesh">
+<h2>Exit PyPrimeMesh<a class="headerlink" href="#exit-pyprimemesh" title="Link to this heading">#</a></h2>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="n">prime_client</span><span class="o">.</span><span class="n">exit</span><span class="p">()</span>
+</pre></div>
+</div>
+<p class="sphx-glr-timing"><strong>Total running time of the script:</strong> (0 minutes 23.382 seconds)</p>
+<div class="sphx-glr-footer sphx-glr-footer-example docutils container" id="sphx-glr-download-examples-gallery-examples-gallery-00-lucid-file-io-py">
+<div class="sphx-glr-download sphx-glr-download-jupyter docutils container">
+<p><a class="reference download internal" download="" href="../../../_downloads/c46c37184731c75e798aace688274472/00_lucid_file_IO.ipynb"><code class="xref download docutils literal notranslate"><span class="pre">Download</span> <span class="pre">Jupyter</span> <span class="pre">notebook:</span> <span class="pre">00_lucid_file_IO.ipynb</span></code></a></p>
+</div>
+<div class="sphx-glr-download sphx-glr-download-python docutils container">
+<p><a class="reference download internal" download="" href="../../../_downloads/2a7a41c0f18bf547bec8662220b17fc1/00_lucid_file_IO.py"><code class="xref download docutils literal notranslate"><span class="pre">Download</span> <span class="pre">Python</span> <span class="pre">source</span> <span class="pre">code:</span> <span class="pre">00_lucid_file_IO.py</span></code></a></p>
+</div>
+</div>
+<p class="sphx-glr-signature"><a class="reference external" href="https://sphinx-gallery.github.io">Gallery generated by Sphinx-Gallery</a></p>
+</section>
+</section>
+
+
+                </article>
+              
+              
+              
+              
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+  <div class="sidebar-secondary-item">
+
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> On this page
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#objective">Objective</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#procedure">Procedure</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#launch-ansys-prime-server">Launch Ansys Prime Server</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#import-geometry">Import geometry</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#generate-mesh">Generate Mesh</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#export-mesh-as-pyprimemesh-pmdat-native-format-mesh-file">Export mesh as PyPrimeMesh (.pmdat) native format mesh file</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#export-mesh-as-ansys-mapdl-cdb-format-mesh-file">Export mesh as Ansys MAPDL (.cdb) format mesh file</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#export-mesh-ansys-fluent-cas-format-mesh-file">Export mesh Ansys Fluent (CAS) format mesh file</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#reading-ansys-pyprimemesh-native-mesh-file-pmdat">Reading Ansys PyPrimeMesh native mesh file (pmdat)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#reading-ansys-fluent-cas-format-mesh-file">Reading Ansys Fluent (.cas) format mesh file</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#exit-pyprimemesh">Exit PyPrimeMesh</a></li>
+</ul>
+  </nav></div>
+
+  <div class="sidebar-secondary-item"> 
+<div class="tocsection editthispage">
+  <a href="https://github.com/ansys/pyprimemesh/edit/main/doc/source/examples/gallery_examples/gallery/00_lucid_file_IO.rst">
+    <i class="fa-solid fa-pencil"></i>
+       Edit
+    on GitHub  
+  </a>
+</div>
+
+</div>
+
+  <div class="sidebar-secondary-item">
+
+  <div class="tocsection sourcelink">
+    <a href="../../../_sources/examples/gallery_examples/gallery/00_lucid_file_IO.rst.txt">
+      <i class="fa-solid fa-file-lines"></i> Show Source
+    </a>
+  </div>
+</div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+          </footer>
+        
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../../../_static/scripts/bootstrap.js?digest=5b4479735964841361fd"></script>
+<script src="../../../_static/scripts/pydata-sphinx-theme.js?digest=5b4479735964841361fd"></script>
+
+  <footer class="bd-footer">
+<div class="bd-footer__inner bd-page-width">
+  
+    <div class="footer-items__start">
+      
+        <div class="footer-item">
+
+  <p class="copyright">
+    
+      © Copyright (c) 2024 ANSYS, Inc. All rights reserved.
+      <br/>
+    
+  </p>
+</div>
+      
+        <div class="footer-item">
+
+  <p class="sphinx-version">
+    Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 7.2.6.
+    <br/>
+  </p>
+</div>
+      
+    </div>
+  
+  
+  
+    <div class="footer-items__end">
+      
+        <div class="footer-item"><p class="theme-version">
+  Built with the
+  <a href="https://sphinxdocs.ansys.com/version/stable/index.html"
+    >Ansys Sphinx Theme</a
+  >
+  0.13.1. <br />Last updated on
+  <span id="date"></span>
+</p>
+<script>
+  var options = { day: "numeric", month: "long", year: "numeric" };
+  var lastModifiedDate = new Date(document.lastModified);
+  var date = lastModifiedDate.toLocaleDateString("en-US", options);
+  document.getElementById("date").innerHTML = date;
+</script></div>
+      
+    </div>
+  
+</div>
+
+  </footer>
+  </body>
+</html>

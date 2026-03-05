@@ -1,0 +1,6 @@
+﻿create\_base\_face
+==================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. automethod:: VolumeSweeper.create_base_face

@@ -1,0 +1,55 @@
+.. _ref_index_graphics:
+
+**********************************
+Interactive graphics using PyVista
+**********************************
+PyPrimeMesh provides support for interactive graphical visualisation using `PyVista <https://docs.pyvista.org/>`_
+if this package is installed as a dependency.
+
+This code shows how to display the model using the :class:`Graphics <ansys.meshing.prime.graphics>` class:
+
+.. code-block:: pycon
+
+    >>> from ansys.meshing.prime.graphics import PrimePlotter
+    >>> import ansys.meshing.prime as prime
+    >>> display = PrimePlotter()
+    >>> display.plot(model)
+    >>> display.show()
+
+
+.. figure:: ../images/graphics.png
+    :width: 400pt
+    :align: center
+
+    **Entire model displayed**
+
+Using the :class:`ScopeDefinition <ansys.meshing.prime.ScopeDefinition>` class allows
+you to limit the display to particular regions of the model:
+
+.. code-block:: pycon
+
+    >>> # display the first part only
+    >>> display = PrimePlotter()
+    >>> display.plot(
+    ...     model, scope=prime.ScopeDefinition(model, part_expression=model.parts[0].name)
+    ... )
+    >>> display.show()
+
+
+.. figure:: ../images/graphics_part.png
+    :width: 400pt
+    :align: center
+
+    **Single part displayed**
+
+Selections can be made of displayed objects. If selections in the window are made,
+information about them can be printed to the console. Selections can also be hidden.
+
+These graphics buttons are provided to help navigate the model and to
+carry out basic verifications:
+
+.. figure:: ../images/graphics_buttons(2).png
+    :width: 200pt
+    :align: center
+
+    **Graphics buttons**

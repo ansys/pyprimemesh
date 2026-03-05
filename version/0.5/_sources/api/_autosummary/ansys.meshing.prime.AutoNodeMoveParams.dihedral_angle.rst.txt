@@ -1,0 +1,6 @@
+dihedral\_angle
+===============
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoproperty:: AutoNodeMoveParams.dihedral_angle

@@ -1,0 +1,11 @@
+numpy\_array\_optimization\_disabled
+====================================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autofunction:: ansys.meshing.prime.numpy_array_optimization_disabled
+
+.. minigallery::
+    :add-heading: Examples using numpy_array_optimization_disabled
+
+    ansys.meshing.prime.numpy_array_optimization_disabled

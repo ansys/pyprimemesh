@@ -1,0 +1,6 @@
+BROKENLOOPTOPOFACES
+===================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoattribute:: TopoSearchField.BROKENLOOPTOPOFACES

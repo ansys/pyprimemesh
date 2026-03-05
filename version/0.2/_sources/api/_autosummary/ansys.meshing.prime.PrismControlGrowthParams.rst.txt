@@ -1,0 +1,35 @@
+PrismControlGrowthParams
+========================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoclass:: PrismControlGrowthParams
+   
+   
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+      :toctree:
+   
+      
+      PrismControlGrowthParams.print_default
+      PrismControlGrowthParams.set_default
+   
+   
+
+   
+   
+   .. rubric:: Attributes
+
+   .. autosummary::
+      :toctree:
+   
+      PrismControlGrowthParams.first_aspect_ratio
+      PrismControlGrowthParams.first_height
+      PrismControlGrowthParams.growth_rate
+      PrismControlGrowthParams.min_aspect_ratio
+      PrismControlGrowthParams.n_layers
+      PrismControlGrowthParams.offset_type
+   
+   

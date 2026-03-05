@@ -1,0 +1,6 @@
+﻿copied\_zonelets
+================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoproperty:: CopyZoneletsResults.copied_zonelets

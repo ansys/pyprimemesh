@@ -1,0 +1,6 @@
+sizing\_method
+==============
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoproperty:: WrapParams.sizing_method

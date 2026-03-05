@@ -1,0 +1,6 @@
+﻿create\_volume\_control
+=======================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. automethod:: ControlData.create_volume_control

@@ -1,0 +1,23 @@
+JoinSeparateMethod
+==================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoclass:: JoinSeparateMethod
+   
+   
+   
+   
+
+   
+   
+   .. rubric:: Attributes
+
+   .. autosummary::
+      :toctree:
+   
+      JoinSeparateMethod.KEEPNONE
+      JoinSeparateMethod.KEEPONE
+      JoinSeparateMethod.KEEPBOTH
+   
+   

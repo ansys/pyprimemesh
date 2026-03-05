@@ -1,0 +1,6 @@
+﻿normal\_angle
+=============
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoproperty:: CurvatureSizingParams.normal_angle

@@ -1,0 +1,6 @@
+simulation\_type
+================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoproperty:: ExportMapdlCdbParams.simulation_type

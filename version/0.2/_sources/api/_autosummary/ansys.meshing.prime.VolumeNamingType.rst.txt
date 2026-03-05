@@ -1,0 +1,22 @@
+VolumeNamingType
+================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoclass:: VolumeNamingType
+   
+   
+   
+   
+
+   
+   
+   .. rubric:: Attributes
+
+   .. autosummary::
+      :toctree:
+   
+      VolumeNamingType.BYFACELABEL
+      VolumeNamingType.BYFACEZONE
+   
+   

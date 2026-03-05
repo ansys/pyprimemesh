@@ -1,0 +1,41 @@
+.. vale off
+
+TetMeshSplineParams
+===================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoclass:: TetMeshSplineParams
+
+   
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+      :toctree:
+   
+      
+      TetMeshSplineParams.print_default
+      TetMeshSplineParams.set_default
+   
+   
+
+   
+   
+   .. rubric:: Attributes
+
+   .. autosummary::
+      :toctree:
+   
+      TetMeshSplineParams.decimation_factor
+      TetMeshSplineParams.feature_angle
+      TetMeshSplineParams.mode
+   
+   
+
+.. minigallery::
+    :add-heading: Examples using TetMeshSplineParams
+
+    ansys.meshing.prime.TetMeshSplineParams
+
+.. vale on

@@ -1,0 +1,6 @@
+get\_num\_threads
+=================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. automethod:: Model.get_num_threads

@@ -1,0 +1,27 @@
+.. vale off
+
+HexCoreCellElementType
+======================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoclass:: HexCoreCellElementType
+   
+   
+   
+   
+
+   
+   
+   .. rubric:: Attributes
+
+   .. autosummary::
+      :toctree:
+   
+      HexCoreCellElementType.ALLPOLY
+      HexCoreCellElementType.ALLHEX
+      HexCoreCellElementType.HEXANDPOLY
+   
+   
+
+.. vale on

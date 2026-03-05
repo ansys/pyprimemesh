@@ -1,0 +1,11 @@
+get\_scope
+==========
+
+.. currentmodule:: ansys.meshing.prime
+
+.. automethod:: ansys.meshing.prime.SizeControl.get_scope
+
+.. minigallery::
+   :add-heading: Examples using SizeControl.get_scope
+
+   ansys.meshing.prime.SizeControl.get_scope

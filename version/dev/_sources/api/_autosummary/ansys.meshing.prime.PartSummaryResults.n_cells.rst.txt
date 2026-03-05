@@ -1,0 +1,6 @@
+n\_cells
+========
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoproperty:: PartSummaryResults.n_cells

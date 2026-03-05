@@ -1,0 +1,6 @@
+PREPAREFORVOLUMEMESHINGFAILED
+=============================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoattribute:: ErrorCode.PREPAREFORVOLUMEMESHINGFAILED

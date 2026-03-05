@@ -1,0 +1,6 @@
+offset\_holes
+=============
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoproperty:: DetectAndTreatHolesParams.offset_holes

@@ -1,0 +1,11 @@
+from\_bytes
+===========
+
+.. currentmodule:: ansys.meshing.prime
+
+.. automethod:: ansys.meshing.prime.ContactPatchAxis.from_bytes
+
+.. minigallery::
+   :add-heading: Examples using ContactPatchAxis.from_bytes
+
+   ansys.meshing.prime.ContactPatchAxis.from_bytes

@@ -1,0 +1,11 @@
+conjugate
+=========
+
+.. currentmodule:: ansys.meshing.prime
+
+.. automethod:: ansys.meshing.prime.LengthUnit.conjugate
+
+.. minigallery::
+   :add-heading: Examples using LengthUnit.conjugate
+
+   ansys.meshing.prime.LengthUnit.conjugate

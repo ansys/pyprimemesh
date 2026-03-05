@@ -1,0 +1,11 @@
+is\_integer
+===========
+
+.. currentmodule:: ansys.meshing.prime
+
+.. automethod:: ansys.meshing.prime.CadRefacetingMaxEdgeSizeLimit.is_integer
+
+.. minigallery::
+   :add-heading: Examples using CadRefacetingMaxEdgeSizeLimit.is_integer
+
+   ansys.meshing.prime.CadRefacetingMaxEdgeSizeLimit.is_integer

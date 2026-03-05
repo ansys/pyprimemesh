@@ -1,0 +1,6 @@
+wrap\_size
+==========
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoproperty:: CreateBOIParams.wrap_size

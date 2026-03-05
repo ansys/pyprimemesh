@@ -1,0 +1,6 @@
+stacking\_defeature\_tolerance
+==============================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoproperty:: MeshStackerParams.stacking_defeature_tolerance

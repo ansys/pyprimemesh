@@ -1,0 +1,6 @@
+PERIODICSURFACESEDGESMISMATCH
+=============================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoattribute:: ErrorCode.PERIODICSURFACESEDGESMISMATCH

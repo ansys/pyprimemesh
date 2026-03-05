@@ -1,0 +1,6 @@
+copy\_cell\_zonelets
+====================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. automethod:: VolumeMeshTool.copy_cell_zonelets

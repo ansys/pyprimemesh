@@ -1,0 +1,6 @@
+VT\_REMESHFACEFAILED
+====================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoattribute:: WarningCode.VT_REMESHFACEFAILED

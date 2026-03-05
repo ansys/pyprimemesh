@@ -1,0 +1,6 @@
+reorder\_edge\_zonelets\_mid\_nodes
+===================================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoproperty:: FaceAndEdgeConnectivityParams.reorder_edge_zonelets_mid_nodes

@@ -1,0 +1,6 @@
+created\_zone\_id
+=================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoproperty:: FillHolesAtPlaneResults.created_zone_id

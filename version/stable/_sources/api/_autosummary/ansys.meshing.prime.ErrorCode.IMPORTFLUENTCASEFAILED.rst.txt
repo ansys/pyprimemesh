@@ -1,0 +1,6 @@
+IMPORTFLUENTCASEFAILED
+======================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoattribute:: ErrorCode.IMPORTFLUENTCASEFAILED

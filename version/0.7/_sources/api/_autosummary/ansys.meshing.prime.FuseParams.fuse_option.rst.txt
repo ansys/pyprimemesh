@@ -1,0 +1,6 @@
+fuse\_option
+============
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoproperty:: FuseParams.fuse_option

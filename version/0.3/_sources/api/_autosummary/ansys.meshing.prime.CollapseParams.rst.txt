@@ -1,0 +1,37 @@
+.. vale off
+
+CollapseParams
+==============
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoclass:: CollapseParams
+   
+   
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+      :toctree:
+   
+      
+      CollapseParams.print_default
+      CollapseParams.set_default
+   
+   
+
+   
+   
+   .. rubric:: Attributes
+
+   .. autosummary::
+      :toctree:
+   
+      CollapseParams.collapse_ratio
+      CollapseParams.feature_type
+      CollapseParams.preserve_quality
+      CollapseParams.target_skewness
+   
+   
+
+.. vale on

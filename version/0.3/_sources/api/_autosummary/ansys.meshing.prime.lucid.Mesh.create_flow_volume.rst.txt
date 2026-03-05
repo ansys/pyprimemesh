@@ -1,0 +1,6 @@
+create\_flow\_volume
+====================
+
+.. currentmodule:: ansys.meshing.prime.lucid
+
+.. automethod:: Mesh.create_flow_volume

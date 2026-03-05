@@ -1,0 +1,6 @@
+﻿WRAPPERCLOSEGAPS\_INVALIDGAPSIZE
+================================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoattribute:: ErrorCode.WRAPPERCLOSEGAPS_INVALIDGAPSIZE

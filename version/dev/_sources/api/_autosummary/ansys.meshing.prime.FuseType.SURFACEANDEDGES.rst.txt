@@ -1,0 +1,6 @@
+SURFACEANDEDGES
+===============
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoattribute:: FuseType.SURFACEANDEDGES

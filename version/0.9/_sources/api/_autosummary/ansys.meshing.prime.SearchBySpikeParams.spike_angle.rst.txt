@@ -1,0 +1,6 @@
+spike\_angle
+============
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoproperty:: SearchBySpikeParams.spike_angle

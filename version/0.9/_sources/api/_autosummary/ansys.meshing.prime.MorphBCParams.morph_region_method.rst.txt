@@ -1,0 +1,6 @@
+morph\_region\_method
+=====================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoproperty:: MorphBCParams.morph_region_method

@@ -1,0 +1,11 @@
+download\_saddle\_bracket\_dsco
+===============================
+
+.. currentmodule:: ansys.meshing.prime.examples
+
+.. autofunction:: ansys.meshing.prime.examples.download_saddle_bracket_dsco
+
+.. minigallery::
+    :add-heading: Examples using download_saddle_bracket_dsco
+
+    ansys.meshing.prime.examples.download_saddle_bracket_dsco

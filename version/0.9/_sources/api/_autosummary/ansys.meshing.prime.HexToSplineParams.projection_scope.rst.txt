@@ -1,0 +1,6 @@
+projection\_scope
+=================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoproperty:: HexToSplineParams.projection_scope

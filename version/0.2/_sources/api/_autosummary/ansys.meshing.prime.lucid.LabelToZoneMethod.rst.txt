@@ -1,0 +1,21 @@
+LabelToZoneMethod
+=================
+
+.. currentmodule:: ansys.meshing.prime.lucid
+
+.. autoclass:: LabelToZoneMethod
+   
+   
+   
+   
+
+   
+   
+   .. rubric:: Attributes
+
+   .. autosummary::
+      :toctree:
+   
+      LabelToZoneMethod.SIMPLE
+   
+   

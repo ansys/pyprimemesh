@@ -1,0 +1,6 @@
+project\_only\_mid\_nodes
+=========================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoproperty:: ProjectOnGeometryParams.project_only_mid_nodes

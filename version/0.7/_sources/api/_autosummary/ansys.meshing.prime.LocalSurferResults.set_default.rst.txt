@@ -1,0 +1,11 @@
+set\_default
+============
+
+.. currentmodule:: ansys.meshing.prime
+
+.. automethod:: ansys.meshing.prime.LocalSurferResults.set_default
+
+.. minigallery::
+   :add-heading: Examples using LocalSurferResults.set_default
+
+   ansys.meshing.prime.LocalSurferResults.set_default

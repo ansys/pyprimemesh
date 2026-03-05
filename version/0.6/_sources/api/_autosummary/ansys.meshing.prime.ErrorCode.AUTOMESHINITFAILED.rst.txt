@@ -1,0 +1,6 @@
+AUTOMESHINITFAILED
+==================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoattribute:: ErrorCode.AUTOMESHINITFAILED

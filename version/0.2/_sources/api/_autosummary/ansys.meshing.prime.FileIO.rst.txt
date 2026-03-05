@@ -1,0 +1,34 @@
+FileIO
+======
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoclass:: FileIO
+   
+   
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+      :toctree:
+   
+      
+      FileIO.export_boundary_fitted_spline_kfile
+      FileIO.export_fluent_case
+      FileIO.export_fluent_meshing_mesh
+      FileIO.export_mapdl_cdb
+      FileIO.import_cad
+      FileIO.import_fluent_case
+      FileIO.import_fluent_meshing_meshes
+      FileIO.import_fluent_meshing_size_field
+      FileIO.import_mapdl_cdb
+      FileIO.read_pmdat
+      FileIO.read_size_field
+      FileIO.write_pmdat
+      FileIO.write_size_field
+   
+   
+
+   
+   
+   

@@ -1,0 +1,6 @@
+﻿number\_of\_threads
+===================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoproperty:: WrapperImproveQualityParams.number_of_threads

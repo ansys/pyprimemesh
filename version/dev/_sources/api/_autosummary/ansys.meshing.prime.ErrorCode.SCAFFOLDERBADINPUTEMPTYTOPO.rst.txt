@@ -1,0 +1,6 @@
+SCAFFOLDERBADINPUTEMPTYTOPO
+===========================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoattribute:: ErrorCode.SCAFFOLDERBADINPUTEMPTYTOPO

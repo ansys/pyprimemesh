@@ -1,0 +1,11 @@
+set\_default
+============
+
+.. currentmodule:: ansys.meshing.prime
+
+.. automethod:: ansys.meshing.prime.OverlapSearchResults.set_default
+
+.. minigallery::
+   :add-heading: Examples using OverlapSearchResults.set_default
+
+   ansys.meshing.prime.OverlapSearchResults.set_default

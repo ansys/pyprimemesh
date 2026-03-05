@@ -1,0 +1,35 @@
+.. vale off
+
+ConnectResults
+==============
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoclass:: ConnectResults
+   
+   
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+      :toctree:
+   
+      
+      ConnectResults.print_default
+      ConnectResults.set_default
+   
+   
+
+   
+   
+   .. rubric:: Attributes
+
+   .. autosummary::
+      :toctree:
+   
+      ConnectResults.error_code
+      ConnectResults.warning_codes
+   
+   
+
+.. vale on

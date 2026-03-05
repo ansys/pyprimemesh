@@ -1,0 +1,6 @@
+has\_invalid\_shape
+===================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoproperty:: CheckMeshResults.has_invalid_shape

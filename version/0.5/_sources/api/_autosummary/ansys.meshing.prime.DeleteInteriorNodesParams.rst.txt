@@ -1,0 +1,36 @@
+.. vale off
+
+DeleteInteriorNodesParams
+=========================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoclass:: DeleteInteriorNodesParams
+   
+   
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+      :toctree:
+   
+      
+      DeleteInteriorNodesParams.print_default
+      DeleteInteriorNodesParams.set_default
+   
+   
+
+   
+   
+   .. rubric:: Attributes
+
+   .. autosummary::
+      :toctree:
+   
+      DeleteInteriorNodesParams.edge_sharp_corner_angle
+      DeleteInteriorNodesParams.merge_edge_allow_self_close
+      DeleteInteriorNodesParams.merge_face_normals_angle
+   
+   
+
+.. vale on

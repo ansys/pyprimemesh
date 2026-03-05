@@ -1,0 +1,26 @@
+.. vale off
+
+DeleteTool
+==========
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoclass:: DeleteTool
+   
+   
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+      :toctree:
+   
+      
+      DeleteTool.delete_fringes_and_overlaps_on_zonelets
+   
+   
+
+   
+   
+   
+
+.. vale on

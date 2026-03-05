@@ -1,0 +1,6 @@
+INVALIDPLANEPOINTS
+==================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoattribute:: ErrorCode.INVALIDPLANEPOINTS

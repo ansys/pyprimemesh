@@ -1,0 +1,6 @@
+material\_points
+================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoproperty:: LeakPreventionParams.material_points

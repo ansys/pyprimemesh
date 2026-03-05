@@ -1,0 +1,6 @@
+split\_topo\_edges\_at\_apex\_point
+===================================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoproperty:: RepairTopologyParams.split_topo_edges_at_apex_point

@@ -1,0 +1,11 @@
+print\_default
+==============
+
+.. currentmodule:: ansys.meshing.prime
+
+.. automethod:: ansys.meshing.prime.ContactElementTypeParams.print_default
+
+.. minigallery::
+   :add-heading: Examples using ContactElementTypeParams.print_default
+
+   ansys.meshing.prime.ContactElementTypeParams.print_default

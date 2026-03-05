@@ -1,0 +1,6 @@
+ABSOLUTE
+========
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoattribute:: CadRefacetingMaxEdgeSizeLimit.ABSOLUTE

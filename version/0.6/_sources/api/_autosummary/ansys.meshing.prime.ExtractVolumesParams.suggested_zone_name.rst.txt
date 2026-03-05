@@ -1,0 +1,6 @@
+suggested\_zone\_name
+=====================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoproperty:: ExtractVolumesParams.suggested_zone_name

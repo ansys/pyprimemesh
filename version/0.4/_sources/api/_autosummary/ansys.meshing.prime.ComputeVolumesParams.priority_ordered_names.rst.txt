@@ -1,0 +1,6 @@
+﻿priority\_ordered\_names
+========================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoproperty:: ComputeVolumesParams.priority_ordered_names

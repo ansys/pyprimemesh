@@ -1,0 +1,6 @@
+CREATECAPONFACEZONELETSFAILED
+=============================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoattribute:: ErrorCode.CREATECAPONFACEZONELETSFAILED

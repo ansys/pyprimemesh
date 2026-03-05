@@ -1,0 +1,22 @@
+MatchNodesOption
+================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoclass:: MatchNodesOption
+   
+   
+   
+   
+
+   
+   
+   .. rubric:: Attributes
+
+   .. autosummary::
+      :toctree:
+   
+      MatchNodesOption.TRIMONESIDE
+      MatchNodesOption.TRIMTWOSIDES
+   
+   

@@ -1,0 +1,6 @@
+﻿nugget\_mesh\_size
+==================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoproperty:: FixInvalidNormalNodeParams.nugget_mesh_size

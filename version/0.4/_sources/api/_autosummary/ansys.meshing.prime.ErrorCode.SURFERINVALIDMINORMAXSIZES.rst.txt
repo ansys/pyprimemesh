@@ -1,0 +1,6 @@
+﻿SURFERINVALIDMINORMAXSIZES
+==========================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoattribute:: ErrorCode.SURFERINVALIDMINORMAXSIZES

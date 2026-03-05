@@ -1,0 +1,11 @@
+create\_boi
+===========
+
+.. currentmodule:: ansys.meshing.prime
+
+.. automethod:: ansys.meshing.prime.SurfaceUtilities.create_boi
+
+.. minigallery::
+   :add-heading: Examples using SurfaceUtilities.create_boi
+
+   ansys.meshing.prime.SurfaceUtilities.create_boi

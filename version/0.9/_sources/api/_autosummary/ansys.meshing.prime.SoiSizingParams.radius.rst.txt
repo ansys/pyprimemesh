@@ -1,0 +1,6 @@
+radius
+======
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoproperty:: SoiSizingParams.radius

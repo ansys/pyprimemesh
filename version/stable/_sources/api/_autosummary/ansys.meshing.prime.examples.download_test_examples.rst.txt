@@ -1,0 +1,11 @@
+download\_test\_examples
+========================
+
+.. currentmodule:: ansys.meshing.prime.examples
+
+.. autofunction:: ansys.meshing.prime.examples.download_test_examples
+
+.. minigallery::
+    :add-heading: Examples using download_test_examples
+
+    ansys.meshing.prime.examples.download_test_examples

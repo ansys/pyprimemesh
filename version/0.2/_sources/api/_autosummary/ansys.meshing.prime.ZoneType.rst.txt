@@ -1,0 +1,23 @@
+ZoneType
+========
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoclass:: ZoneType
+   
+   
+   
+   
+
+   
+   
+   .. rubric:: Attributes
+
+   .. autosummary::
+      :toctree:
+   
+      ZoneType.EDGE
+      ZoneType.FACE
+      ZoneType.VOLUME
+   
+   

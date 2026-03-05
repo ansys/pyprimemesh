@@ -1,0 +1,6 @@
+﻿periodic\_controls
+==================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoproperty:: ControlData.periodic_controls

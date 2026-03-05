@@ -1,0 +1,11 @@
+bit\_count
+==========
+
+.. currentmodule:: ansys.meshing.prime
+
+.. automethod:: ansys.meshing.prime.SizeFieldType.bit_count
+
+.. minigallery::
+   :add-heading: Examples using SizeFieldType.bit_count
+
+   ansys.meshing.prime.SizeFieldType.bit_count

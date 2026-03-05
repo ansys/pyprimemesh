@@ -1,0 +1,6 @@
+FUSEOPTIONINVALID
+=================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoattribute:: ErrorCode.FUSEOPTIONINVALID

@@ -1,0 +1,6 @@
+﻿create\_boundary\_fitted\_spline
+================================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. automethod:: BoundaryFittedSpline.create_boundary_fitted_spline

@@ -1,0 +1,23 @@
+MergeZoneletsResults
+====================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoclass:: MergeZoneletsResults
+   
+   
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+      :toctree:
+   
+      
+      MergeZoneletsResults.print_default
+      MergeZoneletsResults.set_default
+   
+   
+
+   
+   
+   

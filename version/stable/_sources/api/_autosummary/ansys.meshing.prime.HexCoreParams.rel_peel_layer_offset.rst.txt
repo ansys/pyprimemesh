@@ -1,0 +1,6 @@
+rel\_peel\_layer\_offset
+========================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoproperty:: HexCoreParams.rel_peel_layer_offset

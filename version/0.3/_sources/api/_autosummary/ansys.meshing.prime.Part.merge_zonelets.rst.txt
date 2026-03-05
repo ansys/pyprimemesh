@@ -1,0 +1,6 @@
+merge\_zonelets
+===============
+
+.. currentmodule:: ansys.meshing.prime
+
+.. automethod:: Part.merge_zonelets

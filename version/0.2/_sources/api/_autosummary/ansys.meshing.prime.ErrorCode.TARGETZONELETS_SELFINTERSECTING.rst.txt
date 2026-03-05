@@ -1,0 +1,6 @@
+TARGETZONELETS\_SELFINTERSECTING
+================================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoattribute:: ErrorCode.TARGETZONELETS_SELFINTERSECTING

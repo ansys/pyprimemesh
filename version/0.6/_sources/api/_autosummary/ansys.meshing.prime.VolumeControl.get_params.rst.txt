@@ -1,0 +1,6 @@
+get\_params
+===========
+
+.. currentmodule:: ansys.meshing.prime
+
+.. automethod:: VolumeControl.get_params

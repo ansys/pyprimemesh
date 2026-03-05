@@ -1,0 +1,6 @@
+PERVOLUME
+=========
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoattribute:: CreateVolumeZonesType.PERVOLUME

@@ -1,0 +1,11 @@
+print\_default
+==============
+
+.. currentmodule:: ansys.meshing.prime
+
+.. automethod:: ansys.meshing.prime.SetNameResults.print_default
+
+.. minigallery::
+   :add-heading: Examples using SetNameResults.print_default
+
+   ansys.meshing.prime.SetNameResults.print_default

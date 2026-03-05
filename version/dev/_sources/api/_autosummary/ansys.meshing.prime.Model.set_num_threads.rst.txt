@@ -1,0 +1,11 @@
+set\_num\_threads
+=================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. automethod:: ansys.meshing.prime.Model.set_num_threads
+
+.. minigallery::
+   :add-heading: Examples using Model.set_num_threads
+
+   ansys.meshing.prime.Model.set_num_threads

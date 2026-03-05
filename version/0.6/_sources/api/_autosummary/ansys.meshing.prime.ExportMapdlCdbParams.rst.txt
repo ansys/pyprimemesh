@@ -1,0 +1,44 @@
+.. vale off
+
+ExportMapdlCdbParams
+====================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoclass:: ExportMapdlCdbParams
+   
+   
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+      :toctree:
+   
+      
+      ExportMapdlCdbParams.print_default
+      ExportMapdlCdbParams.set_default
+   
+   
+
+   
+   
+   .. rubric:: Attributes
+
+   .. autosummary::
+      :toctree:
+   
+      ExportMapdlCdbParams.analysis_settings
+      ExportMapdlCdbParams.analysis_settings_file_name
+      ExportMapdlCdbParams.boundary_conditions
+      ExportMapdlCdbParams.config_settings
+      ExportMapdlCdbParams.consider_general_connectors_as_spot_weld
+      ExportMapdlCdbParams.enable_face_based_labels
+      ExportMapdlCdbParams.material_properties
+      ExportMapdlCdbParams.pre_solution_settings
+      ExportMapdlCdbParams.simulation_type
+      ExportMapdlCdbParams.write_by_zones
+      ExportMapdlCdbParams.write_cells
+   
+   
+
+.. vale on

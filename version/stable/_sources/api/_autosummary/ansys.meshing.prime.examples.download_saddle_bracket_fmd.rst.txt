@@ -1,0 +1,11 @@
+download\_saddle\_bracket\_fmd
+==============================
+
+.. currentmodule:: ansys.meshing.prime.examples
+
+.. autofunction:: ansys.meshing.prime.examples.download_saddle_bracket_fmd
+
+.. minigallery::
+    :add-heading: Examples using download_saddle_bracket_fmd
+
+    ansys.meshing.prime.examples.download_saddle_bracket_fmd

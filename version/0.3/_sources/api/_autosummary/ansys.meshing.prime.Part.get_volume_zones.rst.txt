@@ -1,0 +1,6 @@
+get\_volume\_zones
+==================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. automethod:: Part.get_volume_zones

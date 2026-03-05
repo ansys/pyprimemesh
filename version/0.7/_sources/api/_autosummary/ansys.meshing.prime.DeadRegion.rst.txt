@@ -1,0 +1,41 @@
+.. vale off
+
+DeadRegion
+==========
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoclass:: DeadRegion
+   
+   
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+      :toctree:
+   
+      
+      DeadRegion.print_default
+      DeadRegion.set_default
+   
+   
+
+   
+   
+   .. rubric:: Attributes
+
+   .. autosummary::
+      :toctree:
+   
+      DeadRegion.dead_material_points
+      DeadRegion.face_zonelet_ids
+      DeadRegion.hole_size
+   
+   
+
+.. minigallery::
+    :add-heading: Examples using DeadRegion
+
+    ansys.meshing.prime.DeadRegion
+
+.. vale on

@@ -1,0 +1,30 @@
+SplitParams
+===========
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoclass:: SplitParams
+   
+   
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+      :toctree:
+   
+      
+      SplitParams.print_default
+      SplitParams.set_default
+   
+   
+
+   
+   
+   .. rubric:: Attributes
+
+   .. autosummary::
+      :toctree:
+   
+      SplitParams.split_ratio
+   
+   

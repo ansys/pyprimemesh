@@ -1,0 +1,35 @@
+ComputeVolumesResults
+=====================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoclass:: ComputeVolumesResults
+   
+   
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+      :toctree:
+   
+      
+      ComputeVolumesResults.print_default
+      ComputeVolumesResults.set_default
+   
+   
+
+   
+   
+   .. rubric:: Attributes
+
+   .. autosummary::
+      :toctree:
+   
+      ComputeVolumesResults.error_code
+      ComputeVolumesResults.error_locations
+      ComputeVolumesResults.external_open_face_zonelets
+      ComputeVolumesResults.material_point_volumes
+      ComputeVolumesResults.volumes
+      ComputeVolumesResults.warning_codes
+   
+   

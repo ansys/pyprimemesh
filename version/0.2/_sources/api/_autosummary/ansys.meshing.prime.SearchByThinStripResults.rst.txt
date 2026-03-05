@@ -1,0 +1,23 @@
+SearchByThinStripResults
+========================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoclass:: SearchByThinStripResults
+   
+   
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+      :toctree:
+   
+      
+      SearchByThinStripResults.print_default
+      SearchByThinStripResults.set_default
+   
+   
+
+   
+   
+   

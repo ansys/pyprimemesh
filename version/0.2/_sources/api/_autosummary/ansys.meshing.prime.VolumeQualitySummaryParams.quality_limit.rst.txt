@@ -1,0 +1,6 @@
+quality\_limit
+==============
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoproperty:: VolumeQualitySummaryParams.quality_limit

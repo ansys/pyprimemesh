@@ -1,0 +1,6 @@
+JOINEDZONELETSFROMMULTIPLEVOLUMES
+=================================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoattribute:: WarningCode.JOINEDZONELETSFROMMULTIPLEVOLUMES

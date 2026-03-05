@@ -1,0 +1,6 @@
+IMPORTABAQUSFAILEDDURINGMESHCREATION
+====================================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoattribute:: ErrorCode.IMPORTABAQUSFAILEDDURINGMESHCREATION

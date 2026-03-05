@@ -1,0 +1,6 @@
+sweep\_type
+===========
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoproperty:: MultiZoneSweepMeshParams.sweep_type

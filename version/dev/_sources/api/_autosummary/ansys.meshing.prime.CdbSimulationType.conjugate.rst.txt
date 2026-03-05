@@ -1,0 +1,11 @@
+conjugate
+=========
+
+.. currentmodule:: ansys.meshing.prime
+
+.. automethod:: ansys.meshing.prime.CdbSimulationType.conjugate
+
+.. minigallery::
+   :add-heading: Examples using CdbSimulationType.conjugate
+
+   ansys.meshing.prime.CdbSimulationType.conjugate

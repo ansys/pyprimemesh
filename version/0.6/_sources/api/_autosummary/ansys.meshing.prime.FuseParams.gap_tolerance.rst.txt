@@ -1,0 +1,6 @@
+gap\_tolerance
+==============
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoproperty:: FuseParams.gap_tolerance

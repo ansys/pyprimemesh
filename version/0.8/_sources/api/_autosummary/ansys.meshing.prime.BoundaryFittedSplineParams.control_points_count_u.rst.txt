@@ -1,0 +1,6 @@
+control\_points\_count\_u
+=========================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoproperty:: BoundaryFittedSplineParams.control_points_count_u

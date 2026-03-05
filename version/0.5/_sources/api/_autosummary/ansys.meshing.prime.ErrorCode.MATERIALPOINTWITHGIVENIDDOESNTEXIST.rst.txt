@@ -1,0 +1,6 @@
+MATERIALPOINTWITHGIVENIDDOESNTEXIST
+===================================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoattribute:: ErrorCode.MATERIALPOINTWITHGIVENIDDOESNTEXIST

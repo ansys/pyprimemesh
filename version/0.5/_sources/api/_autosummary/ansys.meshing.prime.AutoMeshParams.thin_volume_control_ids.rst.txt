@@ -1,0 +1,6 @@
+thin\_volume\_control\_ids
+==========================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoproperty:: AutoMeshParams.thin_volume_control_ids

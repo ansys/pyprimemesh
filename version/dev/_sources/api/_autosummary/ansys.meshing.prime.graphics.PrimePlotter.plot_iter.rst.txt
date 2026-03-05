@@ -1,0 +1,11 @@
+plot\_iter
+==========
+
+.. currentmodule:: ansys.meshing.prime.graphics
+
+.. automethod:: ansys.meshing.prime.graphics.PrimePlotter.plot_iter
+
+.. minigallery::
+   :add-heading: Examples using PrimePlotter.plot_iter
+
+   ansys.meshing.prime.graphics.PrimePlotter.plot_iter

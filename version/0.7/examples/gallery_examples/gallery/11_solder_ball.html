@@ -1,0 +1,1258 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../../../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Mesh a set of solder balls (beta) &#8212; PyPrimeMesh</title>
+  
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  <!--
+    this give us a css class that will be invisible only if js is disabled
+  -->
+  <noscript>
+    <style>
+      .pst-js-only { display: none !important; }
+
+    </style>
+  </noscript>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../../_static/styles/theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
+<link href="../../../_static/styles/pydata-sphinx-theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
+
+    <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=8f2a1f02" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/jupyter-sphinx.css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/thebelab.css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/sg_gallery.css?v=d2d258e8" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/sg_gallery-binder.css?v=f4aeca0c" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/sg_gallery-dataframe.css?v=2082cf3c" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/sg_gallery-rendered-html.css?v=1277b6f3" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/css/ansys_sphinx_theme.css?v=77703c5e" />
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.23/css/jquery.dataTables.min.css" />
+    <link rel="stylesheet" type="text/css" href="https://www.nerdfonts.com/assets/css/webfont.css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/sphinx-design.min.css?v=95c83b7e" />
+  
+  <!-- So that users can add custom icons -->
+  <script src="../../../_static/scripts/fontawesome.js?digest=8878045cc6db502f8baf"></script>
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../../_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf" />
+<link rel="preload" as="script" href="../../../_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf" />
+
+  
+    <link href="../../../_static/css/breadcrumbs.css" rel="stylesheet" />
+  
+    <script src="../../../_static/documentation_options.js?v=fe7df9b0"></script>
+    <script src="../../../_static/doctools.js?v=9bcbadda"></script>
+    <script src="../../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../../../_static/copybutton.js?v=f281be69"></script>
+    <script src="../../../_static/thebelab-helper.js"></script>
+    <script src="../../../_static/js/table.js?v=b64f5182"></script>
+    <script src="https://cdn.datatables.net/1.10.23/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@jupyter-widgets/html-manager@^1.0.1/dist/embed-amd.js"></script>
+    <script src="../../../_static/design-tabs.js?v=f930bc37"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'examples/gallery_examples/gallery/11_solder_ball';</script>
+    <script>
+        DOCUMENTATION_OPTIONS.theme_version = '0.16.1';
+        DOCUMENTATION_OPTIONS.theme_switcher_json_url = 'https://prime.docs.pyansys.com/versions.json';
+        DOCUMENTATION_OPTIONS.theme_switcher_version_match = '0.7';
+        DOCUMENTATION_OPTIONS.show_version_warning_banner =
+            false;
+        </script>
+    <link rel="icon" href="../../../_static/ansys-favicon.png"/>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" />
+    <link rel="next" title="Miscellaneous examples" href="../misc/index.html" />
+    <link rel="prev" title="Create a contact patch for wrapping between a wheel and ground interface" href="10_wheel_ground_contact_patch.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  <meta name="docsearch:version" content="0.7.0" />
+  <link rel="canonical" href="https://prime.docs.pyansys.com/version/stable/examples/gallery_examples/gallery/11_solder_ball.html" />
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <dialog id="pst-search-dialog">
+    
+<form class="bd-search d-flex align-items-center"
+      action="../../../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         placeholder="Search the docs ..."
+         aria-label="Search the docs ..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form>
+  </dialog>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+<div class="bd-header__inner bd-page-width">
+  <button class="pst-navbar-icon sidebar-toggle primary-toggle" aria-label="Site navigation">
+    <span class="fa-solid fa-bars"></span>
+  </button>
+  
+  
+  <div class="col-lg-3 navbar-header-items__start">
+    
+      <div class="navbar-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../../../index.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../../../_static/pyansys_logo_transparent_black.png" class="logo__image only-light" alt="PyPrimeMesh - Home"/>
+    <img src="../../../_static/pyansys_logo_transparent_white.png" class="logo__image only-dark pst-js-only" alt="PyPrimeMesh - Home"/>
+  
+  
+</a></div>
+    
+  </div>
+  
+  <div class="col-lg-9 navbar-header-items">
+    
+    <div class="me-auto navbar-header-items__center">
+      
+        <div class="navbar-item">
+<nav>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../getting_started/index.html">
+    Getting started
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../user_guide/index.html">
+    User guide
+  </a>
+</li>
+
+
+<li class="nav-item current active">
+  <a class="nav-link nav-internal" href="../../index.html">
+    Examples
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../api/index.html">
+    API reference
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../contributing/index.html">
+    Contribute
+  </a>
+</li>
+
+  </ul>
+</nav></div>
+      
+    </div>
+    
+    
+    <div class="navbar-header-items__end">
+      
+        <div class="navbar-item navbar-persistent--container">
+          
+<div class="search-bar pst-js-only" id="search-bar">
+  <form class="bd-search d-flex align-items-center" action="../../../search.html" method="get">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <input type="search" class="form-control" name="q" placeholder="Search the docs ..."
+      aria-label="Search the docs ..." autocomplete="off" autocorrect="off"
+      autocapitalize="off" spellcheck="false" />
+    <span class="search-button__kbd-shortcut">
+      <kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd>
+    </span>
+  </form>
+  <div id="static-search-results" class="static-search-results" style="display:none;" tabindex="0"></div>
+</div>
+        </div>
+      
+      
+        <div class="navbar-item">
+<div class="version-switcher__container dropdown pst-js-only">
+  <button id="pst-version-switcher-button-2"
+    type="button"
+    class="version-switcher__button btn btn-sm dropdown-toggle"
+    data-bs-toggle="dropdown"
+    aria-haspopup="listbox"
+    aria-controls="pst-version-switcher-list-2"
+    aria-label="Version switcher list"
+  >
+    Choose version  <!-- this text may get changed later by javascript -->
+    <span class="caret"></span>
+  </button>
+  <div id="pst-version-switcher-list-2"
+    class="version-switcher__menu dropdown-menu list-group-flush py-0"
+    role="listbox" aria-labelledby="pst-version-switcher-button-2">
+    <!-- dropdown will be populated by javascript on page load -->
+  </div>
+</div></div>
+      
+        <div class="navbar-item">
+
+<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode"  data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i>
+  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dark"></i>
+  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
+</button></div>
+      
+        <div class="navbar-item"><ul class="navbar-icon-links"
+    aria-label="Icon Links">
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/ansys/pyprimemesh" title="GitHub" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-square-github fa-lg" aria-hidden="true"></i>
+            <span class="sr-only">GitHub</span></a>
+        </li>
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/ansys/pyprimemesh/discussions" title="Support" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa fa-comment fa-fw fa-lg" aria-hidden="true"></i>
+            <span class="sr-only">Support</span></a>
+        </li>
+</ul></div>
+      
+    </div>
+    
+  </div>
+  
+  
+    <div class="navbar-persistent--mobile">
+<div class="search-bar pst-js-only" id="search-bar">
+  <form class="bd-search d-flex align-items-center" action="../../../search.html" method="get">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <input type="search" class="form-control" name="q" placeholder="Search the docs ..."
+      aria-label="Search the docs ..." autocomplete="off" autocorrect="off"
+      autocapitalize="off" spellcheck="false" />
+    <span class="search-button__kbd-shortcut">
+      <kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd>
+    </span>
+  </form>
+  <div id="static-search-results" class="static-search-results" style="display:none;" tabindex="0"></div>
+</div>
+    </div>
+  
+
+  
+    <button class="pst-navbar-icon sidebar-toggle secondary-toggle" aria-label="On this page">
+      <span class="fa-solid fa-outdent"></span>
+    </button>
+  
+</div>
+
+    </header>
+  
+  
+    <div id="announcement_msg"></div>
+<script>
+  fetch("announcement.html")
+    .then((response) => {
+      if (!response.ok) {
+        throw new Error(`HTTP error: ${response.status}`);
+      }
+      return response.text();
+    })
+    .then(
+      (text) => (document.getElementById("announcement_msg").innerHTML = text),
+    )
+    .catch((error) => console.error(`Fetch problem: ${error.message}`));
+</script>
+  
+
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <dialog id="pst-primary-sidebar-modal"></dialog>
+      <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+      <div class="sidebar-header-items__center">
+        
+          
+          
+            <div class="navbar-item">
+<nav>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../getting_started/index.html">
+    Getting started
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../user_guide/index.html">
+    User guide
+  </a>
+</li>
+
+
+<li class="nav-item current active">
+  <a class="nav-link nav-internal" href="../../index.html">
+    Examples
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../api/index.html">
+    API reference
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../contributing/index.html">
+    Contribute
+  </a>
+</li>
+
+  </ul>
+</nav></div>
+          
+        
+      </div>
+    
+    
+    
+      <div class="sidebar-header-items__end">
+        
+          <div class="navbar-item">
+<div class="version-switcher__container dropdown pst-js-only">
+  <button id="pst-version-switcher-button-3"
+    type="button"
+    class="version-switcher__button btn btn-sm dropdown-toggle"
+    data-bs-toggle="dropdown"
+    aria-haspopup="listbox"
+    aria-controls="pst-version-switcher-list-3"
+    aria-label="Version switcher list"
+  >
+    Choose version  <!-- this text may get changed later by javascript -->
+    <span class="caret"></span>
+  </button>
+  <div id="pst-version-switcher-list-3"
+    class="version-switcher__menu dropdown-menu list-group-flush py-0"
+    role="listbox" aria-labelledby="pst-version-switcher-button-3">
+    <!-- dropdown will be populated by javascript on page load -->
+  </div>
+</div></div>
+        
+          <div class="navbar-item">
+
+<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode"  data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i>
+  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dark"></i>
+  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
+</button></div>
+        
+          <div class="navbar-item"><ul class="navbar-icon-links"
+    aria-label="Icon Links">
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/ansys/pyprimemesh" title="GitHub" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-square-github fa-lg" aria-hidden="true"></i>
+            <span class="sr-only">GitHub</span></a>
+        </li>
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/ansys/pyprimemesh/discussions" title="Support" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa fa-comment fa-fw fa-lg" aria-hidden="true"></i>
+            <span class="sr-only">Support</span></a>
+        </li>
+</ul></div>
+        
+      </div>
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+<nav class="bd-docs-nav bd-links"
+     aria-label="Section Navigation">
+  <p class="bd-links__title" role="heading" aria-level="1">Section Navigation</p>
+  <div class="bd-toc-item navbar-nav"><ul class="current nav bd-sidenav">
+<li class="toctree-l1 current active has-children"><a class="reference internal" href="index.html">Examples</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="00_lucid_file_IO.html">Convert data when importing and exporting mesh and CAD formats</a></li>
+<li class="toctree-l2"><a class="reference internal" href="01_bracket_scaffold.html">Mesh a mid-surfaced bracket for a structural analysis</a></li>
+<li class="toctree-l2"><a class="reference internal" href="02_lucid_mixing_elbow.html">Mesh a mixing elbow for a flow analysis</a></li>
+<li class="toctree-l2"><a class="reference internal" href="03_lucid_pipe_tee.html">Mesh a pipe T-section for structural thermal and fluid flow analysis</a></li>
+<li class="toctree-l2"><a class="reference internal" href="04_lucid_toy_car.html">Wrap a toy car for a flow analysis</a></li>
+<li class="toctree-l2"><a class="reference internal" href="05_pcb_stacker.html">Mesh a PCB for structural thermal analysis</a></li>
+<li class="toctree-l2"><a class="reference internal" href="06_blade_morph.html">Morph a hexahedral mesh of a turbine blade to a new shape</a></li>
+<li class="toctree-l2"><a class="reference internal" href="07_saddle_bracket.html">Mesh a saddle bracket for a structural analysis</a></li>
+<li class="toctree-l2"><a class="reference internal" href="08_lucid_generic_f1_rear_wing.html">Mesh a generic F1 car rear wing for external aero simulation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="09_multi_layer_quad_mesh_pcb.html">Mesh a generic PCB geometry with multiple hexa layers</a></li>
+<li class="toctree-l2"><a class="reference internal" href="10_wheel_ground_contact_patch.html">Create a contact patch for wrapping between a wheel and ground interface</a></li>
+<li class="toctree-l2 current active"><a class="current reference internal" href="#">Mesh a set of solder balls (beta)</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1"><a class="reference internal" href="../misc/index.html">Miscellaneous examples</a></li>
+</ul>
+</div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+      <div class="sidebar-primary-item">
+<div id="ethical-ad-placement"
+      class="flat"
+      data-ea-publisher="readthedocs"
+      data-ea-type="readthedocs-sidebar"
+      data-ea-manual="true">
+</div></div>
+  </div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item">
+<nav aria-label="Breadcrumb">
+  <ul class="bd-breadcrumbs">
+         
+    <li class="breadcrumb-item breadcrumb-home">
+      <a href="https://docs.pyansys.com/" class="nav-link">PyAnsys</a>
+    </li>
+     
+    <li class="breadcrumb-item">
+      <a
+        href="../../../index.html"
+        class="nav-link"
+        aria-label="Home"
+      >
+        <i class="fa-solid fa-home"></i>
+      </a>
+    </li>
+     
+    <li class="breadcrumb-item">
+      <a href="../../index.html" class="nav-link">Examples</a>
+    </li>
+     
+    <li class="breadcrumb-item">
+      <a href="index.html" class="nav-link">Examples</a>
+    </li>
+      
+    <li class="breadcrumb-item active" aria-current="page"><span class="ellipsis">Mesh a set of solder balls (beta)</span></li>
+    
+  </ul>
+</nav>
+</div>
+      
+    </div>
+  
+  
+</div>
+</div>
+              
+              
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <div class="sphx-glr-download-link-note admonition note">
+<p class="admonition-title">Note</p>
+<p><a class="reference internal" href="#sphx-glr-download-examples-gallery-examples-gallery-11-solder-ball-py"><span class="std std-ref">Go to the end</span></a>
+to download the full example code.</p>
+</div>
+<section class="sphx-glr-example-title" id="mesh-a-set-of-solder-balls-beta">
+<span id="ref-solder-ball-mesh"></span><span id="sphx-glr-examples-gallery-examples-gallery-11-solder-ball-py"></span><h1>Mesh a set of solder balls (beta)<a class="headerlink" href="#mesh-a-set-of-solder-balls-beta" title="Link to this heading">#</a></h1>
+<p><strong>Summary</strong>: This example demonstrates how to mesh a set of solder balls with mainly
+hexahedral elements. The solder is initially modelled as cylindrical to allow meshing
+using stacker and then local match morph controls are applied to recover the
+spherical shapes.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>This example contains a beta API. The behavior and implementation may change in future.</p>
+</div>
+<section id="objective">
+<h2>Objective<a class="headerlink" href="#objective" title="Link to this heading">#</a></h2>
+<p>This example uses locally defined match morphing controls to morph a hexahedral mesh,
+created using volume sweep, to many spherical solder balls.</p>
+<a class="reference internal image-reference" href="../../../_images/solder_ball_mesh_cross_section.png"><img alt="Mesh cross section of solder ball model." class="align-center" src="../../../_images/solder_ball_mesh_cross_section.png" style="width: 800px;" />
+</a>
+</section>
+<section id="procedure">
+<h2>Procedure<a class="headerlink" href="#procedure" title="Link to this heading">#</a></h2>
+<ol class="arabic simple">
+<li><p>Import libraries necessary to run the script.</p></li>
+<li><p>Launch an Ansys Prime Server instance.</p></li>
+<li><p>Import stackable simplified CAD geometry with refaceting.</p></li>
+<li><p>Connect the geometry using scaffolding.</p></li>
+<li><p>Mesh with hex dominant elements using the volume sweeper.</p></li>
+<li><p>Import the target CAD geometry for the solders for match morphing.</p></li>
+<li><p>Locally match morph the simplified mesh to the target spherical solders.</p></li>
+<li><p>Delete the target and export the morphed mesh.</p></li>
+<li><p>Exit the PyPrimeMesh session.</p></li>
+</ol>
+</section>
+<section id="import-modules">
+<h2>Import modules<a class="headerlink" href="#import-modules" title="Link to this heading">#</a></h2>
+<p>Import libraries necessary to run the script.</p>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">os</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">tempfile</span>
+
+<span class="kn">import</span><span class="w"> </span><span class="nn">ansys.meshing.prime</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">prime</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">ansys.meshing.prime.graphics</span><span class="w"> </span><span class="kn">import</span> <span class="n">PrimePlotter</span>
+</pre></div>
+</div>
+</section>
+<section id="launch-ansys-prime-server">
+<h2>Launch Ansys Prime Server<a class="headerlink" href="#launch-ansys-prime-server" title="Link to this heading">#</a></h2>
+<p>Launch an instance of Ansys Prime Server.
+Connect the PyPrimeMesh client and get the model.</p>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="n">prime_client</span> <span class="o">=</span> <span class="n">prime</span><span class="o">.</span><span class="n">launch_prime</span><span class="p">()</span>
+<span class="n">model</span> <span class="o">=</span> <span class="n">prime_client</span><span class="o">.</span><span class="n">model</span>
+</pre></div>
+</div>
+<div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>Using Ansys Prime Server from container ansys-prime-server-12
+</pre></div>
+</div>
+</section>
+<section id="import-cad-geometry">
+<h2>Import CAD geometry<a class="headerlink" href="#import-cad-geometry" title="Link to this heading">#</a></h2>
+<p>FMD is exported from SpaceClaim for the geometry.
+Geometry consists of multiple non overlapping and disconnected volumes.
+The model has multiple layers either side of several solder balls with pads
+and contains an infill volume around the solder. During import, the part
+creation type is set to BODY so that each body in the CAD is imported as a
+separate part. Refaceting is specified for more control of the scaffolding
+operation. Consistent faceting for the curved surfaces to be joined can be
+obtained by specifying CadRefacetingMaxEdgeSizeLimit as ABSOLUTE. To avoid
+over refinement of the faceting the max_edge_size is allowed to reach a size
+of 1.0. Labels can be assigned to manage the entities of each volume.</p>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><a href="https://docs.python.org/3.11/library/stdtypes.html#str" title="builtins.str" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">solder_ball</span></a> <span class="o">=</span> <span class="n">prime</span><span class="o">.</span><span class="n">examples</span><span class="o">.</span><span class="n">download_solder_ball_fmd</span><span class="p">()</span>
+
+<span class="n">params</span> <span class="o">=</span> <span class="n">prime</span><span class="o">.</span><span class="n">ImportCadParams</span><span class="p">(</span>
+    <span class="n">model</span><span class="p">,</span>
+    <span class="n">append</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+    <span class="n">part_creation_type</span><span class="o">=</span><span class="n">prime</span><span class="o">.</span><span class="n">PartCreationType</span><span class="o">.</span><span class="n">BODY</span><span class="p">,</span>
+    <span class="n">refacet</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+    <span class="n">cad_refaceting_params</span><span class="o">=</span><span class="n">prime</span><span class="o">.</span><span class="n">CadRefacetingParams</span><span class="p">(</span>
+        <span class="n">model</span><span class="p">,</span>
+        <span class="n">cad_faceter</span><span class="o">=</span><span class="n">prime</span><span class="o">.</span><span class="n">CadFaceter</span><span class="o">.</span><span class="n">PARASOLID</span><span class="p">,</span>
+        <span class="n">max_edge_size_limit</span><span class="o">=</span><span class="n">prime</span><span class="o">.</span><span class="n">CadRefacetingMaxEdgeSizeLimit</span><span class="o">.</span><span class="n">ABSOLUTE</span><span class="p">,</span>
+        <span class="n">max_edge_size</span><span class="o">=</span><span class="mf">1.0</span><span class="p">,</span>
+    <span class="p">),</span>
+<span class="p">)</span>
+
+<span class="n">prime</span><span class="o">.</span><span class="n">FileIO</span><span class="p">(</span><span class="n">model</span><span class="p">)</span><span class="o">.</span><span class="n">import_cad</span><span class="p">(</span><span class="n">file_name</span><span class="o">=</span><a href="https://docs.python.org/3.11/library/stdtypes.html#str" title="builtins.str" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">solder_ball</span></a><span class="p">,</span> <span class="n">params</span><span class="o">=</span><span class="n">params</span><span class="p">)</span>
+
+<span class="k">for</span> <span class="n">part</span> <span class="ow">in</span> <span class="n">model</span><span class="o">.</span><span class="n">parts</span><span class="p">:</span>
+    <span class="n">part</span><span class="o">.</span><span class="n">add_labels_on_topo_entities</span><span class="p">([</span><span class="n">part</span><span class="o">.</span><span class="n">name</span><span class="p">],</span> <span class="n">part</span><span class="o">.</span><span class="n">get_topo_faces</span><span class="p">())</span>
+    <span class="n">part</span><span class="o">.</span><span class="n">add_labels_on_topo_entities</span><span class="p">([</span><span class="n">part</span><span class="o">.</span><span class="n">name</span><span class="p">],</span> <span class="n">part</span><span class="o">.</span><span class="n">get_topo_volumes</span><span class="p">())</span>
+
+<span class="c1"># Display the model without the infill so the cylindrical geometry of the solder</span>
+<span class="c1"># is visible.</span>
+
+<span class="n">display</span> <span class="o">=</span> <span class="n">PrimePlotter</span><span class="p">()</span>
+<span class="n">display</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span>
+    <span class="n">model</span><span class="p">,</span> <span class="n">scope</span><span class="o">=</span><span class="n">prime</span><span class="o">.</span><span class="n">ScopeDefinition</span><span class="p">(</span><span class="n">model</span><span class="o">=</span><span class="n">model</span><span class="p">,</span> <span class="n">label_expression</span><span class="o">=</span><span class="s2">&quot;solder_cyl*,pad*,layer*&quot;</span><span class="p">)</span>
+<span class="p">)</span>
+<span class="n">display</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+<div class="sd-tab-set docutils">
+<input checked="checked" id="sd-tab-item-0" name="sd-tab-set-0" type="radio">
+<label class="sd-tab-label" for="sd-tab-item-0">
+Static Scene</label><div class="sd-tab-content docutils">
+<img src="../../../_images/sphx_glr_11_solder_ball_001.png" srcset="../../../_images/sphx_glr_11_solder_ball_001.png" alt="11 solder ball" class = "sphx-glr-single-img"/></div>
+<input id="sd-tab-item-1" name="sd-tab-set-0" type="radio">
+<label class="sd-tab-label" for="sd-tab-item-1">
+Interactive Scene</label><div class="sd-tab-content docutils">
+
+    <iframe src='../../../_static/static_viewer.html?fileURL=../_images/examples/gallery_examples/gallery/images/sphx_glr_11_solder_ball_001.vtksz' width='100%%' height='400px' frameborder='0'></iframe>
+</div>
+</div>
+</section>
+<section id="connect-geometry">
+<h2>Connect geometry<a class="headerlink" href="#connect-geometry" title="Link to this heading">#</a></h2>
+<p>Merge all parts into a single part so they can be connected.
+Imprint adjacent topo faces by connecting topo faces and topo edges.
+Mesh all topo faces to allow splitting the imprinted topo faces by mesh regions.
+Delete mesh on topo faces after splitting.
+Merge newly created overlapping topo faces so only a single topo face exists
+between connected volumes.</p>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><a href="https://docs.python.org/3.11/library/stdtypes.html#list" title="builtins.list" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">part_ids</span></a> <span class="o">=</span> <span class="p">[</span><span class="n">part</span><span class="o">.</span><span class="n">id</span> <span class="k">for</span> <span class="n">part</span> <span class="ow">in</span> <span class="n">model</span><span class="o">.</span><span class="n">parts</span> <span class="k">if</span> <span class="n">part</span><span class="o">.</span><span class="n">get_topo_faces</span><span class="p">()]</span>
+<span class="n">merge_result</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">merge_parts</span><span class="p">(</span><a href="https://docs.python.org/3.11/library/stdtypes.html#list" title="builtins.list" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">part_ids</span></a><span class="o">=</span><a href="https://docs.python.org/3.11/library/stdtypes.html#list" title="builtins.list" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">part_ids</span></a><span class="p">,</span> <span class="n">params</span><span class="o">=</span><span class="n">prime</span><span class="o">.</span><span class="n">MergePartsParams</span><span class="p">(</span><span class="n">model</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">model</span><span class="p">)</span>
+
+<span class="n">merged_part</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">get_part</span><span class="p">(</span><span class="n">merge_result</span><span class="o">.</span><span class="n">merged_part_id</span><span class="p">)</span>
+
+<span class="n">params</span> <span class="o">=</span> <span class="n">prime</span><span class="o">.</span><span class="n">ScaffolderParams</span><span class="p">(</span>
+    <span class="n">model</span><span class="o">=</span><span class="n">model</span><span class="p">,</span>
+    <span class="n">absolute_dist_tol</span><span class="o">=</span><span class="mf">0.01</span><span class="p">,</span>
+    <span class="n">intersection_control_mask</span><span class="o">=</span><span class="n">prime</span><span class="o">.</span><span class="n">IntersectionMask</span><span class="o">.</span><span class="n">FACEFACEANDEDGEEDGE</span><span class="p">,</span>
+    <span class="n">constant_mesh_size</span><span class="o">=</span><span class="mf">0.1</span><span class="p">,</span>
+<span class="p">)</span>
+
+<span class="n">scaffolder</span> <span class="o">=</span> <span class="n">prime</span><span class="o">.</span><span class="n">Scaffolder</span><span class="p">(</span><span class="n">model</span><span class="p">,</span> <span class="n">merged_part</span><span class="o">.</span><span class="n">id</span><span class="p">)</span>
+<span class="n">res</span> <span class="o">=</span> <span class="n">scaffolder</span><span class="o">.</span><span class="n">scaffold_topo_faces_and_beams</span><span class="p">(</span>
+    <span class="n">topo_faces</span><span class="o">=</span><span class="n">merged_part</span><span class="o">.</span><span class="n">get_topo_faces</span><span class="p">(),</span> <span class="n">topo_beams</span><span class="o">=</span><span class="p">[],</span> <span class="n">params</span><span class="o">=</span><span class="n">params</span>
+<span class="p">)</span>
+
+<span class="n">prime</span><span class="o">.</span><span class="n">lucid</span><span class="o">.</span><span class="n">Mesh</span><span class="p">(</span><span class="n">model</span><span class="p">)</span><span class="o">.</span><span class="n">surface_mesh</span><span class="p">(</span><span class="n">min_size</span><span class="o">=</span><span class="mf">0.1</span><span class="p">)</span>
+<span class="n">prime</span><span class="o">.</span><span class="n">Scaffolder</span><span class="p">(</span><span class="n">model</span><span class="p">,</span> <span class="n">merged_part</span><span class="o">.</span><span class="n">id</span><span class="p">)</span><span class="o">.</span><span class="n">split_topo_faces_by_mesh_region</span><span class="p">(</span>
+    <span class="n">merged_part</span><span class="o">.</span><span class="n">get_topo_faces</span><span class="p">()</span>
+<span class="p">)</span>
+
+<span class="c1"># This is a beta API. The behavior and implementation may change in future.</span>
+<span class="n">result</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">topo_data</span><span class="o">.</span><span class="n">delete_mesh_on_topo_faces</span><span class="p">(</span>
+    <span class="n">merged_part</span><span class="o">.</span><span class="n">get_topo_faces</span><span class="p">(),</span> <span class="n">prime</span><span class="o">.</span><span class="n">DeleteMeshParams</span><span class="p">(</span><span class="n">model</span><span class="o">=</span><span class="n">model</span><span class="p">)</span>
+<span class="p">)</span>
+
+<span class="n">scaffolder</span><span class="o">.</span><span class="n">merge_overlapping_topo_faces</span><span class="p">(</span><span class="n">merged_part</span><span class="o">.</span><span class="n">get_topo_faces</span><span class="p">(),</span> <span class="n">params</span><span class="p">)</span>
+
+<span class="n">display</span> <span class="o">=</span> <span class="n">PrimePlotter</span><span class="p">()</span>
+<span class="n">display</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">model</span><span class="p">,</span> <span class="n">update</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">display</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+<div class="sd-tab-set docutils">
+<input checked="checked" id="sd-tab-item-2" name="sd-tab-set-1" type="radio">
+<label class="sd-tab-label" for="sd-tab-item-2">
+Static Scene</label><div class="sd-tab-content docutils">
+<img src="../../../_images/sphx_glr_11_solder_ball_002.png" srcset="../../../_images/sphx_glr_11_solder_ball_002.png" alt="11 solder ball" class = "sphx-glr-single-img"/></div>
+<input id="sd-tab-item-3" name="sd-tab-set-1" type="radio">
+<label class="sd-tab-label" for="sd-tab-item-3">
+Interactive Scene</label><div class="sd-tab-content docutils">
+
+    <iframe src='../../../_static/static_viewer.html?fileURL=../_images/examples/gallery_examples/gallery/images/sphx_glr_11_solder_ball_002.vtksz' width='100%%' height='400px' frameborder='0'></iframe>
+</div>
+</div>
+<div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>Part Summary:
+
+Part Name: infill
+Part ID: 9
+    156 Topo Edges
+    132 Topo Faces
+    34 Topo Volumes
+
+    0 Edge Zones
+        Edge Zone Name(s) : []
+    0 Face Zones
+        Face Zone Name(s) : []
+    34 Volume Zones
+        Volume Zone Name(s) : [infill, layer, pad, pad.1, pad.2, pad.3, pad.4, pad.5, pad.6, pad.7, pad.8, pad.9, pad.10, pad.11, pad.12, pad.13, pad.14, pad.15, pad.16, pad.17, layer.1, solder, solder.1, solder.2, solder.3, solder.4, solder.5, solder.6, solder.7, solder.8, layer.2, layer.3, layer.4, layer.5]
+
+    35 Label(s)
+        Names: [infill, layer.1, layer.2, layer.3, layer.4, layer.5, layer.6, pad.1, pad.10, pad.11, pad.12, pad.13, pad.14, pad.15, pad.16, pad.17, pad.18, pad.2, pad.3, pad.4, pad.5, pad.6, pad.7, pad.8, pad.9, solder.1, solder.2, solder.3, solder.4, solder.5, solder.6, solder.7, solder.8, solder.9, solder_cyl]
+
+    Bounding box (0 0.67 0)
+                 (4.00353 3.28 4.00353)
+
+This delete_mesh_on_topo_faces is a beta API. The behavior and implementation may change in future.
+</pre></div>
+</div>
+</section>
+<section id="volume-sweeper">
+<h2>Volume sweeper<a class="headerlink" href="#volume-sweeper" title="Link to this heading">#</a></h2>
+<p>Setup a size control to refine the mesh around the solder.
+Setup stacker parameters to define the volume sweep mesh.
+Create the base face to quad surface mesh and use for sweeping.
+Stack the base face to create the volume mesh.
+Delete topology on mesh part to allow use of surface utilities and feature extraction.
+A large lateral defeature tolerance of 0.1 is used to avoid additional topo nodes
+from scaffolding impacting the final mesh.</p>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="n">model</span><span class="o">.</span><span class="n">set_global_sizing_params</span><span class="p">(</span><span class="n">prime</span><span class="o">.</span><span class="n">GlobalSizingParams</span><span class="p">(</span><span class="n">model</span><span class="p">,</span> <span class="nb">min</span><span class="o">=</span><span class="mf">0.1</span><span class="p">,</span> <span class="nb">max</span><span class="o">=</span><span class="mf">0.4</span><span class="p">))</span>
+
+<span class="n">size_control</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">control_data</span><span class="o">.</span><span class="n">create_size_control</span><span class="p">(</span><span class="n">prime</span><span class="o">.</span><span class="n">SizingType</span><span class="o">.</span><span class="n">SOFT</span><span class="p">)</span>
+<span class="n">size_control</span><span class="o">.</span><span class="n">set_scope</span><span class="p">(</span>
+    <span class="n">prime</span><span class="o">.</span><span class="n">ScopeDefinition</span><span class="p">(</span><span class="n">model</span><span class="p">,</span> <span class="n">part_expression</span><span class="o">=</span><span class="n">merged_part</span><span class="o">.</span><span class="n">name</span><span class="p">,</span> <span class="n">label_expression</span><span class="o">=</span><span class="s2">&quot;*solder*&quot;</span><span class="p">)</span>
+<span class="p">)</span>
+<span class="n">size_control</span><span class="o">.</span><span class="n">set_soft_sizing_params</span><span class="p">(</span><span class="n">prime</span><span class="o">.</span><span class="n">SoftSizingParams</span><span class="p">(</span><span class="n">model</span><span class="p">,</span> <span class="nb">max</span><span class="o">=</span><span class="mf">0.1</span><span class="p">))</span>
+
+<span class="n">stacker_params</span> <span class="o">=</span> <span class="n">prime</span><span class="o">.</span><span class="n">MeshStackerParams</span><span class="p">(</span>
+    <span class="n">model</span><span class="o">=</span><span class="n">model</span><span class="p">,</span>
+    <span class="n">direction</span><span class="o">=</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span>
+    <span class="n">max_offset_size</span><span class="o">=</span><span class="mf">0.4</span><span class="p">,</span>
+    <span class="n">delete_base</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+    <span class="n">lateral_defeature_tolerance</span><span class="o">=</span><span class="mf">0.1</span><span class="p">,</span>
+    <span class="n">stacking_defeature_tolerance</span><span class="o">=</span><span class="mf">0.01</span><span class="p">,</span>
+    <span class="n">size_control_ids</span><span class="o">=</span><span class="p">[</span><span class="n">size_control</span><span class="o">.</span><span class="n">id</span><span class="p">],</span>
+<span class="p">)</span>
+
+<span class="n">sweeper</span> <span class="o">=</span> <span class="n">prime</span><span class="o">.</span><span class="n">VolumeSweeper</span><span class="p">(</span><span class="n">model</span><span class="p">)</span>
+
+<span class="n">createbase_results</span> <span class="o">=</span> <span class="n">sweeper</span><span class="o">.</span><span class="n">create_base_face</span><span class="p">(</span>
+    <span class="n">part_id</span><span class="o">=</span><span class="n">merged_part</span><span class="o">.</span><span class="n">id</span><span class="p">,</span>
+    <span class="n">topo_volume_ids</span><span class="o">=</span><span class="n">merged_part</span><span class="o">.</span><span class="n">get_topo_volumes</span><span class="p">(),</span>
+    <span class="n">params</span><span class="o">=</span><span class="n">stacker_params</span><span class="p">,</span>
+<span class="p">)</span>
+
+<span class="n">base_faces</span> <span class="o">=</span> <span class="n">createbase_results</span><span class="o">.</span><span class="n">base_face_ids</span>
+<span class="n">merged_part</span><span class="o">.</span><span class="n">add_labels_on_topo_entities</span><span class="p">([</span><span class="s2">&quot;base_faces&quot;</span><span class="p">],</span> <span class="n">base_faces</span><span class="p">)</span>
+
+<span class="n">scope</span> <span class="o">=</span> <span class="n">prime</span><span class="o">.</span><span class="n">ScopeDefinition</span><span class="p">(</span><span class="n">model</span><span class="o">=</span><span class="n">model</span><span class="p">,</span> <span class="n">label_expression</span><span class="o">=</span><span class="s2">&quot;base_faces&quot;</span><span class="p">)</span>
+
+<span class="n">base_scope</span> <span class="o">=</span> <span class="n">prime</span><span class="o">.</span><span class="n">lucid</span><span class="o">.</span><span class="n">SurfaceScope</span><span class="p">(</span>
+    <span class="n">entity_expression</span><span class="o">=</span><span class="s2">&quot;base_faces&quot;</span><span class="p">,</span>
+    <span class="n">part_expression</span><span class="o">=</span><span class="n">merged_part</span><span class="o">.</span><span class="n">name</span><span class="p">,</span>
+    <span class="n">scope_evaluation_type</span><span class="o">=</span><span class="n">prime</span><span class="o">.</span><span class="n">ScopeEvaluationType</span><span class="o">.</span><span class="n">LABELS</span><span class="p">,</span>
+<span class="p">)</span>
+
+<span class="n">prime</span><span class="o">.</span><span class="n">lucid</span><span class="o">.</span><span class="n">Mesh</span><span class="p">(</span><span class="n">model</span><span class="p">)</span><span class="o">.</span><span class="n">surface_mesh</span><span class="p">(</span>
+    <span class="n">min_size</span><span class="o">=</span><span class="mf">0.1</span><span class="p">,</span> <span class="n">max_size</span><span class="o">=</span><span class="mf">0.4</span><span class="p">,</span> <span class="n">scope</span><span class="o">=</span><span class="n">base_scope</span><span class="p">,</span> <span class="n">generate_quads</span><span class="o">=</span><span class="kc">True</span>
+<span class="p">)</span>
+
+<span class="n">display</span> <span class="o">=</span> <span class="n">PrimePlotter</span><span class="p">()</span>
+<span class="n">display</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">model</span><span class="p">,</span> <span class="n">update</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">display</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+
+<span class="n">stackbase_results</span> <span class="o">=</span> <span class="n">sweeper</span><span class="o">.</span><span class="n">stack_base_face</span><span class="p">(</span>
+    <span class="n">part_id</span><span class="o">=</span><span class="n">merged_part</span><span class="o">.</span><span class="n">id</span><span class="p">,</span>
+    <span class="n">base_face_ids</span><span class="o">=</span><span class="n">base_faces</span><span class="p">,</span>
+    <span class="n">topo_volume_ids</span><span class="o">=</span><span class="n">merged_part</span><span class="o">.</span><span class="n">get_topo_volumes</span><span class="p">(),</span>
+    <span class="n">params</span><span class="o">=</span><span class="n">stacker_params</span><span class="p">,</span>
+<span class="p">)</span>
+
+<span class="n">merged_part</span><span class="o">.</span><span class="n">delete_topo_entities</span><span class="p">(</span>
+    <span class="n">prime</span><span class="o">.</span><span class="n">DeleteTopoEntitiesParams</span><span class="p">(</span><span class="n">model</span><span class="p">,</span> <span class="n">delete_geom_zonelets</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">delete_mesh_zonelets</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<span class="p">)</span>
+
+<a href="https://docs.python.org/3.11/library/functions.html#bool" title="builtins.bool" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">merged_part</span><span class="o">.</span><span class="n">_print_mesh</span></a> <span class="o">=</span> <span class="kc">True</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">merged_part</span><span class="p">)</span>
+
+<span class="n">display</span> <span class="o">=</span> <span class="n">PrimePlotter</span><span class="p">()</span>
+<span class="n">display</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">model</span><span class="p">,</span> <span class="n">update</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">display</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+<div class="sd-tab-set docutils">
+<input checked="checked" id="sd-tab-item-4" name="sd-tab-set-2" type="radio">
+<label class="sd-tab-label" for="sd-tab-item-4">
+Static Scene</label><div class="sd-tab-content docutils">
+<img src="../../../_images/sphx_glr_11_solder_ball_003.png" srcset="../../../_images/sphx_glr_11_solder_ball_003.png" alt="11 solder ball" class = "sphx-glr-single-img"/></div>
+<input id="sd-tab-item-5" name="sd-tab-set-2" type="radio">
+<label class="sd-tab-label" for="sd-tab-item-5">
+Interactive Scene</label><div class="sd-tab-content docutils">
+
+    <iframe src='../../../_static/static_viewer.html?fileURL=../_images/examples/gallery_examples/gallery/images/sphx_glr_11_solder_ball_003.vtksz' width='100%%' height='400px' frameborder='0'></iframe>
+</div>
+</div>
+<div class="sd-tab-set docutils">
+<input checked="checked" id="sd-tab-item-6" name="sd-tab-set-3" type="radio">
+<label class="sd-tab-label" for="sd-tab-item-6">
+Static Scene</label><div class="sd-tab-content docutils">
+<img src="../../../_images/sphx_glr_11_solder_ball_004.png" srcset="../../../_images/sphx_glr_11_solder_ball_004.png" alt="11 solder ball" class = "sphx-glr-single-img"/></div>
+<input id="sd-tab-item-7" name="sd-tab-set-3" type="radio">
+<label class="sd-tab-label" for="sd-tab-item-7">
+Interactive Scene</label><div class="sd-tab-content docutils">
+
+    <iframe src='../../../_static/static_viewer.html?fileURL=../_images/examples/gallery_examples/gallery/images/sphx_glr_11_solder_ball_004.vtksz' width='100%%' height='400px' frameborder='0'></iframe>
+</div>
+</div>
+<div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>Part Name: infill
+Part ID: 9
+    132 Edge Zonelets
+    99 Face Zonelets
+    34 Cell Zonelets
+
+    0 Edge Zones
+        Edge Zone Name(s) : []
+    0 Face Zones
+        Face Zone Name(s) : []
+    34 Volume Zones
+        Volume Zone Name(s) : [infill, layer, pad, pad.1, pad.2, pad.3, pad.4, pad.5, pad.6, pad.7, pad.8, pad.9, pad.10, pad.11, pad.12, pad.13, pad.14, pad.15, pad.16, pad.17, layer.1, solder, solder.1, solder.2, solder.3, solder.4, solder.5, solder.6, solder.7, solder.8, layer.2, layer.3, layer.4, layer.5]
+
+    35 Label(s)
+        Names: [infill, layer.1, layer.2, layer.3, layer.4, layer.5, layer.6, pad.1, pad.10, pad.11, pad.12, pad.13, pad.14, pad.15, pad.16, pad.17, pad.18, pad.2, pad.3, pad.4, pad.5, pad.6, pad.7, pad.8, pad.9, solder.1, solder.2, solder.3, solder.4, solder.5, solder.6, solder.7, solder.8, solder.9, solder_cyl]
+
+    Bounding box (0 0.67 -5.53009e-17)
+                 (4.00353 3.28 4.00353)
+
+    Mesh Summary:
+        18187 Nodes
+        0 Poly Faces
+        10638 Quad Faces
+        688 Tri Faces
+        11326 Faces
+        0 Poly Cells
+        14154 Hex Cells
+        1204 Prism Cells
+        0 Pyramid Cells
+        0 Tet Cells
+        15358 Cells
+</pre></div>
+</div>
+</section>
+<section id="import-sphere-geometry-for-match-morphing">
+<h2>Import sphere geometry for match morphing<a class="headerlink" href="#import-sphere-geometry-for-match-morphing" title="Link to this heading">#</a></h2>
+<p>Create a single part on CAD import by setting the part creation type to MODEL.
+Convert topology to mesh face zonelets to use surface utilities.</p>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><a href="https://docs.python.org/3.11/library/stdtypes.html#str" title="builtins.str" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">solder_ball_target</span></a> <span class="o">=</span> <span class="n">prime</span><span class="o">.</span><span class="n">examples</span><span class="o">.</span><span class="n">download_solder_ball_target_fmd</span><span class="p">()</span>
+
+<span class="n">params</span> <span class="o">=</span> <span class="n">prime</span><span class="o">.</span><span class="n">ImportCadParams</span><span class="p">(</span><span class="n">model</span><span class="p">,</span> <span class="n">append</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">part_creation_type</span><span class="o">=</span><span class="n">prime</span><span class="o">.</span><span class="n">PartCreationType</span><span class="o">.</span><span class="n">MODEL</span><span class="p">)</span>
+
+<span class="n">prime</span><span class="o">.</span><span class="n">FileIO</span><span class="p">(</span><span class="n">model</span><span class="p">)</span><span class="o">.</span><span class="n">import_cad</span><span class="p">(</span><span class="n">file_name</span><span class="o">=</span><a href="https://docs.python.org/3.11/library/stdtypes.html#str" title="builtins.str" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">solder_ball_target</span></a><span class="p">,</span> <span class="n">params</span><span class="o">=</span><span class="n">params</span><span class="p">)</span>
+
+<a href="https://docs.python.org/3.11/library/stdtypes.html#list" title="builtins.list" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">imported_cad_part_ids</span></a> <span class="o">=</span> <span class="p">[</span><span class="n">part</span><span class="o">.</span><span class="n">id</span> <span class="k">for</span> <span class="n">part</span> <span class="ow">in</span> <span class="n">model</span><span class="o">.</span><span class="n">parts</span> <span class="k">if</span> <span class="n">part</span><span class="o">.</span><span class="n">get_topo_faces</span><span class="p">()]</span>
+<span class="n">target_part</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">get_part</span><span class="p">(</span><a href="https://docs.python.org/3.11/library/stdtypes.html#list" title="builtins.list" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">imported_cad_part_ids</span></a><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+
+<span class="n">display</span> <span class="o">=</span> <span class="n">PrimePlotter</span><span class="p">()</span>
+<span class="n">display</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">model</span><span class="p">,</span> <span class="n">scope</span><span class="o">=</span><span class="n">prime</span><span class="o">.</span><span class="n">ScopeDefinition</span><span class="p">(</span><span class="n">model</span><span class="p">,</span> <span class="n">part_expression</span><span class="o">=</span><span class="n">target_part</span><span class="o">.</span><span class="n">name</span><span class="p">))</span>
+<span class="n">display</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">model</span><span class="p">)</span>
+
+<span class="n">target_part</span><span class="o">.</span><span class="n">delete_topo_entities</span><span class="p">(</span>
+    <span class="n">prime</span><span class="o">.</span><span class="n">DeleteTopoEntitiesParams</span><span class="p">(</span><span class="n">model</span><span class="p">,</span> <span class="n">delete_geom_zonelets</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">delete_mesh_zonelets</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+<div class="sd-tab-set docutils">
+<input checked="checked" id="sd-tab-item-8" name="sd-tab-set-4" type="radio">
+<label class="sd-tab-label" for="sd-tab-item-8">
+Static Scene</label><div class="sd-tab-content docutils">
+<img src="../../../_images/sphx_glr_11_solder_ball_005.png" srcset="../../../_images/sphx_glr_11_solder_ball_005.png" alt="11 solder ball" class = "sphx-glr-single-img"/></div>
+<input id="sd-tab-item-9" name="sd-tab-set-4" type="radio">
+<label class="sd-tab-label" for="sd-tab-item-9">
+Interactive Scene</label><div class="sd-tab-content docutils">
+
+    <iframe src='../../../_static/static_viewer.html?fileURL=../_images/examples/gallery_examples/gallery/images/sphx_glr_11_solder_ball_005.vtksz' width='100%%' height='400px' frameborder='0'></iframe>
+</div>
+</div>
+<div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>Part Summary:
+
+Part Name: infill
+Part ID: 9
+    132 Edge Zonelets
+    99 Face Zonelets
+    34 Cell Zonelets
+
+    0 Edge Zones
+        Edge Zone Name(s) : []
+    0 Face Zones
+        Face Zone Name(s) : []
+    34 Volume Zones
+        Volume Zone Name(s) : [infill, layer, pad, pad.1, pad.2, pad.3, pad.4, pad.5, pad.6, pad.7, pad.8, pad.9, pad.10, pad.11, pad.12, pad.13, pad.14, pad.15, pad.16, pad.17, layer.1, solder, solder.1, solder.2, solder.3, solder.4, solder.5, solder.6, solder.7, solder.8, layer.2, layer.3, layer.4, layer.5]
+
+    35 Label(s)
+        Names: [infill, layer.1, layer.2, layer.3, layer.4, layer.5, layer.6, pad.1, pad.10, pad.11, pad.12, pad.13, pad.14, pad.15, pad.16, pad.17, pad.18, pad.2, pad.3, pad.4, pad.5, pad.6, pad.7, pad.8, pad.9, solder.1, solder.2, solder.3, solder.4, solder.5, solder.6, solder.7, solder.8, solder.9, solder_cyl]
+
+    Bounding box (0 0.67 -5.53009e-17)
+                 (4.00353 3.28 4.00353)
+
+Part Name: solder_ball_generic-small
+Part ID: 2
+    18 Topo Edges
+    9 Topo Faces
+    0 Topo Volumes
+
+    0 Edge Zones
+        Edge Zone Name(s) : []
+    9 Face Zones
+        Face Zone Name(s) : [surface.1, surface.2, surface.3, surface.4, surface.5, surface.6, surface.7, surface.8, surface.9]
+    0 Volume Zones
+        Volume Zone Name(s) : []
+
+    1 Label(s)
+        Names: [solder_sph]
+
+    Bounding box (0.615874 1.67823 0.615776)
+                 (3.38422 2.26177 3.38422)
+
+
+&lt;ansys.meshing.prime.autogen.partstructs.DeleteTopoEntitiesResults object at 0x7f46582f71f0&gt;
+</pre></div>
+</div>
+</section>
+<section id="match-morph-the-mesh-to-the-spherical-solder">
+<h2>Match morph the mesh to the spherical solder<a class="headerlink" href="#match-morph-the-mesh-to-the-spherical-solder" title="Link to this heading">#</a></h2>
+<p>Delete feature edge zonelets on the mesh source.
+Get lists of the source and target face zonelets for the match morph.
+Pair source and target faces based on overlapping bounding box locations.
+For each source face extract feature edges with nodes attached to faces.
+Define edge pairs for each match pair control as a morph boundary condition.
+Match morph solder faces and edges.
+Delete target sphere part and retain the morphed mesh for export.</p>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="n">merged_part</span><span class="o">.</span><span class="n">delete_zonelets</span><span class="p">(</span><span class="n">merged_part</span><span class="o">.</span><span class="n">get_edge_zonelets</span><span class="p">())</span>
+<a href="https://docs.python.org/3.11/library/stdtypes.html#list" title="builtins.list" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">cylinder_faces</span></a> <span class="o">=</span> <span class="n">merged_part</span><span class="o">.</span><span class="n">get_face_zonelets_of_label_name_pattern</span><span class="p">(</span>
+    <span class="s2">&quot;solder_cyl&quot;</span><span class="p">,</span> <span class="n">prime</span><span class="o">.</span><span class="n">NamePatternParams</span><span class="p">(</span><span class="n">model</span><span class="p">)</span>
+<span class="p">)</span>
+<a href="https://docs.python.org/3.11/library/stdtypes.html#list" title="builtins.list" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">sphere_faces</span></a> <span class="o">=</span> <span class="n">target_part</span><span class="o">.</span><span class="n">get_face_zonelets</span><span class="p">()</span>
+
+<a href="https://docs.python.org/3.11/library/stdtypes.html#list" title="builtins.list" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">match_pairs</span></a> <span class="o">=</span> <span class="p">[]</span>
+
+<span class="c1"># When the match morph operation is defined by multiple</span>
+<span class="c1"># separate local match morph source and targets,</span>
+<span class="c1"># individual match pairs must be specified for each</span>
+<span class="c1"># contiguous set of face zonelets.</span>
+<span class="c1"># Separate one to one boundary condition pairs for the</span>
+<span class="c1"># connected edge zonelets must also be defined for</span>
+<span class="c1"># each face match pair to ensure the edges remain rigid.</span>
+
+<span class="c1"># For each solder to be morphed we have a match pair</span>
+<span class="c1"># for the source and target face zonelets. To ensure</span>
+<span class="c1"># the edge zonelets remain rigid during the morph,</span>
+<span class="c1"># boundary condition pairs for each of the two edge</span>
+<span class="c1"># zonelets need to be created.</span>
+
+<span class="c1"># For each cylindrical face zonelet on the source</span>
+<span class="c1"># mesh find the corresponding target sphere face zonelet</span>
+<span class="c1"># to match morph the mesh using the position of their bounding box.</span>
+<span class="c1"># Labels defined in the CAD model would be a more efficient way to pair.</span>
+<a href="https://docs.python.org/3.11/library/functions.html#float" title="builtins.float" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">tolerance</span></a> <span class="o">=</span> <span class="mf">0.2</span>
+<span class="k">for</span> <a href="https://docs.python.org/3.11/library/functions.html#int" title="builtins.int" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">face</span></a> <span class="ow">in</span> <a href="https://docs.python.org/3.11/library/stdtypes.html#list" title="builtins.list" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">cylinder_faces</span></a><span class="p">:</span>
+    <span class="n">box</span> <span class="o">=</span> <span class="n">prime</span><span class="o">.</span><span class="n">SurfaceUtilities</span><span class="p">(</span><span class="n">model</span><span class="p">)</span><span class="o">.</span><span class="n">get_bounding_box_of_zonelets</span><span class="p">([</span><a href="https://docs.python.org/3.11/library/functions.html#int" title="builtins.int" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">face</span></a><span class="p">])</span>
+    <span class="k">for</span> <a href="https://docs.python.org/3.11/library/functions.html#int" title="builtins.int" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">i</span></a> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><a href="https://docs.python.org/3.11/library/stdtypes.html#list" title="builtins.list" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">sphere_faces</span></a><span class="p">)):</span>
+        <span class="n">sphere_box</span> <span class="o">=</span> <span class="n">prime</span><span class="o">.</span><span class="n">SurfaceUtilities</span><span class="p">(</span><span class="n">model</span><span class="p">)</span><span class="o">.</span><span class="n">get_bounding_box_of_zonelets</span><span class="p">([</span><a href="https://docs.python.org/3.11/library/stdtypes.html#list" title="builtins.list" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">sphere_faces</span></a><span class="p">[</span><a href="https://docs.python.org/3.11/library/functions.html#int" title="builtins.int" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">i</span></a><span class="p">]])</span>
+        <span class="k">if</span> <span class="p">(</span>
+            <span class="p">(</span><span class="nb">abs</span><span class="p">(</span><span class="n">sphere_box</span><span class="o">.</span><span class="n">xmin</span> <span class="o">-</span> <span class="n">box</span><span class="o">.</span><span class="n">xmin</span><span class="p">)</span> <span class="o">&lt;</span> <a href="https://docs.python.org/3.11/library/functions.html#float" title="builtins.float" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">tolerance</span></a><span class="p">)</span>
+            <span class="ow">and</span> <span class="p">(</span><span class="nb">abs</span><span class="p">(</span><span class="n">sphere_box</span><span class="o">.</span><span class="n">ymin</span> <span class="o">-</span> <span class="n">box</span><span class="o">.</span><span class="n">ymin</span><span class="p">)</span> <span class="o">&lt;</span> <a href="https://docs.python.org/3.11/library/functions.html#float" title="builtins.float" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">tolerance</span></a><span class="p">)</span>
+            <span class="ow">and</span> <span class="p">(</span><span class="nb">abs</span><span class="p">(</span><span class="n">sphere_box</span><span class="o">.</span><span class="n">zmin</span> <span class="o">-</span> <span class="n">box</span><span class="o">.</span><span class="n">zmin</span><span class="p">)</span> <span class="o">&lt;</span> <a href="https://docs.python.org/3.11/library/functions.html#float" title="builtins.float" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">tolerance</span></a><span class="p">)</span>
+            <span class="ow">and</span> <span class="p">(</span><span class="nb">abs</span><span class="p">(</span><span class="n">sphere_box</span><span class="o">.</span><span class="n">xmax</span> <span class="o">-</span> <span class="n">box</span><span class="o">.</span><span class="n">xmax</span><span class="p">)</span> <span class="o">&lt;</span> <a href="https://docs.python.org/3.11/library/functions.html#float" title="builtins.float" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">tolerance</span></a><span class="p">)</span>
+            <span class="ow">and</span> <span class="p">(</span><span class="nb">abs</span><span class="p">(</span><span class="n">sphere_box</span><span class="o">.</span><span class="n">ymax</span> <span class="o">-</span> <span class="n">box</span><span class="o">.</span><span class="n">ymax</span><span class="p">)</span> <span class="o">&lt;</span> <a href="https://docs.python.org/3.11/library/functions.html#float" title="builtins.float" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">tolerance</span></a><span class="p">)</span>
+            <span class="ow">and</span> <span class="p">(</span><span class="nb">abs</span><span class="p">(</span><span class="n">sphere_box</span><span class="o">.</span><span class="n">zmax</span> <span class="o">-</span> <span class="n">box</span><span class="o">.</span><span class="n">zmax</span><span class="p">)</span> <span class="o">&lt;</span> <a href="https://docs.python.org/3.11/library/functions.html#float" title="builtins.float" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">tolerance</span></a><span class="p">)</span>
+        <span class="p">):</span>
+            <span class="k">break</span>
+        <span class="k">elif</span> <a href="https://docs.python.org/3.11/library/functions.html#int" title="builtins.int" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">i</span></a> <span class="o">==</span> <span class="nb">len</span><span class="p">(</span><a href="https://docs.python.org/3.11/library/stdtypes.html#list" title="builtins.list" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">sphere_faces</span></a><span class="p">)</span> <span class="o">-</span> <span class="mi">1</span><span class="p">:</span>
+            <span class="c1"># if no target face is found by the final pass then return an error</span>
+            <a href="https://docs.python.org/3.11/library/exceptions.html#Exception" title="builtins.Exception" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-exception"><span class="n">prime</span><span class="o">.</span><span class="n">PrimeRuntimeError</span></a><span class="p">(</span><span class="n">message</span><span class="o">=</span><span class="sa">f</span><span class="s2">&quot;Target sphere not found for face </span><span class="si">{</span><a href="https://docs.python.org/3.11/library/functions.html#int" title="builtins.int" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">face</span></a><span class="si">}</span><span class="s2">.&quot;</span><span class="p">)</span>
+    <span class="n">match_pair</span> <span class="o">=</span> <span class="n">prime</span><span class="o">.</span><span class="n">MatchPair</span><span class="p">(</span>
+        <span class="n">model</span><span class="p">,</span>
+        <span class="n">source_surfaces</span><span class="o">=</span><span class="p">[</span><a href="https://docs.python.org/3.11/library/functions.html#int" title="builtins.int" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">face</span></a><span class="p">],</span>
+        <span class="n">target_surfaces</span><span class="o">=</span><span class="p">[</span><a href="https://docs.python.org/3.11/library/stdtypes.html#list" title="builtins.list" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">sphere_faces</span></a><span class="p">[</span><a href="https://docs.python.org/3.11/library/functions.html#int" title="builtins.int" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">i</span></a><span class="p">]],</span>
+        <span class="n">target_type</span><span class="o">=</span><span class="n">prime</span><span class="o">.</span><span class="n">MatchPairTargetType</span><span class="o">.</span><span class="n">FACEZONELET</span><span class="p">,</span>
+    <span class="p">)</span>
+    <a href="https://docs.python.org/3.11/library/stdtypes.html#list" title="builtins.list" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">bc_pairs</span></a> <span class="o">=</span> <span class="p">[]</span>
+
+    <span class="c1"># Once each source and target face zonelet are found and paired, edge zonelets</span>
+    <span class="c1"># are created and used as boundary conditions to ensure they remain rigid.</span>
+    <span class="c1"># Creating edge zonelets not disconnected from the faces ensures that the edge</span>
+    <span class="c1"># zonelet will act as a boundary condition for the morph operation.</span>
+    <span class="c1"># Extracting the edge zonelets from the source face zonelet and using</span>
+    <span class="c1"># them to define both source and target boundary conditions ensures</span>
+    <span class="c1"># the edge zonelets of the solder remain rigid.</span>
+    <span class="n">result</span> <span class="o">=</span> <span class="n">prime</span><span class="o">.</span><span class="n">FeatureExtraction</span><span class="p">(</span><span class="n">model</span><span class="p">)</span><span class="o">.</span><span class="n">extract_features_on_face_zonelets</span><span class="p">(</span>
+        <span class="n">merged_part</span><span class="o">.</span><span class="n">id</span><span class="p">,</span>
+        <span class="p">[</span><a href="https://docs.python.org/3.11/library/functions.html#int" title="builtins.int" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">face</span></a><span class="p">],</span>
+        <span class="n">prime</span><span class="o">.</span><span class="n">ExtractFeatureParams</span><span class="p">(</span>
+            <span class="n">model</span><span class="p">,</span>
+            <span class="n">feature_angle</span><span class="o">=</span><span class="mi">60</span><span class="p">,</span>
+            <span class="n">separate_features</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+            <span class="n">separation_angle</span><span class="o">=</span><span class="mi">60</span><span class="p">,</span>
+            <span class="n">replace</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+            <span class="n">disconnect_with_faces</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+        <span class="p">),</span>
+    <span class="p">)</span>
+    <span class="k">for</span> <span class="n">edge</span> <span class="ow">in</span> <span class="n">result</span><span class="o">.</span><span class="n">new_edge_zonelets</span><span class="p">:</span>
+        <span class="n">bc_pair</span> <span class="o">=</span> <span class="n">prime</span><span class="o">.</span><span class="n">BCPair</span><span class="p">(</span>
+            <span class="n">model</span><span class="p">,</span>
+            <span class="nb">int</span><span class="p">(</span><span class="n">edge</span><span class="p">),</span>
+            <span class="nb">int</span><span class="p">(</span><span class="n">edge</span><span class="p">),</span>
+            <span class="nb">type</span><span class="o">=</span><span class="n">prime</span><span class="o">.</span><span class="n">BCPairType</span><span class="o">.</span><span class="n">EDGE</span><span class="p">,</span>
+        <span class="p">)</span>
+        <a href="https://docs.python.org/3.11/library/stdtypes.html#list" title="builtins.list" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">bc_pairs</span></a><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">bc_pair</span><span class="p">)</span>
+    <span class="n">match_pair</span><span class="o">.</span><a href="https://docs.python.org/3.11/library/stdtypes.html#list" title="builtins.list" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">bc_pairs</span></a> <span class="o">=</span> <a href="https://docs.python.org/3.11/library/stdtypes.html#list" title="builtins.list" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">bc_pairs</span></a>
+    <a href="https://docs.python.org/3.11/library/stdtypes.html#list" title="builtins.list" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">match_pairs</span></a><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">match_pair</span><span class="p">)</span>
+
+<span class="n">morph</span> <span class="o">=</span> <span class="n">prime</span><span class="o">.</span><span class="n">Morpher</span><span class="p">(</span><span class="n">model</span><span class="p">)</span>
+
+<span class="n">morph_params</span> <span class="o">=</span> <span class="n">prime</span><span class="o">.</span><span class="n">MatchMorphParams</span><span class="p">(</span><span class="n">model</span><span class="p">)</span>
+<span class="n">bc_params</span> <span class="o">=</span> <span class="n">prime</span><span class="o">.</span><span class="n">MorphBCParams</span><span class="p">(</span><span class="n">model</span><span class="p">,</span> <span class="n">morphable_layers</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+<span class="n">solve_params</span> <span class="o">=</span> <span class="n">prime</span><span class="o">.</span><span class="n">MorphSolveParams</span><span class="p">(</span><span class="n">model</span><span class="p">)</span>
+
+<span class="n">morph</span><span class="o">.</span><span class="n">match_morph</span><span class="p">(</span>
+    <span class="n">part_id</span><span class="o">=</span><span class="n">merged_part</span><span class="o">.</span><span class="n">id</span><span class="p">,</span>
+    <a href="https://docs.python.org/3.11/library/stdtypes.html#list" title="builtins.list" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">match_pairs</span></a><span class="o">=</span><a href="https://docs.python.org/3.11/library/stdtypes.html#list" title="builtins.list" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">match_pairs</span></a><span class="p">,</span>
+    <span class="n">match_morph_params</span><span class="o">=</span><span class="n">morph_params</span><span class="p">,</span>
+    <span class="n">bc_params</span><span class="o">=</span><span class="n">bc_params</span><span class="p">,</span>
+    <span class="n">solve_params</span><span class="o">=</span><span class="n">solve_params</span><span class="p">,</span>
+<span class="p">)</span>
+
+<span class="n">model</span><span class="o">.</span><span class="n">delete_parts</span><span class="p">([</span><span class="n">target_part</span><span class="o">.</span><span class="n">id</span><span class="p">])</span>
+
+<span class="n">display</span> <span class="o">=</span> <span class="n">PrimePlotter</span><span class="p">()</span>
+<span class="n">display</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span>
+    <span class="n">model</span><span class="p">,</span> <span class="n">scope</span><span class="o">=</span><span class="n">prime</span><span class="o">.</span><span class="n">ScopeDefinition</span><span class="p">(</span><span class="n">model</span><span class="o">=</span><span class="n">model</span><span class="p">,</span> <span class="n">label_expression</span><span class="o">=</span><span class="s2">&quot;solder*&quot;</span><span class="p">),</span> <span class="n">update</span><span class="o">=</span><span class="kc">True</span>
+<span class="p">)</span>
+<span class="n">display</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+<div class="sd-tab-set docutils">
+<input checked="checked" id="sd-tab-item-10" name="sd-tab-set-5" type="radio">
+<label class="sd-tab-label" for="sd-tab-item-10">
+Static Scene</label><div class="sd-tab-content docutils">
+<img src="../../../_images/sphx_glr_11_solder_ball_006.png" srcset="../../../_images/sphx_glr_11_solder_ball_006.png" alt="11 solder ball" class = "sphx-glr-single-img"/></div>
+<input id="sd-tab-item-11" name="sd-tab-set-5" type="radio">
+<label class="sd-tab-label" for="sd-tab-item-11">
+Interactive Scene</label><div class="sd-tab-content docutils">
+
+    <iframe src='../../../_static/static_viewer.html?fileURL=../_images/examples/gallery_examples/gallery/images/sphx_glr_11_solder_ball_006.vtksz' width='100%%' height='400px' frameborder='0'></iframe>
+</div>
+</div>
+</section>
+<section id="export-mesh">
+<h2>Export mesh<a class="headerlink" href="#export-mesh" title="Link to this heading">#</a></h2>
+<p>Export a CDB file.</p>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="k">with</span> <a href="https://docs.python.org/3.11/library/tempfile.html#tempfile.TemporaryDirectory" title="tempfile.TemporaryDirectory" class="sphx-glr-backref-module-tempfile sphx-glr-backref-type-py-class"><span class="n">tempfile</span><span class="o">.</span><span class="n">TemporaryDirectory</span></a><span class="p">()</span> <span class="k">as</span> <a href="https://docs.python.org/3.11/library/stdtypes.html#str" title="builtins.str" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">temp_folder</span></a><span class="p">:</span>
+    <a href="https://docs.python.org/3.11/library/stdtypes.html#str" title="builtins.str" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">mesh_file</span></a> <span class="o">=</span> <a href="https://docs.python.org/3.11/library/os.path.html#os.path.join" title="os.path.join" class="sphx-glr-backref-module-os-path sphx-glr-backref-type-py-function"><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span></a><span class="p">(</span><a href="https://docs.python.org/3.11/library/stdtypes.html#str" title="builtins.str" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">temp_folder</span></a><span class="p">,</span> <span class="s2">&quot;solder_balls.cdb&quot;</span><span class="p">)</span>
+    <span class="n">params</span> <span class="o">=</span> <span class="n">prime</span><span class="o">.</span><span class="n">ExportMapdlCdbParams</span><span class="p">(</span><span class="n">model</span><span class="o">=</span><span class="n">model</span><span class="p">)</span>
+    <span class="n">prime</span><span class="o">.</span><span class="n">FileIO</span><span class="p">(</span><span class="n">model</span><span class="o">=</span><span class="n">model</span><span class="p">)</span><span class="o">.</span><span class="n">export_mapdl_cdb</span><span class="p">(</span><span class="n">file_name</span><span class="o">=</span><a href="https://docs.python.org/3.11/library/stdtypes.html#str" title="builtins.str" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">mesh_file</span></a><span class="p">,</span> <span class="n">params</span><span class="o">=</span><span class="n">params</span><span class="p">)</span>
+    <span class="k">assert</span> <a href="https://docs.python.org/3.11/library/os.path.html#os.path.exists" title="os.path.exists" class="sphx-glr-backref-module-os-path sphx-glr-backref-type-py-function"><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span></a><span class="p">(</span><a href="https://docs.python.org/3.11/library/stdtypes.html#str" title="builtins.str" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">mesh_file</span></a><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Exported file:</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">,</span> <a href="https://docs.python.org/3.11/library/stdtypes.html#str" title="builtins.str" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">mesh_file</span></a><span class="p">)</span>
+</pre></div>
+</div>
+<div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>This get_abaqus_simulation_data is a beta API. The behavior and implementation may change in future.
+
+Exported file:
+ /tmp/tmpzlh6f17s/solder_balls.cdb
+</pre></div>
+</div>
+</section>
+<section id="exit-pyprimemesh">
+<h2>Exit PyPrimeMesh<a class="headerlink" href="#exit-pyprimemesh" title="Link to this heading">#</a></h2>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="n">prime_client</span><span class="o">.</span><span class="n">exit</span><span class="p">()</span>
+</pre></div>
+</div>
+<p class="sphx-glr-timing"><strong>Total running time of the script:</strong> (3 minutes 46.189 seconds)</p>
+<div class="sphx-glr-footer sphx-glr-footer-example docutils container" id="sphx-glr-download-examples-gallery-examples-gallery-11-solder-ball-py">
+<div class="sphx-glr-download sphx-glr-download-jupyter docutils container">
+<p><a class="reference download internal" download="" href="../../../_downloads/e081e5bc67a0cdf9d850c73d850c8fdf/11_solder_ball.ipynb"><code class="xref download docutils literal notranslate"><span class="pre">Download</span> <span class="pre">Jupyter</span> <span class="pre">notebook:</span> <span class="pre">11_solder_ball.ipynb</span></code></a></p>
+</div>
+<div class="sphx-glr-download sphx-glr-download-python docutils container">
+<p><a class="reference download internal" download="" href="../../../_downloads/a1044b161960823f0d776f37d733e0d2/11_solder_ball.py"><code class="xref download docutils literal notranslate"><span class="pre">Download</span> <span class="pre">Python</span> <span class="pre">source</span> <span class="pre">code:</span> <span class="pre">11_solder_ball.py</span></code></a></p>
+</div>
+<div class="sphx-glr-download sphx-glr-download-zip docutils container">
+<p><a class="reference download internal" download="" href="../../../_downloads/161eb549e708408f5f10d4a830787344/11_solder_ball.zip"><code class="xref download docutils literal notranslate"><span class="pre">Download</span> <span class="pre">zipped:</span> <span class="pre">11_solder_ball.zip</span></code></a></p>
+</div>
+</div>
+<p class="sphx-glr-signature"><a class="reference external" href="https://sphinx-gallery.github.io">Gallery generated by Sphinx-Gallery</a></p>
+</section>
+</section>
+
+
+                </article>
+              
+              
+              
+              
+              
+            </div>
+            
+            
+              
+                <dialog id="pst-secondary-sidebar-modal"></dialog>
+                <div id="pst-secondary-sidebar" class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+<div
+    id="pst-page-navigation-heading-2"
+    class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> On this page
+  </div>
+  <nav class="bd-toc-nav page-toc" aria-labelledby="pst-page-navigation-heading-2">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#objective">Objective</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#procedure">Procedure</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#import-modules">Import modules</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#launch-ansys-prime-server">Launch Ansys Prime Server</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#import-cad-geometry">Import CAD geometry</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#connect-geometry">Connect geometry</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#volume-sweeper">Volume sweeper</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#import-sphere-geometry-for-match-morphing">Import sphere geometry for match morphing</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#match-morph-the-mesh-to-the-spherical-solder">Match morph the mesh to the spherical solder</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#export-mesh">Export mesh</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#exit-pyprimemesh">Exit PyPrimeMesh</a></li>
+</ul>
+  </nav></div>
+
+  <div class="sidebar-secondary-item"> 
+<div class="tocsection editthispage">
+  <a href="https://github.com/ansys/pyprimemesh/edit/main/doc/source/examples/gallery_examples/gallery/11_solder_ball.rst">
+    <i class="fa-solid fa-pencil"></i>
+       Edit
+    on GitHub  
+  </a>
+</div>
+
+</div>
+
+  <div class="sidebar-secondary-item">
+  <div role="note" aria-label="source link">
+    <ul class="this-page-menu">
+      <li><a href="../../../_sources/examples/gallery_examples/gallery/11_solder_ball.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+          </footer>
+        
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script defer src="../../../_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf"></script>
+<script defer src="../../../_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf"></script>
+
+<link rel="stylesheet" href="../../../_static/css/fuse-search.css">
+
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.7/require.min.js"></script>
+
+<script>
+// Passing the search options to the search.js file
+const SEARCH_OPTIONS = JSON.parse('{"keys": ["title", "text"], "limit": 10, "threshold": 0.2}');
+const SEARCH_FILE = "../../../_static/search.json";
+</script>
+
+
+<script src="../../../_static/js/search.js"></script>
+  <footer class="bd-footer">
+<div class="bd-footer__inner bd-page-width">
+  
+    <div class="footer-items__start">
+      
+        <div class="footer-item">
+
+  <p class="copyright">
+    
+      © Copyright (c) 2025 ANSYS, Inc. All rights reserved.
+      <br/>
+    
+  </p>
+</div>
+      
+        <div class="footer-item">
+
+  <p class="sphinx-version">
+    Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 8.1.3.
+    <br/>
+  </p>
+</div>
+      
+    </div>
+  
+  
+  
+    <div class="footer-items__end">
+      
+        <div class="footer-item"><p class="theme-version">
+  Built with the
+  <a href="https://sphinxdocs.ansys.com/version/stable/index.html"
+    >Ansys Sphinx Theme</a
+  >
+  1.2.6. <br />Last updated on
+  <span id="ast_build_date"></span>
+</p>
+<script>
+  var options = { day: "numeric", month: "long", year: "numeric" };
+  var ast_lastModifiedDate = new Date(document.lastModified);
+  var ast_build_date = lastModifiedDate.toLocaleDateString("en-US", options);
+  document.getElementById("ast_build_date").innerHTML = ast_build_date;
+</script></div>
+      
+    </div>
+  
+</div>
+
+  </footer>
+  </body>
+</html>

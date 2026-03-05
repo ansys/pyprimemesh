@@ -1,0 +1,6 @@
+﻿base\_size
+==========
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoproperty:: WrapParams.base_size

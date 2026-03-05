@@ -1,0 +1,11 @@
+get\_search\_info\_by\_register\_id
+===================================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. automethod:: ansys.meshing.prime.SurfaceSearch.get_search_info_by_register_id
+
+.. minigallery::
+   :add-heading: Examples using SurfaceSearch.get_search_info_by_register_id
+
+   ansys.meshing.prime.SurfaceSearch.get_search_info_by_register_id

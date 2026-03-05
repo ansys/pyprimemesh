@@ -1,0 +1,39 @@
+.. vale off
+
+CheckTopologyParams
+===================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoclass:: CheckTopologyParams
+   
+   
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+      :toctree:
+   
+      
+      CheckTopologyParams.print_default
+      CheckTopologyParams.set_default
+   
+   
+
+   
+   
+   .. rubric:: Attributes
+
+   .. autosummary::
+      :toctree:
+   
+      CheckTopologyParams.topo_search_field_mask
+   
+   
+
+.. minigallery::
+    :add-heading: Examples using CheckTopologyParams
+
+    ansys.meshing.prime.CheckTopologyParams
+
+.. vale on

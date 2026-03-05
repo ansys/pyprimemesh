@@ -1,0 +1,47 @@
+.. vale off
+
+BCPairType
+==========
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoclass:: BCPairType
+   
+   
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+      :toctree:
+   
+      BCPairType.conjugate
+      BCPairType.bit_length
+      BCPairType.bit_count
+      BCPairType.to_bytes
+      BCPairType.from_bytes
+      BCPairType.as_integer_ratio
+   
+   
+
+   
+   
+   .. rubric:: Attributes
+
+   .. autosummary::
+      :toctree:
+   
+      BCPairType.real
+      BCPairType.imag
+      BCPairType.numerator
+      BCPairType.denominator
+      BCPairType.FACE
+      BCPairType.EDGE
+   
+   
+
+.. minigallery::
+    :add-heading: Examples using BCPairType
+
+    ansys.meshing.prime.BCPairType
+
+.. vale on
