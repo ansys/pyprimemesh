@@ -2,7 +2,7 @@ This project uses [towncrier](https://towncrier.readthedocs.io/) and the changes
 
 <!-- towncrier release notes start -->
 
-## [0.10.0.dev30](https://github.com/ansys/pyprimemesh/releases/tag/v0.10.0.dev30) - March 09, 2026
+## [0.10.0](https://github.com/ansys/pyprimemesh/releases/tag/v0.10.0) - March 09, 2026
 
 
 ### Fixed
@@ -74,7 +74,7 @@ This project uses [towncrier](https://towncrier.readthedocs.io/) and the changes
 - Build(deps): bump actions/download-artifact from 5.0.0 to 6.0.0 [#1172](https://github.com/ansys/pyprimemesh/pull/1172)
 - Build(deps): bump actions/upload-artifact from 4 to 5 [#1173](https://github.com/ansys/pyprimemesh/pull/1173)
 - CHORE:   Update missing or outdated files [#1175](https://github.com/ansys/pyprimemesh/pull/1175)
-- Build(deps-dev): bump the pyvista group with 2 updates [#1176](https://github.com/ansys/pyprimemesh/pull/1176), [#1216](https://github.com/ansys/pyprimemesh/pull/1216), [#1223](https://github.com/ansys/pyprimemesh/pull/1223), [#1227](https://github.com/ansys/pyprimemesh/pull/1227)
+- Build(deps-dev): bump the pyvista group with 2 updates [#1176](https://github.com/ansys/pyprimemesh/pull/1176), [#1216](https://github.com/ansys/pyprimemesh/pull/1216), [#1223](https://github.com/ansys/pyprimemesh/pull/1223)
 - Build(deps-dev): bump pytest from 8.4.2 to 9.0.0 in the test-dependencies group [#1177](https://github.com/ansys/pyprimemesh/pull/1177)
 - Build(deps): bump actions/checkout from 5 to 6 [#1185](https://github.com/ansys/pyprimemesh/pull/1185)
 - Build(deps-dev): bump the test-dependencies group across 1 directory with 2 updates [#1190](https://github.com/ansys/pyprimemesh/pull/1190)
@@ -94,7 +94,6 @@ This project uses [towncrier](https://towncrier.readthedocs.io/) and the changes
 - Build(deps-dev): bump ansys-sphinx-theme[autoapi] from 1.6.4 to 1.7.0 in the doc-dependencies group [#1221](https://github.com/ansys/pyprimemesh/pull/1221)
 - Build: bump ansys-api-meshing-prime [#1224](https://github.com/ansys/pyprimemesh/pull/1224)
 - Added the solver_translation rst file changes [#1225](https://github.com/ansys/pyprimemesh/pull/1225)
-- Chore: Revert changelog update [#1239](https://github.com/ansys/pyprimemesh/pull/1239)
 
 
 ### Documentation
@@ -133,7 +132,7 @@ This project uses [towncrier](https://towncrier.readthedocs.io/) and the changes
 - Fix: broken method links in api [#1092](https://github.com/ansys/pyprimemesh/pull/1092)
 - Fix: search bar [#1113](https://github.com/ansys/pyprimemesh/pull/1113)
 - Ado sync for 26R1 [#1210](https://github.com/ansys/pyprimemesh/pull/1210)
-- Bump dev version to dev30 [#1241](https://github.com/ansys/pyprimemesh/pull/1241)
+- Updates of dev version on release/0.10 branch [#1235](https://github.com/ansys/pyprimemesh/pull/1235)
 
 ## [0.9.5](https://github.com/ansys/pyprimemesh/releases/tag/v0.9.5) - January 07, 2026
 
