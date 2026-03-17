@@ -2,6 +2,8 @@
 version: 2
 updates:
   - package-ecosystem: "pip" # See documentation for possible values
+    cooldown:
+      default-days: 10 # Fallback cooldown if no specific rule applies
     directory: "/"
     insecure-external-code-execution: allow
     schedule:
@@ -29,6 +31,8 @@ updates:
         patterns:
           - "pyvista*"
   - package-ecosystem: "github-actions"
+    cooldown:
+      default-days: 10 # Fallback cooldown if no specific rule applies
     directory: "/"
     schedule:
       interval: "weekly"
