@@ -83,7 +83,10 @@ class Mesh:
         self._logger = model.python_logger
 
     def from_geometry(
-        self, design: "ansys.geometry.core.Design", import_type: ImportTypes = ImportTypes.FMD
+        self,
+        design: "ansys.geometry.core.Design",
+        import_type: ImportTypes = ImportTypes.FMD,
+        append: bool = False,
     ):
         """Import geometry from an Ansys Design object.
 
@@ -93,6 +96,8 @@ class Mesh:
             Ansys Design object to import geometry from.
         import_type : ImportTypes, optional
             Type of import. The default is ImportTypes.FMD.
+        append: bool, optional
+            Append imported CAD into existing model when true.
         """
         with tempfile.TemporaryDirectory() as tmpdir:
             if import_type == ImportTypes.FMD:
@@ -107,7 +112,7 @@ class Mesh:
                 file_path = design.export_to_parasolid_text(tmpdir)
             elif import_type == ImportTypes.SCDOCX:
                 file_path = design.export_to_scdocx(tmpdir)
-            self.read(str(file_path))
+            self.read(str(file_path, append=append))
 
     def read(
         self, file_name: str, append: bool = False, cad_reader_route: prime.CadReaderRoute = None
@@ -134,11 +139,11 @@ class Mesh:
 
         """
         filename, fileext = os.path.splitext(file_name)
-        if fileext == ".msh" or file_name[-7:] == ".msh.gz":
+        if fileext == ".msh" or file_name.endswith(".msh.gz") or file_name.endswith(".msh.h5"):
             prime.FileIO(self._model).import_fluent_meshing_meshes(
                 [file_name], prime.ImportFluentMeshingMeshParams(self._model, append=append)
             )
-        elif fileext == ".cas" or file_name[-7:] == ".cas.gz" or file_name[-7:] == ".cas.h5":
+        elif fileext == ".cas" or file_name.endswith(".cas.gz") or file_name.endswith(".cas.h5"):
             prime.FileIO(self._model).import_fluent_case(
                 file_name, prime.ImportFluentCaseParams(self._model, append=append)
             )
@@ -184,17 +189,21 @@ class Mesh:
             prime.FileIO(self._model).export_lsdyna_keyword_file(
                 file_name, prime.ExportLSDynaKeywordFileParams(self._model)
             )
-        elif fileext == ".cas" or file_name[-7:] == ".cas.gz":
+        elif fileext == ".cas" or file_name.endswith(".cas.gz"):
             prime.FileIO(self._model).export_fluent_case(
                 file_name, prime.ExportFluentCaseParams(self._model, cff_format=False)
             )
-        elif file_name[-7:] == ".cas.h5":
+        elif file_name.endswith(".cas.h5"):
             prime.FileIO(self._model).export_fluent_case(
                 file_name, prime.ExportFluentCaseParams(self._model, cff_format=True)
             )
-        elif fileext == ".msh" or file_name[-7:] == ".msh.gz":
+        elif fileext == ".msh" or file_name.endswith(".msh.gz"):
             prime.FileIO(self._model).export_fluent_meshing_mesh(
                 file_name, prime.ExportFluentMeshingMeshParams(self._model)
+            )
+        elif file_name.endswith(".msh.h5"):
+            prime.FileIO(self._model).export_fluent_meshing_mesh(
+                file_name, prime.ExportFluentMeshingMeshParams(self._model, cff_format=True)
             )
         elif fileext == ".stl":
             part_ids = [part.id for part in self._model.parts]
