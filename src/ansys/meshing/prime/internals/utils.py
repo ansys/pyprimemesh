@@ -33,6 +33,7 @@ import ansys.meshing.prime.internals.defaults as defaults
 import docker
 
 _LOCAL_PORTS = []
+_DOCKER_CLIENT = docker.from_env()
 
 
 def make_unique_container_name(name: str):
@@ -84,15 +85,13 @@ def get_child_processes(process):
         Process IDs of the processes.
     """
     children = []
-    cmd = subprocess.Popen("pgrep -P %d" % process, shell=True, stdout=subprocess.PIPE)
+    cmd = subprocess.Popen(['pgrep', '-P', str(process)], stdout=subprocess.PIPE)
     out = cmd.stdout.read().decode("utf-8")
     cmd.wait()
     for pid in out.split("\n")[:1]:
         if pid.strip() == '':
             break
-        ps_cmd = subprocess.Popen(
-            "ps -o cmd= {}".format(int(pid)), stdout=subprocess.PIPE, shell=True
-        )
+        ps_cmd = subprocess.Popen(['ps', '-o', 'cmd=', str(int(pid))], stdout=subprocess.PIPE)
         ps_out = ps_cmd.stdout.read().decode("utf-8")
         ps_cmd.wait()
         ps_parts = ps_out.split()
@@ -335,14 +334,13 @@ def stop_prime_github_container(name):
     Parameters
     ----------
     name : str
-        Name of the container.
+        Name of the container to stop.
     """
-    client = docker.from_env()
     try:
-        container = client.containers.get(name)
+        container = _DOCKER_CLIENT.containers.get(name)
         container.stop()
     except docker.errors.NotFound:
-        pass  # Container doesn't exist, nothing to stop
+        pass
 
 
 @contextmanager

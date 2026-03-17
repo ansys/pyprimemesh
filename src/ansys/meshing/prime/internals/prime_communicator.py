@@ -117,11 +117,7 @@ class PrimeCommunicator(Communicator):
         dict
             Response from the server.
         """
-        exec(recipe, globals())
-        output = '{"Results" : "' + str(return_value) + '"}'
-        with config.numpy_array_optimization_disabled():
-            result = json.loads(output)
-        return result
+        pass
 
     def close(self):
         """Close session."""
