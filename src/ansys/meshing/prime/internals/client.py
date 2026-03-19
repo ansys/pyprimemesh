@@ -206,7 +206,8 @@ class Client(object):
             self._comm.close()
             self._comm = None
         if self._process is not None:
-            assert self._local == False
+            if self._local:
+                raise ValueError('Local client cannot have a server process')
             terminate_process(self._process)
         if config.using_container():
             container_name = getattr(self, 'container_name', None)
