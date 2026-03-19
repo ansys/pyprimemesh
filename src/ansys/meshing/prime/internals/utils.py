@@ -33,8 +33,21 @@ import ansys.meshing.prime.internals.defaults as defaults
 import docker
 
 _LOCAL_PORTS = []
-_DOCKER_CLIENT = docker.from_env()
+_DOCKER_CLIENT = None
 
+
+def get_docker_client():
+    """Return a cached Docker client, creating it on first use.
+
+    Returns None if Docker is not available.
+    """
+    global _DOCKER_CLIENT
+    if _DOCKER_CLIENT is None:
+        try:
+            _DOCKER_CLIENT = docker.from_env()
+        except docker.errors.DockerException:
+            _DOCKER_CLIENT = None
+    return _DOCKER_CLIENT
 
 def make_unique_container_name(name: str):
     """Make a unique container name.
@@ -336,8 +349,11 @@ def stop_prime_github_container(name):
     name : str
         Name of the container to stop.
     """
+    client = get_docker_client()
+    if client is None:
+        return
     try:
-        container = _DOCKER_CLIENT.containers.get(name)
+        container = client.containers.get(name)
         container.stop()
     except docker.errors.NotFound:
         pass
