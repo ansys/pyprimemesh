@@ -163,6 +163,33 @@ class Mesh:
                 ),
             )
 
+    def from_geometry(self, design, append: bool = False):
+        """Import geometry from a PyGeometry Design object.
+
+        This method exports the Design to a temporary FMD file and imports
+        it into the model.
+
+        Parameters
+        ----------
+        design : ansys.geometry.core.designer.Design
+            PyGeometry Design object to import.
+        append : bool, optional
+            Whether to append the imported geometry to the current model.
+            The default is ``False``.
+
+        Examples
+        --------
+        >>> from ansys.geometry.core import launch_modeler
+        >>> modeler = launch_modeler()
+        >>> design = modeler.create_design("MyDesign")
+        >>> mesh_util = prime.lucid.Mesh(model=model)
+        >>> mesh_util.from_geometry(design)
+
+        """
+        with tempfile.TemporaryDirectory() as tmpdir:
+            fmd_path = design.export_to_fmd(os.path.join(tmpdir, "geometry.fmd"))
+            self.read(str(fmd_path), append=append)
+
     def write(self, file_name: str):
         """Write or export files of different formats based on file extensions.
 
