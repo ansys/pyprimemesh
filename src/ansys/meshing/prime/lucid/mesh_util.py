@@ -97,7 +97,7 @@ class Mesh:
         import_type : ImportTypes, optional
             Type of import. The default is ImportTypes.FMD.
         append: bool, optional
-            Append imported CAD into existing model when true.Expand commentComment on line R100Resolved
+            Append imported CAD into existing model when true.
         """
         with tempfile.TemporaryDirectory() as tmpdir:
             if import_type == ImportTypes.FMD:
