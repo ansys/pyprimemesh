@@ -26,7 +26,6 @@ dependencies = [
   "numpy>=1.14.0,<2.3", # temporary upper-bound fix since breaks visualization
   "appdirs>=1.4.0",
   "importlib-metadata>=4.0,<5; python_version<='3.8'",
-  "docker"
 ]
 
 [project.optional-dependencies]
@@ -36,7 +35,11 @@ graphics = [
 pygeometry = [
   "ansys-geometry-core>=0.7.6,<1",
 ]
+dev = [
+  "docker>=7.1.0",
+]
 tests = [
+  "ansys-meshing-prime[dev]",
   "ansys-tools-visualization-interface==0.12.1",
   "pytest==9.0.2",
   "pytest-cov==7.0.0",
@@ -46,6 +49,7 @@ tests = [
   "pyvista[trame]==0.47.0",
 ]
 doc = [
+  "ansys-meshing-prime[dev]",
   "ansys-sphinx-theme[autoapi]==1.7.0",
   "ansys-tools-visualization-interface==0.12.1",
   "joblib==1.5.3",
