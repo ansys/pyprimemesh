@@ -108,3 +108,20 @@ def test_delete_topo(mesh):
 def test_size_control(mesh):
     mesh.create_constant_size_control()
     mesh.create_curvature_size_control(max=1.0, min=2.0)
+
+
+@pytest.mark.skipif(not os.getenv('CI'), reason="Only run in CI environment")
+def test_from_geometry(mesh):
+    from ansys.geometry.core import launch_modeler
+    from ansys.geometry.core.math import Point2D
+    from ansys.geometry.core.misc import UNITS
+    from ansys.geometry.core.sketch import Sketch
+    from pint import Quantity
+
+    modeler = launch_modeler(transport_mode="insecure", port=654)
+    design_name = "ExtrudeProfile"
+    design = modeler.create_design(design_name)
+    sketch = Sketch()
+    sketch.circle(Point2D([10, 10], UNITS.mm), Quantity(10, UNITS.mm))
+    design.extrude_sketch("SingleBody", sketch, Quantity(10, UNITS.mm))
+    mesh.from_geometry(design)
