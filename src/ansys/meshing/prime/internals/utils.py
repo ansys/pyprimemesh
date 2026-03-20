@@ -49,6 +49,7 @@ def get_docker_client():
             _DOCKER_CLIENT = None
     return _DOCKER_CLIENT
 
+
 def make_unique_container_name(name: str):
     """Make a unique container name.
 
