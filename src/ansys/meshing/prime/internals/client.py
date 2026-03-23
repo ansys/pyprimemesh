@@ -35,6 +35,7 @@ from ansys.meshing.prime.internals.utils import terminate_process
 
 __all__ = ['Client']
 
+
 class Client(object):
     """Provides the ``Client`` class for PyPrimeMesh.
 

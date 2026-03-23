@@ -545,9 +545,7 @@ class _AmplitudeProcessor:
                 formatted_time[0] = f"{ff}"
         if self._step_time and self._step_start_time != 0.0:
             formatted_time.insert(0, f"{self._formatter.field_float(0.0)}")
-            formatted_time.insert(
-                1, f"{self._formatter.field_float(float(self._step_start_time))}"
-            )
+            formatted_time.insert(1, f"{self._formatter.field_float(float(self._step_start_time))}")
             formatted_amp.insert(0, f"{self._formatter.field_float(0.0)}")
             formatted_amp.insert(1, f"{self._formatter.field_float(0.0)}")
             # add two times there! 0, current step start time
@@ -598,9 +596,7 @@ class _AmplitudeProcessor:
                     formatted_time[0] = f"{ff}"
         if self._step_time and self._step_start_time != 0.0:
             formatted_time.insert(0, f"{self._formatter.field_float(0.0)}")
-            formatted_time.insert(
-                1, f"{self._formatter.field_float(float(self._step_start_time))}"
-            )
+            formatted_time.insert(1, f"{self._formatter.field_float(float(self._step_start_time))}")
             formatted_amp.insert(0, f"{self._formatter.field_float(0.0)}")
             formatted_amp.insert(1, f"{self._formatter.field_float(0.0)}")
             # add two times there! 0, current step start time
@@ -1972,9 +1968,7 @@ class _JointMaterialProcessor:
                                     points = int(len(stiff) / len(list(set(temperatures))))
                                 else:
                                     points = int(len(stiff) / len(list(set(temperatures)))) + 1
-                                clms = comps_nonlinear_mapping[
-                                    comp_data['Parameters']['COMPONENT']
-                                ]
+                                clms = comps_nonlinear_mapping[comp_data['Parameters']['COMPONENT']]
                                 elasticity_data += f"TB, JOIN, {mat_id}, , {points}, {clms}\n"
                                 elasticity_data += elasticity_temporary_data
                         else:
@@ -4639,17 +4633,11 @@ class _StepProcessor:
                     key_commands = "Placeholder_GlobalDamping\n"
                 mapdl_step_commands += key_commands
                 if key == "Output" and "Dynamic" in step_data:
-                    if (
-                        "STATIC" in self._analysis_sequence
-                        and "DYNAMIC" in self._analysis_sequence
-                    ):
+                    if "STATIC" in self._analysis_sequence and "DYNAMIC" in self._analysis_sequence:
                         self._transient_output_controls = key_commands
                         self._transient_output_controls += "\nNROPT,FULL\n"
                 if key == "Output" and "Static" in step_data:
-                    if (
-                        "STATIC" in self._analysis_sequence
-                        and "DYNAMIC" in self._analysis_sequence
-                    ):
+                    if "STATIC" in self._analysis_sequence and "DYNAMIC" in self._analysis_sequence:
                         mapdl_step_commands += "Placeholder_Transient_Outres\n"
         step_name = ''
         if 'Parameters' in step_data:
@@ -4740,10 +4728,7 @@ class _StepProcessor:
             steps_commands = steps_commands.replace(
                 "Placeholder_GlobalDamping", f"DMPSTR, {self._global_structural_damping_value}"
             )
-        if (
-            "Placeholder_Transient_Outres" in steps_commands
-            and not self._transient_output_controls
-        ):
+        if "Placeholder_Transient_Outres" in steps_commands and not self._transient_output_controls:
             updated_steps_commands = steps_commands.replace("Placeholder_Transient_Outres", "")
         elif "Placeholder_Transient_Outres" in steps_commands and self._transient_output_controls:
 
