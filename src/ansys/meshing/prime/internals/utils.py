@@ -338,7 +338,7 @@ def stop_prime_github_container(name):
     """
     try:
         _DOCKER_CLIENT = docker.from_env()
-        container = client.containers.get(name)
+        container = _DOCKER_CLIENT.containers.get(name)
         container.stop()
     except docker.errors.NotFound:
         pass
