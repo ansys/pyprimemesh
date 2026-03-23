@@ -5017,7 +5017,6 @@ def generate_mapdl_commands(
         analysis_settings += general_contact_cmds
         analysis_settings += '!-------------------------------------------------\n'
     if params.pre_solution_settings is not None:
-    if params.pre_solution_settings is not None:
         analysis_settings += params.pre_solution_settings
         analysis_settings += '\n'
     analysis_settings += pre_step_boun_cmds

@@ -21,11 +21,7 @@ from sphinx_gallery.sorting import FileNameSortKey
 
 from ansys.meshing.prime import __version__
 
-os.environ["PRIME_MODE"] = "GRPC_INSECURE"
 viz_interface.DOCUMENTATION_BUILD = True
-# Using env var instead
-os.environ["PYANSYS_VISUALIZER_DOC_MODE"] = "true"
-os.environ["PYANSYS_VISUALIZER_HTML_BACKEND"] = "true"
 
 # Project information
 project = 'ansys-meshing-prime'
