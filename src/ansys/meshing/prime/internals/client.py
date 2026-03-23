@@ -35,7 +35,6 @@ from ansys.meshing.prime.internals.utils import terminate_process
 
 __all__ = ['Client']
 
-
 class Client(object):
     """Provides the ``Client`` class for PyPrimeMesh.
 
@@ -136,15 +135,8 @@ class Client(object):
 
                     logging.getLogger('PyPrimeMesh').error('Failed to connect to PRIME GRPC server')
                     raise
-            elif communicator_type == "socket":
-                from ansys.meshing.prime.internals.socket_communicator import (
-                    SocketCommunicator,
-                )
-
-                self._comm = SocketCommunicator(ip=ip, port=port)
-                setattr(self, 'port', port)
             else:
-                logging.getLogger('PyPrimeMesh').error(f'Invalid server type: {communicator_type}')
+                logging.getLogger('PyPrimeMesh').error(f'Invalid server type: {connection_type}')
                 raise
 
         else:

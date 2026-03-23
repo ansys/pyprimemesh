@@ -226,7 +226,6 @@ def launch_remote_prime(
 
     return client
 
-
 def launch_prime(
     prime_root: Optional[str] = None,
     ip: str = defaults.ip(),
