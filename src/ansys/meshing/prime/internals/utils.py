@@ -336,9 +336,6 @@ def stop_prime_github_container(name):
     name : str
         Name of the container to stop.
     """
-    client = get_docker_client()
-    if client is None:
-        return
     try:
         _DOCKER_CLIENT = docker.from_env()
         container = client.containers.get(name)
