@@ -37,7 +37,7 @@ if sys.platform != 'linux':
 # Check input
 if len(sys.argv) < 2:
     print("Please specify Ansys installation folder.")
-    print("Example: {} /ansys_inc/v251".format(os.path.basename(__file__)))
+    print("Example: {} /ansys_inc/v261".format(os.path.basename(__file__)))
     sys.exit(1)
 
 AWP_ROOT = sys.argv[1]
