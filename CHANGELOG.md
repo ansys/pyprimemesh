@@ -2,6 +2,13 @@ This project uses [towncrier](https://towncrier.readthedocs.io/) and the changes
 
 <!-- towncrier release notes start -->
 
+## [0.10.1](https://github.com/ansys/pyprimemesh/releases/tag/v0.10.1) - March 24, 2026
+
+
+### Documentation
+
+- Get changes from release/0.9 and update them in release/0.10 [#1252](https://github.com/ansys/pyprimemesh/pull/1252)
+
 ## [0.10.0](https://github.com/ansys/pyprimemesh/releases/tag/v0.10.0) - March 09, 2026
 
 
