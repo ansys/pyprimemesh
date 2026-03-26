@@ -55,13 +55,11 @@ LOOPBACK_HOSTS = ("localhost", "127.0.0.1")
 
 logger = logging.getLogger(__name__)
 
-
 @dataclass
 class CertificateFiles:
     cert_file: str | Path | None = None
     key_file: str | Path | None = None
     ca_file: str | Path | None = None
-
 
 def create_channel(
     transport_mode: str,
