@@ -30,7 +30,6 @@ from typing import List, Optional
 
 import ansys.meshing.prime.internals.config as config
 import ansys.meshing.prime.internals.defaults as defaults
-import docker
 
 _LOCAL_PORTS = []
 
@@ -236,6 +235,15 @@ def launch_prime_github_container(
     ValueError
         License is not available.
     """
+
+    try:
+        import docker
+    except ImportError:
+        raise ImportError(
+            "The 'docker' package is required to launch containers. "
+            "Install it with: pip install docker"
+        ) from None
+    
     license_file = os.environ.get('ANSYSLMD_LICENSE_FILE', None)
     image_name = os.environ.get('PYPRIMEMESH_IMAGE_NAME', 'ghcr.io/ansys/prime')
     if license_file is None:
