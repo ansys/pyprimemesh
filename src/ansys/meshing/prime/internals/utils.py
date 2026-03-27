@@ -345,6 +345,13 @@ def stop_prime_github_container(name):
     name : str
         Name of the container.
     """
+    try:
+        import docker
+    except ImportError:
+        raise ImportError(
+            "The 'docker' package is required to stop containers. "
+            "Install it with: pip install docker"
+        ) from None
     client = docker.from_env()
     try:
         container = client.containers.get(name)
