@@ -31,12 +31,11 @@ import ansys.meshing.prime.internals.config as config
 import ansys.meshing.prime.internals.defaults as defaults
 import ansys.meshing.prime.internals.utils as utils
 from ansys.meshing.prime.internals.client import Client
+from ansys.meshing.prime.internals import cyberchannel
 
 try:
     import ansys.platform.instancemanagement as pypim
     from simple_upload_server.client import Client as FileClient
-
-    from ansys.meshing.prime.internals import cyberchannel
 
     config.set_has_pim(pypim.is_configured())
 except:
