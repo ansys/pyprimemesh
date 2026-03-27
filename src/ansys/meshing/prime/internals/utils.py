@@ -255,7 +255,6 @@ def launch_prime_github_container(
     ValueError
         License is not available.
     """
-
     docker = _get_docker()
     license_file = os.environ.get('ANSYSLMD_LICENSE_FILE', None)
     image_name = os.environ.get('PYPRIMEMESH_IMAGE_NAME', 'ghcr.io/ansys/prime')
