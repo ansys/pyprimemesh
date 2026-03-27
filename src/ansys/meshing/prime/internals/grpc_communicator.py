@@ -44,7 +44,7 @@ BUFFER_MESSAGE_LENGTH = defaults.max_message_length() - 100
 
 
 def get_secure_channel(client_certs_dir: str, server_host: str, server_port: int):
-    """Create a secure gRPC channel using the provided TLS files.
+    """Creates a secure gRPC channel using the provided TLS files.
 
     Parameters
     ----------

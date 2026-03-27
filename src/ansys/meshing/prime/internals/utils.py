@@ -103,7 +103,34 @@ def get_child_processes(process):
     return children
 
 
-def terminate_process(process: subprocess):
+def cleanup_script_files(shell_script, batch_script) -> bool:
+    """Clean up script files used for process termination.
+
+    Parameters
+    ----------
+    shell_script : Path
+        Path to the shell script file.
+    batch_script : Path
+        Path to the batch script file.
+
+    Returns
+    -------
+    bool
+        True if all files were successfully deleted or didn't exist, False if any deletion failed
+    """
+    success = True
+    for script_file in [shell_script, batch_script]:
+        try:
+            if os.path.exists(script_file):
+                os.remove(script_file)
+        except Exception as e:
+            logging.getLogger('PyPrimeMesh').warning(
+                f"Could not delete script file {script_file}: {e}"
+            )
+            success = False
+    return success
+
+def terminate_process(process: subprocess, unique_id: str = None):
     """Terminates a process.
 
     Parameters
@@ -119,6 +146,36 @@ def terminate_process(process: subprocess):
     else:
         for child in get_child_processes(process.pid):
             os.kill(child, signal.SIGTERM)
+
+    shell_script = unique_id.with_suffix(".sh")
+    batch_script = unique_id.with_suffix(".bat")
+
+    if os.name == "nt":  # Windows
+        if os.path.exists(batch_script):
+            try:
+                subprocess.run([batch_script], check=True, shell=True)
+                logging.getLogger('PyPrimeMesh').info("Prime server process successfully terminated.")
+            except subprocess.CalledProcessError as e:
+                logging.getLogger('PyPrimeMesh').error(f"Error: Failed to terminate prime server process. Details: {e}")
+            except FileNotFoundError:
+                logging.getLogger('PyPrimeMesh').warning(f"Warning: Prime server process might still be running.")
+        else:
+            logging.getLogger('PyPrimeMesh').warning(f"Warning: Cannot terminate prime server on Windows.")
+    else:  # Unix-like (Linux, etc..)
+        if os.path.exists(shell_script):
+            try:
+                if not os.access(shell_script, os.X_OK):
+                    os.chmod(shell_script, 0o755)
+                subprocess.run(["bash", shell_script], check=True)
+                logging.getLogger('PyPrimeMesh').info("Prime server process successfully terminated.")
+            except subprocess.CalledProcessError as e:
+                logging.getLogger('PyPrimeMesh').error(f"Error: Failed to terminate prime server process. Details: {e}")
+            except FileNotFoundError:
+                logging.getLogger('PyPrimeMesh').warning(f"Warning: Prime server process might still be running.")
+        else:
+            logging.getLogger('PyPrimeMesh').warning(f"Warning: Cannot terminate prime server on Unix-like system.")
+
+    cleanup_successful = cleanup_script_files(shell_script, batch_script)
 
     if process.stdin is not None:
         process.stdin.close()
