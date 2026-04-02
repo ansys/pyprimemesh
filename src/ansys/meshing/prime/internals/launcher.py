@@ -33,17 +33,17 @@ import ansys.meshing.prime.internals.utils as utils
 from ansys.meshing.prime.internals.client import Client
 
 try:
+    from ansys.meshing.prime.internals import cyberchannel
+except ImportError:
+    cyberchannel = None
+
+try:
     import ansys.platform.instancemanagement as pypim
     from simple_upload_server.client import Client as FileClient
 
     config.set_has_pim(pypim.is_configured())
 except:
     pass
-
-try:
-    from ansys.meshing.prime.internals import cyberchannel
-except ImportError:
-    cyberchannel = None
 
 __all__ = ['launch_prime', 'launch_server_process']
 
