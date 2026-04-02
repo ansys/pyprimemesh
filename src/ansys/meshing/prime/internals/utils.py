@@ -255,7 +255,7 @@ def launch_prime_github_container(
     environment = {'ANSYSLMD_LICENSE_FILE': license_file}
 
     # Prepare command arguments
-    command = ['--port', str(port)]
+    command = ['--port', str(port), '--shm-size=4g']
 
     # Set default connection type if not provided
     if connection_type is None:
