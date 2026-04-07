@@ -139,7 +139,7 @@ jobs:
     runs-on: ubuntu-latest
     needs: docs
     # Run when the PR is closed i.e. when docs job is skipped
-    if: github.event_name == 'pull_request' && contains(github.event.pull_request.labels.*.name, 'docs:deploy') && (needs.docs.result == 'success' || needs.docs.result == 'skipped')
+    if: always() && github.event_name == 'pull_request' && contains(github.event.pull_request.labels.*.name, 'docs:deploy') && (needs.docs.result == 'success' || needs.docs.result == 'skipped')
     steps:
       - uses: ansys/actions/doc-deploy-pr@v10
         with:
