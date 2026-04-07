@@ -39,7 +39,7 @@ To reach the project support team, email [pyansys.core@ansys.com](mailto:pyansys
 
 ## Installation
 
-The `ansys-meshing-prime` package supports Python 3.10 to Python 3.13 on the Windows and Linux
+The `ansys-meshing-prime` package supports Python 3.10 to Python 3.14 on the Windows and Linux
 operating systems.
 
 
