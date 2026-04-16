@@ -23,7 +23,6 @@
 
 import logging
 import os
-from pathlib import Path
 from typing import Optional
 
 import ansys.meshing.prime.examples as examples
