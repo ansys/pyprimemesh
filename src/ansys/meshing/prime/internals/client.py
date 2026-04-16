@@ -79,7 +79,7 @@ class Client(object):
         local = kwargs.get('local', False)
         if local and server_process is not None:
             raise ValueError('Local client cannot be instantiated with a server process')
-        
+
         if connection_type == config.ConnectionType.GRPC_INSECURE:
             print("Warning (Client): Modification of these configurations is not recommended.")
             print("Refer the documentation for your installed product for additional information.")
@@ -132,6 +132,7 @@ class Client(object):
                     raise
                 except ConnectionError:
                     self.exit()
+
                     logging.getLogger('PyPrimeMesh').error('Failed to connect to PRIME GRPC server')
                     raise
             elif communicator_type == "socket":
