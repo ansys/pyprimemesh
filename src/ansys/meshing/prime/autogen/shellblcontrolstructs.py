@@ -221,7 +221,7 @@ class ShellBLControlGrowthParams(CoreObject):
 
     @property
     def growth_rate(self) -> float:
-        """Ratio of height of the current layer to previous layer.
+        """Ratio of height of the current layer to the previous layer.
 
         **This is a beta parameter**. **The behavior and name may change in the future**.
         """
