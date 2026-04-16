@@ -24,15 +24,34 @@ import logging
 import os
 import shutil
 import subprocess
+import time
 import uuid
 from contextlib import contextmanager
 from typing import List, Optional
 
 import ansys.meshing.prime.internals.config as config
 import ansys.meshing.prime.internals.defaults as defaults
-import docker
 
 _LOCAL_PORTS = []
+
+
+def _get_docker():
+    """Return the docker module, importing it on first use.
+
+    Raises
+    ------
+    ImportError
+        If the 'docker' package is not installed.
+    """
+    try:
+        import docker
+
+        return docker
+    except ImportError:
+        raise ImportError(
+            "The 'docker' package is required for container operations. "
+            "Install it with: pip install docker"
+        ) from None
 
 
 def make_unique_container_name(name: str):
@@ -293,6 +312,7 @@ def launch_prime_github_container(
     ValueError
         License is not available.
     """
+    docker = _get_docker()
     license_file = os.environ.get('ANSYSLMD_LICENSE_FILE', None)
     image_name = os.environ.get('PYPRIMEMESH_IMAGE_NAME', 'ghcr.io/ansys/prime')
     if license_file is None:
@@ -321,7 +341,7 @@ def launch_prime_github_container(
     # Handle connection type
     if (
         connection_type == config.ConnectionType.GRPC_INSECURE
-        or os.environ.get('PRIME_MODE', '').upper() == "GRPC_INSECURE"
+        or os.environ.get('PRIME_MODE', '').upper() == 'GRPC_INSECURE'
     ):
         command.append('--secure=no')
 
@@ -338,9 +358,6 @@ def launch_prime_github_container(
         volumes=volumes,
         environment=environment,
     )
-
-    # Wait for container to start and verify it's still running
-    import time
 
     # Check for welcome message with timeout
     welcome_message = "Welcome to Ansys Prime Meshing"
@@ -394,6 +411,7 @@ def stop_prime_github_container(name):
     name : str
         Name of the container.
     """
+    docker = _get_docker()
     client = docker.from_env()
     try:
         container = client.containers.get(name)
