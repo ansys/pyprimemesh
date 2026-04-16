@@ -592,8 +592,11 @@ class FileIO(_FileIO):
             #    part_id = self._model.parts[0].id
             args = {"partId": 0}
             command_name = "PrimeMesh::FileIO/GetAbaqusSimulationData"
-            sim_data = self._comm.serve(self._model, command_name, self._object_id, args=args)
-            sim_data = json.loads(sim_data)
+            sim_data_str = self._comm.serve(self._model, command_name, self._object_id, args=args)
+            if not sim_data_str or sim_data_str.strip() == "":
+                sim_data = None
+            else:
+                sim_data = json.loads(sim_data_str)
             if sim_data is not None:
                 mp = dynaexportutils.MaterialProcessor(self._model, sim_data)
                 all_mat_cmds = mp.get_all_material_commands()
