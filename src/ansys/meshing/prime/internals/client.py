@@ -23,7 +23,6 @@
 
 import logging
 import os
-from pathlib import Path
 from typing import Optional
 
 import ansys.meshing.prime.examples as examples
@@ -87,7 +86,6 @@ class Client(object):
         self._local = local
         self._process = server_process
         self._comm = None
-        self._cleanup_script_path: Path = None
         if not local:
             if (
                 connection_type == config.ConnectionType.GRPC_SECURE
