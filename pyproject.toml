@@ -8,18 +8,18 @@ version = "0.10.0.dev30"
 description = "PyPrimeMesh is a Python client to Ansys Prime Server, which delivers core Ansys meshing technology."
 readme = "README.md"
 requires-python = ">=3.10,<4"
-license = {file = "LICENSE"}
+license = "MIT"
+license-files = ["LICENSE"]
 authors = [{name = "ANSYS, Inc.", email = "pyansys.core@ansys.com"}]
 maintainers =  [{name = "ANSYS, Inc.", email = "pyansys.core@ansys.com"}]
 classifiers = [
     "Development Status :: 4 - Beta",
-    "License :: OSI Approved :: MIT License",
     "Operating System :: OS Independent",
     "Programming Language :: Python :: 3.10",
     "Programming Language :: Python :: 3.11",
     "Programming Language :: Python :: 3.12",
     "Programming Language :: Python :: 3.13",
-    "Programming Language :: Python :: 3.14",
+    "Programming Language :: Python :: 3.14"
 ]
 
 dependencies = [
@@ -33,10 +33,10 @@ dependencies = [
 
 [project.optional-dependencies]
 graphics = [
-  "ansys-tools-visualization-interface>=0.4.7,<1",
+  "ansys-tools-visualization-interface>=0.4.7,<1"
 ]
 pygeometry = [
-  "ansys-geometry-core>=0.7.6,<1",
+  "ansys-geometry-core>=0.7.6,<1"
 ]
 tests = [
   "ansys-tools-visualization-interface==0.12.1",
@@ -45,7 +45,7 @@ tests = [
   "pytest-pyvista==0.3.2",
   "pytest-xvfb==3.1.1",
   "ansys-geometry-core>=0.7.6,<1",
-  "pyvista[trame]==0.47.1",
+  "pyvista[trame]==0.47.1"
 ]
 doc = [
   "ansys-sphinx-theme[autoapi]==1.7.2",
@@ -59,11 +59,11 @@ doc = [
   "sphinx-gallery==0.20.0",
   "sphinx-jinja==2.0.2",
   "sphinx-notfound-page==1.1.0",
-  "sphinxemoji==0.3.2",
+  "sphinxemoji==0.3.2"
 ]
 all = [
   "ansys-tools-visualization-interface>=0.2.6,<1",
-  "ansys-geometry-core>=0.7.6,<1",
+  "ansys-geometry-core>=0.7.6,<1"
 ]
 
 [project.urls]
@@ -104,7 +104,7 @@ exclude = '''
 minversion = "7.1"
 addopts = "-ra -s --cov=ansys.meshing.prime.core --cov=ansys.meshing.prime.internals --cov=ansys.meshing.prime.lucid --cov=ansys.meshing.prime.graphics --cov-report=term --cov-report=html:.cov/html --image_cache_dir tests/graphics/image_cache --add_missing_images"
 testpaths = [
-    "tests",
+    "tests"
 ]
 
 [tool.towncrier]
