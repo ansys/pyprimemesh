@@ -80,9 +80,10 @@ Key data model concepts demonstrated:
 """
 import colorsys
 
-import ansys.meshing.prime as prime
 import numpy as np
 import pyvista as pv
+
+import ansys.meshing.prime as prime
 from ansys.meshing.prime.core.mesh import DisplayMeshType
 from ansys.meshing.prime.graphics.plotter import ColorByType, PrimePlotter, color_matrix
 
