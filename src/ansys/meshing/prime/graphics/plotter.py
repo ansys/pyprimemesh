@@ -133,6 +133,13 @@ class PrimePlotter(Plotter):
         else:
             return color_matrix[mesh_info.zone_id % num_colors].tolist()
 
+    def add_entity_with_attributes(self, polydata, metadata, **pyvista_kwargs):
+        """Add entity with full PyVista attribute control."""
+        actor = self._backend.pv_interface.scene.add_mesh(polydata.mesh, **pyvista_kwargs)
+        # Store mapping for widgets
+        self._info_actor_map[actor] = metadata
+        return actor
+
     def add_model(
         self, model: Model, scope: prime.ScopeDefinition = None, update: bool = False
     ) -> None:
