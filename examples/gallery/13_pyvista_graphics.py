@@ -31,34 +31,52 @@ Using PyVista for Graphics in PyPrimeMesh
 PyPrimeMesh data model with fine-grained control using PyVista, through the
 ``PrimePlotter`` API and direct scene access.
 
-The pipe tee junction model is used to show six visualization stages:
+The pipe tee junction model (a multi-part CAD assembly) is used to show
+nine visualization stages:
 
 1. **High-level plotting** — ``plotter.show(model)`` for quick visualization
-2. **Zone name visualization** — face and volume zones colored distinctly with
+2. **Part-based coloring** — each part in distinct color using ``part_id``
+   grouping from the polydata dict, with ``get_scalar_colors()`` and
+   ``ColorByType.PART``
+3. **Zone name visualization** — face and volume zones colored distinctly with
    bounding boxes, names, and a legend
-3. **Label visualization** — CAD labels mapped to TopoFace IDs with bounding
+4. **Label visualization** — CAD labels mapped to TopoFace IDs with bounding
    boxes, labels, and a legend
-4. **Scope-based plotting** — ``ScopeDefinition`` to selectively display only
+5. **Edge type coloring** — topology edges rendered with their native
+   type-based colors (stored in the edge ``"colors"`` array)
+6. **Scope-based plotting** — ``ScopeDefinition`` to selectively display only
    labeled inlet/outlet faces
-5. **Face zonelet visualization** — post-meshing face zonelets with distinct
+7. **Face zonelet visualization** — post-meshing face zonelets with distinct
    colors and ID annotations
-6. **Per-element face coloring** — individual mesh face cells colored uniquely
+8. **Per-element face coloring** — individual mesh face cells colored uniquely
    via ``cell_data`` scalars
+9. **ColorByType modes** — same mesh shown colored by ZONE, ZONELET, and PART
+   using ``get_scalar_colors()``
 
 Key data model concepts demonstrated:
 
+- **Multi-part models**: polydata dict is keyed by ``part_id``; each part
+  contains its own faces, edges, control points, and spline surfaces
 - **DisplayMeshType** filtering (``TOPOFACE``, ``TOPOEDGE``, ``FACEZONELET``,
   ``EDGEZONELET``) to distinguish entity types
-- **DisplayMeshInfo** metadata (``id``, ``zone_name``, ``has_mesh``,
-  ``display_mesh_type``) preserved through ``info_actor_map``
+- **DisplayMeshInfo** metadata (``id``, ``zone_name``, ``zone_id``,
+  ``part_id``, ``part_name``, ``has_mesh``, ``display_mesh_type``) preserved
+  through ``info_actor_map``
 - **Labels vs Zones**: labels are overlapping CAD metadata queried via
   ``Part.get_labels()``; zones are non-overlapping mesh groupings from
   ``Part.get_face_zones()`` / ``Part.get_volume_zones()``
+- **Edge type colors**: edges carry type-based RGB data in their ``"colors"``
+  array (red, black, cyan, magenta, yellow, purple by edge type)
+- **ColorByType**: ``get_scalar_colors()`` supports ZONE, ZONELET, and PART
+  coloring modes; the built-in ``ColorByTypeWidget`` cycles between them
 - **Polydata access**: ``model.as_polydata()`` returns a dict keyed by part ID
   with ``"faces"`` (tuples of ``MeshObjectPlot, DisplayMeshInfo``),
   ``"edges"`` (``MeshObjectPlot``), ``"ctrlpts"``, and ``"splinesurf"`` lists
 - **Scene-level control**: direct ``scene.add_mesh()`` / ``add_point_labels()``
   for full PyVista parameter access
+- **Built-in widgets**: ``PrimePlotter`` auto-registers four interactive widgets
+  (ToggleEdges, ColorByType, PickedInfo, HidePicked) accessible via the
+  checkbox buttons in the scene
 """
 import colorsys
 
@@ -66,7 +84,7 @@ import ansys.meshing.prime as prime
 import numpy as np
 import pyvista as pv
 from ansys.meshing.prime.core.mesh import DisplayMeshType
-from ansys.meshing.prime.graphics import PrimePlotter
+from ansys.meshing.prime.graphics.plotter import ColorByType, PrimePlotter, color_matrix
 
 
 def make_distinct_colors(n):
@@ -106,7 +124,62 @@ plotter._backend.pv_interface.scene.add_text(
 plotter.show(model, title="Plot 1 — High-Level: plotter.show(model)")
 
 # ============================================================================
-# PLOT 2: ZONE NAME VISUALIZATION (face zones + volume zones)
+# PLOT 2: PART-BASED COLORING (multi-part model)
+# ============================================================================
+# Demonstrates:
+#   - Polydata dict is keyed by part_id — one entry per part
+#   - get_scalar_colors() with ColorByType.PART for part-based coloring
+#   - Iterating parts to show part names and face/edge counts
+#   - Edge type-based colors stored in edge MeshObjectPlot.mesh["colors"]
+
+plotter = PrimePlotter()
+graphics_data = model.as_polydata()
+
+# Print part structure
+print("Model parts:")
+for part in model.parts:
+    print(f"  Part '{part.name}' (id={part.id})")
+
+# Assign a distinct color per part
+part_ids = sorted(graphics_data.keys())
+part_color_map = make_distinct_colors(len(part_ids))
+
+scene = plotter._backend.pv_interface.scene
+legend_entries = []
+for idx, part_id in enumerate(part_ids):
+    part_data = graphics_data[part_id]
+    part_name = model.get_part(part_id).name
+    color = part_color_map[idx]
+    legend_entries.append([part_name, color])
+
+    # Add faces for this part
+    if "faces" in part_data:
+        for item in part_data["faces"]:
+            if item is None:
+                continue
+            polydata, metadata = item
+            plotter.add_entity_with_attributes(
+                polydata, metadata, color=color, opacity=1.0, show_edges=False
+            )
+
+    # Add edges for this part with same part color
+    if "edges" in part_data:
+        for edge_obj in part_data["edges"]:
+            if edge_obj is None:
+                continue
+            scene.add_mesh(edge_obj.mesh, color=color, line_width=2, pickable=False)
+
+scene.add_legend(legend_entries, bcolor="white", border=True, size=(0.2, 0.25))
+scene.add_text(
+    "Plot 2 \u2014 Part-Based Coloring",
+    position="upper_left",
+    font_size=10,
+    color="black",
+)
+plotter.show(title="Plot 2 — Part-Based Coloring")
+
+# ============================================================================
+# PLOT 3: ZONE NAME VISUALIZATION (face zones + volume zones)
 # ============================================================================
 # Demonstrates:
 #   - Querying face and volume zones via Part.get_face_zones() / get_volume_zones()
@@ -206,15 +279,15 @@ for zname in zone_list:
     legend_entries.append([zname + suffix, zone_colors[zname]])
 scene.add_legend(legend_entries, bcolor="white", border=True, size=(0.2, 0.35))
 scene.add_text(
-    "Plot 2 \u2014 Zone Names (Face & Volume)",
+    "Plot 3 \u2014 Zone Names (Face & Volume)",
     position="upper_left",
     font_size=10,
     color="black",
 )
-plotter.show(title="Plot 2 — Zone Names (Face & Volume)")
+plotter.show(title="Plot 3 \u2014 Zone Names (Face & Volume)")
 
 # ============================================================================
-# PLOT 3: LABEL VISUALIZATION (CAD labels → TopoFace IDs)
+# PLOT 4: LABEL VISUALIZATION (CAD labels → TopoFace IDs)
 # ============================================================================
 # Demonstrates:
 #   - Querying labels via Part.get_labels()
@@ -304,15 +377,58 @@ legend_entries = [[name, label_colors[name]] for name in label_list]
 legend_entries.append(["unlabeled", [0.5, 0.5, 0.5]])
 scene.add_legend(legend_entries, bcolor="white", border=True, size=(0.2, 0.3))
 scene.add_text(
-    "Plot 3 \u2014 CAD Labels on TopoFaces",
+    "Plot 4 \u2014 CAD Labels on TopoFaces",
     position="upper_left",
     font_size=10,
     color="black",
 )
-plotter.show(title="Plot 3 — CAD Labels on TopoFaces")
+plotter.show(title="Plot 4 \u2014 CAD Labels on TopoFaces")
 
 # ============================================================================
-# PLOT 4: SCOPE-BASED PLOTTING
+# PLOT 5: EDGE TYPE COLORING
+# ============================================================================
+# Demonstrates:
+#   - Edge MeshObjectPlot carries type-based RGB in mesh["colors"] array
+#   - Native edge colors encode topology edge type (red, black, cyan, etc.)
+#   - Rendering edges with their built-in scalars via rgb=True
+
+plotter = PrimePlotter()
+graphics_data = model.as_polydata()
+
+scene = plotter._backend.pv_interface.scene
+for part_id, part_data in graphics_data.items():
+    # Add faces as light transparent background
+    if "faces" in part_data:
+        for item in part_data["faces"]:
+            if item is None:
+                continue
+            polydata, metadata = item
+            plotter.add_entity_with_attributes(
+                polydata, metadata, color=[0.85, 0.85, 0.85], opacity=0.3, show_edges=False
+            )
+    # Add edges with their native type-based colors
+    if "edges" in part_data:
+        for edge_obj in part_data["edges"]:
+            if edge_obj is None:
+                continue
+            scene.add_mesh(
+                edge_obj.mesh,
+                scalars="colors",
+                rgb=True,
+                line_width=4,
+                pickable=False,
+            )
+
+scene.add_text(
+    "Plot 5 \u2014 Edge Type Coloring (native RGB)",
+    position="upper_left",
+    font_size=10,
+    color="black",
+)
+plotter.show(title="Plot 5 \u2014 Edge Type Coloring")
+
+# ============================================================================
+# PLOT 6: SCOPE-BASED PLOTTING
 # ============================================================================
 # Demonstrates:
 #   - ScopeDefinition with label_expression to select specific entities
@@ -325,12 +441,12 @@ plotter = PrimePlotter()
 scope_inlets = prime.ScopeDefinition(model, label_expression="in1_inlet,in2_inlet,outlet_main")
 plotter.plot(model, scope=scope_inlets)
 plotter._backend.pv_interface.scene.add_text(
-    "Plot 4 \u2014 Scope-Based: Inlet & Outlet Faces Only",
+    "Plot 6 \u2014 Scope-Based: Inlet & Outlet Faces Only",
     position="upper_left",
     font_size=10,
     color="black",
 )
-plotter.show(title="Plot 4 — Scope-Based: Inlet & Outlet Faces Only")
+plotter.show(title="Plot 6 \u2014 Scope-Based: Inlet & Outlet Faces Only")
 
 # ============================================================================
 # MESHING — wrap, surface mesh, volume mesh
@@ -347,7 +463,7 @@ mesh_util.volume_mesh(
 )
 
 # ============================================================================
-# PLOT 5: FACE ZONELET VISUALIZATION (post-meshing)
+# PLOT 7: FACE ZONELET VISUALIZATION (post-meshing)
 # ============================================================================
 # Demonstrates:
 #   - update=True on as_polydata() to refresh after meshing
@@ -396,15 +512,15 @@ for i, (polydata, metadata) in enumerate(zonelet_items):
         point_size=0,
     )
 scene.add_text(
-    "Plot 5 \u2014 Face Zonelets with IDs",
+    "Plot 7 \u2014 Face Zonelets with IDs",
     position="upper_left",
     font_size=10,
     color="black",
 )
-plotter.show(title="Plot 5 — Face Zonelets with IDs")
+plotter.show(title="Plot 7 \u2014 Face Zonelets with IDs")
 
 # ============================================================================
-# PLOT 6: PER-ELEMENT FACE COLORING
+# PLOT 8: PER-ELEMENT FACE COLORING
 # ============================================================================
 # Demonstrates:
 #   - Assigning per-cell RGB scalars via cell_data on a copy of the mesh
@@ -438,12 +554,55 @@ for part_id, part_data in volume_graphics_data.items():
                         )
                         plotter._info_actor_map[actor] = metadata
 scene.add_text(
-    "Plot 6 \u2014 Per-Element Face Colors",
+    "Plot 8 \u2014 Per-Element Face Colors",
     position="upper_left",
     font_size=10,
     color="black",
 )
-plotter.show(title="Plot 6 — Per-Element Face Colors")
+plotter.show(title="Plot 8 \u2014 Per-Element Face Colors")
+
+# ============================================================================
+# PLOT 9: ColorByType MODES (ZONE / ZONELET / PART)
+# ============================================================================
+# Demonstrates:
+#   - ColorByType enum (ZONE, ZONELET, PART) for different coloring strategies
+#   - Same mesh data rendered three ways using the color_matrix palette
+#   - This is the logic used by the built-in ColorByType widget
+
+
+num_colors = int(color_matrix.size / 3)
+
+for color_mode in [ColorByType.ZONE, ColorByType.ZONELET, ColorByType.PART]:
+    plotter = PrimePlotter()
+    scene = plotter._backend.pv_interface.scene
+
+    for part_id, part_data in volume_graphics_data.items():
+        for entity_type, entity_list in part_data.items():
+            if entity_type == "faces":
+                for item in entity_list:
+                    if item is None:
+                        continue
+                    polydata, metadata = item
+                    if metadata.has_mesh:
+                        # Apply ColorByType logic (same as ColorByTypeWidget)
+                        if color_mode == ColorByType.ZONELET:
+                            color = color_matrix[metadata.id % num_colors].tolist()
+                        elif color_mode == ColorByType.PART:
+                            color = color_matrix[metadata.part_id % num_colors].tolist()
+                        else:  # ZONE
+                            color = color_matrix[metadata.zone_id % num_colors].tolist()
+                        plotter.add_entity_with_attributes(
+                            polydata, metadata, color=color, opacity=1.0, show_edges=True
+                        )
+
+    mode_name = color_mode.name
+    scene.add_text(
+        f"Plot 9 \u2014 ColorByType.{mode_name}",
+        position="upper_left",
+        font_size=10,
+        color="black",
+    )
+    plotter.show(title=f"Plot 9 \u2014 ColorByType.{mode_name}")
 
 # ============================================================================
 # MESH STATISTICS
