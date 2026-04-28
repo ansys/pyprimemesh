@@ -79,8 +79,7 @@ class DownloadManager(metaclass=DownloadManagerMeta):
     def clear_download_cache(self):
         """Remove downloaded example files from the local path."""
         for file in self.downloads_list:
-            if os.path.exists(file):
-                os.remove(file)
+            os.remove(file)
         self.downloads_list.clear()
 
     def download_file(
