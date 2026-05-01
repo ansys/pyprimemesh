@@ -171,7 +171,7 @@ jobs:
         run: docker run -d --rm --name ans_geo -e LICENSE_SERVER=1055@${{ secrets.LICENSE_SERVER }} --dns "8.8.8.8" -p 654:50051 ghcr.io/ansys/geometry:core-linux-latest
 
       - name: Restore images cache
-        uses: actions/cache@v5
+        uses: actions/cache@v5.0.4
         with:
           path: tests/graphics/image_cache
           key: pyvista-image-cache-${{ runner.os }}-v-${{ env.RESET_IMAGE_CACHE }}-${{ hashFiles('pyproject.toml') }}
@@ -225,7 +225,7 @@ jobs:
           path: ${{ env.PACKAGE_NAME }}-artifacts
 
       - name: "Upload artifacts to PyPI using trusted publisher"
-        uses: pypa/gh-action-pypi-publish@ed0c53931b1dc9bd32cbe73a98c7f6766f8a527e # v1.13.0
+        uses: pypa/gh-action-pypi-publish@cef221092ed1bacb1cc03d23a2d87d1d172e277b # v1.14.0
         with:
           print-hash: true
           packages-dir: ${{ env.PACKAGE_NAME }}-artifacts
