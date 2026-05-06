@@ -36,8 +36,7 @@ nine visualization stages:
 
 1. **High-level plotting** — ``plotter.show(model)`` for quick visualization
 2. **Part-based coloring** — each part in distinct color using ``part_id``
-   grouping from the polydata dict, with ``get_scalar_colors()`` and
-   ``ColorByType.PART``
+   grouping from the polydata dict, with ``make_distinct_colors()``
 3. **Zone name visualization** — face and volume zones colored distinctly with
    bounding boxes, names, and a legend
 4. **Label visualization** — CAD labels mapped to TopoFace IDs with bounding
@@ -51,7 +50,7 @@ nine visualization stages:
 8. **Per-element face coloring** — individual mesh face cells colored uniquely
    via ``cell_data`` scalars
 9. **ColorByType modes** — same mesh shown colored by ZONE, ZONELET, and PART
-   using ``get_scalar_colors()``
+   using direct ``color_matrix`` indexing
 
 Key data model concepts demonstrated:
 
