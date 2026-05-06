@@ -52,6 +52,7 @@ doc = [
   "ansys-tools-visualization-interface==0.12.1",
   "joblib==1.5.3",
   "jupyter-sphinx==0.5.3",
+  "nest-asyncio2==1.7.2",
   "numpydoc==1.10.0",
   "pyvista==0.47.3",
   "sphinx-autodoc-typehints==3.1.0",
