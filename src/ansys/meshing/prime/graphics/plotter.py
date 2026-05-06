@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 """Module for the plotter."""
+
 import enum
 import warnings
 from typing import Any, Dict, List, Optional
@@ -111,6 +112,11 @@ class PrimePlotter(Plotter):
         """
         self._info_actor_map = value
 
+    @property
+    def scene(self):
+        """Get the underlying PyVista plotter scene for direct rendering control."""
+        return self._backend.pv_interface.scene
+
     def get_scalar_colors(self, mesh_info: DisplayMeshInfo) -> np.ndarray:
         """Get the scalar colors for the mesh.
 
@@ -133,12 +139,74 @@ class PrimePlotter(Plotter):
         else:
             return color_matrix[mesh_info.zone_id % num_colors].tolist()
 
-    def add_entity_with_attributes(self, polydata, metadata, **pyvista_kwargs):
-        """Add entity with full PyVista attribute control."""
-        actor = self._backend.pv_interface.scene.add_mesh(polydata.mesh, **pyvista_kwargs)
-        # Store mapping for widgets
-        self._info_actor_map[actor] = metadata
+    def add_mesh(self, mesh_or_polydata, metadata=None, **pyvista_kwargs):
+        """Add a mesh or MeshObjectPlot to the scene with optional metadata tracking.
+
+        Parameters
+        ----------
+        mesh_or_polydata : pyvista.DataSet or MeshObjectPlot
+            A raw PyVista mesh or a MeshObjectPlot (which has a ``.mesh`` attribute).
+        metadata : DisplayMeshInfo, optional
+            If provided, registers the actor in ``info_actor_map`` for widget support.
+        **pyvista_kwargs
+            Additional keyword arguments passed to ``scene.add_mesh()``.
+
+        Returns
+        -------
+        actor
+            The PyVista actor added to the scene.
+        """
+        mesh = mesh_or_polydata.mesh if hasattr(mesh_or_polydata, 'mesh') else mesh_or_polydata
+        actor = self.scene.add_mesh(mesh, **pyvista_kwargs)
+        if metadata is not None:
+            self._info_actor_map[actor] = metadata
         return actor
+
+    def add_point_labels(self, points, labels, **kwargs):
+        """Add point labels to the scene.
+
+        Parameters
+        ----------
+        points : array_like
+            Points where labels are placed.
+        labels : list of str
+            Label text for each point.
+        **kwargs
+            Additional keyword arguments passed to ``scene.add_point_labels()``.
+        """
+        return self.scene.add_point_labels(points, labels, **kwargs)
+
+    def add_legend(self, entries, **kwargs):
+        """Add a legend to the scene.
+
+        Parameters
+        ----------
+        entries : list
+            Legend entries (each a [name, color] pair).
+        **kwargs
+            Additional keyword arguments passed to ``scene.add_legend()``.
+        """
+        return self.scene.add_legend(entries, **kwargs)
+
+    def add_text(self, text, **kwargs):
+        """Add text annotation to the scene.
+
+        Parameters
+        ----------
+        text : str
+            Text to display.
+        **kwargs
+            Additional keyword arguments passed to ``scene.add_text()``.
+        """
+        return self.scene.add_text(text, **kwargs)
+
+    def add_entity_with_attributes(self, polydata, metadata, **pyvista_kwargs):
+        """Add entity with full PyVista attribute control.
+
+        .. deprecated::
+            Use :meth:`add_mesh` instead.
+        """
+        return self.add_mesh(polydata, metadata, **pyvista_kwargs)
 
     def add_model(
         self, model: Model, scope: prime.ScopeDefinition = None, update: bool = False
