@@ -71,12 +71,14 @@ Key data model concepts demonstrated:
 - **Polydata access**: ``model.as_polydata()`` returns a dict keyed by part ID
   with ``"faces"`` (tuples of ``MeshObjectPlot, DisplayMeshInfo``),
   ``"edges"`` (``MeshObjectPlot``), ``"ctrlpts"``, and ``"splinesurf"`` lists
-- **Scene-level control**: direct ``scene.add_mesh()`` / ``add_point_labels()``
-  for full PyVista parameter access
+- **Public scene helpers**: ``plotter.add_mesh()``, ``plotter.add_point_labels()``,
+  ``plotter.add_legend()``, ``plotter.add_text()`` for full PyVista parameter access
+  without reaching into private attributes; ``plotter.scene`` for escape-hatch access
 - **Built-in widgets**: ``PrimePlotter`` auto-registers four interactive widgets
   (ToggleEdges, ColorByType, PickedInfo, HidePicked) accessible via the
   checkbox buttons in the scene
 """
+
 import colorsys
 
 import numpy as np
@@ -115,7 +117,7 @@ mesh_util.read(file_name=pipe_tee)
 # determined by has_mesh).
 
 plotter = PrimePlotter()
-plotter._backend.pv_interface.scene.add_text(
+plotter.add_text(
     "Plot 1 \u2014 High-Level: plotter.show(model)",
     position="upper_left",
     font_size=10,
@@ -128,9 +130,9 @@ plotter.show(model, title="Plot 1 — High-Level: plotter.show(model)")
 # ============================================================================
 # Demonstrates:
 #   - Polydata dict is keyed by part_id — one entry per part
-#   - get_scalar_colors() with ColorByType.PART for part-based coloring
+#   - make_distinct_colors() for custom per-part coloring
 #   - Iterating parts to show part names and face/edge counts
-#   - Edge type-based colors stored in edge MeshObjectPlot.mesh["colors"]
+#   - plotter.add_mesh() for both MeshObjectPlot and raw mesh objects
 
 plotter = PrimePlotter()
 graphics_data = model.as_polydata()
@@ -144,7 +146,6 @@ for part in model.parts:
 part_ids = sorted(graphics_data.keys())
 part_color_map = make_distinct_colors(len(part_ids))
 
-scene = plotter._backend.pv_interface.scene
 legend_entries = []
 for idx, part_id in enumerate(part_ids):
     part_data = graphics_data[part_id]
@@ -158,19 +159,17 @@ for idx, part_id in enumerate(part_ids):
             if item is None:
                 continue
             polydata, metadata = item
-            plotter.add_entity_with_attributes(
-                polydata, metadata, color=color, opacity=1.0, show_edges=False
-            )
+            plotter.add_mesh(polydata, metadata, color=color, opacity=1.0, show_edges=False)
 
     # Add edges for this part with same part color
     if "edges" in part_data:
         for edge_obj in part_data["edges"]:
             if edge_obj is None:
                 continue
-            scene.add_mesh(edge_obj.mesh, color=color, line_width=2, pickable=False)
+            plotter.add_mesh(edge_obj.mesh, color=color, line_width=2, pickable=False)
 
-scene.add_legend(legend_entries, bcolor="white", border=True, size=(0.2, 0.25))
-scene.add_text(
+plotter.add_legend(legend_entries, bcolor="white", border=True, size=(0.2, 0.25))
+plotter.add_text(
     "Plot 2 \u2014 Part-Based Coloring",
     position="upper_left",
     font_size=10,
@@ -207,9 +206,6 @@ for part in model.parts:
             volume_zone_info[name] = vz_id
             zone_id_to_name[vz_id] = name
 
-# For faces without a zone name, generate an auto-name from zone_id or part
-auto_zone_counter = 0
-
 # Assign distinct colors
 zone_list = sorted(all_zone_names)
 zone_color_map = make_distinct_colors(max(len(zone_list), 1))
@@ -238,30 +234,26 @@ for part_id, part_data in graphics_data.items():
                         zone_list.append(zname)
                 color = zone_colors.get(zname, [0.5, 0.5, 0.5])
                 zone_face_meshes.setdefault(zname, []).append(polydata.mesh)
-                plotter.add_entity_with_attributes(
-                    polydata, metadata, color=color, opacity=1.0, show_edges=False
-                )
+                plotter.add_mesh(polydata, metadata, color=color, opacity=1.0, show_edges=False)
         elif entity_type == "edges":
             for edge_obj in entity_list:
                 if edge_obj is None:
                     continue
-                scene = plotter._backend.pv_interface.scene
-                scene.add_mesh(edge_obj.mesh, color=[0.3, 0.3, 0.3], line_width=2, pickable=False)
+                plotter.add_mesh(edge_obj.mesh, color=[0.3, 0.3, 0.3], line_width=2, pickable=False)
 
 # Add bounding boxes and labels for zones that have face geometry
-scene = plotter._backend.pv_interface.scene
 for zname, meshes in zone_face_meshes.items():
     combined = meshes[0] if len(meshes) == 1 else meshes[0].merge(meshes[1:])
     bounds = combined.bounds
     bbox = pv.Box(bounds)
     color = zone_colors[zname]
-    scene.add_mesh(bbox, color=color, style="wireframe", line_width=2, pickable=False)
+    plotter.add_mesh(bbox, color=color, style="wireframe", line_width=2, pickable=False)
     center = [
         (bounds[0] + bounds[1]) / 2,
         (bounds[2] + bounds[3]) / 2,
         bounds[5],
     ]
-    scene.add_point_labels(
+    plotter.add_point_labels(
         np.array([center]),
         [zname],
         font_size=16,
@@ -277,8 +269,8 @@ legend_entries = []
 for zname in zone_list:
     suffix = " (volume)" if zname in volume_zone_info else ""
     legend_entries.append([zname + suffix, zone_colors[zname]])
-scene.add_legend(legend_entries, bcolor="white", border=True, size=(0.2, 0.35))
-scene.add_text(
+plotter.add_legend(legend_entries, bcolor="white", border=True, size=(0.2, 0.35))
+plotter.add_text(
     "Plot 3 \u2014 Zone Names (Face & Volume)",
     position="upper_left",
     font_size=10,
@@ -338,30 +330,28 @@ for part_id, part_data in graphics_data.items():
                     else:
                         color = [0.5, 0.5, 0.5]
                         opacity = 0.3
-                    plotter.add_entity_with_attributes(
+                    plotter.add_mesh(
                         polydata, metadata, color=color, opacity=opacity, show_edges=False
                     )
         elif entity_type == "edges":
             for edge_obj in entity_list:
                 if edge_obj is None:
                     continue
-                scene = plotter._backend.pv_interface.scene
-                scene.add_mesh(edge_obj.mesh, color=[0.2, 0.2, 0.2], line_width=2, pickable=False)
+                plotter.add_mesh(edge_obj.mesh, color=[0.2, 0.2, 0.2], line_width=2, pickable=False)
 
 # Bounding boxes and labels
-scene = plotter._backend.pv_interface.scene
 for label_name, meshes in label_face_meshes.items():
     combined = meshes[0] if len(meshes) == 1 else meshes[0].merge(meshes[1:])
     bounds = combined.bounds
     bbox = pv.Box(bounds)
     color = label_colors[label_name]
-    scene.add_mesh(bbox, color=color, style="wireframe", line_width=2, pickable=False)
+    plotter.add_mesh(bbox, color=color, style="wireframe", line_width=2, pickable=False)
     center = [
         (bounds[0] + bounds[1]) / 2,
         (bounds[2] + bounds[3]) / 2,
         bounds[5],
     ]
-    scene.add_point_labels(
+    plotter.add_point_labels(
         np.array([center]),
         [label_name],
         font_size=16,
@@ -375,8 +365,8 @@ for label_name, meshes in label_face_meshes.items():
 # Legend
 legend_entries = [[name, label_colors[name]] for name in label_list]
 legend_entries.append(["unlabeled", [0.5, 0.5, 0.5]])
-scene.add_legend(legend_entries, bcolor="white", border=True, size=(0.2, 0.3))
-scene.add_text(
+plotter.add_legend(legend_entries, bcolor="white", border=True, size=(0.2, 0.3))
+plotter.add_text(
     "Plot 4 \u2014 CAD Labels on TopoFaces",
     position="upper_left",
     font_size=10,
@@ -395,7 +385,6 @@ plotter.show(title="Plot 4 \u2014 CAD Labels on TopoFaces")
 plotter = PrimePlotter()
 graphics_data = model.as_polydata()
 
-scene = plotter._backend.pv_interface.scene
 for part_id, part_data in graphics_data.items():
     # Add faces as light transparent background
     if "faces" in part_data:
@@ -403,7 +392,7 @@ for part_id, part_data in graphics_data.items():
             if item is None:
                 continue
             polydata, metadata = item
-            plotter.add_entity_with_attributes(
+            plotter.add_mesh(
                 polydata, metadata, color=[0.85, 0.85, 0.85], opacity=0.3, show_edges=False
             )
     # Add edges with their native type-based colors
@@ -411,7 +400,7 @@ for part_id, part_data in graphics_data.items():
         for edge_obj in part_data["edges"]:
             if edge_obj is None:
                 continue
-            scene.add_mesh(
+            plotter.add_mesh(
                 edge_obj.mesh,
                 scalars="colors",
                 rgb=True,
@@ -419,7 +408,7 @@ for part_id, part_data in graphics_data.items():
                 pickable=False,
             )
 
-scene.add_text(
+plotter.add_text(
     "Plot 5 \u2014 Edge Type Coloring (native RGB)",
     position="upper_left",
     font_size=10,
@@ -440,7 +429,7 @@ plotter = PrimePlotter()
 # Show only inlet and outlet faces using label-based scoping
 scope_inlets = prime.ScopeDefinition(model, label_expression="in1_inlet,in2_inlet,outlet_main")
 plotter.plot(model, scope=scope_inlets)
-plotter._backend.pv_interface.scene.add_text(
+plotter.add_text(
     "Plot 6 \u2014 Scope-Based: Inlet & Outlet Faces Only",
     position="upper_left",
     font_size=10,
@@ -469,7 +458,7 @@ mesh_util.volume_mesh(
 #   - update=True on as_polydata() to refresh after meshing
 #   - Filtering by DisplayMeshType.FACEZONELET and has_mesh=True
 #   - Distinct color per face zonelet with ID annotations
-#   - Direct scene.add_point_labels() for face zonelet IDs
+#   - plotter.add_point_labels() for face zonelet IDs
 
 plotter = PrimePlotter()
 volume_graphics_data = model.as_polydata(update=True)
@@ -488,10 +477,9 @@ for part_id, part_data in volume_graphics_data.items():
 
 # Assign distinct colors and add ID labels
 zonelet_color_map = make_distinct_colors(len(zonelet_items))
-scene = plotter._backend.pv_interface.scene
 for i, (polydata, metadata) in enumerate(zonelet_items):
     color = zonelet_color_map[i]
-    plotter.add_entity_with_attributes(
+    plotter.add_mesh(
         polydata,
         metadata,
         color=color,
@@ -501,7 +489,7 @@ for i, (polydata, metadata) in enumerate(zonelet_items):
     )
     # Annotate each face zonelet with its ID at the mesh center
     center = np.array(polydata.mesh.center)
-    scene.add_point_labels(
+    plotter.add_point_labels(
         np.array([center]),
         [str(metadata.id)],
         font_size=12,
@@ -511,7 +499,7 @@ for i, (polydata, metadata) in enumerate(zonelet_items):
         render_points_as_spheres=False,
         point_size=0,
     )
-scene.add_text(
+plotter.add_text(
     "Plot 7 \u2014 Face Zonelets with IDs",
     position="upper_left",
     font_size=10,
@@ -524,11 +512,11 @@ plotter.show(title="Plot 7 \u2014 Face Zonelets with IDs")
 # ============================================================================
 # Demonstrates:
 #   - Assigning per-cell RGB scalars via cell_data on a copy of the mesh
-#   - Direct scene.add_mesh() with scalars='RGB' and rgb=True
-#   - Preserving metadata linkage via info_actor_map
+#   - plotter.add_mesh() with scalars='RGB', rgb=True, and metadata
+#   - Metadata automatically registered in info_actor_map
 
 plotter = PrimePlotter()
-scene = plotter._backend.pv_interface.scene
+rng = np.random.default_rng(seed=42)
 
 for part_id, part_data in volume_graphics_data.items():
     for entity_type, entity_list in part_data.items():
@@ -542,18 +530,18 @@ for part_id, part_data in volume_graphics_data.items():
                     mesh_copy = polydata.mesh.copy()
                     n_cells = mesh_copy.n_cells
                     if n_cells > 0:
-                        cell_colors = np.random.randint(0, 256, size=(n_cells, 3), dtype=np.uint8)
+                        cell_colors = rng.integers(0, 256, size=(n_cells, 3), dtype=np.uint8)
                         mesh_copy.cell_data["RGB"] = cell_colors
-                        actor = scene.add_mesh(
+                        plotter.add_mesh(
                             mesh_copy,
+                            metadata,
                             scalars="RGB",
                             rgb=True,
                             show_edges=True,
                             line_width=0.5,
                             pickable=True,
                         )
-                        plotter._info_actor_map[actor] = metadata
-scene.add_text(
+plotter.add_text(
     "Plot 8 \u2014 Per-Element Face Colors",
     position="upper_left",
     font_size=10,
@@ -574,7 +562,6 @@ num_colors = int(color_matrix.size / 3)
 
 for color_mode in [ColorByType.ZONE, ColorByType.ZONELET, ColorByType.PART]:
     plotter = PrimePlotter()
-    scene = plotter._backend.pv_interface.scene
 
     for part_id, part_data in volume_graphics_data.items():
         for entity_type, entity_list in part_data.items():
@@ -591,12 +578,12 @@ for color_mode in [ColorByType.ZONE, ColorByType.ZONELET, ColorByType.PART]:
                             color = color_matrix[metadata.part_id % num_colors].tolist()
                         else:  # ZONE
                             color = color_matrix[metadata.zone_id % num_colors].tolist()
-                        plotter.add_entity_with_attributes(
+                        plotter.add_mesh(
                             polydata, metadata, color=color, opacity=1.0, show_edges=True
                         )
 
     mode_name = color_mode.name
-    scene.add_text(
+    plotter.add_text(
         f"Plot 9 \u2014 ColorByType.{mode_name}",
         position="upper_left",
         font_size=10,
