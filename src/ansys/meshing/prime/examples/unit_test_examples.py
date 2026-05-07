@@ -23,7 +23,7 @@
 import os
 from typing import Optional, Union
 
-from .download_utilities import DownloadManager
+from ansys.tools.common.example_download import DownloadManager
 
 FILE_NAMES = [
     "box.psf",
