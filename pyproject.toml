@@ -40,20 +40,21 @@ pygeometry = [
 ]
 tests = [
   "ansys-tools-visualization-interface==0.12.1",
-  "pytest==9.0.2",
+  "pytest==9.0.3",
   "pytest-cov==7.1.0",
-  "pytest-pyvista==0.3.2",
+  "pytest-pyvista==0.3.3",
   "pytest-xvfb==3.1.1",
   "ansys-geometry-core>=0.7.6,<1",
-  "pyvista[trame]==0.47.1",
+  "pyvista[trame]==0.47.3",
 ]
 doc = [
   "ansys-sphinx-theme[autoapi]==1.7.2",
   "ansys-tools-visualization-interface==0.12.1",
   "joblib==1.5.3",
   "jupyter-sphinx==0.5.3",
+  "nest-asyncio2==1.7.2",
   "numpydoc==1.10.0",
-  "pyvista==0.47.1",
+  "pyvista==0.47.3",
   "sphinx-autodoc-typehints==3.1.0",
   "sphinx-copybutton==0.5.2",
   "sphinx-gallery==0.20.0",
@@ -117,13 +118,13 @@ title_format = "## [{version}](https://github.com/ansys/pyprimemesh/releases/tag
 issue_format = "[#{issue}](https://github.com/ansys/pyprimemesh/pull/{issue})"
 
 [[tool.towncrier.type]]
-directory = "added"
-name = "Added"
+directory = "breaking"
+name = "Breaking"
 showcontent = true
 
 [[tool.towncrier.type]]
-directory = "changed"
-name = "Changed"
+directory = "added"
+name = "Added"
 showcontent = true
 
 [[tool.towncrier.type]]
@@ -132,19 +133,13 @@ name = "Fixed"
 showcontent = true
 
 [[tool.towncrier.type]]
-directory = "dependencies"
-name = "Dependencies"
-showcontent = true
-
-[[tool.towncrier.type]]
-directory = "miscellaneous"
-name = "Miscellaneous"
-showcontent = true
-
-
-[[tool.towncrier.type]]
 directory = "documentation"
 name = "Documentation"
+showcontent = true
+
+[[tool.towncrier.type]]
+directory = "dependencies"
+name = "Dependencies"
 showcontent = true
 
 [[tool.towncrier.type]]
@@ -153,6 +148,17 @@ name = "Maintenance"
 showcontent = true
 
 [[tool.towncrier.type]]
+directory = "miscellaneous"
+name = "Miscellaneous"
+showcontent = true
+
+[[tool.towncrier.type]]
 directory = "test"
 name = "Test"
 showcontent = true
+
+[[tool.towncrier.type]]
+directory = "changed"
+name = "Changed"
+showcontent = true
+

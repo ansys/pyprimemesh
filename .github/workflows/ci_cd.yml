@@ -37,7 +37,7 @@ jobs:
       contents: write
       pull-requests: write
     steps:
-      - uses: ansys/actions/doc-deploy-changelog@v10
+      - uses: ansys/actions/doc-deploy-changelog@v10.2.12
         with:
           token: ${{ secrets.PYANSYS_CI_BOT_TOKEN }}
           bot-user: ${{ secrets.PYANSYS_CI_BOT_USERNAME }}
@@ -48,7 +48,7 @@ jobs:
     runs-on: ubuntu-latest
     if: github.event.action != 'closed'
     steps:
-      - uses: ansys/actions/check-vulnerabilities@v10
+      - uses: ansys/actions/check-vulnerabilities@v10.2.12
         with:
           python-version: ${{ env.MAIN_PYTHON_VERSION }}
           token: ${{ secrets.PYANSYS_CI_BOT_TOKEN }}
@@ -61,7 +61,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: PyAnsys code style checks
-        uses: ansys/actions/code-style@v10
+        uses: ansys/actions/code-style@v10.2.12
         with:
           python-version: ${{ env.MAIN_PYTHON_VERSION }}
           vale-config: "doc/.vale.ini"
@@ -73,7 +73,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: PyAnsys documentation style checks
-        uses: ansys/actions/doc-style@v10
+        uses: ansys/actions/doc-style@v10.2.12
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
 
@@ -94,7 +94,7 @@ jobs:
             os: macos-latest
     steps:
       - name: Build wheelhouse and perform smoke test
-        uses: ansys/actions/build-wheelhouse@v10
+        uses: ansys/actions/build-wheelhouse@v10.2.12
         with:
           library-name: ${{ env.PACKAGE_NAME }}
           library-namespace: ${{ env.PACKAGE_NAMESPACE }}
@@ -121,7 +121,7 @@ jobs:
         uses: pyvista/setup-headless-display-action@v4
 
       - name: "Run Ansys documentation building action"
-        uses: ansys/actions/doc-build@v10
+        uses: ansys/actions/doc-build@v10.2.12
         with:
           python-version: ${{ env.MAIN_PYTHON_VERSION }}
           check-links: false
@@ -170,14 +170,14 @@ jobs:
         run: docker run -d --rm --name ans_geo -e LICENSE_SERVER=1055@${{ secrets.LICENSE_SERVER }} --dns "8.8.8.8" -p 654:50051 ghcr.io/ansys/geometry:core-linux-latest
 
       - name: Restore images cache
-        uses: actions/cache@v5
+        uses: actions/cache@v5.0.5
         with:
           path: tests/graphics/image_cache
           key: pyvista-image-cache-${{ runner.os }}-v-${{ env.RESET_IMAGE_CACHE }}-${{ hashFiles('pyproject.toml') }}
           restore-keys: pyvista-image-cache-${{ runner.os }}-v-${{ env.RESET_IMAGE_CACHE }}
 
       - name: "Run pytest"
-        uses: ansys/actions/tests-pytest@v10
+        uses: ansys/actions/tests-pytest@v10.2.12
         env:
           PYPRIMEMESH_LAUNCH_CONTAINER: 1
           PYPRIMEMESH_IMAGE_TAG: ${{ env.DOCKER_IMAGE_TAG }}
@@ -192,7 +192,7 @@ jobs:
           path: tests/graphics/image_cache
           retention-days: 7
 
-      - uses: codecov/codecov-action@v5
+      - uses: codecov/codecov-action@v6
         name: 'Upload coverage to CodeCov'
 
   package:
@@ -202,7 +202,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Build library source and wheel artifacts
-        uses: ansys/actions/build-library@v10
+        uses: ansys/actions/build-library@v10.2.12
         with:
           library-name: ${{ env.PACKAGE_NAME }}
           python-version: ${{ env.MAIN_PYTHON_VERSION }}
@@ -224,13 +224,13 @@ jobs:
           path: ${{ env.PACKAGE_NAME }}-artifacts
 
       - name: "Upload artifacts to PyPI using trusted publisher"
-        uses: pypa/gh-action-pypi-publish@ed0c53931b1dc9bd32cbe73a98c7f6766f8a527e # v1.13.0
+        uses: pypa/gh-action-pypi-publish@cef221092ed1bacb1cc03d23a2d87d1d172e277b # v1.14.0
         with:
           print-hash: true
           packages-dir: ${{ env.PACKAGE_NAME }}-artifacts
 
       - name: Release to GitHub
-        uses: ansys/actions/release-github@v10
+        uses: ansys/actions/release-github@v10.2.12
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
           library-name: ${{ env.PACKAGE_NAME }}
@@ -242,7 +242,7 @@ jobs:
     needs: [package]
     steps:
       - name: Deploy the latest documentation
-        uses: ansys/actions/doc-deploy-dev@v10
+        uses: ansys/actions/doc-deploy-dev@v10.2.12
         with:
           cname: ${{ env.DOCUMENTATION_CNAME }}
           token: ${{ secrets.PYANSYS_CI_BOT_TOKEN }}
@@ -256,7 +256,7 @@ jobs:
     needs: [release]
     steps:
       - name: Deploy the stable documentation
-        uses: ansys/actions/doc-deploy-stable@v10
+        uses: ansys/actions/doc-deploy-stable@v10.2.12
         with:
           cname: ${{ env.DOCUMENTATION_CNAME }}
           token: ${{ secrets.PYANSYS_CI_BOT_TOKEN }}
