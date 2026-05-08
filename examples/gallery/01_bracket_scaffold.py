@@ -52,6 +52,8 @@ Procedure
 
 """
 
+# sphinx_gallery_tags = ["Structural", "Shell", "Quad", "Connect"]
+
 ###############################################################################
 # Launch Ansys Prime Server
 # ~~~~~~~~~~~~~~~~~~~~~~~~~
