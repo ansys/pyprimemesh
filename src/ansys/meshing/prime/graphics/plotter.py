@@ -139,12 +139,12 @@ class PrimePlotter(Plotter):
         else:
             return color_matrix[mesh_info.zone_id % num_colors].tolist()
 
-    def add_mesh(self, mesh_or_polydata, metadata=None, **pyvista_kwargs):
+    def add_mesh(self, mesh, metadata=None, **pyvista_kwargs):
         """Add a mesh or MeshObjectPlot to the scene with optional metadata tracking.
 
         Parameters
         ----------
-        mesh_or_polydata : pyvista.DataSet or MeshObjectPlot
+        mesh: pyvista.DataSet or MeshObjectPlot
             A raw PyVista mesh or a MeshObjectPlot (which has a ``.mesh`` attribute).
         metadata : DisplayMeshInfo, optional
             If provided, registers the actor in ``info_actor_map`` for widget support.
