@@ -82,6 +82,8 @@ Also adding download function to:
 After this preamble is the first code block:
 """
 
+# sphinx_gallery_tags = ["Template"]
+
 import ansys.meshing.prime as prime
 from ansys.meshing.prime.graphics import PrimePlotter
 
