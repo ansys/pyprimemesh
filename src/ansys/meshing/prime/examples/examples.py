@@ -25,7 +25,7 @@ import os
 from enum import Enum
 from typing import Optional, Union
 
-from .download_utilities import DownloadManager
+from ansys.tools.common.example_download import DownloadManager
 
 __all__ = [
     'get_file',
@@ -170,10 +170,10 @@ def get_file(
     download_manager = DownloadManager()
     if destination is not None and not os.path.isdir(destination):
         raise ValueError('destination directory provided does not exist')
+    directory = f"pyprimemesh/{example.value['git_folder']}"
     file = download_manager.download_file(
         example.value["filename"],
-        'pyprimemesh',
-        example.value["git_folder"],
+        directory,
         destination=destination,
         force=force,
     )
