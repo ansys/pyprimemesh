@@ -22,6 +22,7 @@
 
 """General fixtures to use in all test modules."""
 import os
+import shutil
 import xml.etree.ElementTree as ET
 
 import ansys.tools.visualization_interface as viz_interface
@@ -195,4 +196,4 @@ def pytest_sessionfinish(session, exitstatus):
     """Cleanup generated folder."""
     tmp_path = os.path.abspath("./tests/core/test_files/")
     if os.path.exists(tmp_path):
-        os.rmdir(tmp_path)
+        shutil.rmtree(tmp_path, ignore_errors=True)
