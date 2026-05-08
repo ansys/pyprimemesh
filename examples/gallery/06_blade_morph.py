@@ -52,6 +52,8 @@ Procedure
 
 """
 
+# sphinx_gallery_tags = ["Structural", "Volume", "Hex", "Morph"]
+
 ###############################################################################
 # Launch Ansys Prime Server
 # ~~~~~~~~~~~~~~~~~~~~~~~~~
