@@ -80,6 +80,8 @@ Procedure
 
 """
 
+# sphinx_gallery_tags = ["Structural", "Volume", "Hex", "Quad", "Stacker", "Sweep", "Sizing"]
+
 ###############################################################################
 # Import all necessary modules
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~
