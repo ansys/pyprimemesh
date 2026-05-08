@@ -57,6 +57,8 @@ Procedure
 * Exit the Prime session.
 """
 
+# sphinx_gallery_tags = ["Fluid", "Structural", "Volume", "Poly", "Tet", "Prism", "Inflation", "Wrap"]
+
 ###############################################################################
 # Import all necessary modules and launch an instance of Prime
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
