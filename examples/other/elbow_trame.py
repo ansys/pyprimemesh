@@ -37,6 +37,8 @@ as an example.
 
 """
 
+# sphinx_gallery_tags = ["Fluid", "Visualisation"]
+
 ###############################################################################
 # Launch Ansys Prime Server
 # ~~~~~~~~~~~~~~~~~~~~~~~~~
