@@ -200,14 +200,6 @@ class PrimePlotter(Plotter):
         """
         return self.scene.add_text(text, **kwargs)
 
-    def add_entity_with_attributes(self, polydata, metadata, **pyvista_kwargs):
-        """Add entity with full PyVista attribute control.
-
-        .. deprecated::
-            Use :meth:`add_mesh` instead.
-        """
-        return self.add_mesh(polydata, metadata, **pyvista_kwargs)
-
     def add_model(
         self, model: Model, scope: prime.ScopeDefinition = None, update: bool = False
     ) -> None:
