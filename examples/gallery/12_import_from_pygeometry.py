@@ -129,4 +129,4 @@ With the geometry imported, we can now mesh it and display the mesh:
     prime_client.exit()
 """
 
-# sphinx_gallery_tags = ["Geometry", "Surface", "Volume"]
+# sphinx_gallery_tags = ["Geometry"]
