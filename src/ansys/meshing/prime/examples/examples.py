@@ -170,10 +170,10 @@ def get_file(
     download_manager = DownloadManager()
     if destination is not None and not os.path.isdir(destination):
         raise ValueError('destination directory provided does not exist')
+    directory = f"pyprimemesh/{example.value['git_folder']}"
     file = download_manager.download_file(
         example.value["filename"],
-        'pyprimemesh',
-        example.value["git_folder"],
+        directory,
         destination=destination,
         force=force,
     )
