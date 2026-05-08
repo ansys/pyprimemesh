@@ -20,7 +20,6 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
-from .download_utilities import DownloadManager
 from .examples import (
     download_block_model_fmd,
     download_block_model_pmdat,
