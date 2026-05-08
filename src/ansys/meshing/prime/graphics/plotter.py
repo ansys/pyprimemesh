@@ -156,7 +156,7 @@ class PrimePlotter(Plotter):
         actor
             The PyVista actor added to the scene.
         """
-        mesh = mesh_or_polydata.mesh if hasattr(mesh_or_polydata, 'mesh') else mesh_or_polydata
+        mesh = mesh.mesh if hasattr(mesh, 'mesh') else mesh
         actor = self.scene.add_mesh(mesh, **pyvista_kwargs)
         if metadata is not None:
             self._info_actor_map[actor] = metadata
