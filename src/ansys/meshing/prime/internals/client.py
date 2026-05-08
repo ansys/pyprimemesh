@@ -26,12 +26,13 @@ import os
 from pathlib import Path
 from typing import Optional
 
+from ansys.tools.common.example_download import DownloadManager
+
 import ansys.meshing.prime.internals.config as config
 import ansys.meshing.prime.internals.defaults as defaults
 import ansys.meshing.prime.internals.utils as utils
 from ansys.meshing.prime.core.model import Model
 from ansys.meshing.prime.internals.utils import terminate_process
-from ansys.tools.common.example_download import DownloadManager
 
 __all__ = ['Client']
 
