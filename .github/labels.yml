@@ -10,6 +10,10 @@
   description: Improvements or additions to documentation
   color: 0677ba
 
+- name: docs:deploy
+  description: Deploy PR docs for review as requested
+  color: 0677ba
+
 - name: enhancement
   description: New features or code improvements
   color: FFD827
