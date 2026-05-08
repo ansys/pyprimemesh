@@ -50,7 +50,7 @@ Procedure
 #. Write the mesh for the structural thermal analysis.
 """
 
-# sphinx_gallery_tags = ["Structural", "Hex", "Quad", "Stacker"]
+# sphinx_gallery_tags = ["Structural", "Hex", "Quad", "Semiconductor", "Stacker"]
 
 ###############################################################################
 # Launch Ansys Prime Server
