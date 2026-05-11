@@ -376,10 +376,7 @@ def file_read_context(model, file_name: str):
         container_file_name = container_file_name.replace(os.path.sep, '/')
         yield container_file_name
         if is_copy:
-            try:
-                os.remove(temp_file_name)
-            except FileNotFoundError:
-                Warning(f"File {temp_file_name} not found when attempting to clear copy.")
+            os.remove(temp_file_name)
     elif config.has_pim():
         temp_file_name = os.path.basename(file_name)
         model.file_service.upload_file(file_name)
