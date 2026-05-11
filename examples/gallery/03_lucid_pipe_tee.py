@@ -146,6 +146,14 @@ with tempfile.TemporaryDirectory() as temp_folder:
 # By default, the wrap uses all parts as input and deletes the input
 # geometry after wrapping unless ``keep_input`` is set as ``True``.
 
+prime_client.exit()
+
+prime_client = prime.launch_prime()
+model = prime_client.model
+mesh_util = lucid.Mesh(model)
+
+pipe_tee = prime.examples.download_pipe_tee_fmd()
+
 mesh_util.read(pipe_tee)
 
 wrap = mesh_util.wrap(min_size=6, region_extract=prime.WrapRegion.LARGESTINTERNAL)
