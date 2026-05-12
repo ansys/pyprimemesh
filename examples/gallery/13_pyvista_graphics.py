@@ -108,9 +108,9 @@ mesh_util = prime.lucid.Mesh(model)
 pipe_tee = prime.examples.download_pipe_tee_pmdat()
 mesh_util.read(file_name=pipe_tee)
 
-# ============================================================================
-# PLOT 1: HIGH-LEVEL — plotter.show(model)
-# ============================================================================
+###############################################################################
+# Plot 1: High-level — plotter.show(model)
+# ~~~~~~~~~~~~~~~
 # The simplest way to visualize a model: one line of code.
 # PrimePlotter.show() accepts a Model directly and plots all entities
 # using the default color scheme (zone-based coloring with edge visibility
@@ -125,9 +125,9 @@ plotter.add_text(
 )
 plotter.show(model, title="Plot 1 — High-Level: plotter.show(model)")
 
-# ============================================================================
-# PLOT 2: PART-BASED COLORING (multi-part model)
-# ============================================================================
+###############################################################################
+# Plot 2: Part-based coloring (multi-part model)
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 # Demonstrates:
 #   - Polydata dict is keyed by part_id — one entry per part
 #   - make_distinct_colors() for custom per-part coloring
@@ -177,9 +177,9 @@ plotter.add_text(
 )
 plotter.show(title="Plot 2 — Part-Based Coloring")
 
-# ============================================================================
-# PLOT 3: ZONE NAME VISUALIZATION (face zones + volume zones)
-# ============================================================================
+###############################################################################
+# Plot 3: Zone name visualization (face zones + volume zones)
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 # Demonstrates:
 #   - Querying face and volume zones via Part.get_face_zones() / get_volume_zones()
 #   - Mapping zone IDs to names via model.get_zone_name()
@@ -278,9 +278,9 @@ plotter.add_text(
 )
 plotter.show(title="Plot 3 \u2014 Zone Names (Face & Volume)")
 
-# ============================================================================
-# PLOT 4: LABEL VISUALIZATION (CAD labels → TopoFace IDs)
-# ============================================================================
+###############################################################################
+# Plot 4: Label visualization (CAD labels → TopoFace IDs)
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 # Demonstrates:
 #   - Querying labels via Part.get_labels()
 #   - Resolving label → TopoFace IDs via get_topo_faces_of_label_name_pattern()
@@ -374,9 +374,9 @@ plotter.add_text(
 )
 plotter.show(title="Plot 4 \u2014 CAD Labels on TopoFaces")
 
-# ============================================================================
-# PLOT 5: EDGE TYPE COLORING
-# ============================================================================
+###############################################################################
+# Plot 5: Edge type coloring
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~
 # Demonstrates:
 #   - Edge MeshObjectPlot carries type-based RGB in mesh["colors"] array
 #   - Native edge colors encode topology edge type (red, black, cyan, etc.)
@@ -416,9 +416,9 @@ plotter.add_text(
 )
 plotter.show(title="Plot 5 \u2014 Edge Type Coloring")
 
-# ============================================================================
-# PLOT 6: SCOPE-BASED PLOTTING
-# ============================================================================
+###############################################################################
+# Plot 6: Scope-based plotting
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 # Demonstrates:
 #   - ScopeDefinition with label_expression to select specific entities
 #   - plotter.plot(model, scope=scope) for selective display
@@ -437,9 +437,9 @@ plotter.add_text(
 )
 plotter.show(title="Plot 6 \u2014 Scope-Based: Inlet & Outlet Faces Only")
 
-# ============================================================================
-# MESHING — wrap, surface mesh, volume mesh
-# ============================================================================
+###############################################################################
+# Meshing — wrap, surface mesh, volume mesh
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 mesh_util.wrap(min_size=6, region_extract=prime.WrapRegion.LARGESTINTERNAL)
 model.set_global_sizing_params(prime.GlobalSizingParams(model, min=6, max=50))
@@ -451,9 +451,9 @@ mesh_util.volume_mesh(
     volume_fill_type=prime.VolumeFillType.POLY,
 )
 
-# ============================================================================
-# PLOT 7: FACE ZONELET VISUALIZATION (post-meshing)
-# ============================================================================
+###############################################################################
+# Plot 7: Face zonelet visualization (post-meshing)
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 # Demonstrates:
 #   - update=True on as_polydata() to refresh after meshing
 #   - Filtering by DisplayMeshType.FACEZONELET and has_mesh=True
@@ -507,9 +507,9 @@ plotter.add_text(
 )
 plotter.show(title="Plot 7 \u2014 Face Zonelets with IDs")
 
-# ============================================================================
-# PLOT 8: PER-ELEMENT FACE COLORING
-# ============================================================================
+###############################################################################
+# Plot 8: Per-element face coloring
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 # Demonstrates:
 #   - Assigning per-cell RGB scalars via cell_data on a copy of the mesh
 #   - plotter.add_mesh() with scalars='RGB', rgb=True, and metadata
@@ -549,9 +549,9 @@ plotter.add_text(
 )
 plotter.show(title="Plot 8 \u2014 Per-Element Face Colors")
 
-# ============================================================================
-# PLOT 9: ColorByType MODES (ZONE / ZONELET / PART)
-# ============================================================================
+###############################################################################
+# Plot 9: ColorByType MODES (ZONE / ZONELET / PART)
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 # Demonstrates:
 #   - ColorByType enum (ZONE, ZONELET, PART) for different coloring strategies
 #   - Same mesh data rendered three ways using the color_matrix palette
@@ -591,9 +591,9 @@ for color_mode in [ColorByType.ZONE, ColorByType.ZONELET, ColorByType.PART]:
     )
     plotter.show(title=f"Plot 9 \u2014 ColorByType.{mode_name}")
 
-# ============================================================================
-# MESH STATISTICS
-# ============================================================================
+###############################################################################
+# Mesh statistics
+# ~~~~~~~~~~~~~~~
 
 part = model.get_part_by_name("__wrap__")
 part_summary = part.get_summary(prime.PartSummaryParams(model=model))
