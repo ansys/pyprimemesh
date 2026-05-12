@@ -105,7 +105,7 @@ model = prime_client.model
 mesh_util = prime.lucid.Mesh(model)
 
 # Load pipe tee CAD geometry
-pipe_tee = prime.examples.download_pipe_tee_fmd(destination="graphics_example.fmd")
+pipe_tee = prime.examples.download_pipe_tee_fmd(destination="./graphics_example.fmd")
 mesh_util.read(file_name=pipe_tee)
 
 # ============================================================================
