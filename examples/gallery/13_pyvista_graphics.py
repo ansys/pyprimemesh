@@ -79,7 +79,7 @@ Key data model concepts demonstrated:
   checkbox buttons in the scene
 """
 
-# sphinx_gallery_thumbnail_number = 8
+# sphinx_gallery_thumbnail_number = 2
 # sphinx_gallery_tags = ["Graphics"]
 
 import colorsys
