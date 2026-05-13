@@ -50,7 +50,7 @@ nine visualization stages:
    ID annotations
 8. **Per-element face coloring** — individual mesh face cells colored uniquely
    via ``cell_data`` scalars
-9. **ColorByType modes** — reading and meshing structural parts only to show 
+9. **ColorByType modes** — reading and meshing structural parts only to show
    colored by ZONE, ZONELET, and PART using direct ``color_matrix`` indexing
 
 Key data model concepts demonstrated:
