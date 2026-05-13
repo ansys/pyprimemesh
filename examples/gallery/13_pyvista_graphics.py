@@ -560,6 +560,12 @@ plotter.show(title="Plot 8 \u2014 Per-Element Face Colors")
 #   - Same mesh data rendered three ways using the color_matrix palette
 #   - This is the logic used by the built-in ColorByType widget
 
+# Load pipe tee CAD geometry and mesh as separate parts to show color by type
+pipe_tee = prime.examples.download_pipe_tee_pmdat()
+mesh_util.read(file_name=pipe_tee)
+
+mesh_util.surface_mesh(min_size=5, max_size=25)
+mesh_util.volume_mesh()
 
 num_colors = int(color_matrix.size / 3)
 
@@ -593,15 +599,5 @@ for color_mode in [ColorByType.ZONE, ColorByType.ZONELET, ColorByType.PART]:
         color="black",
     )
     plotter.show(title=f"Plot 9 \u2014 ColorByType.{mode_name}")
-
-###############################################################################
-# Mesh statistics
-# ~~~~~~~~~~~~~~~
-
-part = model.get_part_by_name("__wrap__")
-part_summary = part.get_summary(prime.PartSummaryParams(model=model))
-print("Volume Mesh Statistics:")
-print(f"  Poly faces: {part_summary.n_poly_faces}")
-print(f"  Poly cells: {part_summary.n_poly_cells}")
 
 prime_client.exit()
