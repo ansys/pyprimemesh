@@ -50,7 +50,7 @@ nine visualization stages:
    ID annotations
 8. **Per-element face coloring** — individual mesh face cells colored uniquely
    via ``cell_data`` scalars
-9. **ColorByType modes** — reading and meshing structural parts only to show
+9. **ColorByType modes** — reading and meshing structural parts to show
    colored by ZONE, ZONELET, and PART using direct ``color_matrix`` indexing
 
 Key data model concepts demonstrated:
@@ -574,11 +574,6 @@ mesh_util.read(file_name=pipe_tee)
 mesh_util.surface_mesh(min_size=5, max_size=25)
 mesh_util.volume_mesh()
 
-toDelete = [part.id for part in model.parts if not part.get_volume_zones()]
-
-if toDelete:
-    model.delete_parts(toDelete)
-
 # For reference after the structural parts are meshed the model contains:
 print(model)
 
@@ -613,6 +608,6 @@ for color_mode in [ColorByType.ZONE, ColorByType.ZONELET, ColorByType.PART]:
         font_size=10,
         color="black",
     )
-    plotter.show(title=f"Plot 9 \u2014 ColorByType.{mode_name}")
+    plotter.show(title=f"Plot 9 \u2014 ColorByType.{mode_name}", update=True)
 
 prime_client.exit()
