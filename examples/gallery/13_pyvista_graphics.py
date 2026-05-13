@@ -112,6 +112,9 @@ mesh_util = prime.lucid.Mesh(model)
 pipe_tee = prime.examples.download_pipe_tee_pmdat()
 mesh_util.read(file_name=pipe_tee)
 
+# For reference the model contains:
+print(model)
+
 ###############################################################################
 # Plot 1: High-level — plotter.show(model)
 # ~~~~~~~~~~~~~~~
@@ -455,6 +458,9 @@ mesh_util.volume_mesh(
     volume_fill_type=prime.VolumeFillType.POLY,
 )
 
+# For reference after meshing the model contains:
+print(model)
+
 ###############################################################################
 # Plot 7: Face zonelet visualization (post-meshing)
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -572,6 +578,9 @@ toDelete = [part.id for part in model.parts if not part.get_volume_zones()]
 
 if toDelete:
     model.delete_parts(toDelete)
+
+# For reference after the structural parts are meshed the model contains:
+print(model)
 
 num_colors = int(color_matrix.size / 3)
 
