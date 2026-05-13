@@ -45,12 +45,13 @@ nine visualization stages:
    type-based colors (stored in the edge ``"colors"`` array)
 6. **Scope-based plotting** — ``ScopeDefinition`` to selectively display only
    labeled inlet/outlet faces
-7. **Face zonelet visualization** — post-meshing face zonelets with distinct
-   colors and ID annotations
+7. **Face zonelet visualization** — after extracting fluid region using
+   wrapping and volume meshing showing face zonelets with distinct colors and
+   ID annotations
 8. **Per-element face coloring** — individual mesh face cells colored uniquely
    via ``cell_data`` scalars
-9. **ColorByType modes** — same mesh shown colored by ZONE, ZONELET, and PART
-   using direct ``color_matrix`` indexing
+9. **ColorByType modes** — reading and meshing structural parts only to show 
+   colored by ZONE, ZONELET, and PART using direct ``color_matrix`` indexing
 
 Key data model concepts demonstrated:
 
@@ -566,6 +567,11 @@ mesh_util.read(file_name=pipe_tee)
 
 mesh_util.surface_mesh(min_size=5, max_size=25)
 mesh_util.volume_mesh()
+
+toDelete = [part.id for part in model.parts if not part.get_volume_zones()]
+
+if toDelete:
+    model.delete_parts(toDelete)
 
 num_colors = int(color_matrix.size / 3)
 
