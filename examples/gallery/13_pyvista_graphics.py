@@ -574,8 +574,8 @@ mesh_util.read(file_name=pipe_tee)
 mesh_util.surface_mesh(min_size=5, max_size=25)
 mesh_util.volume_mesh()
 
-# getting data for the new mesh
-volume_graphics_data = model.as_polydata()
+# getting updated data for the new mesh
+volume_graphics_data = model.as_polydata(update=True)
 
 # For reference after the structural parts are meshed the model contains:
 print(model)
@@ -611,6 +611,6 @@ for color_mode in [ColorByType.ZONE, ColorByType.ZONELET, ColorByType.PART]:
         font_size=10,
         color="black",
     )
-    plotter.show(title=f"Plot 9 \u2014 ColorByType.{mode_name}", update=True)
+    plotter.show(title=f"Plot 9 \u2014 ColorByType.{mode_name}")
 
 prime_client.exit()
