@@ -199,12 +199,14 @@ graphics_data = model.as_polydata()
 # Collect all zone names from parts, and build zone_id -> zone_name map
 all_zone_names = set()
 volume_zone_info = {}
+face_zone_info = {}
 zone_id_to_name = {}
 for part in model.parts:
     for fz_id in part.get_face_zones():
         name = model.get_zone_name(fz_id)
         if name:
             all_zone_names.add(name)
+            face_zone_info[name] = fz_id
             zone_id_to_name[fz_id] = name
     for vz_id in part.get_volume_zones():
         name = model.get_zone_name(vz_id)
@@ -274,7 +276,12 @@ for zname, meshes in zone_face_meshes.items():
 # Legend with face and volume zones distinguished
 legend_entries = []
 for zname in zone_list:
-    suffix = " (volume)" if zname in volume_zone_info else ""
+    if zname in volume_zone_info:
+        suffix = " (volume zone)"
+    elif zname in face_zone_info:
+        suffix = " (face zone)"
+    else:
+        suffix = ""
     legend_entries.append([zname + suffix, zone_colors[zname]])
 plotter.add_legend(legend_entries, bcolor="white", border=True, size=(0.2, 0.35))
 plotter.add_text(
