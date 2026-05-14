@@ -574,6 +574,9 @@ mesh_util.read(file_name=pipe_tee)
 mesh_util.surface_mesh(min_size=5, max_size=25)
 mesh_util.volume_mesh()
 
+plotter = PrimePlotter()
+graphics_data = model.as_polydata()
+
 # For reference after the structural parts are meshed the model contains:
 print(model)
 
