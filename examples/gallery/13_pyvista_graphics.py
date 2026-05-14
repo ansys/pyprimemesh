@@ -393,7 +393,10 @@ plotter.show(title="Plot 4 \u2014 CAD Labels on TopoFaces")
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~
 # Demonstrates:
 #   - Edge MeshObjectPlot carries type-based RGB in mesh["colors"] array
-#   - Native edge colors encode topology edge type (red, black, cyan, etc.)
+#   - Native edge colors encode topology connectivity edge type (red, black, cyan, etc.)
+#    - Red: connected to a single face
+#    - Black: connected to two faces
+#    - Cyan: connected to multiple faces
 #   - Rendering edges with their built-in scalars via rgb=True
 
 plotter = PrimePlotter()
@@ -423,7 +426,7 @@ for part_id, part_data in graphics_data.items():
             )
 
 plotter.add_text(
-    "Plot 5 \u2014 Edge Type Coloring (native RGB)",
+    "Plot 5 \u2014 Edge Type Coloring (native RGB, Red=1, Black=2, Cyan>2)",
     position="upper_left",
     font_size=10,
     color="black",
