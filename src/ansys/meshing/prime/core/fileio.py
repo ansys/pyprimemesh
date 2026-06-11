@@ -19,10 +19,11 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
-"""Module for managing file inputs and outputs."""
-import copy
+"""Module for mangaging file inputs and outputs."""
 import json
+import logging
 import traceback
+import copy
 from typing import List
 
 # isort: split
@@ -328,34 +329,33 @@ class FileIO(_FileIO):
         """
         params = copy.copy(params)
         with utils.file_write_context(self._model, file_name) as temp_file_name:
-            # part_id = 1
-            # if len(self._model.parts) > 0:
-            #    part_id = self._model.parts[0].id
-            args = {"partId": 0}
+            args = {"partId" : 0}
             command_name = "PrimeMesh::FileIO/GetAbaqusSimulationData"
             sim_data_str = self._comm.serve(self._model, command_name, self._object_id, args=args)
             if params.config_settings is None:
                 params.config_settings = ''
             generate_mapdl_commands_error = None
             generate_mapdl_commands_traceback = None
-            try:
-                all_mat_cmds, analysis_settings = mapdlcdbexportutils.generate_mapdl_commands(
-                    self._model, sim_data_str, params
-                )
-            except Exception as e:
-                generate_mapdl_commands_error = e
-                generate_mapdl_commands_traceback = traceback.format_exc()
+            with utils.capture_log_records(self._model.python_logger) as collected_logs:
                 all_mat_cmds, analysis_settings = "", ""
+                try:
+                    all_mat_cmds, analysis_settings = mapdlcdbexportutils.generate_mapdl_commands(
+                        self._model, sim_data_str, params
+                    )
+                except Exception as e:
+                    generate_mapdl_commands_error = e
+                    generate_mapdl_commands_traceback = traceback.format_exc()
+                if generate_mapdl_commands_error is not None:
+                    self._model.python_logger.warning(
+                        "Failed to generate MAPDL material/analysis commands. "
+                        "Export proceeded with empty settings. \nError: %s\n%s",
+                        generate_mapdl_commands_error,
+                        generate_mapdl_commands_traceback,
+                    )
             params.material_properties = all_mat_cmds + params.material_properties
             params.analysis_settings = analysis_settings
+            params._custom_params["client_log_messages"] = json.dumps(collected_logs)
             result = super().export_mapdl_cdb(temp_file_name, params)
-            if generate_mapdl_commands_error is not None:
-                self._model.python_logger.warning(
-                    "Failed to generate MAPDL material/analysis commands. "
-                    "Export proceeded with empty settings. \nError: %s\n%s",
-                    generate_mapdl_commands_error,
-                    generate_mapdl_commands_traceback,
-                )
         return result
 
     def initialize_cdb_export_params(
@@ -587,9 +587,6 @@ class FileIO(_FileIO):
         """
         params = copy.copy(params)
         with utils.file_write_context(self._model, file_name) as temp_file_name:
-            # part_id = 1
-            # if len(self._model.parts) > 0:
-            #    part_id = self._model.parts[0].id
             args = {"partId": 0}
             command_name = "PrimeMesh::FileIO/GetAbaqusSimulationData"
             sim_data_str = self._comm.serve(self._model, command_name, self._object_id, args=args)
@@ -597,10 +594,26 @@ class FileIO(_FileIO):
                 sim_data = None
             else:
                 sim_data = json.loads(sim_data_str)
-            if sim_data is not None:
-                mp = dynaexportutils.MaterialProcessor(self._model, sim_data)
-                all_mat_cmds = mp.get_all_material_commands()
-                params.material_properties = all_mat_cmds + params.material_properties
+            generate_lsdyna_commands_error = None
+            generate_lsdyna_commands_traceback = None
+            with utils.capture_log_records(self._model.python_logger) as collected_logs:
+                all_mat_cmds = ""
+                try:
+                    if sim_data is not None:
+                        mp = dynaexportutils.MaterialProcessor(self._model, sim_data)
+                        all_mat_cmds = mp.get_all_material_commands()
+                except Exception as e:
+                    generate_lsdyna_commands_error = e
+                    generate_lsdyna_commands_traceback = traceback.format_exc()
+                if generate_lsdyna_commands_error is not None:
+                    self._model.python_logger.warning(
+                        "Failed to generate LS-DYNA material commands. "
+                        "Export proceeded with empty settings. \nError: %s\n%s",
+                        generate_lsdyna_commands_error,
+                        generate_lsdyna_commands_traceback,
+                    )
+            params.material_properties = all_mat_cmds + params.material_properties
+            params._custom_params["client_log_messages"] = json.dumps(collected_logs)
             result = super().export_lsdyna_keyword_file(temp_file_name, params)
         return result
 

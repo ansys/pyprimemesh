@@ -223,6 +223,40 @@ def print_beta_api_warning(logger: logging.Logger, command: str):
         )
 
 
+@contextmanager
+def capture_log_records(logger):
+    """Context manager that tracks log records from the given logger.
+
+    Records are captured passively via a filter and do not interfere
+    with existing handlers. On exit the collected list is available
+    through the value yielded.
+
+    Parameters
+    ----------
+    logger : logging.Logger
+        Logger to attach the collecting filter to.
+
+    Yields
+    ------
+    list[dict]
+        List of ``{'level': str, 'message': str}`` dicts, populated
+        in-place as log records pass through.
+    """
+    collected = []
+
+    def _collect(record):
+        collected.append({'level': record.levelname, 'message': record.getMessage()})
+        return True
+
+    log_filter = logging.Filter()
+    log_filter.filter = _collect
+    logger.addFilter(log_filter)
+    try:
+        yield collected
+    finally:
+        logger.removeFilter(log_filter)
+
+
 def launch_prime_github_container(
     mount_host: str = defaults.get_user_data_path(),
     mount_image: str = defaults.get_user_data_path_for_containers(),
