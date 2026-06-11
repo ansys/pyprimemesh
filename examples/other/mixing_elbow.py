@@ -21,6 +21,9 @@
 # SOFTWARE.
 
 """Mixing elbow example."""
+
+# sphinx_gallery_tags = ["Fluid", "Poly", "Prism", "Sizing"]
+
 import os
 import tempfile
 

@@ -92,6 +92,7 @@ extensions = [
     "sphinx_autodoc_typehints",
     "sphinxemoji.sphinxemoji",
     "sphinx_design",
+    "pyvista.ext.plot_directive",
     "pyvista.ext.viewer_directive",
     "sphinx_jinja",
 ]
@@ -252,6 +253,7 @@ suppress_warnings = [
     "ref.obj",  # Suppress missing object reference warnings
     "ref.func",  # Suppress missing function reference warnings
     "ref.meth",  # Suppress missing method reference warnings
+    "ref.term",  # Suppress missing glossary term warnings (e.g. numpy:array_like)
     "config.cache",  # Suppress unpickleable configuration warnings
     "autodoc",  # Suppress autodoc warnings including forward reference resolution
 ]

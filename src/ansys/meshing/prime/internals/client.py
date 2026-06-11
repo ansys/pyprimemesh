@@ -26,7 +26,8 @@ import os
 from pathlib import Path
 from typing import Optional
 
-import ansys.meshing.prime.examples as examples
+from ansys.tools.common.example_download import DownloadManager
+
 import ansys.meshing.prime.internals.config as config
 import ansys.meshing.prime.internals.defaults as defaults
 import ansys.meshing.prime.internals.utils as utils
@@ -218,7 +219,7 @@ class Client(object):
             self.pim_client.close()
         clear_examples = bool(int(os.environ.get('PYPRIMEMESH_CLEAR_EXAMPLES', '1')))
         if clear_examples:
-            download_manager = examples.DownloadManager()
+            download_manager = DownloadManager()
             download_manager.clear_download_cache()
 
     def __enter__(self):

@@ -59,6 +59,8 @@ Procedure
 
 """
 
+# sphinx_gallery_tags = ["Semiconductor", "Hex", "Stacker", "Morph", "Connect", "Beta"]
+
 ###############################################################################
 # Import modules
 # ~~~~~~~~~~~~~~

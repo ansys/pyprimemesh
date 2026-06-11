@@ -56,6 +56,8 @@ Procedure
 
 """
 
+# sphinx_gallery_tags = ["Fluid", "Aerodynamics", "Tet", "Prism", "Wrap", "Diagnostics"]
+
 ###############################################################################
 # Launch Ansys Prime Server
 # ~~~~~~~~~~~~~~~~~~~~~~~~~
