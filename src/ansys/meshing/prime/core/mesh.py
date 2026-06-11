@@ -330,7 +330,7 @@ class Mesh(MeshInfo):
         if face_facet_res.topo_face_ids[index] > 0:
             display_mesh_type = DisplayMeshType.TOPOFACE
             id = face_facet_res.topo_face_ids[index]
-            has_mesh = face_facet_res.mesh_face_ids[index] > 0
+            has_mesh = bool(face_facet_res.mesh_face_ids[index] > 0)
         else:
             display_mesh_type = DisplayMeshType.FACEZONELET
             id = face_facet_res.face_zonelet_ids[index]

@@ -33,10 +33,13 @@ import ansys.meshing.prime.internals.utils as utils
 from ansys.meshing.prime.internals.client import Client
 
 try:
+    from ansys.meshing.prime.internals import cyberchannel
+except ImportError:
+    cyberchannel = None
+
+try:
     import ansys.platform.instancemanagement as pypim
     from simple_upload_server.client import Client as FileClient
-
-    from ansys.meshing.prime.internals import cyberchannel
 
     config.set_has_pim(pypim.is_configured())
 except:
@@ -332,6 +335,11 @@ def launch_prime(
     uds_folder = None
     socket_filename = None
     if os.name != 'nt' and client_certs_dir is None:
+        if cyberchannel is None:
+            raise ImportError(
+                "The 'grpcio' package is required for UDS connections on Linux "
+                "but could not be imported. Please install it."
+            )
         uds_folder = cyberchannel.determine_uds_folder()
         uds_id = f'{uuid.uuid4()}'
         socket_filename = "pyprimemesh-" + uds_id + ".sock"

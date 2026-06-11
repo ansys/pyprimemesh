@@ -2,6 +2,27 @@ This project uses [towncrier](https://towncrier.readthedocs.io/) and the changes
 
 <!-- towncrier release notes start -->
 
+## [0.10.3](https://github.com/ansys/pyprimemesh/releases/tag/v0.10.3) - May 21, 2026
+
+
+### Documentation
+
+- Python 3.14 support [#1247](https://github.com/ansys/pyprimemesh/pull/1247)
+
+## [0.10.2](https://github.com/ansys/pyprimemesh/releases/tag/v0.10.2) - April 23, 2026
+
+
+### Miscellaneous
+
+- Changes from 26R1 SP01 ADO to github [#1254](https://github.com/ansys/pyprimemesh/pull/1254)
+- Fixes for both sides : import related failures [#1256](https://github.com/ansys/pyprimemesh/pull/1256)
+- 26R1 ado sync for sp1 [#1264](https://github.com/ansys/pyprimemesh/pull/1264)
+
+
+### Maintenance
+
+- Correct image tag and version for sp1 [#1268](https://github.com/ansys/pyprimemesh/pull/1268)
+
 ## [0.10.1](https://github.com/ansys/pyprimemesh/releases/tag/v0.10.1) - March 24, 2026
 
 
