@@ -37,7 +37,7 @@ jobs:
       contents: write
       pull-requests: write
     steps:
-      - uses: ansys/actions/doc-deploy-changelog@v10.3.1
+      - uses: ansys/actions/doc-deploy-changelog@v10.3.2
         with:
           token: ${{ secrets.PYANSYS_CI_BOT_TOKEN }}
           bot-user: ${{ secrets.PYANSYS_CI_BOT_USERNAME }}
@@ -48,7 +48,7 @@ jobs:
     runs-on: ubuntu-latest
     if: github.event.action != 'closed'
     steps:
-      - uses: ansys/actions/check-vulnerabilities@v10.3.1
+      - uses: ansys/actions/check-vulnerabilities@v10.3.2
         with:
           python-version: ${{ env.MAIN_PYTHON_VERSION }}
           token: ${{ secrets.PYANSYS_CI_BOT_TOKEN }}
@@ -61,7 +61,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: PyAnsys code style checks
-        uses: ansys/actions/code-style@v10.3.1
+        uses: ansys/actions/code-style@v10.3.2
         with:
           python-version: ${{ env.MAIN_PYTHON_VERSION }}
           vale-config: "doc/.vale.ini"
@@ -73,7 +73,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: PyAnsys documentation style checks
-        uses: ansys/actions/doc-style@v10.3.1
+        uses: ansys/actions/doc-style@v10.3.2
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
 
@@ -94,7 +94,7 @@ jobs:
             os: macos-latest
     steps:
       - name: Build wheelhouse and perform smoke test
-        uses: ansys/actions/build-wheelhouse@v10.3.1
+        uses: ansys/actions/build-wheelhouse@v10.3.2
         with:
           library-name: ${{ env.PACKAGE_NAME }}
           library-namespace: ${{ env.PACKAGE_NAMESPACE }}
@@ -108,7 +108,7 @@ jobs:
     needs: [docs-style]
     steps:
       - name: Login in Github Container registry
-        uses: docker/login-action@v4.1.0
+        uses: docker/login-action@v4.2.0
         with:
           registry: ghcr.io
           username: ansys-bot
@@ -121,7 +121,7 @@ jobs:
         uses: pyvista/setup-headless-display-action@v4
 
       - name: "Run Ansys documentation building action"
-        uses: ansys/actions/doc-build@v10.3.1
+        uses: ansys/actions/doc-build@v10.3.2
         with:
           python-version: ${{ env.MAIN_PYTHON_VERSION }}
           check-links: false
@@ -141,7 +141,7 @@ jobs:
     # Run when the PR is closed i.e. when docs job is skipped
     if: always() && github.event_name == 'pull_request' && contains(github.event.pull_request.labels.*.name, 'docs:deploy') && (needs.docs.result == 'success' || needs.docs.result == 'skipped')
     steps:
-      - uses: ansys/actions/doc-deploy-pr@v10.3.1
+      - uses: ansys/actions/doc-deploy-pr@v10.3.2
         with:
           cname: ${{ env.DOCUMENTATION_CNAME }}
           token: ${{ secrets.GITHUB_TOKEN }}
@@ -157,7 +157,7 @@ jobs:
 
     steps:
       - name: Login in Github Container registry
-        uses: docker/login-action@v4.1.0
+        uses: docker/login-action@v4.2.0
         with:
           registry: ghcr.io
           username: ansys-bot
@@ -177,7 +177,7 @@ jobs:
           restore-keys: pyvista-image-cache-${{ runner.os }}-v-${{ env.RESET_IMAGE_CACHE }}
 
       - name: "Run pytest"
-        uses: ansys/actions/tests-pytest@v10.3.1
+        uses: ansys/actions/tests-pytest@v10.3.2
         env:
           PYPRIMEMESH_LAUNCH_CONTAINER: 1
           PYPRIMEMESH_IMAGE_TAG: ${{ env.DOCKER_IMAGE_TAG }}
@@ -202,7 +202,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Build library source and wheel artifacts
-        uses: ansys/actions/build-library@v10.3.1
+        uses: ansys/actions/build-library@v10.3.2
         with:
           library-name: ${{ env.PACKAGE_NAME }}
           python-version: ${{ env.MAIN_PYTHON_VERSION }}
@@ -230,7 +230,7 @@ jobs:
           packages-dir: ${{ env.PACKAGE_NAME }}-artifacts
 
       - name: Release to GitHub
-        uses: ansys/actions/release-github@v10.3.1
+        uses: ansys/actions/release-github@v10.3.2
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
           library-name: ${{ env.PACKAGE_NAME }}
@@ -242,7 +242,7 @@ jobs:
     needs: [package]
     steps:
       - name: Deploy the latest documentation
-        uses: ansys/actions/doc-deploy-dev@v10.3.1
+        uses: ansys/actions/doc-deploy-dev@v10.3.2
         with:
           cname: ${{ env.DOCUMENTATION_CNAME }}
           token: ${{ secrets.PYANSYS_CI_BOT_TOKEN }}
@@ -256,7 +256,7 @@ jobs:
     needs: [release]
     steps:
       - name: Deploy the stable documentation
-        uses: ansys/actions/doc-deploy-stable@v10.3.1
+        uses: ansys/actions/doc-deploy-stable@v10.3.2
         with:
           cname: ${{ env.DOCUMENTATION_CNAME }}
           token: ${{ secrets.PYANSYS_CI_BOT_TOKEN }}
