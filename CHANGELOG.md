@@ -2,6 +2,13 @@ This project uses [towncrier](https://towncrier.readthedocs.io/) and the changes
 
 <!-- towncrier release notes start -->
 
+## [0.10.4](https://github.com/ansys/pyprimemesh/releases/tag/v0.10.4) - June 15, 2026
+
+
+### Maintenance
+
+- Ado sync for 26r1sp02 [#1298](https://github.com/ansys/pyprimemesh/pull/1298)
+
 ## [0.10.3](https://github.com/ansys/pyprimemesh/releases/tag/v0.10.3) - May 21, 2026
 
 
