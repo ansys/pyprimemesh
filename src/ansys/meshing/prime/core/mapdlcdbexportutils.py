@@ -4267,10 +4267,12 @@ class _StepProcessor:
                     else:
                         ninterval = int(parameters['NUMBER INTERVAL'])
             nfreq = None
-            if 'Parameters' in output:
-                parameters = output['Parameters']
-                if 'FREQUENCY' in parameters:
-                    nfreq = parameters['FREQUENCY']
+            if 'Parameters' in output and 'FREQUENCY' in output['Parameters']:
+                if 'Frequency' in self._curr_step:
+                    # Abaqus ignores *OUTPUT FREQUENCY in a *FREQUENCY step and forces it to 1.
+                    nfreq = 1
+                else:
+                    nfreq = output['Parameters']['FREQUENCY']
             time_interval = None
             if 'Parameters' in output:
                 parameters = output['Parameters']
