@@ -21,12 +21,12 @@
 
 """Module for MAPDL cdb export utilities."""
 
+import copy
 import json
+import math
 import os
 import re
-import math
 from typing import Tuple
-import copy
 
 import ansys.meshing.prime as prime
 from ansys.meshing.prime.autogen.fileiostructs import ExportMapdlCdbParams
@@ -547,9 +547,7 @@ class _AmplitudeProcessor:
                 formatted_time[0] = f"{ff}"
         if self._step_time and self._step_start_time != 0.0:
             formatted_time.insert(0, f"{self._formatter.field_float(0.0)}")
-            formatted_time.insert(
-                1, f"{self._formatter.field_float(float(self._step_start_time))}"
-            )
+            formatted_time.insert(1, f"{self._formatter.field_float(float(self._step_start_time))}")
             formatted_amp.insert(0, f"{self._formatter.field_float(0.0)}")
             formatted_amp.insert(1, f"{self._formatter.field_float(0.0)}")
             # add two times there! 0, current step start time
@@ -600,9 +598,7 @@ class _AmplitudeProcessor:
                     formatted_time[0] = f"{ff}"
         if self._step_time and self._step_start_time != 0.0:
             formatted_time.insert(0, f"{self._formatter.field_float(0.0)}")
-            formatted_time.insert(
-                1, f"{self._formatter.field_float(float(self._step_start_time))}"
-            )
+            formatted_time.insert(1, f"{self._formatter.field_float(float(self._step_start_time))}")
             formatted_amp.insert(0, f"{self._formatter.field_float(0.0)}")
             formatted_amp.insert(1, f"{self._formatter.field_float(0.0)}")
             # add two times there! 0, current step start time
@@ -635,11 +631,17 @@ class _MaterialProcessor:
         '_property_function_map',
         '_model',
         '_logger',
-        '_skip_comments'
+        '_skip_comments',
     )
 
-    def __init__(self, model: prime.Model, raw_materials_data, zone_data, hm_comments=False,
-                 skip_comments=True):
+    def __init__(
+        self,
+        model: prime.Model,
+        raw_materials_data,
+        zone_data,
+        hm_comments=False,
+        skip_comments=True,
+    ):
         self._raw_materials_data = raw_materials_data
         self._zone_data = zone_data
         self._mat_id = 0
@@ -692,9 +694,9 @@ class _MaterialProcessor:
                         'ThicknessMode'
                     ] = zone_details['ThicknessMode']
                 if 'Thickness' in zone_details:
-                    self._cohezive_zone_thickness_data[zone_details['Material']][
-                        'Thickness'
-                    ] = zone_details['Thickness']
+                    self._cohezive_zone_thickness_data[zone_details['Material']]['Thickness'] = (
+                        zone_details['Thickness']
+                    )
             if zone_details['Material'] in self._material_linked_to_zone_type:
                 if self._material_linked_to_zone_type[zone_details['Material']] in [
                     'Shell',
@@ -936,7 +938,7 @@ class _MaterialProcessor:
         else:
             self._logger.warning(
                 f"Only TIME=PRONY is processed for VISCOELASTIC material. "
-                f"Material {material} is not processed completly."
+                f"Material {material} is not processed completely."
             )
 
         return viscoelastic_data
@@ -1268,13 +1270,13 @@ class _MaterialProcessor:
             if 'A33' in data and data['A33'] is not None:
                 ctezs = data['A33']
 
-            if (temperature and
-                    (len(temperature) != len(ctexs) or
-                     len(temperature) != len(cteys) or
-                     len(temperature) != len(ctezs))):
+            if temperature and (
+                len(temperature) != len(ctexs)
+                or len(temperature) != len(cteys)
+                or len(temperature) != len(ctezs)
+            ):
                 self._logger.warning(
-                    f"Inconsistent temperature and expansion data "
-                    f"for material {material}."
+                    f"Inconsistent temperature and expansion data " f"for material {material}."
                 )
                 return ''
             if temperature:
@@ -1348,10 +1350,11 @@ class _MaterialProcessor:
             if exp_type == 'TRANSVERSELY ISOTROPIC':
                 k33 = k22
 
-            if (temperature and
-                    (len(temperature) != len(k11) or
-                     len(temperature) != len(k22) or
-                     len(temperature) != len(k33))):
+            if temperature and (
+                len(temperature) != len(k11)
+                or len(temperature) != len(k22)
+                or len(temperature) != len(k33)
+            ):
                 self._logger.warning(
                     f"Inconsistent temperature and orthotropic "
                     f"conductivity data for material {material}."
@@ -1376,13 +1379,14 @@ class _MaterialProcessor:
             k13 = data.get('K13', [])
             k23 = data.get('K23', [])
 
-            if (temperature and
-                    (len(temperature) != len(k11) or
-                     len(temperature) != len(k22) or
-                     len(temperature) != len(k33) or
-                     len(temperature) != len(k12) or
-                     len(temperature) != len(k13) or
-                     len(temperature) != len(k23))):
+            if temperature and (
+                len(temperature) != len(k11)
+                or len(temperature) != len(k22)
+                or len(temperature) != len(k33)
+                or len(temperature) != len(k12)
+                or len(temperature) != len(k13)
+                or len(temperature) != len(k23)
+            ):
                 self._logger.warning(
                     f"Inconsistent temperature and anisotropic "
                     f"conductivity data for material {material}."
@@ -1435,8 +1439,7 @@ class _MaterialProcessor:
         damping_data = ''
         if property_dict['Parameters'] is None:
             self._logger.warning(
-                f"*DAMPING for material {material} does not have "
-                f"parameters to process."
+                f"*DAMPING for material {material} does not have " f"parameters to process."
             )
         else:
             alpha = property_dict['Parameters'].get('ALPHA')
@@ -1446,20 +1449,21 @@ class _MaterialProcessor:
             if beta and beta != "TABULAR" and float(beta) != 0.0:
                 damping_data += f"MP, BETD, {mat_id}, {beta} \n"
             structural = property_dict['Parameters'].get('STRUCTURAL')
-            if (structural and structural != "TABULAR" and
-                    float(structural) != 0.0):
+            if structural and structural != "TABULAR" and float(structural) != 0.0:
                 damping_data += f"MP, DMPS, {mat_id}, {structural} \n"
             composite = property_dict['Parameters'].get('COMPOSITE')
             if composite and composite != "TABULAR":
                 if float(composite) != 0.0:
                     self._logger.warning(
                         f"Parameter {{'COMPOSITE'}} on *DAMPING for "
-                        f"material {material} is not processed.")
+                        f"material {material} is not processed."
+                    )
             band_limited = property_dict['Parameters'].get('BAND LIMITED')
             if band_limited:
                 self._logger.warning(
                     f"Parameter {{'BAND LIMITED'}} on *DAMPING for "
-                    f"material {material} is not processed.")
+                    f"material {material} is not processed."
+                )
         damping_data += f"\n"
         return damping_data
 
@@ -1568,8 +1572,7 @@ class _MaterialProcessor:
             elastic_modulus += f"TB,CZM,{mat_id},1,,BILI \n"
             elastic_modulus += f"TBDATA,1,{c1},{c2},{c3},{c4},{c5},"
 
-        elif (property_dict["Parameters"]["TYPE"] in
-                ['ENGINEERING CONSTANTS', 'LAMINA']):
+        elif property_dict["Parameters"]["TYPE"] in ['ENGINEERING CONSTANTS', 'LAMINA']:
             # same code can be used for by adding 'TRANSVERSELY ISOTROPIC'
             # in above list
             data = copy.deepcopy(data)
@@ -1581,7 +1584,7 @@ class _MaterialProcessor:
                 data['E3'] = data['E2']
                 data['V13'] = data['V12']
                 data['G13'] = data['G12']
-                data['G23'] = float(data['E2']/(2*(1+float(data['V23']))))
+                data['G23'] = float(data['E2'] / (2 * (1 + float(data['V23']))))
 
             temperature = data.get('Temperature', [])
             e1 = data.get('E1', [])
@@ -1596,15 +1599,17 @@ class _MaterialProcessor:
 
             elastic_modulus = f"TB, ELASTIC, {mat_id}, , 9, OELN\n"
             if temperature:
-                if (len(temperature) != len(e1) or
-                        len(temperature) != len(e2) or
-                        len(temperature) != len(e3) or
-                        len(temperature) != len(v12) or
-                        len(temperature) != len(v13) or
-                        len(temperature) != len(v23) or
-                        len(temperature) != len(g12) or
-                        len(temperature) != len(g13) or
-                        len(temperature) != len(g23)):
+                if (
+                    len(temperature) != len(e1)
+                    or len(temperature) != len(e2)
+                    or len(temperature) != len(e3)
+                    or len(temperature) != len(v12)
+                    or len(temperature) != len(v13)
+                    or len(temperature) != len(v23)
+                    or len(temperature) != len(g12)
+                    or len(temperature) != len(g13)
+                    or len(temperature) != len(g23)
+                ):
                     self._logger.warning(
                         f"data values on *ELASTIC are not consistent for material {material}."
                     )
@@ -1612,17 +1617,15 @@ class _MaterialProcessor:
                 for i, temp in enumerate(temperature):
                     elastic_modulus += f"\nTBTEMP, {temp}\n"
                     elastic_modulus += (
-                        f"TBDATA, 1, {e1[i]}, {e2[i]}, {e3[i]}, "
-                        f"{g12[i]}, {g23[i]}, {g13[i]}\n")
-                    elastic_modulus += (
-                        f"TBDATA, 7, {v12[i]}, {v23[i]}, {v13[i]}\n")
+                        f"TBDATA, 1, {e1[i]}, {e2[i]}, {e3[i]}, " f"{g12[i]}, {g23[i]}, {g13[i]}\n"
+                    )
+                    elastic_modulus += f"TBDATA, 7, {v12[i]}, {v23[i]}, {v13[i]}\n"
 
             else:
                 elastic_modulus += (
-                    f"TBDATA, 1, {e1[0]}, {e2[0]}, {e3[0]}, "
-                    f"{g12[0]}, {g23[0]}, {g13[0]}\n")
-                elastic_modulus += (
-                    f"TBDATA, 7, {v12[0]}, {v23[0]}, {v13[0]}\n")
+                    f"TBDATA, 1, {e1[0]}, {e2[0]}, {e3[0]}, " f"{g12[0]}, {g23[0]}, {g13[0]}\n"
+                )
+                elastic_modulus += f"TBDATA, 7, {v12[0]}, {v23[0]}, {v13[0]}\n"
 
         elif property_dict["Parameters"]["TYPE"] in ["ANISOTROPIC", "ORTHOTROPIC"]:
             # Abaqus -> Voigt mapping
@@ -1630,9 +1633,12 @@ class _MaterialProcessor:
                 "11": 1,
                 "22": 2,
                 "33": 3,
-                "12": 4, "21": 4,
-                "23": 5, "32": 5,
-                "13": 6, "31": 6,
+                "12": 4,
+                "21": 4,
+                "23": 5,
+                "32": 5,
+                "13": 6,
+                "31": 6,
             }
             # Initialize 6x6 stiffness matrix (Voigt)
             elastic_modulus = f"TB,ELASTIC,{mat_id},{len(data['D1111'])},21,AELS\n"
@@ -1656,12 +1662,12 @@ class _MaterialProcessor:
 
                 C_ansys = [C[i][j] for i in range(6) for j in range(i, 6)]
                 if 'Temperature' in data:
-                    elastic_modulus+=f"TBTEMP, {data['Temperature'][nn]}"
+                    elastic_modulus += f"TBTEMP, {data['Temperature'][nn]}"
                 for i, val in enumerate(C_ansys):
-                    if i % 6 ==0:
-                        elastic_modulus+=f"\nTBDATA,{i+1}"
-                    elastic_modulus+=f",{C_ansys[i]}"
-                elastic_modulus+="\n"
+                    if i % 6 == 0:
+                        elastic_modulus += f"\nTBDATA,{i+1}"
+                    elastic_modulus += f",{C_ansys[i]}"
+                elastic_modulus += "\n"
         else:
             self._logger.warning(
                 f"Elastic Modulus with type = "
@@ -1676,12 +1682,15 @@ class _MaterialProcessor:
                 return ("{:.6g}".format(float(val))).upper()
             except (TypeError, ValueError):
                 return str(val)
+
         data = []
         if 'Data' in property_dict and property_dict['Data'] is not None:
             data = property_dict['Data']
-        if (property_dict["Parameters"]["HARDENING"] != "ISOTROPIC" and
-           property_dict["Parameters"]["HARDENING"] != "KINEMATIC" and
-           property_dict["Parameters"]["HARDENING"] != "COMBINED"):
+        if (
+            property_dict["Parameters"]["HARDENING"] != "ISOTROPIC"
+            and property_dict["Parameters"]["HARDENING"] != "KINEMATIC"
+            and property_dict["Parameters"]["HARDENING"] != "COMBINED"
+        ):
             self._logger.warning(
                 f"Only HARDENING=ISOTROPIC/KINEMATIC/COMBINED is processed, "
                 f"*PLASTIC for the material {material} "
@@ -1708,7 +1717,7 @@ class _MaterialProcessor:
                 return ''
             nbs = int(nbs)
             nT = len(T)
-            if (len(ys0) != nT or len(C) != nT * nbs or len(Y) != nT * nbs):
+            if len(ys0) != nT or len(C) != nT * nbs or len(Y) != nT * nbs:
                 self._logger.warning(
                     f"Data lengths for COMBINED hardening are inconsistent. "
                     f"*PLASTIC for the material {material} is not processed."
@@ -1782,7 +1791,7 @@ class _MaterialProcessor:
         if 'TEST DATA INPUT' in parameters:
             self._logger.warning(
                 f"Uniaxial test data for HYPERELASTIC material is not processed"
-                f"Material {material} is not processed completly."
+                f"Material {material} is not processed completely."
             )
             return hyperelastic_data
 
@@ -1981,11 +1990,12 @@ class _JointMaterialProcessor:
         '_property_function_map',
         '_model',
         '_logger',
-        '_skip_comments'
+        '_skip_comments',
     )
 
-    def __init__(self, model: prime.Model, raw_joint_materials_data, hm_comments=False,
-                 skip_comments = True):
+    def __init__(
+        self, model: prime.Model, raw_joint_materials_data, hm_comments=False, skip_comments=True
+    ):
         self._raw_joint_materials_data = raw_joint_materials_data
         self._mat_id = 0
         self._enable_hm_comments = hm_comments
@@ -2263,9 +2273,7 @@ class _JointMaterialProcessor:
                                     points = int(len(stiff) / len(list(set(temperatures))))
                                 else:
                                     points = int(len(stiff) / len(list(set(temperatures)))) + 1
-                                clms = comps_nonlinear_mapping[
-                                    comp_data['Parameters']['COMPONENT']
-                                ]
+                                clms = comps_nonlinear_mapping[comp_data['Parameters']['COMPONENT']]
                                 elasticity_data += f"TB, JOIN, {mat_id}, , {points}, {clms}\n"
                                 elasticity_data += elasticity_temporary_data
                         else:
@@ -2568,7 +2576,7 @@ class _BoundaryProcessor:
         step_end_time=1.0,
         sim_data=None,
         need_base_id=False,
-        step_removed=True
+        step_removed=True,
     ):
         self._simulation_data = sim_data
         self._boundaries_data = data
@@ -2743,12 +2751,14 @@ class _BoundaryProcessor:
                         base_map = acc_map[i]
                     else:
                         base_map = dof_map[i]
-                    self._base_id_mapping[boundary_counter].append({
-                        'Component': cmname,
-                        'BaseName': base_name,
-                        base_map: self._base_id_counter,
-                        'BaseMotionType': None
-                    })
+                    self._base_id_mapping[boundary_counter].append(
+                        {
+                            'Component': cmname,
+                            'BaseName': base_name,
+                            base_map: self._base_id_counter,
+                            'BaseMotionType': None,
+                        }
+                    )
                     boundary_commands += f"{self._base_id_counter}"
                     self._base_id_counter += 1
                 else:
@@ -2807,9 +2817,9 @@ class _DloadProcessor:
         mag = 0
         load_type = None
         elset = None
-        x_mag=0
-        y_mag=0
-        z_mag=0
+        x_mag = 0
+        y_mag = 0
+        z_mag = 0
         for data_line in data_lines:
             if len(data_line) == 0:
                 continue
@@ -2835,10 +2845,10 @@ class _DloadProcessor:
                 if denominator_squared == 0:
                     norm = 1  # Or some other appropriate value
                 else:
-                    norm = 1/math.sqrt(denominator_squared)
-                x_mag+= -norm*x*mag
-                y_mag+= -norm*y*mag
-                z_mag+= -norm*z*mag
+                    norm = 1 / math.sqrt(denominator_squared)
+                x_mag += -norm * x * mag
+                y_mag += -norm * y * mag
+                z_mag += -norm * z * mag
         if elset:
             if op == 'NEW':
                 dload_commands = f"CMACEL, {elset}, 0.0, 0.0, 0.0 \n"
@@ -3584,12 +3594,7 @@ class _StepProcessor:
     )
 
     def __init__(
-        self,
-        model: prime.Model,
-        data,
-        sim_data,
-        model_application,
-        use_LMM_as_applicable=False
+        self, model: prime.Model, data, sim_data, model_application, use_LMM_as_applicable=False
     ):
         self._simulation_data = sim_data
         self._steps_data = data
@@ -4034,7 +4039,7 @@ class _StepProcessor:
                         (
                             f'! -------------------------- STEP: '
                             f'{self._step_counter} -----------------------\n'
-                        )
+                        ),
                     )
                     frequency_analysis_commands = '\n'.join(temp_frequency_analysis_commands)
                     self._assign_analysis = self._assign_analysis[:-1]
@@ -4126,9 +4131,7 @@ class _StepProcessor:
         self._previous_analysis = "STEADY STATE DYNAMICS"
         if self.is_base_motion_present():
             steady_state_dynamics_analysis_commands = (
-                steady_state_dynamics_analysis_commands.replace(
-                    'RESVEC, ON', '! RESVEC, ON'
-                )
+                steady_state_dynamics_analysis_commands.replace('RESVEC, ON', '! RESVEC, ON')
             )
         return steady_state_dynamics_analysis_commands
 
@@ -4773,10 +4776,7 @@ class _StepProcessor:
                 eigen_mode_data = step_data['SelectEigenmodes'][0]
                 params = eigen_mode_data.get('Parameters')
                 if params is not None and params:
-                    if (
-                        'DEFINITION' in params
-                        and params['DEFINITION'] == 'FREQUENCY RANGE'
-                    ):
+                    if 'DEFINITION' in params and params['DEFINITION'] == 'FREQUENCY RANGE':
                         data_dict = eigen_mode_data.get('Data')
                         if data_dict is not None and data_dict:
                             data = eigen_mode_data['Data'][0]
@@ -4832,8 +4832,8 @@ class _StepProcessor:
             self._modal_load_vectors,
             sim_data=self._simulation_data,
             use_LMM_as_applicable=self._use_LMM_as_applicable,
-            base_id_mapping = self._base_id_mapping,
-            is_relative = is_relative
+            base_id_mapping=self._base_id_mapping,
+            is_relative=is_relative,
         )
         base_motion_commands = ''
         base_motion_commands += base_motion_processor.get_all_base_motion_commands()
@@ -4896,8 +4896,8 @@ class _StepProcessor:
             self._step_start_time,
             self._step_end_time,
             sim_data=self._simulation_data,
-            need_base_id = need_base_id,
-            step_removed = step_removed
+            need_base_id=need_base_id,
+            step_removed=step_removed,
         )
         boundary_commands = ''
         boundary_commands += boundary_processor.get_all_boundary_commands()
@@ -4996,17 +4996,11 @@ class _StepProcessor:
                     key_commands = "Placeholder_GlobalDamping\n"
                 mapdl_step_commands += key_commands
                 if key == "Output" and "Dynamic" in step_data:
-                    if (
-                        "STATIC" in self._analysis_sequence
-                        and "DYNAMIC" in self._analysis_sequence
-                    ):
+                    if "STATIC" in self._analysis_sequence and "DYNAMIC" in self._analysis_sequence:
                         self._transient_output_controls = key_commands
                         self._transient_output_controls += "\nNROPT,FULL\n"
                 if key == "Output" and "Static" in step_data:
-                    if (
-                        "STATIC" in self._analysis_sequence
-                        and "DYNAMIC" in self._analysis_sequence
-                    ):
+                    if "STATIC" in self._analysis_sequence and "DYNAMIC" in self._analysis_sequence:
                         mapdl_step_commands += "Placeholder_Transient_Outres\n"
         step_name = ''
         if 'Parameters' in step_data:
@@ -5097,10 +5091,7 @@ class _StepProcessor:
             steps_commands = steps_commands.replace(
                 "Placeholder_GlobalDamping", f"DMPSTR, {self._global_structural_damping_value}"
             )
-        if (
-            "Placeholder_Transient_Outres" in steps_commands
-            and not self._transient_output_controls
-        ):
+        if "Placeholder_Transient_Outres" in steps_commands and not self._transient_output_controls:
             updated_steps_commands = steps_commands.replace("Placeholder_Transient_Outres", "")
         elif "Placeholder_Transient_Outres" in steps_commands and self._transient_output_controls:
 
@@ -5251,9 +5242,7 @@ def get_modified_component_name(name: str, set_type: str = None, sim_data=None) 
             and sim_data["Surface"] is not None
             and name in sim_data['Surface']
         )
-        has_nset = (
-            'Nset' in sim_data and sim_data["Nset"] is not None and name in sim_data['Nset']
-        )
+        has_nset = 'Nset' in sim_data and sim_data["Nset"] is not None and name in sim_data['Nset']
         has_elset = (
             'Elset' in sim_data and sim_data["Elset"] is not None and name in sim_data['Elset']
         )
@@ -5310,7 +5299,7 @@ def generate_mapdl_commands(
             json_simulation_data["Materials"],
             json_simulation_data["Zones"],
             params.write_separate_blocks,
-            params.skip_comments
+            params.skip_comments,
         )
         mat_cmds = mp.get_all_material_commands()
         all_mat_cmds = mat_cmds
@@ -5319,8 +5308,10 @@ def generate_mapdl_commands(
         and json_simulation_data["ConnectorBehavior"] is not None
     ):
         jmp = _JointMaterialProcessor(
-            model, json_simulation_data["ConnectorBehavior"], params.write_separate_blocks,
-            params.skip_comments
+            model,
+            json_simulation_data["ConnectorBehavior"],
+            params.write_separate_blocks,
+            params.skip_comments,
         )
         joint_all_mat_cmds = jmp.get_all_material_commands()
         all_mat_cmds += joint_all_mat_cmds
@@ -5352,7 +5343,7 @@ def generate_mapdl_commands(
             json_simulation_data["Step"],
             sim_data=json_simulation_data,
             model_application=params.analysis_type,
-            use_LMM_as_applicable=False
+            use_LMM_as_applicable=False,
         )
         step_settings = steps_data.get_all_steps()
         ninterval_mapdl_commands = steps_data.get_ninterval_mapdl_commands()
@@ -5385,8 +5376,7 @@ def generate_mapdl_commands(
         analysis_settings += params.analysis_settings
         if "Step" in json_simulation_data and json_simulation_data["Step"]:
             analysis_settings += (
-                '!--------------------------------------------------------------'
-                '------------\n'
+                '!--------------------------------------------------------------' '------------\n'
             )
             analysis_settings += '/delete,,cnm,,1\n'
             analysis_settings += '/delete,,DSP,,\n'
