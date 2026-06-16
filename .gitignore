@@ -50,3 +50,15 @@ test-output.xml
 
 # logger
 .log
+
+# Generated example outputs (large binary/geometry files)
+examples/gallery/_generated/
+*.stl
+*.usd
+*.usda
+
+# Scratch/debug scripts at repo root
+/example.py
+/Jabba.stl
+/jabba_meshed.stl
+/model.usd
