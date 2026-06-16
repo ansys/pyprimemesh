@@ -178,6 +178,126 @@ def compute_face_list_from_structured_nodes(dim):
     return flist
 
 
+class FaceGeometry:
+    """Intermediate DTO for face geometry extracted from connectivity results.
+
+    Parameters
+    ----------
+    points : np.ndarray
+        Array of vertex coordinates (N, 3).
+    face_vertex_indices : np.ndarray
+        Flattened array of vertex indices for all faces.
+    face_vertex_counts : np.ndarray
+        Number of vertices per face.
+    color : list
+        RGB color [0-255] for this geometry.
+    part_id : int
+        ID of the part this geometry belongs to.
+    zone_id : int
+        ID of the zone.
+    zone_name : str
+        Name of the zone.
+    mesh_id : int
+        Mesh/zonelet ID.
+    display_mesh_type : DisplayMeshType
+        Type of mesh entity.
+    has_mesh : bool
+        Whether this face has actual mesh elements.
+    """
+
+    def __init__(
+        self,
+        points,
+        face_vertex_indices,
+        face_vertex_counts,
+        color,
+        part_id,
+        zone_id,
+        zone_name,
+        mesh_id,
+        display_mesh_type,
+        has_mesh,
+    ):
+        """Initialize face geometry."""
+        self.points = points
+        self.face_vertex_indices = face_vertex_indices
+        self.face_vertex_counts = face_vertex_counts
+        self.color = color
+        self.part_id = part_id
+        self.zone_id = zone_id
+        self.zone_name = zone_name
+        self.mesh_id = mesh_id
+        self.display_mesh_type = display_mesh_type
+        self.has_mesh = has_mesh
+
+
+class EdgeGeometry:
+    """Intermediate DTO for edge geometry extracted from connectivity results.
+
+    Parameters
+    ----------
+    points : np.ndarray
+        Array of vertex coordinates (N, 3).
+    edge_vertex_indices : np.ndarray
+        Flattened array of vertex indices for all edges.
+    edge_vertex_counts : np.ndarray
+        Number of vertices per edge.
+    color : list
+        RGB color [0-255] for this geometry.
+    part_id : int
+        ID of the part this geometry belongs to.
+    mesh_id : int
+        Edge zonelet ID.
+    display_mesh_type : DisplayMeshType
+        Type of mesh entity (typically EDGEZONELET or TOPOEDGE).
+    """
+
+    def __init__(
+        self,
+        points,
+        edge_vertex_indices,
+        edge_vertex_counts,
+        color,
+        part_id,
+        mesh_id,
+        display_mesh_type,
+    ):
+        """Initialize edge geometry."""
+        self.points = points
+        self.edge_vertex_indices = edge_vertex_indices
+        self.edge_vertex_counts = edge_vertex_counts
+        self.color = color
+        self.part_id = part_id
+        self.mesh_id = mesh_id
+        self.display_mesh_type = display_mesh_type
+
+
+class SplineGeometry:
+    """Intermediate DTO for spline geometry (control points or surface).
+
+    Parameters
+    ----------
+    points : np.ndarray
+        Array of control/spline point coordinates (N, 3).
+    color : list
+        RGB color [0-255].
+    part_id : int
+        ID of the part.
+    spline_id : int
+        ID of the spline.
+    geom_type : DisplayMeshType
+        Either SPLINECONTROLPOINTS or SPLINESURFACE.
+    """
+
+    def __init__(self, points, color, part_id, spline_id, geom_type):
+        """Initialize spline geometry."""
+        self.points = points
+        self.color = color
+        self.part_id = part_id
+        self.spline_id = spline_id
+        self.geom_type = geom_type
+
+
 class Mesh(MeshInfo):
     """Processes the mesh for visualization in the GUI.
 
@@ -599,3 +719,400 @@ class Mesh(MeshInfo):
             Zone ID of the mesh.
         """
         return self._zone_id
+
+
+class MeshUSD(MeshInfo):
+    """Processes the mesh for USD export and serialization.
+
+    This class reads from the same connectivity source as Mesh but outputs
+    OpenUSD geometry instead of PyVista PolyData. It provides parallel APIs
+    for exporting to USD stages.
+
+    Parameters
+    ----------
+    model : CommunicationManager
+        Model to process.
+    """
+
+    def __init__(self, model: CommunicationManager):
+        """Initialize the USD mesh object."""
+        super().__init__(model)
+        self._model = model
+        self._unfreeze()
+        self._parts_usd_geom = {}
+        self._freeze()
+
+    @property
+    def model(self):
+        """Model."""
+        return self._model
+
+    def _extract_face_geometry(
+        self, part_id: int, face_facet_res: FaceConnectivityResults, index: int
+    ) -> FaceGeometry:
+        """Extract face geometry from connectivity results.
+
+        Parameters
+        ----------
+        part_id : int
+            ID of the part.
+        face_facet_res : FaceConnectivityResults
+            Face connectivity results.
+        index : int
+            Index of the face zonelet.
+
+        Returns
+        -------
+        FaceGeometry
+            Extracted face geometry DTO.
+        """
+        part = self._model.get_part(part_id)
+        vertices, faces = self._get_vertices_and_surf_faces(face_facet_res, index)
+
+        # Convert VTK-style packed face list to USD format
+        face_vertex_counts = []
+        face_vertex_indices = []
+        i = 0
+        while i < len(faces):
+            count = int(faces[i])
+            face_vertex_counts.append(count)
+            for j in range(1, count + 1):
+                face_vertex_indices.append(int(faces[i + j]))
+            i += count + 1
+
+        fcolor = np.array(self.get_face_color(part, ColorByType.ZONE))
+        color = fcolor.tolist()
+
+        has_mesh = True
+        if face_facet_res.topo_face_ids[index] > 0:
+            display_mesh_type = DisplayMeshType.TOPOFACE
+            mesh_id = face_facet_res.topo_face_ids[index]
+            has_mesh = bool(face_facet_res.mesh_face_ids[index] > 0)
+        else:
+            display_mesh_type = DisplayMeshType.FACEZONELET
+            mesh_id = face_facet_res.face_zonelet_ids[index]
+
+        return FaceGeometry(
+            points=vertices,
+            face_vertex_indices=np.array(face_vertex_indices, dtype=np.uint32),
+            face_vertex_counts=np.array(face_vertex_counts, dtype=np.uint32),
+            color=color,
+            part_id=part_id,
+            zone_id=face_facet_res.face_zone_ids[index],
+            zone_name=face_facet_res.face_zone_names[index],
+            mesh_id=mesh_id,
+            display_mesh_type=display_mesh_type,
+            has_mesh=has_mesh,
+        )
+
+    def _extract_edge_geometry(
+        self, part_id: int, edge_facet_res: EdgeConnectivityResults, index: int
+    ) -> EdgeGeometry:
+        """Extract edge geometry from connectivity results.
+
+        Parameters
+        ----------
+        part_id : int
+            ID of the part.
+        edge_facet_res : EdgeConnectivityResults
+            Edge connectivity results.
+        index : int
+            Index of the edge zonelet.
+
+        Returns
+        -------
+        EdgeGeometry
+            Extracted edge geometry DTO.
+        """
+        vertices, edges = self._get_vertices_and_surf_edges(edge_facet_res, index)
+
+        # Convert edge list to USD format
+        edge_vertex_counts = []
+        edge_vertex_indices = []
+        i = 0
+        while i < len(edges):
+            count = int(edges[i])
+            edge_vertex_counts.append(count)
+            for j in range(1, count + 1):
+                edge_vertex_indices.append(int(edges[i + j]))
+            i += count + 1
+
+        ecolor = np.array(self.get_edge_color(edge_facet_res, index))
+        color = ecolor.tolist()
+
+        mesh_type = DisplayMeshType.EDGEZONELET
+        if edge_facet_res.topo_edge_ids[index] > 0:
+            mesh_type = DisplayMeshType.TOPOEDGE
+
+        return EdgeGeometry(
+            points=vertices,
+            edge_vertex_indices=np.array(edge_vertex_indices, dtype=np.uint32),
+            edge_vertex_counts=np.array(edge_vertex_counts, dtype=np.uint32),
+            color=color,
+            part_id=part_id,
+            mesh_id=edge_facet_res.edge_zonelet_ids[index],
+            display_mesh_type=mesh_type,
+        )
+
+    def _extract_spline_geometry(
+        self, part_id: int, spline_id: int, geom_type: DisplayMeshType
+    ) -> SplineGeometry:
+        """Extract spline geometry (control points or surface).
+
+        Parameters
+        ----------
+        part_id : int
+            ID of the part.
+        spline_id : int
+            ID of the spline.
+        geom_type : DisplayMeshType
+            Type of spline geometry (SPLINECONTROLPOINTS or SPLINESURFACE).
+
+        Returns
+        -------
+        SplineGeometry
+            Extracted spline geometry DTO.
+        """
+        part = self._model.get_part(part_id)
+        spline = part.get_spline(spline_id)
+
+        if geom_type == DisplayMeshType.SPLINECONTROLPOINTS:
+            points = spline.control_points
+            color = [0, 0, 255]
+        else:
+            points = spline.spline_points
+            color = color_matrix[1].tolist()
+
+        return SplineGeometry(
+            points=np.array(points),
+            color=color,
+            part_id=part_id,
+            spline_id=spline_id,
+            geom_type=geom_type,
+        )
+
+    def get_face_color(self, part: Part, model_type: ColorByType = ColorByType.ZONE):
+        """Get the colors of faces (same logic as Mesh).
+
+        Returns
+        -------
+        List
+            List of colors for faces.
+        """
+        num_colors = int(color_matrix.size / 3)
+        return color_matrix[part.id % num_colors].tolist()
+
+    def get_edge_color(self, edge_results: EdgeConnectivityResults, index: int):
+        """Get the colors of edges (same logic as Mesh).
+
+        Returns
+        -------
+        List
+            List of colors for edges.
+        """
+        mesh_type = DisplayMeshType.EDGEZONELET
+        if edge_results.topo_edge_ids[index] > 0:
+            mesh_type = DisplayMeshType.TOPOEDGE
+        num_colors = int(color_matrix.size / 3)
+        if mesh_type == DisplayMeshType.EDGEZONELET:
+            return color_matrix[index % num_colors].tolist()
+        elif mesh_type == DisplayMeshType.TOPOEDGE:
+            if edge_results.topo_edge_types[index] == 1:
+                return [255, 0, 0]
+            elif edge_results.topo_edge_types[index] == 2:
+                return [0, 0, 0]
+            elif edge_results.topo_edge_types[index] == 3:
+                return [0, 255, 255]
+            elif edge_results.topo_edge_types[index] == 4:
+                return [255, 0, 255]
+            elif edge_results.topo_edge_types[index] == 5:
+                return [255, 255, 0]
+            elif edge_results.topo_edge_types[index] == 6:
+                return [128, 0, 128]
+            else:
+                return color_matrix[edge_results.id % num_colors].tolist()
+
+    def _get_vertices_and_surf_faces(
+        self, connectivity_results: FaceConnectivityResults, index
+    ) -> Union[np.ndarray, np.ndarray]:
+        """Calculate the vertices and faces of the mesh.
+
+        Parameters
+        ----------
+        connectivity_results : FaceConnectivityResults
+            Results of the connectivity operations.
+        index : int
+            Index of the mesh.
+
+        Returns
+        -------
+        Union[np.ndarray, np.ndarray]
+            Vertices and faces of the mesh.
+        """
+        node_start = 3 * np.sum(connectivity_results.num_nodes_per_face_zonelet[0:index])
+        num_node_coords = 3 * connectivity_results.num_nodes_per_face_zonelet[index]
+        face_list_start = np.sum(connectivity_results.num_face_list_per_face_zonelet[0:index])
+        num_face_list = connectivity_results.num_face_list_per_face_zonelet[index]
+        vertices = connectivity_results.node_coords[
+            node_start : node_start + num_node_coords
+        ].reshape((-1, 3))
+        faces = connectivity_results.face_list[face_list_start : face_list_start + num_face_list]
+        return vertices, faces
+
+    def _get_vertices_and_surf_edges(
+        self, connectivity_results: EdgeConnectivityResults, index: int
+    ) -> Union[np.ndarray, np.ndarray]:
+        """Calculate the vertices and edges of the mesh.
+
+        Parameters
+        ----------
+        connectivity_results : EdgeConnectivityResults
+            Results of the connectivity operations.
+        index : int
+            Index of the mesh.
+
+        Returns
+        -------
+        Union[np.ndarray, np.ndarray]
+            Vertices and edges of the mesh.
+        """
+        node_start = 3 * np.sum(connectivity_results.num_nodes_per_edge_zonelet[0:index])
+        num_node_coords = 3 * connectivity_results.num_nodes_per_edge_zonelet[index]
+        edge_list_start = np.sum(connectivity_results.num_edge_list_per_edge_zonelet[0:index])
+        num_edge_list = connectivity_results.num_edge_list_per_edge_zonelet[index]
+        vertices = connectivity_results.node_coords[
+            node_start : node_start + num_node_coords
+        ].reshape((-1, 3))
+        edges = connectivity_results.edge_list[edge_list_start : edge_list_start + num_edge_list]
+        return vertices, edges
+
+    def update_usd(self, part_ids: List[int]) -> Dict[int, Dict[str, list]]:
+        """Update the USD geometry for the given parts.
+
+        Parameters
+        ----------
+        part_ids : List[int]
+            List of part IDs to update.
+
+        Returns
+        -------
+        Dict[int, Dict[str, list]]
+            Dictionary mapping part_id -> {"faces": [...], "edges": [...],
+            "ctrlpts": [...], "splinesurf": [...]}
+        """
+        with prime.numpy_array_optimization_enabled():
+            facet_result = self.get_face_and_edge_connectivity(
+                part_ids, FaceAndEdgeConnectivityParams(model=self._model)
+            )
+        self._parts_usd_geom = {}
+        for i, part_id in enumerate(facet_result.part_ids):
+            part = self._model.get_part(part_id)
+            splines = part.get_splines()
+            part_usd_geom = {}
+
+            face_geom_list = [
+                self._extract_face_geometry(
+                    part_id, facet_result.face_connectivity_result_per_part[i], j
+                )
+                for j in range(
+                    0, len(facet_result.face_connectivity_result_per_part[i].face_zonelet_ids)
+                )
+            ]
+
+            edge_geom_list = [
+                self._extract_edge_geometry(
+                    part_id, facet_result.edge_connectivity_result_per_part[i], j
+                )
+                for j in range(
+                    0, len(facet_result.edge_connectivity_result_per_part[i].edge_zonelet_ids)
+                )
+            ]
+
+            spline_cp_geom_list = [
+                self._extract_spline_geometry(
+                    part_id, spline_id, DisplayMeshType.SPLINECONTROLPOINTS
+                )
+                for spline_id in splines
+            ]
+
+            spline_surface_geom_list = [
+                self._extract_spline_geometry(part_id, spline_id, DisplayMeshType.SPLINESURFACE)
+                for spline_id in splines
+            ]
+
+            part_usd_geom["faces"] = face_geom_list
+            part_usd_geom["edges"] = edge_geom_list
+            part_usd_geom["ctrlpts"] = spline_cp_geom_list
+            part_usd_geom["splinesurf"] = spline_surface_geom_list
+            self._parts_usd_geom[part_id] = part_usd_geom
+
+        return self._parts_usd_geom
+
+    def as_usd(self, update: bool = False) -> Dict[int, Dict[str, list]]:
+        """Return the mesh as USD geometry DTOs.
+
+        Parameters
+        ----------
+        update : bool, default: False
+            Update the USD geometry.
+
+        Returns
+        -------
+        Dict[int, Dict[str, list]]
+            Dictionary mapping part_id -> {"faces": [...], "edges": [...],
+            "ctrlpts": [...], "splinesurf": [...]}
+        """
+        if not self._parts_usd_geom or update:
+            part_ids = [part.id for part in self._model.parts]
+            self.update_usd(part_ids)
+        return self._parts_usd_geom
+
+    def get_scoped_usd(self, scope: "prime.ScopeDefinition", update: bool = False):
+        """Get the USD geometry for a scoped mesh.
+
+        Parameters
+        ----------
+        scope : prime.ScopeDefinition
+            Scope to get the mesh from.
+        update : bool, default: False
+            Update the USD geometry.
+
+        Returns
+        -------
+        Dict[int, Dict[str, list]]
+            Dictionary mapping part_id -> {"faces": [...], "edges": [...], ...}
+        """
+        self.as_usd(update=update)
+        parts = self._model.control_data.get_scope_parts(scope)
+
+        if len(set(parts).intersection(set(self._parts_usd_geom.keys()))) != len(parts):
+            self.update_usd(parts)
+
+        scoped_usd = {}
+        scope_def = scope
+        for part_id in parts:
+            part = self._model.get_part(part_id)
+            scope_def.part_expression = part.name
+            disp_data = None
+            disp_ids = []
+            if scope.entity_type == prime.ScopeEntity.FACEZONELETS:
+                disp_ids = self._model.control_data.get_scope_face_zonelets(
+                    scope=scope_def, params=prime.ScopeZoneletParams(model=self._model)
+                )
+                disp_data = self._parts_usd_geom[part_id]["faces"]
+
+            if disp_data is not None:
+                temp_geom = []
+                for geom in disp_data:
+                    if geom.mesh_id in disp_ids:
+                        temp_geom.append(geom)
+                temp_key = {}
+                if len(temp_geom) > 0:
+                    temp_key["faces"] = temp_geom
+                    scoped_usd[part_id] = temp_key
+
+        if len(scoped_usd) == 0:
+            self.__init__(self._model)
+            return self.get_scoped_usd(scope, update=True)
+
+        return scoped_usd
