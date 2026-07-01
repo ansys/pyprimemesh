@@ -52,8 +52,8 @@ stackable
 [Ss]tacker
 [Ss]weeper
 [Ss]weepable
-Synopsis
-synopsis
+Synopsys
+synopsys
 te
 tet
 tetrahedra
