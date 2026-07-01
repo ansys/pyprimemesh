@@ -1,0 +1,6 @@
+SCALINGFAILED
+=============
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoattribute:: ErrorCode.SCALINGFAILED

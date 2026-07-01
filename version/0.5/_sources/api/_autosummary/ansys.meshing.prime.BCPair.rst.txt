@@ -1,0 +1,36 @@
+.. vale off
+
+BCPair
+======
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoclass:: BCPair
+   
+   
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+      :toctree:
+   
+      
+      BCPair.print_default
+      BCPair.set_default
+   
+   
+
+   
+   
+   .. rubric:: Attributes
+
+   .. autosummary::
+      :toctree:
+   
+      BCPair.source_zonelet
+      BCPair.target_zonelet
+      BCPair.type
+   
+   
+
+.. vale on

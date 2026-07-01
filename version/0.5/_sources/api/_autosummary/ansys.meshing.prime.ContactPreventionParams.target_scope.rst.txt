@@ -1,0 +1,6 @@
+target\_scope
+=============
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoproperty:: ContactPreventionParams.target_scope

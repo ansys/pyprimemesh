@@ -1,0 +1,6 @@
+export\_lsdyna\_iga\_keyword\_file
+==================================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. automethod:: FileIO.export_lsdyna_iga_keyword_file

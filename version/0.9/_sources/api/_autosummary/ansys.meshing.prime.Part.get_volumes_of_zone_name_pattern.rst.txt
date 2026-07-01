@@ -1,0 +1,11 @@
+get\_volumes\_of\_zone\_name\_pattern
+=====================================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. automethod:: ansys.meshing.prime.Part.get_volumes_of_zone_name_pattern
+
+.. minigallery::
+   :add-heading: Examples using Part.get_volumes_of_zone_name_pattern
+
+   ansys.meshing.prime.Part.get_volumes_of_zone_name_pattern

@@ -1,0 +1,11 @@
+is\_integer
+===========
+
+.. currentmodule:: ansys.meshing.prime
+
+.. automethod:: ansys.meshing.prime.SeparateBlocksFormatType.is_integer
+
+.. minigallery::
+   :add-heading: Examples using SeparateBlocksFormatType.is_integer
+
+   ansys.meshing.prime.SeparateBlocksFormatType.is_integer

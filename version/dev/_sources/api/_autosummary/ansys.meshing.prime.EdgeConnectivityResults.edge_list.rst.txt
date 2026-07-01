@@ -1,0 +1,6 @@
+edge\_list
+==========
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoproperty:: EdgeConnectivityResults.edge_list

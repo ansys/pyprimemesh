@@ -1,0 +1,6 @@
+﻿WRAPPERLEAKPREVENTIONFAILED
+===========================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoattribute:: ErrorCode.WRAPPERLEAKPREVENTIONFAILED

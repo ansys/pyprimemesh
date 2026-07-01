@@ -1,0 +1,11 @@
+resolve\_intersections
+======================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. automethod:: ansys.meshing.prime.SurfaceUtilities.resolve_intersections
+
+.. minigallery::
+   :add-heading: Examples using SurfaceUtilities.resolve_intersections
+
+   ansys.meshing.prime.SurfaceUtilities.resolve_intersections

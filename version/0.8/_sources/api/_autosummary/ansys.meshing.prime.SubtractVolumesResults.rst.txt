@@ -1,0 +1,40 @@
+.. vale off
+
+SubtractVolumesResults
+======================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoclass:: SubtractVolumesResults
+   
+   
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+      :toctree:
+   
+      
+      SubtractVolumesResults.print_default
+      SubtractVolumesResults.set_default
+   
+   
+
+   
+   
+   .. rubric:: Attributes
+
+   .. autosummary::
+      :toctree:
+   
+      SubtractVolumesResults.error_code
+      SubtractVolumesResults.warning_codes
+   
+   
+
+.. minigallery::
+    :add-heading: Examples using SubtractVolumesResults
+
+    ansys.meshing.prime.SubtractVolumesResults
+
+.. vale on

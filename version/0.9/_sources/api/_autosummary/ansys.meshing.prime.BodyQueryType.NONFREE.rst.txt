@@ -1,0 +1,6 @@
+NONFREE
+=======
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoattribute:: BodyQueryType.NONFREE

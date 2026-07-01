@@ -1,0 +1,11 @@
+bit\_length
+===========
+
+.. currentmodule:: ansys.meshing.prime
+
+.. automethod:: ansys.meshing.prime.CellZoneletType.bit_length
+
+.. minigallery::
+   :add-heading: Examples using CellZoneletType.bit_length
+
+   ansys.meshing.prime.CellZoneletType.bit_length

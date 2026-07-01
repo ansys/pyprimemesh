@@ -1,0 +1,6 @@
+CADIMPORTFAILED
+===============
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoattribute:: ErrorCode.CADIMPORTFAILED

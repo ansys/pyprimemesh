@@ -1,0 +1,40 @@
+.. vale off
+
+PrismStairStep
+==============
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoclass:: PrismStairStep
+   
+   
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+      :toctree:
+   
+      
+      PrismStairStep.print_default
+      PrismStairStep.set_default
+   
+   
+
+   
+   
+   .. rubric:: Attributes
+
+   .. autosummary::
+      :toctree:
+   
+      PrismStairStep.check_proximity
+      PrismStairStep.gap_factor_scale
+   
+   
+
+.. minigallery::
+    :add-heading: Examples using PrismStairStep
+
+    ansys.meshing.prime.PrismStairStep
+
+.. vale on

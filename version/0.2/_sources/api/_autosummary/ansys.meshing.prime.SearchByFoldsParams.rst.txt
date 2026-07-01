@@ -1,0 +1,30 @@
+SearchByFoldsParams
+===================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoclass:: SearchByFoldsParams
+   
+   
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+      :toctree:
+   
+      
+      SearchByFoldsParams.print_default
+      SearchByFoldsParams.set_default
+   
+   
+
+   
+   
+   .. rubric:: Attributes
+
+   .. autosummary::
+      :toctree:
+   
+      SearchByFoldsParams.critical_angle
+   
+   

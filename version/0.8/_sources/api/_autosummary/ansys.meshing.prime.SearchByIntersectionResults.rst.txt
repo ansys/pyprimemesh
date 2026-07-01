@@ -1,0 +1,40 @@
+.. vale off
+
+SearchByIntersectionResults
+===========================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoclass:: SearchByIntersectionResults
+   
+   
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+      :toctree:
+   
+      
+      SearchByIntersectionResults.print_default
+      SearchByIntersectionResults.set_default
+   
+   
+
+   
+   
+   .. rubric:: Attributes
+
+   .. autosummary::
+      :toctree:
+   
+      SearchByIntersectionResults.error_code
+      SearchByIntersectionResults.n_found
+   
+   
+
+.. minigallery::
+    :add-heading: Examples using SearchByIntersectionResults
+
+    ansys.meshing.prime.SearchByIntersectionResults
+
+.. vale on

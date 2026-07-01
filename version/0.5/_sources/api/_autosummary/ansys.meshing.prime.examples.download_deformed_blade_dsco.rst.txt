@@ -1,0 +1,6 @@
+download\_deformed\_blade\_dsco
+===============================
+
+.. currentmodule:: ansys.meshing.prime.examples
+
+.. autofunction:: download_deformed_blade_dsco

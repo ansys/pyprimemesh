@@ -1,0 +1,6 @@
+﻿ZONENOTFOUND
+============
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoattribute:: ErrorCode.ZONENOTFOUND

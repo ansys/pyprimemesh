@@ -1,0 +1,11 @@
+bit\_count
+==========
+
+.. currentmodule:: ansys.meshing.prime
+
+.. automethod:: ansys.meshing.prime.TopoSearchField.bit_count
+
+.. minigallery::
+   :add-heading: Examples using TopoSearchField.bit_count
+
+   ansys.meshing.prime.TopoSearchField.bit_count

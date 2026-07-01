@@ -1,0 +1,6 @@
+skip\_comments
+==============
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoproperty:: ExportMapdlCdbParams.skip_comments

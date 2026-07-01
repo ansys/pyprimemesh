@@ -1,0 +1,23 @@
+SmoothDihedralFaceNodesResults
+==============================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoclass:: SmoothDihedralFaceNodesResults
+   
+   
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+      :toctree:
+   
+      
+      SmoothDihedralFaceNodesResults.print_default
+      SmoothDihedralFaceNodesResults.set_default
+   
+   
+
+   
+   
+   

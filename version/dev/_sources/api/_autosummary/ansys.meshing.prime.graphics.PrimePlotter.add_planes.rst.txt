@@ -1,0 +1,11 @@
+add\_planes
+===========
+
+.. currentmodule:: ansys.meshing.prime.graphics
+
+.. automethod:: ansys.meshing.prime.graphics.PrimePlotter.add_planes
+
+.. minigallery::
+   :add-heading: Examples using PrimePlotter.add_planes
+
+   ansys.meshing.prime.graphics.PrimePlotter.add_planes

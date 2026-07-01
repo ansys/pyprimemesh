@@ -1,0 +1,6 @@
+min\_size
+=========
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoproperty:: SurferParams.min_size

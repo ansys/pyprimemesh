@@ -1,0 +1,6 @@
+FIRSTASPECTRATIO
+================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoattribute:: MultizonePrismType.FIRSTASPECTRATIO

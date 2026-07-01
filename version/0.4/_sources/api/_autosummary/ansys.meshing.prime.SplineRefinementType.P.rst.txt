@@ -1,0 +1,6 @@
+﻿P
+=
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoattribute:: SplineRefinementType.P

@@ -1,0 +1,40 @@
+.. vale off
+
+DeleteVolumesResults
+====================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoclass:: DeleteVolumesResults
+   
+   
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+      :toctree:
+   
+      
+      DeleteVolumesResults.print_default
+      DeleteVolumesResults.set_default
+   
+   
+
+   
+   
+   .. rubric:: Attributes
+
+   .. autosummary::
+      :toctree:
+   
+      DeleteVolumesResults.deleted_volumes
+      DeleteVolumesResults.error_code
+   
+   
+
+.. minigallery::
+    :add-heading: Examples using DeleteVolumesResults
+
+    ansys.meshing.prime.DeleteVolumesResults
+
+.. vale on

@@ -1,0 +1,6 @@
+MATCHMORPH\_BCPAIRINPUTTYPEMISMATCH
+===================================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoattribute:: ErrorCode.MATCHMORPH_BCPAIRINPUTTYPEMISMATCH

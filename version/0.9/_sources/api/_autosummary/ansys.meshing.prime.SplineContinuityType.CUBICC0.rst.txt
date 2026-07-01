@@ -1,0 +1,6 @@
+CUBICC0
+=======
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoattribute:: SplineContinuityType.CUBICC0

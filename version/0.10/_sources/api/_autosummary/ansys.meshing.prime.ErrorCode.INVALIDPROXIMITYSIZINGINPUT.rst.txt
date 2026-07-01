@@ -1,0 +1,6 @@
+INVALIDPROXIMITYSIZINGINPUT
+===========================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoattribute:: ErrorCode.INVALIDPROXIMITYSIZINGINPUT

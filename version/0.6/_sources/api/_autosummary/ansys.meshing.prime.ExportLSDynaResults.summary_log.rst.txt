@@ -1,0 +1,6 @@
+summary\_log
+============
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoproperty:: ExportLSDynaResults.summary_log

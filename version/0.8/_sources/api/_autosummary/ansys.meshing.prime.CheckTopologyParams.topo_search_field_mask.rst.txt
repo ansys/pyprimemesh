@@ -1,0 +1,6 @@
+topo\_search\_field\_mask
+=========================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoproperty:: CheckTopologyParams.topo_search_field_mask

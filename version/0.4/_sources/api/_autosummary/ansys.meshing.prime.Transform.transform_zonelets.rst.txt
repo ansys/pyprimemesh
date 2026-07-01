@@ -1,0 +1,6 @@
+﻿transform\_zonelets
+===================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. automethod:: Transform.transform_zonelets

@@ -1,0 +1,6 @@
+STACKER\_FAILED
+===============
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoattribute:: ErrorCode.STACKER_FAILED

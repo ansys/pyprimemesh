@@ -1,0 +1,11 @@
+is\_integer
+===========
+
+.. currentmodule:: ansys.meshing.prime
+
+.. automethod:: ansys.meshing.prime.SplineContinuityType.is_integer
+
+.. minigallery::
+   :add-heading: Examples using SplineContinuityType.is_integer
+
+   ansys.meshing.prime.SplineContinuityType.is_integer

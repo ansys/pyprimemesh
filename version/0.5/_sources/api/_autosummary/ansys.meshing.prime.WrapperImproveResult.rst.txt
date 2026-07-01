@@ -1,0 +1,38 @@
+.. vale off
+
+WrapperImproveResult
+====================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoclass:: WrapperImproveResult
+   
+   
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+      :toctree:
+   
+      
+      WrapperImproveResult.print_default
+      WrapperImproveResult.set_default
+   
+   
+
+   
+   
+   .. rubric:: Attributes
+
+   .. autosummary::
+      :toctree:
+   
+      WrapperImproveResult.error_code
+      WrapperImproveResult.n_face_intersections_found
+      WrapperImproveResult.n_skew_found
+      WrapperImproveResult.remaining_skew_faces
+      WrapperImproveResult.unresolved_face_intersections
+   
+   
+
+.. vale on

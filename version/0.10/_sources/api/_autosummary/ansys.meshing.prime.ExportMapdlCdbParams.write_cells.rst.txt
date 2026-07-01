@@ -1,0 +1,6 @@
+write\_cells
+============
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoproperty:: ExportMapdlCdbParams.write_cells

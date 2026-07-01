@@ -1,0 +1,11 @@
+conjugate
+=========
+
+.. currentmodule:: ansys.meshing.prime
+
+.. automethod:: ansys.meshing.prime.PrismControlOffsetType.conjugate
+
+.. minigallery::
+   :add-heading: Examples using PrismControlOffsetType.conjugate
+
+   ansys.meshing.prime.PrismControlOffsetType.conjugate

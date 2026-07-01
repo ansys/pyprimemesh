@@ -1,0 +1,35 @@
+.. vale off
+
+SurfaceSearch
+=============
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoclass:: SurfaceSearch
+   
+   
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+      :toctree:
+   
+      
+      SurfaceSearch.check_face_deviation
+      SurfaceSearch.get_search_info_by_register_id
+      SurfaceSearch.get_surface_diagnostic_summary
+      SurfaceSearch.get_surface_quality_summary
+      SurfaceSearch.search_zonelets_by_folds
+      SurfaceSearch.search_zonelets_by_invalid_normals
+      SurfaceSearch.search_zonelets_by_quality
+      SurfaceSearch.search_zonelets_by_self_intersections
+      SurfaceSearch.search_zonelets_by_spikes
+      SurfaceSearch.search_zonelets_by_thin_strips
+   
+   
+
+   
+   
+   
+
+.. vale on

@@ -1,0 +1,40 @@
+.. vale off
+
+WrapperCloseGapsParams
+======================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoclass:: WrapperCloseGapsParams
+   
+   
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+      :toctree:
+   
+      
+      WrapperCloseGapsParams.print_default
+      WrapperCloseGapsParams.set_default
+   
+   
+
+   
+   
+   .. rubric:: Attributes
+
+   .. autosummary::
+      :toctree:
+   
+      WrapperCloseGapsParams.create_new_part
+      WrapperCloseGapsParams.gap_size
+      WrapperCloseGapsParams.material_point_name
+      WrapperCloseGapsParams.number_of_threads
+      WrapperCloseGapsParams.resolution_factor
+      WrapperCloseGapsParams.suggested_part_name
+      WrapperCloseGapsParams.target
+   
+   
+
+.. vale on

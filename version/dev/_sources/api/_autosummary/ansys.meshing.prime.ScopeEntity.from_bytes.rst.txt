@@ -1,0 +1,11 @@
+from\_bytes
+===========
+
+.. currentmodule:: ansys.meshing.prime
+
+.. automethod:: ansys.meshing.prime.ScopeEntity.from_bytes
+
+.. minigallery::
+   :add-heading: Examples using ScopeEntity.from_bytes
+
+   ansys.meshing.prime.ScopeEntity.from_bytes

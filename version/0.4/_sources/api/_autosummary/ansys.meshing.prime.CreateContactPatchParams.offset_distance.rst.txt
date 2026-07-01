@@ -1,0 +1,6 @@
+﻿offset\_distance
+================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoproperty:: CreateContactPatchParams.offset_distance

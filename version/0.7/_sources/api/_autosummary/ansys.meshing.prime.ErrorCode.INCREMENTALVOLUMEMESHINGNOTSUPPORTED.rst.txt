@@ -1,0 +1,6 @@
+INCREMENTALVOLUMEMESHINGNOTSUPPORTED
+====================================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoattribute:: ErrorCode.INCREMENTALVOLUMEMESHINGNOTSUPPORTED

@@ -1,0 +1,6 @@
+suppress\_boundary\_after\_hole\_fill
+=====================================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoproperty:: TopoFillHoleParams.suppress_boundary_after_hole_fill

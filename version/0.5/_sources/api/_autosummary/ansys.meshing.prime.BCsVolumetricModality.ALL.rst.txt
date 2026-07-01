@@ -1,0 +1,6 @@
+ALL
+===
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoattribute:: BCsVolumetricModality.ALL

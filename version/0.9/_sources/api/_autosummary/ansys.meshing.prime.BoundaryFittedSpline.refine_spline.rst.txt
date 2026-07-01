@@ -1,0 +1,11 @@
+refine\_spline
+==============
+
+.. currentmodule:: ansys.meshing.prime
+
+.. automethod:: ansys.meshing.prime.BoundaryFittedSpline.refine_spline
+
+.. minigallery::
+   :add-heading: Examples using BoundaryFittedSpline.refine_spline
+
+   ansys.meshing.prime.BoundaryFittedSpline.refine_spline

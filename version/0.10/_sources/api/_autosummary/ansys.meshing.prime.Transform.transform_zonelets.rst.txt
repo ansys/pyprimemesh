@@ -1,0 +1,11 @@
+transform\_zonelets
+===================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. automethod:: ansys.meshing.prime.Transform.transform_zonelets
+
+.. minigallery::
+   :add-heading: Examples using Transform.transform_zonelets
+
+   ansys.meshing.prime.Transform.transform_zonelets

@@ -1,0 +1,11 @@
+from\_geometry
+==============
+
+.. currentmodule:: ansys.meshing.prime.lucid
+
+.. automethod:: ansys.meshing.prime.lucid.Mesh.from_geometry
+
+.. minigallery::
+   :add-heading: Examples using Mesh.from_geometry
+
+   ansys.meshing.prime.lucid.Mesh.from_geometry

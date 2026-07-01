@@ -1,0 +1,11 @@
+set\_default
+============
+
+.. currentmodule:: ansys.meshing.prime
+
+.. automethod:: ansys.meshing.prime.SurfaceQualityResult.set_default
+
+.. minigallery::
+   :add-heading: Examples using SurfaceQualityResult.set_default
+
+   ansys.meshing.prime.SurfaceQualityResult.set_default

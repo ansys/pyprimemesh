@@ -1,0 +1,6 @@
+VT\_COLLAPSESHORTEDGESFAILED
+============================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoattribute:: ErrorCode.VT_COLLAPSESHORTEDGESFAILED

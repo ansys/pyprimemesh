@@ -1,0 +1,6 @@
+﻿node\_coords
+============
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoproperty:: EdgeConnectivityResults.node_coords

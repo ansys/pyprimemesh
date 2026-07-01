@@ -1,0 +1,41 @@
+.. vale off
+
+MorphBCParams
+=============
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoclass:: MorphBCParams
+   
+   
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+      :toctree:
+   
+      
+      MorphBCParams.print_default
+      MorphBCParams.set_default
+   
+   
+
+   
+   
+   .. rubric:: Attributes
+
+   .. autosummary::
+      :toctree:
+   
+      MorphBCParams.morph_region_box_extension
+      MorphBCParams.morph_region_method
+      MorphBCParams.morphable_layers
+   
+   
+
+.. minigallery::
+    :add-heading: Examples using MorphBCParams
+
+    ansys.meshing.prime.MorphBCParams
+
+.. vale on

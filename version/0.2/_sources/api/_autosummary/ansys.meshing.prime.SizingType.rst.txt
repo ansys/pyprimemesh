@@ -1,0 +1,26 @@
+SizingType
+==========
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoclass:: SizingType
+   
+   
+   
+   
+
+   
+   
+   .. rubric:: Attributes
+
+   .. autosummary::
+      :toctree:
+   
+      SizingType.CURVATURE
+      SizingType.PROXIMITY
+      SizingType.HARD
+      SizingType.SOFT
+      SizingType.MESHED
+      SizingType.BOI
+   
+   

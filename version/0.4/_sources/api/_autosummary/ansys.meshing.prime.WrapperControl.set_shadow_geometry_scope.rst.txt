@@ -1,0 +1,6 @@
+﻿set\_shadow\_geometry\_scope
+============================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. automethod:: WrapperControl.set_shadow_geometry_scope

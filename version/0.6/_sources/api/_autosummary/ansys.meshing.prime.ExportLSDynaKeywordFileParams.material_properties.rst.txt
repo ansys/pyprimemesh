@@ -1,0 +1,6 @@
+material\_properties
+====================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoproperty:: ExportLSDynaKeywordFileParams.material_properties

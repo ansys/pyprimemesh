@@ -1,0 +1,6 @@
+﻿set\_source\_scope
+==================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. automethod:: ThinVolumeControl.set_source_scope

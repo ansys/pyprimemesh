@@ -1,0 +1,11 @@
+remove\_labels\_from\_zonelets
+==============================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. automethod:: ansys.meshing.prime.Part.remove_labels_from_zonelets
+
+.. minigallery::
+   :add-heading: Examples using Part.remove_labels_from_zonelets
+
+   ansys.meshing.prime.Part.remove_labels_from_zonelets

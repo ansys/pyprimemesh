@@ -1,0 +1,6 @@
+NATIVE
+======
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoattribute:: CadReaderRoute.NATIVE

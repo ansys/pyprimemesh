@@ -1,0 +1,6 @@
+﻿launch\_server\_process
+=======================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autofunction:: launch_server_process

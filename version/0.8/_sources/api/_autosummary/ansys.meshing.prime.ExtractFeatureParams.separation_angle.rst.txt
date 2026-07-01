@@ -1,0 +1,6 @@
+separation\_angle
+=================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoproperty:: ExtractFeatureParams.separation_angle

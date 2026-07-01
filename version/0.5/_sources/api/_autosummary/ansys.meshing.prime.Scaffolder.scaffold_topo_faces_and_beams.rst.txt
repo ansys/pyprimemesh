@@ -1,0 +1,6 @@
+scaffold\_topo\_faces\_and\_beams
+=================================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. automethod:: Scaffolder.scaffold_topo_faces_and_beams

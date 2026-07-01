@@ -1,0 +1,11 @@
+stack\_base\_face
+=================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. automethod:: ansys.meshing.prime.VolumeSweeper.stack_base_face
+
+.. minigallery::
+   :add-heading: Examples using VolumeSweeper.stack_base_face
+
+   ansys.meshing.prime.VolumeSweeper.stack_base_face

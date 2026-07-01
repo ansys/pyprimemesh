@@ -1,0 +1,6 @@
+LASTASPECTRATIO
+===============
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoattribute:: MultizonePrismType.LASTASPECTRATIO

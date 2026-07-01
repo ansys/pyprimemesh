@@ -1,0 +1,6 @@
+wrap\_region
+============
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoproperty:: WrapParams.wrap_region

@@ -1,0 +1,6 @@
+VOLUME
+======
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoattribute:: ZoneType.VOLUME

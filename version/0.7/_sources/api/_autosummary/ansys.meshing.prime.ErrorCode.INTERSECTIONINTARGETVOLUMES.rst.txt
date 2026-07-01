@@ -1,0 +1,6 @@
+INTERSECTIONINTARGETVOLUMES
+===========================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoattribute:: ErrorCode.INTERSECTIONINTARGETVOLUMES

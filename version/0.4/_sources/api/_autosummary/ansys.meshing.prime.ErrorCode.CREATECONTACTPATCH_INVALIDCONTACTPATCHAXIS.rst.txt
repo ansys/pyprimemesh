@@ -1,0 +1,6 @@
+﻿CREATECONTACTPATCH\_INVALIDCONTACTPATCHAXIS
+===========================================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoattribute:: ErrorCode.CREATECONTACTPATCH_INVALIDCONTACTPATCHAXIS

@@ -1,0 +1,11 @@
+bit\_count
+==========
+
+.. currentmodule:: ansys.meshing.prime
+
+.. automethod:: ansys.meshing.prime.VolumeFillType.bit_count
+
+.. minigallery::
+   :add-heading: Examples using VolumeFillType.bit_count
+
+   ansys.meshing.prime.VolumeFillType.bit_count

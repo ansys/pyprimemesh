@@ -1,0 +1,11 @@
+to\_bytes
+=========
+
+.. currentmodule:: ansys.meshing.prime
+
+.. automethod:: ansys.meshing.prime.AdvancedSurferSetup.to_bytes
+
+.. minigallery::
+   :add-heading: Examples using AdvancedSurferSetup.to_bytes
+
+   ansys.meshing.prime.AdvancedSurferSetup.to_bytes

@@ -1,0 +1,6 @@
+edge\_scope
+===========
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoproperty:: MultiZoneEdgeBiasingParams.edge_scope

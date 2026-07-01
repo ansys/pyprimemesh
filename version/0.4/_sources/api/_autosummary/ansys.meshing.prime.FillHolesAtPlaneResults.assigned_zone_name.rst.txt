@@ -1,0 +1,6 @@
+﻿assigned\_zone\_name
+====================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoproperty:: FillHolesAtPlaneResults.assigned_zone_name

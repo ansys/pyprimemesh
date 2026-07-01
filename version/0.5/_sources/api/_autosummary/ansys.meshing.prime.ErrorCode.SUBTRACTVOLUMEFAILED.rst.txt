@@ -1,0 +1,6 @@
+SUBTRACTVOLUMEFAILED
+====================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoattribute:: ErrorCode.SUBTRACTVOLUMEFAILED

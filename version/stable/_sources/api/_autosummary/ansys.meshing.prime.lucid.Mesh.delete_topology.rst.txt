@@ -1,0 +1,11 @@
+delete\_topology
+================
+
+.. currentmodule:: ansys.meshing.prime.lucid
+
+.. automethod:: ansys.meshing.prime.lucid.Mesh.delete_topology
+
+.. minigallery::
+   :add-heading: Examples using Mesh.delete_topology
+
+   ansys.meshing.prime.lucid.Mesh.delete_topology

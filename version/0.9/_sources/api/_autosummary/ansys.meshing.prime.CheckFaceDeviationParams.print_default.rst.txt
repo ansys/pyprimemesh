@@ -1,0 +1,11 @@
+print\_default
+==============
+
+.. currentmodule:: ansys.meshing.prime
+
+.. automethod:: ansys.meshing.prime.CheckFaceDeviationParams.print_default
+
+.. minigallery::
+   :add-heading: Examples using CheckFaceDeviationParams.print_default
+
+   ansys.meshing.prime.CheckFaceDeviationParams.print_default

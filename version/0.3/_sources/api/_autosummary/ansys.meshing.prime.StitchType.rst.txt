@@ -1,0 +1,26 @@
+.. vale off
+
+StitchType
+==========
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoclass:: StitchType
+   
+   
+   
+   
+
+   
+   
+   .. rubric:: Attributes
+
+   .. autosummary::
+      :toctree:
+   
+      StitchType.ALLALL
+      StitchType.FREEFREE
+   
+   
+
+.. vale on

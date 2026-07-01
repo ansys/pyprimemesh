@@ -1,0 +1,6 @@
+HEXCOREPOLY
+===========
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoattribute:: VolumeFillType.HEXCOREPOLY

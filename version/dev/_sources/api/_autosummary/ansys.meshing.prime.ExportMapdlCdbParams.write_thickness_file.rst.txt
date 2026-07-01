@@ -1,0 +1,6 @@
+write\_thickness\_file
+======================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoproperty:: ExportMapdlCdbParams.write_thickness_file

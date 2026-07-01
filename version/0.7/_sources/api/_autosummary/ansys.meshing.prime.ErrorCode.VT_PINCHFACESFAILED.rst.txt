@@ -1,0 +1,6 @@
+VT\_PINCHFACESFAILED
+====================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoattribute:: ErrorCode.VT_PINCHFACESFAILED

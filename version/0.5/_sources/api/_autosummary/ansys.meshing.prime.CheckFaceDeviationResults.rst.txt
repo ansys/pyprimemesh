@@ -1,0 +1,35 @@
+.. vale off
+
+CheckFaceDeviationResults
+=========================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoclass:: CheckFaceDeviationResults
+   
+   
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+      :toctree:
+   
+      
+      CheckFaceDeviationResults.print_default
+      CheckFaceDeviationResults.set_default
+   
+   
+
+   
+   
+   .. rubric:: Attributes
+
+   .. autosummary::
+      :toctree:
+   
+      CheckFaceDeviationResults.maximum_deviation
+      CheckFaceDeviationResults.n_deviated
+   
+   
+
+.. vale on

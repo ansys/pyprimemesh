@@ -1,0 +1,6 @@
+﻿create\_boi
+===========
+
+.. currentmodule:: ansys.meshing.prime
+
+.. automethod:: SurfaceUtilities.create_boi

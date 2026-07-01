@@ -1,0 +1,6 @@
+COARSE
+======
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoattribute:: CadRefacetingResolution.COARSE

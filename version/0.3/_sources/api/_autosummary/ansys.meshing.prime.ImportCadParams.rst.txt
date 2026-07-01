@@ -1,0 +1,42 @@
+.. vale off
+
+ImportCadParams
+===============
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoclass:: ImportCadParams
+   
+   
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+      :toctree:
+   
+      
+      ImportCadParams.print_default
+      ImportCadParams.set_default
+   
+   
+
+   
+   
+   .. rubric:: Attributes
+
+   .. autosummary::
+      :toctree:
+   
+      ImportCadParams.append
+      ImportCadParams.cad_reader_route
+      ImportCadParams.cad_refaceting_params
+      ImportCadParams.cad_update_parameters
+      ImportCadParams.geometry_transfer
+      ImportCadParams.length_unit
+      ImportCadParams.part_creation_type
+      ImportCadParams.refacet
+      ImportCadParams.stitch_tolerance
+   
+   
+
+.. vale on

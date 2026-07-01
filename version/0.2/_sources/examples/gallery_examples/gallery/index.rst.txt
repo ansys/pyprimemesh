@@ -1,0 +1,96 @@
+
+
+.. _sphx_glr_examples_gallery_examples_gallery:
+
+Examples
+========
+Here are a series of mesh preparation examples using ``ansys-meshing-prime``.
+
+
+
+.. raw:: html
+
+    <div class="sphx-glr-thumbnails">
+
+
+.. raw:: html
+
+    <div class="sphx-glr-thumbcontainer" tooltip="**Summary**: This example illustrates how to use topology based connection to generate conforma...">
+
+.. only:: html
+
+  .. image:: /examples/gallery_examples/gallery/images/thumb/sphx_glr_bracket_scaffold_thumb.png
+    :alt: Meshing a Mid-Surfaced Bracket for a Structural Analysis
+
+  :ref:`sphx_glr_examples_gallery_examples_gallery_bracket_scaffold.py`
+
+.. raw:: html
+
+      <div class="sphx-glr-thumbnail-title">Meshing a Mid-Surfaced Bracket for a Structural Analysis</div>
+    </div>
+
+
+.. raw:: html
+
+    <div class="sphx-glr-thumbcontainer" tooltip="**Summary**: This example illustrates how to mesh a mixing elbow for a flow analysis.">
+
+.. only:: html
+
+  .. image:: /examples/gallery_examples/gallery/images/thumb/sphx_glr_lucid_mixing_elbow_thumb.png
+    :alt: Meshing a Mixing Elbow for a Flow Analysis
+
+  :ref:`sphx_glr_examples_gallery_examples_gallery_lucid_mixing_elbow.py`
+
+.. raw:: html
+
+      <div class="sphx-glr-thumbnail-title">Meshing a Mixing Elbow for a Flow Analysis</div>
+    </div>
+
+
+.. raw:: html
+
+    <div class="sphx-glr-thumbcontainer" tooltip="**Summary**: This example demonstrates how to mesh a pipe T-section for both fluid and structur...">
+
+.. only:: html
+
+  .. image:: /examples/gallery_examples/gallery/images/thumb/sphx_glr_lucid_pipe_tee_thumb.png
+    :alt: Meshing a Pipe T-Section for Structural Thermal and Fluid Flow
+
+  :ref:`sphx_glr_examples_gallery_examples_gallery_lucid_pipe_tee.py`
+
+.. raw:: html
+
+      <div class="sphx-glr-thumbnail-title">Meshing a Pipe T-Section for Structural Thermal and Fluid Flow</div>
+    </div>
+
+
+.. raw:: html
+
+    <div class="sphx-glr-thumbcontainer" tooltip="**Summary**: This example illustrates how to wrap a toy car for a flow analysis.">
+
+.. only:: html
+
+  .. image:: /examples/gallery_examples/gallery/images/thumb/sphx_glr_lucid_toy_car_thumb.png
+    :alt: Wrapping a Toy Car for a Flow Analysis
+
+  :ref:`sphx_glr_examples_gallery_examples_gallery_lucid_toy_car.py`
+
+.. raw:: html
+
+      <div class="sphx-glr-thumbnail-title">Wrapping a Toy Car for a Flow Analysis</div>
+    </div>
+
+
+.. raw:: html
+
+    </div>
+
+
+.. toctree::
+   :hidden:
+
+   /examples/gallery_examples/gallery/bracket_scaffold
+   /examples/gallery_examples/gallery/lucid_mixing_elbow
+   /examples/gallery_examples/gallery/lucid_pipe_tee
+   /examples/gallery_examples/gallery/lucid_toy_car
+

@@ -1,0 +1,11 @@
+set\_default
+============
+
+.. currentmodule:: ansys.meshing.prime
+
+.. automethod:: ansys.meshing.prime.ExportLSDynaKeywordFileParams.set_default
+
+.. minigallery::
+   :add-heading: Examples using ExportLSDynaKeywordFileParams.set_default
+
+   ansys.meshing.prime.ExportLSDynaKeywordFileParams.set_default

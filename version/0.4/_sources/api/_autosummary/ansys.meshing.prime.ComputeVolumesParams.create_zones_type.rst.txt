@@ -1,0 +1,6 @@
+﻿create\_zones\_type
+===================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoproperty:: ComputeVolumesParams.create_zones_type

@@ -1,0 +1,11 @@
+is\_integer
+===========
+
+.. currentmodule:: ansys.meshing.prime
+
+.. automethod:: ansys.meshing.prime.LSDynaAnalysisType.is_integer
+
+.. minigallery::
+   :add-heading: Examples using LSDynaAnalysisType.is_integer
+
+   ansys.meshing.prime.LSDynaAnalysisType.is_integer

@@ -1,0 +1,6 @@
+﻿SURFERDEGENERATEFACE
+====================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoattribute:: WarningCode.SURFERDEGENERATEFACE

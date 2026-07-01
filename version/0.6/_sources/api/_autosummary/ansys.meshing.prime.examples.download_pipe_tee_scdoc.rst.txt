@@ -1,0 +1,6 @@
+download\_pipe\_tee\_scdoc
+==========================
+
+.. currentmodule:: ansys.meshing.prime.examples
+
+.. autofunction:: download_pipe_tee_scdoc

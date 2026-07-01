@@ -1,0 +1,34 @@
+.. vale off
+
+VolumeControlParams
+===================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoclass:: VolumeControlParams
+   
+   
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+      :toctree:
+   
+      
+      VolumeControlParams.print_default
+      VolumeControlParams.set_default
+   
+   
+
+   
+   
+   .. rubric:: Attributes
+
+   .. autosummary::
+      :toctree:
+   
+      VolumeControlParams.cell_zonelet_type
+   
+   
+
+.. vale on

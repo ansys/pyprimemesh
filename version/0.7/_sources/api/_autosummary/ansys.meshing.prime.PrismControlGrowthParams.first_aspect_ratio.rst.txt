@@ -1,0 +1,6 @@
+first\_aspect\_ratio
+====================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoproperty:: PrismControlGrowthParams.first_aspect_ratio

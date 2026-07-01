@@ -1,0 +1,39 @@
+.. vale off
+
+ExtractTopoVolumesParams
+========================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoclass:: ExtractTopoVolumesParams
+   
+   
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+      :toctree:
+   
+      
+      ExtractTopoVolumesParams.print_default
+      ExtractTopoVolumesParams.set_default
+   
+   
+
+   
+   
+   .. rubric:: Attributes
+
+   .. autosummary::
+      :toctree:
+   
+      ExtractTopoVolumesParams.zone_name
+   
+   
+
+.. minigallery::
+    :add-heading: Examples using ExtractTopoVolumesParams
+
+    ansys.meshing.prime.ExtractTopoVolumesParams
+
+.. vale on

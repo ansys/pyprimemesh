@@ -1,0 +1,6 @@
+﻿set\_default
+============
+
+.. currentmodule:: ansys.meshing.prime
+
+.. automethod:: SearchByThinStripParams.set_default

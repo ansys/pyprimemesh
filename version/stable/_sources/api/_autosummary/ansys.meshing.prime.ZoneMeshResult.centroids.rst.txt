@@ -1,0 +1,6 @@
+centroids
+=========
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoproperty:: ZoneMeshResult.centroids

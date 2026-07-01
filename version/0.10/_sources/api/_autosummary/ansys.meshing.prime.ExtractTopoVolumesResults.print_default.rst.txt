@@ -1,0 +1,11 @@
+print\_default
+==============
+
+.. currentmodule:: ansys.meshing.prime
+
+.. automethod:: ansys.meshing.prime.ExtractTopoVolumesResults.print_default
+
+.. minigallery::
+   :add-heading: Examples using ExtractTopoVolumesResults.print_default
+
+   ansys.meshing.prime.ExtractTopoVolumesResults.print_default

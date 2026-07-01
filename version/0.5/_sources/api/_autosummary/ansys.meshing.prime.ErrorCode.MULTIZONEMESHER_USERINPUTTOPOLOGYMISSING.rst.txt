@@ -1,0 +1,6 @@
+MULTIZONEMESHER\_USERINPUTTOPOLOGYMISSING
+=========================================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoattribute:: ErrorCode.MULTIZONEMESHER_USERINPUTTOPOLOGYMISSING

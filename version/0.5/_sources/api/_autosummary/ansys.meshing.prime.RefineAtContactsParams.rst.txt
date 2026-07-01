@@ -1,0 +1,37 @@
+.. vale off
+
+RefineAtContactsParams
+======================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoclass:: RefineAtContactsParams
+   
+   
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+      :toctree:
+   
+      
+      RefineAtContactsParams.print_default
+      RefineAtContactsParams.set_default
+   
+   
+
+   
+   
+   .. rubric:: Attributes
+
+   .. autosummary::
+      :toctree:
+   
+      RefineAtContactsParams.contact_tolerance
+      RefineAtContactsParams.project_on_geometry
+      RefineAtContactsParams.refine_max_size
+      RefineAtContactsParams.relative_tolerance
+   
+   
+
+.. vale on

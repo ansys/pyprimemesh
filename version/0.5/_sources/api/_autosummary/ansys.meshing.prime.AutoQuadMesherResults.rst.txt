@@ -1,0 +1,36 @@
+.. vale off
+
+AutoQuadMesherResults
+=====================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoclass:: AutoQuadMesherResults
+   
+   
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+      :toctree:
+   
+      
+      AutoQuadMesherResults.print_default
+      AutoQuadMesherResults.set_default
+   
+   
+
+   
+   
+   .. rubric:: Attributes
+
+   .. autosummary::
+      :toctree:
+   
+      AutoQuadMesherResults.error_code
+      AutoQuadMesherResults.failed_topo_face_ids
+      AutoQuadMesherResults.warning_codes
+   
+   
+
+.. vale on

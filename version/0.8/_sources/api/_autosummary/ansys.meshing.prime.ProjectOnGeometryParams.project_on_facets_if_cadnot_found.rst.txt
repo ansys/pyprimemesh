@@ -1,0 +1,6 @@
+project\_on\_facets\_if\_cadnot\_found
+======================================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoproperty:: ProjectOnGeometryParams.project_on_facets_if_cadnot_found

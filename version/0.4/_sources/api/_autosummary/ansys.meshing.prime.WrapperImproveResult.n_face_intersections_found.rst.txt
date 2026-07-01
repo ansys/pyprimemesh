@@ -1,0 +1,6 @@
+﻿n\_face\_intersections\_found
+=============================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoproperty:: WrapperImproveResult.n_face_intersections_found

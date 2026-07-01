@@ -1,0 +1,6 @@
+﻿NOVOLUMESENCLOSINGMATERIALPOINT
+===============================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoattribute:: WarningCode.NOVOLUMESENCLOSINGMATERIALPOINT

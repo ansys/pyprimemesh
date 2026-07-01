@@ -1,0 +1,11 @@
+export\_stl
+===========
+
+.. currentmodule:: ansys.meshing.prime
+
+.. automethod:: ansys.meshing.prime.FileIO.export_stl
+
+.. minigallery::
+   :add-heading: Examples using FileIO.export_stl
+
+   ansys.meshing.prime.FileIO.export_stl

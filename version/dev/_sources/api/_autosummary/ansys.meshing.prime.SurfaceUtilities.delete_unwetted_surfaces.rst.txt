@@ -1,0 +1,11 @@
+delete\_unwetted\_surfaces
+==========================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. automethod:: ansys.meshing.prime.SurfaceUtilities.delete_unwetted_surfaces
+
+.. minigallery::
+   :add-heading: Examples using SurfaceUtilities.delete_unwetted_surfaces
+
+   ansys.meshing.prime.SurfaceUtilities.delete_unwetted_surfaces

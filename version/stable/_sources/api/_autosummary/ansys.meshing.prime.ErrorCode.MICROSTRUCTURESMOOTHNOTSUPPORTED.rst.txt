@@ -1,0 +1,6 @@
+MICROSTRUCTURESMOOTHNOTSUPPORTED
+================================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoattribute:: ErrorCode.MICROSTRUCTURESMOOTHNOTSUPPORTED

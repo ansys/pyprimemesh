@@ -1,0 +1,6 @@
+﻿n\_rings
+========
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoproperty:: LocalSurferParams.n_rings

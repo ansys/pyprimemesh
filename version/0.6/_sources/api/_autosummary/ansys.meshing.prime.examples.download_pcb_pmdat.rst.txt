@@ -1,0 +1,6 @@
+download\_pcb\_pmdat
+====================
+
+.. currentmodule:: ansys.meshing.prime.examples
+
+.. autofunction:: download_pcb_pmdat

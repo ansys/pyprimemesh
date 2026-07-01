@@ -1,0 +1,6 @@
+﻿hexcore
+=======
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoproperty:: AutoMeshParams.hexcore

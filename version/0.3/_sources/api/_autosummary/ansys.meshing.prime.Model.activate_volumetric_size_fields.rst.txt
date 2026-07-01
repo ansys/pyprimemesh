@@ -1,0 +1,6 @@
+activate\_volumetric\_size\_fields
+==================================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. automethod:: Model.activate_volumetric_size_fields

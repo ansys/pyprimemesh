@@ -1,0 +1,6 @@
+MULTIZONEMESHER\_DEFEATUREDPROTECTEDTOPOLOGY
+============================================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoattribute:: WarningCode.MULTIZONEMESHER_DEFEATUREDPROTECTEDTOPOLOGY

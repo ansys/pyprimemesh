@@ -1,0 +1,31 @@
+.. vale off
+
+TopoUtilities
+=============
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoclass:: TopoUtilities
+   
+   
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+      :toctree:
+   
+      
+      TopoUtilities.fill_hole
+   
+   
+
+   
+   
+   
+
+.. minigallery::
+    :add-heading: Examples using TopoUtilities
+
+    ansys.meshing.prime.TopoUtilities
+
+.. vale on

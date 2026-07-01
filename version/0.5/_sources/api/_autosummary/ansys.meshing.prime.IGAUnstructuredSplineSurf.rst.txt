@@ -1,0 +1,43 @@
+.. vale off
+
+IGAUnstructuredSplineSurf
+=========================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoclass:: IGAUnstructuredSplineSurf
+   
+   
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+      :toctree:
+   
+      
+      IGAUnstructuredSplineSurf.print_default
+      IGAUnstructuredSplineSurf.set_default
+   
+   
+
+   
+   
+   .. rubric:: Attributes
+
+   .. autosummary::
+      :toctree:
+   
+      IGAUnstructuredSplineSurf.average_mesh_size
+      IGAUnstructuredSplineSurf.bad_spline_points_indices
+      IGAUnstructuredSplineSurf.control_points
+      IGAUnstructuredSplineSurf.deviation_array
+      IGAUnstructuredSplineSurf.elements_count
+      IGAUnstructuredSplineSurf.id
+      IGAUnstructuredSplineSurf.invalid_jacobian_elements_count
+      IGAUnstructuredSplineSurf.shell_thickness
+      IGAUnstructuredSplineSurf.spline_points
+      IGAUnstructuredSplineSurf.spline_refinement_level
+   
+   
+
+.. vale on

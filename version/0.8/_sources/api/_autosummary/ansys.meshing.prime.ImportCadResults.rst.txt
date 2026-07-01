@@ -1,0 +1,40 @@
+.. vale off
+
+ImportCadResults
+================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoclass:: ImportCadResults
+   
+   
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+      :toctree:
+   
+      
+      ImportCadResults.print_default
+      ImportCadResults.set_default
+   
+   
+
+   
+   
+   .. rubric:: Attributes
+
+   .. autosummary::
+      :toctree:
+   
+      ImportCadResults.cad_parameters
+      ImportCadResults.error_code
+   
+   
+
+.. minigallery::
+    :add-heading: Examples using ImportCadResults
+
+    ansys.meshing.prime.ImportCadResults
+
+.. vale on

@@ -1,0 +1,6 @@
+NOTSUPPORTEDFORNONTRIFACEZONE
+=============================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoattribute:: ErrorCode.NOTSUPPORTEDFORNONTRIFACEZONE

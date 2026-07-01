@@ -1,0 +1,11 @@
+set\_working\_directory
+=======================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. automethod:: ansys.meshing.prime.Model.set_working_directory
+
+.. minigallery::
+   :add-heading: Examples using Model.set_working_directory
+
+   ansys.meshing.prime.Model.set_working_directory

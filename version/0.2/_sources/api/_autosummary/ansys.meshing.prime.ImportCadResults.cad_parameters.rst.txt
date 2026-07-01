@@ -1,0 +1,6 @@
+cad\_parameters
+===============
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoproperty:: ImportCadResults.cad_parameters

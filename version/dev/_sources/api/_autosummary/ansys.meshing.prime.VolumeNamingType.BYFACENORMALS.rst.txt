@@ -1,0 +1,6 @@
+BYFACENORMALS
+=============
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoattribute:: VolumeNamingType.BYFACENORMALS

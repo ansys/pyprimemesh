@@ -1,0 +1,11 @@
+check\_face\_deviation
+======================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. automethod:: ansys.meshing.prime.SurfaceSearch.check_face_deviation
+
+.. minigallery::
+   :add-heading: Examples using SurfaceSearch.check_face_deviation
+
+   ansys.meshing.prime.SurfaceSearch.check_face_deviation

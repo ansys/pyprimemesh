@@ -1,0 +1,11 @@
+patch\_flow\_regions
+====================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. automethod:: ansys.meshing.prime.Wrapper.patch_flow_regions
+
+.. minigallery::
+   :add-heading: Examples using Wrapper.patch_flow_regions
+
+   ansys.meshing.prime.Wrapper.patch_flow_regions

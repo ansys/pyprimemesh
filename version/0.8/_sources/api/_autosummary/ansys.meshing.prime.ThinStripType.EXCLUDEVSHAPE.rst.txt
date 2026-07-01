@@ -1,0 +1,6 @@
+EXCLUDEVSHAPE
+=============
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoattribute:: ThinStripType.EXCLUDEVSHAPE

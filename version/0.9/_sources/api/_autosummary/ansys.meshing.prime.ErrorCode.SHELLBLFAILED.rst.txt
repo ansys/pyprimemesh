@@ -1,0 +1,6 @@
+SHELLBLFAILED
+=============
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoattribute:: ErrorCode.SHELLBLFAILED

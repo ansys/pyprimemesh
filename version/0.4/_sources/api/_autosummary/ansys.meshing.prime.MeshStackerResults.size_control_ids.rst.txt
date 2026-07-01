@@ -1,0 +1,6 @@
+﻿size\_control\_ids
+==================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoproperty:: MeshStackerResults.size_control_ids

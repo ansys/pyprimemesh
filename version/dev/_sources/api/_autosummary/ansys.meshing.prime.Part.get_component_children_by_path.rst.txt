@@ -1,0 +1,11 @@
+get\_component\_children\_by\_path
+==================================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. automethod:: ansys.meshing.prime.Part.get_component_children_by_path
+
+.. minigallery::
+   :add-heading: Examples using Part.get_component_children_by_path
+
+   ansys.meshing.prime.Part.get_component_children_by_path

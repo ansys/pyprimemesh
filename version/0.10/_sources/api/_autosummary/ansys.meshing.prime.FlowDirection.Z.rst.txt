@@ -1,0 +1,6 @@
+Z
+=
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoattribute:: FlowDirection.Z

@@ -1,0 +1,25 @@
+SizeFieldType
+=============
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoclass:: SizeFieldType
+   
+   
+   
+   
+
+   
+   
+   .. rubric:: Attributes
+
+   .. autosummary::
+      :toctree:
+   
+      SizeFieldType.GEOMETRIC
+      SizeFieldType.VOLUMETRIC
+      SizeFieldType.GEODESIC
+      SizeFieldType.CONSTANT
+      SizeFieldType.MESHEDGEODESIC
+   
+   

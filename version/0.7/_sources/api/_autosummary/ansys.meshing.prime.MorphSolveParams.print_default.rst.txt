@@ -1,0 +1,11 @@
+print\_default
+==============
+
+.. currentmodule:: ansys.meshing.prime
+
+.. automethod:: ansys.meshing.prime.MorphSolveParams.print_default
+
+.. minigallery::
+   :add-heading: Examples using MorphSolveParams.print_default
+
+   ansys.meshing.prime.MorphSolveParams.print_default

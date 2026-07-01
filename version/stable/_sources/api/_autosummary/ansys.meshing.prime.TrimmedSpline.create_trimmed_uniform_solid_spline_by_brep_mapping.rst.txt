@@ -1,0 +1,11 @@
+create\_trimmed\_uniform\_solid\_spline\_by\_brep\_mapping
+==========================================================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. automethod:: ansys.meshing.prime.TrimmedSpline.create_trimmed_uniform_solid_spline_by_brep_mapping
+
+.. minigallery::
+   :add-heading: Examples using TrimmedSpline.create_trimmed_uniform_solid_spline_by_brep_mapping
+
+   ansys.meshing.prime.TrimmedSpline.create_trimmed_uniform_solid_spline_by_brep_mapping

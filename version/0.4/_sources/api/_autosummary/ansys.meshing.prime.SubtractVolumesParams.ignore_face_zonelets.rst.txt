@@ -1,0 +1,6 @@
+﻿ignore\_face\_zonelets
+======================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoproperty:: SubtractVolumesParams.ignore_face_zonelets

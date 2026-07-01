@@ -1,0 +1,11 @@
+bit\_length
+===========
+
+.. currentmodule:: ansys.meshing.prime
+
+.. automethod:: ansys.meshing.prime.MergeNodeType.bit_length
+
+.. minigallery::
+   :add-heading: Examples using MergeNodeType.bit_length
+
+   ansys.meshing.prime.MergeNodeType.bit_length

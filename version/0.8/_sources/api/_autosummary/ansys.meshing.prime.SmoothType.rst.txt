@@ -1,0 +1,47 @@
+.. vale off
+
+SmoothType
+==========
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoclass:: SmoothType
+   
+   
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+      :toctree:
+   
+      SmoothType.conjugate
+      SmoothType.bit_length
+      SmoothType.bit_count
+      SmoothType.to_bytes
+      SmoothType.from_bytes
+      SmoothType.as_integer_ratio
+   
+   
+
+   
+   
+   .. rubric:: Attributes
+
+   .. autosummary::
+      :toctree:
+   
+      SmoothType.real
+      SmoothType.imag
+      SmoothType.numerator
+      SmoothType.denominator
+      SmoothType.SMOOTH
+      SmoothType.INFLATE
+   
+   
+
+.. minigallery::
+    :add-heading: Examples using SmoothType
+
+    ansys.meshing.prime.SmoothType
+
+.. vale on

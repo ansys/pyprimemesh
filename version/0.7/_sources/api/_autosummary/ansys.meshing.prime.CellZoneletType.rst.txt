@@ -1,0 +1,48 @@
+.. vale off
+
+CellZoneletType
+===============
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoclass:: CellZoneletType
+   
+   
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+      :toctree:
+   
+      CellZoneletType.conjugate
+      CellZoneletType.bit_length
+      CellZoneletType.bit_count
+      CellZoneletType.to_bytes
+      CellZoneletType.from_bytes
+      CellZoneletType.as_integer_ratio
+   
+   
+
+   
+   
+   .. rubric:: Attributes
+
+   .. autosummary::
+      :toctree:
+   
+      CellZoneletType.real
+      CellZoneletType.imag
+      CellZoneletType.numerator
+      CellZoneletType.denominator
+      CellZoneletType.DEAD
+      CellZoneletType.FLUID
+      CellZoneletType.SOLID
+   
+   
+
+.. minigallery::
+    :add-heading: Examples using CellZoneletType
+
+    ansys.meshing.prime.CellZoneletType
+
+.. vale on

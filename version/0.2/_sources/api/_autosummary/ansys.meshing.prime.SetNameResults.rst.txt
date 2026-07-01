@@ -1,0 +1,32 @@
+SetNameResults
+==============
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoclass:: SetNameResults
+   
+   
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+      :toctree:
+   
+      
+      SetNameResults.print_default
+      SetNameResults.set_default
+   
+   
+
+   
+   
+   .. rubric:: Attributes
+
+   .. autosummary::
+      :toctree:
+   
+      SetNameResults.assigned_name
+      SetNameResults.error_code
+      SetNameResults.warning_code
+   
+   

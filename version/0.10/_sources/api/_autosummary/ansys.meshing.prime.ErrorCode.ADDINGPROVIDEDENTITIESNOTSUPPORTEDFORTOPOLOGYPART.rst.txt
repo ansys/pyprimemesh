@@ -1,0 +1,6 @@
+ADDINGPROVIDEDENTITIESNOTSUPPORTEDFORTOPOLOGYPART
+=================================================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoattribute:: ErrorCode.ADDINGPROVIDEDENTITIESNOTSUPPORTEDFORTOPOLOGYPART

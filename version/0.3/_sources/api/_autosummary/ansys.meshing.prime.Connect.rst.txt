@@ -1,0 +1,29 @@
+.. vale off
+
+Connect
+=======
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoclass:: Connect
+   
+   
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+      :toctree:
+   
+      
+      Connect.intersect_face_zonelets
+      Connect.join_face_zonelets
+      Connect.stitch_face_zonelets
+      Connect.subtract_volumes
+   
+   
+
+   
+   
+   
+
+.. vale on

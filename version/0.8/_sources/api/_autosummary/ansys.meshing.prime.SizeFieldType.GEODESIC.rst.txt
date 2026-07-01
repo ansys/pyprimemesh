@@ -1,0 +1,6 @@
+GEODESIC
+========
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoattribute:: SizeFieldType.GEODESIC

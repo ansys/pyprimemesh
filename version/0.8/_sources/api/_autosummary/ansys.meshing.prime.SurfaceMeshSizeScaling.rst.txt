@@ -1,0 +1,41 @@
+.. vale off
+
+SurfaceMeshSizeScaling
+======================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoclass:: SurfaceMeshSizeScaling
+   
+   
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+      :toctree:
+   
+      
+      SurfaceMeshSizeScaling.print_default
+      SurfaceMeshSizeScaling.set_default
+   
+   
+
+   
+   
+   .. rubric:: Attributes
+
+   .. autosummary::
+      :toctree:
+   
+      SurfaceMeshSizeScaling.factor
+      SurfaceMeshSizeScaling.size_range_max
+      SurfaceMeshSizeScaling.size_range_min
+   
+   
+
+.. minigallery::
+    :add-heading: Examples using SurfaceMeshSizeScaling
+
+    ansys.meshing.prime.SurfaceMeshSizeScaling
+
+.. vale on

@@ -1,0 +1,6 @@
+dead\_regions
+=============
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoproperty:: WrapperPatchFlowRegionsParams.dead_regions

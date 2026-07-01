@@ -1,0 +1,907 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Sizing &#8212; PyPrimeMesh</title>
+
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=5b4479735964841361fd" rel="stylesheet" />
+<link href="../_static/styles/bootstrap.css?digest=5b4479735964841361fd" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=5b4479735964841361fd" rel="stylesheet" />
+
+  
+  <link href="../_static/vendor/fontawesome/6.1.2/css/all.min.css?digest=5b4479735964841361fd" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=649a27d8" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../_static/jupyter-sphinx.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/thebelab.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sg_gallery.css?v=61a4c737" />
+    <link rel="stylesheet" type="text/css" href="../_static/sg_gallery-binder.css?v=f4aeca0c" />
+    <link rel="stylesheet" type="text/css" href="../_static/sg_gallery-dataframe.css?v=2082cf3c" />
+    <link rel="stylesheet" type="text/css" href="../_static/sg_gallery-rendered-html.css?v=1277b6f3" />
+    <link rel="stylesheet" type="text/css" href="../_static/css/ansys_sphinx_theme.css?v=450015ff" />
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.23/css/jquery.dataTables.min.css" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=5b4479735964841361fd" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=5b4479735964841361fd" />
+  <script src="../_static/vendor/fontawesome/6.1.2/js/all.min.js?digest=5b4479735964841361fd"></script>
+ 
+<link href="../_static/css/breadcrumbs.css" rel="stylesheet" />
+
+    <script src="../_static/documentation_options.js?v=b9afe91b"></script>
+    <script src="../_static/doctools.js?v=888ff710"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../_static/copybutton.js?v=f281be69"></script>
+    <script src="../_static/thebelab-helper.js"></script>
+    <script src="../_static/js/table.js?v=b64f5182"></script>
+    <script src="https://cdn.datatables.net/1.10.23/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@jupyter-widgets/html-manager@^1.0.1/dist/embed-amd.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'user_guide/sizing';</script>
+    <script>
+        DOCUMENTATION_OPTIONS.theme_version = '0.14.4';
+        DOCUMENTATION_OPTIONS.theme_switcher_json_url = 'https://prime.docs.pyansys.com/versions.json';
+        DOCUMENTATION_OPTIONS.theme_switcher_version_match = '0.5';
+        DOCUMENTATION_OPTIONS.show_version_warning_banner = false;
+        </script>
+    <link rel="icon" href="../_static/ansys-favicon.png"/>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Connections" href="connections.html" />
+    <link rel="prev" title="Match morphing" href="matchmorph.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  <link rel="canonical" href="https://prime.docs.pyansys.com/version/stable/user_guide/sizing.html" />
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <a class="skip-link" href="#main-content">Skip to main content</a>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>
+    Back to top
+  </button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__primary"
+          id="__primary"/>
+  <label class="overlay overlay-primary" for="__primary"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__secondary"
+          id="__secondary"/>
+  <label class="overlay overlay-secondary" for="__secondary"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container"><!-- Debugging: html_theme_options =  -->
+
+<!-- If there is no MiliSearch enabled, use the PyData search -->
+<form class="bd-search d-flex align-items-center"
+      action="../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search the docs ..."
+         aria-label="Search the docs ..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+   
+    <nav class="bd-header navbar navbar-expand-lg bd-navbar">
+<div class="bd-header__inner bd-page-width">
+  <label class="sidebar-toggle primary-toggle" for="__primary">
+    <span class="fa-solid fa-bars"></span>
+  </label>
+  
+  
+  <div class="col-lg-3 navbar-header-items__start">
+    
+      <div class="navbar-item">
+
+  
+
+<a class="navbar-brand logo" href="../index.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../_static/pyansys-logo-black-cropped.png" class="logo__image only-light" alt="PyPrimeMesh - Home"/>
+    <script>document.write(`<img src="../_static/pyansys-logo-black-cropped.png" class="logo__image only-dark" alt="PyPrimeMesh - Home"/>`);</script>
+  
+  
+</a></div>
+    
+  </div>
+  
+  <div class="col-lg-9 navbar-header-items">
+    
+    <div class="me-auto navbar-header-items__center">
+      
+        <div class="navbar-item">
+<nav class="navbar-nav">
+  <p class="sidebar-header-items__title"
+     role="heading"
+     aria-level="1"
+     aria-label="Site Navigation">
+    Site Navigation
+  </p>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../getting_started/index.html">
+                        Getting started
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item current active">
+                      <a class="nav-link nav-internal" href="index.html">
+                        User guide
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../examples/index.html">
+                        Examples
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../api/index.html">
+                        API reference
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../contributing/index.html">
+                        Contribute
+                      </a>
+                    </li>
+                
+  </ul>
+</nav></div>
+      
+    </div>
+    
+    
+    <div class="navbar-header-items__end">
+      
+        <div class="navbar-item navbar-persistent--container">
+          
+
+ <script>
+ document.write(`
+   <button class="btn navbar-btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script>
+        </div>
+      
+      
+        <div class="navbar-item">
+<script>
+document.write(`
+  <div class="version-switcher__container dropdown">
+    <button id="pst-version-switcher-button-2"
+      type="button"
+      class="version-switcher__button btn btn-sm navbar-btn dropdown-toggle"
+      data-bs-toggle="dropdown"
+      aria-haspopup="listbox"
+      aria-controls="pst-version-switcher-list-2"
+      aria-label="Version switcher list"
+    >
+      Choose version  <!-- this text may get changed later by javascript -->
+      <span class="caret"></span>
+    </button>
+    <div id="pst-version-switcher-list-2"
+      class="version-switcher__menu dropdown-menu list-group-flush py-0"
+      role="listbox" aria-labelledby="pst-version-switcher-button-2">
+      <!-- dropdown will be populated by javascript on page load -->
+    </div>
+  </div>
+`);
+</script></div>
+      
+        <div class="navbar-item">
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch nav-link" data-mode="light"><i class="fa-solid fa-sun fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="dark"><i class="fa-solid fa-moon fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="auto"><i class="fa-solid fa-circle-half-stroke fa-lg"></i></span>
+  </button>
+`);
+</script></div>
+      
+        <div class="navbar-item"><ul class="navbar-icon-links navbar-nav"
+    aria-label="Icon Links">
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/ansys/pyprimemesh" title="GitHub" class="nav-link" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><span><i class="fa-brands fa-square-github fa-lg" aria-hidden="true"></i></span>
+            <span class="sr-only">GitHub</span></a>
+        </li>
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/ansys/pyprimemesh/discussions" title="Support" class="nav-link" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><span><i class="fa fa-comment fa-fw fa-lg" aria-hidden="true"></i></span>
+            <span class="sr-only">Support</span></a>
+        </li>
+</ul></div>
+      
+    </div>
+    
+  </div>
+  
+  
+    <div class="navbar-persistent--mobile">
+
+ <script>
+ document.write(`
+   <button class="btn navbar-btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script>
+    </div>
+  
+
+  
+    <label class="sidebar-toggle secondary-toggle" for="__secondary" tabindex="0">
+      <span class="fa-solid fa-outdent"></span>
+    </label>
+  
+</div>
+
+    </nav>
+    <div id="announcement_msg"></div>
+<script>
+  fetch("announcement.html")
+    .then((response) => {
+      if (!response.ok) {
+        throw new Error(`HTTP error: ${response.status}`);
+      }
+      return response.text();
+    })
+    .then(
+      (text) => (document.getElementById("announcement_msg").innerHTML = text),
+    )
+    .catch((error) => console.error(`Fetch problem: ${error.message}`));
+</script>  
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+      <div class="sidebar-header-items__center">
+        
+          <div class="navbar-item">
+<nav class="navbar-nav">
+  <p class="sidebar-header-items__title"
+     role="heading"
+     aria-level="1"
+     aria-label="Site Navigation">
+    Site Navigation
+  </p>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../getting_started/index.html">
+                        Getting started
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item current active">
+                      <a class="nav-link nav-internal" href="index.html">
+                        User guide
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../examples/index.html">
+                        Examples
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../api/index.html">
+                        API reference
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../contributing/index.html">
+                        Contribute
+                      </a>
+                    </li>
+                
+  </ul>
+</nav></div>
+        
+      </div>
+    
+    
+    
+      <div class="sidebar-header-items__end">
+        
+          <div class="navbar-item">
+<script>
+document.write(`
+  <div class="version-switcher__container dropdown">
+    <button id="pst-version-switcher-button-3"
+      type="button"
+      class="version-switcher__button btn btn-sm navbar-btn dropdown-toggle"
+      data-bs-toggle="dropdown"
+      aria-haspopup="listbox"
+      aria-controls="pst-version-switcher-list-3"
+      aria-label="Version switcher list"
+    >
+      Choose version  <!-- this text may get changed later by javascript -->
+      <span class="caret"></span>
+    </button>
+    <div id="pst-version-switcher-list-3"
+      class="version-switcher__menu dropdown-menu list-group-flush py-0"
+      role="listbox" aria-labelledby="pst-version-switcher-button-3">
+      <!-- dropdown will be populated by javascript on page load -->
+    </div>
+  </div>
+`);
+</script></div>
+        
+          <div class="navbar-item">
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch nav-link" data-mode="light"><i class="fa-solid fa-sun fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="dark"><i class="fa-solid fa-moon fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="auto"><i class="fa-solid fa-circle-half-stroke fa-lg"></i></span>
+  </button>
+`);
+</script></div>
+        
+          <div class="navbar-item"><ul class="navbar-icon-links navbar-nav"
+    aria-label="Icon Links">
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/ansys/pyprimemesh" title="GitHub" class="nav-link" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><span><i class="fa-brands fa-square-github fa-lg" aria-hidden="true"></i></span>
+            <span class="sr-only">GitHub</span></a>
+        </li>
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/ansys/pyprimemesh/discussions" title="Support" class="nav-link" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><span><i class="fa fa-comment fa-fw fa-lg" aria-hidden="true"></i></span>
+            <span class="sr-only">Support</span></a>
+        </li>
+</ul></div>
+        
+      </div>
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+<nav class="bd-docs-nav bd-links"
+     aria-label="Section Navigation">
+  <p class="bd-links__title" role="heading" aria-level="1">Section Navigation</p>
+  <div class="bd-toc-item navbar-nav"><ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="concepts.html">Concepts and model structure</a></li>
+<li class="toctree-l1"><a class="reference internal" href="launch_prime.html">Launching PyPrimeMesh</a></li>
+<li class="toctree-l1"><a class="reference internal" href="lucid.html">Common meshing tasks and the Lucid module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="fileio.html">Reading and writing files</a></li>
+<li class="toctree-l1"><a class="reference internal" href="logging.html">Logging</a></li>
+<li class="toctree-l1"><a class="reference internal" href="graphics.html">Interactive graphics using PyVista</a></li>
+<li class="toctree-l1"><a class="reference internal" href="surfer.html">Surface meshing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="wrapper.html">Surface wrapping</a></li>
+<li class="toctree-l1"><a class="reference internal" href="automesh.html">Volumetric meshing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="iga.html">Isogeometric analysis</a></li>
+<li class="toctree-l1"><a class="reference internal" href="multizone.html">MultiZone controls</a></li>
+<li class="toctree-l1"><a class="reference internal" href="stacker.html">Volume sweeping</a></li>
+<li class="toctree-l1"><a class="reference internal" href="matchmorph.html">Match morphing</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Sizing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="connections.html">Connections</a></li>
+<li class="toctree-l1"><a class="reference internal" href="mesh_diagnostics.html">Mesh diagnostics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="expressions.html">Expressions</a></li>
+</ul>
+</div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main">
+        
+        
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item">
+<nav aria-label="Breadcrumb">
+  <ul class="bd-breadcrumbs">
+         
+    <li class="breadcrumb-item breadcrumb-home">
+      <a href="https://docs.pyansys.com/" class="nav-link">PyAnsys</a>
+    </li>
+     
+    <li class="breadcrumb-item">
+      <a
+        href="../index.html"
+        class="nav-link"
+        aria-label="Home"
+      >
+        <i class="fa-solid fa-home"></i>
+      </a>
+    </li>
+     
+    <li class="breadcrumb-item">
+      <a href="index.html" class="nav-link">User guide</a>
+    </li>
+      
+    <li class="breadcrumb-item active" aria-current="page">Sizing</li>
+    
+  </ul>
+</nav>
+</div>
+      
+    </div>
+  
+  
+</div>
+</div>
+              
+              
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article" role="main">
+                  
+  <section id="sizing">
+<span id="ref-index-sizing"></span><h1>Sizing<a class="headerlink" href="#sizing" title="Link to this heading">#</a></h1>
+<p>PyPrimeMesh provides various sizing controls to help you define how the mesh size is distributed on a surface or within the volume.</p>
+<section id="sizing-control">
+<h2>Sizing control<a class="headerlink" href="#sizing-control" title="Link to this heading">#</a></h2>
+<p>Mesh quality and resolution are important factors for capturing physics accurately and efficiently. Size controls allows you to get the desired mesh distribution.
+PyPrimeMesh specifies the sizing requirements using sizing controls. The sizing controls in PyPrimeMesh have the following:</p>
+<ul class="simple">
+<li><p>Scope</p></li>
+<li><p>Maximum rate of change of size</p></li>
+<li><p>Range within which the sizes should be on or within the scope</p></li>
+</ul>
+<p>The <a class="reference internal" href="../api/_autosummary/ansys.meshing.prime.SizingType.html#ansys.meshing.prime.SizingType" title="ansys.meshing.prime.SizingType"><code class="xref py py-class docutils literal notranslate"><span class="pre">SizingType</span></code></a> class has control types for defining sizing requirements:</p>
+<ul class="simple">
+<li><p>Curvature</p></li>
+<li><p>Proximity</p></li>
+<li><p>Hard</p></li>
+<li><p>Soft</p></li>
+<li><p>Meshed</p></li>
+<li><p>Body of influence</p></li>
+</ul>
+<section id="curvature-sizing">
+<h3>Curvature sizing<a class="headerlink" href="#curvature-sizing" title="Link to this heading">#</a></h3>
+<p>In the <a class="reference internal" href="../api/_autosummary/ansys.meshing.prime.SizingType.html#ansys.meshing.prime.SizingType" title="ansys.meshing.prime.SizingType"><code class="xref py py-class docutils literal notranslate"><span class="pre">SizingType</span></code></a> class, selecting the <a class="reference internal" href="../api/_autosummary/ansys.meshing.prime.SizingType.CURVATURE.html#ansys.meshing.prime.SizingType.CURVATURE" title="ansys.meshing.prime.SizingType.CURVATURE"><code class="xref py py-attr docutils literal notranslate"><span class="pre">CURVATURE</span></code></a>
+parameter sizes based on the scope on the local curvature. The size is small when the local curvature is large and vice versa.
+This code shows how to use the <a class="reference internal" href="../api/_autosummary/ansys.meshing.prime.CurvatureSizingParams.html#ansys.meshing.prime.CurvatureSizingParams" title="ansys.meshing.prime.CurvatureSizingParams"><code class="xref py py-class docutils literal notranslate"><span class="pre">CurvatureSizingParams</span></code></a> class to specify
+the minimum and maximum size, growth rate, and normal angle:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">size_control</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">control_data</span><span class="o">.</span><span class="n">create_size_control</span><span class="p">(</span><span class="n">prime</span><span class="o">.</span><span class="n">SizingType</span><span class="o">.</span><span class="n">CURVATURE</span><span class="p">)</span>
+<span class="n">size_control</span><span class="o">.</span><span class="n">set_curvature_sizing_params</span><span class="p">(</span>
+    <span class="n">prime</span><span class="o">.</span><span class="n">CurvatureSizingParams</span><span class="p">(</span><span class="n">model</span><span class="o">=</span><span class="n">model</span><span class="p">,</span> <span class="nb">min</span><span class="o">=</span><span class="mf">0.2</span><span class="p">,</span> <span class="nb">max</span><span class="o">=</span><span class="mf">2.0</span><span class="p">,</span> <span class="n">growth_rate</span><span class="o">=</span><span class="mf">1.2</span><span class="p">)</span>
+<span class="p">)</span>
+<span class="n">size_control</span><span class="o">.</span><span class="n">set_suggested_name</span><span class="p">(</span><span class="s2">&quot;curv_control&quot;</span><span class="p">)</span>
+<span class="n">size_control</span><span class="o">.</span><span class="n">set_scope</span><span class="p">(</span><span class="n">prime</span><span class="o">.</span><span class="n">ScopeDefinition</span><span class="p">(</span><span class="n">model</span><span class="o">=</span><span class="n">model</span><span class="p">))</span>
+</pre></div>
+</div>
+<figure class="align-center">
+<a class="reference internal image-reference" href="../_images/curvaturesize.png"><img alt="../_images/curvaturesize.png" src="../_images/curvaturesize.png" style="width: 400pt;" /></a>
+</figure>
+<p>The normal angle parameter is the maximum allowable angle that one element edge may span. For example, a value of 5 implies that a division are made when the angle change along the curve is 5 degrees. Hence, a 90 degree arc is divided into approximately 18 segments.</p>
+</section>
+<section id="proximity-sizing">
+<h3>Proximity sizing<a class="headerlink" href="#proximity-sizing" title="Link to this heading">#</a></h3>
+<p>In the <a class="reference internal" href="../api/_autosummary/ansys.meshing.prime.SizingType.html#ansys.meshing.prime.SizingType" title="ansys.meshing.prime.SizingType"><code class="xref py py-class docutils literal notranslate"><span class="pre">SizingType</span></code></a> class, selecting the
+<a class="reference internal" href="../api/_autosummary/ansys.meshing.prime.SizingType.PROXIMITY.html#ansys.meshing.prime.SizingType.PROXIMITY" title="ansys.meshing.prime.SizingType.PROXIMITY"><code class="xref py py-attr docutils literal notranslate"><span class="pre">PROXIMITY</span></code></a> parameter sizes based on the closeness of
+the surfaces or edges specified in the scope. This code shows how to use the
+<a class="reference internal" href="../api/_autosummary/ansys.meshing.prime.ProximitySizingParams.html#ansys.meshing.prime.ProximitySizingParams" title="ansys.meshing.prime.ProximitySizingParams"><code class="xref py py-class docutils literal notranslate"><span class="pre">ProximitySizingParams</span></code></a> class to specify the
+minimum and maximum size, growth rate, and the number of element per gap:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">size_control</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">control_data</span><span class="o">.</span><span class="n">create_size_control</span><span class="p">(</span><span class="n">prime</span><span class="o">.</span><span class="n">SizingType</span><span class="o">.</span><span class="n">PROXIMITY</span><span class="p">)</span>
+<span class="n">size_control</span><span class="o">.</span><span class="n">set_proximity_sizing_params</span><span class="p">(</span>
+    <span class="n">prime</span><span class="o">.</span><span class="n">ProximitySizingParams</span><span class="p">(</span>
+        <span class="n">model</span><span class="o">=</span><span class="n">model</span><span class="p">,</span>
+        <span class="nb">min</span><span class="o">=</span><span class="mf">0.1</span><span class="p">,</span>
+        <span class="nb">max</span><span class="o">=</span><span class="mf">2.0</span><span class="p">,</span>
+        <span class="n">growth_rate</span><span class="o">=</span><span class="mf">1.2</span><span class="p">,</span>
+        <span class="n">elements_per_gap</span><span class="o">=</span><span class="mf">3.0</span><span class="p">,</span>
+        <span class="n">ignore_orientation</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+        <span class="n">ignore_self_proximity</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+    <span class="p">)</span>
+<span class="p">)</span>
+<span class="n">size_control</span><span class="o">.</span><span class="n">set_suggested_name</span><span class="p">(</span><span class="s2">&quot;prox_control&quot;</span><span class="p">)</span>
+<span class="n">size_control</span><span class="o">.</span><span class="n">set_scope</span><span class="p">(</span><span class="n">prime</span><span class="o">.</span><span class="n">ScopeDefinition</span><span class="p">(</span><span class="n">model</span><span class="o">=</span><span class="n">model</span><span class="p">))</span>
+</pre></div>
+</div>
+<figure class="align-center">
+<a class="reference internal image-reference" href="../_images/proximity.png"><img alt="../_images/proximity.png" src="../_images/proximity.png" style="width: 400pt;" /></a>
+</figure>
+<p>The <a class="reference internal" href="../api/_autosummary/ansys.meshing.prime.ProximitySizingParams.ignore_self_proximity.html#ansys.meshing.prime.ProximitySizingParams.ignore_self_proximity" title="ansys.meshing.prime.ProximitySizingParams.ignore_self_proximity"><code class="xref py py-attr docutils literal notranslate"><span class="pre">ignore_self_proximity</span></code></a>
+and <a class="reference internal" href="../api/_autosummary/ansys.meshing.prime.ProximitySizingParams.ignore_orientation.html#ansys.meshing.prime.ProximitySizingParams.ignore_orientation" title="ansys.meshing.prime.ProximitySizingParams.ignore_orientation"><code class="xref py py-attr docutils literal notranslate"><span class="pre">ignore_orientation</span></code></a>
+parameters are also considered for proximity sizing. The <code class="docutils literal notranslate"><span class="pre">ignore_self_proximity</span></code> parameter
+is set to <code class="docutils literal notranslate"><span class="pre">True</span></code> if proximity between faces in the same face zonelet is to be ignored. The
+<code class="docutils literal notranslate"><span class="pre">ignore_orientation</span></code> parameter allows you to ignore the face normal orientation during the
+proximity calculation. This Boolean parameter is set to <code class="docutils literal notranslate"><span class="pre">False</span></code> by default. In general,
+the proximity depends on the direction of face normals.</p>
+<p>This example explains the use of the <code class="docutils literal notranslate"><span class="pre">ignore_orientation</span></code> parameter for face proximity.
+The normals on the grooved box point inward. With the default setting of <code class="docutils literal notranslate"><span class="pre">False</span></code>, the
+proximity size function does not refine the surface along the entire groove length.
+If the <code class="docutils literal notranslate"><span class="pre">ignore_orientation</span></code> is set to <code class="docutils literal notranslate"><span class="pre">True</span></code>, the surface is refined along the groove length</p>
+<figure class="align-center">
+<a class="reference internal image-reference" href="../_images/proximityorientation.png"><img alt="../_images/proximityorientation.png" src="../_images/proximityorientation.png" style="width: 400pt;" /></a>
+</figure>
+</section>
+<section id="hard-sizing">
+<h3>Hard sizing<a class="headerlink" href="#hard-sizing" title="Link to this heading">#</a></h3>
+<p>In the <a class="reference internal" href="../api/_autosummary/ansys.meshing.prime.SizingType.html#ansys.meshing.prime.SizingType" title="ansys.meshing.prime.SizingType"><code class="xref py py-class docutils literal notranslate"><span class="pre">SizingType</span></code></a> class, selecting the
+<a class="reference internal" href="../api/_autosummary/ansys.meshing.prime.SizingType.HARD.html#ansys.meshing.prime.SizingType.HARD" title="ansys.meshing.prime.SizingType.HARD"><code class="xref py py-attr docutils literal notranslate"><span class="pre">HARD</span></code></a> parameter sizes on the scope based on a uniform
+value while meshing. This code shows how to use the <a class="reference internal" href="../api/_autosummary/ansys.meshing.prime.HardSizingParams.html#ansys.meshing.prime.HardSizingParams" title="ansys.meshing.prime.HardSizingParams"><code class="xref py py-class docutils literal notranslate"><span class="pre">HardSizingParams</span></code></a>
+class to specify the minimum size and growth rate:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">size_control</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">control_data</span><span class="o">.</span><span class="n">create_size_control</span><span class="p">(</span><span class="n">prime</span><span class="o">.</span><span class="n">SizingType</span><span class="o">.</span><span class="n">HARD</span><span class="p">)</span>
+<span class="n">size_control</span><span class="o">.</span><span class="n">set_hard_sizing_params</span><span class="p">(</span>
+    <span class="n">prime</span><span class="o">.</span><span class="n">HardSizingParams</span><span class="p">(</span><span class="n">model</span><span class="o">=</span><span class="n">model</span><span class="p">,</span> <span class="nb">min</span><span class="o">=</span><span class="mf">0.2</span><span class="p">,</span> <span class="n">growth_rate</span><span class="o">=</span><span class="mf">1.2</span><span class="p">)</span>
+<span class="p">)</span>
+<span class="n">size_control</span><span class="o">.</span><span class="n">set_suggested_name</span><span class="p">(</span><span class="s2">&quot;hard_control&quot;</span><span class="p">)</span>
+<span class="n">size_control</span><span class="o">.</span><span class="n">set_scope</span><span class="p">(</span><span class="n">prime</span><span class="o">.</span><span class="n">ScopeDefinition</span><span class="p">(</span><span class="n">model</span><span class="o">=</span><span class="n">model</span><span class="p">))</span>
+</pre></div>
+</div>
+</section>
+<section id="soft-sizing">
+<h3>Soft sizing<a class="headerlink" href="#soft-sizing" title="Link to this heading">#</a></h3>
+<p>In the <a class="reference internal" href="../api/_autosummary/ansys.meshing.prime.SizingType.html#ansys.meshing.prime.SizingType" title="ansys.meshing.prime.SizingType"><code class="xref py py-class docutils literal notranslate"><span class="pre">SizingType</span></code></a> class, selecting the
+<a class="reference internal" href="../api/_autosummary/ansys.meshing.prime.SizingType.SOFT.html#ansys.meshing.prime.SizingType.SOFT" title="ansys.meshing.prime.SizingType.SOFT"><code class="xref py py-attr docutils literal notranslate"><span class="pre">SOFT</span></code></a> parameter sizes on the scope based on a
+certain maximum value that should not be exceeded while meshing. This code shows how
+to use the <a class="reference internal" href="../api/_autosummary/ansys.meshing.prime.SoftSizingParams.html#ansys.meshing.prime.SoftSizingParams" title="ansys.meshing.prime.SoftSizingParams"><code class="xref py py-class docutils literal notranslate"><span class="pre">SoftSizingParams</span></code></a> class to specify
+the maximum size and growth rate:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">size_control</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">control_data</span><span class="o">.</span><span class="n">create_size_control</span><span class="p">(</span><span class="n">prime</span><span class="o">.</span><span class="n">SizingType</span><span class="o">.</span><span class="n">SOFT</span><span class="p">)</span>
+<span class="n">size_control</span><span class="o">.</span><span class="n">set_soft_sizing_params</span><span class="p">(</span>
+    <span class="n">prime</span><span class="o">.</span><span class="n">SoftSizingParams</span><span class="p">(</span><span class="n">model</span><span class="o">=</span><span class="n">model</span><span class="p">,</span> <span class="nb">max</span><span class="o">=</span><span class="mf">0.2</span><span class="p">,</span> <span class="n">growth_rate</span><span class="o">=</span><span class="mf">1.2</span><span class="p">)</span>
+<span class="p">)</span>
+<span class="n">size_control</span><span class="o">.</span><span class="n">set_suggested_name</span><span class="p">(</span><span class="s2">&quot;soft_control&quot;</span><span class="p">)</span>
+<span class="n">size_control</span><span class="o">.</span><span class="n">set_scope</span><span class="p">(</span><span class="n">prime</span><span class="o">.</span><span class="n">ScopeDefinition</span><span class="p">(</span><span class="n">model</span><span class="o">=</span><span class="n">model</span><span class="p">))</span>
+</pre></div>
+</div>
+<figure class="align-center">
+<a class="reference internal image-reference" href="../_images/softandhardsize.png"><img alt="../_images/softandhardsize.png" src="../_images/softandhardsize.png" style="width: 400pt;" /></a>
+</figure>
+</section>
+<section id="meshed-sizing">
+<h3>Meshed sizing<a class="headerlink" href="#meshed-sizing" title="Link to this heading">#</a></h3>
+<p>In the <a class="reference internal" href="../api/_autosummary/ansys.meshing.prime.SizingType.html#ansys.meshing.prime.SizingType" title="ansys.meshing.prime.SizingType"><code class="xref py py-class docutils literal notranslate"><span class="pre">SizingType</span></code></a> class, selecting the
+<a class="reference internal" href="../api/_autosummary/ansys.meshing.prime.SizingType.MESHED.html#ansys.meshing.prime.SizingType.MESHED" title="ansys.meshing.prime.SizingType.MESHED"><code class="xref py py-attr docutils literal notranslate"><span class="pre">MESHED</span></code></a> parameter sizes based on existing local sizes.
+This example shows how to use the <a class="reference internal" href="../api/_autosummary/ansys.meshing.prime.MeshedSizingParams.html#ansys.meshing.prime.MeshedSizingParams" title="ansys.meshing.prime.MeshedSizingParams"><code class="xref py py-class docutils literal notranslate"><span class="pre">MeshedSizingParams</span></code></a>
+class to specify the growth rate:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">size_control</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">control_data</span><span class="o">.</span><span class="n">create_size_control</span><span class="p">(</span><span class="n">prime</span><span class="o">.</span><span class="n">SizingType</span><span class="o">.</span><span class="n">MESHED</span><span class="p">)</span>
+<span class="n">size_control</span><span class="o">.</span><span class="n">set_meshed_sizing_params</span><span class="p">(</span>
+    <span class="n">prime</span><span class="o">.</span><span class="n">MeshedSizingParams</span><span class="p">(</span><span class="n">model</span><span class="o">=</span><span class="n">model</span><span class="p">,</span> <span class="n">growth_rate</span><span class="o">=</span><span class="mf">1.2</span><span class="p">)</span>
+<span class="p">)</span>
+<span class="n">size_control</span><span class="o">.</span><span class="n">set_suggested_name</span><span class="p">(</span><span class="s2">&quot;meshed_control&quot;</span><span class="p">)</span>
+<span class="n">size_control</span><span class="o">.</span><span class="n">set_scope</span><span class="p">(</span><span class="n">prime</span><span class="o">.</span><span class="n">ScopeDefinition</span><span class="p">(</span><span class="n">model</span><span class="o">=</span><span class="n">model</span><span class="p">))</span>
+</pre></div>
+</div>
+<figure class="align-center">
+<a class="reference internal image-reference" href="../_images/meshedsizing.png"><img alt="../_images/meshedsizing.png" src="../_images/meshedsizing.png" style="width: 400pt;" /></a>
+</figure>
+</section>
+<section id="body-of-influence-sizing">
+<h3>Body of influence sizing<a class="headerlink" href="#body-of-influence-sizing" title="Link to this heading">#</a></h3>
+<p>In the <a class="reference internal" href="../api/_autosummary/ansys.meshing.prime.SizingType.html#ansys.meshing.prime.SizingType" title="ansys.meshing.prime.SizingType"><code class="xref py py-class docutils literal notranslate"><span class="pre">SizingType</span></code></a> class, selecting the
+<a class="reference internal" href="../api/_autosummary/ansys.meshing.prime.SizingType.BOI.html#ansys.meshing.prime.SizingType.BOI" title="ansys.meshing.prime.SizingType.BOI"><code class="xref py py-attr docutils literal notranslate"><span class="pre">BOI</span></code></a> parameter sizes inside a closed volume scope
+that is not to exceed a certain maximum value. This code shows how to use the
+<a class="reference internal" href="../api/_autosummary/ansys.meshing.prime.BoiSizingParams.html#ansys.meshing.prime.BoiSizingParams" title="ansys.meshing.prime.BoiSizingParams"><code class="xref py py-class docutils literal notranslate"><span class="pre">BoiSizingParams</span></code></a> class to specify the maximum size and growth rate:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">size_control</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">control_data</span><span class="o">.</span><span class="n">create_size_control</span><span class="p">(</span><span class="n">prime</span><span class="o">.</span><span class="n">SizingType</span><span class="o">.</span><span class="n">BOI</span><span class="p">)</span>
+<span class="n">size_control</span><span class="o">.</span><span class="n">set_boi_sizing_params</span><span class="p">(</span>
+    <span class="n">prime</span><span class="o">.</span><span class="n">BoiSizingParams</span><span class="p">(</span><span class="n">model</span><span class="o">=</span><span class="n">model</span><span class="p">,</span> <span class="nb">max</span><span class="o">=</span><span class="mf">20.0</span><span class="p">,</span> <span class="n">growth_rate</span><span class="o">=</span><span class="mf">1.2</span><span class="p">)</span>
+<span class="p">)</span>
+<span class="n">size_control</span><span class="o">.</span><span class="n">set_suggested_name</span><span class="p">(</span><span class="s2">&quot;BOI_control&quot;</span><span class="p">)</span>
+<span class="n">size_control</span><span class="o">.</span><span class="n">set_scope</span><span class="p">(</span><span class="n">prime</span><span class="o">.</span><span class="n">ScopeDefinition</span><span class="p">(</span><span class="n">model</span><span class="o">=</span><span class="n">model</span><span class="p">))</span>
+</pre></div>
+</div>
+<figure class="align-center">
+<a class="reference internal image-reference" href="../_images/boi.png"><img alt="../_images/boi.png" src="../_images/boi.png" style="width: 400pt;" /></a>
+</figure>
+</section>
+</section>
+<section id="size-fields">
+<h2>Size fields<a class="headerlink" href="#size-fields" title="Link to this heading">#</a></h2>
+<p>The <a class="reference internal" href="../api/_autosummary/ansys.meshing.prime.SizeFieldType.html#ansys.meshing.prime.SizeFieldType" title="ansys.meshing.prime.SizeFieldType"><code class="xref py py-class docutils literal notranslate"><span class="pre">SizeFieldType</span></code></a> class helps you to fetch the element size
+at a given location. These size field types are available in PyPrimeMesh:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">Constant</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">Volumetric</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">Geodesic</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">Geometric</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">Meshedgeodesic</span></code></p></li>
+</ul>
+<p>The <code class="docutils literal notranslate"><span class="pre">Volumetric</span></code> and  <code class="docutils literal notranslate"><span class="pre">Geodesic</span></code> size fields can process and respect the size control that you define.
+The <code class="docutils literal notranslate"><span class="pre">Volumetric</span></code> size field can be computed using the <a class="reference internal" href="../api/_autosummary/ansys.meshing.prime.SizeField.compute_volumetric.html#ansys.meshing.prime.SizeField.compute_volumetric" title="ansys.meshing.prime.SizeField.compute_volumetric"><code class="xref py py-attr docutils literal notranslate"><span class="pre">Compute</span> <span class="pre">volumetric</span></code></a>
+method and then surface and volume meshing can be applied. The remaining size field types are computed as
+part of various surface and volume meshing operations.</p>
+<section id="constant-size-field">
+<h3>Constant size field<a class="headerlink" href="#constant-size-field" title="Link to this heading">#</a></h3>
+<p>In the <a class="reference internal" href="../api/_autosummary/ansys.meshing.prime.SizeFieldType.html#ansys.meshing.prime.SizeFieldType" title="ansys.meshing.prime.SizeFieldType"><code class="xref py py-class docutils literal notranslate"><span class="pre">SizeFieldType</span></code></a> class, selecting the
+<a class="reference internal" href="../api/_autosummary/ansys.meshing.prime.SizeFieldType.CONSTANT.html#ansys.meshing.prime.SizeFieldType.CONSTANT" title="ansys.meshing.prime.SizeFieldType.CONSTANT"><code class="xref py py-attr docutils literal notranslate"><span class="pre">CONSTANT</span></code></a> parameter computes the size field
+based on the size controls specified.</p>
+<figure class="align-center">
+<a class="reference internal image-reference" href="../_images/constantsize1.png"><img alt="../_images/constantsize1.png" src="../_images/constantsize1.png" style="width: 400pt;" /></a>
+</figure>
+<figure class="align-center">
+<a class="reference internal image-reference" href="../_images/constantsize.png"><img alt="../_images/constantsize.png" src="../_images/constantsize.png" style="width: 400pt;" /></a>
+</figure>
+</section>
+<section id="volumetric-size-field">
+<h3>Volumetric size field<a class="headerlink" href="#volumetric-size-field" title="Link to this heading">#</a></h3>
+<p>In the <a class="reference internal" href="../api/_autosummary/ansys.meshing.prime.SizeFieldType.html#ansys.meshing.prime.SizeFieldType" title="ansys.meshing.prime.SizeFieldType"><code class="xref py py-class docutils literal notranslate"><span class="pre">SizeFieldType</span></code></a> class, selecting the
+<a class="reference internal" href="../api/_autosummary/ansys.meshing.prime.SizeFieldType.VOLUMETRIC.html#ansys.meshing.prime.SizeFieldType.VOLUMETRIC" title="ansys.meshing.prime.SizeFieldType.VOLUMETRIC"><code class="xref py py-attr docutils literal notranslate"><span class="pre">VOLUMETRIC</span></code></a> parameter computes the size field
+based on the size controls specified.</p>
+</section>
+<section id="geodesic-size-field">
+<h3>Geodesic size field<a class="headerlink" href="#geodesic-size-field" title="Link to this heading">#</a></h3>
+<p>In the <a class="reference internal" href="../api/_autosummary/ansys.meshing.prime.SizeFieldType.html#ansys.meshing.prime.SizeFieldType" title="ansys.meshing.prime.SizeFieldType"><code class="xref py py-class docutils literal notranslate"><span class="pre">SizeFieldType</span></code></a> class, selecting the
+<a class="reference internal" href="../api/_autosummary/ansys.meshing.prime.SizeFieldType.GEODESIC.html#ansys.meshing.prime.SizeFieldType.GEODESIC" title="ansys.meshing.prime.SizeFieldType.GEODESIC"><code class="xref py py-attr docutils literal notranslate"><span class="pre">GEODESIC</span></code></a> parameter computes the size field
+on face nodes based on the size controls specified. Sizes are defined along a surface rather than
+the volume. Geodesic sizing enables you to confine sizes to surfaces and avoid problems like
+dead space refinement.</p>
+<figure class="align-center">
+<a class="reference internal image-reference" href="../_images/meshvolumetricsize.png"><img alt="../_images/meshvolumetricsize.png" src="../_images/meshvolumetricsize.png" style="width: 400pt;" /></a>
+</figure>
+<figure class="align-center">
+<a class="reference internal image-reference" href="../_images/meshgeodesicsize.png"><img alt="../_images/meshgeodesicsize.png" src="../_images/meshgeodesicsize.png" style="width: 400pt;" /></a>
+</figure>
+</section>
+<section id="geometric-size-field">
+<h3>Geometric size field<a class="headerlink" href="#geometric-size-field" title="Link to this heading">#</a></h3>
+<p>In the <a class="reference internal" href="../api/_autosummary/ansys.meshing.prime.SizeFieldType.html#ansys.meshing.prime.SizeFieldType" title="ansys.meshing.prime.SizeFieldType"><code class="xref py py-class docutils literal notranslate"><span class="pre">SizeFieldType</span></code></a> class, selecting the
+<a class="reference internal" href="../api/_autosummary/ansys.meshing.prime.SizeFieldType.GEOMETRIC.html#ansys.meshing.prime.SizeFieldType.GEOMETRIC" title="ansys.meshing.prime.SizeFieldType.GEOMETRIC"><code class="xref py py-attr docutils literal notranslate"><span class="pre">GEOMETRIC</span></code></a> parameter computes the size field
+based on existing boundary sizes. Sizes can gradually increase from the minimum size to the
+maximum size based on the growth rate.</p>
+<figure class="align-center">
+<a class="reference internal image-reference" href="../_images/geometricsize.png"><img alt="../_images/geometricsize.png" src="../_images/geometricsize.png" style="width: 400pt;" /></a>
+</figure>
+</section>
+<section id="meshedgeodesic-size-field">
+<h3>Meshedgeodesic size field<a class="headerlink" href="#meshedgeodesic-size-field" title="Link to this heading">#</a></h3>
+<p>In the <a class="reference internal" href="../api/_autosummary/ansys.meshing.prime.SizeFieldType.html#ansys.meshing.prime.SizeFieldType" title="ansys.meshing.prime.SizeFieldType"><code class="xref py py-class docutils literal notranslate"><span class="pre">SizeFieldType</span></code></a> class, selecting the
+<a class="reference internal" href="../api/_autosummary/ansys.meshing.prime.SizeFieldType.MESHEDGEODESIC.html#ansys.meshing.prime.SizeFieldType.MESHEDGEODESIC" title="ansys.meshing.prime.SizeFieldType.MESHEDGEODESIC"><code class="xref py py-attr docutils literal notranslate"><span class="pre">MESHEDGEODESIC</span></code></a> parameter computes
+the size field using average mesh edge lengths and is diffused geodesical.</p>
+<figure class="align-center">
+<a class="reference internal image-reference" href="../_images/meshedgeodesic.png"><img alt="../_images/meshedgeodesic.png" src="../_images/meshedgeodesic.png" style="width: 400pt;" /></a>
+</figure>
+<figure class="align-center">
+<a class="reference internal image-reference" href="../_images/meshedgeodesic1.png"><img alt="../_images/meshedgeodesic1.png" src="../_images/meshedgeodesic1.png" style="width: 400pt;" /></a>
+</figure>
+</section>
+</section>
+</section>
+
+
+                </article>
+              
+              
+              
+              
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+  <div class="sidebar-secondary-item">
+
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> On this page
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#sizing-control">Sizing control</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#curvature-sizing">Curvature sizing</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#proximity-sizing">Proximity sizing</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#hard-sizing">Hard sizing</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#soft-sizing">Soft sizing</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#meshed-sizing">Meshed sizing</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#body-of-influence-sizing">Body of influence sizing</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#size-fields">Size fields</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#constant-size-field">Constant size field</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#volumetric-size-field">Volumetric size field</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#geodesic-size-field">Geodesic size field</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#geometric-size-field">Geometric size field</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#meshedgeodesic-size-field">Meshedgeodesic size field</a></li>
+</ul>
+</li>
+</ul>
+  </nav></div>
+
+  <div class="sidebar-secondary-item"> 
+<div class="tocsection editthispage">
+  <a href="https://github.com/ansys/pyprimemesh/edit/main/doc/source/user_guide/sizing.rst">
+    <i class="fa-solid fa-pencil"></i>
+       Edit
+    on GitHub  
+  </a>
+</div>
+
+</div>
+
+  <div class="sidebar-secondary-item">
+
+  <div class="tocsection sourcelink">
+    <a href="../_sources/user_guide/sizing.rst.txt">
+      <i class="fa-solid fa-file-lines"></i> Show Source
+    </a>
+  </div>
+</div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+          </footer>
+        
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../_static/scripts/bootstrap.js?digest=5b4479735964841361fd"></script>
+<script src="../_static/scripts/pydata-sphinx-theme.js?digest=5b4479735964841361fd"></script>
+
+  <footer class="bd-footer">
+<div class="bd-footer__inner bd-page-width">
+  
+    <div class="footer-items__start">
+      
+        <div class="footer-item">
+
+  <p class="copyright">
+    
+      © Copyright (c) 2024 ANSYS, Inc. All rights reserved.
+      <br/>
+    
+  </p>
+</div>
+      
+        <div class="footer-item">
+
+  <p class="sphinx-version">
+    Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 7.2.6.
+    <br/>
+  </p>
+</div>
+      
+    </div>
+  
+  
+  
+    <div class="footer-items__end">
+      
+        <div class="footer-item"><p class="theme-version">
+  Built with the
+  <a href="https://sphinxdocs.ansys.com/version/stable/index.html"
+    >Ansys Sphinx Theme</a
+  >
+  0.13.1. <br />Last updated on
+  <span id="date"></span>
+</p>
+<script>
+  var options = { day: "numeric", month: "long", year: "numeric" };
+  var lastModifiedDate = new Date(document.lastModified);
+  var date = lastModifiedDate.toLocaleDateString("en-US", options);
+  document.getElementById("date").innerHTML = date;
+</script></div>
+      
+    </div>
+  
+</div>
+
+  </footer>
+  </body>
+</html>

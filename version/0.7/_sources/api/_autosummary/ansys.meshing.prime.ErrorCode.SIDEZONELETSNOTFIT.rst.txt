@@ -1,0 +1,6 @@
+SIDEZONELETSNOTFIT
+==================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoattribute:: ErrorCode.SIDEZONELETSNOTFIT

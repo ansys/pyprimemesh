@@ -1,0 +1,11 @@
+get\_topo\_faces
+================
+
+.. currentmodule:: ansys.meshing.prime.lucid
+
+.. automethod:: ansys.meshing.prime.lucid.SurfaceScope.get_topo_faces
+
+.. minigallery::
+   :add-heading: Examples using SurfaceScope.get_topo_faces
+
+   ansys.meshing.prime.lucid.SurfaceScope.get_topo_faces

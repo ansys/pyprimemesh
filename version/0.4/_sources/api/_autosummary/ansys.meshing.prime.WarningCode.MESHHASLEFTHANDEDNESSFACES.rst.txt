@@ -1,0 +1,6 @@
+﻿MESHHASLEFTHANDEDNESSFACES
+==========================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoattribute:: WarningCode.MESHHASLEFTHANDEDNESSFACES

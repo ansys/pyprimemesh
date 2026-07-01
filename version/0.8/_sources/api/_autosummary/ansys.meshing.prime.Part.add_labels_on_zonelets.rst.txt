@@ -1,0 +1,11 @@
+add\_labels\_on\_zonelets
+=========================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. automethod:: ansys.meshing.prime.Part.add_labels_on_zonelets
+
+.. minigallery::
+   :add-heading: Examples using Part.add_labels_on_zonelets
+
+   ansys.meshing.prime.Part.add_labels_on_zonelets

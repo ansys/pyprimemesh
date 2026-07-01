@@ -1,0 +1,6 @@
+﻿get\_size\_control\_by\_name
+============================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. automethod:: ControlData.get_size_control_by_name

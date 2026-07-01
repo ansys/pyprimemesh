@@ -1,0 +1,6 @@
+﻿refine\_at\_contacts
+====================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. automethod:: SurfaceUtilities.refine_at_contacts

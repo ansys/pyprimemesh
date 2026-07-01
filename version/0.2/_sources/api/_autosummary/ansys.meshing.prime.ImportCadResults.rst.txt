@@ -1,0 +1,31 @@
+ImportCadResults
+================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoclass:: ImportCadResults
+   
+   
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+      :toctree:
+   
+      
+      ImportCadResults.print_default
+      ImportCadResults.set_default
+   
+   
+
+   
+   
+   .. rubric:: Attributes
+
+   .. autosummary::
+      :toctree:
+   
+      ImportCadResults.cad_parameters
+      ImportCadResults.error_code
+   
+   

@@ -1,0 +1,6 @@
+SURFACESEARCHPARTWITHMESHNOTFOUND
+=================================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoattribute:: ErrorCode.SURFACESEARCHPARTWITHMESHNOTFOUND

@@ -1,0 +1,6 @@
+INVALIDGLOBALMINMAX
+===================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoattribute:: ErrorCode.INVALIDGLOBALMINMAX

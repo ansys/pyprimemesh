@@ -1,0 +1,11 @@
+set\_default
+============
+
+.. currentmodule:: ansys.meshing.prime
+
+.. automethod:: ansys.meshing.prime.HardSizingParams.set_default
+
+.. minigallery::
+   :add-heading: Examples using HardSizingParams.set_default
+
+   ansys.meshing.prime.HardSizingParams.set_default

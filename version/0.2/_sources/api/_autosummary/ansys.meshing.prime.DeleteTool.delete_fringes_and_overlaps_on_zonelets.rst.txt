@@ -1,0 +1,6 @@
+delete\_fringes\_and\_overlaps\_on\_zonelets
+============================================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. automethod:: DeleteTool.delete_fringes_and_overlaps_on_zonelets

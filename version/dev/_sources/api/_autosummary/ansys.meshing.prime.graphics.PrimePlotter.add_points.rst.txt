@@ -1,0 +1,11 @@
+add\_points
+===========
+
+.. currentmodule:: ansys.meshing.prime.graphics
+
+.. automethod:: ansys.meshing.prime.graphics.PrimePlotter.add_points
+
+.. minigallery::
+   :add-heading: Examples using PrimePlotter.add_points
+
+   ansys.meshing.prime.graphics.PrimePlotter.add_points

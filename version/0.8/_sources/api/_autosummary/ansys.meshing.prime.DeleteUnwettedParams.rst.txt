@@ -1,0 +1,32 @@
+.. vale off
+
+DeleteUnwettedParams
+====================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoclass:: DeleteUnwettedParams
+   
+   
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+      :toctree:
+   
+      
+      DeleteUnwettedParams.print_default
+      DeleteUnwettedParams.set_default
+   
+   
+
+   
+   
+   
+
+.. minigallery::
+    :add-heading: Examples using DeleteUnwettedParams
+
+    ansys.meshing.prime.DeleteUnwettedParams
+
+.. vale on

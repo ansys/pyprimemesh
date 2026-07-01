@@ -1,0 +1,6 @@
+extract\_topo\_volumes
+======================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. automethod:: Part.extract_topo_volumes

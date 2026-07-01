@@ -1,0 +1,6 @@
+﻿n\_duplicate\_faces
+===================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoproperty:: SurfaceDiagnosticSummaryResults.n_duplicate_faces

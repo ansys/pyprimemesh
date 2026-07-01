@@ -1,0 +1,11 @@
+add\_thickness
+==============
+
+.. currentmodule:: ansys.meshing.prime
+
+.. automethod:: ansys.meshing.prime.SurfaceUtilities.add_thickness
+
+.. minigallery::
+   :add-heading: Examples using SurfaceUtilities.add_thickness
+
+   ansys.meshing.prime.SurfaceUtilities.add_thickness

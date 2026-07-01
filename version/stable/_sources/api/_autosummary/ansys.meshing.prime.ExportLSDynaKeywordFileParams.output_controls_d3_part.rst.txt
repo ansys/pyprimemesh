@@ -1,0 +1,6 @@
+output\_controls\_d3\_part
+==========================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoproperty:: ExportLSDynaKeywordFileParams.output_controls_d3_part

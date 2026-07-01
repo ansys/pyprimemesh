@@ -1,0 +1,6 @@
+get\_summary
+============
+
+.. currentmodule:: ansys.meshing.prime
+
+.. automethod:: PeriodicControl.get_summary

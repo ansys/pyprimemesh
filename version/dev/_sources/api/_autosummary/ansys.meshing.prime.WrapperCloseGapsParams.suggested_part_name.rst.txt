@@ -1,0 +1,6 @@
+suggested\_part\_name
+=====================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoproperty:: WrapperCloseGapsParams.suggested_part_name

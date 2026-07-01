@@ -1,0 +1,6 @@
+MERGESMALLZONELETSSUPPORTEDFORFACEZONELETS
+==========================================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoattribute:: ErrorCode.MERGESMALLZONELETSSUPPORTEDFORFACEZONELETS

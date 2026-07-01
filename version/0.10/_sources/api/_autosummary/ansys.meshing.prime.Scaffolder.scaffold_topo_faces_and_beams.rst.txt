@@ -1,0 +1,11 @@
+scaffold\_topo\_faces\_and\_beams
+=================================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. automethod:: ansys.meshing.prime.Scaffolder.scaffold_topo_faces_and_beams
+
+.. minigallery::
+   :add-heading: Examples using Scaffolder.scaffold_topo_faces_and_beams
+
+   ansys.meshing.prime.Scaffolder.scaffold_topo_faces_and_beams

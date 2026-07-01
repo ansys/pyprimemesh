@@ -1,0 +1,6 @@
+﻿initialize\_surfer\_params\_for\_wrapper
+========================================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. automethod:: Surfer.initialize_surfer_params_for_wrapper

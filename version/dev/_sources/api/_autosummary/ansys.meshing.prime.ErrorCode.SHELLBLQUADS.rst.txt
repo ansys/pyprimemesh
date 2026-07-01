@@ -1,0 +1,6 @@
+SHELLBLQUADS
+============
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoattribute:: ErrorCode.SHELLBLQUADS

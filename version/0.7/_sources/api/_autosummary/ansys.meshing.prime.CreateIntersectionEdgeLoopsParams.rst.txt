@@ -1,0 +1,39 @@
+.. vale off
+
+CreateIntersectionEdgeLoopsParams
+=================================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoclass:: CreateIntersectionEdgeLoopsParams
+   
+   
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+      :toctree:
+   
+      
+      CreateIntersectionEdgeLoopsParams.print_default
+      CreateIntersectionEdgeLoopsParams.set_default
+   
+   
+
+   
+   
+   .. rubric:: Attributes
+
+   .. autosummary::
+      :toctree:
+   
+      CreateIntersectionEdgeLoopsParams.label_name
+   
+   
+
+.. minigallery::
+    :add-heading: Examples using CreateIntersectionEdgeLoopsParams
+
+    ansys.meshing.prime.CreateIntersectionEdgeLoopsParams
+
+.. vale on

@@ -1,0 +1,6 @@
+detect\_holes\_params
+=====================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoproperty:: DetectAndTreatHolesParams.detect_holes_params

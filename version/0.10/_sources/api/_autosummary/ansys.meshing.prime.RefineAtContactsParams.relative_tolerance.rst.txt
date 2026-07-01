@@ -1,0 +1,6 @@
+relative\_tolerance
+===================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoproperty:: RefineAtContactsParams.relative_tolerance

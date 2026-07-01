@@ -1,0 +1,6 @@
+get\_wrapper\_control\_by\_name
+===============================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. automethod:: ControlData.get_wrapper_control_by_name

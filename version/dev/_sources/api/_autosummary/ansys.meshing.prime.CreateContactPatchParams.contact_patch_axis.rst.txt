@@ -1,0 +1,6 @@
+contact\_patch\_axis
+====================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoproperty:: CreateContactPatchParams.contact_patch_axis

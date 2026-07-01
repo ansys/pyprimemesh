@@ -1,0 +1,6 @@
+THINVOLUMECONTROLSAMESOURCEFORMORETHANTWOCONTROL
+================================================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoattribute:: ErrorCode.THINVOLUMECONTROLSAMESOURCEFORMORETHANTWOCONTROL

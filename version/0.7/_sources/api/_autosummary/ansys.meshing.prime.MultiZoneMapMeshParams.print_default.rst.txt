@@ -1,0 +1,11 @@
+print\_default
+==============
+
+.. currentmodule:: ansys.meshing.prime
+
+.. automethod:: ansys.meshing.prime.MultiZoneMapMeshParams.print_default
+
+.. minigallery::
+   :add-heading: Examples using MultiZoneMapMeshParams.print_default
+
+   ansys.meshing.prime.MultiZoneMapMeshParams.print_default

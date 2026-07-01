@@ -1,0 +1,6 @@
+buffer\_layers
+==============
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoproperty:: HexCoreParams.buffer_layers

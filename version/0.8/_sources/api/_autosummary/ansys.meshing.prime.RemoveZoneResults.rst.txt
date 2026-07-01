@@ -1,0 +1,40 @@
+.. vale off
+
+RemoveZoneResults
+=================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoclass:: RemoveZoneResults
+   
+   
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+      :toctree:
+   
+      
+      RemoveZoneResults.print_default
+      RemoveZoneResults.set_default
+   
+   
+
+   
+   
+   .. rubric:: Attributes
+
+   .. autosummary::
+      :toctree:
+   
+      RemoveZoneResults.error_code
+      RemoveZoneResults.warning_codes
+   
+   
+
+.. minigallery::
+    :add-heading: Examples using RemoveZoneResults
+
+    ansys.meshing.prime.RemoveZoneResults
+
+.. vale on
