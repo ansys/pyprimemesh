@@ -48,6 +48,12 @@ This table provides compatibility information:
 Installation
 ------------
 
+.. note::
+   These instructions assume you are familiar
+   with ``pip`` and the command line. If they are new to you, you should read
+   the `Python Packaging User Guide Tutorial on pip <https://packaging.python.org/en/latest/tutorials/installing-packages/>`_
+   before proceeding.
+
 The ``ansys-meshing-prime`` package currently supports Python 3.10
 to Python 3.14 on the Windows and Linux operating systems.
 
