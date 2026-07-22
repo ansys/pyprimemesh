@@ -40,7 +40,7 @@ pygeometry = [
   "ansys-geometry-core>=0.7.6,<1",
 ]
 tests = [
-  "ansys-tools-visualization-interface==0.14.0",
+  "ansys-tools-visualization-interface[usd]==0.14.0",
   "pytest==9.1.0",
   "pytest-cov==7.1.0",
   "pytest-pyvista==0.3.3",
