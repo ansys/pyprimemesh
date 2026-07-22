@@ -41,7 +41,7 @@ pygeometry = [
 ]
 tests = [
   "ansys-tools-visualization-interface==0.14.0",
-  "pytest==9.1.0",
+  "pytest==9.1.1",
   "pytest-cov==7.1.0",
   "pytest-pyvista==0.3.3",
   "pytest-xvfb==3.1.1",
@@ -49,8 +49,9 @@ tests = [
   "pyvista[trame]==0.48.4",
 ]
 doc = [
-  "ansys-sphinx-theme[autoapi]==1.8.0",
+
   "ansys-tools-visualization-interface==0.14.0",
+  "ansys-sphinx-theme[autoapi]==1.9.0",
   "joblib==1.5.3",
   "jupyter-sphinx==0.5.3",
   "nest-asyncio2==1.7.2",

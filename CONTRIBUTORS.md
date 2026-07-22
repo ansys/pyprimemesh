@@ -15,6 +15,7 @@
 * [Eric Peng](https://github.com/peng2001)
 * [giovannipappalardiansys](https://github.com/giovannipappalardiansys)
 * [Hao Lee](https://github.com/hlee0122)
+* [James Derrick](https://github.com/jgd10)
 * [Kathy Pippert](https://github.com/PipKat)
 * [Kerry McAdams](https://github.com/klmcadams)
 * [Martin Walters](https://github.com/waltersma)
