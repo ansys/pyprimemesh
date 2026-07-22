@@ -20,171 +20,97 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
-"""Load an F1 rear wing example mesh and export it as OpenUSD.
+"""
+.. _ref_openusd_export:
 
-This example reuses the generic F1 rear wing STL files used by the
-generic rear wing gallery example (download helpers in ``prime.examples``).
+====================================================
+Export a generic F1 rear wing mesh as OpenUSD HTML
+====================================================
 
-Steps
------
-1. Launch Prime.
-2. Import F1 rear wing geometry.
-3. Create a quick wrapped surface to ensure meshed faces exist.
-4. Build USD geometry from the same connectivity source used for PolyData.
-5. Export an HTML viewer using a temporary USD file.
+**Summary**: This example imports the generic F1 rear wing STL geometry,
+merges the parts, and exports the resulting surface mesh as a self-contained
+HTML viewer using OpenUSD.
+
+Procedure
+~~~~~~~~~~
+#. Launch an Ansys Prime Server instance.
+#. Import the F1 rear wing STL geometry files and merge them into one part.
+#. Display the imported mesh.
+#. Export the mesh as a USD file and a self-contained Three.js HTML viewer.
+#. Exit the PyPrimeMesh session.
 """
 
-import webbrowser
+# sphinx_gallery_tags = ["Fluid", "Aerodynamics", "USD"]
+
+###############################################################################
+# Launch Ansys Prime Server
+# ~~~~~~~~~~~~~~~~~~~~~~~~~
+# Import all necessary modules, launch an instance of Ansys Prime Server,
+# and connect the PyPrimeMesh client.
+
 from pathlib import Path
 
+import ansys.meshing.prime as prime
 from ansys.meshing.prime.core.mesh_usd_io import export_usd_viewer_html
+from ansys.meshing.prime.graphics import PrimePlotter
 
+prime_client = prime.launch_prime()
+model = prime_client.model
+mesh_util = prime.lucid.Mesh(model=model)
 
-def _count_entities(usd_geom):
-    """Return a compact count of exported entities."""
-    n_faces = sum(len(p.get("faces", [])) for p in usd_geom.values())
-    n_edges = sum(len(p.get("edges", [])) for p in usd_geom.values())
-    n_ctrlpts = sum(len(p.get("ctrlpts", [])) for p in usd_geom.values())
-    n_splinesurf = sum(len(p.get("splinesurf", [])) for p in usd_geom.values())
-    return n_faces, n_edges, n_ctrlpts, n_splinesurf
+###############################################################################
+# Import geometry
+# ~~~~~~~~~~~~~~~
+# Download the generic F1 rear wing STL files and import each one,
+# appending it to the model.
 
+f1_rw_drs = prime.examples.download_f1_rw_drs_stl()
+f1_rw_enclosure = prime.examples.download_f1_rw_enclosure_stl()
+f1_rw_end_plates = prime.examples.download_f1_rw_end_plates_stl()
+f1_rw_main_plane = prime.examples.download_f1_rw_main_plane_stl()
 
-def main():
-    import ansys.meshing.prime as prime
+for file_name in [f1_rw_drs, f1_rw_enclosure, f1_rw_end_plates, f1_rw_main_plane]:
+    mesh_util.read(file_name, append=True)
 
-    """Run F1 rear wing USD export example."""
-    prime_client = prime.launch_prime()
-    model = prime_client.model
+###############################################################################
+# Display the mesh
+# ~~~~~~~~~~~~~~~~
+# Show the imported surface mesh, excluding the enclosure part.
 
-    try:
-        # sphinx_gallery_tags = ["Structural", "Shell", "Quad", "Connect"]
+scope = prime.ScopeDefinition(model, part_expression="* !*enclosure*")
+display = PrimePlotter()
+display.plot(model, scope)
+display.show()
 
-        ###############################################################################
-        # Launch Ansys Prime Server
-        # ~~~~~~~~~~~~~~~~~~~~~~~~~
-        # Import all necessary modules.
-        # Launch an instance of Ansys Prime Server.
-        # Connect the PyPrimeMesh client and get the model.
+###############################################################################
+# Merge parts
+# ~~~~~~~~~~~
+# Merge all imported parts into a single part named ``f1_rear_wing``.
 
-        from ansys.meshing import prime
-        from ansys.meshing.prime.graphics import PrimePlotter
+merge_params = prime.MergePartsParams(model, merged_part_suggested_name="f1_rear_wing")
+merge_result = model.merge_parts([part.id for part in model.parts], merge_params)
 
-        prime_client = prime.launch_prime()
-        model = prime_client.model
+###############################################################################
+# Export to OpenUSD and HTML
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~
+# Build the USD geometry representation from the surface mesh and export it
+# as both a ``.usd`` file and a self-contained Three.js HTML viewer.
 
-        ###############################################################################
-        # Import CAD geometry
-        # ~~~~~~~~~~~~~~~~~~~
-        # Download the bracket geometry (FMD) file exported by SpaceClaim.
-        # Import the CAD geometry.
-        # Create the part per the CAD model for the topology-based connection.
+usd_geom = model.as_usd(update=True)
 
-        # For Windows OS users, scdoc is also available:
-        # bracket_file = prime.examples.download_bracket_scdoc()
+out_dir = Path.cwd() / "examples" / "gallery" / "_generated"
+out_dir.mkdir(parents=True, exist_ok=True)
 
-        bracket_file = prime.examples.download_bracket_fmd()
+usd_path = out_dir / "f1_rear_wing_mesh.usd"
+html_path = export_usd_viewer_html(usd_geom, usd_path, out_dir / "f1_rear_wing_mesh_viewer.html")
 
-        file_io = prime.FileIO(model)
-        file_io.import_cad(
-            file_name=bracket_file,
-            params=prime.ImportCadParams(
-                model=model,
-                length_unit=prime.LengthUnit.MM,
-                part_creation_type=prime.PartCreationType.MODEL,
-            ),
-        )
+print(f"USD file: {usd_path}")
+print(f"HTML viewer: {html_path}")
+print("Controls: left-drag orbit, right-drag pan, scroll zoom.")
 
-        ###############################################################################
-        # Review the part
-        # ~~~~~~~~~~~~~~~
-        # Get the part summary.
-        # Display the model to show edges by connection.
-        # Use keyboard shortcuts to switch between
-        # the surface (``s``) and wireframe (``w``) representations.
-        # Color code for edge connectivity:
-        #
-        # - Red: free
-        # - Black: double
-        # - Purple: triple
+###############################################################################
+# Exit
+# ~~~~
+# Exit the PyPrimeMesh session.
 
-        part = model.get_part_by_name('bracket_mid_surface-3')
-        part_summary_res = part.get_summary(prime.PartSummaryParams(model, print_mesh=False))
-        print(part_summary_res)
-
-        display = PrimePlotter()
-        display.add_model(model)
-        display.show()
-
-        ###############################################################################
-        # Connection
-        # ~~~~~~~~~~
-        # Initialize the connection tolerance and other parameters. (The connection
-        # tolerance is smaller than the target element size.)
-        # Scaffold the topofaces, topoedges, or both with connection parameters.
-
-        # Target element size
-        element_size = 0.5
-
-        params = prime.ScaffolderParams(
-            model,
-            absolute_dist_tol=0.1 * element_size,
-            intersection_control_mask=prime.IntersectionMask.FACEFACEANDEDGEEDGE,
-            constant_mesh_size=element_size,
-        )
-
-        # Get existing topoface or topoedge IDs
-        faces = part.get_topo_faces()
-        beams = []
-
-        scaffold_res = prime.Scaffolder(model, part.id).scaffold_topo_faces_and_beams(
-            topo_faces=faces, topo_beams=beams, params=params
-        )
-        print(scaffold_res)
-
-        ###############################################################################
-        # Surface mesh
-        # ~~~~~~~~~~~~
-        # Initialize surface meshing parameters.
-        # Mesh topofaces with the constant size and generate quad elements.
-
-        surfer_params = prime.SurferParams(
-            model=model,
-            size_field_type=prime.SizeFieldType.CONSTANT,
-            constant_size=element_size,
-            generate_quads=True,
-        )
-
-        surfer_result = prime.Surfer(model).mesh_topo_faces(
-            part.id, topo_faces=faces, params=surfer_params
-        )
-
-        # Display the mesh
-        pl = PrimePlotter()
-        pl.plot(model, update=True)
-        pl.show()
-
-        usd_geom = model.as_usd(update=True)
-        n_faces, n_edges, n_ctrlpts, n_splinesurf = _count_entities(usd_geom)
-        print(
-            f"Prepared USD geometry: faces={n_faces}, edges={n_edges}, "
-            f"ctrlpts={n_ctrlpts}, splinesurf={n_splinesurf}"
-        )
-
-        out_dir = Path.cwd() / "examples" / "gallery" / "_generated"
-        out_dir.mkdir(parents=True, exist_ok=True)
-
-        usd_path = out_dir / "f1_rear_wing_mesh.usd"
-        html_path = export_usd_viewer_html(
-            usd_geom, usd_path, out_dir / "f1_rear_wing_mesh_viewer.html"
-        )
-
-        print(f"Viewer page generated at: {html_path}")
-        print(f"USD file generated at: {usd_path}")
-        print("Controls: left-drag orbit, right-drag pan, mouse wheel zoom.")
-        webbrowser.open(html_path.resolve().as_uri())
-    finally:
-        prime_client.exit()
-
-
-if __name__ == "__main__":
-    main()
+prime_client.exit()
