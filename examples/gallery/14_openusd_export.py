@@ -24,23 +24,22 @@
 .. _ref_openusd_export:
 
 ====================================================
-Export a generic F1 rear wing mesh as OpenUSD HTML
+Export a toy car mesh as OpenUSD HTML
 ====================================================
 
-**Summary**: This example imports the generic F1 rear wing STL geometry,
-merges the parts, and exports the resulting surface mesh as a self-contained
-HTML viewer using OpenUSD.
+**Summary**: This example imports the toy car mesh, and exports the resulting
+surface mesh as a self-contained HTML viewer using OpenUSD.
 
 Procedure
 ~~~~~~~~~~
 #. Launch an Ansys Prime Server instance.
-#. Import the F1 rear wing STL geometry files and merge them into one part.
+#. Import the toy car mesh.
 #. Display the imported mesh.
 #. Export the mesh as a USD file and a self-contained Three.js HTML viewer.
 #. Exit the PyPrimeMesh session.
 """
 
-# sphinx_gallery_tags = ["Fluid", "Aerodynamics", "USD"]
+# sphinx_gallery_tags = ["USD"]
 
 ###############################################################################
 # Launch Ansys Prime Server
@@ -61,34 +60,19 @@ mesh_util = prime.lucid.Mesh(model=model)
 ###############################################################################
 # Import geometry
 # ~~~~~~~~~~~~~~~
-# Download the generic F1 rear wing STL files and import each one,
-# appending it to the model.
+# Download the toy car mesh file and import it into the model.
 
-f1_rw_drs = prime.examples.download_f1_rw_drs_stl()
-f1_rw_enclosure = prime.examples.download_f1_rw_enclosure_stl()
-f1_rw_end_plates = prime.examples.download_f1_rw_end_plates_stl()
-f1_rw_main_plane = prime.examples.download_f1_rw_main_plane_stl()
-
-for file_name in [f1_rw_drs, f1_rw_enclosure, f1_rw_end_plates, f1_rw_main_plane]:
-    mesh_util.read(file_name, append=True)
+toy_car = prime.examples.download_toy_car_pmdat()
+mesh_util.read(toy_car)
 
 ###############################################################################
 # Display the mesh
 # ~~~~~~~~~~~~~~~~
-# Show the imported surface mesh, excluding the enclosure part.
+# Show the imported surface mesh.
 
-scope = prime.ScopeDefinition(model, part_expression="* !*enclosure*")
 display = PrimePlotter()
-display.plot(model, scope)
+display.plot(model)
 display.show()
-
-###############################################################################
-# Merge parts
-# ~~~~~~~~~~~
-# Merge all imported parts into a single part named ``f1_rear_wing``.
-
-merge_params = prime.MergePartsParams(model, merged_part_suggested_name="f1_rear_wing")
-merge_result = model.merge_parts([part.id for part in model.parts], merge_params)
 
 ###############################################################################
 # Export to OpenUSD and HTML
@@ -101,8 +85,8 @@ usd_geom = model.as_usd(update=True)
 out_dir = Path.cwd() / "examples" / "gallery" / "_generated"
 out_dir.mkdir(parents=True, exist_ok=True)
 
-usd_path = out_dir / "f1_rear_wing_mesh.usd"
-html_path = export_usd_viewer_html(usd_geom, usd_path, out_dir / "f1_rear_wing_mesh_viewer.html")
+usd_path = out_dir / "toy_car_mesh.usd"
+html_path = export_usd_viewer_html(usd_geom, usd_path, out_dir / "toy_car_mesh_viewer.html")
 
 print(f"USD file: {usd_path}")
 print(f"HTML viewer: {html_path}")
