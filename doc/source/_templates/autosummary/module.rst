@@ -2,7 +2,7 @@
 
 {{ fullname | escape | underline}}
 
-.. currentmodule:: {{ fullname }}
+.. module:: {{ fullname }}
 
 {% block attributes %}
 {% if attributes %}
