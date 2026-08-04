@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
-'''High level helper functions for PyPrimeMesh'''
+'''High level helper functions for PyPrimeMesh.'''
+
 from .mesh_util import LabelToZoneMethod, Mesh
 from .scope import SurfaceScope, VolumeScope
