@@ -234,6 +234,43 @@ def run_all_examples_in_parallel():
     Parallel(n_jobs=-1)(delayed(run_example)(script) for script in example_scripts)
 
 
+def skip_int_enum_members(app, what, name, obj, skip, options):
+    """Hide ``int``-inherited members that leak into ``IntEnum`` API pages.
+
+    The enums in ``ansys.meshing.prime`` subclass :class:`enum.IntEnum`, which
+    subclasses :class:`int`. As of recent Sphinx versions, autosummary surfaces
+    the inherited ``int`` members (``conjugate``, ``bit_length``, ``bit_count``,
+    ``to_bytes``, ``from_bytes``, ``as_integer_ratio``, ``real``, ``imag``,
+    ``numerator``, ``denominator``, ``is_integer``) in the API reference. This
+    handler drops them while preserving the meaningful ``name``/``value`` enum
+    members.
+
+    Parameters
+    ----------
+    app : sphinx.application.Sphinx
+        The Sphinx application object.
+    what : str
+        The type of the object which the docstring belongs to.
+    name : str
+        The name of the member being considered.
+    obj : Any
+        The member object itself.
+    skip : bool
+        Whether Sphinx would skip this member by default.
+    options : Any
+        The options given to the directive.
+
+    Returns
+    -------
+    bool or None
+        ``True`` to force skipping the member, otherwise ``None`` to defer to
+        the default behavior.
+    """
+    if name in vars(int) and name not in vars(object):
+        return True
+    return None
+
+
 def setup(app):
     """Sphinx setup function to run all example scripts in parallel before building the docs.
 
@@ -243,6 +280,7 @@ def setup(app):
         The Sphinx application object.
     """
     app.connect("builder-inited", lambda app: run_all_examples_in_parallel())
+    app.connect("autodoc-skip-member", skip_int_enum_members)
 
 
 # Suppress warnings
