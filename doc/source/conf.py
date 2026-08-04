@@ -88,7 +88,6 @@ extensions = [
     "sphinx.ext.coverage",
     "sphinx.ext.doctest",
     "sphinx.ext.extlinks",
-    "sphinx.ext.napoleon",
     "sphinx_autodoc_typehints",
     "sphinxemoji.sphinxemoji",
     "sphinx_design",
