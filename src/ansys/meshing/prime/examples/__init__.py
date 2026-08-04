@@ -20,6 +20,8 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Download example geometry and mesh files for use with PyPrimeMesh."""
+
 from .examples import (
     download_block_model_fmd,
     download_block_model_pmdat,

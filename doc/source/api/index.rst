@@ -8,7 +8,7 @@ This section gives an overview of all API classes, methods, and parameters prese
 
 .. autosummary::
    :toctree: _autosummary
-   
+
    ansys.meshing.prime
    ansys.meshing.prime.examples
    ansys.meshing.prime.graphics

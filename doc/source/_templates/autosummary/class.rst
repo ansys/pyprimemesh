@@ -7,13 +7,14 @@
 .. autoclass:: {{ objname }}
 
    {% block methods %}
-   {% if methods %}
+   {% set visible_methods = methods | reject('equalto', '__init__') | list %}
+   {% if visible_methods %}
    .. rubric:: {{ _('Methods') }}
 
    .. autosummary::
       :toctree:
-   {% for item in methods %}
-      {% if item != '__init__' %}{{ name }}.{{ item }}{% endif %}
+   {% for item in visible_methods %}
+      {{ name }}.{{ item }}
    {%- endfor %}
    {% endif %}
    {% endblock %}
