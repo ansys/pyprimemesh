@@ -55,7 +55,6 @@ def test_plotter(get_remote_client, get_examples, verify_image_cache):
     display.show()
 
 
-
 def _check_element_outlines(model_pd):
     """Check outlines are held for the zonelets the face actor cannot draw itself.
 
