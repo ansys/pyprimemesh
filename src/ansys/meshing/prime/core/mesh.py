@@ -94,6 +94,14 @@ class DisplayMeshInfo:
         Name of the zone.
     display_mesh_type : DisplayMeshType, default: FACEZONELET
         Type of mesh to display.
+    render_mesh : pv.PolyData, default: None
+        Triangulated geometry to shade in place of the facets themselves. This is
+        set only for zonelets that VTK cannot tessellate acceptably on its own. For
+        more information, see :func:`Mesh.get_face_polydata`.
+    element_edges : pv.PolyData, default: None
+        Element outlines to draw as separate line geometry. This is set only for
+        zonelets whose outlines cannot be drawn by the face actor itself. For more
+        information, see :func:`Mesh.get_face_polydata`.
     """
 
     def __init__(
@@ -105,6 +113,8 @@ class DisplayMeshInfo:
         zone_name=None,
         display_mesh_type=DisplayMeshType.FACEZONELET,
         has_mesh=False,
+        render_mesh=None,
+        element_edges=None,
     ) -> None:
         """Initialize display mesh information."""
         self.id = id
@@ -114,6 +124,8 @@ class DisplayMeshInfo:
         self.zone_name = zone_name
         self.display_mesh_type = display_mesh_type
         self.has_mesh = has_mesh
+        self.render_mesh = render_mesh
+        self.element_edges = element_edges
 
 
 def compute_distance(point1, point2) -> float:
@@ -318,6 +330,16 @@ class Mesh(MeshInfo):
         -------
         MeshObjectPlot, DisplayMeshInfo
             Mesh to be plotted and information of the mesh to display.
+
+        Notes
+        -----
+        Quadratic and polygonal facets reach the renderer as polygons of more than
+        four nodes. VTK tessellates such a polygon at draw time by fanning it from
+        its first node, which on a curved facet swallows the element outlines behind
+        the shaded surface when viewed head on, and leaves bright slivers along them
+        at oblique angles. Those zonelets are therefore given an explicit
+        triangulation to shade, together with the outlines of the original polygons
+        for the plotter to draw as independent line geometry.
         """
         part = self._model.get_part(part_id)
 
@@ -334,7 +356,11 @@ class Mesh(MeshInfo):
         else:
             display_mesh_type = DisplayMeshType.FACEZONELET
             id = face_facet_res.face_zonelet_ids[index]
-
+        render_mesh = None
+        element_edges = None
+        if has_mesh and surf.n_cells > 0 and surf.GetPolys().GetMaxCellSize() > 4:
+            render_mesh = surf.triangulate(progress_bar=False)
+            element_edges = surf.extract_all_edges(progress_bar=False)
         if surf.n_points > 0:
             return MeshObjectPlot(part, surf), DisplayMeshInfo(
                 id=id,
@@ -344,6 +370,8 @@ class Mesh(MeshInfo):
                 part_name=part.name,
                 zone_name=face_facet_res.face_zone_names[index],
                 has_mesh=has_mesh,
+                render_mesh=render_mesh,
+                element_edges=element_edges,
             )
 
     def get_edge_polydata(
