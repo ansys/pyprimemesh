@@ -152,7 +152,7 @@ def test_quadratic_edge_zonelets_follow_mid_nodes(get_remote_client, get_example
     it, and the line cuts the chord of the curve the node was projected onto.
     """
     model = get_remote_client.model
-    _curved_quadratic_elbow(model, get_examples["elbow_fmd"])
+    _curved_quadratic_elbow(model, get_examples["elbow_lucid"])
     model_pd = model.as_polydata(update=True)
 
     checked = 0
@@ -176,7 +176,7 @@ def test_quadratic_tet_plotter(get_remote_client, get_examples, verify_image_cac
     and the mid-side subdivision within each facet are most obvious.
     """
     model = get_remote_client.model
-    _curved_quadratic_elbow(model, get_examples["elbow_fmd"])
+    _curved_quadratic_elbow(model, get_examples["elbow_lucid"])
 
     display = PrimePlotter()
     # update, or the polydata another test already cached for this model is reused
