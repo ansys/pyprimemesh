@@ -120,6 +120,24 @@ def test_quadratic_element_outlines(get_remote_client, get_examples):
         display.scene.close()
 
 
+def test_quadratic_tet_plotter(get_remote_client, get_examples, verify_image_cache):
+    """Visual regression for quadratic tet outlines on a curved model.
+
+    Uses an oblique camera so mid-side node edges on the bend are visible in the
+    cached screenshot (downloadable from the CI artifact).
+    """
+    mixing_elbow = get_examples["elbow_lucid"]
+    model = get_remote_client.model
+    _mesh_elbow(model, mixing_elbow, quadratic=True)
+
+    display = PrimePlotter()
+    display.plot(model)
+    display.scene.view_isometric()
+    display.scene.camera.elevation = 25
+    display.scene.camera.azimuth = 35
+    display.show()
+
+
 def test_compute_distance():
     point1 = [1, 1, 3]
     point2 = [1, 1, 1]
