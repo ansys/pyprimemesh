@@ -396,24 +396,27 @@ class Mesh(MeshInfo):
         part = self._model.get_part(part_id)
         vertices, faces = self._get_vertices_and_surf_edges(edge_facet_res, index)
         edge = pv.PolyData()
-        n_edges = edge_facet_res.num_edges_per_edge_zonelet[index]
         edge.points = vertices
-        cells = np.full((n_edges, 3), 2, dtype=np.int_)
-        i = 0
+        segments = []
         j = 0
         while j < len(faces):
             nnodes = faces[j]
-            j += 1
-            cells[i, 1] = faces[j]
-            if nnodes == 2:
-                cells[i, 2] = faces[j + 1]
-            elif nnodes == 3:
-                cells[i, 2] = faces[j + 2]
-            j += nnodes
-            i += 1
+            nodes = faces[j + 1 : j + 1 + nnodes]
+            if nnodes == 3:
+                # a quadratic edge arrives as (start, mid, end); drawing it as a
+                # single start to end segment cuts across the curve the mid-side
+                # node describes, so draw both halves instead
+                segments.append((nodes[0], nodes[1]))
+                segments.append((nodes[1], nodes[2]))
+            else:
+                segments.append((nodes[0], nodes[1]))
+            j += 1 + nnodes
+        cells = np.full((len(segments), 3), 2, dtype=np.int_)
+        if segments:
+            cells[:, 1:] = segments
         edge.lines = cells
         ecolor = np.array(self.get_edge_color(edge_facet_res, index))
-        colors = np.tile(ecolor, (n_edges, 1))
+        colors = np.tile(ecolor, (len(segments), 1))
         edge["colors"] = colors
         if edge.n_points > 0:
             return MeshObjectPlot(part, edge)
