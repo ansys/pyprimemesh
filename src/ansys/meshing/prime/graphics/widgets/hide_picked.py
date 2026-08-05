@@ -48,6 +48,7 @@ class HidePicked(PlotterWidget):
         self.prime_plotter = prime_plotter
         self._picked_dict = self.prime_plotter._backend._custom_picker._picked_dict
         self._object_actors_map = self.prime_plotter._backend._object_to_actors_map
+        self._element_edge_actors = self.prime_plotter._element_edge_actors
         self._button = self.prime_plotter._backend._pl.scene.add_checkbox_button_widget(
             self.callback,
             position=(5, 660),
@@ -58,12 +59,21 @@ class HidePicked(PlotterWidget):
         )
         self._removed_actors = []
 
+    def _actors_of(self, meshobject) -> list:
+        """Get every actor that draws a mesh object, outlines included."""
+        actors = [meshobject.actor]
+        edge_actor = self._element_edge_actors.get(meshobject.actor)
+        if edge_actor is not None:
+            actors.append(edge_actor)
+        return actors
+
     def callback(self, state: bool) -> None:
         """Define callback function for the button widget."""
         if state:
             for meshobject in list(self._picked_dict.values()):
-                self.prime_plotter._backend.pv_interface.scene.remove_actor(meshobject.actor)
-                self._removed_actors.append(meshobject.actor)
+                for actor in self._actors_of(meshobject):
+                    self.prime_plotter._backend.pv_interface.scene.remove_actor(actor)
+                    self._removed_actors.append(actor)
         else:
             for actor in self._removed_actors:
                 self.prime_plotter._backend._pl.scene.add_actor(actor)
