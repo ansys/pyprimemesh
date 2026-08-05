@@ -23,6 +23,7 @@
 """Module for testing plotter related functions."""
 from pathlib import Path
 
+import numpy as np
 import pyvista as pv
 
 import ansys.meshing.prime as prime
@@ -51,7 +52,7 @@ def test_plotter(get_remote_client, get_examples, verify_image_cache):
     )
 
     display = PrimePlotter()
-    display.plot(model)
+    display.plot(model, update=True)
     display.show()
 
 
@@ -120,22 +121,84 @@ def test_quadratic_element_outlines(get_remote_client, get_examples):
         display.scene.close()
 
 
+def _curved_quadratic_elbow(model, elbow_fmd):
+    """Coarse quadratic tet mesh whose mid-side nodes follow the CAD surface.
+
+    Meshing the faceted PMDAT leaves mid-side nodes on straight edges, so the
+    result is indistinguishable from a linear mesh. Reading the CAD and
+    projecting onto it is what actually bulges the elements out.
+    """
+    if model.parts:
+        model.delete_parts([part.id for part in model.parts])
+    mesh_util = prime.lucid.Mesh(model=model)
+    mesh_util.read(file_name=elbow_fmd)
+    # coarse enough that a single element spans a visible amount of curvature
+    mesh_util.surface_mesh(min_size=25, max_size=60)
+    mesh_util.volume_mesh(quadratic=True, volume_fill_type=prime.VolumeFillType.TET)
+    part = model.parts[0]
+    prime.SurfaceUtilities(model).project_topo_faces_on_geometry(
+        part.get_topo_faces(),
+        prime.ProjectOnGeometryParams(
+            model, project_on_facets_if_cadnot_found=True, project_only_mid_nodes=False
+        ),
+    )
+
+
+def test_quadratic_edge_zonelets_follow_mid_nodes(get_remote_client, get_examples):
+    """Edge zonelets are drawn through their mid-side node, not across it.
+
+    A quadratic edge arrives as ``(start, mid, end)``. Drawing it as one segment
+    leaves the mid node sitting in the point array without any line referencing
+    it, and the line cuts the chord of the curve the node was projected onto.
+    """
+    model = get_remote_client.model
+    _curved_quadratic_elbow(model, get_examples["elbow_fmd"])
+    model_pd = model.as_polydata(update=True)
+
+    checked = 0
+    for part_pd in model_pd.values():
+        for edge_mesh_part in part_pd["edges"]:
+            edge = edge_mesh_part.mesh
+            if edge.n_cells == 0:
+                continue
+            lines = edge.lines.reshape(-1, 3)
+            assert (lines[:, 0] == 2).all()
+            referenced = set(lines[:, 1]) | set(lines[:, 2])
+            assert len(referenced) == edge.n_points
+            checked += 1
+    assert checked > 0
+
+
 def test_quadratic_tet_plotter(get_remote_client, get_examples, verify_image_cache):
     """Visual regression for quadratic tet outlines on a curved model.
 
-    Uses an oblique camera so mid-side node edges on the bend are visible in the
-    cached screenshot (downloadable from the CI artifact).
+    Framed at a grazing angle on the pipe wall, where the curved element edges
+    and the mid-side subdivision within each facet are most obvious.
     """
-    mixing_elbow = get_examples["elbow_lucid"]
     model = get_remote_client.model
-    _mesh_elbow(model, mixing_elbow, quadratic=True)
+    _curved_quadratic_elbow(model, get_examples["elbow_fmd"])
 
     display = PrimePlotter()
-    display.plot(model)
-    display.scene.view_isometric()
-    display.scene.camera.elevation = 25
-    display.scene.camera.azimuth = 35
+    # update, or the polydata another test already cached for this model is reused
+    display.plot(model, update=True)
+
+    scene = display.scene
+    bounds = np.array(scene.bounds).reshape(3, 2)
+    span = float((bounds[:, 1] - bounds[:, 0]).max())
+    target = bounds.mean(axis=1) + np.array([-0.10, -0.10, 0.0]) * span
+    azimuth, elevation = np.radians(72), np.radians(12)
+    direction = np.array(
+        [
+            np.cos(elevation) * np.cos(azimuth),
+            np.cos(elevation) * np.sin(azimuth),
+            np.sin(elevation),
+        ]
+    )
+    scene.camera_position = [tuple(target + direction * span * 1.6), tuple(target), (0, 0, 1)]
+    scene.camera.zoom(2.4)
     display.show()
+
+
 
 
 def test_compute_distance():
