@@ -96,22 +96,28 @@ def test_quadratic_element_outlines(get_remote_client, get_examples):
     assert _check_element_outlines(linear_pd) == 0
 
     linear_display = PrimePlotter()
-    linear_display.add_model_pd(linear_pd)
-    assert linear_display.element_edge_actors == {}
+    try:
+        linear_display.add_model_pd(linear_pd)
+        assert linear_display.element_edge_actors == {}
+    finally:
+        linear_display.scene.close()
 
     quadratic_pd = _mesh_elbow(model, mixing_elbow, quadratic=True)
     expected = _check_element_outlines(quadratic_pd)
     assert expected > 0
 
     display = PrimePlotter()
-    display.add_model_pd(quadratic_pd)
-    outlines = display.element_edge_actors
-    assert len(outlines) == expected
-    assert all(actor.visibility for actor in outlines.values())
-    # every outline is keyed by the face actor it belongs to, so that hiding a
-    # zonelet hides its outlines too
-    face_actors = [actor for actor in display.info_actor_map if actor in outlines]
-    assert len(face_actors) == expected
+    try:
+        display.add_model_pd(quadratic_pd)
+        outlines = display.element_edge_actors
+        assert len(outlines) == expected
+        assert all(actor.visibility for actor in outlines.values())
+        # every outline is keyed by the face actor it belongs to, so that hiding a
+        # zonelet hides its outlines too
+        face_actors = [actor for actor in display.info_actor_map if actor in outlines]
+        assert len(face_actors) == expected
+    finally:
+        display.scene.close()
 
 
 def test_compute_distance():
