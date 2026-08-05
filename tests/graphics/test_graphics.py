@@ -55,6 +55,66 @@ def test_plotter(get_remote_client, get_examples, verify_image_cache):
     display.show()
 
 
+
+def _check_element_outlines(model_pd):
+    """Check outlines are held for the zonelets the face actor cannot draw itself.
+
+    Returns the number of zonelets that hold outlines.
+    """
+    count = 0
+    for part_pd in model_pd.values():
+        for mesh_object, info in part_pd["faces"]:
+            higher_order = mesh_object.mesh.GetPolys().GetMaxCellSize() > 4
+            expected = info.has_mesh and higher_order
+            assert (info.element_edges is not None) == expected
+            assert (info.render_mesh is not None) == expected
+            if expected:
+                assert info.element_edges.n_cells > 0
+                # shaded with an explicit triangulation, outlined with the real facets
+                assert info.render_mesh.GetPolys().GetMaxCellSize() == 3
+                assert info.render_mesh.n_cells > mesh_object.mesh.n_cells
+                count += 1
+    return count
+
+
+def _mesh_elbow(model, mixing_elbow, quadratic):
+    """Volume mesh the mixing elbow in an empty model and return its polydata."""
+    model.delete_parts([part.id for part in model.parts])
+    mesh_util = prime.lucid.Mesh(model=model)
+    mesh_util.read(mixing_elbow)
+    mesh_util.surface_mesh(min_size=5, max_size=20)
+    mesh_util.volume_mesh(quadratic=quadratic, volume_fill_type=prime.VolumeFillType.TET)
+    return model.as_polydata(update=True)
+
+
+def test_quadratic_element_outlines(get_remote_client, get_examples):
+    """Quadratic facets get their outlines drawn as separate line geometry."""
+    mixing_elbow = get_examples["elbow_lucid"]
+    model = get_remote_client.model
+
+    # linear facets are drawn by the face actor itself, as they always have been
+    linear_pd = _mesh_elbow(model, mixing_elbow, quadratic=False)
+    assert _check_element_outlines(linear_pd) == 0
+
+    linear_display = PrimePlotter()
+    linear_display.add_model_pd(linear_pd)
+    assert linear_display.element_edge_actors == {}
+
+    quadratic_pd = _mesh_elbow(model, mixing_elbow, quadratic=True)
+    expected = _check_element_outlines(quadratic_pd)
+    assert expected > 0
+
+    display = PrimePlotter()
+    display.add_model_pd(quadratic_pd)
+    outlines = display.element_edge_actors
+    assert len(outlines) == expected
+    assert all(actor.visibility for actor in outlines.values())
+    # every outline is keyed by the face actor it belongs to, so that hiding a
+    # zonelet hides its outlines too
+    face_actors = [actor for actor in display.info_actor_map if actor in outlines]
+    assert len(face_actors) == expected
+
+
 def test_compute_distance():
     point1 = [1, 1, 3]
     point2 = [1, 1, 1]
