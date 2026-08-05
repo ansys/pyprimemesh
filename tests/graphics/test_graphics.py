@@ -199,8 +199,6 @@ def test_quadratic_tet_plotter(get_remote_client, get_examples, verify_image_cac
     display.show()
 
 
-
-
 def test_compute_distance():
     point1 = [1, 1, 3]
     point2 = [1, 1, 1]
