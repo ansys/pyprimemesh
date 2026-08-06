@@ -62,9 +62,6 @@ doc = [
   "sphinx-jinja==2.0.2",
   "sphinx-notfound-page==1.1.0",
   "sphinxemoji==0.3.2",
-  # 3.13.3 ships without its bundled vue2-www/vue3-www assets, so the trame
-  # server fails to start. Remove once a fixed release is available.
-  "trame-client==3.13.2",
 ]
 all = [
   "ansys-tools-visualization-interface>=0.2.6,<1",
