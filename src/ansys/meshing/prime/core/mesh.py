@@ -330,16 +330,6 @@ class Mesh(MeshInfo):
         -------
         MeshObjectPlot, DisplayMeshInfo
             Mesh to be plotted and information of the mesh to display.
-
-        Notes
-        -----
-        Quadratic and polygonal facets reach the renderer as polygons of more than
-        four nodes. VTK tessellates such a polygon at draw time by fanning it from
-        its first node, which on a curved facet swallows the element outlines behind
-        the shaded surface when viewed head on, and leaves bright slivers along them
-        at oblique angles. Those zonelets are therefore given an explicit
-        triangulation to shade, together with the outlines of the original polygons
-        for the plotter to draw as independent line geometry.
         """
         part = self._model.get_part(part_id)
 
