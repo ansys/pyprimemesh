@@ -61,7 +61,7 @@ doc = [
   "sphinx-gallery==0.21.0",
   "sphinx-jinja==2.0.2",
   "sphinx-notfound-page==1.1.0",
-  "sphinxemoji==0.3.2"
+  "sphinxemoji==0.3.2",
 ]
 all = [
   "ansys-tools-visualization-interface>=0.2.6,<1",
