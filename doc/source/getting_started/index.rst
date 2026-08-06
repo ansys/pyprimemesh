@@ -40,7 +40,7 @@ This table provides compatibility information:
 |                            |                            |                          |
 | 0.10.x                     | 26.1.0 (2026 R1)           | 3.10 to 3.13             |
 |                            |                            |                          |
-| 0.11.x                     | 27.1.0 (2027 R1)           | 3.10 to 3.14             |
+| 0.11.x                     | 27.1.0 (2027 R1)           | 3.12 to 3.14             |
 +----------------------------+----------------------------+--------------------------+
 
 .. _Installation:
@@ -54,7 +54,7 @@ Installation
    the `Python Packaging User Guide Tutorial on pip <https://packaging.python.org/en/latest/tutorials/installing-packages/>`_
    before proceeding.
 
-The ``ansys-meshing-prime`` package currently supports Python 3.10
+The ``ansys-meshing-prime`` package currently supports Python 3.12
 to Python 3.14 on the Windows and Linux operating systems.
 
 You can install PyPrimeMesh with all dependencies directly from `PyPI <https://pypi.org/>`_  with this command:
