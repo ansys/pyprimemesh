@@ -47,9 +47,6 @@ tests = [
   "pytest-xvfb==3.1.1",
   "ansys-geometry-core>=0.7.6,<1",
   "pyvista[trame]==0.48.4",
-  # 3.13.3 ships without its bundled vue2-www/vue3-www assets, so the trame
-  # server fails to start. Remove once a fixed release is available.
-  "trame-client==3.13.2",
 ]
 doc = [
   "ansys-sphinx-theme[autoapi]==1.9.0",
