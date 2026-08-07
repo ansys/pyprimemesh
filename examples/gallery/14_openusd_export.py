@@ -24,17 +24,19 @@
 .. _ref_openusd_export:
 
 ====================================================
-Export a toy car mesh as OpenUSD HTML
+Export a bracket scaffold mesh as OpenUSD HTML
 ====================================================
 
-**Summary**: This example imports the toy car mesh, and exports the resulting
-surface mesh as a self-contained HTML viewer using OpenUSD.
+**Summary**: This example imports the bracket scaffold geometry, scaffolds
+and surface meshes it, and exports the resulting mesh as a self-contained
+HTML viewer using OpenUSD.
 
 Procedure
 ~~~~~~~~~~
 #. Launch an Ansys Prime Server instance.
-#. Import the toy car mesh.
-#. Display the imported mesh.
+#. Import the bracket scaffold geometry.
+#. Scaffold the topofaces and surface mesh them with quad elements.
+#. Display the resulting mesh.
 #. Export the mesh as a USD file and a self-contained Three.js HTML viewer.
 #. Exit the PyPrimeMesh session.
 """
@@ -55,23 +57,65 @@ from ansys.meshing.prime.graphics import PrimePlotter
 
 prime_client = prime.launch_prime()
 model = prime_client.model
-mesh_util = prime.lucid.Mesh(model=model)
 
 ###############################################################################
 # Import geometry
 # ~~~~~~~~~~~~~~~
-# Download the toy car mesh file and import it into the model.
+# Download the bracket scaffold geometry (FMD) file and import it into the
+# model, creating a part per the CAD model for the topology-based connection.
 
-toy_car = prime.examples.download_toy_car_pmdat()
-mesh_util.read(toy_car)
+bracket_file = prime.examples.download_bracket_fmd()
+
+file_io = prime.FileIO(model)
+file_io.import_cad(
+    file_name=bracket_file,
+    params=prime.ImportCadParams(
+        model=model,
+        length_unit=prime.LengthUnit.MM,
+        part_creation_type=prime.PartCreationType.MODEL,
+    ),
+)
+
+part = model.get_part_by_name('bracket_mid_surface-3')
+
+###############################################################################
+# Scaffold and surface mesh
+# ~~~~~~~~~~~~~~~~~~~~~~~~~
+# Scaffold the topofaces to connect all the surface bodies, then surface
+# mesh the topofaces with a constant size to generate quad elements.
+
+element_size = 0.5
+
+scaffolder_params = prime.ScaffolderParams(
+    model,
+    absolute_dist_tol=0.1 * element_size,
+    intersection_control_mask=prime.IntersectionMask.FACEFACEANDEDGEEDGE,
+    constant_mesh_size=element_size,
+)
+
+faces = part.get_topo_faces()
+
+scaffold_res = prime.Scaffolder(model, part.id).scaffold_topo_faces_and_beams(
+    topo_faces=faces, topo_beams=[], params=scaffolder_params
+)
+print(scaffold_res)
+
+surfer_params = prime.SurferParams(
+    model=model,
+    size_field_type=prime.SizeFieldType.CONSTANT,
+    constant_size=element_size,
+    generate_quads=True,
+)
+
+surfer_result = prime.Surfer(model).mesh_topo_faces(part.id, topo_faces=faces, params=surfer_params)
 
 ###############################################################################
 # Display the mesh
 # ~~~~~~~~~~~~~~~~
-# Show the imported surface mesh.
+# Show the resulting surface mesh.
 
 display = PrimePlotter()
-display.plot(model)
+display.plot(model, update=True)
 display.show()
 
 ###############################################################################
@@ -85,8 +129,10 @@ usd_geom = model.as_usd(update=True)
 out_dir = Path.cwd() / "examples" / "gallery" / "_generated"
 out_dir.mkdir(parents=True, exist_ok=True)
 
-usd_path = out_dir / "toy_car_mesh.usd"
-html_path = export_usd_viewer_html(usd_geom, usd_path, out_dir / "toy_car_mesh_viewer.html")
+usd_path = out_dir / "bracket_scaffold_mesh.usd"
+html_path = export_usd_viewer_html(
+    usd_geom, usd_path, out_dir / "bracket_scaffold_mesh_viewer.html"
+)
 
 print(f"USD file: {usd_path}")
 print(f"HTML viewer: {html_path}")
