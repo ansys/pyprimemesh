@@ -94,6 +94,14 @@ class DisplayMeshInfo:
         Name of the zone.
     display_mesh_type : DisplayMeshType, default: FACEZONELET
         Type of mesh to display.
+    render_mesh : pv.PolyData, default: None
+        Triangulated geometry to shade in place of the facets themselves. This is
+        set only for zonelets that VTK cannot tessellate acceptably on its own. For
+        more information, see :func:`Mesh.get_face_polydata`.
+    element_edges : pv.PolyData, default: None
+        Element outlines to draw as separate line geometry. This is set only for
+        zonelets whose outlines cannot be drawn by the face actor itself. For more
+        information, see :func:`Mesh.get_face_polydata`.
     """
 
     def __init__(
@@ -105,6 +113,8 @@ class DisplayMeshInfo:
         zone_name=None,
         display_mesh_type=DisplayMeshType.FACEZONELET,
         has_mesh=False,
+        render_mesh=None,
+        element_edges=None,
     ) -> None:
         """Initialize display mesh information."""
         self.id = id
@@ -114,6 +124,8 @@ class DisplayMeshInfo:
         self.zone_name = zone_name
         self.display_mesh_type = display_mesh_type
         self.has_mesh = has_mesh
+        self.render_mesh = render_mesh
+        self.element_edges = element_edges
 
 
 def compute_distance(point1, point2) -> float:
@@ -454,7 +466,11 @@ class Mesh(MeshInfo):
         else:
             display_mesh_type = DisplayMeshType.FACEZONELET
             id = face_facet_res.face_zonelet_ids[index]
-
+        render_mesh = None
+        element_edges = None
+        if has_mesh and surf.n_cells > 0 and surf.GetPolys().GetMaxCellSize() > 4:
+            render_mesh = surf.triangulate(progress_bar=False)
+            element_edges = surf.extract_all_edges(progress_bar=False)
         if surf.n_points > 0:
             return MeshObjectPlot(part, surf), DisplayMeshInfo(
                 id=id,
@@ -464,6 +480,8 @@ class Mesh(MeshInfo):
                 part_name=part.name,
                 zone_name=face_facet_res.face_zone_names[index],
                 has_mesh=has_mesh,
+                render_mesh=render_mesh,
+                element_edges=element_edges,
             )
 
     def get_edge_polydata(
@@ -488,24 +506,27 @@ class Mesh(MeshInfo):
         part = self._model.get_part(part_id)
         vertices, faces = self._get_vertices_and_surf_edges(edge_facet_res, index)
         edge = pv.PolyData()
-        n_edges = edge_facet_res.num_edges_per_edge_zonelet[index]
         edge.points = vertices
-        cells = np.full((n_edges, 3), 2, dtype=np.int_)
-        i = 0
+        segments = []
         j = 0
         while j < len(faces):
             nnodes = faces[j]
-            j += 1
-            cells[i, 1] = faces[j]
-            if nnodes == 2:
-                cells[i, 2] = faces[j + 1]
-            elif nnodes == 3:
-                cells[i, 2] = faces[j + 2]
-            j += nnodes
-            i += 1
+            nodes = faces[j + 1 : j + 1 + nnodes]
+            if nnodes == 3:
+                # a quadratic edge arrives as (start, mid, end); drawing it as a
+                # single start to end segment cuts across the curve the mid-side
+                # node describes, so draw both halves instead
+                segments.append((nodes[0], nodes[1]))
+                segments.append((nodes[1], nodes[2]))
+            else:
+                segments.append((nodes[0], nodes[1]))
+            j += 1 + nnodes
+        cells = np.full((len(segments), 3), 2, dtype=np.int_)
+        if segments:
+            cells[:, 1:] = segments
         edge.lines = cells
         ecolor = np.array(self.get_edge_color(edge_facet_res, index))
-        colors = np.tile(ecolor, (n_edges, 1))
+        colors = np.tile(ecolor, (len(segments), 1))
         edge["colors"] = colors
         if edge.n_points > 0:
             return MeshObjectPlot(part, edge)

@@ -26,6 +26,7 @@ import warnings
 from typing import Any, Dict, List, Optional
 
 import numpy as np
+import pyvista as pv
 from ansys.tools.visualization_interface import Plotter
 from ansys.tools.visualization_interface.backends.pyvista import PyVistaBackend
 
@@ -62,6 +63,13 @@ class ColorByType(enum.IntEnum):
     PART = 2
 
 
+# Depth-buffer offset applied to a face actor whose element outlines are drawn as a
+# separate line actor, so that the shaded surface cannot z-fight with those lines.
+# The first value scales with the depth slope of the polygon, the second is constant.
+POLYGON_OFFSET_FACTOR = 1.0
+POLYGON_OFFSET_UNITS = 1.0
+
+
 class PrimePlotter(Plotter):
     """Create a plotter for PyPrimeMesh models.
 
@@ -85,6 +93,8 @@ class PrimePlotter(Plotter):
 
         # info of the actor to pass to picked info widget
         self._info_actor_map = {}
+        # element outlines drawn separately, keyed by the face actor they belong to
+        self._element_edge_actors = {}
         self._backend.add_widget(ToggleEdges(self))
         self._backend.add_widget(ColorByTypeWidget(self))
         self._backend.add_widget(HidePicked(self))
@@ -111,6 +121,17 @@ class PrimePlotter(Plotter):
             Information actor map.
         """
         self._info_actor_map = value
+
+    @property
+    def element_edge_actors(self) -> Dict:
+        """Get the element outlines that are drawn as separate line geometry.
+
+        Returns
+        -------
+        Dict
+            Actor holding the outlines of each face actor that has them.
+        """
+        return self._element_edge_actors
 
     @property
     def scene(self):
@@ -237,12 +258,19 @@ class PrimePlotter(Plotter):
                     # but we need the actor for the picked info widget
                     colors = self.get_scalar_colors(face_mesh_info)
                     has_mesh = face_mesh_info.has_mesh
+                    element_edges = face_mesh_info.element_edges
+                    render_mesh = face_mesh_info.render_mesh
                     actor = self._backend.pv_interface.scene.add_mesh(
-                        face_mesh_part.mesh, show_edges=has_mesh, color=colors, pickable=True
+                        face_mesh_part.mesh if render_mesh is None else render_mesh,
+                        show_edges=has_mesh and element_edges is None,
+                        color=colors,
+                        pickable=True,
                     )
                     face_mesh_part.actor = actor
                     self._backend.pv_interface._object_to_actors_map[actor] = face_mesh_part
                     self._info_actor_map[actor] = face_mesh_info
+                    if element_edges is not None:
+                        self._add_element_edges(actor, element_edges)
 
             if "edges" in part_polydata.keys():
                 for edge_mesh_part in part_polydata["edges"]:
@@ -281,6 +309,28 @@ class PrimePlotter(Plotter):
                     )
                     spline_mesh_part.actor = actor
                     self._backend._object_to_actors_map[actor] = spline_mesh_part
+
+    def _add_element_edges(self, face_actor, element_edges) -> None:
+        """Draw element outlines that the face actor cannot draw itself.
+
+        Parameters
+        ----------
+        face_actor : pyvista.Actor
+            Actor of the shaded faces the outlines belong to.
+        element_edges : pyvista.PolyData
+            Element outlines to draw.
+        """
+        mapper = face_actor.GetMapper()
+        mapper.SetResolveCoincidentTopologyToPolygonOffset()
+        mapper.SetRelativeCoincidentTopologyPolygonOffsetParameters(
+            POLYGON_OFFSET_FACTOR, POLYGON_OFFSET_UNITS
+        )
+        self._element_edge_actors[face_actor] = self._backend.pv_interface.scene.add_mesh(
+            element_edges,
+            color=pv.global_theme.edge_color,
+            line_width=1,
+            pickable=False,
+        )
 
     def add_scope(self, model: Model, scope: prime.ScopeDefinition, update: bool = False) -> None:
         """Add a scope to the plotter.

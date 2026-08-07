@@ -20,4 +20,6 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Graphics and plotting utilities for visualizing PyPrimeMesh models."""
+
 from ansys.meshing.prime.graphics.plotter import Graphics, PrimePlotter
