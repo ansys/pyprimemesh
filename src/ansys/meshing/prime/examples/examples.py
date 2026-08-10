@@ -139,7 +139,7 @@ _DOWNLOADS = []
 
 def get_file(
     example: Examples,
-    destination: Optional[str] = None,
+    destination: Optional[Union[str, os.PathLike]] = None,
     force: bool = False,
 ) -> Union[str, os.PathLike]:
     """Download a PyPrimeMesh example file from the GitHub repository.
@@ -148,7 +148,7 @@ def get_file(
     ----------
     example : Examples
         Name of the example file to be downloaded.
-    destination : str, optional
+    destination : str, os.PathLike, optional
         Path to download the example file to. The default
         is ``None``, in which case the default path for app data
         is used.
@@ -182,13 +182,13 @@ def get_file(
 
 
 def download_elbow_pmdat(
-    destination: Optional[str] = None, force: bool = False
+    destination: Optional[Union[str, os.PathLike]] = None, force: bool = False
 ) -> Union[str, os.PathLike]:
     """Download the PMDAT file for the mixing elbow example.
 
     Parameters
     ----------
-    destination : str, optional
+    destination : str, os.PathLike, optional
         Path to download the example file to. The default
         is ``None``, in which case the default path for app data
         is used.
@@ -218,13 +218,13 @@ def download_elbow_pmdat(
 
 
 def download_elbow_fmd(
-    destination: Optional[str] = None, force: bool = False
+    destination: Optional[Union[str, os.PathLike]] = None, force: bool = False
 ) -> Union[str, os.PathLike]:
     """Download the FMD file for the mixing elbow example.
 
     Parameters
     ----------
-    destination : str, optional
+    destination : str, os.PathLike, optional
         Path to download the example file to. The default
         is ``None``, in which case the default path for app data
         is used.
@@ -255,13 +255,13 @@ def download_elbow_fmd(
 
 
 def download_elbow_scdoc(
-    destination: Optional[str] = None, force: bool = False
+    destination: Optional[Union[str, os.PathLike]] = None, force: bool = False
 ) -> Union[str, os.PathLike]:
     """Download the SCDOC file for the mixing elbow example.
 
     Parameters
     ----------
-    destination : str, optional
+    destination : str, os.PathLike, optional
         Path to download the example file to. The default
         is ``None``, in which case the default path for app data
         is used.
@@ -291,13 +291,13 @@ def download_elbow_scdoc(
 
 
 def download_elbow_dsco(
-    destination: Optional[str] = None, force: bool = False
+    destination: Optional[Union[str, os.PathLike]] = None, force: bool = False
 ) -> Union[str, os.PathLike]:
     """Download the DSCO file for the mixing elbow example.
 
     Parameters
     ----------
-    destination : str, optional
+    destination : str, os.PathLike, optional
         Path to download the example file to. The default
         is ``None``, in which case the default path for app data
         is used.
@@ -327,13 +327,13 @@ def download_elbow_dsco(
 
 
 def download_bracket_fmd(
-    destination: Optional[str] = None, force: bool = False
+    destination: Optional[Union[str, os.PathLike]] = None, force: bool = False
 ) -> Union[str, os.PathLike]:
     """Download the FMD file for the bracket scaffold example.
 
     Parameters
     ----------
-    destination : str, optional
+    destination : str, os.PathLike, optional
         Path to download the example file to. The default
         is ``None``, in which case the default path for app data
         is used.
@@ -363,13 +363,13 @@ def download_bracket_fmd(
 
 
 def download_bracket_scdoc(
-    destination: Optional[str] = None, force: bool = False
+    destination: Optional[Union[str, os.PathLike]] = None, force: bool = False
 ) -> Union[str, os.PathLike]:
     """Download the SCDOC file for the bracket scaffold example.
 
     Parameters
     ----------
-    destination : str, optional
+    destination : str, os.PathLike, optional
         Path to download the example file to. The default
         is ``None``, in which case the default path for app data
         is used.
@@ -399,13 +399,13 @@ def download_bracket_scdoc(
 
 
 def download_bracket_dsco(
-    destination: Optional[str] = None, force: bool = False
+    destination: Optional[Union[str, os.PathLike]] = None, force: bool = False
 ) -> Union[str, os.PathLike]:
     """Download the DSCO file for the bracket scaffold example.
 
     Parameters
     ----------
-    destination : str, optional
+    destination : str, os.PathLike, optional
         Path to download the example file to. The default
         is ``None``, in which case the default path for app data
         is used.
@@ -435,13 +435,13 @@ def download_bracket_dsco(
 
 
 def download_toy_car_pmdat(
-    destination: Optional[str] = None, force: bool = False
+    destination: Optional[Union[str, os.PathLike]] = None, force: bool = False
 ) -> Union[str, os.PathLike]:
     """Download the PMDAT file for the toy car example.
 
     Parameters
     ----------
-    destination : str, optional
+    destination : str, os.PathLike, optional
         Path to download the example file to. The default
         is ``None``, in which case the default path for app data
         is used.
@@ -471,13 +471,13 @@ def download_toy_car_pmdat(
 
 
 def download_toy_car_fmd(
-    destination: Optional[str] = None, force: bool = False
+    destination: Optional[Union[str, os.PathLike]] = None, force: bool = False
 ) -> Union[str, os.PathLike]:
     """Download the FMD file for the toy car example.
 
     Parameters
     ----------
-    destination : str, optional
+    destination : str, os.PathLike, optional
         Path to download the example file to. The default
         is ``None``, in which case the default path for app data
         is used.
@@ -507,13 +507,13 @@ def download_toy_car_fmd(
 
 
 def download_toy_car_scdoc(
-    destination: Optional[str] = None, force: bool = False
+    destination: Optional[Union[str, os.PathLike]] = None, force: bool = False
 ) -> Union[str, os.PathLike]:
     """Download the SCDOC file for the toy car example.
 
     Parameters
     ----------
-    destination : str, optional
+    destination : str, os.PathLike, optional
         Path to download the example file to. The default
         is ``None``, in which case the default path for app data
         is used.
@@ -543,13 +543,13 @@ def download_toy_car_scdoc(
 
 
 def download_toy_car_dsco(
-    destination: Optional[str] = None, force: bool = False
+    destination: Optional[Union[str, os.PathLike]] = None, force: bool = False
 ) -> Union[str, os.PathLike]:
     """Download the DSCO file for the toy car example.
 
     Parameters
     ----------
-    destination : str, optional
+    destination : str, os.PathLike, optional
         Path to download the example file to. The default
         is ``None``, in which case the default path for app data
         is used.
@@ -579,13 +579,13 @@ def download_toy_car_dsco(
 
 
 def download_pipe_tee_pmdat(
-    destination: Optional[str] = None, force: bool = False
+    destination: Optional[Union[str, os.PathLike]] = None, force: bool = False
 ) -> Union[str, os.PathLike]:
     """Download the PMDAT file for the pipe tee example.
 
     Parameters
     ----------
-    destination : str, optional
+    destination : str, os.PathLike, optional
         Path to download the example file to. The default
         is ``None``, in which case the default path for app data
         is used.
@@ -615,13 +615,13 @@ def download_pipe_tee_pmdat(
 
 
 def download_pipe_tee_fmd(
-    destination: Optional[str] = None, force: bool = False
+    destination: Optional[Union[str, os.PathLike]] = None, force: bool = False
 ) -> Union[str, os.PathLike]:
     """Download the FMD file for the pipe tee example.
 
     Parameters
     ----------
-    destination : str, optional
+    destination : str, os.PathLike, optional
         Path to download the example file to. The default
         is ``None``, in which case the default path for app data
         is used.
@@ -651,13 +651,13 @@ def download_pipe_tee_fmd(
 
 
 def download_pipe_tee_scdoc(
-    destination: Optional[str] = None, force: bool = False
+    destination: Optional[Union[str, os.PathLike]] = None, force: bool = False
 ) -> Union[str, os.PathLike]:
     """Download the SCDOC file for the pipe tee example.
 
     Parameters
     ----------
-    destination : str, optional
+    destination : str, os.PathLike, optional
         Path to download the example file to. The default
         is ``None``, in which case the default path for app data
         is used.
@@ -687,13 +687,13 @@ def download_pipe_tee_scdoc(
 
 
 def download_pipe_tee_dsco(
-    destination: Optional[str] = None, force: bool = False
+    destination: Optional[Union[str, os.PathLike]] = None, force: bool = False
 ) -> Union[str, os.PathLike]:
     """Download the DSCO file for the pipe tee example.
 
     Parameters
     ----------
-    destination : str, optional
+    destination : str, os.PathLike, optional
         Path to download the example file to. The default
         is ``None``, in which case the default path for app data
         is used.
@@ -723,13 +723,13 @@ def download_pipe_tee_dsco(
 
 
 def download_deformed_blade_fmd(
-    destination: Optional[str] = None, force: bool = False
+    destination: Optional[Union[str, os.PathLike]] = None, force: bool = False
 ) -> Union[str, os.PathLike]:
     """Download the FMD file for the turbine blade example.
 
     Parameters
     ----------
-    destination : str, optional
+    destination : str, os.PathLike, optional
         Path to download the example file to. The default
         is ``None``, in which case the default path for app data
         is used.
@@ -759,13 +759,13 @@ def download_deformed_blade_fmd(
 
 
 def download_deformed_blade_scdoc(
-    destination: Optional[str] = None, force: bool = False
+    destination: Optional[Union[str, os.PathLike]] = None, force: bool = False
 ) -> Union[str, os.PathLike]:
     """Download the SCDOC file for the turbine blade example.
 
     Parameters
     ----------
-    destination : str, optional
+    destination : str, os.PathLike, optional
         Path to download the example file to. The default
         is ``None``, in which case the default path for app data
         is used.
@@ -795,13 +795,13 @@ def download_deformed_blade_scdoc(
 
 
 def download_deformed_blade_dsco(
-    destination: Optional[str] = None, force: bool = False
+    destination: Optional[Union[str, os.PathLike]] = None, force: bool = False
 ) -> Union[str, os.PathLike]:
     """Download the DSCO file for the turbine blade example.
 
     Parameters
     ----------
-    destination : str, optional
+    destination : str, os.PathLike, optional
         Path to download the example file to. The default
         is ``None``, in which case the default path for app data
         is used.
@@ -831,11 +831,11 @@ def download_deformed_blade_dsco(
 
 
 def download_turbine_blade_cdb(
-    destination: Optional[str] = None, force: bool = False
+    destination: Optional[Union[str, os.PathLike]] = None, force: bool = False
 ) -> Union[str, os.PathLike]:
     """Download the CDB file for the turbine blade example.
 
-    destination : str, optional
+    destination : str, os.PathLike, optional
         Path to download the example file to. The default
         is ``None``, in which case the default path for app data
         is used.
@@ -868,13 +868,13 @@ def download_turbine_blade_cdb(
 
 
 def download_pcb_pmdat(
-    destination: Optional[str] = None, force: bool = False
+    destination: Optional[Union[str, os.PathLike]] = None, force: bool = False
 ) -> Union[str, os.PathLike]:
     """Download the PMDAT file for the PCB example.
 
     Parameters
     ----------
-    destination : str, optional
+    destination : str, os.PathLike, optional
         Path to download the example file to. The default
         is ``None``, in which case the default path for app data
         is used.
@@ -904,13 +904,13 @@ def download_pcb_pmdat(
 
 
 def download_pcb_scdoc(
-    destination: Optional[str] = None, force: bool = False
+    destination: Optional[Union[str, os.PathLike]] = None, force: bool = False
 ) -> Union[str, os.PathLike]:
     """Download SCDOC file for the pcb example.
 
     Parameters
     ----------
-    destination : str, optional
+    destination : str, os.PathLike, optional
         Path to download the example file to. The default
         is ``None``, in which case the default path for app data
         is used.
@@ -940,13 +940,13 @@ def download_pcb_scdoc(
 
 
 def download_saddle_bracket_fmd(
-    destination: Optional[str] = None, force: bool = False
+    destination: Optional[Union[str, os.PathLike]] = None, force: bool = False
 ) -> Union[str, os.PathLike]:
     """Download FMD file for the saddle bracket example
 
     Parameters
     ----------
-    destination : str, optional
+    destination : str, os.PathLike, optional
         Path to download the example file to. The default
         is ``None``, in which case the default path for app data
         is used.
@@ -977,13 +977,13 @@ def download_saddle_bracket_fmd(
 
 
 def download_saddle_bracket_scdoc(
-    destination: Optional[str] = None, force: bool = False
+    destination: Optional[Union[str, os.PathLike]] = None, force: bool = False
 ) -> Union[str, os.PathLike]:
     """Download SCDOC file for the saddle bracket example.
 
     Parameters
     ----------
-    destination : str, optional
+    destination : str, os.PathLike, optional
         Path to download the example file to. The default
         is ``None``, in which case the default path for app data
         is used.
@@ -1013,13 +1013,13 @@ def download_saddle_bracket_scdoc(
 
 
 def download_saddle_bracket_dsco(
-    destination: Optional[str] = None, force: bool = False
+    destination: Optional[Union[str, os.PathLike]] = None, force: bool = False
 ) -> Union[str, os.PathLike]:
     """Download DSCO file for the saddle bracket example.
 
     Parameters
     ----------
-    destination : str, optional
+    destination : str, os.PathLike, optional
         Path to download the example file to. The default
         is ``None``, in which case the default path for app data
         is used.
@@ -1049,13 +1049,13 @@ def download_saddle_bracket_dsco(
 
 
 def download_f1_rw_drs_stl(
-    destination: Optional[str] = None, force: bool = False
+    destination: Optional[Union[str, os.PathLike]] = None, force: bool = False
 ) -> Union[str, os.PathLike]:
     """Download STL file for the generic f1 rear wing example.
 
     Parameters
     ----------
-    destination : str, optional
+    destination : str, os.PathLike, optional
         Path to download the example file to. The default
         is ``None``, in which case the default path for app data
         is used.
@@ -1085,13 +1085,13 @@ def download_f1_rw_drs_stl(
 
 
 def download_f1_rw_enclosure_stl(
-    destination: Optional[str] = None, force: bool = False
+    destination: Optional[Union[str, os.PathLike]] = None, force: bool = False
 ) -> Union[str, os.PathLike]:
     """Download STL file for the generic f1 rear wing example.
 
     Parameters
     ----------
-    destination : str, optional
+    destination : str, os.PathLike, optional
         Path to download the example file to. The default
         is ``None``, in which case the default path for app data
         is used.
@@ -1121,13 +1121,13 @@ def download_f1_rw_enclosure_stl(
 
 
 def download_f1_rw_end_plates_stl(
-    destination: Optional[str] = None, force: bool = False
+    destination: Optional[Union[str, os.PathLike]] = None, force: bool = False
 ) -> Union[str, os.PathLike]:
     """Download STL file for the generic f1 rear wing example.
 
     Parameters
     ----------
-    destination : str, optional
+    destination : str, os.PathLike, optional
         Path to download the example file to. The default
         is ``None``, in which case the default path for app data
         is used.
@@ -1157,13 +1157,13 @@ def download_f1_rw_end_plates_stl(
 
 
 def download_f1_rw_main_plane_stl(
-    destination: Optional[str] = None, force: bool = False
+    destination: Optional[Union[str, os.PathLike]] = None, force: bool = False
 ) -> Union[str, os.PathLike]:
     """Download STL file for the generic f1 rear wing example.
 
     Parameters
     ----------
-    destination : str, optional
+    destination : str, os.PathLike, optional
         Path to download the example file to. The default
         is ``None``, in which case the default path for app data
         is used.
@@ -1193,13 +1193,13 @@ def download_f1_rw_main_plane_stl(
 
 
 def download_multi_layer_quad_mesh_pcb_dsco(
-    destination: Optional[str] = None, force: bool = False
+    destination: Optional[Union[str, os.PathLike]] = None, force: bool = False
 ) -> Union[str, os.PathLike]:
     """Download the DSCO file for the multi-layer PCB meshing example.
 
     Parameters
     ----------
-    destination : str, optional
+    destination : str, os.PathLike, optional
         Path to download the example file to. The default
         is ``None``, in which case the default path for app data
         is used.
@@ -1229,13 +1229,13 @@ def download_multi_layer_quad_mesh_pcb_dsco(
 
 
 def download_multi_layer_quad_mesh_pcb_pmdb(
-    destination: Optional[str] = None, force: bool = False
+    destination: Optional[Union[str, os.PathLike]] = None, force: bool = False
 ) -> Union[str, os.PathLike]:
     """Download the PMDB file for the multi-layer PCB meshing example.
 
     Parameters
     ----------
-    destination : str, optional
+    destination : str, os.PathLike, optional
         Path to download the example file to. The default
         is ``None``, in which case the default path for app data
         is used.
@@ -1265,13 +1265,13 @@ def download_multi_layer_quad_mesh_pcb_pmdb(
 
 
 def download_multi_layer_quad_mesh_pcb_scdoc(
-    destination: Optional[str] = None, force: bool = False
+    destination: Optional[Union[str, os.PathLike]] = None, force: bool = False
 ) -> Union[str, os.PathLike]:
     """Download the SCDOC file for the multi-layer PCB meshing example.
 
     Parameters
     ----------
-    destination : str, optional
+    destination : str, os.PathLike, optional
         Path to download the example file to. The default
         is ``None``, in which case the default path for app data
         is used.
@@ -1301,13 +1301,13 @@ def download_multi_layer_quad_mesh_pcb_scdoc(
 
 
 def download_multi_layer_quad_mesh_pcb_fmd(
-    destination: Optional[str] = None, force: bool = False
+    destination: Optional[Union[str, os.PathLike]] = None, force: bool = False
 ) -> Union[str, os.PathLike]:
     """Download the FMD file for the multi-layer PCB meshing example.
 
     Parameters
     ----------
-    destination : str, optional
+    destination : str, os.PathLike, optional
         Path to download the example file to. The default
         is ``None``, in which case the default path for app data
         is used.
@@ -1337,13 +1337,13 @@ def download_multi_layer_quad_mesh_pcb_fmd(
 
 
 def download_multi_layer_quad_mesh_pcb_pmdat(
-    destination: Optional[str] = None, force: bool = False
+    destination: Optional[Union[str, os.PathLike]] = None, force: bool = False
 ) -> Union[str, os.PathLike]:
     """Download the PMDAT file for the multi-layer PCB meshing example.
 
     Parameters
     ----------
-    destination : str, optional
+    destination : str, os.PathLike, optional
         Path to download the example file to. The default
         is ``None``, in which case the default path for app data
         is used.
@@ -1373,13 +1373,13 @@ def download_multi_layer_quad_mesh_pcb_pmdat(
 
 
 def download_block_model_scdoc(
-    destination: Optional[str] = None, force: bool = False
+    destination: Optional[Union[str, os.PathLike]] = None, force: bool = False
 ) -> Union[str, os.PathLike]:
     """Download CAD file for the block model example.
 
     Parameters
     ----------
-    destination : str, optional
+    destination : str, os.PathLike, optional
         Path to download the example file to. The default
         is ``None``, in which case the default path for app data
         is used.
@@ -1409,13 +1409,13 @@ def download_block_model_scdoc(
 
 
 def download_block_model_fmd(
-    destination: Optional[str] = None, force: bool = False
+    destination: Optional[Union[str, os.PathLike]] = None, force: bool = False
 ) -> Union[str, os.PathLike]:
     """Download CAD file for the block model example.
 
     Parameters
     ----------
-    destination : str, optional
+    destination : str, os.PathLike, optional
         Path to download the example file to. The default
         is ``None``, in which case the default path for app data
         is used.
@@ -1445,13 +1445,13 @@ def download_block_model_fmd(
 
 
 def download_block_model_pmdat(
-    destination: Optional[str] = None, force: bool = False
+    destination: Optional[Union[str, os.PathLike]] = None, force: bool = False
 ) -> Union[str, os.PathLike]:
     """Download PMDAT file for the block model example.
 
     Parameters
     ----------
-    destination : str, optional
+    destination : str, os.PathLike, optional
         Path to download the example file to. The default
         is ``None``, in which case the default path for app data
         is used.
@@ -1481,13 +1481,13 @@ def download_block_model_pmdat(
 
 
 def download_wheel_ground_scdoc(
-    destination: Optional[str] = None, force: bool = False
+    destination: Optional[Union[str, os.PathLike]] = None, force: bool = False
 ) -> Union[str, os.PathLike]:
     """Download the SCDOC file for the wheel ground contact patch example.
 
     Parameters
     ----------
-    destination : str, optional
+    destination : str, os.PathLike, optional
         Path to download the example file to. The default
         is ``None``, in which case the default path for app data
         is used.
@@ -1517,13 +1517,13 @@ def download_wheel_ground_scdoc(
 
 
 def download_wheel_ground_fmd(
-    destination: Optional[str] = None, force: bool = False
+    destination: Optional[Union[str, os.PathLike]] = None, force: bool = False
 ) -> Union[str, os.PathLike]:
     """Download the FMD file for the wheel ground contact patch example.
 
     Parameters
     ----------
-    destination : str, optional
+    destination : str, os.PathLike, optional
         Path to download the example file to. The default
         is ``None``, in which case the default path for app data
         is used.
@@ -1553,13 +1553,13 @@ def download_wheel_ground_fmd(
 
 
 def download_wheel_ground_dsco(
-    destination: Optional[str] = None, force: bool = False
+    destination: Optional[Union[str, os.PathLike]] = None, force: bool = False
 ) -> Union[str, os.PathLike]:
     """Download the DSCO file for the wheel ground contact patch example.
 
     Parameters
     ----------
-    destination : str, optional
+    destination : str, os.PathLike, optional
         Path to download the example file to. The default
         is ``None``, in which case the default path for app data
         is used.
@@ -1589,13 +1589,13 @@ def download_wheel_ground_dsco(
 
 
 def download_solder_ball_fmd(
-    destination: Optional[str] = None, force: bool = False
+    destination: Optional[Union[str, os.PathLike]] = None, force: bool = False
 ) -> Union[str, os.PathLike]:
     """Download a FMD file for the solder ball example.
 
     Parameters
     ----------
-    destination : str, optional
+    destination : str, os.PathLike, optional
         Path to download the example file to. The default
         is ``None``, in which case the default path for app data
         is used.
@@ -1625,13 +1625,13 @@ def download_solder_ball_fmd(
 
 
 def download_solder_ball_target_fmd(
-    destination: Optional[str] = None, force: bool = False
+    destination: Optional[Union[str, os.PathLike]] = None, force: bool = False
 ) -> Union[str, os.PathLike]:
     """Download a FMD file for the solder ball example.
 
     Parameters
     ----------
-    destination : str, optional
+    destination : str, os.PathLike, optional
         Path to download the example file to. The default
         is ``None``, in which case the default path for app data
         is used.
