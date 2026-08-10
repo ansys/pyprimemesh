@@ -24,6 +24,7 @@
 from pathlib import Path
 
 import ansys.meshing.prime.internals.config as config
+import ansys.meshing.prime.internals.defaults as defaults
 import ansys.meshing.prime.internals.utils as utils
 
 
@@ -71,5 +72,32 @@ def test_file_read_context_list_accepts_paths(tmp_path):
         config.set_using_container(False)
         with utils.file_read_context_list(None, paths) as yielded:
             assert yielded == [str(path) for path in paths]
+    finally:
+        config.set_using_container(previous)
+
+
+def test_container_staging_is_isolated_per_reader(tmp_path):
+    """Concurrent readers of the same base name do not share a staged copy.
+
+    The doc build runs the gallery in parallel, so two readers of the same file
+    used to stage it under one path and delete it from under each other.
+    """
+    first = tmp_path / "one" / "mixing_elbow.fmd"
+    second = tmp_path / "two" / "mixing_elbow.fmd"
+    for path in (first, second):
+        path.parent.mkdir(parents=True)
+        path.write_text(path.parent.name)
+
+    previous = config.using_container()
+    try:
+        config.set_using_container(True)
+        with utils.file_read_context(None, first) as outer:
+            with utils.file_read_context(None, second) as inner:
+                assert outer != inner
+            # the inner reader's cleanup must leave the outer staged copy alone
+            staged = Path(defaults.get_examples_path(), Path(outer).parent.name, "mixing_elbow.fmd")
+            assert staged.is_file()
+            assert staged.read_text() == "one"
+        assert not staged.parent.exists()
     finally:
         config.set_using_container(previous)
