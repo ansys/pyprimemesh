@@ -231,7 +231,6 @@ class Client(object):
                 # effort and must not bring down an otherwise successful session.
                 pass
 
-
     def __enter__(self):
         """Open client."""
         return self
