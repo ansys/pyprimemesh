@@ -116,7 +116,10 @@ class Mesh:
             self.read(file_path, append=append)
 
     def read(
-        self, file_name: FileName, append: bool = False, cad_reader_route: prime.CadReaderRoute = None
+        self,
+        file_name: FileName,
+        append: bool = False,
+        cad_reader_route: prime.CadReaderRoute = None,
     ):
         """Read or import files of different formats based on file extensions.
 
