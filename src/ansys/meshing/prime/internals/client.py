@@ -223,7 +223,14 @@ class Client(object):
         clear_examples = bool(int(os.environ.get('PYPRIMEMESH_CLEAR_EXAMPLES', '1')))
         if clear_examples:
             download_manager = DownloadManager()
-            download_manager.clear_download_cache()
+            try:
+                download_manager.clear_download_cache()
+            except FileNotFoundError:
+                # examples download to a shared temporary directory, so a concurrent
+                # session may have cleared the same files first. Cleanup is best
+                # effort and must not bring down an otherwise successful session.
+                pass
+
 
     def __enter__(self):
         """Open client."""
