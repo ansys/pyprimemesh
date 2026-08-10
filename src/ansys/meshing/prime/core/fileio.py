@@ -23,7 +23,6 @@
 import copy
 import json
 import traceback
-from typing import List
 
 # isort: split
 from ansys.meshing.prime.autogen.fileio import FileIO as _FileIO
