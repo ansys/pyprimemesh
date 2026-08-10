@@ -23,9 +23,12 @@
 """Tests for pathlib.Path support on file I/O helpers."""
 from pathlib import Path
 
+from ansys.tools.common.example_download import DownloadManager
+
 import ansys.meshing.prime.internals.config as config
 import ansys.meshing.prime.internals.defaults as defaults
 import ansys.meshing.prime.internals.utils as utils
+from ansys.meshing.prime.internals.client import Client
 
 
 def test_to_path_str_accepts_str_and_path(tmp_path):
@@ -101,3 +104,24 @@ def test_container_staging_is_isolated_per_reader(tmp_path):
         assert not staged.parent.exists()
     finally:
         config.set_using_container(previous)
+
+
+def test_exit_survives_already_cleared_downloads(monkeypatch):
+    """Exiting does not fail when another session cleared the downloads first.
+
+    Example downloads land in a shared temporary directory, so parallel sessions
+    race to unlink the same files when their clients exit.
+    """
+
+    def raise_missing(self):
+        raise FileNotFoundError(2, "No such file or directory", "/tmp/mixing_elbow.fmd")
+
+    monkeypatch.setattr(DownloadManager, "clear_download_cache", raise_missing)
+    monkeypatch.setenv("PYPRIMEMESH_CLEAR_EXAMPLES", "1")
+
+    client = Client.__new__(Client)
+    client._comm = None
+    client._process = None
+    client._local = True
+
+    client.exit()
