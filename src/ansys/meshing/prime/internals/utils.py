@@ -26,7 +26,7 @@ import shutil
 import subprocess
 import uuid
 from contextlib import contextmanager
-from typing import List, Optional
+from typing import Optional, Sequence, Union
 
 import ansys.meshing.prime.internals.config as config
 import ansys.meshing.prime.internals.defaults as defaults
@@ -34,6 +34,26 @@ import docker
 
 _LOCAL_PORTS = []
 _DOCKER_CLIENT = None
+
+# Paths accepted by FileIO / lucid and normalized before they reach the server.
+FileName = Union[str, os.PathLike]
+FileNameList = Sequence[FileName]
+
+
+def to_path_str(file_name: FileName) -> str:
+    """Convert a path-like object to a filesystem path string.
+
+    Parameters
+    ----------
+    file_name : str, os.PathLike
+        Path provided by the caller.
+
+    Returns
+    -------
+    str
+        Filesystem path as a string, suitable for JSON/gRPC and ``os.path``.
+    """
+    return os.fspath(file_name)
 
 
 def make_unique_container_name(name: str):
@@ -345,7 +365,7 @@ def stop_prime_github_container(name):
 
 
 @contextmanager
-def file_read_context(model, file_name: str):
+def file_read_context(model, file_name: FileName):
     """Upload context.
 
     Upload context to a model.
@@ -354,7 +374,7 @@ def file_read_context(model, file_name: str):
     ----------
     model : Model
         Model to upload the context to.
-    file_name : str
+    file_name : str, os.PathLike
         Name of the file containing the context.
 
     Yields
@@ -362,6 +382,7 @@ def file_read_context(model, file_name: str):
     str
         File name of the context.
     """
+    file_name = to_path_str(file_name)
     if config.file_existence_check_enabled() and not os.path.exists(file_name):
         raise FileNotFoundError(f'Given file name "{file_name}" is not found on local disk')
     if config.using_container():
@@ -441,7 +462,7 @@ def get_available_local_port(init_port: int = defaults.port()):
 
 
 @contextmanager
-def file_read_context_list(model, file_names: List[str]):
+def file_read_context_list(model, file_names: FileNameList):
     """Upload context.
 
     Upload context to a model.
@@ -450,7 +471,7 @@ def file_read_context_list(model, file_names: List[str]):
     ----------
     model : Model
         Model to upload context to.
-    file_names : List[str]
+    file_names : list of str or os.PathLike
         List of files with the context.
 
     Yields
@@ -458,6 +479,7 @@ def file_read_context_list(model, file_names: List[str]):
     List[str]
         List of context files.
     """
+    file_names = [to_path_str(file) for file in file_names]
     if config.file_existence_check_enabled():
         for file in file_names:
             if not os.path.exists(file):
@@ -485,7 +507,7 @@ def file_read_context_list(model, file_names: List[str]):
 
 
 @contextmanager
-def file_write_context(model, file_name: str):
+def file_write_context(model, file_name: FileName):
     """Download context.
 
     Download context from a model and write it to a local file.
@@ -494,7 +516,7 @@ def file_write_context(model, file_name: str):
     ----------
     model : Model
         Model to download context from.
-    file_name : str
+    file_name : str, os.PathLike
         Name of the file to write the context to.
 
     Yields
@@ -502,6 +524,7 @@ def file_write_context(model, file_name: str):
     str
         Name of the file to which context has been written.
     """
+    file_name = to_path_str(file_name)
     if config.using_container():
         base_file_name = os.path.basename(file_name)
         temp_file_name = os.path.join(defaults.get_output_path_for_containers(), base_file_name)
