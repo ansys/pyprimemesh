@@ -428,7 +428,7 @@ class FileIO(_FileIO):
 
     def import_fluent_meshing_meshes(
         self,
-        file_names: List[str],
+        file_names: utils.FileNameList,
         import_fluent_meshing_mesh_params: ImportFluentMeshingMeshParams,
     ) -> ImportFluentMeshingMeshResults:
         """Import Fluent Meshing's mesh (MS and MSH.GZ) files from disk.
