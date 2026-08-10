@@ -24,7 +24,7 @@
 import logging
 import os
 from pathlib import Path
-from typing import Optional
+from typing import Optional, Union
 
 from ansys.tools.common.example_download import DownloadManager
 
@@ -54,7 +54,7 @@ class Client(object):
         Credentials to connect to the server. The default is ``None``.
     uds_id : Optional[str], optional
         Id for the Unix Domain Socket (UDS). The default is ``None``.
-    client_certs_dir : Optional[str]
+    client_certs_dir : str, os.PathLike, optional
         Directory containing client certificates for mutual TLS.
     Raises
     ------
@@ -72,7 +72,7 @@ class Client(object):
         credentials=None,
         connection_type: config.ConnectionType = config.ConnectionType.GRPC_SECURE,
         uds_id: Optional[str] = None,
-        client_certs_dir: Optional[str] = None,
+        client_certs_dir: Optional[Union[str, os.PathLike]] = None,
         **kwargs,
     ):
         """Initialize the client."""
@@ -84,6 +84,9 @@ class Client(object):
         if connection_type == config.ConnectionType.GRPC_INSECURE:
             print("Warning (Client): Modification of these configurations is not recommended.")
             print("Refer the documentation for your installed product for additional information.")
+
+        if client_certs_dir is not None:
+            client_certs_dir = os.fspath(client_certs_dir)
 
         self._local = local
         self._process = server_process
