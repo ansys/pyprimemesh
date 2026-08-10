@@ -168,8 +168,10 @@ def get_file(
         When the provided destination path for the example file does not exist.
     """
     download_manager = DownloadManager()
-    if destination is not None and not os.path.isdir(destination):
-        raise ValueError('destination directory provided does not exist')
+    if destination is not None:
+        destination = os.fspath(destination)
+        if not os.path.isdir(destination):
+            raise ValueError('destination directory provided does not exist')
     directory = f"pyprimemesh/{example.value['git_folder']}"
     file = download_manager.download_file(
         example.value["filename"],
