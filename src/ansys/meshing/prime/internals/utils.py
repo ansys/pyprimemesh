@@ -416,17 +416,15 @@ def file_read_context(model, file_name: FileName):
         raise FileNotFoundError(f'Given file name "{file_name}" is not found on local disk')
     if config.using_container():
         base_file_name = os.path.basename(file_name)
-        temp_file_name = os.path.join(defaults.get_examples_path(), base_file_name)
-        is_copy: bool = file_name != temp_file_name
-        if is_copy:
-            shutil.copyfile(file_name, temp_file_name)
-        container_file_name = os.path.join(
-            defaults.get_examples_path_for_containers(), base_file_name
-        )
+        stage_dir, container_dir = _make_stage_dirs()
+        temp_file_name = os.path.join(stage_dir, base_file_name)
+        shutil.copyfile(file_name, temp_file_name)
+        container_file_name = os.path.join(container_dir, base_file_name)
         container_file_name = container_file_name.replace(os.path.sep, '/')
-        yield container_file_name
-        if is_copy:
-            os.remove(temp_file_name)
+        try:
+            yield container_file_name
+        finally:
+            shutil.rmtree(stage_dir, ignore_errors=True)
     elif config.has_pim():
         temp_file_name = os.path.basename(file_name)
         model.file_service.upload_file(file_name)
@@ -516,16 +514,16 @@ def file_read_context_list(model, file_names: FileNameList):
                 raise FileNotFoundError(error_msg)
     if config.using_container():
         base_names = [os.path.basename(file) for file in file_names]
-        temp_names = [os.path.join(defaults.get_examples_path(), base) for base in base_names]
+        stage_dir, container_dir = _make_stage_dirs()
+        temp_names = [os.path.join(stage_dir, base) for base in base_names]
         for file, temp in zip(file_names, temp_names):
             shutil.copyfile(file, temp)
-        container_files = [
-            os.path.join(defaults.get_examples_path_for_containers(), base) for base in base_names
-        ]
+        container_files = [os.path.join(container_dir, base) for base in base_names]
         container_files = [file.replace(os.path.sep, '/') for file in container_files]
-        yield container_files
-        for temp_file in temp_names:
-            os.remove(temp_file)
+        try:
+            yield container_files
+        finally:
+            shutil.rmtree(stage_dir, ignore_errors=True)
     elif config.has_pim():
         temp_files = [os.path.basename(file) for file in file_names]
         for file in file_names:
@@ -556,15 +554,17 @@ def file_write_context(model, file_name: FileName):
     file_name = to_path_str(file_name)
     if config.using_container():
         base_file_name = os.path.basename(file_name)
-        temp_file_name = os.path.join(defaults.get_output_path_for_containers(), base_file_name)
+        stage_dir, container_dir = _make_stage_dirs(
+            defaults.get_output_path(), defaults.get_output_path_for_containers()
+        )
+        temp_file_name = os.path.join(container_dir, base_file_name)
         temp_file_name = temp_file_name.replace(os.path.sep, '/')
-        if not os.path.exists(defaults.get_output_path()):
-            os.makedirs(defaults.get_output_path())
-        yield temp_file_name
-        # Copy temp_file_name to directory which was asked
-        local_file_name = os.path.join(defaults.get_output_path(), base_file_name)
-        shutil.copyfile(local_file_name, file_name)
-        os.remove(local_file_name)
+        try:
+            yield temp_file_name
+            # Copy what the server wrote to the directory which was asked
+            shutil.copyfile(os.path.join(stage_dir, base_file_name), file_name)
+        finally:
+            shutil.rmtree(stage_dir, ignore_errors=True)
     elif config.has_pim():
         temp_file_name = os.path.basename(file_name)
         file_dir = os.path.dirname(file_name)
