@@ -64,7 +64,7 @@ model = prime_client.model
 # Download the bracket scaffold geometry (FMD) file and import it into the
 # model, creating a part per the CAD model for the topology-based connection.
 
-bracket_file = prime.examples.download_bracket_fmd()
+bracket_file = prime.examples.download_bracket_fmd(force_download=True)
 
 file_io = prime.FileIO(model)
 file_io.import_cad(
