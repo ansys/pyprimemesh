@@ -40,6 +40,35 @@ FileName = Union[str, os.PathLike]
 FileNameList = Sequence[FileName]
 
 
+def _make_stage_dirs(local_root: Optional[str] = None, container_root: Optional[str] = None):
+    """Create a staging directory shared with the container for one file transfer.
+
+    Examples are staged by base name, so parallel callers reading different copies
+    of the same file would otherwise overwrite and delete each other's staged copy.
+    Each transfer therefore gets a directory of its own.
+
+    Parameters
+    ----------
+    local_root : str, optional
+        Client-side directory to stage within. Defaults to the examples directory.
+    container_root : str, optional
+        Matching server-side directory. Defaults to the container examples directory.
+
+    Returns
+    -------
+    tuple of str
+        Client-side and server-side paths of the staging directory.
+    """
+    if local_root is None:
+        local_root = defaults.get_examples_path()
+    if container_root is None:
+        container_root = defaults.get_examples_path_for_containers()
+    stage_id = uuid.uuid4().hex
+    stage_dir = os.path.join(local_root, stage_id)
+    os.makedirs(stage_dir, exist_ok=True)
+    return stage_dir, os.path.join(container_root, stage_id)
+
+
 def to_path_str(file_name: FileName) -> str:
     """Convert a path-like object to a filesystem path string.
 
