@@ -43,7 +43,7 @@ Procedure
 
 # sphinx_gallery_tags = ["USD"]
 
-###############################################################################
+###########################
 # Launch Ansys Prime Server
 # ~~~~~~~~~~~~~~~~~~~~~~~~~
 # Import all necessary modules, launch an instance of Ansys Prime Server,
@@ -58,7 +58,7 @@ from ansys.meshing.prime.graphics import PrimePlotter
 prime_client = prime.launch_prime()
 model = prime_client.model
 
-###############################################################################
+#################
 # Import geometry
 # ~~~~~~~~~~~~~~~
 # Download the bracket scaffold geometry (FMD) file and import it into the
@@ -78,7 +78,7 @@ file_io.import_cad(
 
 part = model.get_part_by_name('bracket_mid_surface-3')
 
-###############################################################################
+###########################
 # Scaffold and surface mesh
 # ~~~~~~~~~~~~~~~~~~~~~~~~~
 # Scaffold the topofaces to connect all the surface bodies, then surface
@@ -109,7 +109,7 @@ surfer_params = prime.SurferParams(
 
 surfer_result = prime.Surfer(model).mesh_topo_faces(part.id, topo_faces=faces, params=surfer_params)
 
-###############################################################################
+##################
 # Display the mesh
 # ~~~~~~~~~~~~~~~~
 # Show the resulting surface mesh.
@@ -118,7 +118,7 @@ display = PrimePlotter()
 display.plot(model, update=True)
 display.show()
 
-###############################################################################
+############################
 # Export to OpenUSD and HTML
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~
 # Build the USD geometry representation from the surface mesh and export it
@@ -138,7 +138,7 @@ print(f"USD file: {usd_path}")
 print(f"HTML viewer: {html_path}")
 print("Controls: left-drag orbit, right-drag pan, scroll zoom.")
 
-###############################################################################
+######
 # Exit
 # ~~~~
 # Exit the PyPrimeMesh session.
