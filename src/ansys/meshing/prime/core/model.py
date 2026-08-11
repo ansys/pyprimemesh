@@ -20,7 +20,7 @@
 # SOFTWARE.
 
 """Module containing the managing logic of the Prime model."""
-from typing import Iterable, List
+from typing import Iterable, List, Union
 
 # isort: split
 from ansys.meshing.prime.autogen.model import Model as _Model
@@ -296,14 +296,14 @@ class Model(_Model):
         _Model.set_global_sizing_params(self, params)
         self._global_sf_params = params
 
-    def set_working_directory(self, path: str):
+    def set_working_directory(self, path: Union[str, os.PathLike]):
         """Set working directory.
 
         Set the working directory to be considered for file i/o when the file paths are relative.
 
         Parameters
         ----------
-        path : str
+        path : str, os.PathLike
             Path to the directory.
 
         Notes
@@ -317,6 +317,7 @@ class Model(_Model):
         >>> zones = model.set_working_directory("C:/input_files")
 
         """
+        path = os.fspath(path)
         _Model.set_working_directory(self, path)
         os.chdir(path)
 

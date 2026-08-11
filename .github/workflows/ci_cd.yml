@@ -131,6 +131,9 @@ jobs:
           PYVISTA_BUILDING_GALLERY: 'True'
           PYPRIMEMESH_LAUNCH_CONTAINER: 1
           PYPRIMEMESH_SPHINX_BUILD: 1
+          # the gallery runs in parallel and shares one example download directory,
+          # so letting each script clear it deletes files the others are still using
+          PYPRIMEMESH_CLEAR_EXAMPLES: 0
           PYPRIMEMESH_IMAGE_TAG: ${{ env.DOCKER_IMAGE_TAG }}
           ANSYSLMD_LICENSE_FILE: '1055@${{ secrets.LICENSE_SERVER }}'
 
