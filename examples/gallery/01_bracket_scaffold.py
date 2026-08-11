@@ -80,7 +80,8 @@ model = prime_client.model
 # For Windows OS users, scdoc is also available:
 # bracket_file = prime.examples.download_bracket_scdoc()
 
-bracket_file = prime.examples.download_bracket_fmd()
+bracket_download_dir = tempfile.mkdtemp()
+bracket_file = prime.examples.download_bracket_fmd(destination=bracket_download_dir)
 
 file_io = prime.FileIO(model)
 file_io.import_cad(
