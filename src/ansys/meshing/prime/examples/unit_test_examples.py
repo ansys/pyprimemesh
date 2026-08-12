@@ -71,6 +71,8 @@ def download_test_examples(
     """
 
     download_manager = DownloadManager()
+    if destination is not None:
+        destination = os.fspath(destination)
     directory = "pyprimemesh/unit_test_examples"
     unit_test_paths = [
         download_manager.download_file(file, directory, destination=destination, force=force)

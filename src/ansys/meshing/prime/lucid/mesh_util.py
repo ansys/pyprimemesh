@@ -27,6 +27,7 @@ import tempfile
 from typing import Iterable, List
 
 import ansys.meshing.prime as prime
+from ansys.meshing.prime.internals.utils import FileName, to_path_str
 
 from .scope import SurfaceScope, VolumeScope
 from .utils import check_name_pattern
@@ -112,10 +113,13 @@ class Mesh:
                 file_path = design.export_to_parasolid_text(tmpdir)
             elif import_type == ImportTypes.SCDOCX:
                 file_path = design.export_to_scdocx(tmpdir)
-            self.read(str(file_path, append=append))
+            self.read(file_path, append=append)
 
     def read(
-        self, file_name: str, append: bool = False, cad_reader_route: prime.CadReaderRoute = None
+        self,
+        file_name: FileName,
+        append: bool = False,
+        cad_reader_route: prime.CadReaderRoute = None,
     ):
         """Read or import files of different formats based on file extensions.
 
@@ -129,7 +133,7 @@ class Mesh:
 
         Parameters
         ----------
-        file_name : str
+        file_name : str, os.PathLike
             Path to the file to read or import.
         append : bool, optional
             Whether to append to the file. The default is ``False``, in which case
@@ -138,6 +142,7 @@ class Mesh:
             Route of the CAD reader. The default is ``None``.
 
         """
+        file_name = to_path_str(file_name)
         filename, fileext = os.path.splitext(file_name)
         if fileext == ".msh" or file_name.endswith(".msh.gz") or file_name.endswith(".msh.h5"):
             prime.FileIO(self._model).import_fluent_meshing_meshes(
@@ -188,9 +193,9 @@ class Mesh:
         """
         with tempfile.TemporaryDirectory() as tmpdir:
             fmd_path = design.export_to_fmd(os.path.join(tmpdir, "geometry.fmd"))
-            self.read(str(fmd_path), append=append)
+            self.read(fmd_path, append=append)
 
-    def write(self, file_name: str):
+    def write(self, file_name: FileName):
         """Write or export files of different formats based on file extensions.
 
         This method supports writing and exporting these file formats:
@@ -203,10 +208,11 @@ class Mesh:
 
         Parameters
         ----------
-        file_name : str
+        file_name : str, os.PathLike
             Path of the file to write or export.
 
         """
+        file_name = to_path_str(file_name)
         filename, fileext = os.path.splitext(file_name)
         if fileext == ".cdb":
             prime.FileIO(self._model).export_mapdl_cdb(

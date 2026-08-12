@@ -25,7 +25,7 @@ import os
 import subprocess
 import sys
 import uuid
-from typing import Optional
+from typing import Optional, Union
 
 import ansys.meshing.prime.internals.config as config
 import ansys.meshing.prime.internals.defaults as defaults
@@ -71,19 +71,19 @@ def get_ansys_prime_server_root():
 
 
 def launch_server_process(
-    prime_root: Optional[str] = None,
+    prime_root: Optional[Union[str, os.PathLike]] = None,
     ip: str = defaults.ip(),
     port: int = defaults.port(),
     n_procs: Optional[int] = None,
     connection_type: config.ConnectionType = None,
-    server_certs_dir: Optional[str] = None,
+    server_certs_dir: Optional[Union[str, os.PathLike]] = None,
     **kw,
 ) -> subprocess.Popen:
     """Launch a server process for Ansys Prime Server.
 
     Parameters
     ----------
-    prime_root : str, optional
+    prime_root : str, os.PathLike, optional
         Root directory for Ansys Prime Server.
     ip: str
         IP address to start the server at. The default is ``127.0.0.1``.
@@ -94,7 +94,7 @@ def launch_server_process(
         processes to spawn. The default is ``None``, in which case
         the server is launched as the only process (normal mode). The
         process marked as ``Node 0`` hosts the gRPC server.
-    server_certs_dir : Optional[str]
+    server_certs_dir : str, os.PathLike, optional
         Directory containing server certificates for mutual TLS.
 
     Returns
@@ -112,8 +112,12 @@ def launch_server_process(
         if prime_root is None:
             raise FileNotFoundError('No valid Ansys Prime Server found to launch.')
     else:  # verify if the file exists
+        prime_root = os.fspath(prime_root)
         if not os.path.isdir(prime_root):
             raise FileNotFoundError('Invalid exec_file path.')
+
+    if server_certs_dir is not None:
+        server_certs_dir = os.fspath(server_certs_dir)
 
     script_ext = 'bat' if os.name == 'nt' else 'sh'
     run_prime_script = f'runPrime.{script_ext}'
@@ -228,13 +232,13 @@ def launch_remote_prime(
 
 
 def launch_prime(
-    prime_root: Optional[str] = None,
+    prime_root: Optional[Union[str, os.PathLike]] = None,
     ip: str = defaults.ip(),
     port: int = defaults.port(),
     timeout: float = defaults.connection_timeout(),
     connection_type: config.ConnectionType = config.ConnectionType.GRPC_SECURE,
-    client_certs_dir: Optional[str] = None,
-    server_certs_dir: Optional[str] = None,
+    client_certs_dir: Optional[Union[str, os.PathLike]] = None,
+    server_certs_dir: Optional[Union[str, os.PathLike]] = None,
     n_procs: Optional[int] = None,
     version: Optional[str] = None,
     **kwargs,
@@ -243,7 +247,7 @@ def launch_prime(
 
     Parameters
     ----------
-    prime_root: Optional[str]
+    prime_root: str, os.PathLike, optional
         Root directory for Ansys Prime Server.
     ip: str
         IP address to start the server at. The default is ``127.0.0.1``.
@@ -257,9 +261,9 @@ def launch_prime(
         processes to spawn. The default is ``None``, in which case
         the server is launched as the only process (normal mode). The
         process marked as ``Node 0`` hosts the gRPC server.
-    client_certs_dir : Optional[str]
+    client_certs_dir : str, os.PathLike, optional
         Directory containing client certificates for mutual TLS.
-    server_certs_dir : Optional[str]
+    server_certs_dir : str, os.PathLike, optional
         Directory containing server certificates for mutual TLS.
 
     Returns
@@ -277,6 +281,13 @@ def launch_prime(
     logging.getLogger('PyPrimeMesh').info("Launching Ansys Prime Server...")
     if config.has_pim():
         return launch_remote_prime(version=version, timeout=timeout)
+
+    if prime_root is not None:
+        prime_root = os.fspath(prime_root)
+    if client_certs_dir is not None:
+        client_certs_dir = os.fspath(client_certs_dir)
+    if server_certs_dir is not None:
+        server_certs_dir = os.fspath(server_certs_dir)
 
     # Check for port availability on local host
     if ip == defaults.ip():
