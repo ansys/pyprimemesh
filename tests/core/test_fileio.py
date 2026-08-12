@@ -21,6 +21,7 @@
 # SOFTWARE.
 
 import os
+from pathlib import Path
 
 import pytest
 
@@ -184,3 +185,29 @@ def test_io_fluent_mesh(get_remote_client, tmp_path):
     export_path = str(tmp_path) + "/hex_test.msh"
     results = file_io.export_fluent_meshing_mesh(os.path.abspath(export_path), import_params)
     assert results.error_code == ErrorCode.NOERROR
+
+
+def test_io_pathlike_pmdat(get_remote_client, get_examples, tmp_path):
+    """FileIO read/write accept pathlib.Path values."""
+    model = get_remote_client.model
+    file_io = prime.FileIO(model=model)
+    results = file_io.read_pmdat(
+        Path(get_examples["elbow_lucid"]),
+        prime.FileReadParams(model=model),
+    )
+    assert results.error_code == ErrorCode.NOERROR
+
+    export_path = tmp_path / "pathlike_out.pmdat"
+    results = file_io.write_pmdat(export_path, prime.FileWriteParams(model=model))
+    assert results.error_code == ErrorCode.NOERROR
+    assert export_path.is_file()
+
+
+def test_lucid_pathlike_read_write(get_remote_client, get_examples, tmp_path):
+    """lucid.Mesh.read/write accept pathlib.Path values."""
+    model = get_remote_client.model
+    mesh = prime.lucid.Mesh(model=model)
+    mesh.read(Path(get_examples["elbow_lucid"]))
+    export_path = tmp_path / "lucid_pathlike.pmdat"
+    mesh.write(export_path)
+    assert export_path.is_file()

@@ -26,7 +26,7 @@ import shutil
 import subprocess
 import uuid
 from contextlib import contextmanager
-from typing import List, Optional
+from typing import Optional, Sequence, Union
 
 import ansys.meshing.prime.internals.config as config
 import ansys.meshing.prime.internals.defaults as defaults
@@ -34,6 +34,55 @@ import docker
 
 _LOCAL_PORTS = []
 _DOCKER_CLIENT = None
+
+# Paths accepted by FileIO / lucid and normalized before they reach the server.
+FileName = Union[str, os.PathLike]
+FileNameList = Sequence[FileName]
+
+
+def _make_stage_dirs(local_root: Optional[str] = None, container_root: Optional[str] = None):
+    """Create a staging directory shared with the container for one file transfer.
+
+    Examples are staged by base name, so parallel callers reading different copies
+    of the same file would otherwise overwrite and delete each other's staged copy.
+    Each transfer therefore gets a directory of its own.
+
+    Parameters
+    ----------
+    local_root : str, optional
+        Client-side directory to stage within. Defaults to the examples directory.
+    container_root : str, optional
+        Matching server-side directory. Defaults to the container examples directory.
+
+    Returns
+    -------
+    tuple of str
+        Client-side and server-side paths of the staging directory.
+    """
+    if local_root is None:
+        local_root = defaults.get_examples_path()
+    if container_root is None:
+        container_root = defaults.get_examples_path_for_containers()
+    stage_id = uuid.uuid4().hex
+    stage_dir = os.path.join(local_root, stage_id)
+    os.makedirs(stage_dir, exist_ok=True)
+    return stage_dir, os.path.join(container_root, stage_id)
+
+
+def to_path_str(file_name: FileName) -> str:
+    """Convert a path-like object to a filesystem path string.
+
+    Parameters
+    ----------
+    file_name : str, os.PathLike
+        Path provided by the caller.
+
+    Returns
+    -------
+    str
+        Filesystem path as a string, suitable for JSON/gRPC and ``os.path``.
+    """
+    return os.fspath(file_name)
 
 
 def make_unique_container_name(name: str):
@@ -345,7 +394,7 @@ def stop_prime_github_container(name):
 
 
 @contextmanager
-def file_read_context(model, file_name: str):
+def file_read_context(model, file_name: FileName):
     """Upload context.
 
     Upload context to a model.
@@ -354,7 +403,7 @@ def file_read_context(model, file_name: str):
     ----------
     model : Model
         Model to upload the context to.
-    file_name : str
+    file_name : str, os.PathLike
         Name of the file containing the context.
 
     Yields
@@ -362,21 +411,20 @@ def file_read_context(model, file_name: str):
     str
         File name of the context.
     """
+    file_name = to_path_str(file_name)
     if config.file_existence_check_enabled() and not os.path.exists(file_name):
         raise FileNotFoundError(f'Given file name "{file_name}" is not found on local disk')
     if config.using_container():
         base_file_name = os.path.basename(file_name)
-        temp_file_name = os.path.join(defaults.get_examples_path(), base_file_name)
-        is_copy: bool = file_name != temp_file_name
-        if is_copy:
-            shutil.copyfile(file_name, temp_file_name)
-        container_file_name = os.path.join(
-            defaults.get_examples_path_for_containers(), base_file_name
-        )
+        stage_dir, container_dir = _make_stage_dirs()
+        temp_file_name = os.path.join(stage_dir, base_file_name)
+        shutil.copyfile(file_name, temp_file_name)
+        container_file_name = os.path.join(container_dir, base_file_name)
         container_file_name = container_file_name.replace(os.path.sep, '/')
-        yield container_file_name
-        if is_copy:
-            os.remove(temp_file_name)
+        try:
+            yield container_file_name
+        finally:
+            shutil.rmtree(stage_dir, ignore_errors=True)
     elif config.has_pim():
         temp_file_name = os.path.basename(file_name)
         model.file_service.upload_file(file_name)
@@ -441,7 +489,7 @@ def get_available_local_port(init_port: int = defaults.port()):
 
 
 @contextmanager
-def file_read_context_list(model, file_names: List[str]):
+def file_read_context_list(model, file_names: FileNameList):
     """Upload context.
 
     Upload context to a model.
@@ -450,7 +498,7 @@ def file_read_context_list(model, file_names: List[str]):
     ----------
     model : Model
         Model to upload context to.
-    file_names : List[str]
+    file_names : list of str or os.PathLike
         List of files with the context.
 
     Yields
@@ -458,6 +506,7 @@ def file_read_context_list(model, file_names: List[str]):
     List[str]
         List of context files.
     """
+    file_names = [to_path_str(file) for file in file_names]
     if config.file_existence_check_enabled():
         for file in file_names:
             if not os.path.exists(file):
@@ -465,16 +514,16 @@ def file_read_context_list(model, file_names: List[str]):
                 raise FileNotFoundError(error_msg)
     if config.using_container():
         base_names = [os.path.basename(file) for file in file_names]
-        temp_names = [os.path.join(defaults.get_examples_path(), base) for base in base_names]
+        stage_dir, container_dir = _make_stage_dirs()
+        temp_names = [os.path.join(stage_dir, base) for base in base_names]
         for file, temp in zip(file_names, temp_names):
             shutil.copyfile(file, temp)
-        container_files = [
-            os.path.join(defaults.get_examples_path_for_containers(), base) for base in base_names
-        ]
+        container_files = [os.path.join(container_dir, base) for base in base_names]
         container_files = [file.replace(os.path.sep, '/') for file in container_files]
-        yield container_files
-        for temp_file in temp_names:
-            os.remove(temp_file)
+        try:
+            yield container_files
+        finally:
+            shutil.rmtree(stage_dir, ignore_errors=True)
     elif config.has_pim():
         temp_files = [os.path.basename(file) for file in file_names]
         for file in file_names:
@@ -485,7 +534,7 @@ def file_read_context_list(model, file_names: List[str]):
 
 
 @contextmanager
-def file_write_context(model, file_name: str):
+def file_write_context(model, file_name: FileName):
     """Download context.
 
     Download context from a model and write it to a local file.
@@ -494,7 +543,7 @@ def file_write_context(model, file_name: str):
     ----------
     model : Model
         Model to download context from.
-    file_name : str
+    file_name : str, os.PathLike
         Name of the file to write the context to.
 
     Yields
@@ -502,17 +551,20 @@ def file_write_context(model, file_name: str):
     str
         Name of the file to which context has been written.
     """
+    file_name = to_path_str(file_name)
     if config.using_container():
         base_file_name = os.path.basename(file_name)
-        temp_file_name = os.path.join(defaults.get_output_path_for_containers(), base_file_name)
+        stage_dir, container_dir = _make_stage_dirs(
+            defaults.get_output_path(), defaults.get_output_path_for_containers()
+        )
+        temp_file_name = os.path.join(container_dir, base_file_name)
         temp_file_name = temp_file_name.replace(os.path.sep, '/')
-        if not os.path.exists(defaults.get_output_path()):
-            os.makedirs(defaults.get_output_path())
-        yield temp_file_name
-        # Copy temp_file_name to directory which was asked
-        local_file_name = os.path.join(defaults.get_output_path(), base_file_name)
-        shutil.copyfile(local_file_name, file_name)
-        os.remove(local_file_name)
+        try:
+            yield temp_file_name
+            # Copy what the server wrote to the directory which was asked
+            shutil.copyfile(os.path.join(stage_dir, base_file_name), file_name)
+        finally:
+            shutil.rmtree(stage_dir, ignore_errors=True)
     elif config.has_pim():
         temp_file_name = os.path.basename(file_name)
         file_dir = os.path.dirname(file_name)
