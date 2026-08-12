@@ -49,7 +49,6 @@ Procedure
 # Import all necessary modules, launch an instance of Ansys Prime Server,
 # and connect the PyPrimeMesh client.
 
-import tempfile
 from pathlib import Path
 
 import ansys.meshing.prime as prime
@@ -65,7 +64,7 @@ model = prime_client.model
 # Download the bracket scaffold geometry (FMD) file and import it into the
 # model, creating a part per the CAD model for the topology-based connection.
 
-bracket_file = prime.examples.download_bracket_fmd(force=True, destination=tempfile.mkdtemp())
+bracket_file = prime.examples.download_bracket_fmd(force=True)
 
 file_io = prime.FileIO(model)
 file_io.import_cad(

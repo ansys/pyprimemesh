@@ -365,21 +365,18 @@ def file_read_context(model, file_name: str):
     if config.file_existence_check_enabled() and not os.path.exists(file_name):
         raise FileNotFoundError(f'Given file name "{file_name}" is not found on local disk')
     if config.using_container():
-        # Use a unique subdirectory so that concurrent calls (e.g. gallery
-        # examples running in parallel) do not clobber each other's files
-        # when they share the same base file name.
-        unique_dir_name = str(uuid.uuid4())
         base_file_name = os.path.basename(file_name)
-        temp_dir_name = os.path.join(defaults.get_examples_path(), unique_dir_name)
-        os.makedirs(temp_dir_name, exist_ok=True)
-        temp_file_name = os.path.join(temp_dir_name, base_file_name)
-        shutil.copyfile(file_name, temp_file_name)
+        temp_file_name = os.path.join(defaults.get_examples_path(), base_file_name)
+        is_copy: bool = file_name != temp_file_name
+        if is_copy:
+            shutil.copyfile(file_name, temp_file_name)
         container_file_name = os.path.join(
-            defaults.get_examples_path_for_containers(), unique_dir_name, base_file_name
+            defaults.get_examples_path_for_containers(), base_file_name
         )
         container_file_name = container_file_name.replace(os.path.sep, '/')
         yield container_file_name
-        shutil.rmtree(temp_dir_name, ignore_errors=True)
+        if is_copy:
+            os.remove(temp_file_name)
     elif config.has_pim():
         temp_file_name = os.path.basename(file_name)
         model.file_service.upload_file(file_name)
@@ -467,23 +464,17 @@ def file_read_context_list(model, file_names: List[str]):
                 error_msg = f"File {file} given for read is missing from local disk."
                 raise FileNotFoundError(error_msg)
     if config.using_container():
-        # Use a unique subdirectory so that concurrent calls (e.g. gallery
-        # examples running in parallel) do not clobber each other's files
-        # when they share the same base file name.
-        unique_dir_name = str(uuid.uuid4())
-        temp_dir_name = os.path.join(defaults.get_examples_path(), unique_dir_name)
-        os.makedirs(temp_dir_name, exist_ok=True)
         base_names = [os.path.basename(file) for file in file_names]
-        temp_names = [os.path.join(temp_dir_name, base) for base in base_names]
+        temp_names = [os.path.join(defaults.get_examples_path(), base) for base in base_names]
         for file, temp in zip(file_names, temp_names):
             shutil.copyfile(file, temp)
         container_files = [
-            os.path.join(defaults.get_examples_path_for_containers(), unique_dir_name, base)
-            for base in base_names
+            os.path.join(defaults.get_examples_path_for_containers(), base) for base in base_names
         ]
         container_files = [file.replace(os.path.sep, '/') for file in container_files]
         yield container_files
-        shutil.rmtree(temp_dir_name, ignore_errors=True)
+        for temp_file in temp_names:
+            os.remove(temp_file)
     elif config.has_pim():
         temp_files = [os.path.basename(file) for file in file_names]
         for file in file_names:
@@ -512,22 +503,16 @@ def file_write_context(model, file_name: str):
         Name of the file to which context has been written.
     """
     if config.using_container():
-        # Use a unique subdirectory so that concurrent calls (e.g. gallery
-        # examples running in parallel) do not clobber each other's files
-        # when they share the same base file name.
-        unique_dir_name = str(uuid.uuid4())
         base_file_name = os.path.basename(file_name)
-        local_dir_name = os.path.join(defaults.get_output_path(), unique_dir_name)
-        os.makedirs(local_dir_name, exist_ok=True)
-        temp_file_name = os.path.join(
-            defaults.get_output_path_for_containers(), unique_dir_name, base_file_name
-        )
+        temp_file_name = os.path.join(defaults.get_output_path_for_containers(), base_file_name)
         temp_file_name = temp_file_name.replace(os.path.sep, '/')
+        if not os.path.exists(defaults.get_output_path()):
+            os.makedirs(defaults.get_output_path())
         yield temp_file_name
         # Copy temp_file_name to directory which was asked
-        local_file_name = os.path.join(local_dir_name, base_file_name)
+        local_file_name = os.path.join(defaults.get_output_path(), base_file_name)
         shutil.copyfile(local_file_name, file_name)
-        shutil.rmtree(local_dir_name, ignore_errors=True)
+        os.remove(local_file_name)
     elif config.has_pim():
         temp_file_name = os.path.basename(file_name)
         file_dir = os.path.dirname(file_name)
