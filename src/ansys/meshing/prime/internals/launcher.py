@@ -188,7 +188,11 @@ def launch_server_process(
         server_args.append(f"--server_cert_dir={server_certs_dir}")
 
     logging.getLogger('PyPrimeMesh').info('Launching Ansys Prime Server')
-    server = subprocess.Popen(server_args, **kwargs)
+    # server_args is built entirely from validated internal values (checked file
+    # paths and a restricted set of option strings), not from untrusted external
+    # input, and shell=False (the default) is used, so shell injection is not
+    # possible here.
+    server = subprocess.Popen(server_args, **kwargs)  # nosec B603
     return server
 
 
@@ -216,7 +220,8 @@ def launch_remote_prime(
 
     client = Client(channel=channel, timeout=timeout)
     file_service = FileClient(
-        token='token',
+        token='token',  # nosec B106 - placeholder value, not a real credential;
+        # the http-simple-upload-server service does not use this for authentication.
         url=instance.services['http-simple-upload-server'].uri,
         headers=instance.services['http-simple-upload-server'].headers,
     )

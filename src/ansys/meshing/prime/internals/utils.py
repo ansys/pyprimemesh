@@ -134,13 +134,21 @@ def get_child_processes(process):
         Process IDs of the processes.
     """
     children = []
-    cmd = subprocess.Popen(['pgrep', '-P', str(process)], stdout=subprocess.PIPE)
+    # Resolve full executable paths to avoid starting a process via a partial
+    # path that could be hijacked through a manipulated PATH environment variable.
+    pgrep_path = shutil.which('pgrep') or 'pgrep'
+    ps_path = shutil.which('ps') or 'ps'
+    cmd = subprocess.Popen(
+        [pgrep_path, '-P', str(process)], stdout=subprocess.PIPE
+    )  # nosec B603 - args are a resolved executable path and str(process); shell=False.
     out = cmd.stdout.read().decode("utf-8")
     cmd.wait()
     for pid in out.split("\n")[:1]:
         if pid.strip() == '':
             break
-        ps_cmd = subprocess.Popen(['ps', '-o', 'cmd=', str(int(pid))], stdout=subprocess.PIPE)
+        ps_cmd = subprocess.Popen(
+            [ps_path, '-o', 'cmd=', str(int(pid))], stdout=subprocess.PIPE
+        )  # nosec B603 - args are a resolved executable path and an int-validated pid; shell=False.
         ps_out = ps_cmd.stdout.read().decode("utf-8")
         ps_cmd.wait()
         ps_parts = ps_out.split()
