@@ -102,7 +102,7 @@ mesh_util.read(wheel_ground_file)
 print(model)
 
 display = PrimePlotter()
-display.plot(model, scope=prime.ScopeDefinition(model, label_expression="ground, wheel"))
+display.plot(model, scope=prime.ScopeDefinition(model, label_expression="ground wheel"))
 display.show()
 
 ###############################################################################
@@ -155,7 +155,7 @@ print(model)
 
 display.plot(
     model,
-    scope=prime.ScopeDefinition(model, label_expression="ground, patch*, wheel"),
+    scope=prime.ScopeDefinition(model, label_expression="ground patch* wheel"),
     update=True,
 )
 display.show()
@@ -185,7 +185,7 @@ wrap_part = mesh_util.wrap(
 print(model)
 display.plot(
     model,
-    scope=prime.ScopeDefinition(model, label_expression="ground, patch*, wheel"),
+    scope=prime.ScopeDefinition(model, label_expression="ground patch* wheel"),
     update=True,
 )
 display.show()
