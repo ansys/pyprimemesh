@@ -58,6 +58,7 @@ Procedure
 """
 
 # sphinx_gallery_tags = ["Fluid", "Structural", "Poly", "Tet", "Prism", "Wrap"]
+# sphinx_gallery_thumbnail_number = 2
 
 ###############################################################################
 # Launch Ansys Prime Server
