@@ -163,9 +163,9 @@ print(model)
 
 display = PrimePlotter()
 display.plot(
-   model,
-   scope=prime.ScopeDefinition(model, label_expression="ground, patch*, wheel"),
-   update=True,
+    model,
+    scope=prime.ScopeDefinition(model, label_expression="ground, patch*, wheel"),
+    update=True,
 )
 display.show()
 
@@ -198,9 +198,9 @@ print(model)
 
 display = PrimePlotter()
 display.plot(
-   model,
-   scope=prime.ScopeDefinition(model, label_expression="ground, patch*, wheel"),
-   update=True,
+    model,
+    scope=prime.ScopeDefinition(model, label_expression="ground, patch*, wheel"),
+    update=True,
 )
 display.show()
 
