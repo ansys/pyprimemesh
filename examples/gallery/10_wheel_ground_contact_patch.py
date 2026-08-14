@@ -104,6 +104,7 @@ print(model)
 display = PrimePlotter()
 display.plot(model, scope=prime.ScopeDefinition(model, label_expression="ground wheel"))
 display.show()
+display.clear()
 
 ###############################################################################
 # Convert topo parts to mesh parts
@@ -160,6 +161,7 @@ display.plot(
     update=True,
 )
 display.show()
+display.clear()
 
 #######################
 # Wrap the fluid region
@@ -191,6 +193,7 @@ display.plot(
     update=True,
 )
 display.show()
+display.clear()
 
 ###############################################################################
 # Volume mesh
@@ -213,6 +216,7 @@ display.plot(
     update=True,
 )
 display.show()
+display.clear()
 
 mesh_util.create_zones_from_labels()
 
