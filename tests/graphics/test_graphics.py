@@ -28,6 +28,9 @@ import pyvista as pv
 
 import ansys.meshing.prime as prime
 from ansys.meshing.prime.core.mesh import (
+    ENTITY_COLOR_ARRAY,
+    ENTITY_ID_ARRAY,
+    ColorByType,
     compute_distance,
     compute_face_list_from_structured_nodes,
 )
@@ -111,12 +114,14 @@ def test_quadratic_element_outlines(get_remote_client, get_examples):
     try:
         display.add_model_pd(quadratic_pd)
         outlines = display.element_edge_actors
-        assert len(outlines) == expected
+        # the outlines of a part are drawn together, so they are keyed by part
+        assert set(outlines) <= set(quadratic_pd)
         assert all(actor.visibility for actor in outlines.values())
-        # every outline is keyed by the face actor it belongs to, so that hiding a
-        # zonelet hides its outlines too
-        face_actors = [actor for actor in display.info_actor_map if actor in outlines]
-        assert len(face_actors) == expected
+        # every zonelet that holds outlines is still identifiable within them
+        outlined = set()
+        for actor in outlines.values():
+            outlined |= set(actor.mapper.dataset.cell_data[ENTITY_ID_ARRAY].tolist())
+        assert len(outlined) == expected
     finally:
         display.scene.close()
 
@@ -197,6 +202,114 @@ def test_quadratic_tet_plotter(get_remote_client, get_examples, verify_image_cac
     scene.camera_position = [tuple(target + direction * span * 1.6), tuple(target), (0, 0, 1)]
     scene.camera.zoom(2.4)
     display.show()
+
+
+def _plot_model(model_pd):
+    """Plot polydata and return the plotter."""
+    display = PrimePlotter(allow_picking=False)
+    display.add_model_pd(model_pd)
+    return display
+
+
+def test_entities_of_a_part_share_actors(get_remote_client, get_examples):
+    """A part is drawn with a handful of actors however many entities it holds.
+
+    The cost of a scene, and of exporting one, scales with the number of actors,
+    so entity count must not leak into it.
+    """
+    model = get_remote_client.model
+    model_pd = _mesh_elbow(model, get_examples["elbow_lucid"], quadratic=False)
+
+    # the widget buttons are actors of their own, so only count what the model adds
+    empty = PrimePlotter(allow_picking=False)
+    baseline = len(empty.scene.actors)
+    empty.scene.close()
+
+    display = _plot_model(model_pd)
+    try:
+        entities = sum(len(part_pd["faces"]) for part_pd in model_pd.values())
+        model_actors = len(display.scene.actors) - baseline
+        # at most two face batches, one outline actor, and one edge actor per part
+        assert model_actors <= 4 * len(model_pd)
+        assert model_actors < entities
+        # merging must not lose any entity
+        assert len(display.entity_infos) == entities
+    finally:
+        display.scene.close()
+
+
+def test_pick_resolves_to_the_entity_under_the_point(get_remote_client, get_examples):
+    """Picking a shared actor selects the one entity the point falls on."""
+    model = get_remote_client.model
+    model_pd = _mesh_elbow(model, get_examples["elbow_lucid"], quadratic=False)
+
+    display = _plot_model(model_pd)
+    try:
+        actor, batch = max(display._batches.items(), key=lambda item: len(item[1].infos))
+        assert len(batch.infos) > 1, "need a batch holding several entities"
+
+        centers = batch.mesh.cell_centers().points
+        for cell_id in (0, batch.mesh.n_cells // 2, batch.mesh.n_cells - 1):
+            expected = int(batch.entity_ids[cell_id])
+            display._picked_entities.clear()
+            assert display._pick_entity(actor, centers[cell_id])
+            assert [int(info.id) for info in display.selected_entity_infos] == [expected]
+
+            # the picked entity is highlighted, and only it
+            colors = batch.mesh.cell_data[ENTITY_COLOR_ARRAY]
+            highlighted = np.unique(batch.entity_ids[colors[:, 0] == colors[cell_id][0]])
+            assert set(highlighted.tolist()) == {expected}
+
+            # picking it again clears the selection
+            assert display._pick_entity(actor, centers[cell_id])
+            assert display.selected_entity_infos == []
+    finally:
+        display.scene.close()
+
+
+def test_hiding_an_entity_leaves_the_rest_drawn(get_remote_client, get_examples):
+    """Hiding an entity masks only its own cells of the mesh it shares."""
+    model = get_remote_client.model
+    model_pd = _mesh_elbow(model, get_examples["elbow_lucid"], quadratic=False)
+
+    display = _plot_model(model_pd)
+    try:
+        batch = max(display._batches.values(), key=lambda candidate: len(candidate.infos))
+        entity_id = int(batch.entity_ids[0])
+
+        display.set_entities_visible([entity_id], False)
+        ghosts = batch.mesh.cell_data["vtkGhostType"]
+        assert (ghosts != 0).all(where=batch.entity_ids == entity_id)
+        assert not (ghosts != 0).any(where=batch.entity_ids != entity_id)
+
+        display.set_entities_visible([entity_id], True)
+        assert not batch.mesh.cell_data["vtkGhostType"].any()
+    finally:
+        display.scene.close()
+
+
+def test_color_by_type_recolors_shared_meshes(get_remote_client, get_examples):
+    """Switching color mode recolors cells rather than actors."""
+    model = get_remote_client.model
+    model_pd = _mesh_elbow(model, get_examples["elbow_lucid"], quadratic=False)
+
+    display = _plot_model(model_pd)
+    try:
+        batch = max(display._batches.values(), key=lambda candidate: len(candidate.infos))
+
+        display.set_color_by_type(ColorByType.PART)
+        by_part = batch.mesh.cell_data[ENTITY_COLOR_ARRAY].copy()
+        assert len(np.unique(by_part, axis=0)) == 1
+
+        display.set_color_by_type(ColorByType.ZONELET)
+        by_zonelet = batch.mesh.cell_data[ENTITY_COLOR_ARRAY]
+        assert len(np.unique(by_zonelet, axis=0)) > 1
+        # cells of one entity always share a color
+        for entity_id in list(batch.infos)[:5]:
+            cells = batch.entity_ids == entity_id
+            assert len(np.unique(by_zonelet[cells], axis=0)) == 1
+    finally:
+        display.scene.close()
 
 
 def test_compute_distance():
