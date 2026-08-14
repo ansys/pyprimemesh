@@ -65,6 +65,7 @@ Procedure
 """
 
 # sphinx_gallery_tags = ["Fluid", "Aerodynamics", "Poly", "Prism", "Wrap"]
+# sphinx_gallery_thumbnail_number = 4
 
 ###############################################################################
 # Launch Ansys Prime Server
