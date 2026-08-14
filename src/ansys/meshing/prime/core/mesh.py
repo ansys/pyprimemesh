@@ -77,6 +77,15 @@ class DisplayMeshType(enum.IntEnum):
     SPLINESURFACE = 5
 
 
+#: Cell array carrying the display entity (topoface or face zonelet) each cell belongs to.
+#: Display entities are merged into shared render batches, so this array is what restores
+#: per entity identity for picking, coloring, and visibility.
+ENTITY_ID_ARRAY = "prime_entity_id"
+
+#: Cell array carrying the RGB color currently applied to each cell.
+ENTITY_COLOR_ARRAY = "colors"
+
+
 class DisplayMeshInfo:
     """Contains the mesh information to display.
 
@@ -126,6 +135,281 @@ class DisplayMeshInfo:
         self.has_mesh = has_mesh
         self.render_mesh = render_mesh
         self.element_edges = element_edges
+
+
+class RenderBatch:
+    """A set of display entities merged into a single renderable mesh.
+
+    Display entities that share a draw style are merged so that the renderer draws
+    them as one actor. The entity each cell came from is kept in the
+    :data:`ENTITY_ID_ARRAY` cell array, so picking, coloring, and visibility stay
+    per entity even though the geometry is shared.
+
+    Parameters
+    ----------
+    mesh : pv.PolyData
+        Merged geometry of every entity in the batch.
+    infos : Dict[int, DisplayMeshInfo]
+        Display information of each entity in the batch, keyed by entity ID.
+    part_id : int
+        ID of the part the batch belongs to.
+    show_edges : bool, default: False
+        Whether the renderer draws the element edges of the batch itself.
+    """
+
+    def __init__(
+        self,
+        mesh: "pv.PolyData",
+        infos: Dict[int, DisplayMeshInfo],
+        part_id: int,
+        show_edges: bool = False,
+    ) -> None:
+        """Initialize the render batch."""
+        self.mesh = mesh
+        self.infos = infos
+        self.part_id = part_id
+        self.show_edges = show_edges
+
+    @property
+    def entity_ids(self) -> np.ndarray:
+        """Entity ID of every cell in the batch.
+
+        Returns
+        -------
+        np.ndarray
+            Entity ID of every cell in the batch.
+        """
+        return self.mesh.cell_data[ENTITY_ID_ARRAY]
+
+    def apply_colors(self, color_type: ColorByType = None) -> None:
+        """Color the cells of the batch by the given entity property.
+
+        Parameters
+        ----------
+        color_type : ColorByType, default: None
+            Entity property to take the color from. When this is ``None``, the
+            property is chosen by :func:`default_color_key`.
+        """
+        self.mesh.cell_data[ENTITY_COLOR_ARRAY] = compute_entity_colors(
+            self.infos, self.entity_ids, color_type
+        )
+
+
+def default_color_key(info: DisplayMeshInfo) -> int:
+    """Get the property a display entity is colored by before a color mode is chosen.
+
+    Which property this is depends on the type of the entity: mesh faces are colored
+    by part and topology edges by their own ID, while everything else is colored by
+    zone.
+
+    Parameters
+    ----------
+    info : DisplayMeshInfo
+        Display information of the entity.
+
+    Returns
+    -------
+    int
+        Value to take the color from.
+    """
+    mesh_type = info.display_mesh_type
+    if mesh_type == DisplayMeshType.TOPOEDGE:
+        return info.id
+    if mesh_type == DisplayMeshType.FACEZONELET:
+        return info.part_id
+    return info.zone_id
+
+
+def entity_color(info: DisplayMeshInfo, color_type: ColorByType = None):
+    """Get the color of a display entity for the given color mode.
+
+    Parameters
+    ----------
+    info : DisplayMeshInfo
+        Display information of the entity.
+    color_type : ColorByType, default: None
+        Entity property to take the color from. When this is ``None``, the property
+        is chosen by :func:`default_color_key`.
+
+    Returns
+    -------
+    np.ndarray
+        RGB color of the entity.
+    """
+    num_colors = int(color_matrix.size / 3)
+    if color_type is None:
+        key = default_color_key(info)
+    elif color_type == ColorByType.ZONELET:
+        key = info.id
+    elif color_type == ColorByType.PART:
+        key = info.part_id
+    else:
+        key = info.zone_id
+    return color_matrix[key % num_colors]
+
+
+def compute_entity_colors(
+    infos: Dict[int, DisplayMeshInfo],
+    entity_ids: np.ndarray,
+    color_type: ColorByType = None,
+) -> np.ndarray:
+    """Compute the per cell colors of a merged mesh.
+
+    Parameters
+    ----------
+    infos : Dict[int, DisplayMeshInfo]
+        Display information of each entity, keyed by entity ID.
+    entity_ids : np.ndarray
+        Entity ID of every cell of the merged mesh.
+    color_type : ColorByType, default: None
+        Entity property to take the color from. When this is ``None``, the property
+        is chosen by :func:`default_color_key`.
+
+    Returns
+    -------
+    np.ndarray
+        RGB color of every cell of the merged mesh.
+    """
+    entity_ids = np.asarray(entity_ids)
+    if entity_ids.size == 0:
+        return np.empty((0, 3), dtype=np.uint8)
+    # the palette is built once per entity and then indexed per cell, so the cost
+    # scales with the number of entities rather than the number of cells
+    unique_ids, inverse = np.unique(entity_ids, return_inverse=True)
+    palette = np.array(
+        [entity_color(infos[entity_id], color_type) for entity_id in unique_ids],
+        dtype=np.uint8,
+    )
+    return palette[inverse]
+
+
+def build_face_render_batches(face_entries: List, part_id: int) -> List[RenderBatch]:
+    """Merge the face entities of a part into render batches.
+
+    Entities are grouped by whether the renderer can draw their element edges itself,
+    since that is a property of the actor rather than of the geometry. This yields at
+    most two batches per part instead of one actor per entity.
+
+    Parameters
+    ----------
+    face_entries : List
+        ``(MeshObjectPlot, DisplayMeshInfo)`` pairs of the faces of a part.
+    part_id : int
+        ID of the part the faces belong to.
+
+    Returns
+    -------
+    List[RenderBatch]
+        Render batches of the faces of the part.
+    """
+    grouped = {}
+    for entry in face_entries:
+        if entry is None:
+            continue
+        mesh_object, info = entry
+        # zonelets that VTK cannot tessellate acceptably carry an explicit
+        # triangulation to shade in place of their own facets
+        geometry = info.render_mesh if info.render_mesh is not None else mesh_object.mesh
+        if geometry is None or geometry.n_cells == 0:
+            continue
+        show_edges = bool(info.has_mesh and info.element_edges is None)
+        grouped.setdefault(show_edges, []).append((geometry, info))
+
+    batches = []
+    for show_edges, items in grouped.items():
+        merged = _merge_geometry([geometry for geometry, _ in items])
+        if merged is None:
+            continue
+        merged.cell_data[ENTITY_ID_ARRAY] = np.repeat(
+            [info.id for _, info in items], [geometry.n_cells for geometry, _ in items]
+        )
+        batch = RenderBatch(
+            mesh=merged,
+            infos={info.id: info for _, info in items},
+            part_id=part_id,
+            show_edges=show_edges,
+        )
+        batch.apply_colors()
+        batches.append(batch)
+    return batches
+
+
+def build_element_edge_mesh(face_entries: List) -> "pv.PolyData":
+    """Merge the element outlines of the face entities of a part.
+
+    Parameters
+    ----------
+    face_entries : List
+        ``(MeshObjectPlot, DisplayMeshInfo)`` pairs of the faces of a part.
+
+    Returns
+    -------
+    pv.PolyData
+        Merged outlines, or ``None`` when no entity carries outlines.
+    """
+    outlines = []
+    entity_ids = []
+    for entry in face_entries:
+        if entry is None:
+            continue
+        _, info = entry
+        if info.element_edges is None or info.element_edges.n_cells == 0:
+            continue
+        outlines.append(info.element_edges)
+        entity_ids.append(info.id)
+
+    merged = _merge_geometry(outlines)
+    if merged is not None:
+        merged.cell_data[ENTITY_ID_ARRAY] = np.repeat(
+            entity_ids, [outline.n_cells for outline in outlines]
+        )
+    return merged
+
+
+def build_edge_render_mesh(edge_entries: List) -> "pv.PolyData":
+    """Merge the edge entities of a part into a single mesh.
+
+    Edges are not pickable, so they carry their colors rather than entity IDs.
+
+    Parameters
+    ----------
+    edge_entries : List
+        ``MeshObjectPlot`` objects of the edges of a part.
+
+    Returns
+    -------
+    pv.PolyData
+        Merged edges, or ``None`` when the part has no edges to draw.
+    """
+    edges = [
+        entry.mesh
+        for entry in edge_entries
+        if entry is not None and entry.mesh is not None and entry.mesh.n_cells > 0
+    ]
+    return _merge_geometry(edges)
+
+
+def _merge_geometry(pieces: List) -> "pv.PolyData":
+    """Concatenate meshes while preserving their order.
+
+    Points are not merged across pieces, so cells stay in piece order and the entity
+    of each cell can be recovered by repeating the entity of its piece.
+
+    Parameters
+    ----------
+    pieces : List
+        Meshes to concatenate.
+
+    Returns
+    -------
+    pv.PolyData
+        Concatenated mesh, or ``None`` when there is nothing to concatenate.
+    """
+    if not pieces:
+        return None
+    if len(pieces) == 1:
+        return pieces[0].copy()
+    return pv.merge(pieces, merge_points=False)
 
 
 def compute_distance(point1, point2) -> float:
@@ -527,7 +811,11 @@ class Mesh(MeshInfo):
         edge.lines = cells
         ecolor = np.array(self.get_edge_color(edge_facet_res, index))
         colors = np.tile(ecolor, (len(segments), 1))
-        edge["colors"] = colors
+        # a closed edge has as many points as segments, so the colors have to name
+        # the association they belong to rather than let it be inferred from length
+        edge.cell_data[ENTITY_COLOR_ARRAY] = colors
+        if segments:
+            edge.set_active_scalars(ENTITY_COLOR_ARRAY, preference="cell")
         if edge.n_points > 0:
             return MeshObjectPlot(part, edge)
 
@@ -605,15 +893,24 @@ class Mesh(MeshInfo):
         if len(set(parts).intersection(set(self._parts_polydata.keys()))) != len(parts):
             self.update_pd(parts)
         scoped_pd = {}
-        scope_def = scope
         for part_id in parts:
             part = self._model.get_part(part_id)
-            scope_def.part_expression = part.name
+            # narrow the query to this part without rewriting the caller's scope;
+            # mutating part_expression on the input silently changes later plots
+            # that reuse the same ScopeDefinition
+            part_scope = prime.ScopeDefinition(
+                model=self._model,
+                entity_type=scope.entity_type,
+                evaluation_type=scope.evaluation_type,
+                part_expression=part.name,
+                label_expression=scope.label_expression,
+                zone_expression=scope.zone_expression,
+            )
             disp_data = None
             disp_ids = []
             if scope.entity_type == prime.ScopeEntity.FACEZONELETS:
                 disp_ids = self._model.control_data.get_scope_face_zonelets(
-                    scope=scope_def, params=prime.ScopeZoneletParams(model=self._model)
+                    scope=part_scope, params=prime.ScopeZoneletParams(model=self._model)
                 )
                 disp_data = self._parts_polydata[part_id]["faces"]
 
