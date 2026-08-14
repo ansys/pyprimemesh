@@ -65,7 +65,6 @@ Procedure
 """
 
 # sphinx_gallery_tags = ["Fluid", "Aerodynamics", "Poly", "Prism", "Wrap"]
-# sphinx_gallery_thumbnail_number = 4
 
 ###############################################################################
 # Launch Ansys Prime Server
@@ -99,12 +98,18 @@ mesh_util = prime.lucid.Mesh(model)
 wheel_ground_file = prime.examples.download_wheel_ground_fmd()
 
 mesh_util.read(wheel_ground_file)
-print(model)
 
-display = PrimePlotter()
-display.plot(model, scope=prime.ScopeDefinition(model, label_expression="ground wheel"))
-display.show()
-display.clear()
+
+###################
+# Visualize results
+# ~~~~~~~~~~~~~~~~~
+# .. code-block:: python
+#
+#   display = PrimePlotter()
+#   display.plot(model, scope=prime.ScopeDefinition(model, label_expression="ground, wheel"))
+#   display.show()
+#
+print(model)
 
 ###############################################################################
 # Convert topo parts to mesh parts
@@ -154,15 +159,17 @@ result = prime.SurfaceUtilities(model).create_contact_patch(
 print(result.error_code)
 print(model)
 
-display.clear()
-display.plot(
-    model,
-    scope=prime.ScopeDefinition(model, label_expression="ground patch* wheel"),
-    update=True,
-)
-display.show()
-display.clear()
-
+###################
+# Visualize results
+# =================
+# .. code-block:: python
+#
+#   display = PrimePlotter()
+#   display.plot(
+#          model, scope=prime.ScopeDefinition(model, label_expression="ground, patch*, wheel")
+#   )
+#   display.show()
+#
 #######################
 # Wrap the fluid region
 # ~~~~~~~~~~~~~~~~~~~~~
@@ -185,15 +192,19 @@ wrap_part = mesh_util.wrap(
     wrap_size_controls=[size_control],
 )
 
+#########################
+# Open a pyvistaqt window
+# ~~~~~~~~~~~~~~~~~~~~~~~
+# .. code-block:: python
+#
+#     display = PrimePlotter()
+#     display.plot(
+#         model,
+#         scope=prime.ScopeDefinition(model, label_expression="ground, patch*, wheel"), update=True
+#     )
+#     display.show()
+#
 print(model)
-display.clear()
-display.plot(
-    model,
-    scope=prime.ScopeDefinition(model, label_expression="ground patch* wheel"),
-    update=True,
-)
-display.show()
-display.clear()
 
 ###############################################################################
 # Volume mesh
@@ -209,14 +220,13 @@ mesh_util.volume_mesh(
     scope=prime.lucid.VolumeScope(part_expression=wrap_part.name),
 )
 
-display.clear()
+display = PrimePlotter()
 display.plot(
     model,
     scope=prime.ScopeDefinition(model, label_expression="!front !side_right !top"),
     update=True,
 )
 display.show()
-display.clear()
 
 mesh_util.create_zones_from_labels()
 
