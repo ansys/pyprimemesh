@@ -46,9 +46,6 @@ class HidePicked(PlotterWidget):
         """Initialize the widget."""
         super().__init__(prime_plotter._backend._pl.scene)
         self.prime_plotter = prime_plotter
-        self._picked_dict = self.prime_plotter._backend._custom_picker._picked_dict
-        self._object_actors_map = self.prime_plotter._backend._object_to_actors_map
-        self._element_edge_actors = self.prime_plotter._element_edge_actors
         self._button = self.prime_plotter._backend._pl.scene.add_checkbox_button_widget(
             self.callback,
             position=(5, 660),
@@ -57,26 +54,16 @@ class HidePicked(PlotterWidget):
             color_off="white",
             color_on="white",
         )
-        self._removed_actors = []
-
-    def _actors_of(self, meshobject) -> list:
-        """Get every actor that draws a mesh object, outlines included."""
-        actors = [meshobject.actor]
-        edge_actor = self._element_edge_actors.get(meshobject.actor)
-        if edge_actor is not None:
-            actors.append(edge_actor)
-        return actors
+        self._hidden_entities = []
 
     def callback(self, state: bool) -> None:
         """Define callback function for the button widget."""
         if state:
-            for meshobject in list(self._picked_dict.values()):
-                for actor in self._actors_of(meshobject):
-                    self.prime_plotter._backend.pv_interface.scene.remove_actor(actor)
-                    self._removed_actors.append(actor)
+            self._hidden_entities = [info.id for info in self.prime_plotter.selected_entity_infos]
+            self.prime_plotter.set_entities_visible(self._hidden_entities, False)
         else:
-            for actor in self._removed_actors:
-                self.prime_plotter._backend._pl.scene.add_actor(actor)
+            self.prime_plotter.set_entities_visible(self._hidden_entities, True)
+            self._hidden_entities = []
 
     def update(self) -> None:
         """Define the configuration and representation of the button widget button."""
