@@ -48,13 +48,13 @@ tests = [
 ]
 doc = [
   "ansys-tools-visualization-interface[usd]==0.14.0",
-  "ansys-sphinx-theme[autoapi]==1.9.0",
+  "ansys-sphinx-theme[autoapi]==1.10.0",
   "joblib==1.5.3",
   "jupyter-sphinx==0.5.3",
   "nest-asyncio2==1.7.2",
   "numpydoc==1.10.0",
   "pyvista==0.48.4",
-  "sphinx-autodoc-typehints==3.13.0",
+  "sphinx-autodoc-typehints==3.13.2",
   "sphinx-copybutton==0.5.2",
   "sphinx-gallery==0.21.0",
   "sphinx-jinja==2.0.2",
