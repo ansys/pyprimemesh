@@ -50,25 +50,28 @@ nine visualization stages:
    ID annotations
 8. **Per-element face coloring** — individual mesh face cells colored uniquely
    via ``cell_data`` scalars
-9. **ColorByType modes** — reading and meshing structural parts to show
-   colored by ZONE, ZONELET, and PART using direct ``color_matrix`` indexing
+9. **ColorByType modes** — reading and meshing structural parts, then coloring
+   the same model by ZONE, ZONELET, and PART through ``set_color_by_type()``
 
 Key data model concepts demonstrated:
 
+- **Shared actors**: high-level plotting merges the display entities of a part
+  into a handful of actors and keeps entity identity on the mesh as cell data,
+  so picking, coloring, and visibility stay per entity without one actor each
 - **Multi-part models**: polydata dict is keyed by ``part_id``; each part
   contains its own faces, edges, control points, and spline surfaces
 - **DisplayMeshType** filtering (``TOPOFACE``, ``TOPOEDGE``, ``FACEZONELET``,
   ``EDGEZONELET``) to distinguish entity types
 - **DisplayMeshInfo** metadata (``id``, ``zone_name``, ``zone_id``,
-  ``part_id``, ``part_name``, ``has_mesh``, ``display_mesh_type``) preserved
-  through ``info_actor_map``
+  ``part_id``, ``part_name``, ``has_mesh``, ``display_mesh_type``) available
+  from polydata and, for custom ``add_mesh`` calls, registered for the widgets
 - **Labels vs Zones**: labels are overlapping CAD metadata queried via
   ``Part.get_labels()``; zones are non-overlapping mesh groupings from
   ``Part.get_face_zones()`` / ``Part.get_volume_zones()``
 - **Edge type colors**: edges carry type-based RGB data in their ``"colors"``
   array (red, black, cyan, magenta, yellow, purple by edge type)
-- **ColorByType**: ``get_scalar_colors()`` supports ZONE, ZONELET, and PART
-  coloring modes; the built-in ``ColorByTypeWidget`` cycles between them
+- **ColorByType**: ``set_color_by_type()`` recolors by ZONE, ZONELET, or PART;
+  the built-in ``ColorByTypeWidget`` cycles between them
 - **Polydata access**: ``model.as_polydata()`` returns a dict keyed by part ID
   with ``"faces"`` (tuples of ``MeshObjectPlot, DisplayMeshInfo``),
   ``"edges"`` (``MeshObjectPlot``), ``"ctrlpts"``, and ``"splinesurf"`` lists
@@ -90,7 +93,7 @@ import pyvista as pv
 
 import ansys.meshing.prime as prime
 from ansys.meshing.prime.core.mesh import DisplayMeshType
-from ansys.meshing.prime.graphics.plotter import ColorByType, PrimePlotter, color_matrix
+from ansys.meshing.prime.graphics.plotter import ColorByType, PrimePlotter
 
 
 def make_distinct_colors(n):
@@ -532,7 +535,7 @@ plotter.show(title="Plot 7 \u2014 Face Zonelets with IDs")
 # Demonstrates:
 #   - Assigning per-cell RGB scalars via cell_data on a copy of the mesh
 #   - plotter.add_mesh() with scalars='RGB', rgb=True, and metadata
-#   - Metadata automatically registered in info_actor_map
+#   - Metadata registered so the built-in widgets can still find the mesh
 
 plotter = PrimePlotter()
 rng = np.random.default_rng(seed=42)
@@ -573,8 +576,8 @@ plotter.show(title="Plot 8 \u2014 Per-Element Face Colors")
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 # Demonstrates:
 #   - ColorByType enum (ZONE, ZONELET, PART) for different coloring strategies
-#   - Same mesh data rendered three ways using the color_matrix palette
-#   - This is the logic used by the built-in ColorByType widget
+#   - set_color_by_type() recoloring the shared actors without rebuilding them
+#   - The same path used by the built-in ColorByType widget
 
 # Load pipe tee CAD geometry and mesh as separate parts to show color by type
 pipe_tee = prime.examples.download_pipe_tee_pmdat()
@@ -583,35 +586,13 @@ mesh_util.read(file_name=pipe_tee)
 mesh_util.surface_mesh(min_size=5, max_size=25)
 mesh_util.volume_mesh()
 
-# getting updated data for the new mesh
-volume_graphics_data = model.as_polydata(update=True)
-
 # For reference after the structural parts are meshed the model contains:
 print(model)
 
-num_colors = int(color_matrix.size / 3)
-
 for color_mode in [ColorByType.ZONE, ColorByType.ZONELET, ColorByType.PART]:
     plotter = PrimePlotter()
-
-    for part_id, part_data in volume_graphics_data.items():
-        for entity_type, entity_list in part_data.items():
-            if entity_type == "faces":
-                for item in entity_list:
-                    if item is None:
-                        continue
-                    polydata, metadata = item
-                    if metadata.has_mesh:
-                        # Apply ColorByType logic (same as ColorByTypeWidget)
-                        if color_mode == ColorByType.ZONELET:
-                            color = color_matrix[metadata.id % num_colors].tolist()
-                        elif color_mode == ColorByType.PART:
-                            color = color_matrix[metadata.part_id % num_colors].tolist()
-                        else:  # ZONE
-                            color = color_matrix[metadata.zone_id % num_colors].tolist()
-                        plotter.add_mesh(
-                            polydata, metadata, color=color, opacity=1.0, show_edges=True
-                        )
+    plotter.plot(model, update=True)
+    plotter.set_color_by_type(color_mode)
 
     mode_name = color_mode.name
     plotter.add_text(
