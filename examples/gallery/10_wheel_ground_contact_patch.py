@@ -98,18 +98,15 @@ mesh_util = prime.lucid.Mesh(model)
 wheel_ground_file = prime.examples.download_wheel_ground_fmd()
 
 mesh_util.read(wheel_ground_file)
-
-
-###################
-# Visualize results
-# ~~~~~~~~~~~~~~~~~
-# .. code-block:: python
-#
-#   display = PrimePlotter()
-#   display.plot(model, scope=prime.ScopeDefinition(model, label_expression="ground, wheel"))
-#   display.show()
-#
 print(model)
+
+########################
+# Show imported geometry
+# ~~~~~~~~~~~~~~~~~~~~~~
+
+display = PrimePlotter()
+display.plot(model, scope=prime.ScopeDefinition(model, label_expression="ground, wheel"))
+display.show()
 
 ###############################################################################
 # Convert topo parts to mesh parts
@@ -159,17 +156,18 @@ result = prime.SurfaceUtilities(model).create_contact_patch(
 print(result.error_code)
 print(model)
 
-###################
-# Visualize results
-# =================
-# .. code-block:: python
-#
-#   display = PrimePlotter()
-#   display.plot(
-#          model, scope=prime.ScopeDefinition(model, label_expression="ground, patch*, wheel")
-#   )
-#   display.show()
-#
+####################
+# Show contact patch
+# ==================
+
+display = PrimePlotter()
+display.plot(
+   model,
+   scope=prime.ScopeDefinition(model, label_expression="ground, patch*, wheel"),
+   update=True,
+)
+display.show()
+
 #######################
 # Wrap the fluid region
 # ~~~~~~~~~~~~~~~~~~~~~
@@ -191,20 +189,19 @@ wrap_part = mesh_util.wrap(
     create_intersection_loops=True,
     wrap_size_controls=[size_control],
 )
-
-#########################
-# Open a pyvistaqt window
-# ~~~~~~~~~~~~~~~~~~~~~~~
-# .. code-block:: python
-#
-#     display = PrimePlotter()
-#     display.plot(
-#         model,
-#         scope=prime.ScopeDefinition(model, label_expression="ground, patch*, wheel"), update=True
-#     )
-#     display.show()
-#
 print(model)
+
+###########
+# Show wrap
+# ~~~~~~~~~
+
+display = PrimePlotter()
+display.plot(
+   model,
+   scope=prime.ScopeDefinition(model, label_expression="ground, patch*, wheel"),
+   update=True,
+)
+display.show()
 
 ###############################################################################
 # Volume mesh
