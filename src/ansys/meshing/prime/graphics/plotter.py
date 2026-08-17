@@ -29,7 +29,6 @@ import pyvista as pv
 from ansys.tools.visualization_interface import Plotter
 from ansys.tools.visualization_interface.backends.pyvista import PyVistaBackend
 from ansys.tools.visualization_interface.utils.color import Color
-from vtkmodules.vtkCommonDataModel import vtkDataSetAttributes
 
 import ansys.meshing.prime as prime
 
@@ -57,11 +56,6 @@ from ansys.meshing.prime.graphics.widgets.toggle_edges import ToggleEdges
 # The first value scales with the depth slope of the polygon, the second is constant.
 POLYGON_OFFSET_FACTOR = 1.0
 POLYGON_OFFSET_UNITS = 1.0
-
-# VTK skips cells flagged as hidden in the ghost array, which is how individual
-# display entities are hidden without rebuilding the mesh they share.
-_HIDDEN_CELL = vtkDataSetAttributes.HIDDENCELL
-_GHOST_ARRAY = "vtkGhostType"
 
 
 class _EntityPickingBackend(PyVistaBackend):
@@ -120,14 +114,19 @@ class PrimePlotter(Plotter):
 
         # actors added through add_mesh(..., metadata=...), keyed for the widgets
         self._info_actor_map = {}
-        # element outlines drawn separately, keyed by part ID for model faces and
-        # by face actor for meshes added through add_mesh
+        # element outlines drawn separately, keyed by the ID of the part they belong to
         self._element_edge_actors = {}
         # merged rendering state, keyed by the actor that draws each batch
         self._batches = {}
         self._entity_infos = {}
         self._picked_entities = {}
+        # point each entity was picked at, so its label can be restored
+        self._picked_points = {}
+        # label actor shown for each picked entity, keyed by entity ID
+        self._entity_labels = {}
         self._hidden_entities = set()
+        # merged element outlines of each part, keyed by part ID
+        self._element_edge_meshes = {}
         # no color mode is chosen until a caller or the widget picks one
         self._color_type = None
         self._add_widgets()
@@ -168,7 +167,7 @@ class PrimePlotter(Plotter):
         Returns
         -------
         Dict
-            Actor holding the outlines of each part (or face actor) that has them.
+            Actor holding the outlines of each part that has them.
         """
         return self._element_edge_actors
 
@@ -365,6 +364,7 @@ class PrimePlotter(Plotter):
             self._entity_infos.update(batch.infos)
 
         if outlines is not None:
+            self._element_edge_meshes[part_id] = outlines
             self._element_edge_actors[part_id] = self.scene.add_mesh(
                 outlines,
                 color=pv.global_theme.edge_color,
@@ -428,17 +428,88 @@ class PrimePlotter(Plotter):
         if batch is None or point is None:
             return False
 
-        cell_id = batch.mesh.find_closest_cell(list(point))
+        # resolve against what is drawn rather than the full batch, so that hidden
+        # entities cannot be picked through the entities that are still shown
+        mesh = actor.mapper.dataset
+        if mesh is None or mesh.n_cells == 0:
+            return True
+
+        cell_id = mesh.find_closest_cell(list(point))
         if cell_id < 0:
             return True
 
-        entity_id = int(batch.entity_ids[cell_id])
+        entity_id = int(mesh.cell_data[ENTITY_ID_ARRAY][cell_id])
         if entity_id in self._picked_entities:
             self._picked_entities.pop(entity_id)
+            self._picked_points.pop(entity_id, None)
+            self._remove_entity_label(entity_id)
         else:
             self._picked_entities[entity_id] = batch.infos[entity_id]
+            self._picked_points[entity_id] = np.asarray(point, dtype=float)
+            self._add_entity_label(entity_id)
         self.refresh_colors()
         return True
+
+    @staticmethod
+    def entity_label(info: DisplayMeshInfo) -> str:
+        """Get the text shown next to a picked entity.
+
+        Parameters
+        ----------
+        info : DisplayMeshInfo
+            Display information of the entity.
+
+        Returns
+        -------
+        str
+            Text shown next to the entity.
+        """
+        name = info.zone_name or info.part_name
+        return f"{name} ({info.id})" if name else str(info.id)
+
+    def _add_entity_label(self, entity_id: int) -> None:
+        """Label a picked entity at the point it was picked at.
+
+        Parameters
+        ----------
+        entity_id : int
+            ID of the entity to label.
+        """
+        point = self._picked_points.get(entity_id)
+        info = self._entity_infos.get(entity_id)
+        if point is None or info is None or entity_id in self._entity_labels:
+            return
+        if not getattr(self._backend, "_plot_picked_names", True):
+            return
+        self._entity_labels[entity_id] = self.scene.add_point_labels(
+            [point],
+            [self.entity_label(info)],
+            always_visible=True,
+            point_size=0,
+            render_points_as_spheres=False,
+            show_points=False,
+        )
+
+    def _remove_entity_label(self, entity_id: int) -> None:
+        """Remove the label of an entity, if it has one.
+
+        Parameters
+        ----------
+        entity_id : int
+            ID of the entity to remove the label of.
+        """
+        label = self._entity_labels.pop(entity_id, None)
+        if label is not None:
+            self.scene.remove_actor(label)
+
+    def _update_entity_labels(self) -> None:
+        """Show the label of every picked entity that is visible, and only those."""
+        for entity_id in list(self._entity_labels):
+            if entity_id in self._hidden_entities or entity_id not in self._picked_entities:
+                self._remove_entity_label(entity_id)
+        for entity_id in self._picked_entities:
+            if entity_id not in self._hidden_entities:
+                self._add_entity_label(entity_id)
 
     def refresh_colors(self) -> None:
         """Recolor every shared actor from the current color mode and selection."""
@@ -450,7 +521,9 @@ class PrimePlotter(Plotter):
                 selected = np.isin(batch.entity_ids, list(self._picked_entities))
                 colors[selected] = highlight
             batch.mesh.cell_data[ENTITY_COLOR_ARRAY] = colors
-        self.render()
+        # the drawn geometry is a copy of the batch whenever something is hidden,
+        # so it has to be rebuilt from the colors that were just written
+        self._apply_visibility()
 
     def set_color_by_type(self, color_type: "ColorByType") -> None:
         """Color the entities in the scene by the given entity property.
@@ -503,28 +576,47 @@ class PrimePlotter(Plotter):
         for actor, info in self._info_actor_map.items():
             if info.id in entity_ids:
                 actor.visibility = visible
-                edge_actor = self._element_edge_actors.get(actor)
-                if edge_actor is not None:
-                    edge_actor.visibility = visible
         self._apply_visibility()
 
-    def _apply_visibility(self) -> None:
-        """Flag the cells of hidden entities so that the renderer skips them."""
-        hidden = list(self._hidden_entities)
-        for actor, batch in self._batches.items():
-            ghosts = np.zeros(batch.mesh.n_cells, dtype=np.uint8)
-            if hidden:
-                ghosts[np.isin(batch.entity_ids, hidden)] = _HIDDEN_CELL
-            batch.mesh.cell_data[_GHOST_ARRAY] = ghosts
+    def _visible_geometry(self, mesh, entity_ids):
+        """Get the geometry of a merged mesh without the cells of hidden entities.
 
-        for outlines in self._element_edge_actors.values():
-            mesh = outlines.mapper.dataset
+        Parameters
+        ----------
+        mesh : pyvista.DataSet
+            Merged mesh to take the visible cells of.
+        entity_ids : np.ndarray
+            Entity ID of every cell of the merged mesh.
+
+        Returns
+        -------
+        pyvista.DataSet
+            The mesh itself when nothing it holds is hidden, and a copy holding only
+            the visible cells otherwise.
+        """
+        if not self._hidden_entities:
+            return mesh
+        hidden = np.isin(entity_ids, list(self._hidden_entities))
+        if not hidden.any():
+            return mesh
+        return mesh.extract_cells(np.flatnonzero(~hidden))
+
+    def _apply_visibility(self) -> None:
+        """Draw only the cells of the entities that are visible.
+
+        Cells cannot be masked in place: a ghost array is honored by the filters that
+        build a surface from a data set, not by the mapper of a polygonal mesh, so the
+        drawn geometry has to hold the visible cells and nothing else.
+        """
+        for actor, batch in self._batches.items():
+            actor.mapper.dataset = self._visible_geometry(batch.mesh, batch.entity_ids)
+
+        for part_id, outlines in self._element_edge_actors.items():
+            mesh = self._element_edge_meshes.get(part_id)
             if mesh is None or ENTITY_ID_ARRAY not in mesh.cell_data:
                 continue
-            ghosts = np.zeros(mesh.n_cells, dtype=np.uint8)
-            if hidden:
-                ghosts[np.isin(mesh.cell_data[ENTITY_ID_ARRAY], hidden)] = _HIDDEN_CELL
-            mesh.cell_data[_GHOST_ARRAY] = ghosts
+            outlines.mapper.dataset = self._visible_geometry(mesh, mesh.cell_data[ENTITY_ID_ARRAY])
+        self._update_entity_labels()
         self.render()
 
     def set_show_edges(self, show: bool) -> None:
@@ -562,7 +654,10 @@ class PrimePlotter(Plotter):
         self._batches = {}
         self._entity_infos = {}
         self._picked_entities = {}
+        self._picked_points = {}
+        self._entity_labels = {}
         self._hidden_entities = set()
+        self._element_edge_meshes = {}
         self._add_widgets()
 
     def add_scope(self, model: Model, scope: prime.ScopeDefinition, update: bool = False) -> None:

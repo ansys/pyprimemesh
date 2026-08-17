@@ -35,6 +35,7 @@ from ansys.meshing.prime.core.mesh import (
     compute_face_list_from_structured_nodes,
 )
 from ansys.meshing.prime.graphics import PrimePlotter
+from ansys.meshing.prime.graphics.widgets.hide_picked import HidePicked
 
 pv.OFF_SCREEN = True
 IMAGE_RESULTS_DIR = Path(Path(__file__).parent, "image_cache", "results")
@@ -82,7 +83,9 @@ def _check_element_outlines(model_pd):
 
 def _mesh_elbow(model, mixing_elbow, quadratic):
     """Volume mesh the mixing elbow in an empty model and return its polydata."""
-    model.delete_parts([part.id for part in model.parts])
+    part_ids = [part.id for part in model.parts]
+    if part_ids:
+        model.delete_parts(part_ids)
     mesh_util = prime.lucid.Mesh(model=model)
     mesh_util.read(mixing_elbow)
     mesh_util.surface_mesh(min_size=5, max_size=20)
@@ -122,6 +125,17 @@ def test_quadratic_element_outlines(get_remote_client, get_examples):
         for actor in outlines.values():
             outlined |= set(actor.mapper.dataset.cell_data[ENTITY_ID_ARRAY].tolist())
         assert len(outlined) == expected
+
+        # hiding an entity takes its outlines out of the scene together with its faces
+        hidden_id = sorted(outlined)[0]
+        display.set_entities_visible([hidden_id], False)
+        for actor in outlines.values():
+            drawn = actor.mapper.dataset
+            assert hidden_id not in set(drawn.cell_data[ENTITY_ID_ARRAY].tolist())
+        display.set_entities_visible([hidden_id], True)
+        for actor in outlines.values():
+            drawn = actor.mapper.dataset
+            assert hidden_id in set(drawn.cell_data[ENTITY_ID_ARRAY].tolist())
     finally:
         display.scene.close()
 
@@ -268,22 +282,170 @@ def test_pick_resolves_to_the_entity_under_the_point(get_remote_client, get_exam
 
 
 def test_hiding_an_entity_leaves_the_rest_drawn(get_remote_client, get_examples):
-    """Hiding an entity masks only its own cells of the mesh it shares."""
+    """Hiding an entity drops its cells from what is drawn, and only its own.
+
+    A cell of a shared mesh cannot be hidden by flagging it: the ghost array is
+    honored when a surface is built from a data set, not by the mapper of a
+    polygonal mesh, so the drawn geometry has to hold the visible cells only.
+    """
     model = get_remote_client.model
     model_pd = _mesh_elbow(model, get_examples["elbow_lucid"], quadratic=False)
 
     display = _plot_model(model_pd)
     try:
-        batch = max(display._batches.values(), key=lambda candidate: len(candidate.infos))
+        actor, batch = max(display._batches.items(), key=lambda item: len(item[1].infos))
         entity_id = int(batch.entity_ids[0])
+        hidden_cells = int(np.count_nonzero(batch.entity_ids == entity_id))
+        assert 0 < hidden_cells < batch.mesh.n_cells
 
         display.set_entities_visible([entity_id], False)
-        ghosts = batch.mesh.cell_data["vtkGhostType"]
-        assert (ghosts != 0).all(where=batch.entity_ids == entity_id)
-        assert not (ghosts != 0).any(where=batch.entity_ids != entity_id)
+        drawn = actor.mapper.dataset
+        assert drawn.n_cells == batch.mesh.n_cells - hidden_cells
+        assert entity_id not in set(drawn.cell_data[ENTITY_ID_ARRAY].tolist())
+        # the entity is only masked from the scene, never lost
+        assert batch.mesh.n_cells == drawn.n_cells + hidden_cells
+        assert entity_id in batch.infos
 
         display.set_entities_visible([entity_id], True)
-        assert not batch.mesh.cell_data["vtkGhostType"].any()
+        assert actor.mapper.dataset.n_cells == batch.mesh.n_cells
+        assert entity_id in set(actor.mapper.dataset.cell_data[ENTITY_ID_ARRAY].tolist())
+    finally:
+        display.scene.close()
+
+
+def test_hidden_entities_stay_hidden_when_recolored(get_remote_client, get_examples):
+    """Recoloring rebuilds the drawn geometry, which must stay free of hidden cells."""
+    model = get_remote_client.model
+    model_pd = _mesh_elbow(model, get_examples["elbow_lucid"], quadratic=False)
+
+    display = _plot_model(model_pd)
+    try:
+        actor, batch = max(display._batches.items(), key=lambda item: len(item[1].infos))
+        entity_id = int(batch.entity_ids[0])
+        display.set_entities_visible([entity_id], False)
+        drawn_cells = actor.mapper.dataset.n_cells
+
+        display.set_color_by_type(ColorByType.ZONELET)
+        drawn = actor.mapper.dataset
+        assert drawn.n_cells == drawn_cells
+        assert entity_id not in set(drawn.cell_data[ENTITY_ID_ARRAY].tolist())
+        # the drawn copy carries the colors that were just computed
+        assert ENTITY_COLOR_ARRAY in drawn.cell_data
+    finally:
+        display.scene.close()
+
+
+def test_hidden_entities_cannot_be_picked(get_remote_client, get_examples):
+    """A pick resolves against what is drawn, so hidden entities are not selectable."""
+    model = get_remote_client.model
+    model_pd = _mesh_elbow(model, get_examples["elbow_lucid"], quadratic=False)
+
+    display = _plot_model(model_pd)
+    try:
+        actor, batch = max(display._batches.items(), key=lambda item: len(item[1].infos))
+        entity_id = int(batch.entity_ids[0])
+        center = batch.mesh.cell_centers().points[0]
+
+        display.set_entities_visible([entity_id], False)
+        assert display._pick_entity(actor, center)
+        assert entity_id not in {int(info.id) for info in display.selected_entity_infos}
+    finally:
+        display.scene.close()
+
+
+def _pick_display_point(display, world_point):
+    """Pick the scene where a world point is drawn, the way a click does."""
+    scene = display.scene
+    coordinate = pv._vtk.vtkCoordinate()
+    coordinate.SetCoordinateSystemToWorld()
+    coordinate.SetValue(*world_point)
+    x, y = coordinate.GetComputedDisplayValue(scene.renderer)
+    scene.iren.picker.Pick(x, y, 0, scene.renderer)
+
+
+def test_clicking_a_shared_actor_selects_and_labels_an_entity(get_remote_client, get_examples):
+    """A click travels from the backend picker to the entity under the cursor.
+
+    The entities of a part share an actor, so the pick has to be resolved against
+    the cell it landed on, and the picked entity has to be labeled here, since the
+    generic backend can only label an object that owns an actor of its own.
+    """
+    model = get_remote_client.model
+    model_pd = _mesh_elbow(model, get_examples["elbow_lucid"], quadratic=False)
+
+    display = PrimePlotter(allow_picking=True)
+    try:
+        display.add_model_pd(model_pd)
+        display._backend.enable_picking()
+        display.scene.show(auto_close=False)
+        display.scene.render()
+
+        actor, batch = max(display._batches.items(), key=lambda item: len(item[1].infos))
+        _pick_display_point(display, batch.mesh.cell_centers().points[0])
+        picked_point = display.scene.picked_point
+        assert picked_point is not None, "the click has to land on the model"
+
+        drawn = display.scene._picked_actor.mapper.dataset
+        expected = int(
+            drawn.cell_data[ENTITY_ID_ARRAY][drawn.find_closest_cell(list(picked_point))]
+        )
+        assert [int(info.id) for info in display.selected_entity_infos] == [expected]
+
+        # the entity is named on screen, as an individually drawn object would be
+        assert expected in display._entity_labels
+        assert display._entity_labels[expected] in display.scene.actors.values()
+
+        # clicking it again clears both the selection and its label
+        _pick_display_point(display, batch.mesh.cell_centers().points[0])
+        assert display.selected_entity_infos == []
+        assert display._entity_labels == {}
+    finally:
+        display.scene.close()
+
+
+def test_hiding_a_picked_entity_hides_its_label(get_remote_client, get_examples):
+    """The label of an entity follows the entity in and out of the scene."""
+    model = get_remote_client.model
+    model_pd = _mesh_elbow(model, get_examples["elbow_lucid"], quadratic=False)
+
+    display = PrimePlotter(allow_picking=True)
+    try:
+        display.add_model_pd(model_pd)
+        actor, batch = max(display._batches.items(), key=lambda item: len(item[1].infos))
+        entity_id = int(batch.entity_ids[0])
+        display._pick_entity(actor, batch.mesh.cell_centers().points[0])
+        assert entity_id in display._entity_labels
+
+        display.set_entities_visible([entity_id], False)
+        assert display._entity_labels == {}
+        # the entity stays picked, so the widgets keep reporting it
+        assert [int(info.id) for info in display.selected_entity_infos] == [entity_id]
+
+        display.set_entities_visible([entity_id], True)
+        assert entity_id in display._entity_labels
+    finally:
+        display.scene.close()
+
+
+def test_hide_picked_widget_hides_and_restores_entities(get_remote_client, get_examples):
+    """The hide widget takes the picked entities out of the scene and brings them back."""
+    model = get_remote_client.model
+    model_pd = _mesh_elbow(model, get_examples["elbow_lucid"], quadratic=False)
+
+    display = PrimePlotter(allow_picking=True)
+    try:
+        display.add_model_pd(model_pd)
+        actor, batch = max(display._batches.items(), key=lambda item: len(item[1].infos))
+        entity_id = int(batch.entity_ids[0])
+        hidden_cells = int(np.count_nonzero(batch.entity_ids == entity_id))
+        display._pick_entity(actor, batch.mesh.cell_centers().points[0])
+
+        widget = next(w for w in display._backend._widgets if isinstance(w, HidePicked))
+        widget.callback(True)
+        assert actor.mapper.dataset.n_cells == batch.mesh.n_cells - hidden_cells
+
+        widget.callback(False)
+        assert actor.mapper.dataset.n_cells == batch.mesh.n_cells
     finally:
         display.scene.close()
 
