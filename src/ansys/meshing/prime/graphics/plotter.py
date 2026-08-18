@@ -127,6 +127,8 @@ class PrimePlotter(Plotter):
         self._hidden_entities = set()
         # merged element outlines of each part, keyed by part ID
         self._element_edge_meshes = {}
+        # geometry handed to each actor, keyed by actor; the mapper does not own it
+        self._drawn_geometry = {}
         # no color mode is chosen until a caller or the widget picks one
         self._color_type = None
         self._add_widgets()
@@ -349,8 +351,11 @@ class PrimePlotter(Plotter):
         """
         outlines = build_element_edge_mesh(face_entries)
         for batch in build_face_render_batches(face_entries, part_id):
+            # the actor draws a copy: the batch stays the whole geometry so that
+            # hidden cells can be taken away from it and put back
+            drawn = batch.mesh.copy()
             actor = self.scene.add_mesh(
-                batch.mesh,
+                drawn,
                 scalars=ENTITY_COLOR_ARRAY,
                 rgb=True,
                 show_edges=batch.show_edges,
@@ -361,16 +366,20 @@ class PrimePlotter(Plotter):
                 # so the shaded surface is pushed back to stop it z-fighting the lines
                 self._offset_polygons(actor)
             self._batches[actor] = batch
+            self._drawn_geometry[actor] = drawn
             self._entity_infos.update(batch.infos)
 
         if outlines is not None:
             self._element_edge_meshes[part_id] = outlines
-            self._element_edge_actors[part_id] = self.scene.add_mesh(
-                outlines,
+            drawn_outlines = outlines.copy()
+            outline_actor = self.scene.add_mesh(
+                drawn_outlines,
                 color=pv.global_theme.edge_color,
                 line_width=1,
                 pickable=False,
             )
+            self._element_edge_actors[part_id] = outline_actor
+            self._drawn_geometry[outline_actor] = drawn_outlines
 
     def _add_edges(self, edge_entries: List) -> None:
         """Draw the edges of a part.
@@ -430,7 +439,7 @@ class PrimePlotter(Plotter):
 
         # resolve against what is drawn rather than the full batch, so that hidden
         # entities cannot be picked through the entities that are still shown
-        mesh = actor.mapper.dataset
+        mesh = self._drawn_geometry.get(actor)
         if mesh is None or mesh.n_cells == 0:
             return True
 
@@ -592,14 +601,34 @@ class PrimePlotter(Plotter):
         -------
         pyvista.DataSet
             The mesh itself when nothing it holds is hidden, and a copy holding only
-            the visible cells otherwise.
+            the visible cells otherwise. The type of the mesh is kept, so that the
+            geometry can be copied straight over what is drawn.
         """
         if not self._hidden_entities:
             return mesh
         hidden = np.isin(entity_ids, list(self._hidden_entities))
         if not hidden.any():
             return mesh
-        return mesh.extract_cells(np.flatnonzero(~hidden))
+        return mesh.remove_cells(np.flatnonzero(hidden), inplace=False)
+
+    def _draw(self, actor, mesh) -> None:
+        """Update the geometry an actor draws.
+
+        The geometry is copied over the mesh the actor was built from instead of
+        being handed to the mapper as a new data set: a mapper keeps no reference of
+        its own to what it is given, and replacing its input leaves the actor blank.
+
+        Parameters
+        ----------
+        actor : pyvista.Actor
+            Actor to draw the geometry with.
+        mesh : pyvista.DataSet
+            Geometry to draw.
+        """
+        drawn = self._drawn_geometry.get(actor)
+        if drawn is None or drawn is mesh:
+            return
+        drawn.copy_from(mesh)
 
     def _apply_visibility(self) -> None:
         """Draw only the cells of the entities that are visible.
@@ -609,13 +638,13 @@ class PrimePlotter(Plotter):
         drawn geometry has to hold the visible cells and nothing else.
         """
         for actor, batch in self._batches.items():
-            actor.mapper.dataset = self._visible_geometry(batch.mesh, batch.entity_ids)
+            self._draw(actor, self._visible_geometry(batch.mesh, batch.entity_ids))
 
         for part_id, outlines in self._element_edge_actors.items():
             mesh = self._element_edge_meshes.get(part_id)
             if mesh is None or ENTITY_ID_ARRAY not in mesh.cell_data:
                 continue
-            outlines.mapper.dataset = self._visible_geometry(mesh, mesh.cell_data[ENTITY_ID_ARRAY])
+            self._draw(outlines, self._visible_geometry(mesh, mesh.cell_data[ENTITY_ID_ARRAY]))
         self._update_entity_labels()
         self.render()
 
@@ -658,6 +687,7 @@ class PrimePlotter(Plotter):
         self._entity_labels = {}
         self._hidden_entities = set()
         self._element_edge_meshes = {}
+        self._drawn_geometry = {}
         self._add_widgets()
 
     def add_scope(self, model: Model, scope: prime.ScopeDefinition, update: bool = False) -> None:

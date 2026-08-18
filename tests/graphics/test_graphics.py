@@ -123,18 +123,18 @@ def test_quadratic_element_outlines(get_remote_client, get_examples):
         # every zonelet that holds outlines is still identifiable within them
         outlined = set()
         for actor in outlines.values():
-            outlined |= set(actor.mapper.dataset.cell_data[ENTITY_ID_ARRAY].tolist())
+            outlined |= set(display._drawn_geometry[actor].cell_data[ENTITY_ID_ARRAY].tolist())
         assert len(outlined) == expected
 
         # hiding an entity takes its outlines out of the scene together with its faces
         hidden_id = sorted(outlined)[0]
         display.set_entities_visible([hidden_id], False)
         for actor in outlines.values():
-            drawn = actor.mapper.dataset
+            drawn = display._drawn_geometry[actor]
             assert hidden_id not in set(drawn.cell_data[ENTITY_ID_ARRAY].tolist())
         display.set_entities_visible([hidden_id], True)
         for actor in outlines.values():
-            drawn = actor.mapper.dataset
+            drawn = display._drawn_geometry[actor]
             assert hidden_id in set(drawn.cell_data[ENTITY_ID_ARRAY].tolist())
     finally:
         display.scene.close()
@@ -225,6 +225,12 @@ def _plot_model(model_pd):
     return display
 
 
+def _drawn_pixels(display):
+    """Count the pixels the model is drawn on, from a camera that does not move."""
+    image = np.asarray(display.scene.screenshot())
+    return int(np.count_nonzero((image != 255).any(axis=2)))
+
+
 def test_entities_of_a_part_share_actors(get_remote_client, get_examples):
     """A part is drawn with a handful of actors however many entities it holds.
 
@@ -297,18 +303,26 @@ def test_hiding_an_entity_leaves_the_rest_drawn(get_remote_client, get_examples)
         entity_id = int(batch.entity_ids[0])
         hidden_cells = int(np.count_nonzero(batch.entity_ids == entity_id))
         assert 0 < hidden_cells < batch.mesh.n_cells
+        # the first screenshot of a window only sets it up, so it can come back blank
+        display.scene.screenshot()
+        everything = _drawn_pixels(display)
 
         display.set_entities_visible([entity_id], False)
-        drawn = actor.mapper.dataset
+        drawn = display._drawn_geometry[actor]
         assert drawn.n_cells == batch.mesh.n_cells - hidden_cells
         assert entity_id not in set(drawn.cell_data[ENTITY_ID_ARRAY].tolist())
         # the entity is only masked from the scene, never lost
         assert batch.mesh.n_cells == drawn.n_cells + hidden_cells
         assert entity_id in batch.infos
+        # the mapper keeps no reference of its own to what it draws, so the geometry
+        # has to be checked on screen and not only in the state of the plotter
+        assert 0 < _drawn_pixels(display) < everything
 
         display.set_entities_visible([entity_id], True)
-        assert actor.mapper.dataset.n_cells == batch.mesh.n_cells
-        assert entity_id in set(actor.mapper.dataset.cell_data[ENTITY_ID_ARRAY].tolist())
+        assert display._drawn_geometry[actor].n_cells == batch.mesh.n_cells
+        assert entity_id in set(display._drawn_geometry[actor].cell_data[ENTITY_ID_ARRAY].tolist())
+        # showing the entity again has to bring every pixel of it back
+        assert _drawn_pixels(display) == everything
     finally:
         display.scene.close()
 
@@ -323,10 +337,10 @@ def test_hidden_entities_stay_hidden_when_recolored(get_remote_client, get_examp
         actor, batch = max(display._batches.items(), key=lambda item: len(item[1].infos))
         entity_id = int(batch.entity_ids[0])
         display.set_entities_visible([entity_id], False)
-        drawn_cells = actor.mapper.dataset.n_cells
+        drawn_cells = display._drawn_geometry[actor].n_cells
 
         display.set_color_by_type(ColorByType.ZONELET)
-        drawn = actor.mapper.dataset
+        drawn = display._drawn_geometry[actor]
         assert drawn.n_cells == drawn_cells
         assert entity_id not in set(drawn.cell_data[ENTITY_ID_ARRAY].tolist())
         # the drawn copy carries the colors that were just computed
@@ -385,7 +399,7 @@ def test_clicking_a_shared_actor_selects_and_labels_an_entity(get_remote_client,
         picked_point = display.scene.picked_point
         assert picked_point is not None, "the click has to land on the model"
 
-        drawn = display.scene._picked_actor.mapper.dataset
+        drawn = display._drawn_geometry[display.scene.picked_actor]
         expected = int(
             drawn.cell_data[ENTITY_ID_ARRAY][drawn.find_closest_cell(list(picked_point))]
         )
@@ -442,10 +456,10 @@ def test_hide_picked_widget_hides_and_restores_entities(get_remote_client, get_e
 
         widget = next(w for w in display._backend._widgets if isinstance(w, HidePicked))
         widget.callback(True)
-        assert actor.mapper.dataset.n_cells == batch.mesh.n_cells - hidden_cells
+        assert display._drawn_geometry[actor].n_cells == batch.mesh.n_cells - hidden_cells
 
         widget.callback(False)
-        assert actor.mapper.dataset.n_cells == batch.mesh.n_cells
+        assert display._drawn_geometry[actor].n_cells == batch.mesh.n_cells
     finally:
         display.scene.close()
 
