@@ -81,6 +81,7 @@ Procedure
 """
 
 # sphinx_gallery_tags = ["Structural", "Hex", "Quad", "Stacker", "Semiconductor", "Sizing"]
+# sphinx_gallery_thumbnail_number = 3
 
 ###############################################################################
 # Import all necessary modules

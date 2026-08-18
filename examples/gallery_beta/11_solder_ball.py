@@ -60,6 +60,7 @@ Procedure
 """
 
 # sphinx_gallery_tags = ["Semiconductor", "Hex", "Stacker", "Morph", "Connect", "Beta"]
+# sphinx_gallery_thumbnail_number = 6
 
 ###############################################################################
 # Import modules

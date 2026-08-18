@@ -21,42 +21,16 @@
 # SOFTWARE.
 
 """Module for ColorByTypeWidget."""
-import enum
 import os
 from typing import TYPE_CHECKING
 
-import numpy as np
 from ansys.tools.visualization_interface.backends.pyvista.widgets import PlotterWidget
 from vtk import vtkPNGReader
 
 if TYPE_CHECKING:
     from ansys.meshing.prime.graphics.plotter import PrimePlotter
 
-from ansys.meshing.prime.core.mesh import DisplayMeshInfo
-
-color_matrix = np.array(
-    [
-        [155, 186, 126],
-        [242, 236, 175],
-        [255, 187, 131],
-        [194, 187, 97],
-        [159, 131, 169],
-        [157, 190, 139],
-        [233, 218, 158],
-        [254, 252, 196],
-        [246, 210, 148],
-        [215, 208, 198],
-        [196, 235, 145],
-    ]
-)
-
-
-class ColorByType(enum.IntEnum):
-    """Contains the zone types to display."""
-
-    ZONE = 0
-    ZONELET = 1
-    PART = 2
+from ansys.meshing.prime.core.mesh import ColorByType, DisplayMeshInfo, entity_color
 
 
 class ColorByTypeWidget(PlotterWidget):
@@ -75,8 +49,6 @@ class ColorByTypeWidget(PlotterWidget):
         """Initialize the widget."""
         super().__init__(prime_plotter._backend._pl.scene)
         self.prime_plotter = prime_plotter
-        self._object_actors_map = self.prime_plotter._backend.pv_interface._object_to_actors_map
-        self._info_actor_map = self.prime_plotter._info_actor_map
         self._button = self.prime_plotter._backend.pv_interface.scene.add_checkbox_button_widget(
             self.callback, position=(5, 630), size=30, border_size=3
         )
@@ -86,11 +58,8 @@ class ColorByTypeWidget(PlotterWidget):
     def callback(self, state) -> None:
         """Define the callback function for the button widget."""
         color_type = ColorByType(self._button.GetRepresentation().GetState())
-        for actor, object in self._object_actors_map.items():
-            if actor in self.prime_plotter._info_actor_map:
-                mesh_info = self.prime_plotter._info_actor_map[actor]
-                actor.prop.color = self.set_color_by_type(color_type, mesh_info)
-                self.update(color_type)
+        self.prime_plotter.set_color_by_type(color_type)
+        self.update(color_type)
 
     def update(self, color_type=ColorByType.ZONE) -> None:
         """Define the configuration and representation of the button widget button.
@@ -132,10 +101,4 @@ class ColorByTypeWidget(PlotterWidget):
         List
             List of colors for faces.
         """
-        num_colors = int(color_matrix.size / 3)
-        if color_type == ColorByType.ZONELET:
-            return color_matrix[mesh_info.id % num_colors].tolist()
-        elif color_type == ColorByType.PART:
-            return color_matrix[mesh_info.part_id % num_colors].tolist()
-        else:
-            return color_matrix[mesh_info.zone_id % num_colors].tolist()
+        return entity_color(mesh_info, color_type).tolist()

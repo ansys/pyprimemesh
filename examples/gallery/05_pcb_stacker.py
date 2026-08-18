@@ -51,6 +51,7 @@ Procedure
 """
 
 # sphinx_gallery_tags = ["Structural", "Hex", "Quad", "Semiconductor", "Stacker"]
+# sphinx_gallery_thumbnail_number = 4
 
 ###############################################################################
 # Launch Ansys Prime Server
