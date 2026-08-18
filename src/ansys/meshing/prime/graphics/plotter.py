@@ -351,11 +351,8 @@ class PrimePlotter(Plotter):
         """
         outlines = build_element_edge_mesh(face_entries)
         for batch in build_face_render_batches(face_entries, part_id):
-            # the actor draws a copy: the batch stays the whole geometry so that
-            # hidden cells can be taken away from it and put back
-            drawn = batch.mesh.copy()
             actor = self.scene.add_mesh(
-                drawn,
+                batch.mesh,
                 scalars=ENTITY_COLOR_ARRAY,
                 rgb=True,
                 show_edges=batch.show_edges,
@@ -366,20 +363,19 @@ class PrimePlotter(Plotter):
                 # so the shaded surface is pushed back to stop it z-fighting the lines
                 self._offset_polygons(actor)
             self._batches[actor] = batch
-            self._drawn_geometry[actor] = drawn
+            self._drawn_geometry[actor] = batch.mesh
             self._entity_infos.update(batch.infos)
 
         if outlines is not None:
             self._element_edge_meshes[part_id] = outlines
-            drawn_outlines = outlines.copy()
             outline_actor = self.scene.add_mesh(
-                drawn_outlines,
+                outlines,
                 color=pv.global_theme.edge_color,
                 line_width=1,
                 pickable=False,
             )
             self._element_edge_actors[part_id] = outline_actor
-            self._drawn_geometry[outline_actor] = drawn_outlines
+            self._drawn_geometry[outline_actor] = outlines
 
     def _add_edges(self, edge_entries: List) -> None:
         """Draw the edges of a part.
@@ -612,11 +608,10 @@ class PrimePlotter(Plotter):
         return mesh.remove_cells(np.flatnonzero(hidden), inplace=False)
 
     def _draw(self, actor, mesh) -> None:
-        """Update the geometry an actor draws.
+        """Give an actor the geometry it has to draw.
 
-        The geometry is copied over the mesh the actor was built from instead of
-        being handed to the mapper as a new data set: a mapper keeps no reference of
-        its own to what it is given, and replacing its input leaves the actor blank.
+        The mesh is kept referenced here because a mapper does not hold one of its
+        own: geometry only the mapper points at is collected and nothing is drawn.
 
         Parameters
         ----------
@@ -625,10 +620,14 @@ class PrimePlotter(Plotter):
         mesh : pyvista.DataSet
             Geometry to draw.
         """
-        drawn = self._drawn_geometry.get(actor)
-        if drawn is None or drawn is mesh:
+        self._drawn_geometry[actor] = mesh
+        if mesh.n_cells == 0:
+            # a mapper that is handed an empty data set stops drawing for good, even
+            # once it is given geometry back, so an actor left with nothing is hidden
+            actor.visibility = False
             return
-        drawn.copy_from(mesh)
+        actor.visibility = True
+        actor.mapper.dataset = mesh
 
     def _apply_visibility(self) -> None:
         """Draw only the cells of the entities that are visible.
