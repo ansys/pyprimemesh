@@ -404,11 +404,7 @@ class PrimePlotter(Plotter):
     def _render_ids_for_keys(batch: RenderBatch, keys: Iterable[DisplayEntityKey]) -> set[int]:
         """Return batch-local render IDs corresponding to model entity keys."""
         wanted = set(keys)
-        return {
-            int(render_id)
-            for render_id, info in batch.infos.items()
-            if info.key in wanted
-        }
+        return {int(render_id) for render_id, info in batch.infos.items() if info.key in wanted}
 
     def refresh_colors(self) -> None:
         """Recolor every shared actor from current mode and selection."""
