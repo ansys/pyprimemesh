@@ -473,9 +473,7 @@ class PrimePlotter(Plotter):
                 integer_ids.add(int(entity))
 
         if integer_ids:
-            keys.update(
-                key for key in self._entity_infos if key.entity_id in integer_ids
-            )
+            keys.update(key for key in self._entity_infos if key.entity_id in integer_ids)
         return keys
 
     def set_entities_visible(self, entities, visible: bool) -> None:
