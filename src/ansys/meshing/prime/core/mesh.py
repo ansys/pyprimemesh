@@ -623,7 +623,7 @@ def build_element_edge_batches(
         if entry is None:
             continue
         mesh_object, info = entry
-        if not info.has_mesh:
+        if not info.has_mesh or info.element_edges is None:
             continue
         if info.element_edges is not None:
             outlines = info.element_edges
