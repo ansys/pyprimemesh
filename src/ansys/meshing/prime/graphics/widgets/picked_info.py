@@ -111,10 +111,7 @@ class PickedInfo(PlotterWidget):
 
         if mesh_info.zone_id > 0:
             zone_name = mesh_info.zone_name or "<unknown>"
-            message += (
-                f"\nZone Id : {mesh_info.zone_id}, "
-                f"Zone Name : {zone_name}"
-            )
+            message += f"\nZone Id : {mesh_info.zone_id}, " f"Zone Name : {zone_name}"
 
         return message
 
