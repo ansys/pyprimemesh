@@ -1,7 +1,6 @@
 # Copyright (C) 2024 - 2026 ANSYS, Inc. and/or its affiliates.
 # SPDX-License-Identifier: MIT
 #
-#
 # Permission is hereby granted, free of charge, to any person obtaining a copy
 # of this software and associated documentation files (the "Software"), to deal
 # in the Software without restriction, including without limitation the rights
@@ -21,84 +20,123 @@
 # SOFTWARE.
 
 """Module for ColorByTypeWidget."""
+
 import os
 from typing import TYPE_CHECKING
 
 from ansys.tools.visualization_interface.backends.pyvista.widgets import PlotterWidget
 from vtk import vtkPNGReader
 
+from ansys.meshing.prime.core.mesh import (
+    ColorByType,
+    DisplayMeshInfo,
+    entity_color,
+)
+
 if TYPE_CHECKING:
     from ansys.meshing.prime.graphics.plotter import PrimePlotter
 
-from ansys.meshing.prime.core.mesh import ColorByType, DisplayMeshInfo, entity_color
-
 
 class ColorByTypeWidget(PlotterWidget):
-    """Initializes the color by the type button widget.
+    """Widget controlling entity coloring mode.
 
-    This widget lets you change the color of the mesh
-    based on the zone, zonelet, or part.
-
-    Parameters
-    ----------
-    prime_plotter : Plotter
-        Plotter object to use.
+    The plotter maintains actor-per-entity-type rendering and recolors
+    entities using per-cell metadata. This widget only changes the active
+    coloring mode.
     """
 
     def __init__(self, prime_plotter: "PrimePlotter") -> None:
         """Initialize the widget."""
         super().__init__(prime_plotter._backend._pl.scene)
+
         self.prime_plotter = prime_plotter
-        self._button = self.prime_plotter._backend.pv_interface.scene.add_checkbox_button_widget(
-            self.callback, position=(5, 630), size=30, border_size=3
+
+        self._button = (
+            self.prime_plotter._backend.pv_interface.scene.add_checkbox_button_widget(
+                self.callback,
+                position=(5, 630),
+                size=30,
+                border_size=3,
+            )
         )
+
         self._button.GetRepresentation().SetNumberOfStates(3)
+
         self._color_type = ColorByType.ZONE
 
     def callback(self, state) -> None:
-        """Define the callback function for the button widget."""
-        color_type = ColorByType(self._button.GetRepresentation().GetState())
+        """Apply the selected coloring mode."""
+        del state
+
+        color_type = ColorByType(
+            self._button.GetRepresentation().GetState()
+        )
+
+        self._color_type = color_type
+
         self.prime_plotter.set_color_by_type(color_type)
+
         self.update(color_type)
 
-    def update(self, color_type=ColorByType.ZONE) -> None:
-        """Define the configuration and representation of the button widget button.
+    def update(
+        self,
+        color_type: ColorByType = ColorByType.ZONE,
+    ) -> None:
+        """Update the widget icon.
 
         Parameters
         ----------
         color_type : ColorByType, default: ColorByType.ZONE
-            Color type to use.
+            Active coloring mode.
         """
-        vr = self._button.GetRepresentation()
-        icon_file = os.path.join(os.path.dirname(__file__), "images", "bin.png")
+        representation = self._button.GetRepresentation()
 
-        if color_type == ColorByType.ZONE:
-            icon_file = os.path.join(os.path.dirname(__file__), "images", "bin.png")
-        elif color_type == ColorByType.ZONELET:
-            icon_file = os.path.join(os.path.dirname(__file__), "images", "surface_body.png")
-        elif color_type == ColorByType.PART:
-            icon_file = os.path.join(os.path.dirname(__file__), "images", "parts.png")
+        image_dir = os.path.join(
+            os.path.dirname(__file__),
+            "images",
+        )
+
+        image_map = {
+            ColorByType.ZONE: "bin.png",
+            ColorByType.ZONELET: "surface_body.png",
+            ColorByType.PART: "parts.png",
+        }
+
+        icon_file = os.path.join(
+            image_dir,
+            image_map[color_type],
+        )
+
         reader = vtkPNGReader()
         reader.SetFileName(icon_file)
         reader.Update()
-        image = reader.GetOutput()
-        vr.SetButtonTexture(0, image)
-        vr.SetButtonTexture(1, image)
-        vr.SetButtonTexture(2, image)
 
-    def set_color_by_type(self, color_type: ColorByType, mesh_info: DisplayMeshInfo):
-        """Get the colors of faces.
+        image = reader.GetOutput()
+
+        representation.SetButtonTexture(0, image)
+        representation.SetButtonTexture(1, image)
+        representation.SetButtonTexture(2, image)
+
+    @staticmethod
+    def set_color_by_type(
+        color_type: ColorByType,
+        mesh_info: DisplayMeshInfo,
+    ):
+        """Return the RGB color for a display entity.
 
         Parameters
         ----------
         color_type : ColorByType
-            Color type to use.
+            Active coloring mode.
         mesh_info : DisplayMeshInfo
-            Mesh information that generates an appropriate color.
+            Entity metadata.
 
         Returns
         -------
-        List
-            List of colors for faces.
+        List[int]
+            RGB color.
         """
-        return entity_color(mesh_info, color_type).tolist()
+        return entity_color(
+            mesh_info,
+            color_type,
+        ).tolist()
