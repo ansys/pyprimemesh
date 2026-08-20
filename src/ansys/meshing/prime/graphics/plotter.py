@@ -527,9 +527,7 @@ class PrimePlotter(Plotter):
         for actor, batch in self._element_edge_batches.items():
             visible = self._visible_geometry(batch)
             self._draw(actor, visible)
-            actor.visibility = bool(
-                self._show_element_edges and visible.n_cells > 0
-            )
+            actor.visibility = bool(self._show_element_edges and visible.n_cells > 0)
 
         self._update_entity_labels()
         self.render()
@@ -539,9 +537,7 @@ class PrimePlotter(Plotter):
         self._show_element_edges = bool(show)
         for actor in self._element_edge_batches:
             mesh = self._drawn_geometry.get(actor)
-            actor.visibility = bool(
-                show and mesh is not None and mesh.n_cells > 0
-            )
+            actor.visibility = bool(show and mesh is not None and mesh.n_cells > 0)
         for actor, info in self._info_actor_map.items():
             if info.has_mesh:
                 actor.prop.show_edges = bool(show)
