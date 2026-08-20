@@ -487,18 +487,12 @@ def _attach_entity_metadata(
     output.cell_data[RENDER_ENTITY_ID_ARRAY] = np.full(
         number_of_cells, int(render_entity_id), dtype=np.int64
     )
-    output.cell_data[PART_ID_ARRAY] = np.full(
-        number_of_cells, info.part_id, dtype=np.int64
-    )
-    output.cell_data[ENTITY_ID_ARRAY] = np.full(
-        number_of_cells, info.id, dtype=np.int64
-    )
+    output.cell_data[PART_ID_ARRAY] = np.full(number_of_cells, info.part_id, dtype=np.int64)
+    output.cell_data[ENTITY_ID_ARRAY] = np.full(number_of_cells, info.id, dtype=np.int64)
     output.cell_data[ENTITY_TYPE_ARRAY] = np.full(
         number_of_cells, int(info.display_mesh_type), dtype=np.int16
     )
-    output.cell_data[ZONE_ID_ARRAY] = np.full(
-        number_of_cells, info.zone_id, dtype=np.int64
-    )
+    output.cell_data[ZONE_ID_ARRAY] = np.full(number_of_cells, info.zone_id, dtype=np.int64)
     return output
 
 
@@ -514,9 +508,7 @@ def _validate_merged_metadata(mesh: "pv.PolyData") -> None:
         )
     for array_name in REQUIRED_PICKING_ARRAYS:
         if len(mesh.cell_data[array_name]) != mesh.n_cells:
-            raise RuntimeError(
-                f"Cell array {array_name!r} does not match the merged cell count."
-            )
+            raise RuntimeError(f"Cell array {array_name!r} does not match the merged cell count.")
 
 
 def _finalize_typed_batches(
@@ -1392,9 +1384,7 @@ class Mesh(MeshInfo):
 
         edge.cell_data[PART_ID_ARRAY] = np.full(n_cells, part_id, dtype=np.int64)
         edge.cell_data[ENTITY_ID_ARRAY] = np.full(n_cells, entity_id, dtype=np.int64)
-        edge.cell_data[ENTITY_TYPE_ARRAY] = np.full(
-            n_cells, int(display_mesh_type), dtype=np.int16
-        )
+        edge.cell_data[ENTITY_TYPE_ARRAY] = np.full(n_cells, int(display_mesh_type), dtype=np.int16)
         edge.cell_data[ZONE_ID_ARRAY] = np.full(n_cells, zone_id, dtype=np.int64)
         edge.set_active_scalars(ENTITY_COLOR_ARRAY, preference="cell")
         return MeshObjectPlot(part, edge)
@@ -1457,9 +1447,7 @@ class Mesh(MeshInfo):
 
                 grouped_raw[display_mesh_type].append((vertices, block, n_cells, info))
                 if has_mesh:
-                    mesh = _assemble_entity_mesh(
-                        vertices, block, n_cells, info, 0, lines=False
-                    )
+                    mesh = _assemble_entity_mesh(vertices, block, n_cells, info, 0, lines=False)
                     if mesh is not None:
                         fast_outline_entries.append((MeshObjectPlot(part, mesh), info))
 
@@ -1772,7 +1760,6 @@ class SplineGeometry:
         self.part_id = part_id
         self.spline_id = spline_id
         self.geom_type = geom_type
-
 
 
 class MeshUSD(MeshInfo):
