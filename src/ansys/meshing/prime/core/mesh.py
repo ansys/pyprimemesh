@@ -508,9 +508,7 @@ def _validate_merged_metadata(mesh: "pv.PolyData") -> None:
         )
     for array_name in REQUIRED_PICKING_ARRAYS:
         if len(mesh.cell_data[array_name]) != mesh.n_cells:
-            raise RuntimeError(
-                f"Cell array {array_name!r} does not match the merged cell count."
-            )
+            raise RuntimeError(f"Cell array {array_name!r} does not match the merged cell count.")
 
 
 def _finalize_typed_batches(
