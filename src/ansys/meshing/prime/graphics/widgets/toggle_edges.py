@@ -1,7 +1,6 @@
 # Copyright (C) 2024 - 2026 ANSYS, Inc. and/or its affiliates.
 # SPDX-License-Identifier: MIT
 #
-#
 # Permission is hereby granted, free of charge, to any person obtaining a copy
 # of this software and associated documentation files (the "Software"), to deal
 # in the Software without restriction, including without limitation the rights
@@ -19,7 +18,9 @@
 # LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
+
 """Module for ToggleEdges widget."""
+
 import os
 from typing import TYPE_CHECKING
 
@@ -31,44 +32,54 @@ if TYPE_CHECKING:
 
 
 class ToggleEdges(PlotterWidget):
-    """Toggles the edges of the mesh objects.
+    """Toggle display of model element edges.
 
-    Parameters
-    ----------
-    prime_plotter : PrimePlotter
-        Plotter to apply this widget to.
+    In actor-per-entity-type rendering, element outlines are drawn as
+    dedicated outline actors and this widget controls their visibility.
     """
 
     def __init__(self, prime_plotter: "PrimePlotter") -> None:
         """Initialize the widget."""
         super().__init__(prime_plotter._backend._pl.scene)
+
         self.prime_plotter = prime_plotter
-        self._button = self.prime_plotter._backend._pl.scene.add_checkbox_button_widget(
-            self.callback,
-            position=(5, 600),
-            size=30,
-            border_size=3,
-            color_off="white",
-            color_on="white",
+
+        self._button = (
+            self.prime_plotter._backend._pl.scene.add_checkbox_button_widget(
+                self.callback,
+                position=(5, 600),
+                size=30,
+                border_size=3,
+                color_off="white",
+                color_on="white",
+            )
         )
 
     def callback(self, state: bool) -> None:
-        """Toggle the edges of the mesh objects.
+        """Toggle edge visibility.
 
         Parameters
         ----------
         state : bool
-            Whether the button widget is activated.
+            Checkbox widget state.
         """
         self.prime_plotter.set_show_edges(not state)
 
     def update(self) -> None:
-        """Define the configuration and representation of the button widget button."""
-        show_point_vr = self._button.GetRepresentation()
-        show_point_icon_file = os.path.join(os.path.dirname(__file__), "images", "show_edges.png")
-        show_point_r = vtkPNGReader()
-        show_point_r.SetFileName(show_point_icon_file)
-        show_point_r.Update()
-        image = show_point_r.GetOutput()
-        show_point_vr.SetButtonTexture(0, image)
-        show_point_vr.SetButtonTexture(1, image)
+        """Configure the widget icon."""
+        representation = self._button.GetRepresentation()
+
+        icon_file = os.path.join(
+            os.path.dirname(__file__),
+            "images",
+            "show_edges.png",
+        )
+
+        reader = vtkPNGReader()
+        reader.SetFileName(icon_file)
+        reader.Update()
+
+        image = reader.GetOutput()
+
+        representation.SetButtonTexture(0, image)
+        representation.SetButtonTexture(1, image)
