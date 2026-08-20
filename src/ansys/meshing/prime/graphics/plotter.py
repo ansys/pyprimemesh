@@ -1,7 +1,6 @@
 # Copyright (C) 2024 - 2026 ANSYS, Inc. and/or its affiliates.
 # SPDX-License-Identifier: MIT
 #
-#
 # Permission is hereby granted, free of charge, to any person obtaining a copy
 # of this software and associated documentation files (the "Software"), to deal
 # in the Software without restriction, including without limitation the rights
@@ -19,10 +18,10 @@
 # LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
-"""Module for the plotter."""
+"""Module for the Prime plotter."""
 
 import warnings
-from typing import Any, Dict, List, Optional
+from typing import Any, Dict, Iterable, List, Optional, Sequence
 
 import numpy as np
 import pyvista as pv
@@ -32,15 +31,18 @@ from ansys.tools.visualization_interface.utils.color import Color
 
 import ansys.meshing.prime as prime
 
-# kept importable from here for callers that build their own coloring
+# Kept importable from here for callers that build their own coloring.
 from ansys.meshing.prime.core.mesh import color_matrix  # noqa: F401
 from ansys.meshing.prime.core.mesh import (
     ENTITY_COLOR_ARRAY,
-    ENTITY_ID_ARRAY,
+    RENDER_ENTITY_ID_ARRAY,
     ColorByType,
+    DisplayEntityKey,
     DisplayMeshInfo,
-    build_edge_render_mesh,
-    build_element_edge_mesh,
+    DisplayMeshType,
+    RenderBatch,
+    build_edge_render_batches,
+    build_element_edge_batches,
     build_face_render_batches,
     compute_entity_colors,
     entity_color,
@@ -51,34 +53,22 @@ from ansys.meshing.prime.graphics.widgets.hide_picked import HidePicked
 from ansys.meshing.prime.graphics.widgets.picked_info import PickedInfo
 from ansys.meshing.prime.graphics.widgets.toggle_edges import ToggleEdges
 
-# Depth-buffer offset applied to a face actor whose element outlines are drawn as a
-# separate line actor, so that the shaded surface cannot z-fight with those lines.
-# The first value scales with the depth slope of the polygon, the second is constant.
+# Depth-buffer offset applied to a face actor when element outlines are drawn as
+# separate line geometry.
 POLYGON_OFFSET_FACTOR = 1.0
 POLYGON_OFFSET_UNITS = 1.0
 
 
 class _EntityPickingBackend(PyVistaBackend):
-    """PyVista backend that resolves a pick to the display entity under the cursor.
-
-    Display entities of a part share an actor, so the actor alone no longer
-    identifies what was picked. Picks that land on a shared actor are resolved
-    against the cell the pick point falls on, and anything else is left to the
-    generic backend.
-    """
+    """Resolve a PyVista actor pick to the Prime entity under the cursor."""
 
     prime_plotter = None
 
     def picker_callback(self, actor: "pv.Actor") -> None:
-        """Select the display entity under the cursor.
-
-        Parameters
-        ----------
-        actor : pv.Actor
-            Actor the pick landed on.
-        """
+        """Select the Prime display entity under the cursor."""
         plotter = self.prime_plotter
-        if plotter is not None and plotter._pick_entity(actor, self._pl.scene.picked_point):
+        picked_point = getattr(self._pl.scene, "picked_point", None)
+        if plotter is not None and plotter._pick_entity(actor, picked_point):
             return
         super().picker_callback(actor)
 
@@ -86,19 +76,16 @@ class _EntityPickingBackend(PyVistaBackend):
 class PrimePlotter(Plotter):
     """Create a plotter for PyPrimeMesh models.
 
-    This plotter is a wrapper around the PyAnsys generic plotter
-    with additional functionality for PyPrimeMesh.
-
-    Display entities of a part are merged into a small number of actors that are
-    drawn together, rather than one actor per entity. The entity each cell belongs
-    to is kept on the mesh, so picking, coloring, and visibility remain per entity
-    while the scene stays cheap to render and to export.
+    Geometry from every displayed part is merged by display entity type. The
+    resulting actor count therefore depends on the populated rendering types,
+    not on the number of parts or zonelets. Per-cell metadata retains part,
+    entity, type, and zone identity for picking, coloring, and visibility.
 
     Parameters
     ----------
-    use_trame : Optional[bool], default: None
+    use_trame : bool, optional
         Whether to use the Trame visualizer.
-    allow_picking : Optional[bool], default: True.
+    allow_picking : bool, default: True
         Whether to allow picking.
     """
 
@@ -107,31 +94,37 @@ class PrimePlotter(Plotter):
         use_trame: Optional[bool] = None,
         allow_picking: Optional[bool] = True,
     ) -> None:
-        """Initialize the widget."""
-        self._backend = _EntityPickingBackend(use_trame=use_trame, allow_picking=allow_picking)
+        """Initialize the plotter."""
+        self._backend = _EntityPickingBackend(
+            use_trame=use_trame,
+            allow_picking=allow_picking,
+        )
         self._backend.prime_plotter = self
         super().__init__(backend=self._backend)
-
-        # actors added through add_mesh(..., metadata=...), keyed for the widgets
-        self._info_actor_map = {}
-        # element outlines drawn separately, keyed by the ID of the part they belong to
-        self._element_edge_actors = {}
-        # merged rendering state, keyed by the actor that draws each batch
-        self._batches = {}
-        self._entity_infos = {}
-        self._picked_entities = {}
-        # point each entity was picked at, so its label can be restored
-        self._picked_points = {}
-        # label actor shown for each picked entity, keyed by entity ID
-        self._entity_labels = {}
-        self._hidden_entities = set()
-        # merged element outlines of each part, keyed by part ID
-        self._element_edge_meshes = {}
-        # geometry handed to each actor, keyed by actor; the mapper does not own it
-        self._drawn_geometry = {}
-        # no color mode is chosen until a caller or the widget picks one
-        self._color_type = None
+        self._reset_prime_state()
         self._add_widgets()
+
+    def _reset_prime_state(self) -> None:
+        """Reset all Prime-specific rendering state."""
+        # Legacy mapping for individually added meshes carrying one metadata object.
+        self._info_actor_map: Dict[Any, DisplayMeshInfo] = {}
+
+        # Model-wide actor batches.
+        self._batches: Dict[Any, RenderBatch] = {}
+        self._element_edge_batches: Dict[Any, RenderBatch] = {}
+        self._spline_actors: Dict[DisplayMeshType, Any] = {}
+
+        # Model-unique entity state.
+        self._entity_infos: Dict[DisplayEntityKey, DisplayMeshInfo] = {}
+        self._picked_entities: Dict[DisplayEntityKey, DisplayMeshInfo] = {}
+        self._picked_points: Dict[DisplayEntityKey, np.ndarray] = {}
+        self._entity_labels: Dict[DisplayEntityKey, Any] = {}
+        self._hidden_entities: set[DisplayEntityKey] = set()
+
+        # Keep all mapper inputs alive and support filtered visibility datasets.
+        self._drawn_geometry: Dict[Any, pv.DataSet] = {}
+        self._color_type: Optional[ColorByType] = None
+        self._show_element_edges = True
 
     def _add_widgets(self) -> None:
         """Attach the PyPrimeMesh widgets to the backend."""
@@ -142,351 +135,249 @@ class PrimePlotter(Plotter):
 
     @property
     def info_actor_map(self) -> Dict:
-        """Get the information actor map for meshes added with metadata.
-
-        Returns
-        -------
-        Dict
-            Information actor map.
-        """
+        """Return metadata for individually added actors."""
         return self._info_actor_map
 
     @info_actor_map.setter
     def info_actor_map(self, value: Dict) -> None:
-        """Set the information actor map for meshes added with metadata.
-
-        Parameters
-        ----------
-        value : Dict
-            Information actor map.
-        """
+        """Set metadata for individually added actors."""
         self._info_actor_map = value
 
     @property
     def element_edge_actors(self) -> Dict:
-        """Get the element outlines that are drawn as separate line geometry.
-
-        Returns
-        -------
-        Dict
-            Actor holding the outlines of each part that has them.
-        """
-        return self._element_edge_actors
+        """Return element-outline actors keyed by actor."""
+        return self._element_edge_batches
 
     @property
     def scene(self):
-        """Get the underlying PyVista plotter scene for direct rendering control."""
+        """Return the underlying PyVista scene."""
         return self._backend.pv_interface.scene
 
     @property
-    def entity_infos(self) -> Dict[int, DisplayMeshInfo]:
-        """Get the display information of every entity in the scene, keyed by entity ID.
-
-        Returns
-        -------
-        Dict[int, DisplayMeshInfo]
-            Display information of every entity in the scene.
-        """
+    def entity_infos(self) -> Dict[DisplayEntityKey, DisplayMeshInfo]:
+        """Return all displayed entities keyed by model-unique entity key."""
         return self._entity_infos
 
     @property
-    def picked_entities(self) -> Dict[int, DisplayMeshInfo]:
-        """Get the display information of the picked entities, keyed by entity ID.
-
-        Returns
-        -------
-        Dict[int, DisplayMeshInfo]
-            Display information of the picked entities.
-        """
+    def picked_entities(self) -> Dict[DisplayEntityKey, DisplayMeshInfo]:
+        """Return picked entities keyed by model-unique entity key."""
         return self._picked_entities
 
     def get_scalar_colors(self, mesh_info: DisplayMeshInfo) -> np.ndarray:
-        """Get the scalar colors for the mesh.
-
-        Parameters
-        ----------
-        mesh_info : DisplayMeshInfo
-            Mesh information that generates an appropriate color.
-
-        Returns
-        -------
-        np.ndarray
-            Scalar colors for the mesh.
-        """
+        """Return the default scalar color for a display entity."""
         return entity_color(mesh_info).tolist()
 
     def add_mesh(self, mesh, metadata=None, **pyvista_kwargs):
-        """Add a mesh or MeshObjectPlot to the scene with optional metadata tracking.
-
-        Parameters
-        ----------
-        mesh: pyvista.DataSet or MeshObjectPlot
-            A raw PyVista mesh or a MeshObjectPlot (which has a ``.mesh`` attribute).
-        metadata : DisplayMeshInfo, optional
-            If provided, registers the actor in ``info_actor_map`` so the built-in
-            widgets can color, hide, and report it.
-        **pyvista_kwargs
-            Additional keyword arguments passed to ``scene.add_mesh()``.
-
-        Returns
-        -------
-        actor
-            The PyVista actor added to the scene.
-        """
-        mesh = mesh.mesh if hasattr(mesh, 'mesh') else mesh
+        """Add a raw mesh or ``MeshObjectPlot`` with optional metadata."""
+        mesh = mesh.mesh if hasattr(mesh, "mesh") else mesh
         actor = self.scene.add_mesh(mesh, **pyvista_kwargs)
         if metadata is not None:
             self._info_actor_map[actor] = metadata
         return actor
 
     def add_point_labels(self, points, labels, **kwargs):
-        """Add point labels to the scene.
-
-        Parameters
-        ----------
-        points : array_like
-            Points where labels are placed.
-        labels : list of str
-            Label text for each point.
-        **kwargs
-            Additional keyword arguments passed to ``scene.add_point_labels()``.
-        """
+        """Add point labels to the scene."""
         return self.scene.add_point_labels(points, labels, **kwargs)
 
     def add_legend(self, entries, **kwargs):
-        """Add a legend to the scene.
-
-        Parameters
-        ----------
-        entries : list
-            Legend entries (each a [name, color] pair).
-        **kwargs
-            Additional keyword arguments passed to ``scene.add_legend()``.
-        """
+        """Add a legend to the scene."""
         return self.scene.add_legend(entries, **kwargs)
 
     def add_text(self, text, **kwargs):
-        """Add text annotation to the scene.
-
-        Parameters
-        ----------
-        text : str
-            Text to display.
-        **kwargs
-            Additional keyword arguments passed to ``scene.add_text()``.
-        """
+        """Add text annotation to the scene."""
         return self.scene.add_text(text, **kwargs)
 
     def add_model(
-        self, model: Model, scope: prime.ScopeDefinition = None, update: bool = False
+        self,
+        model: Model,
+        scope: prime.ScopeDefinition = None,
+        update: bool = False,
     ) -> None:
-        """Add a Prime model to the plotter.
-
-        Parameters
-        ----------
-        model : Model
-            Prime model to add.
-        scope : prime.ScopeDefinition, default: None
-            Scope to show, if any.
-        update : bool, default: False
-            Whether to update the display.
-        """
+        """Add a Prime model or a scoped subset to the plotter."""
         if scope is None:
-            model_pd = model.as_polydata(update=update)
-            self.add_model_pd(model_pd)
+            self.add_model_pd(model.as_polydata(update=update))
         else:
             self.add_scope(model, scope, update=update)
 
+    @staticmethod
+    def _entries(model_pd: Dict, key: str) -> List:
+        """Collect one stored geometry category across all parts."""
+        output = []
+        for part_polydata in model_pd.values():
+            output.extend(entry for entry in part_polydata.get(key, []) if entry is not None)
+        return output
+
     def add_model_pd(self, model_pd: Dict) -> None:
-        """Add a model to the plotter.
+        """Add part-organized PolyData using model-wide entity-type actors."""
+        face_entries = self._entries(model_pd, "faces")
+        edge_entries = self._entries(model_pd, "edges")
+        control_point_entries = self._entries(model_pd, "ctrlpts")
+        spline_surface_entries = self._entries(model_pd, "splinesurf")
 
-        Parameters
-        ----------
-        model : Model
-            Model to add to the plotter.
-        """
-        for part_id, part_polydata in model_pd.items():
-            # proceed if scope won't be used or if the part is in the scope
-            if "faces" in part_polydata.keys():
-                self._add_merged_faces(part_id, part_polydata["faces"])
+        self._add_face_batches(face_entries)
+        self._add_edge_batches(edge_entries)
+        self._add_element_edge_batches(face_entries)
+        self._add_spline_batch(
+            control_point_entries,
+            DisplayMeshType.SPLINECONTROLPOINTS,
+        )
+        self._add_spline_batch(
+            spline_surface_entries,
+            DisplayMeshType.SPLINESURFACE,
+        )
 
-            if "edges" in part_polydata.keys():
-                self._add_edges(part_polydata["edges"])
+    def _register_batch(self, actor, batch: RenderBatch) -> None:
+        """Register a persistent actor and all entities in its batch."""
+        self._batches[actor] = batch
+        self._drawn_geometry[actor] = batch.mesh
+        for info in batch.infos.values():
+            self._entity_infos[info.key] = info
 
-            if "ctrlpoints" in part_polydata.keys():
-                for ctrlpoint_mesh_part in part_polydata["ctrlpoints"]:
-                    actor = self._backend.pv_interface.scene.add_mesh(
-                        ctrlpoint_mesh_part.mesh,
-                        show_edges=False,
-                        # scalars="colors",
-                        rgb=True,
-                        pickable=False,
-                        style='wireframe',
-                        edge_color=[0, 0, 255],
-                    )
-                    ctrlpoint_mesh_part.actor = actor
-                    self._backend._object_to_actors_map[actor] = ctrlpoint_mesh_part
-
-            if "splines" in part_polydata.keys():
-                for spline_mesh_part in part_polydata["splines"]:
-                    actor = self._backend._pl.scene.add_mesh(
-                        spline_mesh_part.mesh,
-                        show_edges=False,
-                        # scalars="colors",
-                        rgb=True,
-                        pickable=False,
-                    )
-                    spline_mesh_part.actor = actor
-                    self._backend._object_to_actors_map[actor] = spline_mesh_part
-
-    def _add_merged_faces(self, part_id: int, face_entries: List) -> None:
-        """Draw the faces of a part as a small number of shared actors.
-
-        Parameters
-        ----------
-        part_id : int
-            ID of the part the faces belong to.
-        face_entries : List
-            ``(MeshObjectPlot, DisplayMeshInfo)`` pairs of the faces of the part.
-        """
-        outlines = build_element_edge_mesh(face_entries)
-        for batch in build_face_render_batches(face_entries, part_id):
+    def _add_face_batches(self, face_entries: Sequence) -> None:
+        """Add at most one shaded actor for each face entity type."""
+        for batch in build_face_render_batches(face_entries).values():
             actor = self.scene.add_mesh(
                 batch.mesh,
                 scalars=ENTITY_COLOR_ARRAY,
                 rgb=True,
-                show_edges=batch.show_edges,
-                pickable=True,
+                show_edges=False,
+                pickable=batch.pickable,
             )
-            if outlines is not None and not batch.show_edges:
-                # the outlines of these entities are drawn as separate line geometry,
-                # so the shaded surface is pushed back to stop it z-fighting the lines
-                self._offset_polygons(actor)
-            self._batches[actor] = batch
-            self._drawn_geometry[actor] = batch.mesh
-            self._entity_infos.update(batch.infos)
+            self._offset_polygons(actor)
+            self._register_batch(actor, batch)
 
-        if outlines is not None:
-            self._element_edge_meshes[part_id] = outlines
-            outline_actor = self.scene.add_mesh(
-                outlines,
+    def _add_edge_batches(self, edge_entries: Sequence) -> None:
+        """Add at most one line actor for each edge entity type."""
+        for batch in build_edge_render_batches(edge_entries).values():
+            has_colors = ENTITY_COLOR_ARRAY in batch.mesh.cell_data
+            actor = self.scene.add_mesh(
+                batch.mesh,
+                scalars=ENTITY_COLOR_ARRAY if has_colors else None,
+                rgb=has_colors,
+                pickable=batch.pickable,
+                line_width=4,
+            )
+            self._register_batch(actor, batch)
+
+    def _add_element_edge_batches(self, face_entries: Sequence) -> None:
+        """Add at most one element-outline actor for each face entity type."""
+        for batch in build_element_edge_batches(face_entries).values():
+            actor = self.scene.add_mesh(
+                batch.mesh,
                 color=pv.global_theme.edge_color,
                 line_width=1,
                 pickable=False,
             )
-            self._element_edge_actors[part_id] = outline_actor
-            self._drawn_geometry[outline_actor] = outlines
+            self._element_edge_batches[actor] = batch
+            self._drawn_geometry[actor] = batch.mesh
 
-    def _add_edges(self, edge_entries: List) -> None:
-        """Draw the edges of a part.
+    @staticmethod
+    def _merge_mesh_objects(entries: Sequence) -> Optional[pv.PolyData]:
+        """Merge ``MeshObjectPlot`` meshes without merging points."""
+        meshes = [
+            entry.mesh
+            for entry in entries
+            if entry is not None
+            and getattr(entry, "mesh", None) is not None
+            and entry.mesh.n_cells > 0
+        ]
+        if not meshes:
+            return None
+        if len(meshes) == 1:
+            return meshes[0].copy(deep=False)
+        return pv.merge(meshes, merge_points=False)
 
-        Parameters
-        ----------
-        edge_entries : List
-            ``MeshObjectPlot`` objects of the edges of the part.
-        """
-        merged = build_edge_render_mesh(edge_entries)
+    def _add_spline_batch(
+        self,
+        entries: Sequence,
+        display_mesh_type: DisplayMeshType,
+    ) -> None:
+        """Add one non-pickable actor for a spline rendering type."""
+        merged = self._merge_mesh_objects(entries)
         if merged is None:
             return
-        # merging does not carry over which array is active, so the colors
-        # the edges were built with have to be named explicitly
+
+        is_control_points = display_mesh_type == DisplayMeshType.SPLINECONTROLPOINTS
         has_colors = ENTITY_COLOR_ARRAY in merged.cell_data
-        self.scene.add_mesh(
+        actor = self.scene.add_mesh(
             merged,
             scalars=ENTITY_COLOR_ARRAY if has_colors else None,
             rgb=has_colors,
+            show_edges=False,
             pickable=False,
-            line_width=4,
+            style="wireframe" if is_control_points else "surface",
+            edge_color=[0, 0, 255] if is_control_points else None,
         )
+        self._spline_actors[display_mesh_type] = actor
+        self._drawn_geometry[actor] = merged
 
     @staticmethod
     def _offset_polygons(actor) -> None:
-        """Push a shaded surface back so coincident line geometry stays visible.
-
-        Parameters
-        ----------
-        actor : pyvista.Actor
-            Actor of the shaded faces to push back.
-        """
+        """Push shaded surfaces back so coincident line geometry stays visible."""
         mapper = actor.GetMapper()
         mapper.SetResolveCoincidentTopologyToPolygonOffset()
         mapper.SetRelativeCoincidentTopologyPolygonOffsetParameters(
-            POLYGON_OFFSET_FACTOR, POLYGON_OFFSET_UNITS
+            POLYGON_OFFSET_FACTOR,
+            POLYGON_OFFSET_UNITS,
         )
 
+    @staticmethod
+    def _info_from_cell(batch: RenderBatch, mesh: pv.DataSet, cell_id: int):
+        """Resolve a cell in a displayed dataset to its batch metadata."""
+        if RENDER_ENTITY_ID_ARRAY not in mesh.cell_data:
+            return None
+        render_id = int(mesh.cell_data[RENDER_ENTITY_ID_ARRAY][cell_id])
+        return batch.infos.get(render_id)
+
     def _pick_entity(self, actor, point) -> bool:
-        """Toggle the selection of the entity the pick landed on.
-
-        Parameters
-        ----------
-        actor : pyvista.Actor
-            Actor the pick landed on.
-        point : Sequence[float]
-            Point the pick landed on.
-
-        Returns
-        -------
-        bool
-            Whether the pick landed on a shared actor and was handled here.
-        """
+        """Toggle the model-unique entity under a picked point."""
         batch = self._batches.get(actor)
-        if batch is None or point is None:
+        if batch is None or not batch.pickable or point is None:
             return False
 
-        # resolve against what is drawn rather than the full batch, so that hidden
-        # entities cannot be picked through the entities that are still shown
         mesh = self._drawn_geometry.get(actor)
         if mesh is None or mesh.n_cells == 0:
             return True
 
-        cell_id = mesh.find_closest_cell(list(point))
+        cell_id = int(mesh.find_closest_cell(np.asarray(point, dtype=float)))
         if cell_id < 0:
             return True
 
-        entity_id = int(mesh.cell_data[ENTITY_ID_ARRAY][cell_id])
-        if entity_id in self._picked_entities:
-            self._picked_entities.pop(entity_id)
-            self._picked_points.pop(entity_id, None)
-            self._remove_entity_label(entity_id)
+        info = self._info_from_cell(batch, mesh, cell_id)
+        if info is None:
+            return True
+
+        key = info.key
+        if key in self._picked_entities:
+            self._picked_entities.pop(key, None)
+            self._picked_points.pop(key, None)
+            self._remove_entity_label(key)
         else:
-            self._picked_entities[entity_id] = batch.infos[entity_id]
-            self._picked_points[entity_id] = np.asarray(point, dtype=float)
-            self._add_entity_label(entity_id)
+            self._picked_entities[key] = info
+            self._picked_points[key] = np.asarray(point, dtype=float)
+            self._add_entity_label(key)
+
         self.refresh_colors()
         return True
 
     @staticmethod
     def entity_label(info: DisplayMeshInfo) -> str:
-        """Get the text shown next to a picked entity.
-
-        Parameters
-        ----------
-        info : DisplayMeshInfo
-            Display information of the entity.
-
-        Returns
-        -------
-        str
-            Text shown next to the entity.
-        """
+        """Return the label text for a picked entity."""
         name = info.zone_name or info.part_name
         return f"{name} ({info.id})" if name else str(info.id)
 
-    def _add_entity_label(self, entity_id: int) -> None:
-        """Label a picked entity at the point it was picked at.
-
-        Parameters
-        ----------
-        entity_id : int
-            ID of the entity to label.
-        """
-        point = self._picked_points.get(entity_id)
-        info = self._entity_infos.get(entity_id)
-        if point is None or info is None or entity_id in self._entity_labels:
+    def _add_entity_label(self, key: DisplayEntityKey) -> None:
+        """Label a visible picked entity at its picked point."""
+        point = self._picked_points.get(key)
+        info = self._entity_infos.get(key)
+        if point is None or info is None or key in self._entity_labels:
+            return
+        if key in self._hidden_entities:
             return
         if not getattr(self._backend, "_plot_picked_names", True):
             return
-        self._entity_labels[entity_id] = self.scene.add_point_labels(
+
+        self._entity_labels[key] = self.scene.add_point_labels(
             [point],
             [self.entity_label(info)],
             always_visible=True,
@@ -495,176 +386,171 @@ class PrimePlotter(Plotter):
             show_points=False,
         )
 
-    def _remove_entity_label(self, entity_id: int) -> None:
-        """Remove the label of an entity, if it has one.
-
-        Parameters
-        ----------
-        entity_id : int
-            ID of the entity to remove the label of.
-        """
-        label = self._entity_labels.pop(entity_id, None)
+    def _remove_entity_label(self, key: DisplayEntityKey) -> None:
+        """Remove an entity label if present."""
+        label = self._entity_labels.pop(key, None)
         if label is not None:
             self.scene.remove_actor(label)
 
     def _update_entity_labels(self) -> None:
-        """Show the label of every picked entity that is visible, and only those."""
-        for entity_id in list(self._entity_labels):
-            if entity_id in self._hidden_entities or entity_id not in self._picked_entities:
-                self._remove_entity_label(entity_id)
-        for entity_id in self._picked_entities:
-            if entity_id not in self._hidden_entities:
-                self._add_entity_label(entity_id)
+        """Synchronize labels with selection and visibility state."""
+        for key in list(self._entity_labels):
+            if key in self._hidden_entities or key not in self._picked_entities:
+                self._remove_entity_label(key)
+        for key in self._picked_entities:
+            self._add_entity_label(key)
+
+    @staticmethod
+    def _render_ids_for_keys(batch: RenderBatch, keys: Iterable[DisplayEntityKey]) -> set[int]:
+        """Return batch-local render IDs corresponding to model entity keys."""
+        wanted = set(keys)
+        return {
+            int(render_id)
+            for render_id, info in batch.infos.items()
+            if info.key in wanted
+        }
 
     def refresh_colors(self) -> None:
-        """Recolor every shared actor from the current color mode and selection."""
-        picked = Color.PICKED.value
-        highlight = np.array(pv.Color(picked).int_rgb, dtype=np.uint8)
+        """Recolor every shared actor from current mode and selection."""
+        highlight = np.asarray(
+            pv.Color(Color.PICKED.value).int_rgb,
+            dtype=np.uint8,
+        )
+
         for batch in self._batches.values():
-            colors = compute_entity_colors(batch.infos, batch.entity_ids, self._color_type)
-            if self._picked_entities:
-                selected = np.isin(batch.entity_ids, list(self._picked_entities))
+            colors = compute_entity_colors(
+                batch.infos,
+                batch.render_entity_ids,
+                self._color_type,
+            )
+            selected_render_ids = self._render_ids_for_keys(
+                batch,
+                self._picked_entities,
+            )
+            if selected_render_ids:
+                selected = np.isin(
+                    batch.render_entity_ids,
+                    tuple(selected_render_ids),
+                )
                 colors[selected] = highlight
             batch.mesh.cell_data[ENTITY_COLOR_ARRAY] = colors
-        # the drawn geometry is a copy of the batch whenever something is hidden,
-        # so it has to be rebuilt from the colors that were just written
+            batch.mesh.set_active_scalars(ENTITY_COLOR_ARRAY, preference="cell")
+
         self._apply_visibility()
 
     def set_color_by_type(self, color_type: "ColorByType") -> None:
-        """Color the entities in the scene by the given entity property.
-
-        Parameters
-        ----------
-        color_type : ColorByType
-            Entity property to take the color from.
-        """
-        self._color_type = color_type
+        """Color displayed entities by zone, zonelet, or part."""
+        self._color_type = ColorByType(color_type)
         for actor, info in self._info_actor_map.items():
-            actor.prop.color = entity_color(info, color_type).tolist()
+            actor.prop.color = entity_color(info, self._color_type).tolist()
         self.refresh_colors()
 
     @property
     def selected_entity_infos(self) -> List[DisplayMeshInfo]:
-        """Get the display information of the entities that are currently picked.
-
-        Returns
-        -------
-        List[DisplayMeshInfo]
-            Display information of the entities that are currently picked.
-        """
+        """Return metadata for all currently picked entities."""
         infos = list(self._picked_entities.values())
-        # meshes added through add_mesh(..., metadata=...) are picked by the backend
-        picked = getattr(self._backend._custom_picker, "picked_dict", {})
-        infos.extend(
-            self._info_actor_map[mesh_object.actor]
-            for mesh_object in picked.values()
-            if getattr(mesh_object, "actor", None) in self._info_actor_map
-        )
+
+        custom_picker = getattr(self._backend, "_custom_picker", None)
+        picked = getattr(custom_picker, "picked_dict", {})
+        for mesh_object in picked.values():
+            actor = getattr(mesh_object, "actor", None)
+            info = self._info_actor_map.get(actor)
+            if info is not None:
+                infos.append(info)
         return infos
 
-    def set_entities_visible(self, entity_ids, visible: bool) -> None:
-        """Show or hide display entities without rebuilding the meshes they share.
+    def _normalise_entity_keys(self, entities: Iterable) -> set[DisplayEntityKey]:
+        """Normalize entity keys while retaining limited ID compatibility.
 
-        Parameters
-        ----------
-        entity_ids : Iterable[int]
-            IDs of the entities to show or hide.
-        visible : bool
-            Whether to show the entities.
+        Integer IDs are expanded to every currently displayed entity with that
+        original ID. New code should pass ``DisplayEntityKey`` values to avoid
+        ambiguity across parts.
         """
-        entity_ids = set(int(entity_id) for entity_id in entity_ids)
+        keys: set[DisplayEntityKey] = set()
+        integer_ids = set()
+        for entity in entities:
+            if isinstance(entity, DisplayEntityKey):
+                keys.add(entity)
+            elif isinstance(entity, DisplayMeshInfo):
+                keys.add(entity.key)
+            else:
+                integer_ids.add(int(entity))
+
+        if integer_ids:
+            keys.update(
+                key for key in self._entity_infos if key.entity_id in integer_ids
+            )
+        return keys
+
+    def set_entities_visible(self, entities, visible: bool) -> None:
+        """Show or hide display entities without changing actor count.
+
+        ``DisplayEntityKey`` is the preferred input. Integer IDs remain accepted
+        and apply to every displayed entity with that original Prime ID.
+        """
+        keys = self._normalise_entity_keys(entities)
         if visible:
-            self._hidden_entities -= entity_ids
+            self._hidden_entities.difference_update(keys)
         else:
-            self._hidden_entities |= entity_ids
+            self._hidden_entities.update(keys)
 
         for actor, info in self._info_actor_map.items():
-            if info.id in entity_ids:
+            if info.key in keys:
                 actor.visibility = visible
         self._apply_visibility()
 
-    def _visible_geometry(self, mesh, entity_ids):
-        """Get the geometry of a merged mesh without the cells of hidden entities.
+    def _visible_geometry(self, batch: RenderBatch) -> pv.DataSet:
+        """Return a batch dataset excluding hidden entities."""
+        hidden_render_ids = self._render_ids_for_keys(
+            batch,
+            self._hidden_entities,
+        )
+        if not hidden_render_ids:
+            return batch.mesh
 
-        Parameters
-        ----------
-        mesh : pyvista.DataSet
-            Merged mesh to take the visible cells of.
-        entity_ids : np.ndarray
-            Entity ID of every cell of the merged mesh.
-
-        Returns
-        -------
-        pyvista.DataSet
-            The mesh itself when nothing it holds is hidden, and a copy holding only
-            the visible cells otherwise. The type of the mesh is kept, so that the
-            geometry can be copied straight over what is drawn.
-        """
-        if not self._hidden_entities:
-            return mesh
-        hidden = np.isin(entity_ids, list(self._hidden_entities))
+        hidden = np.isin(
+            batch.render_entity_ids,
+            tuple(hidden_render_ids),
+        )
         if not hidden.any():
-            return mesh
-        return mesh.remove_cells(np.flatnonzero(hidden), inplace=False)
+            return batch.mesh
+        return batch.mesh.remove_cells(np.flatnonzero(hidden), inplace=False)
 
-    def _draw(self, actor, mesh) -> None:
-        """Give an actor the geometry it has to draw.
-
-        The mesh is kept referenced here because a mapper does not hold one of its
-        own: geometry only the mapper points at is collected and nothing is drawn.
-
-        Parameters
-        ----------
-        actor : pyvista.Actor
-            Actor to draw the geometry with.
-        mesh : pyvista.DataSet
-            Geometry to draw.
-        """
+    def _draw(self, actor, mesh: pv.DataSet) -> None:
+        """Assign live geometry to an actor and keep a strong reference."""
         self._drawn_geometry[actor] = mesh
         if mesh.n_cells == 0:
-            # a mapper that is handed an empty data set stops drawing for good, even
-            # once it is given geometry back, so an actor left with nothing is hidden
             actor.visibility = False
             return
-        actor.visibility = True
         actor.mapper.dataset = mesh
+        actor.visibility = True
 
     def _apply_visibility(self) -> None:
-        """Draw only the cells of the entities that are visible.
-
-        Cells cannot be masked in place: a ghost array is honored by the filters that
-        build a surface from a data set, not by the mapper of a polygonal mesh, so the
-        drawn geometry has to hold the visible cells and nothing else.
-        """
+        """Update mapper inputs for hidden Prime entities."""
         for actor, batch in self._batches.items():
-            self._draw(actor, self._visible_geometry(batch.mesh, batch.entity_ids))
+            self._draw(actor, self._visible_geometry(batch))
 
-        for part_id, outlines in self._element_edge_actors.items():
-            mesh = self._element_edge_meshes.get(part_id)
-            if mesh is None or ENTITY_ID_ARRAY not in mesh.cell_data:
-                continue
-            self._draw(outlines, self._visible_geometry(mesh, mesh.cell_data[ENTITY_ID_ARRAY]))
+        for actor, batch in self._element_edge_batches.items():
+            visible = self._visible_geometry(batch)
+            self._draw(actor, visible)
+            actor.visibility = bool(
+                self._show_element_edges and visible.n_cells > 0
+            )
+
         self._update_entity_labels()
         self.render()
 
     def set_show_edges(self, show: bool) -> None:
-        """Show or hide the element edges of every entity that has a mesh.
-
-        Parameters
-        ----------
-        show : bool
-            Whether to show the element edges.
-        """
-        for actor, batch in self._batches.items():
-            if batch.show_edges:
-                actor.prop.show_edges = show
+        """Show or hide model-wide element-outline actors."""
+        self._show_element_edges = bool(show)
+        for actor in self._element_edge_batches:
+            mesh = self._drawn_geometry.get(actor)
+            actor.visibility = bool(
+                show and mesh is not None and mesh.n_cells > 0
+            )
         for actor, info in self._info_actor_map.items():
             if info.has_mesh:
-                actor.prop.show_edges = show
-        # element outlines drawn as separate line geometry are hidden as a whole,
-        # since they are lines rather than the edges of a shaded actor
-        for outlines in self._element_edge_actors.values():
-            outlines.visibility = show
+                actor.prop.show_edges = bool(show)
         self.render()
 
     def render(self) -> None:
@@ -674,35 +560,20 @@ class PrimePlotter(Plotter):
             scene.render()
 
     def clear(self) -> None:
-        """Remove everything from the scene and reset the plotter."""
+        """Remove scene contents and reset Prime-specific state."""
         super().clear()
         self._backend.prime_plotter = self
-        self._info_actor_map = {}
-        self._element_edge_actors = {}
-        self._batches = {}
-        self._entity_infos = {}
-        self._picked_entities = {}
-        self._picked_points = {}
-        self._entity_labels = {}
-        self._hidden_entities = set()
-        self._element_edge_meshes = {}
-        self._drawn_geometry = {}
+        self._reset_prime_state()
         self._add_widgets()
 
-    def add_scope(self, model: Model, scope: prime.ScopeDefinition, update: bool = False) -> None:
-        """Add a scope to the plotter.
-
-        Parameters
-        ----------
-        model : Model
-            Model to add to the plotter.
-        scope : prime.ScopeDefinition
-            Scope to add to the plotter.
-        update : bool, default: False
-            Whether to update the display.
-        """
-        model_pd = model.get_scoped_polydata(scope, update=update)
-        self.add_model_pd(model_pd)
+    def add_scope(
+        self,
+        model: Model,
+        scope: prime.ScopeDefinition,
+        update: bool = False,
+    ) -> None:
+        """Add a scoped subset of a model."""
+        self.add_model_pd(model.get_scoped_polydata(scope, update=update))
 
     def plot_iter(
         self,
@@ -711,26 +582,14 @@ class PrimePlotter(Plotter):
         update: bool = False,
         **plotting_options,
     ) -> None:
-        """
-        Add a list of any type of object to the scene.
-
-        Allowed types are PyPrime models or any PyVista plottable object.
-
-        Parameters
-        ----------
-        plotting_list : List[Any]
-            List of objects to plot.
-        name_filter : str, default: None
-            Regular expression with the desired name or names to include in the plotter.
-        update: bool, default: False
-            Whether to update the display.
-        **plotting_options : dict, default: None
-            Keyword arguments. For allowable keyword arguments, see the
-            :meth:`Plotter.add_mesh <pyvista.Plotter.add_mesh>` method.
-            Options only applied to PyVista plottable objects.
-        """
+        """Add a list of PyPrime models or PyVista objects to the scene."""
         for plottable_object in plotting_list:
-            _ = self.plot(plottable_object, name_filter, **plotting_options)
+            self.plot(
+                plottable_object,
+                name_filter=name_filter,
+                update=update,
+                **plotting_options,
+            )
 
     def plot(
         self,
@@ -740,47 +599,22 @@ class PrimePlotter(Plotter):
         update: bool = False,
         **plotting_options,
     ):
-        """Add an object to the plotter.
-
-        Allowed types are PyPrime models or any PyVista plottable object.
-
-        Parameters
-        ----------
-        plottable_object : Any
-            Object to add to the plotter.
-        scope : prime.ScopeDefinition, default: None
-            Scope to plot.
-        name_filter : str, default: None
-            Regular expression with the desired name or names to include in the plotter.
-        update: bool, default: False
-            Whether to update the display. Required when any mesh is updated.
-        **plotting_options : dict, default: None
-            Keyword arguments. For allowable keyword arguments, see the
-            :meth:`Plotter.add_mesh <pyvista.Plotter.add_mesh>` method.
-            Options only applied to PyVista plottable objects.
-
-
-        Examples
-        --------
-        >>> import pyvista as pv
-        >>> from ansys.meshing.prime.graphics import PrimePlotter
-        >>> import ansys.meshing.prime as prime
-        >>> model = prime.launch_prime().model
-        >>> prime.lucid.Mesh(model).read(prime.examples.download_block_model_fmd())
-        >>> scope = prime.ScopeDefinition(model, label_expression="my_group")
-        >>> plotter = PrimePlotter()
-        >>> # pyvista sphere with plotting options added for opacity and color
-        >>> plotter.plot(plottable_object=pv.Sphere(radius=2.0), opacity=0.5, color="red")
-        >>> plotter.plot(plottable_object=model, scope=scope)
-        >>> plotter.show()
-
-        """
+        """Add a Prime model or PyVista plottable object."""
         if isinstance(plottable_object, Model):
             self.add_model(plottable_object, scope, update=update)
-        elif isinstance(plottable_object, List):
-            self.plot_iter(plottable_object, name_filter, update=update, **plotting_options)
+        elif isinstance(plottable_object, list):
+            self.plot_iter(
+                plottable_object,
+                name_filter=name_filter,
+                update=update,
+                **plotting_options,
+            )
         else:
-            self._backend.pv_interface.plot(plottable_object, name_filter, **plotting_options)
+            self._backend.pv_interface.plot(
+                plottable_object,
+                name_filter,
+                **plotting_options,
+            )
 
     def show(
         self,
@@ -790,23 +624,14 @@ class PrimePlotter(Plotter):
         scope: prime.ScopeDefinition = None,
         **plotting_options,
     ) -> None:
-        """Show the plotted objects.
-
-        Parameters
-        ----------
-        plottable_object : Any, default: None
-            Object to show.
-        screenshot : str, default: None
-            Path to save a screenshot to.
-        name_filter : str, default: None
-            Regular expression with the desired name or names to include in the plotter.
-        **plotting_options : dict, default: None
-            Keyword arguments. For allowable keyword arguments, see the
-            :meth:`Plotter.add_mesh <pyvista.Plotter.add_mesh>` method.
-            Options only applied to PyVista plottable objects.
-        """
+        """Show plotted content and optionally save a screenshot."""
         if plottable_object is not None:
-            self.plot(plottable_object, name_filter=name_filter, scope=scope, **plotting_options)
+            self.plot(
+                plottable_object,
+                name_filter=name_filter,
+                scope=scope,
+                **plotting_options,
+            )
         self._backend.show(
             plottable_object=plottable_object,
             screenshot=screenshot,
@@ -816,26 +641,20 @@ class PrimePlotter(Plotter):
 
 
 class Graphics:
-    """Manages graphics in PyPrime.
+    """Manage legacy PyPrime graphics.
 
     .. deprecated:: 0.6.0
         Use :class:`PrimePlotter` instead.
-
-    Parameters
-    ----------
-    model : prime.Model
-        Model to show.
-    use_trame : bool, default: False
-        Whether to use the Trame visualizer.
     """
 
     def __init__(self, model: prime.Model, use_trame: bool = False) -> None:
-        """Initialize graphics."""
+        """Initialize legacy graphics."""
         self.model = model
         self.use_trame = use_trame
         warnings.warn(
-            "DeprecationWarning: The `Graphics` class is deprecated. "
-            + "Use the `PrimePlotter` class instead."
+            "The `Graphics` class is deprecated. Use `PrimePlotter` instead.",
+            DeprecationWarning,
+            stacklevel=2,
         )
 
     def __call__(
@@ -845,19 +664,7 @@ class Graphics:
         spline: bool = False,
         scope: prime.ScopeDefinition = None,
     ) -> None:
-        """Show the appropriate display based on parameters.
-
-        Parameters
-        ----------
-        parts : Any, default: None
-            Parts to show.
-        update : bool, default: True
-            Whether to update the display.
-        spline : bool, default: False
-            Whether to use splines.
-        scope : prime.ScopeDefinition, default: None
-            Scope of the parts.
-        """
+        """Display the configured model."""
         plotter = PrimePlotter(use_trame=self.use_trame)
-        plotter.add_model(self.model, scope=scope)
+        plotter.add_model(self.model, scope=scope, update=update)
         plotter.show()
