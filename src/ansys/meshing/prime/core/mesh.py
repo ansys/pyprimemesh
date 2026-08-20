@@ -1384,9 +1384,7 @@ class Mesh(MeshInfo):
 
         edge.cell_data[PART_ID_ARRAY] = np.full(n_cells, part_id, dtype=np.int64)
         edge.cell_data[ENTITY_ID_ARRAY] = np.full(n_cells, entity_id, dtype=np.int64)
-        edge.cell_data[ENTITY_TYPE_ARRAY] = np.full(
-            n_cells, int(display_mesh_type), dtype=np.int16
-        )
+        edge.cell_data[ENTITY_TYPE_ARRAY] = np.full(n_cells, int(display_mesh_type), dtype=np.int16)
         edge.cell_data[ZONE_ID_ARRAY] = np.full(n_cells, zone_id, dtype=np.int64)
         edge.set_active_scalars(ENTITY_COLOR_ARRAY, preference="cell")
         return MeshObjectPlot(part, edge)
