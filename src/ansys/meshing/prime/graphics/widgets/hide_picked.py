@@ -1,7 +1,6 @@
 # Copyright (C) 2024 - 2026 ANSYS, Inc. and/or its affiliates.
 # SPDX-License-Identifier: MIT
 #
-#
 # Permission is hereby granted, free of charge, to any person obtaining a copy
 # of this software and associated documentation files (the "Software"), to deal
 # in the Software without restriction, including without limitation the rights
@@ -21,57 +20,98 @@
 # SOFTWARE.
 
 """This module contains the HidePicked class."""
+
 import os
-from typing import TYPE_CHECKING
+from typing import TYPE_CHECKING, List
 
 from ansys.tools.visualization_interface.backends.pyvista.widgets import PlotterWidget
 from vtk import vtkPNGReader
+
+from ansys.meshing.prime.core.mesh import DisplayEntityKey
 
 if TYPE_CHECKING:
     from ansys.meshing.prime.graphics.plotter import PrimePlotter
 
 
 class HidePicked(PlotterWidget):
-    """Initializes the hide picked button widget.
+    """Hide or restore currently selected Prime display entities.
 
-    This widget lets you hide the picked mesh objects.
-
-    Parameters
-    ----------
-    prime_plotter : Plotter
-        Plotter to apply this widget to.
+    Selection is tracked using DisplayEntityKey so identical entity IDs in
+    different parts remain independent.
     """
 
     def __init__(self, prime_plotter: "PrimePlotter") -> None:
         """Initialize the widget."""
         super().__init__(prime_plotter._backend._pl.scene)
+
         self.prime_plotter = prime_plotter
-        self._button = self.prime_plotter._backend._pl.scene.add_checkbox_button_widget(
-            self.callback,
-            position=(5, 660),
-            size=30,
-            border_size=3,
-            color_off="white",
-            color_on="white",
+
+        self._button = (
+            self.prime_plotter._backend._pl.scene.add_checkbox_button_widget(
+                self.callback,
+                position=(5, 660),
+                size=30,
+                border_size=3,
+                color_off="white",
+                color_on="white",
+            )
         )
-        self._hidden_entities = []
+
+        self._hidden_entities: List[DisplayEntityKey] = []
 
     def callback(self, state: bool) -> None:
-        """Define callback function for the button widget."""
+        """Hide or restore the currently selected entities.
+
+        Parameters
+        ----------
+        state : bool
+            State of the checkbox widget.
+        """
         if state:
-            self._hidden_entities = [info.id for info in self.prime_plotter.selected_entity_infos]
-            self.prime_plotter.set_entities_visible(self._hidden_entities, False)
+            hidden_entities = []
+            seen = set()
+
+            for info in self.prime_plotter.selected_entity_infos:
+                key = info.key
+
+                if key in seen:
+                    continue
+
+                seen.add(key)
+                hidden_entities.append(key)
+
+            self._hidden_entities = hidden_entities
+
+            if self._hidden_entities:
+                self.prime_plotter.set_entities_visible(
+                    self._hidden_entities,
+                    False,
+                )
+
         else:
-            self.prime_plotter.set_entities_visible(self._hidden_entities, True)
+            if self._hidden_entities:
+                self.prime_plotter.set_entities_visible(
+                    self._hidden_entities,
+                    True,
+                )
+
             self._hidden_entities = []
 
     def update(self) -> None:
-        """Define the configuration and representation of the button widget button."""
-        vr = self._button.GetRepresentation()
-        icon_file = os.path.join(os.path.dirname(__file__), "images", "invert_visibility.png")
-        r = vtkPNGReader()
-        r.SetFileName(icon_file)
-        r.Update()
-        image = r.GetOutput()
-        vr.SetButtonTexture(0, image)
-        vr.SetButtonTexture(1, image)
+        """Configure the button appearance."""
+        representation = self._button.GetRepresentation()
+
+        icon_file = os.path.join(
+            os.path.dirname(__file__),
+            "images",
+            "invert_visibility.png",
+        )
+
+        reader = vtkPNGReader()
+        reader.SetFileName(icon_file)
+        reader.Update()
+
+        image = reader.GetOutput()
+
+        representation.SetButtonTexture(0, image)
+        representation.SetButtonTexture(1, image)
