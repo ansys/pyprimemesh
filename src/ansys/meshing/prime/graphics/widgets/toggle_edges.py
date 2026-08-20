@@ -44,15 +44,13 @@ class ToggleEdges(PlotterWidget):
 
         self.prime_plotter = prime_plotter
 
-        self._button = (
-            self.prime_plotter._backend._pl.scene.add_checkbox_button_widget(
-                self.callback,
-                position=(5, 600),
-                size=30,
-                border_size=3,
-                color_off="white",
-                color_on="white",
-            )
+        self._button = self.prime_plotter._backend._pl.scene.add_checkbox_button_widget(
+            self.callback,
+            position=(5, 600),
+            size=30,
+            border_size=3,
+            color_off="white",
+            color_on="white",
         )
 
     def callback(self, state: bool) -> None:
