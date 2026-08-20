@@ -30,8 +30,7 @@ import os
 
 import ansys.meshing.prime.internals.json_utils as json
 from ansys.meshing.prime.autogen.commonstructs import DeleteResults
-from ansys.meshing.prime.autogen.materialpointmanager import \
-    MaterialPointManager
+from ansys.meshing.prime.autogen.materialpointmanager import MaterialPointManager
 from ansys.meshing.prime.autogen.modelstructs import (
     GlobalSizingParams,
     MergePartsParams,
