@@ -705,42 +705,92 @@ def build_edge_render_batches(
     Dict[DisplayMeshType, RenderBatch]
         Edge batches grouped by display entity type.
     """
-    grouped: Dict[
-        DisplayMeshType,
-        List[Tuple["pv.PolyData", DisplayMeshInfo]],
-    ] = defaultdict(list)
-
+    grouped = defaultdict(list)
+    
     for entry in edge_entries:
         if entry is None:
             continue
-
+    
+        # Temporary compatibility with any cached/new tuple-form entries.
         if isinstance(entry, tuple):
             mesh_object, info = entry
         else:
             mesh_object = entry
             info = None
-
+    
         geometry = mesh_object.mesh
         if geometry is None or geometry.n_cells == 0:
             continue
-
+    
+        required = (
+            PART_ID_ARRAY,
+            ENTITY_ID_ARRAY,
+            ENTITY_TYPE_ARRAY,
+            ZONE_ID_ARRAY,
+        )
+        missing = [
+            name
+            for name in required
+            if name not in geometry.cell_data
+        ]
+        if missing:
+            raise ValueError(
+                "Edge geometry is missing Prime identity arrays: "
+                + ", ".join(missing)
+            )
+    
+        part_ids = np.unique(
+            np.asarray(geometry.cell_data[PART_ID_ARRAY])
+        )
+        entity_ids = np.unique(
+            np.asarray(geometry.cell_data[ENTITY_ID_ARRAY])
+        )
+        entity_types = np.unique(
+            np.asarray(geometry.cell_data[ENTITY_TYPE_ARRAY])
+        )
+        zone_ids = np.unique(
+            np.asarray(geometry.cell_data[ZONE_ID_ARRAY])
+        )
+    
+        if (
+            len(part_ids) != 1
+            or len(entity_ids) != 1
+            or len(entity_types) != 1
+            or len(zone_ids) != 1
+        ):
+            raise ValueError(
+                "One edge entry must represent exactly one Prime edge entity."
+            )
+    
+        part_id = int(part_ids[0])
+        entity_id = int(entity_ids[0])
+        display_mesh_type = DisplayMeshType(
+            int(entity_types[0])
+        )
+        zone_id = int(zone_ids[0])
+    
         if info is None:
             part = mesh_object.custom_object
             info = DisplayMeshInfo(
-                id=-1,
-                part_id=part.id,
+                id=entity_id,
+                part_id=part_id,
                 part_name=getattr(part, "name", None),
-                display_mesh_type=DisplayMeshType.EDGEZONELET,
+                zone_id=zone_id,
+                zone_name=None,
+                display_mesh_type=display_mesh_type,
+                has_mesh=False,
             )
+    
+        grouped[display_mesh_type].append(
+            (geometry, info)
+        )
 
-        grouped[info.display_mesh_type].append((geometry, info))
-
-    batches: Dict[DisplayMeshType, RenderBatch] = {}
-
+    batches = {}
+    
     for display_mesh_type, items in grouped.items():
-        infos: Dict[int, DisplayMeshInfo] = {}
-        pieces: List[pv.PolyData] = []
-
+        infos = {}
+        pieces = []
+    
         for render_entity_id, (geometry, info) in enumerate(items):
             infos[render_entity_id] = info
             pieces.append(
@@ -750,29 +800,28 @@ def build_edge_render_batches(
                     render_entity_id,
                 )
             )
-
+    
         merged = _merge_geometry(pieces)
         if merged is None:
             continue
-
+    
         _validate_merged_metadata(merged)
-
+    
         batch = RenderBatch(
             mesh=merged,
             infos=infos,
             display_mesh_type=display_mesh_type,
             pickable=False,
         )
-
-        # Edge pieces already carry their type-specific RGB colors.
+    
         if ENTITY_COLOR_ARRAY in merged.cell_data:
             merged.set_active_scalars(
                 ENTITY_COLOR_ARRAY,
                 preference="cell",
             )
-
+    
         batches[display_mesh_type] = batch
-
+    
     return batches
 
 
@@ -1021,6 +1070,7 @@ class Mesh(MeshInfo):
         self._model = model
         self._unfreeze()
         self._parts_polydata = {}
+        self._edge_infos = {}
         self._freeze()
 
     @property
@@ -1226,25 +1276,57 @@ class Mesh(MeshInfo):
         # a closed edge has as many points as segments, so the colors have to name
         # the association they belong to rather than let it be inferred from length
         edge.cell_data[ENTITY_COLOR_ARRAY] = colors
-        if segments:
-            edge.set_active_scalars(ENTITY_COLOR_ARRAY, preference="cell")
-        if edge.n_points > 0:
-            if edge_facet_res.topo_edge_ids[index] > 0:
-                display_mesh_type = DisplayMeshType.TOPOEDGE
-                entity_id = edge_facet_res.topo_edge_ids[index]
-            else:
-                display_mesh_type = DisplayMeshType.EDGEZONELET
-                entity_id = edge_facet_res.edge_zonelet_ids[index]
-
-            zone_ids = getattr(edge_facet_res, "edge_zone_ids", None)
-            zone_names = getattr(edge_facet_res, "edge_zone_names", None)
-
-            zone_id = int(zone_ids[index]) if zone_ids is not None and len(zone_ids) > index else 0
-            zone_name = (
-                zone_names[index] if zone_names is not None and len(zone_names) > index else None
+        
+        if edge_facet_res.topo_edge_ids[index] > 0:
+            display_mesh_type = DisplayMeshType.TOPOEDGE
+            entity_id = int(edge_facet_res.topo_edge_ids[index])
+        else:
+            display_mesh_type = DisplayMeshType.EDGEZONELET
+            entity_id = int(edge_facet_res.edge_zonelet_ids[index])
+        
+        zone_ids = getattr(edge_facet_res, "edge_zone_ids", None)
+        zone_id = (
+            int(zone_ids[index])
+            if zone_ids is not None and len(zone_ids) > index
+            else 0
+        )
+        
+        if edge.n_cells > 0:
+            edge.cell_data[PART_ID_ARRAY] = np.full(
+                edge.n_cells,
+                part_id,
+                dtype=np.int64,
             )
-
-            return MeshObjectPlot(part, edge), DisplayMeshInfo(
+            edge.cell_data[ENTITY_ID_ARRAY] = np.full(
+                edge.n_cells,
+                entity_id,
+                dtype=np.int64,
+            )
+            edge.cell_data[ENTITY_TYPE_ARRAY] = np.full(
+                edge.n_cells,
+                int(display_mesh_type),
+                dtype=np.int16,
+            )
+            edge.cell_data[ZONE_ID_ARRAY] = np.full(
+                edge.n_cells,
+                zone_id,
+                dtype=np.int64,
+            )
+        
+            edge.set_active_scalars(
+                ENTITY_COLOR_ARRAY,
+                preference="cell",
+            )
+        
+        if edge.n_points > 0:
+            zone_names = getattr(edge_facet_res, "edge_zone_names", None)
+            zone_name = (
+                zone_names[index]
+                if zone_names is not None and len(zone_names) > index
+                else None
+            )
+            
+            info = DisplayMeshInfo(
                 id=entity_id,
                 part_id=part_id,
                 part_name=part.name,
@@ -1253,6 +1335,9 @@ class Mesh(MeshInfo):
                 display_mesh_type=display_mesh_type,
                 has_mesh=False,
             )
+            
+            self._edge_infos[info.key] = info
+            return MeshObjectPlot(part, edge)
 
     def get_spline_cp_polydata(self, part_id: int, spline_id: int) -> MeshObjectPlot:
         """Get the polydata object of the spline control points.
@@ -1384,6 +1469,7 @@ class Mesh(MeshInfo):
                 part_ids, FaceAndEdgeConnectivityParams(model=self._model)
             )
         self._parts_polydata = {}
+        self._edge_infos = {}
         for i, part_id in enumerate(facet_result.part_ids):
             part = self._model.get_part(part_id)
             splines = part.get_splines()
