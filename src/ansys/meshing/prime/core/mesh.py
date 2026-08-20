@@ -556,7 +556,7 @@ def _merge_render_batch_dicts(
                 mask = batch.render_entity_ids == render_entity_id
                 if not mask.any():
                     continue
-                piece = batch.mesh.extract_cells(np.flatnonzero(mask), inplace=False)
+                piece = batch.mesh.extract_cells(np.flatnonzero(mask))
                 grouped[display_mesh_type].append((piece, info))
 
     merged: Dict[DisplayMeshType, RenderBatch] = {}
