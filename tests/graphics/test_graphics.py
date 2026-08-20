@@ -360,10 +360,7 @@ def test_hiding_an_entity_leaves_the_rest_drawn(get_remote_client, get_examples)
         display.set_entities_visible([key], True)
         assert display._drawn_geometry[actor].n_cells == batch.mesh.n_cells
         assert key in _keys_in_mesh(batch, display._drawn_geometry[actor])
-        assert (
-            display._drawn_geometry[actor].n_cells
-            == batch.mesh.n_cells
-        )
+        assert display._drawn_geometry[actor].n_cells == batch.mesh.n_cells
     finally:
         display.scene.close()
 
@@ -397,9 +394,7 @@ def test_hidden_entities_cannot_be_picked(get_remote_client, get_examples):
         actor, batch = max(display._batches.items(), key=lambda item: len(item[1].infos))
         _, _, hidden_key = _entry_info(batch)
         visible_render_id = next(
-            render_id
-            for render_id, info in batch.infos.items()
-            if info.key != hidden_key
+            render_id for render_id, info in batch.infos.items() if info.key != hidden_key
         )
 
         cell_id = np.flatnonzero(
