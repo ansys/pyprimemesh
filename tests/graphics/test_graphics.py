@@ -1,7 +1,6 @@
 # Copyright (C) 2024 - 2026 ANSYS, Inc. and/or its affiliates.
 # SPDX-License-Identifier: MIT
 #
-#
 # Permission is hereby granted, free of charge, to any person obtaining a copy
 # of this software and associated documentation files (the "Software"), to deal
 # in the Software without restriction, including without limitation the rights
@@ -20,17 +19,24 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
-"""Module for testing plotter related functions."""
+"""Tests for Prime plotting and actor-per-entity-type rendering."""
+
 from pathlib import Path
+from types import SimpleNamespace
 
 import numpy as np
 import pyvista as pv
 
 import ansys.meshing.prime as prime
+from ansys.tools.visualization_interface.utils.color import Color
 from ansys.meshing.prime.core.mesh import (
     ENTITY_COLOR_ARRAY,
-    ENTITY_ID_ARRAY,
+    PART_ID_ARRAY,
+    RENDER_ENTITY_ID_ARRAY,
     ColorByType,
+    DisplayEntityKey,
+    DisplayMeshInfo,
+    DisplayMeshType,
     compute_distance,
     compute_face_list_from_structured_nodes,
 )
@@ -42,12 +48,11 @@ IMAGE_RESULTS_DIR = Path(Path(__file__).parent, "image_cache", "results")
 
 
 def test_plotter(get_remote_client, get_examples, verify_image_cache):
-    """Test the basic functionality of the plotter."""
+    """Test basic plotter functionality."""
     mixing_elbow = get_examples["elbow_lucid"]
     model = get_remote_client.model
     mesh_util = prime.lucid.Mesh(model=model)
     mesh_util.read(mixing_elbow)
-
     mesh_util.surface_mesh(min_size=5, max_size=20)
     mesh_util.volume_mesh(
         volume_fill_type=prime.VolumeFillType.POLY,
@@ -61,11 +66,8 @@ def test_plotter(get_remote_client, get_examples, verify_image_cache):
 
 
 def _check_element_outlines(model_pd):
-    """Check outlines are held for the zonelets the face actor cannot draw itself.
-
-    Returns the number of zonelets that hold outlines.
-    """
-    count = 0
+    """Validate explicit triangulations and outlines; return outlined entity keys."""
+    outlined = set()
     for part_pd in model_pd.values():
         for mesh_object, info in part_pd["faces"]:
             higher_order = mesh_object.mesh.GetPolys().GetMaxCellSize() > 4
@@ -74,15 +76,14 @@ def _check_element_outlines(model_pd):
             assert (info.render_mesh is not None) == expected
             if expected:
                 assert info.element_edges.n_cells > 0
-                # shaded with an explicit triangulation, outlined with the real facets
                 assert info.render_mesh.GetPolys().GetMaxCellSize() == 3
                 assert info.render_mesh.n_cells > mesh_object.mesh.n_cells
-                count += 1
-    return count
+                outlined.add(info.key)
+    return outlined
 
 
 def _mesh_elbow(model, mixing_elbow, quadratic):
-    """Volume mesh the mixing elbow in an empty model and return its polydata."""
+    """Volume mesh the elbow in an empty model and return its PolyData."""
     part_ids = [part.id for part in model.parts]
     if part_ids:
         model.delete_parts(part_ids)
@@ -93,15 +94,40 @@ def _mesh_elbow(model, mixing_elbow, quadratic):
     return model.as_polydata(update=True)
 
 
+def _entry_info(batch, cell_id=0):
+    """Return render ID, metadata, and unique key for a batch cell."""
+    render_id = int(batch.render_entity_ids[cell_id])
+    info = batch.infos[render_id]
+    return render_id, info, info.key
+
+
+def _cells_for_key(batch, key):
+    """Return a mask selecting one model-unique entity in a batch."""
+    render_ids = {
+        int(render_id)
+        for render_id, info in batch.infos.items()
+        if info.key == key
+    }
+    return np.isin(batch.render_entity_ids, tuple(render_ids))
+
+
+def _keys_in_mesh(batch, mesh):
+    """Return model-unique entity keys represented in a displayed mesh."""
+    if mesh is None or mesh.n_cells == 0:
+        return set()
+    return {
+        batch.infos[int(render_id)].key
+        for render_id in np.unique(mesh.cell_data[RENDER_ENTITY_ID_ARRAY])
+    }
+
+
 def test_quadratic_element_outlines(get_remote_client, get_examples):
-    """Quadratic facets get their outlines drawn as separate line geometry."""
+    """Quadratic facets use model-wide explicit outline actors."""
     mixing_elbow = get_examples["elbow_lucid"]
     model = get_remote_client.model
 
-    # linear facets are drawn by the face actor itself, as they always have been
     linear_pd = _mesh_elbow(model, mixing_elbow, quadratic=False)
-    assert _check_element_outlines(linear_pd) == 0
-
+    assert _check_element_outlines(linear_pd) == set()
     linear_display = PrimePlotter()
     try:
         linear_display.add_model_pd(linear_pd)
@@ -110,73 +136,65 @@ def test_quadratic_element_outlines(get_remote_client, get_examples):
         linear_display.scene.close()
 
     quadratic_pd = _mesh_elbow(model, mixing_elbow, quadratic=True)
-    expected = _check_element_outlines(quadratic_pd)
-    assert expected > 0
+    expected_keys = _check_element_outlines(quadratic_pd)
+    assert expected_keys
 
     display = PrimePlotter()
     try:
         display.add_model_pd(quadratic_pd)
         outlines = display.element_edge_actors
-        # the outlines of a part are drawn together, so they are keyed by part
-        assert set(outlines) <= set(quadratic_pd)
-        assert all(actor.visibility for actor in outlines.values())
-        # every zonelet that holds outlines is still identifiable within them
-        outlined = set()
-        for actor in outlines.values():
-            outlined |= set(display._drawn_geometry[actor].cell_data[ENTITY_ID_ARRAY].tolist())
-        assert len(outlined) == expected
+        assert outlines
+        assert all(actor.visibility for actor in outlines)
+        assert len(outlines) <= 2  # TOPOFACE and FACEZONELET outline roles.
 
-        # hiding an entity takes its outlines out of the scene together with its faces
-        hidden_id = sorted(outlined)[0]
-        display.set_entities_visible([hidden_id], False)
-        for actor in outlines.values():
-            drawn = display._drawn_geometry[actor]
-            assert hidden_id not in set(drawn.cell_data[ENTITY_ID_ARRAY].tolist())
-        display.set_entities_visible([hidden_id], True)
-        for actor in outlines.values():
-            drawn = display._drawn_geometry[actor]
-            assert hidden_id in set(drawn.cell_data[ENTITY_ID_ARRAY].tolist())
+        represented = set()
+        for actor, batch in outlines.items():
+            represented.update(_keys_in_mesh(batch, display._drawn_geometry[actor]))
+        assert represented == expected_keys
+
+        hidden_key = next(iter(expected_keys))
+        display.set_entities_visible([hidden_key], False)
+        for actor, batch in outlines.items():
+            assert hidden_key not in _keys_in_mesh(batch, display._drawn_geometry[actor])
+
+        display.set_entities_visible([hidden_key], True)
+        represented = set()
+        for actor, batch in outlines.items():
+            represented.update(_keys_in_mesh(batch, display._drawn_geometry[actor]))
+        assert hidden_key in represented
     finally:
         display.scene.close()
 
 
 def _curved_quadratic_elbow(model, elbow_fmd):
-    """Coarse quadratic tet mesh whose mid-side nodes follow the CAD surface.
-
-    Meshing the faceted PMDAT leaves mid-side nodes on straight edges, so the
-    result is indistinguishable from a linear mesh. Reading the CAD and
-    projecting onto it is what actually bulges the elements out.
-    """
+    """Create a coarse quadratic tet mesh whose mid-side nodes follow CAD."""
     if model.parts:
         model.delete_parts([part.id for part in model.parts])
     mesh_util = prime.lucid.Mesh(model=model)
     mesh_util.read(file_name=elbow_fmd)
-    # coarse enough that a single element spans a visible amount of curvature
     mesh_util.surface_mesh(min_size=25, max_size=60)
     mesh_util.volume_mesh(quadratic=True, volume_fill_type=prime.VolumeFillType.TET)
     part = model.parts[0]
     prime.SurfaceUtilities(model).project_topo_faces_on_geometry(
         part.get_topo_faces(),
         prime.ProjectOnGeometryParams(
-            model, project_on_facets_if_cadnot_found=True, project_only_mid_nodes=False
+            model,
+            project_on_facets_if_cadnot_found=True,
+            project_only_mid_nodes=False,
         ),
     )
 
 
 def test_quadratic_edge_zonelets_follow_mid_nodes(get_remote_client, get_examples):
-    """Edge zonelets are drawn through their mid-side node, not across it.
-
-    A quadratic edge arrives as ``(start, mid, end)``. Drawing it as one segment
-    leaves the mid node sitting in the point array without any line referencing
-    it, and the line cuts the chord of the curve the node was projected onto.
-    """
+    """Quadratic edge zonelets are drawn through their mid-side nodes."""
     model = get_remote_client.model
     _curved_quadratic_elbow(model, get_examples["elbow_lucid"])
     model_pd = model.as_polydata(update=True)
 
     checked = 0
     for part_pd in model_pd.values():
-        for edge_mesh_part in part_pd["edges"]:
+        for edge_entry in part_pd["edges"]:
+            edge_mesh_part = edge_entry[0] if isinstance(edge_entry, tuple) else edge_entry
             edge = edge_mesh_part.mesh
             if edge.n_cells == 0:
                 continue
@@ -189,16 +207,10 @@ def test_quadratic_edge_zonelets_follow_mid_nodes(get_remote_client, get_example
 
 
 def test_quadratic_tet_plotter(get_remote_client, get_examples, verify_image_cache):
-    """Visual regression for quadratic tet outlines on a curved model.
-
-    Framed at a grazing angle on the pipe wall, where the curved element edges
-    and the mid-side subdivision within each facet are most obvious.
-    """
+    """Visual regression for quadratic tet outlines on a curved model."""
     model = get_remote_client.model
     _curved_quadratic_elbow(model, get_examples["elbow_lucid"])
-
     display = PrimePlotter()
-    # update, or the polydata another test already cached for this model is reused
     display.plot(model, update=True)
 
     scene = display.scene
@@ -213,34 +225,33 @@ def test_quadratic_tet_plotter(get_remote_client, get_examples, verify_image_cac
             np.sin(elevation),
         ]
     )
-    scene.camera_position = [tuple(target + direction * span * 1.6), tuple(target), (0, 0, 1)]
+    scene.camera_position = [
+        tuple(target + direction * span * 1.6),
+        tuple(target),
+        (0, 0, 1),
+    ]
     scene.camera.zoom(2.4)
     display.show()
 
 
 def _plot_model(model_pd):
-    """Plot polydata and return the plotter."""
+    """Plot PolyData and return the plotter."""
     display = PrimePlotter(allow_picking=False)
     display.add_model_pd(model_pd)
     return display
 
 
 def _drawn_pixels(display):
-    """Count the pixels the model is drawn on, from a camera that does not move."""
+    """Count non-background pixels without moving the camera."""
     image = np.asarray(display.scene.screenshot())
     return int(np.count_nonzero((image != 255).any(axis=2)))
 
 
-def test_entities_of_a_part_share_actors(get_remote_client, get_examples):
-    """A part is drawn with a handful of actors however many entities it holds.
-
-    The cost of a scene, and of exporting one, scales with the number of actors,
-    so entity count must not leak into it.
-    """
+def test_model_uses_actor_per_entity_type(get_remote_client, get_examples):
+    """Actor count depends on rendering types, not entity or part count."""
     model = get_remote_client.model
     model_pd = _mesh_elbow(model, get_examples["elbow_lucid"], quadratic=False)
 
-    # the widget buttons are actors of their own, so only count what the model adds
     empty = PrimePlotter(allow_picking=False)
     baseline = len(empty.scene.actors)
     empty.scene.close()
@@ -249,126 +260,117 @@ def test_entities_of_a_part_share_actors(get_remote_client, get_examples):
     try:
         entities = sum(len(part_pd["faces"]) for part_pd in model_pd.values())
         model_actors = len(display.scene.actors) - baseline
-        # at most two face batches, one outline actor, and one edge actor per part
-        assert model_actors <= 4 * len(model_pd)
+        # Four geometry types, two outline roles, and two spline roles at most.
+        assert model_actors <= 8
         assert model_actors < entities
-        # merging must not lose any entity
         assert len(display.entity_infos) == entities
+        assert len(display._batches) <= 4
+        assert len(display.element_edge_actors) <= 2
     finally:
         display.scene.close()
 
 
-def test_pick_resolves_to_the_entity_under_the_point(get_remote_client, get_examples):
-    """Picking a shared actor selects the one entity the point falls on."""
+def test_pick_resolves_to_model_unique_entity(get_remote_client, get_examples):
+    """Picking a shared actor resolves the exact entity beneath the point."""
     model = get_remote_client.model
     model_pd = _mesh_elbow(model, get_examples["elbow_lucid"], quadratic=False)
 
     display = _plot_model(model_pd)
     try:
         actor, batch = max(display._batches.items(), key=lambda item: len(item[1].infos))
-        assert len(batch.infos) > 1, "need a batch holding several entities"
+        assert len(batch.infos) > 1
 
         centers = batch.mesh.cell_centers().points
         for cell_id in (0, batch.mesh.n_cells // 2, batch.mesh.n_cells - 1):
-            expected = int(batch.entity_ids[cell_id])
+            _, expected_info, expected_key = _entry_info(batch, cell_id)
             display._picked_entities.clear()
             assert display._pick_entity(actor, centers[cell_id])
-            assert [int(info.id) for info in display.selected_entity_infos] == [expected]
+            assert [info.key for info in display.selected_entity_infos] == [expected_key]
 
-            # the picked entity is highlighted, and only it
-            colors = batch.mesh.cell_data[ENTITY_COLOR_ARRAY]
-            highlighted = np.unique(batch.entity_ids[colors[:, 0] == colors[cell_id][0]])
-            assert set(highlighted.tolist()) == {expected}
+            highlight = np.asarray(pv.Color(Color.PICKED.value).int_rgb, dtype=np.uint8)
+            highlighted = np.all(
+                batch.mesh.cell_data[ENTITY_COLOR_ARRAY] == highlight,
+                axis=1,
+            )
+            selected_render_id = int(batch.render_entity_ids[cell_id])
+            assert highlighted[batch.render_entity_ids == selected_render_id].all()
+            assert not highlighted[batch.render_entity_ids != selected_render_id].any()
 
-            # picking it again clears the selection
             assert display._pick_entity(actor, centers[cell_id])
             assert display.selected_entity_infos == []
+            assert expected_info.key not in display._picked_entities
     finally:
         display.scene.close()
 
 
 def test_hiding_an_entity_leaves_the_rest_drawn(get_remote_client, get_examples):
-    """Hiding an entity drops its cells from what is drawn, and only its own.
-
-    A cell of a shared mesh cannot be hidden by flagging it: the ghost array is
-    honored when a surface is built from a data set, not by the mapper of a
-    polygonal mesh, so the drawn geometry has to hold the visible cells only.
-    """
+    """Hiding one entity filters only its cells from the shared actor."""
     model = get_remote_client.model
     model_pd = _mesh_elbow(model, get_examples["elbow_lucid"], quadratic=False)
-
     display = _plot_model(model_pd)
     try:
         actor, batch = max(display._batches.items(), key=lambda item: len(item[1].infos))
-        entity_id = int(batch.entity_ids[0])
-        hidden_cells = int(np.count_nonzero(batch.entity_ids == entity_id))
+        _, _, key = _entry_info(batch)
+        mask = _cells_for_key(batch, key)
+        hidden_cells = int(np.count_nonzero(mask))
         assert 0 < hidden_cells < batch.mesh.n_cells
-        # the first screenshot of a window only sets it up, so it can come back blank
         display.scene.screenshot()
         everything = _drawn_pixels(display)
 
-        display.set_entities_visible([entity_id], False)
+        display.set_entities_visible([key], False)
         drawn = display._drawn_geometry[actor]
         assert drawn.n_cells == batch.mesh.n_cells - hidden_cells
-        assert entity_id not in set(drawn.cell_data[ENTITY_ID_ARRAY].tolist())
-        # the entity is only masked from the scene, never lost
-        assert batch.mesh.n_cells == drawn.n_cells + hidden_cells
-        assert entity_id in batch.infos
-        # the mapper keeps no reference of its own to what it draws, so the geometry
-        # has to be checked on screen and not only in the state of the plotter
+        assert key not in _keys_in_mesh(batch, drawn)
+        assert key in display.entity_infos
         assert 0 < _drawn_pixels(display) < everything
 
-        display.set_entities_visible([entity_id], True)
+        display.set_entities_visible([key], True)
         assert display._drawn_geometry[actor].n_cells == batch.mesh.n_cells
-        assert entity_id in set(display._drawn_geometry[actor].cell_data[ENTITY_ID_ARRAY].tolist())
-        # showing the entity again has to bring every pixel of it back
+        assert key in _keys_in_mesh(batch, display._drawn_geometry[actor])
         assert _drawn_pixels(display) == everything
     finally:
         display.scene.close()
 
 
 def test_hidden_entities_stay_hidden_when_recolored(get_remote_client, get_examples):
-    """Recoloring rebuilds the drawn geometry, which must stay free of hidden cells."""
+    """Recoloring preserves entity visibility filtering."""
     model = get_remote_client.model
     model_pd = _mesh_elbow(model, get_examples["elbow_lucid"], quadratic=False)
-
     display = _plot_model(model_pd)
     try:
         actor, batch = max(display._batches.items(), key=lambda item: len(item[1].infos))
-        entity_id = int(batch.entity_ids[0])
-        display.set_entities_visible([entity_id], False)
+        _, _, key = _entry_info(batch)
+        display.set_entities_visible([key], False)
         drawn_cells = display._drawn_geometry[actor].n_cells
 
         display.set_color_by_type(ColorByType.ZONELET)
         drawn = display._drawn_geometry[actor]
         assert drawn.n_cells == drawn_cells
-        assert entity_id not in set(drawn.cell_data[ENTITY_ID_ARRAY].tolist())
-        # the drawn copy carries the colors that were just computed
+        assert key not in _keys_in_mesh(batch, drawn)
         assert ENTITY_COLOR_ARRAY in drawn.cell_data
     finally:
         display.scene.close()
 
 
 def test_hidden_entities_cannot_be_picked(get_remote_client, get_examples):
-    """A pick resolves against what is drawn, so hidden entities are not selectable."""
+    """A pick resolves against displayed geometry, never hidden cells."""
     model = get_remote_client.model
     model_pd = _mesh_elbow(model, get_examples["elbow_lucid"], quadratic=False)
-
     display = _plot_model(model_pd)
     try:
         actor, batch = max(display._batches.items(), key=lambda item: len(item[1].infos))
-        entity_id = int(batch.entity_ids[0])
+        _, _, hidden_key = _entry_info(batch)
         center = batch.mesh.cell_centers().points[0]
 
-        display.set_entities_visible([entity_id], False)
+        display.set_entities_visible([hidden_key], False)
         assert display._pick_entity(actor, center)
-        assert entity_id not in {int(info.id) for info in display.selected_entity_infos}
+        assert hidden_key not in {info.key for info in display.selected_entity_infos}
     finally:
         display.scene.close()
 
 
 def _pick_display_point(display, world_point):
-    """Pick the scene where a world point is drawn, the way a click does."""
+    """Pick the scene at the display coordinate of a world point."""
     scene = display.scene
     coordinate = pv._vtk.vtkCoordinate()
     coordinate.SetCoordinateSystemToWorld()
@@ -377,16 +379,10 @@ def _pick_display_point(display, world_point):
     scene.iren.picker.Pick(x, y, 0, scene.renderer)
 
 
-def test_clicking_a_shared_actor_selects_and_labels_an_entity(get_remote_client, get_examples):
-    """A click travels from the backend picker to the entity under the cursor.
-
-    The entities of a part share an actor, so the pick has to be resolved against
-    the cell it landed on, and the picked entity has to be labeled here, since the
-    generic backend can only label an object that owns an actor of its own.
-    """
+def test_clicking_shared_actor_selects_and_labels_entity(get_remote_client, get_examples):
+    """A backend click selects and labels one model-unique entity."""
     model = get_remote_client.model
     model_pd = _mesh_elbow(model, get_examples["elbow_lucid"], quadratic=False)
-
     display = PrimePlotter(allow_picking=True)
     try:
         display.add_model_pd(model_pd)
@@ -397,19 +393,17 @@ def test_clicking_a_shared_actor_selects_and_labels_an_entity(get_remote_client,
         actor, batch = max(display._batches.items(), key=lambda item: len(item[1].infos))
         _pick_display_point(display, batch.mesh.cell_centers().points[0])
         picked_point = display.scene.picked_point
-        assert picked_point is not None, "the click has to land on the model"
+        assert picked_point is not None
 
-        drawn = display._drawn_geometry[display.scene.picked_actor]
-        expected = int(
-            drawn.cell_data[ENTITY_ID_ARRAY][drawn.find_closest_cell(list(picked_point))]
-        )
-        assert [int(info.id) for info in display.selected_entity_infos] == [expected]
+        picked_actor = display.scene.picked_actor
+        drawn = display._drawn_geometry[picked_actor]
+        cell_id = drawn.find_closest_cell(list(picked_point))
+        render_id = int(drawn.cell_data[RENDER_ENTITY_ID_ARRAY][cell_id])
+        expected_key = display._batches[picked_actor].infos[render_id].key
+        assert [info.key for info in display.selected_entity_infos] == [expected_key]
+        assert expected_key in display._entity_labels
+        assert display._entity_labels[expected_key] in display.scene.actors.values()
 
-        # the entity is named on screen, as an individually drawn object would be
-        assert expected in display._entity_labels
-        assert display._entity_labels[expected] in display.scene.actors.values()
-
-        # clicking it again clears both the selection and its label
         _pick_display_point(display, batch.mesh.cell_centers().points[0])
         assert display.selected_entity_infos == []
         assert display._entity_labels == {}
@@ -417,87 +411,142 @@ def test_clicking_a_shared_actor_selects_and_labels_an_entity(get_remote_client,
         display.scene.close()
 
 
-def test_hiding_a_picked_entity_hides_its_label(get_remote_client, get_examples):
-    """The label of an entity follows the entity in and out of the scene."""
+def test_hiding_picked_entity_hides_its_label(get_remote_client, get_examples):
+    """A picked entity label follows visibility while selection persists."""
     model = get_remote_client.model
     model_pd = _mesh_elbow(model, get_examples["elbow_lucid"], quadratic=False)
-
     display = PrimePlotter(allow_picking=True)
     try:
         display.add_model_pd(model_pd)
         actor, batch = max(display._batches.items(), key=lambda item: len(item[1].infos))
-        entity_id = int(batch.entity_ids[0])
+        _, _, key = _entry_info(batch)
         display._pick_entity(actor, batch.mesh.cell_centers().points[0])
-        assert entity_id in display._entity_labels
+        assert key in display._entity_labels
 
-        display.set_entities_visible([entity_id], False)
+        display.set_entities_visible([key], False)
         assert display._entity_labels == {}
-        # the entity stays picked, so the widgets keep reporting it
-        assert [int(info.id) for info in display.selected_entity_infos] == [entity_id]
+        assert [info.key for info in display.selected_entity_infos] == [key]
 
-        display.set_entities_visible([entity_id], True)
-        assert entity_id in display._entity_labels
+        display.set_entities_visible([key], True)
+        assert key in display._entity_labels
     finally:
         display.scene.close()
 
 
 def test_hide_picked_widget_hides_and_restores_entities(get_remote_client, get_examples):
-    """The hide widget takes the picked entities out of the scene and brings them back."""
+    """The hide widget filters and restores exactly the picked entity."""
     model = get_remote_client.model
     model_pd = _mesh_elbow(model, get_examples["elbow_lucid"], quadratic=False)
-
     display = PrimePlotter(allow_picking=True)
     try:
         display.add_model_pd(model_pd)
         actor, batch = max(display._batches.items(), key=lambda item: len(item[1].infos))
-        entity_id = int(batch.entity_ids[0])
-        hidden_cells = int(np.count_nonzero(batch.entity_ids == entity_id))
+        _, _, key = _entry_info(batch)
+        hidden_cells = int(np.count_nonzero(_cells_for_key(batch, key)))
         display._pick_entity(actor, batch.mesh.cell_centers().points[0])
 
-        widget = next(w for w in display._backend._widgets if isinstance(w, HidePicked))
+        widget = next(widget for widget in display._backend._widgets if isinstance(widget, HidePicked))
         widget.callback(True)
         assert display._drawn_geometry[actor].n_cells == batch.mesh.n_cells - hidden_cells
+        assert widget._hidden_entities == [key]
 
         widget.callback(False)
         assert display._drawn_geometry[actor].n_cells == batch.mesh.n_cells
+        assert widget._hidden_entities == []
     finally:
         display.scene.close()
 
 
 def test_color_by_type_recolors_shared_meshes(get_remote_client, get_examples):
-    """Switching color mode recolors cells rather than actors."""
+    """Changing color mode recolors cells rather than creating actors."""
     model = get_remote_client.model
     model_pd = _mesh_elbow(model, get_examples["elbow_lucid"], quadratic=False)
-
     display = _plot_model(model_pd)
     try:
         batch = max(display._batches.values(), key=lambda candidate: len(candidate.infos))
+        actor_count = len(display.scene.actors)
 
         display.set_color_by_type(ColorByType.PART)
         by_part = batch.mesh.cell_data[ENTITY_COLOR_ARRAY].copy()
-        assert len(np.unique(by_part, axis=0)) == 1
+        part_count = len(np.unique(batch.mesh.cell_data[PART_ID_ARRAY]))
+        assert len(np.unique(by_part, axis=0)) <= part_count
 
         display.set_color_by_type(ColorByType.ZONELET)
         by_zonelet = batch.mesh.cell_data[ENTITY_COLOR_ARRAY]
         assert len(np.unique(by_zonelet, axis=0)) > 1
-        # cells of one entity always share a color
-        for entity_id in list(batch.infos)[:5]:
-            cells = batch.entity_ids == entity_id
+        for render_id in list(batch.infos)[:5]:
+            cells = batch.render_entity_ids == render_id
             assert len(np.unique(by_zonelet[cells], axis=0)) == 1
+
+        assert len(display.scene.actors) == actor_count
+    finally:
+        display.scene.close()
+
+
+def _synthetic_face_entry(part_id, entity_id, x_offset):
+    """Create one synthetic face entry for duplicate-ID isolation tests."""
+    mesh = pv.Plane(center=(x_offset, 0.0, 0.0), i_resolution=1, j_resolution=1)
+    part = SimpleNamespace(id=part_id, name=f"part-{part_id}")
+    mesh_object = SimpleNamespace(mesh=mesh, custom_object=part)
+    info = DisplayMeshInfo(
+        id=entity_id,
+        part_id=part_id,
+        part_name=part.name,
+        zone_id=1,
+        zone_name="zone",
+        display_mesh_type=DisplayMeshType.FACEZONELET,
+        has_mesh=False,
+    )
+    return mesh_object, info
+
+
+def test_duplicate_entity_ids_in_different_parts_are_independent():
+    """Equal entity IDs in different parts remain independently selectable and hideable."""
+    first = _synthetic_face_entry(part_id=10, entity_id=7, x_offset=-2.0)
+    second = _synthetic_face_entry(part_id=20, entity_id=7, x_offset=2.0)
+    model_pd = {
+        10: {"faces": [first], "edges": [], "ctrlpts": [], "splinesurf": []},
+        20: {"faces": [second], "edges": [], "ctrlpts": [], "splinesurf": []},
+    }
+
+    display = PrimePlotter(allow_picking=False)
+    try:
+        display.add_model_pd(model_pd)
+        assert len(display._batches) == 1
+        actor, batch = next(iter(display._batches.items()))
+        assert len(batch.infos) == 2
+
+        first_key = DisplayEntityKey(10, DisplayMeshType.FACEZONELET, 7)
+        second_key = DisplayEntityKey(20, DisplayMeshType.FACEZONELET, 7)
+        assert set(display.entity_infos) == {first_key, second_key}
+
+        cell_by_key = {
+            info.key: int(np.flatnonzero(batch.render_entity_ids == render_id)[0])
+            for render_id, info in batch.infos.items()
+        }
+        centers = batch.mesh.cell_centers().points
+        assert display._pick_entity(actor, centers[cell_by_key[first_key]])
+        assert set(display.picked_entities) == {first_key}
+
+        display.set_entities_visible([first_key], False)
+        drawn_keys = _keys_in_mesh(batch, display._drawn_geometry[actor])
+        assert first_key not in drawn_keys
+        assert second_key in drawn_keys
+
+        display.set_entities_visible([first_key], True)
+        assert _keys_in_mesh(batch, display._drawn_geometry[actor]) == {
+            first_key,
+            second_key,
+        }
     finally:
         display.scene.close()
 
 
 def test_compute_distance():
-    point1 = [1, 1, 3]
-    point2 = [1, 1, 1]
-    assert compute_distance(point1=point1, point2=point2) == 2.0
+    """Test Euclidean distance."""
+    assert compute_distance(point1=[1, 1, 3], point2=[1, 1, 1]) == 2.0
 
 
 def test_compute_face_list():
-    dim = []
-    dim.append(2)
-    dim.append(2)
-    dim.append(2)
-    flist = compute_face_list_from_structured_nodes(dim)
-    assert len(flist) == 30
+    """Test structured-node face-list generation."""
+    assert len(compute_face_list_from_structured_nodes([2, 2, 2])) == 30
