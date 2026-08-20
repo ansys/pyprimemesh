@@ -31,8 +31,11 @@ from ansys.tools.visualization_interface.utils.color import Color
 import ansys.meshing.prime as prime
 from ansys.meshing.prime.core.mesh import (
     ENTITY_COLOR_ARRAY,
+    ENTITY_ID_ARRAY,
+    ENTITY_TYPE_ARRAY,
     PART_ID_ARRAY,
     RENDER_ENTITY_ID_ARRAY,
+    ZONE_ID_ARRAY,
     ColorByType,
     DisplayEntityKey,
     DisplayMeshInfo,
@@ -99,6 +102,19 @@ def _entry_info(batch, cell_id=0):
     render_id = int(batch.render_entity_ids[cell_id])
     info = batch.infos[render_id]
     return render_id, info, info.key
+
+
+def _largest_pickable_batch(display):
+    """Return the pickable actor and batch with the most registered entities."""
+    actor, batch = max(
+        (
+            (actor, batch)
+            for actor, batch in display._batches.items()
+            if batch.pickable
+        ),
+        key=lambda item: len(item[1].infos),
+    )
+    return actor, batch
 
 
 def _cells_for_key(batch, key):
@@ -292,12 +308,18 @@ def test_model_uses_actor_per_entity_type(get_remote_client, get_examples):
 
     display = _plot_model(model_pd)
     try:
-        entities = sum(len(part_pd["faces"]) for part_pd in model_pd.values())
+        face_entities = sum(len(part_pd["faces"]) for part_pd in model_pd.values())
+        face_types = {DisplayMeshType.TOPOFACE, DisplayMeshType.FACEZONELET}
+        registered_faces = sum(
+            1
+            for info in display.entity_infos.values()
+            if info.display_mesh_type in face_types
+        )
         model_actors = len(display.scene.actors) - baseline
         # Four geometry types, two outline roles, and two spline roles at most.
         assert model_actors <= 8
-        assert model_actors < entities
-        assert len(display.entity_infos) == entities
+        assert model_actors < face_entities
+        assert registered_faces == face_entities
         assert len(display._batches) <= 4
         assert len(display.element_edge_actors) <= 2
     finally:
@@ -311,7 +333,7 @@ def test_pick_resolves_to_model_unique_entity(get_remote_client, get_examples):
 
     display = _plot_model(model_pd)
     try:
-        actor, batch = max(display._batches.items(), key=lambda item: len(item[1].infos))
+        actor, batch = _largest_pickable_batch(display)
         assert len(batch.infos) > 1
 
         centers = batch.mesh.cell_centers().points
@@ -343,7 +365,7 @@ def test_hiding_an_entity_leaves_the_rest_drawn(get_remote_client, get_examples)
     model_pd = _mesh_elbow(model, get_examples["elbow_lucid"], quadratic=False)
     display = _plot_model(model_pd)
     try:
-        actor, batch = max(display._batches.items(), key=lambda item: len(item[1].infos))
+        actor, batch = _largest_pickable_batch(display)
         _, _, key = _entry_info(batch)
         mask = _cells_for_key(batch, key)
         hidden_cells = int(np.count_nonzero(mask))
@@ -371,7 +393,7 @@ def test_hidden_entities_stay_hidden_when_recolored(get_remote_client, get_examp
     model_pd = _mesh_elbow(model, get_examples["elbow_lucid"], quadratic=False)
     display = _plot_model(model_pd)
     try:
-        actor, batch = max(display._batches.items(), key=lambda item: len(item[1].infos))
+        actor, batch = _largest_pickable_batch(display)
         _, _, key = _entry_info(batch)
         display.set_entities_visible([key], False)
         drawn_cells = display._drawn_geometry[actor].n_cells
@@ -391,7 +413,7 @@ def test_hidden_entities_cannot_be_picked(get_remote_client, get_examples):
     model_pd = _mesh_elbow(model, get_examples["elbow_lucid"], quadratic=False)
     display = _plot_model(model_pd)
     try:
-        actor, batch = max(display._batches.items(), key=lambda item: len(item[1].infos))
+        actor, batch = _largest_pickable_batch(display)
         _, _, hidden_key = _entry_info(batch)
         visible_render_id = next(
             render_id for render_id, info in batch.infos.items() if info.key != hidden_key
@@ -429,7 +451,7 @@ def test_clicking_shared_actor_selects_and_labels_entity(get_remote_client, get_
         display.scene.show(auto_close=False)
         display.scene.render()
 
-        actor, batch = max(display._batches.items(), key=lambda item: len(item[1].infos))
+        actor, batch = _largest_pickable_batch(display)
         _pick_display_point(display, batch.mesh.cell_centers().points[0])
         picked_point = display.scene.picked_point
         assert picked_point is not None
@@ -457,7 +479,7 @@ def test_hiding_picked_entity_hides_its_label(get_remote_client, get_examples):
     display = PrimePlotter(allow_picking=True)
     try:
         display.add_model_pd(model_pd)
-        actor, batch = max(display._batches.items(), key=lambda item: len(item[1].infos))
+        actor, batch = _largest_pickable_batch(display)
         _, _, key = _entry_info(batch)
         display._pick_entity(actor, batch.mesh.cell_centers().points[0])
         assert key in display._entity_labels
@@ -479,7 +501,7 @@ def test_hide_picked_widget_hides_and_restores_entities(get_remote_client, get_e
     display = PrimePlotter(allow_picking=True)
     try:
         display.add_model_pd(model_pd)
-        actor, batch = max(display._batches.items(), key=lambda item: len(item[1].infos))
+        actor, batch = _largest_pickable_batch(display)
         _, _, key = _entry_info(batch)
         hidden_cells = int(np.count_nonzero(_cells_for_key(batch, key)))
         display._pick_entity(actor, batch.mesh.cell_centers().points[0])
