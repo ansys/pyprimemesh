@@ -1641,6 +1641,7 @@ class Mesh(MeshInfo):
         """
         return self._zone_id
 
+
 class MeshUSD(MeshInfo):
     """Processes the mesh for USD export and serialization.
 
