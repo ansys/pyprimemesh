@@ -1447,9 +1447,7 @@ class Mesh(MeshInfo):
 
                 grouped_raw[display_mesh_type].append((vertices, block, n_cells, info))
                 if has_mesh:
-                    mesh = _assemble_entity_mesh(
-                        vertices, block, n_cells, info, 0, lines=False
-                    )
+                    mesh = _assemble_entity_mesh(vertices, block, n_cells, info, 0, lines=False)
                     if mesh is not None:
                         fast_outline_entries.append((MeshObjectPlot(part, mesh), info))
 
