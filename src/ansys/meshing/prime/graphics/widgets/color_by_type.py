@@ -51,13 +51,11 @@ class ColorByTypeWidget(PlotterWidget):
 
         self.prime_plotter = prime_plotter
 
-        self._button = (
-            self.prime_plotter._backend.pv_interface.scene.add_checkbox_button_widget(
-                self.callback,
-                position=(5, 630),
-                size=30,
-                border_size=3,
-            )
+        self._button = self.prime_plotter._backend.pv_interface.scene.add_checkbox_button_widget(
+            self.callback,
+            position=(5, 630),
+            size=30,
+            border_size=3,
         )
 
         self._button.GetRepresentation().SetNumberOfStates(3)
@@ -68,9 +66,7 @@ class ColorByTypeWidget(PlotterWidget):
         """Apply the selected coloring mode."""
         del state
 
-        color_type = ColorByType(
-            self._button.GetRepresentation().GetState()
-        )
+        color_type = color_type = ColorByType(self._button.GetRepresentation().GetState())
 
         self._color_type = color_type
 
