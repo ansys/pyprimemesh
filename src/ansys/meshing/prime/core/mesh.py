@@ -237,7 +237,8 @@ class RenderBatch:
                 "The render batch is missing required cell arrays: " + ", ".join(missing)
             )
         render_ids = np.asarray(
-            self.mesh.cell_data[RENDER_ENTITY_ID_ARRAY], dtype=np.int64,
+            self.mesh.cell_data[RENDER_ENTITY_ID_ARRAY],
+            dtype=np.int64,
         )
 
         unknown_ids = set(np.unique(render_ids)).difference(self.infos)
@@ -485,8 +486,7 @@ def resolve_picked_entity(
     """
     if cell_id < 0 or cell_id >= batch.mesh.n_cells:
         raise IndexError(
-            f"Picked cell ID {cell_id} is outside a mesh containing "
-            f"{batch.mesh.n_cells} cells."
+            f"Picked cell ID {cell_id} is outside a mesh containing " f"{batch.mesh.n_cells} cells."
         )
 
     render_entity_id = int(batch.mesh.cell_data[RENDER_ENTITY_ID_ARRAY][cell_id])
@@ -505,13 +505,10 @@ def selected_entity_keys(
         ENTITY_ID_ARRAY,
         ENTITY_TYPE_ARRAY,
     )
-    missing = [
-        name for name in required if name not in mesh.cell_data
-    ]
+    missing = [name for name in required if name not in mesh.cell_data]
     if missing:
         raise ValueError(
-            "Selected geometry is missing Prime ownership arrays: "
-            + ", ".join(missing)
+            "Selected geometry is missing Prime ownership arrays: " + ", ".join(missing)
         )
 
     part_ids = np.asarray(mesh.cell_data[PART_ID_ARRAY])
@@ -561,18 +558,12 @@ def build_face_render_batches(
             continue
 
         mesh_object, info = entry
-        geometry = (
-            info.render_mesh
-            if info.render_mesh is not None
-            else mesh_object.mesh
-        )
+        geometry = info.render_mesh if info.render_mesh is not None else mesh_object.mesh
 
         if geometry is None or geometry.n_cells == 0:
             continue
 
-        grouped[info.display_mesh_type].append(
-            (geometry, info)
-        )
+        grouped[info.display_mesh_type].append((geometry, info))
 
     batches: Dict[DisplayMeshType, RenderBatch] = {}
 
@@ -642,18 +633,14 @@ def build_element_edge_batches(
         if info.element_edges is not None:
             outlines = info.element_edges
         elif mesh_object.mesh is not None:
-            outlines = mesh_object.mesh.extract_all_edges(
-                progress_bar=False
-            )
+            outlines = mesh_object.mesh.extract_all_edges(progress_bar=False)
         else:
             outlines = None
 
         if outlines is None or outlines.n_cells == 0:
             continue
 
-        grouped[info.display_mesh_type].append(
-            (outlines, info)
-        )
+        grouped[info.display_mesh_type].append((outlines, info))
 
     batches: Dict[DisplayMeshType, RenderBatch] = {}
 
@@ -746,9 +733,7 @@ def build_edge_render_batches(
                 display_mesh_type=DisplayMeshType.EDGEZONELET,
             )
 
-        grouped[info.display_mesh_type].append(
-            (geometry, info)
-        )
+        grouped[info.display_mesh_type].append((geometry, info))
 
     batches: Dict[DisplayMeshType, RenderBatch] = {}
 
