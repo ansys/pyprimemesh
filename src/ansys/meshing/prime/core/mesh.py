@@ -779,9 +779,7 @@ def build_edge_render_batches(
 def build_edge_render_mesh(edge_entries: Iterable) -> "pv.PolyData":
     """Return all edge batches as a compatibility mesh."""
     batches = build_edge_render_batches(edge_entries)
-    return _merge_geometry(
-        [batch.mesh for batch in batches.values()]
-    )
+    return _merge_geometry([batch.mesh for batch in batches.values()])
 
 
 def _merge_geometry(
@@ -803,9 +801,7 @@ def _merge_geometry(
         Concatenated geometry, or ``None`` for an empty input.
     """
     valid_pieces = [
-        _as_polydata(piece)
-        for piece in pieces
-        if piece is not None and piece.n_cells > 0
+        _as_polydata(piece) for piece in pieces if piece is not None and piece.n_cells > 0
     ]
 
     if not valid_pieces:
@@ -1243,15 +1239,9 @@ class Mesh(MeshInfo):
             zone_ids = getattr(edge_facet_res, "edge_zone_ids", None)
             zone_names = getattr(edge_facet_res, "edge_zone_names", None)
 
-            zone_id = (
-                int(zone_ids[index])
-                if zone_ids is not None and len(zone_ids) > index
-                else 0
-            )
+            zone_id = int(zone_ids[index]) if zone_ids is not None and len(zone_ids) > index else 0
             zone_name = (
-                zone_names[index]
-                if zone_names is not None and len(zone_names) > index
-                else None
+                zone_names[index] if zone_names is not None and len(zone_names) > index else None
             )
 
             return MeshObjectPlot(part, edge), DisplayMeshInfo(
@@ -1505,19 +1495,13 @@ class Mesh(MeshInfo):
                 update=update,
             )
 
-        face_entries = list(
-            self.iter_polydata_entries(source, "faces")
-        )
-        edge_entries = list(
-            self.iter_polydata_entries(source, "edges")
-        )
+        face_entries = list(self.iter_polydata_entries(source, "faces"))
+        edge_entries = list(self.iter_polydata_entries(source, "edges"))
 
         return {
             "faces": build_face_render_batches(face_entries),
             "edges": build_edge_render_batches(edge_entries),
-            "element_edges": build_element_edge_batches(
-                face_entries
-            ),
+            "element_edges": build_element_edge_batches(face_entries),
         }
 
     @property
