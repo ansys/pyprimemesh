@@ -487,18 +487,12 @@ def _attach_entity_metadata(
     output.cell_data[RENDER_ENTITY_ID_ARRAY] = np.full(
         number_of_cells, int(render_entity_id), dtype=np.int64
     )
-    output.cell_data[PART_ID_ARRAY] = np.full(
-        number_of_cells, info.part_id, dtype=np.int64
-    )
-    output.cell_data[ENTITY_ID_ARRAY] = np.full(
-        number_of_cells, info.id, dtype=np.int64
-    )
+    output.cell_data[PART_ID_ARRAY] = np.full(number_of_cells, info.part_id, dtype=np.int64)
+    output.cell_data[ENTITY_ID_ARRAY] = np.full(number_of_cells, info.id, dtype=np.int64)
     output.cell_data[ENTITY_TYPE_ARRAY] = np.full(
         number_of_cells, int(info.display_mesh_type), dtype=np.int16
     )
-    output.cell_data[ZONE_ID_ARRAY] = np.full(
-        number_of_cells, info.zone_id, dtype=np.int64
-    )
+    output.cell_data[ZONE_ID_ARRAY] = np.full(number_of_cells, info.zone_id, dtype=np.int64)
     return output
 
 
