@@ -1,7 +1,6 @@
 # Copyright (C) 2024 - 2026 ANSYS, Inc. and/or its affiliates.
 # SPDX-License-Identifier: MIT
 #
-#
 # Permission is hereby granted, free of charge, to any person obtaining a copy
 # of this software and associated documentation files (the "Software"), to deal
 # in the Software without restriction, including without limitation the rights
@@ -19,7 +18,8 @@
 # LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
-"""Module for PickedInfo widget."""
+"""Module for the picked-information widget."""
+
 import os
 from typing import TYPE_CHECKING
 
@@ -33,18 +33,20 @@ if TYPE_CHECKING:
 
 
 class PickedInfo(PlotterWidget):
-    """Initializes the picked information button widget.
+    """Initialize the picked-information button widget.
 
-    This widget lets you get information about the picked mesh objects.
+    This widget prints information about each uniquely selected Prime display
+    entity. Entity uniqueness includes the owning part and display entity type,
+    so equal entity IDs in different parts remain distinct.
 
     Parameters
     ----------
     prime_plotter : PrimePlotter
-        Plotter to apply this widget to.
+        Plotter to which this widget is attached.
     """
 
     def __init__(self, prime_plotter: "PrimePlotter") -> None:
-        """Initialize widget."""
+        """Initialize the widget."""
         super().__init__(prime_plotter._backend._pl.scene)
         self.prime_plotter = prime_plotter
         self._button = self.prime_plotter._backend._pl.scene.add_checkbox_button_widget(
@@ -56,61 +58,96 @@ class PickedInfo(PlotterWidget):
             color_on="white",
         )
 
-    def info_message(self, mesh_info: DisplayMeshInfo) -> str:
-        """Get the information message for the selected mesh object.
+    @staticmethod
+    def _entity_description(mesh_info: DisplayMeshInfo) -> str:
+        """Return a readable description of a selected display entity.
 
         Parameters
         ----------
         mesh_info : DisplayMeshInfo
-            Mesh information object to print.
+            Information about the selected display entity.
 
         Returns
         -------
         str
-            Message with the information of the selected mesh object.
+            Entity type and original Prime entity ID.
         """
-        mesh_type = mesh_info.display_mesh_type
-        id = mesh_info.id
-        part_id = mesh_info.part_id
-        part_name = mesh_info.part_name
-        zone_id = mesh_info.zone_id
-        zone_name = mesh_info.zone_name
+        descriptions = {
+            DisplayMeshType.TOPOFACE: "Selected TopoFace",
+            DisplayMeshType.FACEZONELET: "Selected FaceZonelet",
+            DisplayMeshType.TOPOEDGE: "Selected TopoEdge",
+            DisplayMeshType.EDGEZONELET: "Selected EdgeZonelet",
+            DisplayMeshType.SPLINECONTROLPOINTS: "Selected Spline Control Points",
+            DisplayMeshType.SPLINESURFACE: "Selected Spline Surface",
+        }
+        description = descriptions.get(
+            mesh_info.display_mesh_type,
+            "Selected Entity",
+        )
+        return f"{description} {mesh_info.id}"
 
-        if mesh_type == DisplayMeshType.TOPOFACE or mesh_type == DisplayMeshType.FACEZONELET:
-            msg = "Selected FaceZonelet "
-            if mesh_type is DisplayMeshType.TOPOFACE:
-                msg = "Selected TopoFace "
-            msg += str(id)
-        elif mesh_type == DisplayMeshType.TOPOEDGE or mesh_type == DisplayMeshType.EDGEZONELET:
-            msg = "Selected EdgeZonelet "
-            if mesh_type is DisplayMeshType.TOPOEDGE:
-                msg = "Selected TopoEdge "
-            msg += str(id)
-        msg += ", in Part Id : " + str(part_id) + ", Part Name : " + part_name + "\n"
-        if zone_id > 0:
-            msg += "Zone Id : " + str(zone_id) + ", Zone Name : " + zone_name
-        return msg
+    def info_message(self, mesh_info: DisplayMeshInfo) -> str:
+        """Return the information message for a selected display entity.
+
+        Parameters
+        ----------
+        mesh_info : DisplayMeshInfo
+            Information about the selected display entity.
+
+        Returns
+        -------
+        str
+            Human-readable selection information.
+        """
+        part_name = mesh_info.part_name or "<unknown>"
+        entity_type_name = mesh_info.display_mesh_type.name
+
+        message = (
+            f"{self._entity_description(mesh_info)}, "
+            f"Part Id : {mesh_info.part_id}, "
+            f"Part Name : {part_name}, "
+            f"Entity Type : {entity_type_name}"
+        )
+
+        if mesh_info.zone_id > 0:
+            zone_name = mesh_info.zone_name or "<unknown>"
+            message += (
+                f"\nZone Id : {mesh_info.zone_id}, "
+                f"Zone Name : {zone_name}"
+            )
+
+        return message
 
     def callback(self, state: bool) -> None:
-        """Define the callback function for the button widget.
+        """Print information for each uniquely selected entity.
 
         Parameters
         ----------
         state : bool
-            State of the button widget.
+            State of the checkbox button. Selection information is printed for
+            either state to preserve the widget's existing callback behavior.
         """
+        del state
+
+        seen = set()
         for mesh_info in self.prime_plotter.selected_entity_infos:
+            key = mesh_info.key
+            if key in seen:
+                continue
+            seen.add(key)
             print(self.info_message(mesh_info))
 
     def update(self) -> None:
-        """Define the configuration and representation of the button widget button."""
-        show_point_vr = self._button.GetRepresentation()
-        show_point_icon_file = os.path.join(
-            os.path.dirname(__file__), "images", "selectioninfo.png"
+        """Configure the button texture."""
+        representation = self._button.GetRepresentation()
+        icon_file = os.path.join(
+            os.path.dirname(__file__),
+            "images",
+            "selectioninfo.png",
         )
-        show_point_r = vtkPNGReader()
-        show_point_r.SetFileName(show_point_icon_file)
-        show_point_r.Update()
-        image = show_point_r.GetOutput()
-        show_point_vr.SetButtonTexture(0, image)
-        show_point_vr.SetButtonTexture(1, image)
+        reader = vtkPNGReader()
+        reader.SetFileName(icon_file)
+        reader.Update()
+        image = reader.GetOutput()
+        representation.SetButtonTexture(0, image)
+        representation.SetButtonTexture(1, image)
