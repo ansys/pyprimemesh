@@ -190,8 +190,13 @@ def test_quadratic_edge_zonelets_follow_mid_nodes(get_remote_client, get_example
     checked = 0
     for part_pd in model_pd.values():
         for edge_entry in part_pd["edges"]:
-            edge_mesh_part = edge_entry[0] if isinstance(edge_entry, tuple) else edge_entry
+            edge_mesh_part = edge_entry
+            assert not isinstance(edge_entry, tuple)
             edge = edge_mesh_part.mesh
+            assert PART_ID_ARRAY in edge.cell_data
+            assert ENTITY_ID_ARRAY in edge.cell_data
+            assert ENTITY_TYPE_ARRAY in edge.cell_data
+            assert ZONE_ID_ARRAY in edge.cell_data
             if edge.n_cells == 0:
                 continue
             lines = edge.lines.reshape(-1, 3)
@@ -199,6 +204,39 @@ def test_quadratic_edge_zonelets_follow_mid_nodes(get_remote_client, get_example
             referenced = set(lines[:, 1]) | set(lines[:, 2])
             assert len(referenced) == edge.n_points
             checked += 1
+    assert checked > 0
+
+
+def test_edge_polydata_preserves_public_entry_type(
+    get_remote_client,
+    get_examples,
+):
+    """Edge PolyData entries remain MeshObjectPlot objects."""
+    model = get_remote_client.model
+    model_pd = _mesh_elbow(
+        model,
+        get_examples["elbow_lucid"],
+        quadratic=False,
+    )
+
+    checked = 0
+
+    for part_data in model_pd.values():
+        for edge_entry in part_data["edges"]:
+            if edge_entry is None:
+                continue
+
+            assert not isinstance(edge_entry, tuple)
+            assert hasattr(edge_entry, "mesh")
+
+            edge = edge_entry.mesh
+            assert PART_ID_ARRAY in edge.cell_data
+            assert ENTITY_ID_ARRAY in edge.cell_data
+            assert ENTITY_TYPE_ARRAY in edge.cell_data
+            assert ZONE_ID_ARRAY in edge.cell_data
+
+            checked += 1
+
     assert checked > 0
 
 
