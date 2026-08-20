@@ -26,9 +26,9 @@ from types import SimpleNamespace
 
 import numpy as np
 import pyvista as pv
+from ansys.tools.visualization_interface.utils.color import Color
 
 import ansys.meshing.prime as prime
-from ansys.tools.visualization_interface.utils.color import Color
 from ansys.meshing.prime.core.mesh import (
     ENTITY_COLOR_ARRAY,
     PART_ID_ARRAY,
@@ -103,11 +103,7 @@ def _entry_info(batch, cell_id=0):
 
 def _cells_for_key(batch, key):
     """Return a mask selecting one model-unique entity in a batch."""
-    render_ids = {
-        int(render_id)
-        for render_id, info in batch.infos.items()
-        if info.key == key
-    }
+    render_ids = {int(render_id) for render_id, info in batch.infos.items() if info.key == key}
     return np.isin(batch.render_entity_ids, tuple(render_ids))
 
 
@@ -445,7 +441,9 @@ def test_hide_picked_widget_hides_and_restores_entities(get_remote_client, get_e
         hidden_cells = int(np.count_nonzero(_cells_for_key(batch, key)))
         display._pick_entity(actor, batch.mesh.cell_centers().points[0])
 
-        widget = next(widget for widget in display._backend._widgets if isinstance(widget, HidePicked))
+        widget = next(
+            widget for widget in display._backend._widgets if isinstance(widget, HidePicked)
+        )
         widget.callback(True)
         assert display._drawn_geometry[actor].n_cells == batch.mesh.n_cells - hidden_cells
         assert widget._hidden_entities == [key]
