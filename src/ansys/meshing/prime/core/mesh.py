@@ -33,10 +33,8 @@ from ansys.tools.visualization_interface import MeshObjectPlot
 import ansys.meshing.prime as prime
 from ansys.meshing.prime.autogen.meshinfo import MeshInfo
 from ansys.meshing.prime.autogen.meshinfostructs import (
-    EdgeConnectivityResults,
-    FaceAndEdgeConnectivityParams,
-    FaceConnectivityResults,
-)
+    EdgeConnectivityResults, FaceAndEdgeConnectivityParams,
+    FaceConnectivityResults)
 from ansys.meshing.prime.core.part import Part
 from ansys.meshing.prime.internals.comm_manager import CommunicationManager
 
@@ -487,12 +485,18 @@ def _attach_entity_metadata(
     output.cell_data[RENDER_ENTITY_ID_ARRAY] = np.full(
         number_of_cells, int(render_entity_id), dtype=np.int64
     )
-    output.cell_data[PART_ID_ARRAY] = np.full(number_of_cells, info.part_id, dtype=np.int64)
-    output.cell_data[ENTITY_ID_ARRAY] = np.full(number_of_cells, info.id, dtype=np.int64)
+    output.cell_data[PART_ID_ARRAY] = np.full(
+        number_of_cells, info.part_id, dtype=np.int64
+    )
+    output.cell_data[ENTITY_ID_ARRAY] = np.full(
+        number_of_cells, info.id, dtype=np.int64
+    )
     output.cell_data[ENTITY_TYPE_ARRAY] = np.full(
         number_of_cells, int(info.display_mesh_type), dtype=np.int16
     )
-    output.cell_data[ZONE_ID_ARRAY] = np.full(number_of_cells, info.zone_id, dtype=np.int64)
+    output.cell_data[ZONE_ID_ARRAY] = np.full(
+        number_of_cells, info.zone_id, dtype=np.int64
+    )
     return output
 
 
@@ -508,7 +512,9 @@ def _validate_merged_metadata(mesh: "pv.PolyData") -> None:
         )
     for array_name in REQUIRED_PICKING_ARRAYS:
         if len(mesh.cell_data[array_name]) != mesh.n_cells:
-            raise RuntimeError(f"Cell array {array_name!r} does not match the merged cell count.")
+            raise RuntimeError(
+                f"Cell array {array_name!r} does not match the merged cell count."
+            )
 
 
 def _finalize_typed_batches(
@@ -1384,7 +1390,9 @@ class Mesh(MeshInfo):
 
         edge.cell_data[PART_ID_ARRAY] = np.full(n_cells, part_id, dtype=np.int64)
         edge.cell_data[ENTITY_ID_ARRAY] = np.full(n_cells, entity_id, dtype=np.int64)
-        edge.cell_data[ENTITY_TYPE_ARRAY] = np.full(n_cells, int(display_mesh_type), dtype=np.int16)
+        edge.cell_data[ENTITY_TYPE_ARRAY] = np.full(
+            n_cells, int(display_mesh_type), dtype=np.int16
+        )
         edge.cell_data[ZONE_ID_ARRAY] = np.full(n_cells, zone_id, dtype=np.int64)
         edge.set_active_scalars(ENTITY_COLOR_ARRAY, preference="cell")
         return MeshObjectPlot(part, edge)
@@ -1447,7 +1455,9 @@ class Mesh(MeshInfo):
 
                 grouped_raw[display_mesh_type].append((vertices, block, n_cells, info))
                 if has_mesh:
-                    mesh = _assemble_entity_mesh(vertices, block, n_cells, info, 0, lines=False)
+                    mesh = _assemble_entity_mesh(
+                        vertices, block, n_cells, info, 0, lines=False
+                    )
                     if mesh is not None:
                         fast_outline_entries.append((MeshObjectPlot(part, mesh), info))
 
@@ -1640,6 +1650,127 @@ class Mesh(MeshInfo):
             Zone ID of the mesh.
         """
         return self._zone_id
+
+
+class FaceGeometry:
+    """Intermediate DTO for face geometry extracted from connectivity results.
+
+    Parameters
+    ----------
+    points : np.ndarray
+        Array of vertex coordinates (N, 3).
+    face_vertex_indices : np.ndarray
+        Flattened array of vertex indices for all faces.
+    face_vertex_counts : np.ndarray
+        Number of vertices per face.
+    color : list
+        RGB color [0-255] for this geometry.
+    part_id : int
+        ID of the part this geometry belongs to.
+    zone_id : int
+        ID of the zone.
+    zone_name : str
+        Name of the zone.
+    mesh_id : int
+        Mesh/zonelet ID.
+    display_mesh_type : DisplayMeshType
+        Type of mesh entity.
+    has_mesh : bool
+        Whether this face has actual mesh elements.
+    """
+
+    def __init__(
+        self,
+        points,
+        face_vertex_indices,
+        face_vertex_counts,
+        color,
+        part_id,
+        zone_id,
+        zone_name,
+        mesh_id,
+        display_mesh_type,
+        has_mesh,
+    ):
+        """Initialize face geometry."""
+        self.points = points
+        self.face_vertex_indices = face_vertex_indices
+        self.face_vertex_counts = face_vertex_counts
+        self.color = color
+        self.part_id = part_id
+        self.zone_id = zone_id
+        self.zone_name = zone_name
+        self.mesh_id = mesh_id
+        self.display_mesh_type = display_mesh_type
+        self.has_mesh = has_mesh
+
+
+class EdgeGeometry:
+    """Intermediate DTO for edge geometry extracted from connectivity results.
+
+    Parameters
+    ----------
+    points : np.ndarray
+        Array of vertex coordinates (N, 3).
+    edge_vertex_indices : np.ndarray
+        Flattened array of vertex indices for all edges.
+    edge_vertex_counts : np.ndarray
+        Number of vertices per edge.
+    color : list
+        RGB color [0-255] for this geometry.
+    part_id : int
+        ID of the part this geometry belongs to.
+    mesh_id : int
+        Edge zonelet ID.
+    display_mesh_type : DisplayMeshType
+        Type of mesh entity (typically EDGEZONELET or TOPOEDGE).
+    """
+
+    def __init__(
+        self,
+        points,
+        edge_vertex_indices,
+        edge_vertex_counts,
+        color,
+        part_id,
+        mesh_id,
+        display_mesh_type,
+    ):
+        """Initialize edge geometry."""
+        self.points = points
+        self.edge_vertex_indices = edge_vertex_indices
+        self.edge_vertex_counts = edge_vertex_counts
+        self.color = color
+        self.part_id = part_id
+        self.mesh_id = mesh_id
+        self.display_mesh_type = display_mesh_type
+
+
+class SplineGeometry:
+    """Intermediate DTO for spline geometry (control points or surface).
+
+    Parameters
+    ----------
+    points : np.ndarray
+        Array of control/spline point coordinates (N, 3).
+    color : list
+        RGB color [0-255].
+    part_id : int
+        ID of the part.
+    spline_id : int
+        ID of the spline.
+    geom_type : DisplayMeshType
+        Either SPLINECONTROLPOINTS or SPLINESURFACE.
+    """
+
+    def __init__(self, points, color, part_id, spline_id, geom_type):
+        """Initialize spline geometry."""
+        self.points = points
+        self.color = color
+        self.part_id = part_id
+        self.spline_id = spline_id
+        self.geom_type = geom_type
+
 
 
 class MeshUSD(MeshInfo):
