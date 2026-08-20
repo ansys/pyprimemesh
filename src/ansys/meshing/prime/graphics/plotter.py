@@ -40,6 +40,7 @@ from ansys.meshing.prime.core.mesh import (
     DisplayEntityKey,
     DisplayMeshInfo,
     DisplayMeshType,
+    ModelRenderData,
     RenderBatch,
     build_edge_render_batches,
     build_element_edge_batches,
@@ -106,22 +107,15 @@ class PrimePlotter(Plotter):
 
     def _reset_prime_state(self) -> None:
         """Reset all Prime-specific rendering state."""
-        # Legacy mapping for individually added meshes carrying one metadata object.
         self._info_actor_map: Dict[Any, DisplayMeshInfo] = {}
-
-        # Model-wide actor batches.
         self._batches: Dict[Any, RenderBatch] = {}
         self._element_edge_batches: Dict[Any, RenderBatch] = {}
         self._spline_actors: Dict[DisplayMeshType, Any] = {}
-
-        # Model-unique entity state.
         self._entity_infos: Dict[DisplayEntityKey, DisplayMeshInfo] = {}
         self._picked_entities: Dict[DisplayEntityKey, DisplayMeshInfo] = {}
         self._picked_points: Dict[DisplayEntityKey, np.ndarray] = {}
         self._entity_labels: Dict[DisplayEntityKey, Any] = {}
         self._hidden_entities: set[DisplayEntityKey] = set()
-
-        # Keep all mapper inputs alive and support filtered visibility datasets.
         self._drawn_geometry: Dict[Any, pv.DataSet] = {}
         self._color_type: Optional[ColorByType] = None
         self._show_element_edges = True
@@ -195,9 +189,21 @@ class PrimePlotter(Plotter):
     ) -> None:
         """Add a Prime model or a scoped subset to the plotter."""
         if scope is None:
-            self.add_model_pd(model.as_polydata(update=update))
+            self.add_render_data(model.build_render_data(update=update))
         else:
             self.add_scope(model, scope, update=update)
+
+    def add_render_data(self, render_data: ModelRenderData) -> None:
+        """Add pre-built model-wide render batches to the plotter."""
+        self._add_render_batches(render_data.batches)
+        self._add_spline_batch(
+            render_data.ctrlpts,
+            DisplayMeshType.SPLINECONTROLPOINTS,
+        )
+        self._add_spline_batch(
+            render_data.splines,
+            DisplayMeshType.SPLINESURFACE,
+        )
 
     @staticmethod
     def _entries(model_pd: Dict, key: str) -> List:
@@ -225,6 +231,43 @@ class PrimePlotter(Plotter):
             spline_surface_entries,
             DisplayMeshType.SPLINESURFACE,
         )
+
+    def _add_render_batches(
+        self,
+        batches: Dict[str, Dict[DisplayMeshType, RenderBatch]],
+    ) -> None:
+        """Add pre-built model-wide batches to the scene."""
+        for batch in batches.get("faces", {}).values():
+            actor = self.scene.add_mesh(
+                batch.mesh,
+                scalars=ENTITY_COLOR_ARRAY,
+                rgb=True,
+                show_edges=False,
+                pickable=batch.pickable,
+            )
+            self._offset_polygons(actor)
+            self._register_batch(actor, batch)
+
+        for batch in batches.get("edges", {}).values():
+            has_colors = ENTITY_COLOR_ARRAY in batch.mesh.cell_data
+            actor = self.scene.add_mesh(
+                batch.mesh,
+                scalars=ENTITY_COLOR_ARRAY if has_colors else None,
+                rgb=has_colors,
+                pickable=batch.pickable,
+                line_width=4,
+            )
+            self._register_batch(actor, batch)
+
+        for batch in batches.get("element_edges", {}).values():
+            actor = self.scene.add_mesh(
+                batch.mesh,
+                color=pv.global_theme.edge_color,
+                line_width=1,
+                pickable=False,
+            )
+            self._element_edge_batches[actor] = batch
+            self._drawn_geometry[actor] = batch.mesh
 
     def _register_batch(self, actor, batch: RenderBatch) -> None:
         """Register a persistent actor and all entities in its batch."""
@@ -456,12 +499,7 @@ class PrimePlotter(Plotter):
         return infos
 
     def _normalise_entity_keys(self, entities: Iterable) -> set[DisplayEntityKey]:
-        """Normalize entity keys while retaining limited ID compatibility.
-
-        Integer IDs are expanded to every currently displayed entity with that
-        original ID. New code should pass ``DisplayEntityKey`` values to avoid
-        ambiguity across parts.
-        """
+        """Normalize entity keys while retaining limited ID compatibility."""
         keys: set[DisplayEntityKey] = set()
         integer_ids = set()
         for entity in entities:
@@ -477,11 +515,7 @@ class PrimePlotter(Plotter):
         return keys
 
     def set_entities_visible(self, entities, visible: bool) -> None:
-        """Show or hide display entities without changing actor count.
-
-        ``DisplayEntityKey`` is the preferred input. Integer IDs remain accepted
-        and apply to every displayed entity with that original Prime ID.
-        """
+        """Show or hide display entities without changing actor count."""
         keys = self._normalise_entity_keys(entities)
         if visible:
             self._hidden_entities.difference_update(keys)
@@ -563,7 +597,7 @@ class PrimePlotter(Plotter):
         update: bool = False,
     ) -> None:
         """Add a scoped subset of a model."""
-        self.add_model_pd(model.get_scoped_polydata(scope, update=update))
+        self.add_render_data(model.get_scoped_render_data(scope, update=update))
 
     def plot_iter(
         self,
