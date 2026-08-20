@@ -234,13 +234,10 @@ class RenderBatch:
         ]
         if missing:
             raise ValueError(
-                "The render batch is missing required cell arrays: "
-                + ", ".join(missing)
+                "The render batch is missing required cell arrays: " + ", ".join(missing)
             )
-
         render_ids = np.asarray(
-            self.mesh.cell_data[RENDER_ENTITY_ID_ARRAY],
-            dtype=np.int64,
+            self.mesh.cell_data[RENDER_ENTITY_ID_ARRAY], dtype=np.int64,
         )
 
         unknown_ids = set(np.unique(render_ids)).difference(self.infos)
@@ -256,9 +253,7 @@ class RenderBatch:
         )
         expected_type = int(self.display_mesh_type)
         if entity_types.size and np.any(entity_types != expected_type):
-            raise ValueError(
-                "A render batch may contain only one DisplayMeshType."
-            )
+            raise ValueError("A render batch may contain only one DisplayMeshType.")
 
     @property
     def render_entity_ids(self) -> np.ndarray:
@@ -391,22 +386,12 @@ def compute_entity_colors(
         return_inverse=True,
     )
 
-    missing = [
-        int(render_id)
-        for render_id in unique_ids
-        if int(render_id) not in infos
-    ]
+    missing = [int(render_id) for render_id in unique_ids if int(render_id) not in infos]
     if missing:
-        raise KeyError(
-            "No DisplayMeshInfo exists for render entity IDs "
-            f"{missing}."
-        )
+        raise KeyError("No DisplayMeshInfo exists for render entity IDs " f"{missing}.")
 
     palette = np.asarray(
-        [
-            entity_color(infos[int(render_id)], color_type)
-            for render_id in unique_ids
-        ],
+        [entity_color(infos[int(render_id)], color_type) for render_id in unique_ids],
         dtype=np.uint8,
     )
 
@@ -465,22 +450,18 @@ def _attach_entity_metadata(
 def _validate_merged_metadata(mesh: "pv.PolyData") -> None:
     """Ensure a merge has preserved all picking arrays."""
     missing = [
-        array_name
-        for array_name in REQUIRED_PICKING_ARRAYS
-        if array_name not in mesh.cell_data
+        array_name for array_name in REQUIRED_PICKING_ARRAYS if array_name not in mesh.cell_data
     ]
     if missing:
         raise RuntimeError(
             "PyVista discarded required Prime picking metadata while "
-            "merging geometry: "
-            + ", ".join(missing)
+            "merging geometry: " + ", ".join(missing)
         )
 
     for array_name in REQUIRED_PICKING_ARRAYS:
         if len(mesh.cell_data[array_name]) != mesh.n_cells:
             raise RuntimeError(
-                f"Cell array {array_name!r} does not match the merged "
-                "cell count."
+                f"Cell array {array_name!r} does not match the merged " "cell count."
             )
 
 
@@ -508,9 +489,7 @@ def resolve_picked_entity(
             f"{batch.mesh.n_cells} cells."
         )
 
-    render_entity_id = int(
-        batch.mesh.cell_data[RENDER_ENTITY_ID_ARRAY][cell_id]
-    )
+    render_entity_id = int(batch.mesh.cell_data[RENDER_ENTITY_ID_ARRAY][cell_id])
     return batch.info_for_render_id(render_entity_id)
 
 
