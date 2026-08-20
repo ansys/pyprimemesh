@@ -516,7 +516,8 @@ def resolve_picked_entity(
 
 def selected_entity_keys(
     mesh: "pv.DataSet",
-) -> set"""Return unique Prime entity keys represented by selected cells."""
+) -> set:
+    """Return unique Prime entity keys represented by selected cells."""
     if mesh is None or mesh.n_cells == 0:
         return set()
 
