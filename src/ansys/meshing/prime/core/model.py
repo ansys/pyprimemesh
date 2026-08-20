@@ -30,12 +30,11 @@ import os
 
 import ansys.meshing.prime.internals.json_utils as json
 from ansys.meshing.prime.autogen.commonstructs import DeleteResults
-from ansys.meshing.prime.autogen.materialpointmanager import MaterialPointManager
-from ansys.meshing.prime.autogen.modelstructs import (
-    GlobalSizingParams,
-    MergePartsParams,
-    MergePartsResults,
-)
+from ansys.meshing.prime.autogen.materialpointmanager import \
+    MaterialPointManager
+from ansys.meshing.prime.autogen.modelstructs import (GlobalSizingParams,
+                                                      MergePartsParams,
+                                                      MergePartsResults)
 from ansys.meshing.prime.autogen.primeconfig import ErrorCode
 from ansys.meshing.prime.autogen.topodata import TopoData
 from ansys.meshing.prime.core.controldata import ControlData
@@ -77,7 +76,6 @@ class Model(_Model):
         self._control_data = None
         self._material_point_data = None
         self._model_pv_mesh = None
-        self._model_usd_mesh = None
         self._freeze()
 
     def _sync_up_model(self):
@@ -481,6 +479,56 @@ class Model(_Model):
             self._model_pv_mesh = Mesh(self)
         return self._model_pv_mesh.as_polydata(update=update)
 
+    def build_render_data(self, update: bool = False):
+        """Build merged render geometry for :class:`PrimePlotter`.
+
+        Parameters
+        ----------
+        update : bool, optional
+            Rebuild even when cached data is present, by default False.
+
+        Returns
+        -------
+        ModelRenderData
+            Model-wide render geometry grouped by entity type.
+        """
+        try:
+            from ansys.meshing.prime.core.mesh import Mesh
+        except ImportError:
+            raise ImportError(
+                "Please install optional dependencies to use visualization features:"
+                + "pip install ansys-meshing-prime[all]"
+            )
+        if self._model_pv_mesh is None or update:
+            self._model_pv_mesh = Mesh(self)
+        return self._model_pv_mesh.build_render_data(update=update)
+
+    def get_scoped_render_data(self, scope, update: bool = False):
+        """Build merged render geometry for a scope.
+
+        Parameters
+        ----------
+        scope : Scope
+            Scope of the model.
+        update : bool, optional
+            Rebuild even when cached data is present, by default False.
+
+        Returns
+        -------
+        ModelRenderData
+            Scoped model-wide render geometry.
+        """
+        try:
+            from ansys.meshing.prime.core.mesh import Mesh
+        except ImportError:
+            raise ImportError(
+                "Please install optional dependencies to use visualization features:"
+                + "pip install ansys-meshing-prime[all]"
+            )
+        if self._model_pv_mesh is None or update:
+            self._model_pv_mesh = Mesh(self)
+        return self._model_pv_mesh.get_scoped_render_data(scope, update=update)
+
     def get_scoped_polydata(self, scope, update: bool = False):
         """Get the scoped polydata of the model.
 
@@ -509,68 +557,3 @@ class Model(_Model):
         if self._model_pv_mesh is None or update:
             self._model_pv_mesh = Mesh(self)
         return self._model_pv_mesh.get_scoped_polydata(scope, update=update)
-
-    def as_usd(self, update: bool = False):
-        """Get the model as USD geometry DTOs.
-
-        Parameters
-        ----------
-        update : bool, optional
-            Update the USD geometry if it is already present, by default False.
-
-        Returns
-        -------
-        dict
-            Dictionary mapping part_id -> {"faces": [...], "edges": [...],
-            "ctrlpts": [...], "splinesurf": [...]} where each list contains
-            FaceGeometry, EdgeGeometry, or SplineGeometry DTOs.
-
-        Examples
-        --------
-            >>> usd_geom = model.as_usd()
-            >>> for part_id, geoms in usd_geom.items():
-            ...     for face_geom in geoms.get("faces", []):
-            ...         print(face_geom.mesh_id, face_geom.color)
-        """
-        try:
-            from ansys.meshing.prime.core.mesh import MeshUSD
-        except ImportError:
-            raise ImportError(
-                "Please install optional dependencies to use visualization features:"
-                + "pip install ansys-meshing-prime[all]"
-            )
-        if self._model_usd_mesh is None or update:
-            self._model_usd_mesh = MeshUSD(self)
-        return self._model_usd_mesh.as_usd(update=update)
-
-    def get_scoped_usd(self, scope, update: bool = False):
-        """Get the scoped USD geometry of the model.
-
-        Parameters
-        ----------
-        scope : Scope
-            Scope of the model.
-        update : bool, optional
-            Update the USD geometry if it is already present, by default False.
-
-        Returns
-        -------
-        dict
-            Dictionary mapping part_id -> {"faces": [...], "edges": [...], ...}
-            containing only geometry within the specified scope.
-
-        Examples
-        --------
-            >>> scoped_usd = model.get_scoped_usd(scope)
-        """
-        try:
-            from ansys.meshing.prime.core.mesh import MeshUSD
-        except ImportError:
-            raise ImportError(
-                "Please install optional dependencies to use visualization features:"
-                + "pip install ansys-meshing-prime[all]"
-            )
-
-        if self._model_usd_mesh is None or update:
-            self._model_usd_mesh = MeshUSD(self)
-        return self._model_usd_mesh.get_scoped_usd(scope, update=update)
