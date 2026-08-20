@@ -31,7 +31,6 @@ import pyvista as pv
 from ansys.tools.visualization_interface import MeshObjectPlot
 
 import ansys.meshing.prime as prime
-from ansys.meshing.prime.internals.comm_manager import CommunicationManager
 from ansys.meshing.prime.autogen.meshinfo import MeshInfo
 from ansys.meshing.prime.autogen.meshinfostructs import (
     EdgeConnectivityResults,
@@ -39,6 +38,7 @@ from ansys.meshing.prime.autogen.meshinfostructs import (
     FaceConnectivityResults,
 )
 from ansys.meshing.prime.core.part import Part
+from ansys.meshing.prime.internals.comm_manager import CommunicationManager
 
 
 class ColorByType(enum.IntEnum):
