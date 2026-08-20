@@ -1275,10 +1275,10 @@ class Mesh(MeshInfo):
             else:
                 display_mesh_type = DisplayMeshType.EDGEZONELET
                 entity_id = edge_facet_res.edge_zonelet_ids[index]
-        
+
             zone_ids = getattr(edge_facet_res, "edge_zone_ids", None)
             zone_names = getattr(edge_facet_res, "edge_zone_names", None)
-        
+
             zone_id = (
                 int(zone_ids[index])
                 if zone_ids is not None and len(zone_ids) > index
@@ -1289,7 +1289,7 @@ class Mesh(MeshInfo):
                 if zone_names is not None and len(zone_names) > index
                 else None
             )
-        
+
             return MeshObjectPlot(part, edge), DisplayMeshInfo(
                 id=entity_id,
                 part_id=part_id,
