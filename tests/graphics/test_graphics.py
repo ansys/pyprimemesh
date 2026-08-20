@@ -397,9 +397,7 @@ def test_hidden_entities_cannot_be_picked(get_remote_client, get_examples):
             render_id for render_id, info in batch.infos.items() if info.key != hidden_key
         )
 
-        cell_id = np.flatnonzero(
-            batch.render_entity_ids == visible_render_id
-        )[0]
+        cell_id = np.flatnonzero(batch.render_entity_ids == visible_render_id)[0]
 
         center = batch.mesh.cell_centers().points[cell_id]
 
