@@ -706,69 +706,52 @@ def build_edge_render_batches(
         Edge batches grouped by display entity type.
     """
     grouped = defaultdict(list)
-    
+
     for entry in edge_entries:
         if entry is None:
             continue
-    
+
         # Temporary compatibility with any cached/new tuple-form entries.
         if isinstance(entry, tuple):
             mesh_object, info = entry
         else:
             mesh_object = entry
             info = None
-    
+
         geometry = mesh_object.mesh
         if geometry is None or geometry.n_cells == 0:
             continue
-    
+
         required = (
             PART_ID_ARRAY,
             ENTITY_ID_ARRAY,
             ENTITY_TYPE_ARRAY,
             ZONE_ID_ARRAY,
         )
-        missing = [
-            name
-            for name in required
-            if name not in geometry.cell_data
-        ]
+        missing = [name for name in required if name not in geometry.cell_data]
         if missing:
             raise ValueError(
-                "Edge geometry is missing Prime identity arrays: "
-                + ", ".join(missing)
+                "Edge geometry is missing Prime identity arrays: " + ", ".join(missing)
             )
-    
-        part_ids = np.unique(
-            np.asarray(geometry.cell_data[PART_ID_ARRAY])
-        )
-        entity_ids = np.unique(
-            np.asarray(geometry.cell_data[ENTITY_ID_ARRAY])
-        )
-        entity_types = np.unique(
-            np.asarray(geometry.cell_data[ENTITY_TYPE_ARRAY])
-        )
-        zone_ids = np.unique(
-            np.asarray(geometry.cell_data[ZONE_ID_ARRAY])
-        )
-    
+
+        part_ids = np.unique(np.asarray(geometry.cell_data[PART_ID_ARRAY]))
+        entity_ids = np.unique(np.asarray(geometry.cell_data[ENTITY_ID_ARRAY]))
+        entity_types = np.unique(np.asarray(geometry.cell_data[ENTITY_TYPE_ARRAY]))
+        zone_ids = np.unique(np.asarray(geometry.cell_data[ZONE_ID_ARRAY]))
+
         if (
             len(part_ids) != 1
             or len(entity_ids) != 1
             or len(entity_types) != 1
             or len(zone_ids) != 1
         ):
-            raise ValueError(
-                "One edge entry must represent exactly one Prime edge entity."
-            )
-    
+            raise ValueError("One edge entry must represent exactly one Prime edge entity.")
+
         part_id = int(part_ids[0])
         entity_id = int(entity_ids[0])
-        display_mesh_type = DisplayMeshType(
-            int(entity_types[0])
-        )
+        display_mesh_type = DisplayMeshType(int(entity_types[0]))
         zone_id = int(zone_ids[0])
-    
+
         if info is None:
             part = mesh_object.custom_object
             info = DisplayMeshInfo(
@@ -780,17 +763,15 @@ def build_edge_render_batches(
                 display_mesh_type=display_mesh_type,
                 has_mesh=False,
             )
-    
-        grouped[display_mesh_type].append(
-            (geometry, info)
-        )
+
+        grouped[display_mesh_type].append((geometry, info))
 
     batches = {}
-    
+
     for display_mesh_type, items in grouped.items():
         infos = {}
         pieces = []
-    
+
         for render_entity_id, (geometry, info) in enumerate(items):
             infos[render_entity_id] = info
             pieces.append(
@@ -800,28 +781,28 @@ def build_edge_render_batches(
                     render_entity_id,
                 )
             )
-    
+
         merged = _merge_geometry(pieces)
         if merged is None:
             continue
-    
+
         _validate_merged_metadata(merged)
-    
+
         batch = RenderBatch(
             mesh=merged,
             infos=infos,
             display_mesh_type=display_mesh_type,
             pickable=False,
         )
-    
+
         if ENTITY_COLOR_ARRAY in merged.cell_data:
             merged.set_active_scalars(
                 ENTITY_COLOR_ARRAY,
                 preference="cell",
             )
-    
+
         batches[display_mesh_type] = batch
-    
+
     return batches
 
 
@@ -1276,21 +1257,17 @@ class Mesh(MeshInfo):
         # a closed edge has as many points as segments, so the colors have to name
         # the association they belong to rather than let it be inferred from length
         edge.cell_data[ENTITY_COLOR_ARRAY] = colors
-        
+
         if edge_facet_res.topo_edge_ids[index] > 0:
             display_mesh_type = DisplayMeshType.TOPOEDGE
             entity_id = int(edge_facet_res.topo_edge_ids[index])
         else:
             display_mesh_type = DisplayMeshType.EDGEZONELET
             entity_id = int(edge_facet_res.edge_zonelet_ids[index])
-        
+
         zone_ids = getattr(edge_facet_res, "edge_zone_ids", None)
-        zone_id = (
-            int(zone_ids[index])
-            if zone_ids is not None and len(zone_ids) > index
-            else 0
-        )
-        
+        zone_id = int(zone_ids[index]) if zone_ids is not None and len(zone_ids) > index else 0
+
         if edge.n_cells > 0:
             edge.cell_data[PART_ID_ARRAY] = np.full(
                 edge.n_cells,
@@ -1312,20 +1289,18 @@ class Mesh(MeshInfo):
                 zone_id,
                 dtype=np.int64,
             )
-        
+
             edge.set_active_scalars(
                 ENTITY_COLOR_ARRAY,
                 preference="cell",
             )
-        
+
         if edge.n_points > 0:
             zone_names = getattr(edge_facet_res, "edge_zone_names", None)
             zone_name = (
-                zone_names[index]
-                if zone_names is not None and len(zone_names) > index
-                else None
+                zone_names[index] if zone_names is not None and len(zone_names) > index else None
             )
-            
+
             info = DisplayMeshInfo(
                 id=entity_id,
                 part_id=part_id,
@@ -1335,7 +1310,7 @@ class Mesh(MeshInfo):
                 display_mesh_type=display_mesh_type,
                 has_mesh=False,
             )
-            
+
             self._edge_infos[info.key] = info
             return MeshObjectPlot(part, edge)
 
