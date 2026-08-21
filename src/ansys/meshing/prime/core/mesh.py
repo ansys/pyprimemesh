@@ -33,10 +33,8 @@ from ansys.tools.visualization_interface import MeshObjectPlot
 import ansys.meshing.prime as prime
 from ansys.meshing.prime.autogen.meshinfo import MeshInfo
 from ansys.meshing.prime.autogen.meshinfostructs import (
-    EdgeConnectivityResults,
-    FaceAndEdgeConnectivityParams,
-    FaceConnectivityResults,
-)
+    EdgeConnectivityResults, FaceAndEdgeConnectivityParams,
+    FaceConnectivityResults)
 from ansys.meshing.prime.core.part import Part
 from ansys.meshing.prime.internals.comm_manager import CommunicationManager
 
@@ -487,12 +485,18 @@ def _attach_entity_metadata(
     output.cell_data[RENDER_ENTITY_ID_ARRAY] = np.full(
         number_of_cells, int(render_entity_id), dtype=np.int64
     )
-    output.cell_data[PART_ID_ARRAY] = np.full(number_of_cells, info.part_id, dtype=np.int64)
-    output.cell_data[ENTITY_ID_ARRAY] = np.full(number_of_cells, info.id, dtype=np.int64)
+    output.cell_data[PART_ID_ARRAY] = np.full(
+        number_of_cells, info.part_id, dtype=np.int64
+    )
+    output.cell_data[ENTITY_ID_ARRAY] = np.full(
+        number_of_cells, info.id, dtype=np.int64
+    )
     output.cell_data[ENTITY_TYPE_ARRAY] = np.full(
         number_of_cells, int(info.display_mesh_type), dtype=np.int16
     )
-    output.cell_data[ZONE_ID_ARRAY] = np.full(number_of_cells, info.zone_id, dtype=np.int64)
+    output.cell_data[ZONE_ID_ARRAY] = np.full(
+        number_of_cells, info.zone_id, dtype=np.int64
+    )
     return output
 
 
@@ -508,7 +512,9 @@ def _validate_merged_metadata(mesh: "pv.PolyData") -> None:
         )
     for array_name in REQUIRED_PICKING_ARRAYS:
         if len(mesh.cell_data[array_name]) != mesh.n_cells:
-            raise RuntimeError(f"Cell array {array_name!r} does not match the merged cell count.")
+            raise RuntimeError(
+                f"Cell array {array_name!r} does not match the merged cell count."
+            )
 
 
 def _finalize_typed_batches(
@@ -569,27 +575,116 @@ def _merge_render_batch_dicts(
     return merged
 
 
+def _attach_raw_metadata(
+    mesh: "pv.PolyData",
+    infos: Sequence[DisplayMeshInfo],
+    cell_counts: np.ndarray,
+) -> None:
+    """Write per-cell ownership arrays for concatenated entity geometry.
+
+    Each entity contributes a contiguous run of cells, so every array is one
+    ``np.repeat`` rather than a per-entity assignment.
+    """
+    mesh.cell_data[RENDER_ENTITY_ID_ARRAY] = np.repeat(
+        np.arange(len(infos), dtype=np.int64), cell_counts
+    )
+    mesh.cell_data[PART_ID_ARRAY] = np.repeat(
+        np.fromiter((info.part_id for info in infos), np.int64, len(infos)), cell_counts
+    )
+    mesh.cell_data[ENTITY_ID_ARRAY] = np.repeat(
+        np.fromiter((info.id for info in infos), np.int64, len(infos)), cell_counts
+    )
+    mesh.cell_data[ENTITY_TYPE_ARRAY] = np.repeat(
+        np.fromiter((int(info.display_mesh_type) for info in infos), np.int16, len(infos)),
+        cell_counts,
+    )
+    mesh.cell_data[ZONE_ID_ARRAY] = np.repeat(
+        np.fromiter((info.zone_id for info in infos), np.int64, len(infos)), cell_counts
+    )
+
+
+def _build_batch_from_raw(
+    raw_pieces: Sequence[Tuple[np.ndarray, np.ndarray, int, DisplayMeshInfo]],
+    display_mesh_type: DisplayMeshType,
+    pickable: bool,
+    lines: bool = False,
+    colors: Optional[Sequence[np.ndarray]] = None,
+) -> Optional[RenderBatch]:
+    """Assemble one batch directly from array-level connectivity.
+
+    Building a ``pv.PolyData`` per display entity and merging afterwards spends
+    far more time in PyVista attribute bookkeeping than in the geometry itself,
+    so points, connectivity, and ownership arrays are concatenated with NumPy
+    and written once to a single mesh.
+    """
+    usable = [index for index, piece in enumerate(raw_pieces) if piece[2] > 0]
+    if not usable:
+        return None
+
+    pieces = [raw_pieces[index] for index in usable]
+    mesh = _assemble_pieces(
+        [(points, block, n_cells, 0) for points, block, n_cells, _ in pieces],
+        lines=lines,
+    )
+    if mesh is None:
+        return None
+
+    infos = [piece[3] for piece in pieces]
+    cell_counts = np.fromiter((piece[2] for piece in pieces), np.int64, len(pieces))
+    _attach_raw_metadata(mesh, infos, cell_counts)
+
+    if colors is not None:
+        mesh.cell_data[ENTITY_COLOR_ARRAY] = np.repeat(
+            np.asarray([colors[index] for index in usable], dtype=np.uint8),
+            cell_counts,
+            axis=0,
+        )
+
+    batch = RenderBatch(
+        mesh=mesh,
+        infos=dict(enumerate(infos)),
+        display_mesh_type=display_mesh_type,
+        pickable=pickable,
+    )
+    if pickable:
+        batch.apply_colors()
+    elif ENTITY_COLOR_ARRAY in mesh.cell_data:
+        mesh.set_active_scalars(ENTITY_COLOR_ARRAY, preference="cell")
+    return batch
+
+
 def _build_batches_from_raw_faces(
     grouped_raw: Dict[DisplayMeshType, List[Tuple[np.ndarray, np.ndarray, int, DisplayMeshInfo]]],
 ) -> Dict[DisplayMeshType, RenderBatch]:
     """Build face batches from array-level connectivity grouped by entity type."""
-    grouped: Dict[
-        DisplayMeshType,
-        List[Tuple["pv.PolyData", DisplayMeshInfo]],
-    ] = defaultdict(list)
+    batches: Dict[DisplayMeshType, RenderBatch] = {}
     for display_mesh_type, raw_pieces in grouped_raw.items():
-        for render_entity_id, (vertices, block, n_cells, info) in enumerate(raw_pieces):
-            mesh = _assemble_entity_mesh(
-                vertices,
-                block,
-                n_cells,
-                info,
-                render_entity_id,
-                lines=False,
-            )
-            if mesh is not None:
-                grouped[display_mesh_type].append((mesh, info))
-    return _finalize_typed_batches(grouped, pickable=True)
+        batch = _build_batch_from_raw(raw_pieces, display_mesh_type, pickable=True)
+        if batch is not None:
+            batches[display_mesh_type] = batch
+    return batches
+
+
+def _build_batches_from_raw_edges(
+    grouped_raw: Dict[
+        DisplayMeshType,
+        List[Tuple[np.ndarray, np.ndarray, int, DisplayMeshInfo]],
+    ],
+    grouped_colors: Dict[DisplayMeshType, List[np.ndarray]],
+) -> Dict[DisplayMeshType, RenderBatch]:
+    """Build edge batches from array-level line connectivity."""
+    batches: Dict[DisplayMeshType, RenderBatch] = {}
+    for display_mesh_type, raw_pieces in grouped_raw.items():
+        batch = _build_batch_from_raw(
+            raw_pieces,
+            display_mesh_type,
+            pickable=False,
+            lines=True,
+            colors=grouped_colors.get(display_mesh_type),
+        )
+        if batch is not None:
+            batches[display_mesh_type] = batch
+    return batches
 
 
 def build_face_render_batches(
@@ -633,12 +728,6 @@ def build_element_edge_batches(
             outlines = mesh_object.mesh.extract_all_edges(progress_bar=False)
         else:
             continue
-        if outlines is None or outlines.n_cells == 0:
-            continue
-        elif mesh_object.mesh is not None:
-            outlines = mesh_object.mesh.extract_all_edges(progress_bar=False)
-        else:
-            outlines = None
         if outlines is None or outlines.n_cells == 0:
             continue
         grouped[info.display_mesh_type].append((outlines, info))
@@ -1392,10 +1481,49 @@ class Mesh(MeshInfo):
 
         edge.cell_data[PART_ID_ARRAY] = np.full(n_cells, part_id, dtype=np.int64)
         edge.cell_data[ENTITY_ID_ARRAY] = np.full(n_cells, entity_id, dtype=np.int64)
-        edge.cell_data[ENTITY_TYPE_ARRAY] = np.full(n_cells, int(display_mesh_type), dtype=np.int16)
+        edge.cell_data[ENTITY_TYPE_ARRAY] = np.full(
+            n_cells, int(display_mesh_type), dtype=np.int16
+        )
         edge.cell_data[ZONE_ID_ARRAY] = np.full(n_cells, zone_id, dtype=np.int64)
         edge.set_active_scalars(ENTITY_COLOR_ARRAY, preference="cell")
         return MeshObjectPlot(part, edge)
+
+    def _build_raw_edge_piece(
+        self,
+        part_id: int,
+        part: Part,
+        edge_res: EdgeConnectivityResults,
+        index: int,
+    ) -> Optional[Tuple[Tuple[np.ndarray, np.ndarray, int, DisplayMeshInfo], np.ndarray]]:
+        """Return array-level line geometry and color for one edge entity."""
+        vertices, edge_list = self._get_vertices_and_surf_edges(edge_res, index)
+        if vertices.size == 0:
+            return None
+        lines, n_cells = _edge_lines_from_list(np.asarray(edge_list))
+        if n_cells == 0:
+            return None
+
+        if edge_res.topo_edge_ids[index] > 0:
+            display_mesh_type = DisplayMeshType.TOPOEDGE
+            entity_id = int(edge_res.topo_edge_ids[index])
+        else:
+            display_mesh_type = DisplayMeshType.EDGEZONELET
+            entity_id = int(edge_res.edge_zonelet_ids[index])
+
+        zone_ids = getattr(edge_res, "edge_zone_ids", None)
+        zone_id = int(zone_ids[index]) if zone_ids is not None and len(zone_ids) > index else 0
+
+        info = DisplayMeshInfo(
+            id=entity_id,
+            part_id=part_id,
+            zone_id=zone_id,
+            display_mesh_type=display_mesh_type,
+            part_name=part.name,
+            zone_name=None,
+            has_mesh=False,
+        )
+        color = np.asarray(self.get_edge_color(edge_res, index), dtype=np.uint8)
+        return (vertices, lines, n_cells, info), color
 
     def _build_model_batches_from_connectivity(
         self,
@@ -1409,7 +1537,11 @@ class Mesh(MeshInfo):
         ] = defaultdict(list)
         slow_entries = []
         fast_outline_entries = []
-        edge_entries = []
+        grouped_raw_edges: Dict[
+            DisplayMeshType,
+            List[Tuple[np.ndarray, np.ndarray, int, DisplayMeshInfo]],
+        ] = defaultdict(list)
+        grouped_edge_colors: Dict[DisplayMeshType, List[np.ndarray]] = defaultdict(list)
 
         for index, part_id in enumerate(facet_result.part_ids):
             face_res = facet_result.face_connectivity_result_per_part[index]
@@ -1455,14 +1587,19 @@ class Mesh(MeshInfo):
 
                 grouped_raw[display_mesh_type].append((vertices, block, n_cells, info))
                 if has_mesh:
-                    mesh = _assemble_entity_mesh(vertices, block, n_cells, info, 0, lines=False)
+                    mesh = _assemble_entity_mesh(
+                        vertices, block, n_cells, info, 0, lines=False
+                    )
                     if mesh is not None:
                         fast_outline_entries.append((MeshObjectPlot(part, mesh), info))
 
             for edge_index in range(len(edge_res.edge_zonelet_ids)):
-                edge_entry = self._build_edge_mesh_object(part_id, edge_res, edge_index)
-                if edge_entry is not None:
-                    edge_entries.append(edge_entry)
+                raw_edge = self._build_raw_edge_piece(part_id, part, edge_res, edge_index)
+                if raw_edge is None:
+                    continue
+                piece, color = raw_edge
+                grouped_raw_edges[piece[3].display_mesh_type].append(piece)
+                grouped_edge_colors[piece[3].display_mesh_type].append(color)
 
         face_batches = _build_batches_from_raw_faces(grouped_raw)
         if slow_entries:
@@ -1477,7 +1614,7 @@ class Mesh(MeshInfo):
 
         return {
             "faces": face_batches,
-            "edges": build_edge_render_batches(edge_entries),
+            "edges": _build_batches_from_raw_edges(grouped_raw_edges, grouped_edge_colors),
             "element_edges": build_element_edge_batches(outline_entries),
         }
 
@@ -1768,6 +1905,7 @@ class SplineGeometry:
         self.part_id = part_id
         self.spline_id = spline_id
         self.geom_type = geom_type
+
 
 
 class MeshUSD(MeshInfo):
