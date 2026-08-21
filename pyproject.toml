@@ -186,4 +186,7 @@ exclude = [
     'ansys\\.meshing\\.prime\\.internals\\.',
     'ansys\\.meshing\\.prime\\.relaxed_json\\.',
 ]
-
+exclude_files = [
+    '^tests/.*',
+    '^examples/.*',
+]
