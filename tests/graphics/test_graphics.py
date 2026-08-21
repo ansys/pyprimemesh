@@ -244,14 +244,23 @@ def test_cad_without_mesh_is_outlined_by_its_facets(get_remote_client, get_examp
     display = PrimePlotter(allow_picking=False)
     try:
         display.add_model(model, update=True)
-        assert display.element_edge_actors
+        assert display.facet_edge_actors
+        assert not display.element_edge_actors
 
         outlined = set()
-        for actor, batch in display.element_edge_actors.items():
+        for actor, batch in display.facet_edge_actors.items():
             assert all(not info.has_mesh for info in batch.infos.values())
             outlined.update(_keys_in_mesh(batch, display._drawn_geometry[actor]))
         expected = {info.key for part_pd in model_pd.values() for _, info in part_pd["faces"]}
         assert expected <= outlined
+
+        # Facets stand in for a mesh that is not there, so they start hidden and the
+        # show-edges button reveals them.
+        assert not any(actor.visibility for actor in display.facet_edge_actors)
+        display.set_show_edges(False)
+        assert all(actor.visibility for actor in display.facet_edge_actors)
+        display.set_show_edges(True)
+        assert not any(actor.visibility for actor in display.facet_edge_actors)
     finally:
         display.scene.close()
 
