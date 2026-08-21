@@ -136,22 +136,46 @@ class PrimePlotter(Plotter):
 
     @property
     def info_actor_map(self) -> Dict:
-        """Return metadata for individually added actors."""
+        """Return metadata for individually added actors.
+
+        Returns
+        -------
+        Dict
+            Display information of each actor added with :meth:`add_mesh`.
+        """
         return self._info_actor_map
 
     @info_actor_map.setter
     def info_actor_map(self, value: Dict) -> None:
-        """Set metadata for individually added actors."""
+        """Set metadata for individually added actors.
+
+        Parameters
+        ----------
+        value : Dict
+            Display information of each actor added with :meth:`add_mesh`.
+        """
         self._info_actor_map = value
 
     @property
     def element_edge_actors(self) -> Dict:
-        """Return element-outline actors of meshed faces, keyed by actor."""
+        """Return element-outline actors of meshed faces.
+
+        Returns
+        -------
+        Dict
+            Render batch of each element-outline actor, keyed by actor.
+        """
         return self._element_edge_batches
 
     @property
     def facet_edge_actors(self) -> Dict:
-        """Return facet-outline actors of unmeshed faces, keyed by actor."""
+        """Return facet-outline actors of unmeshed faces.
+
+        Returns
+        -------
+        Dict
+            Render batch of each facet-outline actor, keyed by actor.
+        """
         return self._facet_edge_batches
 
     def _outline_groups(self):
@@ -167,25 +191,71 @@ class PrimePlotter(Plotter):
 
     @property
     def scene(self):
-        """Return the underlying PyVista scene."""
+        """Return the underlying PyVista scene.
+
+        Returns
+        -------
+        pyvista.Plotter
+            Scene used for direct rendering control.
+        """
         return self._backend.pv_interface.scene
 
     @property
     def entity_infos(self) -> Dict[DisplayEntityKey, DisplayMeshInfo]:
-        """Return all displayed entities keyed by model-unique entity key."""
+        """Return all displayed entities.
+
+        Returns
+        -------
+        Dict[DisplayEntityKey, DisplayMeshInfo]
+            Display information of every entity, keyed by model-unique entity key.
+        """
         return self._entity_infos
 
     @property
     def picked_entities(self) -> Dict[DisplayEntityKey, DisplayMeshInfo]:
-        """Return picked entities keyed by model-unique entity key."""
+        """Return the entities currently picked.
+
+        Returns
+        -------
+        Dict[DisplayEntityKey, DisplayMeshInfo]
+            Display information of each picked entity, keyed by model-unique
+            entity key.
+        """
         return self._picked_entities
 
     def get_scalar_colors(self, mesh_info: DisplayMeshInfo) -> np.ndarray:
-        """Return the default scalar color for a display entity."""
+        """Get the default scalar color of a display entity.
+
+        Parameters
+        ----------
+        mesh_info : DisplayMeshInfo
+            Display information that the color is generated from.
+
+        Returns
+        -------
+        np.ndarray
+            RGB color of the entity.
+        """
         return entity_color(mesh_info).tolist()
 
     def add_mesh(self, mesh, metadata=None, **pyvista_kwargs):
-        """Add a raw mesh or ``MeshObjectPlot`` with optional metadata."""
+        """Add a mesh or ``MeshObjectPlot`` to the scene, optionally tracking metadata.
+
+        Parameters
+        ----------
+        mesh : pyvista.DataSet or MeshObjectPlot
+            Raw PyVista mesh, or a ``MeshObjectPlot`` holding one as ``.mesh``.
+        metadata : DisplayMeshInfo, default: None
+            Display information of the mesh. When given, the actor is registered in
+            :attr:`info_actor_map` so that the widgets can act on it.
+        **pyvista_kwargs : dict, default: None
+            Keyword arguments passed to ``scene.add_mesh()``.
+
+        Returns
+        -------
+        pyvista.Actor
+            Actor added to the scene.
+        """
         mesh = mesh.mesh if hasattr(mesh, "mesh") else mesh
         actor = self.scene.add_mesh(mesh, **pyvista_kwargs)
         if metadata is not None:
@@ -193,15 +263,56 @@ class PrimePlotter(Plotter):
         return actor
 
     def add_point_labels(self, points, labels, **kwargs):
-        """Add point labels to the scene."""
+        """Add point labels to the scene.
+
+        Parameters
+        ----------
+        points : array_like
+            Points where the labels are placed.
+        labels : list of str
+            Label text of each point.
+        **kwargs : dict, default: None
+            Keyword arguments passed to ``scene.add_point_labels()``.
+
+        Returns
+        -------
+        pyvista.Actor
+            Actor holding the labels.
+        """
         return self.scene.add_point_labels(points, labels, **kwargs)
 
     def add_legend(self, entries, **kwargs):
-        """Add a legend to the scene."""
+        """Add a legend to the scene.
+
+        Parameters
+        ----------
+        entries : list
+            Legend entries, each a ``[name, color]`` pair.
+        **kwargs : dict, default: None
+            Keyword arguments passed to ``scene.add_legend()``.
+
+        Returns
+        -------
+        pyvista.Actor
+            Actor holding the legend.
+        """
         return self.scene.add_legend(entries, **kwargs)
 
     def add_text(self, text, **kwargs):
-        """Add text annotation to the scene."""
+        """Add a text annotation to the scene.
+
+        Parameters
+        ----------
+        text : str
+            Text to display.
+        **kwargs : dict, default: None
+            Keyword arguments passed to ``scene.add_text()``.
+
+        Returns
+        -------
+        pyvista.Actor
+            Actor holding the text.
+        """
         return self.scene.add_text(text, **kwargs)
 
     def add_model(
@@ -210,7 +321,17 @@ class PrimePlotter(Plotter):
         scope: prime.ScopeDefinition = None,
         update: bool = False,
     ) -> None:
-        """Add a Prime model or a scoped subset to the plotter."""
+        """Add a Prime model, or a scoped subset of one, to the plotter.
+
+        Parameters
+        ----------
+        model : Model
+            Prime model to add.
+        scope : prime.ScopeDefinition, default: None
+            Scope to show. When this is ``None``, the whole model is shown.
+        update : bool, default: False
+            Whether to rebuild the display geometry rather than reuse what is cached.
+        """
         self._model = model
         if scope is None:
             self.add_render_data(model.build_render_data(update=update))
@@ -218,7 +339,14 @@ class PrimePlotter(Plotter):
             self.add_scope(model, scope, update=update)
 
     def add_render_data(self, render_data: ModelRenderData) -> None:
-        """Add pre-built model-wide render batches to the plotter."""
+        """Add render geometry that has already been built.
+
+        Parameters
+        ----------
+        render_data : ModelRenderData
+            Model-wide render batches, as returned by
+            :func:`Model.build_render_data`.
+        """
         self._add_render_batches(render_data.batches)
         self._add_spline_batch(
             render_data.ctrlpts,
@@ -238,7 +366,14 @@ class PrimePlotter(Plotter):
         return output
 
     def add_model_pd(self, model_pd: Dict) -> None:
-        """Add part-organized PolyData using model-wide entity-type actors."""
+        """Add part-organized PolyData using model-wide entity-type actors.
+
+        Parameters
+        ----------
+        model_pd : Dict
+            PolyData of each part keyed by part ID, as returned by
+            :func:`Model.as_polydata`.
+        """
         face_entries = self._entries(model_pd, "faces")
         edge_entries = self._entries(model_pd, "edges")
         control_point_entries = self._entries(model_pd, "ctrlpts")
@@ -539,7 +674,14 @@ class PrimePlotter(Plotter):
         classify_face_connectivity(self._model, infos)
 
     def set_color_by_type(self, color_type: "ColorByType") -> None:
-        """Color displayed entities by zone, zonelet, part, or connectivity."""
+        """Color displayed entities by zone, zonelet, part, or connectivity.
+
+        Parameters
+        ----------
+        color_type : ColorByType
+            Entity property to take the color from. Selecting
+            ``ColorByType.CONNECTIVITY`` classifies face connectivity on first use.
+        """
         self._color_type = ColorByType(color_type)
         if self._color_type == ColorByType.CONNECTIVITY:
             self._ensure_face_connectivity()
@@ -549,7 +691,14 @@ class PrimePlotter(Plotter):
 
     @property
     def selected_entity_infos(self) -> List[DisplayMeshInfo]:
-        """Return metadata for all currently picked entities."""
+        """Return metadata for all currently picked entities.
+
+        Returns
+        -------
+        List[DisplayMeshInfo]
+            Display information of each picked entity, including anything picked
+            through an actor added with :meth:`add_mesh`.
+        """
         infos = list(self._picked_entities.values())
 
         custom_picker = getattr(self._backend, "_custom_picker", None)
@@ -578,7 +727,16 @@ class PrimePlotter(Plotter):
         return keys
 
     def set_entities_visible(self, entities, visible: bool) -> None:
-        """Show or hide display entities without changing actor count."""
+        """Show or hide display entities without changing the actor count.
+
+        Parameters
+        ----------
+        entities : Iterable
+            Entities to update, given as ``DisplayEntityKey``, ``DisplayMeshInfo``,
+            or entity ID.
+        visible : bool
+            Whether to show the entities.
+        """
         keys = self._normalise_entity_keys(entities)
         if visible:
             self._hidden_entities.difference_update(keys)
@@ -670,7 +828,17 @@ class PrimePlotter(Plotter):
         scope: prime.ScopeDefinition,
         update: bool = False,
     ) -> None:
-        """Add a scoped subset of a model."""
+        """Add a scoped subset of a model.
+
+        Parameters
+        ----------
+        model : Model
+            Prime model the scope is evaluated against.
+        scope : prime.ScopeDefinition
+            Scope selecting the entities to show.
+        update : bool, default: False
+            Whether to rebuild the display geometry rather than reuse what is cached.
+        """
         self._model = model
         self.add_render_data(model.get_scoped_render_data(scope, update=update))
 
@@ -681,7 +849,24 @@ class PrimePlotter(Plotter):
         update: bool = False,
         **plotting_options,
     ) -> None:
-        """Add a list of PyPrime models or PyVista objects to the scene."""
+        """Add a list of objects to the scene.
+
+        Allowed types are PyPrime models or any PyVista plottable object.
+
+        Parameters
+        ----------
+        plotting_list : List[Any]
+            Objects to plot.
+        name_filter : str, default: None
+            Regular expression with the desired name or names to include in the
+            plotter.
+        update : bool, default: False
+            Whether to rebuild the display geometry rather than reuse what is cached.
+        **plotting_options : dict, default: None
+            Keyword arguments. For allowable keyword arguments, see the
+            :meth:`Plotter.add_mesh <pyvista.Plotter.add_mesh>` method.
+            Options only applied to PyVista plottable objects.
+        """
         for plottable_object in plotting_list:
             self.plot(
                 plottable_object,
@@ -698,7 +883,41 @@ class PrimePlotter(Plotter):
         update: bool = False,
         **plotting_options,
     ):
-        """Add a Prime model or PyVista plottable object."""
+        """Add an object to the plotter.
+
+        Allowed types are PyPrime models or any PyVista plottable object.
+
+        Parameters
+        ----------
+        plottable_object : Any
+            Object to add to the plotter.
+        scope : prime.ScopeDefinition, default: None
+            Scope to plot. Only applied to Prime models.
+        name_filter : str, default: None
+            Regular expression with the desired name or names to include in the
+            plotter.
+        update : bool, default: False
+            Whether to rebuild the display geometry rather than reuse what is cached.
+            Required when any mesh has been updated.
+        **plotting_options : dict, default: None
+            Keyword arguments. For allowable keyword arguments, see the
+            :meth:`Plotter.add_mesh <pyvista.Plotter.add_mesh>` method.
+            Options only applied to PyVista plottable objects.
+
+        Examples
+        --------
+        >>> import pyvista as pv
+        >>> from ansys.meshing.prime.graphics import PrimePlotter
+        >>> import ansys.meshing.prime as prime
+        >>> model = prime.launch_prime().model
+        >>> prime.lucid.Mesh(model).read(prime.examples.download_block_model_fmd())
+        >>> scope = prime.ScopeDefinition(model, label_expression="my_group")
+        >>> plotter = PrimePlotter()
+        >>> # pyvista sphere with plotting options added for opacity and color
+        >>> plotter.plot(plottable_object=pv.Sphere(radius=2.0), opacity=0.5, color="red")
+        >>> plotter.plot(plottable_object=model, scope=scope)
+        >>> plotter.show()
+        """
         if isinstance(plottable_object, Model):
             self.add_model(plottable_object, scope, update=update)
         elif isinstance(plottable_object, list):
@@ -723,7 +942,25 @@ class PrimePlotter(Plotter):
         scope: prime.ScopeDefinition = None,
         **plotting_options,
     ) -> None:
-        """Show plotted content and optionally save a screenshot."""
+        """Show the plotted objects.
+
+        Parameters
+        ----------
+        plottable_object : Any, default: None
+            Object to show. When this is ``None``, only what is already plotted
+            is shown.
+        screenshot : str, default: None
+            Path to save a screenshot to.
+        name_filter : str, default: None
+            Regular expression with the desired name or names to include in the
+            plotter.
+        scope : prime.ScopeDefinition, default: None
+            Scope to plot. Only applied to Prime models.
+        **plotting_options : dict, default: None
+            Keyword arguments. For allowable keyword arguments, see the
+            :meth:`Plotter.add_mesh <pyvista.Plotter.add_mesh>` method.
+            Options only applied to PyVista plottable objects.
+        """
         if plottable_object is not None:
             self.plot(
                 plottable_object,
