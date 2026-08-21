@@ -161,3 +161,29 @@ directory = "changed"
 name = "Changed"
 showcontent = true
 
+[tool.numpydoc_validation]
+# Keep in sync with doc/source/conf.py.
+checks = [
+    "GL06",
+    "GL07",
+    "GL08",
+    "GL09",
+    "GL10",
+    "SS01",
+    "SS04",
+    "PR01",
+    "RT01",
+    "RT02",
+]
+exclude = [
+    '\\.ColorByType$',
+    '\\.DisplayMeshType$',
+    '\\.FaceConnectivity$',
+    '\\.ImportTypes$',
+    '\\.LabelToZoneMethod$',
+    '\\.Examples$',
+    'ansys\\.meshing\\.prime\\.autogen\\.',
+    'ansys\\.meshing\\.prime\\.internals\\.',
+    'ansys\\.meshing\\.prime\\.relaxed_json\\.',
+]
+
