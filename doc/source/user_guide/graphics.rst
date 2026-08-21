@@ -53,3 +53,58 @@ carry out basic verifications:
     :align: center
 
     **Graphics buttons**
+
+Coloring the display
+====================
+The color button cycles through the ways entities can be colored. The mode can also be
+set from a script with ``ColorByType``:
+
+.. code-block:: pycon
+
+    >>> from ansys.meshing.prime.core.mesh import ColorByType
+    >>> display = PrimePlotter()
+    >>> display.add_model(model)
+    >>> display.set_color_by_type(ColorByType.CONNECTIVITY)
+    >>> display.show()
+
+``ZONE``, ``ZONELET``, and ``PART`` give each zone, entity, or part its own color from a
+palette, which tells entities apart but carries no meaning beyond that.
+
+``CONNECTIVITY`` instead colors entities by how they connect to the rest of their part,
+which is the quickest way to spot leaks, missing interfaces, and unintended sheet bodies
+before meshing. Faces are colored by the number of volumes they bound:
+
+.. list-table::
+    :header-rows: 1
+    :widths: 20 80
+
+    * - Class
+      - Meaning
+    * - ``SURFACE``
+      - Bounds no volume, such as a midsurface or another sheet body.
+    * - ``BODY``
+      - Bounds exactly one volume, so it is the outer skin of a solid body.
+    * - ``SHARED``
+      - Bounds two or more volumes, so it is an interface inside the part.
+
+Edges keep the connectivity colors they are always drawn with, so free, double, and
+multiply connected edges stay distinguishable in every mode, including while a face is
+selected. The exact colors are given by ``FACE_CONNECTIVITY_COLORS`` and
+``TOPO_EDGE_TYPE_COLORS`` in ``ansys.meshing.prime.core.mesh``.
+
+Face connectivity is read from the volumes of each part, so it works for topology parts
+and for mesh parts alike, and for topology parts that have since been meshed. It is
+resolved the first time you select the connectivity mode rather than at display time,
+which keeps the cost off models that never use it.
+
+Showing the mesh
+================
+The show mesh button toggles the interior edges of the displayed faces. What those edges
+are depends on whether a face carries a mesh:
+
+- A meshed face shows its element edges, drawn in the theme edge color.
+- An unmeshed face shows the facets that approximate its CAD surface, drawn faintly so
+  that tessellation is not mistaken for a real mesh.
+
+This means a CAD model still gives a sense of its surface curvature before meshing, and
+a partially meshed model shows at a glance which faces have been meshed.
