@@ -137,10 +137,7 @@ def test_quadratic_element_outlines(get_remote_client, get_examples):
     linear_pd = _mesh_elbow(model, mixing_elbow, quadratic=False)
     assert _check_element_outlines(linear_pd) == set()
     linear_meshed_keys = {
-        info.key
-        for part_pd in linear_pd.values()
-        for _, info in part_pd["faces"]
-        if info.has_mesh
+        info.key for part_pd in linear_pd.values() for _, info in part_pd["faces"] if info.has_mesh
     }
     assert linear_meshed_keys
     linear_display = PrimePlotter()
@@ -149,9 +146,7 @@ def test_quadratic_element_outlines(get_remote_client, get_examples):
         assert linear_display.element_edge_actors
         represented = set()
         for actor, batch in linear_display.element_edge_actors.items():
-            represented.update(
-                _keys_in_mesh(batch, linear_display._drawn_geometry[actor])
-            )
+            represented.update(_keys_in_mesh(batch, linear_display._drawn_geometry[actor]))
         assert linear_meshed_keys <= represented
     finally:
         linear_display.scene.close()
