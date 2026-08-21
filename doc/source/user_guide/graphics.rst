@@ -81,7 +81,7 @@ before meshing. Faces are colored by the number of volumes they bound:
     * - Class
       - Meaning
     * - ``SURFACE``
-      - Bounds no volume, such as a midsurface or another sheet body.
+      - Bounds no volume, such as a sheet body.
     * - ``BODY``
       - Bounds exactly one volume, so it is the outer skin of a solid body.
     * - ``SHARED``
