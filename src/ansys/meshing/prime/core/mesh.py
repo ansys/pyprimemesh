@@ -623,10 +623,18 @@ def build_element_edge_batches(
         if entry is None:
             continue
         mesh_object, info = entry
-        if not info.has_mesh or info.element_edges is None:
+        if not info.has_mesh:
             continue
         if info.element_edges is not None:
             outlines = info.element_edges
+        elif mesh_object.mesh is not None and mesh_object.mesh.n_cells > 0:
+            # Linear meshed facets do not store explicit outlines on DisplayMeshInfo,
+            # but batch rendering still needs element-edge actors for ToggleEdges.
+            outlines = mesh_object.mesh.extract_all_edges(progress_bar=False)
+        else:
+            continue
+        if outlines is None or outlines.n_cells == 0:
+            continue
         elif mesh_object.mesh is not None:
             outlines = mesh_object.mesh.extract_all_edges(progress_bar=False)
         else:
