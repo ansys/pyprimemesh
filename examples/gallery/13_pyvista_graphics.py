@@ -589,7 +589,12 @@ mesh_util.volume_mesh()
 # For reference after the structural parts are meshed the model contains:
 print(model)
 
-for color_mode in [ColorByType.ZONE, ColorByType.ZONELET, ColorByType.PART, ColorByType.CONNECTIVITY]:
+for color_mode in [
+   ColorByType.ZONE,
+   ColorByType.ZONELET,
+   ColorByType.PART,
+   ColorByType.CONNECTIVITY,
+]:
     plotter = PrimePlotter()
     plotter.plot(model, update=True)
     plotter.set_color_by_type(color_mode)
