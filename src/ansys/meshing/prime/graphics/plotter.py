@@ -981,6 +981,13 @@ class Graphics:
 
     .. deprecated:: 0.6.0
         Use :class:`PrimePlotter` instead.
+
+    Parameters
+    ----------
+    model : prime.Model
+        Prime model to display.
+    use_trame : bool, default: False
+        Whether to render through Trame rather than a native window.
     """
 
     def __init__(self, model: prime.Model, use_trame: bool = False) -> None:
@@ -1000,7 +1007,19 @@ class Graphics:
         spline: bool = False,
         scope: prime.ScopeDefinition = None,
     ) -> None:
-        """Display the configured model."""
+        """Display the configured model.
+
+        Parameters
+        ----------
+        parts : List, default: None
+            Unused, kept for backward compatibility.
+        update : bool, default: True
+            Whether to rebuild the display geometry rather than reuse what is cached.
+        spline : bool, default: False
+            Unused, kept for backward compatibility.
+        scope : prime.ScopeDefinition, default: None
+            Scope to show. When this is ``None``, the whole model is shown.
+        """
         plotter = PrimePlotter(use_trame=self.use_trame)
         plotter.add_model(self.model, scope=scope, update=update)
         plotter.show()
