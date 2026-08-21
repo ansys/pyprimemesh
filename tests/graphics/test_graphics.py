@@ -25,14 +25,18 @@ from pathlib import Path
 from types import SimpleNamespace
 
 import numpy as np
+import pytest
 import pyvista as pv
 from ansys.tools.visualization_interface.utils.color import Color
 
 import ansys.meshing.prime as prime
 from ansys.meshing.prime.core.mesh import (
+    EDGE_DISPLAY_MESH_TYPES,
     ENTITY_COLOR_ARRAY,
     ENTITY_ID_ARRAY,
     ENTITY_TYPE_ARRAY,
+    FACE_CONNECTIVITY_COLORS,
+    FACE_DISPLAY_MESH_TYPES,
     PART_ID_ARRAY,
     RENDER_ENTITY_ID_ARRAY,
     ZONE_ID_ARRAY,
@@ -40,8 +44,10 @@ from ansys.meshing.prime.core.mesh import (
     DisplayEntityKey,
     DisplayMeshInfo,
     DisplayMeshType,
+    FaceConnectivity,
     compute_distance,
     compute_face_list_from_structured_nodes,
+    connectivity_color,
 )
 from ansys.meshing.prime.graphics import PrimePlotter
 from ansys.meshing.prime.graphics.widgets.hide_picked import HidePicked
@@ -105,12 +111,32 @@ def _entry_info(batch, cell_id=0):
 
 
 def _largest_pickable_batch(display):
-    """Return the pickable actor and batch with the most registered entities."""
+    """Return the pickable face actor and batch with the most registered entities."""
     actor, batch = max(
-        ((actor, batch) for actor, batch in display._batches.items() if batch.pickable),
+        (
+            (actor, batch)
+            for actor, batch in display._batches.items()
+            if batch.pickable and batch.display_mesh_type in FACE_DISPLAY_MESH_TYPES
+        ),
         key=lambda item: len(item[1].infos),
     )
     return actor, batch
+
+
+def _batches_of_types(display, display_mesh_types):
+    """Return every registered actor and batch of the given display entity types."""
+    return [
+        (actor, batch)
+        for actor, batch in display._batches.items()
+        if batch.display_mesh_type in display_mesh_types
+    ]
+
+
+def _read_only(model, file_name):
+    """Replace every part of a model with the contents of one file."""
+    if model.parts:
+        model.delete_parts([part.id for part in model.parts])
+    prime.lucid.Mesh(model=model).read(file_name)
 
 
 def _cells_for_key(batch, key):
@@ -207,14 +233,10 @@ def test_add_model_shows_linear_meshed_element_outlines(get_remote_client, get_e
         display.scene.close()
 
 
-def test_cad_without_mesh_has_no_element_outlines(get_remote_client, get_examples):
-    """Unmeshed CAD faces keep has_mesh=False and skip element-outline actors."""
+def test_cad_without_mesh_is_outlined_by_its_facets(get_remote_client, get_examples):
+    """Unmeshed CAD faces keep has_mesh=False but still show their facets."""
     model = get_remote_client.model
-    part_ids = [part.id for part in model.parts]
-    if part_ids:
-        model.delete_parts(part_ids)
-    mesh_util = prime.lucid.Mesh(model=model)
-    mesh_util.read(get_examples["elbow_lucid"])
+    _read_only(model, get_examples["elbow_lucid"])
 
     model_pd = model.as_polydata(update=True)
     assert all(not info.has_mesh for part_pd in model_pd.values() for _, info in part_pd["faces"])
@@ -222,7 +244,270 @@ def test_cad_without_mesh_has_no_element_outlines(get_remote_client, get_example
     display = PrimePlotter(allow_picking=False)
     try:
         display.add_model(model, update=True)
-        assert display.element_edge_actors == {}
+        assert display.element_edge_actors
+
+        outlined = set()
+        for actor, batch in display.element_edge_actors.items():
+            assert all(not info.has_mesh for info in batch.infos.values())
+            outlined.update(_keys_in_mesh(batch, display._drawn_geometry[actor]))
+        expected = {info.key for part_pd in model_pd.values() for _, info in part_pd["faces"]}
+        assert expected <= outlined
+    finally:
+        display.scene.close()
+
+
+def test_picking_a_face_keeps_edges_colored_by_connectivity(get_remote_client, get_examples):
+    """Selecting a face leaves edge connectivity colors untouched."""
+    model = get_remote_client.model
+    part_ids = [part.id for part in model.parts]
+    if part_ids:
+        model.delete_parts(part_ids)
+    mesh_util = prime.lucid.Mesh(model=model)
+    mesh_util.read(get_examples["elbow_lucid"])
+
+    display = PrimePlotter(allow_picking=True)
+    try:
+        display.add_model(model, update=True)
+        edge_batches = [
+            batch
+            for batch in display._batches.values()
+            if batch.display_mesh_type in (DisplayMeshType.TOPOEDGE, DisplayMeshType.EDGEZONELET)
+        ]
+        assert edge_batches
+        assert all(batch.base_colors is not None for batch in edge_batches)
+        before = [batch.mesh.cell_data[ENTITY_COLOR_ARRAY].copy() for batch in edge_batches]
+
+        actor, batch = _largest_pickable_batch(display)
+        assert display._pick_entity(actor, batch.mesh.cell_centers().points[0])
+        assert display.selected_entity_infos
+
+        for edge_batch, original in zip(edge_batches, before):
+            assert np.array_equal(edge_batch.mesh.cell_data[ENTITY_COLOR_ARRAY], original)
+    finally:
+        display.scene.close()
+
+
+@pytest.mark.parametrize(
+    "example,expected",
+    [
+        ("bracket", FaceConnectivity.SURFACE),
+        ("elbow_lucid", FaceConnectivity.BODY),
+    ],
+)
+def test_connectivity_mode_colors_faces_by_volume_membership(
+    get_remote_client, get_examples, example, expected
+):
+    """Sheet bodies and the skin of a solid take different connectivity colors."""
+    model = get_remote_client.model
+    _read_only(model, get_examples[example])
+
+    display = PrimePlotter(allow_picking=True)
+    try:
+        display.add_model(model, update=True)
+        faces = _batches_of_types(display, FACE_DISPLAY_MESH_TYPES)
+        assert faces
+        assert all(info.connectivity is None for _, batch in faces for info in batch.infos.values())
+
+        display.set_color_by_type(ColorByType.CONNECTIVITY)
+
+        wanted = np.asarray(FACE_CONNECTIVITY_COLORS[expected], dtype=np.uint8)
+        for _, batch in faces:
+            assert all(info.connectivity == int(expected) for info in batch.infos.values())
+            assert np.all(batch.mesh.cell_data[ENTITY_COLOR_ARRAY] == wanted)
+    finally:
+        display.scene.close()
+
+
+def test_connectivity_mode_keeps_edge_connectivity_colors(get_remote_client, get_examples):
+    """Edges already carry connectivity colors, so the mode leaves them alone."""
+    model = get_remote_client.model
+    _read_only(model, get_examples["bracket"])
+
+    display = PrimePlotter(allow_picking=True)
+    try:
+        display.add_model(model, update=True)
+        edges = _batches_of_types(display, EDGE_DISPLAY_MESH_TYPES)
+        assert edges
+        assert all(batch.base_colors is not None for _, batch in edges)
+
+        for color_type in (ColorByType.PART, ColorByType.CONNECTIVITY):
+            display.set_color_by_type(color_type)
+            for _, batch in edges:
+                applied = batch.mesh.cell_data[ENTITY_COLOR_ARRAY]
+                assert np.array_equal(applied, batch.base_colors) == (
+                    color_type == ColorByType.CONNECTIVITY
+                )
+    finally:
+        display.scene.close()
+
+
+def test_edges_can_be_picked(get_remote_client, get_examples):
+    """An edge batch resolves a pick to its own entity."""
+    model = get_remote_client.model
+    _read_only(model, get_examples["bracket"])
+
+    display = PrimePlotter(allow_picking=True)
+    try:
+        display.add_model(model, update=True)
+        edges = _batches_of_types(display, EDGE_DISPLAY_MESH_TYPES)
+        assert edges
+        actor, batch = edges[0]
+        assert batch.pickable
+
+        _, _, key = _entry_info(batch)
+        assert display._pick_entity(actor, batch.mesh.cell_centers().points[0])
+        assert [info.key for info in display.selected_entity_infos] == [key]
+
+        highlight = np.asarray(pv.Color(Color.PICKED.value).int_rgb, dtype=np.uint8)
+        selected = _cells_for_key(batch, key)
+        applied = batch.mesh.cell_data[ENTITY_COLOR_ARRAY]
+        assert np.all(applied[selected] == highlight)
+        assert np.array_equal(applied[~selected], batch.base_colors[~selected])
+    finally:
+        display.scene.close()
+
+
+def _spaced_copies(model, file_name, copies, spacing):
+    """Replace the model with several copies of one CAD file, spaced along X."""
+    if model.parts:
+        model.delete_parts([part.id for part in model.parts])
+    for index in range(copies):
+        prime.FileIO(model).import_cad(
+            file_name,
+            params=prime.ImportCadParams(model=model, append=index > 0),
+        )
+    for index, part in enumerate(model.parts):
+        if not index:
+            continue
+        params = prime.TransformParams(model)
+        # fmt: off
+        params.transformation_matrix = [
+            1.0, 0.0, 0.0, index * spacing,
+            0.0, 1.0, 0.0, 0.0,
+            0.0, 0.0, 1.0, 0.0,
+            0.0, 0.0, 0.0, 1.0,
+        ]
+        # fmt: on
+        prime.Transform(model).transform_zonelets(
+            part.id,
+            list(part.get_topo_faces()) + list(part.get_topo_edges()),
+            params,
+        )
+
+
+def test_multiple_parts_keep_edge_colors_and_pick_correctly(get_remote_client, get_examples):
+    """Edge connectivity colors and picking hold up once a model has many parts."""
+    model = get_remote_client.model
+    _spaced_copies(model, get_examples["bracket"], copies=3, spacing=250.0)
+    assert len(model.parts) > 2
+
+    display = PrimePlotter(allow_picking=True)
+    try:
+        display.add_model(model, update=True)
+
+        edge_parts = set()
+        for _, batch in _batches_of_types(display, EDGE_DISPLAY_MESH_TYPES):
+            colors = batch.mesh.cell_data[ENTITY_COLOR_ARRAY]
+            for render_id, info in batch.infos.items():
+                edge_parts.add(info.part_id)
+                cells = batch.render_entity_ids == render_id
+                expected = np.asarray(connectivity_color(info), dtype=np.uint8)
+                assert np.all(colors[cells] == expected)
+        assert edge_parts == {part.id for part in model.parts}
+
+        picked_parts = set()
+        for actor, batch in _batches_of_types(display, FACE_DISPLAY_MESH_TYPES):
+            if not batch.pickable:
+                continue
+            centers = batch.mesh.cell_centers().points
+            for render_id, info in batch.infos.items():
+                cell = int(np.flatnonzero(batch.render_entity_ids == render_id)[0])
+                display._picked_entities.clear()
+                assert display._pick_entity(actor, centers[cell])
+                assert [picked.key for picked in display.selected_entity_infos] == [info.key]
+                picked_parts.add(info.part_id)
+        assert picked_parts == {part.id for part in model.parts}
+    finally:
+        display.scene.close()
+
+
+def _face_scope(model, label_expression):
+    """Return a face-zonelet scope selecting one label."""
+    return prime.ScopeDefinition(
+        model=model,
+        entity_type=prime.ScopeEntity.FACEZONELETS,
+        evaluation_type=prime.ScopeEvaluationType.LABELS,
+        label_expression=label_expression,
+    )
+
+
+def _face_keys(render_data):
+    """Return the face entity keys present in render data."""
+    return {
+        info.key
+        for batch in render_data.batches.get("faces", {}).values()
+        for info in batch.infos.values()
+    }
+
+
+def test_scoped_render_data_returns_only_the_scoped_faces(get_remote_client, get_examples):
+    """A face scope delivers the scoped faces and no other entity."""
+    model = get_remote_client.model
+    _read_only(model, get_examples["elbow_fmd"])
+    prime.lucid.Mesh(model=model).surface_mesh(min_size=5, max_size=20)
+
+    labels = model.parts[0].get_labels()
+    assert labels
+
+    everything = _face_keys(model.build_render_data(update=True))
+    scoped_data = model.get_scoped_render_data(_face_scope(model, labels[0]), update=True)
+    scoped = _face_keys(scoped_data)
+
+    assert scoped
+    assert scoped < everything
+    # The scope selects faces, so the rest of the part's edges are not its entities.
+    assert not scoped_data.batches.get("edges")
+    outlined = {
+        info.key
+        for batch in scoped_data.batches.get("element_edges", {}).values()
+        for info in batch.infos.values()
+    }
+    assert outlined <= scoped
+
+
+def test_scope_matching_nothing_returns_empty_render_data(get_remote_client, get_examples):
+    """A scope that matches nothing terminates rather than recursing forever."""
+    model = get_remote_client.model
+    _read_only(model, get_examples["elbow_fmd"])
+
+    data = model.get_scoped_render_data(_face_scope(model, "no_such_label"), update=True)
+    assert data.batches == {}
+
+
+def test_connectivity_classifies_mesh_parts_without_topology(get_remote_client, get_examples):
+    """Face zonelets classify from mesh volumes once topology is deleted."""
+    model = get_remote_client.model
+    _read_only(model, get_examples["elbow_fmd"])
+    prime.lucid.Mesh(model=model).surface_mesh(min_size=5, max_size=20)
+    prime.lucid.Mesh(model=model).volume_mesh(volume_fill_type=prime.VolumeFillType.TET)
+    for part in model.parts:
+        part.delete_topo_entities(
+            prime.DeleteTopoEntitiesParams(model=model, delete_geom_zonelets=True)
+        )
+
+    display = PrimePlotter(allow_picking=False)
+    try:
+        display.add_model(model, update=True)
+        faces = _batches_of_types(display, FACE_DISPLAY_MESH_TYPES)
+        assert faces
+        assert all(batch.display_mesh_type == DisplayMeshType.FACEZONELET for _, batch in faces)
+
+        display.set_color_by_type(ColorByType.CONNECTIVITY)
+        assert all(
+            info.connectivity == int(FaceConnectivity.BODY)
+            for _, batch in faces
+            for info in batch.infos.values()
+        )
     finally:
         display.scene.close()
 
