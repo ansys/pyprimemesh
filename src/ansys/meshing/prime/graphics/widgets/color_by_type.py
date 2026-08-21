@@ -58,7 +58,7 @@ class ColorByTypeWidget(PlotterWidget):
             border_size=3,
         )
 
-        self._button.GetRepresentation().SetNumberOfStates(3)
+        self._button.GetRepresentation().SetNumberOfStates(len(ColorByType))
 
         self._color_type = ColorByType.ZONE
 
@@ -66,7 +66,7 @@ class ColorByTypeWidget(PlotterWidget):
         """Apply the selected coloring mode."""
         del state
 
-        color_type = color_type = ColorByType(self._button.GetRepresentation().GetState())
+        color_type = ColorByType(self._button.GetRepresentation().GetState())
 
         self._color_type = color_type
 
@@ -96,6 +96,7 @@ class ColorByTypeWidget(PlotterWidget):
             ColorByType.ZONE: "bin.png",
             ColorByType.ZONELET: "surface_body.png",
             ColorByType.PART: "parts.png",
+            ColorByType.CONNECTIVITY: "connectivity.png",
         }
 
         icon_file = os.path.join(
@@ -109,9 +110,8 @@ class ColorByTypeWidget(PlotterWidget):
 
         image = reader.GetOutput()
 
-        representation.SetButtonTexture(0, image)
-        representation.SetButtonTexture(1, image)
-        representation.SetButtonTexture(2, image)
+        for state in range(len(ColorByType)):
+            representation.SetButtonTexture(state, image)
 
     @staticmethod
     def set_color_by_type(
