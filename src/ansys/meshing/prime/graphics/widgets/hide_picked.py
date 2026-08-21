@@ -38,6 +38,11 @@ class HidePicked(PlotterWidget):
 
     Selection is tracked using DisplayEntityKey so identical entity IDs in
     different parts remain independent.
+
+    Parameters
+    ----------
+    prime_plotter : PrimePlotter
+        Plotter whose selected entities the widget hides and restores.
     """
 
     def __init__(self, prime_plotter: "PrimePlotter") -> None:
