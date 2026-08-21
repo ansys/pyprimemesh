@@ -115,6 +115,7 @@ class PrimePlotter(Plotter):
         self._info_actor_map: Dict[Any, DisplayMeshInfo] = {}
         self._batches: Dict[Any, RenderBatch] = {}
         self._element_edge_batches: Dict[Any, RenderBatch] = {}
+        self._facet_edge_batches: Dict[Any, RenderBatch] = {}
         self._spline_actors: Dict[DisplayMeshType, Any] = {}
         self._entity_infos: Dict[DisplayEntityKey, DisplayMeshInfo] = {}
         self._picked_entities: Dict[DisplayEntityKey, DisplayMeshInfo] = {}
@@ -145,8 +146,24 @@ class PrimePlotter(Plotter):
 
     @property
     def element_edge_actors(self) -> Dict:
-        """Return element-outline actors keyed by actor."""
+        """Return element-outline actors of meshed faces, keyed by actor."""
         return self._element_edge_batches
+
+    @property
+    def facet_edge_actors(self) -> Dict:
+        """Return facet-outline actors of unmeshed faces, keyed by actor."""
+        return self._facet_edge_batches
+
+    def _outline_groups(self):
+        """Pair each outline group with whether the show-edges state draws it.
+
+        A meshed face shows its element edges by default and an unmeshed face hides
+        its facets, so the two groups follow opposite sides of the same state.
+        """
+        return (
+            (self._element_edge_batches, self._show_element_edges),
+            (self._facet_edge_batches, not self._show_element_edges),
+        )
 
     @property
     def scene(self):
@@ -284,7 +301,8 @@ class PrimePlotter(Plotter):
                 line_width=1,
                 pickable=False,
             )
-            self._element_edge_batches[actor] = batch
+            actor.visibility = not self._show_element_edges
+            self._facet_edge_batches[actor] = batch
             self._drawn_geometry[actor] = batch.mesh
 
     def _register_batch(self, actor, batch: RenderBatch) -> None:
@@ -326,11 +344,15 @@ class PrimePlotter(Plotter):
         Meshed faces contribute element edges, and unmeshed faces contribute the
         facets approximating their CAD surface, drawn faintly to keep the two apart.
         """
-        styles = (
-            (True, {"color": pv.global_theme.edge_color}),
-            (False, {"color": FACET_EDGE_COLOR, "opacity": FACET_EDGE_OPACITY}),
+        groups = (
+            (True, self._element_edge_batches, {"color": pv.global_theme.edge_color}),
+            (
+                False,
+                self._facet_edge_batches,
+                {"color": FACET_EDGE_COLOR, "opacity": FACET_EDGE_OPACITY},
+            ),
         )
-        for meshed, style in styles:
+        for meshed, group, style in groups:
             for batch in build_element_edge_batches(face_entries, meshed=meshed).values():
                 actor = self.scene.add_mesh(
                     batch.mesh,
@@ -338,7 +360,8 @@ class PrimePlotter(Plotter):
                     pickable=False,
                     **style,
                 )
-                self._element_edge_batches[actor] = batch
+                actor.visibility = meshed == self._show_element_edges
+                group[actor] = batch
                 self._drawn_geometry[actor] = batch.mesh
 
     @staticmethod
@@ -598,22 +621,32 @@ class PrimePlotter(Plotter):
         for actor, batch in self._batches.items():
             self._draw(actor, self._visible_geometry(batch))
 
-        for actor, batch in self._element_edge_batches.items():
-            visible = self._visible_geometry(batch)
-            self._draw(actor, visible)
-            actor.visibility = bool(self._show_element_edges and visible.n_cells > 0)
+        for group, shown in self._outline_groups():
+            for actor, batch in group.items():
+                visible = self._visible_geometry(batch)
+                self._draw(actor, visible)
+                actor.visibility = bool(shown and visible.n_cells > 0)
 
         self._update_entity_labels()
         self.render()
 
     def set_show_edges(self, show: bool) -> None:
-        """Show or hide model-wide element-outline actors."""
+        """Show the element edges of meshed faces or the facets of unmeshed ones.
+
+        Parameters
+        ----------
+        show : bool
+            Whether to draw element edges. Facets follow the opposite state, so an
+            unmeshed CAD surface starts clean and reveals its tessellation when
+            element edges are turned off.
+        """
         self._show_element_edges = bool(show)
-        for actor in self._element_edge_batches:
-            mesh = self._drawn_geometry.get(actor)
-            actor.visibility = bool(show and mesh is not None and mesh.n_cells > 0)
+        for group, shown in self._outline_groups():
+            for actor in group:
+                mesh = self._drawn_geometry.get(actor)
+                actor.visibility = bool(shown and mesh is not None and mesh.n_cells > 0)
         for actor, info in self._info_actor_map.items():
-            actor.prop.show_edges = bool(show)
+            actor.prop.show_edges = bool(show) if info.has_mesh else not show
             if not info.has_mesh:
                 actor.prop.edge_color = FACET_EDGE_COLOR
         self.render()
