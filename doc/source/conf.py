@@ -131,8 +131,26 @@ numpydoc_validation_checks = {
     # "SS03", # Summary does not end with a period
     "SS04",  # Summary contains heading whitespaces
     # "SS05", # Summary must start with infinitive verb, not third person
+    "PR01",  # Parameters in the signature must be documented
+    "RT01",  # Functions that return a value need a Returns section
     "RT02",  # The first line of the Returns section should contain only the
     # type, unless multiple values are being returned"
+}
+
+# numpydoc validates Enum classes against Enum.__new__ (*values). Exclude hand-written
+# enums here; autogen enums are covered by the autogen module pattern below.
+numpydoc_validation_exclude = {
+    r"\.ColorByType$",
+    r"\.DisplayMeshType$",
+    r"\.FaceConnectivity$",
+    r"\.ImportTypes$",
+    r"\.LabelToZoneMethod$",
+    r"\.Examples$",
+    # Remove once autogen emits numpydoc-compliant parameter lines (`name : type`).
+    r"ansys\.meshing\.prime\.autogen\.",
+    # Remove once internals docstrings document all parameters and returns.
+    r"ansys\.meshing\.prime\.internals\.",
+    r"ansys\.meshing\.prime\.relaxed_json\.",
 }
 
 
