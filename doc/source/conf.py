@@ -139,6 +139,8 @@ numpydoc_validation_checks = {
 
 # numpydoc validates Enum classes against Enum.__new__ (*values). Exclude hand-written
 # enums here; autogen enums are covered by the autogen module pattern below.
+# Tests and examples are not public API (see pydocstyle excludes) and are skipped by
+# the pre-commit hook via exclude_files in pyproject.toml.
 numpydoc_validation_exclude = {
     r"\.ColorByType$",
     r"\.DisplayMeshType$",
