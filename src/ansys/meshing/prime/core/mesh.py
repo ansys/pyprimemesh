@@ -48,6 +48,7 @@ class ColorByType(enum.IntEnum):
     ZONE = 0
     ZONELET = 1
     PART = 2
+    CONNECTIVITY = 3
 
 
 color_matrix = np.array(
@@ -76,6 +77,51 @@ class DisplayMeshType(enum.IntEnum):
     EDGEZONELET = 3
     SPLINECONTROLPOINTS = 4
     SPLINESURFACE = 5
+
+
+class FaceConnectivity(enum.IntEnum):
+    """How a displayed face connects to the volumes of its part.
+
+    The value is the number of volumes the face bounds, capped at ``SHARED``.
+    """
+
+    #: Bounds no volume, such as a midsurface or another sheet body.
+    SURFACE = 0
+    #: Bounds exactly one volume, so it is the outer skin of a solid body.
+    BODY = 1
+    #: Bounds two or more volumes, so it is an interface inside the part.
+    SHARED = 2
+
+
+#: Color of each face connectivity class under :attr:`ColorByType.CONNECTIVITY`.
+FACE_CONNECTIVITY_COLORS = {
+    FaceConnectivity.SURFACE: [102, 178, 255],
+    FaceConnectivity.BODY: [155, 186, 126],
+    FaceConnectivity.SHARED: [255, 140, 0],
+}
+
+#: Color of each Prime topology edge type, keyed by its ``topo_edge_types`` value.
+TOPO_EDGE_TYPE_COLORS = {
+    1: [255, 0, 0],
+    2: [0, 0, 0],
+    3: [0, 255, 255],
+    4: [255, 0, 255],
+    5: [255, 255, 0],
+    6: [128, 0, 128],
+}
+
+#: Color of an entity whose connectivity has not been determined.
+UNKNOWN_CONNECTIVITY_COLOR = [190, 190, 190]
+
+EDGE_DISPLAY_MESH_TYPES = (
+    DisplayMeshType.TOPOEDGE,
+    DisplayMeshType.EDGEZONELET,
+)
+
+FACE_DISPLAY_MESH_TYPES = (
+    DisplayMeshType.TOPOFACE,
+    DisplayMeshType.FACEZONELET,
+)
 
 
 @dataclass(frozen=True)
@@ -140,6 +186,11 @@ class DisplayMeshInfo:
         Element outlines to draw as separate line geometry. This is set only for
         zonelets whose outlines cannot be drawn by the face actor itself. For more
         information, see :func:`Mesh.get_face_polydata`.
+    connectivity : int, default: None
+        How the entity connects to the rest of its part. For edges this is the Prime
+        topology edge type, and for faces it is the number of volumes the face bounds,
+        as classified by :class:`FaceConnectivity`. Face connectivity needs extra server
+        queries, so it stays ``None`` until :func:`classify_face_connectivity` fills it in.
     """
 
     def __init__(
@@ -153,6 +204,7 @@ class DisplayMeshInfo:
         has_mesh=False,
         render_mesh=None,
         element_edges=None,
+        connectivity=None,
     ) -> None:
         """Initialize display mesh information."""
         self.id = int(id)
@@ -164,6 +216,7 @@ class DisplayMeshInfo:
         self.has_mesh = bool(has_mesh)
         self.render_mesh = render_mesh
         self.element_edges = element_edges
+        self.connectivity = None if connectivity is None else int(connectivity)
 
     @property
     def key(self) -> DisplayEntityKey:
@@ -189,12 +242,14 @@ class RenderBatch:
         infos: Mapping[int, DisplayMeshInfo],
         display_mesh_type: DisplayMeshType,
         pickable: bool = True,
+        base_colors: Optional[np.ndarray] = None,
     ) -> None:
         """Initialize the render batch."""
         self.mesh = mesh
         self.infos = dict(infos)
         self.display_mesh_type = DisplayMeshType(display_mesh_type)
         self.pickable = bool(pickable)
+        self.base_colors = None if base_colors is None else np.asarray(base_colors, dtype=np.uint8)
         self._validate()
 
     def _validate(self) -> None:
@@ -256,13 +311,48 @@ class RenderBatch:
         """Return display information for a batch-local render entity ID."""
         return self.infos[int(render_entity_id)]
 
-    def apply_colors(self, color_type: Optional[ColorByType] = None) -> None:
-        """Color all cells using their owning display entity."""
-        self.mesh.cell_data[ENTITY_COLOR_ARRAY] = compute_entity_colors(
+    @property
+    def cell_colored(self) -> bool:
+        """Whether cells carry their own colors instead of one solid actor color.
+
+        Decoration geometry such as element outlines is drawn in a single theme
+        color, so it is left alone by coloring modes and selection highlighting.
+        """
+        return self.pickable or self.base_colors is not None
+
+    def colors_for(self, color_type: Optional[ColorByType] = None) -> np.ndarray:
+        """Return the per-cell colors of a coloring mode, before any selection highlight.
+
+        Batches built with meaningful colors of their own, such as edges colored by
+        connectivity type, keep those colors while no explicit mode is active.
+
+        Parameters
+        ----------
+        color_type : ColorByType, default: None
+            Entity property to take the color from. When this is ``None``, batch
+            colors supplied at build time are used if there are any.
+
+        Returns
+        -------
+        np.ndarray
+            RGB color of every cell.
+        """
+        # Edge batches are built with connectivity colors already, so they serve both
+        # the default mode and the connectivity mode without recomputation.
+        keeps_base_colors = color_type is None or color_type == ColorByType.CONNECTIVITY
+        if keeps_base_colors and self.base_colors is not None:
+            return self.base_colors.copy()
+        return compute_entity_colors(
             self.infos,
             self.render_entity_ids,
             color_type,
         )
+
+    def apply_colors(self, color_type: Optional[ColorByType] = None) -> None:
+        """Color all cells using their owning display entity."""
+        if not self.cell_colored:
+            return
+        self.mesh.cell_data[ENTITY_COLOR_ARRAY] = self.colors_for(color_type)
         self.mesh.set_active_scalars(
             ENTITY_COLOR_ARRAY,
             preference="cell",
@@ -375,6 +465,86 @@ def _mixed_edge_segments(flat: np.ndarray, size: int) -> np.ndarray:
     return np.asarray(segments, dtype=np.int64)
 
 
+def _facet_edge_pairs(block: np.ndarray, n_cells: int) -> np.ndarray:
+    """Collect every polygon side of a face block as an unordered node pair.
+
+    Parameters
+    ----------
+    block : np.ndarray
+        VTK polygon connectivity of one entity.
+    n_cells : int
+        Number of polygons in the block.
+
+    Returns
+    -------
+    np.ndarray
+        Node pairs of shape ``(n, 2)``, with duplicates still present.
+    """
+    width = int(block[0])
+    stride = width + 1
+    if width >= 3 and block.size == n_cells * stride and bool(np.all(block[::stride] == width)):
+        nodes = block.reshape(n_cells, stride)[:, 1:]
+        pairs = np.stack((nodes, np.roll(nodes, -1, axis=1)), axis=2)
+        return pairs.reshape(-1, 2)
+
+    collected = []
+    cursor = 0
+    while cursor < block.size:
+        count = int(block[cursor])
+        nodes = block[cursor + 1 : cursor + 1 + count]
+        if count >= 2:
+            collected.append(np.stack((nodes, np.roll(nodes, -1)), axis=1))
+        cursor += count + 1
+    if not collected:
+        return np.empty((0, 2), dtype=np.int64)
+    return np.concatenate(collected, axis=0)
+
+
+def _facet_edge_lines(
+    block: np.ndarray,
+    n_cells: int,
+    n_points: int,
+) -> "tuple[np.ndarray, int]":
+    """Turn face connectivity into VTK line connectivity for the facet outlines.
+
+    Facets are the triangulation that approximates an unmeshed CAD surface. Drawing
+    their outlines through PyVista one entity at a time is far too slow on large
+    assemblies, so the shared sides are deduplicated here with NumPy instead.
+
+    Parameters
+    ----------
+    block : np.ndarray
+        VTK polygon connectivity of one entity.
+    n_cells : int
+        Number of polygons in the block.
+    n_points : int
+        Number of points the connectivity indexes into.
+
+    Returns
+    -------
+    tuple[np.ndarray, int]
+        VTK line connectivity and the number of line cells.
+    """
+    block = np.asarray(block, dtype=np.int64).ravel()
+    if n_cells == 0 or block.size == 0 or n_points <= 0:
+        return np.empty((0, 3), dtype=np.int64), 0
+
+    pairs = _facet_edge_pairs(block, n_cells)
+    if pairs.shape[0] == 0:
+        return np.empty((0, 3), dtype=np.int64), 0
+
+    low = np.minimum(pairs[:, 0], pairs[:, 1])
+    high = np.maximum(pairs[:, 0], pairs[:, 1])
+    # One integer key per undirected side deduplicates far faster than a 2D unique.
+    unique_keys = np.unique(low * np.int64(n_points) + high)
+    segments = np.empty((unique_keys.size, 2), dtype=np.int64)
+    segments[:, 0], segments[:, 1] = np.divmod(unique_keys, np.int64(n_points))
+
+    cells = np.full((segments.shape[0], 3), 2, dtype=np.int64)
+    cells[:, 1:] = segments
+    return cells, int(segments.shape[0])
+
+
 def _polydata_polygon_piece(poly: "pv.PolyData", entity_id: int):
     """Extract an array-level polygon piece from a PolyData.
 
@@ -481,6 +651,84 @@ def default_color_key(info: DisplayMeshInfo) -> int:
     return info.zone_id
 
 
+def connectivity_color(info: DisplayMeshInfo) -> List[int]:
+    """Get the color showing how a display entity connects to the rest of its part.
+
+    Edges are colored by their topology edge type, so free, double, and triple edges
+    stay visually distinct. Faces are colored by the number of volumes they bound, which
+    separates sheet bodies from the skin of a solid and from interfaces inside a part.
+
+    Parameters
+    ----------
+    info : DisplayMeshInfo
+        Display information of the entity.
+
+    Returns
+    -------
+    List[int]
+        RGB color of the entity, gray when its connectivity is unknown.
+    """
+    if info.connectivity is None:
+        return list(UNKNOWN_CONNECTIVITY_COLOR)
+    if info.display_mesh_type in EDGE_DISPLAY_MESH_TYPES:
+        return list(TOPO_EDGE_TYPE_COLORS.get(info.connectivity, UNKNOWN_CONNECTIVITY_COLOR))
+    capped = min(info.connectivity, int(FaceConnectivity.SHARED))
+    return list(FACE_CONNECTIVITY_COLORS[FaceConnectivity(capped)])
+
+
+def _volume_counts_per_face(part: "Part", topo: bool) -> Dict[int, int]:
+    """Count how many volumes of a part each of its faces bounds."""
+    if topo:
+        volumes = part.get_topo_volumes()
+        faces_of_volume = part.get_topo_faces_of_topo_volumes
+    else:
+        volumes = part.get_volumes()
+        faces_of_volume = part.get_face_zonelets_of_volumes
+
+    counts: Dict[int, int] = {}
+    for volume in volumes:
+        for face in faces_of_volume([int(volume)]):
+            counts[int(face)] = counts.get(int(face), 0) + 1
+    return counts
+
+
+def classify_face_connectivity(model, infos: Iterable[DisplayMeshInfo]) -> None:
+    """Record how many volumes each displayed face bounds.
+
+    Prime reports no face connectivity alongside the render geometry, so volume
+    membership is counted with one query per volume of every part that still needs it.
+    Entities that already know their connectivity are skipped, which keeps repeat calls
+    free and lets the connectivity color mode pay this cost only once.
+
+    Parameters
+    ----------
+    model : Model
+        Model owning the parts that the faces belong to.
+    infos : Iterable[DisplayMeshInfo]
+        Display entities to classify. Entities that are not faces are ignored.
+    """
+    pending: Dict[int, List[DisplayMeshInfo]] = defaultdict(list)
+    for info in infos:
+        if info.display_mesh_type in FACE_DISPLAY_MESH_TYPES and info.connectivity is None:
+            pending[info.part_id].append(info)
+
+    for part_id, part_infos in pending.items():
+        part = model.get_part(part_id)
+        if part is None:
+            continue
+        for topo in (True, False):
+            wanted = [
+                info
+                for info in part_infos
+                if (info.display_mesh_type == DisplayMeshType.TOPOFACE) == topo
+            ]
+            if not wanted:
+                continue
+            counts = _volume_counts_per_face(part, topo)
+            for info in wanted:
+                info.connectivity = counts.get(info.id, 0)
+
+
 def entity_color(info: DisplayMeshInfo, color_type: ColorByType = None):
     """Get the color of a display entity for the given color mode.
 
@@ -498,6 +746,8 @@ def entity_color(info: DisplayMeshInfo, color_type: ColorByType = None):
         RGB color of the entity.
     """
     num_colors = int(color_matrix.size / 3)
+    if color_type == ColorByType.CONNECTIVITY:
+        return np.asarray(connectivity_color(info), dtype=np.uint8)
     if color_type is None:
         key = default_color_key(info)
     elif color_type == ColorByType.ZONELET:
@@ -576,8 +826,13 @@ def _validate_merged_metadata(mesh: "pv.PolyData") -> None:
 def _finalize_typed_batches(
     grouped: Dict[DisplayMeshType, List[Tuple["pv.PolyData", DisplayMeshInfo]]],
     pickable: bool = True,
+    keep_colors: bool = False,
 ) -> Dict[DisplayMeshType, RenderBatch]:
-    """Merge grouped geometry pieces into one batch per display entity type."""
+    """Merge grouped geometry pieces into one batch per display entity type.
+
+    Set ``keep_colors`` when the pieces already carry meaningful colors, such as edges
+    colored by connectivity, so that coloring modes do not discard them.
+    """
     batches: Dict[DisplayMeshType, RenderBatch] = {}
     for display_mesh_type, items in grouped.items():
         infos: Dict[int, DisplayMeshInfo] = {}
@@ -589,16 +844,17 @@ def _finalize_typed_batches(
         if merged is None:
             continue
         _validate_merged_metadata(merged)
+        base_colors = None
+        if keep_colors and ENTITY_COLOR_ARRAY in merged.cell_data:
+            base_colors = np.asarray(merged.cell_data[ENTITY_COLOR_ARRAY], dtype=np.uint8)
         batch = RenderBatch(
             mesh=merged,
             infos=infos,
             display_mesh_type=display_mesh_type,
             pickable=pickable,
+            base_colors=base_colors,
         )
-        if pickable:
-            batch.apply_colors()
-        elif ENTITY_COLOR_ARRAY in merged.cell_data:
-            merged.set_active_scalars(ENTITY_COLOR_ARRAY, preference="cell")
+        batch.apply_colors()
         batches[display_mesh_type] = batch
     return batches
 
@@ -623,11 +879,15 @@ def _merge_render_batch_dicts(
 
     merged: Dict[DisplayMeshType, RenderBatch] = {}
     for display_mesh_type, items in grouped.items():
-        pickable = display_mesh_type in (
-            DisplayMeshType.TOPOFACE,
-            DisplayMeshType.FACEZONELET,
+        is_edge = display_mesh_type in EDGE_DISPLAY_MESH_TYPES
+        pickable = is_edge or display_mesh_type in FACE_DISPLAY_MESH_TYPES
+        merged.update(
+            _finalize_typed_batches(
+                {display_mesh_type: items},
+                pickable=pickable,
+                keep_colors=is_edge,
+            )
         )
-        merged.update(_finalize_typed_batches({display_mesh_type: items}, pickable=pickable))
     return merged
 
 
@@ -689,8 +949,9 @@ def _build_batch_from_raw(
     cell_counts = np.fromiter((piece[2] for piece in pieces), np.int64, len(pieces))
     _attach_raw_metadata(mesh, infos, cell_counts)
 
+    base_colors = None
     if colors is not None:
-        mesh.cell_data[ENTITY_COLOR_ARRAY] = np.repeat(
+        base_colors = np.repeat(
             np.asarray([colors[index] for index in usable], dtype=np.uint8),
             cell_counts,
             axis=0,
@@ -701,11 +962,9 @@ def _build_batch_from_raw(
         infos=dict(enumerate(infos)),
         display_mesh_type=display_mesh_type,
         pickable=pickable,
+        base_colors=base_colors,
     )
-    if pickable:
-        batch.apply_colors()
-    elif ENTITY_COLOR_ARRAY in mesh.cell_data:
-        mesh.set_active_scalars(ENTITY_COLOR_ARRAY, preference="cell")
+    batch.apply_colors()
     return batch
 
 
@@ -734,7 +993,7 @@ def _build_batches_from_raw_edges(
         batch = _build_batch_from_raw(
             raw_pieces,
             display_mesh_type,
-            pickable=False,
+            pickable=True,
             lines=True,
             colors=grouped_colors.get(display_mesh_type),
         )
@@ -764,8 +1023,18 @@ def build_face_render_batches(
 
 def build_element_edge_batches(
     face_entries: Iterable,
+    meshed: bool = True,
 ) -> Dict[DisplayMeshType, RenderBatch]:
-    """Build one element-outline batch per owning face entity type."""
+    """Build one outline batch per owning face entity type.
+
+    Parameters
+    ----------
+    face_entries : Iterable
+        ``(MeshObjectPlot, DisplayMeshInfo)`` pairs of the faces to outline.
+    meshed : bool, default: True
+        Whether to outline meshed faces, giving mesh element edges, or unmeshed
+        faces, giving the facets that approximate the underlying CAD.
+    """
     grouped: Dict[
         DisplayMeshType,
         List[Tuple["pv.PolyData", DisplayMeshInfo]],
@@ -774,7 +1043,7 @@ def build_element_edge_batches(
         if entry is None:
             continue
         mesh_object, info = entry
-        if not info.has_mesh:
+        if info.has_mesh != meshed:
             continue
         if info.element_edges is not None:
             outlines = info.element_edges
@@ -846,7 +1115,7 @@ def build_edge_render_batches(
                 has_mesh=False,
             )
         grouped[info.display_mesh_type].append((geometry, info))
-    return _finalize_typed_batches(dict(grouped), pickable=False)
+    return _finalize_typed_batches(dict(grouped), pickable=True, keep_colors=True)
 
 
 def build_edge_render_mesh(edge_entries: Iterable) -> "pv.PolyData":
@@ -1162,27 +1431,13 @@ class Mesh(MeshInfo):
         List
             List of colors for edges.
         """
-        mesh_type = DisplayMeshType.EDGEZONELET
-        if edge_results.topo_edge_ids[index] > 0:
-            mesh_type = DisplayMeshType.TOPOEDGE
         num_colors = int(color_matrix.size / 3)
-        if mesh_type == DisplayMeshType.EDGEZONELET:
+        if edge_results.topo_edge_ids[index] <= 0:
             return color_matrix[index % num_colors].tolist()
-        elif mesh_type == DisplayMeshType.TOPOEDGE:
-            if edge_results.topo_edge_types[index] == 1:
-                return [255, 0, 0]
-            elif edge_results.topo_edge_types[index] == 2:
-                return [0, 0, 0]
-            elif edge_results.topo_edge_types[index] == 3:
-                return [0, 255, 255]
-            elif edge_results.topo_edge_types[index] == 4:
-                return [255, 0, 255]
-            elif edge_results.topo_edge_types[index] == 5:
-                return [255, 255, 0]
-            elif edge_results.topo_edge_types[index] == 6:
-                return [128, 0, 128]
-            else:
-                return color_matrix[edge_results.id % num_colors].tolist()
+        color = TOPO_EDGE_TYPE_COLORS.get(int(edge_results.topo_edge_types[index]))
+        if color is None:
+            return color_matrix[edge_results.id % num_colors].tolist()
+        return list(color)
 
     def _get_vertices_and_surf_faces(
         self, connectivity_results: FaceConnectivityResults, index
@@ -1439,7 +1694,12 @@ class Mesh(MeshInfo):
         if surf.n_points > 0:
             return MeshObjectPlot(part, surf)
 
-    def get_scoped_polydata(self, scope: "prime.ScopeDefinition", update: bool = False):
+    def get_scoped_polydata(
+        self,
+        scope: "prime.ScopeDefinition",
+        update: bool = False,
+        _refreshed: bool = False,
+    ):
         """Get the polydata object of the scoped mesh.
 
         Parameters
@@ -1491,10 +1751,11 @@ class Mesh(MeshInfo):
                     scoped_pd[part_id] = temp_key
 
         # in case the scoped_pd is empty, the mesh must be reinitialized
-        # to get the updated changes from the backend
-        if len(scoped_pd) == 0:
+        # to get the updated changes from the backend. Only once, because a scope
+        # that genuinely matches nothing would otherwise recurse forever.
+        if len(scoped_pd) == 0 and not _refreshed:
             self.__init__(self._model)
-            return self.get_scoped_polydata(scope, update=True)
+            return self.get_scoped_polydata(scope, update=True, _refreshed=True)
         return scoped_pd
 
     def update_pd(self, part_ids) -> Dict[int, Dict[str, list[(pv.PolyData, Part)]]]:
@@ -1603,9 +1864,11 @@ class Mesh(MeshInfo):
         if n_cells == 0:
             return None
 
+        connectivity = None
         if edge_res.topo_edge_ids[index] > 0:
             display_mesh_type = DisplayMeshType.TOPOEDGE
             entity_id = int(edge_res.topo_edge_ids[index])
+            connectivity = int(edge_res.topo_edge_types[index])
         else:
             display_mesh_type = DisplayMeshType.EDGEZONELET
             entity_id = int(edge_res.edge_zonelet_ids[index])
@@ -1621,6 +1884,7 @@ class Mesh(MeshInfo):
             part_name=part.name,
             zone_name=None,
             has_mesh=False,
+            connectivity=connectivity,
         )
         color = np.asarray(self.get_edge_color(edge_res, index), dtype=np.uint8)
         return (vertices, lines, n_cells, info), color
@@ -1642,6 +1906,10 @@ class Mesh(MeshInfo):
             List[Tuple[np.ndarray, np.ndarray, int, DisplayMeshInfo]],
         ] = defaultdict(list)
         grouped_edge_colors: Dict[DisplayMeshType, List[np.ndarray]] = defaultdict(list)
+        grouped_raw_facets: Dict[
+            DisplayMeshType,
+            List[Tuple[np.ndarray, np.ndarray, int, DisplayMeshInfo]],
+        ] = defaultdict(list)
 
         for index, part_id in enumerate(facet_result.part_ids):
             face_res = facet_result.face_connectivity_result_per_part[index]
@@ -1690,14 +1958,25 @@ class Mesh(MeshInfo):
                     mesh = _assemble_entity_mesh(vertices, block, n_cells, info, 0, lines=False)
                     if mesh is not None:
                         fast_outline_entries.append((MeshObjectPlot(part, mesh), info))
+                else:
+                    # Unmeshed faces contribute their facets, so the show-edges button
+                    # can reveal the tessellation approximating the CAD surface.
+                    lines, n_lines = _facet_edge_lines(block, n_cells, len(vertices))
+                    if n_lines:
+                        grouped_raw_facets[display_mesh_type].append(
+                            (vertices, lines, n_lines, info)
+                        )
 
-            for edge_index in range(len(edge_res.edge_zonelet_ids)):
-                raw_edge = self._build_raw_edge_piece(part_id, part, edge_res, edge_index)
-                if raw_edge is None:
-                    continue
-                piece, color = raw_edge
-                grouped_raw_edges[piece[3].display_mesh_type].append(piece)
-                grouped_edge_colors[piece[3].display_mesh_type].append(color)
+            # A face scope selects faces only, so drawing the rest of the part's edges
+            # would show, and let the user pick, entities the scope never asked for.
+            if entity_filter is None:
+                for edge_index in range(len(edge_res.edge_zonelet_ids)):
+                    raw_edge = self._build_raw_edge_piece(part_id, part, edge_res, edge_index)
+                    if raw_edge is None:
+                        continue
+                    piece, color = raw_edge
+                    grouped_raw_edges[piece[3].display_mesh_type].append(piece)
+                    grouped_edge_colors[piece[3].display_mesh_type].append(color)
 
         face_batches = _build_batches_from_raw_faces(grouped_raw)
         if slow_entries:
@@ -1710,10 +1989,22 @@ class Mesh(MeshInfo):
             entry for entry in slow_entries if entry is not None
         ] + fast_outline_entries
 
+        facet_batches: Dict[DisplayMeshType, RenderBatch] = {}
+        for display_mesh_type, raw_pieces in grouped_raw_facets.items():
+            batch = _build_batch_from_raw(
+                raw_pieces,
+                display_mesh_type,
+                pickable=False,
+                lines=True,
+            )
+            if batch is not None:
+                facet_batches[display_mesh_type] = batch
+
         return {
             "faces": face_batches,
             "edges": _build_batches_from_raw_edges(grouped_raw_edges, grouped_edge_colors),
-            "element_edges": build_element_edge_batches(outline_entries),
+            "element_edges": build_element_edge_batches(outline_entries, meshed=True),
+            "facet_edges": facet_batches,
         }
 
     def build_render_data(
@@ -1755,10 +2046,16 @@ class Mesh(MeshInfo):
         return self._model_render_data
 
     def get_scoped_render_data(
-        self, scope: "prime.ScopeDefinition", update: bool = False
+        self,
+        scope: "prime.ScopeDefinition",
+        update: bool = False,
+        _refreshed: bool = False,
     ) -> ModelRenderData:
         """Build render data for the entities matched by a scope."""
         parts = self._model.control_data.get_scope_parts(scope)
+        if scope.entity_type != prime.ScopeEntity.FACEZONELETS:
+            return self.build_render_data(parts, update=update)
+
         entity_filters = {}
         for part_id in parts:
             part = self._model.get_part(part_id)
@@ -1770,8 +2067,6 @@ class Mesh(MeshInfo):
                 label_expression=scope.label_expression,
                 zone_expression=scope.zone_expression,
             )
-            if scope.entity_type != prime.ScopeEntity.FACEZONELETS:
-                return self.build_render_data(parts, update=update)
             disp_ids = set(
                 self._model.control_data.get_scope_face_zonelets(
                     scope=part_scope,
@@ -1782,8 +2077,13 @@ class Mesh(MeshInfo):
                 entity_filters[part_id] = disp_ids
 
         if not entity_filters:
+            # Cached state can predate the entities the scope names, so refresh once.
+            # Retrying beyond that never terminates when a scope genuinely matches
+            # nothing, so an empty scope yields empty render data instead.
+            if _refreshed:
+                return ModelRenderData(batches={})
             self.__init__(self._model)
-            return self.get_scoped_render_data(scope, update=True)
+            return self.get_scoped_render_data(scope, update=True, _refreshed=True)
 
         with prime.numpy_array_optimization_enabled():
             facet_result = self.get_face_and_edge_connectivity(
@@ -2194,27 +2494,13 @@ class MeshUSD(MeshInfo):
         List
             List of colors for edges.
         """
-        mesh_type = DisplayMeshType.EDGEZONELET
-        if edge_results.topo_edge_ids[index] > 0:
-            mesh_type = DisplayMeshType.TOPOEDGE
         num_colors = int(color_matrix.size / 3)
-        if mesh_type == DisplayMeshType.EDGEZONELET:
+        if edge_results.topo_edge_ids[index] <= 0:
             return color_matrix[index % num_colors].tolist()
-        elif mesh_type == DisplayMeshType.TOPOEDGE:
-            if edge_results.topo_edge_types[index] == 1:
-                return [255, 0, 0]
-            elif edge_results.topo_edge_types[index] == 2:
-                return [0, 0, 0]
-            elif edge_results.topo_edge_types[index] == 3:
-                return [0, 255, 255]
-            elif edge_results.topo_edge_types[index] == 4:
-                return [255, 0, 255]
-            elif edge_results.topo_edge_types[index] == 5:
-                return [255, 255, 0]
-            elif edge_results.topo_edge_types[index] == 6:
-                return [128, 0, 128]
-            else:
-                return color_matrix[edge_results.id % num_colors].tolist()
+        color = TOPO_EDGE_TYPE_COLORS.get(int(edge_results.topo_edge_types[index]))
+        if color is None:
+            return color_matrix[edge_results.id % num_colors].tolist()
+        return list(color)
 
     def _get_vertices_and_surf_faces(
         self, connectivity_results: FaceConnectivityResults, index
