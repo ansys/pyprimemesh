@@ -107,11 +107,7 @@ def _entry_info(batch, cell_id=0):
 def _largest_pickable_batch(display):
     """Return the pickable actor and batch with the most registered entities."""
     actor, batch = max(
-        (
-            (actor, batch)
-            for actor, batch in display._batches.items()
-            if batch.pickable
-        ),
+        ((actor, batch) for actor, batch in display._batches.items() if batch.pickable),
         key=lambda item: len(item[1].infos),
     )
     return actor, batch
@@ -311,9 +307,7 @@ def test_model_uses_actor_per_entity_type(get_remote_client, get_examples):
         face_entities = sum(len(part_pd["faces"]) for part_pd in model_pd.values())
         face_types = {DisplayMeshType.TOPOFACE, DisplayMeshType.FACEZONELET}
         registered_faces = sum(
-            1
-            for info in display.entity_infos.values()
-            if info.display_mesh_type in face_types
+            1 for info in display.entity_infos.values() if info.display_mesh_type in face_types
         )
         model_actors = len(display.scene.actors) - baseline
         # Four geometry types, two outline roles, and two spline roles at most.
