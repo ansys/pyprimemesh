@@ -45,7 +45,7 @@ from ansys.meshing.prime.core.mesh import (
     build_edge_render_batches,
     build_element_edge_batches,
     build_face_render_batches,
-    compute_entity_colors,
+    classify_face_connectivity,
     entity_color,
 )
 from ansys.meshing.prime.core.model import Model
@@ -58,6 +58,11 @@ from ansys.meshing.prime.graphics.widgets.toggle_edges import ToggleEdges
 # separate line geometry.
 POLYGON_OFFSET_FACTOR = 1.0
 POLYGON_OFFSET_UNITS = 1.0
+
+# Facets approximating an unmeshed CAD surface are drawn faintly so that they read as
+# tessellation rather than as a real mesh.
+FACET_EDGE_COLOR = "#b4b4b4"
+FACET_EDGE_OPACITY = 0.35
 
 
 class _EntityPickingBackend(PyVistaBackend):
@@ -119,6 +124,7 @@ class PrimePlotter(Plotter):
         self._drawn_geometry: Dict[Any, pv.DataSet] = {}
         self._color_type: Optional[ColorByType] = None
         self._show_element_edges = True
+        self._model: Optional[Model] = None
 
     def _add_widgets(self) -> None:
         """Attach the PyPrimeMesh widgets to the backend."""
@@ -188,6 +194,7 @@ class PrimePlotter(Plotter):
         update: bool = False,
     ) -> None:
         """Add a Prime model or a scoped subset to the plotter."""
+        self._model = model
         if scope is None:
             self.add_render_data(model.build_render_data(update=update))
         else:
@@ -269,6 +276,17 @@ class PrimePlotter(Plotter):
             self._element_edge_batches[actor] = batch
             self._drawn_geometry[actor] = batch.mesh
 
+        for batch in batches.get("facet_edges", {}).values():
+            actor = self.scene.add_mesh(
+                batch.mesh,
+                color=FACET_EDGE_COLOR,
+                opacity=FACET_EDGE_OPACITY,
+                line_width=1,
+                pickable=False,
+            )
+            self._element_edge_batches[actor] = batch
+            self._drawn_geometry[actor] = batch.mesh
+
     def _register_batch(self, actor, batch: RenderBatch) -> None:
         """Register a persistent actor and all entities in its batch."""
         self._batches[actor] = batch
@@ -303,16 +321,25 @@ class PrimePlotter(Plotter):
             self._register_batch(actor, batch)
 
     def _add_element_edge_batches(self, face_entries: Sequence) -> None:
-        """Add at most one element-outline actor for each face entity type."""
-        for batch in build_element_edge_batches(face_entries).values():
-            actor = self.scene.add_mesh(
-                batch.mesh,
-                color=pv.global_theme.edge_color,
-                line_width=1,
-                pickable=False,
-            )
-            self._element_edge_batches[actor] = batch
-            self._drawn_geometry[actor] = batch.mesh
+        """Add at most one outline actor for each face entity type.
+
+        Meshed faces contribute element edges, and unmeshed faces contribute the
+        facets approximating their CAD surface, drawn faintly to keep the two apart.
+        """
+        styles = (
+            (True, {"color": pv.global_theme.edge_color}),
+            (False, {"color": FACET_EDGE_COLOR, "opacity": FACET_EDGE_OPACITY}),
+        )
+        for meshed, style in styles:
+            for batch in build_element_edge_batches(face_entries, meshed=meshed).values():
+                actor = self.scene.add_mesh(
+                    batch.mesh,
+                    line_width=1,
+                    pickable=False,
+                    **style,
+                )
+                self._element_edge_batches[actor] = batch
+                self._drawn_geometry[actor] = batch.mesh
 
     @staticmethod
     def _merge_mesh_objects(entries: Sequence) -> Optional[pv.PolyData]:
@@ -457,11 +484,9 @@ class PrimePlotter(Plotter):
         )
 
         for batch in self._batches.values():
-            colors = compute_entity_colors(
-                batch.infos,
-                batch.render_entity_ids,
-                self._color_type,
-            )
+            if not batch.cell_colored:
+                continue
+            colors = batch.colors_for(self._color_type)
             selected_render_ids = self._render_ids_for_keys(
                 batch,
                 self._picked_entities,
@@ -477,9 +502,24 @@ class PrimePlotter(Plotter):
 
         self._apply_visibility()
 
+    def _ensure_face_connectivity(self) -> None:
+        """Classify face connectivity on first use of the connectivity color mode.
+
+        Faces carry no connectivity in the render data, so it is queried here rather
+        than during every build. Already classified entities are skipped, so the cost
+        is paid once per model.
+        """
+        if self._model is None:
+            return
+        infos = list(self._entity_infos.values())
+        infos.extend(self._info_actor_map.values())
+        classify_face_connectivity(self._model, infos)
+
     def set_color_by_type(self, color_type: "ColorByType") -> None:
-        """Color displayed entities by zone, zonelet, or part."""
+        """Color displayed entities by zone, zonelet, part, or connectivity."""
         self._color_type = ColorByType(color_type)
+        if self._color_type == ColorByType.CONNECTIVITY:
+            self._ensure_face_connectivity()
         for actor, info in self._info_actor_map.items():
             actor.prop.color = entity_color(info, self._color_type).tolist()
         self.refresh_colors()
@@ -573,8 +613,9 @@ class PrimePlotter(Plotter):
             mesh = self._drawn_geometry.get(actor)
             actor.visibility = bool(show and mesh is not None and mesh.n_cells > 0)
         for actor, info in self._info_actor_map.items():
-            if info.has_mesh:
-                actor.prop.show_edges = bool(show)
+            actor.prop.show_edges = bool(show)
+            if not info.has_mesh:
+                actor.prop.edge_color = FACET_EDGE_COLOR
         self.render()
 
     def render(self) -> None:
@@ -597,6 +638,7 @@ class PrimePlotter(Plotter):
         update: bool = False,
     ) -> None:
         """Add a scoped subset of a model."""
+        self._model = model
         self.add_render_data(model.get_scoped_render_data(scope, update=update))
 
     def plot_iter(
