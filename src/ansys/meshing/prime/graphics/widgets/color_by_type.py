@@ -43,6 +43,11 @@ class ColorByTypeWidget(PlotterWidget):
     The plotter maintains actor-per-entity-type rendering and recolors
     entities using per-cell metadata. This widget only changes the active
     coloring mode.
+
+    Parameters
+    ----------
+    prime_plotter : PrimePlotter
+        Plotter whose coloring mode the widget controls.
     """
 
     def __init__(self, prime_plotter: "PrimePlotter") -> None:
@@ -63,7 +68,14 @@ class ColorByTypeWidget(PlotterWidget):
         self._color_type = ColorByType.ZONE
 
     def callback(self, state) -> None:
-        """Apply the selected coloring mode."""
+        """Apply the selected coloring mode.
+
+        Parameters
+        ----------
+        state : bool
+            Checkbox widget state. Unused, because the mode is read from the
+            button, which cycles through more than two states.
+        """
         del state
 
         color_type = ColorByType(self._button.GetRepresentation().GetState())
