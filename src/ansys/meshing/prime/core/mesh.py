@@ -22,6 +22,7 @@
 """Process the mesh for visualization in the GUI."""
 
 import enum
+import weakref
 from collections import defaultdict
 from dataclasses import dataclass, field
 from typing import Dict, Iterable, List, Mapping, Optional, Sequence, Tuple, Union
@@ -33,8 +34,10 @@ from ansys.tools.visualization_interface import MeshObjectPlot
 import ansys.meshing.prime as prime
 from ansys.meshing.prime.autogen.meshinfo import MeshInfo
 from ansys.meshing.prime.autogen.meshinfostructs import (
-    EdgeConnectivityResults, FaceAndEdgeConnectivityParams,
-    FaceConnectivityResults)
+    EdgeConnectivityResults,
+    FaceAndEdgeConnectivityParams,
+    FaceConnectivityResults,
+)
 from ansys.meshing.prime.core.part import Part
 from ansys.meshing.prime.internals.comm_manager import CommunicationManager
 
@@ -292,12 +295,75 @@ def _edge_lines_from_list(edge_list: np.ndarray) -> "tuple[np.ndarray, int]":
     tuple[np.ndarray, int]
         VTK line connectivity and the number of line cells.
     """
+    flat = np.asarray(edge_list, dtype=np.int64).ravel()
+    size = int(flat.size)
+    if size == 0:
+        return np.empty((0, 3), dtype=np.int64), 0
+
+    segments = _uniform_edge_segments(flat)
+    if segments is None:
+        segments = _mixed_edge_segments(flat, size)
+    if segments.shape[0] == 0:
+        return np.empty((0, 3), dtype=np.int64), 0
+
+    cells = np.full((segments.shape[0], 3), 2, dtype=np.int64)
+    cells[:, 1:] = segments
+    return cells, int(segments.shape[0])
+
+
+def _uniform_edge_segments(flat: np.ndarray) -> Optional[np.ndarray]:
+    """Split an edge list into node pairs, assuming every edge has the same node count.
+
+    Parameters
+    ----------
+    flat : np.ndarray
+        Flat edge list from the server.
+
+    Returns
+    -------
+    Optional[np.ndarray]
+        Node pairs of shape ``(n, 2)``, or None when the edges are not all the
+        same width and the caller has to walk the list instead.
+    """
+    nnodes = int(flat[0])
+    stride = nnodes + 1
+    if nnodes not in (2, 3) or flat.size % stride:
+        return None
+    blocks = flat.reshape(-1, stride)
+    if not bool(np.all(blocks[:, 0] == nnodes)):
+        return None
+
+    nodes = blocks[:, 1:]
+    if nnodes == 2:
+        return nodes
+    # A quadratic edge becomes two segments, kept adjacent so cell order matches
+    # the order the server sent the edges in.
+    segments = np.empty((nodes.shape[0] * 2, 2), dtype=np.int64)
+    segments[0::2] = nodes[:, 0:2]
+    segments[1::2] = nodes[:, 1:3]
+    return segments
+
+
+def _mixed_edge_segments(flat: np.ndarray, size: int) -> np.ndarray:
+    """Split an edge list into node pairs when edges vary in node count.
+
+    Parameters
+    ----------
+    flat : np.ndarray
+        Flat edge list from the server.
+    size : int
+        Length of ``flat``.
+
+    Returns
+    -------
+    np.ndarray
+        Node pairs of shape ``(n, 2)``.
+    """
     segments = []
     cursor = 0
-    size = int(edge_list.size)
     while cursor < size:
-        nnodes = int(edge_list[cursor])
-        nodes = edge_list[cursor + 1 : cursor + 1 + nnodes]
+        nnodes = int(flat[cursor])
+        nodes = flat[cursor + 1 : cursor + 1 + nnodes]
         if nnodes == 3:
             segments.append((int(nodes[0]), int(nodes[1])))
             segments.append((int(nodes[1]), int(nodes[2])))
@@ -305,10 +371,8 @@ def _edge_lines_from_list(edge_list: np.ndarray) -> "tuple[np.ndarray, int]":
             segments.append((int(nodes[0]), int(nodes[1])))
         cursor += 1 + nnodes
     if not segments:
-        return np.empty((0, 3), dtype=np.int64), 0
-    cells = np.full((len(segments), 3), 2, dtype=np.int64)
-    cells[:, 1:] = segments
-    return cells, len(segments)
+        return np.empty((0, 2), dtype=np.int64)
+    return np.asarray(segments, dtype=np.int64)
 
 
 def _polydata_polygon_piece(poly: "pv.PolyData", entity_id: int):
@@ -485,18 +549,12 @@ def _attach_entity_metadata(
     output.cell_data[RENDER_ENTITY_ID_ARRAY] = np.full(
         number_of_cells, int(render_entity_id), dtype=np.int64
     )
-    output.cell_data[PART_ID_ARRAY] = np.full(
-        number_of_cells, info.part_id, dtype=np.int64
-    )
-    output.cell_data[ENTITY_ID_ARRAY] = np.full(
-        number_of_cells, info.id, dtype=np.int64
-    )
+    output.cell_data[PART_ID_ARRAY] = np.full(number_of_cells, info.part_id, dtype=np.int64)
+    output.cell_data[ENTITY_ID_ARRAY] = np.full(number_of_cells, info.id, dtype=np.int64)
     output.cell_data[ENTITY_TYPE_ARRAY] = np.full(
         number_of_cells, int(info.display_mesh_type), dtype=np.int16
     )
-    output.cell_data[ZONE_ID_ARRAY] = np.full(
-        number_of_cells, info.zone_id, dtype=np.int64
-    )
+    output.cell_data[ZONE_ID_ARRAY] = np.full(number_of_cells, info.zone_id, dtype=np.int64)
     return output
 
 
@@ -512,9 +570,7 @@ def _validate_merged_metadata(mesh: "pv.PolyData") -> None:
         )
     for array_name in REQUIRED_PICKING_ARRAYS:
         if len(mesh.cell_data[array_name]) != mesh.n_cells:
-            raise RuntimeError(
-                f"Cell array {array_name!r} does not match the merged cell count."
-            )
+            raise RuntimeError(f"Cell array {array_name!r} does not match the merged cell count.")
 
 
 def _finalize_typed_batches(
@@ -836,6 +892,42 @@ def _prefix_offsets(counts: np.ndarray) -> np.ndarray:
     return offsets
 
 
+_ZONELET_OFFSET_CACHE: "weakref.WeakKeyDictionary" = weakref.WeakKeyDictionary()
+
+
+def _zonelet_offsets(results, *count_names: str) -> Tuple[np.ndarray, ...]:
+    """Start index of each zonelet's slice within a connectivity result's flat arrays.
+
+    Callers walk every zonelet of a result in turn, so the offsets are cached
+    against the result object. Summing the preceding counts on each visit
+    instead would cost quadratic time in the number of zonelets.
+
+    Parameters
+    ----------
+    results : FaceConnectivityResults or EdgeConnectivityResults
+        Connectivity result holding the per-zonelet count arrays.
+    *count_names : str
+        Names of the per-zonelet count attributes to build offsets for.
+
+    Returns
+    -------
+    Tuple[np.ndarray, ...]
+        One offsets array per requested count attribute, in the same order.
+    """
+    cached = _ZONELET_OFFSET_CACHE.get(results)
+    if cached is None:
+        cached = {}
+        _ZONELET_OFFSET_CACHE[results] = cached
+    offsets = []
+    for name in count_names:
+        entry = cached.get(name)
+        if entry is None:
+            entry = _prefix_offsets(np.asarray(getattr(results, name), dtype=np.int64))
+            cached[name] = entry
+        offsets.append(entry)
+    return tuple(offsets)
+
+
 def _scan_cell_block(block: np.ndarray) -> "tuple[int, int]":
     """Count the cells of a VTK connectivity block and the widest cell in it.
 
@@ -1109,9 +1201,14 @@ class Mesh(MeshInfo):
         Union[np.ndarray, np.ndarray]
             Vertices and faces of the mesh.
         """
-        node_start = 3 * np.sum(connectivity_results.num_nodes_per_face_zonelet[0:index])
+        node_offsets, face_list_offsets = _zonelet_offsets(
+            connectivity_results,
+            "num_nodes_per_face_zonelet",
+            "num_face_list_per_face_zonelet",
+        )
+        node_start = 3 * int(node_offsets[index])
         num_node_coords = 3 * connectivity_results.num_nodes_per_face_zonelet[index]
-        face_list_start = np.sum(connectivity_results.num_face_list_per_face_zonelet[0:index])
+        face_list_start = int(face_list_offsets[index])
         num_face_list = connectivity_results.num_face_list_per_face_zonelet[index]
         vertices = connectivity_results.node_coords[
             node_start : node_start + num_node_coords
@@ -1136,9 +1233,14 @@ class Mesh(MeshInfo):
         Union[np.ndarray, np.ndarray]
             Vertices and faces of the mesh.
         """
-        node_start = 3 * np.sum(connectivity_results.num_nodes_per_edge_zonelet[0:index])
+        node_offsets, edge_list_offsets = _zonelet_offsets(
+            connectivity_results,
+            "num_nodes_per_edge_zonelet",
+            "num_edge_list_per_edge_zonelet",
+        )
+        node_start = 3 * int(node_offsets[index])
         num_node_coords = 3 * connectivity_results.num_nodes_per_edge_zonelet[index]
-        edge_list_start = np.sum(connectivity_results.num_edge_list_per_edge_zonelet[0:index])
+        edge_list_start = int(edge_list_offsets[index])
         num_edge_list = connectivity_results.num_edge_list_per_edge_zonelet[index]
         vertices = connectivity_results.node_coords[
             node_start : node_start + num_node_coords
@@ -1481,9 +1583,7 @@ class Mesh(MeshInfo):
 
         edge.cell_data[PART_ID_ARRAY] = np.full(n_cells, part_id, dtype=np.int64)
         edge.cell_data[ENTITY_ID_ARRAY] = np.full(n_cells, entity_id, dtype=np.int64)
-        edge.cell_data[ENTITY_TYPE_ARRAY] = np.full(
-            n_cells, int(display_mesh_type), dtype=np.int16
-        )
+        edge.cell_data[ENTITY_TYPE_ARRAY] = np.full(n_cells, int(display_mesh_type), dtype=np.int16)
         edge.cell_data[ZONE_ID_ARRAY] = np.full(n_cells, zone_id, dtype=np.int64)
         edge.set_active_scalars(ENTITY_COLOR_ARRAY, preference="cell")
         return MeshObjectPlot(part, edge)
@@ -1587,9 +1687,7 @@ class Mesh(MeshInfo):
 
                 grouped_raw[display_mesh_type].append((vertices, block, n_cells, info))
                 if has_mesh:
-                    mesh = _assemble_entity_mesh(
-                        vertices, block, n_cells, info, 0, lines=False
-                    )
+                    mesh = _assemble_entity_mesh(vertices, block, n_cells, info, 0, lines=False)
                     if mesh is not None:
                         fast_outline_entries.append((MeshObjectPlot(part, mesh), info))
 
@@ -1907,7 +2005,6 @@ class SplineGeometry:
         self.geom_type = geom_type
 
 
-
 class MeshUSD(MeshInfo):
     """Processes the mesh for USD export and serialization.
 
@@ -2136,9 +2233,14 @@ class MeshUSD(MeshInfo):
         Union[np.ndarray, np.ndarray]
             Vertices and faces of the mesh.
         """
-        node_start = 3 * np.sum(connectivity_results.num_nodes_per_face_zonelet[0:index])
+        node_offsets, face_list_offsets = _zonelet_offsets(
+            connectivity_results,
+            "num_nodes_per_face_zonelet",
+            "num_face_list_per_face_zonelet",
+        )
+        node_start = 3 * int(node_offsets[index])
         num_node_coords = 3 * connectivity_results.num_nodes_per_face_zonelet[index]
-        face_list_start = np.sum(connectivity_results.num_face_list_per_face_zonelet[0:index])
+        face_list_start = int(face_list_offsets[index])
         num_face_list = connectivity_results.num_face_list_per_face_zonelet[index]
         vertices = connectivity_results.node_coords[
             node_start : node_start + num_node_coords
@@ -2163,9 +2265,14 @@ class MeshUSD(MeshInfo):
         Union[np.ndarray, np.ndarray]
             Vertices and edges of the mesh.
         """
-        node_start = 3 * np.sum(connectivity_results.num_nodes_per_edge_zonelet[0:index])
+        node_offsets, edge_list_offsets = _zonelet_offsets(
+            connectivity_results,
+            "num_nodes_per_edge_zonelet",
+            "num_edge_list_per_edge_zonelet",
+        )
+        node_start = 3 * int(node_offsets[index])
         num_node_coords = 3 * connectivity_results.num_nodes_per_edge_zonelet[index]
-        edge_list_start = np.sum(connectivity_results.num_edge_list_per_edge_zonelet[0:index])
+        edge_list_start = int(edge_list_offsets[index])
         num_edge_list = connectivity_results.num_edge_list_per_edge_zonelet[index]
         vertices = connectivity_results.node_coords[
             node_start : node_start + num_node_coords
