@@ -36,6 +36,11 @@ class ToggleEdges(PlotterWidget):
 
     In actor-per-entity-type rendering, element outlines are drawn as
     dedicated outline actors and this widget controls their visibility.
+
+    Parameters
+    ----------
+    prime_plotter : PrimePlotter
+        Plotter whose outline actors the widget shows and hides.
     """
 
     def __init__(self, prime_plotter: "PrimePlotter") -> None:
