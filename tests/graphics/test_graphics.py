@@ -136,10 +136,23 @@ def test_quadratic_element_outlines(get_remote_client, get_examples):
 
     linear_pd = _mesh_elbow(model, mixing_elbow, quadratic=False)
     assert _check_element_outlines(linear_pd) == set()
+    linear_meshed_keys = {
+        info.key
+        for part_pd in linear_pd.values()
+        for _, info in part_pd["faces"]
+        if info.has_mesh
+    }
+    assert linear_meshed_keys
     linear_display = PrimePlotter()
     try:
         linear_display.add_model_pd(linear_pd)
-        assert linear_display.element_edge_actors == {}
+        assert linear_display.element_edge_actors
+        represented = set()
+        for actor, batch in linear_display.element_edge_actors.items():
+            represented.update(
+                _keys_in_mesh(batch, linear_display._drawn_geometry[actor])
+            )
+        assert linear_meshed_keys <= represented
     finally:
         linear_display.scene.close()
 
@@ -170,6 +183,51 @@ def test_quadratic_element_outlines(get_remote_client, get_examples):
         for actor, batch in outlines.items():
             represented.update(_keys_in_mesh(batch, display._drawn_geometry[actor]))
         assert hidden_key in represented
+    finally:
+        display.scene.close()
+
+
+def test_add_model_shows_linear_meshed_element_outlines(get_remote_client, get_examples):
+    """Fast render path draws element outlines for linear meshed faces."""
+    model = get_remote_client.model
+    _mesh_elbow(model, get_examples["elbow_lucid"], quadratic=False)
+
+    meshed_keys = {
+        info.key
+        for part_pd in model.as_polydata(update=True).values()
+        for _, info in part_pd["faces"]
+        if info.has_mesh
+    }
+    assert meshed_keys
+
+    display = PrimePlotter(allow_picking=False)
+    try:
+        display.add_model(model, update=True)
+        assert display.element_edge_actors
+        represented = set()
+        for actor, batch in display.element_edge_actors.items():
+            represented.update(_keys_in_mesh(batch, display._drawn_geometry[actor]))
+        assert meshed_keys <= represented
+    finally:
+        display.scene.close()
+
+
+def test_cad_without_mesh_has_no_element_outlines(get_remote_client, get_examples):
+    """Unmeshed CAD faces keep has_mesh=False and skip element-outline actors."""
+    model = get_remote_client.model
+    part_ids = [part.id for part in model.parts]
+    if part_ids:
+        model.delete_parts(part_ids)
+    mesh_util = prime.lucid.Mesh(model=model)
+    mesh_util.read(get_examples["elbow_lucid"])
+
+    model_pd = model.as_polydata(update=True)
+    assert all(not info.has_mesh for part_pd in model_pd.values() for _, info in part_pd["faces"])
+
+    display = PrimePlotter(allow_picking=False)
+    try:
+        display.add_model(model, update=True)
+        assert display.element_edge_actors == {}
     finally:
         display.scene.close()
 
