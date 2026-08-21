@@ -126,7 +126,20 @@ FACE_DISPLAY_MESH_TYPES = (
 
 @dataclass(frozen=True)
 class DisplayEntityKey:
-    """Uniquely identify one displayed Prime entity."""
+    """Uniquely identify one displayed Prime entity.
+
+    Entity IDs repeat across parts, so the part and the display type are needed
+    alongside the ID to address an entity across the whole model.
+
+    Parameters
+    ----------
+    part_id : int
+        ID of the part owning the entity.
+    display_mesh_type : DisplayMeshType
+        Display type of the entity.
+    entity_id : int
+        Prime ID of the entity, such as a topo-face ID or face-zonelet ID.
+    """
 
     part_id: int
     display_mesh_type: "DisplayMeshType"
@@ -178,6 +191,9 @@ class DisplayMeshInfo:
         Name of the zone.
     display_mesh_type : DisplayMeshType, default: FACEZONELET
         Type of mesh to display.
+    has_mesh : bool, default: False
+        Whether the entity carries a mesh. An unmeshed face is drawn from its CAD
+        facets instead, which the display treats differently when showing edges.
     render_mesh : pv.PolyData, default: None
         Triangulated geometry to shade in place of the facets themselves. This is
         set only for zonelets that VTK cannot tessellate acceptably on its own. For
@@ -234,6 +250,23 @@ class RenderBatch:
     A render batch spans all parts contributing the same display entity type.
     Entity ownership is retained in cell-data arrays for picking, coloring,
     and visibility.
+
+    Parameters
+    ----------
+    mesh : pv.PolyData
+        Merged geometry of the batch. It must carry the ownership arrays listed in
+        ``REQUIRED_PICKING_ARRAYS``.
+    infos : Mapping[int, DisplayMeshInfo]
+        Display information of each entity, keyed by batch-local render entity ID.
+    display_mesh_type : DisplayMeshType
+        Display type shared by every entity in the batch.
+    pickable : bool, default: True
+        Whether entities in the batch respond to picking. Outline batches are not
+        pickable, because the face beneath them is picked instead.
+    base_colors : np.ndarray, default: None
+        Per-cell colors to fall back on when no explicit coloring mode is active.
+        This keeps connectivity-colored edges from being recolored by a palette
+        when a face is selected.
     """
 
     def __init__(
@@ -308,7 +341,18 @@ class RenderBatch:
         )
 
     def info_for_render_id(self, render_entity_id: int) -> DisplayMeshInfo:
-        """Return display information for a batch-local render entity ID."""
+        """Return display information for a batch-local render entity ID.
+
+        Parameters
+        ----------
+        render_entity_id : int
+            Render entity ID, as stored in the cell data of the batch.
+
+        Returns
+        -------
+        DisplayMeshInfo
+            Display information of the owning entity.
+        """
         return self.infos[int(render_entity_id)]
 
     @property
@@ -349,7 +393,17 @@ class RenderBatch:
         )
 
     def apply_colors(self, color_type: Optional[ColorByType] = None) -> None:
-        """Color all cells using their owning display entity."""
+        """Color all cells using their owning display entity.
+
+        Batches that are not cell-colored keep their single actor color and are
+        left untouched.
+
+        Parameters
+        ----------
+        color_type : ColorByType, default: None
+            Entity property to take the color from. When this is ``None``, the
+            base colors of the batch are used.
+        """
         if not self.cell_colored:
             return
         self.mesh.cell_data[ENTITY_COLOR_ARRAY] = self.colors_for(color_type)
@@ -361,7 +415,18 @@ class RenderBatch:
 
 @dataclass
 class ModelRenderData:
-    """Model-wide render geometry grouped by entity type."""
+    """Model-wide render geometry grouped by entity type.
+
+    Parameters
+    ----------
+    batches : Dict[str, Dict[DisplayMeshType, RenderBatch]]
+        Batch of each display type, held under the ``faces``, ``edges``,
+        ``element_edges``, and ``facet_edges`` categories.
+    ctrlpts : List, default: None
+        Spline control point geometry. Defaults to an empty list.
+    splines : List, default: None
+        Spline surface geometry. Defaults to an empty list.
+    """
 
     batches: Dict[str, Dict[DisplayMeshType, RenderBatch]]
     ctrlpts: List = field(default_factory=list)
@@ -764,7 +829,28 @@ def compute_entity_colors(
     render_entity_ids: np.ndarray,
     color_type: Optional[ColorByType] = None,
 ) -> np.ndarray:
-    """Compute per-cell colors for a merged entity-type mesh."""
+    """Compute per-cell colors for a merged entity-type mesh.
+
+    Parameters
+    ----------
+    infos : Mapping[int, DisplayMeshInfo]
+        Display information of each entity, keyed by batch-local render entity ID.
+    render_entity_ids : np.ndarray
+        Render entity ID owning each cell of the merged mesh.
+    color_type : ColorByType, default: None
+        Entity property to take the color from. When this is ``None``, the default
+        color of each entity is used.
+
+    Returns
+    -------
+    np.ndarray
+        RGB color of every cell.
+
+    Raises
+    ------
+    KeyError
+        If any render entity ID has no matching display information.
+    """
     render_entity_ids = np.asarray(render_entity_ids, dtype=np.int64)
     if render_entity_ids.size == 0:
         return np.empty((0, 3), dtype=np.uint8)
@@ -1005,7 +1091,19 @@ def _build_batches_from_raw_edges(
 def build_face_render_batches(
     face_entries: Iterable,
 ) -> Dict[DisplayMeshType, RenderBatch]:
-    """Build one face actor batch per display entity type."""
+    """Build one face actor batch per display entity type.
+
+    Parameters
+    ----------
+    face_entries : Iterable
+        ``(MeshObjectPlot, DisplayMeshInfo)`` pairs of the faces to draw. Empty
+        entries are skipped.
+
+    Returns
+    -------
+    Dict[DisplayMeshType, RenderBatch]
+        Pickable batch of each display type, merged across parts.
+    """
     grouped: Dict[
         DisplayMeshType,
         List[Tuple["pv.PolyData", DisplayMeshInfo]],
@@ -1034,6 +1132,11 @@ def build_element_edge_batches(
     meshed : bool, default: True
         Whether to outline meshed faces, giving mesh element edges, or unmeshed
         faces, giving the facets that approximate the underlying CAD.
+
+    Returns
+    -------
+    Dict[DisplayMeshType, RenderBatch]
+        Non-pickable outline batch of each owning face display type.
     """
     grouped: Dict[
         DisplayMeshType,
@@ -1060,7 +1163,18 @@ def build_element_edge_batches(
 
 
 def build_element_edge_mesh(face_entries: Iterable) -> "pv.PolyData":
-    """Return all element outlines as one compatibility mesh."""
+    """Return all element outlines as one compatibility mesh.
+
+    Parameters
+    ----------
+    face_entries : Iterable
+        ``(MeshObjectPlot, DisplayMeshInfo)`` pairs of the meshed faces to outline.
+
+    Returns
+    -------
+    pv.PolyData
+        Every element outline merged into a single mesh.
+    """
     batches = build_element_edge_batches(face_entries)
     return _merge_geometry([batch.mesh for batch in batches.values()])
 
@@ -1068,7 +1182,19 @@ def build_element_edge_mesh(face_entries: Iterable) -> "pv.PolyData":
 def build_edge_render_batches(
     edge_entries: Iterable,
 ) -> Dict[DisplayMeshType, RenderBatch]:
-    """Build one persistent edge batch per edge display entity type."""
+    """Build one persistent edge batch per edge display entity type.
+
+    Parameters
+    ----------
+    edge_entries : Iterable
+        Edges to draw, given either as ``(MeshObjectPlot, DisplayMeshInfo)`` pairs
+        or as bare mesh objects that already carry per-cell metadata.
+
+    Returns
+    -------
+    Dict[DisplayMeshType, RenderBatch]
+        Batch of each edge display type, merged across parts.
+    """
     grouped = defaultdict(list)
     for entry in edge_entries:
         if entry is None:
@@ -1119,7 +1245,19 @@ def build_edge_render_batches(
 
 
 def build_edge_render_mesh(edge_entries: Iterable) -> "pv.PolyData":
-    """Return all edge batches as a compatibility mesh."""
+    """Return all edge batches as a compatibility mesh.
+
+    Parameters
+    ----------
+    edge_entries : Iterable
+        Edges to draw, given either as ``(MeshObjectPlot, DisplayMeshInfo)`` pairs
+        or as bare mesh objects that already carry per-cell metadata.
+
+    Returns
+    -------
+    pv.PolyData
+        Every edge batch merged into a single mesh.
+    """
     batches = build_edge_render_batches(edge_entries)
     return _merge_geometry([batch.mesh for batch in batches.values()])
 
@@ -1410,6 +1548,13 @@ class Mesh(MeshInfo):
     def get_face_color(self, part: Part, model_type: ColorByType = ColorByType.ZONE):
         """Get the colors of faces.
 
+        Parameters
+        ----------
+        part : Part
+            Part owning the faces.
+        model_type : ColorByType, default: ColorByType.ZONE
+            Entity property to take the color from.
+
         Returns
         -------
         List
@@ -1425,6 +1570,13 @@ class Mesh(MeshInfo):
 
     def get_edge_color(self, edge_results: EdgeConnectivityResults, index: int):
         """Get the colors of edges.
+
+        Parameters
+        ----------
+        edge_results : EdgeConnectivityResults
+            Edge connectivity of the part, holding the topology edge types.
+        index : int
+            Position of the edge within the connectivity results.
 
         Returns
         -------
@@ -1706,6 +1858,11 @@ class Mesh(MeshInfo):
         ----------
         scope : prime.ScopeDefinition
             Scope to get the mesh from.
+        update : bool, default: False
+            Whether to rebuild the geometry rather than reuse what is cached.
+        _refreshed : bool, default: False
+            Internal guard. A scope that matches nothing triggers one refresh and
+            retry, and this flag stops that retry from recursing.
 
         Returns
         -------
@@ -2012,7 +2169,26 @@ class Mesh(MeshInfo):
         part_ids: List[int] = None,
         update: bool = False,
     ) -> ModelRenderData:
-        """Build merged render geometry for the plotter."""
+        """Build merged render geometry for the plotter.
+
+        Geometry is merged across the whole model by display entity type, so the
+        scene needs one actor per type rather than one per part.
+
+        Parameters
+        ----------
+        part_ids : List[int], default: None
+            Parts to include. When this is ``None``, every part in the model is
+            included.
+        update : bool, default: False
+            Whether to rebuild the geometry rather than reuse what is cached for
+            the same parts.
+
+        Returns
+        -------
+        ModelRenderData
+            Merged render batches, along with any spline control points and
+            surfaces.
+        """
         if part_ids is None:
             part_ids = [part.id for part in self._model.parts]
         cache_key = frozenset(part_ids)
@@ -2051,7 +2227,24 @@ class Mesh(MeshInfo):
         update: bool = False,
         _refreshed: bool = False,
     ) -> ModelRenderData:
-        """Build render data for the entities matched by a scope."""
+        """Build render data for the entities matched by a scope.
+
+        Parameters
+        ----------
+        scope : prime.ScopeDefinition
+            Scope selecting the entities to include.
+        update : bool, default: False
+            Whether to rebuild the geometry rather than reuse what is cached.
+        _refreshed : bool, default: False
+            Internal guard. A scope that matches nothing triggers one refresh and
+            retry, and this flag stops that retry from recursing.
+
+        Returns
+        -------
+        ModelRenderData
+            Render batches holding only the scoped entities. Batches are empty when
+            the scope matches nothing.
+        """
         parts = self._model.control_data.get_scope_parts(scope)
         if scope.entity_type != prime.ScopeEntity.FACEZONELETS:
             return self.build_render_data(parts, update=update)
@@ -2103,7 +2296,22 @@ class Mesh(MeshInfo):
         polydata=None,
         key: str = "faces",
     ):
-        """Iterate entries of one geometry category across all parts."""
+        """Iterate entries of one geometry category across all parts.
+
+        Parameters
+        ----------
+        polydata : Dict, default: None
+            Part-organized PolyData to read. When this is ``None``, the PolyData of
+            the whole model is used.
+        key : str, default: "faces"
+            Geometry category to iterate, such as ``faces`` or ``edges``.
+
+        Yields
+        ------
+        tuple
+            ``(MeshObjectPlot, DisplayMeshInfo)`` pair of each entry, skipping
+            empty ones.
+        """
         source = self.as_polydata() if polydata is None else polydata
         for part_data in source.values():
             for entry in part_data.get(key, []):
@@ -2115,7 +2323,22 @@ class Mesh(MeshInfo):
         scope: Optional["prime.ScopeDefinition"] = None,
         update: bool = False,
     ) -> Dict[str, Dict[DisplayMeshType, RenderBatch]]:
-        """Build model-wide batches suitable for actor-per-type rendering."""
+        """Build model-wide batches suitable for actor-per-type rendering.
+
+        Parameters
+        ----------
+        scope : prime.ScopeDefinition, default: None
+            Scope to restrict the batches to. When this is ``None``, the whole
+            model is used and the fast merged path is taken.
+        update : bool, default: False
+            Whether to rebuild the geometry rather than reuse what is cached.
+
+        Returns
+        -------
+        Dict[str, Dict[DisplayMeshType, RenderBatch]]
+            Batches of each display type under the ``faces``, ``edges``, and
+            ``element_edges`` categories.
+        """
         if scope is None and not update and self._model_render_data is not None:
             return self._model_render_data.batches
         if scope is None:
@@ -2478,6 +2701,13 @@ class MeshUSD(MeshInfo):
     def get_face_color(self, part: Part, model_type: ColorByType = ColorByType.ZONE):
         """Get the colors of faces (same logic as Mesh).
 
+        Parameters
+        ----------
+        part : Part
+            Part owning the faces.
+        model_type : ColorByType, default: ColorByType.ZONE
+            Entity property to take the color from.
+
         Returns
         -------
         List
@@ -2488,6 +2718,13 @@ class MeshUSD(MeshInfo):
 
     def get_edge_color(self, edge_results: EdgeConnectivityResults, index: int):
         """Get the colors of edges (same logic as Mesh).
+
+        Parameters
+        ----------
+        edge_results : EdgeConnectivityResults
+            Edge connectivity of the part, holding the topology edge types.
+        index : int
+            Position of the edge within the connectivity results.
 
         Returns
         -------
