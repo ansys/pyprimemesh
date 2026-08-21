@@ -590,10 +590,10 @@ mesh_util.volume_mesh()
 print(model)
 
 for color_mode in [
-   ColorByType.ZONE,
-   ColorByType.ZONELET,
-   ColorByType.PART,
-   ColorByType.CONNECTIVITY,
+    ColorByType.ZONE,
+    ColorByType.ZONELET,
+    ColorByType.PART,
+    ColorByType.CONNECTIVITY,
 ]:
     plotter = PrimePlotter()
     plotter.plot(model, update=True)
