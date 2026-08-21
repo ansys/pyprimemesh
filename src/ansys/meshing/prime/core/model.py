@@ -538,6 +538,8 @@ class Model(_Model):
         ----------
         scope : Scope
             Scope of the model.
+        update : bool, default: False
+            Whether to rebuild the geometry rather than reuse what is cached.
 
         Returns
         -------
