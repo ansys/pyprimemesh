@@ -102,9 +102,13 @@ Showing the mesh
 The show mesh button toggles the interior edges of the displayed faces. What those edges
 are depends on whether a face carries a mesh:
 
-- A meshed face shows its element edges, drawn in the theme edge color.
+- A meshed face shows its element edges, drawn in the theme edge color. These are shown
+  by default.
 - An unmeshed face shows the facets that approximate its CAD surface, drawn faintly so
-  that tessellation is not mistaken for a real mesh.
+  that tessellation is not mistaken for a real mesh. These are hidden by default.
 
-This means a CAD model still gives a sense of its surface curvature before meshing, and
-a partially meshed model shows at a glance which faces have been meshed.
+The two follow opposite sides of the same button, because facets stand in for a mesh
+that is not there. A CAD model therefore arrives with clean surfaces and reveals its
+tessellation only when you ask for it, while a meshed model shows its elements straight
+away. In a partly meshed model the button swaps between the two, which shows at a glance
+which faces have been meshed.
