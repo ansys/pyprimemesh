@@ -27,7 +27,11 @@ import numpy as np
 import pyvista as pv
 from ansys.tools.visualization_interface import Plotter
 from ansys.tools.visualization_interface.backends.pyvista import PyVistaBackend
+from ansys.tools.visualization_interface.backends.pyvista.widgets.mesh_slider import (
+    MeshSliderWidget,
+)
 from ansys.tools.visualization_interface.utils.color import Color
+from vtk import vtkPlane, vtkTextActor
 
 import ansys.meshing.prime as prime
 
@@ -42,16 +46,21 @@ from ansys.meshing.prime.core.mesh import (
     DisplayMeshType,
     ModelRenderData,
     RenderBatch,
+    SelectionTarget,
     build_edge_render_batches,
     build_element_edge_batches,
     build_face_render_batches,
     classify_face_connectivity,
     entity_color,
+    selectable_display_types,
 )
 from ansys.meshing.prime.core.model import Model
+from ansys.meshing.prime.graphics.widgets.clip_plane import ClipPlaneWidget
 from ansys.meshing.prime.graphics.widgets.color_by_type import ColorByTypeWidget
 from ansys.meshing.prime.graphics.widgets.hide_picked import HidePicked
 from ansys.meshing.prime.graphics.widgets.picked_info import PickedInfo
+from ansys.meshing.prime.graphics.widgets.reset_display import ResetDisplay
+from ansys.meshing.prime.graphics.widgets.selection_target import SelectionTargetWidget
 from ansys.meshing.prime.graphics.widgets.toggle_edges import ToggleEdges
 
 # Depth-buffer offset applied to a face actor when element outlines are drawn as
@@ -64,11 +73,42 @@ POLYGON_OFFSET_UNITS = 1.0
 FACET_EDGE_COLOR = "#b4b4b4"
 FACET_EDGE_OPACITY = 0.35
 
+TOOLTIP_FONT_SIZE = 14
+# Distance from the cursor to the hover text, so the text clears the button.
+TOOLTIP_GAP = 24
+TOOLTIP_TEXT_COLOR = (0.0, 0.0, 0.0)
+TOOLTIP_BACKGROUND_COLOR = (1.0, 1.0, 0.88)
+TOOLTIP_FRAME_COLOR = (0.25, 0.25, 0.25)
+
 
 class _EntityPickingBackend(PyVistaBackend):
     """Resolve a PyVista actor pick to the Prime entity under the cursor."""
 
     prime_plotter = None
+
+    def enable_widgets(self, dark_mode: bool = False) -> None:
+        """Add the backend widgets, minus the clip slider.
+
+        That slider clips by rebuilding the scene from combined geometry and
+        identifying actors by dataset address, neither of which holds once entities
+        are merged into render batches and hidden by filtering cells. PyPrimeMesh
+        supplies its own clip button instead.
+
+        Parameters
+        ----------
+        dark_mode : bool, default: False
+            Whether to use dark mode for the widgets.
+        """
+        super().enable_widgets(dark_mode)
+
+        kept = []
+        for widget in getattr(self, "_widgets", []):
+            if isinstance(widget, MeshSliderWidget):
+                widget._button.Off()
+                widget._button.GetRepresentation().SetVisibility(0)
+                continue
+            kept.append(widget)
+        self._widgets = kept
 
     def picker_callback(self, actor: "pv.Actor") -> None:
         """Select the Prime display entity under the cursor."""
@@ -125,14 +165,35 @@ class PrimePlotter(Plotter):
         self._drawn_geometry: Dict[Any, pv.DataSet] = {}
         self._color_type: Optional[ColorByType] = None
         self._show_element_edges = True
+        self._selection_target = SelectionTarget.BOTH
+        self._initial_camera = None
+        self._camera_observer = None
+        self._tooltip_actor = None
+        self._tooltip_text = None
+        self._hover_position = None
+        self._hover_observer = None
+        self._clip_plane = None
+        self._prime_widget_list: List = []
         self._model: Optional[Model] = None
 
     def _add_widgets(self) -> None:
-        """Attach the PyPrimeMesh widgets to the backend."""
-        self._backend.add_widget(ToggleEdges(self))
-        self._backend.add_widget(ColorByTypeWidget(self))
-        self._backend.add_widget(HidePicked(self))
-        self._backend.add_widget(PickedInfo(self))
+        """Attach the PyPrimeMesh widgets to the backend.
+
+        The backend rebuilds its own widget list when the scene is shown, dropping
+        the widgets added here, so they are also kept locally. The buttons themselves
+        stay live because they are registered with the scene.
+        """
+        self._prime_widget_list = [
+            ToggleEdges(self),
+            ColorByTypeWidget(self),
+            HidePicked(self),
+            PickedInfo(self),
+            SelectionTargetWidget(self),
+            ClipPlaneWidget(self),
+            ResetDisplay(self),
+        ]
+        for widget in self._prime_widget_list:
+            self._backend.add_widget(widget)
 
     @property
     def info_actor_map(self) -> Dict:
@@ -177,6 +238,22 @@ class PrimePlotter(Plotter):
             Render batch of each facet-outline actor, keyed by actor.
         """
         return self._facet_edge_batches
+
+    @property
+    def has_faceting(self) -> bool:
+        """Whether anything on display has CAD faceting to show in place of a mesh.
+
+        Only an unmeshed face has faceting to fall back on, so this is ``False``
+        once everything shown is meshed, whether it is topology or mesh.
+
+        Returns
+        -------
+        bool
+            ``True`` when faceting can be drawn instead of mesh edges.
+        """
+        if any(batch.mesh.n_cells > 0 for batch in self._facet_edge_batches.values()):
+            return True
+        return any(not info.has_mesh for info in self._info_actor_map.values())
 
     def _outline_groups(self):
         """Pair each outline group with whether the show-edges state draws it.
@@ -356,6 +433,8 @@ class PrimePlotter(Plotter):
             render_data.splines,
             DisplayMeshType.SPLINESURFACE,
         )
+        # Geometry added while clipping is on has to be clipped as well.
+        self._apply_clip_plane()
 
     @staticmethod
     def _entries(model_pd: Dict, key: str) -> List:
@@ -390,6 +469,7 @@ class PrimePlotter(Plotter):
             spline_surface_entries,
             DisplayMeshType.SPLINESURFACE,
         )
+        self._apply_clip_plane()
 
     def _add_render_batches(
         self,
@@ -563,6 +643,9 @@ class PrimePlotter(Plotter):
         if batch is None or not batch.pickable or point is None:
             return False
 
+        if batch.display_mesh_type not in selectable_display_types(self._selection_target):
+            return True
+
         mesh = self._drawn_geometry.get(actor)
         if mesh is None or mesh.n_cells == 0:
             return True
@@ -586,6 +669,7 @@ class PrimePlotter(Plotter):
             self._add_entity_label(key)
 
         self.refresh_colors()
+        self.refresh_tooltips()
         return True
 
     @staticmethod
@@ -710,6 +794,36 @@ class PrimePlotter(Plotter):
                 infos.append(info)
         return infos
 
+    @property
+    def selection_target(self) -> SelectionTarget:
+        """Return the kinds of entity that respond to picking.
+
+        Returns
+        -------
+        SelectionTarget
+            Active selection target.
+        """
+        return self._selection_target
+
+    def set_selection_target(self, target: SelectionTarget) -> None:
+        """Choose whether picking selects faces, edges, or both.
+
+        Entities already selected stay selected, so narrowing the target is a way
+        to add edges to a face selection without losing it.
+
+        Parameters
+        ----------
+        target : SelectionTarget
+            Kinds of entity that respond to picking.
+        """
+        self._selection_target = SelectionTarget(target)
+        selectable = selectable_display_types(self._selection_target)
+        for actor, batch in self._batches.items():
+            # Dropping pickability keeps VTK from returning a face actor that sits
+            # in front of the edge the user is aiming at.
+            actor.SetPickable(bool(batch.pickable and batch.display_mesh_type in selectable))
+        self.render()
+
     def _normalise_entity_keys(self, entities: Iterable) -> set[DisplayEntityKey]:
         """Normalize entity keys while retaining limited ID compatibility."""
         keys: set[DisplayEntityKey] = set()
@@ -821,6 +935,316 @@ class PrimePlotter(Plotter):
         self._backend.prime_plotter = self
         self._reset_prime_state()
         self._add_widgets()
+
+    def _reset_widget_buttons(self) -> None:
+        """Return every Prime toggle button to its unpressed state."""
+        for widget in self._prime_widgets():
+            reset = getattr(widget, "reset", None)
+            if callable(reset):
+                reset()
+
+    def _prime_actors(self) -> List:
+        """Return every actor this plotter owns."""
+        actors = list(self._batches)
+        actors.extend(self._element_edge_batches)
+        actors.extend(self._facet_edge_batches)
+        actors.extend(self._info_actor_map)
+        return actors
+
+    def _remove_clipping(self) -> None:
+        """Undo clipping applied by the backend slider widget.
+
+        That widget clips by replacing the model with a combined copy and taking the
+        original actors out of the renderer, so dropping the plane alone would leave
+        nothing on screen. The originals are put back and the widget is emptied of the
+        actors it captured, which would otherwise be restored again later.
+        """
+        scene = self.scene
+        if scene is None:
+            return
+
+        self._disable_clipping()
+
+        for widget in getattr(self._backend, "_widgets", []):
+            clipped = getattr(widget, "_widget_actor", None)
+            if clipped is None:
+                continue
+            scene.remove_actor(clipped)
+            widget._widget_actor = None
+            widget._mesh_actor_list = []
+            button = getattr(widget, "_button", None)
+            if button is not None:
+                button.GetRepresentation().SetState(0)
+
+        clear_planes = getattr(scene, "clear_plane_widgets", None)
+        if callable(clear_planes):
+            clear_planes()
+
+        renderer = scene.renderer
+        for actor in self._prime_actors():
+            if not renderer.HasViewProp(actor):
+                renderer.AddActor(actor)
+
+    def reset_display(self) -> None:
+        """Restore the display to how the model was first drawn.
+
+        Selections, hidden entities, coloring, edge visibility, the selection
+        target, and any clip plane are all cleared, and the camera returns to its
+        opening view. Unlike :meth:`clear`, the model geometry is kept, so the
+        model does not need to be added again.
+        """
+        for key in list(self._entity_labels):
+            self._remove_entity_label(key)
+        self._picked_entities.clear()
+        self._picked_points.clear()
+
+        self._hidden_entities.clear()
+        for actor in self._info_actor_map:
+            actor.visibility = True
+
+        self._color_type = None
+        self._show_element_edges = True
+        self._selection_target = SelectionTarget.BOTH
+        for actor, batch in self._batches.items():
+            actor.SetPickable(bool(batch.pickable))
+
+        self._remove_clipping()
+        self._reset_widget_buttons()
+
+        # Recoloring rebuilds the mapper inputs, which is what brings back the cells
+        # the hide widget filtered out.
+        self.refresh_colors()
+        self.set_show_edges(True)
+        self._reset_camera()
+        self.refresh_tooltips()
+        self.render()
+
+    def _reset_camera(self) -> None:
+        """Return the camera to the view the model opened with."""
+        scene = self.scene
+        if scene is None:
+            return
+        if self._initial_camera is not None:
+            scene.camera_position = self._initial_camera
+        else:
+            scene.reset_camera()
+
+    def _store_initial_camera(self) -> None:
+        """Arrange for the opening view to be remembered.
+
+        The camera only frames the model once the window is shown, so the view is
+        taken from the first completed render rather than read here, where it would
+        still be the default camera.
+        """
+        scene = self.scene
+        if scene is None or self._initial_camera is not None:
+            return
+        if self._camera_observer is not None:
+            return
+
+        renderer = scene.renderer
+
+        def capture(caller, event) -> None:
+            if self._initial_camera is None:
+                self._initial_camera = scene.camera_position
+            self._release_camera_observer()
+
+        self._camera_observer = renderer.AddObserver("EndEvent", capture)
+
+    def _prime_widgets(self) -> List:
+        """Return the widgets this plotter created."""
+        return list(self._prime_widget_list)
+
+    @property
+    def clipping(self) -> bool:
+        """Whether a clip plane is currently applied.
+
+        Returns
+        -------
+        bool
+            ``True`` while the model is clipped.
+        """
+        return self._clip_plane is not None
+
+    def set_clipping(self, enabled: bool) -> None:
+        """Clip the model with an interactive plane, or stop clipping.
+
+        The plane is applied to the mappers rather than to the geometry, so the
+        entities, their colors, and what is selectable are all unaffected: only
+        which part of them is drawn changes.
+
+        Parameters
+        ----------
+        enabled : bool
+            Whether to clip the model.
+        """
+        if bool(enabled) == self.clipping:
+            return
+        if enabled:
+            self._enable_clipping()
+        else:
+            self._disable_clipping()
+
+    def _enable_clipping(self) -> None:
+        """Add the clip plane and its widget."""
+        scene = self.scene
+        if scene is None:
+            return
+
+        bounds = scene.bounds
+        center = (
+            (bounds[0] + bounds[1]) / 2.0,
+            (bounds[2] + bounds[3]) / 2.0,
+            (bounds[4] + bounds[5]) / 2.0,
+        )
+
+        plane = vtkPlane()
+        plane.SetOrigin(center)
+        plane.SetNormal(1.0, 0.0, 0.0)
+        self._clip_plane = plane
+        self._apply_clip_plane()
+
+        scene.add_plane_widget(
+            self._move_clip_plane,
+            normal="x",
+            origin=center,
+            outline_translation=False,
+            normal_rotation=True,
+        )
+        self.render()
+
+    def _move_clip_plane(self, normal, origin) -> None:
+        """Follow the plane widget.
+
+        Parameters
+        ----------
+        normal : Sequence[float]
+            Plane normal given by the widget.
+        origin : Sequence[float]
+            Point on the plane given by the widget.
+        """
+        if self._clip_plane is None:
+            return
+        # The mapper keeps what the normal points away from, so the visible half is
+        # the one behind the widget arrow.
+        self._clip_plane.SetNormal(-normal[0], -normal[1], -normal[2])
+        self._clip_plane.SetOrigin(origin)
+        self.render()
+
+    def _disable_clipping(self) -> None:
+        """Remove the clip plane and its widget."""
+        self._clip_plane = None
+        self._apply_clip_plane()
+
+        scene = self.scene
+        if scene is not None:
+            clear_planes = getattr(scene, "clear_plane_widgets", None)
+            if callable(clear_planes):
+                clear_planes()
+        self.render()
+
+    def _apply_clip_plane(self) -> None:
+        """Put the current clip plane, if any, on every Prime mapper."""
+        for actor in self._prime_actors():
+            mapper = actor.GetMapper()
+            if mapper is None:
+                continue
+            mapper.RemoveAllClippingPlanes()
+            if self._clip_plane is not None:
+                mapper.AddClippingPlane(self._clip_plane)
+
+    def _enable_tooltips(self) -> None:
+        """Give the Prime buttons hover text describing what they do.
+
+        VTK's balloon widget is not used because it finds what the cursor is over by
+        picking, which reports only 3D props and so never matches a button. Its pick
+        also runs a selection render on every hover, which is costly on a large
+        model. The buttons are asked directly instead.
+        """
+        scene = self.scene
+        if scene is None or self._tooltip_actor is not None:
+            return
+        interactor = getattr(scene, "iren", None)
+        if interactor is None:
+            return
+
+        tooltip = vtkTextActor()
+        tooltip.SetInput(" ")
+        tooltip.SetVisibility(False)
+        text = tooltip.GetTextProperty()
+        text.SetFontSize(TOOLTIP_FONT_SIZE)
+        text.SetColor(*TOOLTIP_TEXT_COLOR)
+        text.SetBackgroundColor(*TOOLTIP_BACKGROUND_COLOR)
+        text.SetBackgroundOpacity(1.0)
+        text.SetFrame(True)
+        text.SetFrameColor(*TOOLTIP_FRAME_COLOR)
+
+        scene.add_actor(tooltip, render=False)
+        self._tooltip_actor = tooltip
+        self._hover_observer = interactor.interactor.AddObserver(
+            "MouseMoveEvent",
+            self._hover,
+        )
+
+    def _hover(self, caller, event) -> None:
+        """Follow the cursor.
+
+        Parameters
+        ----------
+        caller : vtkRenderWindowInteractor
+            Interactor reporting the movement.
+        event : str
+            Name of the VTK event. Unused.
+        """
+        del event
+
+        self._update_tooltip(*caller.GetEventPosition())
+
+    def _update_tooltip(self, x: int, y: int) -> None:
+        """Show the hover text of the button at a display position, if any.
+
+        Parameters
+        ----------
+        x : int
+            Horizontal display coordinate.
+        y : int
+            Vertical display coordinate.
+        """
+        tooltip = self._tooltip_actor
+        if tooltip is None:
+            return
+
+        self._hover_position = (x, y)
+        hovered = next(
+            (widget for widget in self._prime_widgets() if widget.contains(x, y)),
+            None,
+        )
+        text = hovered.tooltip() if hovered is not None else ""
+        if text == self._tooltip_text:
+            return
+
+        self._tooltip_text = text
+        tooltip.SetInput(text or " ")
+        tooltip.SetDisplayPosition(x + TOOLTIP_GAP, y)
+        tooltip.SetVisibility(bool(text))
+        self.render()
+
+    def refresh_tooltips(self) -> None:
+        """Update the hover text of every Prime button to match its current state."""
+        if self._tooltip_actor is None or self._hover_position is None:
+            return
+        # The state that the text describes has just changed, so it has to be rebuilt
+        # even though the cursor has not moved.
+        self._tooltip_text = None
+        self._update_tooltip(*self._hover_position)
+
+    def _release_camera_observer(self) -> None:
+        """Stop watching for the first render."""
+        scene = self.scene
+        if self._camera_observer is None or scene is None:
+            return
+        scene.renderer.RemoveObserver(self._camera_observer)
+        self._camera_observer = None
 
     def add_scope(
         self,
@@ -968,6 +1392,8 @@ class PrimePlotter(Plotter):
                 scope=scope,
                 **plotting_options,
             )
+        self._store_initial_camera()
+        self._enable_tooltips()
         self._backend.show(
             plottable_object=plottable_object,
             screenshot=screenshot,
