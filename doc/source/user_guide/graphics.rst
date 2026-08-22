@@ -48,11 +48,16 @@ information about them can be printed to the console. Selections can also be hid
 These graphics buttons are provided to help navigate the model and to
 carry out basic verifications:
 
-.. figure:: ../images/graphics_buttons(2).png
-    :width: 200pt
+.. figure:: ../images/graphics_buttons.png
+    :width: 300pt
     :align: center
 
-    **Graphics buttons**
+    **Graphics buttons, in the order they appear on screen**
+
+Several of these buttons cycle through more than two states, so hovering over one
+shows what it is set to and what the next click does, such as ``Colouring by zone.
+Click to colour by zonelet.`` The icon tells you which state you are in and the hover
+text tells you where the next click takes you.
 
 Coloring the display
 ====================
@@ -112,3 +117,60 @@ that is not there. A CAD model therefore arrives with clean surfaces and reveals
 tessellation only when you ask for it, while a meshed model shows its elements straight
 away. In a partly meshed model the button swaps between the two, which shows at a glance
 which faces have been meshed.
+
+The hover text follows what is on display. Where nothing is left unmeshed, whether it is
+topology or mesh, there is no faceting to fall back on and the button reads as showing
+or hiding the mesh edges. Where unmeshed faces are present, it offers their faceting
+instead.
+
+Choosing what a click selects
+=============================
+Faces and edges are both selectable, but an edge is thin and usually sits on the surface
+of the face behind it, so a click near a shared boundary tends to reach whichever the
+renderer happens to hit first. The selection button cycles the selection target so that
+you can say what you are aiming at. The target can also be set from a script:
+
+.. code-block:: pycon
+
+    >>> from ansys.meshing.prime.core.mesh import SelectionTarget
+    >>> display.set_selection_target(SelectionTarget.EDGES)
+
+``BOTH`` leaves everything selectable, ``FACES`` clicks through edges, and ``EDGES``
+clicks through faces. Only the entities in the target take part in hit testing, so a
+face can no longer shadow the edge behind it.
+
+Changing the target never clears what is already selected, so faces and edges can be
+gathered into one selection by picking the faces you want, switching the target, and
+then picking the edges.
+
+Clipping the model
+==================
+The clip button cuts the model open with a plane you can drag and rotate, which is how
+you look inside a closed volume or check a mesh on an internal face. Click it again to
+show the whole model. The same is available from a script:
+
+.. code-block:: pycon
+
+    >>> display.set_clipping(True)
+
+Clipping is applied when the model is drawn rather than to the model itself, so the
+entities are unchanged: they keep their colors, they stay selectable, and picking a
+face that has been cut still selects the whole face. Anything hidden stays hidden,
+and turning clipping off restores the view exactly.
+
+Resetting the display
+=====================
+The reset button returns the display to how the model was first drawn. Selections are
+cleared, hidden entities come back, coloring returns to the default, edge display and
+the selection target return to their opening state, any clipping plane is removed, and
+the camera goes back to the view the model opened with. The same is available from a
+script:
+
+.. code-block:: pycon
+
+    >>> display.reset_display()
+
+The geometry itself is kept, so this is a way out of an unreadable display without
+adding the model again. To discard the geometry as well, use
+:meth:`PrimePlotter.clear() <ansys.meshing.prime.graphics.plotter.PrimePlotter.clear>`,
+which empties the scene entirely.
