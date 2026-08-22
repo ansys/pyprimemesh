@@ -1003,6 +1003,16 @@ def test_reset_display_restores_the_opening_state(get_remote_client, get_example
         display.scene.close()
 
 
+def _partly_meshed_model_pd():
+    """Build a model where one face is meshed and another is not."""
+    meshed = _synthetic_face_entry(part_id=1, entity_id=1, x_offset=-2.0, has_mesh=True)
+    unmeshed = _synthetic_face_entry(part_id=2, entity_id=2, x_offset=2.0, has_mesh=False)
+    return {
+        1: {"faces": [meshed], "edges": [], "ctrlpts": [], "splinesurf": []},
+        2: {"faces": [unmeshed], "edges": [], "ctrlpts": [], "splinesurf": []},
+    }
+
+
 def _button_center(widget):
     """Return the display position at the middle of a toolbar button."""
     left, bottom = widget._button_position
@@ -1046,8 +1056,8 @@ def test_button_tooltips_report_state_and_next_click(get_remote_client, get_exam
         display.scene.close()
 
 
-def test_show_edges_tooltip_offers_faceting_only_when_there_is_any(get_remote_client, get_examples):
-    """Faceting is offered for unmeshed CAD, and hiding the mesh otherwise."""
+def test_show_edges_tooltip_names_what_is_actually_on_display(get_remote_client, get_examples):
+    """The wording follows whether anything shown is meshed, unmeshed, or both."""
     model = get_remote_client.model
     _read_only(model, get_examples["elbow_lucid"])
     display = PrimePlotter(allow_picking=False)
@@ -1055,15 +1065,13 @@ def test_show_edges_tooltip_offers_faceting_only_when_there_is_any(get_remote_cl
         display.add_model(model, update=True)
         display.show(auto_close=False)
         assert display.has_faceting
+        assert not display.has_mesh_edges
         edges = next(w for w in display._prime_widgets() if isinstance(w, ToggleEdges))
 
-        assert edges.tooltip() == (
-            "Showing mesh edges.\nClick to show the CAD faceting of unmeshed faces."
-        )
+        # Nothing is meshed, so there are no mesh edges to claim to be showing.
+        assert edges.tooltip() == "Showing topology.\nClick to show the CAD faceting."
         display.set_show_edges(False)
-        assert edges.tooltip() == (
-            "Showing the CAD faceting of unmeshed faces.\nClick to show mesh edges."
-        )
+        assert edges.tooltip() == "Showing the CAD faceting.\nClick to show topology."
     finally:
         display.scene.close()
 
@@ -1073,11 +1081,31 @@ def test_show_edges_tooltip_offers_faceting_only_when_there_is_any(get_remote_cl
         display.add_model(model, update=True)
         display.show(auto_close=False)
         assert not display.has_faceting
+        assert display.has_mesh_edges
         edges = next(w for w in display._prime_widgets() if isinstance(w, ToggleEdges))
 
+        # Everything is meshed, so there is no faceting to offer.
         assert edges.tooltip() == "Showing mesh edges.\nClick to hide mesh edges."
         display.set_show_edges(False)
         assert edges.tooltip() == "Mesh edges hidden.\nClick to show mesh edges."
+    finally:
+        display.scene.close()
+
+    display = PrimePlotter(allow_picking=False)
+    try:
+        display.add_model_pd(_partly_meshed_model_pd())
+        assert display.has_faceting
+        assert display.has_mesh_edges
+        edges = next(w for w in display._prime_widgets() if isinstance(w, ToggleEdges))
+
+        # Both are present, so the button swaps one for the other.
+        assert edges.tooltip() == (
+            "Showing mesh edges.\nClick to show the CAD faceting of unmeshed faces."
+        )
+        display.set_show_edges(False)
+        assert edges.tooltip() == (
+            "Showing the CAD faceting of unmeshed faces.\nClick to show mesh edges."
+        )
     finally:
         display.scene.close()
 
@@ -1205,7 +1233,7 @@ def test_color_by_type_recolors_shared_meshes(get_remote_client, get_examples):
         display.scene.close()
 
 
-def _synthetic_face_entry(part_id, entity_id, x_offset):
+def _synthetic_face_entry(part_id, entity_id, x_offset, has_mesh=False):
     """Create one synthetic face entry for duplicate-ID isolation tests."""
     mesh = pv.Plane(center=(x_offset, 0.0, 0.0), i_resolution=1, j_resolution=1)
     part = SimpleNamespace(id=part_id, name=f"part-{part_id}")
@@ -1217,7 +1245,7 @@ def _synthetic_face_entry(part_id, entity_id, x_offset):
         zone_id=1,
         zone_name="zone",
         display_mesh_type=DisplayMeshType.FACEZONELET,
-        has_mesh=False,
+        has_mesh=has_mesh,
     )
     return mesh_object, info
 
