@@ -118,10 +118,11 @@ tessellation only when you ask for it, while a meshed model shows its elements s
 away. In a partly meshed model the button swaps between the two, which shows at a glance
 which faces have been meshed.
 
-The hover text follows what is on display. Where nothing is left unmeshed, whether it is
-topology or mesh, there is no faceting to fall back on and the button reads as showing
-or hiding the mesh edges. Where unmeshed faces are present, it offers their faceting
-instead.
+The hover text follows what is on display, so it never offers something that is not
+there. Where nothing is left unmeshed, whether it is topology or mesh, there is no
+faceting to fall back on and the button reads as showing or hiding the mesh edges. Where
+nothing is meshed, there are no mesh edges either, so it reads as showing the topology
+or its CAD faceting. Where both are present, it swaps one for the other.
 
 Choosing what a click selects
 =============================
