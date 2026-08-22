@@ -1,0 +1,104 @@
+# Copyright (C) 2024 - 2026 ANSYS, Inc. and/or its affiliates.
+# SPDX-License-Identifier: MIT
+#
+# Permission is hereby granted, free of charge, to any person obtaining a copy
+# of this software and associated documentation files (the "Software"), to deal
+# in the Software without restriction, including without limitation the rights
+# to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+# copies of the Software, and to permit persons to whom the Software is
+# furnished to do so, subject to the following conditions:
+#
+# The above copyright notice and this permission notice shall be included in all
+# copies or substantial portions of the Software.
+#
+# THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+# IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+# FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+# AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+# LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+# OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+# SOFTWARE.
+
+"""Module for the ResetDisplay widget."""
+
+import os
+from typing import TYPE_CHECKING
+
+from ansys.tools.visualization_interface.backends.pyvista.widgets import PlotterWidget
+from vtk import vtkPNGReader
+
+from ansys.meshing.prime.graphics.widgets.toolbar import ToolbarButton
+
+if TYPE_CHECKING:
+    from ansys.meshing.prime.graphics.plotter import PrimePlotter
+
+
+class ResetDisplay(ToolbarButton, PlotterWidget):
+    """Return the display to how the model was first drawn.
+
+    The button clears selections, restores hidden entities, drops any clip plane,
+    and returns the camera to its opening view without discarding the geometry.
+
+    Parameters
+    ----------
+    prime_plotter : PrimePlotter
+        Plotter the widget resets.
+    """
+
+    def __init__(self, prime_plotter: "PrimePlotter") -> None:
+        """Initialize the widget."""
+        super().__init__(prime_plotter._backend._pl.scene)
+
+        self.prime_plotter = prime_plotter
+
+        self._button = self._add_button((5, 690), color_off="white", color_on="white")
+
+    def callback(self, state: bool) -> None:
+        """Reset the display.
+
+        Parameters
+        ----------
+        state : bool
+            Checkbox widget state. Unused, because a reset is an action rather
+            than a mode, so both button states do the same thing.
+        """
+        del state
+
+        self.prime_plotter.reset_display()
+
+    def tooltip(self) -> str:
+        """Return hover text describing what a click restores.
+
+        Returns
+        -------
+        str
+            Description of the reset action.
+        """
+        return (
+            "Click to reset the display to how the model opened.\n"
+            "Clears the selection, hiding, colouring, clipping and the camera."
+        )
+
+    def update(self) -> None:
+        """Configure the widget icon."""
+        representation = self._button.GetRepresentation()
+
+        icon_file = os.path.join(
+            os.path.dirname(__file__),
+            "images",
+            "reset_display.png",
+        )
+
+        reader = vtkPNGReader()
+        reader.SetFileName(icon_file)
+        reader.Update()
+
+        image = reader.GetOutput()
+
+        representation.SetButtonTexture(0, image)
+        representation.SetButtonTexture(1, image)
+
+    def reset(self) -> None:
+        """Return the widget to its unpressed state without calling back."""
+        self._button.GetRepresentation().SetState(0)
+        self.update()
