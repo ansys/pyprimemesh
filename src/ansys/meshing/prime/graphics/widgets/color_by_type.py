@@ -32,12 +32,21 @@ from ansys.meshing.prime.core.mesh import (
     DisplayMeshInfo,
     entity_color,
 )
+from ansys.meshing.prime.graphics.widgets.toolbar import ToolbarButton
 
 if TYPE_CHECKING:
     from ansys.meshing.prime.graphics.plotter import PrimePlotter
 
+#: How each coloring mode reads in the button hover text.
+COLOR_BY_TYPE_LABELS = {
+    ColorByType.ZONE: "zone",
+    ColorByType.ZONELET: "zonelet",
+    ColorByType.PART: "part",
+    ColorByType.CONNECTIVITY: "connectivity",
+}
 
-class ColorByTypeWidget(PlotterWidget):
+
+class ColorByTypeWidget(ToolbarButton, PlotterWidget):
     """Widget controlling entity coloring mode.
 
     The plotter maintains actor-per-entity-type rendering and recolors
@@ -56,12 +65,7 @@ class ColorByTypeWidget(PlotterWidget):
 
         self.prime_plotter = prime_plotter
 
-        self._button = self.prime_plotter._backend.pv_interface.scene.add_checkbox_button_widget(
-            self.callback,
-            position=(5, 630),
-            size=30,
-            border_size=3,
-        )
+        self._button = self._add_button((5, 630))
 
         self._button.GetRepresentation().SetNumberOfStates(len(ColorByType))
 
@@ -85,6 +89,23 @@ class ColorByTypeWidget(PlotterWidget):
         self.prime_plotter.set_color_by_type(color_type)
 
         self.update(color_type)
+
+        self.prime_plotter.refresh_tooltips()
+
+    def tooltip(self) -> str:
+        """Return hover text naming the coloring and what the next click applies.
+
+        Returns
+        -------
+        str
+            Description of the current and next coloring mode.
+        """
+        current = ColorByType(self._button.GetRepresentation().GetState())
+        following = ColorByType((int(current) + 1) % len(ColorByType))
+        return (
+            f"Colouring by {COLOR_BY_TYPE_LABELS[current]}.\n"
+            f"Click to colour by {COLOR_BY_TYPE_LABELS[following]}."
+        )
 
     def update(
         self,
@@ -124,6 +145,13 @@ class ColorByTypeWidget(PlotterWidget):
 
         for state in range(len(ColorByType)):
             representation.SetButtonTexture(state, image)
+
+    def reset(self) -> None:
+        """Return the widget to its unpressed state without calling back."""
+        self._button.GetRepresentation().SetState(0)
+        self._color_type = ColorByType.ZONE
+        self.update(ColorByType.ZONE)
+        self.prime_plotter.refresh_tooltips()
 
     @staticmethod
     def set_color_by_type(
