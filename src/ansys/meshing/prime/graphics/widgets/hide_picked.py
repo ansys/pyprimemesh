@@ -28,12 +28,13 @@ from ansys.tools.visualization_interface.backends.pyvista.widgets import Plotter
 from vtk import vtkPNGReader
 
 from ansys.meshing.prime.core.mesh import DisplayEntityKey
+from ansys.meshing.prime.graphics.widgets.toolbar import ToolbarButton
 
 if TYPE_CHECKING:
     from ansys.meshing.prime.graphics.plotter import PrimePlotter
 
 
-class HidePicked(PlotterWidget):
+class HidePicked(ToolbarButton, PlotterWidget):
     """Hide or restore currently selected Prime display entities.
 
     Selection is tracked using DisplayEntityKey so identical entity IDs in
@@ -51,14 +52,7 @@ class HidePicked(PlotterWidget):
 
         self.prime_plotter = prime_plotter
 
-        self._button = self.prime_plotter._backend._pl.scene.add_checkbox_button_widget(
-            self.callback,
-            position=(5, 660),
-            size=30,
-            border_size=3,
-            color_off="white",
-            color_on="white",
-        )
+        self._button = self._add_button((5, 660), color_off="white", color_on="white")
 
         self._hidden_entities: List[DisplayEntityKey] = []
 
@@ -100,6 +94,20 @@ class HidePicked(PlotterWidget):
 
             self._hidden_entities = []
 
+        self.prime_plotter.refresh_tooltips()
+
+    def tooltip(self) -> str:
+        """Return hover text naming what the next click hides or restores.
+
+        Returns
+        -------
+        str
+            Description of the current and next visibility state.
+        """
+        if self._hidden_entities:
+            return f"{len(self._hidden_entities)} entities hidden.\nClick to restore them."
+        return "Selected entities are visible.\nClick to hide the selection."
+
     def update(self) -> None:
         """Configure the button appearance."""
         representation = self._button.GetRepresentation()
@@ -118,3 +126,14 @@ class HidePicked(PlotterWidget):
 
         representation.SetButtonTexture(0, image)
         representation.SetButtonTexture(1, image)
+
+    def reset(self) -> None:
+        """Return the widget to its unpressed state without restoring twice.
+
+        The plotter unhides everything itself, so the widget only forgets what it
+        was holding.
+        """
+        self._button.GetRepresentation().SetState(0)
+        self._hidden_entities = []
+        self.update()
+        self.prime_plotter.refresh_tooltips()
