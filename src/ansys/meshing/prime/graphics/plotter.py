@@ -255,6 +255,19 @@ class PrimePlotter(Plotter):
             return True
         return any(not info.has_mesh for info in self._info_actor_map.values())
 
+    @property
+    def has_mesh_edges(self) -> bool:
+        """Whether anything on display is meshed and so has element edges to draw.
+
+        Returns
+        -------
+        bool
+            ``True`` when mesh edges can be drawn.
+        """
+        if any(batch.mesh.n_cells > 0 for batch in self._element_edge_batches.values()):
+            return True
+        return any(info.has_mesh for info in self._info_actor_map.values())
+
     def _outline_groups(self):
         """Pair each outline group with whether the show-edges state draws it.
 
