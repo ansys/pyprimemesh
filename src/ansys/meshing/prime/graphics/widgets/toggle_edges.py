@@ -27,11 +27,13 @@ from typing import TYPE_CHECKING
 from ansys.tools.visualization_interface.backends.pyvista.widgets import PlotterWidget
 from vtk import vtkPNGReader
 
+from ansys.meshing.prime.graphics.widgets.toolbar import ToolbarButton
+
 if TYPE_CHECKING:
     from ansys.meshing.prime.graphics.plotter import PrimePlotter
 
 
-class ToggleEdges(PlotterWidget):
+class ToggleEdges(ToolbarButton, PlotterWidget):
     """Toggle display of model element edges.
 
     In actor-per-entity-type rendering, element outlines are drawn as
@@ -49,14 +51,7 @@ class ToggleEdges(PlotterWidget):
 
         self.prime_plotter = prime_plotter
 
-        self._button = self.prime_plotter._backend._pl.scene.add_checkbox_button_widget(
-            self.callback,
-            position=(5, 600),
-            size=30,
-            border_size=3,
-            color_off="white",
-            color_on="white",
-        )
+        self._button = self._add_button((5, 600), color_off="white", color_on="white")
 
     def callback(self, state: bool) -> None:
         """Toggle edge visibility.
@@ -67,6 +62,26 @@ class ToggleEdges(PlotterWidget):
             Checkbox widget state.
         """
         self.prime_plotter.set_show_edges(not state)
+        self.prime_plotter.refresh_tooltips()
+
+    def tooltip(self) -> str:
+        """Return hover text naming what interior edges are drawn.
+
+        Returns
+        -------
+        str
+            Description of the current and next interior edge display.
+        """
+        showing_mesh = self.prime_plotter._show_element_edges
+        if not self.prime_plotter.has_faceting:
+            # Everything shown is meshed, so there is no faceting to switch to and
+            # the button simply shows or hides the mesh.
+            if showing_mesh:
+                return "Showing mesh edges.\nClick to hide mesh edges."
+            return "Mesh edges hidden.\nClick to show mesh edges."
+        if showing_mesh:
+            return "Showing mesh edges.\nClick to show the CAD faceting of unmeshed faces."
+        return "Showing the CAD faceting of unmeshed faces.\nClick to show mesh edges."
 
     def update(self) -> None:
         """Configure the widget icon."""
@@ -86,3 +101,9 @@ class ToggleEdges(PlotterWidget):
 
         representation.SetButtonTexture(0, image)
         representation.SetButtonTexture(1, image)
+
+    def reset(self) -> None:
+        """Return the widget to its unpressed state without calling back."""
+        self._button.GetRepresentation().SetState(0)
+        self.update()
+        self.prime_plotter.refresh_tooltips()
