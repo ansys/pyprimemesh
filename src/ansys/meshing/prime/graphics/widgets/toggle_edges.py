@@ -79,6 +79,12 @@ class ToggleEdges(ToolbarButton, PlotterWidget):
             if showing_mesh:
                 return "Showing mesh edges.\nClick to hide mesh edges."
             return "Mesh edges hidden.\nClick to show mesh edges."
+        if not self.prime_plotter.has_mesh_edges:
+            # Nothing is meshed, so the alternative to the faceting is the bare
+            # topology rather than a mesh that is not there.
+            if showing_mesh:
+                return "Showing topology.\nClick to show the CAD faceting."
+            return "Showing the CAD faceting.\nClick to show topology."
         if showing_mesh:
             return "Showing mesh edges.\nClick to show the CAD faceting of unmeshed faces."
         return "Showing the CAD faceting of unmeshed faces.\nClick to show mesh edges."
