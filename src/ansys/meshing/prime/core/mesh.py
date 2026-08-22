@@ -79,6 +79,17 @@ class DisplayMeshType(enum.IntEnum):
     SPLINESURFACE = 5
 
 
+class SelectionTarget(enum.IntEnum):
+    """Which kinds of display entity respond to picking."""
+
+    #: Faces and edges are both selectable.
+    BOTH = 0
+    #: Only faces are selectable, so an edge in front of a face is clicked through.
+    FACES = 1
+    #: Only edges are selectable, so a face never shadows the edge behind it.
+    EDGES = 2
+
+
 class FaceConnectivity(enum.IntEnum):
     """How a displayed face connects to the volumes of its part.
 
@@ -122,6 +133,26 @@ FACE_DISPLAY_MESH_TYPES = (
     DisplayMeshType.TOPOFACE,
     DisplayMeshType.FACEZONELET,
 )
+
+
+def selectable_display_types(target: SelectionTarget) -> tuple:
+    """Return the display types a selection target accepts.
+
+    Parameters
+    ----------
+    target : SelectionTarget
+        Kinds of entity that respond to picking.
+
+    Returns
+    -------
+    tuple
+        Display types eligible for selection.
+    """
+    if target == SelectionTarget.FACES:
+        return FACE_DISPLAY_MESH_TYPES
+    if target == SelectionTarget.EDGES:
+        return EDGE_DISPLAY_MESH_TYPES
+    return FACE_DISPLAY_MESH_TYPES + EDGE_DISPLAY_MESH_TYPES
 
 
 @dataclass(frozen=True)
