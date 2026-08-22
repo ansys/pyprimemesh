@@ -27,12 +27,13 @@ from ansys.tools.visualization_interface.backends.pyvista.widgets import Plotter
 from vtk import vtkPNGReader
 
 from ansys.meshing.prime.core.mesh import DisplayMeshInfo, DisplayMeshType
+from ansys.meshing.prime.graphics.widgets.toolbar import ToolbarButton
 
 if TYPE_CHECKING:
     from ansys.meshing.prime.graphics.plotter import PrimePlotter
 
 
-class PickedInfo(PlotterWidget):
+class PickedInfo(ToolbarButton, PlotterWidget):
     """Initialize the picked-information button widget.
 
     This widget prints information about each uniquely selected Prime display
@@ -49,14 +50,7 @@ class PickedInfo(PlotterWidget):
         """Initialize the widget."""
         super().__init__(prime_plotter._backend._pl.scene)
         self.prime_plotter = prime_plotter
-        self._button = self.prime_plotter._backend._pl.scene.add_checkbox_button_widget(
-            self.callback,
-            position=(5, 570),
-            size=30,
-            border_size=3,
-            color_off="white",
-            color_on="white",
-        )
+        self._button = self._add_button((5, 570), color_off="white", color_on="white")
 
     @staticmethod
     def _entity_description(mesh_info: DisplayMeshInfo) -> str:
@@ -134,6 +128,19 @@ class PickedInfo(PlotterWidget):
             seen.add(key)
             print(self.info_message(mesh_info))
 
+    def tooltip(self) -> str:
+        """Return hover text describing what a click prints.
+
+        Returns
+        -------
+        str
+            Description of the action and how much is currently selected.
+        """
+        selected = len({info.key for info in self.prime_plotter.selected_entity_infos})
+        if selected:
+            return f"Click to print details of the {selected} selected entities."
+        return "Click to print details of the selection.\nNothing is selected."
+
     def update(self) -> None:
         """Configure the button texture."""
         representation = self._button.GetRepresentation()
@@ -148,3 +155,8 @@ class PickedInfo(PlotterWidget):
         image = reader.GetOutput()
         representation.SetButtonTexture(0, image)
         representation.SetButtonTexture(1, image)
+
+    def reset(self) -> None:
+        """Return the widget to its unpressed state without calling back."""
+        self._button.GetRepresentation().SetState(0)
+        self.update()
