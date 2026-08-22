@@ -27,6 +27,9 @@ from types import SimpleNamespace
 import numpy as np
 import pytest
 import pyvista as pv
+from ansys.tools.visualization_interface.backends.pyvista.widgets.mesh_slider import (
+    MeshSliderWidget,
+)
 from ansys.tools.visualization_interface.utils.color import Color
 
 import ansys.meshing.prime as prime
@@ -45,12 +48,17 @@ from ansys.meshing.prime.core.mesh import (
     DisplayMeshInfo,
     DisplayMeshType,
     FaceConnectivity,
+    SelectionTarget,
     compute_distance,
     compute_face_list_from_structured_nodes,
     connectivity_color,
 )
 from ansys.meshing.prime.graphics import PrimePlotter
+from ansys.meshing.prime.graphics.widgets.clip_plane import ClipPlaneWidget
+from ansys.meshing.prime.graphics.widgets.color_by_type import ColorByTypeWidget
 from ansys.meshing.prime.graphics.widgets.hide_picked import HidePicked
+from ansys.meshing.prime.graphics.widgets.toggle_edges import ToggleEdges
+from ansys.meshing.prime.graphics.widgets.toolbar import BUTTON_SIZE
 
 pv.OFF_SCREEN = True
 IMAGE_RESULTS_DIR = Path(Path(__file__).parent, "image_cache", "results")
@@ -857,6 +865,316 @@ def test_hide_picked_widget_hides_and_restores_entities(get_remote_client, get_e
         widget.callback(False)
         assert display._drawn_geometry[actor].n_cells == batch.mesh.n_cells
         assert widget._hidden_entities == []
+    finally:
+        display.scene.close()
+
+
+def _first_pickable_batch(display, display_mesh_types):
+    """Return the first pickable actor and batch of the given display types."""
+    return next(
+        (actor, batch)
+        for actor, batch in display._batches.items()
+        if batch.pickable and batch.display_mesh_type in display_mesh_types
+    )
+
+
+def _pick_first_cell(display, actor, batch):
+    """Pick the center of the first cell of a batch."""
+    return display._pick_entity(actor, batch.mesh.cell_centers().points[0])
+
+
+@pytest.mark.parametrize(
+    "target,face_selects,edge_selects",
+    [
+        (SelectionTarget.BOTH, True, True),
+        (SelectionTarget.FACES, True, False),
+        (SelectionTarget.EDGES, False, True),
+    ],
+)
+def test_selection_target_restricts_what_a_pick_selects(
+    get_remote_client, get_examples, target, face_selects, edge_selects
+):
+    """Only the targeted kind of entity answers a pick."""
+    model = get_remote_client.model
+    _read_only(model, get_examples["bracket"])
+    display = PrimePlotter(allow_picking=False)
+    try:
+        display.add_model(model, update=True)
+        face_actor, face_batch = _first_pickable_batch(display, FACE_DISPLAY_MESH_TYPES)
+        edge_actor, edge_batch = _first_pickable_batch(display, EDGE_DISPLAY_MESH_TYPES)
+
+        display.set_selection_target(target)
+        assert display.selection_target == target
+
+        _pick_first_cell(display, face_actor, face_batch)
+        assert bool(display.selected_entity_infos) == face_selects
+
+        display._picked_entities.clear()
+        _pick_first_cell(display, edge_actor, edge_batch)
+        assert bool(display.selected_entity_infos) == edge_selects
+    finally:
+        display.scene.close()
+
+
+def test_selection_target_leaves_only_target_actors_pickable(get_remote_client, get_examples):
+    """Untargeted actors drop out of hit testing so they cannot shadow a pick."""
+    model = get_remote_client.model
+    _read_only(model, get_examples["bracket"])
+    display = PrimePlotter(allow_picking=False)
+    try:
+        display.add_model(model, update=True)
+
+        display.set_selection_target(SelectionTarget.EDGES)
+        for actor, batch in display._batches.items():
+            expected = batch.pickable and batch.display_mesh_type in EDGE_DISPLAY_MESH_TYPES
+            assert bool(actor.GetPickable()) == expected
+
+        display.set_selection_target(SelectionTarget.BOTH)
+        for actor, batch in display._batches.items():
+            assert bool(actor.GetPickable()) == batch.pickable
+    finally:
+        display.scene.close()
+
+
+def test_selection_target_keeps_entities_already_selected(get_remote_client, get_examples):
+    """Switching target collects faces and edges together rather than replacing."""
+    model = get_remote_client.model
+    _read_only(model, get_examples["bracket"])
+    display = PrimePlotter(allow_picking=False)
+    try:
+        display.add_model(model, update=True)
+        face_actor, face_batch = _first_pickable_batch(display, FACE_DISPLAY_MESH_TYPES)
+        edge_actor, edge_batch = _first_pickable_batch(display, EDGE_DISPLAY_MESH_TYPES)
+
+        display.set_selection_target(SelectionTarget.FACES)
+        _pick_first_cell(display, face_actor, face_batch)
+        display.set_selection_target(SelectionTarget.EDGES)
+        _pick_first_cell(display, edge_actor, edge_batch)
+
+        selected = {info.display_mesh_type for info in display.selected_entity_infos}
+        assert selected & set(FACE_DISPLAY_MESH_TYPES)
+        assert selected & set(EDGE_DISPLAY_MESH_TYPES)
+    finally:
+        display.scene.close()
+
+
+def test_reset_display_restores_the_opening_state(get_remote_client, get_examples):
+    """A reset undoes selection, hiding, coloring, edges, and the selection target."""
+    model = get_remote_client.model
+    model_pd = _mesh_elbow(model, get_examples["elbow_lucid"], quadratic=False)
+    display = PrimePlotter(allow_picking=True)
+    try:
+        display.add_model_pd(model_pd)
+        # Showing rebuilds the backend widget list, so a reset has to survive that.
+        display.show(auto_close=False)
+        actor, batch = _largest_pickable_batch(display)
+        cell_counts = {
+            batch_actor: display._drawn_geometry[batch_actor].n_cells
+            for batch_actor in display._batches
+        }
+
+        _pick_first_cell(display, actor, batch)
+        assert display.selected_entity_infos
+        hide_widget = next(
+            widget for widget in display._prime_widgets() if isinstance(widget, HidePicked)
+        )
+        hide_widget.callback(True)
+        display.set_color_by_type(ColorByType.PART)
+        display.set_show_edges(False)
+        display.set_selection_target(SelectionTarget.EDGES)
+
+        display.reset_display()
+
+        assert display.selected_entity_infos == []
+        assert display._entity_labels == {}
+        assert display._hidden_entities == set()
+        assert hide_widget._hidden_entities == []
+        assert display._color_type is None
+        assert display._show_element_edges
+        assert display.selection_target == SelectionTarget.BOTH
+        assert all(
+            widget._button.GetRepresentation().GetState() == 0
+            for widget in display._prime_widgets()
+        )
+        assert all(actor.visibility for actor in display._info_actor_map)
+        for batch_actor, n_cells in cell_counts.items():
+            assert display._drawn_geometry[batch_actor].n_cells == n_cells
+    finally:
+        display.scene.close()
+
+
+def _button_center(widget):
+    """Return the display position at the middle of a toolbar button."""
+    left, bottom = widget._button_position
+    return left + BUTTON_SIZE // 2, bottom + BUTTON_SIZE // 2
+
+
+def test_button_tooltips_report_state_and_next_click(get_remote_client, get_examples):
+    """Every Prime button carries hover text naming its state and the next click."""
+    model = get_remote_client.model
+    _read_only(model, get_examples["bracket"])
+    display = PrimePlotter(allow_picking=False)
+    try:
+        display.add_model(model, update=True)
+        display.show(auto_close=False)
+
+        tooltip = display._tooltip_actor
+        assert tooltip is not None
+        assert not tooltip.GetVisibility()
+
+        widgets = display._prime_widgets()
+        assert widgets
+        for widget in widgets:
+            display._update_tooltip(*_button_center(widget))
+            assert tooltip.GetVisibility()
+            assert tooltip.GetInput() == widget.tooltip()
+
+        color = next(w for w in widgets if isinstance(w, ColorByTypeWidget))
+        representation = color._button.GetRepresentation()
+        display._update_tooltip(*_button_center(color))
+        assert "Colouring by zone" in tooltip.GetInput()
+
+        representation.SetState((representation.GetState() + 1) % len(ColorByType))
+        color.callback(True)
+
+        # The text follows the state even though the cursor has not moved.
+        assert "Colouring by zonelet" in tooltip.GetInput()
+
+        display._update_tooltip(600, 400)
+        assert not tooltip.GetVisibility()
+    finally:
+        display.scene.close()
+
+
+def test_show_edges_tooltip_offers_faceting_only_when_there_is_any(get_remote_client, get_examples):
+    """Faceting is offered for unmeshed CAD, and hiding the mesh otherwise."""
+    model = get_remote_client.model
+    _read_only(model, get_examples["elbow_lucid"])
+    display = PrimePlotter(allow_picking=False)
+    try:
+        display.add_model(model, update=True)
+        display.show(auto_close=False)
+        assert display.has_faceting
+        edges = next(w for w in display._prime_widgets() if isinstance(w, ToggleEdges))
+
+        assert edges.tooltip() == (
+            "Showing mesh edges.\nClick to show the CAD faceting of unmeshed faces."
+        )
+        display.set_show_edges(False)
+        assert edges.tooltip() == (
+            "Showing the CAD faceting of unmeshed faces.\nClick to show mesh edges."
+        )
+    finally:
+        display.scene.close()
+
+    _mesh_elbow(model, get_examples["elbow_lucid"], quadratic=False)
+    display = PrimePlotter(allow_picking=False)
+    try:
+        display.add_model(model, update=True)
+        display.show(auto_close=False)
+        assert not display.has_faceting
+        edges = next(w for w in display._prime_widgets() if isinstance(w, ToggleEdges))
+
+        assert edges.tooltip() == "Showing mesh edges.\nClick to hide mesh edges."
+        display.set_show_edges(False)
+        assert edges.tooltip() == "Mesh edges hidden.\nClick to show mesh edges."
+    finally:
+        display.scene.close()
+
+
+def test_clipping_cuts_the_view_without_altering_entities(get_remote_client, get_examples):
+    """Clipping happens in the mappers, so the model itself is untouched."""
+    model = get_remote_client.model
+    _read_only(model, get_examples["bracket"])
+    display = PrimePlotter(allow_picking=False)
+    try:
+        display.add_model(model, update=True)
+        display.show(auto_close=False)
+        assert not display.clipping
+        whole = _drawn_pixels(display)
+        cells = {actor: batch.mesh.n_cells for actor, batch in display._batches.items()}
+
+        display.set_clipping(True)
+
+        assert display.clipping
+        assert all(actor.GetMapper().GetNumberOfClippingPlanes() == 1 for actor in display._batches)
+        # The geometry is intact; only what the mapper draws has changed.
+        assert {actor: batch.mesh.n_cells for actor, batch in display._batches.items()} == cells
+        assert _drawn_pixels(display) < whole
+
+        actor, batch = _largest_pickable_batch(display)
+        assert display._pick_entity(actor, batch.mesh.cell_centers().points[0])
+        assert display.selected_entity_infos
+
+        display.set_clipping(False)
+
+        assert not display.clipping
+        assert all(actor.GetMapper().GetNumberOfClippingPlanes() == 0 for actor in display._batches)
+    finally:
+        display.scene.close()
+
+
+def test_backend_clip_slider_is_replaced(get_remote_client, get_examples):
+    """The backend slider is removed, so only the Prime clip button is offered."""
+    model = get_remote_client.model
+    _read_only(model, get_examples["bracket"])
+    display = PrimePlotter(allow_picking=False)
+    try:
+        display.add_model(model, update=True)
+        display.show(auto_close=False)
+
+        assert not any(isinstance(widget, MeshSliderWidget) for widget in display._backend._widgets)
+        assert any(isinstance(widget, ClipPlaneWidget) for widget in display._prime_widgets())
+    finally:
+        display.scene.close()
+
+
+def test_reset_display_recovers_from_clipping(get_remote_client, get_examples):
+    """Reset drops the clip plane, its widget, and the button that switched it on."""
+    model = get_remote_client.model
+    _read_only(model, get_examples["bracket"])
+    display = PrimePlotter(allow_picking=False)
+    try:
+        display.add_model(model, update=True)
+        display.show(auto_close=False)
+        clip = next(
+            widget for widget in display._prime_widgets() if isinstance(widget, ClipPlaneWidget)
+        )
+        before = _drawn_pixels(display)
+
+        clip.callback(True)
+        assert display.clipping
+        assert _drawn_pixels(display) < before
+
+        display.reset_display()
+
+        assert not display.clipping
+        assert clip._button.GetRepresentation().GetState() == 0
+        assert _drawn_pixels(display) == before
+    finally:
+        display.scene.close()
+
+
+def test_reset_display_returns_the_camera_to_the_opening_view(get_remote_client, get_examples):
+    """The camera goes back to the view captured when the model was first shown."""
+    model = get_remote_client.model
+    model_pd = _mesh_elbow(model, get_examples["elbow_lucid"], quadratic=False)
+    display = _plot_model(model_pd)
+    try:
+        display.show(auto_close=False)
+
+        # The view is only framed while showing, so the opening camera has to be
+        # taken from the first render rather than read before it.
+        opening = tuple(display.scene.camera_position)
+        assert display._initial_camera is not None
+        assert tuple(display._initial_camera) == opening
+
+        display.scene.camera_position = "xy"
+        display.scene.camera.zoom(2.5)
+        assert tuple(display.scene.camera_position) != opening
+
+        display.reset_display()
+        assert tuple(display.scene.camera_position) == opening
     finally:
         display.scene.close()
 
