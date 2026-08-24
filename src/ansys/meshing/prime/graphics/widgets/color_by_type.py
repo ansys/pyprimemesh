@@ -40,7 +40,7 @@ if TYPE_CHECKING:
 #: How each coloring mode reads in the button hover text.
 COLOR_BY_TYPE_LABELS = {
     ColorByType.ZONE: "zone",
-    ColorByType.ZONELET: "zonelet",
+    ColorByType.ZONELET: "entity",
     ColorByType.PART: "part",
     ColorByType.CONNECTIVITY: "connectivity",
 }
