@@ -101,7 +101,7 @@ class VolumeSweeper(_Sweeper):
         ----------
         part_id : int
             ID of the part.
-        base_face_ids: Iterable[int]
+        base_face_ids : Iterable[int]
             IDs of the base faces to stack.
         topo_volume_ids : Iterable[int]
             IDs of the volumes to mesh.

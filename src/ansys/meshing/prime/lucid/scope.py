@@ -1,7 +1,6 @@
 # Copyright (C) 2024 - 2026 ANSYS, Inc. and/or its affiliates.
 # SPDX-License-Identifier: MIT
 #
-#
 # Permission is hereby granted, free of charge, to any person obtaining a copy
 # of this software and associated documentation files (the "Software"), to deal
 # in the Software without restriction, including without limitation the rights
@@ -94,6 +93,15 @@ class SurfaceScope(_LucidScope):
 
     This class is meant for beginners to meshing. This class is used to define
     a scope for operation on surfaces.
+
+    Parameters
+    ----------
+    part_expression : str, default: "*"
+        Part expression to scope parts while evaluating scope.
+    entity_expression : str, default: "*"
+        Label or zone expression to scope entities while evaluating scope.
+    scope_evaluation_type : ScopeEvaluationType, default: ScopeEvaluationType.LABELS
+        Evaluation type to scope entities.
 
     """
 
@@ -231,6 +239,15 @@ class VolumeScope(_LucidScope):
 
     This class is meant for beginners to meshing. This class is used to define
     a scope for operation on volumes.
+
+    Parameters
+    ----------
+    part_expression : str, default: "*"
+        Part expression to scope parts while evaluating scope.
+    entity_expression : str, default: "*"
+        Label or zone expression to scope entities while evaluating scope.
+    scope_evaluation_type : ScopeEvaluationType, default: ScopeEvaluationType.ZONES
+        Evaluation type to scope entities.
 
     """
 
