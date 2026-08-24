@@ -66,7 +66,7 @@ import os
 import tempfile
 
 from ansys.meshing import prime
-from ansys.meshing.prime.graphics import ColorByType, PrimePlotter
+from ansys.meshing.prime.graphics.plotter import ColorByType, PrimePlotter
 
 prime_client = prime.launch_prime()
 model = prime_client.model
