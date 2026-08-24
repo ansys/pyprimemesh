@@ -40,6 +40,8 @@ class VolumeControl(_VolumeControl):
         Object id of the VolumeControl.
     name : str
         Name of the VolumeControl.
+    local : bool, default: False
+        Whether this control is local to the current session.
     """
 
     def __init__(self, model, id, object_id, name, local=False):

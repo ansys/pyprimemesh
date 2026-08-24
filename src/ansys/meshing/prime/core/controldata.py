@@ -122,7 +122,7 @@ class ControlData(_ControlData):
 
         Parameters
         ----------
-        type : SizingType
+        sizing_type : SizingType
             Sizing type for creating the size control.
 
         Returns

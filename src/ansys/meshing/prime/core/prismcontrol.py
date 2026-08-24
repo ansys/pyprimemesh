@@ -42,6 +42,8 @@ class PrismControl(_PrismControl):
         Object id of the PrismControl.
     name : str
         Name of the PrismControl.
+    local : bool, default: False
+        Whether this control is local to the current session.
     """
 
     def __init__(self, model, id, object_id, name, local=False):
