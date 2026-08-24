@@ -163,7 +163,7 @@ class PrimePlotter(Plotter):
         self._entity_labels: Dict[DisplayEntityKey, Any] = {}
         self._hidden_entities: set[DisplayEntityKey] = set()
         self._drawn_geometry: Dict[Any, pv.DataSet] = {}
-        self._color_type: Optional[ColorByType] = None
+        self._color_type: Optional[ColorByType] = ColorByType.ZONE
         self._show_element_edges = True
         self._selection_target = SelectionTarget.BOTH
         self._initial_camera = None
@@ -448,6 +448,9 @@ class PrimePlotter(Plotter):
         )
         # Geometry added while clipping is on has to be clipped as well.
         self._apply_clip_plane()
+        # Draw in the initial color mode so edges are not left on their build-time
+        # connectivity base colors.
+        self.refresh_colors()
 
     @staticmethod
     def _entries(model_pd: Dict, key: str) -> List:
@@ -1015,7 +1018,7 @@ class PrimePlotter(Plotter):
         for actor in self._info_actor_map:
             actor.visibility = True
 
-        self._color_type = None
+        self._color_type = ColorByType.ZONE
         self._show_element_edges = True
         self._selection_target = SelectionTarget.BOTH
         for actor, batch in self._batches.items():
