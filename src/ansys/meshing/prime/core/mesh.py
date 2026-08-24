@@ -234,9 +234,10 @@ class DisplayMeshInfo:
         zonelets whose outlines cannot be drawn by the face actor itself. For more
         information, see :func:`Mesh.get_face_polydata`.
     connectivity : int, default: None
-        How the entity connects to the rest of its part. For edges this is the Prime
-        topology edge type, and for faces it is the number of volumes the face bounds,
-        as classified by :class:`FaceConnectivity`. Face connectivity needs extra server
+        How the entity connects to the rest of its part. For topology edges this is
+        the Prime topology edge type, and for faces it is the number of volumes the
+        face bounds, as classified by :class:`FaceConnectivity`. Mesh edge zonelets
+        are not yet classified and stay ``None``. Face connectivity needs extra server
         queries, so it stays ``None`` until :func:`classify_face_connectivity` fills it in.
     """
 
@@ -412,10 +413,10 @@ class RenderBatch:
         np.ndarray
             RGB color of every cell.
         """
-        # Edge batches are built with connectivity colors already, so they serve both
-        # the default mode and the connectivity mode without recomputation.
-        keeps_base_colors = color_type is None or color_type == ColorByType.CONNECTIVITY
-        if keeps_base_colors and self.base_colors is not None:
+        # Base colors are only the initial display colors. Every explicit mode,
+        # including connectivity, is computed from DisplayMeshInfo so that unresolved
+        # entities show their true state rather than a stale build-time color.
+        if color_type is None and self.base_colors is not None:
             return self.base_colors.copy()
         return compute_entity_colors(
             self.infos,
@@ -750,9 +751,11 @@ def default_color_key(info: DisplayMeshInfo) -> int:
 def connectivity_color(info: DisplayMeshInfo) -> List[int]:
     """Get the color showing how a display entity connects to the rest of its part.
 
-    Edges are colored by their topology edge type, so free, double, and triple edges
-    stay visually distinct. Faces are colored by the number of volumes they bound, which
-    separates sheet bodies from the skin of a solid and from interfaces inside a part.
+    Topology edges are colored by their topology edge type, so free, double, and triple
+    edges stay visually distinct. Faces are colored by the number of volumes they bound,
+    which separates sheet bodies from the skin of a solid and from interfaces inside a
+    part. Mesh edge zonelets are not yet classified, so they are shown in the neutral
+    unknown color.
 
     Parameters
     ----------
@@ -766,7 +769,13 @@ def connectivity_color(info: DisplayMeshInfo) -> List[int]:
     """
     if info.connectivity is None:
         return list(UNKNOWN_CONNECTIVITY_COLOR)
-    if info.display_mesh_type in EDGE_DISPLAY_MESH_TYPES:
+    if info.display_mesh_type == DisplayMeshType.EDGEZONELET:
+        # Interim: mesh edge-zonelet connectivity (free/double/multiple) is not yet
+        # classified, so edge zonelets are shown in the neutral unknown color rather
+        # than an arbitrary palette color. Replace this branch once adjacency-based
+        # classification is available.
+        return list(UNKNOWN_CONNECTIVITY_COLOR)
+    if info.display_mesh_type == DisplayMeshType.TOPOEDGE:
         return list(TOPO_EDGE_TYPE_COLORS.get(info.connectivity, UNKNOWN_CONNECTIVITY_COLOR))
     capped = min(info.connectivity, int(FaceConnectivity.SHARED))
     return list(FACE_CONNECTIVITY_COLORS[FaceConnectivity(capped)])
@@ -1616,7 +1625,10 @@ class Mesh(MeshInfo):
         """
         num_colors = int(color_matrix.size / 3)
         if edge_results.topo_edge_ids[index] <= 0:
-            return color_matrix[index % num_colors].tolist()
+            # Key the default color on the stable edge-zonelet id, not the result
+            # position, so a mesh part's edges keep the same color between loads.
+            edge_zonelet_id = int(edge_results.edge_zonelet_ids[index])
+            return color_matrix[edge_zonelet_id % num_colors].tolist()
         color = TOPO_EDGE_TYPE_COLORS.get(int(edge_results.topo_edge_types[index]))
         if color is None:
             return color_matrix[edge_results.id % num_colors].tolist()
@@ -2060,6 +2072,8 @@ class Mesh(MeshInfo):
         else:
             display_mesh_type = DisplayMeshType.EDGEZONELET
             entity_id = int(edge_res.edge_zonelet_ids[index])
+            # Interim: mesh edge zonelets are left unclassified (connectivity=None),
+            # so they render in the neutral unknown color under connectivity mode.
 
         zone_ids = getattr(edge_res, "edge_zone_ids", None)
         zone_id = int(zone_ids[index]) if zone_ids is not None and len(zone_ids) > index else 0
@@ -2764,7 +2778,10 @@ class MeshUSD(MeshInfo):
         """
         num_colors = int(color_matrix.size / 3)
         if edge_results.topo_edge_ids[index] <= 0:
-            return color_matrix[index % num_colors].tolist()
+            # Key the default color on the stable edge-zonelet id, not the result
+            # position, so a mesh part's edges keep the same color between loads.
+            edge_zonelet_id = int(edge_results.edge_zonelet_ids[index])
+            return color_matrix[edge_zonelet_id % num_colors].tolist()
         color = TOPO_EDGE_TYPE_COLORS.get(int(edge_results.topo_edge_types[index]))
         if color is None:
             return color_matrix[edge_results.id % num_colors].tolist()
