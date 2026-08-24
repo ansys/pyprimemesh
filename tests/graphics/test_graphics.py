@@ -414,7 +414,9 @@ def _spaced_copies(model, file_name, copies, spacing):
         )
 
 
-def test_multiple_parts_keep_connectivity_colors_and_pick_correctly(get_remote_client, get_examples):
+def test_multiple_parts_keep_connectivity_colors_and_pick_correctly(
+    get_remote_client, get_examples
+):
     """Edge connectivity colors and picking hold up once a model has many parts."""
     model = get_remote_client.model
     _spaced_copies(model, get_examples["bracket"], copies=3, spacing=250.0)
@@ -1050,7 +1052,7 @@ def test_button_tooltips_report_state_and_next_click(get_remote_client, get_exam
         assert display._color_type == ColorByType.ZONE
 
         assert representation.GetState() == list(ColorByType).index(ColorByType.ZONE)
-        
+
         display.set_color_by_type(ColorByType.ZONELET)
         display._update_tooltip(*_button_center(color))
         assert "Colouring by entity" in tooltip.GetInput()
