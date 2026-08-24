@@ -1,7 +1,6 @@
 # Copyright (C) 2024 - 2026 ANSYS, Inc. and/or its affiliates.
 # SPDX-License-Identifier: MIT
 #
-#
 # Permission is hereby granted, free of charge, to any person obtaining a copy
 # of this software and associated documentation files (the "Software"), to deal
 # in the Software without restriction, including without limitation the rights
@@ -70,6 +69,11 @@ class Mesh:
     * Helper method for creating zones from labels
     * Helper methods for reading and writing files
 
+    Parameters
+    ----------
+    model : prime.Model
+        Model that the methods are to work on.
+
     """
 
     def __init__(self, model: prime.Model):
@@ -97,7 +101,7 @@ class Mesh:
             Ansys Design object to import geometry from.
         import_type : ImportTypes, optional
             Type of import. The default is ImportTypes.FMD.
-        append: bool, optional
+        append : bool, optional
             Append imported CAD into existing model when true.
         """
         with tempfile.TemporaryDirectory() as tmpdir:
@@ -710,7 +714,7 @@ class Mesh:
             The default is ``"*"``.
         target_face_labels : str, optional
             Name pattern of the face labels to connect. The default is ``"*"``.
-        tolerance: float, optional
+        tolerance : float, optional
             Tolerance for the connection. The default is ``0.05``.
 
         """
@@ -1477,7 +1481,7 @@ class Mesh:
         use_existing_features : bool, optional
             Whether to maintain existing features on parts. The
             default is ``False``.
-        enable_feature_octree_refinement: bool, optional
+        enable_feature_octree_refinement : bool, optional
             Whether to apply refinement to feature edges during the wrap.
             The default is ``True``.
         feature_angle : float, optional

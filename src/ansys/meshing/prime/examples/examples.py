@@ -837,7 +837,9 @@ def download_turbine_blade_cdb(
 ) -> Union[str, os.PathLike]:
     """Download the CDB file for the turbine blade example.
 
-    destination : str, os.PathLike, optional
+    Parameters
+    ----------
+    destination : str or os.PathLike, optional
         Path to download the example file to. The default
         is ``None``, in which case the default path for app data
         is used.
