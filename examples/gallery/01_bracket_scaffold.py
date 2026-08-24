@@ -66,7 +66,7 @@ import os
 import tempfile
 
 from ansys.meshing import prime
-from ansys.meshing.prime.graphics import PrimePlotter
+from ansys.meshing.prime.graphics import ColorByType, PrimePlotter
 
 prime_client = prime.launch_prime()
 model = prime_client.model
@@ -112,6 +112,7 @@ print(part_summary_res)
 
 display = PrimePlotter()
 display.add_model(model)
+display.set_color_by_type(ColorByType.CONNECTIVITY)
 display.show()
 
 ###############################################################################
@@ -158,6 +159,7 @@ surfer_result = prime.Surfer(model).mesh_topo_faces(part.id, topo_faces=faces, p
 # Display the mesh
 pl = PrimePlotter()
 pl.plot(model, update=True)
+pl.set_color_by_type(ColorByType.CONNECTIVITY)
 pl.show()
 
 ###############################################################################
