@@ -273,8 +273,8 @@ def test_cad_without_mesh_is_outlined_by_its_facets(get_remote_client, get_examp
         display.scene.close()
 
 
-def test_picking_a_face_keeps_edges_colored_by_connectivity(get_remote_client, get_examples):
-    """Selecting a face leaves edge connectivity colors untouched."""
+def test_picking_a_face_preserves_explicit_connectivity_coloring(get_remote_client, get_examples):
+    """Selecting a face leaves explicitly selected edge connectivity colors untouched."""
     model = get_remote_client.model
     part_ids = [part.id for part in model.parts]
     if part_ids:
@@ -285,6 +285,7 @@ def test_picking_a_face_keeps_edges_colored_by_connectivity(get_remote_client, g
     display = PrimePlotter(allow_picking=True)
     try:
         display.add_model(model, update=True)
+        display.set_color_by_type(ColorByType.CONNECTIVITY)
         edge_batches = [
             batch
             for batch in display._batches.values()
@@ -413,7 +414,7 @@ def _spaced_copies(model, file_name, copies, spacing):
         )
 
 
-def test_multiple_parts_keep_edge_colors_and_pick_correctly(get_remote_client, get_examples):
+def test_multiple_parts_keep_connectivity_colors_and_pick_correctly(get_remote_client, get_examples):
     """Edge connectivity colors and picking hold up once a model has many parts."""
     model = get_remote_client.model
     _spaced_copies(model, get_examples["bracket"], copies=3, spacing=250.0)
@@ -422,6 +423,7 @@ def test_multiple_parts_keep_edge_colors_and_pick_correctly(get_remote_client, g
     display = PrimePlotter(allow_picking=True)
     try:
         display.add_model(model, update=True)
+        display.set_color_by_type(ColorByType.CONNECTIVITY)
 
         edge_parts = set()
         for _, batch in _batches_of_types(display, EDGE_DISPLAY_MESH_TYPES):
@@ -966,6 +968,7 @@ def test_reset_display_restores_the_opening_state(get_remote_client, get_example
     display = PrimePlotter(allow_picking=True)
     try:
         display.add_model_pd(model_pd)
+        assert display.selection_target == SelectionTarget.FACES
         # Showing rebuilds the backend widget list, so a reset has to survive that.
         display.show(auto_close=False)
         actor, batch = _largest_pickable_batch(display)
@@ -990,9 +993,9 @@ def test_reset_display_restores_the_opening_state(get_remote_client, get_example
         assert display._entity_labels == {}
         assert display._hidden_entities == set()
         assert hide_widget._hidden_entities == []
-        assert display._color_type is None
+        assert display._color_type == ColorByType.ZONE
         assert display._show_element_edges
-        assert display.selection_target == SelectionTarget.BOTH
+        assert display.selection_target == SelectionTarget.FACES
         assert all(
             widget._button.GetRepresentation().GetState() == 0
             for widget in display._prime_widgets()
@@ -1044,12 +1047,13 @@ def test_button_tooltips_report_state_and_next_click(get_remote_client, get_exam
         representation = color._button.GetRepresentation()
         display._update_tooltip(*_button_center(color))
         assert "Colouring by zone" in tooltip.GetInput()
+        assert display._color_type == ColorByType.ZONE
 
-        representation.SetState((representation.GetState() + 1) % len(ColorByType))
-        color.callback(True)
-
-        # The text follows the state even though the cursor has not moved.
-        assert "Colouring by zonelet" in tooltip.GetInput()
+        assert representation.GetState() == list(ColorByType).index(ColorByType.ZONE)
+        
+        display.set_color_by_type(ColorByType.ZONELET)
+        display._update_tooltip(*_button_center(color))
+        assert "Colouring by entity" in tooltip.GetInput()
 
         display._update_tooltip(600, 400)
         assert not tooltip.GetVisibility()
