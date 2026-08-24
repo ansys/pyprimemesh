@@ -102,12 +102,12 @@ class SelectionTargetWidget(ToolbarButton, PlotterWidget):
             f"Click to select {SELECTION_TARGET_LABELS[following]}."
         )
 
-    def update(self, target: SelectionTarget = SelectionTarget.BOTH) -> None:
+    def update(self, target: SelectionTarget = SelectionTarget.FACES) -> None:
         """Configure the widget icon.
 
         Parameters
         ----------
-        target : SelectionTarget, default: SelectionTarget.BOTH
+        target : SelectionTarget, default: SelectionTarget.FACES
             Active selection target.
         """
         representation = self._button.GetRepresentation()
