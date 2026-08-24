@@ -366,6 +366,7 @@ def test_edges_can_be_picked(get_remote_client, get_examples):
     display = PrimePlotter(allow_picking=True)
     try:
         display.add_model(model, update=True)
+        display.set_selection_target(SelectionTarget.EDGES)
         edges = _batches_of_types(display, EDGE_DISPLAY_MESH_TYPES)
         assert edges
         actor, batch = edges[0]
