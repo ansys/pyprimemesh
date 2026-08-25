@@ -108,6 +108,9 @@ def get_examples():
     elbow_lucid = prime.examples.download_elbow_pmdat()
     examples_dict["elbow_lucid"] = elbow_lucid
 
+    elbow_fmd = prime.examples.download_elbow_fmd()
+    examples_dict["elbow_fmd"] = elbow_fmd
+
     toy_car = prime.examples.download_toy_car_pmdat()
     examples_dict["toy_car"] = toy_car
 

@@ -19,31 +19,30 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
-"""This module contains the HidePicked class."""
+"""Module for the ResetDisplay widget."""
 
 import os
-from typing import TYPE_CHECKING, List
+from typing import TYPE_CHECKING
 
 from ansys.tools.visualization_interface.backends.pyvista.widgets import PlotterWidget
 from vtk import vtkPNGReader
 
-from ansys.meshing.prime.core.mesh import DisplayEntityKey
 from ansys.meshing.prime.graphics.widgets.toolbar import ToolbarButton
 
 if TYPE_CHECKING:
     from ansys.meshing.prime.graphics.plotter import PrimePlotter
 
 
-class HidePicked(ToolbarButton, PlotterWidget):
-    """Hide or restore currently selected Prime display entities.
+class ResetDisplay(ToolbarButton, PlotterWidget):
+    """Return the display to how the model was first drawn.
 
-    Selection is tracked using DisplayEntityKey so identical entity IDs in
-    different parts remain independent.
+    The button clears selections, restores hidden entities, drops any clip plane,
+    and returns the camera to its opening view without discarding the geometry.
 
     Parameters
     ----------
     prime_plotter : PrimePlotter
-        Plotter whose selected entities the widget hides and restores.
+        Plotter the widget resets.
     """
 
     def __init__(self, prime_plotter: "PrimePlotter") -> None:
@@ -52,70 +51,42 @@ class HidePicked(ToolbarButton, PlotterWidget):
 
         self.prime_plotter = prime_plotter
 
-        self._button = self._add_button((5, 660), color_off="white", color_on="white")
-
-        self._hidden_entities: List[DisplayEntityKey] = []
+        self._button = self._add_button((5, 690), color_off="white", color_on="white")
 
     def callback(self, state: bool) -> None:
-        """Hide or restore the currently selected entities.
+        """Reset the display.
 
         Parameters
         ----------
         state : bool
-            State of the checkbox widget.
+            Checkbox widget state. Unused, because a reset is an action rather
+            than a mode, so both button states do the same thing.
         """
-        if state:
-            hidden_entities = []
-            seen = set()
+        del state
 
-            for info in self.prime_plotter.selected_entity_infos:
-                key = info.key
-
-                if key in seen:
-                    continue
-
-                seen.add(key)
-                hidden_entities.append(key)
-
-            self._hidden_entities = hidden_entities
-
-            if self._hidden_entities:
-                self.prime_plotter.set_entities_visible(
-                    self._hidden_entities,
-                    False,
-                )
-
-        else:
-            if self._hidden_entities:
-                self.prime_plotter.set_entities_visible(
-                    self._hidden_entities,
-                    True,
-                )
-
-            self._hidden_entities = []
-
-        self.prime_plotter.refresh_tooltips()
+        self.prime_plotter.reset_display()
 
     def tooltip(self) -> str:
-        """Return hover text naming what the next click hides or restores.
+        """Return hover text describing what a click restores.
 
         Returns
         -------
         str
-            Description of the current and next visibility state.
+            Description of the reset action.
         """
-        if self._hidden_entities:
-            return f"{len(self._hidden_entities)} entities hidden.\nClick to restore them."
-        return "Selected entities are visible.\nClick to hide the selection."
+        return (
+            "Click to reset the display to how the model opened.\n"
+            "Clears the selection, hiding, colouring, clipping and the camera."
+        )
 
     def update(self) -> None:
-        """Configure the button appearance."""
+        """Configure the widget icon."""
         representation = self._button.GetRepresentation()
 
         icon_file = os.path.join(
             os.path.dirname(__file__),
             "images",
-            "invert_visibility.png",
+            "reset_display.png",
         )
 
         reader = vtkPNGReader()
@@ -128,12 +99,6 @@ class HidePicked(ToolbarButton, PlotterWidget):
         representation.SetButtonTexture(1, image)
 
     def reset(self) -> None:
-        """Return the widget to its unpressed state without restoring twice.
-
-        The plotter unhides everything itself, so the widget only forgets what it
-        was holding.
-        """
+        """Return the widget to its unpressed state without calling back."""
         self._button.GetRepresentation().SetState(0)
-        self._hidden_entities = []
         self.update()
-        self.prime_plotter.refresh_tooltips()

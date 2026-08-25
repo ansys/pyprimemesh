@@ -19,7 +19,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
-"""Module for ColorByTypeWidget."""
+"""Module for the SelectionTargetWidget widget."""
 
 import os
 from typing import TYPE_CHECKING
@@ -27,36 +27,31 @@ from typing import TYPE_CHECKING
 from ansys.tools.visualization_interface.backends.pyvista.widgets import PlotterWidget
 from vtk import vtkPNGReader
 
-from ansys.meshing.prime.core.mesh import (
-    ColorByType,
-    DisplayMeshInfo,
-    entity_color,
-)
+from ansys.meshing.prime.core.mesh import SelectionTarget
 from ansys.meshing.prime.graphics.widgets.toolbar import ToolbarButton
 
 if TYPE_CHECKING:
     from ansys.meshing.prime.graphics.plotter import PrimePlotter
 
-#: How each coloring mode reads in the button hover text.
-COLOR_BY_TYPE_LABELS = {
-    ColorByType.ZONE: "zone",
-    ColorByType.ZONELET: "entity",
-    ColorByType.PART: "part",
-    ColorByType.CONNECTIVITY: "connectivity",
+#: How each selection target reads in the button hover text.
+SELECTION_TARGET_LABELS = {
+    SelectionTarget.BOTH: "faces and edges",
+    SelectionTarget.FACES: "faces only",
+    SelectionTarget.EDGES: "edges only",
 }
 
 
-class ColorByTypeWidget(ToolbarButton, PlotterWidget):
-    """Widget controlling entity coloring mode.
+class SelectionTargetWidget(ToolbarButton, PlotterWidget):
+    """Choose whether picking selects faces, edges, or both.
 
-    The plotter maintains actor-per-entity-type rendering and recolors
-    entities using per-cell metadata. This widget only changes the active
-    coloring mode.
+    Narrowing the target only changes what the next click can hit. Entities that
+    are already selected stay selected, so faces and edges can be collected
+    together by switching the target between picks.
 
     Parameters
     ----------
     prime_plotter : PrimePlotter
-        Plotter whose coloring mode the widget controls.
+        Plotter whose selection target the widget controls.
     """
 
     def __init__(self, prime_plotter: "PrimePlotter") -> None:
@@ -65,58 +60,55 @@ class ColorByTypeWidget(ToolbarButton, PlotterWidget):
 
         self.prime_plotter = prime_plotter
 
-        self._button = self._add_button((5, 630))
+        self._button = self._add_button((5, 540), color_off="white", color_on="white")
 
-        self._button.GetRepresentation().SetNumberOfStates(len(ColorByType))
+        self._button.GetRepresentation().SetNumberOfStates(len(SelectionTarget))
 
-        self._color_type = ColorByType.ZONE
+        self._target = SelectionTarget.FACES
 
     def callback(self, state) -> None:
-        """Apply the selected coloring mode.
+        """Apply the selected target.
 
         Parameters
         ----------
         state : bool
-            Checkbox widget state. Unused, because the mode is read from the
+            Checkbox widget state. Unused, because the target is read from the
             button, which cycles through more than two states.
         """
         del state
 
-        color_type = ColorByType(self._button.GetRepresentation().GetState())
+        target = SelectionTarget(self._button.GetRepresentation().GetState())
 
-        self._color_type = color_type
+        self._target = target
 
-        self.prime_plotter.set_color_by_type(color_type)
+        self.prime_plotter.set_selection_target(target)
 
-        self.update(color_type)
+        self.update(target)
 
         self.prime_plotter.refresh_tooltips()
 
     def tooltip(self) -> str:
-        """Return hover text naming the coloring and what the next click applies.
+        """Return hover text naming the target and what the next click selects.
 
         Returns
         -------
         str
-            Description of the current and next coloring mode.
+            Description of the current and next selection target.
         """
-        current = ColorByType(self._button.GetRepresentation().GetState())
-        following = ColorByType((int(current) + 1) % len(ColorByType))
+        current = SelectionTarget(self._button.GetRepresentation().GetState())
+        following = SelectionTarget((int(current) + 1) % len(SelectionTarget))
         return (
-            f"Colouring by {COLOR_BY_TYPE_LABELS[current]}.\n"
-            f"Click to colour by {COLOR_BY_TYPE_LABELS[following]}."
+            f"Selecting {SELECTION_TARGET_LABELS[current]}.\n"
+            f"Click to select {SELECTION_TARGET_LABELS[following]}."
         )
 
-    def update(
-        self,
-        color_type: ColorByType = ColorByType.ZONE,
-    ) -> None:
-        """Update the widget icon.
+    def update(self, target: SelectionTarget = SelectionTarget.FACES) -> None:
+        """Configure the widget icon.
 
         Parameters
         ----------
-        color_type : ColorByType, default: ColorByType.ZONE
-            Active coloring mode.
+        target : SelectionTarget, default: SelectionTarget.FACES
+            Active selection target.
         """
         representation = self._button.GetRepresentation()
 
@@ -126,15 +118,14 @@ class ColorByTypeWidget(ToolbarButton, PlotterWidget):
         )
 
         image_map = {
-            ColorByType.ZONE: "bin.png",
-            ColorByType.ZONELET: "surface_body.png",
-            ColorByType.PART: "parts.png",
-            ColorByType.CONNECTIVITY: "connectivity.png",
+            SelectionTarget.BOTH: "select_both.png",
+            SelectionTarget.FACES: "select_faces.png",
+            SelectionTarget.EDGES: "select_edges.png",
         }
 
         icon_file = os.path.join(
             image_dir,
-            image_map[color_type],
+            image_map[target],
         )
 
         reader = vtkPNGReader()
@@ -143,36 +134,12 @@ class ColorByTypeWidget(ToolbarButton, PlotterWidget):
 
         image = reader.GetOutput()
 
-        for state in range(len(ColorByType)):
+        for state in range(len(SelectionTarget)):
             representation.SetButtonTexture(state, image)
 
     def reset(self) -> None:
         """Return the widget to its unpressed state without calling back."""
         self._button.GetRepresentation().SetState(0)
-        self._color_type = ColorByType.ZONE
-        self.update(ColorByType.ZONE)
+        self._target = SelectionTarget.FACES
+        self.update(SelectionTarget.FACES)
         self.prime_plotter.refresh_tooltips()
-
-    @staticmethod
-    def set_color_by_type(
-        color_type: ColorByType,
-        mesh_info: DisplayMeshInfo,
-    ):
-        """Return the RGB color for a display entity.
-
-        Parameters
-        ----------
-        color_type : ColorByType
-            Active coloring mode.
-        mesh_info : DisplayMeshInfo
-            Entity metadata.
-
-        Returns
-        -------
-        List[int]
-            RGB color.
-        """
-        return entity_color(
-            mesh_info,
-            color_type,
-        ).tolist()

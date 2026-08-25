@@ -51,7 +51,7 @@ nine visualization stages:
 8. **Per-element face coloring** — individual mesh face cells colored uniquely
    via ``cell_data`` scalars
 9. **ColorByType modes** — reading and meshing structural parts, then coloring
-   the same model by ZONE, ZONELET, and PART through ``set_color_by_type()``
+   the same model by ZONE, ZONELET, PART and CONNECTIVITY through ``set_color_by_type()``
 
 Key data model concepts demonstrated:
 
@@ -70,7 +70,7 @@ Key data model concepts demonstrated:
   ``Part.get_face_zones()`` / ``Part.get_volume_zones()``
 - **Edge type colors**: edges carry type-based RGB data in their ``"colors"``
   array (red, black, cyan, magenta, yellow, purple by edge type)
-- **ColorByType**: ``set_color_by_type()`` recolors by ZONE, ZONELET, or PART;
+- **ColorByType**: ``set_color_by_type()`` recolors by ZONE, ZONELET, PART or CONNECTIVITY;
   the built-in ``ColorByTypeWidget`` cycles between them
 - **Polydata access**: ``model.as_polydata()`` returns a dict keyed by part ID
   with ``"faces"`` (tuples of ``MeshObjectPlot, DisplayMeshInfo``),
@@ -572,10 +572,10 @@ plotter.add_text(
 plotter.show(title="Plot 8 \u2014 Per-Element Face Colors")
 
 ###############################################################################
-# Plot 9: ColorByType MODES (ZONE / ZONELET / PART)
-# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+# Plot 9: ColorByType MODES (ZONE / ZONELET / PART / CONNECTIVITY)
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 # Demonstrates:
-#   - ColorByType enum (ZONE, ZONELET, PART) for different coloring strategies
+#   - ColorByType enum (ZONE, ZONELET, PART, CONNECTIVITY) for different coloring strategies
 #   - set_color_by_type() recoloring the shared actors without rebuilding them
 #   - The same path used by the built-in ColorByType widget
 
@@ -589,7 +589,12 @@ mesh_util.volume_mesh()
 # For reference after the structural parts are meshed the model contains:
 print(model)
 
-for color_mode in [ColorByType.ZONE, ColorByType.ZONELET, ColorByType.PART]:
+for color_mode in [
+    ColorByType.ZONE,
+    ColorByType.ZONELET,
+    ColorByType.PART,
+    ColorByType.CONNECTIVITY,
+]:
     plotter = PrimePlotter()
     plotter.plot(model, update=True)
     plotter.set_color_by_type(color_mode)
