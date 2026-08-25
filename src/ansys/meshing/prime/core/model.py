@@ -481,6 +481,56 @@ class Model(_Model):
             self._model_pv_mesh = Mesh(self)
         return self._model_pv_mesh.as_polydata(update=update)
 
+    def build_render_data(self, update: bool = False):
+        """Build merged render geometry for :class:`PrimePlotter`.
+
+        Parameters
+        ----------
+        update : bool, optional
+            Rebuild even when cached data is present, by default False.
+
+        Returns
+        -------
+        ModelRenderData
+            Model-wide render geometry grouped by entity type.
+        """
+        try:
+            from ansys.meshing.prime.core.mesh import Mesh
+        except ImportError:
+            raise ImportError(
+                "Please install optional dependencies to use visualization features:"
+                + "pip install ansys-meshing-prime[all]"
+            )
+        if self._model_pv_mesh is None or update:
+            self._model_pv_mesh = Mesh(self)
+        return self._model_pv_mesh.build_render_data(update=update)
+
+    def get_scoped_render_data(self, scope, update: bool = False):
+        """Build merged render geometry for a scope.
+
+        Parameters
+        ----------
+        scope : Scope
+            Scope of the model.
+        update : bool, optional
+            Rebuild even when cached data is present, by default False.
+
+        Returns
+        -------
+        ModelRenderData
+            Scoped model-wide render geometry.
+        """
+        try:
+            from ansys.meshing.prime.core.mesh import Mesh
+        except ImportError:
+            raise ImportError(
+                "Please install optional dependencies to use visualization features:"
+                + "pip install ansys-meshing-prime[all]"
+            )
+        if self._model_pv_mesh is None or update:
+            self._model_pv_mesh = Mesh(self)
+        return self._model_pv_mesh.get_scoped_render_data(scope, update=update)
+
     def get_scoped_polydata(self, scope, update: bool = False):
         """Get the scoped polydata of the model.
 
@@ -488,6 +538,8 @@ class Model(_Model):
         ----------
         scope : Scope
             Scope of the model.
+        update : bool, default: False
+            Whether to rebuild the geometry rather than reuse what is cached.
 
         Returns
         -------
@@ -527,10 +579,10 @@ class Model(_Model):
 
         Examples
         --------
-            >>> usd_geom = model.as_usd()
-            >>> for part_id, geoms in usd_geom.items():
-            ...     for face_geom in geoms.get("faces", []):
-            ...         print(face_geom.mesh_id, face_geom.color)
+        >>> usd_geom = model.as_usd()
+        >>> for part_id, geoms in usd_geom.items():
+        ...     for face_geom in geoms.get("faces", []):
+        ...         print(face_geom.mesh_id, face_geom.color)
         """
         try:
             from ansys.meshing.prime.core.mesh import MeshUSD
@@ -561,7 +613,7 @@ class Model(_Model):
 
         Examples
         --------
-            >>> scoped_usd = model.get_scoped_usd(scope)
+        >>> scoped_usd = model.get_scoped_usd(scope)
         """
         try:
             from ansys.meshing.prime.core.mesh import MeshUSD
