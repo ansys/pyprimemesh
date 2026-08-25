@@ -165,7 +165,7 @@ class PrimePlotter(Plotter):
         self._drawn_geometry: Dict[Any, pv.DataSet] = {}
         self._color_type: Optional[ColorByType] = ColorByType.ZONE
         self._show_element_edges = True
-        self._selection_target = SelectionTarget.BOTH
+        self._selection_target = SelectionTarget.FACES
         self._initial_camera = None
         self._camera_observer = None
         self._tooltip_actor = None
@@ -542,6 +542,11 @@ class PrimePlotter(Plotter):
         self._drawn_geometry[actor] = batch.mesh
         for info in batch.infos.values():
             self._entity_infos[info.key] = info
+        # New actors default to fully pickable, so the current selection target has
+        # to be reapplied or an out-of-scope display entity type (usually edges,
+        # which visually sit in front of faces) would still be pickable in VTK.
+        selectable = selectable_display_types(self._selection_target)
+        actor.SetPickable(bool(batch.pickable and batch.display_mesh_type in selectable))
 
     def _add_face_batches(self, face_entries: Sequence) -> None:
         """Add at most one shaded actor for each face entity type."""
@@ -788,6 +793,7 @@ class PrimePlotter(Plotter):
         for actor, info in self._info_actor_map.items():
             actor.prop.color = entity_color(info, self._color_type).tolist()
         self.refresh_colors()
+        self._sync_widget_state(ColorByTypeWidget, "_color_type", self._color_type)
 
     @property
     def selected_entity_infos(self) -> List[DisplayMeshInfo]:
@@ -839,6 +845,33 @@ class PrimePlotter(Plotter):
             # in front of the edge the user is aiming at.
             actor.SetPickable(bool(batch.pickable and batch.display_mesh_type in selectable))
         self.render()
+        self._sync_widget_state(SelectionTargetWidget, "_target", self._selection_target)
+
+    def _sync_widget_state(self, widget_cls: type, attribute: str, value) -> None:
+        """Keep a toolbar button in step with state changed through the script API.
+
+        A button normally advances its own representation state on a click, which
+        is what :meth:`~ToolbarButton.tooltip` and its icon read back. Calling the
+        equivalent setter from a script bypasses that click, so the button is
+        brought into line here instead.
+
+        Parameters
+        ----------
+        widget_cls : type
+            Class of the toolbar button to update.
+        attribute : str
+            Name of the attribute the widget uses to track its own state.
+        value : Any
+            New state, as an ``IntEnum`` member matching the button representation
+            state it corresponds to.
+        """
+        widget = next((w for w in self._prime_widget_list if isinstance(w, widget_cls)), None)
+        if widget is None:
+            return
+        widget._button.GetRepresentation().SetState(int(value))
+        setattr(widget, attribute, value)
+        widget.update(value)
+        self.refresh_tooltips()
 
     def _normalise_entity_keys(self, entities: Iterable) -> set[DisplayEntityKey]:
         """Normalize entity keys while retaining limited ID compatibility."""
@@ -1020,9 +1053,10 @@ class PrimePlotter(Plotter):
 
         self._color_type = ColorByType.ZONE
         self._show_element_edges = True
-        self._selection_target = SelectionTarget.BOTH
+        self._selection_target = SelectionTarget.FACES
+        selectable = selectable_display_types(self._selection_target)
         for actor, batch in self._batches.items():
-            actor.SetPickable(bool(batch.pickable))
+            actor.SetPickable(bool(batch.pickable and batch.display_mesh_type in selectable))
 
         self._remove_clipping()
         self._reset_widget_buttons()

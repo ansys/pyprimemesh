@@ -82,12 +82,13 @@ class DisplayMeshType(enum.IntEnum):
 class SelectionTarget(enum.IntEnum):
     """Which kinds of display entity respond to picking."""
 
-    #: Faces and edges are both selectable.
-    BOTH = 0
     #: Only faces are selectable, so an edge in front of a face is clicked through.
-    FACES = 1
+    #: This is the opening state, matching the unpressed (state 0) selection button.
+    FACES = 0
     #: Only edges are selectable, so a face never shadows the edge behind it.
-    EDGES = 2
+    EDGES = 1
+    #: Faces and edges are both selectable.
+    BOTH = 2
 
 
 class FaceConnectivity(enum.IntEnum):
@@ -314,7 +315,13 @@ class RenderBatch:
         self.infos = dict(infos)
         self.display_mesh_type = DisplayMeshType(display_mesh_type)
         self.pickable = bool(pickable)
-        self.base_colors = None if base_colors is None else np.asarray(base_colors, dtype=np.uint8)
+        # A plain np.asarray would return the same object, rather than copy, when the
+        # source is already a uint8 ndarray. That includes a pyvista_ndarray backed by
+        # the mesh's own cell data, so writing recolored cells back onto the mesh would
+        # silently corrupt this snapshot too. An explicit copy keeps it independent.
+        self.base_colors = (
+            None if base_colors is None else np.array(base_colors, dtype=np.uint8, copy=True)
+        )
         self._validate()
 
     def _validate(self) -> None:
@@ -415,8 +422,11 @@ class RenderBatch:
         """
         # Base colors are only the initial display colors. Every explicit mode,
         # including connectivity, is computed from DisplayMeshInfo so that unresolved
-        # entities show their true state rather than a stale build-time color.
-        if color_type is None and self.base_colors is not None:
+        # entities show their true state rather than a stale build-time color. ZONE is
+        # the opening color mode (unpressed button state), so it is treated the same as
+        # no mode being active yet: batches with their own build-time colors keep them
+        # rather than being recolored by zone ID.
+        if color_type in (None, ColorByType.ZONE) and self.base_colors is not None:
             return self.base_colors.copy()
         return compute_entity_colors(
             self.infos,

@@ -52,7 +52,7 @@ class ClipPlaneWidget(ToolbarButton, PlotterWidget):
 
         self.prime_plotter = prime_plotter
 
-        self._button = self._add_button((5, 510), color_off="white", color_on="white")
+        self._button = self._add_button((37, 130), color_off="white", color_on="white")
 
     def callback(self, state: bool) -> None:
         """Turn clipping on or off.

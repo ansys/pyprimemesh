@@ -64,7 +64,7 @@ class SelectionTargetWidget(ToolbarButton, PlotterWidget):
 
         self._button.GetRepresentation().SetNumberOfStates(len(SelectionTarget))
 
-        self._target = SelectionTarget.BOTH
+        self._target = SelectionTarget.FACES
 
     def callback(self, state) -> None:
         """Apply the selected target.
@@ -140,6 +140,6 @@ class SelectionTargetWidget(ToolbarButton, PlotterWidget):
     def reset(self) -> None:
         """Return the widget to its unpressed state without calling back."""
         self._button.GetRepresentation().SetState(0)
-        self._target = SelectionTarget.BOTH
-        self.update(SelectionTarget.BOTH)
+        self._target = SelectionTarget.FACES
+        self.update(SelectionTarget.FACES)
         self.prime_plotter.refresh_tooltips()
