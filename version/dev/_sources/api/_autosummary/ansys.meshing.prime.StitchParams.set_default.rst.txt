@@ -1,0 +1,11 @@
+set\_default
+============
+
+.. currentmodule:: ansys.meshing.prime
+
+.. automethod:: ansys.meshing.prime.StitchParams.set_default
+
+.. minigallery::
+   :add-heading: Examples using StitchParams.set_default
+
+   ansys.meshing.prime.StitchParams.set_default

@@ -1,0 +1,6 @@
+shell\_thickness
+================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoproperty:: IGAUnstructuredSplineSurf.shell_thickness

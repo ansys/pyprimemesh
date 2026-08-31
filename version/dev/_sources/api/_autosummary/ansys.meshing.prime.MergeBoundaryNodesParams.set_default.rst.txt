@@ -1,0 +1,11 @@
+set\_default
+============
+
+.. currentmodule:: ansys.meshing.prime
+
+.. automethod:: ansys.meshing.prime.MergeBoundaryNodesParams.set_default
+
+.. minigallery::
+   :add-heading: Examples using MergeBoundaryNodesParams.set_default
+
+   ansys.meshing.prime.MergeBoundaryNodesParams.set_default

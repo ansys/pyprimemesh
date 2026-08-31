@@ -1,0 +1,6 @@
+﻿inflate\_dihedral\_face\_nodes
+==============================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoproperty:: WrapperImproveQualityParams.inflate_dihedral_face_nodes

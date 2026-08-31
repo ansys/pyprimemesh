@@ -1,0 +1,6 @@
+STITCHWITHPRESERVEDENTITIESFAILED
+=================================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoattribute:: ErrorCode.STITCHWITHPRESERVEDENTITIESFAILED

@@ -1,0 +1,6 @@
+IGNORE
+======
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoattribute:: SplineFeatureCaptureType.IGNORE

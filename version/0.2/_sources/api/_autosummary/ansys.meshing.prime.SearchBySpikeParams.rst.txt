@@ -1,0 +1,30 @@
+SearchBySpikeParams
+===================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoclass:: SearchBySpikeParams
+   
+   
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+      :toctree:
+   
+      
+      SearchBySpikeParams.print_default
+      SearchBySpikeParams.set_default
+   
+   
+
+   
+   
+   .. rubric:: Attributes
+
+   .. autosummary::
+      :toctree:
+   
+      SearchBySpikeParams.spike_angle
+   
+   

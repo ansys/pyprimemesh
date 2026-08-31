@@ -1,0 +1,32 @@
+.. vale off
+
+SearchInfoByRegisterIdParams
+============================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoclass:: SearchInfoByRegisterIdParams
+   
+   
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+      :toctree:
+   
+      
+      SearchInfoByRegisterIdParams.print_default
+      SearchInfoByRegisterIdParams.set_default
+   
+   
+
+   
+   
+   
+
+.. minigallery::
+    :add-heading: Examples using SearchInfoByRegisterIdParams
+
+    ansys.meshing.prime.SearchInfoByRegisterIdParams
+
+.. vale on

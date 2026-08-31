@@ -1,0 +1,6 @@
+set\_thin\_volume\_mesh\_params
+===============================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. automethod:: ThinVolumeControl.set_thin_volume_mesh_params

@@ -1,0 +1,30 @@
+PrismParams
+===========
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoclass:: PrismParams
+   
+   
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+      :toctree:
+   
+      
+      PrismParams.print_default
+      PrismParams.set_default
+   
+   
+
+   
+   
+   .. rubric:: Attributes
+
+   .. autosummary::
+      :toctree:
+   
+      PrismParams.no_imprint_zonelets
+   
+   

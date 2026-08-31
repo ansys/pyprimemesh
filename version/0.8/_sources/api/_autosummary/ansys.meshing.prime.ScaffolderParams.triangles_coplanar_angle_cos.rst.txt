@@ -1,0 +1,6 @@
+triangles\_coplanar\_angle\_cos
+===============================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoproperty:: ScaffolderParams.triangles_coplanar_angle_cos

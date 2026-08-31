@@ -1,0 +1,11 @@
+conjugate
+=========
+
+.. currentmodule:: ansys.meshing.prime
+
+.. automethod:: ansys.meshing.prime.CellQualityMeasure.conjugate
+
+.. minigallery::
+   :add-heading: Examples using CellQualityMeasure.conjugate
+
+   ansys.meshing.prime.CellQualityMeasure.conjugate

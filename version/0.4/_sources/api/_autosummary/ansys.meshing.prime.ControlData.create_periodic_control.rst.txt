@@ -1,0 +1,6 @@
+﻿create\_periodic\_control
+=========================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. automethod:: ControlData.create_periodic_control

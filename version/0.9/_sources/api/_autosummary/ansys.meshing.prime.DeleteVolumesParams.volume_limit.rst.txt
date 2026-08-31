@@ -1,0 +1,6 @@
+volume\_limit
+=============
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoproperty:: DeleteVolumesParams.volume_limit

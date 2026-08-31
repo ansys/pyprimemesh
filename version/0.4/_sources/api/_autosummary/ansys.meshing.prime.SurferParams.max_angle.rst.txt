@@ -1,0 +1,6 @@
+﻿max\_angle
+==========
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoproperty:: SurferParams.max_angle

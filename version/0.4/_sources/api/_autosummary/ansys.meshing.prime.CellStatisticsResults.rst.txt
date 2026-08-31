@@ -1,0 +1,35 @@
+.. vale off
+
+CellStatisticsResults
+=====================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoclass:: CellStatisticsResults
+   
+   
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+      :toctree:
+   
+      
+      CellStatisticsResults.print_default
+      CellStatisticsResults.set_default
+   
+   
+
+   
+   
+   .. rubric:: Attributes
+
+   .. autosummary::
+      :toctree:
+   
+      CellStatisticsResults.error_code
+      CellStatisticsResults.volume
+   
+   
+
+.. vale on

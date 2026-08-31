@@ -1,0 +1,6 @@
+﻿mesh\_face\_ids
+===============
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoproperty:: FaceConnectivityResults.mesh_face_ids

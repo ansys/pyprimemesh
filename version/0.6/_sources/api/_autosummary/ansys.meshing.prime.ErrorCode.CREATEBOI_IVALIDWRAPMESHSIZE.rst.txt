@@ -1,0 +1,6 @@
+CREATEBOI\_IVALIDWRAPMESHSIZE
+=============================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoattribute:: ErrorCode.CREATEBOI_IVALIDWRAPMESHSIZE

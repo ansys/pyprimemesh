@@ -1,0 +1,33 @@
+FaceAndEdgeConnectivityResults
+==============================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoclass:: FaceAndEdgeConnectivityResults
+   
+   
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+      :toctree:
+   
+      
+      FaceAndEdgeConnectivityResults.print_default
+      FaceAndEdgeConnectivityResults.set_default
+   
+   
+
+   
+   
+   .. rubric:: Attributes
+
+   .. autosummary::
+      :toctree:
+   
+      FaceAndEdgeConnectivityResults.edge_connectivity_result_per_part
+      FaceAndEdgeConnectivityResults.error_code
+      FaceAndEdgeConnectivityResults.face_connectivity_result_per_part
+      FaceAndEdgeConnectivityResults.part_ids
+   
+   

@@ -1,0 +1,6 @@
+﻿has\_left\_handed\_faces
+========================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoproperty:: CheckMeshResults.has_left_handed_faces

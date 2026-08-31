@@ -1,0 +1,6 @@
+AITOVERLAPALONGMULTIFOUND
+=========================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoattribute:: ErrorCode.AITOVERLAPALONGMULTIFOUND

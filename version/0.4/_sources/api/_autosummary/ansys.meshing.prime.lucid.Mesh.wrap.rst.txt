@@ -1,0 +1,6 @@
+﻿wrap
+====
+
+.. currentmodule:: ansys.meshing.prime.lucid
+
+.. automethod:: Mesh.wrap

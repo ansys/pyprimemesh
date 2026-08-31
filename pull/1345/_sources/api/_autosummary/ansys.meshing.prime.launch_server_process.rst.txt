@@ -1,0 +1,11 @@
+launch\_server\_process
+=======================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autofunction:: ansys.meshing.prime.launch_server_process
+
+.. minigallery::
+    :add-heading: Examples using launch_server_process
+
+    ansys.meshing.prime.launch_server_process

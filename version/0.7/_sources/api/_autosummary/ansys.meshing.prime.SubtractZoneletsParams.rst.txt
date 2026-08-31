@@ -1,0 +1,41 @@
+.. vale off
+
+SubtractZoneletsParams
+======================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoclass:: SubtractZoneletsParams
+   
+   
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+      :toctree:
+   
+      
+      SubtractZoneletsParams.print_default
+      SubtractZoneletsParams.set_default
+   
+   
+
+   
+   
+   .. rubric:: Attributes
+
+   .. autosummary::
+      :toctree:
+   
+      SubtractZoneletsParams.extract_edges
+      SubtractZoneletsParams.retain_cutter
+      SubtractZoneletsParams.trace_edges
+   
+   
+
+.. minigallery::
+    :add-heading: Examples using SubtractZoneletsParams
+
+    ansys.meshing.prime.SubtractZoneletsParams
+
+.. vale on

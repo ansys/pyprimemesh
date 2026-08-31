@@ -1,0 +1,11 @@
+delete\_mesh\_on\_topo\_faces
+=============================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. automethod:: ansys.meshing.prime.TopoData.delete_mesh_on_topo_faces
+
+.. minigallery::
+   :add-heading: Examples using TopoData.delete_mesh_on_topo_faces
+
+   ansys.meshing.prime.TopoData.delete_mesh_on_topo_faces

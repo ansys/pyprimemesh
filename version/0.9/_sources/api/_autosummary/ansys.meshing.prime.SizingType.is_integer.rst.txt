@@ -1,0 +1,11 @@
+is\_integer
+===========
+
+.. currentmodule:: ansys.meshing.prime
+
+.. automethod:: ansys.meshing.prime.SizingType.is_integer
+
+.. minigallery::
+   :add-heading: Examples using SizingType.is_integer
+
+   ansys.meshing.prime.SizingType.is_integer

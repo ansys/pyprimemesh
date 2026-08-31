@@ -1,0 +1,11 @@
+get\_labels\_on\_zonelet
+========================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. automethod:: ansys.meshing.prime.Part.get_labels_on_zonelet
+
+.. minigallery::
+   :add-heading: Examples using Part.get_labels_on_zonelet
+
+   ansys.meshing.prime.Part.get_labels_on_zonelet

@@ -1,0 +1,6 @@
+get\_topo\_faces\_of\_label\_name\_pattern
+==========================================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. automethod:: Part.get_topo_faces_of_label_name_pattern

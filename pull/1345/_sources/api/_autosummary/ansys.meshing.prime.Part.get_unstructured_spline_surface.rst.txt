@@ -1,0 +1,11 @@
+get\_unstructured\_spline\_surface
+==================================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. automethod:: ansys.meshing.prime.Part.get_unstructured_spline_surface
+
+.. minigallery::
+   :add-heading: Examples using Part.get_unstructured_spline_surface
+
+   ansys.meshing.prime.Part.get_unstructured_spline_surface

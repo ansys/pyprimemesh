@@ -1,0 +1,6 @@
+overlap\_count
+==============
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoproperty:: WrapperImproveQualityParams.overlap_count

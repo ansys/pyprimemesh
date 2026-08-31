@@ -1,0 +1,6 @@
+SURFACEONLY
+===========
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoattribute:: FuseType.SURFACEONLY

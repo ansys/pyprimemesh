@@ -1,0 +1,11 @@
+bit\_count
+==========
+
+.. currentmodule:: ansys.meshing.prime
+
+.. automethod:: ansys.meshing.prime.MatchPairTargetType.bit_count
+
+.. minigallery::
+   :add-heading: Examples using MatchPairTargetType.bit_count
+
+   ansys.meshing.prime.MatchPairTargetType.bit_count

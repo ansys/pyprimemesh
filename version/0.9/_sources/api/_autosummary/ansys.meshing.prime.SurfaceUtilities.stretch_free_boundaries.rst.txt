@@ -1,0 +1,11 @@
+stretch\_free\_boundaries
+=========================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. automethod:: ansys.meshing.prime.SurfaceUtilities.stretch_free_boundaries
+
+.. minigallery::
+   :add-heading: Examples using SurfaceUtilities.stretch_free_boundaries
+
+   ansys.meshing.prime.SurfaceUtilities.stretch_free_boundaries

@@ -1,0 +1,6 @@
+INCORRECTBOUNDARYORIENTATIONTOPOFACES
+=====================================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoattribute:: TopoSearchField.INCORRECTBOUNDARYORIENTATIONTOPOFACES

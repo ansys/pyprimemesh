@@ -1,0 +1,6 @@
+PrimeRuntimeWarning
+===================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoexception:: PrimeRuntimeWarning

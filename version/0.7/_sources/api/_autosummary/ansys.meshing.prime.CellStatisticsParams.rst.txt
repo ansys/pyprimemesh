@@ -1,0 +1,39 @@
+.. vale off
+
+CellStatisticsParams
+====================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoclass:: CellStatisticsParams
+   
+   
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+      :toctree:
+   
+      
+      CellStatisticsParams.print_default
+      CellStatisticsParams.set_default
+   
+   
+
+   
+   
+   .. rubric:: Attributes
+
+   .. autosummary::
+      :toctree:
+   
+      CellStatisticsParams.get_volume
+   
+   
+
+.. minigallery::
+    :add-heading: Examples using CellStatisticsParams
+
+    ansys.meshing.prime.CellStatisticsParams
+
+.. vale on

@@ -1,0 +1,11 @@
+get\_adjacent\_volumes\_of\_volumes
+===================================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. automethod:: ansys.meshing.prime.Part.get_adjacent_volumes_of_volumes
+
+.. minigallery::
+   :add-heading: Examples using Part.get_adjacent_volumes_of_volumes
+
+   ansys.meshing.prime.Part.get_adjacent_volumes_of_volumes

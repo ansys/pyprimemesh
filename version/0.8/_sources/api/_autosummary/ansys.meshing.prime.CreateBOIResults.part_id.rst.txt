@@ -1,0 +1,6 @@
+part\_id
+========
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoproperty:: CreateBOIResults.part_id

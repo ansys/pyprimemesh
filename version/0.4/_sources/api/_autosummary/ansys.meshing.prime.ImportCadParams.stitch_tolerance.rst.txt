@@ -1,0 +1,6 @@
+﻿stitch\_tolerance
+=================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoproperty:: ImportCadParams.stitch_tolerance

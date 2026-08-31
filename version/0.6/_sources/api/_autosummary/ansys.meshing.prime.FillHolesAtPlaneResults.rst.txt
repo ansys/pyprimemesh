@@ -1,0 +1,38 @@
+.. vale off
+
+FillHolesAtPlaneResults
+=======================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoclass:: FillHolesAtPlaneResults
+   
+   
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+      :toctree:
+   
+      
+      FillHolesAtPlaneResults.print_default
+      FillHolesAtPlaneResults.set_default
+   
+   
+
+   
+   
+   .. rubric:: Attributes
+
+   .. autosummary::
+      :toctree:
+   
+      FillHolesAtPlaneResults.assigned_zone_name
+      FillHolesAtPlaneResults.created_face_zonelets
+      FillHolesAtPlaneResults.created_zone_id
+      FillHolesAtPlaneResults.error_code
+      FillHolesAtPlaneResults.warning_codes
+   
+   
+
+.. vale on

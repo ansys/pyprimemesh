@@ -1,0 +1,6 @@
+﻿delete\_fringes
+===============
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoproperty:: DeleteFringesAndOverlapsParams.delete_fringes

@@ -1,0 +1,6 @@
+﻿size\_range\_min
+================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoproperty:: SurfaceMeshSizeScaling.size_range_min

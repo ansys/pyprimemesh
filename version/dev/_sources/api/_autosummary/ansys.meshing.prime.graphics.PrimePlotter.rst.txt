@@ -1,0 +1,76 @@
+.. vale off
+
+PrimePlotter
+============
+
+.. currentmodule:: ansys.meshing.prime.graphics
+
+.. autoclass:: PrimePlotter
+
+   
+   
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+      :toctree:
+   
+      PrimePlotter.add_labels
+      PrimePlotter.add_legend
+      PrimePlotter.add_lines
+      PrimePlotter.add_mesh
+      PrimePlotter.add_model
+      PrimePlotter.add_model_pd
+      PrimePlotter.add_planes
+      PrimePlotter.add_point_labels
+      PrimePlotter.add_points
+      PrimePlotter.add_render_data
+      PrimePlotter.add_scope
+      PrimePlotter.add_text
+      PrimePlotter.animate
+      PrimePlotter.clear
+      PrimePlotter.entity_label
+      PrimePlotter.get_scalar_colors
+      PrimePlotter.plot
+      PrimePlotter.plot_iter
+      PrimePlotter.refresh_colors
+      PrimePlotter.refresh_tooltips
+      PrimePlotter.render
+      PrimePlotter.reset_display
+      PrimePlotter.set_clipping
+      PrimePlotter.set_color_by_type
+      PrimePlotter.set_entities_visible
+      PrimePlotter.set_selection_target
+      PrimePlotter.set_show_edges
+      PrimePlotter.show
+   
+   
+
+   
+   
+   .. rubric:: Attributes
+
+   .. autosummary::
+      :toctree:
+   
+      PrimePlotter.backend
+      PrimePlotter.clipping
+      PrimePlotter.element_edge_actors
+      PrimePlotter.entity_infos
+      PrimePlotter.facet_edge_actors
+      PrimePlotter.has_faceting
+      PrimePlotter.has_mesh_edges
+      PrimePlotter.info_actor_map
+      PrimePlotter.picked_entities
+      PrimePlotter.scene
+      PrimePlotter.selected_entity_infos
+      PrimePlotter.selection_target
+   
+   
+
+.. minigallery::
+    :add-heading: Examples using PrimePlotter
+
+    ansys.meshing.prime.graphics.PrimePlotter
+
+.. vale on

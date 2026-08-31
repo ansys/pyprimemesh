@@ -1,0 +1,34 @@
+.. vale off
+
+CreateMaterialPointParams
+=========================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoclass:: CreateMaterialPointParams
+   
+   
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+      :toctree:
+   
+      
+      CreateMaterialPointParams.print_default
+      CreateMaterialPointParams.set_default
+   
+   
+
+   
+   
+   .. rubric:: Attributes
+
+   .. autosummary::
+      :toctree:
+   
+      CreateMaterialPointParams.type
+   
+   
+
+.. vale on

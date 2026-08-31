@@ -1,0 +1,11 @@
+extract\_volumes
+================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. automethod:: ansys.meshing.prime.Part.extract_volumes
+
+.. minigallery::
+   :add-heading: Examples using Part.extract_volumes
+
+   ansys.meshing.prime.Part.extract_volumes

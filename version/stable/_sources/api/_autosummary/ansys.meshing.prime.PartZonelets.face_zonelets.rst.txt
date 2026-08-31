@@ -1,0 +1,6 @@
+face\_zonelets
+==============
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoproperty:: PartZonelets.face_zonelets

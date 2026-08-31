@@ -1,0 +1,11 @@
+get\_topo\_faces\_of\_topo\_volumes
+===================================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. automethod:: ansys.meshing.prime.Part.get_topo_faces_of_topo_volumes
+
+.. minigallery::
+   :add-heading: Examples using Part.get_topo_faces_of_topo_volumes
+
+   ansys.meshing.prime.Part.get_topo_faces_of_topo_volumes

@@ -1,0 +1,11 @@
+conjugate
+=========
+
+.. currentmodule:: ansys.meshing.prime
+
+.. automethod:: ansys.meshing.prime.LSDynaAnalysisType.conjugate
+
+.. minigallery::
+   :add-heading: Examples using LSDynaAnalysisType.conjugate
+
+   ansys.meshing.prime.LSDynaAnalysisType.conjugate

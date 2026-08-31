@@ -1,0 +1,6 @@
+formatted\_summary\_log
+=======================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoproperty:: ImportAbaqusResults.formatted_summary_log

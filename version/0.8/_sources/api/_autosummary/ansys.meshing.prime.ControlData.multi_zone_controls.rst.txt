@@ -1,0 +1,11 @@
+multi\_zone\_controls
+=====================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. automethod:: ansys.meshing.prime.ControlData.multi_zone_controls
+
+.. minigallery::
+   :add-heading: Examples using ControlData.multi_zone_controls
+
+   ansys.meshing.prime.ControlData.multi_zone_controls

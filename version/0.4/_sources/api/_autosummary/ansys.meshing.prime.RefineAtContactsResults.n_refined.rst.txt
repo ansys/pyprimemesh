@@ -1,0 +1,6 @@
+﻿n\_refined
+==========
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoproperty:: RefineAtContactsResults.n_refined

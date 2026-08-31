@@ -1,0 +1,6 @@
+element\_edge\_actors
+=====================
+
+.. currentmodule:: ansys.meshing.prime.graphics
+
+.. autoproperty:: PrimePlotter.element_edge_actors

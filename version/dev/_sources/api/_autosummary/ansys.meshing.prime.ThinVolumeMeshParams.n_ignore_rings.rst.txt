@@ -1,0 +1,6 @@
+n\_ignore\_rings
+================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoproperty:: ThinVolumeMeshParams.n_ignore_rings

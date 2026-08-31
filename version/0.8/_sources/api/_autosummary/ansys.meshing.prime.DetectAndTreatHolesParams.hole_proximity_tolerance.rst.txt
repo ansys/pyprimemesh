@@ -1,0 +1,6 @@
+hole\_proximity\_tolerance
+==========================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoproperty:: DetectAndTreatHolesParams.hole_proximity_tolerance

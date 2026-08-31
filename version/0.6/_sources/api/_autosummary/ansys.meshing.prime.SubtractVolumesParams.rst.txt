@@ -1,0 +1,36 @@
+.. vale off
+
+SubtractVolumesParams
+=====================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoclass:: SubtractVolumesParams
+   
+   
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+      :toctree:
+   
+      
+      SubtractVolumesParams.print_default
+      SubtractVolumesParams.set_default
+   
+   
+
+   
+   
+   .. rubric:: Attributes
+
+   .. autosummary::
+      :toctree:
+   
+      SubtractVolumesParams.check_cutters
+      SubtractVolumesParams.ignore_face_zonelets
+      SubtractVolumesParams.keep_cutters
+   
+   
+
+.. vale on

@@ -1,0 +1,39 @@
+.. vale off
+
+ResolveIntersectionResult
+=========================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoclass:: ResolveIntersectionResult
+   
+   
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+      :toctree:
+   
+      
+      ResolveIntersectionResult.print_default
+      ResolveIntersectionResult.set_default
+   
+   
+
+   
+   
+   .. rubric:: Attributes
+
+   .. autosummary::
+      :toctree:
+   
+      ResolveIntersectionResult.error_code
+   
+   
+
+.. minigallery::
+    :add-heading: Examples using ResolveIntersectionResult
+
+    ansys.meshing.prime.ResolveIntersectionResult
+
+.. vale on

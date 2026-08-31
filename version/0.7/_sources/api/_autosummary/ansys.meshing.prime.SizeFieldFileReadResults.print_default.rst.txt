@@ -1,0 +1,11 @@
+print\_default
+==============
+
+.. currentmodule:: ansys.meshing.prime
+
+.. automethod:: ansys.meshing.prime.SizeFieldFileReadResults.print_default
+
+.. minigallery::
+   :add-heading: Examples using SizeFieldFileReadResults.print_default
+
+   ansys.meshing.prime.SizeFieldFileReadResults.print_default

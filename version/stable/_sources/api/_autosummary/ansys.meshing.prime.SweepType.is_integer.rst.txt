@@ -1,0 +1,11 @@
+is\_integer
+===========
+
+.. currentmodule:: ansys.meshing.prime
+
+.. automethod:: ansys.meshing.prime.SweepType.is_integer
+
+.. minigallery::
+   :add-heading: Examples using SweepType.is_integer
+
+   ansys.meshing.prime.SweepType.is_integer

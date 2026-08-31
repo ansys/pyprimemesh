@@ -1,0 +1,6 @@
+write\_component\_based\_ties
+=============================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoproperty:: ExportMapdlCdbParams.write_component_based_ties

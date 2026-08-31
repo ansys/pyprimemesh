@@ -1,0 +1,6 @@
+project\_topo\_faces\_on\_geometry
+==================================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. automethod:: SurfaceUtilities.project_topo_faces_on_geometry

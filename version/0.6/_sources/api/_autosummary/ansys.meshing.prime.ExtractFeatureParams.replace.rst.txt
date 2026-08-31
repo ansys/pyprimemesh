@@ -1,0 +1,6 @@
+replace
+=======
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoproperty:: ExtractFeatureParams.replace

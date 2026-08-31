@@ -1,0 +1,40 @@
+.. vale off
+
+ExtractedFeatureIds
+===================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoclass:: ExtractedFeatureIds
+   
+   
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+      :toctree:
+   
+      
+      ExtractedFeatureIds.print_default
+      ExtractedFeatureIds.set_default
+   
+   
+
+   
+   
+   .. rubric:: Attributes
+
+   .. autosummary::
+      :toctree:
+   
+      ExtractedFeatureIds.new_edge_zonelets
+      ExtractedFeatureIds.part_id
+   
+   
+
+.. minigallery::
+    :add-heading: Examples using ExtractedFeatureIds
+
+    ansys.meshing.prime.ExtractedFeatureIds
+
+.. vale on

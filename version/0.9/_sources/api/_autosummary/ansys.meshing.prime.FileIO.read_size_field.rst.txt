@@ -1,0 +1,11 @@
+read\_size\_field
+=================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. automethod:: ansys.meshing.prime.FileIO.read_size_field
+
+.. minigallery::
+   :add-heading: Examples using FileIO.read_size_field
+
+   ansys.meshing.prime.FileIO.read_size_field

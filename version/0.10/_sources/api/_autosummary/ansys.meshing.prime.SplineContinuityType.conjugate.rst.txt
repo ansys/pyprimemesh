@@ -1,0 +1,11 @@
+conjugate
+=========
+
+.. currentmodule:: ansys.meshing.prime
+
+.. automethod:: ansys.meshing.prime.SplineContinuityType.conjugate
+
+.. minigallery::
+   :add-heading: Examples using SplineContinuityType.conjugate
+
+   ansys.meshing.prime.SplineContinuityType.conjugate

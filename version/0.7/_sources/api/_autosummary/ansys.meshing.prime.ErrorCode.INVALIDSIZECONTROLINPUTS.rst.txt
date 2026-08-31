@@ -1,0 +1,6 @@
+INVALIDSIZECONTROLINPUTS
+========================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoattribute:: ErrorCode.INVALIDSIZECONTROLINPUTS

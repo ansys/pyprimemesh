@@ -1,0 +1,6 @@
+REGULAR
+=======
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoattribute:: LSDynaFileFormatType.REGULAR

@@ -1,0 +1,11 @@
+set\_default
+============
+
+.. currentmodule:: ansys.meshing.prime
+
+.. automethod:: ansys.meshing.prime.SearchByQualityParams.set_default
+
+.. minigallery::
+   :add-heading: Examples using SearchByQualityParams.set_default
+
+   ansys.meshing.prime.SearchByQualityParams.set_default

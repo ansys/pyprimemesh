@@ -1,0 +1,6 @@
+﻿surface\_mesh\_with\_size\_controls
+===================================
+
+.. currentmodule:: ansys.meshing.prime.lucid
+
+.. automethod:: Mesh.surface_mesh_with_size_controls

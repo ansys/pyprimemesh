@@ -1,0 +1,11 @@
+to\_bytes
+=========
+
+.. currentmodule:: ansys.meshing.prime
+
+.. automethod:: ansys.meshing.prime.HexCoreCellElementType.to_bytes
+
+.. minigallery::
+   :add-heading: Examples using HexCoreCellElementType.to_bytes
+
+   ansys.meshing.prime.HexCoreCellElementType.to_bytes

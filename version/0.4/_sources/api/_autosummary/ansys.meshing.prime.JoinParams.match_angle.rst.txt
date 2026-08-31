@@ -1,0 +1,6 @@
+﻿match\_angle
+============
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoproperty:: JoinParams.match_angle

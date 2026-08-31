@@ -1,0 +1,11 @@
+print\_default
+==============
+
+.. currentmodule:: ansys.meshing.prime
+
+.. automethod:: ansys.meshing.prime.ImportCadParams.print_default
+
+.. minigallery::
+   :add-heading: Examples using ImportCadParams.print_default
+
+   ansys.meshing.prime.ImportCadParams.print_default

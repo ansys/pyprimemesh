@@ -1,0 +1,6 @@
+﻿stair\_step
+===========
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoproperty:: PrismParams.stair_step

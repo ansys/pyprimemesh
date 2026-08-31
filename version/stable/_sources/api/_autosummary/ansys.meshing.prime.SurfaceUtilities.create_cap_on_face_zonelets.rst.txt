@@ -1,0 +1,11 @@
+create\_cap\_on\_face\_zonelets
+===============================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. automethod:: ansys.meshing.prime.SurfaceUtilities.create_cap_on_face_zonelets
+
+.. minigallery::
+   :add-heading: Examples using SurfaceUtilities.create_cap_on_face_zonelets
+
+   ansys.meshing.prime.SurfaceUtilities.create_cap_on_face_zonelets

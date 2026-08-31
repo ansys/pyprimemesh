@@ -1,0 +1,6 @@
+pre\_solution\_settings
+=======================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoproperty:: ExportMapdlCdbParams.pre_solution_settings

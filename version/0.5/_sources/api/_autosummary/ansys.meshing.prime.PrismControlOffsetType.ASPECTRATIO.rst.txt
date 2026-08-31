@@ -1,0 +1,6 @@
+ASPECTRATIO
+===========
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoattribute:: PrismControlOffsetType.ASPECTRATIO

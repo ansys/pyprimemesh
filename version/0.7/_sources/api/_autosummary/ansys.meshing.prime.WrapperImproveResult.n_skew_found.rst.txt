@@ -1,0 +1,6 @@
+n\_skew\_found
+==============
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoproperty:: WrapperImproveResult.n_skew_found

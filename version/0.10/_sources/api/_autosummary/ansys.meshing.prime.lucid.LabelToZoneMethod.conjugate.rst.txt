@@ -1,0 +1,11 @@
+conjugate
+=========
+
+.. currentmodule:: ansys.meshing.prime.lucid
+
+.. automethod:: ansys.meshing.prime.lucid.LabelToZoneMethod.conjugate
+
+.. minigallery::
+   :add-heading: Examples using LabelToZoneMethod.conjugate
+
+   ansys.meshing.prime.lucid.LabelToZoneMethod.conjugate

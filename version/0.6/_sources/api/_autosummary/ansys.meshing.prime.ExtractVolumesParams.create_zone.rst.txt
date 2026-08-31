@@ -1,0 +1,6 @@
+create\_zone
+============
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoproperty:: ExtractVolumesParams.create_zone

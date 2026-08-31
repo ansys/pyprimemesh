@@ -1,0 +1,11 @@
+bit\_count
+==========
+
+.. currentmodule:: ansys.meshing.prime
+
+.. automethod:: ansys.meshing.prime.BOIType.bit_count
+
+.. minigallery::
+   :add-heading: Examples using BOIType.bit_count
+
+   ansys.meshing.prime.BOIType.bit_count

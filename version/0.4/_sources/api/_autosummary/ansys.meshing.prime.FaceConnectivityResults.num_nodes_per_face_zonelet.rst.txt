@@ -1,0 +1,6 @@
+﻿num\_nodes\_per\_face\_zonelet
+==============================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoproperty:: FaceConnectivityResults.num_nodes_per_face_zonelet

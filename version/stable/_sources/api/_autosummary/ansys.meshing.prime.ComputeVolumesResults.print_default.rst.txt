@@ -1,0 +1,11 @@
+print\_default
+==============
+
+.. currentmodule:: ansys.meshing.prime
+
+.. automethod:: ansys.meshing.prime.ComputeVolumesResults.print_default
+
+.. minigallery::
+   :add-heading: Examples using ComputeVolumesResults.print_default
+
+   ansys.meshing.prime.ComputeVolumesResults.print_default

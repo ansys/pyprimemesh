@@ -1,0 +1,11 @@
+from\_bytes
+===========
+
+.. currentmodule:: ansys.meshing.prime
+
+.. automethod:: ansys.meshing.prime.MultizonePrismType.from_bytes
+
+.. minigallery::
+   :add-heading: Examples using MultizonePrismType.from_bytes
+
+   ansys.meshing.prime.MultizonePrismType.from_bytes

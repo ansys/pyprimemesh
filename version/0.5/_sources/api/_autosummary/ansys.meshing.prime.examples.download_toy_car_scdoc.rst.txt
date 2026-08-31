@@ -1,0 +1,6 @@
+download\_toy\_car\_scdoc
+=========================
+
+.. currentmodule:: ansys.meshing.prime.examples
+
+.. autofunction:: download_toy_car_scdoc

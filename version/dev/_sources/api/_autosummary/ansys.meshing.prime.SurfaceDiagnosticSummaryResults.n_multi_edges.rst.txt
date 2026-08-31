@@ -1,0 +1,6 @@
+n\_multi\_edges
+===============
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoproperty:: SurfaceDiagnosticSummaryResults.n_multi_edges

@@ -1,0 +1,6 @@
+COMPACT
+=======
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoattribute:: SeparateBlocksFormatType.COMPACT

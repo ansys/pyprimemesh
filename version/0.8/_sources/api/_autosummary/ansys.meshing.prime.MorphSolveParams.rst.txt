@@ -1,0 +1,32 @@
+.. vale off
+
+MorphSolveParams
+================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoclass:: MorphSolveParams
+   
+   
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+      :toctree:
+   
+      
+      MorphSolveParams.print_default
+      MorphSolveParams.set_default
+   
+   
+
+   
+   
+   
+
+.. minigallery::
+    :add-heading: Examples using MorphSolveParams
+
+    ansys.meshing.prime.MorphSolveParams
+
+.. vale on

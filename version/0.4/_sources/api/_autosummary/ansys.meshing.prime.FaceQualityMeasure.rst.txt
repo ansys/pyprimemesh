@@ -1,0 +1,27 @@
+.. vale off
+
+FaceQualityMeasure
+==================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoclass:: FaceQualityMeasure
+   
+   
+   
+   
+
+   
+   
+   .. rubric:: Attributes
+
+   .. autosummary::
+      :toctree:
+   
+      FaceQualityMeasure.SKEWNESS
+      FaceQualityMeasure.ASPECTRATIO
+      FaceQualityMeasure.ELEMENTQUALITY
+   
+   
+
+.. vale on

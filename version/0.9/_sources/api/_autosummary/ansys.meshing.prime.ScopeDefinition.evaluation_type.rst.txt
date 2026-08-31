@@ -1,0 +1,6 @@
+evaluation\_type
+================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoproperty:: ScopeDefinition.evaluation_type

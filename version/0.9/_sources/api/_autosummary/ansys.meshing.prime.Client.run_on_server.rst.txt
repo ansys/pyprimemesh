@@ -1,0 +1,11 @@
+run\_on\_server
+===============
+
+.. currentmodule:: ansys.meshing.prime
+
+.. automethod:: ansys.meshing.prime.Client.run_on_server
+
+.. minigallery::
+   :add-heading: Examples using Client.run_on_server
+
+   ansys.meshing.prime.Client.run_on_server

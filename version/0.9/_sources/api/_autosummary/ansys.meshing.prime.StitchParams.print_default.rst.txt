@@ -1,0 +1,11 @@
+print\_default
+==============
+
+.. currentmodule:: ansys.meshing.prime
+
+.. automethod:: ansys.meshing.prime.StitchParams.print_default
+
+.. minigallery::
+   :add-heading: Examples using StitchParams.print_default
+
+   ansys.meshing.prime.StitchParams.print_default

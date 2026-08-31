@@ -1,0 +1,31 @@
+AutoMeshResults
+===============
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoclass:: AutoMeshResults
+   
+   
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+      :toctree:
+   
+      
+      AutoMeshResults.print_default
+      AutoMeshResults.set_default
+   
+   
+
+   
+   
+   .. rubric:: Attributes
+
+   .. autosummary::
+      :toctree:
+   
+      AutoMeshResults.error_code
+      AutoMeshResults.warning_codes
+   
+   

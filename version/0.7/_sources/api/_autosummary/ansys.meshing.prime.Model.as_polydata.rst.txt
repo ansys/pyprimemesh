@@ -1,0 +1,11 @@
+as\_polydata
+============
+
+.. currentmodule:: ansys.meshing.prime
+
+.. automethod:: ansys.meshing.prime.Model.as_polydata
+
+.. minigallery::
+   :add-heading: Examples using Model.as_polydata
+
+   ansys.meshing.prime.Model.as_polydata

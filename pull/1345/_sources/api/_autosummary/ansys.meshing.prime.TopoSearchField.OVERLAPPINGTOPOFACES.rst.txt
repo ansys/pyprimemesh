@@ -1,0 +1,6 @@
+OVERLAPPINGTOPOFACES
+====================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoattribute:: TopoSearchField.OVERLAPPINGTOPOFACES

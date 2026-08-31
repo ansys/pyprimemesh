@@ -1,0 +1,6 @@
+﻿ignore\_self\_proximity
+=======================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoproperty:: ProximitySizingParams.ignore_self_proximity

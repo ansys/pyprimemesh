@@ -1,0 +1,11 @@
+set\_default
+============
+
+.. currentmodule:: ansys.meshing.prime
+
+.. automethod:: ansys.meshing.prime.CreateIntersectionEdgeLoopsParams.set_default
+
+.. minigallery::
+   :add-heading: Examples using CreateIntersectionEdgeLoopsParams.set_default
+
+   ansys.meshing.prime.CreateIntersectionEdgeLoopsParams.set_default

@@ -1,0 +1,11 @@
+set\_default
+============
+
+.. currentmodule:: ansys.meshing.prime
+
+.. automethod:: ansys.meshing.prime.DefeatureTopologyParams.set_default
+
+.. minigallery::
+   :add-heading: Examples using DefeatureTopologyParams.set_default
+
+   ansys.meshing.prime.DefeatureTopologyParams.set_default

@@ -1,0 +1,27 @@
+.. vale off
+
+CadRefacetingMaxEdgeSizeLimit
+=============================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoclass:: CadRefacetingMaxEdgeSizeLimit
+   
+   
+   
+   
+
+   
+   
+   .. rubric:: Attributes
+
+   .. autosummary::
+      :toctree:
+   
+      CadRefacetingMaxEdgeSizeLimit.NONE
+      CadRefacetingMaxEdgeSizeLimit.ABSOLUTE
+      CadRefacetingMaxEdgeSizeLimit.RELATIVE
+   
+   
+
+.. vale on

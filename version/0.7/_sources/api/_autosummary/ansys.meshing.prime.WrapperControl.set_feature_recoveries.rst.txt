@@ -1,0 +1,11 @@
+set\_feature\_recoveries
+========================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. automethod:: ansys.meshing.prime.WrapperControl.set_feature_recoveries
+
+.. minigallery::
+   :add-heading: Examples using WrapperControl.set_feature_recoveries
+
+   ansys.meshing.prime.WrapperControl.set_feature_recoveries

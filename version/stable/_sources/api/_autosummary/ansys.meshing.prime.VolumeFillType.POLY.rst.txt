@@ -1,0 +1,6 @@
+POLY
+====
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoattribute:: VolumeFillType.POLY

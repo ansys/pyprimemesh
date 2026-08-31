@@ -1,0 +1,6 @@
+picked\_entities
+================
+
+.. currentmodule:: ansys.meshing.prime.graphics
+
+.. autoproperty:: PrimePlotter.picked_entities

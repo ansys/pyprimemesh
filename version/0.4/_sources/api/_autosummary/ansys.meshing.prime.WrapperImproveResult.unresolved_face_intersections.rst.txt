@@ -1,0 +1,6 @@
+﻿unresolved\_face\_intersections
+===============================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoproperty:: WrapperImproveResult.unresolved_face_intersections

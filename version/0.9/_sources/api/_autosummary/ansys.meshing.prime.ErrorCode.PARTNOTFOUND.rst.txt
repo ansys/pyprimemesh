@@ -1,0 +1,6 @@
+PARTNOTFOUND
+============
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoattribute:: ErrorCode.PARTNOTFOUND

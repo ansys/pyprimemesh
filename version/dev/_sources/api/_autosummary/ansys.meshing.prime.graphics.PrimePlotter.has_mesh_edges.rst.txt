@@ -1,0 +1,6 @@
+has\_mesh\_edges
+================
+
+.. currentmodule:: ansys.meshing.prime.graphics
+
+.. autoproperty:: PrimePlotter.has_mesh_edges

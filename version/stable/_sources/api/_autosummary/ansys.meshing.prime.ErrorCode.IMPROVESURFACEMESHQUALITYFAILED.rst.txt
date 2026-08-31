@@ -1,0 +1,6 @@
+IMPROVESURFACEMESHQUALITYFAILED
+===============================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoattribute:: ErrorCode.IMPROVESURFACEMESHQUALITYFAILED

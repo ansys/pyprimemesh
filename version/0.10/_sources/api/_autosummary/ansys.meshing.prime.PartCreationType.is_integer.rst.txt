@@ -1,0 +1,11 @@
+is\_integer
+===========
+
+.. currentmodule:: ansys.meshing.prime
+
+.. automethod:: ansys.meshing.prime.PartCreationType.is_integer
+
+.. minigallery::
+   :add-heading: Examples using PartCreationType.is_integer
+
+   ansys.meshing.prime.PartCreationType.is_integer

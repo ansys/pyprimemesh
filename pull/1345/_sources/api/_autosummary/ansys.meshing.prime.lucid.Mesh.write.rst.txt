@@ -1,0 +1,11 @@
+write
+=====
+
+.. currentmodule:: ansys.meshing.prime.lucid
+
+.. automethod:: ansys.meshing.prime.lucid.Mesh.write
+
+.. minigallery::
+   :add-heading: Examples using Mesh.write
+
+   ansys.meshing.prime.lucid.Mesh.write

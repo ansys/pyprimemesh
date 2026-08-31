@@ -1,0 +1,6 @@
+DELETECONTROLSFAILED
+====================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoattribute:: ErrorCode.DELETECONTROLSFAILED

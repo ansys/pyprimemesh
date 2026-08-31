@@ -1,0 +1,6 @@
+first\_height
+=============
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoproperty:: ShellBLControlGrowthParams.first_height

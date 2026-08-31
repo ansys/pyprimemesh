@@ -1,0 +1,11 @@
+remove\_zone\_on\_topo\_entities
+================================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. automethod:: ansys.meshing.prime.Part.remove_zone_on_topo_entities
+
+.. minigallery::
+   :add-heading: Examples using Part.remove_zone_on_topo_entities
+
+   ansys.meshing.prime.Part.remove_zone_on_topo_entities

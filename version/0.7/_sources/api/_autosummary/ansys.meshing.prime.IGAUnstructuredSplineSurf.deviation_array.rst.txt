@@ -1,0 +1,6 @@
+deviation\_array
+================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoproperty:: IGAUnstructuredSplineSurf.deviation_array

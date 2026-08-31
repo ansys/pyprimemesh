@@ -1,0 +1,11 @@
+set\_default
+============
+
+.. currentmodule:: ansys.meshing.prime
+
+.. automethod:: ansys.meshing.prime.ComputeTopoVolumesResults.set_default
+
+.. minigallery::
+   :add-heading: Examples using ComputeTopoVolumesResults.set_default
+
+   ansys.meshing.prime.ComputeTopoVolumesResults.set_default

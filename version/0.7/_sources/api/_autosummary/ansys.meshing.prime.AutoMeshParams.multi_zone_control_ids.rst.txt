@@ -1,0 +1,6 @@
+multi\_zone\_control\_ids
+=========================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoproperty:: AutoMeshParams.multi_zone_control_ids

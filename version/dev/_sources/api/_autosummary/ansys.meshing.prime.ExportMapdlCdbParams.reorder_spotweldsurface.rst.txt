@@ -1,0 +1,6 @@
+reorder\_spotweldsurface
+========================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoproperty:: ExportMapdlCdbParams.reorder_spotweldsurface

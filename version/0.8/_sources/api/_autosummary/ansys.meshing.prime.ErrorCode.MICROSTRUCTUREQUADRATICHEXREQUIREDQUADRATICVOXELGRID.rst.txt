@@ -1,0 +1,6 @@
+MICROSTRUCTUREQUADRATICHEXREQUIREDQUADRATICVOXELGRID
+====================================================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoattribute:: ErrorCode.MICROSTRUCTUREQUADRATICHEXREQUIREDQUADRATICVOXELGRID

@@ -1,0 +1,11 @@
+print\_default
+==============
+
+.. currentmodule:: ansys.meshing.prime
+
+.. automethod:: ansys.meshing.prime.DeleteVolumesParams.print_default
+
+.. minigallery::
+   :add-heading: Examples using DeleteVolumesParams.print_default
+
+   ansys.meshing.prime.DeleteVolumesParams.print_default

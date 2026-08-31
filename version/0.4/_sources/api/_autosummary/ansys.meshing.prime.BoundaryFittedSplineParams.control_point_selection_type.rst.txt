@@ -1,0 +1,6 @@
+﻿control\_point\_selection\_type
+===============================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoproperty:: BoundaryFittedSplineParams.control_point_selection_type

@@ -1,0 +1,6 @@
+EXTRACTVOLUMESFAILED
+====================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoattribute:: ErrorCode.EXTRACTVOLUMESFAILED

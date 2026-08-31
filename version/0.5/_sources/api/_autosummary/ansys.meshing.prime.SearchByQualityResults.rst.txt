@@ -1,0 +1,37 @@
+.. vale off
+
+SearchByQualityResults
+======================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoclass:: SearchByQualityResults
+   
+   
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+      :toctree:
+   
+      
+      SearchByQualityResults.print_default
+      SearchByQualityResults.set_default
+   
+   
+
+   
+   
+   .. rubric:: Attributes
+
+   .. autosummary::
+      :toctree:
+   
+      SearchByQualityResults.error_code
+      SearchByQualityResults.max_quality
+      SearchByQualityResults.min_quality
+      SearchByQualityResults.n_found
+   
+   
+
+.. vale on

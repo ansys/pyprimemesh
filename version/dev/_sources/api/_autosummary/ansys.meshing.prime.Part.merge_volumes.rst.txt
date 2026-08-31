@@ -1,0 +1,11 @@
+merge\_volumes
+==============
+
+.. currentmodule:: ansys.meshing.prime
+
+.. automethod:: ansys.meshing.prime.Part.merge_volumes
+
+.. minigallery::
+   :add-heading: Examples using Part.merge_volumes
+
+   ansys.meshing.prime.Part.merge_volumes

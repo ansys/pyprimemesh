@@ -1,0 +1,24 @@
+.. vale off
+
+Union
+=====
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoclass:: Union
+
+   
+   
+   
+   
+
+   
+   
+   
+
+.. minigallery::
+    :add-heading: Examples using Union
+
+    ansys.meshing.prime.Union
+
+.. vale on

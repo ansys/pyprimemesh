@@ -1,0 +1,6 @@
+SURFERINVALIDINPUT
+==================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoattribute:: ErrorCode.SURFERINVALIDINPUT

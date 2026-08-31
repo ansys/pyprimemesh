@@ -1,0 +1,35 @@
+.. vale off
+
+Surfer
+======
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoclass:: Surfer
+   
+   
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+      :toctree:
+   
+      
+      Surfer.create_shell_bl_using_controls
+      Surfer.initialize_surfer_params_for_wrapper
+      Surfer.mesh_topo_faces
+      Surfer.remesh_face_zonelets
+      Surfer.remesh_face_zonelets_locally
+   
+   
+
+   
+   
+   
+
+.. minigallery::
+    :add-heading: Examples using Surfer
+
+    ansys.meshing.prime.Surfer
+
+.. vale on

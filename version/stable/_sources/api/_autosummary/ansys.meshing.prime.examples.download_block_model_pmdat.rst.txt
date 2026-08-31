@@ -1,0 +1,11 @@
+download\_block\_model\_pmdat
+=============================
+
+.. currentmodule:: ansys.meshing.prime.examples
+
+.. autofunction:: ansys.meshing.prime.examples.download_block_model_pmdat
+
+.. minigallery::
+    :add-heading: Examples using download_block_model_pmdat
+
+    ansys.meshing.prime.examples.download_block_model_pmdat

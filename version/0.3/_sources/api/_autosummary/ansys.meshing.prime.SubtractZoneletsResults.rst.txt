@@ -1,0 +1,35 @@
+.. vale off
+
+SubtractZoneletsResults
+=======================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoclass:: SubtractZoneletsResults
+   
+   
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+      :toctree:
+   
+      
+      SubtractZoneletsResults.print_default
+      SubtractZoneletsResults.set_default
+   
+   
+
+   
+   
+   .. rubric:: Attributes
+
+   .. autosummary::
+      :toctree:
+   
+      SubtractZoneletsResults.error_code
+      SubtractZoneletsResults.processing_time
+   
+   
+
+.. vale on

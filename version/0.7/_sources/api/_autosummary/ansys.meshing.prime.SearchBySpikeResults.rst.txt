@@ -1,0 +1,40 @@
+.. vale off
+
+SearchBySpikeResults
+====================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoclass:: SearchBySpikeResults
+   
+   
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+      :toctree:
+   
+      
+      SearchBySpikeResults.print_default
+      SearchBySpikeResults.set_default
+   
+   
+
+   
+   
+   .. rubric:: Attributes
+
+   .. autosummary::
+      :toctree:
+   
+      SearchBySpikeResults.error_code
+      SearchBySpikeResults.n_found
+   
+   
+
+.. minigallery::
+    :add-heading: Examples using SearchBySpikeResults
+
+    ansys.meshing.prime.SearchBySpikeResults
+
+.. vale on

@@ -1,0 +1,6 @@
+﻿min\_quality
+============
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoproperty:: VolumeQualityResultsPart.min_quality

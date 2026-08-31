@@ -1,0 +1,32 @@
+IntersectParams
+===============
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoclass:: IntersectParams
+   
+   
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+      :toctree:
+   
+      
+      IntersectParams.print_default
+      IntersectParams.set_default
+   
+   
+
+   
+   
+   .. rubric:: Attributes
+
+   .. autosummary::
+      :toctree:
+   
+      IntersectParams.remesh
+      IntersectParams.tolerance
+      IntersectParams.use_absolute_tolerance
+   
+   

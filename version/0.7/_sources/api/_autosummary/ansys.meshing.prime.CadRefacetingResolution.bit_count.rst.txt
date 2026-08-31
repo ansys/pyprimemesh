@@ -1,0 +1,11 @@
+bit\_count
+==========
+
+.. currentmodule:: ansys.meshing.prime
+
+.. automethod:: ansys.meshing.prime.CadRefacetingResolution.bit_count
+
+.. minigallery::
+   :add-heading: Examples using CadRefacetingResolution.bit_count
+
+   ansys.meshing.prime.CadRefacetingResolution.bit_count

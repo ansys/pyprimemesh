@@ -1,0 +1,6 @@
+BODY
+====
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoattribute:: PartCreationType.BODY

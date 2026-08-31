@@ -1,0 +1,6 @@
+INVALIDPRISMCONTROLS\_INCORRECTSCOPEENTITY
+==========================================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoattribute:: ErrorCode.INVALIDPRISMCONTROLS_INCORRECTSCOPEENTITY

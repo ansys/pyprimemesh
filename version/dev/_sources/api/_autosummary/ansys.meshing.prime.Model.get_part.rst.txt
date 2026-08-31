@@ -1,0 +1,11 @@
+get\_part
+=========
+
+.. currentmodule:: ansys.meshing.prime
+
+.. automethod:: ansys.meshing.prime.Model.get_part
+
+.. minigallery::
+   :add-heading: Examples using Model.get_part
+
+   ansys.meshing.prime.Model.get_part

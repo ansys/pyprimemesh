@@ -1,0 +1,11 @@
+print\_default
+==============
+
+.. currentmodule:: ansys.meshing.prime
+
+.. automethod:: ansys.meshing.prime.SmoothDihedralFaceNodesResults.print_default
+
+.. minigallery::
+   :add-heading: Examples using SmoothDihedralFaceNodesResults.print_default
+
+   ansys.meshing.prime.SmoothDihedralFaceNodesResults.print_default

@@ -1,0 +1,6 @@
+REMOVECUSP\_PARTWITHMULTIPLEVOLUMES
+===================================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoattribute:: WarningCode.REMOVECUSP_PARTWITHMULTIPLEVOLUMES

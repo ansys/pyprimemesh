@@ -1,0 +1,6 @@
+merge\_parts
+============
+
+.. currentmodule:: ansys.meshing.prime.lucid
+
+.. automethod:: Mesh.merge_parts

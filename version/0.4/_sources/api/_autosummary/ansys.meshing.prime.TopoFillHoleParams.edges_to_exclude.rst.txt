@@ -1,0 +1,6 @@
+﻿edges\_to\_exclude
+==================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoproperty:: TopoFillHoleParams.edges_to_exclude

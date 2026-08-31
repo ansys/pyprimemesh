@@ -1,0 +1,11 @@
+merge\_parts
+============
+
+.. currentmodule:: ansys.meshing.prime
+
+.. automethod:: ansys.meshing.prime.Model.merge_parts
+
+.. minigallery::
+   :add-heading: Examples using Model.merge_parts
+
+   ansys.meshing.prime.Model.merge_parts

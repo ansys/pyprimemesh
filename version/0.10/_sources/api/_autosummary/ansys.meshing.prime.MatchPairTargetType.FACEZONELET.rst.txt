@@ -1,0 +1,6 @@
+FACEZONELET
+===========
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoattribute:: MatchPairTargetType.FACEZONELET

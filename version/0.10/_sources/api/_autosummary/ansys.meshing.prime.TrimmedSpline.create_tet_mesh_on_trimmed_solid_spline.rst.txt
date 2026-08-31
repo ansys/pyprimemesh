@@ -1,0 +1,11 @@
+create\_tet\_mesh\_on\_trimmed\_solid\_spline
+=============================================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. automethod:: ansys.meshing.prime.TrimmedSpline.create_tet_mesh_on_trimmed_solid_spline
+
+.. minigallery::
+   :add-heading: Examples using TrimmedSpline.create_tet_mesh_on_trimmed_solid_spline
+
+   ansys.meshing.prime.TrimmedSpline.create_tet_mesh_on_trimmed_solid_spline

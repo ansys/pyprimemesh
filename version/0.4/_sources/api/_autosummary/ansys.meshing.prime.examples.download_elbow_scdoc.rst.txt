@@ -1,0 +1,6 @@
+﻿download\_elbow\_scdoc
+======================
+
+.. currentmodule:: ansys.meshing.prime.examples
+
+.. autofunction:: download_elbow_scdoc

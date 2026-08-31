@@ -1,0 +1,6 @@
+add\_thickness
+==============
+
+.. currentmodule:: ansys.meshing.prime
+
+.. automethod:: SurfaceUtilities.add_thickness

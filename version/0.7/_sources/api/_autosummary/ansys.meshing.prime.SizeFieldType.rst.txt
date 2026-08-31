@@ -1,0 +1,50 @@
+.. vale off
+
+SizeFieldType
+=============
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoclass:: SizeFieldType
+   
+   
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+      :toctree:
+   
+      SizeFieldType.conjugate
+      SizeFieldType.bit_length
+      SizeFieldType.bit_count
+      SizeFieldType.to_bytes
+      SizeFieldType.from_bytes
+      SizeFieldType.as_integer_ratio
+   
+   
+
+   
+   
+   .. rubric:: Attributes
+
+   .. autosummary::
+      :toctree:
+   
+      SizeFieldType.real
+      SizeFieldType.imag
+      SizeFieldType.numerator
+      SizeFieldType.denominator
+      SizeFieldType.GEOMETRIC
+      SizeFieldType.VOLUMETRIC
+      SizeFieldType.GEODESIC
+      SizeFieldType.CONSTANT
+      SizeFieldType.MESHEDGEODESIC
+   
+   
+
+.. minigallery::
+    :add-heading: Examples using SizeFieldType
+
+    ansys.meshing.prime.SizeFieldType
+
+.. vale on

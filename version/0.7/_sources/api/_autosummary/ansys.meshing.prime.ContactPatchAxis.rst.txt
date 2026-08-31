@@ -1,0 +1,48 @@
+.. vale off
+
+ContactPatchAxis
+================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoclass:: ContactPatchAxis
+   
+   
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+      :toctree:
+   
+      ContactPatchAxis.conjugate
+      ContactPatchAxis.bit_length
+      ContactPatchAxis.bit_count
+      ContactPatchAxis.to_bytes
+      ContactPatchAxis.from_bytes
+      ContactPatchAxis.as_integer_ratio
+   
+   
+
+   
+   
+   .. rubric:: Attributes
+
+   .. autosummary::
+      :toctree:
+   
+      ContactPatchAxis.real
+      ContactPatchAxis.imag
+      ContactPatchAxis.numerator
+      ContactPatchAxis.denominator
+      ContactPatchAxis.X
+      ContactPatchAxis.Y
+      ContactPatchAxis.Z
+   
+   
+
+.. minigallery::
+    :add-heading: Examples using ContactPatchAxis
+
+    ansys.meshing.prime.ContactPatchAxis
+
+.. vale on

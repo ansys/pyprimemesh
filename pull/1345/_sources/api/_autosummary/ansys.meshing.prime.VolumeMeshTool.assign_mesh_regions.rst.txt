@@ -1,0 +1,11 @@
+assign\_mesh\_regions
+=====================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. automethod:: ansys.meshing.prime.VolumeMeshTool.assign_mesh_regions
+
+.. minigallery::
+   :add-heading: Examples using VolumeMeshTool.assign_mesh_regions
+
+   ansys.meshing.prime.VolumeMeshTool.assign_mesh_regions

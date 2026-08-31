@@ -1,0 +1,11 @@
+get\_name
+=========
+
+.. currentmodule:: ansys.meshing.prime
+
+.. automethod:: ansys.meshing.prime.Part.get_name
+
+.. minigallery::
+   :add-heading: Examples using Part.get_name
+
+   ansys.meshing.prime.Part.get_name

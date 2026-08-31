@@ -1,0 +1,6 @@
+get\_global\_sizing\_params
+===========================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. automethod:: Model.get_global_sizing_params

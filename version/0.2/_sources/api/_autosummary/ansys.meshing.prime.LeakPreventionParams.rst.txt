@@ -1,0 +1,33 @@
+LeakPreventionParams
+====================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoclass:: LeakPreventionParams
+   
+   
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+      :toctree:
+   
+      
+      LeakPreventionParams.print_default
+      LeakPreventionParams.set_default
+   
+   
+
+   
+   
+   .. rubric:: Attributes
+
+   .. autosummary::
+      :toctree:
+   
+      LeakPreventionParams.material_points
+      LeakPreventionParams.max_hole_size
+      LeakPreventionParams.n_expansion_layers
+      LeakPreventionParams.scope
+   
+   

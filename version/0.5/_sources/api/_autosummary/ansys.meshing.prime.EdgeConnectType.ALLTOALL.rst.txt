@@ -1,0 +1,6 @@
+ALLTOALL
+========
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoattribute:: EdgeConnectType.ALLTOALL

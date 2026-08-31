@@ -1,0 +1,6 @@
+﻿download\_file
+==============
+
+.. currentmodule:: ansys.meshing.prime.examples
+
+.. automethod:: DownloadManager.download_file

@@ -1,0 +1,6 @@
+overlap\_tol
+============
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoproperty:: WrapperImproveQualityParams.overlap_tol

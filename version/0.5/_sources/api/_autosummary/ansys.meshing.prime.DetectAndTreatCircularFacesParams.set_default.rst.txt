@@ -1,0 +1,6 @@
+set\_default
+============
+
+.. currentmodule:: ansys.meshing.prime
+
+.. automethod:: DetectAndTreatCircularFacesParams.set_default

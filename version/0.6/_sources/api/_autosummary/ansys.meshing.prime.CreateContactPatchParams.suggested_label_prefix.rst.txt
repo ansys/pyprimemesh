@@ -1,0 +1,6 @@
+suggested\_label\_prefix
+========================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoproperty:: CreateContactPatchParams.suggested_label_prefix

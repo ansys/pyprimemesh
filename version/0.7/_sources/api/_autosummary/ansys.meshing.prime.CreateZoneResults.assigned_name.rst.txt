@@ -1,0 +1,6 @@
+assigned\_name
+==============
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoproperty:: CreateZoneResults.assigned_name

@@ -1,0 +1,11 @@
+get\_thin\_volume\_control\_by\_name
+====================================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. automethod:: ansys.meshing.prime.ControlData.get_thin_volume_control_by_name
+
+.. minigallery::
+   :add-heading: Examples using ControlData.get_thin_volume_control_by_name
+
+   ansys.meshing.prime.ControlData.get_thin_volume_control_by_name

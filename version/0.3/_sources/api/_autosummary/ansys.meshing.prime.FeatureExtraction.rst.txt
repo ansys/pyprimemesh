@@ -1,0 +1,27 @@
+.. vale off
+
+FeatureExtraction
+=================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoclass:: FeatureExtraction
+   
+   
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+      :toctree:
+   
+      
+      FeatureExtraction.create_intersection_edge_loops
+      FeatureExtraction.extract_features_on_face_zonelets
+   
+   
+
+   
+   
+   
+
+.. vale on

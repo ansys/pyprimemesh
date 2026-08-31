@@ -1,0 +1,43 @@
+.. vale off
+
+CreateContactPatchParams
+========================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoclass:: CreateContactPatchParams
+   
+   
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+      :toctree:
+   
+      
+      CreateContactPatchParams.print_default
+      CreateContactPatchParams.set_default
+   
+   
+
+   
+   
+   .. rubric:: Attributes
+
+   .. autosummary::
+      :toctree:
+   
+      CreateContactPatchParams.contact_patch_axis
+      CreateContactPatchParams.grouping_tolerance
+      CreateContactPatchParams.offset_distance
+      CreateContactPatchParams.suggested_label_prefix
+      CreateContactPatchParams.suggested_part_name
+   
+   
+
+.. minigallery::
+    :add-heading: Examples using CreateContactPatchParams
+
+    ansys.meshing.prime.CreateContactPatchParams
+
+.. vale on

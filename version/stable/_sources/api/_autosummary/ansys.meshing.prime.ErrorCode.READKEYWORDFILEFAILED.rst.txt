@@ -1,0 +1,6 @@
+READKEYWORDFILEFAILED
+=====================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoattribute:: ErrorCode.READKEYWORDFILEFAILED

@@ -1,0 +1,11 @@
+create\_boundary\_fitted\_spline
+================================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. automethod:: ansys.meshing.prime.BoundaryFittedSpline.create_boundary_fitted_spline
+
+.. minigallery::
+   :add-heading: Examples using BoundaryFittedSpline.create_boundary_fitted_spline
+
+   ansys.meshing.prime.BoundaryFittedSpline.create_boundary_fitted_spline

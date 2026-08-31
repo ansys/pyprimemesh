@@ -1,0 +1,11 @@
+set\_default
+============
+
+.. currentmodule:: ansys.meshing.prime
+
+.. automethod:: ansys.meshing.prime.DetectNonCircularHolesParams.set_default
+
+.. minigallery::
+   :add-heading: Examples using DetectNonCircularHolesParams.set_default
+
+   ansys.meshing.prime.DetectNonCircularHolesParams.set_default

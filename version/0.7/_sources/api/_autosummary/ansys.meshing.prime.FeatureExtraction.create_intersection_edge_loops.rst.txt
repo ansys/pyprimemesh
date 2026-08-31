@@ -1,0 +1,11 @@
+create\_intersection\_edge\_loops
+=================================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. automethod:: ansys.meshing.prime.FeatureExtraction.create_intersection_edge_loops
+
+.. minigallery::
+   :add-heading: Examples using FeatureExtraction.create_intersection_edge_loops
+
+   ansys.meshing.prime.FeatureExtraction.create_intersection_edge_loops

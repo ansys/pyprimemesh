@@ -1,0 +1,6 @@
+﻿transition\_size\_field\_type
+=============================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoproperty:: HexCoreParams.transition_size_field_type

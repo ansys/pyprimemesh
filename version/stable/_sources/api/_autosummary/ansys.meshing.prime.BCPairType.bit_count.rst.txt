@@ -1,0 +1,11 @@
+bit\_count
+==========
+
+.. currentmodule:: ansys.meshing.prime
+
+.. automethod:: ansys.meshing.prime.BCPairType.bit_count
+
+.. minigallery::
+   :add-heading: Examples using BCPairType.bit_count
+
+   ansys.meshing.prime.BCPairType.bit_count

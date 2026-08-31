@@ -1,0 +1,6 @@
+﻿PARTDOESNOTHAVETOPOLOGY
+=======================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoattribute:: ErrorCode.PARTDOESNOTHAVETOPOLOGY

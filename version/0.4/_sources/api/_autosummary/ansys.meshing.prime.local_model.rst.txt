@@ -1,0 +1,6 @@
+﻿local\_model
+============
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autofunction:: local_model

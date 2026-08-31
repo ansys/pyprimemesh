@@ -1,0 +1,6 @@
+TETIMPROVEFAILED
+================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoattribute:: ErrorCode.TETIMPROVEFAILED

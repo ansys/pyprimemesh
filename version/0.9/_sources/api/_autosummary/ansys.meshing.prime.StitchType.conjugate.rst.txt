@@ -1,0 +1,11 @@
+conjugate
+=========
+
+.. currentmodule:: ansys.meshing.prime
+
+.. automethod:: ansys.meshing.prime.StitchType.conjugate
+
+.. minigallery::
+   :add-heading: Examples using StitchType.conjugate
+
+   ansys.meshing.prime.StitchType.conjugate
