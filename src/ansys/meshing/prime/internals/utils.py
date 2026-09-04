@@ -1,4 +1,5 @@
-# Copyright (C) 2024 - 2026 ANSYS, Inc. and/or its affiliates.
+# Copyright (C) 2026 ANSYS, Inc. and/or its affiliates.
+# SPDX-FileCopyrightText: 2026 Synopsys, Inc. and ANSYS, Inc. All rights reserved.
 # SPDX-License-Identifier: MIT
 #
 # Permission is hereby granted, free of charge, to any person obtaining a copy
@@ -36,7 +37,7 @@ _LOCAL_PORTS = []
 
 
 def _get_docker():
-    """Return the docker module, importing it on first use.
+    """Get the docker module, importing it on first use.
 
     Raises
     ------
@@ -49,8 +50,8 @@ def _get_docker():
         return docker
     except ImportError:
         raise ImportError(
-            "The 'docker' package is required for container operations. "
-            "Install it with: pip install docker"
+            "Container operations require 'docker' package. "
+            "Install the docker package using the command 'pip install docker'."
         ) from None
 
 

@@ -1,4 +1,5 @@
-# Copyright (C) 2024 - 2026 ANSYS, Inc. and/or its affiliates.
+# Copyright (C) 2026 ANSYS, Inc. and/or its affiliates.
+# SPDX-FileCopyrightText: 2026 Synopsys, Inc. and ANSYS, Inc. All rights reserved.
 # SPDX-License-Identifier: MIT
 #
 # Permission is hereby granted, free of charge, to any person obtaining a copy
@@ -22,7 +23,9 @@
 """Module for managing file inputs and outputs."""
 import copy
 import json
+import logging
 import traceback
+from pathlib import Path
 from typing import List
 
 # isort: split
@@ -63,6 +66,7 @@ from ansys.meshing.prime.autogen.fileiostructs import (
     WriteSizeFieldParams,
 )
 from ansys.meshing.prime.core.model import Model
+from ansys.meshing.prime.internals import yaml_converter
 from ansys.meshing.prime.params.primestructs import ErrorCode
 
 
@@ -81,6 +85,52 @@ class FileIO(_FileIO):
         """Initialize model and parent class."""
         self._model = model
         super().__init__(model)
+
+    def _get_customization_schema_json(self, customization_file_name: str) -> str:
+        """Convert custom YAML schema to JSON and return the content as a string.
+
+        This runs on the client side before Abaqus import or MAPDL export so
+        the server side C++ code can directly consume the JSON schema content.
+
+        Parameters
+        ----------
+        customization_file_name : str
+            Path to the YAML customization file.
+
+        Returns
+        -------
+        str
+            JSON string content of the converted schema, or empty string if
+            no custom YAML schema is found or conversion fails.
+        """
+        logger = getattr(self._model, "python_logger", logging.getLogger(__name__))
+
+        yaml_file = Path(customization_file_name)
+        if not yaml_file.is_file():
+            return ""
+
+        try:
+            schema_content = yaml_converter.convert_yaml_to_json_string(str(yaml_file))
+            logger.info("Converted custom YAML schema to JSON: %s", yaml_file)
+            return schema_content
+        except FileNotFoundError as ex:
+            logger.warning(
+                "Custom YAML schema file not found: %s",
+                ex,
+            )
+            return ""
+        except ValueError as ex:
+            logger.warning(
+                "Failed to convert custom YAML schema to JSON: %s",
+                ex,
+            )
+            return ""
+        except Exception as ex:
+            logger.warning(
+                "Unexpected error converting custom YAML schema: %s",
+                ex,
+            )
+            return ""
 
     def read_pmdat(self, file_name: str, file_read_params: FileReadParams) -> FileReadResults:
         """Read a PyPrimeMesh data (PMDAT) file.
@@ -327,6 +377,16 @@ class FileIO(_FileIO):
         >>> results = file_io.export_mapdl_cdb("/tmp/file.cdb", params)
         """
         params = copy.copy(params)
+        # Support hidden transport fields through custom params when these
+        # members are not part of the released client API surface.
+        customization_file = getattr(params, "customization_file_name", None)
+        if not customization_file:
+            customization_file = params._custom_params.get("customization_file_name")
+        if customization_file:
+            params._custom_params["customization_schema"] = self._get_customization_schema_json(
+                customization_file
+            )
+            params._custom_params["customization_file_name"] = customization_file
         with utils.file_write_context(self._model, file_name) as temp_file_name:
             args = {"partId": 0}
             command_name = "PrimeMesh::FileIO/GetAbaqusSimulationData"

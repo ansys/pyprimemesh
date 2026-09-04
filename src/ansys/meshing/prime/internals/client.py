@@ -1,4 +1,5 @@
-# Copyright (C) 2024 - 2026 ANSYS, Inc. and/or its affiliates.
+# Copyright (C) 2026 ANSYS, Inc. and/or its affiliates.
+# SPDX-FileCopyrightText: 2026 Synopsys, Inc. and ANSYS, Inc. All rights reserved.
 # SPDX-License-Identifier: MIT
 #
 # Permission is hereby granted, free of charge, to any person obtaining a copy
@@ -23,6 +24,7 @@
 
 import logging
 import os
+from pathlib import Path
 from typing import Optional
 
 import ansys.meshing.prime.examples as examples
@@ -86,6 +88,7 @@ class Client(object):
         self._local = local
         self._process = server_process
         self._comm = None
+        self._cleanup_script_path: Path = None
         if not local:
             if (
                 connection_type == config.ConnectionType.GRPC_SECURE

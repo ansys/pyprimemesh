@@ -1,4 +1,5 @@
-# Copyright (C) 2024 - 2026 ANSYS, Inc. and/or its affiliates.
+# Copyright (C) 2026 ANSYS, Inc. and/or its affiliates.
+# SPDX-FileCopyrightText: 2026 Synopsys, Inc. and ANSYS, Inc. All rights reserved.
 # SPDX-License-Identifier: MIT
 #
 # Permission is hereby granted, free of charge, to any person obtaining a copy
@@ -277,7 +278,6 @@ def launch_prime(
     ConnectionError
         When there is an error in connecting to the gRPC server.
     """
-    logging.getLogger('PyPrimeMesh').info("Launching Ansys Prime Server...")
     if config.has_pim():
         return launch_remote_prime(version=version, timeout=timeout)
 
@@ -307,7 +307,6 @@ def launch_prime(
             )
 
     launch_container = bool(int(os.environ.get('PYPRIMEMESH_LAUNCH_CONTAINER', '0')))
-    logging.getLogger('PyPrimeMesh').info(f'Launch container: {launch_container}')
     if launch_container:
         logging.getLogger('PyPrimeMesh').info("Launching container...")
         container_name = utils.make_unique_container_name('ansys-prime-server')
