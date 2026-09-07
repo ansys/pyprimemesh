@@ -64,7 +64,7 @@ import os
 import tempfile
 
 import ansys.meshing.prime as prime
-from ansys.meshing.prime.graphics import PrimePlotter
+from ansys.meshing.prime.graphics.plotter import ColorByType, PrimePlotter
 
 prime_client = prime.launch_prime()
 model = prime_client.model
@@ -92,6 +92,7 @@ mesh_util.read(file_name=prime.examples.download_pcb_pmdat())
 
 display = PrimePlotter()
 display.plot(model)
+display.set_color_by_type(ColorByType.CONNECTIVITY)
 display.show()
 
 sizing_params = prime.GlobalSizingParams(model=model, min=0.5, max=1.0)
@@ -170,6 +171,7 @@ stackbase_results = sweeper.stack_base_face(
 
 display = PrimePlotter()
 display.plot(model, update=True)
+display.set_color_by_type(ColorByType.CONNECTIVITY)
 display.show()
 
 ###############################################################################
