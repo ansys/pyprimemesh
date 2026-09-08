@@ -168,9 +168,7 @@ def test_io_fluent_mesh(get_remote_client, get_testfiles, tmp_path):
     file_io = prime.FileIO(model=model)
 
     import_params = prime.ImportFluentMeshingMeshParams(model=model)
-    results = file_io.import_fluent_meshing_meshes(
-        [get_testfiles["hex.msh"]], import_params
-    )
+    results = file_io.import_fluent_meshing_meshes([get_testfiles["hex.msh"]], import_params)
     assert results.error_code == ErrorCode.NOERROR
 
     import_params = prime.ExportFluentMeshingMeshParams(model=model)
