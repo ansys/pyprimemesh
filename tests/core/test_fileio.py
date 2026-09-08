@@ -45,7 +45,7 @@ def test_io_file_not_found_error(get_remote_client, get_examples):
             )
 
 
-def test_io_pdmat(get_remote_client, get_examples, tmp_path):
+def test_io_pdmat(get_remote_client, get_examples, get_testfiles, tmp_path):
     model = get_remote_client.model
     file_io = prime.FileIO(model=model)
     file_read_params = prime.FileReadParams(model=model)
@@ -54,7 +54,7 @@ def test_io_pdmat(get_remote_client, get_examples, tmp_path):
     # Wrong extension
     with pytest.raises(PrimeRuntimeError) as prime_error:
         _ = file_io.read_pmdat(
-            os.path.abspath("./tests/core/test_files/file.pdmat"),
+            get_testfiles["file.pdmat"],
             file_read_params,
         )
         assert "file extension is not supported" in str(prime_error.value)
@@ -62,7 +62,7 @@ def test_io_pdmat(get_remote_client, get_examples, tmp_path):
     # Empty file
     with pytest.raises(PrimeRuntimeError) as prime_error:
         _ = file_io.read_pmdat(
-            os.path.abspath("./tests/core/test_files/file.pmdat"),
+            get_testfiles["file.pmdat"],
             file_read_params,
         )
 
@@ -82,15 +82,13 @@ def test_io_pdmat(get_remote_client, get_examples, tmp_path):
     assert results.error_code == ErrorCode.NOERROR
 
 
-def test_io_cdb(get_remote_client, tmp_path):
+def test_io_cdb(get_remote_client, get_testfiles, tmp_path):
     model = get_remote_client.model
     file_io = prime.FileIO(model=model)
 
     # import
     import_params = prime.ImportMapdlCdbParams(model=model)
-    results = file_io.import_mapdl_cdb(
-        os.path.abspath("./tests/core/test_files/hex.cdb"), import_params
-    )
+    results = file_io.import_mapdl_cdb(get_testfiles["hex.cdb"], import_params)
     assert results.error_code == ErrorCode.NOERROR
 
     # export
@@ -100,15 +98,13 @@ def test_io_cdb(get_remote_client, tmp_path):
     assert results.error_code == ErrorCode.NOERROR
 
 
-def test_io_fluent_case(get_remote_client, tmp_path):
+def test_io_fluent_case(get_remote_client, get_testfiles, tmp_path):
     model = get_remote_client.model
     file_io = prime.FileIO(model=model)
 
     # import
     import_params = prime.ImportFluentCaseParams(model=model)
-    results = file_io.import_fluent_case(
-        os.path.abspath("./tests/core/test_files/hex.cas"), import_params
-    )
+    results = file_io.import_fluent_case(get_testfiles["hex.cas"], import_params)
     assert results.error_code == ErrorCode.NOERROR
 
     # export
@@ -135,25 +131,21 @@ def test_export_kfile(get_remote_client, get_examples, tmp_path):
     assert results.error_code == ErrorCode.NOERROR
 
 
-def test_io_sf(get_remote_client):
+def test_io_sf(get_remote_client, get_testfiles):
     model = get_remote_client.model
     file_io = prime.FileIO(model=model)
 
     # import
-    results = file_io.import_fluent_meshing_size_field(
-        os.path.abspath("./tests/core/test_files/box.sf")
-    )
+    results = file_io.import_fluent_meshing_size_field(get_testfiles["box.sf"])
     assert results.error_code == ErrorCode.NOERROR
 
 
-def test_io_psf(get_remote_client, tmp_path):
+def test_io_psf(get_remote_client, get_testfiles, tmp_path):
     model = get_remote_client.model
     file_io = prime.FileIO(model=model)
 
     import_params = prime.ReadSizeFieldParams(model=model)
-    results = file_io.read_size_field(
-        os.path.abspath("./tests/core/test_files/box.psf"), import_params
-    )
+    results = file_io.read_size_field(get_testfiles["box.psf"], import_params)
     assert results.error_code == ErrorCode.NOERROR
 
     export_params = prime.WriteSizeFieldParams(model=model)
@@ -162,22 +154,22 @@ def test_io_psf(get_remote_client, tmp_path):
     assert results.error_code == ErrorCode.NOERROR
 
 
-def test_io_cad(get_remote_client):
+def test_io_cad(get_remote_client, get_testfiles):
     model = get_remote_client.model
     file_io = prime.FileIO(model=model)
 
     import_params = prime.ImportCadParams(model=model)
-    results = file_io.import_cad(os.path.abspath("./tests/core/test_files/hex.fmd"), import_params)
+    results = file_io.import_cad(get_testfiles["hex.fmd"], import_params)
     assert results.error_code == ErrorCode.NOERROR
 
 
-def test_io_fluent_mesh(get_remote_client, tmp_path):
+def test_io_fluent_mesh(get_remote_client, get_testfiles, tmp_path):
     model = get_remote_client.model
     file_io = prime.FileIO(model=model)
 
     import_params = prime.ImportFluentMeshingMeshParams(model=model)
     results = file_io.import_fluent_meshing_meshes(
-        [os.path.abspath("./tests/core/test_files/hex.msh")], import_params
+        [get_testfiles["hex.msh"]], import_params
     )
     assert results.error_code == ErrorCode.NOERROR
 
