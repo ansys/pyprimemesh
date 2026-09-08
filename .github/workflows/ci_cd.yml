@@ -119,7 +119,7 @@ jobs:
         run: docker pull ${{ env.DOCKER_IMAGE_NAME }}:${{ env.DOCKER_IMAGE_TAG }}
 
       - name: Setup headless display
-        uses: pyvista/setup-headless-display-action@v4
+        uses: pyvista/setup-headless-display-action@v5
 
       - name: "Run Ansys documentation building action"
         uses: ansys/actions/doc-build@v11.0.3
