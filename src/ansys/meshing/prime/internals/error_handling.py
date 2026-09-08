@@ -494,6 +494,16 @@ class PrimeRuntimeError(Exception):
         """Transform the message to a string."""
         return self._message
 
+    def __repr__(self) -> str:
+        """Provide the full string representation of the error."""
+        args = [f"message={self._message!r}"]
+        # Skip default arguments
+        if self._error_code is not None:
+            args.append(f"error_code={self._error_code!r}")
+        if self._error_locations is not None:
+            args.append(f"error_locations={self._error_locations!r}")
+        return f"{self.__class__.__name__}({', '.join(args)})"
+
     def __process_message(self, message: str):
         """Process the message to be digested by the error class.
 
