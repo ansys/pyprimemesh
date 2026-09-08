@@ -34,13 +34,13 @@ def mesh(get_remote_client):
     return mesh
 
 
-def test_read(mesh):
-    mesh.read(os.path.abspath("./tests/core/test_files/hex.msh"))
-    mesh.read(os.path.abspath("./tests/core/test_files/hex.cdb"))
-    mesh.read(os.path.abspath("./tests/core/test_files/hex.cas"))
+def test_read(mesh, get_testfiles):
+    mesh.read(get_testfiles["hex.msh"])
+    mesh.read(get_testfiles["hex.cdb"])
+    mesh.read(get_testfiles["hex.cas"])
 
     # causes docker error
-    # mesh.read(os.path.abspath("./tests/core/test_files/file.pmdat"))
+    # mesh.read(get_testfiles["file.pmdat"])
     # missing CAD file
 
 
@@ -58,12 +58,12 @@ def test_write(mesh, tmp_path):
     mesh.read(os.path.abspath(str(tmp_path) + "/file_output.pmdat"))
 
 
-def test_create_zones(mesh, get_examples):
+def test_create_zones(mesh, get_examples, get_testfiles):
     pmdat_path = get_examples["elbow_lucid"]
     mesh.read(pmdat_path)
     mesh.create_zones_from_labels(label_expression="*")
     mesh.create_zones_from_labels(conversion_method=1)
-    mesh.read(os.path.abspath("./tests/core/test_files/hex.cas"))
+    mesh.read(get_testfiles["hex.cas"])
     mesh.create_zones_from_labels(label_expression="*")
 
 
