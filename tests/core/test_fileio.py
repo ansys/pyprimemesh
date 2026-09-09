@@ -58,6 +58,7 @@ def test_io_pdmat(get_remote_client, get_examples, get_testfiles, tmp_path):
             file_read_params,
         )
         assert "file extension is not supported" in str(prime_error.value)
+        assert "file extension is not supported" in repr(prime_error)
 
     # Empty file
     with pytest.raises(PrimeRuntimeError) as prime_error:
