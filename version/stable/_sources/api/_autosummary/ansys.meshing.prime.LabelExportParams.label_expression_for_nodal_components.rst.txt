@@ -1,0 +1,6 @@
+label\_expression\_for\_nodal\_components
+=========================================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoproperty:: LabelExportParams.label_expression_for_nodal_components

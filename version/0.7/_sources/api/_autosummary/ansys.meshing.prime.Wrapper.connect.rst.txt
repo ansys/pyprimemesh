@@ -1,0 +1,11 @@
+connect
+=======
+
+.. currentmodule:: ansys.meshing.prime
+
+.. automethod:: ansys.meshing.prime.Wrapper.connect
+
+.. minigallery::
+   :add-heading: Examples using Wrapper.connect
+
+   ansys.meshing.prime.Wrapper.connect

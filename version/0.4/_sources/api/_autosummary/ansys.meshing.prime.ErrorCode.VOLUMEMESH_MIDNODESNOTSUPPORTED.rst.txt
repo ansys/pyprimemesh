@@ -1,0 +1,6 @@
+﻿VOLUMEMESH\_MIDNODESNOTSUPPORTED
+================================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoattribute:: ErrorCode.VOLUMEMESH_MIDNODESNOTSUPPORTED

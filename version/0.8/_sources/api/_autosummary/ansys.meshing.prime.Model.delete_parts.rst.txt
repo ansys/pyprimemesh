@@ -1,0 +1,11 @@
+delete\_parts
+=============
+
+.. currentmodule:: ansys.meshing.prime
+
+.. automethod:: ansys.meshing.prime.Model.delete_parts
+
+.. minigallery::
+   :add-heading: Examples using Model.delete_parts
+
+   ansys.meshing.prime.Model.delete_parts

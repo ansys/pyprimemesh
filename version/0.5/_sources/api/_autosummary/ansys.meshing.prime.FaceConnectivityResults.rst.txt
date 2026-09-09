@@ -1,0 +1,43 @@
+.. vale off
+
+FaceConnectivityResults
+=======================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoclass:: FaceConnectivityResults
+   
+   
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+      :toctree:
+   
+      
+      FaceConnectivityResults.print_default
+      FaceConnectivityResults.set_default
+   
+   
+
+   
+   
+   .. rubric:: Attributes
+
+   .. autosummary::
+      :toctree:
+   
+      FaceConnectivityResults.error_code
+      FaceConnectivityResults.face_list
+      FaceConnectivityResults.face_zone_ids
+      FaceConnectivityResults.face_zone_names
+      FaceConnectivityResults.face_zonelet_ids
+      FaceConnectivityResults.mesh_face_ids
+      FaceConnectivityResults.node_coords
+      FaceConnectivityResults.num_face_list_per_face_zonelet
+      FaceConnectivityResults.num_nodes_per_face_zonelet
+      FaceConnectivityResults.topo_face_ids
+   
+   
+
+.. vale on

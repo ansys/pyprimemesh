@@ -1,0 +1,46 @@
+.. vale off
+
+
+UniformSolidSplineCreationParams
+================================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoclass:: UniformSolidSplineCreationParams
+
+   
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+      :toctree:
+
+   
+      
+      UniformSolidSplineCreationParams.print_default
+      UniformSolidSplineCreationParams.set_default
+   
+   
+
+   
+   
+   .. rubric:: Attributes
+
+   .. autosummary::
+      :toctree:
+   
+      UniformSolidSplineCreationParams.degree_u
+      UniformSolidSplineCreationParams.degree_v
+      UniformSolidSplineCreationParams.degree_w
+      UniformSolidSplineCreationParams.n_control_points_u
+      UniformSolidSplineCreationParams.n_control_points_v
+      UniformSolidSplineCreationParams.n_control_points_w
+   
+   
+
+.. minigallery::
+    :add-heading: Examples using UniformSolidSplineCreationParams
+
+    ansys.meshing.prime.UniformSolidSplineCreationParams
+
+.. vale on

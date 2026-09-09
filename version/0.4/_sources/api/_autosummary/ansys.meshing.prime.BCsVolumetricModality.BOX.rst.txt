@@ -1,0 +1,6 @@
+﻿BOX
+===
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoattribute:: BCsVolumetricModality.BOX

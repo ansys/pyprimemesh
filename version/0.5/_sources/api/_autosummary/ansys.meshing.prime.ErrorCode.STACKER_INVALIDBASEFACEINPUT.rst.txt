@@ -1,0 +1,6 @@
+STACKER\_INVALIDBASEFACEINPUT
+=============================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoattribute:: ErrorCode.STACKER_INVALIDBASEFACEINPUT

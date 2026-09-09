@@ -1,0 +1,11 @@
+print\_default
+==============
+
+.. currentmodule:: ansys.meshing.prime
+
+.. automethod:: ansys.meshing.prime.HexCoreParams.print_default
+
+.. minigallery::
+   :add-heading: Examples using HexCoreParams.print_default
+
+   ansys.meshing.prime.HexCoreParams.print_default

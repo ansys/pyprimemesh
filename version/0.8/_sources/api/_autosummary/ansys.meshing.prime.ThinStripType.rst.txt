@@ -1,0 +1,48 @@
+.. vale off
+
+ThinStripType
+=============
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoclass:: ThinStripType
+   
+   
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+      :toctree:
+   
+      ThinStripType.conjugate
+      ThinStripType.bit_length
+      ThinStripType.bit_count
+      ThinStripType.to_bytes
+      ThinStripType.from_bytes
+      ThinStripType.as_integer_ratio
+   
+   
+
+   
+   
+   .. rubric:: Attributes
+
+   .. autosummary::
+      :toctree:
+   
+      ThinStripType.real
+      ThinStripType.imag
+      ThinStripType.numerator
+      ThinStripType.denominator
+      ThinStripType.ALL
+      ThinStripType.EXCLUDEVSHAPE
+      ThinStripType.VSHAPE
+   
+   
+
+.. minigallery::
+    :add-heading: Examples using ThinStripType
+
+    ansys.meshing.prime.ThinStripType
+
+.. vale on

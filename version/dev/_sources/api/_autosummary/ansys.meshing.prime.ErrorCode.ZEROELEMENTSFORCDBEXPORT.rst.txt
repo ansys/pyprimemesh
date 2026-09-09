@@ -1,0 +1,6 @@
+ZEROELEMENTSFORCDBEXPORT
+========================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoattribute:: ErrorCode.ZEROELEMENTSFORCDBEXPORT

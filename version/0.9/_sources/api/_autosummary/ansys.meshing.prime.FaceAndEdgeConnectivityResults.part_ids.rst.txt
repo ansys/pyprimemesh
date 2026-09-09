@@ -1,0 +1,6 @@
+part\_ids
+=========
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoproperty:: FaceAndEdgeConnectivityResults.part_ids

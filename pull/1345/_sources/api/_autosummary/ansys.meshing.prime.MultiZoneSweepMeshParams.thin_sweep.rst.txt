@@ -1,0 +1,6 @@
+thin\_sweep
+===========
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoproperty:: MultiZoneSweepMeshParams.thin_sweep

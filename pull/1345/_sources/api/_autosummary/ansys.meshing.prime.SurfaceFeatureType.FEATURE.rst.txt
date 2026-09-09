@@ -1,0 +1,6 @@
+FEATURE
+=======
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoattribute:: SurfaceFeatureType.FEATURE

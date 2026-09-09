@@ -1,0 +1,40 @@
+.. vale off
+
+PrismParams
+===========
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoclass:: PrismParams
+   
+   
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+      :toctree:
+   
+      
+      PrismParams.print_default
+      PrismParams.set_default
+   
+   
+
+   
+   
+   .. rubric:: Attributes
+
+   .. autosummary::
+      :toctree:
+   
+      PrismParams.no_imprint_zonelets
+      PrismParams.stair_step
+   
+   
+
+.. minigallery::
+    :add-heading: Examples using PrismParams
+
+    ansys.meshing.prime.PrismParams
+
+.. vale on

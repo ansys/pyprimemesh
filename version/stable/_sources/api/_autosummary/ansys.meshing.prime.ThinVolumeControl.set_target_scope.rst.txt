@@ -1,0 +1,11 @@
+set\_target\_scope
+==================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. automethod:: ansys.meshing.prime.ThinVolumeControl.set_target_scope
+
+.. minigallery::
+   :add-heading: Examples using ThinVolumeControl.set_target_scope
+
+   ansys.meshing.prime.ThinVolumeControl.set_target_scope

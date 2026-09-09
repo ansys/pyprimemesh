@@ -1,0 +1,6 @@
+SELFINTERSECTINGTOPOFACES
+=========================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoattribute:: TopoSearchField.SELFINTERSECTINGTOPOFACES

@@ -1,0 +1,6 @@
+﻿flow\_dir
+=========
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoproperty:: CreateBOIParams.flow_dir

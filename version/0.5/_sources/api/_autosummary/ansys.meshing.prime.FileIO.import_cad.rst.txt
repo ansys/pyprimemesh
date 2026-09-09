@@ -1,0 +1,6 @@
+import\_cad
+===========
+
+.. currentmodule:: ansys.meshing.prime
+
+.. automethod:: FileIO.import_cad

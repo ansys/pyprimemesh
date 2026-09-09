@@ -1,0 +1,6 @@
+VT\_SKIPPEDENTITIESINDIFFERENTZONES
+===================================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoattribute:: WarningCode.VT_SKIPPEDENTITIESINDIFFERENTZONES

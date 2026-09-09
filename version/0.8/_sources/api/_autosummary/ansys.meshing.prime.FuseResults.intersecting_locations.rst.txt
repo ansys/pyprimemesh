@@ -1,0 +1,6 @@
+intersecting\_locations
+=======================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoproperty:: FuseResults.intersecting_locations

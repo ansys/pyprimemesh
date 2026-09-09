@@ -1,0 +1,6 @@
+suppress\_topo\_edge\_and\_mesh\_cleanup
+========================================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoproperty:: OptimizeQuadMeshParams.suppress_topo_edge_and_mesh_cleanup

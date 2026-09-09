@@ -1,0 +1,6 @@
+VT\_OPERATIONFAILED
+===================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoattribute:: ErrorCode.VT_OPERATIONFAILED

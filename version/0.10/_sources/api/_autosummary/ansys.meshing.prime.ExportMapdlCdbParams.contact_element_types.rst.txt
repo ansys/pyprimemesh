@@ -1,0 +1,6 @@
+contact\_element\_types
+=======================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoproperty:: ExportMapdlCdbParams.contact_element_types

@@ -1,0 +1,6 @@
+﻿n\_free\_edges
+==============
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoproperty:: SurfaceDiagnosticSummaryResults.n_free_edges

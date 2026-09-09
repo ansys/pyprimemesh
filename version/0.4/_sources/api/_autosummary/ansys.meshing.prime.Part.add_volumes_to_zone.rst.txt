@@ -1,0 +1,6 @@
+﻿add\_volumes\_to\_zone
+======================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. automethod:: Part.add_volumes_to_zone

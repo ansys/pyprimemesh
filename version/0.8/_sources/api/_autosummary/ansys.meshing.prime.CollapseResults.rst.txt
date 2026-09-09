@@ -1,0 +1,41 @@
+.. vale off
+
+CollapseResults
+===============
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoclass:: CollapseResults
+   
+   
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+      :toctree:
+   
+      
+      CollapseResults.print_default
+      CollapseResults.set_default
+   
+   
+
+   
+   
+   .. rubric:: Attributes
+
+   .. autosummary::
+      :toctree:
+   
+      CollapseResults.error_code
+      CollapseResults.n_collapsed
+      CollapseResults.n_splits
+   
+   
+
+.. minigallery::
+    :add-heading: Examples using CollapseResults
+
+    ansys.meshing.prime.CollapseResults
+
+.. vale on

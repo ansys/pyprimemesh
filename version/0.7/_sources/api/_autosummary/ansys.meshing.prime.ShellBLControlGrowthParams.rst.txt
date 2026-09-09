@@ -1,0 +1,42 @@
+.. vale off
+
+ShellBLControlGrowthParams
+==========================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoclass:: ShellBLControlGrowthParams
+   
+   
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+      :toctree:
+   
+      
+      ShellBLControlGrowthParams.print_default
+      ShellBLControlGrowthParams.set_default
+   
+   
+
+   
+   
+   .. rubric:: Attributes
+
+   .. autosummary::
+      :toctree:
+   
+      ShellBLControlGrowthParams.first_height
+      ShellBLControlGrowthParams.growth_rate
+      ShellBLControlGrowthParams.n_layers
+      ShellBLControlGrowthParams.offset_type
+   
+   
+
+.. minigallery::
+    :add-heading: Examples using ShellBLControlGrowthParams
+
+    ansys.meshing.prime.ShellBLControlGrowthParams
+
+.. vale on

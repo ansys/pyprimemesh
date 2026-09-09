@@ -1,0 +1,6 @@
+export\_rigid\_bodies\_as\_rbgen
+================================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoproperty:: ExportMapdlCdbParams.export_rigid_bodies_as_rbgen

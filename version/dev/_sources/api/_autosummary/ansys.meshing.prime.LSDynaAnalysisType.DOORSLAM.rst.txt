@@ -1,0 +1,6 @@
+DOORSLAM
+========
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoattribute:: LSDynaAnalysisType.DOORSLAM

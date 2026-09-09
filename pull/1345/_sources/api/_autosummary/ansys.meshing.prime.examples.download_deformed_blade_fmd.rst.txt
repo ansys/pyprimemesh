@@ -1,0 +1,11 @@
+download\_deformed\_blade\_fmd
+==============================
+
+.. currentmodule:: ansys.meshing.prime.examples
+
+.. autofunction:: ansys.meshing.prime.examples.download_deformed_blade_fmd
+
+.. minigallery::
+    :add-heading: Examples using download_deformed_blade_fmd
+
+    ansys.meshing.prime.examples.download_deformed_blade_fmd

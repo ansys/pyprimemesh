@@ -1,0 +1,6 @@
+﻿quality\_limit
+==============
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoproperty:: SearchByQualityParams.quality_limit

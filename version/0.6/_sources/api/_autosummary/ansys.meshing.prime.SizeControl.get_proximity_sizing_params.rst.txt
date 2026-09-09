@@ -1,0 +1,6 @@
+get\_proximity\_sizing\_params
+==============================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. automethod:: SizeControl.get_proximity_sizing_params

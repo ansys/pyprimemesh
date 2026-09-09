@@ -1,0 +1,11 @@
+set\_default
+============
+
+.. currentmodule:: ansys.meshing.prime
+
+.. automethod:: ansys.meshing.prime.ExtractTopoVolumesParams.set_default
+
+.. minigallery::
+   :add-heading: Examples using ExtractTopoVolumesParams.set_default
+
+   ansys.meshing.prime.ExtractTopoVolumesParams.set_default

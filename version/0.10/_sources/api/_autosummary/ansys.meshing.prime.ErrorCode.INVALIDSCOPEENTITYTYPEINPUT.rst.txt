@@ -1,0 +1,6 @@
+INVALIDSCOPEENTITYTYPEINPUT
+===========================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoattribute:: ErrorCode.INVALIDSCOPEENTITYTYPEINPUT

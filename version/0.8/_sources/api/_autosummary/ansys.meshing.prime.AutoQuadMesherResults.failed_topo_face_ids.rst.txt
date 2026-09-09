@@ -1,0 +1,6 @@
+failed\_topo\_face\_ids
+=======================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoproperty:: AutoQuadMesherResults.failed_topo_face_ids

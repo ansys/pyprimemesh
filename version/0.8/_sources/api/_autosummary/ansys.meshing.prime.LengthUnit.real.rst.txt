@@ -1,0 +1,6 @@
+real
+====
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoattribute:: LengthUnit.real

@@ -1,0 +1,39 @@
+.. vale off
+
+PeriodicControl
+===============
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoclass:: PeriodicControl
+   
+   
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+      :toctree:
+   
+      
+      PeriodicControl.get_params
+      PeriodicControl.get_scope
+      PeriodicControl.get_summary
+      PeriodicControl.set_params
+      PeriodicControl.set_scope
+      PeriodicControl.set_suggested_name
+   
+   
+
+   
+   
+   .. rubric:: Attributes
+
+   .. autosummary::
+      :toctree:
+   
+      PeriodicControl.id
+      PeriodicControl.name
+   
+   
+
+.. vale on

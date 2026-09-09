@@ -1,0 +1,51 @@
+.. vale off
+
+
+ScaffolderRepairMode
+====================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoclass:: ScaffolderRepairMode
+
+   
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+      :toctree:
+
+   
+      ScaffolderRepairMode.conjugate
+      ScaffolderRepairMode.bit_length
+      ScaffolderRepairMode.bit_count
+      ScaffolderRepairMode.to_bytes
+      ScaffolderRepairMode.from_bytes
+      ScaffolderRepairMode.as_integer_ratio
+      ScaffolderRepairMode.is_integer
+      
+   
+   
+
+   
+   
+   .. rubric:: Attributes
+
+   .. autosummary::
+      :toctree:
+   
+      ScaffolderRepairMode.real
+      ScaffolderRepairMode.imag
+      ScaffolderRepairMode.numerator
+      ScaffolderRepairMode.denominator
+      ScaffolderRepairMode.DEFAULT
+      ScaffolderRepairMode.CONSERVATIVE
+   
+   
+
+.. minigallery::
+    :add-heading: Examples using ScaffolderRepairMode
+
+    ansys.meshing.prime.ScaffolderRepairMode
+
+.. vale on

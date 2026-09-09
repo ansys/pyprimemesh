@@ -1,0 +1,11 @@
+fill\_holes\_at\_plane
+======================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. automethod:: ansys.meshing.prime.SurfaceUtilities.fill_holes_at_plane
+
+.. minigallery::
+   :add-heading: Examples using SurfaceUtilities.fill_holes_at_plane
+
+   ansys.meshing.prime.SurfaceUtilities.fill_holes_at_plane

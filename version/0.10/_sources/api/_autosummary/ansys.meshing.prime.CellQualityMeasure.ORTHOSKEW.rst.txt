@@ -1,0 +1,6 @@
+ORTHOSKEW
+=========
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoattribute:: CellQualityMeasure.ORTHOSKEW

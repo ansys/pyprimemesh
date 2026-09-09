@@ -1,0 +1,6 @@
+merge\_boundary\_nodes
+======================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. automethod:: Connect.merge_boundary_nodes

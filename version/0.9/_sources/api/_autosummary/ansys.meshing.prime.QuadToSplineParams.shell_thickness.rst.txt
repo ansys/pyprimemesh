@@ -1,0 +1,6 @@
+shell\_thickness
+================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoproperty:: QuadToSplineParams.shell_thickness

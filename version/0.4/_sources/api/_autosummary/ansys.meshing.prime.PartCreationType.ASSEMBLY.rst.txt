@@ -1,0 +1,6 @@
+﻿ASSEMBLY
+========
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoattribute:: PartCreationType.ASSEMBLY

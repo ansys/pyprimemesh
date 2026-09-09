@@ -1,0 +1,6 @@
+absolute\_tolerance
+===================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoproperty:: RepairEdgesParams.absolute_tolerance

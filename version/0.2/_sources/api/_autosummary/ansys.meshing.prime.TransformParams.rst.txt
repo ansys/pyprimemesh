@@ -1,0 +1,30 @@
+TransformParams
+===============
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoclass:: TransformParams
+   
+   
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+      :toctree:
+   
+      
+      TransformParams.print_default
+      TransformParams.set_default
+   
+   
+
+   
+   
+   .. rubric:: Attributes
+
+   .. autosummary::
+      :toctree:
+   
+      TransformParams.transformation_matrix
+   
+   

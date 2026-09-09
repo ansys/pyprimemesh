@@ -1,0 +1,23 @@
+ExportMapdlCdbParams
+====================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoclass:: ExportMapdlCdbParams
+   
+   
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+      :toctree:
+   
+      
+      ExportMapdlCdbParams.print_default
+      ExportMapdlCdbParams.set_default
+   
+   
+
+   
+   
+   

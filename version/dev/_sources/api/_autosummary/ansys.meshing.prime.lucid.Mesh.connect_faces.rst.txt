@@ -1,0 +1,11 @@
+connect\_faces
+==============
+
+.. currentmodule:: ansys.meshing.prime.lucid
+
+.. automethod:: ansys.meshing.prime.lucid.Mesh.connect_faces
+
+.. minigallery::
+   :add-heading: Examples using Mesh.connect_faces
+
+   ansys.meshing.prime.lucid.Mesh.connect_faces

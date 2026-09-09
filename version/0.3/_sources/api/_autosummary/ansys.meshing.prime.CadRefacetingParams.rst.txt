@@ -1,0 +1,39 @@
+.. vale off
+
+CadRefacetingParams
+===================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoclass:: CadRefacetingParams
+   
+   
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+      :toctree:
+   
+      
+      CadRefacetingParams.print_default
+      CadRefacetingParams.set_default
+   
+   
+
+   
+   
+   .. rubric:: Attributes
+
+   .. autosummary::
+      :toctree:
+   
+      CadRefacetingParams.cad_faceter
+      CadRefacetingParams.custom_normal_angle_tolerance
+      CadRefacetingParams.custom_surface_deviation_tolerance
+      CadRefacetingParams.faceting_resolution
+      CadRefacetingParams.max_edge_size
+      CadRefacetingParams.max_edge_size_limit
+   
+   
+
+.. vale on

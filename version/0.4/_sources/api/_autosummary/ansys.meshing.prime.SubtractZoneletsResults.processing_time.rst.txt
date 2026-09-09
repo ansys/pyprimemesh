@@ -1,0 +1,6 @@
+﻿processing\_time
+================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoproperty:: SubtractZoneletsResults.processing_time

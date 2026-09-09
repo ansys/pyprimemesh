@@ -1,0 +1,6 @@
+WRITINGCONTACTPAIRSSKIPPED
+==========================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoattribute:: WarningCode.WRITINGCONTACTPAIRSSKIPPED

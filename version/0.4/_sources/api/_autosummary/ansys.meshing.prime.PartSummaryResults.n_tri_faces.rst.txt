@@ -1,0 +1,6 @@
+﻿n\_tri\_faces
+=============
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoproperty:: PartSummaryResults.n_tri_faces

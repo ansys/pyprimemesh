@@ -1,0 +1,6 @@
+INVALIDGROWTHRATE
+=================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoattribute:: ErrorCode.INVALIDGROWTHRATE

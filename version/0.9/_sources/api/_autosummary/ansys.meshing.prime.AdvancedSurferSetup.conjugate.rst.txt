@@ -1,0 +1,11 @@
+conjugate
+=========
+
+.. currentmodule:: ansys.meshing.prime
+
+.. automethod:: ansys.meshing.prime.AdvancedSurferSetup.conjugate
+
+.. minigallery::
+   :add-heading: Examples using AdvancedSurferSetup.conjugate
+
+   ansys.meshing.prime.AdvancedSurferSetup.conjugate

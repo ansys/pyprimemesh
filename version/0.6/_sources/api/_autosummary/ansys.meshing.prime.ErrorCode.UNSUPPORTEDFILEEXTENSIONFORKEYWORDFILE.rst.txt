@@ -1,0 +1,6 @@
+UNSUPPORTEDFILEEXTENSIONFORKEYWORDFILE
+======================================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoattribute:: ErrorCode.UNSUPPORTEDFILEEXTENSIONFORKEYWORDFILE

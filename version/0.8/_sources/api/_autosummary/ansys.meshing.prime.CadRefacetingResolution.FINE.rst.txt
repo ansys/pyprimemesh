@@ -1,0 +1,6 @@
+FINE
+====
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoattribute:: CadRefacetingResolution.FINE

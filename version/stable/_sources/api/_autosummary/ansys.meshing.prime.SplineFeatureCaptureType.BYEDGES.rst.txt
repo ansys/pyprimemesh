@@ -1,0 +1,6 @@
+BYEDGES
+=======
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoattribute:: SplineFeatureCaptureType.BYEDGES

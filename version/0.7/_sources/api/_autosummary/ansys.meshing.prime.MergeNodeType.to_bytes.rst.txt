@@ -1,0 +1,11 @@
+to\_bytes
+=========
+
+.. currentmodule:: ansys.meshing.prime
+
+.. automethod:: ansys.meshing.prime.MergeNodeType.to_bytes
+
+.. minigallery::
+   :add-heading: Examples using MergeNodeType.to_bytes
+
+   ansys.meshing.prime.MergeNodeType.to_bytes

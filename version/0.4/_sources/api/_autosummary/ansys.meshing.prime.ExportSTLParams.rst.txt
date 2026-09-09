@@ -1,0 +1,34 @@
+.. vale off
+
+ExportSTLParams
+===============
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoclass:: ExportSTLParams
+   
+   
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+      :toctree:
+   
+      
+      ExportSTLParams.print_default
+      ExportSTLParams.set_default
+   
+   
+
+   
+   
+   .. rubric:: Attributes
+
+   .. autosummary::
+      :toctree:
+   
+      ExportSTLParams.part_ids
+   
+   
+
+.. vale on

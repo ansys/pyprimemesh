@@ -1,0 +1,6 @@
+CREATEBOI\_INVALIDTYPEFORWRAP
+=============================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoattribute:: ErrorCode.CREATEBOI_INVALIDTYPEFORWRAP

@@ -1,0 +1,6 @@
+ELEMENTQUALITY
+==============
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoattribute:: CellQualityMeasure.ELEMENTQUALITY

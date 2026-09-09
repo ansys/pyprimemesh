@@ -1,0 +1,41 @@
+.. vale off
+
+ZoneMeshResult
+==============
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoclass:: ZoneMeshResult
+
+   
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+      :toctree:
+   
+      
+      ZoneMeshResult.print_default
+      ZoneMeshResult.set_default
+   
+   
+
+   
+   
+   .. rubric:: Attributes
+
+   .. autosummary::
+      :toctree:
+   
+      ZoneMeshResult.centroids
+      ZoneMeshResult.element_ids
+      ZoneMeshResult.zone_name
+   
+   
+
+.. minigallery::
+    :add-heading: Examples using ZoneMeshResult
+
+    ansys.meshing.prime.ZoneMeshResult
+
+.. vale on

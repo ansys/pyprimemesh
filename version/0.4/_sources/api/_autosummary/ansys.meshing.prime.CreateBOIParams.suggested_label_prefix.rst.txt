@@ -1,0 +1,6 @@
+﻿suggested\_label\_prefix
+========================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoproperty:: CreateBOIParams.suggested_label_prefix

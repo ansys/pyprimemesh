@@ -1,0 +1,11 @@
+set\_scope
+==========
+
+.. currentmodule:: ansys.meshing.prime
+
+.. automethod:: ansys.meshing.prime.SizeControl.set_scope
+
+.. minigallery::
+   :add-heading: Examples using SizeControl.set_scope
+
+   ansys.meshing.prime.SizeControl.set_scope

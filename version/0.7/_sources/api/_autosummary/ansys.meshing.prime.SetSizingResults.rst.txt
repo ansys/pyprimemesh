@@ -1,0 +1,40 @@
+.. vale off
+
+SetSizingResults
+================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoclass:: SetSizingResults
+   
+   
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+      :toctree:
+   
+      
+      SetSizingResults.print_default
+      SetSizingResults.set_default
+   
+   
+
+   
+   
+   .. rubric:: Attributes
+
+   .. autosummary::
+      :toctree:
+   
+      SetSizingResults.error_code
+      SetSizingResults.warning_codes
+   
+   
+
+.. minigallery::
+    :add-heading: Examples using SetSizingResults
+
+    ansys.meshing.prime.SetSizingResults
+
+.. vale on

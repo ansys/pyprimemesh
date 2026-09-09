@@ -1,0 +1,11 @@
+conjugate
+=========
+
+.. currentmodule:: ansys.meshing.prime
+
+.. automethod:: ansys.meshing.prime.PartCreationType.conjugate
+
+.. minigallery::
+   :add-heading: Examples using PartCreationType.conjugate
+
+   ansys.meshing.prime.PartCreationType.conjugate

@@ -1,0 +1,11 @@
+to\_bytes
+=========
+
+.. currentmodule:: ansys.meshing.prime
+
+.. automethod:: ansys.meshing.prime.BCPairType.to_bytes
+
+.. minigallery::
+   :add-heading: Examples using BCPairType.to_bytes
+
+   ansys.meshing.prime.BCPairType.to_bytes

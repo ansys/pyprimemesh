@@ -1,0 +1,45 @@
+.. vale off
+
+PrimePlotter
+============
+
+.. currentmodule:: ansys.meshing.prime.graphics
+
+.. autoclass:: PrimePlotter
+
+   
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+      :toctree:
+   
+      
+      PrimePlotter.add_model
+      PrimePlotter.add_model_pd
+      PrimePlotter.add_scope
+      PrimePlotter.get_scalar_colors
+      PrimePlotter.plot
+      PrimePlotter.plot_iter
+      PrimePlotter.show
+   
+   
+
+   
+   
+   .. rubric:: Attributes
+
+   .. autosummary::
+      :toctree:
+   
+      PrimePlotter.backend
+      PrimePlotter.info_actor_map
+   
+   
+
+.. minigallery::
+    :add-heading: Examples using PrimePlotter
+
+    ansys.meshing.prime.graphics.PrimePlotter
+
+.. vale on

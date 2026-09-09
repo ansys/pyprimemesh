@@ -1,0 +1,6 @@
+n\_deviated
+===========
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoproperty:: CheckFaceDeviationResults.n_deviated

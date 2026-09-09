@@ -1,0 +1,6 @@
+INVALIDINPUTPART
+================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoattribute:: ErrorCode.INVALIDINPUTPART

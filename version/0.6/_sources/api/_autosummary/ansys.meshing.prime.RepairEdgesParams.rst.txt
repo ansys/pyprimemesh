@@ -1,0 +1,35 @@
+.. vale off
+
+RepairEdgesParams
+=================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoclass:: RepairEdgesParams
+   
+   
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+      :toctree:
+   
+      
+      RepairEdgesParams.print_default
+      RepairEdgesParams.set_default
+   
+   
+
+   
+   
+   .. rubric:: Attributes
+
+   .. autosummary::
+      :toctree:
+   
+      RepairEdgesParams.absolute_tolerance
+      RepairEdgesParams.constant_mesh_size
+   
+   
+
+.. vale on

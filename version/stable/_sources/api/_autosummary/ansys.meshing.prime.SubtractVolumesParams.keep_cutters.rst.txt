@@ -1,0 +1,6 @@
+keep\_cutters
+=============
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoproperty:: SubtractVolumesParams.keep_cutters

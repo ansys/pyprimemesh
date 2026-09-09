@@ -1,0 +1,6 @@
+﻿SIMPLE
+======
+
+.. currentmodule:: ansys.meshing.prime.lucid
+
+.. autoattribute:: LabelToZoneMethod.SIMPLE

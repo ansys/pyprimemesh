@@ -1,0 +1,6 @@
+﻿INVALIDTRANSFORMATIONMATRIX
+===========================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoattribute:: ErrorCode.INVALIDTRANSFORMATIONMATRIX

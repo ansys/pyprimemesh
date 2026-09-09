@@ -1,0 +1,6 @@
+has\_faceting
+=============
+
+.. currentmodule:: ansys.meshing.prime.graphics
+
+.. autoproperty:: PrimePlotter.has_faceting

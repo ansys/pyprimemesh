@@ -1,0 +1,6 @@
+MULTIZONEMESHER\_PRISMMESHINGFAILED
+===================================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoattribute:: ErrorCode.MULTIZONEMESHER_PRISMMESHINGFAILED

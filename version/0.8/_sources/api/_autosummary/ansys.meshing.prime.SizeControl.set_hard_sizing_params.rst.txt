@@ -1,0 +1,11 @@
+set\_hard\_sizing\_params
+=========================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. automethod:: ansys.meshing.prime.SizeControl.set_hard_sizing_params
+
+.. minigallery::
+   :add-heading: Examples using SizeControl.set_hard_sizing_params
+
+   ansys.meshing.prime.SizeControl.set_hard_sizing_params

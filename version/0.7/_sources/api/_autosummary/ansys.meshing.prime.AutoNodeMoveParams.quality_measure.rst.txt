@@ -1,0 +1,6 @@
+quality\_measure
+================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoproperty:: AutoNodeMoveParams.quality_measure

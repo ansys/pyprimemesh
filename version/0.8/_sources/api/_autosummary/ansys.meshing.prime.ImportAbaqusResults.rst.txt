@@ -1,0 +1,41 @@
+.. vale off
+
+ImportAbaqusResults
+===================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoclass:: ImportAbaqusResults
+   
+   
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+      :toctree:
+   
+      
+      ImportAbaqusResults.print_default
+      ImportAbaqusResults.set_default
+   
+   
+
+   
+   
+   .. rubric:: Attributes
+
+   .. autosummary::
+      :toctree:
+   
+      ImportAbaqusResults.error_code
+      ImportAbaqusResults.summary_log
+      ImportAbaqusResults.warning_codes
+   
+   
+
+.. minigallery::
+    :add-heading: Examples using ImportAbaqusResults
+
+    ansys.meshing.prime.ImportAbaqusResults
+
+.. vale on

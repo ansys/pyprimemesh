@@ -1,0 +1,11 @@
+set\_default
+============
+
+.. currentmodule:: ansys.meshing.prime
+
+.. automethod:: ansys.meshing.prime.TriangulateParams.set_default
+
+.. minigallery::
+   :add-heading: Examples using TriangulateParams.set_default
+
+   ansys.meshing.prime.TriangulateParams.set_default

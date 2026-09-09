@@ -1,0 +1,6 @@
+project\_on\_geometry
+=====================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoproperty:: QuadToSplineParams.project_on_geometry

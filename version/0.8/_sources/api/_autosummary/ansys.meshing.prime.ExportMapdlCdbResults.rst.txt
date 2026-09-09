@@ -1,0 +1,41 @@
+.. vale off
+
+ExportMapdlCdbResults
+=====================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoclass:: ExportMapdlCdbResults
+   
+   
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+      :toctree:
+   
+      
+      ExportMapdlCdbResults.print_default
+      ExportMapdlCdbResults.set_default
+   
+   
+
+   
+   
+   .. rubric:: Attributes
+
+   .. autosummary::
+      :toctree:
+   
+      ExportMapdlCdbResults.error_code
+      ExportMapdlCdbResults.summary_log
+      ExportMapdlCdbResults.warning_codes
+   
+   
+
+.. minigallery::
+    :add-heading: Examples using ExportMapdlCdbResults
+
+    ansys.meshing.prime.ExportMapdlCdbResults
+
+.. vale on

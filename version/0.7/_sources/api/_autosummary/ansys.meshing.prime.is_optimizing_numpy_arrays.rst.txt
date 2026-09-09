@@ -1,0 +1,11 @@
+is\_optimizing\_numpy\_arrays
+=============================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autofunction:: ansys.meshing.prime.is_optimizing_numpy_arrays
+
+.. minigallery::
+    :add-heading: Examples using is_optimizing_numpy_arrays
+
+    ansys.meshing.prime.is_optimizing_numpy_arrays

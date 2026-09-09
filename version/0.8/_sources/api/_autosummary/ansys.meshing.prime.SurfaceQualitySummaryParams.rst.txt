@@ -1,0 +1,41 @@
+.. vale off
+
+SurfaceQualitySummaryParams
+===========================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoclass:: SurfaceQualitySummaryParams
+   
+   
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+      :toctree:
+   
+      
+      SurfaceQualitySummaryParams.print_default
+      SurfaceQualitySummaryParams.set_default
+   
+   
+
+   
+   
+   .. rubric:: Attributes
+
+   .. autosummary::
+      :toctree:
+   
+      SurfaceQualitySummaryParams.face_quality_measures
+      SurfaceQualitySummaryParams.quality_limit
+      SurfaceQualitySummaryParams.scope
+   
+   
+
+.. minigallery::
+    :add-heading: Examples using SurfaceQualitySummaryParams
+
+    ansys.meshing.prime.SurfaceQualitySummaryParams
+
+.. vale on

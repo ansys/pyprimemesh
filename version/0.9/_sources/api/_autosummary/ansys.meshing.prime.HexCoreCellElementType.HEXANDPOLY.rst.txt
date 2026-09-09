@@ -1,0 +1,6 @@
+HEXANDPOLY
+==========
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoattribute:: HexCoreCellElementType.HEXANDPOLY

@@ -1,0 +1,45 @@
+.. vale off
+
+MeshStackerParams
+=================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoclass:: MeshStackerParams
+   
+   
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+      :toctree:
+   
+      
+      MeshStackerParams.print_default
+      MeshStackerParams.set_default
+   
+   
+
+   
+   
+   .. rubric:: Attributes
+
+   .. autosummary::
+      :toctree:
+   
+      MeshStackerParams.delete_base
+      MeshStackerParams.direction
+      MeshStackerParams.lateral_defeature_tolerance
+      MeshStackerParams.max_offset_size
+      MeshStackerParams.origin
+      MeshStackerParams.size_control_ids
+      MeshStackerParams.stacking_defeature_tolerance
+   
+   
+
+.. minigallery::
+    :add-heading: Examples using MeshStackerParams
+
+    ansys.meshing.prime.MeshStackerParams
+
+.. vale on

@@ -1,0 +1,6 @@
+﻿EDGEINTERSECTINGFACEFOUND
+=========================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoattribute:: ErrorCode.EDGEINTERSECTINGFACEFOUND

@@ -1,0 +1,6 @@
+IMPRINTBOUNDARYNODESFAILED
+==========================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoattribute:: ErrorCode.IMPRINTBOUNDARYNODESFAILED

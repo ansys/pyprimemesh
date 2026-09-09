@@ -1,0 +1,6 @@
+﻿improve\_quality
+================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. automethod:: Wrapper.improve_quality

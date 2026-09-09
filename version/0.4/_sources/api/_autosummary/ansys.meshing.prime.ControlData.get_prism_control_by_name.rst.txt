@@ -1,0 +1,6 @@
+﻿get\_prism\_control\_by\_name
+=============================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. automethod:: ControlData.get_prism_control_by_name

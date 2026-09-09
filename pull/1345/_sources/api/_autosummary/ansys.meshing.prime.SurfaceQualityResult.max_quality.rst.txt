@@ -1,0 +1,6 @@
+max\_quality
+============
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoproperty:: SurfaceQualityResult.max_quality

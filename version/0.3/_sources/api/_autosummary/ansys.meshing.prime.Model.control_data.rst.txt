@@ -1,0 +1,6 @@
+control\_data
+=============
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoproperty:: Model.control_data

@@ -1,0 +1,6 @@
+﻿topofaces\_not\_projected\_on\_geometry
+=======================================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoproperty:: SurferResults.topofaces_not_projected_on_geometry

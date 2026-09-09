@@ -1,0 +1,6 @@
+side\_scale
+===========
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoproperty:: CreateBOIParams.side_scale

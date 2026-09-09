@@ -1,0 +1,28 @@
+.. vale off
+
+DownloadManager
+===============
+
+.. currentmodule:: ansys.meshing.prime.examples
+
+.. autoclass:: DownloadManager
+   
+   
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+      :toctree:
+   
+      
+      DownloadManager.add_file
+      DownloadManager.clear_download_cache
+      DownloadManager.download_file
+   
+   
+
+   
+   
+   
+
+.. vale on

@@ -1,0 +1,6 @@
+enable\_feature\_octree\_refinement
+===================================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoproperty:: FeatureRecoveryParams.enable_feature_octree_refinement

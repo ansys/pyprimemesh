@@ -1,0 +1,47 @@
+.. vale off
+
+AdvancedSurferSetup
+===================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoclass:: AdvancedSurferSetup
+   
+   
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+      :toctree:
+   
+      AdvancedSurferSetup.conjugate
+      AdvancedSurferSetup.bit_length
+      AdvancedSurferSetup.bit_count
+      AdvancedSurferSetup.to_bytes
+      AdvancedSurferSetup.from_bytes
+      AdvancedSurferSetup.as_integer_ratio
+   
+   
+
+   
+   
+   .. rubric:: Attributes
+
+   .. autosummary::
+      :toctree:
+   
+      AdvancedSurferSetup.real
+      AdvancedSurferSetup.imag
+      AdvancedSurferSetup.numerator
+      AdvancedSurferSetup.denominator
+      AdvancedSurferSetup.NONE
+      AdvancedSurferSetup.WRAPPER
+   
+   
+
+.. minigallery::
+    :add-heading: Examples using AdvancedSurferSetup
+
+    ansys.meshing.prime.AdvancedSurferSetup
+
+.. vale on

@@ -1,0 +1,6 @@
+TARGETZONELETS\_NOTWATERTIGHT
+=============================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoattribute:: ErrorCode.TARGETZONELETS_NOTWATERTIGHT

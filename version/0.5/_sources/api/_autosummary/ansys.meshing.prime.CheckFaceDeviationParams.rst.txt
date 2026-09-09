@@ -1,0 +1,34 @@
+.. vale off
+
+CheckFaceDeviationParams
+========================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoclass:: CheckFaceDeviationParams
+   
+   
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+      :toctree:
+   
+      
+      CheckFaceDeviationParams.print_default
+      CheckFaceDeviationParams.set_default
+   
+   
+
+   
+   
+   .. rubric:: Attributes
+
+   .. autosummary::
+      :toctree:
+   
+      CheckFaceDeviationParams.distance
+   
+   
+
+.. vale on

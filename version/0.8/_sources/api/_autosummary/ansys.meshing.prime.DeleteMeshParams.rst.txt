@@ -1,0 +1,39 @@
+.. vale off
+
+DeleteMeshParams
+================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoclass:: DeleteMeshParams
+   
+   
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+      :toctree:
+   
+      
+      DeleteMeshParams.print_default
+      DeleteMeshParams.set_default
+   
+   
+
+   
+   
+   .. rubric:: Attributes
+
+   .. autosummary::
+      :toctree:
+   
+      DeleteMeshParams.delete_mesh_on_connected_topo_edges
+   
+   
+
+.. minigallery::
+    :add-heading: Examples using DeleteMeshParams
+
+    ansys.meshing.prime.DeleteMeshParams
+
+.. vale on

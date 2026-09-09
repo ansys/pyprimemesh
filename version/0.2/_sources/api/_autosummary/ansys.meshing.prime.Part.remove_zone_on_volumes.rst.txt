@@ -1,0 +1,6 @@
+remove\_zone\_on\_volumes
+=========================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. automethod:: Part.remove_zone_on_volumes

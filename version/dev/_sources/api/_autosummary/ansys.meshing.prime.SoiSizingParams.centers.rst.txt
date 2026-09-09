@@ -1,0 +1,6 @@
+centers
+=======
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoproperty:: SoiSizingParams.centers

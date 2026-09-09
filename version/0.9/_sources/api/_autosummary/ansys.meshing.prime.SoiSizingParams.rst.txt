@@ -1,0 +1,44 @@
+.. vale off
+
+
+SoiSizingParams
+===============
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoclass:: SoiSizingParams
+
+   
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+      :toctree:
+
+   
+      
+      SoiSizingParams.print_default
+      SoiSizingParams.set_default
+   
+   
+
+   
+   
+   .. rubric:: Attributes
+
+   .. autosummary::
+      :toctree:
+   
+      SoiSizingParams.centers
+      SoiSizingParams.growth_rate
+      SoiSizingParams.max
+      SoiSizingParams.radius
+   
+   
+
+.. minigallery::
+    :add-heading: Examples using SoiSizingParams
+
+    ansys.meshing.prime.SoiSizingParams
+
+.. vale on

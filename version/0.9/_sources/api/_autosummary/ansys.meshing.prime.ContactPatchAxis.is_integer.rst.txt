@@ -1,0 +1,11 @@
+is\_integer
+===========
+
+.. currentmodule:: ansys.meshing.prime
+
+.. automethod:: ansys.meshing.prime.ContactPatchAxis.is_integer
+
+.. minigallery::
+   :add-heading: Examples using ContactPatchAxis.is_integer
+
+   ansys.meshing.prime.ContactPatchAxis.is_integer

@@ -1,0 +1,40 @@
+.. vale off
+
+FillHolesAtPlaneParams
+======================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoclass:: FillHolesAtPlaneParams
+   
+   
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+      :toctree:
+   
+      
+      FillHolesAtPlaneParams.print_default
+      FillHolesAtPlaneParams.set_default
+   
+   
+
+   
+   
+   .. rubric:: Attributes
+
+   .. autosummary::
+      :toctree:
+   
+      FillHolesAtPlaneParams.create_zone
+      FillHolesAtPlaneParams.suggested_zone_name
+   
+   
+
+.. minigallery::
+    :add-heading: Examples using FillHolesAtPlaneParams
+
+    ansys.meshing.prime.FillHolesAtPlaneParams
+
+.. vale on

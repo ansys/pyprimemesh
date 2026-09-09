@@ -1,0 +1,11 @@
+print\_default
+==============
+
+.. currentmodule:: ansys.meshing.prime
+
+.. automethod:: ansys.meshing.prime.MeshStackerResults.print_default
+
+.. minigallery::
+   :add-heading: Examples using MeshStackerResults.print_default
+
+   ansys.meshing.prime.MeshStackerResults.print_default

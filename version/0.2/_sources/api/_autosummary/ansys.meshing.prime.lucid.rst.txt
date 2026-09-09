@@ -1,0 +1,33 @@
+﻿ansys.meshing.prime.lucid
+=========================
+
+.. currentmodule:: ansys.meshing.prime.lucid
+
+
+
+
+
+
+
+
+
+
+
+.. autosummary:: 
+   :toctree:
+   :caption: Classes
+
+
+   LabelToZoneMethod
+   Mesh
+   SurfaceScope
+   VolumeScope
+
+
+
+
+
+
+
+
+

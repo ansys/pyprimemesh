@@ -1,0 +1,6 @@
+mesh\_topo\_faces
+=================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. automethod:: Surfer.mesh_topo_faces

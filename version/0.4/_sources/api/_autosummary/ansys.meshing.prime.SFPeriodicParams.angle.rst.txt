@@ -1,0 +1,6 @@
+﻿angle
+=====
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoproperty:: SFPeriodicParams.angle

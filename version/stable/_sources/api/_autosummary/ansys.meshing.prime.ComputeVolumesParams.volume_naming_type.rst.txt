@@ -1,0 +1,6 @@
+volume\_naming\_type
+====================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoproperty:: ComputeVolumesParams.volume_naming_type

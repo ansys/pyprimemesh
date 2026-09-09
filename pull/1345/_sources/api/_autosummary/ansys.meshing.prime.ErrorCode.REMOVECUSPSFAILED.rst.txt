@@ -1,0 +1,6 @@
+REMOVECUSPSFAILED
+=================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoattribute:: ErrorCode.REMOVECUSPSFAILED

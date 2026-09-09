@@ -1,0 +1,39 @@
+.. vale off
+
+VTComposerResults
+=================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoclass:: VTComposerResults
+   
+   
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+      :toctree:
+   
+      
+      VTComposerResults.print_default
+      VTComposerResults.set_default
+   
+   
+
+   
+   
+   .. rubric:: Attributes
+
+   .. autosummary::
+      :toctree:
+   
+      VTComposerResults.error_code
+   
+   
+
+.. minigallery::
+    :add-heading: Examples using VTComposerResults
+
+    ansys.meshing.prime.VTComposerResults
+
+.. vale on

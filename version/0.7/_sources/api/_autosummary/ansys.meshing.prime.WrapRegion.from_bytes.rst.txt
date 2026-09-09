@@ -1,0 +1,11 @@
+from\_bytes
+===========
+
+.. currentmodule:: ansys.meshing.prime
+
+.. automethod:: ansys.meshing.prime.WrapRegion.from_bytes
+
+.. minigallery::
+   :add-heading: Examples using WrapRegion.from_bytes
+
+   ansys.meshing.prime.WrapRegion.from_bytes

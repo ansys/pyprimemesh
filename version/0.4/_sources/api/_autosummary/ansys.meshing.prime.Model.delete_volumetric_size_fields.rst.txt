@@ -1,0 +1,6 @@
+﻿delete\_volumetric\_size\_fields
+================================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. automethod:: Model.delete_volumetric_size_fields

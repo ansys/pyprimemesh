@@ -1,0 +1,11 @@
+bit\_count
+==========
+
+.. currentmodule:: ansys.meshing.prime
+
+.. automethod:: ansys.meshing.prime.HexCoreCellElementType.bit_count
+
+.. minigallery::
+   :add-heading: Examples using HexCoreCellElementType.bit_count
+
+   ansys.meshing.prime.HexCoreCellElementType.bit_count

@@ -1,0 +1,6 @@
+UNSUPPORTEDFILEEXTENSIONFORFLUENTCASE
+=====================================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoattribute:: ErrorCode.UNSUPPORTEDFILEEXTENSIONFORFLUENTCASE

@@ -1,0 +1,6 @@
+﻿cell\_quality\_measure
+======================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoproperty:: VolumeQualityResultsPart.cell_quality_measure

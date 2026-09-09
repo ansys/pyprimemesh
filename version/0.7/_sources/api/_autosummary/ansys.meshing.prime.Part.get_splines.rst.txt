@@ -1,0 +1,11 @@
+get\_splines
+============
+
+.. currentmodule:: ansys.meshing.prime
+
+.. automethod:: ansys.meshing.prime.Part.get_splines
+
+.. minigallery::
+   :add-heading: Examples using Part.get_splines
+
+   ansys.meshing.prime.Part.get_splines

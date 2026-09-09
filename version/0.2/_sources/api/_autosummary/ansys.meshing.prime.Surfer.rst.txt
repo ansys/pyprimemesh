@@ -1,0 +1,25 @@
+Surfer
+======
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoclass:: Surfer
+   
+   
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+      :toctree:
+   
+      
+      Surfer.initialize_surfer_params_for_wrapper
+      Surfer.mesh_topo_faces
+      Surfer.remesh_face_zonelets
+      Surfer.remesh_face_zonelets_locally
+   
+   
+
+   
+   
+   

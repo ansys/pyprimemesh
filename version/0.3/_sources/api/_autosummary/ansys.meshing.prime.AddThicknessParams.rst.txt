@@ -1,0 +1,37 @@
+.. vale off
+
+AddThicknessParams
+==================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoclass:: AddThicknessParams
+   
+   
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+      :toctree:
+   
+      
+      AddThicknessParams.print_default
+      AddThicknessParams.set_default
+   
+   
+
+   
+   
+   .. rubric:: Attributes
+
+   .. autosummary::
+      :toctree:
+   
+      AddThicknessParams.fix_intersections
+      AddThicknessParams.reverse_face_normal
+      AddThicknessParams.suggested_part_name
+      AddThicknessParams.thickness
+   
+   
+
+.. vale on

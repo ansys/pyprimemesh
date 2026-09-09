@@ -1,0 +1,6 @@
+constant\_size
+==============
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoproperty:: SurferParams.constant_size

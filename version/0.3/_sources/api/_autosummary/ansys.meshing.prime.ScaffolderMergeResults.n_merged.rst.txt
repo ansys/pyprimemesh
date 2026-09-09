@@ -1,0 +1,6 @@
+n\_merged
+=========
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoproperty:: ScaffolderMergeResults.n_merged

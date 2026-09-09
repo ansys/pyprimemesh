@@ -1,0 +1,11 @@
+conjugate
+=========
+
+.. currentmodule:: ansys.meshing.prime
+
+.. automethod:: ansys.meshing.prime.MultizonePrismType.conjugate
+
+.. minigallery::
+   :add-heading: Examples using MultizonePrismType.conjugate
+
+   ansys.meshing.prime.MultizonePrismType.conjugate

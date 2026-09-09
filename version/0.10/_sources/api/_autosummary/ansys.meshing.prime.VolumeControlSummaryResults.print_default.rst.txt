@@ -1,0 +1,11 @@
+print\_default
+==============
+
+.. currentmodule:: ansys.meshing.prime
+
+.. automethod:: ansys.meshing.prime.VolumeControlSummaryResults.print_default
+
+.. minigallery::
+   :add-heading: Examples using VolumeControlSummaryResults.print_default
+
+   ansys.meshing.prime.VolumeControlSummaryResults.print_default

@@ -1,0 +1,6 @@
+﻿advanced\_surfer\_setup
+=======================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoproperty:: SurferParams.advanced_surfer_setup

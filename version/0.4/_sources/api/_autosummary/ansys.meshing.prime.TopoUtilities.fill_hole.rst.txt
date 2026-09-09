@@ -1,0 +1,6 @@
+﻿fill\_hole
+==========
+
+.. currentmodule:: ansys.meshing.prime
+
+.. automethod:: TopoUtilities.fill_hole

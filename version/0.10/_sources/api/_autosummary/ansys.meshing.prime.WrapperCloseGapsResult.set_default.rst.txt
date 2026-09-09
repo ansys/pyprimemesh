@@ -1,0 +1,11 @@
+set\_default
+============
+
+.. currentmodule:: ansys.meshing.prime
+
+.. automethod:: ansys.meshing.prime.WrapperCloseGapsResult.set_default
+
+.. minigallery::
+   :add-heading: Examples using WrapperCloseGapsResult.set_default
+
+   ansys.meshing.prime.WrapperCloseGapsResult.set_default

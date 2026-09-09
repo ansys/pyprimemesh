@@ -1,0 +1,51 @@
+.. vale off
+
+WrapperImproveQualityParams
+===========================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoclass:: WrapperImproveQualityParams
+   
+   
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+      :toctree:
+   
+      
+      WrapperImproveQualityParams.print_default
+      WrapperImproveQualityParams.set_default
+   
+   
+
+   
+   
+   .. rubric:: Attributes
+
+   .. autosummary::
+      :toctree:
+   
+      WrapperImproveQualityParams.aggressively
+      WrapperImproveQualityParams.geom_zonelets
+      WrapperImproveQualityParams.inflate_dihedral_face_nodes
+      WrapperImproveQualityParams.island_count
+      WrapperImproveQualityParams.island_tol
+      WrapperImproveQualityParams.number_of_threads
+      WrapperImproveQualityParams.overlap_count
+      WrapperImproveQualityParams.overlap_tol
+      WrapperImproveQualityParams.resolve_intersections
+      WrapperImproveQualityParams.resolve_invalid_node_normals
+      WrapperImproveQualityParams.resolve_spikes
+      WrapperImproveQualityParams.sharp_angle
+      WrapperImproveQualityParams.target_skewness
+   
+   
+
+.. minigallery::
+    :add-heading: Examples using WrapperImproveQualityParams
+
+    ansys.meshing.prime.WrapperImproveQualityParams
+
+.. vale on

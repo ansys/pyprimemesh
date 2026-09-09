@@ -1,0 +1,6 @@
+﻿delete\_mesh\_zonelets
+======================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoproperty:: DeleteTopoEntitiesParams.delete_mesh_zonelets

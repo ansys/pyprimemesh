@@ -1,0 +1,6 @@
+VT\_REPAIRSHARPCORNERANGLESFAILED
+=================================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoattribute:: ErrorCode.VT_REPAIRSHARPCORNERANGLESFAILED

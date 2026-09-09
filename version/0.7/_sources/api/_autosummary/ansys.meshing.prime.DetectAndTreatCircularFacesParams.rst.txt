@@ -1,0 +1,42 @@
+.. vale off
+
+DetectAndTreatCircularFacesParams
+=================================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoclass:: DetectAndTreatCircularFacesParams
+   
+   
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+      :toctree:
+   
+      
+      DetectAndTreatCircularFacesParams.print_default
+      DetectAndTreatCircularFacesParams.set_default
+   
+   
+
+   
+   
+   .. rubric:: Attributes
+
+   .. autosummary::
+      :toctree:
+   
+      DetectAndTreatCircularFacesParams.edge_mesh_constant_size
+      DetectAndTreatCircularFacesParams.merge_edge_allow_self_close
+      DetectAndTreatCircularFacesParams.merge_face_normals_angle
+      DetectAndTreatCircularFacesParams.surface_mesh_constant_size
+   
+   
+
+.. minigallery::
+    :add-heading: Examples using DetectAndTreatCircularFacesParams
+
+    ansys.meshing.prime.DetectAndTreatCircularFacesParams
+
+.. vale on

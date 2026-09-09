@@ -1,0 +1,42 @@
+.. vale off
+
+IGAUSplineSurf
+==============
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoclass:: IGAUSplineSurf
+   
+   
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+      :toctree:
+   
+      
+      IGAUSplineSurf.print_default
+      IGAUSplineSurf.set_default
+   
+   
+
+   
+   
+   .. rubric:: Attributes
+
+   .. autosummary::
+      :toctree:
+   
+      IGAUSplineSurf.average_mesh_size
+      IGAUSplineSurf.control_points
+      IGAUSplineSurf.deviation_array
+      IGAUSplineSurf.elements_count
+      IGAUSplineSurf.id
+      IGAUSplineSurf.invalid_jacobian_elements_count
+      IGAUSplineSurf.shell_thickness
+      IGAUSplineSurf.spline_points
+      IGAUSplineSurf.spline_refinement_level
+   
+   
+
+.. vale on

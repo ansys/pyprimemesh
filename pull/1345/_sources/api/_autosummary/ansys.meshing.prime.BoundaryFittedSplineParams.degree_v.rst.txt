@@ -1,0 +1,6 @@
+degree\_v
+=========
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoproperty:: BoundaryFittedSplineParams.degree_v

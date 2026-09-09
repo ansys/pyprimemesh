@@ -1,0 +1,31 @@
+.. vale off
+
+QuadToSpline
+============
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoclass:: QuadToSpline
+   
+   
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+      :toctree:
+   
+      
+      QuadToSpline.convert_quad_to_spline
+   
+   
+
+   
+   
+   
+
+.. minigallery::
+    :add-heading: Examples using QuadToSpline
+
+    ansys.meshing.prime.QuadToSpline
+
+.. vale on

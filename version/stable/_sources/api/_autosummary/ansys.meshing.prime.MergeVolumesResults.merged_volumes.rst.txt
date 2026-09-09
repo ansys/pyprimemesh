@@ -1,0 +1,6 @@
+merged\_volumes
+===============
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoproperty:: MergeVolumesResults.merged_volumes

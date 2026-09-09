@@ -1,0 +1,6 @@
+separate\_features
+==================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoproperty:: ExtractFeatureParams.separate_features

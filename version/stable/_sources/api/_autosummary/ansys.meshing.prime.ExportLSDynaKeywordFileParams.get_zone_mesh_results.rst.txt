@@ -1,0 +1,6 @@
+get\_zone\_mesh\_results
+========================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoproperty:: ExportLSDynaKeywordFileParams.get_zone_mesh_results

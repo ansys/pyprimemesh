@@ -1,0 +1,11 @@
+set\_default
+============
+
+.. currentmodule:: ansys.meshing.prime
+
+.. automethod:: ansys.meshing.prime.MeshStackerResults.set_default
+
+.. minigallery::
+   :add-heading: Examples using MeshStackerResults.set_default
+
+   ansys.meshing.prime.MeshStackerResults.set_default

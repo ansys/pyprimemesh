@@ -1,0 +1,31 @@
+.. vale off
+
+HexToSpline
+===========
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoclass:: HexToSpline
+
+   
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+      :toctree:
+   
+      
+      HexToSpline.convert_hex_to_spline
+   
+   
+
+   
+   
+   
+
+.. minigallery::
+    :add-heading: Examples using HexToSpline
+
+    ansys.meshing.prime.HexToSpline
+
+.. vale on

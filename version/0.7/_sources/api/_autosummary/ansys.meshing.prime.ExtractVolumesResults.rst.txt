@@ -1,0 +1,43 @@
+.. vale off
+
+ExtractVolumesResults
+=====================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoclass:: ExtractVolumesResults
+   
+   
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+      :toctree:
+   
+      
+      ExtractVolumesResults.print_default
+      ExtractVolumesResults.set_default
+   
+   
+
+   
+   
+   .. rubric:: Attributes
+
+   .. autosummary::
+      :toctree:
+   
+      ExtractVolumesResults.assigned_zone_name
+      ExtractVolumesResults.error_code
+      ExtractVolumesResults.face_zonelets_without_volumes
+      ExtractVolumesResults.volumes
+      ExtractVolumesResults.warning_codes
+   
+   
+
+.. minigallery::
+    :add-heading: Examples using ExtractVolumesResults
+
+    ansys.meshing.prime.ExtractVolumesResults
+
+.. vale on

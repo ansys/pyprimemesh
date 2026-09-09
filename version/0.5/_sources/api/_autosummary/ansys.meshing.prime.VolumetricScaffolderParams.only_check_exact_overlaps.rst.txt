@@ -1,0 +1,6 @@
+only\_check\_exact\_overlaps
+============================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoproperty:: VolumetricScaffolderParams.only_check_exact_overlaps

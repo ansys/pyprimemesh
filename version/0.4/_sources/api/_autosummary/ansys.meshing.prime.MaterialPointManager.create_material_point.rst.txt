@@ -1,0 +1,6 @@
+﻿create\_material\_point
+=======================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. automethod:: MaterialPointManager.create_material_point

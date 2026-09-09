@@ -1,0 +1,49 @@
+.. vale off
+
+VolumeFillType
+==============
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoclass:: VolumeFillType
+   
+   
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+      :toctree:
+   
+      VolumeFillType.conjugate
+      VolumeFillType.bit_length
+      VolumeFillType.bit_count
+      VolumeFillType.to_bytes
+      VolumeFillType.from_bytes
+      VolumeFillType.as_integer_ratio
+   
+   
+
+   
+   
+   .. rubric:: Attributes
+
+   .. autosummary::
+      :toctree:
+   
+      VolumeFillType.real
+      VolumeFillType.imag
+      VolumeFillType.numerator
+      VolumeFillType.denominator
+      VolumeFillType.TET
+      VolumeFillType.POLY
+      VolumeFillType.HEXCORETET
+      VolumeFillType.HEXCOREPOLY
+   
+   
+
+.. minigallery::
+    :add-heading: Examples using VolumeFillType
+
+    ansys.meshing.prime.VolumeFillType
+
+.. vale on

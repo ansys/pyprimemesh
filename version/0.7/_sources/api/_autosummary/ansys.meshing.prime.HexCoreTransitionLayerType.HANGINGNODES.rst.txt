@@ -1,0 +1,6 @@
+HANGINGNODES
+============
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoattribute:: HexCoreTransitionLayerType.HANGINGNODES

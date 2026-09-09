@@ -1,0 +1,6 @@
+﻿max\_hole\_size
+===============
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoproperty:: LeakPreventionParams.max_hole_size

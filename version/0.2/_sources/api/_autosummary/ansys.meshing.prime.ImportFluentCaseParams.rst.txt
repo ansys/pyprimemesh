@@ -1,0 +1,30 @@
+ImportFluentCaseParams
+======================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoclass:: ImportFluentCaseParams
+   
+   
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+      :toctree:
+   
+      
+      ImportFluentCaseParams.print_default
+      ImportFluentCaseParams.set_default
+   
+   
+
+   
+   
+   .. rubric:: Attributes
+
+   .. autosummary::
+      :toctree:
+   
+      ImportFluentCaseParams.append
+   
+   

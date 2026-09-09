@@ -1,0 +1,11 @@
+from\_bytes
+===========
+
+.. currentmodule:: ansys.meshing.prime
+
+.. automethod:: ansys.meshing.prime.CdbAnalysisType.from_bytes
+
+.. minigallery::
+   :add-heading: Examples using CdbAnalysisType.from_bytes
+
+   ansys.meshing.prime.CdbAnalysisType.from_bytes

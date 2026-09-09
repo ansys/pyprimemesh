@@ -1,0 +1,6 @@
+﻿IGA\_INCORRECTCONTROLPOINTSIZEWRTINPUT
+======================================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoattribute:: ErrorCode.IGA_INCORRECTCONTROLPOINTSIZEWRTINPUT

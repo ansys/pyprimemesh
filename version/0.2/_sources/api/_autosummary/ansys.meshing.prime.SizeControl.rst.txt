@@ -1,0 +1,45 @@
+SizeControl
+===========
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoclass:: SizeControl
+   
+   
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+      :toctree:
+   
+      
+      SizeControl.get_boi_sizing_params
+      SizeControl.get_curvature_sizing_params
+      SizeControl.get_hard_sizing_params
+      SizeControl.get_meshed_sizing_params
+      SizeControl.get_proximity_sizing_params
+      SizeControl.get_scope
+      SizeControl.get_soft_sizing_params
+      SizeControl.get_summary
+      SizeControl.set_boi_sizing_params
+      SizeControl.set_curvature_sizing_params
+      SizeControl.set_hard_sizing_params
+      SizeControl.set_meshed_sizing_params
+      SizeControl.set_proximity_sizing_params
+      SizeControl.set_scope
+      SizeControl.set_soft_sizing_params
+      SizeControl.set_suggested_name
+   
+   
+
+   
+   
+   .. rubric:: Attributes
+
+   .. autosummary::
+      :toctree:
+   
+      SizeControl.id
+      SizeControl.name
+   
+   

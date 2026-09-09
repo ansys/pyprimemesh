@@ -1,0 +1,11 @@
+is\_integer
+===========
+
+.. currentmodule:: ansys.meshing.prime
+
+.. automethod:: ansys.meshing.prime.BCPairType.is_integer
+
+.. minigallery::
+   :add-heading: Examples using BCPairType.is_integer
+
+   ansys.meshing.prime.BCPairType.is_integer

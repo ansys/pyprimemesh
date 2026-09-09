@@ -1,0 +1,1022 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Meshing a generic F1 car rear wing for external aero simulation &#8212; PyPrimeMesh</title>
+    
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../../_static/styles/theme.css?digest=e353d410970836974a52" rel="stylesheet" />
+<link href="../../../_static/styles/bootstrap.css?digest=e353d410970836974a52" rel="stylesheet" />
+<link href="../../../_static/styles/pydata-sphinx-theme.css?digest=e353d410970836974a52" rel="stylesheet" />
+
+  
+  <link href="../../../_static/vendor/fontawesome/6.1.2/css/all.min.css?digest=e353d410970836974a52" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../../../_static/vendor/fontawesome/6.1.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../../_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../../_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/jupyter-sphinx.css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/thebelab.css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/sg_gallery.css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/sg_gallery-binder.css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/sg_gallery-dataframe.css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/sg_gallery-rendered-html.css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/css/ansys_sphinx_theme.css" />
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.23/css/jquery.dataTables.min.css" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../../_static/scripts/bootstrap.js?digest=e353d410970836974a52" />
+<link rel="preload" as="script" href="../../../_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52" />
+
+    
+        <link href="../../../_static/css/breadcrumbs.css" rel="stylesheet">
+    
+    <script data-url_root="../../../" id="documentation_options" src="../../../_static/documentation_options.js"></script>
+    <script src="../../../_static/doctools.js"></script>
+    <script src="../../../_static/sphinx_highlight.js"></script>
+    <script src="../../../_static/clipboard.min.js"></script>
+    <script src="../../../_static/copybutton.js"></script>
+    <script src="../../../_static/thebelab-helper.js"></script>
+    <script src="../../../_static/js/table.js"></script>
+    <script src="https://cdn.datatables.net/1.10.23/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@jupyter-widgets/html-manager@^1.0.1/dist/embed-amd.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'examples/gallery_examples/gallery/08_lucid_generic_f1_rear_wing';</script>
+    <script>
+        DOCUMENTATION_OPTIONS.theme_switcher_json_url = 'https://prime.docs.pyansys.com/versions.json';
+        DOCUMENTATION_OPTIONS.theme_switcher_version_match = '0.4';
+        </script>
+    <link rel="icon" href="../../../_static/ansys-favicon.png"/>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" />
+    <link rel="next" title="Miscellaneous examples" href="../misc/index.html" />
+    <link rel="prev" title="Morphing a hexahedral mesh of a turbine blade to a new shape" href="06_blade_morph.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  <link rel="canonical" href="https://prime.docs.pyansys.com/version/stable/examples/gallery_examples/gallery/08_lucid_generic_f1_rear_wing.html" />
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <a class="skip-link" href="#main-content">Skip to main content</a>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__primary"
+          id="__primary"/>
+  <label class="overlay overlay-primary" for="__primary"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__secondary"
+          id="__secondary"/>
+  <label class="overlay overlay-secondary" for="__secondary"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container"><!-- Debugging: html_theme_options =  -->
+
+  <!-- If there is no MiliSearch enabled, use the PyData search -->
+<form class="bd-search d-flex align-items-center"
+      action="../../../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search the docs ..."
+         aria-label="Search the docs ..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form>
+</div>
+  </div>
+  
+    
+    <nav class="bd-header navbar navbar-expand-lg bd-navbar">
+<div class="bd-header__inner bd-page-width">
+  <label class="sidebar-toggle primary-toggle" for="__primary">
+    <span class="fa-solid fa-bars"></span>
+  </label>
+  
+  <div class="navbar-header-items__start">
+    
+      <div class="navbar-item">
+  
+
+<a class="navbar-brand logo" href="../../../index.html">
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../../../_static/pyansys-logo-black-cropped.png" class="logo__image only-light" alt="Logo image"/>
+    <script>document.write(`<img src="../../../_static/pyansys-logo-black-cropped.png" class="logo__image only-dark" alt="Logo image"/>`);</script>
+  
+  
+</a></div>
+    
+  </div>
+  
+  
+  <div class="col-lg-9 navbar-header-items">
+    
+    <div class="me-auto navbar-header-items__center">
+      
+        <div class="navbar-item"><nav class="navbar-nav">
+  <p class="sidebar-header-items__title"
+     role="heading"
+     aria-level="1"
+     aria-label="Site Navigation">
+    Site Navigation
+  </p>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../../../getting_started/index.html">
+                        Getting started
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../../../user_guide/index.html">
+                        User guide
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../../index.html">
+                        Examples
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../../../api/index.html">
+                        API reference
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../../../contributing/index.html">
+                        Contribute
+                      </a>
+                    </li>
+                
+  </ul>
+</nav></div>
+      
+    </div>
+    
+    
+    <div class="navbar-header-items__end">
+      
+        <div class="navbar-item navbar-persistent--container">
+          
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+  </button>
+`);
+</script>
+        </div>
+      
+      
+        <div class="navbar-item">
+<script>
+document.write(`
+  <div class="version-switcher__container dropdown">
+    <button type="button" class="version-switcher__button btn btn-sm navbar-btn dropdown-toggle" data-bs-toggle="dropdown">
+      0.4  <!-- this text may get changed later by javascript -->
+      <span class="caret"></span>
+    </button>
+    <div class="version-switcher__menu dropdown-menu list-group-flush py-0">
+    <!-- dropdown will be populated by javascript on page load -->
+    </div>
+  </div>
+`);
+</script></div>
+      
+        <div class="navbar-item">
+<script>
+document.write(`
+  <button class="theme-switch-button btn btn-sm btn-outline-primary navbar-btn rounded-circle" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch" data-mode="light"><i class="fa-solid fa-sun"></i></span>
+    <span class="theme-switch" data-mode="dark"><i class="fa-solid fa-moon"></i></span>
+    <span class="theme-switch" data-mode="auto"><i class="fa-solid fa-circle-half-stroke"></i></span>
+  </button>
+`);
+</script></div>
+      
+        <div class="navbar-item"><ul class="navbar-icon-links navbar-nav"
+    aria-label="Icon Links">
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/ansys/pyprimemesh" title="GitHub" class="nav-link" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><span><i class="fa-brands fa-square-github"></i></span>
+            <label class="sr-only">GitHub</label></a>
+        </li>
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/ansys/pyprimemesh/discussions" title="Support" class="nav-link" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><span><i class="fa fa-comment fa-fw"></i></span>
+            <label class="sr-only">Support</label></a>
+        </li>
+</ul></div>
+      
+    </div>
+    
+  </div>
+  
+  
+    <div class="navbar-persistent--mobile">
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+  </button>
+`);
+</script>
+    </div>
+  
+
+  
+    <label class="sidebar-toggle secondary-toggle" for="__secondary">
+      <span class="fa-solid fa-outdent"></span>
+    </label>
+  
+</div>
+
+    </nav>
+  
+
+    
+    <div id="announcement_msg"></div>
+<script>
+  fetch("announcement.html")
+    .then((response) => {
+      if (!response.ok) {
+        throw new Error(`HTTP error: ${response.status}`);
+      }
+      return response.text();
+    })
+    .then(text => document.getElementById("announcement_msg").innerHTML = text)
+    .catch((error) => console.error(`Fetch problem: ${error.message}`));
+</script>
+    
+
+    
+    <div class="container-xl">
+    <div class="row">
+        <div class="col-12 col-md-3" id="breadcrumbs-spacer"></div>
+        <div class="col-12 col-md-11 col-xl-9" id="breadcrumbs">
+          
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+    
+        <li class="nav-item nav-item-additional-breadcrumb"><a href="https://docs.pyansys.com/">PyAnsys</a> » </li>
+    
+    
+        <li class="nav-item nav-item-0"><a href="../../../index.html">PyPrimeMesh</a> » </li>
+    
+
+          <li class="nav-item nav-item-1"><a href="../../index.html" >Examples</a> » </li>
+          <li class="nav-item nav-item-2"><a href="index.html" accesskey="U">Examples</a> » </li>
+        <li class="nav-item nav-item-this"><a href="">Meshing a generic F1 car rear wing for external aero simulation</a></li> 
+      </ul>
+    </div>
+        </div>
+  </div>
+</div>
+    
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+      <div class="sidebar-header-items__center">
+        
+          <div class="navbar-item"><nav class="navbar-nav">
+  <p class="sidebar-header-items__title"
+     role="heading"
+     aria-level="1"
+     aria-label="Site Navigation">
+    Site Navigation
+  </p>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../../../getting_started/index.html">
+                        Getting started
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../../../user_guide/index.html">
+                        User guide
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../../index.html">
+                        Examples
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../../../api/index.html">
+                        API reference
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../../../contributing/index.html">
+                        Contribute
+                      </a>
+                    </li>
+                
+  </ul>
+</nav></div>
+        
+      </div>
+    
+    
+    
+      <div class="sidebar-header-items__end">
+        
+          <div class="navbar-item">
+<script>
+document.write(`
+  <div class="version-switcher__container dropdown">
+    <button type="button" class="version-switcher__button btn btn-sm navbar-btn dropdown-toggle" data-bs-toggle="dropdown">
+      0.4  <!-- this text may get changed later by javascript -->
+      <span class="caret"></span>
+    </button>
+    <div class="version-switcher__menu dropdown-menu list-group-flush py-0">
+    <!-- dropdown will be populated by javascript on page load -->
+    </div>
+  </div>
+`);
+</script></div>
+        
+          <div class="navbar-item">
+<script>
+document.write(`
+  <button class="theme-switch-button btn btn-sm btn-outline-primary navbar-btn rounded-circle" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch" data-mode="light"><i class="fa-solid fa-sun"></i></span>
+    <span class="theme-switch" data-mode="dark"><i class="fa-solid fa-moon"></i></span>
+    <span class="theme-switch" data-mode="auto"><i class="fa-solid fa-circle-half-stroke"></i></span>
+  </button>
+`);
+</script></div>
+        
+          <div class="navbar-item"><ul class="navbar-icon-links navbar-nav"
+    aria-label="Icon Links">
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/ansys/pyprimemesh" title="GitHub" class="nav-link" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><span><i class="fa-brands fa-square-github"></i></span>
+            <label class="sr-only">GitHub</label></a>
+        </li>
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/ansys/pyprimemesh/discussions" title="Support" class="nav-link" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><span><i class="fa fa-comment fa-fw"></i></span>
+            <label class="sr-only">Support</label></a>
+        </li>
+</ul></div>
+        
+      </div>
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item"><nav class="bd-docs-nav bd-links"
+     aria-label="Section Navigation">
+  <p class="bd-links__title" role="heading" aria-level="1">Section Navigation</p>
+  <div class="bd-toc-item navbar-nav"><ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="01_bracket_scaffold.html">Meshing a mid-surfaced bracket for a structural analysis</a></li>
+<li class="toctree-l1"><a class="reference internal" href="02_lucid_mixing_elbow.html">Meshing a mixing elbow for a flow analysis</a></li>
+<li class="toctree-l1"><a class="reference internal" href="03_lucid_pipe_tee.html">Meshing a pipe T-section for structural thermal and fluid flow analysis</a></li>
+<li class="toctree-l1"><a class="reference internal" href="04_lucid_toy_car.html">Wrapping a toy car for a flow analysis</a></li>
+<li class="toctree-l1"><a class="reference internal" href="05_pcb_stacker.html">Meshing a PCB for structural thermal analysis</a></li>
+<li class="toctree-l1"><a class="reference internal" href="06_blade_morph.html">Morphing a hexahedral mesh of a turbine blade to a new shape</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Meshing a generic F1 car rear wing for external aero simulation</a></li>
+</ul>
+</div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main">
+        
+        
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article"></div>
+              
+              
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article" role="main">
+                  
+  <div class="sphx-glr-download-link-note admonition note">
+<p class="admonition-title">Note</p>
+<p><a class="reference internal" href="#sphx-glr-download-examples-gallery-examples-gallery-08-lucid-generic-f1-rear-wing-py"><span class="std std-ref">Go to the end</span></a>
+to download the full example code</p>
+</div>
+<section class="sphx-glr-example-title" id="meshing-a-generic-f1-car-rear-wing-for-external-aero-simulation">
+<span id="ref-generic-f1-rw"></span><span id="sphx-glr-examples-gallery-examples-gallery-08-lucid-generic-f1-rear-wing-py"></span><h1>Meshing a generic F1 car rear wing for external aero simulation<a class="headerlink" href="#meshing-a-generic-f1-car-rear-wing-for-external-aero-simulation" title="Permalink to this heading">#</a></h1>
+<p><strong>Summary</strong>: This example showcases the process of generating a mesh for a generic F1 rear wing
+STL file model.</p>
+<section id="objective">
+<h2>Objective<a class="headerlink" href="#objective" title="Permalink to this heading">#</a></h2>
+<p>The example demonstrates how to connect various parts of a rear wing from
+a generic F1 car and volume mesh the resulting model using a poly-hexcore mesh containing prisms.
+To simplify the process and enhance convenience, multiple meshing utilities provided in the
+“lucid” class are used.</p>
+<a class="reference internal image-reference" href="../../../_images/generic_rear_wing.png"><img alt="Generic F1 rear wing." class="align-center" src="../../../_images/generic_rear_wing.png" style="width: 800px;" /></a>
+</section>
+<section id="procedure">
+<h2>Procedure<a class="headerlink" href="#procedure" title="Permalink to this heading">#</a></h2>
+<ul class="simple">
+<li><p>Launch an Ansys Prime Server instance and instantiate the meshing utilities
+from the <code class="docutils literal notranslate"><span class="pre">lucid</span></code> class.</p></li>
+<li><p>Import and append the STL geometry files for each part of the F1 rear wing.</p></li>
+<li><p>Merge all imported components into a single part.</p></li>
+<li><p>Use the connect operation to join the components together.</p></li>
+<li><p>Define local size controls on aero surfaces.</p></li>
+<li><p>Generate a surface mesh with curvature sizing.</p></li>
+<li><p>Compute volume zones and define fluid zone type.</p></li>
+<li><p>Define boundary layer definition.</p></li>
+<li><p>Generate a volume mesh using poly-hexcore elements and apply boundary layer refinement.</p></li>
+<li><p>Print statistics on the generated mesh.</p></li>
+<li><p>Write a <cite>.cas</cite> file for use in the Fluent solver.</p></li>
+<li><p>Exit the PyPrimeMesh session.</p></li>
+</ul>
+</section>
+<section id="launch-ansys-prime-server">
+<h2>Launch Ansys Prime Server<a class="headerlink" href="#launch-ansys-prime-server" title="Permalink to this heading">#</a></h2>
+<p>Import all necessary modules.
+Launch an instance of Ansys Prime Server.
+Connect the PyPrimeMesh client and get the model.
+Instantiate meshing utilities from the <code class="docutils literal notranslate"><span class="pre">lucid</span></code> class.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">os</span>
+<span class="kn">import</span> <span class="nn">tempfile</span>
+
+<span class="kn">import</span> <span class="nn">ansys.meshing.prime</span> <span class="k">as</span> <span class="nn">prime</span>
+<span class="kn">from</span> <span class="nn">ansys.meshing.prime.graphics</span> <span class="kn">import</span> <span class="n">Graphics</span>
+
+<span class="n">prime_client</span> <span class="o">=</span> <span class="n">prime</span><span class="o">.</span><span class="n">launch_prime</span><span class="p">()</span>
+<span class="n">model</span> <span class="o">=</span> <span class="n">prime_client</span><span class="o">.</span><span class="n">model</span>
+<span class="n">mesh_util</span> <span class="o">=</span> <span class="n">prime</span><span class="o">.</span><span class="n">lucid</span><span class="o">.</span><span class="n">Mesh</span><span class="p">(</span><span class="n">model</span><span class="o">=</span><span class="n">model</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<section id="import-geometry">
+<h2>Import geometry<a class="headerlink" href="#import-geometry" title="Permalink to this heading">#</a></h2>
+<p>Download the generic F1 rear wing geometries (stl files).
+Import each geometry and append to the model.
+Display the imported geometry.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><a href="https://docs.python.org/dev/library/stdtypes.html#str" title="builtins.str" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">f1_rw_drs</span></a> <span class="o">=</span> <span class="n">prime</span><span class="o">.</span><span class="n">examples</span><span class="o">.</span><span class="n">download_f1_rw_drs_stl</span><span class="p">()</span>
+<a href="https://docs.python.org/dev/library/stdtypes.html#str" title="builtins.str" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">f1_rw_enclosure</span></a> <span class="o">=</span> <span class="n">prime</span><span class="o">.</span><span class="n">examples</span><span class="o">.</span><span class="n">download_f1_rw_enclosure_stl</span><span class="p">()</span>
+<a href="https://docs.python.org/dev/library/stdtypes.html#str" title="builtins.str" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">f1_rw_end_plates</span></a> <span class="o">=</span> <span class="n">prime</span><span class="o">.</span><span class="n">examples</span><span class="o">.</span><span class="n">download_f1_rw_end_plates_stl</span><span class="p">()</span>
+<a href="https://docs.python.org/dev/library/stdtypes.html#str" title="builtins.str" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">f1_rw_main_plane</span></a> <span class="o">=</span> <span class="n">prime</span><span class="o">.</span><span class="n">examples</span><span class="o">.</span><span class="n">download_f1_rw_main_plane_stl</span><span class="p">()</span>
+
+<span class="k">for</span> <a href="https://docs.python.org/dev/library/stdtypes.html#str" title="builtins.str" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">file_name</span></a> <span class="ow">in</span> <span class="p">[</span><a href="https://docs.python.org/dev/library/stdtypes.html#str" title="builtins.str" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">f1_rw_drs</span></a><span class="p">,</span> <a href="https://docs.python.org/dev/library/stdtypes.html#str" title="builtins.str" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">f1_rw_enclosure</span></a><span class="p">,</span> <a href="https://docs.python.org/dev/library/stdtypes.html#str" title="builtins.str" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">f1_rw_end_plates</span></a><span class="p">,</span> <a href="https://docs.python.org/dev/library/stdtypes.html#str" title="builtins.str" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">f1_rw_main_plane</span></a><span class="p">]:</span>
+    <span class="n">mesh_util</span><span class="o">.</span><span class="n">read</span><span class="p">(</span><a href="https://docs.python.org/dev/library/stdtypes.html#str" title="builtins.str" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">file_name</span></a><span class="p">,</span> <span class="n">append</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+<span class="c1"># display the rear wing geometry without the enclosure</span>
+<span class="n">display</span> <span class="o">=</span> <span class="n">Graphics</span><span class="p">(</span><span class="n">model</span><span class="p">)</span>
+<span class="n">scope</span> <span class="o">=</span> <span class="n">prime</span><span class="o">.</span><span class="n">ScopeDefinition</span><span class="p">(</span><span class="n">model</span><span class="p">,</span> <span class="n">part_expression</span><span class="o">=</span><span class="s2">&quot;* !*enclosure*&quot;</span><span class="p">)</span>
+<span class="n">display</span><span class="p">(</span><span class="n">scope</span><span class="o">=</span><span class="n">scope</span><span class="p">)</span>
+</pre></div>
+</div>
+<img src="../../../_images/sphx_glr_08_lucid_generic_f1_rear_wing_001.png" srcset="../../../_images/sphx_glr_08_lucid_generic_f1_rear_wing_001.png" alt="08 lucid generic f1 rear wing" class = "sphx-glr-single-img"/></section>
+<section id="merge-parts">
+<h2>Merge parts<a class="headerlink" href="#merge-parts" title="Permalink to this heading">#</a></h2>
+<p>Establish the global size parameter to regulate mesh refinement.
+Merge all individual parts into a unified part named <cite>f1_car_rear_wing</cite>.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># Define global sizes</span>
+<span class="n">model</span><span class="o">.</span><span class="n">set_global_sizing_params</span><span class="p">(</span><span class="n">prime</span><span class="o">.</span><span class="n">GlobalSizingParams</span><span class="p">(</span><span class="n">model</span><span class="p">,</span> <span class="nb">min</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span> <span class="nb">max</span><span class="o">=</span><span class="mi">32</span><span class="p">,</span> <span class="n">growth_rate</span><span class="o">=</span><span class="mf">1.2</span><span class="p">))</span>
+
+<span class="c1"># Create label per part</span>
+<span class="k">for</span> <span class="n">part</span> <span class="ow">in</span> <span class="n">model</span><span class="o">.</span><span class="n">parts</span><span class="p">:</span>
+    <span class="n">part</span><span class="o">.</span><span class="n">add_labels_on_zonelets</span><span class="p">([</span><span class="n">part</span><span class="o">.</span><span class="n">name</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;.&quot;</span><span class="p">)[</span><span class="mi">0</span><span class="p">]],</span> <span class="n">part</span><span class="o">.</span><span class="n">get_face_zonelets</span><span class="p">())</span>
+
+<span class="c1"># Merge parts</span>
+<span class="n">merge_params</span> <span class="o">=</span> <span class="n">prime</span><span class="o">.</span><span class="n">MergePartsParams</span><span class="p">(</span><span class="n">model</span><span class="p">,</span> <span class="n">merged_part_suggested_name</span><span class="o">=</span><span class="s2">&quot;f1_car_rear_wing&quot;</span><span class="p">)</span>
+<span class="n">merge_result</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">merge_parts</span><span class="p">([</span><span class="n">part</span><span class="o">.</span><span class="n">id</span> <span class="k">for</span> <span class="n">part</span> <span class="ow">in</span> <span class="n">model</span><span class="o">.</span><span class="n">parts</span><span class="p">],</span> <span class="n">merge_params</span><span class="p">)</span>
+<span class="n">part</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">get_part_by_name</span><span class="p">(</span><span class="n">merge_result</span><span class="o">.</span><span class="n">merged_part_assigned_name</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<section id="mesh-connect">
+<h2>Mesh connect<a class="headerlink" href="#mesh-connect" title="Permalink to this heading">#</a></h2>
+<p>In order to generate a volume mesh for a closed domain, it is necessary to ensure
+that the components of the rear wing are properly connected.
+To achieve this, perform a connect operation using labels to join the components of
+the rear wing.
+Afterward, inspect the mesh to detect any edges that are not connected.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># Connect faces</span>
+<span class="n">mesh_util</span><span class="o">.</span><span class="n">connect_faces</span><span class="p">(</span><span class="n">part</span><span class="o">.</span><span class="n">name</span><span class="p">,</span> <span class="n">face_labels</span><span class="o">=</span><span class="s2">&quot;*&quot;</span><span class="p">,</span> <span class="n">target_face_labels</span><span class="o">=</span><span class="s2">&quot;*&quot;</span><span class="p">,</span> <span class="n">tolerance</span><span class="o">=</span><span class="mf">0.02</span><span class="p">)</span>
+
+<span class="c1"># Diagnostics</span>
+<span class="n">surf_diag</span> <span class="o">=</span> <span class="n">prime</span><span class="o">.</span><span class="n">SurfaceSearch</span><span class="p">(</span><span class="n">model</span><span class="p">)</span>
+<span class="n">surf_report</span> <span class="o">=</span> <span class="n">surf_diag</span><span class="o">.</span><span class="n">get_surface_diagnostic_summary</span><span class="p">(</span>
+    <span class="n">prime</span><span class="o">.</span><span class="n">SurfaceDiagnosticSummaryParams</span><span class="p">(</span>
+        <span class="n">model</span><span class="p">,</span>
+        <span class="n">compute_free_edges</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+        <span class="n">compute_self_intersections</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+    <span class="p">)</span>
+<span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Total number of free edges present is </span><span class="si">{</span><span class="n">surf_report</span><span class="o">.</span><span class="n">n_free_edges</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>Total number of free edges present is 0
+</pre></div>
+</div>
+</section>
+<section id="define-local-size-control-and-generate-size-field">
+<h2>Define local size-control and generate size-field<a class="headerlink" href="#define-local-size-control-and-generate-size-field" title="Permalink to this heading">#</a></h2>
+<p>In order to accurately represent the physics of the DRS wing, a limitation of 8 mm
+is imposed on the mesh size of the wing.
+This is accomplished by implementing curvature size control, which refines the
+mesh according to the curvature of the DRS surfaces.
+Additionally, to accurately capture the curved surfaces of other sections of the
+wing, curvature control is defined with a normal angle of 18 degrees.
+These controls are used during surface mesh generation.
+A volumetric size-field is then computed based on the defined size controls.
+The volumetric size-field plays a crucial role in controlling
+the growth and refinement of the volume mesh.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># Local curvature size control for DRS</span>
+<span class="n">curv_size_control</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">control_data</span><span class="o">.</span><span class="n">create_size_control</span><span class="p">(</span><span class="n">prime</span><span class="o">.</span><span class="n">SizingType</span><span class="o">.</span><span class="n">CURVATURE</span><span class="p">)</span>
+<span class="n">curv_size_params</span> <span class="o">=</span> <span class="n">prime</span><span class="o">.</span><span class="n">CurvatureSizingParams</span><span class="p">(</span><span class="n">model</span><span class="p">,</span> <span class="n">normal_angle</span><span class="o">=</span><span class="mi">18</span><span class="p">,</span> <span class="nb">max</span><span class="o">=</span><span class="mi">4</span><span class="p">)</span>
+<span class="n">curv_size_control</span><span class="o">.</span><span class="n">set_curvature_sizing_params</span><span class="p">(</span><span class="n">curv_size_params</span><span class="p">)</span>
+<span class="n">curv_scope</span> <span class="o">=</span> <span class="n">prime</span><span class="o">.</span><span class="n">ScopeDefinition</span><span class="p">(</span>
+    <span class="n">model</span><span class="p">,</span>
+    <span class="n">entity_type</span><span class="o">=</span><span class="n">prime</span><span class="o">.</span><span class="n">ScopeEntity</span><span class="o">.</span><span class="n">FACEZONELETS</span><span class="p">,</span>
+    <span class="n">part_expression</span><span class="o">=</span><span class="s2">&quot;f1_car_rear_wing*&quot;</span><span class="p">,</span>
+    <span class="n">label_expression</span><span class="o">=</span><span class="s2">&quot;*drs*&quot;</span><span class="p">,</span>
+<span class="p">)</span>
+<span class="n">curv_size_control</span><span class="o">.</span><span class="n">set_scope</span><span class="p">(</span><span class="n">curv_scope</span><span class="p">)</span>
+<span class="n">curv_size_control</span><span class="o">.</span><span class="n">set_suggested_name</span><span class="p">(</span><span class="s2">&quot;curvature_drs&quot;</span><span class="p">)</span>
+
+<span class="c1"># Global curvature size control on all face zones of the rear wing</span>
+<span class="n">curv_size_control_global</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">control_data</span><span class="o">.</span><span class="n">create_size_control</span><span class="p">(</span><span class="n">prime</span><span class="o">.</span><span class="n">SizingType</span><span class="o">.</span><span class="n">CURVATURE</span><span class="p">)</span>
+<span class="n">curv_size_params_global</span> <span class="o">=</span> <span class="n">prime</span><span class="o">.</span><span class="n">CurvatureSizingParams</span><span class="p">(</span><span class="n">model</span><span class="p">,</span> <span class="n">normal_angle</span><span class="o">=</span><span class="mi">18</span><span class="p">,</span> <span class="nb">min</span><span class="o">=</span><span class="mi">8</span><span class="p">)</span>
+<span class="n">curv_size_control_global</span><span class="o">.</span><span class="n">set_curvature_sizing_params</span><span class="p">(</span><span class="n">curv_size_params_global</span><span class="p">)</span>
+<span class="n">curv_scope</span> <span class="o">=</span> <span class="n">prime</span><span class="o">.</span><span class="n">ScopeDefinition</span><span class="p">(</span>
+    <span class="n">model</span><span class="p">,</span>
+    <span class="n">entity_type</span><span class="o">=</span><span class="n">prime</span><span class="o">.</span><span class="n">ScopeEntity</span><span class="o">.</span><span class="n">FACEZONELETS</span><span class="p">,</span>
+    <span class="n">part_expression</span><span class="o">=</span><span class="s2">&quot;f1_car_rear_wing*&quot;</span><span class="p">,</span>
+<span class="p">)</span>
+<span class="n">curv_size_control_global</span><span class="o">.</span><span class="n">set_scope</span><span class="p">(</span><span class="n">curv_scope</span><span class="p">)</span>
+<span class="n">curv_size_control_global</span><span class="o">.</span><span class="n">set_suggested_name</span><span class="p">(</span><span class="s2">&quot;curvature_global&quot;</span><span class="p">)</span>
+
+<span class="c1"># Compute volumetric sizefield</span>
+<span class="n">compute_size</span> <span class="o">=</span> <span class="n">prime</span><span class="o">.</span><span class="n">SizeField</span><span class="p">(</span><span class="n">model</span><span class="p">)</span>
+<span class="n">vol_sf_params</span> <span class="o">=</span> <span class="n">prime</span><span class="o">.</span><span class="n">VolumetricSizeFieldComputeParams</span><span class="p">(</span><span class="n">model</span><span class="p">)</span>
+<span class="n">compute_size</span><span class="o">.</span><span class="n">compute_volumetric</span><span class="p">(</span>
+    <span class="p">[</span><span class="n">curv_size_control</span><span class="o">.</span><span class="n">id</span><span class="p">,</span> <span class="n">curv_size_control_global</span><span class="o">.</span><span class="n">id</span><span class="p">],</span> <span class="n">volumetric_sizefield_params</span><span class="o">=</span><span class="n">vol_sf_params</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+<div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>&lt;ansys.meshing.prime.autogen.sizefieldstructs.VolumetricSizeFieldComputeResults object at 0x7f833420f1f0&gt;
+</pre></div>
+</div>
+</section>
+<section id="generate-surface-mesh">
+<h2>Generate surface mesh<a class="headerlink" href="#generate-surface-mesh" title="Permalink to this heading">#</a></h2>
+<p>Create a surface mesh for the rear wing using the defined size controls.
+To facilitate the definition of boundary conditions on the surfaces in the solver,
+generate face zones by utilizing the existing labels found in the rear wing model.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">mesh_util</span><span class="o">.</span><span class="n">surface_mesh_with_size_controls</span><span class="p">(</span><span class="n">size_control_names</span><span class="o">=</span><span class="s2">&quot;*curvature*&quot;</span><span class="p">)</span>
+<span class="n">scope</span> <span class="o">=</span> <span class="n">prime</span><span class="o">.</span><span class="n">ScopeDefinition</span><span class="p">(</span><span class="n">model</span><span class="p">,</span> <span class="n">label_expression</span><span class="o">=</span><span class="s2">&quot;* !*enclosure*&quot;</span><span class="p">)</span>
+<span class="n">display</span><span class="p">(</span><span class="n">scope</span><span class="o">=</span><span class="n">scope</span><span class="p">)</span>
+
+<span class="c1"># Create face zones per label</span>
+<span class="k">for</span> <a href="https://docs.python.org/dev/library/stdtypes.html#str" title="builtins.str" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">label</span></a> <span class="ow">in</span> <span class="n">part</span><span class="o">.</span><span class="n">get_labels</span><span class="p">():</span>
+    <span class="n">mesh_util</span><span class="o">.</span><span class="n">create_zones_from_labels</span><span class="p">(</span><span class="n">label_expression</span><span class="o">=</span><a href="https://docs.python.org/dev/library/stdtypes.html#str" title="builtins.str" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">label</span></a><span class="p">)</span>
+</pre></div>
+</div>
+<img src="../../../_images/sphx_glr_08_lucid_generic_f1_rear_wing_002.png" srcset="../../../_images/sphx_glr_08_lucid_generic_f1_rear_wing_002.png" alt="08 lucid generic f1 rear wing" class = "sphx-glr-single-img"/></section>
+<section id="compute-volumetric-regions">
+<h2>Compute volumetric regions<a class="headerlink" href="#compute-volumetric-regions" title="Permalink to this heading">#</a></h2>
+<p>Compute the volume zones.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">mesh_util</span><span class="o">.</span><span class="n">compute_volumes</span><span class="p">(</span><span class="n">part_expression</span><span class="o">=</span><span class="n">part</span><span class="o">.</span><span class="n">name</span><span class="p">,</span> <span class="n">create_zones_per_volume</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<section id="define-volume-controls">
+<h2>Define volume controls<a class="headerlink" href="#define-volume-controls" title="Permalink to this heading">#</a></h2>
+<p>In order to prevent the generation of a volume mesh within the solid wing,
+the type of a volume zone within the rear wing can be defined as “dead”.
+To accomplish this, Volume Control is utilized to assign the type for the
+specific volume zone.
+Expressions are employed to define the volume zones that need to be filled, with
+“* !f1_rw_enclosure” indicating that it applies to all volume zones except
+for “f1_rw_enclosure”.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">volume_control</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">control_data</span><span class="o">.</span><span class="n">create_volume_control</span><span class="p">()</span>
+<span class="n">volume_control</span><span class="o">.</span><span class="n">set_params</span><span class="p">(</span>
+    <span class="n">prime</span><span class="o">.</span><span class="n">VolumeControlParams</span><span class="p">(</span>
+        <span class="n">model</span><span class="p">,</span>
+        <span class="n">cell_zonelet_type</span><span class="o">=</span><span class="n">prime</span><span class="o">.</span><span class="n">CellZoneletType</span><span class="o">.</span><span class="n">DEAD</span><span class="p">,</span>
+    <span class="p">)</span>
+<span class="p">)</span>
+<span class="n">volume_control</span><span class="o">.</span><span class="n">set_scope</span><span class="p">(</span>
+    <span class="n">prime</span><span class="o">.</span><span class="n">ScopeDefinition</span><span class="p">(</span>
+        <span class="n">model</span><span class="p">,</span> <span class="n">evaluation_type</span><span class="o">=</span><span class="n">prime</span><span class="o">.</span><span class="n">ScopeEvaluationType</span><span class="o">.</span><span class="n">ZONES</span><span class="p">,</span> <span class="n">zone_expression</span><span class="o">=</span><span class="s2">&quot;* !f1_rw_enclosure&quot;</span>
+    <span class="p">)</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+<div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>&lt;ansys.meshing.prime.autogen.controlstructs.SetScopeResults object at 0x7f8334318ac0&gt;
+</pre></div>
+</div>
+</section>
+<section id="define-prism-controls">
+<h2>Define prism controls<a class="headerlink" href="#define-prism-controls" title="Permalink to this heading">#</a></h2>
+<p>A prism control can be used to define inflation layers on the external aero surfaces.
+Specify the aero surfaces using labels, here prism scope is defined on zones associated
+with labels <code class="docutils literal notranslate"><span class="pre">*drs*</span></code> and <code class="docutils literal notranslate"><span class="pre">*plane*</span></code>.
+The growth for the prism layer is controlled by defining the offset type to
+be <code class="docutils literal notranslate"><span class="pre">uniform</span></code> with a first height of 0.5mm .</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">prism_control</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">control_data</span><span class="o">.</span><span class="n">create_prism_control</span><span class="p">()</span>
+<span class="n">prism_control</span><span class="o">.</span><span class="n">set_surface_scope</span><span class="p">(</span>
+    <span class="n">prime</span><span class="o">.</span><span class="n">ScopeDefinition</span><span class="p">(</span>
+        <span class="n">model</span><span class="p">,</span>
+        <span class="n">evaluation_type</span><span class="o">=</span><span class="n">prime</span><span class="o">.</span><span class="n">ScopeEvaluationType</span><span class="o">.</span><span class="n">LABELS</span><span class="p">,</span>
+        <span class="n">entity_type</span><span class="o">=</span><span class="n">prime</span><span class="o">.</span><span class="n">ScopeEntity</span><span class="o">.</span><span class="n">FACEZONELETS</span><span class="p">,</span>
+        <span class="n">label_expression</span><span class="o">=</span><span class="s2">&quot;*drs*, *plane*&quot;</span><span class="p">,</span>
+    <span class="p">)</span>
+<span class="p">)</span>
+<span class="n">prism_control</span><span class="o">.</span><span class="n">set_volume_scope</span><span class="p">(</span>
+    <span class="n">prime</span><span class="o">.</span><span class="n">ScopeDefinition</span><span class="p">(</span>
+        <span class="n">model</span><span class="p">,</span>
+        <span class="n">evaluation_type</span><span class="o">=</span><span class="n">prime</span><span class="o">.</span><span class="n">ScopeEvaluationType</span><span class="o">.</span><span class="n">ZONES</span><span class="p">,</span>
+        <span class="n">entity_type</span><span class="o">=</span><span class="n">prime</span><span class="o">.</span><span class="n">ScopeEntity</span><span class="o">.</span><span class="n">VOLUME</span><span class="p">,</span>
+        <span class="n">zone_expression</span><span class="o">=</span><span class="s2">&quot;*f1_rw_enclosure*&quot;</span><span class="p">,</span>
+    <span class="p">)</span>
+<span class="p">)</span>
+<span class="n">prism_control</span><span class="o">.</span><span class="n">set_growth_params</span><span class="p">(</span>
+    <span class="n">prime</span><span class="o">.</span><span class="n">PrismControlGrowthParams</span><span class="p">(</span>
+        <span class="n">model</span><span class="p">,</span>
+        <span class="n">offset_type</span><span class="o">=</span><span class="n">prime</span><span class="o">.</span><span class="n">PrismControlOffsetType</span><span class="o">.</span><span class="n">UNIFORM</span><span class="p">,</span>
+        <span class="n">n_layers</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span>
+        <span class="n">first_height</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span>
+        <span class="n">growth_rate</span><span class="o">=</span><span class="mf">1.2</span><span class="p">,</span>
+    <span class="p">)</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<section id="generate-volume-mesh">
+<h2>Generate volume mesh<a class="headerlink" href="#generate-volume-mesh" title="Permalink to this heading">#</a></h2>
+<p>Volume mesh with hexcore polyhedral elements and boundary layer refinement.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">volume_mesh</span> <span class="o">=</span> <span class="n">prime</span><span class="o">.</span><span class="n">AutoMesh</span><span class="p">(</span><span class="n">model</span><span class="p">)</span>
+<span class="n">auto_mesh_param</span> <span class="o">=</span> <span class="n">prime</span><span class="o">.</span><span class="n">AutoMeshParams</span><span class="p">(</span>
+    <span class="n">model</span><span class="p">,</span>
+    <span class="n">prism_control_ids</span><span class="o">=</span><span class="p">[</span><span class="n">prism_control</span><span class="o">.</span><span class="n">id</span><span class="p">],</span>
+    <span class="n">size_field_type</span><span class="o">=</span><span class="n">prime</span><span class="o">.</span><span class="n">SizeFieldType</span><span class="o">.</span><span class="n">VOLUMETRIC</span><span class="p">,</span>
+    <span class="n">volume_fill_type</span><span class="o">=</span><span class="n">prime</span><span class="o">.</span><span class="n">VolumeFillType</span><span class="o">.</span><span class="n">HEXCOREPOLY</span><span class="p">,</span>
+    <span class="n">volume_control_ids</span><span class="o">=</span><span class="p">[</span><span class="n">volume_control</span><span class="o">.</span><span class="n">id</span><span class="p">],</span>
+<span class="p">)</span>
+<span class="n">volume_mesh</span><span class="o">.</span><span class="n">mesh</span><span class="p">(</span><span class="n">part</span><span class="o">.</span><span class="n">id</span><span class="p">,</span> <span class="n">auto_mesh_param</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>&lt;ansys.meshing.prime.autogen.automeshstructs.AutoMeshResults object at 0x7f8323c4c4c0&gt;
+</pre></div>
+</div>
+</section>
+<section id="print-mesh-statistics">
+<h2>Print mesh statistics<a class="headerlink" href="#print-mesh-statistics" title="Permalink to this heading">#</a></h2>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># Get meshed part</span>
+<span class="n">part</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">get_part_by_name</span><span class="p">(</span><span class="s2">&quot;f1_car_rear_wing&quot;</span><span class="p">)</span>
+
+<span class="c1"># Get statistics on the mesh</span>
+<span class="n">part_summary_res</span> <span class="o">=</span> <span class="n">part</span><span class="o">.</span><span class="n">get_summary</span><span class="p">(</span><span class="n">prime</span><span class="o">.</span><span class="n">PartSummaryParams</span><span class="p">(</span><span class="n">model</span><span class="o">=</span><span class="n">model</span><span class="p">))</span>
+
+<span class="c1"># Get element quality on all parts in the model</span>
+<span class="n">search</span> <span class="o">=</span> <span class="n">prime</span><span class="o">.</span><span class="n">VolumeSearch</span><span class="p">(</span><span class="n">model</span><span class="o">=</span><span class="n">model</span><span class="p">)</span>
+<span class="n">params</span> <span class="o">=</span> <span class="n">prime</span><span class="o">.</span><span class="n">VolumeQualitySummaryParams</span><span class="p">(</span>
+    <span class="n">model</span><span class="o">=</span><span class="n">model</span><span class="p">,</span>
+    <span class="n">scope</span><span class="o">=</span><span class="n">prime</span><span class="o">.</span><span class="n">ScopeDefinition</span><span class="p">(</span><span class="n">model</span><span class="o">=</span><span class="n">model</span><span class="p">,</span> <span class="n">part_expression</span><span class="o">=</span><span class="s2">&quot;*&quot;</span><span class="p">),</span>
+    <span class="n">cell_quality_measures</span><span class="o">=</span><span class="p">[</span><span class="n">prime</span><span class="o">.</span><span class="n">CellQualityMeasure</span><span class="o">.</span><span class="n">INVERSEORTHOGONAL</span><span class="p">],</span>
+    <span class="n">quality_limit</span><span class="o">=</span><span class="p">[</span><span class="mf">0.9</span><span class="p">],</span>
+<span class="p">)</span>
+<span class="n">results</span> <span class="o">=</span> <span class="n">search</span><span class="o">.</span><span class="n">get_volume_quality_summary</span><span class="p">(</span><span class="n">params</span><span class="o">=</span><span class="n">params</span><span class="p">)</span>
+
+<span class="c1"># Print statistics on meshed part</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">part_summary_res</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span>
+    <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Maximum inverse-orthoginal quality of the Volume Mesh : &quot;</span><span class="p">,</span>
+    <span class="n">results</span><span class="o">.</span><span class="n">quality_results_part</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">max_quality</span><span class="p">,</span>
+<span class="p">)</span>
+
+<span class="c1"># Mesh check</span>
+<span class="n">result</span> <span class="o">=</span> <span class="n">prime</span><span class="o">.</span><span class="n">VolumeMeshTool</span><span class="p">(</span><span class="n">model</span><span class="p">)</span><span class="o">.</span><span class="n">check_mesh</span><span class="p">(</span><span class="n">part</span><span class="o">.</span><span class="n">id</span><span class="p">,</span> <span class="n">params</span><span class="o">=</span><span class="n">prime</span><span class="o">.</span><span class="n">CheckMeshParams</span><span class="p">(</span><span class="n">model</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Mesh Check&quot;</span><span class="p">,</span> <span class="n">result</span><span class="p">,</span> <span class="n">sep</span><span class="o">=</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
+
+<span class="n">scope</span> <span class="o">=</span> <span class="n">prime</span><span class="o">.</span><span class="n">ScopeDefinition</span><span class="p">(</span><span class="n">model</span><span class="p">,</span> <span class="n">part_expression</span><span class="o">=</span><span class="s2">&quot;*&quot;</span><span class="p">,</span> <span class="n">label_expression</span><span class="o">=</span><span class="s2">&quot;* !*enclosure*&quot;</span><span class="p">)</span>
+<span class="n">display</span><span class="p">(</span><span class="n">scope</span><span class="o">=</span><span class="n">scope</span><span class="p">)</span>
+</pre></div>
+</div>
+<img src="../../../_images/sphx_glr_08_lucid_generic_f1_rear_wing_003.png" srcset="../../../_images/sphx_glr_08_lucid_generic_f1_rear_wing_003.png" alt="08 lucid generic f1 rear wing" class = "sphx-glr-single-img"/><div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>message :
+Part Name: f1_car_rear_wing
+Part ID: 6
+    0 Edge Zonelets
+    4 Face Zonelets
+    1 Cell Zonelets
+
+    0 Edge Zones
+        Edge Zone Name(s) : []
+    4 Face Zones
+        Face Zone Name(s) : [f1_rw_drs.1, f1_rw_enclosure.1, f1_rw_end_plates.1, f1_rw_main_plane.1]
+    2 Volume Zones
+        Volume Zone Name(s) : [f1_rw_enclosure, f1_rw_end_plates]
+
+    4 Label(s)
+        Names: [f1_rw_drs, f1_rw_enclosure, f1_rw_end_plates, f1_rw_main_plane]
+
+    Bounding box (-1500 -900 -300)
+                 (500 900 1200)
+
+    Mesh Summary:
+        1508518 Nodes
+        71345 Poly Faces
+        0 Quad Faces
+        0 Tri Faces
+        71345 Faces
+        587954 Poly Cells
+        0 Hex Cells
+        0 Prism Cells
+        0 Pyramid Cells
+        0 Tet Cells
+        587954 Cells
+
+n_topo_edges :  0
+n_topo_faces :  0
+n_topo_volumes :  0
+n_edge_zonelets :  0
+n_face_zonelets :  4
+n_cell_zonelets :  1
+n_edge_zones :  0
+n_face_zones :  4
+n_volume_zones :  2
+n_labels :  4
+n_nodes :  1508518
+n_faces :  71345
+n_cells :  587954
+n_tri_faces :  0
+n_poly_faces :  71345
+n_quad_faces :  0
+n_tet_cells :  0
+n_pyra_cells :  0
+n_prism_cells :  0
+n_poly_cells :  587954
+n_hex_cells :  0
+n_unmeshed_topo_faces :  0
+
+Maximum inverse-orthoginal quality of the Volume Mesh :  0.919632
+
+Mesh Check
+has_non_positive_volumes :  False
+has_non_positive_areas :  False
+has_invalid_shape :  False
+has_left_handed_faces :  False
+error_code :  ErrorCode.NOERROR
+warning_codes :  []
+</pre></div>
+</div>
+</section>
+<section id="write-mesh">
+<h2>Write mesh<a class="headerlink" href="#write-mesh" title="Permalink to this heading">#</a></h2>
+<p>Export as cas file for external aero simulations</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="k">with</span> <a href="https://docs.python.org/dev/library/tempfile.html#tempfile.TemporaryDirectory" title="tempfile.TemporaryDirectory" class="sphx-glr-backref-module-tempfile sphx-glr-backref-type-py-class"><span class="n">tempfile</span><span class="o">.</span><span class="n">TemporaryDirectory</span></a><span class="p">()</span> <span class="k">as</span> <a href="https://docs.python.org/dev/library/stdtypes.html#str" title="builtins.str" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">temp_folder</span></a><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><a href="https://docs.python.org/dev/library/stdtypes.html#str" title="builtins.str" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">temp_folder</span></a><span class="p">)</span>
+    <a href="https://docs.python.org/dev/library/stdtypes.html#str" title="builtins.str" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">mesh_file</span></a> <span class="o">=</span> <a href="https://docs.python.org/dev/library/os.path.html#os.path.join" title="os.path.join" class="sphx-glr-backref-module-os-path sphx-glr-backref-type-py-function"><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span></a><span class="p">(</span><a href="https://docs.python.org/dev/library/stdtypes.html#str" title="builtins.str" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">temp_folder</span></a><span class="p">,</span> <span class="s2">&quot;f1_rear_wing_vol_mesh.cas&quot;</span><span class="p">)</span>
+    <span class="n">mesh_util</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><a href="https://docs.python.org/dev/library/stdtypes.html#str" title="builtins.str" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">mesh_file</span></a><span class="p">)</span>
+    <span class="k">assert</span> <a href="https://docs.python.org/dev/library/os.path.html#os.path.exists" title="os.path.exists" class="sphx-glr-backref-module-os-path sphx-glr-backref-type-py-function"><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span></a><span class="p">(</span><a href="https://docs.python.org/dev/library/stdtypes.html#str" title="builtins.str" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">mesh_file</span></a><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Exported file:</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">,</span> <a href="https://docs.python.org/dev/library/stdtypes.html#str" title="builtins.str" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">mesh_file</span></a><span class="p">)</span>
+</pre></div>
+</div>
+<div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>/tmp/tmplmcrsk49
+
+Exported file:
+ /tmp/tmplmcrsk49/f1_rear_wing_vol_mesh.cas
+</pre></div>
+</div>
+</section>
+<section id="exit-pyprimemesh">
+<h2>Exit PyPrimeMesh<a class="headerlink" href="#exit-pyprimemesh" title="Permalink to this heading">#</a></h2>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">prime_client</span><span class="o">.</span><span class="n">exit</span><span class="p">()</span>
+</pre></div>
+</div>
+<p class="sphx-glr-timing"><strong>Total running time of the script:</strong> ( 2 minutes  14.512 seconds)</p>
+<div class="sphx-glr-footer sphx-glr-footer-example docutils container" id="sphx-glr-download-examples-gallery-examples-gallery-08-lucid-generic-f1-rear-wing-py">
+<div class="sphx-glr-download sphx-glr-download-python docutils container">
+<p><a class="reference download internal" download="" href="../../../_downloads/ccf6092cceb8dc253f845b845318fcbc/08_lucid_generic_f1_rear_wing.py"><code class="xref download docutils literal notranslate"><span class="pre">Download</span> <span class="pre">Python</span> <span class="pre">source</span> <span class="pre">code:</span> <span class="pre">08_lucid_generic_f1_rear_wing.py</span></code></a></p>
+</div>
+<div class="sphx-glr-download sphx-glr-download-jupyter docutils container">
+<p><a class="reference download internal" download="" href="../../../_downloads/3aa5e670a2d68fee9a2f4814e4a26998/08_lucid_generic_f1_rear_wing.ipynb"><code class="xref download docutils literal notranslate"><span class="pre">Download</span> <span class="pre">Jupyter</span> <span class="pre">notebook:</span> <span class="pre">08_lucid_generic_f1_rear_wing.ipynb</span></code></a></p>
+</div>
+</div>
+<p class="sphx-glr-signature"><a class="reference external" href="https://sphinx-gallery.github.io">Gallery generated by Sphinx-Gallery</a></p>
+</section>
+</section>
+
+
+                </article>
+              
+              
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> On this page
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#objective">Objective</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#procedure">Procedure</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#launch-ansys-prime-server">Launch Ansys Prime Server</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#import-geometry">Import geometry</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#merge-parts">Merge parts</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#mesh-connect">Mesh connect</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#define-local-size-control-and-generate-size-field">Define local size-control and generate size-field</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#generate-surface-mesh">Generate surface mesh</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#compute-volumetric-regions">Compute volumetric regions</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#define-volume-controls">Define volume controls</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#define-prism-controls">Define prism controls</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#generate-volume-mesh">Generate volume mesh</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#print-mesh-statistics">Print mesh statistics</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#write-mesh">Write mesh</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#exit-pyprimemesh">Exit PyPrimeMesh</a></li>
+</ul>
+  </nav></div>
+
+  <div class="sidebar-secondary-item">
+  
+  <div class="tocsection editthispage">
+    <a href="https://github.com/ansys/pyprimemesh/edit/main/doc/source/examples/gallery_examples/gallery/08_lucid_generic_f1_rear_wing.rst">
+      <i class="fa-solid fa-pencil"></i>
+      
+      
+        
+          Edit on GitHub
+        
+      
+    </a>
+  </div>
+</div>
+
+  <div class="sidebar-secondary-item">
+  <div class="tocsection sourcelink">
+    <a href="../../../_sources/examples/gallery_examples/gallery/08_lucid_generic_f1_rear_wing.rst.txt">
+      <i class="fa-solid fa-file-lines"></i> Show Source
+    </a>
+  </div>
+</div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+          </footer>
+        
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../../../_static/scripts/bootstrap.js?digest=e353d410970836974a52"></script>
+<script src="../../../_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52"></script>
+
+  <footer class="bd-footer">
+<div class="bd-footer__inner bd-page-width">
+  
+    <div class="footer-items__start">
+      
+        <div class="footer-item">
+  <p class="copyright">
+    
+      © Copyright (c) 2023 ANSYS, Inc. All rights reserved.
+      <br/>
+    
+  </p>
+</div>
+      
+        <div class="footer-item">
+  <p class="sphinx-version">
+    Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 7.0.1.
+    <br/>
+  </p>
+</div>
+      
+    </div>
+  
+  
+    <div class="footer-items__end">
+      
+        <div class="footer-item"><p class="theme-version">
+    Built with the <a href="https://sphinxdocs.ansys.com/version/stable/index.html">Ansys Sphinx Theme</a> 0.9.9.
+    <br>Last updated on <span id="date"></span></br>
+</p>
+<script>
+  var options = { day: 'numeric', month: 'long', year: 'numeric' };
+  var lastModifiedDate = new Date(document.lastModified);
+  var date = lastModifiedDate.toLocaleDateString('en-US', options);
+  document.getElementById("date").innerHTML = date;
+</script></div>
+      
+    </div>
+  
+</div>
+
+  </footer>
+  </body>
+</html>

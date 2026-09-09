@@ -1,0 +1,43 @@
+.. vale off
+
+ScopeDefinition
+===============
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoclass:: ScopeDefinition
+   
+   
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+      :toctree:
+   
+      
+      ScopeDefinition.print_default
+      ScopeDefinition.set_default
+   
+   
+
+   
+   
+   .. rubric:: Attributes
+
+   .. autosummary::
+      :toctree:
+   
+      ScopeDefinition.entity_type
+      ScopeDefinition.evaluation_type
+      ScopeDefinition.label_expression
+      ScopeDefinition.part_expression
+      ScopeDefinition.zone_expression
+   
+   
+
+.. minigallery::
+    :add-heading: Examples using ScopeDefinition
+
+    ansys.meshing.prime.ScopeDefinition
+
+.. vale on

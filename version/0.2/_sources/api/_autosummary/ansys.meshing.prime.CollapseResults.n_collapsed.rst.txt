@@ -1,0 +1,6 @@
+n\_collapsed
+============
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoproperty:: CollapseResults.n_collapsed

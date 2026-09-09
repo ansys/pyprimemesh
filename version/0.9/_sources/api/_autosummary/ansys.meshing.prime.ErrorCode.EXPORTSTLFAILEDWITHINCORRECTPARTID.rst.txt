@@ -1,0 +1,6 @@
+EXPORTSTLFAILEDWITHINCORRECTPARTID
+==================================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoattribute:: ErrorCode.EXPORTSTLFAILEDWITHINCORRECTPARTID

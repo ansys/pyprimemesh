@@ -1,0 +1,11 @@
+from\_bytes
+===========
+
+.. currentmodule:: ansys.meshing.prime.lucid
+
+.. automethod:: ansys.meshing.prime.lucid.LabelToZoneMethod.from_bytes
+
+.. minigallery::
+   :add-heading: Examples using LabelToZoneMethod.from_bytes
+
+   ansys.meshing.prime.lucid.LabelToZoneMethod.from_bytes

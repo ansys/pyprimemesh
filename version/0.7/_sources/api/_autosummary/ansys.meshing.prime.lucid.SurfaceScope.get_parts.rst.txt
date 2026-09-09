@@ -1,0 +1,11 @@
+get\_parts
+==========
+
+.. currentmodule:: ansys.meshing.prime.lucid
+
+.. automethod:: ansys.meshing.prime.lucid.SurfaceScope.get_parts
+
+.. minigallery::
+   :add-heading: Examples using SurfaceScope.get_parts
+
+   ansys.meshing.prime.lucid.SurfaceScope.get_parts

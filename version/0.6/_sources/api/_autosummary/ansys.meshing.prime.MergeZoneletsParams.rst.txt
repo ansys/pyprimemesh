@@ -1,0 +1,35 @@
+.. vale off
+
+MergeZoneletsParams
+===================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoclass:: MergeZoneletsParams
+   
+   
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+      :toctree:
+   
+      
+      MergeZoneletsParams.print_default
+      MergeZoneletsParams.set_default
+   
+   
+
+   
+   
+   .. rubric:: Attributes
+
+   .. autosummary::
+      :toctree:
+   
+      MergeZoneletsParams.element_count_limit
+      MergeZoneletsParams.merge_small_zonelets_with_neighbors
+   
+   
+
+.. vale on

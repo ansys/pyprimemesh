@@ -1,0 +1,30 @@
+IGASpline
+=========
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoclass:: IGASpline
+   
+   
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+      :toctree:
+   
+      
+      IGASpline.print_default
+      IGASpline.set_default
+   
+   
+
+   
+   
+   .. rubric:: Attributes
+
+   .. autosummary::
+      :toctree:
+   
+      IGASpline.id
+   
+   

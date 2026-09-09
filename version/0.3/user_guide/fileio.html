@@ -1,0 +1,898 @@
+
+
+<!DOCTYPE html>
+
+
+<html lang="en" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.19: https://docutils.sourceforge.io/" />
+
+    <title>Reading and writing files &#8212; PyPrimeMesh</title>
+    
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=e353d410970836974a52" rel="stylesheet" />
+<link href="../_static/styles/bootstrap.css?digest=e353d410970836974a52" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=e353d410970836974a52" rel="stylesheet" />
+
+  
+  <link href="../_static/vendor/fontawesome/6.1.2/css/all.min.css?digest=e353d410970836974a52" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/jupyter-sphinx.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/thebelab.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sg_gallery.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sg_gallery-binder.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sg_gallery-dataframe.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sg_gallery-rendered-html.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/css/ansys_sphinx_theme.css" />
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.23/css/jquery.dataTables.min.css" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=e353d410970836974a52" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52" />
+
+    
+        <link href="../_static/css/breadcrumbs.css" rel="stylesheet">
+    
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/sphinx_highlight.js"></script>
+    <script src="../_static/clipboard.min.js"></script>
+    <script src="../_static/copybutton.js"></script>
+    <script src="../_static/thebelab-helper.js"></script>
+    <script src="../_static/js/table.js"></script>
+    <script src="https://cdn.datatables.net/1.10.23/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@jupyter-widgets/html-manager@^1.0.1/dist/embed-amd.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'user_guide/fileio';</script>
+    <script>
+        DOCUMENTATION_OPTIONS.theme_switcher_json_url = 'https://prime.docs.pyansys.com/versions.json';
+        DOCUMENTATION_OPTIONS.theme_switcher_version_match = '0.3';
+        </script>
+    <link rel="icon" href="../_static/ansys-favicon.png"/>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Logging" href="logging.html" />
+    <link rel="prev" title="Common meshing tasks and the Lucid module" href="lucid.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  <link rel="canonical" href="https://prime.docs.pyansys.com/version/stable/user_guide/fileio.html" />
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <a class="skip-link" href="#main-content">Skip to main content</a>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__primary"
+          id="__primary"/>
+  <label class="overlay overlay-primary" for="__primary"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__secondary"
+          id="__secondary"/>
+  <label class="overlay overlay-secondary" for="__secondary"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container"><!-- Debugging: html_theme_options =  -->
+
+  <!-- If there is no MiliSearch enabled, use the PyData search -->
+<form class="bd-search d-flex align-items-center"
+      action="../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search the docs ..."
+         aria-label="Search the docs ..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+  
+    
+    <nav class="bd-header navbar navbar-expand-lg bd-navbar">
+<div class="bd-header__inner bd-page-width">
+  <label class="sidebar-toggle primary-toggle" for="__primary">
+    <span class="fa-solid fa-bars"></span>
+  </label>
+  
+  <div class="navbar-header-items__start">
+    
+      <div class="navbar-item">
+  
+
+<a class="navbar-brand logo" href="../index.html">
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../_static/pyansys-logo-black-cropped.png" class="logo__image only-light" alt="Logo image"/>
+    <script>document.write(`<img src="../_static/pyansys-logo-black-cropped.png" class="logo__image only-dark" alt="Logo image"/>`);</script>
+  
+  
+</a></div>
+    
+  </div>
+  
+  
+  <div class="col-lg-9 navbar-header-items">
+    
+    <div class="me-auto navbar-header-items__center">
+      
+        <div class="navbar-item"><nav class="navbar-nav">
+  <p class="sidebar-header-items__title"
+     role="heading"
+     aria-level="1"
+     aria-label="Site Navigation">
+    Site Navigation
+  </p>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../getting_started/index.html">
+                        Getting started
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item current active">
+                      <a class="nav-link nav-internal" href="index.html">
+                        User guide
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../examples/index.html">
+                        Examples
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../api/index.html">
+                        API reference
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../contributing/index.html">
+                        Contributing
+                      </a>
+                    </li>
+                
+  </ul>
+</nav></div>
+      
+    </div>
+    
+    
+    <div class="navbar-header-items__end">
+      
+        <div class="navbar-item navbar-persistent--container">
+          
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+  </button>
+`);
+</script>
+        </div>
+      
+      
+        <div class="navbar-item">
+<script>
+document.write(`
+  <div class="version-switcher__container dropdown">
+    <button type="button" class="version-switcher__button btn btn-sm navbar-btn dropdown-toggle" data-bs-toggle="dropdown">
+      0.3  <!-- this text may get changed later by javascript -->
+      <span class="caret"></span>
+    </button>
+    <div class="version-switcher__menu dropdown-menu list-group-flush py-0">
+    <!-- dropdown will be populated by javascript on page load -->
+    </div>
+  </div>
+`);
+</script></div>
+      
+        <div class="navbar-item">
+<script>
+document.write(`
+  <button class="theme-switch-button btn btn-sm btn-outline-primary navbar-btn rounded-circle" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch" data-mode="light"><i class="fa-solid fa-sun"></i></span>
+    <span class="theme-switch" data-mode="dark"><i class="fa-solid fa-moon"></i></span>
+    <span class="theme-switch" data-mode="auto"><i class="fa-solid fa-circle-half-stroke"></i></span>
+  </button>
+`);
+</script></div>
+      
+        <div class="navbar-item"><ul class="navbar-icon-links navbar-nav"
+    aria-label="Icon Links">
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/ansys/pyprimemesh" title="GitHub" class="nav-link" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><span><i class="fa-brands fa-square-github"></i></span>
+            <label class="sr-only">GitHub</label></a>
+        </li>
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/ansys/pyprimemesh/discussions" title="Support" class="nav-link" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><span><i class="fa fa-comment fa-fw"></i></span>
+            <label class="sr-only">Support</label></a>
+        </li>
+</ul></div>
+      
+    </div>
+    
+  </div>
+  
+  
+    <div class="navbar-persistent--mobile">
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+  </button>
+`);
+</script>
+    </div>
+  
+
+  
+    <label class="sidebar-toggle secondary-toggle" for="__secondary">
+      <span class="fa-solid fa-outdent"></span>
+    </label>
+  
+</div>
+
+    </nav>
+  
+
+    
+    <div id="announcement_msg"></div>
+<script>
+  fetch("announcement.html")
+    .then((response) => {
+      if (!response.ok) {
+        throw new Error(`HTTP error: ${response.status}`);
+      }
+      return response.text();
+    })
+    .then(text => document.getElementById("announcement_msg").innerHTML = text)
+    .catch((error) => console.error(`Fetch problem: ${error.message}`));
+</script>
+    
+
+    
+    <div class="container-xl">
+    <div class="row">
+        <div class="col-12 col-md-3" id="breadcrumbs-spacer"></div>
+        <div class="col-12 col-md-11 col-xl-9" id="breadcrumbs">
+          
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+    
+        <li class="nav-item nav-item-additional-breadcrumb"><a href="https://docs.pyansys.com/">PyAnsys</a> » </li>
+    
+    
+        <li class="nav-item nav-item-0"><a href="../index.html">PyPrimeMesh</a> » </li>
+    
+
+          <li class="nav-item nav-item-1"><a href="index.html" accesskey="U">User guide</a> » </li>
+        <li class="nav-item nav-item-this"><a href="">Reading and writing files</a></li> 
+      </ul>
+    </div>
+        </div>
+  </div>
+</div>
+    
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+      <div class="sidebar-header-items__center">
+        
+          <div class="navbar-item"><nav class="navbar-nav">
+  <p class="sidebar-header-items__title"
+     role="heading"
+     aria-level="1"
+     aria-label="Site Navigation">
+    Site Navigation
+  </p>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../getting_started/index.html">
+                        Getting started
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item current active">
+                      <a class="nav-link nav-internal" href="index.html">
+                        User guide
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../examples/index.html">
+                        Examples
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../api/index.html">
+                        API reference
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../contributing/index.html">
+                        Contributing
+                      </a>
+                    </li>
+                
+  </ul>
+</nav></div>
+        
+      </div>
+    
+    
+    
+      <div class="sidebar-header-items__end">
+        
+          <div class="navbar-item">
+<script>
+document.write(`
+  <div class="version-switcher__container dropdown">
+    <button type="button" class="version-switcher__button btn btn-sm navbar-btn dropdown-toggle" data-bs-toggle="dropdown">
+      0.3  <!-- this text may get changed later by javascript -->
+      <span class="caret"></span>
+    </button>
+    <div class="version-switcher__menu dropdown-menu list-group-flush py-0">
+    <!-- dropdown will be populated by javascript on page load -->
+    </div>
+  </div>
+`);
+</script></div>
+        
+          <div class="navbar-item">
+<script>
+document.write(`
+  <button class="theme-switch-button btn btn-sm btn-outline-primary navbar-btn rounded-circle" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch" data-mode="light"><i class="fa-solid fa-sun"></i></span>
+    <span class="theme-switch" data-mode="dark"><i class="fa-solid fa-moon"></i></span>
+    <span class="theme-switch" data-mode="auto"><i class="fa-solid fa-circle-half-stroke"></i></span>
+  </button>
+`);
+</script></div>
+        
+          <div class="navbar-item"><ul class="navbar-icon-links navbar-nav"
+    aria-label="Icon Links">
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/ansys/pyprimemesh" title="GitHub" class="nav-link" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><span><i class="fa-brands fa-square-github"></i></span>
+            <label class="sr-only">GitHub</label></a>
+        </li>
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/ansys/pyprimemesh/discussions" title="Support" class="nav-link" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><span><i class="fa fa-comment fa-fw"></i></span>
+            <label class="sr-only">Support</label></a>
+        </li>
+</ul></div>
+        
+      </div>
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item"><nav class="bd-docs-nav bd-links"
+     aria-label="Section Navigation">
+  <p class="bd-links__title" role="heading" aria-level="1">Section Navigation</p>
+  <div class="bd-toc-item navbar-nav"><ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="concepts.html">Concepts and model structure</a></li>
+<li class="toctree-l1"><a class="reference internal" href="launch_prime.html">Launching PyPrimeMesh</a></li>
+<li class="toctree-l1"><a class="reference internal" href="lucid.html">Common meshing tasks and the Lucid module</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Reading and writing files</a></li>
+<li class="toctree-l1"><a class="reference internal" href="logging.html">Logging</a></li>
+<li class="toctree-l1"><a class="reference internal" href="graphics.html">Interactive graphics using PyVista</a></li>
+<li class="toctree-l1"><a class="reference internal" href="surfer.html">Surface meshing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="automesh.html">Volumetric meshing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="sizing.html">Sizing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="connections.html">Connections</a></li>
+<li class="toctree-l1"><a class="reference internal" href="mesh_diagnostics.html">Mesh diagnostics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="expressions.html">Expressions</a></li>
+</ul>
+</div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main">
+        
+        
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article"></div>
+              
+              
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article" role="main">
+                  
+  <section id="reading-and-writing-files">
+<span id="ref-index-reading-writing"></span><h1>Reading and writing files<a class="headerlink" href="#reading-and-writing-files" title="Permalink to this heading">#</a></h1>
+<p>The <a class="reference internal" href="../api/_autosummary/ansys.meshing.prime.FileIO.html#ansys.meshing.prime.FileIO" title="ansys.meshing.prime.FileIO"><code class="xref py py-class docutils literal notranslate"><span class="pre">FileIO</span></code></a> class is used for all file-based data exchanges.</p>
+<section id="native-pmdat-format">
+<h2>Native PMDAT format<a class="headerlink" href="#native-pmdat-format" title="Permalink to this heading">#</a></h2>
+<p>PMDAT is the native file format for PyPrimeMesh. It contains all data associated with the active model.</p>
+<p>This includes geometry, mesh, topology, controls, labels, and zones.</p>
+<p>The model data can be read from and written to the PMDAT format using the
+<a class="reference internal" href="../api/_autosummary/ansys.meshing.prime.FileIO.read_pmdat.html#ansys.meshing.prime.FileIO.read_pmdat" title="ansys.meshing.prime.FileIO.read_pmdat"><code class="xref py py-func docutils literal notranslate"><span class="pre">FileIO.read_pmdat()</span></code></a> and
+<a class="reference internal" href="../api/_autosummary/ansys.meshing.prime.FileIO.write_pmdat.html#ansys.meshing.prime.FileIO.write_pmdat" title="ansys.meshing.prime.FileIO.write_pmdat"><code class="xref py py-func docutils literal notranslate"><span class="pre">FileIO.write_pmdat()</span></code></a> methods
+with parameters defined in the <a class="reference internal" href="../api/_autosummary/ansys.meshing.prime.FileReadParams.html#ansys.meshing.prime.FileReadParams" title="ansys.meshing.prime.FileReadParams"><code class="xref py py-class docutils literal notranslate"><span class="pre">FileReadParams</span></code></a>
+and <a class="reference internal" href="../api/_autosummary/ansys.meshing.prime.FileWriteParams.html#ansys.meshing.prime.FileWriteParams" title="ansys.meshing.prime.FileWriteParams"><code class="xref py py-class docutils literal notranslate"><span class="pre">FileWriteParams</span></code></a> classes respectively.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">ansys.meshing</span> <span class="kn">import</span> <span class="n">prime</span>
+
+<span class="c1"># Start Ansys Prime Server and get the model</span>
+<span class="n">prime_client</span> <span class="o">=</span> <span class="n">prime</span><span class="o">.</span><span class="n">launch_prime</span><span class="p">()</span>
+<span class="n">model</span> <span class="o">=</span> <span class="n">prime_client</span><span class="o">.</span><span class="n">model</span>
+
+<span class="c1"># Download and read an example PMDAT file</span>
+<span class="n">mixing_elbow</span> <span class="o">=</span> <span class="n">prime</span><span class="o">.</span><span class="n">examples</span><span class="o">.</span><span class="n">download_elbow_pmdat</span><span class="p">()</span>
+<span class="n">params</span> <span class="o">=</span> <span class="n">prime</span><span class="o">.</span><span class="n">FileReadParams</span><span class="p">(</span><span class="n">model</span><span class="o">=</span><span class="n">model</span><span class="p">)</span>
+<span class="n">prime</span><span class="o">.</span><span class="n">FileIO</span><span class="p">(</span><span class="n">model</span><span class="p">)</span><span class="o">.</span><span class="n">read_pmdat</span><span class="p">(</span><span class="n">file_name</span><span class="o">=</span><span class="n">mixing_elbow</span><span class="p">,</span> <span class="n">file_read_params</span><span class="o">=</span><span class="n">params</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<p>Files can be read or imported based on file extension using the <a class="reference internal" href="../api/_autosummary/ansys.meshing.prime.lucid.Mesh.read.html#ansys.meshing.prime.lucid.Mesh.read" title="ansys.meshing.prime.lucid.Mesh.read"><code class="xref py py-func docutils literal notranslate"><span class="pre">Mesh.read()</span></code></a>
+method in the Lucid API. The method supports PyPrimeMesh’s native format, various CAD formats, and solver mesh files.</p>
+</div>
+</section>
+<section id="import-cad-files">
+<h2>Import CAD files<a class="headerlink" href="#import-cad-files" title="Permalink to this heading">#</a></h2>
+<p>The <a class="reference internal" href="../api/_autosummary/ansys.meshing.prime.FileIO.import_cad.html#ansys.meshing.prime.FileIO.import_cad" title="ansys.meshing.prime.FileIO.import_cad"><code class="xref py py-func docutils literal notranslate"><span class="pre">FileIO.import_cad()</span></code></a> method allows
+you to import CAD files and set parameters for importing files using the
+<a class="reference internal" href="../api/_autosummary/ansys.meshing.prime.ImportCadParams.html#ansys.meshing.prime.ImportCadParams" title="ansys.meshing.prime.ImportCadParams"><code class="xref py py-class docutils literal notranslate"><span class="pre">ImportCadParams</span></code></a> class.</p>
+<section id="cad-reader-routes">
+<h3>CAD reader routes<a class="headerlink" href="#cad-reader-routes" title="Permalink to this heading">#</a></h3>
+<p>You can specify the import route for CAD files using the <a class="reference internal" href="../api/_autosummary/ansys.meshing.prime.CadReaderRoute.html#ansys.meshing.prime.CadReaderRoute" title="ansys.meshing.prime.CadReaderRoute"><code class="xref py py-class docutils literal notranslate"><span class="pre">CadReaderRoute</span></code></a> class.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">params</span> <span class="o">=</span> <span class="n">prime</span><span class="o">.</span><span class="n">ImportCadParams</span><span class="p">(</span>
+    <span class="n">model</span><span class="o">=</span><span class="n">model</span><span class="p">,</span> <span class="n">cad_reader_route</span><span class="o">=</span><span class="n">prime</span><span class="o">.</span><span class="n">CadReaderRoute</span><span class="o">.</span><span class="n">SPACECLAIM</span>
+<span class="p">)</span>
+<span class="n">prime</span><span class="o">.</span><span class="n">FileIO</span><span class="p">(</span><span class="n">model</span><span class="p">)</span><span class="o">.</span><span class="n">import_cad</span><span class="p">(</span><span class="n">file_name</span><span class="o">=</span><span class="n">mixing_elbow</span><span class="p">,</span> <span class="n">params</span><span class="o">=</span><span class="n">params</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Alternatively, you can use the <a class="reference internal" href="../api/_autosummary/ansys.meshing.prime.lucid.Mesh.html#ansys.meshing.prime.lucid.Mesh" title="ansys.meshing.prime.lucid.Mesh"><code class="xref py py-class docutils literal notranslate"><span class="pre">Mesh</span></code></a> class in the Lucid API:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">mesh_util</span> <span class="o">=</span> <span class="n">prime</span><span class="o">.</span><span class="n">lucid</span><span class="o">.</span><span class="n">Mesh</span><span class="p">(</span><span class="n">model</span><span class="o">=</span><span class="n">model</span><span class="p">)</span>
+<span class="n">mesh_util</span><span class="o">.</span><span class="n">read</span><span class="p">(</span><span class="n">file_name</span><span class="o">=</span><span class="n">mixing_elbow</span><span class="p">,</span> <span class="n">cad_reader_route</span><span class="o">=</span><span class="n">prime</span><span class="o">.</span><span class="n">CadReaderRoute</span><span class="o">.</span><span class="n">SPACECLAIM</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Four CAD import routes are available in PyPrimeMesh:</p>
+<blockquote>
+<div><ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">Program</span> <span class="pre">Controlled</span></code>: Automatically chooses the best route based on the CAD format. This
+route uses the <code class="docutils literal notranslate"><span class="pre">Native</span></code> route if available, the <code class="docutils literal notranslate"><span class="pre">SpaceClaim</span></code> route for SCDOC file formats,
+and the <code class="docutils literal notranslate"><span class="pre">Workbench</span></code> route for all other file formats.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">Native</span></code>: Imports selected natively supported file formats like FMD <code class="docutils literal notranslate"><span class="pre">(*.fmd)</span></code>, ACIS <code class="docutils literal notranslate"><span class="pre">(*.sat,</span> <span class="pre">*.sab)</span></code>,
+Parasolid <code class="docutils literal notranslate"><span class="pre">(*.x_t,</span> <span class="pre">*.x_b)</span></code>, JTOpen <code class="docutils literal notranslate"><span class="pre">(*.jt,</span> <span class="pre">*.plmxml)</span></code>, and STL <code class="docutils literal notranslate"><span class="pre">(*.stl)</span></code>.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">SpaceClaim</span></code>: Uses SCDM to import supported CAD files from the SpaceClaim reader. Only the
+Windows platform supports importing SpaceClaim files.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">Workbench</span></code>: Uses Workbench to import supported CAD files from the Workbench reader.</p></li>
+</ul>
+</div></blockquote>
+<p>To view the CAD supported for the Workbench route on different platforms, see
+<a class="reference external" href="https://www.ansys.com/it-solutions/platform-support">CAD Support</a> on the Ansys website.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>When deploying scripts using SpaceClaim or Workbench CAD readers, ensure that the CAD configuration
+and in-app defaults are consistent in the deployed environment.</p>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>You must install and configure Workbench CAD readers or plug-ins (Ansys Geometry Interfaces)
+while installing Ansys Workbench.</p>
+</div>
+</section>
+<section id="append-cad-files">
+<h3>Append CAD files<a class="headerlink" href="#append-cad-files" title="Permalink to this heading">#</a></h3>
+<p>The <a class="reference internal" href="../api/_autosummary/ansys.meshing.prime.ImportCadParams.append.html#ansys.meshing.prime.ImportCadParams.append" title="ansys.meshing.prime.ImportCadParams.append"><code class="xref py py-attr docutils literal notranslate"><span class="pre">ImportCadParams.append</span></code></a> parameter allows
+you to append a CAD file to the model:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">params</span> <span class="o">=</span> <span class="n">prime</span><span class="o">.</span><span class="n">ImportCadParams</span><span class="p">(</span><span class="n">model</span><span class="o">=</span><span class="n">model</span><span class="p">,</span> <span class="n">append</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">prime</span><span class="o">.</span><span class="n">FileIO</span><span class="p">(</span><span class="n">model</span><span class="p">)</span><span class="o">.</span><span class="n">import_cad</span><span class="p">(</span><span class="n">file_name</span><span class="o">=</span><span class="s2">&quot;cad_to_append.scdoc&quot;</span><span class="p">,</span> <span class="n">params</span><span class="o">=</span><span class="n">params</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Alternatively, you can use the <a class="reference internal" href="../api/_autosummary/ansys.meshing.prime.lucid.Mesh.html#ansys.meshing.prime.lucid.Mesh" title="ansys.meshing.prime.lucid.Mesh"><code class="xref py py-class docutils literal notranslate"><span class="pre">Mesh</span></code></a> class in
+the Lucid API:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">mesh_util</span> <span class="o">=</span> <span class="n">prime</span><span class="o">.</span><span class="n">lucid</span><span class="o">.</span><span class="n">Mesh</span><span class="p">(</span><span class="n">model</span><span class="o">=</span><span class="n">model</span><span class="p">)</span>
+<span class="n">mesh_util</span><span class="o">.</span><span class="n">read</span><span class="p">(</span><span class="s2">&quot;cad_to_append.scdoc&quot;</span><span class="p">,</span> <span class="n">append</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<section id="parametric-cad-update">
+<h3>Parametric CAD update<a class="headerlink" href="#parametric-cad-update" title="Permalink to this heading">#</a></h3>
+<p>Parametric CAD update can be used while importing CAD files that have parameters defined that
+can be accessed by Workbench CAD readers.</p>
+<p>This code gets existing CAD parameters while importing:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">params</span> <span class="o">=</span> <span class="n">prime</span><span class="o">.</span><span class="n">ImportCadParams</span><span class="p">(</span><span class="n">model</span><span class="o">=</span><span class="n">model</span><span class="p">)</span>
+<span class="n">params</span><span class="o">.</span><span class="n">cad_reader_route</span> <span class="o">=</span> <span class="n">prime</span><span class="o">.</span><span class="n">CadReaderRoute</span><span class="o">.</span><span class="n">WORKBENCH</span>
+<span class="n">result</span> <span class="o">=</span> <span class="n">prime</span><span class="o">.</span><span class="n">FileIO</span><span class="p">(</span><span class="n">model</span><span class="p">)</span><span class="o">.</span><span class="n">import_cad</span><span class="p">(</span><span class="n">file_name</span><span class="o">=</span><span class="s2">&quot;parametric_cad.scdoc&quot;</span><span class="p">,</span> <span class="n">params</span><span class="o">=</span><span class="n">params</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="highlight-pycon notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">result</span><span class="o">.</span><span class="n">cad_parameters</span><span class="p">)</span>
+
+<span class="go">{&#39;my_param&#39;: 1}</span>
+</pre></div>
+</div>
+<p>This code sets the parameters that are used for the import:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">params</span> <span class="o">=</span> <span class="n">prime</span><span class="o">.</span><span class="n">ImportCadParams</span><span class="p">(</span><span class="n">model</span><span class="o">=</span><span class="n">model</span><span class="p">)</span>
+<span class="n">params</span><span class="o">.</span><span class="n">cad_reader_route</span> <span class="o">=</span> <span class="n">prime</span><span class="o">.</span><span class="n">CadReaderRoute</span><span class="o">.</span><span class="n">WORKBENCH</span>
+<span class="n">params</span><span class="o">.</span><span class="n">cad_update_parameters</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;my_param&quot;</span><span class="p">:</span> <span class="mi">2</span><span class="p">}</span>
+<span class="n">result</span> <span class="o">=</span> <span class="n">prime</span><span class="o">.</span><span class="n">FileIO</span><span class="p">(</span><span class="n">model</span><span class="p">)</span><span class="o">.</span><span class="n">import_cad</span><span class="p">(</span><span class="n">file_name</span><span class="o">=</span><span class="s2">&quot;parametric_cad.scdoc&quot;</span><span class="p">,</span> <span class="n">params</span><span class="o">=</span><span class="n">params</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="highlight-pycon notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">result</span><span class="o">.</span><span class="n">cad_parameters</span><span class="p">)</span>
+
+<span class="go">{&#39;my_param&#39;: 2}</span>
+</pre></div>
+</div>
+</section>
+<section id="part-management-and-creation">
+<h3>Part management and creation<a class="headerlink" href="#part-management-and-creation" title="Permalink to this heading">#</a></h3>
+<p>PyPrimeMesh has options for part management within the product structure while importing a CAD (Computer Aided Design) model.
+The CAD model is the top in product hierarchy. A CAD model can have one or more CAD assemblies. The CAD assembly or
+subassembly has different CAD parts. The CAD part has bodies or other geometric entities. Here is a typical CAD product
+structure from SpaceClaim:</p>
+<figure class="align-center" id="id1">
+<a class="reference internal image-reference" href="../_images/cad_structure(2).png"><img alt="../_images/cad_structure%282%29.png" src="../_images/cad_structure%282%29.png" style="width: 100pt;" /></a>
+<figcaption>
+<p><span class="caption-text"><strong>Example CAD structure from SpaceClaim</strong></span><a class="headerlink" href="#id1" title="Permalink to this image">#</a></p>
+</figcaption>
+</figure>
+<p>The <a class="reference internal" href="../api/_autosummary/ansys.meshing.prime.PartCreationType.html#ansys.meshing.prime.PartCreationType" title="ansys.meshing.prime.PartCreationType"><code class="xref py py-class docutils literal notranslate"><span class="pre">PartCreationType</span></code></a> class decides whether to create a part per:</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>Model</p></li>
+<li><p>Assembly</p></li>
+<li><p>Part</p></li>
+<li><p>Body</p></li>
+</ul>
+</div></blockquote>
+<section id="model">
+<h4>Model<a class="headerlink" href="#model" title="Permalink to this heading">#</a></h4>
+<p>When you import a CAD model and specify the <a class="reference internal" href="../api/_autosummary/ansys.meshing.prime.PartCreationType.html#ansys.meshing.prime.PartCreationType" title="ansys.meshing.prime.PartCreationType"><code class="xref py py-class docutils literal notranslate"><span class="pre">PartCreationType</span></code></a> parameter
+as <a class="reference internal" href="../api/_autosummary/ansys.meshing.prime.PartCreationType.MODEL.html#ansys.meshing.prime.PartCreationType.MODEL" title="ansys.meshing.prime.PartCreationType.MODEL"><code class="xref py py-attr docutils literal notranslate"><span class="pre">MODEL</span></code></a>, a single part is created that inherits its name from
+the CAD model name. The number of zones within the part is identical to the number of bodies within the CAD model.</p>
+<figure class="align-center" id="id2">
+<a class="reference internal image-reference" href="../_images/creation_model(2).png"><img alt="../_images/creation_model%282%29.png" src="../_images/creation_model%282%29.png" style="width: 220pt;" /></a>
+<figcaption>
+<p><span class="caption-text"><strong>Part creation by model (from SpaceClaim to PyPrimeMesh part structure)</strong></span><a class="headerlink" href="#id2" title="Permalink to this image">#</a></p>
+</figcaption>
+</figure>
+</section>
+<section id="assembly">
+<h4>Assembly<a class="headerlink" href="#assembly" title="Permalink to this heading">#</a></h4>
+<p>When you import a CAD model and specify the <a class="reference internal" href="../api/_autosummary/ansys.meshing.prime.PartCreationType.html#ansys.meshing.prime.PartCreationType" title="ansys.meshing.prime.PartCreationType"><code class="xref py py-class docutils literal notranslate"><span class="pre">PartCreationType</span></code></a> parameter
+as <a class="reference internal" href="../api/_autosummary/ansys.meshing.prime.PartCreationType.ASSEMBLY.html#ansys.meshing.prime.PartCreationType.ASSEMBLY" title="ansys.meshing.prime.PartCreationType.ASSEMBLY"><code class="xref py py-attr docutils literal notranslate"><span class="pre">ASSEMBLY</span></code></a>, a part per CAD assembly is created where the part
+name is inherited from the CAD assembly name. The number of zones within each part is identical to the number of bodies
+within the CAD assembly.</p>
+<figure class="align-center" id="id3">
+<a class="reference internal image-reference" href="../_images/creation_assembly(2).png"><img alt="../_images/creation_assembly%282%29.png" src="../_images/creation_assembly%282%29.png" style="width: 200pt;" /></a>
+<figcaption>
+<p><span class="caption-text"><strong>Part creation by assembly (from SpaceClaim to PyPrimeMesh part structure)</strong></span><a class="headerlink" href="#id3" title="Permalink to this image">#</a></p>
+</figcaption>
+</figure>
+</section>
+<section id="part">
+<h4>Part<a class="headerlink" href="#part" title="Permalink to this heading">#</a></h4>
+<p>When you import a CAD model and specify the <a class="reference internal" href="../api/_autosummary/ansys.meshing.prime.PartCreationType.html#ansys.meshing.prime.PartCreationType" title="ansys.meshing.prime.PartCreationType"><code class="xref py py-class docutils literal notranslate"><span class="pre">PartCreationType</span></code></a> parameter
+as <a class="reference internal" href="../api/_autosummary/ansys.meshing.prime.PartCreationType.PART.html#ansys.meshing.prime.PartCreationType.PART" title="ansys.meshing.prime.PartCreationType.PART"><code class="xref py py-attr docutils literal notranslate"><span class="pre">PART</span></code></a>, a part per CAD part is created that inherits the part
+name from the CAD part name. The number of zones within a part is identical to the number of bodies within the CAD
+part.</p>
+<figure class="align-center" id="id4">
+<a class="reference internal image-reference" href="../_images/creation_part(2).png"><img alt="../_images/creation_part%282%29.png" src="../_images/creation_part%282%29.png" style="width: 221pt;" /></a>
+<figcaption>
+<p><span class="caption-text"><strong>Part creation by part (from SpaceClaim to PyPrimeMesh part structure)</strong></span><a class="headerlink" href="#id4" title="Permalink to this image">#</a></p>
+</figcaption>
+</figure>
+</section>
+<section id="body">
+<h4>Body<a class="headerlink" href="#body" title="Permalink to this heading">#</a></h4>
+<p>When you import a CAD model and specify the <a class="reference internal" href="../api/_autosummary/ansys.meshing.prime.PartCreationType.html#ansys.meshing.prime.PartCreationType" title="ansys.meshing.prime.PartCreationType"><code class="xref py py-class docutils literal notranslate"><span class="pre">PartCreationType</span></code></a> parameter
+as <a class="reference internal" href="../api/_autosummary/ansys.meshing.prime.PartCreationType.BODY.html#ansys.meshing.prime.PartCreationType.BODY" title="ansys.meshing.prime.PartCreationType.BODY"><code class="xref py py-attr docutils literal notranslate"><span class="pre">BODY</span></code></a>, a part per CAD body is created that inherits the part name
+from the CAD body name. The number of parts is identical to the number of bodies.</p>
+<figure class="align-center" id="id5">
+<a class="reference internal image-reference" href="../_images/creation_body(2).png"><img alt="../_images/creation_body%282%29.png" src="../_images/creation_body%282%29.png" style="width: 200pt;" /></a>
+<figcaption>
+<p><span class="caption-text"><strong>Part creation by body (from SpaceClaim to PyPrimeMesh part structure)</strong></span><a class="headerlink" href="#id5" title="Permalink to this image">#</a></p>
+</figcaption>
+</figure>
+</section>
+</section>
+</section>
+<section id="import-and-export-solver-mesh-files">
+<h2>Import and export solver mesh files<a class="headerlink" href="#import-and-export-solver-mesh-files" title="Permalink to this heading">#</a></h2>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<p>File extensions such as CAS <code class="docutils literal notranslate"><span class="pre">(*.cas)</span></code>, MSH <code class="docutils literal notranslate"><span class="pre">(*.msh,</span> <span class="pre">*.msh.gz)</span></code>, and CDB <code class="docutils literal notranslate"><span class="pre">(*.cdb)</span></code> can be imported
+using the <a class="reference internal" href="../api/_autosummary/ansys.meshing.prime.lucid.Mesh.read.html#ansys.meshing.prime.lucid.Mesh.read" title="ansys.meshing.prime.lucid.Mesh.read"><code class="xref py py-func docutils literal notranslate"><span class="pre">Mesh.read()</span></code></a> method and exported using the
+<a class="reference internal" href="../api/_autosummary/ansys.meshing.prime.lucid.Mesh.write.html#ansys.meshing.prime.lucid.Mesh.write" title="ansys.meshing.prime.lucid.Mesh.write"><code class="xref py py-func docutils literal notranslate"><span class="pre">Mesh.write()</span></code></a> method in the Lucid API.</p>
+</div>
+<section id="import-solver-mesh-files">
+<h3>Import solver mesh files<a class="headerlink" href="#import-solver-mesh-files" title="Permalink to this heading">#</a></h3>
+<blockquote>
+<div><ul class="simple">
+<li><p>The <a class="reference internal" href="../api/_autosummary/ansys.meshing.prime.FileIO.import_fluent_case.html#ansys.meshing.prime.FileIO.import_fluent_case" title="ansys.meshing.prime.FileIO.import_fluent_case"><code class="xref py py-func docutils literal notranslate"><span class="pre">FileIO.import_fluent_case()</span></code></a> method allows you
+to import Fluent case <code class="docutils literal notranslate"><span class="pre">(*.cas)</span></code> files and set parameters for importing files using the
+<a class="reference internal" href="../api/_autosummary/ansys.meshing.prime.ImportFluentCaseParams.html#ansys.meshing.prime.ImportFluentCaseParams" title="ansys.meshing.prime.ImportFluentCaseParams"><code class="xref py py-class docutils literal notranslate"><span class="pre">ImportFluentCaseParams</span></code></a> class.</p></li>
+<li><p>The <a class="reference internal" href="../api/_autosummary/ansys.meshing.prime.FileIO.import_fluent_meshing_meshes.html#ansys.meshing.prime.FileIO.import_fluent_meshing_meshes" title="ansys.meshing.prime.FileIO.import_fluent_meshing_meshes"><code class="xref py py-func docutils literal notranslate"><span class="pre">FileIO.import_fluent_meshing_meshes()</span></code></a> method
+allows you to import Fluent Meshing’s mesh files <code class="docutils literal notranslate"><span class="pre">(*.msh,</span> <span class="pre">*.msh.gz)</span></code> and set parameters for importing files
+using the <a class="reference internal" href="../api/_autosummary/ansys.meshing.prime.ImportFluentMeshingMeshParams.html#ansys.meshing.prime.ImportFluentMeshingMeshParams" title="ansys.meshing.prime.ImportFluentMeshingMeshParams"><code class="xref py py-class docutils literal notranslate"><span class="pre">ImportFluentMeshingMeshParams</span></code></a> class.
+You can import multiple files in parallel using multithreading with the optional
+<a class="reference internal" href="../api/_autosummary/ansys.meshing.prime.ImportFluentMeshingMeshParams.enable_multi_threading.html#ansys.meshing.prime.ImportFluentMeshingMeshParams.enable_multi_threading" title="ansys.meshing.prime.ImportFluentMeshingMeshParams.enable_multi_threading"><code class="xref py py-attr docutils literal notranslate"><span class="pre">enable_multi_threading</span></code></a>
+parameter.</p></li>
+<li><p>The <a class="reference internal" href="../api/_autosummary/ansys.meshing.prime.FileIO.import_mapdl_cdb.html#ansys.meshing.prime.FileIO.import_mapdl_cdb" title="ansys.meshing.prime.FileIO.import_mapdl_cdb"><code class="xref py py-func docutils literal notranslate"><span class="pre">FileIO.import_mapdl_cdb()</span></code></a> method allows you to
+import MAPDL <code class="docutils literal notranslate"><span class="pre">(*.cdb)</span></code> files and set parameters for importing files using the
+<a class="reference internal" href="../api/_autosummary/ansys.meshing.prime.ImportMapdlCdbParams.html#ansys.meshing.prime.ImportMapdlCdbParams" title="ansys.meshing.prime.ImportMapdlCdbParams"><code class="xref py py-class docutils literal notranslate"><span class="pre">ImportMapdlCdbParams</span></code></a> class. You can import quadratic mesh
+elements as linear with the optional <a class="reference internal" href="../api/_autosummary/ansys.meshing.prime.ImportMapdlCdbParams.drop_mid_nodes.html#ansys.meshing.prime.ImportMapdlCdbParams.drop_mid_nodes" title="ansys.meshing.prime.ImportMapdlCdbParams.drop_mid_nodes"><code class="xref py py-attr docutils literal notranslate"><span class="pre">drop_mid_nodes</span></code></a>
+parameter.</p></li>
+</ul>
+</div></blockquote>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>All import methods have the optional parameter to append imported files to an existing model.</p>
+</div>
+</section>
+<section id="export-solver-mesh-files">
+<h3>Export solver mesh files<a class="headerlink" href="#export-solver-mesh-files" title="Permalink to this heading">#</a></h3>
+<blockquote>
+<div><ul class="simple">
+<li><p>The <a class="reference internal" href="../api/_autosummary/ansys.meshing.prime.FileIO.export_fluent_case.html#ansys.meshing.prime.FileIO.export_fluent_case" title="ansys.meshing.prime.FileIO.export_fluent_case"><code class="xref py py-func docutils literal notranslate"><span class="pre">FileIO.export_fluent_case()</span></code></a> method allows you to
+export Fluent case <code class="docutils literal notranslate"><span class="pre">(*.cas)</span></code> files and set parameters for exporting files using the
+<a class="reference internal" href="../api/_autosummary/ansys.meshing.prime.ExportFluentCaseParams.html#ansys.meshing.prime.ExportFluentCaseParams" title="ansys.meshing.prime.ExportFluentCaseParams"><code class="xref py py-class docutils literal notranslate"><span class="pre">ExportFluentCaseParams</span></code></a> class.</p></li>
+<li><p>The <code class="xref py py-func docutils literal notranslate"><span class="pre">FileIO.export_fluent_meshing_meshes()</span></code> method
+allows you to export Fluent Meshing’s mesh <code class="docutils literal notranslate"><span class="pre">(*.msh)</span></code> files and set parameters for exporting files
+using the <a class="reference internal" href="../api/_autosummary/ansys.meshing.prime.ExportFluentMeshingMeshParams.html#ansys.meshing.prime.ExportFluentMeshingMeshParams" title="ansys.meshing.prime.ExportFluentMeshingMeshParams"><code class="xref py py-class docutils literal notranslate"><span class="pre">ExportFluentMeshingMeshParams</span></code></a> class.</p></li>
+<li><p>The <a class="reference internal" href="../api/_autosummary/ansys.meshing.prime.FileIO.export_mapdl_cdb.html#ansys.meshing.prime.FileIO.export_mapdl_cdb" title="ansys.meshing.prime.FileIO.export_mapdl_cdb"><code class="xref py py-func docutils literal notranslate"><span class="pre">FileIO.export_mapdl_cdb()</span></code></a> method allows you to export
+MAPDL <code class="docutils literal notranslate"><span class="pre">(*.cdb)</span></code> files and set parameters for exporting files using the
+<a class="reference internal" href="../api/_autosummary/ansys.meshing.prime.ExportMapdlCdbParams.html#ansys.meshing.prime.ExportMapdlCdbParams" title="ansys.meshing.prime.ExportMapdlCdbParams"><code class="xref py py-class docutils literal notranslate"><span class="pre">ExportMapdlCdbParams</span></code></a> class.</p></li>
+<li><p>The <a class="reference internal" href="../api/_autosummary/ansys.meshing.prime.FileIO.export_boundary_fitted_spline_kfile.html#ansys.meshing.prime.FileIO.export_boundary_fitted_spline_kfile" title="ansys.meshing.prime.FileIO.export_boundary_fitted_spline_kfile"><code class="xref py py-func docutils literal notranslate"><span class="pre">FileIO.export_boundary_fitted_spline_kfile()</span></code></a>
+method allows you to export IGA LS-DYNA keyword <code class="docutils literal notranslate"><span class="pre">(*.k)</span></code> files and set parameters for exporting boundary-fitted
+splines using the <a class="reference internal" href="../api/_autosummary/ansys.meshing.prime.ExportBoundaryFittedSplineParams.html#ansys.meshing.prime.ExportBoundaryFittedSplineParams" title="ansys.meshing.prime.ExportBoundaryFittedSplineParams"><code class="xref py py-class docutils literal notranslate"><span class="pre">ExportBoundaryFittedSplineParams</span></code></a> class.</p></li>
+</ul>
+</div></blockquote>
+</section>
+</section>
+<section id="read-and-write-size-field-files">
+<h2>Read and write size field files<a class="headerlink" href="#read-and-write-size-field-files" title="Permalink to this heading">#</a></h2>
+<section id="native-psf-format">
+<h3>Native PSF format<a class="headerlink" href="#native-psf-format" title="Permalink to this heading">#</a></h3>
+<blockquote>
+<div><ul class="simple">
+<li><p>The <a class="reference internal" href="../api/_autosummary/ansys.meshing.prime.FileIO.read_size_field.html#ansys.meshing.prime.FileIO.read_size_field" title="ansys.meshing.prime.FileIO.read_size_field"><code class="xref py py-func docutils literal notranslate"><span class="pre">FileIO.read_size_field()</span></code></a> method allows you to
+read Ansys Prime Server’s size field <code class="docutils literal notranslate"><span class="pre">(*.psf,</span> <span class="pre">*.psf.gz)</span></code> file and set parameters for reading this file
+using the <a class="reference internal" href="../api/_autosummary/ansys.meshing.prime.ReadSizeFieldParams.html#ansys.meshing.prime.ReadSizeFieldParams" title="ansys.meshing.prime.ReadSizeFieldParams"><code class="xref py py-class docutils literal notranslate"><span class="pre">ReadSizeFieldParams</span></code></a> class.</p></li>
+<li><p>The <a class="reference internal" href="../api/_autosummary/ansys.meshing.prime.FileIO.write_size_field.html#ansys.meshing.prime.FileIO.write_size_field" title="ansys.meshing.prime.FileIO.write_size_field"><code class="xref py py-func docutils literal notranslate"><span class="pre">FileIO.write_size_field()</span></code></a> method allows you to
+write Ansys Prime Server’s size field <code class="docutils literal notranslate"><span class="pre">(*.psf)</span></code> file and set parameters for writing this file using the
+<a class="reference internal" href="../api/_autosummary/ansys.meshing.prime.WriteSizeFieldParams.html#ansys.meshing.prime.WriteSizeFieldParams" title="ansys.meshing.prime.WriteSizeFieldParams"><code class="xref py py-class docutils literal notranslate"><span class="pre">WriteSizeFieldParams</span></code></a> class. You can write only active
+size fields into the file with the optional <a class="reference internal" href="../api/_autosummary/ansys.meshing.prime.WriteSizeFieldParams.write_only_active_size_fields.html#ansys.meshing.prime.WriteSizeFieldParams.write_only_active_size_fields" title="ansys.meshing.prime.WriteSizeFieldParams.write_only_active_size_fields"><code class="xref py py-attr docutils literal notranslate"><span class="pre">write_only_active_size_fields</span></code></a>
+parameter.</p></li>
+</ul>
+</div></blockquote>
+</section>
+<section id="fluent-meshing-format">
+<h3>Fluent Meshing format<a class="headerlink" href="#fluent-meshing-format" title="Permalink to this heading">#</a></h3>
+<p>The <a class="reference internal" href="../api/_autosummary/ansys.meshing.prime.FileIO.import_fluent_meshing_size_field.html#ansys.meshing.prime.FileIO.import_fluent_meshing_size_field" title="ansys.meshing.prime.FileIO.import_fluent_meshing_size_field"><code class="xref py py-func docutils literal notranslate"><span class="pre">FileIO.import_fluent_meshing_size_field()</span></code></a>
+method allows you to import Fluent Meshing’s size field <code class="docutils literal notranslate"><span class="pre">(*.sf,</span> <span class="pre">*.sf.gz)</span></code> file.</p>
+</section>
+</section>
+</section>
+
+
+                </article>
+              
+              
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> On this page
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#native-pmdat-format">Native PMDAT format</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#import-cad-files">Import CAD files</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#cad-reader-routes">CAD reader routes</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#append-cad-files">Append CAD files</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#parametric-cad-update">Parametric CAD update</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#part-management-and-creation">Part management and creation</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#model">Model</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#assembly">Assembly</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#part">Part</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#body">Body</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#import-and-export-solver-mesh-files">Import and export solver mesh files</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#import-solver-mesh-files">Import solver mesh files</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#export-solver-mesh-files">Export solver mesh files</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#read-and-write-size-field-files">Read and write size field files</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#native-psf-format">Native PSF format</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#fluent-meshing-format">Fluent Meshing format</a></li>
+</ul>
+</li>
+</ul>
+  </nav></div>
+
+  <div class="sidebar-secondary-item">
+  
+  <div class="tocsection editthispage">
+    <a href="https://github.com/ansys/pyprimemesh/edit/main/doc/source/user_guide/fileio.rst">
+      <i class="fa-solid fa-pencil"></i>
+      
+      
+        
+          Edit on GitHub
+        
+      
+    </a>
+  </div>
+</div>
+
+  <div class="sidebar-secondary-item">
+  <div class="tocsection sourcelink">
+    <a href="../_sources/user_guide/fileio.rst.txt">
+      <i class="fa-solid fa-file-lines"></i> Show Source
+    </a>
+  </div>
+</div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+          </footer>
+        
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../_static/scripts/bootstrap.js?digest=e353d410970836974a52"></script>
+<script src="../_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52"></script>
+
+  <footer class="bd-footer">
+<div class="bd-footer__inner bd-page-width">
+  
+    <div class="footer-items__start">
+      
+        <div class="footer-item">
+  <p class="copyright">
+    
+      © Copyright (c) 2023 ANSYS, Inc. All rights reserved.
+      <br/>
+    
+  </p>
+</div>
+      
+        <div class="footer-item">
+  <p class="sphinx-version">
+    Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 6.2.0.
+    <br/>
+  </p>
+</div>
+      
+    </div>
+  
+  
+    <div class="footer-items__end">
+      
+        <div class="footer-item"><p class="theme-version">
+    Built with the <a href="https://sphinxdocs.ansys.com/version/stable/index.html">Ansys Sphinx Theme</a> 0.9.8.
+    <br>Last updated on <span id="date"></span></br>
+</p>
+<script>
+  var options = { day: 'numeric', month: 'long', year: 'numeric' };
+  var lastModifiedDate = new Date(document.lastModified);
+  var date = lastModifiedDate.toLocaleDateString('en-US', options);
+  document.getElementById("date").innerHTML = date;
+</script></div>
+      
+    </div>
+  
+</div>
+
+  </footer>
+  </body>
+</html>

@@ -1,0 +1,11 @@
+set\_params
+===========
+
+.. currentmodule:: ansys.meshing.prime
+
+.. automethod:: ansys.meshing.prime.PeriodicControl.set_params
+
+.. minigallery::
+   :add-heading: Examples using PeriodicControl.set_params
+
+   ansys.meshing.prime.PeriodicControl.set_params

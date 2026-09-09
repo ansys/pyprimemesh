@@ -1,0 +1,6 @@
+n\_second\_order\_prism\_cells
+==============================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoproperty:: PartSummaryResults.n_second_order_prism_cells

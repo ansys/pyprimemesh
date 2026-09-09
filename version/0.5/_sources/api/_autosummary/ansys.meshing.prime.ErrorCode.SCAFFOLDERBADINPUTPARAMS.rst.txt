@@ -1,0 +1,6 @@
+SCAFFOLDERBADINPUTPARAMS
+========================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoattribute:: ErrorCode.SCAFFOLDERBADINPUTPARAMS

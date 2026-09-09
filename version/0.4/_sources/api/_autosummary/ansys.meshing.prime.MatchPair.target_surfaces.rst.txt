@@ -1,0 +1,6 @@
+﻿target\_surfaces
+================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoproperty:: MatchPair.target_surfaces

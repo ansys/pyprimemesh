@@ -1,0 +1,39 @@
+.. vale off
+
+MatchMorphResults
+=================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoclass:: MatchMorphResults
+   
+   
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+      :toctree:
+   
+      
+      MatchMorphResults.print_default
+      MatchMorphResults.set_default
+   
+   
+
+   
+   
+   .. rubric:: Attributes
+
+   .. autosummary::
+      :toctree:
+   
+      MatchMorphResults.error_code
+   
+   
+
+.. minigallery::
+    :add-heading: Examples using MatchMorphResults
+
+    ansys.meshing.prime.MatchMorphResults
+
+.. vale on

@@ -1,0 +1,6 @@
+output\_format
+==============
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoproperty:: ExportLSDynaKeywordFileParams.output_format

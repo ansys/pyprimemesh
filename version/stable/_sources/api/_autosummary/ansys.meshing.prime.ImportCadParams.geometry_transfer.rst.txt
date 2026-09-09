@@ -1,0 +1,6 @@
+geometry\_transfer
+==================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoproperty:: ImportCadParams.geometry_transfer

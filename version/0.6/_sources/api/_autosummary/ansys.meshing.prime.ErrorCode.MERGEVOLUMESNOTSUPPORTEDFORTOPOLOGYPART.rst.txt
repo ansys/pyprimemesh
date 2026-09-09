@@ -1,0 +1,6 @@
+MERGEVOLUMESNOTSUPPORTEDFORTOPOLOGYPART
+=======================================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoattribute:: ErrorCode.MERGEVOLUMESNOTSUPPORTEDFORTOPOLOGYPART

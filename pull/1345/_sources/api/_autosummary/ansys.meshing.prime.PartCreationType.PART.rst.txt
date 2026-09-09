@@ -1,0 +1,6 @@
+PART
+====
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoattribute:: PartCreationType.PART

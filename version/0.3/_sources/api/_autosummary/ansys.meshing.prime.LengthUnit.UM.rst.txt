@@ -1,0 +1,6 @@
+UM
+==
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoattribute:: LengthUnit.UM

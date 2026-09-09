@@ -1,0 +1,11 @@
+bit\_count
+==========
+
+.. currentmodule:: ansys.meshing.prime
+
+.. automethod:: ansys.meshing.prime.EdgeMergeControl.bit_count
+
+.. minigallery::
+   :add-heading: Examples using EdgeMergeControl.bit_count
+
+   ansys.meshing.prime.EdgeMergeControl.bit_count

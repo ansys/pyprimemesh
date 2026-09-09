@@ -1,0 +1,6 @@
+spline\_refinement\_type
+========================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoproperty:: RefineSplineParams.spline_refinement_type

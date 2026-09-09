@@ -1,0 +1,11 @@
+bit\_count
+==========
+
+.. currentmodule:: ansys.meshing.prime
+
+.. automethod:: ansys.meshing.prime.MergeNodeType.bit_count
+
+.. minigallery::
+   :add-heading: Examples using MergeNodeType.bit_count
+
+   ansys.meshing.prime.MergeNodeType.bit_count

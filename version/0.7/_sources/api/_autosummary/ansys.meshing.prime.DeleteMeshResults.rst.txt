@@ -1,0 +1,39 @@
+.. vale off
+
+DeleteMeshResults
+=================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoclass:: DeleteMeshResults
+   
+   
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+      :toctree:
+   
+      
+      DeleteMeshResults.print_default
+      DeleteMeshResults.set_default
+   
+   
+
+   
+   
+   .. rubric:: Attributes
+
+   .. autosummary::
+      :toctree:
+   
+      DeleteMeshResults.error_code
+   
+   
+
+.. minigallery::
+    :add-heading: Examples using DeleteMeshResults
+
+    ansys.meshing.prime.DeleteMeshResults
+
+.. vale on

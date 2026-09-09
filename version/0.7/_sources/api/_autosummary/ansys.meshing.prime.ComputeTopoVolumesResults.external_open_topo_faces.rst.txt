@@ -1,0 +1,6 @@
+external\_open\_topo\_faces
+===========================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoproperty:: ComputeTopoVolumesResults.external_open_topo_faces

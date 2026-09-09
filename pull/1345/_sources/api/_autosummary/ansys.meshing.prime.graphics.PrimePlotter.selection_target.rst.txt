@@ -1,0 +1,6 @@
+selection\_target
+=================
+
+.. currentmodule:: ansys.meshing.prime.graphics
+
+.. autoproperty:: PrimePlotter.selection_target

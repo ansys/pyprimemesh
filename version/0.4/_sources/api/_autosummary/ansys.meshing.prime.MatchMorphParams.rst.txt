@@ -1,0 +1,27 @@
+.. vale off
+
+MatchMorphParams
+================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoclass:: MatchMorphParams
+   
+   
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+      :toctree:
+   
+      
+      MatchMorphParams.print_default
+      MatchMorphParams.set_default
+   
+   
+
+   
+   
+   
+
+.. vale on

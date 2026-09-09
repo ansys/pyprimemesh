@@ -1,0 +1,11 @@
+import\_cad
+===========
+
+.. currentmodule:: ansys.meshing.prime
+
+.. automethod:: ansys.meshing.prime.FileIO.import_cad
+
+.. minigallery::
+   :add-heading: Examples using FileIO.import_cad
+
+   ansys.meshing.prime.FileIO.import_cad

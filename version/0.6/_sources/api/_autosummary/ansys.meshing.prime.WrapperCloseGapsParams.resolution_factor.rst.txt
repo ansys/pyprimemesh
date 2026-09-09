@@ -1,0 +1,6 @@
+resolution\_factor
+==================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoproperty:: WrapperCloseGapsParams.resolution_factor

@@ -1,0 +1,6 @@
+SIZEFIELDTYPENOTSUPPORTED
+=========================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoattribute:: ErrorCode.SIZEFIELDTYPENOTSUPPORTED

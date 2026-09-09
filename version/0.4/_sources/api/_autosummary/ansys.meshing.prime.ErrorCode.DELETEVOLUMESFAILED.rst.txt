@@ -1,0 +1,6 @@
+﻿DELETEVOLUMESFAILED
+===================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoattribute:: ErrorCode.DELETEVOLUMESFAILED

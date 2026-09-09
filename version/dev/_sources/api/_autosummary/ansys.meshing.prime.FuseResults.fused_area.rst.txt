@@ -1,0 +1,6 @@
+fused\_area
+===========
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoproperty:: FuseResults.fused_area

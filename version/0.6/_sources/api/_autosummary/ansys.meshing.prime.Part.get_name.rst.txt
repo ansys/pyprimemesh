@@ -1,0 +1,6 @@
+get\_name
+=========
+
+.. currentmodule:: ansys.meshing.prime
+
+.. automethod:: Part.get_name

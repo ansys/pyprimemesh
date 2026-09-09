@@ -1,0 +1,6 @@
+create\_new\_part
+=================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoproperty:: WrapperCloseGapsParams.create_new_part

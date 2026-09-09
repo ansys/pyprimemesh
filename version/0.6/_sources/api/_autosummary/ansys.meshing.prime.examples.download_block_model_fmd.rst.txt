@@ -1,0 +1,6 @@
+download\_block\_model\_fmd
+===========================
+
+.. currentmodule:: ansys.meshing.prime.examples
+
+.. autofunction:: download_block_model_fmd

@@ -1,0 +1,6 @@
+﻿max\_size
+=========
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoproperty:: LocalSurferParams.max_size

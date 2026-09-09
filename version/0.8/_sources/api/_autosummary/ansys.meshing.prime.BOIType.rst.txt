@@ -1,0 +1,47 @@
+.. vale off
+
+BOIType
+=======
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoclass:: BOIType
+   
+   
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+      :toctree:
+   
+      BOIType.conjugate
+      BOIType.bit_length
+      BOIType.bit_count
+      BOIType.to_bytes
+      BOIType.from_bytes
+      BOIType.as_integer_ratio
+   
+   
+
+   
+   
+   .. rubric:: Attributes
+
+   .. autosummary::
+      :toctree:
+   
+      BOIType.real
+      BOIType.imag
+      BOIType.numerator
+      BOIType.denominator
+      BOIType.OFFSETBOX
+      BOIType.OFFSETSURFACE
+   
+   
+
+.. minigallery::
+    :add-heading: Examples using BOIType
+
+    ansys.meshing.prime.BOIType
+
+.. vale on

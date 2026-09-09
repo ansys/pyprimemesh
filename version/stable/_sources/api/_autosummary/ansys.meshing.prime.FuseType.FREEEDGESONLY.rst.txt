@@ -1,0 +1,6 @@
+FREEEDGESONLY
+=============
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoattribute:: FuseType.FREEEDGESONLY

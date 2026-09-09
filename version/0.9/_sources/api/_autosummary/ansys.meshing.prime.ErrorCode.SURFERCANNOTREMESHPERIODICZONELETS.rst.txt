@@ -1,0 +1,6 @@
+SURFERCANNOTREMESHPERIODICZONELETS
+==================================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoattribute:: ErrorCode.SURFERCANNOTREMESHPERIODICZONELETS
