@@ -105,7 +105,8 @@ def get_response_messages(response_generator):
         if response.HasField('completion_token'):
             break
 
-        assert response.HasField('content')
+        if not response.HasField('content'):
+            raise RuntimeError('Received a gRPC response without content or a completion token.')
         yield response.content
 
 
@@ -419,13 +420,16 @@ class GRPCCommunicator(Communicator):
         if self._stub is not None:
             try:
                 response = self._stub.Finalize(prime_pb2.FinalizeRequest())
-                message = get_response(response, '')
-            except Exception:
+                get_response(response, '')
+            except grpc.RpcError:
                 # It is possible that the server is already down
                 # when this is called.
                 # In that case, we can just ignore the error.
                 # The channel will be closed anyway.
-                pass
+                logging.getLogger('PyPrimeMesh').debug(
+                    'Prime Server was unavailable while finalizing the gRPC connection.',
+                    exc_info=True,
+                )
         else:
             raise RuntimeError("No connection with server")
 

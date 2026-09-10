@@ -207,7 +207,8 @@ class Client(object):
             self._comm.close()
             self._comm = None
         if self._process is not None:
-            assert self._local == False
+            if self._local:
+                raise RuntimeError('A local client cannot own a server process.')
             terminate_process(self._process)
             self._process = None
         if config.using_container():
