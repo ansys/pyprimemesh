@@ -25,7 +25,7 @@ import logging
 import os
 import shutil
 
-# Required for fixed process-inspection commands.
+# Required for process inspection.
 import subprocess  # nosec B404
 import time
 import uuid
@@ -106,23 +106,22 @@ def get_child_processes(process):
         Process IDs of the processes.
     """
     children = []
-    # These fixed system commands receive only integer process IDs and never use a shell.
-    cmd = subprocess.run(  # nosec B603, B607
-        ['pgrep', '-P', str(process)],
-        capture_output=True,
-        text=True,
-        check=False,
+    # The command interpolates only a process ID.
+    cmd = subprocess.Popen(  # nosec B602
+        "pgrep -P %d" % process, shell=True, stdout=subprocess.PIPE
     )
-    for pid in cmd.stdout.splitlines()[:1]:
+    out = cmd.stdout.read().decode("utf-8")
+    cmd.wait()
+    for pid in out.split("\n")[:1]:
         if pid.strip() == '':
             break
-        ps_cmd = subprocess.run(  # nosec B603, B607
-            ['ps', '-o', 'cmd=', str(int(pid))],
-            capture_output=True,
-            text=True,
-            check=False,
+        # The PID is normalized to an integer.
+        ps_cmd = subprocess.Popen(  # nosec B602
+            "ps -o cmd= {}".format(int(pid)), stdout=subprocess.PIPE, shell=True
         )
-        ps_parts = ps_cmd.stdout.split()
+        ps_out = ps_cmd.stdout.read().decode("utf-8")
+        ps_cmd.wait()
+        ps_parts = ps_out.split()
         if ps_parts and "AnsysPrimeServer" in ps_parts[0]:
             children.append(int(pid))
         else:

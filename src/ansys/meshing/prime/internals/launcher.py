@@ -24,7 +24,7 @@
 import logging
 import os
 
-# Required to launch the validated Prime Server executable.
+# Required to launch Prime Server.
 import subprocess  # nosec B404
 import sys
 import uuid
@@ -45,9 +45,7 @@ try:
     from simple_upload_server.client import Client as FileClient
 
     config.set_has_pim(pypim.is_configured())
-except ImportError:
-    pypim = None
-    FileClient = None
+except:
     config.set_has_pim(False)
 
 __all__ = ['launch_prime', 'launch_server_process']
@@ -208,9 +206,6 @@ def launch_remote_prime(
     if version is None:
         version = 'latest'
 
-    if pypim is None or FileClient is None:
-        raise RuntimeError('PyPIM and the simple upload server client are required.')
-
     pim = pypim.connect()
     instance = pim.create_instance(product_name='prime', product_version=version)
     instance.wait_for_ready()
@@ -223,7 +218,7 @@ def launch_remote_prime(
     )
 
     client = Client(channel=channel, timeout=timeout)
-    # The service authenticates through its headers but requires a non-secret token value.
+    # The service authenticates through headers; this is a required non-secret placeholder.
     file_service = FileClient(
         token='token',  # nosec B106
         url=instance.services['http-simple-upload-server'].uri,
