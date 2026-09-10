@@ -118,7 +118,8 @@ class PrimeCommunicator(Communicator):
         dict
             Response from the server.
         """
-        exec(recipe, globals())
+        # This API intentionally executes trusted recipes in the embedded Prime Server runtime.
+        exec(recipe, globals())  # nosec B102
         output = '{"Results" : "' + str(return_value) + '"}'
         with config.numpy_array_optimization_disabled():
             result = json.loads(output)
