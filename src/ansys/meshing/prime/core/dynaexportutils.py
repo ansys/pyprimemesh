@@ -2454,26 +2454,16 @@ class MaterialProcessor:
         if self._zone_data is not None:
             for zone in self._zone_data:
                 zone_details = self._zone_data[zone]
-                try:
-                    if zone_details['id'] == _id:
-                        zone_name = zone
-                        zone_details = zone_details
-                        return zone_name, zone_details
-                except:
-                    pass
+                if isinstance(zone_details, dict) and zone_details.get('id') == _id:
+                    return zone, zone_details
         elif self._part_data is not None:
             for part in self._part_data:
                 part_info = self._part_data[part]
                 if part_info is not None and part_info['Zones'] is not None:
                     for zone in part_info['Zones']:
                         zone_details = part_info['Zones'][zone]
-                        try:
-                            if zone_details['id'] == _id:
-                                zone_name = zone
-                                zone_details = zone_details
-                                return zone_name, zone_details
-                        except:
-                            pass
+                        if isinstance(zone_details, dict) and zone_details.get('id') == _id:
+                            return zone, zone_details
         return None, {}
 
     def _is_material_used_with_shell(self, mat_name):
