@@ -20,7 +20,8 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
-"""ANSYS PRIME standalone YAML parser.
+"""
+ANSYS PRIME Standalone YAML Parser.
 
 Zero external dependencies - pure Python implementation.
 
