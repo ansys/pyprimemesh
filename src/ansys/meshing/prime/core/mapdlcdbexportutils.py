@@ -1,5 +1,6 @@
-# Copyright (C) 2024 - 2026 ANSYS, Inc. and/or its affiliates.
+# Copyright (C) 2022 - 2026 Synopsys, Inc. and ANSYS, Inc. All rights reserved.
 # SPDX-License-Identifier: MIT
+#
 #
 # Permission is hereby granted, free of charge, to any person obtaining a copy
 # of this software and associated documentation files (the "Software"), to deal
@@ -102,12 +103,8 @@ class _FormatEntities:
         return field
 
 
-class _ModelInformation:
-    model_simulation_data = None
-
-
 class _TimePointsProcessor:
-    __slots__ = ('_time_data', '_file_name', '_formatter', '_model', '_logger')
+    __slots__ = ('_time_data', '_file_name', '_formatter', '_model', '_logger', '_points')
 
     def __init__(self, model: prime.Model, data, file_name=''):
         self._time_data = data
@@ -115,6 +112,7 @@ class _TimePointsProcessor:
         self._formatter = _FormatEntities()
         self._model = model
         self._logger = model.python_logger
+        self._points = []
 
     def write_timepoint_table_to_file(self, mapdl_commands):
         with open(self._file_name, 'a') as file_time_pt:
@@ -134,6 +132,9 @@ class _TimePointsProcessor:
             )
         return time_pt_commands
 
+    def _get_list_of_floats(self):
+        return self._points
+
     def _get_commands(self, time_pt_table_name, time_pt_table_data):
         mapdl_commands = ''
         params = time_pt_table_data['Parameters']
@@ -147,7 +148,10 @@ class _TimePointsProcessor:
                 f"Warning: timepoint table with argument generate is not processed."
             )
         pt_data = time_pt_table_data['Data']['time_points']
-        formatter_pt_data = [f"{self._formatter.field_str(pt)}" for pt in pt_data]
+        self._points = [float(pt) for pt in pt_data if float(pt) != 0.0]
+        formatter_pt_data = [
+            f"{self._formatter.field_str(str(float(pt)))}" for pt in pt_data if float(pt) != 0.0
+        ]
         all_values = []
         all_values.extend(formatter_pt_data)
         format_output = ""
@@ -155,8 +159,8 @@ class _TimePointsProcessor:
             values = all_values[i : i + 4]
             format_output += ''.join(values) + '\n'
         tpname = get_modified_component_name(time_pt_table_name)
-        mapdl_commands += f"*DIM, {tpname}, ARRAY, {len(pt_data)}, 1, 1,\n"
-        mapdl_commands += f"*PREAD, {tpname}, {len(pt_data)}\n"
+        mapdl_commands += f"*DIM, {tpname}, ARRAY, {len(formatter_pt_data)}, 1, 1,\n"
+        mapdl_commands += f"*PREAD, {tpname}, {len(formatter_pt_data)}\n"
         mapdl_commands += format_output
         mapdl_commands += "END PREAD\n"
         return mapdl_commands
@@ -632,6 +636,7 @@ class _MaterialProcessor:
         '_model',
         '_logger',
         '_skip_comments',
+        '_params',
     )
 
     def __init__(
@@ -641,12 +646,14 @@ class _MaterialProcessor:
         zone_data,
         hm_comments=False,
         skip_comments=True,
+        params=None,
     ):
         self._raw_materials_data = raw_materials_data
         self._zone_data = zone_data
         self._mat_id = 0
         self._enable_hm_comments = hm_comments
         self._material_linked_to_zone_type = {}
+        self._params = params
         self._cohezive_zone_thickness_data = {}
         self._property_function_map = {
             'DENSITY': self._process_density,
@@ -674,14 +681,21 @@ class _MaterialProcessor:
             if 'Type' not in zone_details:
                 self._logger.warning(f'Warning: Type is not specified for zone {zone}')
                 continue
-            if zone_details['Type'] not in ['Shell', 'Solid', 'Cohesive', 'Beam']:
+            if zone_details['Type'] not in [
+                'Shell',
+                'Solid',
+                'Cohesive',
+                'Beam',
+                'Gasket',
+                'Membrane',
+            ]:
                 self._logger.warning(
                     f"Warning: Type of {zone} in not mapped to "
                     f"material ({zone_details['Type']})"
                 )
                 self._logger.info(zone_details['Type'])
                 continue
-            if 'Material' not in zone_details:
+            if 'Material' not in zone_details and zone_details['Type'] != 'Gasket':
                 self._logger.warning(f'Warning: Material is not specified for zone {zone}')
                 continue
             if zone_details['Type'] == 'Cohesive':
@@ -697,25 +711,29 @@ class _MaterialProcessor:
                     self._cohezive_zone_thickness_data[zone_details['Material']]['Thickness'] = (
                         zone_details['Thickness']
                     )
-            if zone_details['Material'] in self._material_linked_to_zone_type:
-                if self._material_linked_to_zone_type[zone_details['Material']] in [
-                    'Shell',
-                    'Solid',
-                    'beam',
-                ]:
-                    if zone_details['Type'] == 'Cohesive':
-                        self._logger.warning(
-                            f"Warning: Material:'{zone_details['Material']}' is used for "
-                            f" {zone_details['Type']} and one of these [Shell, Solid, beam]"
-                        )
-                elif self._material_linked_to_zone_type[zone_details['Material']] == 'Cohesive':
-                    if zone_details['Type'] in ['Shell', 'Solid', 'beam']:
-                        self._logger.warning(
-                            f"Warning: Material:'{zone_details['Material']}' is used for "
-                            f"{zone_details['Type']} and cohesive"
-                        )
-            else:
-                self._material_linked_to_zone_type[zone_details['Material']] = zone_details['Type']
+            if "Material" in zone_details:
+                if zone_details['Material'] in self._material_linked_to_zone_type:
+                    if self._material_linked_to_zone_type[zone_details['Material']] in [
+                        'Shell',
+                        'Solid',
+                        'beam',
+                        'Membrane',
+                    ]:
+                        if zone_details['Type'] == 'Cohesive':
+                            self._logger.warning(
+                                f"Warning: Material:'{zone_details['Material']}' is used for "
+                                f" {zone_details['Type']} and one of these [Shell, Solid, beam]"
+                            )
+                    elif self._material_linked_to_zone_type[zone_details['Material']] == 'Cohesive':
+                        if zone_details['Type'] in ['Shell', 'Solid', 'beam', 'Membrane']:
+                            self._logger.warning(
+                                f"Warning: Material:'{zone_details['Material']}' is used for "
+                                f"{zone_details['Type']} and cohesive"
+                            )
+                else:
+                    self._material_linked_to_zone_type[zone_details['Material']] = zone_details[
+                        'Type'
+                    ]
 
     def get_all_material_commands(self):
         mapdl_text_data_list = []
@@ -1311,6 +1329,7 @@ class _MaterialProcessor:
             zero = float(parameters['ZERO'])
         expansion_data += f"MPTEMP,,,,,,,,\n"
         expansion_data += f"MPAMOD, {mat_id}, {zero},\t! C\n"
+        expansion_data += "\n\n"
         return expansion_data
 
     def _process_conductivity_data(self, property_dict, material, mat_id):
@@ -1526,8 +1545,12 @@ class _MaterialProcessor:
                     elastic_modulus += f"TBDATA, 1, {e}, {v}\n"
             else:
                 if self._material_linked_to_zone_type[material] == 'Cohesive':
-                    elastic_modulus += f"TB, ELAS, {mat_id}, 1, 2,ISOT\n"
-                    elastic_modulus += f"TBDATA, 1, {youngs_mod[0]}, {nu[0]}\n"
+                    if int(str(self._params.target_ansys_version)[-3:]) >= 251:
+                        elastic_modulus += f"TB, ELAS, {mat_id}, 1, 2,ISOT\n"
+                        elastic_modulus += f"TBDATA, 1, {youngs_mod[0]}, {nu[0]}\n"
+                    else:
+                        elastic_modulus += f"TB, GASKET, {mat_id}, 1, 2, ELAS\n"
+                        elastic_modulus += f"TBDATA, 1, {youngs_mod[0]}, {nu[0]}\n"
                 else:
                     elastic_modulus += f"MP,EX,{mat_id},{youngs_mod[0]}\n"
                     elastic_modulus += f"MP,NUXY,{mat_id},{nu[0]}\n"
@@ -1676,6 +1699,20 @@ class _MaterialProcessor:
             return ''
         return elastic_modulus
 
+    def _is_negative_stress_strain_slope_present(self, stress, strain, data_points):
+
+        if len(stress) != len(strain):
+            self._logger.warning(f"Inconsistent stress and strain values for *PLASTIC")
+            return False
+
+        for i in range(data_points):
+            if i + 2 > data_points:
+                break
+            if float(stress[i + 1]) < float(stress[i]) and float(strain[i + 1]) > float(strain[i]):
+                return True
+
+        return False
+
     def _process_plastic_data(self, property_dict, material, mat_id):
         def fmt(val):
             try:
@@ -1762,7 +1799,8 @@ class _MaterialProcessor:
             if hardening == "ISOTROPIC":
                 lines.append(f"TB,PLAS,{mat_id},,{int(data_points)},MISO")
                 use_tbd = False
-
+            if self._is_negative_stress_strain_slope_present(stresses, strains, int(data_points)):
+                lines.append(f"TBEO,NEGSLOPE,1")
             curr_temp = None
             start = 1
             num_prev = 0
@@ -1980,6 +2018,293 @@ class _MaterialProcessor:
                     pass
         hyperelastic_data += f"\n"
         return hyperelastic_data
+
+
+class _GasketMaterialProcessor:
+    __slots__ = (
+        '_raw_gasket_materials_data',
+        '_sim_data',
+        '_mat_id',
+        '_enable_hm_comments',
+        '_property_function_map',
+        '_gasket_zone_thickness_data',
+        '_gasket_zone_gap_data',
+        '_model',
+        '_logger',
+        '_skip_comments',
+    )
+
+    def __init__(
+        self,
+        model: prime.Model,
+        raw_gasket_materials_data,
+        sim_data=None,
+        hm_comments=False,
+        skip_comments=True,
+    ):
+        self._raw_gasket_materials_data = raw_gasket_materials_data
+        self._sim_data = sim_data
+        self._mat_id = 0
+        self._gasket_zone_thickness_data = {}
+        self._gasket_zone_gap_data = {}
+        self._enable_hm_comments = hm_comments
+        self._property_function_map = {
+            "GasketElasticity": self._process_gasket_elasticity,
+            "GasketThicknessBehavior": self._process_gasket_thickness_behavior,
+            "Expansion": self._process_expansion_data,
+        }
+        self._model = model
+        self._logger = model.python_logger
+        self._skip_comments = skip_comments
+
+    def _map_zone_with_gasket_behavior(self):
+        if self._sim_data.get("GasketSection") is None:
+            return
+        for zone in self._sim_data.get("GasketSection"):
+            zone_details = self._sim_data.get("GasketSection")[zone]
+            parameters = zone_details.get("Parameters", {})
+            zone_data = zone_details.get("Data", {})
+            if "BEHAVIOR" in parameters:
+                behavior = parameters["BEHAVIOR"]
+                if zone_data is not None:
+                    if "initial_gap" in zone_data:
+                        self._gasket_zone_gap_data.setdefault(behavior, []).append(
+                            zone_data['initial_gap']
+                        )
+                    if "initial_thickness" in zone_data:
+                        self._gasket_zone_thickness_data.setdefault(behavior, []).append(
+                            zone_data['initial_thickness']
+                        )
+
+    def get_all_material_commands(self):
+        mapdl_text_data_list = []
+        self._map_zone_with_gasket_behavior()
+        if self._raw_gasket_materials_data:
+            for material in self._raw_gasket_materials_data:
+                self._logger.info(f"Processing Material: {material}")
+                mapdl_text_data = self._get_mat_comands(material)
+                mapdl_text_data_list.append(mapdl_text_data)
+        return '\n\n'.join(mapdl_text_data_list)
+
+    def _get_mat_comands(self, material):
+        mat_data = self._raw_gasket_materials_data[material]
+        self._mat_id = mat_data['id']
+        mapdl_text_data = ""
+        hm_comment = self._enable_hm_comments and self._skip_comments is False
+        if hm_comment:
+            mapdl_text_data += "!!HMNAME MAT \n"
+            mapdl_text_data += f'!!{self._mat_id:>10} "{material}"\n'
+        else:
+            mapdl_text_data += f"! material '{material}' \n"
+        if "Parameters" in mat_data:
+            self._logger.warning(f"Parameter on Material {material} are not processed.")
+        for prop in mat_data:
+            if prop == 'id':
+                continue
+            if prop in self._property_function_map:
+                function = self._property_function_map[prop]
+                mapdl_text_data += function(mat_data[prop], material, self._mat_id)
+            else:
+                if prop not in ['HMComments', 'Comments']:
+                    self._logger.warning(
+                        f"The property {prop} for Material {material} is not processed."
+                    )
+        return mapdl_text_data
+
+    def _process_gasket_elasticity(self, property_dicts, material, mat_id):
+        gasket_elasticity_data = ""
+
+        for property_dict in property_dicts:
+            parameters = property_dict.get("Parameters", {})
+            data = property_dict.get("Data", {})
+
+            component = parameters.get("COMPONENT", "TRANSVERSE SHEAR")
+
+            temperature = data.get("Temperature", [])
+
+            if component == "TRANSVERSE SHEAR":
+                shear_stiffness = data.get("Shear stiffness", [])
+
+                if not temperature:
+                    temperature = [None] * len(shear_stiffness)
+                temp = None
+                gasket_elasticity_data += f"TB, GASKET, {mat_id}, , 3, TSS\n"
+                for s, t in zip(shear_stiffness, temperature):
+                    if temp != t:
+                        temp = t
+                        if temp is not None:
+                            gasket_elasticity_data += f"TBTEMP, {temp}\n"
+                    gasket_elasticity_data += f"TBDATA, 1, {s}, {s}, 0\n"
+                    gasket_elasticity_data += f"\n"
+
+            if component == "MEMBRANE":
+                youngs_modulus = data.get("Youngs modulus", [])
+                poisson_ratio = data.get("Poisson ratio", [])
+
+                if not temperature:
+                    temperature = [None] * len(youngs_modulus)
+
+                temp = None
+                gasket_elasticity_data += f"TB, GASKET, {mat_id}, , 6, TSMS\n"
+                for e, v, t in zip(youngs_modulus, poisson_ratio, temperature):
+                    if temp != t:
+                        temp = t
+                        if temp is not None:
+                            gasket_elasticity_data += f"TBTEMP, {temp}\n"
+                    gasket_elasticity_data += f"TBDATA, 1, , , {e}, {e}, , {v}\n"
+                    gasket_elasticity_data += f"\n"
+
+        return gasket_elasticity_data
+
+    def _process_expansion_data(self, property_dicts, material, mat_id):
+
+        expansion_data = _MaterialProcessor._process_expansion_data(
+            self, property_dicts, material, mat_id
+        )
+
+        return expansion_data
+
+    def _process_gasket_thickness_behavior(self, property_dicts, material, mat_id):
+        gasket_thickness_behavior_data = ""
+
+        # print(f"_process_gasket_thickness_behavior {material}")
+        # print(property_dicts)
+
+        def _to_float(v, default=None):
+            try:
+                return float(v)
+            except (TypeError, ValueError):
+                return default
+
+        def _as_list(v):
+            if v is None:
+                return []
+            return v if isinstance(v, list) else [v]
+
+        def _fmt(v):
+            fv = _to_float(v, 0.0)
+            return f"{fv:.12g}"
+
+        for property_dict in property_dicts:
+            parameters = property_dict.get("Parameters", {})
+
+            scaling_factor = 1e-3
+            if "SCALING FACTOR" in parameters:
+                scaling_factor = _to_float(parameters["SCALING FACTOR"], 1e-3)
+
+            if material in self._gasket_zone_gap_data and self._gasket_zone_gap_data[material]:
+                if len(self._gasket_zone_gap_data[material]) > 1:
+                    self._logger.warning(
+                        f"Multiple initial gap values are provided for material {material} "
+                        f"from the zone data, "
+                        f"only the first value is used for processing gasket thickness behavior."
+                    )
+                initial_gap = self._gasket_zone_gap_data[material][0]
+            else:
+                initial_gap = 0.0
+
+            data = property_dict.get("Data", {})
+
+            data_type = parameters.get("TYPE", "ELASTIC-PLASTIC")
+            data_variables = parameters.get("VARIABLE", "STRESS")
+            data_direction = parameters.get("DIRECTION", "LOADING")
+            data_interpolation = parameters.get("INTERPOLATION", "NORMALIZED")
+
+            if data_direction == 'LOADING':
+                gasket_thickness_behavior_data += f"TB, GASKET, {mat_id}, 1, , PARA\n"
+                gasket_thickness_behavior_data += f"TBDATA, 1, {initial_gap}, {scaling_factor}, 0\n"
+                gasket_thickness_behavior_data += f"\n"
+
+            derection_map = {"LOADING": "COMP", "UNLOADING": "NUNL"}
+
+            temperature = data.get("Temperature", [])
+
+            if data_variables == 'STRESS':
+                pressure = data.get("Pressure", [])
+                closure = data.get("Closure", [])
+            else:
+                pressure = data.get("Force", [])
+                closure = data.get("Closure", [])
+
+            if data_type == 'ELASTIC-PLASTIC':
+                plastic_closure = data.get("Plastic Closure", [])
+            else:
+                plastic_closure = data.get("Maximum Closure", [])
+
+            if not temperature:
+                temperature = [None] * len(pressure)
+            if not plastic_closure:
+                plastic_closure = [None] * len(pressure)
+
+            temp = None
+            pc = None
+
+            datapoints = len(pressure) // len(list(set(temperature)))
+            if data_direction == 'LOADING':
+                gasket_thickness_behavior_data += (
+                    f"TB, GASKET, {mat_id}, , {datapoints}, {derection_map[data_direction]}\n"
+                )
+                for i in range(len(pressure)):
+                    if temp != temperature[i]:
+                        temp = temperature[i]
+                        gasket_thickness_behavior_data += f"TBTEMP, {temp}\n"
+                    gasket_thickness_behavior_data += f"TBPT, ,{closure[i]}, {pressure[i]}\n"
+
+            else:
+                gasket_unloading_curve_data = ""
+                pt_counter = 0
+                for i in range(0, len(pressure)):
+                    if temp != temperature[i] or pc != plastic_closure[i] or closure[i] == 0.0:
+                        if (
+                            pt_counter > 0
+                            and f"TB, GASKET, {mat_id}, , 0, {derection_map[data_direction]}\n"
+                            in gasket_thickness_behavior_data
+                        ):
+                            gasket_thickness_behavior_data = gasket_thickness_behavior_data.replace(
+                                f"TB, GASKET, {mat_id}, , 0, " f"{derection_map[data_direction]}\n",
+                                f"TB, GASKET, {mat_id}, , {pt_counter}, "
+                                f"{derection_map[data_direction]}\n",
+                            )
+                            gasket_thickness_behavior_data += gasket_unloading_curve_data
+                            gasket_unloading_curve_data = ""
+                        gasket_thickness_behavior_data += f"\n"
+                        gasket_thickness_behavior_data += (
+                            f"TB, GASKET, {mat_id}, , 0, {derection_map[data_direction]}\n"
+                        )
+                        pt_counter = 0
+                        if temp is not None:
+                            gasket_thickness_behavior_data += f"TBTEMP, {temp}\n"
+
+                        temp = temperature[i]
+                        pc = plastic_closure[i]
+
+                    gasket_unloading_curve_data = (
+                        f"TBPT, ,{closure[i]}, {pressure[i]}\n" + gasket_unloading_curve_data
+                    )
+                    pt_counter += 1
+                if (
+                    f"TB, GASKET, {mat_id}, , 0, {derection_map[data_direction]}\n"
+                    in gasket_thickness_behavior_data
+                ):
+                    gasket_thickness_behavior_data = gasket_thickness_behavior_data.replace(
+                        f"TB, GASKET, {mat_id}, , 0, {derection_map[data_direction]}\n",
+                        f"TB, GASKET, {mat_id}, , {pt_counter}, {derection_map[data_direction]}\n",
+                    )
+                    gasket_thickness_behavior_data += gasket_unloading_curve_data
+        return gasket_thickness_behavior_data
+
+    def get_material_commands_by_material_name(self, mat_name):
+        mapdl_text_data = self._get_mat_comands(mat_name)
+        return mapdl_text_data
+
+    def get_material_commands_by_material_id(self, id):
+        mapdl_text_data = ''
+        for material in self._raw_gasket_materials_data:
+            mat_data = self._raw_gasket_materials_data[material]
+            if mat_data['id'] == id:
+                mapdl_text_data = self._get_mat_comands(material)
+                break
+        return mapdl_text_data
 
 
 class _JointMaterialProcessor:
@@ -2566,6 +2891,9 @@ class _BoundaryProcessor:
         '_base_id_counter',
         '_step_removed',
         '_logger',
+        '_boundary_component_data',
+        'current_boundary_component',
+        'op_new',
     )
 
     def __init__(
@@ -2577,6 +2905,7 @@ class _BoundaryProcessor:
         sim_data=None,
         need_base_id=False,
         step_removed=True,
+        previous_component_data={},
     ):
         self._simulation_data = sim_data
         self._boundaries_data = data
@@ -2590,6 +2919,9 @@ class _BoundaryProcessor:
         self._base_id_mapping = {}
         self._base_id_counter = 1
         self._logger = model.python_logger
+        self._boundary_component_data = previous_component_data
+        self.current_boundary_component = {}
+        self.op_new = False
 
     def get_ampl_commands(self):
         return self._ampl_commands
@@ -2601,7 +2933,11 @@ class _BoundaryProcessor:
         for boundary_data in boundaries_data:
             boundary_commands += self._get_commands(boundary_data, boundary_counter)
             boundary_counter += 1
+        boundary_commands += self._get_ddele()
         return boundary_commands
+
+    def get_boundary_component_data(self):
+        return self.current_boundary_component
 
     def get_boundary_commands_by_id(self, boundary_id):
         pass
@@ -2619,7 +2955,10 @@ class _BoundaryProcessor:
                             for data_line in data_lines:
                                 comp_names.append(
                                     get_modified_component_name(
-                                        str(data_line['node_set']), 'NSET', self._simulation_data
+                                        str(data_line['node_set']),
+                                        'NSET',
+                                        self._simulation_data,
+                                        self._logger,
                                     )
                                 )
                 else:
@@ -2629,11 +2968,27 @@ class _BoundaryProcessor:
                             for data_line in data_lines:
                                 comp_names.append(
                                     get_modified_component_name(
-                                        str(data_line['node_set']), 'NSET', self._simulation_data
+                                        str(data_line['node_set']),
+                                        'NSET',
+                                        self._simulation_data,
+                                        self._logger,
                                     )
                                 )
 
         return comp_names
+
+    def _get_ddele(self):
+        ddele_str = ""
+        if self.op_new and self._boundary_component_data:
+            for _c, _dof in self._boundary_component_data.items():
+                if _c in self.current_boundary_component:
+                    for _d in list(set(_dof).difference(set(self.current_boundary_component[_c]))):
+                        ddele_str += f"DDELE, {_c}, {_d}\n"
+
+                        if not self._step_removed:
+                            boundary_commands += ",,,FORCE\n"
+                            # boundary_commands += "OUTRES,RSOL,1\n"
+        return ddele_str
 
     def _get_commands(self, boundary_data, boundary_counter):
         boundary_commands = ''
@@ -2665,14 +3020,17 @@ class _BoundaryProcessor:
         base_name = None
         fixed = False
         boundary_type = 'DISPLACEMENT'
+        current_boundary_component = {}
         if 'Parameters' in boundary_data and boundary_data['Parameters'] is not None:
             params = boundary_data['Parameters']
-            if 'OP' in params and params['OP'] == 'NEW' and self._ddele_added == False:
-                self._ddele_added = True
-                boundary_commands += "DDELE,ALL,ALL"
-                if not self._step_removed:
-                    boundary_commands += ",,,FORCE\n"
-                    boundary_commands += "OUTRES,RSOL,1\n"
+            if 'OP' in params and params['OP'] == 'NEW':
+                self.op_new = True
+                # if 'OP' in params and params['OP'] == 'NEW' and self._ddele_added == False:
+                #     self._ddele_added = True
+                #     boundary_commands += "DDELE,ALL,ALL"
+                #     if not self._step_removed:
+                #         boundary_commands += ",,,FORCE\n"
+                #         boundary_commands += "OUTRES,RSOL,1\n"
 
                 boundary_commands += "\n"
             if 'AMPLITUDE' in params:
@@ -2705,9 +3063,12 @@ class _BoundaryProcessor:
                 last = int(data_line['last_degree']) + 1
             if amplitude is not None:
                 modified_amplitude_name = "AMPL_BOUNDARY"
-                applied_on = get_modified_component_name(
-                    str(data_line['node_set']), 'NSET', self._simulation_data
-                )
+                if str(data_line['node_set']).isnumeric():
+                    applied_on = get_modified_component_name(str(data_line['node_set']))
+                else:
+                    applied_on = get_modified_component_name(
+                        str(data_line['node_set']), 'NSET', self._simulation_data
+                    )
                 ampl_processor = _AmplitudeProcessor(
                     self._model, self._simulation_data["Amplitude"]
                 )
@@ -2732,16 +3093,20 @@ class _BoundaryProcessor:
                     cmname = data_line['node_set']
                 else:
                     cmname = get_modified_component_name(
-                        data_line['node_set'], 'NSET', self._simulation_data
+                        data_line['node_set'], 'NSET', self._simulation_data, self._logger
                     )
                 boundary_commands += f"D, {cmname}, "
-
+                if cmname not in self.current_boundary_component:
+                    self.current_boundary_component[cmname] = []
                 if boundary_type == 'VELOCITY':
                     boundary_commands += f"{vel_map[i]}, "
+                    self.current_boundary_component[cmname].append(vel_map[i])
                 elif boundary_type == 'ACCELERATION':
                     boundary_commands += f"{acc_map[i]}, "
+                    self.current_boundary_component[cmname].append(acc_map[i])
                 else:
                     boundary_commands += f"{dof_map[i]}, "
+                    self.current_boundary_component[cmname].append(dof_map[i])
                 if fixed:
                     boundary_commands += f"%_FIX%"
                 elif self._need_base_id:
@@ -2768,6 +3133,7 @@ class _BoundaryProcessor:
                     else:
                         boundary_commands += f"{mag}"
                 boundary_commands += "\n"
+
         return boundary_commands
 
 
@@ -2806,58 +3172,84 @@ class _DloadProcessor:
         op = None
         if 'Parameters' in dload_data and dload_data['Parameters'] is not None:
             params = dload_data['Parameters']
-            if 'OP' in params:
-                if params['OP'] == 'NEW':
-                    op = 'NEW'
-                if len(params) > 1:
-                    self._logger.warning(f"Warning: parameter on DLOAD keyword are not processed")
-            else:
-                self._logger.warning(f"Warning: parameter on DLOAD keyword are not processed")
+
+            if params.get('OP') == 'NEW':
+                op = 'NEW'
+            if len(params) > 1:
+                self._logger.warning("Warning: parameter on DLOAD keyword are not processed")
         data_lines = dload_data['Data']
-        mag = 0
+
         load_type = None
-        elset = None
-        x_mag = 0
-        y_mag = 0
-        z_mag = 0
+        mag = 0.0
+
+        # Stores acceleration per ELSET
+        elset_accel = {}
+        # Global acceleration (ACEL)
+        x_mag_accel = y_mag_accel = z_mag_accel = 0.0
+        elset_used = False
+
         for data_line in data_lines:
-            if len(data_line) == 0:
+            if not data_line:
                 continue
+            elset = None
             if 'element_number_or_set' in data_line:
-                elset = get_modified_component_name(
-                    data_line['element_number_or_set'], 'ELSET', self._simulation_data
-                )
-            if 'magnitude' in data_line:
-                mag = float(data_line['magnitude'])
+                if str(data_line['element_number_or_set']).isnumeric():
+                    elset = get_modified_component_name(str(data_line['element_number_or_set']))
+                else:
+                    elset = get_modified_component_name(
+                        data_line['element_number_or_set'],
+                        'ELSET',
+                        self._simulation_data,
+                        self._logger,
+                    )
             if 'type' in data_line:
                 load_type = data_line['type']
+            if 'magnitude' in data_line:
+                mag = float(data_line['magnitude'])
+
             if load_type == "GRAV":
-                x = 0.0
-                y = 0.0
-                z = 0.0
-                if 'x' in data_line:
-                    x = float(data_line['x'])
-                if 'y' in data_line:
-                    y = float(data_line['y'])
-                if 'z' in data_line:
-                    z = float(data_line['z'])
-                denominator_squared = x**2 + y**2 + z**2
-                if denominator_squared == 0:
-                    norm = 1  # Or some other appropriate value
+                x = float(data_line.get('x', 0.0))
+
+                y = float(data_line.get('y', 0.0))
+
+                z = float(data_line.get('z', 0.0))
+                denominator_squared = x * x + y * y + z * z
+                norm = 1.0 if denominator_squared == 0 else 1.0 / math.sqrt(denominator_squared)
+                ax = -norm * x * mag
+                ay = -norm * y * mag
+                az = -norm * z * mag
+                # ELSET-SPECIFIC CASE
+                if elset:
+                    elset_used = True
+                    if elset not in elset_accel:
+                        elset_accel[elset] = [0.0, 0.0, 0.0]
+                    elset_accel[elset][0] += ax
+                    elset_accel[elset][1] += ay
+                    elset_accel[elset][2] += az
+
+                # GLOBAL CASE
                 else:
-                    norm = 1 / math.sqrt(denominator_squared)
-                x_mag += -norm * x * mag
-                y_mag += -norm * y * mag
-                z_mag += -norm * z * mag
-        if elset:
+                    x_mag_accel += ax
+                    y_mag_accel += ay
+                    z_mag_accel += az
+            else:
+                self._logger.warning(f"*DLOAD of type = " f"{load_type} is not processed.")
+        # print(elset_accel)
+        # ELSET COMMANDS
+        if elset_accel:
+            for elset, (ax, ay, az) in elset_accel.items():
+                if op == 'NEW':
+                    dload_commands += f"CMACEL, {elset}, 0.0, 0.0, 0.0\n"
+                dload_commands += (
+                    f"CMACEL, {elset}, {elset_accel[elset][0]}, "
+                    f"{elset_accel[elset][1]}, {elset_accel[elset][2]}\n"
+                )
+        # WRITE GLOBAL COMMAND
+        if x_mag_accel != 0.0 or y_mag_accel != 0.0 or z_mag_accel != 0.0:
             if op == 'NEW':
-                dload_commands = f"CMACEL, {elset}, 0.0, 0.0, 0.0 \n"
-            dload_commands += f"CMACEL, {elset}, {x_mag}, {y_mag}, {z_mag}\n"
-        else:
-            if op == 'NEW':
-                dload_commands = "ACEL, 0.0, 0.0, 0.0 \n"
-            dload_commands += f"ACEL, {x_mag}, {y_mag}, {z_mag}\n"
-        dload_commands += "\n"
+                dload_commands += "ACEL, 0.0, 0.0, 0.0\n"
+            dload_commands += f"ACEL, {x_mag_accel}, {y_mag_accel}, {z_mag_accel}\n"
+
         return dload_commands
 
 
@@ -2874,6 +3266,8 @@ class _CloadProcessor:
         '_ampl_commands',
         '_model',
         '_logger',
+        '_previous_cload_component_data',
+        '_current_cload_component_data',
     )
 
     def __init__(
@@ -2885,6 +3279,7 @@ class _CloadProcessor:
         step_MSUP=False,
         modal_load_vectors={},
         sim_data=None,
+        previous_component_data=None,
     ):
         self._simulation_data = sim_data
         self._modal_load_vectors = modal_load_vectors
@@ -2897,6 +3292,8 @@ class _CloadProcessor:
         self._ampl_commands = ''
         self._model = model
         self._logger = model.python_logger
+        self._previous_cload_component_data = previous_component_data
+        self._current_cload_component_data = {}
 
     def get_ampl_commands(self):
         return self._ampl_commands
@@ -2912,6 +3309,13 @@ class _CloadProcessor:
             cload_commands += f'\n'
         for cload_data in cloads_data:
             cload_commands += self._get_commands(cload_data)
+        if self._fedele_added and cloads_data and not self._step_MSUP:
+            fdele_commands = ''
+            for key, val in self._previous_cload_component_data.items():
+                if key not in self._current_cload_component_data:
+                    for dof in val:
+                        fdele_commands += f"F, {key}, {dof}, 0\n"
+            cload_commands = fdele_commands + cload_commands
         if self._step_MSUP:
             for i in list(
                 set(self._modal_load_vectors.keys()).difference(
@@ -2919,7 +3323,7 @@ class _CloadProcessor:
                 )
             ):
                 cload_commands += f"LVSCALE, 0, {i}\n"
-        return cload_commands
+        return cload_commands, self._current_cload_component_data
 
     def get_cload_commands_by_id(self, cload_id):
         pass
@@ -2936,13 +3340,16 @@ class _CloadProcessor:
             6: 'MZ',
         }
         amplitude = None
+        real = True
         if 'Parameters' in cload_data and cload_data['Parameters'] is not None:
             params = cload_data['Parameters']
             if 'OP' in params and params['OP'] == 'NEW' and self._fedele_added == False:
                 self._fedele_added = True
-                cload_commands += "FDELE,ALL,ALL \n"
+                # cload_commands += "FDELE,ALL,ALL \n"
             if 'AMPLITUDE' in params:
                 amplitude = params['AMPLITUDE']
+            if "IMAGINARY" in params:
+                real = False
         data_lines = cload_data['Data']
         for data_line in data_lines:
             if len(data_line) == 0:
@@ -2953,9 +3360,12 @@ class _CloadProcessor:
                 mag = float(data_line['magnitude'])
             if amplitude is not None:
                 modified_amplitude_name = "AMPL_CLOAD"
-                applied_on = get_modified_component_name(
-                    str(data_line['node_set']), 'NSET', self._simulation_data
-                )
+                if str(data_line['node_set']).isnumeric():
+                    applied_on = get_modified_component_name(str(data_line['node_set']))
+                else:
+                    applied_on = get_modified_component_name(
+                        str(data_line['node_set']), 'NSET', self._simulation_data
+                    )
                 ampl_processor = _AmplitudeProcessor(
                     self._model, self._simulation_data["Amplitude"]
                 )
@@ -2970,11 +3380,22 @@ class _CloadProcessor:
                 self._ampl_commands += ampl_commands
             if data_line['node_set'].isnumeric():
                 cload_commands += f"F, {data_line['node_set']}, {dof_map[dof]}, "
+                if data_line['node_set'] not in self._current_cload_component_data:
+                    self._current_cload_component_data[data_line['node_set']] = [dof_map[dof]]
+                else:
+                    self._current_cload_component_data[data_line['node_set']].append(dof_map[dof])
             else:
                 cmname = get_modified_component_name(
-                    data_line['node_set'], 'NSET', self._simulation_data
+                    data_line['node_set'], 'NSET', self._simulation_data, self._logger
                 )
+                if cmname not in self._current_cload_component_data:
+                    self._current_cload_component_data[cmname] = [dof_map[dof]]
+                else:
+                    self._current_cload_component_data[cmname].append(dof_map[dof])
                 cload_commands += f"F, {cmname}, {dof_map[dof]}, "
+
+            if not real:
+                cload_commands += ", "
             if amplitude is not None:
                 ac = _AmplitudeProcessor._amplitude_count
                 cload_commands += f"%{modified_amplitude_name}_{ac}%"
@@ -2982,13 +3403,22 @@ class _CloadProcessor:
                 cload_commands += f"{mag}"
             cload_commands += "\n"
             for dict_key, val in self._modal_load_vectors.items():
-                if (
-                    get_modified_component_name(val["SET"], 'NSET', self._simulation_data)
-                    == get_modified_component_name(
-                        data_line['node_set'], 'NSET', self._simulation_data
+                if val["SET"].isnumeric():
+                    lv_comp = val["SET"]
+                else:
+                    lv_comp = get_modified_component_name(
+                        val["SET"], 'NSET', self._simulation_data, self._logger
                     )
-                    and val["COMP"] == dof_map[dof]
-                ):
+                if data_line['node_set'].isnumeric():
+                    f_comp = data_line['node_set']
+                else:
+                    f_comp = get_modified_component_name(
+                        data_line['node_set'],
+                        'NSET',
+                        self._simulation_data,
+                        self._logger,
+                    )
+                if lv_comp == f_comp and val["COMP"] == dof_map[dof] and val["REAL"] == real:
                     cload_lv_scale_commands += f"LVSCALE, 0, {dict_key}\n"
                     self._load_vestors_in_current_step.append(dict_key)
                     if amplitude:
@@ -3094,9 +3524,17 @@ class _ConnectorMotionProcessor:
                 mag = float(data_line['magnitude'])
             if amplitude is not None:
                 modified_amplitude_name = "AMPL_CONNECTOR_MOTION"
-                applied_on = get_modified_component_name(
-                    str(data_line['element_number_or_set']), 'ELSET', self._simulation_data
-                )
+                if str(data_line['element_number_or_set']).isnumeric():
+                    applied_on = get_modified_component_name(
+                        str(data_line['element_number_or_set'])
+                    )
+                else:
+                    applied_on = get_modified_component_name(
+                        str(data_line['element_number_or_set']),
+                        'ELSET',
+                        self._simulation_data,
+                        self._logger,
+                    )
                 ampl_processor = _AmplitudeProcessor(
                     self._model, self._simulation_data["Amplitude"]
                 )
@@ -3110,14 +3548,15 @@ class _ConnectorMotionProcessor:
                 )
             if data_line['element_number_or_set'].isnumeric() == False:
                 dls = get_modified_component_name(
-                    data_line['element_number_or_set'], 'ELSET', self._simulation_data
+                    data_line['element_number_or_set'],
+                    'ELSET',
+                    self._simulation_data,
+                    self._logger,
                 )
                 connector_motion_commands += f"CMSEL, S, {dls}, ELEM\n"
                 connector_motion_commands += f"DJ, ALL, "
             else:
-                cmname = get_modified_component_name(
-                    str(data_line['element_number_or_set']), 'ELSET', self._simulation_data
-                )
+                cmname = get_modified_component_name(str(data_line['element_number_or_set']))
                 connector_motion_commands += f"DJ, {cmname}, "
             if connnector_motion_type == 'DISPLACEMENT':
                 connector_motion_commands += f"{dof_map[dof]}, "
@@ -3272,18 +3711,27 @@ class _BaseMotionProcessor:
 
         temp_count = 0
         lists_bc_base = None
+        inner_break = False
 
         for key, val in self._base_id_mapping.items():
             if not base_name:
-                if val[0]['BaseName'] is None:
-                    temp_count += 1
-                    if temp_count == self._base_motion_counter:
-                        lists_bc_base = self._base_id_mapping[key]
-                        self._base_motion_counter += 1
-                        break
+                for base in val:
+                    if base['BaseName'] is None:
+                        temp_count += 1
+                        if temp_count == self._base_motion_counter:
+                            lists_bc_base = self._base_id_mapping[key]
+                            self._base_motion_counter += 1
+                            inner_break = True
+                            break
+                if inner_break:
+                    break
             else:
-                if val[0]['BaseName'] == base_name:
-                    lists_bc_base = self._base_id_mapping[key]
+                for base in val:
+                    if base['BaseName'] == base_name:
+                        lists_bc_base = self._base_id_mapping[key]
+                        inner_break = True
+                        break
+                if inner_break:
                     break
 
         if lists_bc_base is not None:
@@ -3507,7 +3955,9 @@ class _MonitorProcessor:
                     if node.isnumeric():
                         str_node = node
                     else:
-                        cmname = get_modified_component_name(node, 'NSET', self._simulation_data)
+                        cmname = get_modified_component_name(
+                            node, 'NSET', self._simulation_data, self._logger
+                        )
                         monitor_commands += f"CMSEL,S,{cmname},NODE\n"
                         monitor_commands += f"node_id = NDNEXT(0)\n"
                         monitor_commands += f"ALLSEL\n"
@@ -3591,10 +4041,21 @@ class _StepProcessor:
         '_global_structural_damping_value',
         '_use_LMM_as_applicable',
         '_base_id_mapping',
+        '_cload_component_data',
+        '_boundary_component_data',
+        '_time_points',
+        '_params',
     )
 
     def __init__(
-        self, model: prime.Model, data, sim_data, model_application, use_LMM_as_applicable=False
+        self,
+        model: prime.Model,
+        data,
+        sim_data,
+        model_application,
+        use_LMM_as_applicable=False,
+        time_points=[],
+        params=None,
     ):
         self._simulation_data = sim_data
         self._steps_data = data
@@ -3623,6 +4084,10 @@ class _StepProcessor:
         self._global_structural_damping_value = 0.0
         self._base_id_mapping = {}
         self._use_LMM_as_applicable = use_LMM_as_applicable
+        self._cload_component_data = {}
+        self._boundary_component_data = {}
+        self._time_points = time_points
+        self._params = params
 
     def get_cload_ampl_commands(self):
         return self._cload_ampl_commands
@@ -3664,6 +4129,9 @@ class _StepProcessor:
         time_period = 1.0
         min_time_increment = 1e-05
         max_time_increment = 1.0
+        first_point = None
+        if self._time_points:
+            first_point = self._time_points[0]
         if 'Data' in static_data and static_data['Data'] is not None:
             data = static_data['Data']
             if 'time_increment' in data:
@@ -3689,6 +4157,8 @@ class _StepProcessor:
             max_time_increment = time_interval_val
         if time_increment > max_time_increment:
             time_increment = max_time_increment
+        if first_point is not None and time_increment > first_point and self._time == 0.0:
+            time_increment = first_point
         self._step_start_time = self._time
         self._time += time_period
         self._step_end_time = self._time
@@ -3708,12 +4178,16 @@ class _StepProcessor:
                     static_analysis_commands += 'ANTYPE, STATIC\n'
             else:
                 static_analysis_commands += 'ANTYPE, STATIC\n'
+        else:
+            static_analysis_commands += 'ANTYPE, STATIC\n'
         static_analysis_commands += f'TIME,{self._time}\n'
         static_analysis_commands += f'AUTOTS,ON\n'
         static_analysis_commands += (
-            f'DELTIM, {time_increment}, {min_time_increment}, {max_time_increment}, , FORCE\n'
+            f'DELTIM, {time_increment}, {min_time_increment}, {max_time_increment}'
         )
-        static_analysis_commands += '\n'
+        if int(str(self._params.target_ansys_version)[-3:]) >= 252:
+            static_analysis_commands += ", , FORCE"
+        static_analysis_commands += '\n\n'
         self._previous_analysis = "STATIC"
         return static_analysis_commands
 
@@ -3721,6 +4195,11 @@ class _StepProcessor:
         """Get modal dynamic analysis details."""
         dynamic_analysis_commands = ''
         self._step_MSUP = True
+
+        first_point = None
+        if self._time_points:
+            first_point = self._time_points[0]
+
         if type(dynamic_data) == list:
             dynamic_data = dynamic_data[0]
         time_increment = 1.0
@@ -3741,6 +4220,8 @@ class _StepProcessor:
                 time_period = float(data['time_period'])
         if time_increment > max_time_increment:
             time_increment = max_time_increment
+        if first_point is not None and time_increment > first_point and self._time == 0.0:
+            time_increment = first_point
         if 'Parameters' in dynamic_data:
             data = dynamic_data['Parameters']
             if data:
@@ -3754,6 +4235,7 @@ class _StepProcessor:
             f'! ---------------------------- STEP: {self._step_counter} -----------------------\n'
         )
         if self._previous_analysis == "STATIC":
+            dynamic_analysis_commands += f'ANTYPE, STATIC \n'
             dynamic_analysis_commands += 'TINTP, 0.41421,,,,,,-1\n'
             dynamic_analysis_commands += '\n'
             dynamic_analysis_commands += 'SOLOPT,STOT,FORCE,HHT\n'
@@ -3781,7 +4263,9 @@ class _StepProcessor:
             )
             self._assign_analysis.append(f'step_{self._step_counter}_transient_analysis')
             dynamic_analysis_commands += f'/SOLU\n'
-        if self._previous_analysis != "MODAL DYNAMIC":
+        if self._previous_analysis == "MODAL DYNAMIC":
+            dynamic_analysis_commands += f'ANTYPE, TRANS \n'
+        else:
             dynamic_analysis_commands += f'ANTYPE, TRANS \n'
             dynamic_analysis_commands += f'TRNOPT, '
             if "FREQUENCY" in self._analysis_sequence[: self._step_counter]:
@@ -3815,6 +4299,11 @@ class _StepProcessor:
     def get_dynamic_analysis_data(self, dynamic_data):
         """Get dynamic analysis details."""
         dynamic_analysis_commands = ''
+
+        first_point = None
+        if self._time_points:
+            first_point = self._time_points[0]
+
         self._step_MSUP = False
         if type(dynamic_data) == list:
             dynamic_data = dynamic_data[0]
@@ -3851,6 +4340,8 @@ class _StepProcessor:
             max_time_increment = time_interval_val
         if time_increment > max_time_increment:
             time_increment = max_time_increment
+        if first_point is not None and time_increment > first_point and self._time == 0.0:
+            time_increment = first_point
         if 'Parameters' in dynamic_data:
             data = dynamic_data['Parameters']
             if data:
@@ -3864,6 +4355,7 @@ class _StepProcessor:
             f'! ------------------------- STEP: {self._step_counter} -----------------------\n'
         )
         if self._previous_analysis == "STATIC":
+            dynamic_analysis_commands += f'ANTYPE, STATIC\n'
             dynamic_analysis_commands += 'TINTP, 0.41421,,,,,,-1\n'
             dynamic_analysis_commands += '\n'
             dynamic_analysis_commands += 'SOLOPT,STOT,FORCE,HHT\n'
@@ -3891,7 +4383,10 @@ class _StepProcessor:
             )
             self._assign_analysis.append(f'step_{self._step_counter}_transient_analysis')
             dynamic_analysis_commands += f'/SOLU\n'
-        if self._previous_analysis != "DYNAMIC" and self._previous_analysis != "STATIC":
+
+        if self._previous_analysis == "DYNAMIC":
+            dynamic_analysis_commands += f'ANTYPE, TRANS \n'
+        elif self._previous_analysis != "DYNAMIC" and self._previous_analysis != "STATIC":
             dynamic_analysis_commands += f'ANTYPE, TRANS \n'
             dynamic_analysis_commands += f'TRNOPT, '
             if "FREQUENCY" in self._analysis_sequence[: self._step_counter]:
@@ -3904,9 +4399,11 @@ class _StepProcessor:
         dynamic_analysis_commands += f'TIME, {self._time}\n'
         dynamic_analysis_commands += f'AUTOTS,ON\n'
         dynamic_analysis_commands += (
-            f'DELTIM, {time_increment}, {min_time_increment}, {max_time_increment},, FORCE\n'
+            f'DELTIM, {time_increment}, {min_time_increment}, {max_time_increment}'
         )
-        dynamic_analysis_commands += f'\n'
+        if int(str(self._params.target_ansys_version)[-3:]) >= 252:
+            dynamic_analysis_commands += f', , FORCE'
+        dynamic_analysis_commands += f'\n\n'
         if res_modes:
             dynamic_analysis_commands += f'RESVEC, {res_modes}\n'
         dynamic_analysis_commands += f'\n'
@@ -4019,8 +4516,9 @@ class _StepProcessor:
             )
             self._assign_analysis.append(f'step_{self._step_counter}_modal_analysis')
             frequency_analysis_commands += f'/SOLU\n'
-        if self._previous_analysis != 'FREQUENCY':
-            frequency_analysis_commands += f'ANTYPE, MODAL\n'
+        # if self._previous_analysis != 'FREQUENCY':
+        #     frequency_analysis_commands += f'ANTYPE, MODAL\n'
+        frequency_analysis_commands += f'ANTYPE, MODAL\n'
         frequency_analysis_commands += (
             f'MODOPT, {modopt_method}, {nmodes}, {min_frequency}, '
             f'{max_frequency}, {cpxmod}, {nrm_key}\n'
@@ -4087,6 +4585,7 @@ class _StepProcessor:
             and type(steady_state_dynamics_data['Data']) == list
         ):
             data = steady_state_dynamics_data['Data']
+
             first_line = data[0]
             if 'num_points' in first_line:
                 npoints = int(first_line['num_points'])
@@ -4105,8 +4604,9 @@ class _StepProcessor:
             )
             self._assign_analysis.append(f'step_{self._step_counter}_harmonic_analysis')
             steady_state_dynamics_analysis_commands += f'/SOLU\n'
-        if self._previous_analysis != "STEADY STATE DYNAMICS":
-            steady_state_dynamics_analysis_commands += f'ANTYPE, HARMIC\n'
+        # if self._previous_analysis != "STEADY STATE DYNAMICS":
+        #     steady_state_dynamics_analysis_commands += f'ANTYPE, HARMIC\n'
+        steady_state_dynamics_analysis_commands += f'ANTYPE, HARMIC\n'
         steady_state_dynamics_analysis_commands += f'HARFRQ, {min_frequency}, {max_frequency}\n'
         steady_state_dynamics_analysis_commands += f'NSUB, {npoints-1}\n'
         if "FREQUENCY" in self._analysis_sequence[: self._step_counter]:
@@ -4212,6 +4712,8 @@ class _StepProcessor:
             return output_analysis_commands
         time_points = None
         for output in output_data:
+            if not ('Data' in output and output['Data'] is not None):
+                continue
             if 'Parameters' in output:
                 parameters = output['Parameters']
                 if 'TIME POINT' in parameters:
@@ -4244,6 +4746,8 @@ class _StepProcessor:
 
         number_interval_to_table = False
         for output in output_data:
+            if not ('Data' in output and output['Data'] is not None):
+                continue
             minimum_time_interval = self.get_output_time_interval()
             ninterval = None
             if 'Parameters' in output:
@@ -4267,12 +4771,10 @@ class _StepProcessor:
                     else:
                         ninterval = int(parameters['NUMBER INTERVAL'])
             nfreq = None
-            if 'Parameters' in output and 'FREQUENCY' in output['Parameters']:
-                if 'Frequency' in self._curr_step:
-                    # Abaqus ignores *OUTPUT FREQUENCY in a *FREQUENCY step and forces it to 1.
-                    nfreq = 1
-                else:
-                    nfreq = output['Parameters']['FREQUENCY']
+            if 'Parameters' in output:
+                parameters = output['Parameters']
+                if 'FREQUENCY' in parameters:
+                    nfreq = parameters['FREQUENCY']
             time_interval = None
             if 'Parameters' in output:
                 parameters = output['Parameters']
@@ -4314,6 +4816,7 @@ class _StepProcessor:
                                         enrgout['Parameters']['ELSET'],
                                         'ELSET',
                                         self._simulation_data,
+                                        self._logger,
                                     )
                             output_analysis_commands += ', ,\n'
                 if 'NodeOutput' in output['Data']:
@@ -4345,6 +4848,7 @@ class _StepProcessor:
                                                         nodeout['Parameters']['NSET'],
                                                         'NSET',
                                                         self._simulation_data,
+                                                        self._logger,
                                                     )
                                                     + ",NODE\n"
                                                 )
@@ -4357,6 +4861,7 @@ class _StepProcessor:
                                                         nodeout['Parameters']['NSET'],
                                                         'NSET',
                                                         self._simulation_data,
+                                                        self._logger,
                                                     )
                                                     + "_CONTACT, ELEM\n"
                                                 )
@@ -4414,6 +4919,7 @@ class _StepProcessor:
                                                         nodeout['Parameters']['NSET'],
                                                         'NSET',
                                                         self._simulation_data,
+                                                        self._logger,
                                                     )
                                                 )
                                     elif key == "CF":
@@ -4440,6 +4946,7 @@ class _StepProcessor:
                                                         nodeout['Parameters']['NSET'],
                                                         'NSET',
                                                         self._simulation_data,
+                                                        self._logger,
                                                     )
                                                     + "_CONTACT"
                                                 )
@@ -4492,6 +4999,7 @@ class _StepProcessor:
                                                         elemout['Parameters']['ELSET'],
                                                         'ELSET',
                                                         self._simulation_data,
+                                                        self._logger,
                                                     )
                                                 )
                                     elif key in ["PEEQ", "PEEQMAX"]:
@@ -4518,6 +5026,7 @@ class _StepProcessor:
                                                         elemout['Parameters']['ELSET'],
                                                         'ELSET',
                                                         self._simulation_data,
+                                                        self._logger,
                                                     )
                                                 )
                                     elif key == "PE":
@@ -4544,6 +5053,7 @@ class _StepProcessor:
                                                     elemout['Parameters']['ELSET'],
                                                     'ELSET',
                                                     self._simulation_data,
+                                                    self._logger,
                                                 )
                                         output_analysis_commands += (
                                             out_cmds
@@ -4563,6 +5073,7 @@ class _StepProcessor:
                                                 elemout['Parameters']['ELSET'],
                                                 'ELSET',
                                                 self._simulation_data,
+                                                self._logger,
                                             )
                                         else:
                                             out_cmds += "ESEL, S, ENAME, , 181\n"
@@ -4611,6 +5122,7 @@ class _StepProcessor:
                                                         elemout['Parameters']['ELSET'],
                                                         'ELSET',
                                                         self._simulation_data,
+                                                        self._logger,
                                                     )
                                                 )
                                     elif key == "CTF":
@@ -4637,6 +5149,7 @@ class _StepProcessor:
                                                         elemout['Parameters']['ELSET'],
                                                         'ELSET',
                                                         self._simulation_data,
+                                                        self._logger,
                                                     )
                                                 )
                                     elif key == "NFORC":
@@ -4663,6 +5176,7 @@ class _StepProcessor:
                                                         elemout['Parameters']['ELSET'],
                                                         'ELSET',
                                                         self._simulation_data,
+                                                        self._logger,
                                                     )
                                                 )
                                     output_analysis_commands += ', ,\n'
@@ -4685,7 +5199,10 @@ class _StepProcessor:
                                 and 'ELSET' in elemout['Parameters']
                             ):
                                 output_analysis_commands += get_modified_component_name(
-                                    elemout['Parameters']['ELSET'], 'ELSET', self._simulation_data
+                                    elemout['Parameters']['ELSET'],
+                                    'ELSET',
+                                    self._simulation_data,
+                                    self._logger,
                                 )
                             output_analysis_commands += "\n"
         return output_analysis_commands
@@ -4711,6 +5228,7 @@ class _StepProcessor:
                 if self._previous_modal_resvec is None:
                     if temp_count != 0:
                         vector_commands += 'SOLVE\n'
+                        vector_commands += 'ANTYPE, MODAL\n'
                         vector_commands += '\n'
                     vector_commands += f'FDELE, ALL, ALL \n'
                     vector_commands += f'SFDELE, ALL, ALL \n'
@@ -4721,6 +5239,10 @@ class _StepProcessor:
                 if "Cload" in step_data:
                     cloads_data = step_data['Cload']
                     for cload_data in cloads_data:
+                        real = True
+                        if 'Parameters' in cload_data and cload_data['Parameters'] is not None:
+                            if "IMAGINARY" in cload_data['Parameters']:
+                                real = False
                         data_lines = cload_data['Data']
                         for data_line in data_lines:
                             if len(data_line) == 0:
@@ -4732,26 +5254,38 @@ class _StepProcessor:
                             if self._previous_modal_resvec:
                                 if count_load_vectors != 0:
                                     vector_commands += 'SOLVE\n'
+                                    vector_commands += 'ANTYPE, MODAL\n'
                                     vector_commands += '\n'
                                 vector_commands += f'FDELE, ALL, ALL \n'
                                 vector_commands += f'SFDELE, ALL, ALL \n'
                                 vector_commands += f'SFEDELE, ALL, ALL, ALL \n'
                                 vector_commands += f'ACEL, 0, 0, 0 \n'
                                 vector_commands += f'\n'
+                            load_val = ", 1"
+                            if not real:
+                                load_val = ", , 1"
                             if data_line['node_set'].isnumeric():
                                 cmname = data_line['node_set']
                                 vector_commands += (
-                                    f"F, " f"{data_line['node_set']}, " f"{dof_map[dof]}, 1\n"
+                                    f"F, "
+                                    f"{data_line['node_set']}, "
+                                    f"{dof_map[dof]}{load_val}\n"
                                 )
                             else:
                                 cmname = get_modified_component_name(
-                                    data_line['node_set'], 'NSET', self._simulation_data
+                                    data_line['node_set'],
+                                    'NSET',
+                                    self._simulation_data,
+                                    self._logger,
                                 )
-                                vector_commands += f"F, " f"{cmname}, " f"{dof_map[dof]}, 1\n"
+                                vector_commands += (
+                                    f"F, " f"{cmname}, " f"{dof_map[dof]}{load_val}\n"
+                                )
                             count_load_vectors += 1
                             self._modal_load_vectors[count_load_vectors] = {
                                 'SET': cmname,
                                 "COMP": dof_map[dof],
+                                "REAL": real,
                             }
         return vector_commands
 
@@ -4862,9 +5396,9 @@ class _StepProcessor:
             self._step_MSUP,
             self._modal_load_vectors,
             sim_data=self._simulation_data,
+            previous_component_data=self._cload_component_data,
         )
-        cload_commands = ''
-        cload_commands += cload_processor.get_all_cload_commands()
+        cload_commands, self._cload_component_data = cload_processor.get_all_cload_commands()
         self._cload_ampl_commands += cload_processor.get_ampl_commands()
         return cload_commands
 
@@ -4898,10 +5432,12 @@ class _StepProcessor:
             sim_data=self._simulation_data,
             need_base_id=need_base_id,
             step_removed=step_removed,
+            previous_component_data=self._boundary_component_data,
         )
         boundary_commands = ''
         boundary_commands += boundary_processor.get_all_boundary_commands()
         self._boundary_ampl_commands += boundary_processor.get_ampl_commands()
+        self._boundary_component_data = boundary_processor.get_boundary_component_data()
         self._base_id_mapping = boundary_processor._base_id_mapping
         return boundary_commands
 
@@ -5002,6 +5538,13 @@ class _StepProcessor:
                 if key == "Output" and "Static" in step_data:
                     if "STATIC" in self._analysis_sequence and "DYNAMIC" in self._analysis_sequence:
                         mapdl_step_commands += "Placeholder_Transient_Outres\n"
+
+        if "DDELE" in mapdl_step_commands:
+            lines = mapdl_step_commands.split('\n')
+            for line in lines:
+                if line.startswith("DDELE") and "FORCE" in line:
+                    mapdl_step_commands += "OUTRES,RSOL,1\n"
+
         step_name = ''
         if 'Parameters' in step_data:
             step_params = step_data['Parameters']
@@ -5207,12 +5750,13 @@ class _AxialTempCorrection:
         return secdata_string
 
 
-def get_modified_component_name(name: str, set_type: str = None, sim_data=None) -> str:
+def get_modified_component_name(name: str, set_type: str = None, sim_data=None, logger=None) -> str:
     """
     Modify a component name to meet specific criteria.
 
-    This function replaces any non-alphanumeric characters with underscores
-    and adds the prefix "COMP_" if the name starts with a digit or underscore.
+    This function returns the precomputed modified component name stored in
+    simulation data. If no stored modified name is available, the original
+    component name is returned.
 
     Parameters
     ----------
@@ -5220,47 +5764,78 @@ def get_modified_component_name(name: str, set_type: str = None, sim_data=None) 
         The original component name.
 
     set_type : str
-        The type of component (NSET, ELSET, SURFACE), used if there is a potential name conflict.
+        The type of component (NSET, ELSET, SURFACE, ELEMENT), used to select
+        the matching simulation-data section.
 
     sim_data
-        The simulation data of the part in json format, used if there is a potential name conflict.
+        The simulation data of the part in json format, used to retrieve a
+        precomputed modified component name.
+
+    logger
+        Optional logger used to warn when the helper falls back to the
+        original unsanitized component name.
 
     Returns
     -------
     str
-        The modified component name.
+        The modified component name if it is stored in simulation data.
 
     Notes
     -----
-    This function is designed to sanitize component names for specific use cases
-    where restrictions might exist on allowed characters and initial characters.
+    This function is designed to read precomputed component names for MAPDL
+    export. When a set type is not provided, it falls back to sanitizing the
+    component name and adding the COMP_ prefix when needed.
     """
-    modified_name = re.sub(r"[^\w]", "_", name)
-    if set_type == 'NSET':
-        has_surface = (
-            'Surface' in sim_data
-            and sim_data["Surface"] is not None
-            and name in sim_data['Surface']
-        )
-        has_nset = 'Nset' in sim_data and sim_data["Nset"] is not None and name in sim_data['Nset']
-        has_elset = (
-            'Elset' in sim_data and sim_data["Elset"] is not None and name in sim_data['Elset']
-        )
-        has_element = (
-            'Element' in sim_data
-            and sim_data["Element"] is not None
-            and name in sim_data['Element']
-        )
 
-        count = has_nset + (has_surface or has_elset or has_element)
+    def warn_and_return_original_name(reason: str) -> str:
+        if logger is not None:
+            logger.warning(
+                "Using original unsanitized component name "
+                f"'{name}' for set type '{set_type}': {reason}"
+            )
+        return name
 
-        if count > 1:
-            modified_name = set_type + "_" + modified_name
+    if set_type is None:
+        modified_name = re.sub(r"[^\w]", "_", name)
+        if modified_name and (modified_name[0].isdigit() or modified_name[0] == "_"):
+            modified_name = "COMP_" + modified_name
+        return modified_name
 
-    if modified_name and (modified_name[0].isdigit() or modified_name[0] == "_"):
-        modified_name = "COMP_" + modified_name
+    if not isinstance(sim_data, dict):
+        return warn_and_return_original_name("simulation data is unavailable")
 
-    return modified_name
+    section_name = {
+        'SURFACE': 'Surface',
+        'NSET': 'Nset',
+        'ELSET': 'Elset',
+        'ELEMENT': 'Element',
+    }.get(set_type)
+    if section_name is None:
+        return warn_and_return_original_name(f"component source type {set_type} is unsupported")
+
+    section = sim_data.get(section_name)
+    entry = section.get(name) if isinstance(section, dict) else None
+    if not isinstance(entry, dict):
+        parts = sim_data.get('Parts')
+        if isinstance(parts, dict):
+            matched_entry = None
+            for part_data in parts.values():
+                part_section = part_data.get(section_name) if isinstance(part_data, dict) else None
+                part_entry = part_section.get(name) if isinstance(part_section, dict) else None
+                if isinstance(part_entry, dict):
+                    if matched_entry is not None:
+                        return warn_and_return_original_name(
+                            "multiple matching part entries were found"
+                        )
+                    matched_entry = part_entry
+            entry = matched_entry
+    if not isinstance(entry, dict):
+        return warn_and_return_original_name("no matching simulation-data entry was found")
+
+    modified_name = entry.get('ModifiedCdbComponentName')
+    if isinstance(modified_name, str):
+        return modified_name
+    return warn_and_return_original_name("ModifiedCdbComponentName is missing")
 
 
 def generate_mapdl_commands(
@@ -5300,6 +5875,7 @@ def generate_mapdl_commands(
             json_simulation_data["Zones"],
             params.write_separate_blocks,
             params.skip_comments,
+            params=params,
         )
         mat_cmds = mp.get_all_material_commands()
         all_mat_cmds = mat_cmds
@@ -5315,14 +5891,31 @@ def generate_mapdl_commands(
         )
         joint_all_mat_cmds = jmp.get_all_material_commands()
         all_mat_cmds += joint_all_mat_cmds
+    if (
+        "GasketBehavior" in json_simulation_data
+        and json_simulation_data["GasketBehavior"] is not None
+    ):
+        gmp = _GasketMaterialProcessor(
+            model,
+            json_simulation_data["GasketBehavior"],
+            json_simulation_data,
+            params.write_separate_blocks,
+            params.skip_comments,
+        )
+        gasket_all_mat_cmds = gmp.get_all_material_commands()
+        all_mat_cmds += gasket_all_mat_cmds
+
     general_contact_cmds = ''
     ampl_cmds = ''
+    time_points = []
     if "TimePoint" in json_simulation_data:
         timepoint_processor = _TimePointsProcessor(model, json_simulation_data["TimePoint"])
         ampl_cmds += timepoint_processor.get_all_timepoints_commands()
+        time_points = timepoint_processor._get_list_of_floats()
     if "TimePoints" in json_simulation_data:
         timepoints_processor = _TimePointsProcessor(model, json_simulation_data["TimePoints"])
         ampl_cmds += timepoints_processor.get_all_timepoints_commands()
+        time_points = timepoints_processor._get_list_of_floats()
     pre_step_boun_cmds = ''
     boundary_ampl_cmds = ''
     if "Boundary" in json_simulation_data:
@@ -5344,6 +5937,8 @@ def generate_mapdl_commands(
             sim_data=json_simulation_data,
             model_application=params.analysis_type,
             use_LMM_as_applicable=False,
+            time_points=time_points,
+            params=params,
         )
         step_settings = steps_data.get_all_steps()
         ninterval_mapdl_commands = steps_data.get_ninterval_mapdl_commands()

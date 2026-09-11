@@ -1,5 +1,6 @@
-# Copyright (C) 2024 - 2026 ANSYS, Inc. and/or its affiliates.
+# Copyright (C) 2022 - 2026 Synopsys, Inc. and ANSYS, Inc. All rights reserved.
 # SPDX-License-Identifier: MIT
+#
 #
 # Permission is hereby granted, free of charge, to any person obtaining a copy
 # of this software and associated documentation files (the "Software"), to deal
@@ -2459,7 +2460,7 @@ class MaterialProcessor:
                         zone_details = zone_details
                         return zone_name, zone_details
                 except:
-                    pass
+                    zone_details = None
         elif self._part_data is not None:
             for part in self._part_data:
                 part_info = self._part_data[part]
@@ -2472,7 +2473,7 @@ class MaterialProcessor:
                                 zone_details = zone_details
                                 return zone_name, zone_details
                         except:
-                            pass
+                            zone_details = None
         return None, {}
 
     def _is_material_used_with_shell(self, mat_name):

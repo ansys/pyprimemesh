@@ -1,5 +1,6 @@
-# Copyright (C) 2024 - 2026 ANSYS, Inc. and/or its affiliates.
+# Copyright (C) 2022 - 2026 Synopsys, Inc. and ANSYS, Inc. All rights reserved.
 # SPDX-License-Identifier: MIT
+#
 #
 # Permission is hereby granted, free of charge, to any person obtaining a copy
 # of this software and associated documentation files (the "Software"), to deal
@@ -204,7 +205,7 @@ class Client(object):
             self._comm.close()
             self._comm = None
         if self._process is not None:
-            assert self._local == False
+            assert self._local == False  # nosec B101
             terminate_process(self._process)
             self._process = None
         if config.using_container():

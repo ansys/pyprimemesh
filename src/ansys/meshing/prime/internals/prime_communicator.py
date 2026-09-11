@@ -1,5 +1,6 @@
-# Copyright (C) 2024 - 2026 ANSYS, Inc. and/or its affiliates.
+# Copyright (C) 2022 - 2026 Synopsys, Inc. and ANSYS, Inc. All rights reserved.
 # SPDX-License-Identifier: MIT
+#
 #
 # Permission is hereby granted, free of charge, to any person obtaining a copy
 # of this software and associated documentation files (the "Software"), to deal
@@ -117,7 +118,8 @@ class PrimeCommunicator(Communicator):
         dict
             Response from the server.
         """
-        exec(recipe, globals())
+        # This API intentionally executes trusted recipes in the embedded Prime Server runtime.
+        exec(recipe, globals())  # nosec B102
         output = '{"Results" : "' + str(return_value) + '"}'
         with config.numpy_array_optimization_disabled():
             result = json.loads(output)

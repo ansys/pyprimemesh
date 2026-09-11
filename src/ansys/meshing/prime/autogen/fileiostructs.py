@@ -1,4 +1,4 @@
-# Copyright (C) 2024 - 2025 ANSYS, Inc. and/or its affiliates.
+# Copyright (c) 2026 Synopsys, Inc. and ANSYS, Inc. All rights reserved.
 # SPDX-License-Identifier: MIT
 #
 #
@@ -141,6 +141,42 @@ class SeparateBlocksFormatType(enum.IntEnum):
     **This is a beta parameter**. **The behavior and name may change in the future**."""
     COMPACT = 1
     """Compact format for element blocks with reduced columns.
+
+    **This is a beta parameter**. **The behavior and name may change in the future**."""
+
+class TargetAnsysVersion(enum.IntEnum):
+    """Target ANSYS release version for CDB export compatibility. Determines which features and formats are available.
+    """
+    V231 = 0
+    """Target Ansys 2023 R1.
+
+    **This is a beta parameter**. **The behavior and name may change in the future**."""
+    V232 = 1
+    """Target Ansys 2023 R2.
+
+    **This is a beta parameter**. **The behavior and name may change in the future**."""
+    V241 = 2
+    """Target Ansys 2024 R1.
+
+    **This is a beta parameter**. **The behavior and name may change in the future**."""
+    V242 = 3
+    """Target Ansys 2024 R2.
+
+    **This is a beta parameter**. **The behavior and name may change in the future**."""
+    V251 = 4
+    """Target Ansys 2025 R1.
+
+    **This is a beta parameter**. **The behavior and name may change in the future**."""
+    V252 = 5
+    """Target Ansys 2025 R2.
+
+    **This is a beta parameter**. **The behavior and name may change in the future**."""
+    V261 = 6
+    """Target Ansys 2026 R1.
+
+    **This is a beta parameter**. **The behavior and name may change in the future**."""
+    LATEST = 6
+    """Alias for the latest supported Ansys release (default). Update this alias each release cycle.
 
     **This is a beta parameter**. **The behavior and name may change in the future**."""
 
@@ -3509,6 +3545,10 @@ class ExportMapdlCdbParams(CoreObject):
         Parameter to specify the starting counter values for export
 
         **This is a beta parameter**. **The behavior and name may change in the future**.
+    target_ansys_version: TargetAnsysVersion, optional
+        Target ANSYS version for export compatibility. Defaults to TargetAnsysVersion_Latest. When set to an older version, incompatible features are automatically coerced to safe fallback values.
+
+        **This is a beta parameter**. **The behavior and name may change in the future**.
     json_data: dict, optional
         JSON dictionary to create a ``ExportMapdlCdbParams`` object with provided parameters.
 
@@ -3547,7 +3587,8 @@ class ExportMapdlCdbParams(CoreObject):
             contact_element_types: ContactElementTypeParams,
             reorder_spotweldsurface: bool,
             skip_comments: bool,
-            initial_counters: Dict[str, Union[str, int, float, bool]]):
+            initial_counters: Dict[str, Union[str, int, float, bool]],
+            target_ansys_version: TargetAnsysVersion):
         self._config_settings = config_settings
         self._pre_solution_settings = pre_solution_settings
         self._material_properties = material_properties
@@ -3576,6 +3617,7 @@ class ExportMapdlCdbParams(CoreObject):
         self._reorder_spotweldsurface = reorder_spotweldsurface
         self._skip_comments = skip_comments
         self._initial_counters = initial_counters
+        self._target_ansys_version = TargetAnsysVersion(target_ansys_version)
 
     def __init__(
             self,
@@ -3608,6 +3650,7 @@ class ExportMapdlCdbParams(CoreObject):
             reorder_spotweldsurface: bool = None,
             skip_comments: bool = None,
             initial_counters: Dict[str, Union[str, int, float, bool]] = None,
+            target_ansys_version: TargetAnsysVersion = None,
             json_data : dict = None,
              **kwargs):
         """Initialize a ``ExportMapdlCdbParams`` object.
@@ -3728,6 +3771,10 @@ class ExportMapdlCdbParams(CoreObject):
             Parameter to specify the starting counter values for export
 
             **This is a beta parameter**. **The behavior and name may change in the future**.
+        target_ansys_version: TargetAnsysVersion, optional
+            Target ANSYS version for export compatibility. Defaults to TargetAnsysVersion_Latest. When set to an older version, incompatible features are automatically coerced to safe fallback values.
+
+            **This is a beta parameter**. **The behavior and name may change in the future**.
         json_data: dict, optional
             JSON dictionary to create a ``ExportMapdlCdbParams`` object with provided parameters.
 
@@ -3764,9 +3811,10 @@ class ExportMapdlCdbParams(CoreObject):
                 ContactElementTypeParams(model = model, json_data = json_data["contactElementTypes"] if "contactElementTypes" in json_data else None),
                 json_data["reorderSpotweldsurface"] if "reorderSpotweldsurface" in json_data else None,
                 json_data["skipComments"] if "skipComments" in json_data else None,
-                json_data["initialCounters"] if "initialCounters" in json_data else None)
+                json_data["initialCounters"] if "initialCounters" in json_data else None,
+                TargetAnsysVersion(json_data["targetAnsysVersion"] if "targetAnsysVersion" in json_data else None))
         else:
-            all_field_specified = all(arg is not None for arg in [config_settings, pre_solution_settings, material_properties, boundary_conditions, analysis_settings, write_cells, enable_face_based_labels, label_export_params, write_by_zones, consider_general_connectors_as_spot_weld, analysis_type, simulation_type, analysis_settings_file_name, write_separate_blocks, write_components_with_element_blocks, separate_blocks_format_type, export_tie_as_cntgen, export_coupling_as_sfcgen, export_fasteners_as_swgen, export_rigid_bodies_as_rbgen, write_component_based_ties, mortar_contact_for_ties, get_zone_mesh_results, write_thickness_file, contact_element_types, reorder_spotweldsurface, skip_comments, initial_counters])
+            all_field_specified = all(arg is not None for arg in [config_settings, pre_solution_settings, material_properties, boundary_conditions, analysis_settings, write_cells, enable_face_based_labels, label_export_params, write_by_zones, consider_general_connectors_as_spot_weld, analysis_type, simulation_type, analysis_settings_file_name, write_separate_blocks, write_components_with_element_blocks, separate_blocks_format_type, export_tie_as_cntgen, export_coupling_as_sfcgen, export_fasteners_as_swgen, export_rigid_bodies_as_rbgen, write_component_based_ties, mortar_contact_for_ties, get_zone_mesh_results, write_thickness_file, contact_element_types, reorder_spotweldsurface, skip_comments, initial_counters, target_ansys_version])
             if all_field_specified:
                 self.__initialize(
                     config_settings,
@@ -3796,7 +3844,8 @@ class ExportMapdlCdbParams(CoreObject):
                     contact_element_types,
                     reorder_spotweldsurface,
                     skip_comments,
-                    initial_counters)
+                    initial_counters,
+                    target_ansys_version)
             else:
                 if model is None:
                     raise ValueError("Invalid assignment. Either pass a model or specify all properties.")
@@ -3831,7 +3880,8 @@ class ExportMapdlCdbParams(CoreObject):
                         contact_element_types if contact_element_types is not None else ( ExportMapdlCdbParams._default_params["contact_element_types"] if "contact_element_types" in ExportMapdlCdbParams._default_params else ContactElementTypeParams(model = model, json_data = (json_data["contactElementTypes"] if "contactElementTypes" in json_data else None))),
                         reorder_spotweldsurface if reorder_spotweldsurface is not None else ( ExportMapdlCdbParams._default_params["reorder_spotweldsurface"] if "reorder_spotweldsurface" in ExportMapdlCdbParams._default_params else (json_data["reorderSpotweldsurface"] if "reorderSpotweldsurface" in json_data else None)),
                         skip_comments if skip_comments is not None else ( ExportMapdlCdbParams._default_params["skip_comments"] if "skip_comments" in ExportMapdlCdbParams._default_params else (json_data["skipComments"] if "skipComments" in json_data else None)),
-                        initial_counters if initial_counters is not None else ( ExportMapdlCdbParams._default_params["initial_counters"] if "initial_counters" in ExportMapdlCdbParams._default_params else (json_data["initialCounters"] if "initialCounters" in json_data else None)))
+                        initial_counters if initial_counters is not None else ( ExportMapdlCdbParams._default_params["initial_counters"] if "initial_counters" in ExportMapdlCdbParams._default_params else (json_data["initialCounters"] if "initialCounters" in json_data else None)),
+                        target_ansys_version if target_ansys_version is not None else ( ExportMapdlCdbParams._default_params["target_ansys_version"] if "target_ansys_version" in ExportMapdlCdbParams._default_params else TargetAnsysVersion(json_data["targetAnsysVersion"] if "targetAnsysVersion" in json_data else None)))
         self._custom_params = kwargs
         if model is not None:
             [ model._logger.debug(f'Unsupported argument : {key}') for key in kwargs ]
@@ -3868,7 +3918,8 @@ class ExportMapdlCdbParams(CoreObject):
             contact_element_types: ContactElementTypeParams = None,
             reorder_spotweldsurface: bool = None,
             skip_comments: bool = None,
-            initial_counters: Dict[str, Union[str, int, float, bool]] = None):
+            initial_counters: Dict[str, Union[str, int, float, bool]] = None,
+            target_ansys_version: TargetAnsysVersion = None):
         """Set the default values of the ``ExportMapdlCdbParams`` object.
 
         Parameters
@@ -3929,6 +3980,8 @@ class ExportMapdlCdbParams(CoreObject):
             Option to skip export of comments to the exported file. When the value is true, skips writing comments. When the value is false, writes comments to the exported file. The default value is false.
         initial_counters: Dict[str, Union[str, int, float, bool]], optional
             Parameter to specify the starting counter values for export
+        target_ansys_version: TargetAnsysVersion, optional
+            Target ANSYS version for export compatibility. Defaults to TargetAnsysVersion_Latest. When set to an older version, incompatible features are automatically coerced to safe fallback values.
         """
         args = locals()
         [ExportMapdlCdbParams._default_params.update({ key: value }) for key, value in args.items() if value is not None]
@@ -4003,11 +4056,13 @@ class ExportMapdlCdbParams(CoreObject):
             json_data["skipComments"] = self._skip_comments
         if self._initial_counters is not None:
             json_data["initialCounters"] = self._initial_counters
+        if self._target_ansys_version is not None:
+            json_data["targetAnsysVersion"] = self._target_ansys_version
         [ json_data.update({ utils.to_camel_case(key) : value }) for key, value in self._custom_params.items()]
         return json_data
 
     def __str__(self) -> str:
-        message = "config_settings :  %s\npre_solution_settings :  %s\nmaterial_properties :  %s\nboundary_conditions :  %s\nanalysis_settings :  %s\nwrite_cells :  %s\nenable_face_based_labels :  %s\nlabel_export_params :  %s\nwrite_by_zones :  %s\nconsider_general_connectors_as_spot_weld :  %s\nanalysis_type :  %s\nsimulation_type :  %s\nanalysis_settings_file_name :  %s\nwrite_separate_blocks :  %s\nwrite_components_with_element_blocks :  %s\nseparate_blocks_format_type :  %s\nexport_tie_as_cntgen :  %s\nexport_coupling_as_sfcgen :  %s\nexport_fasteners_as_swgen :  %s\nexport_rigid_bodies_as_rbgen :  %s\nwrite_component_based_ties :  %s\nmortar_contact_for_ties :  %s\nget_zone_mesh_results :  %s\nwrite_thickness_file :  %s\ncontact_element_types :  %s\nreorder_spotweldsurface :  %s\nskip_comments :  %s\ninitial_counters :  %s" % (self._config_settings, self._pre_solution_settings, self._material_properties, self._boundary_conditions, self._analysis_settings, self._write_cells, self._enable_face_based_labels, '{ ' + str(self._label_export_params) + ' }', self._write_by_zones, self._consider_general_connectors_as_spot_weld, self._analysis_type, self._simulation_type, self._analysis_settings_file_name, self._write_separate_blocks, self._write_components_with_element_blocks, self._separate_blocks_format_type, self._export_tie_as_cntgen, self._export_coupling_as_sfcgen, self._export_fasteners_as_swgen, self._export_rigid_bodies_as_rbgen, self._write_component_based_ties, self._mortar_contact_for_ties, self._get_zone_mesh_results, self._write_thickness_file, '{ ' + str(self._contact_element_types) + ' }', self._reorder_spotweldsurface, self._skip_comments, self._initial_counters)
+        message = "config_settings :  %s\npre_solution_settings :  %s\nmaterial_properties :  %s\nboundary_conditions :  %s\nanalysis_settings :  %s\nwrite_cells :  %s\nenable_face_based_labels :  %s\nlabel_export_params :  %s\nwrite_by_zones :  %s\nconsider_general_connectors_as_spot_weld :  %s\nanalysis_type :  %s\nsimulation_type :  %s\nanalysis_settings_file_name :  %s\nwrite_separate_blocks :  %s\nwrite_components_with_element_blocks :  %s\nseparate_blocks_format_type :  %s\nexport_tie_as_cntgen :  %s\nexport_coupling_as_sfcgen :  %s\nexport_fasteners_as_swgen :  %s\nexport_rigid_bodies_as_rbgen :  %s\nwrite_component_based_ties :  %s\nmortar_contact_for_ties :  %s\nget_zone_mesh_results :  %s\nwrite_thickness_file :  %s\ncontact_element_types :  %s\nreorder_spotweldsurface :  %s\nskip_comments :  %s\ninitial_counters :  %s\ntarget_ansys_version :  %s" % (self._config_settings, self._pre_solution_settings, self._material_properties, self._boundary_conditions, self._analysis_settings, self._write_cells, self._enable_face_based_labels, '{ ' + str(self._label_export_params) + ' }', self._write_by_zones, self._consider_general_connectors_as_spot_weld, self._analysis_type, self._simulation_type, self._analysis_settings_file_name, self._write_separate_blocks, self._write_components_with_element_blocks, self._separate_blocks_format_type, self._export_tie_as_cntgen, self._export_coupling_as_sfcgen, self._export_fasteners_as_swgen, self._export_rigid_bodies_as_rbgen, self._write_component_based_ties, self._mortar_contact_for_ties, self._get_zone_mesh_results, self._write_thickness_file, '{ ' + str(self._contact_element_types) + ' }', self._reorder_spotweldsurface, self._skip_comments, self._initial_counters, self._target_ansys_version)
         message += ''.join('\n' + str(key) + ' : ' + str(value) for key, value in self._custom_params.items())
         return message
 
@@ -4346,6 +4401,18 @@ class ExportMapdlCdbParams(CoreObject):
     @initial_counters.setter
     def initial_counters(self, value: Dict[str, Union[str, int, float, bool]]):
         self._initial_counters = value
+
+    @property
+    def target_ansys_version(self) -> TargetAnsysVersion:
+        """Target ANSYS version for export compatibility. Defaults to TargetAnsysVersion_Latest. When set to an older version, incompatible features are automatically coerced to safe fallback values.
+
+        **This is a beta parameter**. **The behavior and name may change in the future**.
+        """
+        return self._target_ansys_version
+
+    @target_ansys_version.setter
+    def target_ansys_version(self, value: TargetAnsysVersion):
+        self._target_ansys_version = value
 
 class ExportMapdlCdbResults(CoreObject):
     """Results associated with the MAPDL CDB export.
