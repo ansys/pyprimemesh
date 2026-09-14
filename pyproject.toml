@@ -49,7 +49,7 @@ tests = [
 doc = [
   "ansys-tools-visualization-interface[usd]==0.14.0",
   "ansys-sphinx-theme[autoapi]==1.10.0",
-  "joblib==1.5.3",
+  "joblib==1.6.0",
   "jupyter-sphinx==0.5.3",
   "nest-asyncio2==1.7.2",
   "numpydoc==1.10.0",
