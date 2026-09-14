@@ -128,10 +128,15 @@ def get_examples():
 
 @pytest.fixture(scope="session", autouse=True)
 def get_testfiles():
-    """Downloads unit test files"""
-    if not os.path.exists("./tests/core/test_files/"):
-        os.mkdir(os.path.abspath("./tests/core/test_files/"))
-    download_test_examples(destination=str(os.path.abspath("./tests/core/test_files/")))
+    """Download unit test files and return a map of filename to local path.
+
+    ``DownloadManager`` nests files under the GitHub directory name, so callers
+    must use the returned paths rather than ``destination / filename``.
+    """
+    destination = os.path.abspath("./tests/core/test_files/")
+    os.makedirs(destination, exist_ok=True)
+    paths = download_test_examples(destination=destination)
+    return {os.path.basename(path): path for path in paths}
 
 
 def create_scenario_element(test, id):
