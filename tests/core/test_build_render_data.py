@@ -21,12 +21,79 @@
 
 """Tests for the fast render-data build path."""
 
+from types import SimpleNamespace
+
+import numpy as np
+
 import ansys.meshing.prime as prime
 from ansys.meshing.prime.core.mesh import (
+    CONNECTIVITY_PART_CHUNK_SIZE,
+    _facet_edge_lines,
+    _get_face_and_edge_connectivity,
+    _triangulate_wide_cells,
     build_edge_render_batches,
     build_element_edge_batches,
     build_face_render_batches,
 )
+
+
+def test_wide_cells_are_triangulated_without_vtk_objects():
+    """Wide polygons are fan-triangulated while quads remain unchanged."""
+    block = np.array([5, 0, 1, 2, 3, 4, 4, 5, 6, 7, 8], dtype=np.int64)
+
+    triangulated, n_cells = _triangulate_wide_cells(block, 2)
+
+    assert n_cells == 4
+    assert triangulated.tolist() == [
+        3,
+        0,
+        1,
+        2,
+        3,
+        0,
+        2,
+        3,
+        3,
+        0,
+        3,
+        4,
+        4,
+        5,
+        6,
+        7,
+        8,
+    ]
+    lines, n_lines = _facet_edge_lines(block, 2, 9)
+    assert n_lines == 9
+    assert lines.shape == (9, 3)
+
+
+def test_connectivity_requests_are_chunked_and_combined():
+    """Large part lists use bounded RPCs while preserving result order."""
+
+    class FakeMesh:
+        def __init__(self):
+            self.calls = []
+
+        def get_face_and_edge_connectivity(self, part_ids, params):
+            self.calls.append((part_ids, params))
+            return SimpleNamespace(
+                part_ids=part_ids,
+                face_connectivity_result_per_part=[f"face-{part_id}" for part_id in part_ids],
+                edge_connectivity_result_per_part=[f"edge-{part_id}" for part_id in part_ids],
+            )
+
+    fake = FakeMesh()
+    params = object()
+    part_ids = list(range(CONNECTIVITY_PART_CHUNK_SIZE + 1))
+
+    result = _get_face_and_edge_connectivity(fake, part_ids, params)
+
+    assert [len(call[0]) for call in fake.calls] == [CONNECTIVITY_PART_CHUNK_SIZE, 1]
+    assert all(call[1] is params for call in fake.calls)
+    assert result.part_ids == part_ids
+    assert result.face_connectivity_result_per_part[-1] == f"face-{part_ids[-1]}"
+    assert result.edge_connectivity_result_per_part[-1] == f"edge-{part_ids[-1]}"
 
 
 def _legacy_model_batches(model_pd):
