@@ -1,5 +1,6 @@
-# Copyright (C) 2024 - 2026 ANSYS, Inc. and/or its affiliates.
+# Copyright (C) 2022 - 2026 Synopsys, Inc. and ANSYS, Inc. All rights reserved.
 # SPDX-License-Identifier: MIT
+#
 #
 # Permission is hereby granted, free of charge, to any person obtaining a copy
 # of this software and associated documentation files (the "Software"), to deal
@@ -22,7 +23,9 @@
 """Helper module for launching the server."""
 import logging
 import os
-import subprocess
+
+# Required to launch Prime Server.
+import subprocess  # nosec B404
 import sys
 import uuid
 from typing import Optional
@@ -43,7 +46,7 @@ try:
 
     config.set_has_pim(pypim.is_configured())
 except:
-    pass
+    config.set_has_pim(False)
 
 __all__ = ['launch_prime', 'launch_server_process']
 
@@ -187,7 +190,8 @@ def launch_server_process(
         server_args.append(f"--server_cert_dir={server_certs_dir}")
 
     logging.getLogger('PyPrimeMesh').info('Launching Ansys Prime Server')
-    server = subprocess.Popen(server_args, **kwargs)
+    # The executable path is validated above and arguments are passed without a shell.
+    server = subprocess.Popen(server_args, **kwargs)  # nosec B603
     return server
 
 
@@ -214,8 +218,9 @@ def launch_remote_prime(
     )
 
     client = Client(channel=channel, timeout=timeout)
+    # The service authenticates through headers; this is a required non-secret placeholder.
     file_service = FileClient(
-        token='token',
+        token='token',  # nosec B106
         url=instance.services['http-simple-upload-server'].uri,
         headers=instance.services['http-simple-upload-server'].headers,
     )

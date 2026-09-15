@@ -51,6 +51,7 @@ SizeField
 sizefield
 stackable
 [Ss]tacker
+Synopsys
 [Ss]weeper
 [Ss]weepable
 te

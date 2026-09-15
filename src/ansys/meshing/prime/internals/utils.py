@@ -1,5 +1,6 @@
-# Copyright (C) 2024 - 2026 ANSYS, Inc. and/or its affiliates.
+# Copyright (C) 2022 - 2026 Synopsys, Inc. and ANSYS, Inc. All rights reserved.
 # SPDX-License-Identifier: MIT
+#
 #
 # Permission is hereby granted, free of charge, to any person obtaining a copy
 # of this software and associated documentation files (the "Software"), to deal
@@ -23,7 +24,9 @@
 import logging
 import os
 import shutil
-import subprocess
+
+# Required for process inspection.
+import subprocess  # nosec B404
 import time
 import uuid
 from contextlib import contextmanager
@@ -36,7 +39,7 @@ _LOCAL_PORTS = []
 
 
 def _get_docker():
-    """Return the docker module, importing it on first use.
+    """Get the docker module, importing it on first use.
 
     Raises
     ------
@@ -49,8 +52,8 @@ def _get_docker():
         return docker
     except ImportError:
         raise ImportError(
-            "The 'docker' package is required for container operations. "
-            "Install it with: pip install docker"
+            "Container operations require 'docker' package. "
+            "Install the docker package using the command 'pip install docker'."
         ) from None
 
 
@@ -103,13 +106,17 @@ def get_child_processes(process):
         Process IDs of the processes.
     """
     children = []
-    cmd = subprocess.Popen("pgrep -P %d" % process, shell=True, stdout=subprocess.PIPE)
+    # The command interpolates only a process ID.
+    cmd = subprocess.Popen(  # nosec B602
+        "pgrep -P %d" % process, shell=True, stdout=subprocess.PIPE
+    )
     out = cmd.stdout.read().decode("utf-8")
     cmd.wait()
     for pid in out.split("\n")[:1]:
         if pid.strip() == '':
             break
-        ps_cmd = subprocess.Popen(
+        # The PID is normalized to an integer.
+        ps_cmd = subprocess.Popen(  # nosec B602
             "ps -o cmd= {}".format(int(pid)), stdout=subprocess.PIPE, shell=True
         )
         ps_out = ps_cmd.stdout.read().decode("utf-8")

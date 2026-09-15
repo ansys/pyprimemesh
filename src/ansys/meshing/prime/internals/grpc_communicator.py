@@ -1,5 +1,6 @@
-# Copyright (C) 2024 - 2026 ANSYS, Inc. and/or its affiliates.
+# Copyright (C) 2022 - 2026 Synopsys, Inc. and ANSYS, Inc. All rights reserved.
 # SPDX-License-Identifier: MIT
+#
 #
 # Permission is hereby granted, free of charge, to any person obtaining a copy
 # of this software and associated documentation files (the "Software"), to deal
@@ -104,7 +105,7 @@ def get_response_messages(response_generator):
         if response.HasField('completion_token'):
             break
 
-        assert response.HasField('content')
+        assert response.HasField('content')  # nosec B101
         yield response.content
 
 
@@ -424,7 +425,7 @@ class GRPCCommunicator(Communicator):
                 # when this is called.
                 # In that case, we can just ignore the error.
                 # The channel will be closed anyway.
-                pass
+                return
         else:
             raise RuntimeError("No connection with server")
 
