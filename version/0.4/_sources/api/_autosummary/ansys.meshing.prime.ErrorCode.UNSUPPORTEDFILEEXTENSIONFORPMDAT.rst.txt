@@ -1,0 +1,6 @@
+﻿UNSUPPORTEDFILEEXTENSIONFORPMDAT
+================================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoattribute:: ErrorCode.UNSUPPORTEDFILEEXTENSIONFORPMDAT

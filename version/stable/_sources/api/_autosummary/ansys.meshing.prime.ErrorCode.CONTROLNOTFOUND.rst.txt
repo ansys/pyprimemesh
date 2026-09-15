@@ -1,0 +1,6 @@
+CONTROLNOTFOUND
+===============
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoattribute:: ErrorCode.CONTROLNOTFOUND

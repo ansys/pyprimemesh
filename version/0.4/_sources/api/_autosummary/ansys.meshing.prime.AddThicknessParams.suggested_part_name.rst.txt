@@ -1,0 +1,6 @@
+﻿suggested\_part\_name
+=====================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoproperty:: AddThicknessParams.suggested_part_name

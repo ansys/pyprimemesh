@@ -1,0 +1,11 @@
+get\_geom\_zonelets\_of\_topo\_faces
+====================================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. automethod:: ansys.meshing.prime.TopoData.get_geom_zonelets_of_topo_faces
+
+.. minigallery::
+   :add-heading: Examples using TopoData.get_geom_zonelets_of_topo_faces
+
+   ansys.meshing.prime.TopoData.get_geom_zonelets_of_topo_faces

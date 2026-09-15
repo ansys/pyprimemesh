@@ -1,0 +1,36 @@
+.. vale off
+
+OverlapSearchResults
+====================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoclass:: OverlapSearchResults
+   
+   
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+      :toctree:
+   
+      
+      OverlapSearchResults.print_default
+      OverlapSearchResults.set_default
+   
+   
+
+   
+   
+   .. rubric:: Attributes
+
+   .. autosummary::
+      :toctree:
+   
+      OverlapSearchResults.error_code
+      OverlapSearchResults.n_pairs
+      OverlapSearchResults.overlap_pairs
+   
+   
+
+.. vale on

@@ -1,0 +1,6 @@
+﻿set\_params
+===========
+
+.. currentmodule:: ansys.meshing.prime
+
+.. automethod:: PeriodicControl.set_params

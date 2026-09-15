@@ -1,0 +1,6 @@
+size\_controls
+==============
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoproperty:: ControlData.size_controls

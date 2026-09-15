@@ -1,0 +1,6 @@
+check\_proximity
+================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoproperty:: PrismStairStep.check_proximity

@@ -1,0 +1,28 @@
+.. vale off
+
+EdgeConnectType
+===============
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoclass:: EdgeConnectType
+   
+   
+   
+   
+
+   
+   
+   .. rubric:: Attributes
+
+   .. autosummary::
+      :toctree:
+   
+      EdgeConnectType.NONE
+      EdgeConnectType.ALLTOALL
+      EdgeConnectType.FREETOALL
+      EdgeConnectType.FREETOFREE
+   
+   
+
+.. vale on

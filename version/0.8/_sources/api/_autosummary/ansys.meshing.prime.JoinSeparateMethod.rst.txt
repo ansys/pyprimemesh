@@ -1,0 +1,48 @@
+.. vale off
+
+JoinSeparateMethod
+==================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoclass:: JoinSeparateMethod
+   
+   
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+      :toctree:
+   
+      JoinSeparateMethod.conjugate
+      JoinSeparateMethod.bit_length
+      JoinSeparateMethod.bit_count
+      JoinSeparateMethod.to_bytes
+      JoinSeparateMethod.from_bytes
+      JoinSeparateMethod.as_integer_ratio
+   
+   
+
+   
+   
+   .. rubric:: Attributes
+
+   .. autosummary::
+      :toctree:
+   
+      JoinSeparateMethod.real
+      JoinSeparateMethod.imag
+      JoinSeparateMethod.numerator
+      JoinSeparateMethod.denominator
+      JoinSeparateMethod.KEEPNONE
+      JoinSeparateMethod.KEEPONE
+      JoinSeparateMethod.KEEPBOTH
+   
+   
+
+.. minigallery::
+    :add-heading: Examples using JoinSeparateMethod
+
+    ansys.meshing.prime.JoinSeparateMethod
+
+.. vale on

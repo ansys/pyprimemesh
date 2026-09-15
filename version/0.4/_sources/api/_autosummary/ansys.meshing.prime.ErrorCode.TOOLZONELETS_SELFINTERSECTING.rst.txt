@@ -1,0 +1,6 @@
+﻿TOOLZONELETS\_SELFINTERSECTING
+==============================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoattribute:: ErrorCode.TOOLZONELETS_SELFINTERSECTING

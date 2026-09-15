@@ -1,0 +1,6 @@
+FACEFACE
+========
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoattribute:: IntersectionMask.FACEFACE

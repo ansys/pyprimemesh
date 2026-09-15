@@ -1,0 +1,11 @@
+create\_zone
+============
+
+.. currentmodule:: ansys.meshing.prime
+
+.. automethod:: ansys.meshing.prime.Model.create_zone
+
+.. minigallery::
+   :add-heading: Examples using Model.create_zone
+
+   ansys.meshing.prime.Model.create_zone

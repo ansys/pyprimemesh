@@ -1,0 +1,6 @@
+IGA\_NURBSFITTINGFAILED
+=======================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoattribute:: ErrorCode.IGA_NURBSFITTINGFAILED

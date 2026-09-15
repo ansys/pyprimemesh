@@ -1,0 +1,6 @@
+warning\_codes
+==============
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoproperty:: ExportLSDynaResults.warning_codes

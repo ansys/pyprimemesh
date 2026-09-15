@@ -1,0 +1,26 @@
+.. vale off
+
+CollapseTool
+============
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoclass:: CollapseTool
+   
+   
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+      :toctree:
+   
+      
+      CollapseTool.split_and_collapse_on_zonelets
+   
+   
+
+   
+   
+   
+
+.. vale on

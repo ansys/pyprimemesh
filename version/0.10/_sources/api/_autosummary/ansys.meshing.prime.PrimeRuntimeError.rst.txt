@@ -1,0 +1,6 @@
+PrimeRuntimeError
+=================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoexception:: PrimeRuntimeError

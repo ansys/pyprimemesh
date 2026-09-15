@@ -1,0 +1,6 @@
+max\_quality
+============
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoproperty:: VolumeQualityResultsPart.max_quality

@@ -1,0 +1,11 @@
+create\_zones\_from\_labels
+===========================
+
+.. currentmodule:: ansys.meshing.prime.lucid
+
+.. automethod:: ansys.meshing.prime.lucid.Mesh.create_zones_from_labels
+
+.. minigallery::
+   :add-heading: Examples using Mesh.create_zones_from_labels
+
+   ansys.meshing.prime.lucid.Mesh.create_zones_from_labels

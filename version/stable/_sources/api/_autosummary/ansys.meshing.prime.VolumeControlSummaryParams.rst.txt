@@ -1,0 +1,32 @@
+.. vale off
+
+VolumeControlSummaryParams
+==========================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoclass:: VolumeControlSummaryParams
+
+   
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+      :toctree:
+   
+      
+      VolumeControlSummaryParams.print_default
+      VolumeControlSummaryParams.set_default
+   
+   
+
+   
+   
+   
+
+.. minigallery::
+    :add-heading: Examples using VolumeControlSummaryParams
+
+    ansys.meshing.prime.VolumeControlSummaryParams
+
+.. vale on

@@ -1,0 +1,6 @@
+split\_topo\_faces\_by\_mesh\_region
+====================================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. automethod:: Scaffolder.split_topo_faces_by_mesh_region

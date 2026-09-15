@@ -1,0 +1,22 @@
+ControlPointSelection
+=====================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoclass:: ControlPointSelection
+   
+   
+   
+   
+
+   
+   
+   .. rubric:: Attributes
+
+   .. autosummary::
+      :toctree:
+   
+      ControlPointSelection.MANUAL
+      ControlPointSelection.PROGRAMCONTROLLED
+   
+   

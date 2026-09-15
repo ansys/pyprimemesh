@@ -1,0 +1,49 @@
+.. vale off
+
+PartCreationType
+================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoclass:: PartCreationType
+   
+   
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+      :toctree:
+   
+      PartCreationType.conjugate
+      PartCreationType.bit_length
+      PartCreationType.bit_count
+      PartCreationType.to_bytes
+      PartCreationType.from_bytes
+      PartCreationType.as_integer_ratio
+   
+   
+
+   
+   
+   .. rubric:: Attributes
+
+   .. autosummary::
+      :toctree:
+   
+      PartCreationType.real
+      PartCreationType.imag
+      PartCreationType.numerator
+      PartCreationType.denominator
+      PartCreationType.MODEL
+      PartCreationType.ASSEMBLY
+      PartCreationType.PART
+      PartCreationType.BODY
+   
+   
+
+.. minigallery::
+    :add-heading: Examples using PartCreationType
+
+    ansys.meshing.prime.PartCreationType
+
+.. vale on

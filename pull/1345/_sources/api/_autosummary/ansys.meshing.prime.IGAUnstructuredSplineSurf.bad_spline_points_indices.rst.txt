@@ -1,0 +1,6 @@
+bad\_spline\_points\_indices
+============================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoproperty:: IGAUnstructuredSplineSurf.bad_spline_points_indices

@@ -1,0 +1,6 @@
+clipping
+========
+
+.. currentmodule:: ansys.meshing.prime.graphics
+
+.. autoproperty:: PrimePlotter.clipping

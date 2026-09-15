@@ -1,0 +1,37 @@
+.. vale off
+
+SearchInfoByRegisterIdResults
+=============================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoclass:: SearchInfoByRegisterIdResults
+   
+   
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+      :toctree:
+   
+      
+      SearchInfoByRegisterIdResults.print_default
+      SearchInfoByRegisterIdResults.set_default
+   
+   
+
+   
+   
+   .. rubric:: Attributes
+
+   .. autosummary::
+      :toctree:
+   
+      SearchInfoByRegisterIdResults.error_code
+      SearchInfoByRegisterIdResults.face_zonelets_found
+      SearchInfoByRegisterIdResults.locations_found
+      SearchInfoByRegisterIdResults.n_found
+   
+   
+
+.. vale on

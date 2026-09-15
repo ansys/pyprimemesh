@@ -1,0 +1,11 @@
+add\_render\_data
+=================
+
+.. currentmodule:: ansys.meshing.prime.graphics
+
+.. automethod:: ansys.meshing.prime.graphics.PrimePlotter.add_render_data
+
+.. minigallery::
+   :add-heading: Examples using PrimePlotter.add_render_data
+
+   ansys.meshing.prime.graphics.PrimePlotter.add_render_data

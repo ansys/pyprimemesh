@@ -1,0 +1,42 @@
+.. vale off
+
+MatchPair
+=========
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoclass:: MatchPair
+   
+   
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+      :toctree:
+   
+      
+      MatchPair.print_default
+      MatchPair.set_default
+   
+   
+
+   
+   
+   .. rubric:: Attributes
+
+   .. autosummary::
+      :toctree:
+   
+      MatchPair.bc_pairs
+      MatchPair.source_surfaces
+      MatchPair.target_surfaces
+      MatchPair.target_type
+   
+   
+
+.. minigallery::
+    :add-heading: Examples using MatchPair
+
+    ansys.meshing.prime.MatchPair
+
+.. vale on

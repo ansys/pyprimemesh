@@ -1,0 +1,6 @@
+remove\_slivers\_abs\_dist\_tol\_ratio
+======================================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoproperty:: ScaffolderParams.remove_slivers_abs_dist_tol_ratio

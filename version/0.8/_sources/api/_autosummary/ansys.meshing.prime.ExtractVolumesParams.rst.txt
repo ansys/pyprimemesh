@@ -1,0 +1,40 @@
+.. vale off
+
+ExtractVolumesParams
+====================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoclass:: ExtractVolumesParams
+   
+   
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+      :toctree:
+   
+      
+      ExtractVolumesParams.print_default
+      ExtractVolumesParams.set_default
+   
+   
+
+   
+   
+   .. rubric:: Attributes
+
+   .. autosummary::
+      :toctree:
+   
+      ExtractVolumesParams.create_zone
+      ExtractVolumesParams.suggested_zone_name
+   
+   
+
+.. minigallery::
+    :add-heading: Examples using ExtractVolumesParams
+
+    ansys.meshing.prime.ExtractVolumesParams
+
+.. vale on

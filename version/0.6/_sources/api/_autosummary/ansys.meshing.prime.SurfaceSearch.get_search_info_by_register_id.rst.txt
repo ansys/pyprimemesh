@@ -1,0 +1,6 @@
+get\_search\_info\_by\_register\_id
+===================================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. automethod:: SurfaceSearch.get_search_info_by_register_id

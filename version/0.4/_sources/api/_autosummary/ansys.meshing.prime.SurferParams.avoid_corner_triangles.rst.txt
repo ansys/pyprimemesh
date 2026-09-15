@@ -1,0 +1,6 @@
+﻿avoid\_corner\_triangles
+========================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoproperty:: SurferParams.avoid_corner_triangles

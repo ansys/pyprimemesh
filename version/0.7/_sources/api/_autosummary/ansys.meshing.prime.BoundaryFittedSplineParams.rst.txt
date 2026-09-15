@@ -1,0 +1,49 @@
+.. vale off
+
+BoundaryFittedSplineParams
+==========================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoclass:: BoundaryFittedSplineParams
+   
+   
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+      :toctree:
+   
+      
+      BoundaryFittedSplineParams.print_default
+      BoundaryFittedSplineParams.set_default
+   
+   
+
+   
+   
+   .. rubric:: Attributes
+
+   .. autosummary::
+      :toctree:
+   
+      BoundaryFittedSplineParams.control_point_selection_type
+      BoundaryFittedSplineParams.control_points_count_u
+      BoundaryFittedSplineParams.control_points_count_v
+      BoundaryFittedSplineParams.control_points_count_w
+      BoundaryFittedSplineParams.degree_u
+      BoundaryFittedSplineParams.degree_v
+      BoundaryFittedSplineParams.degree_w
+      BoundaryFittedSplineParams.n_refine
+      BoundaryFittedSplineParams.refinement_fraction_u
+      BoundaryFittedSplineParams.refinement_fraction_v
+      BoundaryFittedSplineParams.refinement_fraction_w
+   
+   
+
+.. minigallery::
+    :add-heading: Examples using BoundaryFittedSplineParams
+
+    ansys.meshing.prime.BoundaryFittedSplineParams
+
+.. vale on

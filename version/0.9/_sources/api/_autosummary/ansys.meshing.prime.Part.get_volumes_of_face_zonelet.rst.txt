@@ -1,0 +1,11 @@
+get\_volumes\_of\_face\_zonelet
+===============================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. automethod:: ansys.meshing.prime.Part.get_volumes_of_face_zonelet
+
+.. minigallery::
+   :add-heading: Examples using Part.get_volumes_of_face_zonelet
+
+   ansys.meshing.prime.Part.get_volumes_of_face_zonelet

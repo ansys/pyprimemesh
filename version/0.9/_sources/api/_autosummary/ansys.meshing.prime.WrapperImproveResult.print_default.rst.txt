@@ -1,0 +1,11 @@
+print\_default
+==============
+
+.. currentmodule:: ansys.meshing.prime
+
+.. automethod:: ansys.meshing.prime.WrapperImproveResult.print_default
+
+.. minigallery::
+   :add-heading: Examples using WrapperImproveResult.print_default
+
+   ansys.meshing.prime.WrapperImproveResult.print_default

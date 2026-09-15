@@ -1,0 +1,917 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Connections &#8212; PyPrimeMesh</title>
+  
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  <!--
+    this give us a css class that will be invisible only if js is disabled
+  -->
+  <noscript>
+    <style>
+      .pst-js-only { display: none !important; }
+
+    </style>
+  </noscript>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=8f2a1f02" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../_static/jupyter-sphinx.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/thebelab.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sg_gallery.css?v=d2d258e8" />
+    <link rel="stylesheet" type="text/css" href="../_static/sg_gallery-binder.css?v=f4aeca0c" />
+    <link rel="stylesheet" type="text/css" href="../_static/sg_gallery-dataframe.css?v=2082cf3c" />
+    <link rel="stylesheet" type="text/css" href="../_static/sg_gallery-rendered-html.css?v=1277b6f3" />
+    <link rel="stylesheet" type="text/css" href="../_static/css/ansys_sphinx_theme.css?v=77703c5e" />
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.23/css/jquery.dataTables.min.css" />
+    <link rel="stylesheet" type="text/css" href="https://www.nerdfonts.com/assets/css/webfont.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
+  
+  <!-- So that users can add custom icons -->
+  <script src="../_static/scripts/fontawesome.js?digest=8878045cc6db502f8baf"></script>
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf" />
+
+  
+    <link href="../_static/css/breadcrumbs.css" rel="stylesheet" />
+  
+    <script src="../_static/documentation_options.js?v=fe7df9b0"></script>
+    <script src="../_static/doctools.js?v=9bcbadda"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../_static/copybutton.js?v=f281be69"></script>
+    <script src="../_static/thebelab-helper.js"></script>
+    <script src="../_static/js/table.js?v=b64f5182"></script>
+    <script src="https://cdn.datatables.net/1.10.23/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@jupyter-widgets/html-manager@^1.0.1/dist/embed-amd.js"></script>
+    <script src="../_static/design-tabs.js?v=f930bc37"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'user_guide/connections';</script>
+    <script>
+        DOCUMENTATION_OPTIONS.theme_version = '0.16.1';
+        DOCUMENTATION_OPTIONS.theme_switcher_json_url = 'https://prime.docs.pyansys.com/versions.json';
+        DOCUMENTATION_OPTIONS.theme_switcher_version_match = '0.7';
+        DOCUMENTATION_OPTIONS.show_version_warning_banner =
+            false;
+        </script>
+    <link rel="icon" href="../_static/ansys-favicon.png"/>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Mesh diagnostics" href="mesh_diagnostics.html" />
+    <link rel="prev" title="Sizing" href="sizing.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  <meta name="docsearch:version" content="0.7.0" />
+  <link rel="canonical" href="https://prime.docs.pyansys.com/version/stable/user_guide/connections.html" />
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <dialog id="pst-search-dialog">
+    
+<form class="bd-search d-flex align-items-center"
+      action="../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         placeholder="Search the docs ..."
+         aria-label="Search the docs ..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form>
+  </dialog>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+<div class="bd-header__inner bd-page-width">
+  <button class="pst-navbar-icon sidebar-toggle primary-toggle" aria-label="Site navigation">
+    <span class="fa-solid fa-bars"></span>
+  </button>
+  
+  
+  <div class="col-lg-3 navbar-header-items__start">
+    
+      <div class="navbar-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../index.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../_static/pyansys_logo_transparent_black.png" class="logo__image only-light" alt="PyPrimeMesh - Home"/>
+    <img src="../_static/pyansys_logo_transparent_white.png" class="logo__image only-dark pst-js-only" alt="PyPrimeMesh - Home"/>
+  
+  
+</a></div>
+    
+  </div>
+  
+  <div class="col-lg-9 navbar-header-items">
+    
+    <div class="me-auto navbar-header-items__center">
+      
+        <div class="navbar-item">
+<nav>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../getting_started/index.html">
+    Getting started
+  </a>
+</li>
+
+
+<li class="nav-item current active">
+  <a class="nav-link nav-internal" href="index.html">
+    User guide
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../examples/index.html">
+    Examples
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../api/index.html">
+    API reference
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../contributing/index.html">
+    Contribute
+  </a>
+</li>
+
+  </ul>
+</nav></div>
+      
+    </div>
+    
+    
+    <div class="navbar-header-items__end">
+      
+        <div class="navbar-item navbar-persistent--container">
+          
+<div class="search-bar pst-js-only" id="search-bar">
+  <form class="bd-search d-flex align-items-center" action="../search.html" method="get">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <input type="search" class="form-control" name="q" placeholder="Search the docs ..."
+      aria-label="Search the docs ..." autocomplete="off" autocorrect="off"
+      autocapitalize="off" spellcheck="false" />
+    <span class="search-button__kbd-shortcut">
+      <kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd>
+    </span>
+  </form>
+  <div id="static-search-results" class="static-search-results" style="display:none;" tabindex="0"></div>
+</div>
+        </div>
+      
+      
+        <div class="navbar-item">
+<div class="version-switcher__container dropdown pst-js-only">
+  <button id="pst-version-switcher-button-2"
+    type="button"
+    class="version-switcher__button btn btn-sm dropdown-toggle"
+    data-bs-toggle="dropdown"
+    aria-haspopup="listbox"
+    aria-controls="pst-version-switcher-list-2"
+    aria-label="Version switcher list"
+  >
+    Choose version  <!-- this text may get changed later by javascript -->
+    <span class="caret"></span>
+  </button>
+  <div id="pst-version-switcher-list-2"
+    class="version-switcher__menu dropdown-menu list-group-flush py-0"
+    role="listbox" aria-labelledby="pst-version-switcher-button-2">
+    <!-- dropdown will be populated by javascript on page load -->
+  </div>
+</div></div>
+      
+        <div class="navbar-item">
+
+<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode"  data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i>
+  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dark"></i>
+  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
+</button></div>
+      
+        <div class="navbar-item"><ul class="navbar-icon-links"
+    aria-label="Icon Links">
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/ansys/pyprimemesh" title="GitHub" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-square-github fa-lg" aria-hidden="true"></i>
+            <span class="sr-only">GitHub</span></a>
+        </li>
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/ansys/pyprimemesh/discussions" title="Support" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa fa-comment fa-fw fa-lg" aria-hidden="true"></i>
+            <span class="sr-only">Support</span></a>
+        </li>
+</ul></div>
+      
+    </div>
+    
+  </div>
+  
+  
+    <div class="navbar-persistent--mobile">
+<div class="search-bar pst-js-only" id="search-bar">
+  <form class="bd-search d-flex align-items-center" action="../search.html" method="get">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <input type="search" class="form-control" name="q" placeholder="Search the docs ..."
+      aria-label="Search the docs ..." autocomplete="off" autocorrect="off"
+      autocapitalize="off" spellcheck="false" />
+    <span class="search-button__kbd-shortcut">
+      <kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd>
+    </span>
+  </form>
+  <div id="static-search-results" class="static-search-results" style="display:none;" tabindex="0"></div>
+</div>
+    </div>
+  
+
+  
+    <button class="pst-navbar-icon sidebar-toggle secondary-toggle" aria-label="On this page">
+      <span class="fa-solid fa-outdent"></span>
+    </button>
+  
+</div>
+
+    </header>
+  
+  
+    <div id="announcement_msg"></div>
+<script>
+  fetch("announcement.html")
+    .then((response) => {
+      if (!response.ok) {
+        throw new Error(`HTTP error: ${response.status}`);
+      }
+      return response.text();
+    })
+    .then(
+      (text) => (document.getElementById("announcement_msg").innerHTML = text),
+    )
+    .catch((error) => console.error(`Fetch problem: ${error.message}`));
+</script>
+  
+
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <dialog id="pst-primary-sidebar-modal"></dialog>
+      <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+      <div class="sidebar-header-items__center">
+        
+          
+          
+            <div class="navbar-item">
+<nav>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../getting_started/index.html">
+    Getting started
+  </a>
+</li>
+
+
+<li class="nav-item current active">
+  <a class="nav-link nav-internal" href="index.html">
+    User guide
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../examples/index.html">
+    Examples
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../api/index.html">
+    API reference
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../contributing/index.html">
+    Contribute
+  </a>
+</li>
+
+  </ul>
+</nav></div>
+          
+        
+      </div>
+    
+    
+    
+      <div class="sidebar-header-items__end">
+        
+          <div class="navbar-item">
+<div class="version-switcher__container dropdown pst-js-only">
+  <button id="pst-version-switcher-button-3"
+    type="button"
+    class="version-switcher__button btn btn-sm dropdown-toggle"
+    data-bs-toggle="dropdown"
+    aria-haspopup="listbox"
+    aria-controls="pst-version-switcher-list-3"
+    aria-label="Version switcher list"
+  >
+    Choose version  <!-- this text may get changed later by javascript -->
+    <span class="caret"></span>
+  </button>
+  <div id="pst-version-switcher-list-3"
+    class="version-switcher__menu dropdown-menu list-group-flush py-0"
+    role="listbox" aria-labelledby="pst-version-switcher-button-3">
+    <!-- dropdown will be populated by javascript on page load -->
+  </div>
+</div></div>
+        
+          <div class="navbar-item">
+
+<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode"  data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i>
+  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dark"></i>
+  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
+</button></div>
+        
+          <div class="navbar-item"><ul class="navbar-icon-links"
+    aria-label="Icon Links">
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/ansys/pyprimemesh" title="GitHub" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-square-github fa-lg" aria-hidden="true"></i>
+            <span class="sr-only">GitHub</span></a>
+        </li>
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/ansys/pyprimemesh/discussions" title="Support" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa fa-comment fa-fw fa-lg" aria-hidden="true"></i>
+            <span class="sr-only">Support</span></a>
+        </li>
+</ul></div>
+        
+      </div>
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+<nav class="bd-docs-nav bd-links"
+     aria-label="Section Navigation">
+  <p class="bd-links__title" role="heading" aria-level="1">Section Navigation</p>
+  <div class="bd-toc-item navbar-nav"><ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="concepts.html">Concepts and model structure</a></li>
+<li class="toctree-l1"><a class="reference internal" href="launch_prime.html">Launching PyPrimeMesh</a></li>
+<li class="toctree-l1"><a class="reference internal" href="lucid.html">Common meshing tasks and the Lucid module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="fileio.html">Reading and writing files</a></li>
+<li class="toctree-l1"><a class="reference internal" href="logging.html">Logging</a></li>
+<li class="toctree-l1"><a class="reference internal" href="graphics.html">Interactive graphics using PyVista</a></li>
+<li class="toctree-l1"><a class="reference internal" href="surfer.html">Surface meshing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="wrapper.html">Surface wrapping</a></li>
+<li class="toctree-l1"><a class="reference internal" href="automesh.html">Volumetric meshing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="iga.html">Isogeometric analysis</a></li>
+<li class="toctree-l1"><a class="reference internal" href="multizone.html">MultiZone controls</a></li>
+<li class="toctree-l1"><a class="reference internal" href="stacker.html">Volume sweeping</a></li>
+<li class="toctree-l1"><a class="reference internal" href="matchmorph.html">Match morphing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="sizing.html">Sizing</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Connections</a></li>
+<li class="toctree-l1"><a class="reference internal" href="mesh_diagnostics.html">Mesh diagnostics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="expressions.html">Expressions</a></li>
+</ul>
+</div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+      <div class="sidebar-primary-item">
+<div id="ethical-ad-placement"
+      class="flat"
+      data-ea-publisher="readthedocs"
+      data-ea-type="readthedocs-sidebar"
+      data-ea-manual="true">
+</div></div>
+  </div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item">
+<nav aria-label="Breadcrumb">
+  <ul class="bd-breadcrumbs">
+         
+    <li class="breadcrumb-item breadcrumb-home">
+      <a href="https://docs.pyansys.com/" class="nav-link">PyAnsys</a>
+    </li>
+     
+    <li class="breadcrumb-item">
+      <a
+        href="../index.html"
+        class="nav-link"
+        aria-label="Home"
+      >
+        <i class="fa-solid fa-home"></i>
+      </a>
+    </li>
+     
+    <li class="breadcrumb-item">
+      <a href="index.html" class="nav-link">User guide</a>
+    </li>
+      
+    <li class="breadcrumb-item active" aria-current="page"><span class="ellipsis">Connections</span></li>
+    
+  </ul>
+</nav>
+</div>
+      
+    </div>
+  
+  
+</div>
+</div>
+              
+              
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section id="connections">
+<span id="ref-index-connections"></span><h1>Connections<a class="headerlink" href="#connections" title="Link to this heading">#</a></h1>
+<section id="zonelet-connection">
+<h2>Zonelet connection<a class="headerlink" href="#zonelet-connection" title="Link to this heading">#</a></h2>
+<p>Connect operations help you to create a watertight, fully connected surface mesh for successful volume mesh generation.
+Connect operations conformally connect multiple watertight volumes providing shared zonelets (and therefore connected
+volume mesh) between them. The <a class="reference internal" href="../api/_autosummary/ansys.meshing.prime.Connect.html#ansys.meshing.prime.Connect" title="ansys.meshing.prime.Connect"><code class="xref py py-class docutils literal notranslate"><span class="pre">Connect</span></code></a> class allows you to connect the face zonelets
+in a part, volume, or model using various connect algorithms.</p>
+<p>There are three major operations for zonelet connections:</p>
+<ul class="simple">
+<li><p>The <a class="reference internal" href="../api/_autosummary/ansys.meshing.prime.Connect.intersect_face_zonelets.html#ansys.meshing.prime.Connect.intersect_face_zonelets" title="ansys.meshing.prime.Connect.intersect_face_zonelets"><code class="xref py py-func docutils literal notranslate"><span class="pre">Connect.intersect_face_zonelets()</span></code></a> function allows you
+to intersect the face zonelets of the part along the intersecting faces.</p></li>
+</ul>
+<figure class="align-center">
+<a class="reference internal image-reference" href="../_images/connect_intersect.png"><img alt="../_images/connect_intersect.png" src="../_images/connect_intersect.png" style="width: 200pt;" />
+</a>
+</figure>
+<ul class="simple">
+<li><p>The <a class="reference internal" href="../api/_autosummary/ansys.meshing.prime.Connect.stitch_face_zonelets.html#ansys.meshing.prime.Connect.stitch_face_zonelets" title="ansys.meshing.prime.Connect.stitch_face_zonelets"><code class="xref py py-func docutils literal notranslate"><span class="pre">Connect.stitch_face_zonelets()</span></code></a> function allows you to
+stitch a set of face zonelets to another set of face zonelets along the boundary of zonelets.</p></li>
+</ul>
+<figure class="align-center">
+<a class="reference internal image-reference" href="../_images/connect_stitch.png"><img alt="../_images/connect_stitch.png" src="../_images/connect_stitch.png" style="width: 200pt;" />
+</a>
+</figure>
+<ul class="simple">
+<li><p>The <a class="reference internal" href="../api/_autosummary/ansys.meshing.prime.Connect.join_face_zonelets.html#ansys.meshing.prime.Connect.join_face_zonelets" title="ansys.meshing.prime.Connect.join_face_zonelets"><code class="xref py py-func docutils literal notranslate"><span class="pre">Connect.join_face_zonelets()</span></code></a> function allows you to join
+a set of face zonelets to another set of face zonelets along the overlapping faces.</p></li>
+</ul>
+<figure class="align-center">
+<a class="reference internal image-reference" href="../_images/connect_join.png"><img alt="../_images/connect_join.png" src="../_images/connect_join.png" style="width: 200pt;" />
+</a>
+</figure>
+<ul class="simple">
+<li><p>The <a class="reference internal" href="../api/_autosummary/ansys.meshing.prime.Connect.fuse_face_zonelets.html#ansys.meshing.prime.Connect.fuse_face_zonelets" title="ansys.meshing.prime.Connect.fuse_face_zonelets"><code class="xref py py-func docutils literal notranslate"><span class="pre">Connect.fuse_face_zonelets()</span></code></a> function allows you to
+perform fuse operation between overlapping face zonelets within a single part.</p></li>
+<li><p>The <a class="reference internal" href="../api/_autosummary/ansys.meshing.prime.Connect.merge_boundary_nodes.html#ansys.meshing.prime.Connect.merge_boundary_nodes" title="ansys.meshing.prime.Connect.merge_boundary_nodes"><code class="xref py py-func docutils literal notranslate"><span class="pre">Connect.merge_boundary_nodes()</span></code></a> function allows you
+to merge boundary nodes of source face zonelets with boundary nodes of target face zonelets with the given parameters.</p></li>
+</ul>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Connect operations support only computational mesh, which is mesh with reasonable size changes and quality.
+Faceted geometry, which is STL-like mesh that can have extreme size changes and many sliver elements, is not supported.</p>
+</div>
+<p>The following example shows how to accomplish these tasks:</p>
+<ul class="simple">
+<li><p>Import the model and delete geometry topology from each part.</p></li>
+<li><p>Merge the parts and verify the surface mesh connectivity.</p></li>
+<li><p>Perform the join or intersect operation on face zonelets.</p></li>
+</ul>
+<ol class="arabic">
+<li><p>Import the model and delete topo-geometric entities from each part:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">prime</span><span class="o">.</span><span class="n">FileIO</span><span class="p">(</span><span class="n">model</span><span class="p">)</span><span class="o">.</span><span class="n">read_pmdat</span><span class="p">(</span>
+    <span class="s2">&quot;D:/Temp/mesh.pmdat&quot;</span><span class="p">,</span> <span class="n">file_read_params</span><span class="o">=</span><span class="n">prime</span><span class="o">.</span><span class="n">FileReadParams</span><span class="p">(</span><span class="n">model</span><span class="p">)</span>
+<span class="p">)</span>
+<span class="k">for</span> <span class="n">part</span> <span class="ow">in</span> <span class="n">model</span><span class="o">.</span><span class="n">parts</span><span class="p">:</span>
+    <span class="n">topofaces</span> <span class="o">=</span> <span class="n">part</span><span class="o">.</span><span class="n">get_topo_faces</span><span class="p">()</span>
+    <span class="k">if</span> <span class="n">topofaces</span><span class="p">:</span>
+        <span class="n">params</span> <span class="o">=</span> <span class="n">prime</span><span class="o">.</span><span class="n">DeleteTopoEntitiesParams</span><span class="p">(</span>
+            <span class="n">model</span><span class="p">,</span> <span class="n">delete_geom_zonelets</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">delete_mesh_zonelets</span><span class="o">=</span><span class="kc">False</span>
+        <span class="p">)</span>
+        <span class="n">part</span><span class="o">.</span><span class="n">delete_topo_entities</span><span class="p">(</span><span class="n">params</span><span class="p">)</span>
+</pre></div>
+</div>
+</li>
+<li><p>Merge the parts.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">model</span><span class="o">.</span><span class="n">merge_parts</span><span class="p">(</span>
+    <span class="n">part_ids</span><span class="o">=</span><span class="p">[</span><span class="n">part</span><span class="o">.</span><span class="n">id</span> <span class="k">for</span> <span class="n">part</span> <span class="ow">in</span> <span class="n">model</span><span class="o">.</span><span class="n">parts</span><span class="p">],</span> <span class="n">params</span><span class="o">=</span><span class="n">prime</span><span class="o">.</span><span class="n">MergePartsParams</span><span class="p">(</span><span class="n">model</span><span class="p">)</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</li>
+<li><p>Check the surface before performing the connect operation.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">diag</span> <span class="o">=</span> <span class="n">prime</span><span class="o">.</span><span class="n">SurfaceSearch</span><span class="p">(</span><span class="n">model</span><span class="p">)</span>
+<span class="n">diag_res</span> <span class="o">=</span> <span class="n">diag</span><span class="o">.</span><span class="n">get_surface_diagnostic_summary</span><span class="p">(</span>
+    <span class="n">prime</span><span class="o">.</span><span class="n">SurfaceDiagnosticSummaryParams</span><span class="p">(</span>
+        <span class="n">model</span><span class="p">,</span>
+        <span class="n">scope</span><span class="o">=</span><span class="n">prime</span><span class="o">.</span><span class="n">ScopeDefinition</span><span class="p">(</span><span class="n">model</span><span class="o">=</span><span class="n">model</span><span class="p">,</span> <span class="n">part_expression</span><span class="o">=</span><span class="s2">&quot;*&quot;</span><span class="p">),</span>
+        <span class="n">compute_free_edges</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+        <span class="n">compute_multi_edges</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+    <span class="p">)</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+<p>For more information on checking the surface mesh connectivity, see <a class="reference internal" href="mesh_diagnostics.html#ref-index-mesh-diagnostics"><span class="std std-ref">Mesh diagnostics</span></a>.</p>
+</li>
+<li><p>Print the results of the surface mesh connectivity before performing the connect operation:</p>
+<div class="highlight-pycon notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">diag_res</span><span class="p">)</span>
+
+<span class="go">error_code :  ErrorCode.NOERROR</span>
+<span class="go">n_self_intersections :  342</span>
+<span class="go">n_free_edges :  564</span>
+<span class="go">n_multi_edges :  0</span>
+<span class="go">n_duplicate_faces :  0</span>
+</pre></div>
+</div>
+</li>
+<li><p>Connect face zonelets in the model:</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Only triangular faces are supported.</p>
+</div>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">join_params</span> <span class="o">=</span> <span class="n">prime</span><span class="o">.</span><span class="n">JoinParams</span><span class="p">(</span><span class="n">model</span><span class="p">)</span>
+<span class="n">inter_params</span> <span class="o">=</span> <span class="n">prime</span><span class="o">.</span><span class="n">IntersectParams</span><span class="p">(</span><span class="n">model</span><span class="p">)</span>
+<span class="n">join_params</span><span class="o">.</span><span class="n">tolerance</span> <span class="o">=</span> <span class="mf">0.1</span>
+<span class="n">part_id</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">parts</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">id</span>
+<span class="n">faces</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">parts</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">get_face_zonelets</span><span class="p">()</span>
+
+<span class="k">for</span> <span class="n">face</span> <span class="ow">in</span> <span class="n">faces</span><span class="p">:</span>
+    <span class="n">other_faces</span> <span class="o">=</span> <span class="p">[</span><span class="n">other</span> <span class="k">for</span> <span class="n">other</span> <span class="ow">in</span> <span class="n">faces</span> <span class="k">if</span> <span class="n">face</span> <span class="o">!=</span> <span class="n">other</span><span class="p">]</span>
+    <span class="n">prime</span><span class="o">.</span><span class="n">Connect</span><span class="p">(</span><span class="n">model</span><span class="p">)</span><span class="o">.</span><span class="n">intersect_face_zonelets</span><span class="p">(</span>
+        <span class="n">part_id</span><span class="o">=</span><span class="n">part_id</span><span class="p">,</span>
+        <span class="n">face_zonelet_ids</span><span class="o">=</span><span class="p">[</span><span class="n">face</span><span class="p">],</span>
+        <span class="n">with_face_zonelet_ids</span><span class="o">=</span><span class="n">other_faces</span><span class="p">,</span>
+        <span class="n">params</span><span class="o">=</span><span class="n">inter_params</span><span class="p">,</span>
+    <span class="p">)</span>
+    <span class="n">prime</span><span class="o">.</span><span class="n">Connect</span><span class="p">(</span><span class="n">model</span><span class="p">)</span><span class="o">.</span><span class="n">join_face_zonelets</span><span class="p">(</span>
+        <span class="n">part_id</span><span class="o">=</span><span class="n">part_id</span><span class="p">,</span>
+        <span class="n">face_zonelet_ids</span><span class="o">=</span><span class="p">[</span><span class="n">face</span><span class="p">],</span>
+        <span class="n">with_face_zonelet_ids</span><span class="o">=</span><span class="n">other_faces</span><span class="p">,</span>
+        <span class="n">params</span><span class="o">=</span><span class="n">join_params</span><span class="p">,</span>
+    <span class="p">)</span>
+</pre></div>
+</div>
+</li>
+<li><p>Check the surface after performing the connect operation:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">diag_res</span> <span class="o">=</span> <span class="n">diag</span><span class="o">.</span><span class="n">get_surface_diagnostic_summary</span><span class="p">(</span><span class="n">diag_params</span><span class="p">)</span>
+</pre></div>
+</div>
+</li>
+<li><p>Print the results of the surface mesh connectivity after performing the connect operation:</p>
+<div class="highlight-pycon notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">diag_res</span><span class="p">)</span>
+
+<span class="go">error_code :  ErrorCode.NOERROR</span>
+<span class="go">n_self_intersections :  0</span>
+<span class="go">n_free_edges :  448</span>
+<span class="go">n_multi_edges :  9</span>
+<span class="go">n_duplicate_faces :  0</span>
+</pre></div>
+</div>
+</li>
+</ol>
+<p>To perform Fuse operation,</p>
+<ol class="arabic simple">
+<li><p>Connect face zonelets in the model using fuse operation. You can apply Fuse operation on overlapping faces
+within a single part. You can co-locate, merge, or remove fused surfaces as per your requirement.</p></li>
+</ol>
+<figure class="align-center">
+<a class="reference internal image-reference" href="../_images/fuse.png"><img alt="../_images/fuse.png" src="../_images/fuse.png" style="width: 200pt;" />
+</a>
+</figure>
+<ol class="arabic" start="2">
+<li><p>Enable the fuse parameters as per your requirement. When use_absolute_tolerance is True,
+provides the gap tolerance or side tolerance value as absolute value.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">connect</span> <span class="o">=</span> <span class="n">prime</span><span class="o">.</span><span class="n">Connect</span><span class="p">(</span><span class="n">model</span><span class="p">)</span>
+<span class="n">params</span> <span class="o">=</span> <span class="n">prime</span><span class="o">.</span><span class="n">FuseParams</span><span class="p">(</span><span class="n">model</span><span class="o">=</span><span class="n">model</span><span class="p">)</span>
+<span class="n">params</span><span class="o">.</span><span class="n">use_absolute_tolerance</span> <span class="o">=</span> <span class="kc">True</span>
+<span class="n">params</span><span class="o">.</span><span class="n">gap_tolerance</span> <span class="o">=</span> <span class="mi">20</span>
+<span class="n">params</span><span class="o">.</span><span class="n">fuse_option</span> <span class="o">=</span> <span class="n">prime</span><span class="o">.</span><span class="n">FuseOption</span><span class="o">.</span><span class="n">TRIMONESIDE</span>
+<span class="n">params</span><span class="o">.</span><span class="n">check_interior</span> <span class="o">=</span> <span class="kc">True</span>
+<span class="n">params</span><span class="o">.</span><span class="n">check_orientation</span> <span class="o">=</span> <span class="kc">False</span>
+<span class="n">params</span><span class="o">.</span><span class="n">local_remesh</span> <span class="o">=</span> <span class="kc">True</span>
+<span class="n">params</span><span class="o">.</span><span class="n">separate</span> <span class="o">=</span> <span class="kc">True</span>
+<span class="n">params</span><span class="o">.</span><span class="n">dump_mesh</span> <span class="o">=</span> <span class="kc">False</span>
+<span class="n">params</span><span class="o">.</span><span class="n">n_layers</span> <span class="o">=</span> <span class="mi">2</span>
+<span class="n">params</span><span class="o">.</span><span class="n">angle</span> <span class="o">=</span> <span class="mi">45</span>
+</pre></div>
+</div>
+</li>
+</ol>
+<p>The fuse_option parameter specifies how to treat the surface when performing fuse operation.
+Here, TRIMONESIDE option deletes the faces to be fused on one side and merges the nodes in the middle location.
+When local_remesh parameter is True, the fused region is meshed after performing fuse operation.
+n_layers parameter specifies the number of layers around the region to be fused.
+When separate is True, the fused region is separated.</p>
+<ol class="arabic simple" start="3">
+<li><p>Fuse the face zonelets using the given parameters.</p></li>
+</ol>
+<blockquote>
+<div><blockquote>
+<div><div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">result</span> <span class="o">=</span> <span class="n">connect</span><span class="o">.</span><span class="n">fuse_face_zonelets</span><span class="p">(</span>
+    <span class="n">part</span><span class="o">.</span><span class="n">id</span><span class="p">,</span> <span class="n">source_face_zonelet_ids</span><span class="p">,</span> <span class="n">target_face_zonelet_ids</span><span class="p">,</span> <span class="n">params</span>
+<span class="p">)</span>
+<span class="n">g</span> <span class="o">=</span> <span class="n">Graphics</span><span class="p">(</span><span class="n">model</span><span class="p">)</span>
+<span class="n">g</span><span class="p">()</span>
+</pre></div>
+</div>
+</div></blockquote>
+<figure class="align-center">
+<a class="reference internal image-reference" href="../_images/connect_fuse.png"><img alt="../_images/connect_fuse.png" src="../_images/connect_fuse.png" style="width: 200pt;" />
+</a>
+</figure>
+</div></blockquote>
+</section>
+<section id="topology-based-connection">
+<h2>Topology-based connection<a class="headerlink" href="#topology-based-connection" title="Link to this heading">#</a></h2>
+<p>The <a class="reference internal" href="../api/_autosummary/ansys.meshing.prime.Scaffolder.html#ansys.meshing.prime.Scaffolder" title="ansys.meshing.prime.Scaffolder"><code class="xref py py-class docutils literal notranslate"><span class="pre">Scaffolder</span></code></a> class allows you to provide connection
+using faceted geometry and topology. This class also handles the gaps and mismatches in the geometry.</p>
+<p>Topology-based connection creates shared topoedges between neighboring topofaces. Hence, you can
+create connected mesh between topofaces.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Connectivity cannot be shared across multiple parts.</p>
+</div>
+<figure class="align-center">
+<a class="reference internal image-reference" href="../_images/scaffold.png"><img alt="../_images/scaffold.png" src="../_images/scaffold.png" style="width: 200pt;" />
+</a>
+</figure>
+<p>Here, the yellow edges denote multiple connections between the four topofaces.
+The model has a single topoface containing an interior edge loop and an overlapping topoface on the central portion.
+You may separate the large topoface by the interior edge loop and delete the shadow or merge the topoface to
+achieve the desired state.</p>
+<p>This code merges parts and scaffold topofaces:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Merge parts</span>
+<span class="n">model</span><span class="o">.</span><span class="n">merge_parts</span><span class="p">(</span>
+    <span class="n">part_ids</span><span class="o">=</span><span class="p">[</span><span class="n">part</span><span class="o">.</span><span class="n">id</span> <span class="k">for</span> <span class="n">part</span> <span class="ow">in</span> <span class="n">model</span><span class="o">.</span><span class="n">parts</span><span class="p">],</span> <span class="n">params</span><span class="o">=</span><span class="n">prime</span><span class="o">.</span><span class="n">MergePartsParams</span><span class="p">(</span><span class="n">model</span><span class="p">)</span>
+<span class="p">)</span>
+
+<span class="c1"># Scaffold TopoFaces</span>
+<span class="n">params</span> <span class="o">=</span> <span class="n">prime</span><span class="o">.</span><span class="n">ScaffolderParams</span><span class="p">(</span>
+    <span class="n">model</span><span class="o">=</span><span class="n">model</span><span class="p">,</span>
+    <span class="n">absolute_dist_tol</span><span class="o">=</span><span class="mf">0.01</span><span class="p">,</span>
+    <span class="n">intersection_control_mask</span><span class="o">=</span><span class="n">prime</span><span class="o">.</span><span class="n">IntersectionMask</span><span class="o">.</span><span class="n">FACEFACEANDEDGEEDGE</span><span class="p">,</span>
+    <span class="n">constant_mesh_size</span><span class="o">=</span><span class="mf">0.1</span><span class="p">,</span>
+<span class="p">)</span>
+
+<span class="n">scaffolder</span> <span class="o">=</span> <span class="n">prime</span><span class="o">.</span><span class="n">Scaffolder</span><span class="p">(</span><span class="n">model</span><span class="p">,</span> <span class="n">part</span><span class="o">.</span><span class="n">id</span><span class="p">)</span>
+<span class="n">res</span> <span class="o">=</span> <span class="n">scaffolder</span><span class="o">.</span><span class="n">scaffold_topo_faces_and_beams</span><span class="p">(</span>
+    <span class="n">topo_faces</span><span class="o">=</span><span class="n">part</span><span class="o">.</span><span class="n">get_topo_faces</span><span class="p">(),</span> <span class="n">topo_beams</span><span class="o">=</span><span class="p">[],</span> <span class="n">params</span><span class="o">=</span><span class="n">params</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+<p>This code prints the results so that you can verify the number of topofaces that failed
+in the scaffold operation:</p>
+<div class="highlight-pycon notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">res</span><span class="p">)</span>
+
+<span class="go">n_incomplete_topo_faces :  0</span>
+<span class="go">error_code :  ErrorCode.NOERROR</span>
+</pre></div>
+</div>
+</section>
+</section>
+
+
+                </article>
+              
+              
+              
+              
+              
+            </div>
+            
+            
+              
+                <dialog id="pst-secondary-sidebar-modal"></dialog>
+                <div id="pst-secondary-sidebar" class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+<div
+    id="pst-page-navigation-heading-2"
+    class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> On this page
+  </div>
+  <nav class="bd-toc-nav page-toc" aria-labelledby="pst-page-navigation-heading-2">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#zonelet-connection">Zonelet connection</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#topology-based-connection">Topology-based connection</a></li>
+</ul>
+  </nav></div>
+
+  <div class="sidebar-secondary-item"> 
+<div class="tocsection editthispage">
+  <a href="https://github.com/ansys/pyprimemesh/edit/main/doc/source/user_guide/connections.rst">
+    <i class="fa-solid fa-pencil"></i>
+       Edit
+    on GitHub  
+  </a>
+</div>
+
+</div>
+
+  <div class="sidebar-secondary-item">
+  <div role="note" aria-label="source link">
+    <ul class="this-page-menu">
+      <li><a href="../_sources/user_guide/connections.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+          </footer>
+        
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script defer src="../_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf"></script>
+<script defer src="../_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf"></script>
+
+<link rel="stylesheet" href="../_static/css/fuse-search.css">
+
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.7/require.min.js"></script>
+
+<script>
+// Passing the search options to the search.js file
+const SEARCH_OPTIONS = JSON.parse('{"keys": ["title", "text"], "limit": 10, "threshold": 0.2}');
+const SEARCH_FILE = "../_static/search.json";
+</script>
+
+
+<script src="../_static/js/search.js"></script>
+  <footer class="bd-footer">
+<div class="bd-footer__inner bd-page-width">
+  
+    <div class="footer-items__start">
+      
+        <div class="footer-item">
+
+  <p class="copyright">
+    
+      © Copyright (c) 2025 ANSYS, Inc. All rights reserved.
+      <br/>
+    
+  </p>
+</div>
+      
+        <div class="footer-item">
+
+  <p class="sphinx-version">
+    Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 8.1.3.
+    <br/>
+  </p>
+</div>
+      
+    </div>
+  
+  
+  
+    <div class="footer-items__end">
+      
+        <div class="footer-item"><p class="theme-version">
+  Built with the
+  <a href="https://sphinxdocs.ansys.com/version/stable/index.html"
+    >Ansys Sphinx Theme</a
+  >
+  1.2.6. <br />Last updated on
+  <span id="ast_build_date"></span>
+</p>
+<script>
+  var options = { day: "numeric", month: "long", year: "numeric" };
+  var ast_lastModifiedDate = new Date(document.lastModified);
+  var ast_build_date = lastModifiedDate.toLocaleDateString("en-US", options);
+  document.getElementById("ast_build_date").innerHTML = ast_build_date;
+</script></div>
+      
+    </div>
+  
+</div>
+
+  </footer>
+  </body>
+</html>

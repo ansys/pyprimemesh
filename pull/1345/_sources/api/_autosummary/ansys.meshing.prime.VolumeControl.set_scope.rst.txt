@@ -1,0 +1,11 @@
+set\_scope
+==========
+
+.. currentmodule:: ansys.meshing.prime
+
+.. automethod:: ansys.meshing.prime.VolumeControl.set_scope
+
+.. minigallery::
+   :add-heading: Examples using VolumeControl.set_scope
+
+   ansys.meshing.prime.VolumeControl.set_scope

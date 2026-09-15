@@ -1,0 +1,11 @@
+print\_default
+==============
+
+.. currentmodule:: ansys.meshing.prime
+
+.. automethod:: ansys.meshing.prime.DeleteFringesAndOverlapsResults.print_default
+
+.. minigallery::
+   :add-heading: Examples using DeleteFringesAndOverlapsResults.print_default
+
+   ansys.meshing.prime.DeleteFringesAndOverlapsResults.print_default

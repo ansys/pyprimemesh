@@ -1,0 +1,11 @@
+merge\_parts
+============
+
+.. currentmodule:: ansys.meshing.prime.lucid
+
+.. automethod:: ansys.meshing.prime.lucid.Mesh.merge_parts
+
+.. minigallery::
+   :add-heading: Examples using Mesh.merge_parts
+
+   ansys.meshing.prime.lucid.Mesh.merge_parts

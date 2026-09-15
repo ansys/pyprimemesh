@@ -1,0 +1,11 @@
+delete\_zone
+============
+
+.. currentmodule:: ansys.meshing.prime
+
+.. automethod:: ansys.meshing.prime.Model.delete_zone
+
+.. minigallery::
+   :add-heading: Examples using Model.delete_zone
+
+   ansys.meshing.prime.Model.delete_zone

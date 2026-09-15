@@ -1,0 +1,11 @@
+set\_default
+============
+
+.. currentmodule:: ansys.meshing.prime
+
+.. automethod:: ansys.meshing.prime.DeleteMeshResults.set_default
+
+.. minigallery::
+   :add-heading: Examples using DeleteMeshResults.set_default
+
+   ansys.meshing.prime.DeleteMeshResults.set_default

@@ -1,0 +1,27 @@
+.. vale off
+
+IntersectionMask
+================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoclass:: IntersectionMask
+   
+   
+   
+   
+
+   
+   
+   .. rubric:: Attributes
+
+   .. autosummary::
+      :toctree:
+   
+      IntersectionMask.EDGEEDGE
+      IntersectionMask.FACEFACE
+      IntersectionMask.FACEFACEANDEDGEEDGE
+   
+   
+
+.. vale on

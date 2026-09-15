@@ -1,0 +1,34 @@
+.. vale off
+
+ImportFluentCaseResults
+=======================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoclass:: ImportFluentCaseResults
+   
+   
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+      :toctree:
+   
+      
+      ImportFluentCaseResults.print_default
+      ImportFluentCaseResults.set_default
+   
+   
+
+   
+   
+   .. rubric:: Attributes
+
+   .. autosummary::
+      :toctree:
+   
+      ImportFluentCaseResults.error_code
+   
+   
+
+.. vale on

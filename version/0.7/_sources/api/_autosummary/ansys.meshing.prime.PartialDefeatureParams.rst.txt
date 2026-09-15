@@ -1,0 +1,41 @@
+.. vale off
+
+PartialDefeatureParams
+======================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoclass:: PartialDefeatureParams
+   
+   
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+      :toctree:
+   
+      
+      PartialDefeatureParams.print_default
+      PartialDefeatureParams.set_default
+   
+   
+
+   
+   
+   .. rubric:: Attributes
+
+   .. autosummary::
+      :toctree:
+   
+      PartialDefeatureParams.edge_sharp_corner_angle
+      PartialDefeatureParams.merge_edge_allow_self_close
+      PartialDefeatureParams.merge_face_normals_angle
+   
+   
+
+.. minigallery::
+    :add-heading: Examples using PartialDefeatureParams
+
+    ansys.meshing.prime.PartialDefeatureParams
+
+.. vale on

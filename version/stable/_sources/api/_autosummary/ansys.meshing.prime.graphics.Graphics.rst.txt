@@ -1,0 +1,30 @@
+.. vale off
+
+Graphics
+========
+
+.. currentmodule:: ansys.meshing.prime.graphics
+
+.. autoclass:: Graphics
+
+   
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+      :toctree:
+   
+      
+   
+   
+
+   
+   
+   
+
+.. minigallery::
+    :add-heading: Examples using Graphics
+
+    ansys.meshing.prime.graphics.Graphics
+
+.. vale on

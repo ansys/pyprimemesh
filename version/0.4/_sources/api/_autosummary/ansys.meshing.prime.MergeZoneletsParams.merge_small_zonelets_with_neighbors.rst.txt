@@ -1,0 +1,6 @@
+﻿merge\_small\_zonelets\_with\_neighbors
+=======================================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoproperty:: MergeZoneletsParams.merge_small_zonelets_with_neighbors

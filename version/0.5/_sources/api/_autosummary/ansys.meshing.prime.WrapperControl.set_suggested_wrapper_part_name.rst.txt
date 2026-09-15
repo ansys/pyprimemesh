@@ -1,0 +1,6 @@
+set\_suggested\_wrapper\_part\_name
+===================================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. automethod:: WrapperControl.set_suggested_wrapper_part_name

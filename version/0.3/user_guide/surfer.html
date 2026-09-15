@@ -1,0 +1,802 @@
+
+
+<!DOCTYPE html>
+
+
+<html lang="en" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.19: https://docutils.sourceforge.io/" />
+
+    <title>Surface meshing &#8212; PyPrimeMesh</title>
+    
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=e353d410970836974a52" rel="stylesheet" />
+<link href="../_static/styles/bootstrap.css?digest=e353d410970836974a52" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=e353d410970836974a52" rel="stylesheet" />
+
+  
+  <link href="../_static/vendor/fontawesome/6.1.2/css/all.min.css?digest=e353d410970836974a52" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/jupyter-sphinx.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/thebelab.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sg_gallery.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sg_gallery-binder.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sg_gallery-dataframe.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sg_gallery-rendered-html.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/css/ansys_sphinx_theme.css" />
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.23/css/jquery.dataTables.min.css" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=e353d410970836974a52" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52" />
+
+    
+        <link href="../_static/css/breadcrumbs.css" rel="stylesheet">
+    
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/sphinx_highlight.js"></script>
+    <script src="../_static/clipboard.min.js"></script>
+    <script src="../_static/copybutton.js"></script>
+    <script src="../_static/thebelab-helper.js"></script>
+    <script src="../_static/js/table.js"></script>
+    <script src="https://cdn.datatables.net/1.10.23/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@jupyter-widgets/html-manager@^1.0.1/dist/embed-amd.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'user_guide/surfer';</script>
+    <script>
+        DOCUMENTATION_OPTIONS.theme_switcher_json_url = 'https://prime.docs.pyansys.com/versions.json';
+        DOCUMENTATION_OPTIONS.theme_switcher_version_match = '0.3';
+        </script>
+    <link rel="icon" href="../_static/ansys-favicon.png"/>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Volumetric meshing" href="automesh.html" />
+    <link rel="prev" title="Interactive graphics using PyVista" href="graphics.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  <link rel="canonical" href="https://prime.docs.pyansys.com/version/stable/user_guide/surfer.html" />
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <a class="skip-link" href="#main-content">Skip to main content</a>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__primary"
+          id="__primary"/>
+  <label class="overlay overlay-primary" for="__primary"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__secondary"
+          id="__secondary"/>
+  <label class="overlay overlay-secondary" for="__secondary"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container"><!-- Debugging: html_theme_options =  -->
+
+  <!-- If there is no MiliSearch enabled, use the PyData search -->
+<form class="bd-search d-flex align-items-center"
+      action="../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search the docs ..."
+         aria-label="Search the docs ..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+  
+    
+    <nav class="bd-header navbar navbar-expand-lg bd-navbar">
+<div class="bd-header__inner bd-page-width">
+  <label class="sidebar-toggle primary-toggle" for="__primary">
+    <span class="fa-solid fa-bars"></span>
+  </label>
+  
+  <div class="navbar-header-items__start">
+    
+      <div class="navbar-item">
+  
+
+<a class="navbar-brand logo" href="../index.html">
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../_static/pyansys-logo-black-cropped.png" class="logo__image only-light" alt="Logo image"/>
+    <script>document.write(`<img src="../_static/pyansys-logo-black-cropped.png" class="logo__image only-dark" alt="Logo image"/>`);</script>
+  
+  
+</a></div>
+    
+  </div>
+  
+  
+  <div class="col-lg-9 navbar-header-items">
+    
+    <div class="me-auto navbar-header-items__center">
+      
+        <div class="navbar-item"><nav class="navbar-nav">
+  <p class="sidebar-header-items__title"
+     role="heading"
+     aria-level="1"
+     aria-label="Site Navigation">
+    Site Navigation
+  </p>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../getting_started/index.html">
+                        Getting started
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item current active">
+                      <a class="nav-link nav-internal" href="index.html">
+                        User guide
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../examples/index.html">
+                        Examples
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../api/index.html">
+                        API reference
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../contributing/index.html">
+                        Contributing
+                      </a>
+                    </li>
+                
+  </ul>
+</nav></div>
+      
+    </div>
+    
+    
+    <div class="navbar-header-items__end">
+      
+        <div class="navbar-item navbar-persistent--container">
+          
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+  </button>
+`);
+</script>
+        </div>
+      
+      
+        <div class="navbar-item">
+<script>
+document.write(`
+  <div class="version-switcher__container dropdown">
+    <button type="button" class="version-switcher__button btn btn-sm navbar-btn dropdown-toggle" data-bs-toggle="dropdown">
+      0.3  <!-- this text may get changed later by javascript -->
+      <span class="caret"></span>
+    </button>
+    <div class="version-switcher__menu dropdown-menu list-group-flush py-0">
+    <!-- dropdown will be populated by javascript on page load -->
+    </div>
+  </div>
+`);
+</script></div>
+      
+        <div class="navbar-item">
+<script>
+document.write(`
+  <button class="theme-switch-button btn btn-sm btn-outline-primary navbar-btn rounded-circle" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch" data-mode="light"><i class="fa-solid fa-sun"></i></span>
+    <span class="theme-switch" data-mode="dark"><i class="fa-solid fa-moon"></i></span>
+    <span class="theme-switch" data-mode="auto"><i class="fa-solid fa-circle-half-stroke"></i></span>
+  </button>
+`);
+</script></div>
+      
+        <div class="navbar-item"><ul class="navbar-icon-links navbar-nav"
+    aria-label="Icon Links">
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/ansys/pyprimemesh" title="GitHub" class="nav-link" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><span><i class="fa-brands fa-square-github"></i></span>
+            <label class="sr-only">GitHub</label></a>
+        </li>
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/ansys/pyprimemesh/discussions" title="Support" class="nav-link" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><span><i class="fa fa-comment fa-fw"></i></span>
+            <label class="sr-only">Support</label></a>
+        </li>
+</ul></div>
+      
+    </div>
+    
+  </div>
+  
+  
+    <div class="navbar-persistent--mobile">
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+  </button>
+`);
+</script>
+    </div>
+  
+
+  
+    <label class="sidebar-toggle secondary-toggle" for="__secondary">
+      <span class="fa-solid fa-outdent"></span>
+    </label>
+  
+</div>
+
+    </nav>
+  
+
+    
+    <div id="announcement_msg"></div>
+<script>
+  fetch("announcement.html")
+    .then((response) => {
+      if (!response.ok) {
+        throw new Error(`HTTP error: ${response.status}`);
+      }
+      return response.text();
+    })
+    .then(text => document.getElementById("announcement_msg").innerHTML = text)
+    .catch((error) => console.error(`Fetch problem: ${error.message}`));
+</script>
+    
+
+    
+    <div class="container-xl">
+    <div class="row">
+        <div class="col-12 col-md-3" id="breadcrumbs-spacer"></div>
+        <div class="col-12 col-md-11 col-xl-9" id="breadcrumbs">
+          
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+    
+        <li class="nav-item nav-item-additional-breadcrumb"><a href="https://docs.pyansys.com/">PyAnsys</a> » </li>
+    
+    
+        <li class="nav-item nav-item-0"><a href="../index.html">PyPrimeMesh</a> » </li>
+    
+
+          <li class="nav-item nav-item-1"><a href="index.html" accesskey="U">User guide</a> » </li>
+        <li class="nav-item nav-item-this"><a href="">Surface meshing</a></li> 
+      </ul>
+    </div>
+        </div>
+  </div>
+</div>
+    
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+      <div class="sidebar-header-items__center">
+        
+          <div class="navbar-item"><nav class="navbar-nav">
+  <p class="sidebar-header-items__title"
+     role="heading"
+     aria-level="1"
+     aria-label="Site Navigation">
+    Site Navigation
+  </p>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../getting_started/index.html">
+                        Getting started
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item current active">
+                      <a class="nav-link nav-internal" href="index.html">
+                        User guide
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../examples/index.html">
+                        Examples
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../api/index.html">
+                        API reference
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../contributing/index.html">
+                        Contributing
+                      </a>
+                    </li>
+                
+  </ul>
+</nav></div>
+        
+      </div>
+    
+    
+    
+      <div class="sidebar-header-items__end">
+        
+          <div class="navbar-item">
+<script>
+document.write(`
+  <div class="version-switcher__container dropdown">
+    <button type="button" class="version-switcher__button btn btn-sm navbar-btn dropdown-toggle" data-bs-toggle="dropdown">
+      0.3  <!-- this text may get changed later by javascript -->
+      <span class="caret"></span>
+    </button>
+    <div class="version-switcher__menu dropdown-menu list-group-flush py-0">
+    <!-- dropdown will be populated by javascript on page load -->
+    </div>
+  </div>
+`);
+</script></div>
+        
+          <div class="navbar-item">
+<script>
+document.write(`
+  <button class="theme-switch-button btn btn-sm btn-outline-primary navbar-btn rounded-circle" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch" data-mode="light"><i class="fa-solid fa-sun"></i></span>
+    <span class="theme-switch" data-mode="dark"><i class="fa-solid fa-moon"></i></span>
+    <span class="theme-switch" data-mode="auto"><i class="fa-solid fa-circle-half-stroke"></i></span>
+  </button>
+`);
+</script></div>
+        
+          <div class="navbar-item"><ul class="navbar-icon-links navbar-nav"
+    aria-label="Icon Links">
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/ansys/pyprimemesh" title="GitHub" class="nav-link" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><span><i class="fa-brands fa-square-github"></i></span>
+            <label class="sr-only">GitHub</label></a>
+        </li>
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/ansys/pyprimemesh/discussions" title="Support" class="nav-link" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><span><i class="fa fa-comment fa-fw"></i></span>
+            <label class="sr-only">Support</label></a>
+        </li>
+</ul></div>
+        
+      </div>
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item"><nav class="bd-docs-nav bd-links"
+     aria-label="Section Navigation">
+  <p class="bd-links__title" role="heading" aria-level="1">Section Navigation</p>
+  <div class="bd-toc-item navbar-nav"><ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="concepts.html">Concepts and model structure</a></li>
+<li class="toctree-l1"><a class="reference internal" href="launch_prime.html">Launching PyPrimeMesh</a></li>
+<li class="toctree-l1"><a class="reference internal" href="lucid.html">Common meshing tasks and the Lucid module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="fileio.html">Reading and writing files</a></li>
+<li class="toctree-l1"><a class="reference internal" href="logging.html">Logging</a></li>
+<li class="toctree-l1"><a class="reference internal" href="graphics.html">Interactive graphics using PyVista</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Surface meshing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="automesh.html">Volumetric meshing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="sizing.html">Sizing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="connections.html">Connections</a></li>
+<li class="toctree-l1"><a class="reference internal" href="mesh_diagnostics.html">Mesh diagnostics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="expressions.html">Expressions</a></li>
+</ul>
+</div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main">
+        
+        
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article"></div>
+              
+              
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article" role="main">
+                  
+  <section id="surface-meshing">
+<span id="ref-index-surfer"></span><h1>Surface meshing<a class="headerlink" href="#surface-meshing" title="Permalink to this heading">#</a></h1>
+<p>The <a class="reference internal" href="../api/_autosummary/ansys.meshing.prime.Surfer.html#ansys.meshing.prime.Surfer" title="ansys.meshing.prime.Surfer"><code class="xref py py-class docutils literal notranslate"><span class="pre">Surfer</span></code></a> class enables you to perform surface meshing using
+different surface meshing algorithms on topofaces or face zonelets. Surface meshing considers many
+parameters, such as like size field type, minimum size, maximum size, growth rate, and transition type,
+while meshing face zonelets or topofaces.</p>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<p>Surface meshing with constant and variable sizing with tri/quad mesh can be generated using
+the <a class="reference internal" href="../api/_autosummary/ansys.meshing.prime.lucid.Mesh.surface_mesh.html#ansys.meshing.prime.lucid.Mesh.surface_mesh" title="ansys.meshing.prime.lucid.Mesh.surface_mesh"><code class="xref py py-func docutils literal notranslate"><span class="pre">Mesh.surface_mesh()</span></code></a> method in the Lucid API.</p>
+</div>
+<section id="surface-meshing-geometry-topology">
+<h2>Surface meshing geometry/topology<a class="headerlink" href="#surface-meshing-geometry-topology" title="Permalink to this heading">#</a></h2>
+<p>The following example shows how to perform these steps:</p>
+<ul class="simple">
+<li><p>Import topology-based geometry (SCDOC) files and visualize the model.</p></li>
+<li><p>Surface mesh the topofaces with constant size.</p></li>
+</ul>
+<p>Start the PyPrimeMesh client and import the CAD geometry (SCDOC) file:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">ansys.meshing.prime</span> <span class="k">as</span> <span class="nn">prime</span>
+<span class="kn">from</span> <span class="nn">ansys.meshing.prime.graphics</span> <span class="kn">import</span> <span class="n">Graphics</span>
+
+<span class="n">prime_client</span> <span class="o">=</span> <span class="n">prime</span><span class="o">.</span><span class="n">launch_prime</span><span class="p">()</span>
+<span class="n">model</span> <span class="o">=</span> <span class="n">prime_client</span><span class="o">.</span><span class="n">model</span>
+
+<span class="c1"># Import CAD file</span>
+<span class="n">input_file</span> <span class="o">=</span> <span class="sa">r</span><span class="s2">&quot;D:/Examples/simple-bracket-holes.scdoc&quot;</span>
+<span class="n">file_io</span> <span class="o">=</span> <span class="n">prime</span><span class="o">.</span><span class="n">FileIO</span><span class="p">(</span><span class="n">model</span><span class="p">)</span>
+<span class="n">file_io</span><span class="o">.</span><span class="n">import_cad</span><span class="p">(</span>
+    <span class="n">input_file</span><span class="p">,</span>
+    <span class="n">params</span><span class="o">=</span><span class="n">prime</span><span class="o">.</span><span class="n">ImportCadParams</span><span class="p">(</span><span class="n">model</span><span class="o">=</span><span class="n">model</span><span class="p">,</span> <span class="n">length_unit</span><span class="o">=</span><span class="n">prime</span><span class="o">.</span><span class="n">LengthUnit</span><span class="o">.</span><span class="n">MM</span><span class="p">),</span>
+<span class="p">)</span>
+<span class="c1"># Show model in graphic</span>
+<span class="n">display</span> <span class="o">=</span> <span class="n">Graphics</span><span class="p">(</span><span class="n">model</span><span class="p">)</span>
+<span class="n">display</span><span class="p">(</span><span class="n">update</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">part</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">get_part_by_name</span><span class="p">(</span><span class="s2">&quot;simple-bracket-holes&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<figure class="align-center" id="id1">
+<a class="reference internal image-reference" href="../_images/simple-bracket-holes_scdoc.png"><img alt="../_images/simple-bracket-holes_scdoc.png" src="../_images/simple-bracket-holes_scdoc.png" style="width: 300pt;" /></a>
+<figcaption>
+<p><span class="caption-text"><strong>CAD geometry imported</strong></span><a class="headerlink" href="#id1" title="Permalink to this image">#</a></p>
+</figcaption>
+</figure>
+<p>Initialize surfer parameters and generate surface mesh on topofaces:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Surface mesh with triangular elements of uniform size</span>
+<span class="n">surfer_params</span> <span class="o">=</span> <span class="n">prime</span><span class="o">.</span><span class="n">SurferParams</span><span class="p">(</span><span class="n">model</span><span class="o">=</span><span class="n">model</span><span class="p">,</span> <span class="n">constant_size</span><span class="o">=</span><span class="mf">1.0</span><span class="p">)</span>
+<span class="n">surfer_result</span> <span class="o">=</span> <span class="n">prime</span><span class="o">.</span><span class="n">Surfer</span><span class="p">(</span><span class="n">model</span><span class="p">)</span><span class="o">.</span><span class="n">mesh_topo_faces</span><span class="p">(</span>
+    <span class="n">part</span><span class="o">.</span><span class="n">id</span><span class="p">,</span> <span class="n">topo_faces</span><span class="o">=</span><span class="n">part</span><span class="o">.</span><span class="n">get_topo_faces</span><span class="p">(),</span> <span class="n">params</span><span class="o">=</span><span class="n">surfer_params</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+<figure class="align-center" id="id2">
+<a class="reference internal image-reference" href="../_images/simple-bracket-holes_mesh3.png"><img alt="../_images/simple-bracket-holes_mesh3.png" src="../_images/simple-bracket-holes_mesh3.png" style="width: 300pt;" /></a>
+<figcaption>
+<p><span class="caption-text"><strong>Surface mesh displayed</strong></span><a class="headerlink" href="#id2" title="Permalink to this image">#</a></p>
+</figcaption>
+</figure>
+</section>
+<section id="remesh-surfaces">
+<h2>Remesh surfaces<a class="headerlink" href="#remesh-surfaces" title="Permalink to this heading">#</a></h2>
+<p>This example shows you to perform these steps:</p>
+<ul class="simple">
+<li><p>Import a faceted geometry (STL) file and visualize the model.</p></li>
+<li><p>Create curvature size control and compute a volumetric size field. (For more information,
+see <a class="reference internal" href="sizing.html#ref-index-sizing"><span class="std std-ref">Sizing</span></a>.)</p></li>
+<li><p>Remesh the STL surface mesh.</p></li>
+</ul>
+<p>Start the PyPrimeMesh client and import the faceted geometry (STL) file:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">ansys.meshing.prime</span> <span class="k">as</span> <span class="nn">prime</span>
+<span class="kn">from</span> <span class="nn">ansys.meshing.prime.graphics</span> <span class="kn">import</span> <span class="n">Graphics</span>
+
+<span class="n">prime_client</span> <span class="o">=</span> <span class="n">prime</span><span class="o">.</span><span class="n">launch_prime</span><span class="p">()</span>
+<span class="n">model</span> <span class="o">=</span> <span class="n">prime_client</span><span class="o">.</span><span class="n">model</span>
+
+<span class="c1"># Import CAD file</span>
+<span class="n">input_file</span> <span class="o">=</span> <span class="sa">r</span><span class="s2">&quot;D:/Examples/simple-bracket-holes.stl&quot;</span>
+<span class="n">file_io</span> <span class="o">=</span> <span class="n">prime</span><span class="o">.</span><span class="n">FileIO</span><span class="p">(</span><span class="n">model</span><span class="p">)</span>
+<span class="n">file_io</span><span class="o">.</span><span class="n">import_cad</span><span class="p">(</span>
+    <span class="n">input_file</span><span class="p">,</span>
+    <span class="n">params</span><span class="o">=</span><span class="n">prime</span><span class="o">.</span><span class="n">ImportCadParams</span><span class="p">(</span><span class="n">model</span><span class="o">=</span><span class="n">model</span><span class="p">,</span> <span class="n">length_unit</span><span class="o">=</span><span class="n">prime</span><span class="o">.</span><span class="n">LengthUnit</span><span class="o">.</span><span class="n">MM</span><span class="p">),</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+<p>Now that the CAD file is imported, display the model using graphics module:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Show model in graphic and get part summary</span>
+<span class="n">display</span> <span class="o">=</span> <span class="n">Graphics</span><span class="p">(</span><span class="n">model</span><span class="p">)</span>
+<span class="n">display</span><span class="p">(</span><span class="n">update</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">part</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">get_part_by_name</span><span class="p">(</span><span class="s2">&quot;simple-bracket-holes&quot;</span><span class="p">)</span>
+<span class="n">part_summary_res</span> <span class="o">=</span> <span class="n">part</span><span class="o">.</span><span class="n">get_summary</span><span class="p">(</span><span class="n">prime</span><span class="o">.</span><span class="n">PartSummaryParams</span><span class="p">(</span><span class="n">model</span><span class="o">=</span><span class="n">model</span><span class="p">))</span>
+</pre></div>
+</div>
+<figure class="align-center" id="id3">
+<a class="reference internal image-reference" href="../_images/simple-bracket-holes_stl.png"><img alt="../_images/simple-bracket-holes_stl.png" src="../_images/simple-bracket-holes_stl.png" style="width: 300pt;" /></a>
+<figcaption>
+<p><span class="caption-text"><strong>Faceted geometry imported</strong></span><a class="headerlink" href="#id3" title="Permalink to this image">#</a></p>
+</figcaption>
+</figure>
+<p>Print the results of part summary:</p>
+<div class="highlight-pycon notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">part_summary_res</span><span class="p">)</span>
+
+<span class="go">Part Name: simple-bracket-holes</span>
+<span class="go">Part ID: 2</span>
+<span class="go">    0 Edge Zonelets</span>
+<span class="go">    1 Face Zonelets</span>
+<span class="go">    0 Cell Zonelets</span>
+
+<span class="go">    0 Edge Zones</span>
+<span class="go">        Edge Zone Name(s) : []</span>
+<span class="go">    0 Face Zones</span>
+<span class="go">        Face Zone Name(s) : []</span>
+<span class="go">    0 Volume Zones</span>
+<span class="go">        Volume Zone Name(s) : []</span>
+
+<span class="go">    0 Label(s)</span>
+<span class="go">        Names: []</span>
+
+<span class="go">    Bounding box (-10 -10 -8.17)</span>
+<span class="go">                 (19.1 23.075 25.52)</span>
+
+<span class="go">    Mesh Summary:</span>
+<span class="go">        1048 Nodes</span>
+<span class="go">        0 Poly Faces</span>
+<span class="go">        0 Quad Faces</span>
+<span class="go">        2124 Tri Faces</span>
+<span class="go">        2124 Faces</span>
+<span class="go">        0 Cells</span>
+</pre></div>
+</div>
+<p>Set the global sizing parameters to initialize size control parameters (with curvature refinement):</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Surface mesh size controls</span>
+<span class="n">model</span><span class="o">.</span><span class="n">set_global_sizing_params</span><span class="p">(</span>
+    <span class="n">prime</span><span class="o">.</span><span class="n">GlobalSizingParams</span><span class="p">(</span><span class="n">model</span><span class="p">,</span> <span class="nb">min</span><span class="o">=</span><span class="mf">0.27</span><span class="p">,</span> <span class="nb">max</span><span class="o">=</span><span class="mf">5.5</span><span class="p">,</span> <span class="n">growth_rate</span><span class="o">=</span><span class="mf">1.2</span><span class="p">)</span>
+<span class="p">)</span>
+<span class="n">size_control</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">control_data</span><span class="o">.</span><span class="n">create_size_control</span><span class="p">(</span><span class="n">prime</span><span class="o">.</span><span class="n">SizingType</span><span class="o">.</span><span class="n">CURVATURE</span><span class="p">)</span>
+<span class="n">size_control</span><span class="o">.</span><span class="n">set_scope</span><span class="p">(</span><span class="n">prime</span><span class="o">.</span><span class="n">ScopeDefinition</span><span class="p">(</span><span class="n">model</span><span class="p">))</span>
+</pre></div>
+</div>
+<p>Compute the volumetric size field based on the size controls:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">size_field</span> <span class="o">=</span> <span class="n">prime</span><span class="o">.</span><span class="n">SizeField</span><span class="p">(</span><span class="n">model</span><span class="p">)</span>
+<span class="n">res</span> <span class="o">=</span> <span class="n">size_field_compute_volumetric</span><span class="p">(</span>
+    <span class="n">size_control_ids</span><span class="o">=</span><span class="p">[</span><span class="n">size_control</span><span class="o">.</span><span class="n">id</span><span class="p">],</span>
+    <span class="n">volumetric_sizefield_params</span><span class="o">=</span><span class="n">prime</span><span class="o">.</span><span class="n">VolumetricSizeFieldComputeParams</span><span class="p">(</span>
+        <span class="n">model</span><span class="p">,</span> <span class="n">enable_multi_threading</span><span class="o">=</span><span class="kc">False</span>
+    <span class="p">),</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+<p>Initialize surfer parameters and generate a surface mesh on face zonelets:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Surface mesh with triangular elements</span>
+<span class="n">surfer_params</span> <span class="o">=</span> <span class="n">prime</span><span class="o">.</span><span class="n">SurferParams</span><span class="p">(</span>
+    <span class="n">model</span><span class="o">=</span><span class="n">model</span><span class="p">,</span> <span class="n">size_field_type</span><span class="o">=</span><span class="n">prime</span><span class="o">.</span><span class="n">SizeFieldType</span><span class="o">.</span><span class="n">VOLUMETRIC</span>
+<span class="p">)</span>
+<span class="n">surfer_result</span> <span class="o">=</span> <span class="n">prime</span><span class="o">.</span><span class="n">Surfer</span><span class="p">(</span><span class="n">model</span><span class="p">)</span><span class="o">.</span><span class="n">remesh_face_zonelets</span><span class="p">(</span>
+    <span class="n">part_id</span><span class="o">=</span><span class="n">part</span><span class="o">.</span><span class="n">id</span><span class="p">,</span>
+    <span class="n">face_zonelets</span><span class="o">=</span><span class="n">part</span><span class="o">.</span><span class="n">get_face_zonelets</span><span class="p">(),</span>
+    <span class="n">edge_zonelets</span><span class="o">=</span><span class="n">part</span><span class="o">.</span><span class="n">get_edge_zonelets</span><span class="p">(),</span>
+    <span class="n">params</span><span class="o">=</span><span class="n">surfer_params</span><span class="p">,</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+<figure class="align-center" id="id4">
+<a class="reference internal image-reference" href="../_images/simple-bracket-holes_mesh1.png"><img alt="../_images/simple-bracket-holes_mesh1.png" src="../_images/simple-bracket-holes_mesh1.png" style="width: 300pt;" /></a>
+<figcaption>
+<p><span class="caption-text"><strong>Surface mesh displayed</strong></span><a class="headerlink" href="#id4" title="Permalink to this image">#</a></p>
+</figcaption>
+</figure>
+<section id="remesh-surface-using-the-lucid-module">
+<h3>Remesh surface using the Lucid module<a class="headerlink" href="#remesh-surface-using-the-lucid-module" title="Permalink to this heading">#</a></h3>
+<p>This code shows how to replicate the preceding surface mesh results by remeshing
+the surface using the Lucid module:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">ansys.meshing.prime</span> <span class="k">as</span> <span class="nn">prime</span>
+
+<span class="n">prime_client</span> <span class="o">=</span> <span class="n">prime</span><span class="o">.</span><span class="n">launch_prime</span><span class="p">()</span>
+<span class="n">model</span> <span class="o">=</span> <span class="n">prime_client</span><span class="o">.</span><span class="n">model</span>
+
+<span class="c1"># Instantiate the Lucid module</span>
+<span class="n">mesh_util</span> <span class="o">=</span> <span class="n">prime</span><span class="o">.</span><span class="n">lucid</span><span class="o">.</span><span class="n">Mesh</span><span class="p">(</span><span class="n">model</span><span class="p">)</span>
+
+<span class="c1"># Import CAD (STL) file</span>
+<span class="n">input_file</span> <span class="o">=</span> <span class="sa">r</span><span class="s2">&quot;D:/Examples/simple-bracket-holes.stl&quot;</span>
+<span class="n">mesh_util</span><span class="o">.</span><span class="n">read</span><span class="p">(</span><span class="n">input_file</span><span class="p">)</span>
+
+<span class="c1"># Surface mesh the geometry with curvature sizing</span>
+<span class="c1"># Set minimum and maximum sizing to use for curvature refinement</span>
+<span class="n">mesh_util</span><span class="o">.</span><span class="n">surface_mesh</span><span class="p">(</span><span class="n">min_size</span><span class="o">=</span><span class="mf">0.27</span><span class="p">,</span> <span class="n">max_size</span><span class="o">=</span><span class="mf">5.5</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+</section>
+</section>
+
+
+                </article>
+              
+              
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> On this page
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#surface-meshing-geometry-topology">Surface meshing geometry/topology</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#remesh-surfaces">Remesh surfaces</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#remesh-surface-using-the-lucid-module">Remesh surface using the Lucid module</a></li>
+</ul>
+</li>
+</ul>
+  </nav></div>
+
+  <div class="sidebar-secondary-item">
+  
+  <div class="tocsection editthispage">
+    <a href="https://github.com/ansys/pyprimemesh/edit/main/doc/source/user_guide/surfer.rst">
+      <i class="fa-solid fa-pencil"></i>
+      
+      
+        
+          Edit on GitHub
+        
+      
+    </a>
+  </div>
+</div>
+
+  <div class="sidebar-secondary-item">
+  <div class="tocsection sourcelink">
+    <a href="../_sources/user_guide/surfer.rst.txt">
+      <i class="fa-solid fa-file-lines"></i> Show Source
+    </a>
+  </div>
+</div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+          </footer>
+        
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../_static/scripts/bootstrap.js?digest=e353d410970836974a52"></script>
+<script src="../_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52"></script>
+
+  <footer class="bd-footer">
+<div class="bd-footer__inner bd-page-width">
+  
+    <div class="footer-items__start">
+      
+        <div class="footer-item">
+  <p class="copyright">
+    
+      © Copyright (c) 2023 ANSYS, Inc. All rights reserved.
+      <br/>
+    
+  </p>
+</div>
+      
+        <div class="footer-item">
+  <p class="sphinx-version">
+    Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 6.2.0.
+    <br/>
+  </p>
+</div>
+      
+    </div>
+  
+  
+    <div class="footer-items__end">
+      
+        <div class="footer-item"><p class="theme-version">
+    Built with the <a href="https://sphinxdocs.ansys.com/version/stable/index.html">Ansys Sphinx Theme</a> 0.9.8.
+    <br>Last updated on <span id="date"></span></br>
+</p>
+<script>
+  var options = { day: 'numeric', month: 'long', year: 'numeric' };
+  var lastModifiedDate = new Date(document.lastModified);
+  var date = lastModifiedDate.toLocaleDateString('en-US', options);
+  document.getElementById("date").innerHTML = date;
+</script></div>
+      
+    </div>
+  
+</div>
+
+  </footer>
+  </body>
+</html>

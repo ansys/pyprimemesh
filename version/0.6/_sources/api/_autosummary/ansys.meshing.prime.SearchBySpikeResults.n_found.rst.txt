@@ -1,0 +1,6 @@
+n\_found
+========
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoproperty:: SearchBySpikeResults.n_found

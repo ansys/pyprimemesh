@@ -1,0 +1,6 @@
+wake\_scale
+===========
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoproperty:: CreateBOIParams.wake_scale

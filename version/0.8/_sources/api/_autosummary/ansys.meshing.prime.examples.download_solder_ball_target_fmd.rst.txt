@@ -1,0 +1,11 @@
+download\_solder\_ball\_target\_fmd
+===================================
+
+.. currentmodule:: ansys.meshing.prime.examples
+
+.. autofunction:: ansys.meshing.prime.examples.download_solder_ball_target_fmd
+
+.. minigallery::
+    :add-heading: Examples using download_solder_ball_target_fmd
+
+    ansys.meshing.prime.examples.download_solder_ball_target_fmd

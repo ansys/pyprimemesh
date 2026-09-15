@@ -1,0 +1,11 @@
+conjugate
+=========
+
+.. currentmodule:: ansys.meshing.prime
+
+.. automethod:: ansys.meshing.prime.CreateVolumeZonesType.conjugate
+
+.. minigallery::
+   :add-heading: Examples using CreateVolumeZonesType.conjugate
+
+   ansys.meshing.prime.CreateVolumeZonesType.conjugate

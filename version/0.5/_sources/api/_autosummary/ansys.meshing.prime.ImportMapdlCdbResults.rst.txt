@@ -1,0 +1,34 @@
+.. vale off
+
+ImportMapdlCdbResults
+=====================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoclass:: ImportMapdlCdbResults
+   
+   
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+      :toctree:
+   
+      
+      ImportMapdlCdbResults.print_default
+      ImportMapdlCdbResults.set_default
+   
+   
+
+   
+   
+   .. rubric:: Attributes
+
+   .. autosummary::
+      :toctree:
+   
+      ImportMapdlCdbResults.error_code
+   
+   
+
+.. vale on

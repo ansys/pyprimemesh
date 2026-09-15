@@ -1,0 +1,11 @@
+set\_color\_by\_type
+====================
+
+.. currentmodule:: ansys.meshing.prime.graphics
+
+.. automethod:: ansys.meshing.prime.graphics.PrimePlotter.set_color_by_type
+
+.. minigallery::
+   :add-heading: Examples using PrimePlotter.set_color_by_type
+
+   ansys.meshing.prime.graphics.PrimePlotter.set_color_by_type

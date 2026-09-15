@@ -1,0 +1,6 @@
+﻿IGA\_QUADTOSPLINEBASISFAILED
+============================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoattribute:: ErrorCode.IGA_QUADTOSPLINEBASISFAILED

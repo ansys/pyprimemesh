@@ -1,0 +1,51 @@
+.. vale off
+
+SurferParams
+============
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoclass:: SurferParams
+   
+   
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+      :toctree:
+   
+      
+      SurferParams.print_default
+      SurferParams.set_default
+   
+   
+
+   
+   
+   .. rubric:: Attributes
+
+   .. autosummary::
+      :toctree:
+   
+      SurferParams.advanced_surfer_setup
+      SurferParams.avoid_corner_triangles
+      SurferParams.check_non_manifolds
+      SurferParams.constant_size
+      SurferParams.enable_multi_threading
+      SurferParams.generate_quads
+      SurferParams.growth_rate
+      SurferParams.max_angle
+      SurferParams.max_size
+      SurferParams.min_size
+      SurferParams.project_on_geometry
+      SurferParams.size_field_type
+      SurferParams.smooth_size_transition
+   
+   
+
+.. minigallery::
+    :add-heading: Examples using SurferParams
+
+    ansys.meshing.prime.SurferParams
+
+.. vale on

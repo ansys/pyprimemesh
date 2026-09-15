@@ -1,0 +1,34 @@
+.. vale off
+
+DeleteUnwettedResult
+====================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoclass:: DeleteUnwettedResult
+   
+   
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+      :toctree:
+   
+      
+      DeleteUnwettedResult.print_default
+      DeleteUnwettedResult.set_default
+   
+   
+
+   
+   
+   .. rubric:: Attributes
+
+   .. autosummary::
+      :toctree:
+   
+      DeleteUnwettedResult.error_code
+   
+   
+
+.. vale on

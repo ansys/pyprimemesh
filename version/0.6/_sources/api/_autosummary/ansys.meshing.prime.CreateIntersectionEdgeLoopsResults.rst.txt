@@ -1,0 +1,36 @@
+.. vale off
+
+CreateIntersectionEdgeLoopsResults
+==================================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoclass:: CreateIntersectionEdgeLoopsResults
+   
+   
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+      :toctree:
+   
+      
+      CreateIntersectionEdgeLoopsResults.print_default
+      CreateIntersectionEdgeLoopsResults.set_default
+   
+   
+
+   
+   
+   .. rubric:: Attributes
+
+   .. autosummary::
+      :toctree:
+   
+      CreateIntersectionEdgeLoopsResults.error_code
+      CreateIntersectionEdgeLoopsResults.extracted_ids
+      CreateIntersectionEdgeLoopsResults.processing_time
+   
+   
+
+.. vale on

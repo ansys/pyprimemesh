@@ -1,0 +1,27 @@
+.. vale off
+
+VolumeSweeper
+=============
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoclass:: VolumeSweeper
+   
+   
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+      :toctree:
+   
+      
+      VolumeSweeper.create_base_face
+      VolumeSweeper.stack_base_face
+   
+   
+
+   
+   
+   
+
+.. vale on

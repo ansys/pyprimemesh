@@ -1,0 +1,6 @@
+﻿feature\_type
+=============
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoproperty:: CollapseParams.feature_type

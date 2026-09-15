@@ -1,0 +1,11 @@
+bit\_count
+==========
+
+.. currentmodule:: ansys.meshing.prime
+
+.. automethod:: ansys.meshing.prime.AdvancedSurferSetup.bit_count
+
+.. minigallery::
+   :add-heading: Examples using AdvancedSurferSetup.bit_count
+
+   ansys.meshing.prime.AdvancedSurferSetup.bit_count

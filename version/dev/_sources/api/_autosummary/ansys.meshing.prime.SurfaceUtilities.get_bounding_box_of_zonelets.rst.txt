@@ -1,0 +1,11 @@
+get\_bounding\_box\_of\_zonelets
+================================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. automethod:: ansys.meshing.prime.SurfaceUtilities.get_bounding_box_of_zonelets
+
+.. minigallery::
+   :add-heading: Examples using SurfaceUtilities.get_bounding_box_of_zonelets
+
+   ansys.meshing.prime.SurfaceUtilities.get_bounding_box_of_zonelets

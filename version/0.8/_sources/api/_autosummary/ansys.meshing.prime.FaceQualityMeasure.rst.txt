@@ -1,0 +1,50 @@
+.. vale off
+
+FaceQualityMeasure
+==================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoclass:: FaceQualityMeasure
+   
+   
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+      :toctree:
+   
+      FaceQualityMeasure.conjugate
+      FaceQualityMeasure.bit_length
+      FaceQualityMeasure.bit_count
+      FaceQualityMeasure.to_bytes
+      FaceQualityMeasure.from_bytes
+      FaceQualityMeasure.as_integer_ratio
+   
+   
+
+   
+   
+   .. rubric:: Attributes
+
+   .. autosummary::
+      :toctree:
+   
+      FaceQualityMeasure.real
+      FaceQualityMeasure.imag
+      FaceQualityMeasure.numerator
+      FaceQualityMeasure.denominator
+      FaceQualityMeasure.SKEWNESS
+      FaceQualityMeasure.SIZECHANGE
+      FaceQualityMeasure.ASPECTRATIO
+      FaceQualityMeasure.WARP
+      FaceQualityMeasure.ELEMENTQUALITY
+   
+   
+
+.. minigallery::
+    :add-heading: Examples using FaceQualityMeasure
+
+    ansys.meshing.prime.FaceQualityMeasure
+
+.. vale on

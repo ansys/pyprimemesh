@@ -1,0 +1,11 @@
+print\_default
+==============
+
+.. currentmodule:: ansys.meshing.prime
+
+.. automethod:: ansys.meshing.prime.MergeVolumesParams.print_default
+
+.. minigallery::
+   :add-heading: Examples using MergeVolumesParams.print_default
+
+   ansys.meshing.prime.MergeVolumesParams.print_default

@@ -1,0 +1,6 @@
+﻿OFFSETSURFACE
+=============
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoattribute:: BOIType.OFFSETSURFACE

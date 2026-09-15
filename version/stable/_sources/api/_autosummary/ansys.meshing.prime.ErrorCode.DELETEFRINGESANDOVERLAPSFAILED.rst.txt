@@ -1,0 +1,6 @@
+DELETEFRINGESANDOVERLAPSFAILED
+==============================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoattribute:: ErrorCode.DELETEFRINGESANDOVERLAPSFAILED

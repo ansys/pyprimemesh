@@ -1,0 +1,11 @@
+get\_edge\_zones
+================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. automethod:: ansys.meshing.prime.Part.get_edge_zones
+
+.. minigallery::
+   :add-heading: Examples using Part.get_edge_zones
+
+   ansys.meshing.prime.Part.get_edge_zones

@@ -1,0 +1,6 @@
+gap\_size
+=========
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoproperty:: WrapperCloseGapsParams.gap_size

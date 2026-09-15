@@ -1,0 +1,6 @@
+﻿STACKER\_INVALIDPARAMS
+======================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoattribute:: ErrorCode.STACKER_INVALIDPARAMS

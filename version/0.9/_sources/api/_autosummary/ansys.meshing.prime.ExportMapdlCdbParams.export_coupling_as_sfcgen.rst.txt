@@ -1,0 +1,6 @@
+export\_coupling\_as\_sfcgen
+============================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoproperty:: ExportMapdlCdbParams.export_coupling_as_sfcgen

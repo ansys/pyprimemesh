@@ -1,0 +1,6 @@
+CURVATUREBASED
+==============
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoattribute:: ShellBLOffsetType.CURVATUREBASED
