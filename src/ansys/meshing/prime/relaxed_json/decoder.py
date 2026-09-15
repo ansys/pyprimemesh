@@ -22,7 +22,7 @@
 
 """Implementation of Relaxed JSON Decoder."""
 import re
-from typing import Any, Callable, Dict, Tuple
+from typing import Any, Callable, Dict, Tuple, Union
 
 import numpy as np
 
@@ -50,16 +50,17 @@ class JSONDecodeError(ValueError):
     ----------
     msg : str
         Error message
-    document : bytesorbytearray
+    document : str, bytes, or bytearray
         Document where the error is happening.
     pos : int
         Position where the error is happening.
     """
 
-    def __init__(self, msg: str, document: bytes or bytearray, pos: int):
+    def __init__(self, msg: str, document: Union[str, bytes, bytearray], pos: int):
         """Initialize error handler."""
-        lineno = document.count(b'\n', 0, pos) + 1
-        colno = pos - document.rfind(b'\n', 0, pos)
+        newline = b'\n' if isinstance(document, (bytes, bytearray)) else '\n'
+        lineno = document.count(newline, 0, pos) + 1
+        colno = pos - document.rfind(newline, 0, pos)
         error_msg = f"{msg}: line {lineno} column {colno} (char {pos})"
         ValueError.__init__(self, error_msg)
         self.error_msg = error_msg
@@ -198,7 +199,7 @@ def decode_bytes(s, end):
     end += size
 
     if s[end : end + 1] != b'>':
-        raise JSONDecodeError("Unterminated bytes object starting at", str, begin) from None
+        raise JSONDecodeError("Unterminated bytes object starting at", s, begin) from None
     end += 1  # '>' character
 
     dtype = TYPEMAP.get(type, None)
