@@ -155,12 +155,8 @@ def _get_face_and_edge_connectivity(mesh_info, part_ids, params):
             part_ids[start : start + CONNECTIVITY_PART_CHUNK_SIZE], params
         )
         combined.part_ids.extend(result.part_ids)
-        combined.face_connectivity_result_per_part.extend(
-            result.face_connectivity_result_per_part
-        )
-        combined.edge_connectivity_result_per_part.extend(
-            result.edge_connectivity_result_per_part
-        )
+        combined.face_connectivity_result_per_part.extend(result.face_connectivity_result_per_part)
+        combined.edge_connectivity_result_per_part.extend(result.edge_connectivity_result_per_part)
     return combined
 
 
