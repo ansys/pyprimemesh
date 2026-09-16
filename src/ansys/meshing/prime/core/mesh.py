@@ -25,6 +25,7 @@ import enum
 import weakref
 from collections import defaultdict
 from dataclasses import dataclass, field
+from types import SimpleNamespace
 from typing import Dict, Iterable, List, Mapping, Optional, Sequence, Tuple, Union
 
 import numpy as np
@@ -134,6 +135,29 @@ FACE_DISPLAY_MESH_TYPES = (
     DisplayMeshType.TOPOFACE,
     DisplayMeshType.FACEZONELET,
 )
+
+CONNECTIVITY_PART_CHUNK_SIZE = 24
+
+
+def _get_face_and_edge_connectivity(mesh_info, part_ids, params):
+    """Fetch render connectivity in bounded requests and combine the results."""
+    part_ids = list(part_ids)
+    if len(part_ids) <= CONNECTIVITY_PART_CHUNK_SIZE:
+        return mesh_info.get_face_and_edge_connectivity(part_ids, params)
+
+    combined = SimpleNamespace(
+        part_ids=[],
+        face_connectivity_result_per_part=[],
+        edge_connectivity_result_per_part=[],
+    )
+    for start in range(0, len(part_ids), CONNECTIVITY_PART_CHUNK_SIZE):
+        result = mesh_info.get_face_and_edge_connectivity(
+            part_ids[start : start + CONNECTIVITY_PART_CHUNK_SIZE], params
+        )
+        combined.part_ids.extend(result.part_ids)
+        combined.face_connectivity_result_per_part.extend(result.face_connectivity_result_per_part)
+        combined.edge_connectivity_result_per_part.extend(result.edge_connectivity_result_per_part)
+    return combined
 
 
 def selectable_display_types(target: SelectionTarget) -> tuple:
@@ -650,6 +674,38 @@ def _facet_edge_lines(
     cells = np.full((segments.shape[0], 3), 2, dtype=np.int64)
     cells[:, 1:] = segments
     return cells, int(segments.shape[0])
+
+
+def _triangulate_polygon_block(
+    vertices: np.ndarray,
+    block: np.ndarray,
+) -> "tuple[np.ndarray, np.ndarray, int]":
+    """Triangulate a face block holding polygons wider than a quad.
+
+    Fanning a polygon from its first node covers a convex facet exactly, but a
+    quadratic facet curves inwards wherever the surface is concave, and a fan then
+    doubles back over part of the facet while leaving the rest bare. VTK triangulates
+    the polygon properly, so the cost of a per-entity ``PolyData`` is paid only by the
+    entities that actually carry wide polygons.
+
+    Parameters
+    ----------
+    vertices : np.ndarray
+        Points the block indexes into.
+    block : np.ndarray
+        VTK polygon connectivity of one entity.
+
+    Returns
+    -------
+    tuple[np.ndarray, np.ndarray, int]
+        Points, triangle connectivity, and the number of triangles.
+    """
+    surface = pv.PolyData(vertices, block).triangulate(progress_bar=False)
+    return (
+        np.asarray(surface.points),
+        np.asarray(surface.faces, dtype=np.int64),
+        int(surface.n_cells),
+    )
 
 
 def _polydata_polygon_piece(poly: "pv.PolyData", entity_id: int):
@@ -1982,8 +2038,8 @@ class Mesh(MeshInfo):
             Dictionary with the polydata objects.
         """
         with prime.numpy_array_optimization_enabled():
-            facet_result = self.get_face_and_edge_connectivity(
-                part_ids, FaceAndEdgeConnectivityParams(model=self._model)
+            facet_result = _get_face_and_edge_connectivity(
+                self, part_ids, FaceAndEdgeConnectivityParams(model=self._model)
             )
         self._parts_polydata = {}
         for i, part_id in enumerate(facet_result.part_ids):
@@ -2111,8 +2167,10 @@ class Mesh(MeshInfo):
             DisplayMeshType,
             List[Tuple[np.ndarray, np.ndarray, int, DisplayMeshInfo]],
         ] = defaultdict(list)
-        slow_entries = []
-        fast_outline_entries = []
+        grouped_raw_outlines: Dict[
+            DisplayMeshType,
+            List[Tuple[np.ndarray, np.ndarray, int, DisplayMeshInfo]],
+        ] = defaultdict(list)
         grouped_raw_edges: Dict[
             DisplayMeshType,
             List[Tuple[np.ndarray, np.ndarray, int, DisplayMeshInfo]],
@@ -2161,16 +2219,19 @@ class Mesh(MeshInfo):
                     has_mesh=has_mesh,
                 )
 
-                if has_mesh and max_size > 4:
-                    slow_entries.append(self.get_face_polydata(part_id, face_res, face_index))
-                    continue
-
-                grouped_raw[display_mesh_type].append((vertices, block, n_cells, info))
                 if has_mesh:
-                    mesh = _assemble_entity_mesh(vertices, block, n_cells, info, 0, lines=False)
-                    if mesh is not None:
-                        fast_outline_entries.append((MeshObjectPlot(part, mesh), info))
+                    if max_size > 4:
+                        render = _triangulate_polygon_block(vertices, block)
+                    else:
+                        render = (vertices, block, n_cells)
+                    grouped_raw[display_mesh_type].append((*render, info))
+                    lines, n_lines = _facet_edge_lines(block, n_cells, len(vertices))
+                    if n_lines:
+                        grouped_raw_outlines[display_mesh_type].append(
+                            (vertices, lines, n_lines, info)
+                        )
                 else:
+                    grouped_raw[display_mesh_type].append((vertices, block, n_cells, info))
                     # Unmeshed faces contribute their facets, so the show-edges button
                     # can reveal the tessellation approximating the CAD surface.
                     lines, n_lines = _facet_edge_lines(block, n_cells, len(vertices))
@@ -2190,33 +2251,24 @@ class Mesh(MeshInfo):
                     grouped_raw_edges[piece[3].display_mesh_type].append(piece)
                     grouped_edge_colors[piece[3].display_mesh_type].append(color)
 
-        face_batches = _build_batches_from_raw_faces(grouped_raw)
-        if slow_entries:
-            slow_batches = build_face_render_batches(
-                entry for entry in slow_entries if entry is not None
-            )
-            face_batches = _merge_render_batch_dicts(face_batches, slow_batches)
-
-        outline_entries = [
-            entry for entry in slow_entries if entry is not None
-        ] + fast_outline_entries
-
-        facet_batches: Dict[DisplayMeshType, RenderBatch] = {}
-        for display_mesh_type, raw_pieces in grouped_raw_facets.items():
-            batch = _build_batch_from_raw(
-                raw_pieces,
-                display_mesh_type,
-                pickable=False,
-                lines=True,
-            )
-            if batch is not None:
-                facet_batches[display_mesh_type] = batch
+        def build_outline_batches(grouped):
+            batches = {}
+            for display_mesh_type, raw_pieces in grouped.items():
+                batch = _build_batch_from_raw(
+                    raw_pieces,
+                    display_mesh_type,
+                    pickable=False,
+                    lines=True,
+                )
+                if batch is not None:
+                    batches[display_mesh_type] = batch
+            return batches
 
         return {
-            "faces": face_batches,
+            "faces": _build_batches_from_raw_faces(grouped_raw),
             "edges": _build_batches_from_raw_edges(grouped_raw_edges, grouped_edge_colors),
-            "element_edges": build_element_edge_batches(outline_entries, meshed=True),
-            "facet_edges": facet_batches,
+            "element_edges": build_outline_batches(grouped_raw_outlines),
+            "facet_edges": build_outline_batches(grouped_raw_facets),
         }
 
     def build_render_data(
@@ -2255,8 +2307,8 @@ class Mesh(MeshInfo):
             return self._model_render_data
 
         with prime.numpy_array_optimization_enabled():
-            facet_result = self.get_face_and_edge_connectivity(
-                part_ids, FaceAndEdgeConnectivityParams(model=self._model)
+            facet_result = _get_face_and_edge_connectivity(
+                self, part_ids, FaceAndEdgeConnectivityParams(model=self._model)
             )
 
         batches = self._build_model_batches_from_connectivity(facet_result)
@@ -2334,7 +2386,8 @@ class Mesh(MeshInfo):
             return self.get_scoped_render_data(scope, update=True, _refreshed=True)
 
         with prime.numpy_array_optimization_enabled():
-            facet_result = self.get_face_and_edge_connectivity(
+            facet_result = _get_face_and_edge_connectivity(
+                self,
                 list(entity_filters.keys()),
                 FaceAndEdgeConnectivityParams(model=self._model),
             )
@@ -2876,8 +2929,8 @@ class MeshUSD(MeshInfo):
             "ctrlpts": [...], "splinesurf": [...]}
         """
         with prime.numpy_array_optimization_enabled():
-            facet_result = self.get_face_and_edge_connectivity(
-                part_ids, FaceAndEdgeConnectivityParams(model=self._model)
+            facet_result = _get_face_and_edge_connectivity(
+                self, part_ids, FaceAndEdgeConnectivityParams(model=self._model)
             )
         self._parts_usd_geom = {}
         for i, part_id in enumerate(facet_result.part_ids):
