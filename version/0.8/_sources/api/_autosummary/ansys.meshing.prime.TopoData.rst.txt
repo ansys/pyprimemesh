@@ -1,0 +1,46 @@
+.. vale off
+
+TopoData
+========
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoclass:: TopoData
+   
+   
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+      :toctree:
+   
+      
+      TopoData.delete_mesh_on_topo_faces
+      TopoData.get_adjacent_topo_edges_of_topo_edges
+      TopoData.get_adjacent_topo_faces_of_topo_faces
+      TopoData.get_geom_zonelets_of_topo_edges
+      TopoData.get_geom_zonelets_of_topo_faces
+      TopoData.get_mesh_zonelets_of_topo_edges
+      TopoData.get_mesh_zonelets_of_topo_faces
+      TopoData.get_topo_edges_of_topo_faces
+   
+   
+
+   
+   
+   .. rubric:: Attributes
+
+   .. autosummary::
+      :toctree:
+   
+      TopoData.id
+      TopoData.name
+   
+   
+
+.. minigallery::
+    :add-heading: Examples using TopoData
+
+    ansys.meshing.prime.TopoData
+
+.. vale on

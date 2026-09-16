@@ -1,0 +1,11 @@
+set\_edge\_biasing\_params
+==========================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. automethod:: ansys.meshing.prime.MultiZoneControl.set_edge_biasing_params
+
+.. minigallery::
+   :add-heading: Examples using MultiZoneControl.set_edge_biasing_params
+
+   ansys.meshing.prime.MultiZoneControl.set_edge_biasing_params

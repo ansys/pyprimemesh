@@ -1,0 +1,6 @@
+export\_tie\_as\_cntgen
+=======================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoproperty:: ExportMapdlCdbParams.export_tie_as_cntgen

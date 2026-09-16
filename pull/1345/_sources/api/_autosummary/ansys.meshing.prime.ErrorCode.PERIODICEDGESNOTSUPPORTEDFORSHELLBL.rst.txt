@@ -1,0 +1,6 @@
+PERIODICEDGESNOTSUPPORTEDFORSHELLBL
+===================================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoattribute:: ErrorCode.PERIODICEDGESNOTSUPPORTEDFORSHELLBL

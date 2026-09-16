@@ -1,0 +1,6 @@
+thin\_volume\_controls
+======================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoproperty:: ControlData.thin_volume_controls

@@ -1,0 +1,6 @@
+﻿INVALIDLASTASPECTRATIO
+======================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoattribute:: ErrorCode.INVALIDLASTASPECTRATIO

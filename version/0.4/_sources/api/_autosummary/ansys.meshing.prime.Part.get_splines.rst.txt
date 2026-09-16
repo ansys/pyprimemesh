@@ -1,0 +1,6 @@
+﻿get\_splines
+============
+
+.. currentmodule:: ansys.meshing.prime
+
+.. automethod:: Part.get_splines

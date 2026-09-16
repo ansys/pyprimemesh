@@ -1,0 +1,27 @@
+.. vale off
+
+FuseOption
+==========
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoclass:: FuseOption
+   
+   
+   
+   
+
+   
+   
+   .. rubric:: Attributes
+
+   .. autosummary::
+      :toctree:
+   
+      FuseOption.NONE
+      FuseOption.TRIMONESIDE
+      FuseOption.TRIMTWOSIDES
+   
+   
+
+.. vale on

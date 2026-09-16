@@ -1,0 +1,6 @@
+reverse\_face\_normal
+=====================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoproperty:: AddThicknessParams.reverse_face_normal

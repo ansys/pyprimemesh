@@ -1,0 +1,11 @@
+print\_default
+==============
+
+.. currentmodule:: ansys.meshing.prime
+
+.. automethod:: ansys.meshing.prime.FaceConnectivityResults.print_default
+
+.. minigallery::
+   :add-heading: Examples using FaceConnectivityResults.print_default
+
+   ansys.meshing.prime.FaceConnectivityResults.print_default

@@ -1,0 +1,11 @@
+get\_params
+===========
+
+.. currentmodule:: ansys.meshing.prime
+
+.. automethod:: ansys.meshing.prime.VolumeControl.get_params
+
+.. minigallery::
+   :add-heading: Examples using VolumeControl.get_params
+
+   ansys.meshing.prime.VolumeControl.get_params

@@ -1,0 +1,35 @@
+.. vale off
+
+ScaffolderMergeResults
+======================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoclass:: ScaffolderMergeResults
+   
+   
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+      :toctree:
+   
+      
+      ScaffolderMergeResults.print_default
+      ScaffolderMergeResults.set_default
+   
+   
+
+   
+   
+   .. rubric:: Attributes
+
+   .. autosummary::
+      :toctree:
+   
+      ScaffolderMergeResults.error_code
+      ScaffolderMergeResults.n_merged
+   
+   
+
+.. vale on

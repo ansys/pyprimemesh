@@ -1,0 +1,6 @@
+TET
+===
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoattribute:: VolumeFillType.TET

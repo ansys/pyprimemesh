@@ -1,0 +1,6 @@
+corner\_angle
+=============
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoproperty:: QuadToSplineParams.corner_angle

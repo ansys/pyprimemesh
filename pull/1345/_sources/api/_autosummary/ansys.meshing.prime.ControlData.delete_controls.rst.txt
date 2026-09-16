@@ -1,0 +1,11 @@
+delete\_controls
+================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. automethod:: ansys.meshing.prime.ControlData.delete_controls
+
+.. minigallery::
+   :add-heading: Examples using ControlData.delete_controls
+
+   ansys.meshing.prime.ControlData.delete_controls

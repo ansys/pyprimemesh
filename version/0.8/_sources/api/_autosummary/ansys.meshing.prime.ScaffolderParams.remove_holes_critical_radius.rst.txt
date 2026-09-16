@@ -1,0 +1,6 @@
+remove\_holes\_critical\_radius
+===============================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoproperty:: ScaffolderParams.remove_holes_critical_radius

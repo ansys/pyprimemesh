@@ -1,0 +1,11 @@
+set\_show\_edges
+================
+
+.. currentmodule:: ansys.meshing.prime.graphics
+
+.. automethod:: ansys.meshing.prime.graphics.PrimePlotter.set_show_edges
+
+.. minigallery::
+   :add-heading: Examples using PrimePlotter.set_show_edges
+
+   ansys.meshing.prime.graphics.PrimePlotter.set_show_edges

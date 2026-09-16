@@ -1,0 +1,11 @@
+create\_shell\_bl\_using\_controls
+==================================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. automethod:: ansys.meshing.prime.Surfer.create_shell_bl_using_controls
+
+.. minigallery::
+   :add-heading: Examples using Surfer.create_shell_bl_using_controls
+
+   ansys.meshing.prime.Surfer.create_shell_bl_using_controls

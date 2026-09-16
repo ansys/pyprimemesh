@@ -1,0 +1,6 @@
+n\_topo\_faces
+==============
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoproperty:: PartSummaryResults.n_topo_faces

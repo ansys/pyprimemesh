@@ -1,0 +1,23 @@
+DeleteVolumesParams
+===================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoclass:: DeleteVolumesParams
+   
+   
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+      :toctree:
+   
+      
+      DeleteVolumesParams.print_default
+      DeleteVolumesParams.set_default
+   
+   
+
+   
+   
+   

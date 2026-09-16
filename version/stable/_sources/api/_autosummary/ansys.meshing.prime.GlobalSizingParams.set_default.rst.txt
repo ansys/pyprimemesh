@@ -1,0 +1,11 @@
+set\_default
+============
+
+.. currentmodule:: ansys.meshing.prime
+
+.. automethod:: ansys.meshing.prime.GlobalSizingParams.set_default
+
+.. minigallery::
+   :add-heading: Examples using GlobalSizingParams.set_default
+
+   ansys.meshing.prime.GlobalSizingParams.set_default

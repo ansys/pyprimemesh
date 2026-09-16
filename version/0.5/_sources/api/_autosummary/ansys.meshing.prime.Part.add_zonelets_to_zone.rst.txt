@@ -1,0 +1,6 @@
+add\_zonelets\_to\_zone
+=======================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. automethod:: Part.add_zonelets_to_zone

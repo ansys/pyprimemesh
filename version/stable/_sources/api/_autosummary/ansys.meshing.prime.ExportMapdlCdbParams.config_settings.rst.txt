@@ -1,0 +1,6 @@
+config\_settings
+================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoproperty:: ExportMapdlCdbParams.config_settings

@@ -1,0 +1,6 @@
+AUTOQUADMESHER\_NEGATIVEINPUTPARAMETER
+======================================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoattribute:: ErrorCode.AUTOQUADMESHER_NEGATIVEINPUTPARAMETER

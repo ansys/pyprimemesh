@@ -1,0 +1,32 @@
+.. vale off
+
+SearchBySelfIntersectionParams
+==============================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoclass:: SearchBySelfIntersectionParams
+   
+   
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+      :toctree:
+   
+      
+      SearchBySelfIntersectionParams.print_default
+      SearchBySelfIntersectionParams.set_default
+   
+   
+
+   
+   
+   
+
+.. minigallery::
+    :add-heading: Examples using SearchBySelfIntersectionParams
+
+    ansys.meshing.prime.SearchBySelfIntersectionParams
+
+.. vale on

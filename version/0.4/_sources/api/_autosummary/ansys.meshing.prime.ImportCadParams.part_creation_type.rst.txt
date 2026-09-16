@@ -1,0 +1,6 @@
+﻿part\_creation\_type
+====================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoproperty:: ImportCadParams.part_creation_type

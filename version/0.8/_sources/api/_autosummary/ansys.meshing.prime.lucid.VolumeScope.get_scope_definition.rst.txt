@@ -1,0 +1,11 @@
+get\_scope\_definition
+======================
+
+.. currentmodule:: ansys.meshing.prime.lucid
+
+.. automethod:: ansys.meshing.prime.lucid.VolumeScope.get_scope_definition
+
+.. minigallery::
+   :add-heading: Examples using VolumeScope.get_scope_definition
+
+   ansys.meshing.prime.lucid.VolumeScope.get_scope_definition

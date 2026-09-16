@@ -1,0 +1,50 @@
+.. vale off
+
+MultizonePrismType
+==================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoclass:: MultizonePrismType
+
+   
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+      :toctree:
+   
+      MultizonePrismType.conjugate
+      MultizonePrismType.bit_length
+      MultizonePrismType.bit_count
+      MultizonePrismType.to_bytes
+      MultizonePrismType.from_bytes
+      MultizonePrismType.as_integer_ratio
+      MultizonePrismType.is_integer
+      
+   
+   
+
+   
+   
+   .. rubric:: Attributes
+
+   .. autosummary::
+      :toctree:
+   
+      MultizonePrismType.real
+      MultizonePrismType.imag
+      MultizonePrismType.numerator
+      MultizonePrismType.denominator
+      MultizonePrismType.UNIFORM
+      MultizonePrismType.LASTASPECTRATIO
+      MultizonePrismType.FIRSTASPECTRATIO
+   
+   
+
+.. minigallery::
+    :add-heading: Examples using MultizonePrismType
+
+    ansys.meshing.prime.MultizonePrismType
+
+.. vale on

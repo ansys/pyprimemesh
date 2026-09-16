@@ -1,0 +1,11 @@
+print\_default
+==============
+
+.. currentmodule:: ansys.meshing.prime
+
+.. automethod:: ansys.meshing.prime.WrapperImproveQualityParams.print_default
+
+.. minigallery::
+   :add-heading: Examples using WrapperImproveQualityParams.print_default
+
+   ansys.meshing.prime.WrapperImproveQualityParams.print_default

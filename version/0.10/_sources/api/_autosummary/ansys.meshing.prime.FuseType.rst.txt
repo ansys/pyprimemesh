@@ -1,0 +1,51 @@
+.. vale off
+
+FuseType
+========
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoclass:: FuseType
+
+   
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+      :toctree:
+   
+      FuseType.conjugate
+      FuseType.bit_length
+      FuseType.bit_count
+      FuseType.to_bytes
+      FuseType.from_bytes
+      FuseType.as_integer_ratio
+      FuseType.is_integer
+      
+   
+   
+
+   
+   
+   .. rubric:: Attributes
+
+   .. autosummary::
+      :toctree:
+   
+      FuseType.real
+      FuseType.imag
+      FuseType.numerator
+      FuseType.denominator
+      FuseType.SURFACEONLY
+      FuseType.SURFACEANDEDGES
+      FuseType.EDGESONLY
+      FuseType.FREEEDGESONLY
+   
+   
+
+.. minigallery::
+    :add-heading: Examples using FuseType
+
+    ansys.meshing.prime.FuseType
+
+.. vale on

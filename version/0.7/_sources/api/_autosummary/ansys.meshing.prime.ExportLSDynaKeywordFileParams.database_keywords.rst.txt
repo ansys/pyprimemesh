@@ -1,0 +1,6 @@
+database\_keywords
+==================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoproperty:: ExportLSDynaKeywordFileParams.database_keywords

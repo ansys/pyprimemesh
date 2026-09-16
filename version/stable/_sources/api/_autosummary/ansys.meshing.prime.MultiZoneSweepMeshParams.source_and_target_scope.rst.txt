@@ -1,0 +1,6 @@
+source\_and\_target\_scope
+==========================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoproperty:: MultiZoneSweepMeshParams.source_and_target_scope

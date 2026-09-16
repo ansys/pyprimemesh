@@ -1,0 +1,6 @@
+﻿preserve\_quality
+=================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoproperty:: CollapseParams.preserve_quality

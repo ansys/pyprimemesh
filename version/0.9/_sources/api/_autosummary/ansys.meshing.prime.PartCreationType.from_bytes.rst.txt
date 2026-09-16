@@ -1,0 +1,11 @@
+from\_bytes
+===========
+
+.. currentmodule:: ansys.meshing.prime
+
+.. automethod:: ansys.meshing.prime.PartCreationType.from_bytes
+
+.. minigallery::
+   :add-heading: Examples using PartCreationType.from_bytes
+
+   ansys.meshing.prime.PartCreationType.from_bytes

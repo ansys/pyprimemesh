@@ -1,0 +1,6 @@
+CONSERVATIVE
+============
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoattribute:: ScaffolderRepairMode.CONSERVATIVE

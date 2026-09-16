@@ -1,0 +1,6 @@
+repair\_edges
+=============
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoproperty:: RepairTopologyParams.repair_edges

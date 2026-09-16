@@ -1,0 +1,11 @@
+set\_default
+============
+
+.. currentmodule:: ansys.meshing.prime
+
+.. automethod:: ansys.meshing.prime.TopoFillHoleParams.set_default
+
+.. minigallery::
+   :add-heading: Examples using TopoFillHoleParams.set_default
+
+   ansys.meshing.prime.TopoFillHoleParams.set_default

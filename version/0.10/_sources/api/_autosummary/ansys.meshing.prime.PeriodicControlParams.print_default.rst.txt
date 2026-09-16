@@ -1,0 +1,11 @@
+print\_default
+==============
+
+.. currentmodule:: ansys.meshing.prime
+
+.. automethod:: ansys.meshing.prime.PeriodicControlParams.print_default
+
+.. minigallery::
+   :add-heading: Examples using PeriodicControlParams.print_default
+
+   ansys.meshing.prime.PeriodicControlParams.print_default

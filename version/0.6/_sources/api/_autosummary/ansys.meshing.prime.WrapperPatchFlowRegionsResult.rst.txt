@@ -1,0 +1,37 @@
+.. vale off
+
+WrapperPatchFlowRegionsResult
+=============================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoclass:: WrapperPatchFlowRegionsResult
+   
+   
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+      :toctree:
+   
+      
+      WrapperPatchFlowRegionsResult.print_default
+      WrapperPatchFlowRegionsResult.set_default
+   
+   
+
+   
+   
+   .. rubric:: Attributes
+
+   .. autosummary::
+      :toctree:
+   
+      WrapperPatchFlowRegionsResult.error_code
+      WrapperPatchFlowRegionsResult.id
+      WrapperPatchFlowRegionsResult.name
+      WrapperPatchFlowRegionsResult.warning_codes
+   
+   
+
+.. vale on

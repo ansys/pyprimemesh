@@ -1,0 +1,11 @@
+get\_unstructured\_spline\_solid
+================================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. automethod:: ansys.meshing.prime.Part.get_unstructured_spline_solid
+
+.. minigallery::
+   :add-heading: Examples using Part.get_unstructured_spline_solid
+
+   ansys.meshing.prime.Part.get_unstructured_spline_solid

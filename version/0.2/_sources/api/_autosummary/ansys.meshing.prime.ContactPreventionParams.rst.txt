@@ -1,0 +1,32 @@
+ContactPreventionParams
+=======================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoclass:: ContactPreventionParams
+   
+   
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+      :toctree:
+   
+      
+      ContactPreventionParams.print_default
+      ContactPreventionParams.set_default
+   
+   
+
+   
+   
+   .. rubric:: Attributes
+
+   .. autosummary::
+      :toctree:
+   
+      ContactPreventionParams.size
+      ContactPreventionParams.source_scope
+      ContactPreventionParams.target_scope
+   
+   

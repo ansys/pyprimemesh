@@ -1,0 +1,11 @@
+get\_face\_zonelets
+===================
+
+.. currentmodule:: ansys.meshing.prime.lucid
+
+.. automethod:: ansys.meshing.prime.lucid.SurfaceScope.get_face_zonelets
+
+.. minigallery::
+   :add-heading: Examples using SurfaceScope.get_face_zonelets
+
+   ansys.meshing.prime.lucid.SurfaceScope.get_face_zonelets

@@ -1,0 +1,11 @@
+get\_abaqus\_simulation\_data
+=============================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. automethod:: ansys.meshing.prime.FileIO.get_abaqus_simulation_data
+
+.. minigallery::
+   :add-heading: Examples using FileIO.get_abaqus_simulation_data
+
+   ansys.meshing.prime.FileIO.get_abaqus_simulation_data

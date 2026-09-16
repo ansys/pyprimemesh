@@ -1,0 +1,6 @@
+n\_control\_points\_u
+=====================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoproperty:: UniformSolidSplineCreationParams.n_control_points_u

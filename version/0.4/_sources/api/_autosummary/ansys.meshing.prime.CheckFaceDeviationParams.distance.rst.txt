@@ -1,0 +1,6 @@
+﻿distance
+========
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoproperty:: CheckFaceDeviationParams.distance

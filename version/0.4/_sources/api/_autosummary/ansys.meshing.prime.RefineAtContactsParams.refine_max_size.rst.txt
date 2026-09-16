@@ -1,0 +1,6 @@
+﻿refine\_max\_size
+=================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoproperty:: RefineAtContactsParams.refine_max_size

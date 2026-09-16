@@ -1,0 +1,6 @@
+measure\_name
+=============
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoproperty:: VolumeQualityResultsPart.measure_name

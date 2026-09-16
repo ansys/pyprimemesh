@@ -1,0 +1,6 @@
+VOLUMETRIC
+==========
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoattribute:: SizeFieldType.VOLUMETRIC

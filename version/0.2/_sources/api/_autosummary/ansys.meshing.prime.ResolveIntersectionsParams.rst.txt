@@ -1,0 +1,30 @@
+ResolveIntersectionsParams
+==========================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoclass:: ResolveIntersectionsParams
+   
+   
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+      :toctree:
+   
+      
+      ResolveIntersectionsParams.print_default
+      ResolveIntersectionsParams.set_default
+   
+   
+
+   
+   
+   .. rubric:: Attributes
+
+   .. autosummary::
+      :toctree:
+   
+      ResolveIntersectionsParams.number_of_threads
+   
+   

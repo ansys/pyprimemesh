@@ -1,0 +1,6 @@
+﻿n\_incomplete\_topo\_faces
+==========================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoproperty:: ScaffolderResults.n_incomplete_topo_faces

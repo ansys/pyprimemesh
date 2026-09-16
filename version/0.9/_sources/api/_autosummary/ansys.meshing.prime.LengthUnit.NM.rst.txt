@@ -1,0 +1,6 @@
+NM
+==
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoattribute:: LengthUnit.NM

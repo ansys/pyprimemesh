@@ -1,0 +1,6 @@
+dump\_mesh
+==========
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoproperty:: FuseParams.dump_mesh

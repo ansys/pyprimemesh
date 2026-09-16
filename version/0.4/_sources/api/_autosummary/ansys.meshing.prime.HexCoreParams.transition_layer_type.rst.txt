@@ -1,0 +1,6 @@
+﻿transition\_layer\_type
+=======================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoproperty:: HexCoreParams.transition_layer_type

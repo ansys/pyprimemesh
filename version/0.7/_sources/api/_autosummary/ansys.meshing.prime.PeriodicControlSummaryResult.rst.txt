@@ -1,0 +1,39 @@
+.. vale off
+
+PeriodicControlSummaryResult
+============================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoclass:: PeriodicControlSummaryResult
+   
+   
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+      :toctree:
+   
+      
+      PeriodicControlSummaryResult.print_default
+      PeriodicControlSummaryResult.set_default
+   
+   
+
+   
+   
+   .. rubric:: Attributes
+
+   .. autosummary::
+      :toctree:
+   
+      PeriodicControlSummaryResult.message
+   
+   
+
+.. minigallery::
+    :add-heading: Examples using PeriodicControlSummaryResult
+
+    ansys.meshing.prime.PeriodicControlSummaryResult
+
+.. vale on

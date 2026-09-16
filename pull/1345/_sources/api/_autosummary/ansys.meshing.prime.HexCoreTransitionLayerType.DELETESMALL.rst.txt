@@ -1,0 +1,6 @@
+DELETESMALL
+===========
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoattribute:: HexCoreTransitionLayerType.DELETESMALL

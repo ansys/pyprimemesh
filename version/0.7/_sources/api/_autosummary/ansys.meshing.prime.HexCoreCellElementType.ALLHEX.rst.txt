@@ -1,0 +1,6 @@
+ALLHEX
+======
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoattribute:: HexCoreCellElementType.ALLHEX

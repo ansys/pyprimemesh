@@ -1,0 +1,6 @@
+get\_scope
+==========
+
+.. currentmodule:: ansys.meshing.prime
+
+.. automethod:: SizeControl.get_scope

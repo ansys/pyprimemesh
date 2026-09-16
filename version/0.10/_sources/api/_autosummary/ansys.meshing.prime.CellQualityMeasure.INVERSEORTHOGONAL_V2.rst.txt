@@ -1,0 +1,6 @@
+INVERSEORTHOGONAL\_V2
+=====================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoattribute:: CellQualityMeasure.INVERSEORTHOGONAL_V2

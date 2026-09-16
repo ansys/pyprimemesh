@@ -1,0 +1,42 @@
+.. vale off
+
+DetectNonCircularHolesParams
+============================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoclass:: DetectNonCircularHolesParams
+   
+   
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+      :toctree:
+   
+      
+      DetectNonCircularHolesParams.print_default
+      DetectNonCircularHolesParams.set_default
+   
+   
+
+   
+   
+   .. rubric:: Attributes
+
+   .. autosummary::
+      :toctree:
+   
+      DetectNonCircularHolesParams.allow_curved_topo_faces
+      DetectNonCircularHolesParams.max_hole_length
+      DetectNonCircularHolesParams.merge_edge_allow_self_close
+      DetectNonCircularHolesParams.min_hole_length
+   
+   
+
+.. minigallery::
+    :add-heading: Examples using DetectNonCircularHolesParams
+
+    ansys.meshing.prime.DetectNonCircularHolesParams
+
+.. vale on

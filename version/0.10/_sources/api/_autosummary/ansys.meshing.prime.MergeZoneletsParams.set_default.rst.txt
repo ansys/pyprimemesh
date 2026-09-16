@@ -1,0 +1,11 @@
+set\_default
+============
+
+.. currentmodule:: ansys.meshing.prime
+
+.. automethod:: ansys.meshing.prime.MergeZoneletsParams.set_default
+
+.. minigallery::
+   :add-heading: Examples using MergeZoneletsParams.set_default
+
+   ansys.meshing.prime.MergeZoneletsParams.set_default

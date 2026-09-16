@@ -1,0 +1,6 @@
+﻿set\_suggested\_zone\_name
+==========================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. automethod:: Model.set_suggested_zone_name

@@ -1,0 +1,24 @@
+CellQualityMeasure
+==================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoclass:: CellQualityMeasure
+   
+   
+   
+   
+
+   
+   
+   .. rubric:: Attributes
+
+   .. autosummary::
+      :toctree:
+   
+      CellQualityMeasure.SKEWNESS
+      CellQualityMeasure.ASPECTRATIO
+      CellQualityMeasure.FLUENTASPECTRATIO
+      CellQualityMeasure.ELEMENTQUALITY
+   
+   

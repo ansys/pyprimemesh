@@ -1,0 +1,11 @@
+conjugate
+=========
+
+.. currentmodule:: ansys.meshing.prime
+
+.. automethod:: ansys.meshing.prime.BodyQueryType.conjugate
+
+.. minigallery::
+   :add-heading: Examples using BodyQueryType.conjugate
+
+   ansys.meshing.prime.BodyQueryType.conjugate

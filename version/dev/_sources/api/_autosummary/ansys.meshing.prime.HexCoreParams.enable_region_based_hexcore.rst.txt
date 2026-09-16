@@ -1,0 +1,6 @@
+enable\_region\_based\_hexcore
+==============================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoproperty:: HexCoreParams.enable_region_based_hexcore

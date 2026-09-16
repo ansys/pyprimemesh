@@ -1,0 +1,6 @@
+﻿topo\_data
+==========
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoproperty:: Model.topo_data

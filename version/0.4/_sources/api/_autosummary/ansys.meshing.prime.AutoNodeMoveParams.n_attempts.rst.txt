@@ -1,0 +1,6 @@
+﻿n\_attempts
+===========
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoproperty:: AutoNodeMoveParams.n_attempts

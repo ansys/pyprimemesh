@@ -1,0 +1,34 @@
+.. vale off
+
+CopyZoneletsParams
+==================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoclass:: CopyZoneletsParams
+   
+   
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+      :toctree:
+   
+      
+      CopyZoneletsParams.print_default
+      CopyZoneletsParams.set_default
+   
+   
+
+   
+   
+   .. rubric:: Attributes
+
+   .. autosummary::
+      :toctree:
+   
+      CopyZoneletsParams.copy_zones
+   
+   
+
+.. vale on

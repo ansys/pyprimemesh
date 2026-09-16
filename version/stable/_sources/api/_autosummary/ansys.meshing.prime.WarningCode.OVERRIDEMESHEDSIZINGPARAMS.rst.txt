@@ -1,0 +1,6 @@
+OVERRIDEMESHEDSIZINGPARAMS
+==========================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoattribute:: WarningCode.OVERRIDEMESHEDSIZINGPARAMS

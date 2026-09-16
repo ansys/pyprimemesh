@@ -1,0 +1,30 @@
+MeshedSizingParams
+==================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoclass:: MeshedSizingParams
+   
+   
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+      :toctree:
+   
+      
+      MeshedSizingParams.print_default
+      MeshedSizingParams.set_default
+   
+   
+
+   
+   
+   .. rubric:: Attributes
+
+   .. autosummary::
+      :toctree:
+   
+      MeshedSizingParams.growth_rate
+   
+   

@@ -1,0 +1,11 @@
+print\_default
+==============
+
+.. currentmodule:: ansys.meshing.prime
+
+.. automethod:: ansys.meshing.prime.CollapseParams.print_default
+
+.. minigallery::
+   :add-heading: Examples using CollapseParams.print_default
+
+   ansys.meshing.prime.CollapseParams.print_default
