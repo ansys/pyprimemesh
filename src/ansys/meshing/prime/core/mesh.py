@@ -155,8 +155,12 @@ def _get_face_and_edge_connectivity(mesh_info, part_ids, params):
             part_ids[start : start + CONNECTIVITY_PART_CHUNK_SIZE], params
         )
         combined.part_ids.extend(result.part_ids)
-        combined.face_connectivity_result_per_part.extend(result.face_connectivity_result_per_part)
-        combined.edge_connectivity_result_per_part.extend(result.edge_connectivity_result_per_part)
+        combined.face_connectivity_result_per_part.extend(
+            result.face_connectivity_result_per_part
+        )
+        combined.edge_connectivity_result_per_part.extend(
+            result.edge_connectivity_result_per_part
+        )
     return combined
 
 
@@ -676,49 +680,36 @@ def _facet_edge_lines(
     return cells, int(segments.shape[0])
 
 
-def _triangulate_wide_cells(block: np.ndarray, n_cells: int) -> "tuple[np.ndarray, int]":
-    """Fan-triangulate polygons wider than quads using array connectivity only.
+def _triangulate_polygon_block(
+    vertices: np.ndarray,
+    block: np.ndarray,
+) -> "tuple[np.ndarray, np.ndarray, int]":
+    """Triangulate a face block holding polygons wider than a quad.
 
-    Triangles and quads are retained as-is. Avoiding ``PolyData.triangulate`` here
-    keeps large render builds out of VTK's per-entity pipeline.
+    Fanning a polygon from its first node covers a convex facet exactly, but a
+    quadratic facet curves inwards wherever the surface is concave, and a fan then
+    doubles back over part of the facet while leaving the rest bare. VTK triangulates
+    the polygon properly, so the cost of a per-entity ``PolyData`` is paid only by the
+    entities that actually carry wide polygons.
+
+    Parameters
+    ----------
+    vertices : np.ndarray
+        Points the block indexes into.
+    block : np.ndarray
+        VTK polygon connectivity of one entity.
+
+    Returns
+    -------
+    tuple[np.ndarray, np.ndarray, int]
+        Points, triangle connectivity, and the number of triangles.
     """
-    block = np.asarray(block, dtype=np.int64).ravel()
-    if n_cells == 0 or block.size == 0:
-        return block, 0
-
-    width = int(block[0])
-    stride = width + 1
-    uniform = block.size == n_cells * stride and bool(np.all(block[::stride] == width))
-    if uniform and width <= 4:
-        return block, n_cells
-    if uniform:
-        nodes = block.reshape(n_cells, stride)[:, 1:]
-        triangles = np.empty((n_cells, width - 2, 4), dtype=np.int64)
-        triangles[:, :, 0] = 3
-        triangles[:, :, 1] = nodes[:, :1]
-        triangles[:, :, 2] = nodes[:, 1:-1]
-        triangles[:, :, 3] = nodes[:, 2:]
-        return triangles.ravel(), int(n_cells * (width - 2))
-
-    pieces = []
-    output_cells = 0
-    cursor = 0
-    while cursor < block.size:
-        count = int(block[cursor])
-        nodes = block[cursor + 1 : cursor + 1 + count]
-        if count <= 4:
-            pieces.append(block[cursor : cursor + count + 1])
-            output_cells += 1
-        else:
-            triangles = np.empty((count - 2, 4), dtype=np.int64)
-            triangles[:, 0] = 3
-            triangles[:, 1] = nodes[0]
-            triangles[:, 2] = nodes[1:-1]
-            triangles[:, 3] = nodes[2:]
-            pieces.append(triangles.ravel())
-            output_cells += count - 2
-        cursor += count + 1
-    return np.concatenate(pieces) if pieces else np.empty(0, dtype=np.int64), output_cells
+    surface = pv.PolyData(vertices, block).triangulate(progress_bar=False)
+    return (
+        np.asarray(surface.points),
+        np.asarray(surface.faces, dtype=np.int64),
+        int(surface.n_cells),
+    )
 
 
 def _polydata_polygon_piece(poly: "pv.PolyData", entity_id: int):
@@ -2218,7 +2209,7 @@ class Mesh(MeshInfo):
                     continue
 
                 block = np.asarray(faces)
-                n_cells, _ = _scan_cell_block(block)
+                n_cells, max_size = _scan_cell_block(block)
                 if n_cells == 0:
                     continue
 
@@ -2233,10 +2224,11 @@ class Mesh(MeshInfo):
                 )
 
                 if has_mesh:
-                    render_block, render_cells = _triangulate_wide_cells(block, n_cells)
-                    grouped_raw[display_mesh_type].append(
-                        (vertices, render_block, render_cells, info)
-                    )
+                    if max_size > 4:
+                        render = _triangulate_polygon_block(vertices, block)
+                    else:
+                        render = (vertices, block, n_cells)
+                    grouped_raw[display_mesh_type].append((*render, info))
                     lines, n_lines = _facet_edge_lines(block, n_cells, len(vertices))
                     if n_lines:
                         grouped_raw_outlines[display_mesh_type].append(
