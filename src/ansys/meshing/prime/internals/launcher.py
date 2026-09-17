@@ -282,6 +282,7 @@ def launch_prime(
     ConnectionError
         When there is an error in connecting to the gRPC server.
     """
+    logging.getLogger('PyPrimeMesh').info("Launching Ansys Prime Server...")
     if config.has_pim():
         return launch_remote_prime(version=version, timeout=timeout)
 
@@ -311,6 +312,7 @@ def launch_prime(
             )
 
     launch_container = bool(int(os.environ.get('PYPRIMEMESH_LAUNCH_CONTAINER', '0')))
+    logging.getLogger('PyPrimeMesh').info(f'Launch container: {launch_container}')
     if launch_container:
         logging.getLogger('PyPrimeMesh').info("Launching container...")
         container_name = utils.make_unique_container_name('ansys-prime-server')

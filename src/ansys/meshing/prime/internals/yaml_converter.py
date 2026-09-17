@@ -20,11 +20,13 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
-"""YAML to PRIME JSON schema converter module.
+"""
+YAML to PRIME JSON Schema Converter Module.
 
 Converts user-friendly YAML schema definitions to ANSYS PRIME's JSON schema format.
-Supports both simple keywords (like *BOUNDARY) and complex parameter-variant keywords
-(like *SURFACE). Preserves Output templates and field metadata.
+Supports both simple keywords (like *BOUNDARY) and complex parameter-variant
+keywords (like *SURFACE).
+Preserves Output templates and field metadata.
 
 Architecture:
 - Simple keywords: Data -> Data_Block.Data_Fields + Output_Template
@@ -50,7 +52,7 @@ class YamlToPrimeJsonConverter:
     """Converts YAML keyword definitions to PRIME JSON schema format."""
 
     def __init__(self):
-        """Initialize an empty converter."""
+        """Initialize the converter."""
         self.schemas = {}
         self.logger = logging.getLogger(__name__)
 

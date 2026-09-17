@@ -2196,8 +2196,8 @@ class _GasketMaterialProcessor:
                 if len(self._gasket_zone_gap_data[material]) > 1:
                     self._logger.warning(
                         f"Multiple initial gap values are provided for material {material} "
-                        f"from the zone data, only the first value is used for processing "
-                        f"gasket thickness behavior."
+                        f"from the zone data, "
+                        f"only the first value is used for processing gasket thickness behavior."
                     )
                 initial_gap = self._gasket_zone_gap_data[material][0]
             else:
@@ -2261,7 +2261,7 @@ class _GasketMaterialProcessor:
                             in gasket_thickness_behavior_data
                         ):
                             gasket_thickness_behavior_data = gasket_thickness_behavior_data.replace(
-                                f"TB, GASKET, {mat_id}, , 0, {derection_map[data_direction]}\n",
+                                f"TB, GASKET, {mat_id}, , 0, " f"{derection_map[data_direction]}\n",
                                 f"TB, GASKET, {mat_id}, , {pt_counter}, "
                                 f"{derection_map[data_direction]}\n",
                             )
