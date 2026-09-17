@@ -1,5 +1,6 @@
-# Copyright (C) 2024 - 2026 ANSYS, Inc. and/or its affiliates.
+# Copyright (C) 2026 Synopsys, Inc. and ANSYS, Inc. All rights reserved.
 # SPDX-License-Identifier: MIT
+#
 #
 # Permission is hereby granted, free of charge, to any person obtaining a copy
 # of this software and associated documentation files (the "Software"), to deal
@@ -20,6 +21,7 @@
 # SOFTWARE.
 
 """Module for meshing utility functions."""
+
 import enum
 import os
 import tempfile
@@ -1006,10 +1008,8 @@ class Mesh:
                     geodesic_global_size_controls.append(curv_size_control)
             else:
                 if elements_per_gap == None and not wrap_size_controls:
-                    prime.PrimeRuntimeError(
-                        "Error: No size functions or settings provided.\
-                        No wrap done."
-                    )
+                    prime.PrimeRuntimeError("Error: No size functions or settings provided.\
+                        No wrap done.")
                     return
             if elements_per_gap:
                 prox_size_control = self._model.control_data.create_size_control(
@@ -1166,10 +1166,8 @@ class Mesh:
                             )
                         )
         else:
-            self._logger.warning(
-                "Contact prevention size specified but \
-                insufficient parts and labels identified to define contact."
-            )
+            self._logger.warning("Contact prevention size specified but \
+                insufficient parts and labels identified to define contact.")
 
     def __create_feature_recovery_params(
         self,
