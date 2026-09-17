@@ -53,5 +53,6 @@ repos:
   rev: v0.8.0
   hooks:
     - id: add-license-headers
+      files: '((src|examples|tests|docker)/.*\.py)|\.(proto)'
       args:
           - --start_year=2026
