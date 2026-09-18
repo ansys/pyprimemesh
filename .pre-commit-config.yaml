@@ -46,12 +46,13 @@ repos:
   rev: 6.3.0
   hooks:
   - id: pydocstyle
-    additional_dependencies: [toml]
+    additional_dependencies: [toml, tomli]
     exclude: "tests/|examples/|__init__.py"
 
 - repo: https://github.com/ansys/pre-commit-hooks
-  rev: v0.2.8
+  rev: v0.8.0
   hooks:
     - id: add-license-headers
+      files: '((src|examples|tests|docker)/.*\.py)|\.(proto)'
       args:
-          - LICENSE
+          - --start_year=2026

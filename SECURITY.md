@@ -1,5 +1,5 @@
 <!--
-Copyright (C) 2025 ANSYS, Inc. and/or its affiliates.
+Copyright © 2025 ANSYS, Inc. and/or its affiliates.
 SPDX-License-Identifier: MIT
 
 
