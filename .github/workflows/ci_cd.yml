@@ -20,7 +20,6 @@ env:
   DOCKER_IMAGE_TAG: '26.1.0.dev30'
   MAIN_PYTHON_VERSION: '3.14'
   PACKAGE_NAME: 'ansys-meshing-prime'
-  PACKAGE_NAMESPACE: 'ansys.meshing.prime'
   DOCUMENTATION_CNAME: 'prime.docs.pyansys.com'
   RESET_IMAGE_CACHE: 2
 
@@ -133,7 +132,6 @@ jobs:
         uses: ansys/actions/build-wheelhouse@7410037bfb276c79ae91eb3617b9f5d2876f0c94 # v11.0.8
         with:
           library-name: ${{ env.PACKAGE_NAME }}
-          library-namespace: ${{ env.PACKAGE_NAMESPACE }}
           operating-system: ${{ matrix.os }}
           python-version: ${{ matrix.python-version }}
 
