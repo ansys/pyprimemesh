@@ -14,13 +14,20 @@ concurrency:
   group: ${{ github.workflow }}-${{ github.ref }}
   cancel-in-progress: true
 
+permissions: {}
+
 jobs:
 
   label-syncer:
     name: Syncer
     runs-on: ubuntu-latest
+    permissions:
+      contents: read # Check out the label configuration
+      issues: write # Synchronize repository labels
     steps:
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
       - uses: micnncim/action-label-syncer@3abd5ab72fda571e69fffd97bd4e0033dd5f495c # v1.3.0
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
@@ -29,8 +36,8 @@ jobs:
     name: Set labels
     needs: [label-syncer]
     permissions:
-      contents: read
-      pull-requests: write
+      contents: read # Read the files modified by the pull request
+      pull-requests: write # Apply labels to the pull request
     runs-on: ubuntu-latest
     steps:
 
@@ -77,7 +84,10 @@ jobs:
         labels: testing
 
   commenter:
+    name: Suggest adding labels
     runs-on: ubuntu-latest
+    permissions:
+      pull-requests: write # Add a comment to the pull request
     steps:
     - name: Suggest to add labels
       uses: peter-evans/create-or-update-comment@e8674b075228eee787fea43ef493e45ece1004c9 # v5.0.0
@@ -99,8 +109,8 @@ jobs:
     name: "Create changelog fragment"
     needs: [labeler]
     permissions:
-      contents: write
-      pull-requests: write
+      contents: write # Add the changelog fragment to the branch
+      pull-requests: write # Update the pull request with the fragment
     runs-on: ubuntu-latest
     steps:
     - uses: ansys/actions/doc-changelog@7410037bfb276c79ae91eb3617b9f5d2876f0c94 # v11.0.8

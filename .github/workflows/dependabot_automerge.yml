@@ -1,23 +1,26 @@
 name: Dependabot auto-merge
 on: pull_request
 
-permissions:
-  pull-requests: write
-  contents: write
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+permissions: {}
 
 jobs:
   dependabot:
+    name: Approve and merge Dependabot updates
     runs-on: ubuntu-latest
-    if: github.actor == 'dependabot[bot]'
+    if: github.event.pull_request.user.login == 'dependabot[bot]'
+    permissions:
+      contents: write # Enable auto-merge for dependency updates
+      pull-requests: write # Approve Dependabot pull requests
     steps:
       - name: Dependabot metadata
         id: metadata
         uses: dependabot/fetch-metadata@25dd0e34f4fe68f24cc83900b1fe3fe149efef98 # v3.1.0
         with:
           github-token: ${{ secrets.GITHUB_TOKEN }}
-
-      - name: Print actor
-        run: echo "Actor is ${{github.actor}}"
 
       - name: Approve a PR
         run: gh pr review --approve "$PR_URL"
@@ -26,7 +29,9 @@ jobs:
           GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
 
       - name: PyAnsys Bot Login
-        run: echo "${{ secrets.PYANSYS_CI_BOT_TOKEN }}" | gh auth login --with-token
+        run: echo "$PYANSYS_CI_BOT_TOKEN" | gh auth login --with-token
+        env:
+          PYANSYS_CI_BOT_TOKEN: ${{ secrets.PYANSYS_CI_BOT_TOKEN }}
 
       - name: Enable auto-merge for Dependabot PRs
         if: steps.metadata.outputs.update-type != 'version-update:semver-major'
