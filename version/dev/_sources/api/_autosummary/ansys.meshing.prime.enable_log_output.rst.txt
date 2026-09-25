@@ -1,0 +1,11 @@
+enable\_log\_output
+===================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autofunction:: ansys.meshing.prime.enable_log_output
+
+.. minigallery::
+    :add-heading: Examples using enable_log_output
+
+    ansys.meshing.prime.enable_log_output

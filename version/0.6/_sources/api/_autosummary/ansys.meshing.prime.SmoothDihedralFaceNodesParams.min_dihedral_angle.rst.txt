@@ -1,0 +1,6 @@
+min\_dihedral\_angle
+====================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoproperty:: SmoothDihedralFaceNodesParams.min_dihedral_angle

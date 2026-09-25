@@ -1,0 +1,6 @@
+set\_default
+============
+
+.. currentmodule:: ansys.meshing.prime
+
+.. automethod:: LocalSurferParams.set_default

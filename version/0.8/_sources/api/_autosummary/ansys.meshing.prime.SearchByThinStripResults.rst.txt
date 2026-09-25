@@ -1,0 +1,40 @@
+.. vale off
+
+SearchByThinStripResults
+========================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoclass:: SearchByThinStripResults
+   
+   
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+      :toctree:
+   
+      
+      SearchByThinStripResults.print_default
+      SearchByThinStripResults.set_default
+   
+   
+
+   
+   
+   .. rubric:: Attributes
+
+   .. autosummary::
+      :toctree:
+   
+      SearchByThinStripResults.error_code
+      SearchByThinStripResults.n_found
+   
+   
+
+.. minigallery::
+    :add-heading: Examples using SearchByThinStripResults
+
+    ansys.meshing.prime.SearchByThinStripResults
+
+.. vale on

@@ -1,0 +1,22 @@
+SizeField
+=========
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoclass:: SizeField
+   
+   
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+      :toctree:
+   
+      
+      SizeField.compute_volumetric
+   
+   
+
+   
+   
+   

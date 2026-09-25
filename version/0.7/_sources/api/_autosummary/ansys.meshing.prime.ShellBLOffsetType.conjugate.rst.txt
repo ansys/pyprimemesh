@@ -1,0 +1,11 @@
+conjugate
+=========
+
+.. currentmodule:: ansys.meshing.prime
+
+.. automethod:: ansys.meshing.prime.ShellBLOffsetType.conjugate
+
+.. minigallery::
+   :add-heading: Examples using ShellBLOffsetType.conjugate
+
+   ansys.meshing.prime.ShellBLOffsetType.conjugate

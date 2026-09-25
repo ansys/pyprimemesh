@@ -1,0 +1,38 @@
+.. vale off
+
+SurfaceDiagnosticSummaryParams
+==============================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoclass:: SurfaceDiagnosticSummaryParams
+   
+   
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+      :toctree:
+   
+      
+      SurfaceDiagnosticSummaryParams.print_default
+      SurfaceDiagnosticSummaryParams.set_default
+   
+   
+
+   
+   
+   .. rubric:: Attributes
+
+   .. autosummary::
+      :toctree:
+   
+      SurfaceDiagnosticSummaryParams.compute_duplicate_faces
+      SurfaceDiagnosticSummaryParams.compute_free_edges
+      SurfaceDiagnosticSummaryParams.compute_multi_edges
+      SurfaceDiagnosticSummaryParams.compute_self_intersections
+      SurfaceDiagnosticSummaryParams.scope
+   
+   
+
+.. vale on

@@ -1,0 +1,6 @@
+WRAPPERCLOSEGAPS\_INVALIDSCOPE
+==============================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoattribute:: ErrorCode.WRAPPERCLOSEGAPS_INVALIDSCOPE

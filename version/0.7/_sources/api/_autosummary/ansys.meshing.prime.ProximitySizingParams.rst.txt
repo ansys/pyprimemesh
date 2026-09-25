@@ -1,0 +1,44 @@
+.. vale off
+
+ProximitySizingParams
+=====================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoclass:: ProximitySizingParams
+   
+   
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+      :toctree:
+   
+      
+      ProximitySizingParams.print_default
+      ProximitySizingParams.set_default
+   
+   
+
+   
+   
+   .. rubric:: Attributes
+
+   .. autosummary::
+      :toctree:
+   
+      ProximitySizingParams.elements_per_gap
+      ProximitySizingParams.growth_rate
+      ProximitySizingParams.ignore_orientation
+      ProximitySizingParams.ignore_self_proximity
+      ProximitySizingParams.max
+      ProximitySizingParams.min
+   
+   
+
+.. minigallery::
+    :add-heading: Examples using ProximitySizingParams
+
+    ansys.meshing.prime.ProximitySizingParams
+
+.. vale on

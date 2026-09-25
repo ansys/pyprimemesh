@@ -1,0 +1,6 @@
+﻿id
+==
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoproperty:: VolumeControl.id

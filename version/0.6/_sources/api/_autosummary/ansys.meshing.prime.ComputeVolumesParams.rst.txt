@@ -1,0 +1,37 @@
+.. vale off
+
+ComputeVolumesParams
+====================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoclass:: ComputeVolumesParams
+   
+   
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+      :toctree:
+   
+      
+      ComputeVolumesParams.print_default
+      ComputeVolumesParams.set_default
+   
+   
+
+   
+   
+   .. rubric:: Attributes
+
+   .. autosummary::
+      :toctree:
+   
+      ComputeVolumesParams.create_zones_type
+      ComputeVolumesParams.material_point_names
+      ComputeVolumesParams.priority_ordered_names
+      ComputeVolumesParams.volume_naming_type
+   
+   
+
+.. vale on

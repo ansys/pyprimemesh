@@ -1,0 +1,11 @@
+download\_toy\_car\_dsco
+========================
+
+.. currentmodule:: ansys.meshing.prime.examples
+
+.. autofunction:: ansys.meshing.prime.examples.download_toy_car_dsco
+
+.. minigallery::
+    :add-heading: Examples using download_toy_car_dsco
+
+    ansys.meshing.prime.examples.download_toy_car_dsco

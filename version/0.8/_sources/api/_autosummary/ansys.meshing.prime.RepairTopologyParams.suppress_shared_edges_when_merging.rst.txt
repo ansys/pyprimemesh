@@ -1,0 +1,6 @@
+suppress\_shared\_edges\_when\_merging
+======================================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoproperty:: RepairTopologyParams.suppress_shared_edges_when_merging

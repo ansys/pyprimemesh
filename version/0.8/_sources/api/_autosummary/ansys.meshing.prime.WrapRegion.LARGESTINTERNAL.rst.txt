@@ -1,0 +1,6 @@
+LARGESTINTERNAL
+===============
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoattribute:: WrapRegion.LARGESTINTERNAL

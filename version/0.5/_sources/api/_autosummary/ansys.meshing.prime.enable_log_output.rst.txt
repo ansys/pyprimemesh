@@ -1,0 +1,6 @@
+enable\_log\_output
+===================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autofunction:: enable_log_output

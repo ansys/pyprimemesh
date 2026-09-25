@@ -1,0 +1,38 @@
+.. vale off
+
+CurvatureSizingParams
+=====================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoclass:: CurvatureSizingParams
+   
+   
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+      :toctree:
+   
+      
+      CurvatureSizingParams.print_default
+      CurvatureSizingParams.set_default
+   
+   
+
+   
+   
+   .. rubric:: Attributes
+
+   .. autosummary::
+      :toctree:
+   
+      CurvatureSizingParams.growth_rate
+      CurvatureSizingParams.max
+      CurvatureSizingParams.min
+      CurvatureSizingParams.normal_angle
+      CurvatureSizingParams.use_cad_curvature
+   
+   
+
+.. vale on

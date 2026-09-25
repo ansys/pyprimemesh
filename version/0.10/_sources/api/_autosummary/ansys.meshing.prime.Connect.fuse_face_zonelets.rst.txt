@@ -1,0 +1,11 @@
+fuse\_face\_zonelets
+====================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. automethod:: ansys.meshing.prime.Connect.fuse_face_zonelets
+
+.. minigallery::
+   :add-heading: Examples using Connect.fuse_face_zonelets
+
+   ansys.meshing.prime.Connect.fuse_face_zonelets

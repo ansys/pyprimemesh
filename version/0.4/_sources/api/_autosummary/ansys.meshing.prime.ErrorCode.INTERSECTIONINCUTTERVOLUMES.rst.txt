@@ -1,0 +1,6 @@
+﻿INTERSECTIONINCUTTERVOLUMES
+===========================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoattribute:: ErrorCode.INTERSECTIONINCUTTERVOLUMES

@@ -1,0 +1,6 @@
+LIVE
+====
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoattribute:: MaterialPointType.LIVE

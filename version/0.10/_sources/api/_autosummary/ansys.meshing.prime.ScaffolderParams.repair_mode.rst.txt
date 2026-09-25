@@ -1,0 +1,6 @@
+repair\_mode
+============
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoproperty:: ScaffolderParams.repair_mode

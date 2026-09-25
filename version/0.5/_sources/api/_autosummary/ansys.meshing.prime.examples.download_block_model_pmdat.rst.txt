@@ -1,0 +1,6 @@
+download\_block\_model\_pmdat
+=============================
+
+.. currentmodule:: ansys.meshing.prime.examples
+
+.. autofunction:: download_block_model_pmdat

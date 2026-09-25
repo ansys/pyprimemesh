@@ -1,0 +1,30 @@
+.. vale off
+
+CellQualityMeasure
+==================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoclass:: CellQualityMeasure
+   
+   
+   
+   
+
+   
+   
+   .. rubric:: Attributes
+
+   .. autosummary::
+      :toctree:
+   
+      CellQualityMeasure.SKEWNESS
+      CellQualityMeasure.ASPECTRATIO
+      CellQualityMeasure.FLUENTASPECTRATIO
+      CellQualityMeasure.INVERSEORTHOGONAL
+      CellQualityMeasure.INVERSEORTHOGONAL_V2
+      CellQualityMeasure.ELEMENTQUALITY
+   
+   
+
+.. vale on

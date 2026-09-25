@@ -1,0 +1,6 @@
+smallest\_edge\_length
+======================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoproperty:: RepairTopologyParams.smallest_edge_length

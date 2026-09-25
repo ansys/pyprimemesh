@@ -1,0 +1,39 @@
+.. vale off
+
+ExportFluentCaseParams
+======================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoclass:: ExportFluentCaseParams
+   
+   
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+      :toctree:
+   
+      
+      ExportFluentCaseParams.print_default
+      ExportFluentCaseParams.set_default
+   
+   
+
+   
+   
+   .. rubric:: Attributes
+
+   .. autosummary::
+      :toctree:
+   
+      ExportFluentCaseParams.cff_format
+   
+   
+
+.. minigallery::
+    :add-heading: Examples using ExportFluentCaseParams
+
+    ansys.meshing.prime.ExportFluentCaseParams
+
+.. vale on

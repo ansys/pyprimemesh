@@ -1,0 +1,6 @@
+numerator
+=========
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoattribute:: EdgeConnectType.numerator

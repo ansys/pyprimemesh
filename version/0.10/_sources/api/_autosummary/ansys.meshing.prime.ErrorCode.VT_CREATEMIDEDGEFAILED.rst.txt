@@ -1,0 +1,6 @@
+VT\_CREATEMIDEDGEFAILED
+=======================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoattribute:: ErrorCode.VT_CREATEMIDEDGEFAILED

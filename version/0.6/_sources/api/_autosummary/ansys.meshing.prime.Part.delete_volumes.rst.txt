@@ -1,0 +1,6 @@
+delete\_volumes
+===============
+
+.. currentmodule:: ansys.meshing.prime
+
+.. automethod:: Part.delete_volumes

@@ -1,0 +1,6 @@
+﻿source\_zonelet
+===============
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoproperty:: BCPair.source_zonelet

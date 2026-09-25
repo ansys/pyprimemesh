@@ -1,0 +1,22 @@
+CadFaceter
+==========
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoclass:: CadFaceter
+   
+   
+   
+   
+
+   
+   
+   .. rubric:: Attributes
+
+   .. autosummary::
+      :toctree:
+   
+      CadFaceter.ACIS
+      CadFaceter.PARASOLID
+   
+   

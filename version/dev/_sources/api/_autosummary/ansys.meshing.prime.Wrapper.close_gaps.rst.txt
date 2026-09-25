@@ -1,0 +1,11 @@
+close\_gaps
+===========
+
+.. currentmodule:: ansys.meshing.prime
+
+.. automethod:: ansys.meshing.prime.Wrapper.close_gaps
+
+.. minigallery::
+   :add-heading: Examples using Wrapper.close_gaps
+
+   ansys.meshing.prime.Wrapper.close_gaps

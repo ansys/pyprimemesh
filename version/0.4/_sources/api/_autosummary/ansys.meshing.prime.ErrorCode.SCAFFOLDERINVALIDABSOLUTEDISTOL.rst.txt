@@ -1,0 +1,6 @@
+﻿SCAFFOLDERINVALIDABSOLUTEDISTOL
+===============================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoattribute:: ErrorCode.SCAFFOLDERINVALIDABSOLUTEDISTOL

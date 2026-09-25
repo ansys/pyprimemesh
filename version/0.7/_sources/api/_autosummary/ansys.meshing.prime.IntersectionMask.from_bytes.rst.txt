@@ -1,0 +1,11 @@
+from\_bytes
+===========
+
+.. currentmodule:: ansys.meshing.prime
+
+.. automethod:: ansys.meshing.prime.IntersectionMask.from_bytes
+
+.. minigallery::
+   :add-heading: Examples using IntersectionMask.from_bytes
+
+   ansys.meshing.prime.IntersectionMask.from_bytes

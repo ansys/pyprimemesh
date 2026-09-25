@@ -1,0 +1,11 @@
+bit\_count
+==========
+
+.. currentmodule:: ansys.meshing.prime
+
+.. automethod:: ansys.meshing.prime.SmoothType.bit_count
+
+.. minigallery::
+   :add-heading: Examples using SmoothType.bit_count
+
+   ansys.meshing.prime.SmoothType.bit_count

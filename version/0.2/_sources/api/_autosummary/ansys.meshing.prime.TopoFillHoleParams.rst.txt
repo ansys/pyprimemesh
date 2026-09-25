@@ -1,0 +1,32 @@
+TopoFillHoleParams
+==================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoclass:: TopoFillHoleParams
+   
+   
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+      :toctree:
+   
+      
+      TopoFillHoleParams.print_default
+      TopoFillHoleParams.set_default
+   
+   
+
+   
+   
+   .. rubric:: Attributes
+
+   .. autosummary::
+      :toctree:
+   
+      TopoFillHoleParams.edges_to_exclude
+      TopoFillHoleParams.fill_annular_hole
+      TopoFillHoleParams.suppress_boundary_after_hole_fill
+   
+   

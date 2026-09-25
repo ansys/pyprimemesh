@@ -1,0 +1,6 @@
+﻿assigned\_name
+==============
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoproperty:: SetNameResults.assigned_name

@@ -1,0 +1,6 @@
+use\_volumetric\_size\_field
+============================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoproperty:: MultiZoneSizingParams.use_volumetric_size_field

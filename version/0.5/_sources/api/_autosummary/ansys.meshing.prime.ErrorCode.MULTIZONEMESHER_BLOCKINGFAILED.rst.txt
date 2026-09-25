@@ -1,0 +1,6 @@
+MULTIZONEMESHER\_BLOCKINGFAILED
+===============================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoattribute:: ErrorCode.MULTIZONEMESHER_BLOCKINGFAILED

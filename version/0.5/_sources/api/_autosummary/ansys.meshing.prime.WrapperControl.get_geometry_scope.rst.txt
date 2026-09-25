@@ -1,0 +1,6 @@
+get\_geometry\_scope
+====================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. automethod:: WrapperControl.get_geometry_scope

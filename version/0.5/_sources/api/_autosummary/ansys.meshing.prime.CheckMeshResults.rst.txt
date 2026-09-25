@@ -1,0 +1,39 @@
+.. vale off
+
+CheckMeshResults
+================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoclass:: CheckMeshResults
+   
+   
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+      :toctree:
+   
+      
+      CheckMeshResults.print_default
+      CheckMeshResults.set_default
+   
+   
+
+   
+   
+   .. rubric:: Attributes
+
+   .. autosummary::
+      :toctree:
+   
+      CheckMeshResults.error_code
+      CheckMeshResults.has_invalid_shape
+      CheckMeshResults.has_left_handed_faces
+      CheckMeshResults.has_non_positive_areas
+      CheckMeshResults.has_non_positive_volumes
+      CheckMeshResults.warning_codes
+   
+   
+
+.. vale on

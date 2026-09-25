@@ -1,0 +1,40 @@
+.. vale off
+
+ConnectFacesParams
+==================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoclass:: ConnectFacesParams
+   
+   
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+      :toctree:
+   
+      
+      ConnectFacesParams.print_default
+      ConnectFacesParams.set_default
+   
+   
+
+   
+   
+   .. rubric:: Attributes
+
+   .. autosummary::
+      :toctree:
+   
+      ConnectFacesParams.absolute_tolerance
+      ConnectFacesParams.constant_mesh_size
+   
+   
+
+.. minigallery::
+    :add-heading: Examples using ConnectFacesParams
+
+    ansys.meshing.prime.ConnectFacesParams
+
+.. vale on

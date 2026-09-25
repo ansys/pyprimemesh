@@ -1,0 +1,11 @@
+set\_default
+============
+
+.. currentmodule:: ansys.meshing.prime
+
+.. automethod:: ansys.meshing.prime.ExtractFeatureParams.set_default
+
+.. minigallery::
+   :add-heading: Examples using ExtractFeatureParams.set_default
+
+   ansys.meshing.prime.ExtractFeatureParams.set_default

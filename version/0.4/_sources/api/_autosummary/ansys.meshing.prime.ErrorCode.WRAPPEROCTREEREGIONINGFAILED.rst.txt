@@ -1,0 +1,6 @@
+﻿WRAPPEROCTREEREGIONINGFAILED
+============================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoattribute:: ErrorCode.WRAPPEROCTREEREGIONINGFAILED

@@ -1,0 +1,6 @@
+﻿topo\_face\_ids
+===============
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoproperty:: FaceConnectivityResults.topo_face_ids

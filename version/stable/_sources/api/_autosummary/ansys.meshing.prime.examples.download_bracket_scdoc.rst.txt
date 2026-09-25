@@ -1,0 +1,11 @@
+download\_bracket\_scdoc
+========================
+
+.. currentmodule:: ansys.meshing.prime.examples
+
+.. autofunction:: ansys.meshing.prime.examples.download_bracket_scdoc
+
+.. minigallery::
+    :add-heading: Examples using download_bracket_scdoc
+
+    ansys.meshing.prime.examples.download_bracket_scdoc

@@ -1,0 +1,11 @@
+conjugate
+=========
+
+.. currentmodule:: ansys.meshing.prime
+
+.. automethod:: ansys.meshing.prime.CdbAnalysisType.conjugate
+
+.. minigallery::
+   :add-heading: Examples using CdbAnalysisType.conjugate
+
+   ansys.meshing.prime.CdbAnalysisType.conjugate

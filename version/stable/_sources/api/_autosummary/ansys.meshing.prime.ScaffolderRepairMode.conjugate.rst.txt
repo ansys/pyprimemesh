@@ -1,0 +1,11 @@
+conjugate
+=========
+
+.. currentmodule:: ansys.meshing.prime
+
+.. automethod:: ansys.meshing.prime.ScaffolderRepairMode.conjugate
+
+.. minigallery::
+   :add-heading: Examples using ScaffolderRepairMode.conjugate
+
+   ansys.meshing.prime.ScaffolderRepairMode.conjugate

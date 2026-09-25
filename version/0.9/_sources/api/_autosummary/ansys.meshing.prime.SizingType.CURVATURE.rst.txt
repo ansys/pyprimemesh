@@ -1,0 +1,6 @@
+CURVATURE
+=========
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoattribute:: SizingType.CURVATURE

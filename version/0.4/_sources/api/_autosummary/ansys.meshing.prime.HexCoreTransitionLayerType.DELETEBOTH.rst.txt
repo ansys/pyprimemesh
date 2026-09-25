@@ -1,0 +1,6 @@
+﻿DELETEBOTH
+==========
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoattribute:: HexCoreTransitionLayerType.DELETEBOTH

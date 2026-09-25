@@ -1,0 +1,11 @@
+create\_contact\_patch
+======================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. automethod:: ansys.meshing.prime.SurfaceUtilities.create_contact_patch
+
+.. minigallery::
+   :add-heading: Examples using SurfaceUtilities.create_contact_patch
+
+   ansys.meshing.prime.SurfaceUtilities.create_contact_patch

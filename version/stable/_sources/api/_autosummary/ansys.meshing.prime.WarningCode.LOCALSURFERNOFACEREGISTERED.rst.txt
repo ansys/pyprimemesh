@@ -1,0 +1,6 @@
+LOCALSURFERNOFACEREGISTERED
+===========================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoattribute:: WarningCode.LOCALSURFERNOFACEREGISTERED

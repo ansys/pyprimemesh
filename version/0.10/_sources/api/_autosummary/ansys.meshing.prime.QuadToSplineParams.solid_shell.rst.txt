@@ -1,0 +1,6 @@
+solid\_shell
+============
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoproperty:: QuadToSplineParams.solid_shell

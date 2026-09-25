@@ -1,0 +1,11 @@
+set\_default
+============
+
+.. currentmodule:: ansys.meshing.prime
+
+.. automethod:: ansys.meshing.prime.RemoveZoneResults.set_default
+
+.. minigallery::
+   :add-heading: Examples using RemoveZoneResults.set_default
+
+   ansys.meshing.prime.RemoveZoneResults.set_default

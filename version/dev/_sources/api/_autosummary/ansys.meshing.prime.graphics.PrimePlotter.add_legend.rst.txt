@@ -1,0 +1,11 @@
+add\_legend
+===========
+
+.. currentmodule:: ansys.meshing.prime.graphics
+
+.. automethod:: ansys.meshing.prime.graphics.PrimePlotter.add_legend
+
+.. minigallery::
+   :add-heading: Examples using PrimePlotter.add_legend
+
+   ansys.meshing.prime.graphics.PrimePlotter.add_legend

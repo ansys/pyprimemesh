@@ -1,0 +1,11 @@
+add\_scope
+==========
+
+.. currentmodule:: ansys.meshing.prime.graphics
+
+.. automethod:: ansys.meshing.prime.graphics.PrimePlotter.add_scope
+
+.. minigallery::
+   :add-heading: Examples using PrimePlotter.add_scope
+
+   ansys.meshing.prime.graphics.PrimePlotter.add_scope

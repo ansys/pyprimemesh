@@ -1,0 +1,6 @@
+copy\_face\_zonelets
+====================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. automethod:: SurfaceUtilities.copy_face_zonelets

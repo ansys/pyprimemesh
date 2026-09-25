@@ -1,0 +1,35 @@
+.. vale off
+
+OverlapPairs
+============
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoclass:: OverlapPairs
+   
+   
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+      :toctree:
+   
+      
+      OverlapPairs.print_default
+      OverlapPairs.set_default
+   
+   
+
+   
+   
+   .. rubric:: Attributes
+
+   .. autosummary::
+      :toctree:
+   
+      OverlapPairs.zone_id0
+      OverlapPairs.zone_id1
+   
+   
+
+.. vale on

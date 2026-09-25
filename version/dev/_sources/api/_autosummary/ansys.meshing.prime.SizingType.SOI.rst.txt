@@ -1,0 +1,6 @@
+SOI
+===
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoattribute:: SizingType.SOI

@@ -1,0 +1,6 @@
+overlap\_zone\_name
+===================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoproperty:: JoinParams.overlap_zone_name

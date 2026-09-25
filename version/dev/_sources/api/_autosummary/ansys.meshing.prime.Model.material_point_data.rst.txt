@@ -1,0 +1,6 @@
+material\_point\_data
+=====================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoproperty:: Model.material_point_data

@@ -1,0 +1,11 @@
+set\_default
+============
+
+.. currentmodule:: ansys.meshing.prime
+
+.. automethod:: ansys.meshing.prime.DeleteTopoEntitiesParams.set_default
+
+.. minigallery::
+   :add-heading: Examples using DeleteTopoEntitiesParams.set_default
+
+   ansys.meshing.prime.DeleteTopoEntitiesParams.set_default

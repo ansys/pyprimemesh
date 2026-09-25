@@ -1,0 +1,11 @@
+export\_boundary\_fitted\_spline\_kfile
+=======================================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. automethod:: ansys.meshing.prime.FileIO.export_boundary_fitted_spline_kfile
+
+.. minigallery::
+   :add-heading: Examples using FileIO.export_boundary_fitted_spline_kfile
+
+   ansys.meshing.prime.FileIO.export_boundary_fitted_spline_kfile

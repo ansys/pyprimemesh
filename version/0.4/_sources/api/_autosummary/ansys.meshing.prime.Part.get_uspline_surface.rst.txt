@@ -1,0 +1,6 @@
+﻿get\_uspline\_surface
+=====================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. automethod:: Part.get_uspline_surface

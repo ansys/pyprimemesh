@@ -1,0 +1,11 @@
+delete\_zonelets
+================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. automethod:: ansys.meshing.prime.Part.delete_zonelets
+
+.. minigallery::
+   :add-heading: Examples using Part.delete_zonelets
+
+   ansys.meshing.prime.Part.delete_zonelets

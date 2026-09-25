@@ -1,0 +1,6 @@
+﻿WRITEKEYWORDFILEFAILED
+======================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoattribute:: ErrorCode.WRITEKEYWORDFILEFAILED

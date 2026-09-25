@@ -1,0 +1,6 @@
+fringe\_element\_count
+======================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoproperty:: DeleteFringesAndOverlapsParams.fringe_element_count

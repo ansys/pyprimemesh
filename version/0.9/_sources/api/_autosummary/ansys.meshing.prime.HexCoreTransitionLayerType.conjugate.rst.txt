@@ -1,0 +1,11 @@
+conjugate
+=========
+
+.. currentmodule:: ansys.meshing.prime
+
+.. automethod:: ansys.meshing.prime.HexCoreTransitionLayerType.conjugate
+
+.. minigallery::
+   :add-heading: Examples using HexCoreTransitionLayerType.conjugate
+
+   ansys.meshing.prime.HexCoreTransitionLayerType.conjugate

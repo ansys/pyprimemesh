@@ -1,0 +1,11 @@
+from\_bytes
+===========
+
+.. currentmodule:: ansys.meshing.prime
+
+.. automethod:: ansys.meshing.prime.StitchType.from_bytes
+
+.. minigallery::
+   :add-heading: Examples using StitchType.from_bytes
+
+   ansys.meshing.prime.StitchType.from_bytes

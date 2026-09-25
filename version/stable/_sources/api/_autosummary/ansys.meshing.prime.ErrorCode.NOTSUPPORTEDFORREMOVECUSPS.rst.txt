@@ -1,0 +1,6 @@
+NOTSUPPORTEDFORREMOVECUSPS
+==========================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoattribute:: ErrorCode.NOTSUPPORTEDFORREMOVECUSPS

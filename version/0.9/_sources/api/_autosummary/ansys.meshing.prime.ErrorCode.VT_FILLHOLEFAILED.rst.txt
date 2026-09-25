@@ -1,0 +1,6 @@
+VT\_FILLHOLEFAILED
+==================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoattribute:: ErrorCode.VT_FILLHOLEFAILED

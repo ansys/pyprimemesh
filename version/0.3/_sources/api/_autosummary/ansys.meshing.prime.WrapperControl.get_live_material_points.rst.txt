@@ -1,0 +1,6 @@
+get\_live\_material\_points
+===========================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. automethod:: WrapperControl.get_live_material_points

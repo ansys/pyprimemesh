@@ -1,0 +1,6 @@
+Y
+=
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoattribute:: ContactPatchAxis.Y

@@ -1,0 +1,32 @@
+ExtractFeatureResults
+=====================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoclass:: ExtractFeatureResults
+   
+   
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+      :toctree:
+   
+      
+      ExtractFeatureResults.print_default
+      ExtractFeatureResults.set_default
+   
+   
+
+   
+   
+   .. rubric:: Attributes
+
+   .. autosummary::
+      :toctree:
+   
+      ExtractFeatureResults.error_code
+      ExtractFeatureResults.new_edge_zonelets
+      ExtractFeatureResults.processing_time
+   
+   

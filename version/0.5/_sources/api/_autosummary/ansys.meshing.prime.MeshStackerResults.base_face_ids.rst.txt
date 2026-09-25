@@ -1,0 +1,6 @@
+base\_face\_ids
+===============
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoproperty:: MeshStackerResults.base_face_ids

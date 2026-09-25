@@ -1,0 +1,11 @@
+get\_size\_field\_name
+======================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. automethod:: ansys.meshing.prime.Model.get_size_field_name
+
+.. minigallery::
+   :add-heading: Examples using Model.get_size_field_name
+
+   ansys.meshing.prime.Model.get_size_field_name

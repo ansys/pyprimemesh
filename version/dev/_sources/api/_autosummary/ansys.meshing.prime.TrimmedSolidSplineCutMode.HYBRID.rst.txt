@@ -1,0 +1,6 @@
+HYBRID
+======
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoattribute:: TrimmedSolidSplineCutMode.HYBRID
