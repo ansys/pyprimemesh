@@ -1,0 +1,6 @@
+﻿get\_topo\_faces\_of\_zone\_name\_pattern
+=========================================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. automethod:: Part.get_topo_faces_of_zone_name_pattern

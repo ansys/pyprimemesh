@@ -1,0 +1,6 @@
+project\_on\_geometry
+=====================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoproperty:: SurferParams.project_on_geometry

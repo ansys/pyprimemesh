@@ -1,0 +1,6 @@
+message
+=======
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoproperty:: PeriodicControlSummaryResult.message

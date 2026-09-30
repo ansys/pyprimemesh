@@ -1,0 +1,6 @@
+prism\_controls
+===============
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoproperty:: ControlData.prism_controls

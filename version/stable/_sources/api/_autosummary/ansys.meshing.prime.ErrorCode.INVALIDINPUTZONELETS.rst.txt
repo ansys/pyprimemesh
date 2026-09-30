@@ -1,0 +1,6 @@
+INVALIDINPUTZONELETS
+====================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoattribute:: ErrorCode.INVALIDINPUTZONELETS

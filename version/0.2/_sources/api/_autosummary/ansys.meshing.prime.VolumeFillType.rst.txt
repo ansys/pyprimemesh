@@ -1,0 +1,24 @@
+VolumeFillType
+==============
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoclass:: VolumeFillType
+   
+   
+   
+   
+
+   
+   
+   .. rubric:: Attributes
+
+   .. autosummary::
+      :toctree:
+   
+      VolumeFillType.TET
+      VolumeFillType.POLY
+      VolumeFillType.HEXCORETET
+      VolumeFillType.HEXCOREPOLY
+   
+   

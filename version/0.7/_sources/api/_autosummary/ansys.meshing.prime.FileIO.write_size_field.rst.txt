@@ -1,0 +1,11 @@
+write\_size\_field
+==================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. automethod:: ansys.meshing.prime.FileIO.write_size_field
+
+.. minigallery::
+   :add-heading: Examples using FileIO.write_size_field
+
+   ansys.meshing.prime.FileIO.write_size_field

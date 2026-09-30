@@ -1,0 +1,32 @@
+.. vale off
+
+ShellBLParams
+=============
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoclass:: ShellBLParams
+   
+   
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+      :toctree:
+   
+      
+      ShellBLParams.print_default
+      ShellBLParams.set_default
+   
+   
+
+   
+   
+   
+
+.. minigallery::
+    :add-heading: Examples using ShellBLParams
+
+    ansys.meshing.prime.ShellBLParams
+
+.. vale on

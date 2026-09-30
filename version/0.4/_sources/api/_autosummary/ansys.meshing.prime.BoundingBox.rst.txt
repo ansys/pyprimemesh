@@ -1,0 +1,39 @@
+.. vale off
+
+BoundingBox
+===========
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoclass:: BoundingBox
+   
+   
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+      :toctree:
+   
+      
+      BoundingBox.print_default
+      BoundingBox.set_default
+   
+   
+
+   
+   
+   .. rubric:: Attributes
+
+   .. autosummary::
+      :toctree:
+   
+      BoundingBox.xmax
+      BoundingBox.xmin
+      BoundingBox.ymax
+      BoundingBox.ymin
+      BoundingBox.zmax
+      BoundingBox.zmin
+   
+   
+
+.. vale on

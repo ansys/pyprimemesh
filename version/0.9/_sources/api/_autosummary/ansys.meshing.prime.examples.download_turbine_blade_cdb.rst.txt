@@ -1,0 +1,11 @@
+download\_turbine\_blade\_cdb
+=============================
+
+.. currentmodule:: ansys.meshing.prime.examples
+
+.. autofunction:: ansys.meshing.prime.examples.download_turbine_blade_cdb
+
+.. minigallery::
+    :add-heading: Examples using download_turbine_blade_cdb
+
+    ansys.meshing.prime.examples.download_turbine_blade_cdb

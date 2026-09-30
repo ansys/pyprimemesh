@@ -1,0 +1,6 @@
+VT\_FILLANNULARHOLEFAILED
+=========================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoattribute:: ErrorCode.VT_FILLANNULARHOLEFAILED

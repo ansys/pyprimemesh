@@ -1,0 +1,6 @@
+UNIFORM
+=======
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoattribute:: ShellBLOffsetType.UNIFORM

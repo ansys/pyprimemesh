@@ -1,0 +1,42 @@
+.. vale off
+
+WrapResult
+==========
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoclass:: WrapResult
+   
+   
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+      :toctree:
+   
+      
+      WrapResult.print_default
+      WrapResult.set_default
+   
+   
+
+   
+   
+   .. rubric:: Attributes
+
+   .. autosummary::
+      :toctree:
+   
+      WrapResult.error_code
+      WrapResult.id
+      WrapResult.name
+      WrapResult.warning_codes
+   
+   
+
+.. minigallery::
+    :add-heading: Examples using WrapResult
+
+    ansys.meshing.prime.WrapResult
+
+.. vale on

@@ -1,0 +1,11 @@
+bit\_length
+===========
+
+.. currentmodule:: ansys.meshing.prime
+
+.. automethod:: ansys.meshing.prime.LSDynaFileFormatType.bit_length
+
+.. minigallery::
+   :add-heading: Examples using LSDynaFileFormatType.bit_length
+
+   ansys.meshing.prime.LSDynaFileFormatType.bit_length

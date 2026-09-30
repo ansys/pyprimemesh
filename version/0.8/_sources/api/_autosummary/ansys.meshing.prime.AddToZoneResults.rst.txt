@@ -1,0 +1,40 @@
+.. vale off
+
+AddToZoneResults
+================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoclass:: AddToZoneResults
+   
+   
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+      :toctree:
+   
+      
+      AddToZoneResults.print_default
+      AddToZoneResults.set_default
+   
+   
+
+   
+   
+   .. rubric:: Attributes
+
+   .. autosummary::
+      :toctree:
+   
+      AddToZoneResults.error_code
+      AddToZoneResults.warning_codes
+   
+   
+
+.. minigallery::
+    :add-heading: Examples using AddToZoneResults
+
+    ansys.meshing.prime.AddToZoneResults
+
+.. vale on

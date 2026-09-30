@@ -1,0 +1,6 @@
+enable\_multi\_threading
+========================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoproperty:: SurferParams.enable_multi_threading

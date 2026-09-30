@@ -1,0 +1,6 @@
+MORPHER\_BCPAIRINPUTTYPEMISMATCH
+================================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoattribute:: ErrorCode.MORPHER_BCPAIRINPUTTYPEMISMATCH

@@ -1,0 +1,39 @@
+.. vale off
+
+FileReadResults
+===============
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoclass:: FileReadResults
+   
+   
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+      :toctree:
+   
+      
+      FileReadResults.print_default
+      FileReadResults.set_default
+   
+   
+
+   
+   
+   .. rubric:: Attributes
+
+   .. autosummary::
+      :toctree:
+   
+      FileReadResults.error_code
+   
+   
+
+.. minigallery::
+    :add-heading: Examples using FileReadResults
+
+    ansys.meshing.prime.FileReadResults
+
+.. vale on

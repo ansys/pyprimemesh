@@ -1,0 +1,6 @@
+number\_of\_threads
+===================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoproperty:: WrapperCloseGapsParams.number_of_threads

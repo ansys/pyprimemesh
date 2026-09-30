@@ -1,0 +1,6 @@
+launch\_prime
+=============
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autofunction:: launch_prime

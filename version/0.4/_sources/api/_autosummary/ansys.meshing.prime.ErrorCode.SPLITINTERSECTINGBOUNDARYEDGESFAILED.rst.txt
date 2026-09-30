@@ -1,0 +1,6 @@
+﻿SPLITINTERSECTINGBOUNDARYEDGESFAILED
+====================================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoattribute:: ErrorCode.SPLITINTERSECTINGBOUNDARYEDGESFAILED

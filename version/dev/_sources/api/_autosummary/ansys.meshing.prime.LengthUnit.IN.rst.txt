@@ -1,0 +1,6 @@
+IN
+==
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoattribute:: LengthUnit.IN

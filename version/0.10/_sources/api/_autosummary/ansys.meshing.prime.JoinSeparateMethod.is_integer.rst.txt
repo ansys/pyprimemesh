@@ -1,0 +1,11 @@
+is\_integer
+===========
+
+.. currentmodule:: ansys.meshing.prime
+
+.. automethod:: ansys.meshing.prime.JoinSeparateMethod.is_integer
+
+.. minigallery::
+   :add-heading: Examples using JoinSeparateMethod.is_integer
+
+   ansys.meshing.prime.JoinSeparateMethod.is_integer

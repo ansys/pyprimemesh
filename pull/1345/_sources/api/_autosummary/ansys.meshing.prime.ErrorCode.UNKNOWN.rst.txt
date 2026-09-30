@@ -1,0 +1,6 @@
+UNKNOWN
+=======
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoattribute:: ErrorCode.UNKNOWN

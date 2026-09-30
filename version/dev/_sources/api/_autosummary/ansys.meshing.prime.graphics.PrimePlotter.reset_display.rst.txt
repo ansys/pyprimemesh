@@ -1,0 +1,11 @@
+reset\_display
+==============
+
+.. currentmodule:: ansys.meshing.prime.graphics
+
+.. automethod:: ansys.meshing.prime.graphics.PrimePlotter.reset_display
+
+.. minigallery::
+   :add-heading: Examples using PrimePlotter.reset_display
+
+   ansys.meshing.prime.graphics.PrimePlotter.reset_display

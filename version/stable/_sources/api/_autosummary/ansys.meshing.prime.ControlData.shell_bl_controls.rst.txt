@@ -1,0 +1,6 @@
+shell\_bl\_controls
+===================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoproperty:: ControlData.shell_bl_controls

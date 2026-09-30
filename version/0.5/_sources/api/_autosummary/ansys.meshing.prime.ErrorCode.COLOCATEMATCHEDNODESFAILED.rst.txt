@@ -1,0 +1,6 @@
+COLOCATEMATCHEDNODESFAILED
+==========================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoattribute:: ErrorCode.COLOCATEMATCHEDNODESFAILED

@@ -1,0 +1,11 @@
+print\_default
+==============
+
+.. currentmodule:: ansys.meshing.prime
+
+.. automethod:: ansys.meshing.prime.AutoMeshResults.print_default
+
+.. minigallery::
+   :add-heading: Examples using AutoMeshResults.print_default
+
+   ansys.meshing.prime.AutoMeshResults.print_default

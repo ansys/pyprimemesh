@@ -1,0 +1,6 @@
+volume\_controls
+================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoproperty:: ControlData.volume_controls

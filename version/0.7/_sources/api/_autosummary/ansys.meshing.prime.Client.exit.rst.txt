@@ -1,0 +1,11 @@
+exit
+====
+
+.. currentmodule:: ansys.meshing.prime
+
+.. automethod:: ansys.meshing.prime.Client.exit
+
+.. minigallery::
+   :add-heading: Examples using Client.exit
+
+   ansys.meshing.prime.Client.exit

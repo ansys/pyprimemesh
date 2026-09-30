@@ -1,0 +1,6 @@
+smooth\_dihedral\_face\_nodes
+=============================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. automethod:: SurfaceUtilities.smooth_dihedral_face_nodes

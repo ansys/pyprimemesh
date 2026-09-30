@@ -1,0 +1,6 @@
+VT\_MERGETHINSTRIPESFAILED
+==========================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoattribute:: ErrorCode.VT_MERGETHINSTRIPESFAILED

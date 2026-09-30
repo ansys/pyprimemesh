@@ -1,0 +1,6 @@
+UNSUPPORTEDFILEEXTENSIONFORFLUENTSIZEFIELD
+==========================================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoattribute:: ErrorCode.UNSUPPORTEDFILEEXTENSIONFORFLUENTSIZEFIELD

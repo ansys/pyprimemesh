@@ -1,0 +1,6 @@
+suggested\_part\_name
+=====================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoproperty:: CreateContactPatchParams.suggested_part_name

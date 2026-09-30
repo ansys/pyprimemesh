@@ -1,0 +1,23 @@
+FileWriteParams
+===============
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoclass:: FileWriteParams
+   
+   
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+      :toctree:
+   
+      
+      FileWriteParams.print_default
+      FileWriteParams.set_default
+   
+   
+
+   
+   
+   

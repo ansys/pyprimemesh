@@ -1,0 +1,6 @@
+tet
+===
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoproperty:: AutoMeshParams.tet

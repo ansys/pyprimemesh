@@ -1,0 +1,6 @@
+label
+=====
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoproperty:: FixInvalidNormalNodeParams.label

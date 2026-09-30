@@ -1,0 +1,6 @@
+﻿merge\_to\_neighbor\_volume
+===========================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoproperty:: MergeVolumesParams.merge_to_neighbor_volume

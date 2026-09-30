@@ -1,0 +1,6 @@
+island\_tol
+===========
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoproperty:: WrapperImproveQualityParams.island_tol

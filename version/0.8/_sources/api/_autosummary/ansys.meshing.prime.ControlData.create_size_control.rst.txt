@@ -1,0 +1,11 @@
+create\_size\_control
+=====================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. automethod:: ansys.meshing.prime.ControlData.create_size_control
+
+.. minigallery::
+   :add-heading: Examples using ControlData.create_size_control
+
+   ansys.meshing.prime.ControlData.create_size_control

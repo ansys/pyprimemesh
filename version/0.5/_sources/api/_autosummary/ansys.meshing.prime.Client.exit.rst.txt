@@ -1,0 +1,6 @@
+exit
+====
+
+.. currentmodule:: ansys.meshing.prime
+
+.. automethod:: Client.exit

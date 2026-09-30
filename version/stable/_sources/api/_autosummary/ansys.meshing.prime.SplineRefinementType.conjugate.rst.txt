@@ -1,0 +1,11 @@
+conjugate
+=========
+
+.. currentmodule:: ansys.meshing.prime
+
+.. automethod:: ansys.meshing.prime.SplineRefinementType.conjugate
+
+.. minigallery::
+   :add-heading: Examples using SplineRefinementType.conjugate
+
+   ansys.meshing.prime.SplineRefinementType.conjugate

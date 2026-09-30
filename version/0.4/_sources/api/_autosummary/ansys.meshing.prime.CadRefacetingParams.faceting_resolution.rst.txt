@@ -1,0 +1,6 @@
+﻿faceting\_resolution
+====================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoproperty:: CadRefacetingParams.faceting_resolution

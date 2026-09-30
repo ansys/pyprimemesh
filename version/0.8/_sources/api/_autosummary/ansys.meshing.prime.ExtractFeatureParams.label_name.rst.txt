@@ -1,0 +1,6 @@
+label\_name
+===========
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoproperty:: ExtractFeatureParams.label_name

@@ -1,0 +1,6 @@
+SURFERLAYEREDQUADFAILED
+=======================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoattribute:: WarningCode.SURFERLAYEREDQUADFAILED

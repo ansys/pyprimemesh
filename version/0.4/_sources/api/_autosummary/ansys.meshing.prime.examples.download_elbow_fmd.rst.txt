@@ -1,0 +1,6 @@
+﻿download\_elbow\_fmd
+====================
+
+.. currentmodule:: ansys.meshing.prime.examples
+
+.. autofunction:: download_elbow_fmd

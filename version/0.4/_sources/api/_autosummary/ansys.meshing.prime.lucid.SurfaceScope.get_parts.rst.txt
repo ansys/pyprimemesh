@@ -1,0 +1,6 @@
+﻿get\_parts
+==========
+
+.. currentmodule:: ansys.meshing.prime.lucid
+
+.. automethod:: SurfaceScope.get_parts

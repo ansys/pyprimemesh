@@ -1,0 +1,11 @@
+search\_zonelets\_by\_invalid\_normals
+======================================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. automethod:: ansys.meshing.prime.SurfaceSearch.search_zonelets_by_invalid_normals
+
+.. minigallery::
+   :add-heading: Examples using SurfaceSearch.search_zonelets_by_invalid_normals
+
+   ansys.meshing.prime.SurfaceSearch.search_zonelets_by_invalid_normals

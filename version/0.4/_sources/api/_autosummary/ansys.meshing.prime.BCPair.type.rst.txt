@@ -1,0 +1,6 @@
+﻿type
+====
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoproperty:: BCPair.type

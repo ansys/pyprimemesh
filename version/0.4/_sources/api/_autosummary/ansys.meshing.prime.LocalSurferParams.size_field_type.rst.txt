@@ -1,0 +1,6 @@
+﻿size\_field\_type
+=================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoproperty:: LocalSurferParams.size_field_type

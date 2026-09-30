@@ -1,0 +1,51 @@
+.. vale off
+
+CellQualityMeasure
+==================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoclass:: CellQualityMeasure
+   
+   
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+      :toctree:
+   
+      CellQualityMeasure.conjugate
+      CellQualityMeasure.bit_length
+      CellQualityMeasure.bit_count
+      CellQualityMeasure.to_bytes
+      CellQualityMeasure.from_bytes
+      CellQualityMeasure.as_integer_ratio
+   
+   
+
+   
+   
+   .. rubric:: Attributes
+
+   .. autosummary::
+      :toctree:
+   
+      CellQualityMeasure.real
+      CellQualityMeasure.imag
+      CellQualityMeasure.numerator
+      CellQualityMeasure.denominator
+      CellQualityMeasure.SKEWNESS
+      CellQualityMeasure.ASPECTRATIO
+      CellQualityMeasure.FLUENTASPECTRATIO
+      CellQualityMeasure.INVERSEORTHOGONAL
+      CellQualityMeasure.INVERSEORTHOGONAL_V2
+      CellQualityMeasure.ELEMENTQUALITY
+   
+   
+
+.. minigallery::
+    :add-heading: Examples using CellQualityMeasure
+
+    ansys.meshing.prime.CellQualityMeasure
+
+.. vale on

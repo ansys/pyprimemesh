@@ -1,0 +1,6 @@
+﻿ALIGN\_OPERATIONINTERRUPTED
+===========================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoattribute:: WarningCode.ALIGN_OPERATIONINTERRUPTED

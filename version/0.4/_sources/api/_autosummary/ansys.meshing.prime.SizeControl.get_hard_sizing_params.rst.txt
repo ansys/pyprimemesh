@@ -1,0 +1,6 @@
+﻿get\_hard\_sizing\_params
+=========================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. automethod:: SizeControl.get_hard_sizing_params

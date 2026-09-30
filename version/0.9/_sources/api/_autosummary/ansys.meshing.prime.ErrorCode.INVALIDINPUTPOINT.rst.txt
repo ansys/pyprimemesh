@@ -1,0 +1,6 @@
+INVALIDINPUTPOINT
+=================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoattribute:: ErrorCode.INVALIDINPUTPOINT

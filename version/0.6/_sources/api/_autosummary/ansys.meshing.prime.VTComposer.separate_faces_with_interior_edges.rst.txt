@@ -1,0 +1,6 @@
+separate\_faces\_with\_interior\_edges
+======================================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. automethod:: VTComposer.separate_faces_with_interior_edges

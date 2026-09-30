@@ -1,0 +1,6 @@
+﻿download\_bracket\_dsco
+=======================
+
+.. currentmodule:: ansys.meshing.prime.examples
+
+.. autofunction:: download_bracket_dsco

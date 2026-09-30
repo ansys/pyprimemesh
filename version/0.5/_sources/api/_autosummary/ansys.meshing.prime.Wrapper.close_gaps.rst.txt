@@ -1,0 +1,6 @@
+close\_gaps
+===========
+
+.. currentmodule:: ansys.meshing.prime
+
+.. automethod:: Wrapper.close_gaps

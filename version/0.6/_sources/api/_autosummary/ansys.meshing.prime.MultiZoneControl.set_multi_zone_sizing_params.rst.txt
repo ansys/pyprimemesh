@@ -1,0 +1,6 @@
+set\_multi\_zone\_sizing\_params
+================================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. automethod:: MultiZoneControl.set_multi_zone_sizing_params

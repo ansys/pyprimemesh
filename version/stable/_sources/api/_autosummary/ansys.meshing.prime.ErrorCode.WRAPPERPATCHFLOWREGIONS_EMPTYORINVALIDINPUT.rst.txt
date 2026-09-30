@@ -1,0 +1,6 @@
+WRAPPERPATCHFLOWREGIONS\_EMPTYORINVALIDINPUT
+============================================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoattribute:: ErrorCode.WRAPPERPATCHFLOWREGIONS_EMPTYORINVALIDINPUT

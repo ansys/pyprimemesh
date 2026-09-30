@@ -1,0 +1,6 @@
+﻿download\_f1\_rw\_end\_plates\_stl
+==================================
+
+.. currentmodule:: ansys.meshing.prime.examples
+
+.. autofunction:: download_f1_rw_end_plates_stl

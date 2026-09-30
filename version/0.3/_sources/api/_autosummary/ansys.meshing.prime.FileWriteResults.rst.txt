@@ -1,0 +1,34 @@
+.. vale off
+
+FileWriteResults
+================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoclass:: FileWriteResults
+   
+   
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+      :toctree:
+   
+      
+      FileWriteResults.print_default
+      FileWriteResults.set_default
+   
+   
+
+   
+   
+   .. rubric:: Attributes
+
+   .. autosummary::
+      :toctree:
+   
+      FileWriteResults.error_code
+   
+   
+
+.. vale on

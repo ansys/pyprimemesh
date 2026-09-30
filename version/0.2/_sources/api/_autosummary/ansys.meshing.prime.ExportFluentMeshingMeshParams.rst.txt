@@ -1,0 +1,23 @@
+ExportFluentMeshingMeshParams
+=============================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoclass:: ExportFluentMeshingMeshParams
+   
+   
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+      :toctree:
+   
+      
+      ExportFluentMeshingMeshParams.print_default
+      ExportFluentMeshingMeshParams.set_default
+   
+   
+
+   
+   
+   

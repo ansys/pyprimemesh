@@ -1,0 +1,6 @@
+﻿subtract\_volumes
+=================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. automethod:: Connect.subtract_volumes

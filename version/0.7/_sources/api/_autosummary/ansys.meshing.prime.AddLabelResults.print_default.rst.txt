@@ -1,0 +1,11 @@
+print\_default
+==============
+
+.. currentmodule:: ansys.meshing.prime
+
+.. automethod:: ansys.meshing.prime.AddLabelResults.print_default
+
+.. minigallery::
+   :add-heading: Examples using AddLabelResults.print_default
+
+   ansys.meshing.prime.AddLabelResults.print_default

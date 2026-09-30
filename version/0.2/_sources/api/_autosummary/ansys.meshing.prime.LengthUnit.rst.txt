@@ -1,0 +1,27 @@
+LengthUnit
+==========
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoclass:: LengthUnit
+   
+   
+   
+   
+
+   
+   
+   .. rubric:: Attributes
+
+   .. autosummary::
+      :toctree:
+   
+      LengthUnit.M
+      LengthUnit.CM
+      LengthUnit.MM
+      LengthUnit.UM
+      LengthUnit.NM
+      LengthUnit.IN
+      LengthUnit.FT
+   
+   

@@ -1,0 +1,6 @@
+CREATECONTACTPATCH\_INVALIDTOLERANCEVALUE
+=========================================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoattribute:: ErrorCode.CREATECONTACTPATCH_INVALIDTOLERANCEVALUE

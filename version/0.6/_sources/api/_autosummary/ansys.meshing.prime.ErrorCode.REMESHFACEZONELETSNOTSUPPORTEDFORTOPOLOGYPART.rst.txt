@@ -1,0 +1,6 @@
+REMESHFACEZONELETSNOTSUPPORTEDFORTOPOLOGYPART
+=============================================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoattribute:: ErrorCode.REMESHFACEZONELETSNOTSUPPORTEDFORTOPOLOGYPART

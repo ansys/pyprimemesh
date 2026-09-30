@@ -1,0 +1,6 @@
+﻿ZONEBOUNDARY
+============
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoattribute:: SurfaceFeatureType.ZONEBOUNDARY

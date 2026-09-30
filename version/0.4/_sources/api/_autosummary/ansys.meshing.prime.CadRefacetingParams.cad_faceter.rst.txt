@@ -1,0 +1,6 @@
+﻿cad\_faceter
+============
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoproperty:: CadRefacetingParams.cad_faceter

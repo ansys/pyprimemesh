@@ -1,0 +1,36 @@
+.. vale off
+
+SmoothDihedralFaceNodesParams
+=============================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoclass:: SmoothDihedralFaceNodesParams
+   
+   
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+      :toctree:
+   
+      
+      SmoothDihedralFaceNodesParams.print_default
+      SmoothDihedralFaceNodesParams.set_default
+   
+   
+
+   
+   
+   .. rubric:: Attributes
+
+   .. autosummary::
+      :toctree:
+   
+      SmoothDihedralFaceNodesParams.min_dihedral_angle
+      SmoothDihedralFaceNodesParams.tolerance
+      SmoothDihedralFaceNodesParams.type
+   
+   
+
+.. vale on

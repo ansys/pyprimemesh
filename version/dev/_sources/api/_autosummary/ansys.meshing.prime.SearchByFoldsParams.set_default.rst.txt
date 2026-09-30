@@ -1,0 +1,11 @@
+set\_default
+============
+
+.. currentmodule:: ansys.meshing.prime
+
+.. automethod:: ansys.meshing.prime.SearchByFoldsParams.set_default
+
+.. minigallery::
+   :add-heading: Examples using SearchByFoldsParams.set_default
+
+   ansys.meshing.prime.SearchByFoldsParams.set_default

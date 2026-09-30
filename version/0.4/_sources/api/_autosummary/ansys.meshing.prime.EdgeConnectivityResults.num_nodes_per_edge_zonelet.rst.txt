@@ -1,0 +1,6 @@
+﻿num\_nodes\_per\_edge\_zonelet
+==============================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoproperty:: EdgeConnectivityResults.num_nodes_per_edge_zonelet

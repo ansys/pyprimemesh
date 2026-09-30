@@ -1,0 +1,6 @@
+FUSEINTERIORFAILED
+==================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoattribute:: ErrorCode.FUSEINTERIORFAILED

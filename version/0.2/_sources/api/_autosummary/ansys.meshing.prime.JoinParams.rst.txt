@@ -1,0 +1,34 @@
+JoinParams
+==========
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoclass:: JoinParams
+   
+   
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+      :toctree:
+   
+      
+      JoinParams.print_default
+      JoinParams.set_default
+   
+   
+
+   
+   
+   .. rubric:: Attributes
+
+   .. autosummary::
+      :toctree:
+   
+      JoinParams.match_angle
+      JoinParams.overlap_zone_name
+      JoinParams.remesh
+      JoinParams.tolerance
+      JoinParams.use_absolute_tolerance
+   
+   
