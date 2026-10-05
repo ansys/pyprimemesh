@@ -1,0 +1,11 @@
+get\_face\_zone\_of\_zonelet
+============================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. automethod:: ansys.meshing.prime.Part.get_face_zone_of_zonelet
+
+.. minigallery::
+   :add-heading: Examples using Part.get_face_zone_of_zonelet
+
+   ansys.meshing.prime.Part.get_face_zone_of_zonelet

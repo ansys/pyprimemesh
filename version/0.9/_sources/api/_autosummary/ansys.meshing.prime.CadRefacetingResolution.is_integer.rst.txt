@@ -1,0 +1,11 @@
+is\_integer
+===========
+
+.. currentmodule:: ansys.meshing.prime
+
+.. automethod:: ansys.meshing.prime.CadRefacetingResolution.is_integer
+
+.. minigallery::
+   :add-heading: Examples using CadRefacetingResolution.is_integer
+
+   ansys.meshing.prime.CadRefacetingResolution.is_integer

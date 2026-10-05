@@ -1,0 +1,6 @@
+﻿tolerance
+=========
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoproperty:: StitchParams.tolerance

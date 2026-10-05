@@ -1,0 +1,6 @@
+﻿WRAPPERPROJECTIONFAILED
+=======================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoattribute:: ErrorCode.WRAPPERPROJECTIONFAILED

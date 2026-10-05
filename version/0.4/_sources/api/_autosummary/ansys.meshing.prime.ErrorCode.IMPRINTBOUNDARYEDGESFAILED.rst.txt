@@ -1,0 +1,6 @@
+﻿IMPRINTBOUNDARYEDGESFAILED
+==========================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoattribute:: ErrorCode.IMPRINTBOUNDARYEDGESFAILED

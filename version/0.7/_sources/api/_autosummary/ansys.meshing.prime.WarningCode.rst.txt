@@ -1,0 +1,106 @@
+.. vale off
+
+WarningCode
+===========
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoclass:: WarningCode
+   
+   
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+      :toctree:
+   
+      WarningCode.conjugate
+      WarningCode.bit_length
+      WarningCode.bit_count
+      WarningCode.to_bytes
+      WarningCode.from_bytes
+      WarningCode.as_integer_ratio
+   
+   
+
+   
+   
+   .. rubric:: Attributes
+
+   .. autosummary::
+      :toctree:
+   
+      WarningCode.real
+      WarningCode.imag
+      WarningCode.numerator
+      WarningCode.denominator
+      WarningCode.NOWARNING
+      WarningCode.UNKNOWN
+      WarningCode.SURFER_QUADCLEANUP_MULTITHREADINGNOTSUPPORTED
+      WarningCode.OVERRIDECURVATURESIZINGPARAMS
+      WarningCode.OVERRIDESOFTSIZINGPARAMS
+      WarningCode.OVERRIDEHARDSIZINGPARAMS
+      WarningCode.OVERRIDEPROXIMITYSIZINGPARAMS
+      WarningCode.OVERRIDEBOISIZINGPARAMS
+      WarningCode.OVERRIDEMESHEDSIZINGPARAMS
+      WarningCode.INVALIDSIZECONTROLSCOPE
+      WarningCode.OVERRIDEGROWTHRATEPARAM
+      WarningCode.OVERRIDESUGGESTEDNAME
+      WarningCode.OVERRIDESURFACESCOPEENTITY
+      WarningCode.OVERRIDEVOLUMESCOPEENTITY
+      WarningCode.MAXOFPRISMCONTROLSMINASPECTRATIO
+      WarningCode.OVERRIDEEDGESCOPEENTITY
+      WarningCode.SHELLBLGAPFACTORMINLIMIT
+      WarningCode.PARTNOTINPARTSCOPE
+      WarningCode.NUMERICPARTNAMERENAMETOALPHANUMERIC
+      WarningCode.SURFERLAYEREDQUADFAILED
+      WarningCode.SURFERDEGENERATEFACE
+      WarningCode.ALIGN_OPERATIONINTERRUPTED
+      WarningCode.FUSEOVERLAPREMOVALINCOMPLETE
+      WarningCode.REMOVEOVERLAPWITHINTERSECT
+      WarningCode.IGA_NOGEOMZONELETFORSPLINEFITTING
+      WarningCode.NOHOLESFOUNDONPLANE
+      WarningCode.NOVOLUMESCOMPUTED
+      WarningCode.EXTERNALOPENFACEZONELETSFOUND
+      WarningCode.NOVOLUMESENCLOSINGMATERIALPOINT
+      WarningCode.EXTERNALOPENTOPOFACESFOUND
+      WarningCode.FACEZONELETSWITHOUTVOLUMES
+      WarningCode.JOINEDZONELETSFROMMULTIPLEVOLUMES
+      WarningCode.FAILEDTOUPDATEVOLUMES
+      WarningCode.WRAPPER_SIZECONTROLNOTDEFINED
+      WarningCode.WRAPPER_SIZECONTROLNOTSUPPORTED
+      WarningCode.WRAPPER_SMALLERSIZEATFEAURES
+      WarningCode.WRAPPER_SMALLERCONTACTPREVENTIONSIZE
+      WarningCode.MATERIALPOINTWITHSAMENAMEEXISTS
+      WarningCode.ENTITIESNOTBELONGTOANYZONE
+      WarningCode.INVALIDENTITIESNOTADDEDTOZONE
+      WarningCode.LOCALSURFERNOFACEREGISTERED
+      WarningCode.MESHHASNONPOSITIVEVOLUMES
+      WarningCode.MESHHASNONPOSITIVEAREAS
+      WarningCode.MESHHASINVALIDSHAPE
+      WarningCode.MESHHASLEFTHANDEDNESSFACES
+      WarningCode.NOCADGEOMETRYFOUND
+      WarningCode.NOCADGEOMETRYPROJECTONFACETS
+      WarningCode.DUPLICATEINPUT
+      WarningCode.UNPROCESSEDKEYWORDSINABAQUSFILE
+      WarningCode.EXPORTMAPDLANALYSISSETTINGSFAILED
+      WarningCode.WRITINGCONTACTPAIRSSKIPPED
+      WarningCode.WRITINGTIESSKIPPED
+      WarningCode.WRITINGZONELETOFLABELTOELEMENTCOMPONENTSKIPPED
+      WarningCode.VT_SKIPPEDPROTECTEDENTITIES
+      WarningCode.VT_SKIPPEDFEATUREENTITIES
+      WarningCode.VT_SKIPPEDFREEEDGES
+      WarningCode.VT_SKIPPEDNONMANIFOLDEDGES
+      WarningCode.VT_SKIPPEDENTITIESINDIFFERENTZONES
+      WarningCode.VT_CANNOTMERGENODES
+      WarningCode.VT_REMESHFACEFAILED
+      WarningCode.MULTIZONEMESHER_SURFACESCOPEVOLUMESCOPEINCONSISTENCY
+   
+   
+
+.. minigallery::
+    :add-heading: Examples using WarningCode
+
+    ansys.meshing.prime.WarningCode
+
+.. vale on

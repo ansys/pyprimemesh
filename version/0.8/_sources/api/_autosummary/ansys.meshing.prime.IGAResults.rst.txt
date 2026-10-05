@@ -1,0 +1,41 @@
+.. vale off
+
+IGAResults
+==========
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoclass:: IGAResults
+   
+   
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+      :toctree:
+   
+      
+      IGAResults.print_default
+      IGAResults.set_default
+   
+   
+
+   
+   
+   .. rubric:: Attributes
+
+   .. autosummary::
+      :toctree:
+   
+      IGAResults.error_code
+      IGAResults.spline_ids
+      IGAResults.warning_code
+   
+   
+
+.. minigallery::
+    :add-heading: Examples using IGAResults
+
+    ansys.meshing.prime.IGAResults
+
+.. vale on

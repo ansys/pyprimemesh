@@ -1,0 +1,6 @@
+﻿WRAPPERSURFACEHASHOLES
+======================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoattribute:: ErrorCode.WRAPPERSURFACEHASHOLES

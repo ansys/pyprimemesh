@@ -1,0 +1,6 @@
+topo\_edge\_ids
+===============
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoproperty:: EdgeConnectivityResults.topo_edge_ids

@@ -1,0 +1,6 @@
+SURFERINVALIDANGLES
+===================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoattribute:: ErrorCode.SURFERINVALIDANGLES

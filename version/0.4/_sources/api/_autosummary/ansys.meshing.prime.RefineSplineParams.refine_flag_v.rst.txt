@@ -1,0 +1,6 @@
+﻿refine\_flag\_v
+===============
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoproperty:: RefineSplineParams.refine_flag_v

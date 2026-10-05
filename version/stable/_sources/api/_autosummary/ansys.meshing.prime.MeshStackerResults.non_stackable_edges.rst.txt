@@ -1,0 +1,6 @@
+non\_stackable\_edges
+=====================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoproperty:: MeshStackerResults.non_stackable_edges

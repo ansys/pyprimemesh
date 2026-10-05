@@ -1,0 +1,6 @@
+﻿sharp\_angle
+============
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoproperty:: WrapperImproveQualityParams.sharp_angle

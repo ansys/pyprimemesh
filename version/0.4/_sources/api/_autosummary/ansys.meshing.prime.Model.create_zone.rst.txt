@@ -1,0 +1,6 @@
+﻿create\_zone
+============
+
+.. currentmodule:: ansys.meshing.prime
+
+.. automethod:: Model.create_zone

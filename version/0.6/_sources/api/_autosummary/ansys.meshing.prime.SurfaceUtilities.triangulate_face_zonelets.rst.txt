@@ -1,0 +1,6 @@
+triangulate\_face\_zonelets
+===========================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. automethod:: SurfaceUtilities.triangulate_face_zonelets

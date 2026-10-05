@@ -1,0 +1,6 @@
+﻿search\_zonelets\_by\_self\_intersections
+=========================================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. automethod:: SurfaceSearch.search_zonelets_by_self_intersections

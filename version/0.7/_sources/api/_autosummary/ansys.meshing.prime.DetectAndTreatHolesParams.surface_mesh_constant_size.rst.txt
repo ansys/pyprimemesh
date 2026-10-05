@@ -1,0 +1,6 @@
+surface\_mesh\_constant\_size
+=============================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoproperty:: DetectAndTreatHolesParams.surface_mesh_constant_size

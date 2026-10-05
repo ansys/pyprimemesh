@@ -1,0 +1,6 @@
+stretch\_free\_boundaries
+=========================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. automethod:: SurfaceUtilities.stretch_free_boundaries

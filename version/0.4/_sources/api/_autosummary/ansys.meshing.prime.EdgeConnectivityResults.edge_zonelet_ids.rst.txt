@@ -1,0 +1,6 @@
+﻿edge\_zonelet\_ids
+==================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoproperty:: EdgeConnectivityResults.edge_zonelet_ids

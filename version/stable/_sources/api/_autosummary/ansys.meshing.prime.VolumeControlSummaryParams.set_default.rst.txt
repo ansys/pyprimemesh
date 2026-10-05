@@ -1,0 +1,11 @@
+set\_default
+============
+
+.. currentmodule:: ansys.meshing.prime
+
+.. automethod:: ansys.meshing.prime.VolumeControlSummaryParams.set_default
+
+.. minigallery::
+   :add-heading: Examples using VolumeControlSummaryParams.set_default
+
+   ansys.meshing.prime.VolumeControlSummaryParams.set_default

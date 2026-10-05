@@ -1,0 +1,6 @@
+﻿part\_expression
+================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoproperty:: ScopeDefinition.part_expression

@@ -1,0 +1,47 @@
+.. vale off
+
+LocalSurferParams
+=================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoclass:: LocalSurferParams
+   
+   
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+      :toctree:
+   
+      
+      LocalSurferParams.print_default
+      LocalSurferParams.set_default
+   
+   
+
+   
+   
+   .. rubric:: Attributes
+
+   .. autosummary::
+      :toctree:
+   
+      LocalSurferParams.constant_size
+      LocalSurferParams.growth_rate
+      LocalSurferParams.max_angle
+      LocalSurferParams.max_size
+      LocalSurferParams.min_angle
+      LocalSurferParams.min_size
+      LocalSurferParams.n_rings
+      LocalSurferParams.size_field_type
+      LocalSurferParams.smooth_boundary
+   
+   
+
+.. minigallery::
+    :add-heading: Examples using LocalSurferParams
+
+    ansys.meshing.prime.LocalSurferParams
+
+.. vale on

@@ -1,0 +1,11 @@
+match\_morph
+============
+
+.. currentmodule:: ansys.meshing.prime
+
+.. automethod:: ansys.meshing.prime.Morpher.match_morph
+
+.. minigallery::
+   :add-heading: Examples using Morpher.match_morph
+
+   ansys.meshing.prime.Morpher.match_morph

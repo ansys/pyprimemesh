@@ -1,0 +1,11 @@
+delete\_topo\_entities
+======================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. automethod:: ansys.meshing.prime.Part.delete_topo_entities
+
+.. minigallery::
+   :add-heading: Examples using Part.delete_topo_entities
+
+   ansys.meshing.prime.Part.delete_topo_entities

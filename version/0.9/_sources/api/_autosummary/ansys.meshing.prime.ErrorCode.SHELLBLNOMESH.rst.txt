@@ -1,0 +1,6 @@
+SHELLBLNOMESH
+=============
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoattribute:: ErrorCode.SHELLBLNOMESH

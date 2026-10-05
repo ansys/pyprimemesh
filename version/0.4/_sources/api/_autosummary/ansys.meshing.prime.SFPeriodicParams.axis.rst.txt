@@ -1,0 +1,6 @@
+﻿axis
+====
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoproperty:: SFPeriodicParams.axis

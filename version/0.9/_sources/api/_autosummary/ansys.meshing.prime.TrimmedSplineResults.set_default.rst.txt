@@ -1,0 +1,11 @@
+set\_default
+============
+
+.. currentmodule:: ansys.meshing.prime
+
+.. automethod:: ansys.meshing.prime.TrimmedSplineResults.set_default
+
+.. minigallery::
+   :add-heading: Examples using TrimmedSplineResults.set_default
+
+   ansys.meshing.prime.TrimmedSplineResults.set_default

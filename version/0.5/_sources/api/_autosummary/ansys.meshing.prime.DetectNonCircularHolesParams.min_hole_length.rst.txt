@@ -1,0 +1,6 @@
+min\_hole\_length
+=================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoproperty:: DetectNonCircularHolesParams.min_hole_length

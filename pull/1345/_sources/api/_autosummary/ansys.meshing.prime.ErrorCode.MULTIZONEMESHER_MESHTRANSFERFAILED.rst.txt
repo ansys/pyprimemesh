@@ -1,0 +1,6 @@
+MULTIZONEMESHER\_MESHTRANSFERFAILED
+===================================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoattribute:: ErrorCode.MULTIZONEMESHER_MESHTRANSFERFAILED

@@ -1,0 +1,6 @@
+﻿refinement\_fraction\_v
+=======================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoproperty:: BoundaryFittedSplineParams.refinement_fraction_v

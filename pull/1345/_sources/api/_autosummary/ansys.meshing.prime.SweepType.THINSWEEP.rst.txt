@@ -1,0 +1,6 @@
+THINSWEEP
+=========
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoattribute:: SweepType.THINSWEEP

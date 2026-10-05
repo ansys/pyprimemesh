@@ -1,0 +1,6 @@
+﻿write
+=====
+
+.. currentmodule:: ansys.meshing.prime.lucid
+
+.. automethod:: Mesh.write

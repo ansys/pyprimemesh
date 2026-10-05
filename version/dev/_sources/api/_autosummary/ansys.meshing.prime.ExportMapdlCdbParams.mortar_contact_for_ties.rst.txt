@@ -1,0 +1,6 @@
+mortar\_contact\_for\_ties
+==========================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoproperty:: ExportMapdlCdbParams.mortar_contact_for_ties

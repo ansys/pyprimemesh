@@ -1,0 +1,11 @@
+conjugate
+=========
+
+.. currentmodule:: ansys.meshing.prime
+
+.. automethod:: ansys.meshing.prime.SweepType.conjugate
+
+.. minigallery::
+   :add-heading: Examples using SweepType.conjugate
+
+   ansys.meshing.prime.SweepType.conjugate

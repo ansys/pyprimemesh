@@ -1,0 +1,39 @@
+.. vale off
+
+FileReadParams
+==============
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoclass:: FileReadParams
+   
+   
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+      :toctree:
+   
+      
+      FileReadParams.print_default
+      FileReadParams.set_default
+   
+   
+
+   
+   
+   .. rubric:: Attributes
+
+   .. autosummary::
+      :toctree:
+   
+      FileReadParams.append
+   
+   
+
+.. minigallery::
+    :add-heading: Examples using FileReadParams
+
+    ansys.meshing.prime.FileReadParams
+
+.. vale on

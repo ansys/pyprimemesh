@@ -1,0 +1,6 @@
+SKEWNESS
+========
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoattribute:: CellQualityMeasure.SKEWNESS

@@ -1,0 +1,11 @@
+download\_multi\_layer\_quad\_mesh\_pcb\_pmdat
+==============================================
+
+.. currentmodule:: ansys.meshing.prime.examples
+
+.. autofunction:: ansys.meshing.prime.examples.download_multi_layer_quad_mesh_pcb_pmdat
+
+.. minigallery::
+    :add-heading: Examples using download_multi_layer_quad_mesh_pcb_pmdat
+
+    ansys.meshing.prime.examples.download_multi_layer_quad_mesh_pcb_pmdat

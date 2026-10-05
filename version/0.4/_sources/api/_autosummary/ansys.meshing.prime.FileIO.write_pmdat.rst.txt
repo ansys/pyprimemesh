@@ -1,0 +1,6 @@
+﻿write\_pmdat
+============
+
+.. currentmodule:: ansys.meshing.prime
+
+.. automethod:: FileIO.write_pmdat

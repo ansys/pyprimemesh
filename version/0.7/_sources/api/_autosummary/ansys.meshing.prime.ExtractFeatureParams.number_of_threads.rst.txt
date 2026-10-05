@@ -1,0 +1,6 @@
+number\_of\_threads
+===================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoproperty:: ExtractFeatureParams.number_of_threads

@@ -1,0 +1,6 @@
+get\_scope\_face\_zonelets
+==========================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. automethod:: ControlData.get_scope_face_zonelets

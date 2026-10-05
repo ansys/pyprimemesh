@@ -1,0 +1,6 @@
+﻿drop\_mid\_nodes
+================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoproperty:: ImportMapdlCdbParams.drop_mid_nodes

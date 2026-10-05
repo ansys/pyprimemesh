@@ -1,0 +1,6 @@
+FLUENTASPECTRATIO
+=================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoattribute:: CellQualityMeasure.FLUENTASPECTRATIO

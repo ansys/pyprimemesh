@@ -1,0 +1,23 @@
+BoundaryFittedSpline
+====================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoclass:: BoundaryFittedSpline
+   
+   
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+      :toctree:
+   
+      
+      BoundaryFittedSpline.create_boundary_fitted_spline
+      BoundaryFittedSpline.refine_spline
+   
+   
+
+   
+   
+   

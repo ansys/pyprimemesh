@@ -1,0 +1,11 @@
+from\_bytes
+===========
+
+.. currentmodule:: ansys.meshing.prime
+
+.. automethod:: ansys.meshing.prime.MaterialPointType.from_bytes
+
+.. minigallery::
+   :add-heading: Examples using MaterialPointType.from_bytes
+
+   ansys.meshing.prime.MaterialPointType.from_bytes

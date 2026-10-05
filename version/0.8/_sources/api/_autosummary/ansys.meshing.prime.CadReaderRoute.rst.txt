@@ -1,0 +1,50 @@
+.. vale off
+
+CadReaderRoute
+==============
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoclass:: CadReaderRoute
+   
+   
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+      :toctree:
+   
+      CadReaderRoute.conjugate
+      CadReaderRoute.bit_length
+      CadReaderRoute.bit_count
+      CadReaderRoute.to_bytes
+      CadReaderRoute.from_bytes
+      CadReaderRoute.as_integer_ratio
+   
+   
+
+   
+   
+   .. rubric:: Attributes
+
+   .. autosummary::
+      :toctree:
+   
+      CadReaderRoute.real
+      CadReaderRoute.imag
+      CadReaderRoute.numerator
+      CadReaderRoute.denominator
+      CadReaderRoute.PROGRAMCONTROLLED
+      CadReaderRoute.NATIVE
+      CadReaderRoute.WORKBENCH
+      CadReaderRoute.SPACECLAIM
+      CadReaderRoute.DISCOVERY
+   
+   
+
+.. minigallery::
+    :add-heading: Examples using CadReaderRoute
+
+    ansys.meshing.prime.CadReaderRoute
+
+.. vale on

@@ -1,0 +1,41 @@
+.. vale off
+
+SurfaceQualitySummaryResults
+============================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoclass:: SurfaceQualitySummaryResults
+   
+   
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+      :toctree:
+   
+      
+      SurfaceQualitySummaryResults.print_default
+      SurfaceQualitySummaryResults.set_default
+   
+   
+
+   
+   
+   .. rubric:: Attributes
+
+   .. autosummary::
+      :toctree:
+   
+      SurfaceQualitySummaryResults.error_code
+      SurfaceQualitySummaryResults.quality_results
+      SurfaceQualitySummaryResults.summary
+   
+   
+
+.. minigallery::
+    :add-heading: Examples using SurfaceQualitySummaryResults
+
+    ansys.meshing.prime.SurfaceQualitySummaryResults
+
+.. vale on

@@ -1,0 +1,29 @@
+.. vale off
+
+Wrapper
+=======
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoclass:: Wrapper
+   
+   
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+      :toctree:
+   
+      
+      Wrapper.close_gaps
+      Wrapper.connect
+      Wrapper.improve_quality
+      Wrapper.wrap
+   
+   
+
+   
+   
+   
+
+.. vale on

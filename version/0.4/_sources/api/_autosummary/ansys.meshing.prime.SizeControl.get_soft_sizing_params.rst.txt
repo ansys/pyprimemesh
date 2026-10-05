@@ -1,0 +1,6 @@
+﻿get\_soft\_sizing\_params
+=========================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. automethod:: SizeControl.get_soft_sizing_params

@@ -1,0 +1,6 @@
+NOHOLESFOUNDONPLANE
+===================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoattribute:: WarningCode.NOHOLESFOUNDONPLANE

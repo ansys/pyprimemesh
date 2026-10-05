@@ -1,0 +1,11 @@
+to\_bytes
+=========
+
+.. currentmodule:: ansys.meshing.prime
+
+.. automethod:: ansys.meshing.prime.ScopeEvaluationType.to_bytes
+
+.. minigallery::
+   :add-heading: Examples using ScopeEvaluationType.to_bytes
+
+   ansys.meshing.prime.ScopeEvaluationType.to_bytes

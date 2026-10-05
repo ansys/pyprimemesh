@@ -1,0 +1,6 @@
+SOFT
+====
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoattribute:: SizingType.SOFT

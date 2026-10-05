@@ -1,0 +1,6 @@
+I10
+===
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoattribute:: LSDynaFileFormatType.I10

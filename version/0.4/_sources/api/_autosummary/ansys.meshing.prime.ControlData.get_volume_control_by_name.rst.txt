@@ -1,0 +1,6 @@
+﻿get\_volume\_control\_by\_name
+==============================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. automethod:: ControlData.get_volume_control_by_name

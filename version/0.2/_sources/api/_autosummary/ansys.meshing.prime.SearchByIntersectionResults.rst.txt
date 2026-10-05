@@ -1,0 +1,23 @@
+SearchByIntersectionResults
+===========================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoclass:: SearchByIntersectionResults
+   
+   
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+      :toctree:
+   
+      
+      SearchByIntersectionResults.print_default
+      SearchByIntersectionResults.set_default
+   
+   
+
+   
+   
+   

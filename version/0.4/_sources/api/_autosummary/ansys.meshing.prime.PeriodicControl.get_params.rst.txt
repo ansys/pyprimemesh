@@ -1,0 +1,6 @@
+﻿get\_params
+===========
+
+.. currentmodule:: ansys.meshing.prime
+
+.. automethod:: PeriodicControl.get_params

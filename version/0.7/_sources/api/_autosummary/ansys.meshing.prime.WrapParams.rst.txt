@@ -1,0 +1,46 @@
+.. vale off
+
+WrapParams
+==========
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoclass:: WrapParams
+   
+   
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+      :toctree:
+   
+      
+      WrapParams.print_default
+      WrapParams.set_default
+   
+   
+
+   
+   
+   .. rubric:: Attributes
+
+   .. autosummary::
+      :toctree:
+   
+      WrapParams.base_size
+      WrapParams.imprint_iterations
+      WrapParams.imprint_relative_range
+      WrapParams.number_of_threads
+      WrapParams.size_control_ids
+      WrapParams.size_field_ids
+      WrapParams.sizing_method
+      WrapParams.wrap_region
+   
+   
+
+.. minigallery::
+    :add-heading: Examples using WrapParams
+
+    ansys.meshing.prime.WrapParams
+
+.. vale on

@@ -1,0 +1,6 @@
+check\_non\_manifolds
+=====================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoproperty:: SurferParams.check_non_manifolds

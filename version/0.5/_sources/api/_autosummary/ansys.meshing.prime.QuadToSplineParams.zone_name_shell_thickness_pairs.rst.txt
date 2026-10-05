@@ -1,0 +1,6 @@
+zone\_name\_shell\_thickness\_pairs
+===================================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoproperty:: QuadToSplineParams.zone_name_shell_thickness_pairs

@@ -1,0 +1,6 @@
+﻿edge\_connectivity\_result\_per\_part
+=====================================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoproperty:: FaceAndEdgeConnectivityResults.edge_connectivity_result_per_part

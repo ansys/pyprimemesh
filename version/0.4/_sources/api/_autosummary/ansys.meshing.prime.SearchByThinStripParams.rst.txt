@@ -1,0 +1,38 @@
+.. vale off
+
+SearchByThinStripParams
+=======================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoclass:: SearchByThinStripParams
+   
+   
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+      :toctree:
+   
+      
+      SearchByThinStripParams.print_default
+      SearchByThinStripParams.set_default
+   
+   
+
+   
+   
+   .. rubric:: Attributes
+
+   .. autosummary::
+      :toctree:
+   
+      SearchByThinStripParams.face_quality_measure
+      SearchByThinStripParams.feature_angle
+      SearchByThinStripParams.feature_type
+      SearchByThinStripParams.quality_limit
+      SearchByThinStripParams.strip_height_limit
+   
+   
+
+.. vale on

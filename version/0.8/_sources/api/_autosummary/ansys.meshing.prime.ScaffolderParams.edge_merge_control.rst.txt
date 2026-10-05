@@ -1,0 +1,6 @@
+edge\_merge\_control
+====================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoproperty:: ScaffolderParams.edge_merge_control

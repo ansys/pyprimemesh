@@ -1,0 +1,41 @@
+.. vale off
+
+CreateZoneResults
+=================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoclass:: CreateZoneResults
+   
+   
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+      :toctree:
+   
+      
+      CreateZoneResults.print_default
+      CreateZoneResults.set_default
+   
+   
+
+   
+   
+   .. rubric:: Attributes
+
+   .. autosummary::
+      :toctree:
+   
+      CreateZoneResults.assigned_name
+      CreateZoneResults.error_code
+      CreateZoneResults.zone_id
+   
+   
+
+.. minigallery::
+    :add-heading: Examples using CreateZoneResults
+
+    ansys.meshing.prime.CreateZoneResults
+
+.. vale on

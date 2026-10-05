@@ -1,0 +1,6 @@
+local\_remesh
+=============
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoproperty:: FuseParams.local_remesh

@@ -1,0 +1,6 @@
+﻿size\_field\_id
+===============
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoproperty:: RefineAtContactsResults.size_field_id

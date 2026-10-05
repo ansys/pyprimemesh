@@ -1,0 +1,6 @@
+compute\_multi\_edges
+=====================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoproperty:: SurfaceDiagnosticSummaryParams.compute_multi_edges

@@ -1,0 +1,6 @@
+convert\_quad\_to\_spline
+=========================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. automethod:: QuadToSpline.convert_quad_to_spline

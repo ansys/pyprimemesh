@@ -1,0 +1,6 @@
+﻿merged\_part\_suggested\_name
+=============================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoproperty:: MergePartsParams.merged_part_suggested_name

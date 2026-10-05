@@ -1,0 +1,6 @@
+﻿DELETEMESHFACES\_TOPOLOGYNOTSUPPORTED
+=====================================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoattribute:: ErrorCode.DELETEMESHFACES_TOPOLOGYNOTSUPPORTED

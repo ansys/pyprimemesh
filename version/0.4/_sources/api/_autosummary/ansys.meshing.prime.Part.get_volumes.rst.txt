@@ -1,0 +1,6 @@
+﻿get\_volumes
+============
+
+.. currentmodule:: ansys.meshing.prime
+
+.. automethod:: Part.get_volumes

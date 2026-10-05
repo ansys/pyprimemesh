@@ -1,0 +1,6 @@
+FILENOTFOUND
+============
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoattribute:: ErrorCode.FILENOTFOUND

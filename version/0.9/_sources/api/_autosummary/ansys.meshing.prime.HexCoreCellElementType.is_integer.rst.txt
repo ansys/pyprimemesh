@@ -1,0 +1,11 @@
+is\_integer
+===========
+
+.. currentmodule:: ansys.meshing.prime
+
+.. automethod:: ansys.meshing.prime.HexCoreCellElementType.is_integer
+
+.. minigallery::
+   :add-heading: Examples using HexCoreCellElementType.is_integer
+
+   ansys.meshing.prime.HexCoreCellElementType.is_integer

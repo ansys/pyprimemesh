@@ -1,0 +1,6 @@
+﻿contact\_tolerance
+==================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoproperty:: RefineAtContactsParams.contact_tolerance

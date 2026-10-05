@@ -1,0 +1,40 @@
+.. vale off
+
+SetFeatureRecoveriesResults
+===========================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoclass:: SetFeatureRecoveriesResults
+   
+   
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+      :toctree:
+   
+      
+      SetFeatureRecoveriesResults.print_default
+      SetFeatureRecoveriesResults.set_default
+   
+   
+
+   
+   
+   .. rubric:: Attributes
+
+   .. autosummary::
+      :toctree:
+   
+      SetFeatureRecoveriesResults.error_code
+      SetFeatureRecoveriesResults.ids
+   
+   
+
+.. minigallery::
+    :add-heading: Examples using SetFeatureRecoveriesResults
+
+    ansys.meshing.prime.SetFeatureRecoveriesResults
+
+.. vale on

@@ -1,0 +1,6 @@
+REFINEATCONTACTSFAILED
+======================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoattribute:: ErrorCode.REFINEATCONTACTSFAILED

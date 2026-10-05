@@ -1,0 +1,6 @@
+TRIMONESIDE
+===========
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoattribute:: FuseOption.TRIMONESIDE

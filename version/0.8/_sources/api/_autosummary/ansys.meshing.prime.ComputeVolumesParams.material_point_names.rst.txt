@@ -1,0 +1,6 @@
+material\_point\_names
+======================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoproperty:: ComputeVolumesParams.material_point_names

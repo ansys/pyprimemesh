@@ -1,0 +1,37 @@
+.. vale off
+
+MultiZoneSweepMeshParams
+========================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoclass:: MultiZoneSweepMeshParams
+   
+   
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+      :toctree:
+   
+      
+      MultiZoneSweepMeshParams.print_default
+      MultiZoneSweepMeshParams.set_default
+   
+   
+
+   
+   
+   .. rubric:: Attributes
+
+   .. autosummary::
+      :toctree:
+   
+      MultiZoneSweepMeshParams.n_divisions
+      MultiZoneSweepMeshParams.source_and_target_scope
+      MultiZoneSweepMeshParams.sweep_mesh_size
+      MultiZoneSweepMeshParams.thin_sweep
+   
+   
+
+.. vale on

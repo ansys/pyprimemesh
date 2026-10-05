@@ -1,0 +1,11 @@
+entity\_label
+=============
+
+.. currentmodule:: ansys.meshing.prime.graphics
+
+.. automethod:: ansys.meshing.prime.graphics.PrimePlotter.entity_label
+
+.. minigallery::
+   :add-heading: Examples using PrimePlotter.entity_label
+
+   ansys.meshing.prime.graphics.PrimePlotter.entity_label

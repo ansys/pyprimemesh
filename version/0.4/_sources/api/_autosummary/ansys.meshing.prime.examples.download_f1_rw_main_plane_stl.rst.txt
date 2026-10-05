@@ -1,0 +1,6 @@
+﻿download\_f1\_rw\_main\_plane\_stl
+==================================
+
+.. currentmodule:: ansys.meshing.prime.examples
+
+.. autofunction:: download_f1_rw_main_plane_stl
