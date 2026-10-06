@@ -1,4 +1,4 @@
-# Copyright (C) 2024 - 2025 ANSYS, Inc. and/or its affiliates.
+# Copyright (C) 2026 Synopsys, Inc. and ANSYS, Inc. All rights reserved.
 # SPDX-License-Identifier: MIT
 #
 #
@@ -25,7 +25,7 @@ from __future__ import annotations
 from ansys.meshing.prime.internals.comm_manager import CommunicationManager
 from ansys.meshing.prime.params.primestructs import *
 from ansys.meshing.prime.autogen.coreobject import *
-from typing import List, Any, Union
+from typing import Dict, Any, Union, List, Iterable
 
 class TopoData(CoreObject):
     """Topodata has all information about connectivity of nodes, edges, elements and more.
@@ -52,7 +52,7 @@ class TopoData(CoreObject):
         self._freeze()
 
     def get_geom_zonelets_of_topo_edges(self, topo_edges : Iterable[int]) -> Iterable[int]:
-        """ Get the geometry edge zonelets for the provided topoedge ids.
+        """ Gets the geometry edge zonelets for the provided topoedge ids.
 
 
         Parameters
@@ -63,7 +63,7 @@ class TopoData(CoreObject):
         Returns
         -------
         Iterable[int]
-            Return the geometry edge zonelet ids.
+            Returns a list of geometry edge zonelet ids.
 
 
         Examples
@@ -81,7 +81,7 @@ class TopoData(CoreObject):
         return result
 
     def get_geom_zonelets_of_topo_faces(self, topo_faces : Iterable[int]) -> Iterable[int]:
-        """ Get the geometry face zonelets for the provided topoface ids.
+        """ Gets the geometry face zonelets for the provided topoface ids.
 
 
         Parameters
@@ -92,7 +92,7 @@ class TopoData(CoreObject):
         Returns
         -------
         Iterable[int]
-            Return the geometry face zonelet ids.
+            Returns a list of geometry face zonelet ids.
 
 
         Examples
@@ -110,7 +110,7 @@ class TopoData(CoreObject):
         return result
 
     def get_mesh_zonelets_of_topo_edges(self, topo_edges : Iterable[int]) -> Iterable[int]:
-        """ Get the mesh edge zonelets for the provided topoedge ids.
+        """ Gets the mesh edge zonelets for the provided topoedge ids.
 
 
         Parameters
@@ -121,7 +121,7 @@ class TopoData(CoreObject):
         Returns
         -------
         Iterable[int]
-            Return the mesh edge zonelet ids.
+            Returns a list of mesh edge zonelet ids.
 
 
         Examples
@@ -139,7 +139,7 @@ class TopoData(CoreObject):
         return result
 
     def get_mesh_zonelets_of_topo_faces(self, topo_faces : Iterable[int]) -> Iterable[int]:
-        """ Get the mesh face zonelets for the provided topoface ids.
+        """ Gets the mesh face zonelets for the provided topoface ids.
 
 
         Parameters
@@ -150,7 +150,7 @@ class TopoData(CoreObject):
         Returns
         -------
         Iterable[int]
-            Return the mesh face zonelet ids.
+            Returns a list of mesh face zonelet ids.
 
 
         Examples
@@ -168,23 +168,23 @@ class TopoData(CoreObject):
         return result
 
     def get_topo_edges_of_topo_faces(self, topo_faces : Iterable[int]) -> Iterable[int]:
-        """ Get the topoedges of the provided topoface ids.
+        """ Gets the topoedges of the provided topoface ids.
 
 
         Parameters
         ----------
         topo_faces : Iterable[int]
-            Ids of the topoface.
+            Ids of the topofaces.
 
         Returns
         -------
         Iterable[int]
-            Returns the list of topoedge ids.
+            Returns a list of topoedge ids.
 
 
         Examples
         --------
-        >>> topo_edges_of_topo_faces = topo_data.get_topo_edges_of_topo_faces(topo_faces)
+        >>> topo_edges = topo_data.get_topo_edges_of_topo_faces(topo_faces)
 
         """
         if not isinstance(topo_faces, Iterable):
@@ -208,7 +208,7 @@ class TopoData(CoreObject):
         Returns
         -------
         Iterable[int]
-            Returns the list of topovolume ids.
+            Returns a list of topovolume ids.
 
 
         Notes
@@ -217,7 +217,7 @@ class TopoData(CoreObject):
 
         Examples
         --------
-        >>> topovolumes = topo_data.get_topo_volumes_of_topo_faces(topo_faces)
+        >>> topo_volumes = topo_data.get_topo_volumes_of_topo_faces(topo_faces)
 
         """
         if not isinstance(topo_faces, Iterable):
@@ -231,13 +231,13 @@ class TopoData(CoreObject):
         return result
 
     def get_adjacent_topo_faces_of_topo_faces(self, topo_faces : Iterable[int]) -> Iterable[int]:
-        """ Get the adjacent topofaces for the provided topoface ids.
+        """ Gets the adjacent topofaces for the provided topofaces.
 
 
         Parameters
         ----------
         topo_faces : Iterable[int]
-            Ids of the topoface.
+            Ids of the topofaces.
 
         Returns
         -------
@@ -247,7 +247,7 @@ class TopoData(CoreObject):
 
         Examples
         --------
-        >>> topo_faces_of_topo_faces = topo_data.get_adjacent_topo_faces_of_topo_faces(topo_faces)
+        >>> adj_topo_faces = topo_data.get_adjacent_topo_faces_of_topo_faces(topo_faces)
 
         """
         if not isinstance(topo_faces, Iterable):
@@ -260,7 +260,7 @@ class TopoData(CoreObject):
         return result
 
     def get_adjacent_topo_edges_of_topo_edges(self, topo_edges : Iterable[int]) -> Iterable[int]:
-        """ Get the adjacent topoedges for the provided topoedge ids.
+        """ Gets the adjacent topoedges for the provided topoedge ids.
 
 
         Parameters
@@ -289,7 +289,7 @@ class TopoData(CoreObject):
         return result
 
     def delete_mesh_on_topo_faces(self, topo_faces : Iterable[int], params : DeleteMeshParams) -> DeleteMeshResults:
-        """ Delete mesh on the provided topofaces.
+        """ Deletes mesh on the provided topofaces.
 
 
         Parameters
@@ -312,12 +312,12 @@ class TopoData(CoreObject):
         Examples
         --------
         >>> params = prime.DeleteMeshParams(model = model)
-        >>> result = topo_data.delete_mesh_on_topo_faces(top_faces, params)
+        >>> result = topo_data.delete_mesh_on_topo_faces(topo_faces, params)
 
         """
         if not isinstance(topo_faces, Iterable):
             raise TypeError("Invalid argument type passed for 'topo_faces'. Valid argument type is Iterable[int].")
-        if not isinstance(params, DeleteMeshParams):
+        if type(params).__name__ != 'DeleteMeshParams':
             raise TypeError("Invalid argument type passed for 'params'. Valid argument type is DeleteMeshParams.")
         args = {"topo_faces" : topo_faces,
         "params" : params._jsonify()}

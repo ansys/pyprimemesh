@@ -1,4 +1,4 @@
-# Copyright (C) 2024 - 2025 ANSYS, Inc. and/or its affiliates.
+# Copyright (C) 2026 Synopsys, Inc. and ANSYS, Inc. All rights reserved.
 # SPDX-License-Identifier: MIT
 #
 #
@@ -25,7 +25,7 @@ from __future__ import annotations
 from ansys.meshing.prime.internals.comm_manager import CommunicationManager
 from ansys.meshing.prime.params.primestructs import *
 from ansys.meshing.prime.autogen.coreobject import *
-from typing import List, Any, Union
+from typing import Dict, Any, Union, List, Iterable
 
 class CollapseTool(CoreObject):
     """Performs various collapse operations. For example, split and collapse on face zonelets.
@@ -94,9 +94,9 @@ class CollapseTool(CoreObject):
             raise TypeError("Invalid argument type passed for 'face_zonelets'. Valid argument type is Iterable[int].")
         if not isinstance(register_id, int):
             raise TypeError("Invalid argument type passed for 'register_id'. Valid argument type is int.")
-        if not isinstance(split_params, SplitParams):
+        if type(split_params).__name__ != 'SplitParams':
             raise TypeError("Invalid argument type passed for 'split_params'. Valid argument type is SplitParams.")
-        if not isinstance(collapse_params, CollapseParams):
+        if type(collapse_params).__name__ != 'CollapseParams':
             raise TypeError("Invalid argument type passed for 'collapse_params'. Valid argument type is CollapseParams.")
         args = {"part_id" : part_id,
         "face_zonelets" : face_zonelets,

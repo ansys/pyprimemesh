@@ -1,4 +1,4 @@
-# Copyright (C) 2024 - 2025 ANSYS, Inc. and/or its affiliates.
+# Copyright (C) 2026 Synopsys, Inc. and ANSYS, Inc. All rights reserved.
 # SPDX-License-Identifier: MIT
 #
 #
@@ -25,7 +25,7 @@ from __future__ import annotations
 from ansys.meshing.prime.internals.comm_manager import CommunicationManager
 from ansys.meshing.prime.params.primestructs import *
 from ansys.meshing.prime.autogen.coreobject import *
-from typing import List, Any, Union
+from typing import Dict, Any, Union, List, Iterable
 
 class SurfaceUtilities(CoreObject):
     """Performs various general surface utilities algorithms. For example, copy zonelets, resolve surface intersections.
@@ -114,7 +114,7 @@ class SurfaceUtilities(CoreObject):
             raise TypeError("Invalid argument type passed for 'part_id'. Valid argument type is int.")
         if not isinstance(face_zonelets, Iterable):
             raise TypeError("Invalid argument type passed for 'face_zonelets'. Valid argument type is Iterable[int].")
-        if not isinstance(params, FixInvalidNormalNodeParams):
+        if type(params).__name__ != 'FixInvalidNormalNodeParams':
             raise TypeError("Invalid argument type passed for 'params'. Valid argument type is FixInvalidNormalNodeParams.")
         args = {"part_id" : part_id,
         "face_zonelets" : face_zonelets,
@@ -154,7 +154,7 @@ class SurfaceUtilities(CoreObject):
             raise TypeError("Invalid argument type passed for 'face_zonelets'. Valid argument type is Iterable[int].")
         if not isinstance(target_part_id, int):
             raise TypeError("Invalid argument type passed for 'target_part_id'. Valid argument type is int.")
-        if not isinstance(params, CopyZoneletsParams):
+        if type(params).__name__ != 'CopyZoneletsParams':
             raise TypeError("Invalid argument type passed for 'params'. Valid argument type is CopyZoneletsParams.")
         args = {"face_zonelets" : face_zonelets,
         "target_part_id" : target_part_id,
@@ -194,7 +194,7 @@ class SurfaceUtilities(CoreObject):
         """
         if not isinstance(topo_faces, Iterable):
             raise TypeError("Invalid argument type passed for 'topo_faces'. Valid argument type is Iterable[int].")
-        if not isinstance(params, ProjectOnGeometryParams):
+        if type(params).__name__ != 'ProjectOnGeometryParams':
             raise TypeError("Invalid argument type passed for 'params'. Valid argument type is ProjectOnGeometryParams.")
         args = {"topo_faces" : topo_faces,
         "params" : params._jsonify()}
@@ -238,7 +238,7 @@ class SurfaceUtilities(CoreObject):
             raise TypeError("Invalid argument type passed for 'face_zonelets'. Valid argument type is Iterable[int].")
         if not isinstance(plane_points, Iterable):
             raise TypeError("Invalid argument type passed for 'plane_points'. Valid argument type is Iterable[float].")
-        if not isinstance(params, FillHolesAtPlaneParams):
+        if type(params).__name__ != 'FillHolesAtPlaneParams':
             raise TypeError("Invalid argument type passed for 'params'. Valid argument type is FillHolesAtPlaneParams.")
         args = {"part_id" : part_id,
         "face_zonelets" : face_zonelets,
@@ -279,7 +279,7 @@ class SurfaceUtilities(CoreObject):
             raise TypeError("Invalid argument type passed for 'part_id'. Valid argument type is int.")
         if not isinstance(face_zonelets, Iterable):
             raise TypeError("Invalid argument type passed for 'face_zonelets'. Valid argument type is Iterable[int].")
-        if not isinstance(params, CreateCapParams):
+        if type(params).__name__ != 'CreateCapParams':
             raise TypeError("Invalid argument type passed for 'params'. Valid argument type is CreateCapParams.")
         args = {"part_id" : part_id,
         "face_zonelets" : face_zonelets,
@@ -318,7 +318,7 @@ class SurfaceUtilities(CoreObject):
             raise TypeError("Invalid argument type passed for 'face_zonelet_ids'. Valid argument type is Iterable[int].")
         if not isinstance(live_material_point_names, List):
             raise TypeError("Invalid argument type passed for 'live_material_point_names'. Valid argument type is List[str].")
-        if not isinstance(params, DeleteUnwettedParams):
+        if type(params).__name__ != 'DeleteUnwettedParams':
             raise TypeError("Invalid argument type passed for 'params'. Valid argument type is DeleteUnwettedParams.")
         args = {"face_zonelet_ids" : face_zonelet_ids,
         "live_material_point_names" : live_material_point_names,
@@ -353,7 +353,7 @@ class SurfaceUtilities(CoreObject):
         """
         if not isinstance(face_zonelet_ids, Iterable):
             raise TypeError("Invalid argument type passed for 'face_zonelet_ids'. Valid argument type is Iterable[int].")
-        if not isinstance(params, ResolveIntersectionsParams):
+        if type(params).__name__ != 'ResolveIntersectionsParams':
             raise TypeError("Invalid argument type passed for 'params'. Valid argument type is ResolveIntersectionsParams.")
         args = {"face_zonelet_ids" : face_zonelet_ids,
         "params" : params._jsonify()}
@@ -387,7 +387,7 @@ class SurfaceUtilities(CoreObject):
         """
         if not isinstance(zonelets, Iterable):
             raise TypeError("Invalid argument type passed for 'zonelets'. Valid argument type is Iterable[int].")
-        if not isinstance(params, SmoothDihedralFaceNodesParams):
+        if type(params).__name__ != 'SmoothDihedralFaceNodesParams':
             raise TypeError("Invalid argument type passed for 'params'. Valid argument type is SmoothDihedralFaceNodesParams.")
         args = {"zonelets" : zonelets,
         "params" : params._jsonify()}
@@ -422,7 +422,7 @@ class SurfaceUtilities(CoreObject):
         """
         if not isinstance(part_ids, Iterable):
             raise TypeError("Invalid argument type passed for 'part_ids'. Valid argument type is Iterable[int].")
-        if not isinstance(params, RefineAtContactsParams):
+        if type(params).__name__ != 'RefineAtContactsParams':
             raise TypeError("Invalid argument type passed for 'params'. Valid argument type is RefineAtContactsParams.")
         args = {"part_ids" : part_ids,
         "params" : params._jsonify()}
@@ -456,7 +456,7 @@ class SurfaceUtilities(CoreObject):
         """
         if not isinstance(zonelets, Iterable):
             raise TypeError("Invalid argument type passed for 'zonelets'. Valid argument type is Iterable[int].")
-        if not isinstance(params, AddThicknessParams):
+        if type(params).__name__ != 'AddThicknessParams':
             raise TypeError("Invalid argument type passed for 'params'. Valid argument type is AddThicknessParams.")
         args = {"zonelets" : zonelets,
         "params" : params._jsonify()}
@@ -490,7 +490,7 @@ class SurfaceUtilities(CoreObject):
         """
         if not isinstance(face_zonelet_ids, Iterable):
             raise TypeError("Invalid argument type passed for 'face_zonelet_ids'. Valid argument type is Iterable[int].")
-        if not isinstance(params, CreateBOIParams):
+        if type(params).__name__ != 'CreateBOIParams':
             raise TypeError("Invalid argument type passed for 'params'. Valid argument type is CreateBOIParams.")
         args = {"face_zonelet_ids" : face_zonelet_ids,
         "params" : params._jsonify()}
@@ -528,7 +528,7 @@ class SurfaceUtilities(CoreObject):
             raise TypeError("Invalid argument type passed for 'source_zonelets'. Valid argument type is Iterable[int].")
         if not isinstance(target_zonelets, Iterable):
             raise TypeError("Invalid argument type passed for 'target_zonelets'. Valid argument type is Iterable[int].")
-        if not isinstance(params, CreateContactPatchParams):
+        if type(params).__name__ != 'CreateContactPatchParams':
             raise TypeError("Invalid argument type passed for 'params'. Valid argument type is CreateContactPatchParams.")
         args = {"source_zonelets" : source_zonelets,
         "target_zonelets" : target_zonelets,
@@ -563,7 +563,7 @@ class SurfaceUtilities(CoreObject):
         """
         if not isinstance(face_zonelet_ids, Iterable):
             raise TypeError("Invalid argument type passed for 'face_zonelet_ids'. Valid argument type is Iterable[int].")
-        if not isinstance(params, StretchFreeBoundariesParams):
+        if type(params).__name__ != 'StretchFreeBoundariesParams':
             raise TypeError("Invalid argument type passed for 'params'. Valid argument type is StretchFreeBoundariesParams.")
         args = {"face_zonelet_ids" : face_zonelet_ids,
         "params" : params._jsonify()}
@@ -601,7 +601,7 @@ class SurfaceUtilities(CoreObject):
         """
         if not isinstance(face_zonelet_ids, Iterable):
             raise TypeError("Invalid argument type passed for 'face_zonelet_ids'. Valid argument type is Iterable[int].")
-        if not isinstance(params, TriangulateParams):
+        if type(params).__name__ != 'TriangulateParams':
             raise TypeError("Invalid argument type passed for 'params'. Valid argument type is TriangulateParams.")
         args = {"face_zonelet_ids" : face_zonelet_ids,
         "params" : params._jsonify()}
@@ -611,3 +611,53 @@ class SurfaceUtilities(CoreObject):
         result = self._comm.serve(self._model, command_name, self._object_id, args=args)
         self._model._print_logs_after_command("triangulate_face_zonelets", TriangulateResults(model = self._model, json_data = result))
         return TriangulateResults(model = self._model, json_data = result)
+
+    def compute_internal_region_points(self, external_cap_topo_faces : Iterable[int], internal_cap_topo_faces : Iterable[int], geometry_topo_faces : Iterable[int], params : ComputeInternalRegionPointParams) -> ComputeInternalRegionPointResults:
+        """ Computes points inside enclosed regions by detecting intersections between offset cap surfaces and source topofaces.
+
+
+        Parameters
+        ----------
+        external_cap_topo_faces : Iterable[int]
+            Ids of external cap topofaces (For example, inlets, outlets).
+        internal_cap_topo_faces : Iterable[int]
+            Ids of internal cap topofaces.
+        geometry_topo_faces : Iterable[int]
+            Ids of geometry topofaces.
+        params : ComputeInternalRegionPointParams
+            Parameters to control the internal region point computation.
+
+        Returns
+        -------
+        ComputeInternalRegionPointResults
+            Returns the ComputeInternalRegionPointResults.
+
+
+        Notes
+        -----
+        **This is a beta API**. **The behavior and implementation may change in future**.
+
+        Examples
+        --------
+        >>> params = prime.ComputeInternalRegionPointParams(model = model)
+        >>> result = surf_utils.compute_internal_region_points(external_cap_topo_faces, internal_cap_topo_faces, geometry_topo_faces, params)
+
+        """
+        if not isinstance(external_cap_topo_faces, Iterable):
+            raise TypeError("Invalid argument type passed for 'external_cap_topo_faces'. Valid argument type is Iterable[int].")
+        if not isinstance(internal_cap_topo_faces, Iterable):
+            raise TypeError("Invalid argument type passed for 'internal_cap_topo_faces'. Valid argument type is Iterable[int].")
+        if not isinstance(geometry_topo_faces, Iterable):
+            raise TypeError("Invalid argument type passed for 'geometry_topo_faces'. Valid argument type is Iterable[int].")
+        if type(params).__name__ != 'ComputeInternalRegionPointParams':
+            raise TypeError("Invalid argument type passed for 'params'. Valid argument type is ComputeInternalRegionPointParams.")
+        args = {"external_cap_topo_faces" : external_cap_topo_faces,
+        "internal_cap_topo_faces" : internal_cap_topo_faces,
+        "geometry_topo_faces" : geometry_topo_faces,
+        "params" : params._jsonify()}
+        command_name = "PrimeMesh::SurfaceUtilities/ComputeInternalRegionPoints"
+        self._model._print_beta_api_warning("compute_internal_region_points")
+        self._model._print_logs_before_command("compute_internal_region_points", args)
+        result = self._comm.serve(self._model, command_name, self._object_id, args=args)
+        self._model._print_logs_after_command("compute_internal_region_points", ComputeInternalRegionPointResults(model = self._model, json_data = result))
+        return ComputeInternalRegionPointResults(model = self._model, json_data = result)

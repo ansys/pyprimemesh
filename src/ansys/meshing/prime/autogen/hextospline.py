@@ -1,4 +1,4 @@
-# Copyright (C) 2024 - 2025 ANSYS, Inc. and/or its affiliates.
+# Copyright (C) 2026 Synopsys, Inc. and ANSYS, Inc. All rights reserved.
 # SPDX-License-Identifier: MIT
 #
 #
@@ -25,7 +25,7 @@ from __future__ import annotations
 from ansys.meshing.prime.internals.comm_manager import CommunicationManager
 from ansys.meshing.prime.params.primestructs import *
 from ansys.meshing.prime.autogen.coreobject import *
-from typing import List, Any, Union
+from typing import Dict, Any, Union, List, Iterable
 
 class HexToSpline(CoreObject):
     """Converts all-hex mesh to spline.
@@ -81,9 +81,9 @@ class HexToSpline(CoreObject):
         >>> results = hexToSpline.ConvertHexToSpline(input_scope, hex_to_spline_params)
 
         """
-        if not isinstance(input_scope, ScopeDefinition):
+        if type(input_scope).__name__ != 'ScopeDefinition':
             raise TypeError("Invalid argument type passed for 'input_scope'. Valid argument type is ScopeDefinition.")
-        if not isinstance(hex_to_spline_params, HexToSplineParams):
+        if type(hex_to_spline_params).__name__ != 'HexToSplineParams':
             raise TypeError("Invalid argument type passed for 'hex_to_spline_params'. Valid argument type is HexToSplineParams.")
         args = {"input_scope" : input_scope._jsonify(),
         "hex_to_spline_params" : hex_to_spline_params._jsonify()}

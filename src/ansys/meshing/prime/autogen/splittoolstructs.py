@@ -1,4 +1,4 @@
-# Copyright (C) 2024 - 2025 ANSYS, Inc. and/or its affiliates.
+# Copyright (C) 2026 Synopsys, Inc. and ANSYS, Inc. All rights reserved.
 # SPDX-License-Identifier: MIT
 #
 #
@@ -35,11 +35,11 @@ class SplitParams(CoreObject):
 
     Parameters
     ----------
-    model: Model
+    model : Model
         Model to create a ``SplitParams`` object with default parameters.
-    split_ratio: float, optional
+    split_ratio : float, optional
         Minimum ratio of split edge length to original edge length.
-    json_data: dict, optional
+    json_data : dict, optional
         JSON dictionary to create a ``SplitParams`` object with provided parameters.
 
     Examples
@@ -50,24 +50,24 @@ class SplitParams(CoreObject):
 
     def __initialize(
             self,
-            split_ratio: float):
+            split_ratio : float):
         self._split_ratio = split_ratio
 
     def __init__(
             self,
             model: CommunicationManager=None,
-            split_ratio: float = None,
+            split_ratio : float = None,
             json_data : dict = None,
              **kwargs):
         """Initialize a ``SplitParams`` object.
 
         Parameters
         ----------
-        model: Model
+        model : Model
             Model to create a ``SplitParams`` object with default parameters.
-        split_ratio: float, optional
+        split_ratio : float, optional
             Minimum ratio of split edge length to original edge length.
-        json_data: dict, optional
+        json_data : dict, optional
             JSON dictionary to create a ``SplitParams`` object with provided parameters.
 
         Examples
@@ -99,12 +99,12 @@ class SplitParams(CoreObject):
 
     @staticmethod
     def set_default(
-            split_ratio: float = None):
+            split_ratio : float = None):
         """Set the default values of the ``SplitParams`` object.
 
         Parameters
         ----------
-        split_ratio: float, optional
+        split_ratio : float, optional
             Minimum ratio of split edge length to original edge length.
         """
         args = locals()

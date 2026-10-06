@@ -1,4 +1,4 @@
-# Copyright (C) 2024 - 2025 ANSYS, Inc. and/or its affiliates.
+# Copyright (C) 2026 Synopsys, Inc. and ANSYS, Inc. All rights reserved.
 # SPDX-License-Identifier: MIT
 #
 #
@@ -35,23 +35,23 @@ class MeshStackerResults(CoreObject):
 
     Parameters
     ----------
-    model: Model
+    model : Model
         Model to create a ``MeshStackerResults`` object with default parameters.
-    error_code: ErrorCode, optional
+    error_code : ErrorCode, optional
         Error code associated with the operation.
-    error_codes_per_topo_volume: Iterable[int], optional
+    error_codes_per_topo_volume : Iterable[int], optional
         Error codes associated with the topovolume-by-topovolume stacking.
-    non_stackable_faces: Iterable[int], optional
+    non_stackable_faces : Iterable[int], optional
         List of non-stackable faces. Note: Under-resolved faceting can also create non-stackable geometry.
-    non_stackable_edges: Iterable[int], optional
+    non_stackable_edges : Iterable[int], optional
         List of non-stackable edges. Note: Under-resolved faceting can also create non-stackable geometry.
-    small_features: Iterable[int], optional
+    small_features : Iterable[int], optional
         List of features edges smaller than input tolerance.
-    base_face_ids: Iterable[int], optional
+    base_face_ids : Iterable[int], optional
         List of base face ids after base creation.
-    size_control_ids: Iterable[int], optional
+    size_control_ids : Iterable[int], optional
         List of ids of newly created size controls.
-    json_data: dict, optional
+    json_data : dict, optional
         JSON dictionary to create a ``MeshStackerResults`` object with provided parameters.
 
     Examples
@@ -62,13 +62,13 @@ class MeshStackerResults(CoreObject):
 
     def __initialize(
             self,
-            error_code: ErrorCode,
-            error_codes_per_topo_volume: Iterable[int],
-            non_stackable_faces: Iterable[int],
-            non_stackable_edges: Iterable[int],
-            small_features: Iterable[int],
-            base_face_ids: Iterable[int],
-            size_control_ids: Iterable[int]):
+            error_code : ErrorCode,
+            error_codes_per_topo_volume : Iterable[int],
+            non_stackable_faces : Iterable[int],
+            non_stackable_edges : Iterable[int],
+            small_features : Iterable[int],
+            base_face_ids : Iterable[int],
+            size_control_ids : Iterable[int]):
         self._error_code = ErrorCode(error_code)
         self._error_codes_per_topo_volume = error_codes_per_topo_volume if isinstance(error_codes_per_topo_volume, np.ndarray) else np.array(error_codes_per_topo_volume, dtype=np.int32) if error_codes_per_topo_volume is not None else None
         self._non_stackable_faces = non_stackable_faces if isinstance(non_stackable_faces, np.ndarray) else np.array(non_stackable_faces, dtype=np.int32) if non_stackable_faces is not None else None
@@ -80,36 +80,36 @@ class MeshStackerResults(CoreObject):
     def __init__(
             self,
             model: CommunicationManager=None,
-            error_code: ErrorCode = None,
-            error_codes_per_topo_volume: Iterable[int] = None,
-            non_stackable_faces: Iterable[int] = None,
-            non_stackable_edges: Iterable[int] = None,
-            small_features: Iterable[int] = None,
-            base_face_ids: Iterable[int] = None,
-            size_control_ids: Iterable[int] = None,
+            error_code : ErrorCode = None,
+            error_codes_per_topo_volume : Iterable[int] = None,
+            non_stackable_faces : Iterable[int] = None,
+            non_stackable_edges : Iterable[int] = None,
+            small_features : Iterable[int] = None,
+            base_face_ids : Iterable[int] = None,
+            size_control_ids : Iterable[int] = None,
             json_data : dict = None,
              **kwargs):
         """Initialize a ``MeshStackerResults`` object.
 
         Parameters
         ----------
-        model: Model
+        model : Model
             Model to create a ``MeshStackerResults`` object with default parameters.
-        error_code: ErrorCode, optional
+        error_code : ErrorCode, optional
             Error code associated with the operation.
-        error_codes_per_topo_volume: Iterable[int], optional
+        error_codes_per_topo_volume : Iterable[int], optional
             Error codes associated with the topovolume-by-topovolume stacking.
-        non_stackable_faces: Iterable[int], optional
+        non_stackable_faces : Iterable[int], optional
             List of non-stackable faces. Note: Under-resolved faceting can also create non-stackable geometry.
-        non_stackable_edges: Iterable[int], optional
+        non_stackable_edges : Iterable[int], optional
             List of non-stackable edges. Note: Under-resolved faceting can also create non-stackable geometry.
-        small_features: Iterable[int], optional
+        small_features : Iterable[int], optional
             List of features edges smaller than input tolerance.
-        base_face_ids: Iterable[int], optional
+        base_face_ids : Iterable[int], optional
             List of base face ids after base creation.
-        size_control_ids: Iterable[int], optional
+        size_control_ids : Iterable[int], optional
             List of ids of newly created size controls.
-        json_data: dict, optional
+        json_data : dict, optional
             JSON dictionary to create a ``MeshStackerResults`` object with provided parameters.
 
         Examples
@@ -159,30 +159,30 @@ class MeshStackerResults(CoreObject):
 
     @staticmethod
     def set_default(
-            error_code: ErrorCode = None,
-            error_codes_per_topo_volume: Iterable[int] = None,
-            non_stackable_faces: Iterable[int] = None,
-            non_stackable_edges: Iterable[int] = None,
-            small_features: Iterable[int] = None,
-            base_face_ids: Iterable[int] = None,
-            size_control_ids: Iterable[int] = None):
+            error_code : ErrorCode = None,
+            error_codes_per_topo_volume : Iterable[int] = None,
+            non_stackable_faces : Iterable[int] = None,
+            non_stackable_edges : Iterable[int] = None,
+            small_features : Iterable[int] = None,
+            base_face_ids : Iterable[int] = None,
+            size_control_ids : Iterable[int] = None):
         """Set the default values of the ``MeshStackerResults`` object.
 
         Parameters
         ----------
-        error_code: ErrorCode, optional
+        error_code : ErrorCode, optional
             Error code associated with the operation.
-        error_codes_per_topo_volume: Iterable[int], optional
+        error_codes_per_topo_volume : Iterable[int], optional
             Error codes associated with the topovolume-by-topovolume stacking.
-        non_stackable_faces: Iterable[int], optional
+        non_stackable_faces : Iterable[int], optional
             List of non-stackable faces. Note: Under-resolved faceting can also create non-stackable geometry.
-        non_stackable_edges: Iterable[int], optional
+        non_stackable_edges : Iterable[int], optional
             List of non-stackable edges. Note: Under-resolved faceting can also create non-stackable geometry.
-        small_features: Iterable[int], optional
+        small_features : Iterable[int], optional
             List of features edges smaller than input tolerance.
-        base_face_ids: Iterable[int], optional
+        base_face_ids : Iterable[int], optional
             List of base face ids after base creation.
-        size_control_ids: Iterable[int], optional
+        size_control_ids : Iterable[int], optional
             List of ids of newly created size controls.
         """
         args = locals()
@@ -299,27 +299,27 @@ class MeshStackerParams(CoreObject):
 
     Parameters
     ----------
-    model: Model
+    model : Model
         Model to create a ``MeshStackerParams`` object with default parameters.
-    origin: Iterable[float], optional
+    origin : Iterable[float], optional
         Origin coordinate list of stacker.
-    direction: Iterable[float], optional
+    direction : Iterable[float], optional
         Direction vector of stacker.
-    lateral_defeature_tolerance: float, optional
+    lateral_defeature_tolerance : float, optional
         Absolute lateral distance tolerance for stacker. If the lateral distance tolerance is not specified, a default tolerance value is calculated by stacker.
-    stacking_defeature_tolerance: float, optional
+    stacking_defeature_tolerance : float, optional
         Absolute stacking distance tolerance for stacker. If the stacking distance tolerance is not specified, a default tolerance value is calculated by stacker.
-    max_offset_size: float, optional
+    max_offset_size : float, optional
         Maximum stack size allowed during stacking. If the maximum stack size is not specified, it is set to global max size.
-    size_control_ids: Iterable[int], optional
+    size_control_ids : Iterable[int], optional
         List of size control ids to be respected by stacker. Stacker respects all supported controls by default.
-    seed_faces: Iterable[int], optional
+    seed_faces : Iterable[int], optional
         List of faces whose edges need to be imprinted on the base face. If the faces are meshed, the mesh will be transferred to the base face.
 
         **This is a beta parameter**. **The behavior and name may change in the future**.
-    delete_base: bool, optional
+    delete_base : bool, optional
         Option to delete base face at the end of stacking. The default is false.
-    json_data: dict, optional
+    json_data : dict, optional
         JSON dictionary to create a ``MeshStackerParams`` object with provided parameters.
 
     Examples
@@ -330,14 +330,14 @@ class MeshStackerParams(CoreObject):
 
     def __initialize(
             self,
-            origin: Iterable[float],
-            direction: Iterable[float],
-            lateral_defeature_tolerance: float,
-            stacking_defeature_tolerance: float,
-            max_offset_size: float,
-            size_control_ids: Iterable[int],
-            seed_faces: Iterable[int],
-            delete_base: bool):
+            origin : Iterable[float],
+            direction : Iterable[float],
+            lateral_defeature_tolerance : float,
+            stacking_defeature_tolerance : float,
+            max_offset_size : float,
+            size_control_ids : Iterable[int],
+            seed_faces : Iterable[int],
+            delete_base : bool):
         self._origin = origin if isinstance(origin, np.ndarray) else np.array(origin, dtype=np.double) if origin is not None else None
         self._direction = direction if isinstance(direction, np.ndarray) else np.array(direction, dtype=np.double) if direction is not None else None
         self._lateral_defeature_tolerance = lateral_defeature_tolerance
@@ -350,41 +350,41 @@ class MeshStackerParams(CoreObject):
     def __init__(
             self,
             model: CommunicationManager=None,
-            origin: Iterable[float] = None,
-            direction: Iterable[float] = None,
-            lateral_defeature_tolerance: float = None,
-            stacking_defeature_tolerance: float = None,
-            max_offset_size: float = None,
-            size_control_ids: Iterable[int] = None,
-            seed_faces: Iterable[int] = None,
-            delete_base: bool = None,
+            origin : Iterable[float] = None,
+            direction : Iterable[float] = None,
+            lateral_defeature_tolerance : float = None,
+            stacking_defeature_tolerance : float = None,
+            max_offset_size : float = None,
+            size_control_ids : Iterable[int] = None,
+            seed_faces : Iterable[int] = None,
+            delete_base : bool = None,
             json_data : dict = None,
              **kwargs):
         """Initialize a ``MeshStackerParams`` object.
 
         Parameters
         ----------
-        model: Model
+        model : Model
             Model to create a ``MeshStackerParams`` object with default parameters.
-        origin: Iterable[float], optional
+        origin : Iterable[float], optional
             Origin coordinate list of stacker.
-        direction: Iterable[float], optional
+        direction : Iterable[float], optional
             Direction vector of stacker.
-        lateral_defeature_tolerance: float, optional
+        lateral_defeature_tolerance : float, optional
             Absolute lateral distance tolerance for stacker. If the lateral distance tolerance is not specified, a default tolerance value is calculated by stacker.
-        stacking_defeature_tolerance: float, optional
+        stacking_defeature_tolerance : float, optional
             Absolute stacking distance tolerance for stacker. If the stacking distance tolerance is not specified, a default tolerance value is calculated by stacker.
-        max_offset_size: float, optional
+        max_offset_size : float, optional
             Maximum stack size allowed during stacking. If the maximum stack size is not specified, it is set to global max size.
-        size_control_ids: Iterable[int], optional
+        size_control_ids : Iterable[int], optional
             List of size control ids to be respected by stacker. Stacker respects all supported controls by default.
-        seed_faces: Iterable[int], optional
+        seed_faces : Iterable[int], optional
             List of faces whose edges need to be imprinted on the base face. If the faces are meshed, the mesh will be transferred to the base face.
 
             **This is a beta parameter**. **The behavior and name may change in the future**.
-        delete_base: bool, optional
+        delete_base : bool, optional
             Option to delete base face at the end of stacking. The default is false.
-        json_data: dict, optional
+        json_data : dict, optional
             JSON dictionary to create a ``MeshStackerParams`` object with provided parameters.
 
         Examples
@@ -437,33 +437,33 @@ class MeshStackerParams(CoreObject):
 
     @staticmethod
     def set_default(
-            origin: Iterable[float] = None,
-            direction: Iterable[float] = None,
-            lateral_defeature_tolerance: float = None,
-            stacking_defeature_tolerance: float = None,
-            max_offset_size: float = None,
-            size_control_ids: Iterable[int] = None,
-            seed_faces: Iterable[int] = None,
-            delete_base: bool = None):
+            origin : Iterable[float] = None,
+            direction : Iterable[float] = None,
+            lateral_defeature_tolerance : float = None,
+            stacking_defeature_tolerance : float = None,
+            max_offset_size : float = None,
+            size_control_ids : Iterable[int] = None,
+            seed_faces : Iterable[int] = None,
+            delete_base : bool = None):
         """Set the default values of the ``MeshStackerParams`` object.
 
         Parameters
         ----------
-        origin: Iterable[float], optional
+        origin : Iterable[float], optional
             Origin coordinate list of stacker.
-        direction: Iterable[float], optional
+        direction : Iterable[float], optional
             Direction vector of stacker.
-        lateral_defeature_tolerance: float, optional
+        lateral_defeature_tolerance : float, optional
             Absolute lateral distance tolerance for stacker. If the lateral distance tolerance is not specified, a default tolerance value is calculated by stacker.
-        stacking_defeature_tolerance: float, optional
+        stacking_defeature_tolerance : float, optional
             Absolute stacking distance tolerance for stacker. If the stacking distance tolerance is not specified, a default tolerance value is calculated by stacker.
-        max_offset_size: float, optional
+        max_offset_size : float, optional
             Maximum stack size allowed during stacking. If the maximum stack size is not specified, it is set to global max size.
-        size_control_ids: Iterable[int], optional
+        size_control_ids : Iterable[int], optional
             List of size control ids to be respected by stacker. Stacker respects all supported controls by default.
-        seed_faces: Iterable[int], optional
+        seed_faces : Iterable[int], optional
             List of faces whose edges need to be imprinted on the base face. If the faces are meshed, the mesh will be transferred to the base face.
-        delete_base: bool, optional
+        delete_base : bool, optional
             Option to delete base face at the end of stacking. The default is false.
         """
         args = locals()

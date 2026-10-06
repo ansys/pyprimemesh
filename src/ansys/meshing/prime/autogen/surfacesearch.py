@@ -1,4 +1,4 @@
-# Copyright (C) 2024 - 2025 ANSYS, Inc. and/or its affiliates.
+# Copyright (C) 2026 Synopsys, Inc. and ANSYS, Inc. All rights reserved.
 # SPDX-License-Identifier: MIT
 #
 #
@@ -25,7 +25,7 @@ from __future__ import annotations
 from ansys.meshing.prime.internals.comm_manager import CommunicationManager
 from ansys.meshing.prime.params.primestructs import *
 from ansys.meshing.prime.autogen.coreobject import *
-from typing import List, Any, Union
+from typing import Dict, Any, Union, List, Iterable
 
 class SurfaceSearch(CoreObject):
     """SurfaceSearch allows you to check surface mesh quality.
@@ -76,7 +76,8 @@ class SurfaceSearch(CoreObject):
         Returns
         -------
         SearchByQualityResults
-            Returns the SearchByQualityResults.
+            Returns the SearchByQualityResults structure.
+
 
         Examples
         --------
@@ -90,7 +91,7 @@ class SurfaceSearch(CoreObject):
             raise TypeError("Invalid argument type passed for 'face_zonelets'. Valid argument type is Iterable[int].")
         if not isinstance(register_id, int):
             raise TypeError("Invalid argument type passed for 'register_id'. Valid argument type is int.")
-        if not isinstance(params, SearchByQualityParams):
+        if type(params).__name__ != 'SearchByQualityParams':
             raise TypeError("Invalid argument type passed for 'params'. Valid argument type is SearchByQualityParams.")
         args = {"part_id" : part_id,
         "face_zonelets" : face_zonelets,
@@ -120,7 +121,8 @@ class SurfaceSearch(CoreObject):
         Returns
         -------
         SearchByIntersectionResults
-            Returns the SearchByIntersectionResults.
+            Returns the SearchByIntersectionResults structure.
+
 
         Examples
         --------
@@ -134,7 +136,7 @@ class SurfaceSearch(CoreObject):
             raise TypeError("Invalid argument type passed for 'face_zonelets'. Valid argument type is Iterable[int].")
         if not isinstance(register_id, int):
             raise TypeError("Invalid argument type passed for 'register_id'. Valid argument type is int.")
-        if not isinstance(params, SearchBySelfIntersectionParams):
+        if type(params).__name__ != 'SearchBySelfIntersectionParams':
             raise TypeError("Invalid argument type passed for 'params'. Valid argument type is SearchBySelfIntersectionParams.")
         args = {"part_id" : part_id,
         "face_zonelets" : face_zonelets,
@@ -147,9 +149,8 @@ class SurfaceSearch(CoreObject):
         return SearchByIntersectionResults(model = self._model, json_data = result)
 
     def search_zonelets_by_spikes(self, part_id : int, face_zonelets : Iterable[int], register_id : int, params : SearchBySpikeParams) -> SearchBySpikeResults:
-        """ Search face zonelets to identify spikes.
+        """ Search face zonelets to identify spikes with provided spike parameters.
 
-        Search face zonelets to identify spikes with provided spike parameters
 
         Parameters
         ----------
@@ -165,7 +166,8 @@ class SurfaceSearch(CoreObject):
         Returns
         -------
         SearchBySpikeResults
-            Returns the SearchBySpikeResults.
+            Returns the SearchBySpikeResults structure.
+
 
         Examples
         --------
@@ -179,7 +181,7 @@ class SurfaceSearch(CoreObject):
             raise TypeError("Invalid argument type passed for 'face_zonelets'. Valid argument type is Iterable[int].")
         if not isinstance(register_id, int):
             raise TypeError("Invalid argument type passed for 'register_id'. Valid argument type is int.")
-        if not isinstance(params, SearchBySpikeParams):
+        if type(params).__name__ != 'SearchBySpikeParams':
             raise TypeError("Invalid argument type passed for 'params'. Valid argument type is SearchBySpikeParams.")
         args = {"part_id" : part_id,
         "face_zonelets" : face_zonelets,
@@ -192,9 +194,8 @@ class SurfaceSearch(CoreObject):
         return SearchBySpikeResults(model = self._model, json_data = result)
 
     def search_zonelets_by_folds(self, part_id : int, face_zonelets : Iterable[int], register_id : int, params : SearchByFoldsParams) -> SearchByFoldsResults:
-        """ Search face zonelets to identify folds.
+        """ Search face zonelets to identify folds with provided folds parameters.
 
-        Search face zonelets to identify folds with provided folds parameters.
 
         Parameters
         ----------
@@ -210,7 +211,8 @@ class SurfaceSearch(CoreObject):
         Returns
         -------
         SearchByFoldsResults
-            Returns the SearchByFoldsResults.
+            Returns the SearchByFoldsResults structure.
+
 
         Examples
         --------
@@ -224,7 +226,7 @@ class SurfaceSearch(CoreObject):
             raise TypeError("Invalid argument type passed for 'face_zonelets'. Valid argument type is Iterable[int].")
         if not isinstance(register_id, int):
             raise TypeError("Invalid argument type passed for 'register_id'. Valid argument type is int.")
-        if not isinstance(params, SearchByFoldsParams):
+        if type(params).__name__ != 'SearchByFoldsParams':
             raise TypeError("Invalid argument type passed for 'params'. Valid argument type is SearchByFoldsParams.")
         args = {"part_id" : part_id,
         "face_zonelets" : face_zonelets,
@@ -239,7 +241,6 @@ class SurfaceSearch(CoreObject):
     def search_zonelets_by_invalid_normals(self, part_id : int, face_zonelets : Iterable[int], register_id : int) -> SearchByInvalidNormalsResults:
         """ Search face zonelets to identify faces with invalid normals.
 
-        Search face zonelets to identify faces with invalid normals.
 
         Parameters
         ----------
@@ -253,7 +254,8 @@ class SurfaceSearch(CoreObject):
         Returns
         -------
         SearchByInvalidNormalsResults
-            Returns the SearchByInvalidNormalsResults.
+            Returns the SearchByInvalidNormalsResults structure.
+
 
         Examples
         --------
@@ -294,7 +296,8 @@ class SurfaceSearch(CoreObject):
         Returns
         -------
         SearchByThinStripResults
-            Returns the SearchByThinStripResults.
+            Returns the SearchByThinStripResults structure.
+
 
         Examples
         --------
@@ -308,7 +311,7 @@ class SurfaceSearch(CoreObject):
             raise TypeError("Invalid argument type passed for 'face_zonelets'. Valid argument type is Iterable[int].")
         if not isinstance(register_id, int):
             raise TypeError("Invalid argument type passed for 'register_id'. Valid argument type is int.")
-        if not isinstance(params, SearchByThinStripParams):
+        if type(params).__name__ != 'SearchByThinStripParams':
             raise TypeError("Invalid argument type passed for 'params'. Valid argument type is SearchByThinStripParams.")
         args = {"part_id" : part_id,
         "face_zonelets" : face_zonelets,
@@ -321,10 +324,9 @@ class SurfaceSearch(CoreObject):
         return SearchByThinStripResults(model = self._model, json_data = result)
 
     def get_surface_quality_summary(self, params : SurfaceQualitySummaryParams) -> SurfaceQualitySummaryResults:
-        """ Gets the surface quality summary.
+        """ Diagnose surface quality for the given scope and face quality measures provided by the surface quality summary parameters.Uses default quality limit if not specified with params.
 
-        Diagnose surface quality for the given scope and face quality measures provided by the surface quality summary parameters.
-        Uses default quality limit if not specified with params.
+        /
 
         Parameters
         ----------
@@ -334,7 +336,8 @@ class SurfaceSearch(CoreObject):
         Returns
         -------
         SurfaceQualitySummaryResults
-            Returns the SurfaceQualitySummaryResults.
+            Returns the SurfaceQualitySummaryResults structure.
+
 
         Examples
         --------
@@ -342,7 +345,7 @@ class SurfaceSearch(CoreObject):
         >>> results = surf_search.get_surface_quality_summary(SurfaceQualitySummaryParams(model=model))
 
         """
-        if not isinstance(params, SurfaceQualitySummaryParams):
+        if type(params).__name__ != 'SurfaceQualitySummaryParams':
             raise TypeError("Invalid argument type passed for 'params'. Valid argument type is SurfaceQualitySummaryParams.")
         args = {"params" : params._jsonify()}
         command_name = "PrimeMesh::SurfaceSearch/GetSurfaceQualitySummary"
@@ -352,9 +355,8 @@ class SurfaceSearch(CoreObject):
         return SurfaceQualitySummaryResults(model = self._model, json_data = result)
 
     def get_surface_diagnostic_summary(self, params : SurfaceDiagnosticSummaryParams) -> SurfaceDiagnosticSummaryResults:
-        """ Gets the surface diagnostic summary.
+        """ Diagnose surface connectivity for the given scope and controls provided by the surface diagnostic summary parameters.
 
-        Diagnose surface connectivity for the given scope and controls provided by the surface diagnostic summary parameters.
 
         Parameters
         ----------
@@ -364,7 +366,8 @@ class SurfaceSearch(CoreObject):
         Returns
         -------
         SurfaceDiagnosticSummaryResults
-            Returns the SurfaceDiagnosticSummaryResults.
+            Returns the SurfaceDiagnosticSummaryResults structure.
+
 
         Examples
         --------
@@ -372,7 +375,7 @@ class SurfaceSearch(CoreObject):
         >>> results = surf_search.get_surface_diagnostics_summary(SurfaceDiagnosticSummaryParams(model=model))
 
         """
-        if not isinstance(params, SurfaceDiagnosticSummaryParams):
+        if type(params).__name__ != 'SurfaceDiagnosticSummaryParams':
             raise TypeError("Invalid argument type passed for 'params'. Valid argument type is SurfaceDiagnosticSummaryParams.")
         args = {"params" : params._jsonify()}
         command_name = "PrimeMesh::SurfaceSearch/GetSurfaceDiagnosticSummary"
@@ -381,7 +384,7 @@ class SurfaceSearch(CoreObject):
         self._model._print_logs_after_command("get_surface_diagnostic_summary", SurfaceDiagnosticSummaryResults(model = self._model, json_data = result))
         return SurfaceDiagnosticSummaryResults(model = self._model, json_data = result)
 
-    def get_search_info_by_register_id(self, face_zonelets : Iterable[int], register_id : int, params : SearchInfoByRegisterIdParams) -> SearchInfoByRegisterIdResults:
+    def get_search_info_by_register_id(self, face_zonelets : Iterable[int], register_id :  int, params : SearchInfoByRegisterIdParams) -> SearchInfoByRegisterIdResults:
         """ Gets search information regarding registered face elements of provided zonelets using a register id.
 
 
@@ -389,7 +392,7 @@ class SurfaceSearch(CoreObject):
         ----------
         face_zonelets : Iterable[int]
             Ids of the face zonelets to search in.
-        register_id : int
+        register_id :  int
             An integer register id.
         params : SearchInfoByRegisterIdParams
             Parameters for retrieveing information on registered faces.
@@ -397,7 +400,8 @@ class SurfaceSearch(CoreObject):
         Returns
         -------
         SearchInfoByRegisterIdResults
-            Returns the SearchInfoByRegisterIdResults.
+            Returns the SearchInfoByRegisterIdResults structure.
+
 
         Examples
         --------
@@ -408,9 +412,9 @@ class SurfaceSearch(CoreObject):
         """
         if not isinstance(face_zonelets, Iterable):
             raise TypeError("Invalid argument type passed for 'face_zonelets'. Valid argument type is Iterable[int].")
-        if not isinstance(register_id, int):
-            raise TypeError("Invalid argument type passed for 'register_id'. Valid argument type is int.")
-        if not isinstance(params, SearchInfoByRegisterIdParams):
+        if not isinstance(register_id,  int):
+            raise TypeError("Invalid argument type passed for 'register_id'. Valid argument type is  int.")
+        if type(params).__name__ != 'SearchInfoByRegisterIdParams':
             raise TypeError("Invalid argument type passed for 'params'. Valid argument type is SearchInfoByRegisterIdParams.")
         args = {"face_zonelets" : face_zonelets,
         "register_id" : register_id,
@@ -439,6 +443,7 @@ class SurfaceSearch(CoreObject):
         CheckFaceDeviationResults
             Returns the CheckFaceDeviationResults.
 
+
         Examples
         --------
         >>> surf_search = SurfaceSearch(model=model)
@@ -450,7 +455,7 @@ class SurfaceSearch(CoreObject):
             raise TypeError("Invalid argument type passed for 'source_face_zonelets'. Valid argument type is Iterable[int].")
         if not isinstance(target_face_zonelets, Iterable):
             raise TypeError("Invalid argument type passed for 'target_face_zonelets'. Valid argument type is Iterable[int].")
-        if not isinstance(params, CheckFaceDeviationParams):
+        if type(params).__name__ != 'CheckFaceDeviationParams':
             raise TypeError("Invalid argument type passed for 'params'. Valid argument type is CheckFaceDeviationParams.")
         args = {"source_face_zonelets" : source_face_zonelets,
         "target_face_zonelets" : target_face_zonelets,

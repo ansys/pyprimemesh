@@ -1,4 +1,4 @@
-# Copyright (C) 2024 - 2025 ANSYS, Inc. and/or its affiliates.
+# Copyright (C) 2026 Synopsys, Inc. and ANSYS, Inc. All rights reserved.
 # SPDX-License-Identifier: MIT
 #
 #
@@ -25,7 +25,7 @@ from __future__ import annotations
 from ansys.meshing.prime.internals.comm_manager import CommunicationManager
 from ansys.meshing.prime.params.primestructs import *
 from ansys.meshing.prime.autogen.coreobject import *
-from typing import List, Any, Union
+from typing import Dict, Any, Union, List, Iterable
 
 class SizeControl(CoreObject):
     """Size control is used to compute the size field.
@@ -77,7 +77,7 @@ class SizeControl(CoreObject):
         >>>                  normal_angle = 18))
 
         """
-        if not isinstance(params, CurvatureSizingParams):
+        if type(params).__name__ != 'CurvatureSizingParams':
             raise TypeError("Invalid argument type passed for 'params'. Valid argument type is CurvatureSizingParams.")
         args = {"params" : params._jsonify()}
         command_name = "PrimeMesh::SizeControl/SetCurvatureSizingParams"
@@ -108,7 +108,7 @@ class SizeControl(CoreObject):
         >>>                  max = 1.0, growth_rate = 1.2))
 
         """
-        if not isinstance(params, SoftSizingParams):
+        if type(params).__name__ != 'SoftSizingParams':
             raise TypeError("Invalid argument type passed for 'params'. Valid argument type is SoftSizingParams.")
         args = {"params" : params._jsonify()}
         command_name = "PrimeMesh::SizeControl/SetSoftSizingParams"
@@ -139,7 +139,7 @@ class SizeControl(CoreObject):
         >>>                  min = 0.1, max = 1.0, growth_rate = 1.2))
 
         """
-        if not isinstance(params, ProximitySizingParams):
+        if type(params).__name__ != 'ProximitySizingParams':
             raise TypeError("Invalid argument type passed for 'params'. Valid argument type is ProximitySizingParams.")
         args = {"params" : params._jsonify()}
         command_name = "PrimeMesh::SizeControl/SetProximitySizingParams"
@@ -170,7 +170,7 @@ class SizeControl(CoreObject):
         >>>                  min = 0.1, growth_rate = 1.2))
 
         """
-        if not isinstance(params, HardSizingParams):
+        if type(params).__name__ != 'HardSizingParams':
             raise TypeError("Invalid argument type passed for 'params'. Valid argument type is HardSizingParams.")
         args = {"params" : params._jsonify()}
         command_name = "PrimeMesh::SizeControl/SetHardSizingParams"
@@ -201,7 +201,7 @@ class SizeControl(CoreObject):
         >>>                  growth_rate = 1.2))
 
         """
-        if not isinstance(params, MeshedSizingParams):
+        if type(params).__name__ != 'MeshedSizingParams':
             raise TypeError("Invalid argument type passed for 'params'. Valid argument type is MeshedSizingParams.")
         args = {"params" : params._jsonify()}
         command_name = "PrimeMesh::SizeControl/SetMeshedSizingParams"
@@ -232,7 +232,7 @@ class SizeControl(CoreObject):
         >>>                  max = 0.1, growth_rate = 1.2))
 
         """
-        if not isinstance(params, BoiSizingParams):
+        if type(params).__name__ != 'BoiSizingParams':
             raise TypeError("Invalid argument type passed for 'params'. Valid argument type is BoiSizingParams.")
         args = {"params" : params._jsonify()}
         command_name = "PrimeMesh::SizeControl/SetBoiSizingParams"
@@ -267,7 +267,7 @@ class SizeControl(CoreObject):
         >>>                  max = 0.1, growth_rate = 1.2))
 
         """
-        if not isinstance(params, SoiSizingParams):
+        if type(params).__name__ != 'SoiSizingParams':
             raise TypeError("Invalid argument type passed for 'params'. Valid argument type is SoiSizingParams.")
         args = {"params" : params._jsonify()}
         command_name = "PrimeMesh::SizeControl/SetSoiSizingParams"
@@ -278,13 +278,13 @@ class SizeControl(CoreObject):
         return SetSizingResults(model = self._model, json_data = result)
 
     def get_curvature_sizing_params(self) -> CurvatureSizingParams:
-        """ Get the curvature sizing parameters of size control.
+        """ Gets the curvature sizing parameters of size control.
 
 
         Returns
         -------
         CurvatureSizingParams
-            Return the CurvatureSizingParams.
+            Returns the CurvatureSizingParams.
 
 
         Examples
@@ -489,7 +489,7 @@ class SizeControl(CoreObject):
         >>>                        label_expression = "inlet"))
 
         """
-        if not isinstance(scope, ScopeDefinition):
+        if type(scope).__name__ != 'ScopeDefinition':
             raise TypeError("Invalid argument type passed for 'scope'. Valid argument type is ScopeDefinition.")
         args = {"scope" : scope._jsonify()}
         command_name = "PrimeMesh::SizeControl/SetScope"
@@ -565,7 +565,7 @@ class SizeControl(CoreObject):
         >>> results = size_control.get_summary(prime.SizeControlSummaryParams(model=model))
 
         """
-        if not isinstance(params, SizeControlSummaryParams):
+        if type(params).__name__ != 'SizeControlSummaryParams':
             raise TypeError("Invalid argument type passed for 'params'. Valid argument type is SizeControlSummaryParams.")
         args = {"params" : params._jsonify()}
         command_name = "PrimeMesh::SizeControl/GetSummary"

@@ -1,4 +1,4 @@
-# Copyright (C) 2024 - 2025 ANSYS, Inc. and/or its affiliates.
+# Copyright (C) 2026 Synopsys, Inc. and ANSYS, Inc. All rights reserved.
 # SPDX-License-Identifier: MIT
 #
 #
@@ -25,7 +25,7 @@ from __future__ import annotations
 from ansys.meshing.prime.internals.comm_manager import CommunicationManager
 from ansys.meshing.prime.params.primestructs import *
 from ansys.meshing.prime.autogen.coreobject import *
-from typing import List, Any, Union
+from typing import Dict, Any, Union, List, Iterable
 
 class ThinVolumeControl(CoreObject):
     """ThinVolumeControl allows you to generate prisms in the space between surfaces.
@@ -67,7 +67,7 @@ class ThinVolumeControl(CoreObject):
         >>> results = thin_vol_ctrl.set_thin_volume_mesh_params(ThinVolumeMeshParams(model=model))
 
         """
-        if not isinstance(thin_volume_mesh_params, ThinVolumeMeshParams):
+        if type(thin_volume_mesh_params).__name__ != 'ThinVolumeMeshParams':
             raise TypeError("Invalid argument type passed for 'thin_volume_mesh_params'. Valid argument type is ThinVolumeMeshParams.")
         args = {"thin_volume_mesh_params" : thin_volume_mesh_params._jsonify()}
         command_name = "PrimeMesh::ThinVolumeControl/SetThinVolumeMeshParams"
@@ -95,7 +95,7 @@ class ThinVolumeControl(CoreObject):
         >>> results = thin_vol_ctrl.set_source_scope(entities)
 
         """
-        if not isinstance(entities, ScopeDefinition):
+        if type(entities).__name__ != 'ScopeDefinition':
             raise TypeError("Invalid argument type passed for 'entities'. Valid argument type is ScopeDefinition.")
         args = {"entities" : entities._jsonify()}
         command_name = "PrimeMesh::ThinVolumeControl/SetSourceScope"
@@ -124,7 +124,7 @@ class ThinVolumeControl(CoreObject):
         >>> results = thin_vol_ctrl.set_target_scope(entities)
 
         """
-        if not isinstance(entities, ScopeDefinition):
+        if type(entities).__name__ != 'ScopeDefinition':
             raise TypeError("Invalid argument type passed for 'entities'. Valid argument type is ScopeDefinition.")
         args = {"entities" : entities._jsonify()}
         command_name = "PrimeMesh::ThinVolumeControl/SetTargetScope"
@@ -157,7 +157,7 @@ class ThinVolumeControl(CoreObject):
         >>> results = thin_vol_ctrl.set_volume_scope(entities)
 
         """
-        if not isinstance(entities, ScopeDefinition):
+        if type(entities).__name__ != 'ScopeDefinition':
             raise TypeError("Invalid argument type passed for 'entities'. Valid argument type is ScopeDefinition.")
         args = {"entities" : entities._jsonify()}
         command_name = "PrimeMesh::ThinVolumeControl/SetVolumeScope"

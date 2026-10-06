@@ -1,4 +1,4 @@
-# Copyright (C) 2024 - 2025 ANSYS, Inc. and/or its affiliates.
+# Copyright (C) 2026 Synopsys, Inc. and ANSYS, Inc. All rights reserved.
 # SPDX-License-Identifier: MIT
 #
 #
@@ -43,15 +43,15 @@ class MorphBCParams(CoreObject):
 
     Parameters
     ----------
-    model: Model
+    model : Model
         Model to create a ``MorphBCParams`` object with default parameters.
-    morph_region_method: BCsVolumetricModality, optional
+    morph_region_method : BCsVolumetricModality, optional
         Indicate options to identify morphable regions in the input volumetric mesh.
-    morphable_layers: int, optional
+    morphable_layers : int, optional
         Number of layers around defined boundary.
-    morph_region_box_extension: float, optional
+    morph_region_box_extension : float, optional
         Percentage extension for the volumetric box.
-    json_data: dict, optional
+    json_data : dict, optional
         JSON dictionary to create a ``MorphBCParams`` object with provided parameters.
 
     Examples
@@ -62,9 +62,9 @@ class MorphBCParams(CoreObject):
 
     def __initialize(
             self,
-            morph_region_method: BCsVolumetricModality,
-            morphable_layers: int,
-            morph_region_box_extension: float):
+            morph_region_method : BCsVolumetricModality,
+            morphable_layers : int,
+            morph_region_box_extension : float):
         self._morph_region_method = BCsVolumetricModality(morph_region_method)
         self._morphable_layers = morphable_layers
         self._morph_region_box_extension = morph_region_box_extension
@@ -72,24 +72,24 @@ class MorphBCParams(CoreObject):
     def __init__(
             self,
             model: CommunicationManager=None,
-            morph_region_method: BCsVolumetricModality = None,
-            morphable_layers: int = None,
-            morph_region_box_extension: float = None,
+            morph_region_method : BCsVolumetricModality = None,
+            morphable_layers : int = None,
+            morph_region_box_extension : float = None,
             json_data : dict = None,
              **kwargs):
         """Initialize a ``MorphBCParams`` object.
 
         Parameters
         ----------
-        model: Model
+        model : Model
             Model to create a ``MorphBCParams`` object with default parameters.
-        morph_region_method: BCsVolumetricModality, optional
+        morph_region_method : BCsVolumetricModality, optional
             Indicate options to identify morphable regions in the input volumetric mesh.
-        morphable_layers: int, optional
+        morphable_layers : int, optional
             Number of layers around defined boundary.
-        morph_region_box_extension: float, optional
+        morph_region_box_extension : float, optional
             Percentage extension for the volumetric box.
-        json_data: dict, optional
+        json_data : dict, optional
             JSON dictionary to create a ``MorphBCParams`` object with provided parameters.
 
         Examples
@@ -127,18 +127,18 @@ class MorphBCParams(CoreObject):
 
     @staticmethod
     def set_default(
-            morph_region_method: BCsVolumetricModality = None,
-            morphable_layers: int = None,
-            morph_region_box_extension: float = None):
+            morph_region_method : BCsVolumetricModality = None,
+            morphable_layers : int = None,
+            morph_region_box_extension : float = None):
         """Set the default values of the ``MorphBCParams`` object.
 
         Parameters
         ----------
-        morph_region_method: BCsVolumetricModality, optional
+        morph_region_method : BCsVolumetricModality, optional
             Indicate options to identify morphable regions in the input volumetric mesh.
-        morphable_layers: int, optional
+        morphable_layers : int, optional
             Number of layers around defined boundary.
-        morph_region_box_extension: float, optional
+        morph_region_box_extension : float, optional
             Percentage extension for the volumetric box.
         """
         args = locals()

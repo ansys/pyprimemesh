@@ -1,4 +1,5 @@
-# Copyright (C) 2024 - 2026 ANSYS, Inc. and/or its affiliates.
+# Copyright (C) 2026 ANSYS, Inc. and/or its affiliates.
+# Copyright (C) 2026 Synopsys, Inc. and ANSYS, Inc. All rights reserved.
 # SPDX-License-Identifier: MIT
 #
 # Permission is hereby granted, free of charge, to any person obtaining a copy
@@ -158,7 +159,7 @@ class GRPCCommunicator(Communicator):
         self._stub = None
         self._models = []
         self._logger = logging.getLogger("PyPrimeMesh")
-
+        self._progress_callback = None
         self._channel = kwargs.get('channel', None)
         if self._channel is None:
             self._logger.debug("Creating cyber channel...")
@@ -172,6 +173,7 @@ class GRPCCommunicator(Communicator):
             )
             self._logger.debug("Cyber channel created.")
 
+        self._models = []
         if 'PYPRIMEMESH_DEVELOPER_MODE' not in os.environ:
             timeout = 60.0
 
@@ -316,12 +318,74 @@ class GRPCCommunicator(Communicator):
                 )
                 message = get_response(response, '')
             if defaults.print_communicator_stats():
+                import logging
+
                 logging.getLogger("PyPrimeMesh").info(
                     f'Data Transfer: Received {len(message)} bytes'
                 )
-            return json.loads(message)
+            res = json.loads(message)
+            while (
+                res is not None
+                and 'Results' in res
+                and isinstance(res['Results'], dict)
+                and 'Progress' in res['Results']
+            ):
+                command = {
+                    "Command": "PrimeMesh::Model/WaitForNextMessage",
+                    "ObjectID": model._object_id,
+                    "Args": {},
+                }
+                response = self._stub.ServeJson(
+                    request_iterator(
+                        model._object_id,
+                        json.dumps(command),
+                        prime_pb2.StringMessage,
+                        prime_pb2.Model,
+                        prime_pb2.StringJsonContent,
+                        prime_pb2.MessageCompletionToken,
+                    )
+                )
+                message = get_response(response, '')
+                res = {key: json.loads(value) for key, value in json.loads(message).items()}
+                if (
+                    self._progress_callback is not None
+                    and 'Results' in res
+                    and isinstance(res['Results'], dict)
+                    and 'Progress' in res['Results']
+                ):
+                    self._progress_callback(res['Results'])
+                else:
+                    self._progress_callback({"Progress": {"Percentage": 100}})
+
+            return res
         else:
             raise RuntimeError("No connection with server")
+
+    @property
+    def progress_callback(self):
+        """Get the current progress callback function.
+
+        Returns
+        -------
+        Callable[[dict], None] or None
+            The current progress callback function, or None if no callback is set.
+        """
+        return self._progress_callback
+
+    @progress_callback.setter
+    def progress_callback(self, callback):
+        """Set a callback function to receive progress updates from the server.
+
+        The callback function should accept a single argument, which will be a dictionary
+        containing progress information.
+
+        Parameters
+        ----------
+        callback : Callable[[dict], None]
+            A function that takes a dictionary as input and returns None. This function will
+            be called with progress updates from the server.
+        """
+        self._progress_callback = callback
 
     def initialize_params(self, model: Model, param_name: str, *args) -> dict:
         """Initialize parameters on the server side.
@@ -424,7 +488,7 @@ class GRPCCommunicator(Communicator):
                 # when this is called.
                 # In that case, we can just ignore the error.
                 # The channel will be closed anyway.
-                pass
+                return
         else:
             raise RuntimeError("No connection with server")
 

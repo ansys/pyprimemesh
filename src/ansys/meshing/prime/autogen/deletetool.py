@@ -1,4 +1,4 @@
-# Copyright (C) 2024 - 2025 ANSYS, Inc. and/or its affiliates.
+# Copyright (C) 2026 Synopsys, Inc. and ANSYS, Inc. All rights reserved.
 # SPDX-License-Identifier: MIT
 #
 #
@@ -25,7 +25,7 @@ from __future__ import annotations
 from ansys.meshing.prime.internals.comm_manager import CommunicationManager
 from ansys.meshing.prime.params.primestructs import *
 from ansys.meshing.prime.autogen.coreobject import *
-from typing import List, Any, Union
+from typing import Dict, Any, Union, List, Iterable
 
 class DeleteTool(CoreObject):
     """Performs various delete operation. For example, delete fringes and overlapping faces.
@@ -87,7 +87,7 @@ class DeleteTool(CoreObject):
             raise TypeError("Invalid argument type passed for 'part_id'. Valid argument type is int.")
         if not isinstance(face_zonelets, Iterable):
             raise TypeError("Invalid argument type passed for 'face_zonelets'. Valid argument type is Iterable[int].")
-        if not isinstance(params, DeleteFringesAndOverlapsParams):
+        if type(params).__name__ != 'DeleteFringesAndOverlapsParams':
             raise TypeError("Invalid argument type passed for 'params'. Valid argument type is DeleteFringesAndOverlapsParams.")
         args = {"part_id" : part_id,
         "face_zonelets" : face_zonelets,

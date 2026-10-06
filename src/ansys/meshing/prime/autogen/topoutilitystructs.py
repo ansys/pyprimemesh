@@ -1,4 +1,4 @@
-# Copyright (C) 2024 - 2025 ANSYS, Inc. and/or its affiliates.
+# Copyright (C) 2026 Synopsys, Inc. and ANSYS, Inc. All rights reserved.
 # SPDX-License-Identifier: MIT
 #
 #
@@ -35,15 +35,15 @@ class TopoFillHoleParams(CoreObject):
 
     Parameters
     ----------
-    model: Model
+    model : Model
         Model to create a ``TopoFillHoleParams`` object with default parameters.
-    edges_to_exclude: Iterable[int], optional
+    edges_to_exclude : Iterable[int], optional
         TopoEdges to be excluded for cap creation.
-    suppress_boundary_after_hole_fill: bool, optional
+    suppress_boundary_after_hole_fill : bool, optional
         Option to preserve or suppress hole-boundary after filling holes.
-    fill_annular_hole: bool, optional
+    fill_annular_hole : bool, optional
         Option for filling holes with annular bounding loops.
-    json_data: dict, optional
+    json_data : dict, optional
         JSON dictionary to create a ``TopoFillHoleParams`` object with provided parameters.
 
     Examples
@@ -54,9 +54,9 @@ class TopoFillHoleParams(CoreObject):
 
     def __initialize(
             self,
-            edges_to_exclude: Iterable[int],
-            suppress_boundary_after_hole_fill: bool,
-            fill_annular_hole: bool):
+            edges_to_exclude : Iterable[int],
+            suppress_boundary_after_hole_fill : bool,
+            fill_annular_hole : bool):
         self._edges_to_exclude = edges_to_exclude if isinstance(edges_to_exclude, np.ndarray) else np.array(edges_to_exclude, dtype=np.int32) if edges_to_exclude is not None else None
         self._suppress_boundary_after_hole_fill = suppress_boundary_after_hole_fill
         self._fill_annular_hole = fill_annular_hole
@@ -64,24 +64,24 @@ class TopoFillHoleParams(CoreObject):
     def __init__(
             self,
             model: CommunicationManager=None,
-            edges_to_exclude: Iterable[int] = None,
-            suppress_boundary_after_hole_fill: bool = None,
-            fill_annular_hole: bool = None,
+            edges_to_exclude : Iterable[int] = None,
+            suppress_boundary_after_hole_fill : bool = None,
+            fill_annular_hole : bool = None,
             json_data : dict = None,
              **kwargs):
         """Initialize a ``TopoFillHoleParams`` object.
 
         Parameters
         ----------
-        model: Model
+        model : Model
             Model to create a ``TopoFillHoleParams`` object with default parameters.
-        edges_to_exclude: Iterable[int], optional
+        edges_to_exclude : Iterable[int], optional
             TopoEdges to be excluded for cap creation.
-        suppress_boundary_after_hole_fill: bool, optional
+        suppress_boundary_after_hole_fill : bool, optional
             Option to preserve or suppress hole-boundary after filling holes.
-        fill_annular_hole: bool, optional
+        fill_annular_hole : bool, optional
             Option for filling holes with annular bounding loops.
-        json_data: dict, optional
+        json_data : dict, optional
             JSON dictionary to create a ``TopoFillHoleParams`` object with provided parameters.
 
         Examples
@@ -119,18 +119,18 @@ class TopoFillHoleParams(CoreObject):
 
     @staticmethod
     def set_default(
-            edges_to_exclude: Iterable[int] = None,
-            suppress_boundary_after_hole_fill: bool = None,
-            fill_annular_hole: bool = None):
+            edges_to_exclude : Iterable[int] = None,
+            suppress_boundary_after_hole_fill : bool = None,
+            fill_annular_hole : bool = None):
         """Set the default values of the ``TopoFillHoleParams`` object.
 
         Parameters
         ----------
-        edges_to_exclude: Iterable[int], optional
+        edges_to_exclude : Iterable[int], optional
             TopoEdges to be excluded for cap creation.
-        suppress_boundary_after_hole_fill: bool, optional
+        suppress_boundary_after_hole_fill : bool, optional
             Option to preserve or suppress hole-boundary after filling holes.
-        fill_annular_hole: bool, optional
+        fill_annular_hole : bool, optional
             Option for filling holes with annular bounding loops.
         """
         args = locals()
@@ -199,13 +199,13 @@ class TopoFillHoleResult(CoreObject):
 
     Parameters
     ----------
-    model: Model
+    model : Model
         Model to create a ``TopoFillHoleResult`` object with default parameters.
-    new_topo_faces_created: Iterable[int], optional
+    new_topo_faces_created : Iterable[int], optional
         Ids of new topofaces created.
-    error_code: ErrorCode, optional
+    error_code : ErrorCode, optional
         Error code associated with a wrap operation.
-    json_data: dict, optional
+    json_data : dict, optional
         JSON dictionary to create a ``TopoFillHoleResult`` object with provided parameters.
 
     Examples
@@ -216,29 +216,29 @@ class TopoFillHoleResult(CoreObject):
 
     def __initialize(
             self,
-            new_topo_faces_created: Iterable[int],
-            error_code: ErrorCode):
+            new_topo_faces_created : Iterable[int],
+            error_code : ErrorCode):
         self._new_topo_faces_created = new_topo_faces_created if isinstance(new_topo_faces_created, np.ndarray) else np.array(new_topo_faces_created, dtype=np.int32) if new_topo_faces_created is not None else None
         self._error_code = ErrorCode(error_code)
 
     def __init__(
             self,
             model: CommunicationManager=None,
-            new_topo_faces_created: Iterable[int] = None,
-            error_code: ErrorCode = None,
+            new_topo_faces_created : Iterable[int] = None,
+            error_code : ErrorCode = None,
             json_data : dict = None,
              **kwargs):
         """Initialize a ``TopoFillHoleResult`` object.
 
         Parameters
         ----------
-        model: Model
+        model : Model
             Model to create a ``TopoFillHoleResult`` object with default parameters.
-        new_topo_faces_created: Iterable[int], optional
+        new_topo_faces_created : Iterable[int], optional
             Ids of new topofaces created.
-        error_code: ErrorCode, optional
+        error_code : ErrorCode, optional
             Error code associated with a wrap operation.
-        json_data: dict, optional
+        json_data : dict, optional
             JSON dictionary to create a ``TopoFillHoleResult`` object with provided parameters.
 
         Examples
@@ -273,15 +273,15 @@ class TopoFillHoleResult(CoreObject):
 
     @staticmethod
     def set_default(
-            new_topo_faces_created: Iterable[int] = None,
-            error_code: ErrorCode = None):
+            new_topo_faces_created : Iterable[int] = None,
+            error_code : ErrorCode = None):
         """Set the default values of the ``TopoFillHoleResult`` object.
 
         Parameters
         ----------
-        new_topo_faces_created: Iterable[int], optional
+        new_topo_faces_created : Iterable[int], optional
             Ids of new topofaces created.
-        error_code: ErrorCode, optional
+        error_code : ErrorCode, optional
             Error code associated with a wrap operation.
         """
         args = locals()

@@ -1,4 +1,4 @@
-# Copyright (C) 2024 - 2025 ANSYS, Inc. and/or its affiliates.
+# Copyright (C) 2026 Synopsys, Inc. and ANSYS, Inc. All rights reserved.
 # SPDX-License-Identifier: MIT
 #
 #
@@ -35,15 +35,15 @@ class PeriodicControlParams(CoreObject):
 
     Parameters
     ----------
-    model: Model
+    model : Model
         Model to create a ``PeriodicControlParams`` object with default parameters.
-    center: Iterable[float], optional
+    center : Iterable[float], optional
         Center coordinates.
-    axis: Iterable[float], optional
+    axis : Iterable[float], optional
         Axis vector coordinates.
-    angle: float, optional
+    angle : float, optional
         Angle in degrees.
-    json_data: dict, optional
+    json_data : dict, optional
         JSON dictionary to create a ``PeriodicControlParams`` object with provided parameters.
 
     Examples
@@ -54,9 +54,9 @@ class PeriodicControlParams(CoreObject):
 
     def __initialize(
             self,
-            center: Iterable[float],
-            axis: Iterable[float],
-            angle: float):
+            center : Iterable[float],
+            axis : Iterable[float],
+            angle : float):
         self._center = center if isinstance(center, np.ndarray) else np.array(center, dtype=np.double) if center is not None else None
         self._axis = axis if isinstance(axis, np.ndarray) else np.array(axis, dtype=np.double) if axis is not None else None
         self._angle = angle
@@ -64,24 +64,24 @@ class PeriodicControlParams(CoreObject):
     def __init__(
             self,
             model: CommunicationManager=None,
-            center: Iterable[float] = None,
-            axis: Iterable[float] = None,
-            angle: float = None,
+            center : Iterable[float] = None,
+            axis : Iterable[float] = None,
+            angle : float = None,
             json_data : dict = None,
              **kwargs):
         """Initialize a ``PeriodicControlParams`` object.
 
         Parameters
         ----------
-        model: Model
+        model : Model
             Model to create a ``PeriodicControlParams`` object with default parameters.
-        center: Iterable[float], optional
+        center : Iterable[float], optional
             Center coordinates.
-        axis: Iterable[float], optional
+        axis : Iterable[float], optional
             Axis vector coordinates.
-        angle: float, optional
+        angle : float, optional
             Angle in degrees.
-        json_data: dict, optional
+        json_data : dict, optional
             JSON dictionary to create a ``PeriodicControlParams`` object with provided parameters.
 
         Examples
@@ -119,18 +119,18 @@ class PeriodicControlParams(CoreObject):
 
     @staticmethod
     def set_default(
-            center: Iterable[float] = None,
-            axis: Iterable[float] = None,
-            angle: float = None):
+            center : Iterable[float] = None,
+            axis : Iterable[float] = None,
+            angle : float = None):
         """Set the default values of the ``PeriodicControlParams`` object.
 
         Parameters
         ----------
-        center: Iterable[float], optional
+        center : Iterable[float], optional
             Center coordinates.
-        axis: Iterable[float], optional
+        axis : Iterable[float], optional
             Axis vector coordinates.
-        angle: float, optional
+        angle : float, optional
             Angle in degrees.
         """
         args = locals()
@@ -199,11 +199,11 @@ class PeriodicControlSummaryResult(CoreObject):
 
     Parameters
     ----------
-    model: Model
+    model : Model
         Model to create a ``PeriodicControlSummaryResult`` object with default parameters.
-    message: str, optional
+    message : str, optional
         String with the periodic control summary.
-    json_data: dict, optional
+    json_data : dict, optional
         JSON dictionary to create a ``PeriodicControlSummaryResult`` object with provided parameters.
 
     Examples
@@ -214,24 +214,24 @@ class PeriodicControlSummaryResult(CoreObject):
 
     def __initialize(
             self,
-            message: str):
+            message : str):
         self._message = message
 
     def __init__(
             self,
             model: CommunicationManager=None,
-            message: str = None,
+            message : str = None,
             json_data : dict = None,
              **kwargs):
         """Initialize a ``PeriodicControlSummaryResult`` object.
 
         Parameters
         ----------
-        model: Model
+        model : Model
             Model to create a ``PeriodicControlSummaryResult`` object with default parameters.
-        message: str, optional
+        message : str, optional
             String with the periodic control summary.
-        json_data: dict, optional
+        json_data : dict, optional
             JSON dictionary to create a ``PeriodicControlSummaryResult`` object with provided parameters.
 
         Examples
@@ -263,12 +263,12 @@ class PeriodicControlSummaryResult(CoreObject):
 
     @staticmethod
     def set_default(
-            message: str = None):
+            message : str = None):
         """Set the default values of the ``PeriodicControlSummaryResult`` object.
 
         Parameters
         ----------
-        message: str, optional
+        message : str, optional
             String with the periodic control summary.
         """
         args = locals()
@@ -313,9 +313,9 @@ class PeriodicControlSummaryParams(CoreObject):
 
     Parameters
     ----------
-    model: Model
+    model : Model
         Model to create a ``PeriodicControlSummaryParams`` object with default parameters.
-    json_data: dict, optional
+    json_data : dict, optional
         JSON dictionary to create a ``PeriodicControlSummaryParams`` object with provided parameters.
 
     Examples
@@ -337,9 +337,9 @@ class PeriodicControlSummaryParams(CoreObject):
 
         Parameters
         ----------
-        model: Model
+        model : Model
             Model to create a ``PeriodicControlSummaryParams`` object with default parameters.
-        json_data: dict, optional
+        json_data : dict, optional
             JSON dictionary to create a ``PeriodicControlSummaryParams`` object with provided parameters.
 
         Examples

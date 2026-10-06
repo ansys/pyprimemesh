@@ -1,4 +1,4 @@
-# Copyright (C) 2024 - 2025 ANSYS, Inc. and/or its affiliates.
+# Copyright (C) 2026 Synopsys, Inc. and ANSYS, Inc. All rights reserved.
 # SPDX-License-Identifier: MIT
 #
 #
@@ -25,7 +25,7 @@ from __future__ import annotations
 from ansys.meshing.prime.internals.comm_manager import CommunicationManager
 from ansys.meshing.prime.params.primestructs import *
 from ansys.meshing.prime.autogen.coreobject import *
-from typing import List, Any, Union
+from typing import Dict, Any, Union, List, Iterable
 
 class FeatureExtraction(CoreObject):
     """Provide functions for all feature extraction operations like extracting edges zonlelets, tracing node paths.
@@ -83,7 +83,7 @@ class FeatureExtraction(CoreObject):
             raise TypeError("Invalid argument type passed for 'part_id'. Valid argument type is int.")
         if not isinstance(face_zonelets, Iterable):
             raise TypeError("Invalid argument type passed for 'face_zonelets'. Valid argument type is Iterable[int].")
-        if not isinstance(params, ExtractFeatureParams):
+        if type(params).__name__ != 'ExtractFeatureParams':
             raise TypeError("Invalid argument type passed for 'params'. Valid argument type is ExtractFeatureParams.")
         args = {"part_id" : part_id,
         "face_zonelets" : face_zonelets,
@@ -118,11 +118,11 @@ class FeatureExtraction(CoreObject):
         >>> results = feature_extraction.create_intersection_edge_loops(part_face_zonelets, intersecting_part_face_zonelets, params)
 
         """
-        if not isinstance(part_face_zonelets, List):
+        if not isinstance(part_face_zonelets, Iterable):
             raise TypeError("Invalid argument type passed for 'part_face_zonelets'. Valid argument type is List[PartZonelets].")
-        if not isinstance(intersecting_part_face_zonelets, List):
+        if not isinstance(intersecting_part_face_zonelets, Iterable):
             raise TypeError("Invalid argument type passed for 'intersecting_part_face_zonelets'. Valid argument type is List[PartZonelets].")
-        if not isinstance(params, CreateIntersectionEdgeLoopsParams):
+        if type(params).__name__ != 'CreateIntersectionEdgeLoopsParams':
             raise TypeError("Invalid argument type passed for 'params'. Valid argument type is CreateIntersectionEdgeLoopsParams.")
         args = {"part_face_zonelets" : [p._jsonify() for p in part_face_zonelets],
         "intersecting_part_face_zonelets" : [p._jsonify() for p in intersecting_part_face_zonelets],

@@ -1,4 +1,4 @@
-# Copyright (C) 2024 - 2025 ANSYS, Inc. and/or its affiliates.
+# Copyright (C) 2026 Synopsys, Inc. and ANSYS, Inc. All rights reserved.
 # SPDX-License-Identifier: MIT
 #
 #
@@ -71,15 +71,15 @@ class IGAResults(CoreObject):
 
     Parameters
     ----------
-    model: Model
+    model : Model
         Model to create a ``IGAResults`` object with default parameters.
-    error_code: ErrorCode, optional
+    error_code : ErrorCode, optional
         Error code if IGA operation is unsuccessful.
-    warning_code: WarningCode, optional
+    warning_code : WarningCode, optional
         Warning code if IGA operation is partially successful.
-    spline_ids: Iterable[int], optional
+    spline_ids : Iterable[int], optional
         Ids of the created spline.
-    json_data: dict, optional
+    json_data : dict, optional
         JSON dictionary to create a ``IGAResults`` object with provided parameters.
 
     Examples
@@ -90,9 +90,9 @@ class IGAResults(CoreObject):
 
     def __initialize(
             self,
-            error_code: ErrorCode,
-            warning_code: WarningCode,
-            spline_ids: Iterable[int]):
+            error_code : ErrorCode,
+            warning_code : WarningCode,
+            spline_ids : Iterable[int]):
         self._error_code = ErrorCode(error_code)
         self._warning_code = WarningCode(warning_code)
         self._spline_ids = spline_ids if isinstance(spline_ids, np.ndarray) else np.array(spline_ids, dtype=np.int32) if spline_ids is not None else None
@@ -100,24 +100,24 @@ class IGAResults(CoreObject):
     def __init__(
             self,
             model: CommunicationManager=None,
-            error_code: ErrorCode = None,
-            warning_code: WarningCode = None,
-            spline_ids: Iterable[int] = None,
+            error_code : ErrorCode = None,
+            warning_code : WarningCode = None,
+            spline_ids : Iterable[int] = None,
             json_data : dict = None,
              **kwargs):
         """Initialize a ``IGAResults`` object.
 
         Parameters
         ----------
-        model: Model
+        model : Model
             Model to create a ``IGAResults`` object with default parameters.
-        error_code: ErrorCode, optional
+        error_code : ErrorCode, optional
             Error code if IGA operation is unsuccessful.
-        warning_code: WarningCode, optional
+        warning_code : WarningCode, optional
             Warning code if IGA operation is partially successful.
-        spline_ids: Iterable[int], optional
+        spline_ids : Iterable[int], optional
             Ids of the created spline.
-        json_data: dict, optional
+        json_data : dict, optional
             JSON dictionary to create a ``IGAResults`` object with provided parameters.
 
         Examples
@@ -155,18 +155,18 @@ class IGAResults(CoreObject):
 
     @staticmethod
     def set_default(
-            error_code: ErrorCode = None,
-            warning_code: WarningCode = None,
-            spline_ids: Iterable[int] = None):
+            error_code : ErrorCode = None,
+            warning_code : WarningCode = None,
+            spline_ids : Iterable[int] = None):
         """Set the default values of the ``IGAResults`` object.
 
         Parameters
         ----------
-        error_code: ErrorCode, optional
+        error_code : ErrorCode, optional
             Error code if IGA operation is unsuccessful.
-        warning_code: WarningCode, optional
+        warning_code : WarningCode, optional
             Warning code if IGA operation is partially successful.
-        spline_ids: Iterable[int], optional
+        spline_ids : Iterable[int], optional
             Ids of the created spline.
         """
         args = locals()
@@ -235,11 +235,11 @@ class IGASpline(CoreObject):
 
     Parameters
     ----------
-    model: Model
+    model : Model
         Model to create a ``IGASpline`` object with default parameters.
-    id: int, optional
+    id : int, optional
         Unique id of the spline.
-    json_data: dict, optional
+    json_data : dict, optional
         JSON dictionary to create a ``IGASpline`` object with provided parameters.
 
     Examples
@@ -250,24 +250,24 @@ class IGASpline(CoreObject):
 
     def __initialize(
             self,
-            id: int):
+            id : int):
         self._id = id
 
     def __init__(
             self,
             model: CommunicationManager=None,
-            id: int = None,
+            id : int = None,
             json_data : dict = None,
              **kwargs):
         """Initialize a ``IGASpline`` object.
 
         Parameters
         ----------
-        model: Model
+        model : Model
             Model to create a ``IGASpline`` object with default parameters.
-        id: int, optional
+        id : int, optional
             Unique id of the spline.
-        json_data: dict, optional
+        json_data : dict, optional
             JSON dictionary to create a ``IGASpline`` object with provided parameters.
 
         Examples
@@ -299,12 +299,12 @@ class IGASpline(CoreObject):
 
     @staticmethod
     def set_default(
-            id: int = None):
+            id : int = None):
         """Set the default values of the ``IGASpline`` object.
 
         Parameters
         ----------
-        id: int, optional
+        id : int, optional
             Unique id of the spline.
         """
         args = locals()
@@ -349,33 +349,33 @@ class IGAUnstructuredSplineSurf(CoreObject):
 
     Parameters
     ----------
-    model: Model
+    model : Model
         Model to create a ``IGAUnstructuredSplineSurf`` object with default parameters.
-    id: int, optional
+    id : int, optional
         Id of the unstructured spline surface.
-    degree: int, optional
+    degree : int, optional
         Degree of the spline surface.
 
         **This is a beta parameter**. **The behavior and name may change in the future**.
-    spline_refinement_level: int, optional
+    spline_refinement_level : int, optional
         Refinement level for rendering of spline points.
-    control_points: Iterable[float], optional
+    control_points : Iterable[float], optional
         Coordinates of the control points of the spline.
-    spline_points: Iterable[float], optional
+    spline_points : Iterable[float], optional
         Coordinates of the spline points.
-    bad_spline_points_indices: Iterable[int], optional
+    bad_spline_points_indices : Iterable[int], optional
         Node indices in the spline points list which has negative jacobian value.
-    deviation_array: Iterable[float], optional
+    deviation_array : Iterable[float], optional
         Deviation value from the spline point to the model geometry.
-    invalid_jacobian_elements_count: int, optional
+    invalid_jacobian_elements_count : int, optional
         Count of elements with negative jacobian.
-    average_mesh_size: float, optional
+    average_mesh_size : float, optional
         Reference length to compute deviation.
-    elements_count: int, optional
+    elements_count : int, optional
         Count of shell elements.
-    shell_thickness: float, optional
+    shell_thickness : float, optional
         Thickness of shell.
-    json_data: dict, optional
+    json_data : dict, optional
         JSON dictionary to create a ``IGAUnstructuredSplineSurf`` object with provided parameters.
 
     Examples
@@ -386,17 +386,17 @@ class IGAUnstructuredSplineSurf(CoreObject):
 
     def __initialize(
             self,
-            id: int,
-            degree: int,
-            spline_refinement_level: int,
-            control_points: Iterable[float],
-            spline_points: Iterable[float],
-            bad_spline_points_indices: Iterable[int],
-            deviation_array: Iterable[float],
-            invalid_jacobian_elements_count: int,
-            average_mesh_size: float,
-            elements_count: int,
-            shell_thickness: float):
+            id : int,
+            degree : int,
+            spline_refinement_level : int,
+            control_points : Iterable[float],
+            spline_points : Iterable[float],
+            bad_spline_points_indices : Iterable[int],
+            deviation_array : Iterable[float],
+            invalid_jacobian_elements_count : int,
+            average_mesh_size : float,
+            elements_count : int,
+            shell_thickness : float):
         self._id = id
         self._degree = degree
         self._spline_refinement_level = spline_refinement_level
@@ -412,50 +412,50 @@ class IGAUnstructuredSplineSurf(CoreObject):
     def __init__(
             self,
             model: CommunicationManager=None,
-            id: int = None,
-            degree: int = None,
-            spline_refinement_level: int = None,
-            control_points: Iterable[float] = None,
-            spline_points: Iterable[float] = None,
-            bad_spline_points_indices: Iterable[int] = None,
-            deviation_array: Iterable[float] = None,
-            invalid_jacobian_elements_count: int = None,
-            average_mesh_size: float = None,
-            elements_count: int = None,
-            shell_thickness: float = None,
+            id : int = None,
+            degree : int = None,
+            spline_refinement_level : int = None,
+            control_points : Iterable[float] = None,
+            spline_points : Iterable[float] = None,
+            bad_spline_points_indices : Iterable[int] = None,
+            deviation_array : Iterable[float] = None,
+            invalid_jacobian_elements_count : int = None,
+            average_mesh_size : float = None,
+            elements_count : int = None,
+            shell_thickness : float = None,
             json_data : dict = None,
              **kwargs):
         """Initialize a ``IGAUnstructuredSplineSurf`` object.
 
         Parameters
         ----------
-        model: Model
+        model : Model
             Model to create a ``IGAUnstructuredSplineSurf`` object with default parameters.
-        id: int, optional
+        id : int, optional
             Id of the unstructured spline surface.
-        degree: int, optional
+        degree : int, optional
             Degree of the spline surface.
 
             **This is a beta parameter**. **The behavior and name may change in the future**.
-        spline_refinement_level: int, optional
+        spline_refinement_level : int, optional
             Refinement level for rendering of spline points.
-        control_points: Iterable[float], optional
+        control_points : Iterable[float], optional
             Coordinates of the control points of the spline.
-        spline_points: Iterable[float], optional
+        spline_points : Iterable[float], optional
             Coordinates of the spline points.
-        bad_spline_points_indices: Iterable[int], optional
+        bad_spline_points_indices : Iterable[int], optional
             Node indices in the spline points list which has negative jacobian value.
-        deviation_array: Iterable[float], optional
+        deviation_array : Iterable[float], optional
             Deviation value from the spline point to the model geometry.
-        invalid_jacobian_elements_count: int, optional
+        invalid_jacobian_elements_count : int, optional
             Count of elements with negative jacobian.
-        average_mesh_size: float, optional
+        average_mesh_size : float, optional
             Reference length to compute deviation.
-        elements_count: int, optional
+        elements_count : int, optional
             Count of shell elements.
-        shell_thickness: float, optional
+        shell_thickness : float, optional
             Thickness of shell.
-        json_data: dict, optional
+        json_data : dict, optional
             JSON dictionary to create a ``IGAUnstructuredSplineSurf`` object with provided parameters.
 
         Examples
@@ -517,42 +517,42 @@ class IGAUnstructuredSplineSurf(CoreObject):
 
     @staticmethod
     def set_default(
-            id: int = None,
-            degree: int = None,
-            spline_refinement_level: int = None,
-            control_points: Iterable[float] = None,
-            spline_points: Iterable[float] = None,
-            bad_spline_points_indices: Iterable[int] = None,
-            deviation_array: Iterable[float] = None,
-            invalid_jacobian_elements_count: int = None,
-            average_mesh_size: float = None,
-            elements_count: int = None,
-            shell_thickness: float = None):
+            id : int = None,
+            degree : int = None,
+            spline_refinement_level : int = None,
+            control_points : Iterable[float] = None,
+            spline_points : Iterable[float] = None,
+            bad_spline_points_indices : Iterable[int] = None,
+            deviation_array : Iterable[float] = None,
+            invalid_jacobian_elements_count : int = None,
+            average_mesh_size : float = None,
+            elements_count : int = None,
+            shell_thickness : float = None):
         """Set the default values of the ``IGAUnstructuredSplineSurf`` object.
 
         Parameters
         ----------
-        id: int, optional
+        id : int, optional
             Id of the unstructured spline surface.
-        degree: int, optional
+        degree : int, optional
             Degree of the spline surface.
-        spline_refinement_level: int, optional
+        spline_refinement_level : int, optional
             Refinement level for rendering of spline points.
-        control_points: Iterable[float], optional
+        control_points : Iterable[float], optional
             Coordinates of the control points of the spline.
-        spline_points: Iterable[float], optional
+        spline_points : Iterable[float], optional
             Coordinates of the spline points.
-        bad_spline_points_indices: Iterable[int], optional
+        bad_spline_points_indices : Iterable[int], optional
             Node indices in the spline points list which has negative jacobian value.
-        deviation_array: Iterable[float], optional
+        deviation_array : Iterable[float], optional
             Deviation value from the spline point to the model geometry.
-        invalid_jacobian_elements_count: int, optional
+        invalid_jacobian_elements_count : int, optional
             Count of elements with negative jacobian.
-        average_mesh_size: float, optional
+        average_mesh_size : float, optional
             Reference length to compute deviation.
-        elements_count: int, optional
+        elements_count : int, optional
             Count of shell elements.
-        shell_thickness: float, optional
+        shell_thickness : float, optional
             Thickness of shell.
         """
         args = locals()
@@ -719,21 +719,21 @@ class IGAUnstructuredSplineSolid(CoreObject):
 
     Parameters
     ----------
-    model: Model
+    model : Model
         Model to create a ``IGAUnstructuredSplineSolid`` object with default parameters.
-    id: int, optional
+    id : int, optional
         Id of the unstructured spline solid.
 
         **This is a beta parameter**. **The behavior and name may change in the future**.
-    degree: int, optional
+    degree : int, optional
         Degree of the spline solid.
 
         **This is a beta parameter**. **The behavior and name may change in the future**.
-    invalid_jacobian_elements_count: int, optional
+    invalid_jacobian_elements_count : int, optional
         Count of elements with negative jacobian.
 
         **This is a beta parameter**. **The behavior and name may change in the future**.
-    json_data: dict, optional
+    json_data : dict, optional
         JSON dictionary to create a ``IGAUnstructuredSplineSolid`` object with provided parameters.
 
     Examples
@@ -744,9 +744,9 @@ class IGAUnstructuredSplineSolid(CoreObject):
 
     def __initialize(
             self,
-            id: int,
-            degree: int,
-            invalid_jacobian_elements_count: int):
+            id : int,
+            degree : int,
+            invalid_jacobian_elements_count : int):
         self._id = id
         self._degree = degree
         self._invalid_jacobian_elements_count = invalid_jacobian_elements_count
@@ -754,30 +754,30 @@ class IGAUnstructuredSplineSolid(CoreObject):
     def __init__(
             self,
             model: CommunicationManager=None,
-            id: int = None,
-            degree: int = None,
-            invalid_jacobian_elements_count: int = None,
+            id : int = None,
+            degree : int = None,
+            invalid_jacobian_elements_count : int = None,
             json_data : dict = None,
              **kwargs):
         """Initialize a ``IGAUnstructuredSplineSolid`` object.
 
         Parameters
         ----------
-        model: Model
+        model : Model
             Model to create a ``IGAUnstructuredSplineSolid`` object with default parameters.
-        id: int, optional
+        id : int, optional
             Id of the unstructured spline solid.
 
             **This is a beta parameter**. **The behavior and name may change in the future**.
-        degree: int, optional
+        degree : int, optional
             Degree of the spline solid.
 
             **This is a beta parameter**. **The behavior and name may change in the future**.
-        invalid_jacobian_elements_count: int, optional
+        invalid_jacobian_elements_count : int, optional
             Count of elements with negative jacobian.
 
             **This is a beta parameter**. **The behavior and name may change in the future**.
-        json_data: dict, optional
+        json_data : dict, optional
             JSON dictionary to create a ``IGAUnstructuredSplineSolid`` object with provided parameters.
 
         Examples
@@ -815,18 +815,18 @@ class IGAUnstructuredSplineSolid(CoreObject):
 
     @staticmethod
     def set_default(
-            id: int = None,
-            degree: int = None,
-            invalid_jacobian_elements_count: int = None):
+            id : int = None,
+            degree : int = None,
+            invalid_jacobian_elements_count : int = None):
         """Set the default values of the ``IGAUnstructuredSplineSolid`` object.
 
         Parameters
         ----------
-        id: int, optional
+        id : int, optional
             Id of the unstructured spline solid.
-        degree: int, optional
+        degree : int, optional
             Degree of the spline solid.
-        invalid_jacobian_elements_count: int, optional
+        invalid_jacobian_elements_count : int, optional
             Count of elements with negative jacobian.
         """
         args = locals()
@@ -901,31 +901,31 @@ class BoundaryFittedSplineParams(CoreObject):
 
     Parameters
     ----------
-    model: Model
+    model : Model
         Model to create a ``BoundaryFittedSplineParams`` object with default parameters.
-    degree_u: int, optional
+    degree_u : int, optional
         Degree of spline in u direction.
-    degree_v: int, optional
+    degree_v : int, optional
         Degree of spline in v direction.
-    degree_w: int, optional
+    degree_w : int, optional
         Degree of spline in w direction.
-    refinement_fraction_u: float, optional
+    refinement_fraction_u : float, optional
         Fraction of input mesh size that sets the control points size in u direction. This is used in program controlled control points selection mode.
-    refinement_fraction_v: float, optional
+    refinement_fraction_v : float, optional
         Fraction of input mesh size that sets the control points size in v direction. This is used in program controlled control points selection mode.
-    refinement_fraction_w: float, optional
+    refinement_fraction_w : float, optional
         Fraction of input mesh size that sets the control points size in w direction. This is used in program controlled control points selection mode.
-    control_points_count_u: int, optional
+    control_points_count_u : int, optional
         Spline control points count in U direction. Used in manual control points selection mode.
-    control_points_count_v: int, optional
+    control_points_count_v : int, optional
         Spline control points count in V direction. Used in manual control points selection mode.
-    control_points_count_w: int, optional
+    control_points_count_w : int, optional
         Spline control points count in W direction. Used in manual control points selection mode.
-    n_refine: int, optional
+    n_refine : int, optional
         Spline refinement level for rendering.
-    control_point_selection_type: ControlPointSelection, optional
+    control_point_selection_type : ControlPointSelection, optional
         Spline control points selection type.
-    json_data: dict, optional
+    json_data : dict, optional
         JSON dictionary to create a ``BoundaryFittedSplineParams`` object with provided parameters.
 
     Examples
@@ -936,17 +936,17 @@ class BoundaryFittedSplineParams(CoreObject):
 
     def __initialize(
             self,
-            degree_u: int,
-            degree_v: int,
-            degree_w: int,
-            refinement_fraction_u: float,
-            refinement_fraction_v: float,
-            refinement_fraction_w: float,
-            control_points_count_u: int,
-            control_points_count_v: int,
-            control_points_count_w: int,
-            n_refine: int,
-            control_point_selection_type: ControlPointSelection):
+            degree_u : int,
+            degree_v : int,
+            degree_w : int,
+            refinement_fraction_u : float,
+            refinement_fraction_v : float,
+            refinement_fraction_w : float,
+            control_points_count_u : int,
+            control_points_count_v : int,
+            control_points_count_w : int,
+            n_refine : int,
+            control_point_selection_type : ControlPointSelection):
         self._degree_u = degree_u
         self._degree_v = degree_v
         self._degree_w = degree_w
@@ -962,48 +962,48 @@ class BoundaryFittedSplineParams(CoreObject):
     def __init__(
             self,
             model: CommunicationManager=None,
-            degree_u: int = None,
-            degree_v: int = None,
-            degree_w: int = None,
-            refinement_fraction_u: float = None,
-            refinement_fraction_v: float = None,
-            refinement_fraction_w: float = None,
-            control_points_count_u: int = None,
-            control_points_count_v: int = None,
-            control_points_count_w: int = None,
-            n_refine: int = None,
-            control_point_selection_type: ControlPointSelection = None,
+            degree_u : int = None,
+            degree_v : int = None,
+            degree_w : int = None,
+            refinement_fraction_u : float = None,
+            refinement_fraction_v : float = None,
+            refinement_fraction_w : float = None,
+            control_points_count_u : int = None,
+            control_points_count_v : int = None,
+            control_points_count_w : int = None,
+            n_refine : int = None,
+            control_point_selection_type : ControlPointSelection = None,
             json_data : dict = None,
              **kwargs):
         """Initialize a ``BoundaryFittedSplineParams`` object.
 
         Parameters
         ----------
-        model: Model
+        model : Model
             Model to create a ``BoundaryFittedSplineParams`` object with default parameters.
-        degree_u: int, optional
+        degree_u : int, optional
             Degree of spline in u direction.
-        degree_v: int, optional
+        degree_v : int, optional
             Degree of spline in v direction.
-        degree_w: int, optional
+        degree_w : int, optional
             Degree of spline in w direction.
-        refinement_fraction_u: float, optional
+        refinement_fraction_u : float, optional
             Fraction of input mesh size that sets the control points size in u direction. This is used in program controlled control points selection mode.
-        refinement_fraction_v: float, optional
+        refinement_fraction_v : float, optional
             Fraction of input mesh size that sets the control points size in v direction. This is used in program controlled control points selection mode.
-        refinement_fraction_w: float, optional
+        refinement_fraction_w : float, optional
             Fraction of input mesh size that sets the control points size in w direction. This is used in program controlled control points selection mode.
-        control_points_count_u: int, optional
+        control_points_count_u : int, optional
             Spline control points count in U direction. Used in manual control points selection mode.
-        control_points_count_v: int, optional
+        control_points_count_v : int, optional
             Spline control points count in V direction. Used in manual control points selection mode.
-        control_points_count_w: int, optional
+        control_points_count_w : int, optional
             Spline control points count in W direction. Used in manual control points selection mode.
-        n_refine: int, optional
+        n_refine : int, optional
             Spline refinement level for rendering.
-        control_point_selection_type: ControlPointSelection, optional
+        control_point_selection_type : ControlPointSelection, optional
             Spline control points selection type.
-        json_data: dict, optional
+        json_data : dict, optional
             JSON dictionary to create a ``BoundaryFittedSplineParams`` object with provided parameters.
 
         Examples
@@ -1065,42 +1065,42 @@ class BoundaryFittedSplineParams(CoreObject):
 
     @staticmethod
     def set_default(
-            degree_u: int = None,
-            degree_v: int = None,
-            degree_w: int = None,
-            refinement_fraction_u: float = None,
-            refinement_fraction_v: float = None,
-            refinement_fraction_w: float = None,
-            control_points_count_u: int = None,
-            control_points_count_v: int = None,
-            control_points_count_w: int = None,
-            n_refine: int = None,
-            control_point_selection_type: ControlPointSelection = None):
+            degree_u : int = None,
+            degree_v : int = None,
+            degree_w : int = None,
+            refinement_fraction_u : float = None,
+            refinement_fraction_v : float = None,
+            refinement_fraction_w : float = None,
+            control_points_count_u : int = None,
+            control_points_count_v : int = None,
+            control_points_count_w : int = None,
+            n_refine : int = None,
+            control_point_selection_type : ControlPointSelection = None):
         """Set the default values of the ``BoundaryFittedSplineParams`` object.
 
         Parameters
         ----------
-        degree_u: int, optional
+        degree_u : int, optional
             Degree of spline in u direction.
-        degree_v: int, optional
+        degree_v : int, optional
             Degree of spline in v direction.
-        degree_w: int, optional
+        degree_w : int, optional
             Degree of spline in w direction.
-        refinement_fraction_u: float, optional
+        refinement_fraction_u : float, optional
             Fraction of input mesh size that sets the control points size in u direction. This is used in program controlled control points selection mode.
-        refinement_fraction_v: float, optional
+        refinement_fraction_v : float, optional
             Fraction of input mesh size that sets the control points size in v direction. This is used in program controlled control points selection mode.
-        refinement_fraction_w: float, optional
+        refinement_fraction_w : float, optional
             Fraction of input mesh size that sets the control points size in w direction. This is used in program controlled control points selection mode.
-        control_points_count_u: int, optional
+        control_points_count_u : int, optional
             Spline control points count in U direction. Used in manual control points selection mode.
-        control_points_count_v: int, optional
+        control_points_count_v : int, optional
             Spline control points count in V direction. Used in manual control points selection mode.
-        control_points_count_w: int, optional
+        control_points_count_w : int, optional
             Spline control points count in W direction. Used in manual control points selection mode.
-        n_refine: int, optional
+        n_refine : int, optional
             Spline refinement level for rendering.
-        control_point_selection_type: ControlPointSelection, optional
+        control_point_selection_type : ControlPointSelection, optional
             Spline control points selection type.
         """
         args = locals()
@@ -1265,53 +1265,53 @@ class QuadToSplineParams(CoreObject):
 
     Parameters
     ----------
-    model: Model
+    model : Model
         Model to create a ``QuadToSplineParams`` object with default parameters.
-    feature_capture_type: SplineFeatureCaptureType, optional
+    feature_capture_type : SplineFeatureCaptureType, optional
         Feature capture options.
 
         **This is a beta parameter**. **The behavior and name may change in the future**.
-    feature_angle: float, optional
+    feature_angle : float, optional
         Angle to capture the feature.
 
         **This is a beta parameter**. **The behavior and name may change in the future**.
-    corner_angle: float, optional
+    corner_angle : float, optional
         Corner angle of the feature.
 
         **This is a beta parameter**. **The behavior and name may change in the future**.
-    shell_thickness: float, optional
+    shell_thickness : float, optional
         Thickness of shell.
 
         **This is a beta parameter**. **The behavior and name may change in the future**.
-    solid_shell: bool, optional
+    solid_shell : bool, optional
         Solid shell option. Set true to generate solid shell spline, and set false to generate surface spline.
 
         **This is a beta parameter**. **The behavior and name may change in the future**.
-    separate_by_zone: bool, optional
+    separate_by_zone : bool, optional
         Option to separate IGA shell regions by zone. If set to true, it creates LS-Dyna part per zone while exporting IGA .k file and if set to false, it creates a single LS-Dyna part per Prime part, irrespective of the zones.
 
         **This is a beta parameter**. **The behavior and name may change in the future**.
-    zone_name_shell_thickness_pairs: Dict[str, Union[str, int, float, bool]], optional
+    zone_name_shell_thickness_pairs : Dict[str, Union[str, int, float, bool]], optional
         Zone name and thickness pair list. For example, {"Zone1Name": Zone1Thickness, "Zone2Name": Zone2Thickness, ...}.
 
         **This is a beta parameter**. **The behavior and name may change in the future**.
-    continuity: SplineContinuityType, optional
+    continuity : SplineContinuityType, optional
         Spline Continuity options.
 
         **This is a beta parameter**. **The behavior and name may change in the future**.
-    project_on_geometry: bool, optional
+    project_on_geometry : bool, optional
         Option to project on geometry.
 
         **This is a beta parameter**. **The behavior and name may change in the future**.
-    use_projection_scope: bool, optional
+    use_projection_scope : bool, optional
         Option to use projection scope.
 
         **This is a beta parameter**. **The behavior and name may change in the future**.
-    projection_scope: ScopeDefinition, optional
+    projection_scope : ScopeDefinition, optional
         Scope to evaluate entities for projection.
 
         **This is a beta parameter**. **The behavior and name may change in the future**.
-    json_data: dict, optional
+    json_data : dict, optional
         JSON dictionary to create a ``QuadToSplineParams`` object with provided parameters.
 
     Examples
@@ -1322,17 +1322,17 @@ class QuadToSplineParams(CoreObject):
 
     def __initialize(
             self,
-            feature_capture_type: SplineFeatureCaptureType,
-            feature_angle: float,
-            corner_angle: float,
-            shell_thickness: float,
-            solid_shell: bool,
-            separate_by_zone: bool,
-            zone_name_shell_thickness_pairs: Dict[str, Union[str, int, float, bool]],
-            continuity: SplineContinuityType,
-            project_on_geometry: bool,
-            use_projection_scope: bool,
-            projection_scope: ScopeDefinition):
+            feature_capture_type : SplineFeatureCaptureType,
+            feature_angle : float,
+            corner_angle : float,
+            shell_thickness : float,
+            solid_shell : bool,
+            separate_by_zone : bool,
+            zone_name_shell_thickness_pairs : Dict[str, Union[str, int, float, bool]],
+            continuity : SplineContinuityType,
+            project_on_geometry : bool,
+            use_projection_scope : bool,
+            projection_scope : ScopeDefinition):
         self._feature_capture_type = SplineFeatureCaptureType(feature_capture_type)
         self._feature_angle = feature_angle
         self._corner_angle = corner_angle
@@ -1348,70 +1348,70 @@ class QuadToSplineParams(CoreObject):
     def __init__(
             self,
             model: CommunicationManager=None,
-            feature_capture_type: SplineFeatureCaptureType = None,
-            feature_angle: float = None,
-            corner_angle: float = None,
-            shell_thickness: float = None,
-            solid_shell: bool = None,
-            separate_by_zone: bool = None,
-            zone_name_shell_thickness_pairs: Dict[str, Union[str, int, float, bool]] = None,
-            continuity: SplineContinuityType = None,
-            project_on_geometry: bool = None,
-            use_projection_scope: bool = None,
-            projection_scope: ScopeDefinition = None,
+            feature_capture_type : SplineFeatureCaptureType = None,
+            feature_angle : float = None,
+            corner_angle : float = None,
+            shell_thickness : float = None,
+            solid_shell : bool = None,
+            separate_by_zone : bool = None,
+            zone_name_shell_thickness_pairs : Dict[str, Union[str, int, float, bool]] = None,
+            continuity : SplineContinuityType = None,
+            project_on_geometry : bool = None,
+            use_projection_scope : bool = None,
+            projection_scope : ScopeDefinition = None,
             json_data : dict = None,
              **kwargs):
         """Initialize a ``QuadToSplineParams`` object.
 
         Parameters
         ----------
-        model: Model
+        model : Model
             Model to create a ``QuadToSplineParams`` object with default parameters.
-        feature_capture_type: SplineFeatureCaptureType, optional
+        feature_capture_type : SplineFeatureCaptureType, optional
             Feature capture options.
 
             **This is a beta parameter**. **The behavior and name may change in the future**.
-        feature_angle: float, optional
+        feature_angle : float, optional
             Angle to capture the feature.
 
             **This is a beta parameter**. **The behavior and name may change in the future**.
-        corner_angle: float, optional
+        corner_angle : float, optional
             Corner angle of the feature.
 
             **This is a beta parameter**. **The behavior and name may change in the future**.
-        shell_thickness: float, optional
+        shell_thickness : float, optional
             Thickness of shell.
 
             **This is a beta parameter**. **The behavior and name may change in the future**.
-        solid_shell: bool, optional
+        solid_shell : bool, optional
             Solid shell option. Set true to generate solid shell spline, and set false to generate surface spline.
 
             **This is a beta parameter**. **The behavior and name may change in the future**.
-        separate_by_zone: bool, optional
+        separate_by_zone : bool, optional
             Option to separate IGA shell regions by zone. If set to true, it creates LS-Dyna part per zone while exporting IGA .k file and if set to false, it creates a single LS-Dyna part per Prime part, irrespective of the zones.
 
             **This is a beta parameter**. **The behavior and name may change in the future**.
-        zone_name_shell_thickness_pairs: Dict[str, Union[str, int, float, bool]], optional
+        zone_name_shell_thickness_pairs : Dict[str, Union[str, int, float, bool]], optional
             Zone name and thickness pair list. For example, {"Zone1Name": Zone1Thickness, "Zone2Name": Zone2Thickness, ...}.
 
             **This is a beta parameter**. **The behavior and name may change in the future**.
-        continuity: SplineContinuityType, optional
+        continuity : SplineContinuityType, optional
             Spline Continuity options.
 
             **This is a beta parameter**. **The behavior and name may change in the future**.
-        project_on_geometry: bool, optional
+        project_on_geometry : bool, optional
             Option to project on geometry.
 
             **This is a beta parameter**. **The behavior and name may change in the future**.
-        use_projection_scope: bool, optional
+        use_projection_scope : bool, optional
             Option to use projection scope.
 
             **This is a beta parameter**. **The behavior and name may change in the future**.
-        projection_scope: ScopeDefinition, optional
+        projection_scope : ScopeDefinition, optional
             Scope to evaluate entities for projection.
 
             **This is a beta parameter**. **The behavior and name may change in the future**.
-        json_data: dict, optional
+        json_data : dict, optional
             JSON dictionary to create a ``QuadToSplineParams`` object with provided parameters.
 
         Examples
@@ -1473,42 +1473,42 @@ class QuadToSplineParams(CoreObject):
 
     @staticmethod
     def set_default(
-            feature_capture_type: SplineFeatureCaptureType = None,
-            feature_angle: float = None,
-            corner_angle: float = None,
-            shell_thickness: float = None,
-            solid_shell: bool = None,
-            separate_by_zone: bool = None,
-            zone_name_shell_thickness_pairs: Dict[str, Union[str, int, float, bool]] = None,
-            continuity: SplineContinuityType = None,
-            project_on_geometry: bool = None,
-            use_projection_scope: bool = None,
-            projection_scope: ScopeDefinition = None):
+            feature_capture_type : SplineFeatureCaptureType = None,
+            feature_angle : float = None,
+            corner_angle : float = None,
+            shell_thickness : float = None,
+            solid_shell : bool = None,
+            separate_by_zone : bool = None,
+            zone_name_shell_thickness_pairs : Dict[str, Union[str, int, float, bool]] = None,
+            continuity : SplineContinuityType = None,
+            project_on_geometry : bool = None,
+            use_projection_scope : bool = None,
+            projection_scope : ScopeDefinition = None):
         """Set the default values of the ``QuadToSplineParams`` object.
 
         Parameters
         ----------
-        feature_capture_type: SplineFeatureCaptureType, optional
+        feature_capture_type : SplineFeatureCaptureType, optional
             Feature capture options.
-        feature_angle: float, optional
+        feature_angle : float, optional
             Angle to capture the feature.
-        corner_angle: float, optional
+        corner_angle : float, optional
             Corner angle of the feature.
-        shell_thickness: float, optional
+        shell_thickness : float, optional
             Thickness of shell.
-        solid_shell: bool, optional
+        solid_shell : bool, optional
             Solid shell option. Set true to generate solid shell spline, and set false to generate surface spline.
-        separate_by_zone: bool, optional
+        separate_by_zone : bool, optional
             Option to separate IGA shell regions by zone. If set to true, it creates LS-Dyna part per zone while exporting IGA .k file and if set to false, it creates a single LS-Dyna part per Prime part, irrespective of the zones.
-        zone_name_shell_thickness_pairs: Dict[str, Union[str, int, float, bool]], optional
+        zone_name_shell_thickness_pairs : Dict[str, Union[str, int, float, bool]], optional
             Zone name and thickness pair list. For example, {"Zone1Name": Zone1Thickness, "Zone2Name": Zone2Thickness, ...}.
-        continuity: SplineContinuityType, optional
+        continuity : SplineContinuityType, optional
             Spline Continuity options.
-        project_on_geometry: bool, optional
+        project_on_geometry : bool, optional
             Option to project on geometry.
-        use_projection_scope: bool, optional
+        use_projection_scope : bool, optional
             Option to use projection scope.
-        projection_scope: ScopeDefinition, optional
+        projection_scope : ScopeDefinition, optional
             Scope to evaluate entities for projection.
         """
         args = locals()
@@ -1549,7 +1549,7 @@ class QuadToSplineParams(CoreObject):
         if self._use_projection_scope is not None:
             json_data["useProjectionScope"] = self._use_projection_scope
         if self._projection_scope is not None:
-            json_data["projectionScope"] = self._projection_scope._jsonify()
+            json_data["projectionScope"] = self._projection_scope if isinstance(self._projection_scope, dict) else self._projection_scope._jsonify()
         [ json_data.update({ utils.to_camel_case(key) : value }) for key, value in self._custom_params.items()]
         return json_data
 
@@ -1695,37 +1695,37 @@ class HexToSplineParams(CoreObject):
 
     Parameters
     ----------
-    model: Model
+    model : Model
         Model to create a ``HexToSplineParams`` object with default parameters.
-    feature_capture_type: SplineFeatureCaptureType, optional
+    feature_capture_type : SplineFeatureCaptureType, optional
         Feature capture options.
 
         **This is a beta parameter**. **The behavior and name may change in the future**.
-    feature_angle: float, optional
+    feature_angle : float, optional
         Angle to capture the feature.
 
         **This is a beta parameter**. **The behavior and name may change in the future**.
-    corner_angle: float, optional
+    corner_angle : float, optional
         Corner angle of the feature.
 
         **This is a beta parameter**. **The behavior and name may change in the future**.
-    continuity: SplineContinuityType, optional
+    continuity : SplineContinuityType, optional
         Spline Continuity options.
 
         **This is a beta parameter**. **The behavior and name may change in the future**.
-    project_on_geometry: bool, optional
+    project_on_geometry : bool, optional
         Option to project on geometry.
 
         **This is a beta parameter**. **The behavior and name may change in the future**.
-    use_projection_scope: bool, optional
+    use_projection_scope : bool, optional
         Option to use projection scope.
 
         **This is a beta parameter**. **The behavior and name may change in the future**.
-    projection_scope: ScopeDefinition, optional
+    projection_scope : ScopeDefinition, optional
         Scope to evaluate entities for projection.
 
         **This is a beta parameter**. **The behavior and name may change in the future**.
-    json_data: dict, optional
+    json_data : dict, optional
         JSON dictionary to create a ``HexToSplineParams`` object with provided parameters.
 
     Examples
@@ -1736,13 +1736,13 @@ class HexToSplineParams(CoreObject):
 
     def __initialize(
             self,
-            feature_capture_type: SplineFeatureCaptureType,
-            feature_angle: float,
-            corner_angle: float,
-            continuity: SplineContinuityType,
-            project_on_geometry: bool,
-            use_projection_scope: bool,
-            projection_scope: ScopeDefinition):
+            feature_capture_type : SplineFeatureCaptureType,
+            feature_angle : float,
+            corner_angle : float,
+            continuity : SplineContinuityType,
+            project_on_geometry : bool,
+            use_projection_scope : bool,
+            projection_scope : ScopeDefinition):
         self._feature_capture_type = SplineFeatureCaptureType(feature_capture_type)
         self._feature_angle = feature_angle
         self._corner_angle = corner_angle
@@ -1754,50 +1754,50 @@ class HexToSplineParams(CoreObject):
     def __init__(
             self,
             model: CommunicationManager=None,
-            feature_capture_type: SplineFeatureCaptureType = None,
-            feature_angle: float = None,
-            corner_angle: float = None,
-            continuity: SplineContinuityType = None,
-            project_on_geometry: bool = None,
-            use_projection_scope: bool = None,
-            projection_scope: ScopeDefinition = None,
+            feature_capture_type : SplineFeatureCaptureType = None,
+            feature_angle : float = None,
+            corner_angle : float = None,
+            continuity : SplineContinuityType = None,
+            project_on_geometry : bool = None,
+            use_projection_scope : bool = None,
+            projection_scope : ScopeDefinition = None,
             json_data : dict = None,
              **kwargs):
         """Initialize a ``HexToSplineParams`` object.
 
         Parameters
         ----------
-        model: Model
+        model : Model
             Model to create a ``HexToSplineParams`` object with default parameters.
-        feature_capture_type: SplineFeatureCaptureType, optional
+        feature_capture_type : SplineFeatureCaptureType, optional
             Feature capture options.
 
             **This is a beta parameter**. **The behavior and name may change in the future**.
-        feature_angle: float, optional
+        feature_angle : float, optional
             Angle to capture the feature.
 
             **This is a beta parameter**. **The behavior and name may change in the future**.
-        corner_angle: float, optional
+        corner_angle : float, optional
             Corner angle of the feature.
 
             **This is a beta parameter**. **The behavior and name may change in the future**.
-        continuity: SplineContinuityType, optional
+        continuity : SplineContinuityType, optional
             Spline Continuity options.
 
             **This is a beta parameter**. **The behavior and name may change in the future**.
-        project_on_geometry: bool, optional
+        project_on_geometry : bool, optional
             Option to project on geometry.
 
             **This is a beta parameter**. **The behavior and name may change in the future**.
-        use_projection_scope: bool, optional
+        use_projection_scope : bool, optional
             Option to use projection scope.
 
             **This is a beta parameter**. **The behavior and name may change in the future**.
-        projection_scope: ScopeDefinition, optional
+        projection_scope : ScopeDefinition, optional
             Scope to evaluate entities for projection.
 
             **This is a beta parameter**. **The behavior and name may change in the future**.
-        json_data: dict, optional
+        json_data : dict, optional
             JSON dictionary to create a ``HexToSplineParams`` object with provided parameters.
 
         Examples
@@ -1847,30 +1847,30 @@ class HexToSplineParams(CoreObject):
 
     @staticmethod
     def set_default(
-            feature_capture_type: SplineFeatureCaptureType = None,
-            feature_angle: float = None,
-            corner_angle: float = None,
-            continuity: SplineContinuityType = None,
-            project_on_geometry: bool = None,
-            use_projection_scope: bool = None,
-            projection_scope: ScopeDefinition = None):
+            feature_capture_type : SplineFeatureCaptureType = None,
+            feature_angle : float = None,
+            corner_angle : float = None,
+            continuity : SplineContinuityType = None,
+            project_on_geometry : bool = None,
+            use_projection_scope : bool = None,
+            projection_scope : ScopeDefinition = None):
         """Set the default values of the ``HexToSplineParams`` object.
 
         Parameters
         ----------
-        feature_capture_type: SplineFeatureCaptureType, optional
+        feature_capture_type : SplineFeatureCaptureType, optional
             Feature capture options.
-        feature_angle: float, optional
+        feature_angle : float, optional
             Angle to capture the feature.
-        corner_angle: float, optional
+        corner_angle : float, optional
             Corner angle of the feature.
-        continuity: SplineContinuityType, optional
+        continuity : SplineContinuityType, optional
             Spline Continuity options.
-        project_on_geometry: bool, optional
+        project_on_geometry : bool, optional
             Option to project on geometry.
-        use_projection_scope: bool, optional
+        use_projection_scope : bool, optional
             Option to use projection scope.
-        projection_scope: ScopeDefinition, optional
+        projection_scope : ScopeDefinition, optional
             Scope to evaluate entities for projection.
         """
         args = locals()
@@ -1903,7 +1903,7 @@ class HexToSplineParams(CoreObject):
         if self._use_projection_scope is not None:
             json_data["useProjectionScope"] = self._use_projection_scope
         if self._projection_scope is not None:
-            json_data["projectionScope"] = self._projection_scope._jsonify()
+            json_data["projectionScope"] = self._projection_scope if isinstance(self._projection_scope, dict) else self._projection_scope._jsonify()
         [ json_data.update({ utils.to_camel_case(key) : value }) for key, value in self._custom_params.items()]
         return json_data
 
@@ -2001,17 +2001,17 @@ class RefineSplineParams(CoreObject):
 
     Parameters
     ----------
-    model: Model
+    model : Model
         Model to create a ``RefineSplineParams`` object with default parameters.
-    refine_flag_u: bool, optional
+    refine_flag_u : bool, optional
         Indicates whether refinement is applied in u direction.
-    refine_flag_v: bool, optional
+    refine_flag_v : bool, optional
         Indicates whether refinement is applied in v direction.
-    refine_flag_w: bool, optional
+    refine_flag_w : bool, optional
         Indicates whether refinement is applied in w direction.
-    spline_refinement_type: SplineRefinementType, optional
+    spline_refinement_type : SplineRefinementType, optional
         Type of spline refinement. Currently, supports h-refinement and p-refinement.
-    json_data: dict, optional
+    json_data : dict, optional
         JSON dictionary to create a ``RefineSplineParams`` object with provided parameters.
 
     Examples
@@ -2022,10 +2022,10 @@ class RefineSplineParams(CoreObject):
 
     def __initialize(
             self,
-            refine_flag_u: bool,
-            refine_flag_v: bool,
-            refine_flag_w: bool,
-            spline_refinement_type: SplineRefinementType):
+            refine_flag_u : bool,
+            refine_flag_v : bool,
+            refine_flag_w : bool,
+            spline_refinement_type : SplineRefinementType):
         self._refine_flag_u = refine_flag_u
         self._refine_flag_v = refine_flag_v
         self._refine_flag_w = refine_flag_w
@@ -2034,27 +2034,27 @@ class RefineSplineParams(CoreObject):
     def __init__(
             self,
             model: CommunicationManager=None,
-            refine_flag_u: bool = None,
-            refine_flag_v: bool = None,
-            refine_flag_w: bool = None,
-            spline_refinement_type: SplineRefinementType = None,
+            refine_flag_u : bool = None,
+            refine_flag_v : bool = None,
+            refine_flag_w : bool = None,
+            spline_refinement_type : SplineRefinementType = None,
             json_data : dict = None,
              **kwargs):
         """Initialize a ``RefineSplineParams`` object.
 
         Parameters
         ----------
-        model: Model
+        model : Model
             Model to create a ``RefineSplineParams`` object with default parameters.
-        refine_flag_u: bool, optional
+        refine_flag_u : bool, optional
             Indicates whether refinement is applied in u direction.
-        refine_flag_v: bool, optional
+        refine_flag_v : bool, optional
             Indicates whether refinement is applied in v direction.
-        refine_flag_w: bool, optional
+        refine_flag_w : bool, optional
             Indicates whether refinement is applied in w direction.
-        spline_refinement_type: SplineRefinementType, optional
+        spline_refinement_type : SplineRefinementType, optional
             Type of spline refinement. Currently, supports h-refinement and p-refinement.
-        json_data: dict, optional
+        json_data : dict, optional
             JSON dictionary to create a ``RefineSplineParams`` object with provided parameters.
 
         Examples
@@ -2095,21 +2095,21 @@ class RefineSplineParams(CoreObject):
 
     @staticmethod
     def set_default(
-            refine_flag_u: bool = None,
-            refine_flag_v: bool = None,
-            refine_flag_w: bool = None,
-            spline_refinement_type: SplineRefinementType = None):
+            refine_flag_u : bool = None,
+            refine_flag_v : bool = None,
+            refine_flag_w : bool = None,
+            spline_refinement_type : SplineRefinementType = None):
         """Set the default values of the ``RefineSplineParams`` object.
 
         Parameters
         ----------
-        refine_flag_u: bool, optional
+        refine_flag_u : bool, optional
             Indicates whether refinement is applied in u direction.
-        refine_flag_v: bool, optional
+        refine_flag_v : bool, optional
             Indicates whether refinement is applied in v direction.
-        refine_flag_w: bool, optional
+        refine_flag_w : bool, optional
             Indicates whether refinement is applied in w direction.
-        spline_refinement_type: SplineRefinementType, optional
+        spline_refinement_type : SplineRefinementType, optional
             Type of spline refinement. Currently, supports h-refinement and p-refinement.
         """
         args = locals()
@@ -2184,3 +2184,456 @@ class RefineSplineParams(CoreObject):
     @spline_refinement_type.setter
     def spline_refinement_type(self, value: SplineRefinementType):
         self._spline_refinement_type = value
+
+class CheckSplineJacobianParams(CoreObject):
+    """Parameters to check the spline Jacobian.
+
+    Parameters
+    ----------
+    model : Model
+        Model to create a ``CheckSplineJacobianParams`` object with default parameters.
+    shell_thickness : float, optional
+        Thickness of shell.
+
+        **This is a beta parameter**. **The behavior and name may change in the future**.
+    zone_name_shell_thickness_pairs : Dict[str, Union[str, int, float, bool]], optional
+        Zone name and thickness pair list. For example, {"Zone1Name": Zone1Thickness, "Zone2Name": Zone2Thickness, ...}.
+
+        **This is a beta parameter**. **The behavior and name may change in the future**.
+    json_data : dict, optional
+        JSON dictionary to create a ``CheckSplineJacobianParams`` object with provided parameters.
+
+    Examples
+    --------
+    >>> check_spline_jacobian_params = prime.CheckSplineJacobianParams(model = model)
+    """
+    _default_params = {}
+
+    def __initialize(
+            self,
+            shell_thickness : float,
+            zone_name_shell_thickness_pairs : Dict[str, Union[str, int, float, bool]]):
+        self._shell_thickness = shell_thickness
+        self._zone_name_shell_thickness_pairs = zone_name_shell_thickness_pairs
+
+    def __init__(
+            self,
+            model: CommunicationManager=None,
+            shell_thickness : float = None,
+            zone_name_shell_thickness_pairs : Dict[str, Union[str, int, float, bool]] = None,
+            json_data : dict = None,
+             **kwargs):
+        """Initialize a ``CheckSplineJacobianParams`` object.
+
+        Parameters
+        ----------
+        model : Model
+            Model to create a ``CheckSplineJacobianParams`` object with default parameters.
+        shell_thickness : float, optional
+            Thickness of shell.
+
+            **This is a beta parameter**. **The behavior and name may change in the future**.
+        zone_name_shell_thickness_pairs : Dict[str, Union[str, int, float, bool]], optional
+            Zone name and thickness pair list. For example, {"Zone1Name": Zone1Thickness, "Zone2Name": Zone2Thickness, ...}.
+
+            **This is a beta parameter**. **The behavior and name may change in the future**.
+        json_data : dict, optional
+            JSON dictionary to create a ``CheckSplineJacobianParams`` object with provided parameters.
+
+        Examples
+        --------
+        >>> check_spline_jacobian_params = prime.CheckSplineJacobianParams(model = model)
+        """
+        if json_data:
+            self.__initialize(
+                json_data["shellThickness"] if "shellThickness" in json_data else None,
+                json_data["zoneNameShellThicknessPairs"] if "zoneNameShellThicknessPairs" in json_data else None)
+        else:
+            all_field_specified = all(arg is not None for arg in [shell_thickness, zone_name_shell_thickness_pairs])
+            if all_field_specified:
+                self.__initialize(
+                    shell_thickness,
+                    zone_name_shell_thickness_pairs)
+            else:
+                if model is None:
+                    raise ValueError("Invalid assignment. Either pass a model or specify all properties.")
+                else:
+                    param_json = model._communicator.initialize_params(model, "CheckSplineJacobianParams")
+                    json_data = param_json["CheckSplineJacobianParams"] if "CheckSplineJacobianParams" in param_json else {}
+                    self.__initialize(
+                        shell_thickness if shell_thickness is not None else ( CheckSplineJacobianParams._default_params["shell_thickness"] if "shell_thickness" in CheckSplineJacobianParams._default_params else (json_data["shellThickness"] if "shellThickness" in json_data else None)),
+                        zone_name_shell_thickness_pairs if zone_name_shell_thickness_pairs is not None else ( CheckSplineJacobianParams._default_params["zone_name_shell_thickness_pairs"] if "zone_name_shell_thickness_pairs" in CheckSplineJacobianParams._default_params else (json_data["zoneNameShellThicknessPairs"] if "zoneNameShellThicknessPairs" in json_data else None)))
+        self._custom_params = kwargs
+        if model is not None:
+            [ model._logger.debug(f'Unsupported argument : {key}') for key in kwargs ]
+        [setattr(type(self), key, property(lambda self, key = key:  self._custom_params[key] if key in self._custom_params else None,
+        lambda self, value, key = key : self._custom_params.update({ key: value }))) for key in kwargs]
+        self._freeze()
+
+    @staticmethod
+    def set_default(
+            shell_thickness : float = None,
+            zone_name_shell_thickness_pairs : Dict[str, Union[str, int, float, bool]] = None):
+        """Set the default values of the ``CheckSplineJacobianParams`` object.
+
+        Parameters
+        ----------
+        shell_thickness : float, optional
+            Thickness of shell.
+        zone_name_shell_thickness_pairs : Dict[str, Union[str, int, float, bool]], optional
+            Zone name and thickness pair list. For example, {"Zone1Name": Zone1Thickness, "Zone2Name": Zone2Thickness, ...}.
+        """
+        args = locals()
+        [CheckSplineJacobianParams._default_params.update({ key: value }) for key, value in args.items() if value is not None]
+
+    @staticmethod
+    def print_default():
+        """Print the default values of ``CheckSplineJacobianParams`` object.
+
+        Examples
+        --------
+        >>> CheckSplineJacobianParams.print_default()
+        """
+        message = ""
+        message += ''.join(str(key) + ' : ' + str(value) + '\n' for key, value in CheckSplineJacobianParams._default_params.items())
+        print(message)
+
+    def _jsonify(self) -> Dict[str, Any]:
+        json_data = {}
+        if self._shell_thickness is not None:
+            json_data["shellThickness"] = self._shell_thickness
+        if self._zone_name_shell_thickness_pairs is not None:
+            json_data["zoneNameShellThicknessPairs"] = self._zone_name_shell_thickness_pairs
+        [ json_data.update({ utils.to_camel_case(key) : value }) for key, value in self._custom_params.items()]
+        return json_data
+
+    def __str__(self) -> str:
+        message = "shell_thickness :  %s\nzone_name_shell_thickness_pairs :  %s" % (self._shell_thickness, self._zone_name_shell_thickness_pairs)
+        message += ''.join('\n' + str(key) + ' : ' + str(value) for key, value in self._custom_params.items())
+        return message
+
+    @property
+    def shell_thickness(self) -> float:
+        """Thickness of shell.
+
+        **This is a beta parameter**. **The behavior and name may change in the future**.
+        """
+        return self._shell_thickness
+
+    @shell_thickness.setter
+    def shell_thickness(self, value: float):
+        self._shell_thickness = value
+
+    @property
+    def zone_name_shell_thickness_pairs(self) -> Dict[str, Union[str, int, float, bool]]:
+        """Zone name and thickness pair list. For example, {"Zone1Name": Zone1Thickness, "Zone2Name": Zone2Thickness, ...}.
+
+        **This is a beta parameter**. **The behavior and name may change in the future**.
+        """
+        return self._zone_name_shell_thickness_pairs
+
+    @zone_name_shell_thickness_pairs.setter
+    def zone_name_shell_thickness_pairs(self, value: Dict[str, Union[str, int, float, bool]]):
+        self._zone_name_shell_thickness_pairs = value
+
+class CheckSplineJacobianResults(CoreObject):
+    """Results of Check Spline Jacobian operations.
+
+    Parameters
+    ----------
+    model : Model
+        Model to create a ``CheckSplineJacobianResults`` object with default parameters.
+    negative_jacobian_points : Iterable[float], optional
+        Points of negative Jacobian on spline.
+
+        **This is a beta parameter**. **The behavior and name may change in the future**.
+    json_data : dict, optional
+        JSON dictionary to create a ``CheckSplineJacobianResults`` object with provided parameters.
+
+    Examples
+    --------
+    >>> check_spline_jacobian_results = prime.CheckSplineJacobianResults(model = model)
+    """
+    _default_params = {}
+
+    def __initialize(
+            self,
+            negative_jacobian_points : Iterable[float]):
+        self._negative_jacobian_points = negative_jacobian_points if isinstance(negative_jacobian_points, np.ndarray) else np.array(negative_jacobian_points, dtype=np.double) if negative_jacobian_points is not None else None
+
+    def __init__(
+            self,
+            model: CommunicationManager=None,
+            negative_jacobian_points : Iterable[float] = None,
+            json_data : dict = None,
+             **kwargs):
+        """Initialize a ``CheckSplineJacobianResults`` object.
+
+        Parameters
+        ----------
+        model : Model
+            Model to create a ``CheckSplineJacobianResults`` object with default parameters.
+        negative_jacobian_points : Iterable[float], optional
+            Points of negative Jacobian on spline.
+
+            **This is a beta parameter**. **The behavior and name may change in the future**.
+        json_data : dict, optional
+            JSON dictionary to create a ``CheckSplineJacobianResults`` object with provided parameters.
+
+        Examples
+        --------
+        >>> check_spline_jacobian_results = prime.CheckSplineJacobianResults(model = model)
+        """
+        if json_data:
+            self.__initialize(
+                json_data["negativeJacobianPoints"] if "negativeJacobianPoints" in json_data else None)
+        else:
+            all_field_specified = all(arg is not None for arg in [negative_jacobian_points])
+            if all_field_specified:
+                self.__initialize(
+                    negative_jacobian_points)
+            else:
+                if model is None:
+                    raise ValueError("Invalid assignment. Either pass a model or specify all properties.")
+                else:
+                    param_json = model._communicator.initialize_params(model, "CheckSplineJacobianResults")
+                    json_data = param_json["CheckSplineJacobianResults"] if "CheckSplineJacobianResults" in param_json else {}
+                    self.__initialize(
+                        negative_jacobian_points if negative_jacobian_points is not None else ( CheckSplineJacobianResults._default_params["negative_jacobian_points"] if "negative_jacobian_points" in CheckSplineJacobianResults._default_params else (json_data["negativeJacobianPoints"] if "negativeJacobianPoints" in json_data else None)))
+        self._custom_params = kwargs
+        if model is not None:
+            [ model._logger.debug(f'Unsupported argument : {key}') for key in kwargs ]
+        [setattr(type(self), key, property(lambda self, key = key:  self._custom_params[key] if key in self._custom_params else None,
+        lambda self, value, key = key : self._custom_params.update({ key: value }))) for key in kwargs]
+        self._freeze()
+
+    @staticmethod
+    def set_default(
+            negative_jacobian_points : Iterable[float] = None):
+        """Set the default values of the ``CheckSplineJacobianResults`` object.
+
+        Parameters
+        ----------
+        negative_jacobian_points : Iterable[float], optional
+            Points of negative Jacobian on spline.
+        """
+        args = locals()
+        [CheckSplineJacobianResults._default_params.update({ key: value }) for key, value in args.items() if value is not None]
+
+    @staticmethod
+    def print_default():
+        """Print the default values of ``CheckSplineJacobianResults`` object.
+
+        Examples
+        --------
+        >>> CheckSplineJacobianResults.print_default()
+        """
+        message = ""
+        message += ''.join(str(key) + ' : ' + str(value) + '\n' for key, value in CheckSplineJacobianResults._default_params.items())
+        print(message)
+
+    def _jsonify(self) -> Dict[str, Any]:
+        json_data = {}
+        if self._negative_jacobian_points is not None:
+            json_data["negativeJacobianPoints"] = self._negative_jacobian_points
+        [ json_data.update({ utils.to_camel_case(key) : value }) for key, value in self._custom_params.items()]
+        return json_data
+
+    def __str__(self) -> str:
+        message = "negative_jacobian_points :  %s" % (self._negative_jacobian_points)
+        message += ''.join('\n' + str(key) + ' : ' + str(value) for key, value in self._custom_params.items())
+        return message
+
+    @property
+    def negative_jacobian_points(self) -> Iterable[float]:
+        """Points of negative Jacobian on spline.
+
+        **This is a beta parameter**. **The behavior and name may change in the future**.
+        """
+        return self._negative_jacobian_points
+
+    @negative_jacobian_points.setter
+    def negative_jacobian_points(self, value: Iterable[float]):
+        self._negative_jacobian_points = value
+
+class SplineParametricProjectionResult(CoreObject):
+    """Bezier Element ids and UV-parameterizations of the projected points on spline.
+
+    Parameters
+    ----------
+    model : Model
+        Model to create a ``SplineParametricProjectionResult`` object with default parameters.
+    element_ids : Iterable[int], optional
+        Sequence of Beizer element ids of the projected points.
+
+        **This is a beta parameter**. **The behavior and name may change in the future**.
+    uvs : Iterable[float], optional
+        Sequence of uv-parametric coordinates of the projected points.
+
+        **This is a beta parameter**. **The behavior and name may change in the future**.
+    projected_coordinates : Iterable[float], optional
+        Sequence of 3D coordinates of the projected points.
+
+        **This is a beta parameter**. **The behavior and name may change in the future**.
+    json_data : dict, optional
+        JSON dictionary to create a ``SplineParametricProjectionResult`` object with provided parameters.
+
+    Examples
+    --------
+    >>> spline_parametric_projection_result = prime.SplineParametricProjectionResult(model = model)
+    """
+    _default_params = {}
+
+    def __initialize(
+            self,
+            element_ids : Iterable[int],
+            uvs : Iterable[float],
+            projected_coordinates : Iterable[float]):
+        self._element_ids = element_ids if isinstance(element_ids, np.ndarray) else np.array(element_ids, dtype=np.int32) if element_ids is not None else None
+        self._uvs = uvs if isinstance(uvs, np.ndarray) else np.array(uvs, dtype=np.double) if uvs is not None else None
+        self._projected_coordinates = projected_coordinates if isinstance(projected_coordinates, np.ndarray) else np.array(projected_coordinates, dtype=np.double) if projected_coordinates is not None else None
+
+    def __init__(
+            self,
+            model: CommunicationManager=None,
+            element_ids : Iterable[int] = None,
+            uvs : Iterable[float] = None,
+            projected_coordinates : Iterable[float] = None,
+            json_data : dict = None,
+             **kwargs):
+        """Initialize a ``SplineParametricProjectionResult`` object.
+
+        Parameters
+        ----------
+        model : Model
+            Model to create a ``SplineParametricProjectionResult`` object with default parameters.
+        element_ids : Iterable[int], optional
+            Sequence of Beizer element ids of the projected points.
+
+            **This is a beta parameter**. **The behavior and name may change in the future**.
+        uvs : Iterable[float], optional
+            Sequence of uv-parametric coordinates of the projected points.
+
+            **This is a beta parameter**. **The behavior and name may change in the future**.
+        projected_coordinates : Iterable[float], optional
+            Sequence of 3D coordinates of the projected points.
+
+            **This is a beta parameter**. **The behavior and name may change in the future**.
+        json_data : dict, optional
+            JSON dictionary to create a ``SplineParametricProjectionResult`` object with provided parameters.
+
+        Examples
+        --------
+        >>> spline_parametric_projection_result = prime.SplineParametricProjectionResult(model = model)
+        """
+        if json_data:
+            self.__initialize(
+                json_data["elementIDs"] if "elementIDs" in json_data else None,
+                json_data["uvs"] if "uvs" in json_data else None,
+                json_data["projectedCoordinates"] if "projectedCoordinates" in json_data else None)
+        else:
+            all_field_specified = all(arg is not None for arg in [element_ids, uvs, projected_coordinates])
+            if all_field_specified:
+                self.__initialize(
+                    element_ids,
+                    uvs,
+                    projected_coordinates)
+            else:
+                if model is None:
+                    raise ValueError("Invalid assignment. Either pass a model or specify all properties.")
+                else:
+                    param_json = model._communicator.initialize_params(model, "SplineParametricProjectionResult")
+                    json_data = param_json["SplineParametricProjectionResult"] if "SplineParametricProjectionResult" in param_json else {}
+                    self.__initialize(
+                        element_ids if element_ids is not None else ( SplineParametricProjectionResult._default_params["element_ids"] if "element_ids" in SplineParametricProjectionResult._default_params else (json_data["elementIDs"] if "elementIDs" in json_data else None)),
+                        uvs if uvs is not None else ( SplineParametricProjectionResult._default_params["uvs"] if "uvs" in SplineParametricProjectionResult._default_params else (json_data["uvs"] if "uvs" in json_data else None)),
+                        projected_coordinates if projected_coordinates is not None else ( SplineParametricProjectionResult._default_params["projected_coordinates"] if "projected_coordinates" in SplineParametricProjectionResult._default_params else (json_data["projectedCoordinates"] if "projectedCoordinates" in json_data else None)))
+        self._custom_params = kwargs
+        if model is not None:
+            [ model._logger.debug(f'Unsupported argument : {key}') for key in kwargs ]
+        [setattr(type(self), key, property(lambda self, key = key:  self._custom_params[key] if key in self._custom_params else None,
+        lambda self, value, key = key : self._custom_params.update({ key: value }))) for key in kwargs]
+        self._freeze()
+
+    @staticmethod
+    def set_default(
+            element_ids : Iterable[int] = None,
+            uvs : Iterable[float] = None,
+            projected_coordinates : Iterable[float] = None):
+        """Set the default values of the ``SplineParametricProjectionResult`` object.
+
+        Parameters
+        ----------
+        element_ids : Iterable[int], optional
+            Sequence of Beizer element ids of the projected points.
+        uvs : Iterable[float], optional
+            Sequence of uv-parametric coordinates of the projected points.
+        projected_coordinates : Iterable[float], optional
+            Sequence of 3D coordinates of the projected points.
+        """
+        args = locals()
+        [SplineParametricProjectionResult._default_params.update({ key: value }) for key, value in args.items() if value is not None]
+
+    @staticmethod
+    def print_default():
+        """Print the default values of ``SplineParametricProjectionResult`` object.
+
+        Examples
+        --------
+        >>> SplineParametricProjectionResult.print_default()
+        """
+        message = ""
+        message += ''.join(str(key) + ' : ' + str(value) + '\n' for key, value in SplineParametricProjectionResult._default_params.items())
+        print(message)
+
+    def _jsonify(self) -> Dict[str, Any]:
+        json_data = {}
+        if self._element_ids is not None:
+            json_data["elementIDs"] = self._element_ids
+        if self._uvs is not None:
+            json_data["uvs"] = self._uvs
+        if self._projected_coordinates is not None:
+            json_data["projectedCoordinates"] = self._projected_coordinates
+        [ json_data.update({ utils.to_camel_case(key) : value }) for key, value in self._custom_params.items()]
+        return json_data
+
+    def __str__(self) -> str:
+        message = "element_ids :  %s\nuvs :  %s\nprojected_coordinates :  %s" % (self._element_ids, self._uvs, self._projected_coordinates)
+        message += ''.join('\n' + str(key) + ' : ' + str(value) for key, value in self._custom_params.items())
+        return message
+
+    @property
+    def element_ids(self) -> Iterable[int]:
+        """Sequence of Beizer element ids of the projected points.
+
+        **This is a beta parameter**. **The behavior and name may change in the future**.
+        """
+        return self._element_ids
+
+    @element_ids.setter
+    def element_ids(self, value: Iterable[int]):
+        self._element_ids = value
+
+    @property
+    def uvs(self) -> Iterable[float]:
+        """Sequence of uv-parametric coordinates of the projected points.
+
+        **This is a beta parameter**. **The behavior and name may change in the future**.
+        """
+        return self._uvs
+
+    @uvs.setter
+    def uvs(self, value: Iterable[float]):
+        self._uvs = value
+
+    @property
+    def projected_coordinates(self) -> Iterable[float]:
+        """Sequence of 3D coordinates of the projected points.
+
+        **This is a beta parameter**. **The behavior and name may change in the future**.
+        """
+        return self._projected_coordinates
+
+    @projected_coordinates.setter
+    def projected_coordinates(self, value: Iterable[float]):
+        self._projected_coordinates = value

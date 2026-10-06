@@ -1,4 +1,5 @@
-# Copyright (C) 2024 - 2026 ANSYS, Inc. and/or its affiliates.
+# Copyright (C) 2026 ANSYS, Inc. and/or its affiliates.
+# Copyright (C) 2026 Synopsys, Inc. and ANSYS, Inc. All rights reserved.
 # SPDX-License-Identifier: MIT
 #
 # Permission is hereby granted, free of charge, to any person obtaining a copy
@@ -23,17 +24,57 @@
 import logging
 import os
 import shutil
-import subprocess
+
+# Required for process inspection.
+import subprocess  # nosec B404
 import uuid
 from contextlib import contextmanager
 from typing import Optional, Sequence, Union
 
 import ansys.meshing.prime.internals.config as config
 import ansys.meshing.prime.internals.defaults as defaults
-import docker
 
 _LOCAL_PORTS = []
 _DOCKER_CLIENT = None
+
+
+def _get_docker():
+    """Get the docker module, importing it on first use.
+
+    Raises
+    ------
+    ImportError
+        If the 'docker' package is not installed.
+    """
+    try:
+        import docker
+
+        return docker
+    except ImportError:
+        raise ImportError(
+            "Container operations require 'docker' package. "
+            "Install the docker package using the command 'pip install docker'."
+        ) from None
+
+
+def _get_download_manager():
+    """Get the DownloadManager class, importing it on first use.
+
+    Raises
+    ------
+    ImportError
+        If the 'ansys-tools-common' package is not installed.
+    """
+    try:
+        from ansys.tools.common.example_download import DownloadManager
+
+        return DownloadManager
+    except ImportError:
+        raise ImportError(
+            "Downloading examples requires the 'ansys-tools-common' package. "
+            "Install it using the command 'pip install ansys-tools-common'."
+        ) from None
+
 
 # Paths accepted by FileIO / lucid and normalized before they reach the server.
 FileName = Union[str, os.PathLike]
@@ -260,6 +301,40 @@ def print_beta_api_warning(logger: logging.Logger, command: str):
         )
 
 
+@contextmanager
+def capture_log_records(logger):
+    """Context manager that tracks log records from the given logger.
+
+    Records are captured passively via a filter and do not interfere
+    with existing handlers. On exit the collected list is available
+    through the value yielded.
+
+    Parameters
+    ----------
+    logger : logging.Logger
+        Logger to attach the collecting filter to.
+
+    Yields
+    ------
+    list[dict]
+        List of ``{'level': str, 'message': str}`` dicts, populated
+        in-place as log records pass through.
+    """
+    collected = []
+
+    def _collect(record):
+        collected.append({'level': record.levelname, 'message': record.getMessage()})
+        return True
+
+    log_filter = logging.Filter()
+    log_filter.filter = _collect
+    logger.addFilter(log_filter)
+    try:
+        yield collected
+    finally:
+        logger.removeFilter(log_filter)
+
+
 def launch_prime_github_container(
     mount_host: str = defaults.get_user_data_path(),
     mount_image: str = defaults.get_user_data_path_for_containers(),
@@ -292,6 +367,7 @@ def launch_prime_github_container(
     ValueError
         License is not available.
     """
+    docker = _get_docker()
     license_file = os.environ.get('ANSYSLMD_LICENSE_FILE', None)
     image_name = os.environ.get('PYPRIMEMESH_IMAGE_NAME', 'ghcr.io/ansys/prime')
     if license_file is None:
@@ -320,7 +396,7 @@ def launch_prime_github_container(
     # Handle connection type
     if (
         connection_type == config.ConnectionType.GRPC_INSECURE
-        or os.environ.get('PRIME_MODE', '').upper() == "GRPC_INSECURE"
+        or os.environ.get('PRIME_MODE', '').upper() == 'GRPC_INSECURE'
     ):
         command.append('--secure=no')
 
@@ -393,12 +469,13 @@ def stop_prime_github_container(name):
     name : str
         Name of the container to stop.
     """
+    docker = _get_docker()
+    client = docker.from_env()
     try:
-        _DOCKER_CLIENT = docker.from_env()
-        container = _DOCKER_CLIENT.containers.get(name)
+        container = client.containers.get(name)
         container.stop()
     except docker.errors.NotFound:
-        pass
+        pass  # Container doesn't exist, nothing to stop
 
 
 @contextmanager

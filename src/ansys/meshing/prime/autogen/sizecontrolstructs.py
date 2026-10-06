@@ -1,4 +1,4 @@
-# Copyright (C) 2024 - 2025 ANSYS, Inc. and/or its affiliates.
+# Copyright (C) 2026 Synopsys, Inc. and ANSYS, Inc. All rights reserved.
 # SPDX-License-Identifier: MIT
 #
 #
@@ -59,19 +59,19 @@ class CurvatureSizingParams(CoreObject):
 
     Parameters
     ----------
-    model: Model
+    model : Model
         Model to create a ``CurvatureSizingParams`` object with default parameters.
-    min: float, optional
+    min : float, optional
         Minimum size used for computing edge and face size using curavture size control.
-    max: float, optional
+    max : float, optional
         Maximum size used for computing edge and face size using curavture size control.
-    growth_rate: float, optional
+    growth_rate : float, optional
         Growth rate used for transitioning from one element size to neighbor element size.
-    normal_angle: float, optional
+    normal_angle : float, optional
         Maximum allowable angle at which one element edge may span.
-    use_cad_curvature: bool, optional
+    use_cad_curvature : bool, optional
         Option to enable use of CAD curvature for computing edge and face size.
-    json_data: dict, optional
+    json_data : dict, optional
         JSON dictionary to create a ``CurvatureSizingParams`` object with provided parameters.
 
     Examples
@@ -82,11 +82,11 @@ class CurvatureSizingParams(CoreObject):
 
     def __initialize(
             self,
-            min: float,
-            max: float,
-            growth_rate: float,
-            normal_angle: float,
-            use_cad_curvature: bool):
+            min : float,
+            max : float,
+            growth_rate : float,
+            normal_angle : float,
+            use_cad_curvature : bool):
         self._min = min
         self._max = max
         self._growth_rate = growth_rate
@@ -96,30 +96,30 @@ class CurvatureSizingParams(CoreObject):
     def __init__(
             self,
             model: CommunicationManager=None,
-            min: float = None,
-            max: float = None,
-            growth_rate: float = None,
-            normal_angle: float = None,
-            use_cad_curvature: bool = None,
+            min : float = None,
+            max : float = None,
+            growth_rate : float = None,
+            normal_angle : float = None,
+            use_cad_curvature : bool = None,
             json_data : dict = None,
              **kwargs):
         """Initialize a ``CurvatureSizingParams`` object.
 
         Parameters
         ----------
-        model: Model
+        model : Model
             Model to create a ``CurvatureSizingParams`` object with default parameters.
-        min: float, optional
+        min : float, optional
             Minimum size used for computing edge and face size using curavture size control.
-        max: float, optional
+        max : float, optional
             Maximum size used for computing edge and face size using curavture size control.
-        growth_rate: float, optional
+        growth_rate : float, optional
             Growth rate used for transitioning from one element size to neighbor element size.
-        normal_angle: float, optional
+        normal_angle : float, optional
             Maximum allowable angle at which one element edge may span.
-        use_cad_curvature: bool, optional
+        use_cad_curvature : bool, optional
             Option to enable use of CAD curvature for computing edge and face size.
-        json_data: dict, optional
+        json_data : dict, optional
             JSON dictionary to create a ``CurvatureSizingParams`` object with provided parameters.
 
         Examples
@@ -163,24 +163,24 @@ class CurvatureSizingParams(CoreObject):
 
     @staticmethod
     def set_default(
-            min: float = None,
-            max: float = None,
-            growth_rate: float = None,
-            normal_angle: float = None,
-            use_cad_curvature: bool = None):
+            min : float = None,
+            max : float = None,
+            growth_rate : float = None,
+            normal_angle : float = None,
+            use_cad_curvature : bool = None):
         """Set the default values of the ``CurvatureSizingParams`` object.
 
         Parameters
         ----------
-        min: float, optional
+        min : float, optional
             Minimum size used for computing edge and face size using curavture size control.
-        max: float, optional
+        max : float, optional
             Maximum size used for computing edge and face size using curavture size control.
-        growth_rate: float, optional
+        growth_rate : float, optional
             Growth rate used for transitioning from one element size to neighbor element size.
-        normal_angle: float, optional
+        normal_angle : float, optional
             Maximum allowable angle at which one element edge may span.
-        use_cad_curvature: bool, optional
+        use_cad_curvature : bool, optional
             Option to enable use of CAD curvature for computing edge and face size.
         """
         args = locals()
@@ -273,21 +273,21 @@ class ProximitySizingParams(CoreObject):
 
     Parameters
     ----------
-    model: Model
+    model : Model
         Model to create a ``ProximitySizingParams`` object with default parameters.
-    min: float, optional
+    min : float, optional
         Minimum size used for computing edge and face size using proximity size control.
-    max: float, optional
+    max : float, optional
         Maximum size used for computing edge and face size using proximity size control.
-    growth_rate: float, optional
+    growth_rate : float, optional
         Growth rate used for transitioning from one element size to neighbor element size.
-    elements_per_gap: float, optional
+    elements_per_gap : float, optional
         The number of elements per gap can be a real value.  This has the effect of stretching face elements with larger sizes along side faces,  or gaps, thereby reducing the overall face count, and ultimately the cell count.
-    ignore_self_proximity: bool, optional
+    ignore_self_proximity : bool, optional
         Ignore proximity within zonelets.
-    ignore_orientation: bool, optional
+    ignore_orientation : bool, optional
         The ignore orientation option can be used to ignore the face normal orientation during the proximity calculation. The default is false.
-    json_data: dict, optional
+    json_data : dict, optional
         JSON dictionary to create a ``ProximitySizingParams`` object with provided parameters.
 
     Examples
@@ -298,12 +298,12 @@ class ProximitySizingParams(CoreObject):
 
     def __initialize(
             self,
-            min: float,
-            max: float,
-            growth_rate: float,
-            elements_per_gap: float,
-            ignore_self_proximity: bool,
-            ignore_orientation: bool):
+            min : float,
+            max : float,
+            growth_rate : float,
+            elements_per_gap : float,
+            ignore_self_proximity : bool,
+            ignore_orientation : bool):
         self._min = min
         self._max = max
         self._growth_rate = growth_rate
@@ -314,33 +314,33 @@ class ProximitySizingParams(CoreObject):
     def __init__(
             self,
             model: CommunicationManager=None,
-            min: float = None,
-            max: float = None,
-            growth_rate: float = None,
-            elements_per_gap: float = None,
-            ignore_self_proximity: bool = None,
-            ignore_orientation: bool = None,
+            min : float = None,
+            max : float = None,
+            growth_rate : float = None,
+            elements_per_gap : float = None,
+            ignore_self_proximity : bool = None,
+            ignore_orientation : bool = None,
             json_data : dict = None,
              **kwargs):
         """Initialize a ``ProximitySizingParams`` object.
 
         Parameters
         ----------
-        model: Model
+        model : Model
             Model to create a ``ProximitySizingParams`` object with default parameters.
-        min: float, optional
+        min : float, optional
             Minimum size used for computing edge and face size using proximity size control.
-        max: float, optional
+        max : float, optional
             Maximum size used for computing edge and face size using proximity size control.
-        growth_rate: float, optional
+        growth_rate : float, optional
             Growth rate used for transitioning from one element size to neighbor element size.
-        elements_per_gap: float, optional
+        elements_per_gap : float, optional
             The number of elements per gap can be a real value.  This has the effect of stretching face elements with larger sizes along side faces,  or gaps, thereby reducing the overall face count, and ultimately the cell count.
-        ignore_self_proximity: bool, optional
+        ignore_self_proximity : bool, optional
             Ignore proximity within zonelets.
-        ignore_orientation: bool, optional
+        ignore_orientation : bool, optional
             The ignore orientation option can be used to ignore the face normal orientation during the proximity calculation. The default is false.
-        json_data: dict, optional
+        json_data : dict, optional
             JSON dictionary to create a ``ProximitySizingParams`` object with provided parameters.
 
         Examples
@@ -387,27 +387,27 @@ class ProximitySizingParams(CoreObject):
 
     @staticmethod
     def set_default(
-            min: float = None,
-            max: float = None,
-            growth_rate: float = None,
-            elements_per_gap: float = None,
-            ignore_self_proximity: bool = None,
-            ignore_orientation: bool = None):
+            min : float = None,
+            max : float = None,
+            growth_rate : float = None,
+            elements_per_gap : float = None,
+            ignore_self_proximity : bool = None,
+            ignore_orientation : bool = None):
         """Set the default values of the ``ProximitySizingParams`` object.
 
         Parameters
         ----------
-        min: float, optional
+        min : float, optional
             Minimum size used for computing edge and face size using proximity size control.
-        max: float, optional
+        max : float, optional
             Maximum size used for computing edge and face size using proximity size control.
-        growth_rate: float, optional
+        growth_rate : float, optional
             Growth rate used for transitioning from one element size to neighbor element size.
-        elements_per_gap: float, optional
+        elements_per_gap : float, optional
             The number of elements per gap can be a real value.  This has the effect of stretching face elements with larger sizes along side faces,  or gaps, thereby reducing the overall face count, and ultimately the cell count.
-        ignore_self_proximity: bool, optional
+        ignore_self_proximity : bool, optional
             Ignore proximity within zonelets.
-        ignore_orientation: bool, optional
+        ignore_orientation : bool, optional
             The ignore orientation option can be used to ignore the face normal orientation during the proximity calculation. The default is false.
         """
         args = locals()
@@ -516,13 +516,13 @@ class SoftSizingParams(CoreObject):
 
     Parameters
     ----------
-    model: Model
+    model : Model
         Model to create a ``SoftSizingParams`` object with default parameters.
-    max: float, optional
+    max : float, optional
         Maximum size used for computing edge and face size using soft size control.
-    growth_rate: float, optional
+    growth_rate : float, optional
         Growth rate used for transitioning from one element size to neighbor element size.
-    json_data: dict, optional
+    json_data : dict, optional
         JSON dictionary to create a ``SoftSizingParams`` object with provided parameters.
 
     Examples
@@ -533,29 +533,29 @@ class SoftSizingParams(CoreObject):
 
     def __initialize(
             self,
-            max: float,
-            growth_rate: float):
+            max : float,
+            growth_rate : float):
         self._max = max
         self._growth_rate = growth_rate
 
     def __init__(
             self,
             model: CommunicationManager=None,
-            max: float = None,
-            growth_rate: float = None,
+            max : float = None,
+            growth_rate : float = None,
             json_data : dict = None,
              **kwargs):
         """Initialize a ``SoftSizingParams`` object.
 
         Parameters
         ----------
-        model: Model
+        model : Model
             Model to create a ``SoftSizingParams`` object with default parameters.
-        max: float, optional
+        max : float, optional
             Maximum size used for computing edge and face size using soft size control.
-        growth_rate: float, optional
+        growth_rate : float, optional
             Growth rate used for transitioning from one element size to neighbor element size.
-        json_data: dict, optional
+        json_data : dict, optional
             JSON dictionary to create a ``SoftSizingParams`` object with provided parameters.
 
         Examples
@@ -590,15 +590,15 @@ class SoftSizingParams(CoreObject):
 
     @staticmethod
     def set_default(
-            max: float = None,
-            growth_rate: float = None):
+            max : float = None,
+            growth_rate : float = None):
         """Set the default values of the ``SoftSizingParams`` object.
 
         Parameters
         ----------
-        max: float, optional
+        max : float, optional
             Maximum size used for computing edge and face size using soft size control.
-        growth_rate: float, optional
+        growth_rate : float, optional
             Growth rate used for transitioning from one element size to neighbor element size.
         """
         args = locals()
@@ -657,13 +657,13 @@ class HardSizingParams(CoreObject):
 
     Parameters
     ----------
-    model: Model
+    model : Model
         Model to create a ``HardSizingParams`` object with default parameters.
-    min: float, optional
+    min : float, optional
         Minimum size used for computing edge and face size using hard size control.
-    growth_rate: float, optional
+    growth_rate : float, optional
         Growth rate used for transitioning from one element size to neighbor element size.
-    json_data: dict, optional
+    json_data : dict, optional
         JSON dictionary to create a ``HardSizingParams`` object with provided parameters.
 
     Examples
@@ -674,29 +674,29 @@ class HardSizingParams(CoreObject):
 
     def __initialize(
             self,
-            min: float,
-            growth_rate: float):
+            min : float,
+            growth_rate : float):
         self._min = min
         self._growth_rate = growth_rate
 
     def __init__(
             self,
             model: CommunicationManager=None,
-            min: float = None,
-            growth_rate: float = None,
+            min : float = None,
+            growth_rate : float = None,
             json_data : dict = None,
              **kwargs):
         """Initialize a ``HardSizingParams`` object.
 
         Parameters
         ----------
-        model: Model
+        model : Model
             Model to create a ``HardSizingParams`` object with default parameters.
-        min: float, optional
+        min : float, optional
             Minimum size used for computing edge and face size using hard size control.
-        growth_rate: float, optional
+        growth_rate : float, optional
             Growth rate used for transitioning from one element size to neighbor element size.
-        json_data: dict, optional
+        json_data : dict, optional
             JSON dictionary to create a ``HardSizingParams`` object with provided parameters.
 
         Examples
@@ -731,15 +731,15 @@ class HardSizingParams(CoreObject):
 
     @staticmethod
     def set_default(
-            min: float = None,
-            growth_rate: float = None):
+            min : float = None,
+            growth_rate : float = None):
         """Set the default values of the ``HardSizingParams`` object.
 
         Parameters
         ----------
-        min: float, optional
+        min : float, optional
             Minimum size used for computing edge and face size using hard size control.
-        growth_rate: float, optional
+        growth_rate : float, optional
             Growth rate used for transitioning from one element size to neighbor element size.
         """
         args = locals()
@@ -796,11 +796,11 @@ class MeshedSizingParams(CoreObject):
 
     Parameters
     ----------
-    model: Model
+    model : Model
         Model to create a ``MeshedSizingParams`` object with default parameters.
-    growth_rate: float, optional
+    growth_rate : float, optional
         Growth rate used for transitioning from one element size to neighbor element size.
-    json_data: dict, optional
+    json_data : dict, optional
         JSON dictionary to create a ``MeshedSizingParams`` object with provided parameters.
 
     Examples
@@ -811,24 +811,24 @@ class MeshedSizingParams(CoreObject):
 
     def __initialize(
             self,
-            growth_rate: float):
+            growth_rate : float):
         self._growth_rate = growth_rate
 
     def __init__(
             self,
             model: CommunicationManager=None,
-            growth_rate: float = None,
+            growth_rate : float = None,
             json_data : dict = None,
              **kwargs):
         """Initialize a ``MeshedSizingParams`` object.
 
         Parameters
         ----------
-        model: Model
+        model : Model
             Model to create a ``MeshedSizingParams`` object with default parameters.
-        growth_rate: float, optional
+        growth_rate : float, optional
             Growth rate used for transitioning from one element size to neighbor element size.
-        json_data: dict, optional
+        json_data : dict, optional
             JSON dictionary to create a ``MeshedSizingParams`` object with provided parameters.
 
         Examples
@@ -860,12 +860,12 @@ class MeshedSizingParams(CoreObject):
 
     @staticmethod
     def set_default(
-            growth_rate: float = None):
+            growth_rate : float = None):
         """Set the default values of the ``MeshedSizingParams`` object.
 
         Parameters
         ----------
-        growth_rate: float, optional
+        growth_rate : float, optional
             Growth rate used for transitioning from one element size to neighbor element size.
         """
         args = locals()
@@ -913,13 +913,13 @@ class BoiSizingParams(CoreObject):
 
     Parameters
     ----------
-    model: Model
+    model : Model
         Model to create a ``BoiSizingParams`` object with default parameters.
-    max: float, optional
+    max : float, optional
         Maximum size used for computing edge and face size using boi size control.
-    growth_rate: float, optional
+    growth_rate : float, optional
         Growth rate used for transitioning from one element size to neighbor element size.
-    json_data: dict, optional
+    json_data : dict, optional
         JSON dictionary to create a ``BoiSizingParams`` object with provided parameters.
 
     Examples
@@ -930,29 +930,29 @@ class BoiSizingParams(CoreObject):
 
     def __initialize(
             self,
-            max: float,
-            growth_rate: float):
+            max : float,
+            growth_rate : float):
         self._max = max
         self._growth_rate = growth_rate
 
     def __init__(
             self,
             model: CommunicationManager=None,
-            max: float = None,
-            growth_rate: float = None,
+            max : float = None,
+            growth_rate : float = None,
             json_data : dict = None,
              **kwargs):
         """Initialize a ``BoiSizingParams`` object.
 
         Parameters
         ----------
-        model: Model
+        model : Model
             Model to create a ``BoiSizingParams`` object with default parameters.
-        max: float, optional
+        max : float, optional
             Maximum size used for computing edge and face size using boi size control.
-        growth_rate: float, optional
+        growth_rate : float, optional
             Growth rate used for transitioning from one element size to neighbor element size.
-        json_data: dict, optional
+        json_data : dict, optional
             JSON dictionary to create a ``BoiSizingParams`` object with provided parameters.
 
         Examples
@@ -987,15 +987,15 @@ class BoiSizingParams(CoreObject):
 
     @staticmethod
     def set_default(
-            max: float = None,
-            growth_rate: float = None):
+            max : float = None,
+            growth_rate : float = None):
         """Set the default values of the ``BoiSizingParams`` object.
 
         Parameters
         ----------
-        max: float, optional
+        max : float, optional
             Maximum size used for computing edge and face size using boi size control.
-        growth_rate: float, optional
+        growth_rate : float, optional
             Growth rate used for transitioning from one element size to neighbor element size.
         """
         args = locals()
@@ -1052,25 +1052,25 @@ class SoiSizingParams(CoreObject):
 
     Parameters
     ----------
-    model: Model
+    model : Model
         Model to create a ``SoiSizingParams`` object with default parameters.
-    centers: Iterable[float], optional
+    centers : Iterable[float], optional
         Centers of the spheres within which the size is limited to the specified max value.
 
         **This is a beta parameter**. **The behavior and name may change in the future**.
-    radius: float, optional
+    radius : float, optional
         Radius of the sphere within which the size is limited to the specified max value.
 
         **This is a beta parameter**. **The behavior and name may change in the future**.
-    max: float, optional
+    max : float, optional
         Maximum size within the sphere.
 
         **This is a beta parameter**. **The behavior and name may change in the future**.
-    growth_rate: float, optional
+    growth_rate : float, optional
         The rate at which size grows outwards from the sphere boundary.
 
         **This is a beta parameter**. **The behavior and name may change in the future**.
-    json_data: dict, optional
+    json_data : dict, optional
         JSON dictionary to create a ``SoiSizingParams`` object with provided parameters.
 
     Examples
@@ -1081,10 +1081,10 @@ class SoiSizingParams(CoreObject):
 
     def __initialize(
             self,
-            centers: Iterable[float],
-            radius: float,
-            max: float,
-            growth_rate: float):
+            centers : Iterable[float],
+            radius : float,
+            max : float,
+            growth_rate : float):
         self._centers = centers if isinstance(centers, np.ndarray) else np.array(centers, dtype=np.double) if centers is not None else None
         self._radius = radius
         self._max = max
@@ -1093,35 +1093,35 @@ class SoiSizingParams(CoreObject):
     def __init__(
             self,
             model: CommunicationManager=None,
-            centers: Iterable[float] = None,
-            radius: float = None,
-            max: float = None,
-            growth_rate: float = None,
+            centers : Iterable[float] = None,
+            radius : float = None,
+            max : float = None,
+            growth_rate : float = None,
             json_data : dict = None,
              **kwargs):
         """Initialize a ``SoiSizingParams`` object.
 
         Parameters
         ----------
-        model: Model
+        model : Model
             Model to create a ``SoiSizingParams`` object with default parameters.
-        centers: Iterable[float], optional
+        centers : Iterable[float], optional
             Centers of the spheres within which the size is limited to the specified max value.
 
             **This is a beta parameter**. **The behavior and name may change in the future**.
-        radius: float, optional
+        radius : float, optional
             Radius of the sphere within which the size is limited to the specified max value.
 
             **This is a beta parameter**. **The behavior and name may change in the future**.
-        max: float, optional
+        max : float, optional
             Maximum size within the sphere.
 
             **This is a beta parameter**. **The behavior and name may change in the future**.
-        growth_rate: float, optional
+        growth_rate : float, optional
             The rate at which size grows outwards from the sphere boundary.
 
             **This is a beta parameter**. **The behavior and name may change in the future**.
-        json_data: dict, optional
+        json_data : dict, optional
             JSON dictionary to create a ``SoiSizingParams`` object with provided parameters.
 
         Examples
@@ -1162,21 +1162,21 @@ class SoiSizingParams(CoreObject):
 
     @staticmethod
     def set_default(
-            centers: Iterable[float] = None,
-            radius: float = None,
-            max: float = None,
-            growth_rate: float = None):
+            centers : Iterable[float] = None,
+            radius : float = None,
+            max : float = None,
+            growth_rate : float = None):
         """Set the default values of the ``SoiSizingParams`` object.
 
         Parameters
         ----------
-        centers: Iterable[float], optional
+        centers : Iterable[float], optional
             Centers of the spheres within which the size is limited to the specified max value.
-        radius: float, optional
+        radius : float, optional
             Radius of the sphere within which the size is limited to the specified max value.
-        max: float, optional
+        max : float, optional
             Maximum size within the sphere.
-        growth_rate: float, optional
+        growth_rate : float, optional
             The rate at which size grows outwards from the sphere boundary.
         """
         args = locals()
@@ -1265,11 +1265,11 @@ class SizeControlSummaryResult(CoreObject):
 
     Parameters
     ----------
-    model: Model
+    model : Model
         Model to create a ``SizeControlSummaryResult`` object with default parameters.
-    message: str, optional
+    message : str, optional
         Size control summary text.
-    json_data: dict, optional
+    json_data : dict, optional
         JSON dictionary to create a ``SizeControlSummaryResult`` object with provided parameters.
 
     Examples
@@ -1280,24 +1280,24 @@ class SizeControlSummaryResult(CoreObject):
 
     def __initialize(
             self,
-            message: str):
+            message : str):
         self._message = message
 
     def __init__(
             self,
             model: CommunicationManager=None,
-            message: str = None,
+            message : str = None,
             json_data : dict = None,
              **kwargs):
         """Initialize a ``SizeControlSummaryResult`` object.
 
         Parameters
         ----------
-        model: Model
+        model : Model
             Model to create a ``SizeControlSummaryResult`` object with default parameters.
-        message: str, optional
+        message : str, optional
             Size control summary text.
-        json_data: dict, optional
+        json_data : dict, optional
             JSON dictionary to create a ``SizeControlSummaryResult`` object with provided parameters.
 
         Examples
@@ -1329,12 +1329,12 @@ class SizeControlSummaryResult(CoreObject):
 
     @staticmethod
     def set_default(
-            message: str = None):
+            message : str = None):
         """Set the default values of the ``SizeControlSummaryResult`` object.
 
         Parameters
         ----------
-        message: str, optional
+        message : str, optional
             Size control summary text.
         """
         args = locals()
@@ -1379,9 +1379,9 @@ class SizeControlSummaryParams(CoreObject):
 
     Parameters
     ----------
-    model: Model
+    model : Model
         Model to create a ``SizeControlSummaryParams`` object with default parameters.
-    json_data: dict, optional
+    json_data : dict, optional
         JSON dictionary to create a ``SizeControlSummaryParams`` object with provided parameters.
 
     Examples
@@ -1403,9 +1403,9 @@ class SizeControlSummaryParams(CoreObject):
 
         Parameters
         ----------
-        model: Model
+        model : Model
             Model to create a ``SizeControlSummaryParams`` object with default parameters.
-        json_data: dict, optional
+        json_data : dict, optional
             JSON dictionary to create a ``SizeControlSummaryParams`` object with provided parameters.
 
         Examples
@@ -1463,142 +1463,3 @@ class SizeControlSummaryParams(CoreObject):
         if len(message) == 0:
             message = 'The object has no parameters to print.'
         return message
-
-class SetSizingResults(CoreObject):
-    """Result associated with the different set sizing parameters.
-
-    Parameters
-    ----------
-    model: Model
-        Model to create a ``SetSizingResults`` object with default parameters.
-    warning_codes: List[WarningCode], optional
-        Warning codes associated with the set sizing parameters.
-    error_code: ErrorCode, optional
-        Error code associated with the set sizing parameters.
-    json_data: dict, optional
-        JSON dictionary to create a ``SetSizingResults`` object with provided parameters.
-
-    Examples
-    --------
-    >>> set_sizing_results = prime.SetSizingResults(model = model)
-    """
-    _default_params = {}
-
-    def __initialize(
-            self,
-            warning_codes: List[WarningCode],
-            error_code: ErrorCode):
-        self._warning_codes = warning_codes
-        self._error_code = ErrorCode(error_code)
-
-    def __init__(
-            self,
-            model: CommunicationManager=None,
-            warning_codes: List[WarningCode] = None,
-            error_code: ErrorCode = None,
-            json_data : dict = None,
-             **kwargs):
-        """Initialize a ``SetSizingResults`` object.
-
-        Parameters
-        ----------
-        model: Model
-            Model to create a ``SetSizingResults`` object with default parameters.
-        warning_codes: List[WarningCode], optional
-            Warning codes associated with the set sizing parameters.
-        error_code: ErrorCode, optional
-            Error code associated with the set sizing parameters.
-        json_data: dict, optional
-            JSON dictionary to create a ``SetSizingResults`` object with provided parameters.
-
-        Examples
-        --------
-        >>> set_sizing_results = prime.SetSizingResults(model = model)
-        """
-        if json_data:
-            self.__initialize(
-                [WarningCode(data) for data in json_data["warningCodes"]] if "warningCodes" in json_data else None,
-                ErrorCode(json_data["errorCode"] if "errorCode" in json_data else None))
-        else:
-            all_field_specified = all(arg is not None for arg in [warning_codes, error_code])
-            if all_field_specified:
-                self.__initialize(
-                    warning_codes,
-                    error_code)
-            else:
-                if model is None:
-                    raise ValueError("Invalid assignment. Either pass a model or specify all properties.")
-                else:
-                    param_json = model._communicator.initialize_params(model, "SetSizingResults")
-                    json_data = param_json["SetSizingResults"] if "SetSizingResults" in param_json else {}
-                    self.__initialize(
-                        warning_codes if warning_codes is not None else ( SetSizingResults._default_params["warning_codes"] if "warning_codes" in SetSizingResults._default_params else [WarningCode(data) for data in (json_data["warningCodes"] if "warningCodes" in json_data else None)]),
-                        error_code if error_code is not None else ( SetSizingResults._default_params["error_code"] if "error_code" in SetSizingResults._default_params else ErrorCode(json_data["errorCode"] if "errorCode" in json_data else None)))
-        self._custom_params = kwargs
-        if model is not None:
-            [ model._logger.debug(f'Unsupported argument : {key}') for key in kwargs ]
-        [setattr(type(self), key, property(lambda self, key = key:  self._custom_params[key] if key in self._custom_params else None,
-        lambda self, value, key = key : self._custom_params.update({ key: value }))) for key in kwargs]
-        self._freeze()
-
-    @staticmethod
-    def set_default(
-            warning_codes: List[WarningCode] = None,
-            error_code: ErrorCode = None):
-        """Set the default values of the ``SetSizingResults`` object.
-
-        Parameters
-        ----------
-        warning_codes: List[WarningCode], optional
-            Warning codes associated with the set sizing parameters.
-        error_code: ErrorCode, optional
-            Error code associated with the set sizing parameters.
-        """
-        args = locals()
-        [SetSizingResults._default_params.update({ key: value }) for key, value in args.items() if value is not None]
-
-    @staticmethod
-    def print_default():
-        """Print the default values of ``SetSizingResults`` object.
-
-        Examples
-        --------
-        >>> SetSizingResults.print_default()
-        """
-        message = ""
-        message += ''.join(str(key) + ' : ' + str(value) + '\n' for key, value in SetSizingResults._default_params.items())
-        print(message)
-
-    def _jsonify(self) -> Dict[str, Any]:
-        json_data = {}
-        if self._warning_codes is not None:
-            json_data["warningCodes"] = [data for data in self._warning_codes]
-        if self._error_code is not None:
-            json_data["errorCode"] = self._error_code
-        [ json_data.update({ utils.to_camel_case(key) : value }) for key, value in self._custom_params.items()]
-        return json_data
-
-    def __str__(self) -> str:
-        message = "warning_codes :  %s\nerror_code :  %s" % ('[' + ''.join('\n' + str(data) for data in self._warning_codes) + ']', self._error_code)
-        message += ''.join('\n' + str(key) + ' : ' + str(value) for key, value in self._custom_params.items())
-        return message
-
-    @property
-    def warning_codes(self) -> List[WarningCode]:
-        """Warning codes associated with the set sizing parameters.
-        """
-        return self._warning_codes
-
-    @warning_codes.setter
-    def warning_codes(self, value: List[WarningCode]):
-        self._warning_codes = value
-
-    @property
-    def error_code(self) -> ErrorCode:
-        """Error code associated with the set sizing parameters.
-        """
-        return self._error_code
-
-    @error_code.setter
-    def error_code(self, value: ErrorCode):
-        self._error_code = value

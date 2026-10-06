@@ -1,4 +1,5 @@
-# Copyright (C) 2024 - 2026 ANSYS, Inc. and/or its affiliates.
+# Copyright (C) 2026 ANSYS, Inc. and/or its affiliates.
+# Copyright (C) 2026 Synopsys, Inc. and ANSYS, Inc. All rights reserved.
 # SPDX-License-Identifier: MIT
 #
 # Permission is hereby granted, free of charge, to any person obtaining a copy
@@ -20,9 +21,12 @@
 # SOFTWARE.
 
 """Helper module for launching the server."""
+import datetime
 import logging
 import os
-import subprocess
+
+# Required to launch Prime Server.
+import subprocess  # nosec B404
 import sys
 import uuid
 from typing import Optional, Union
@@ -33,6 +37,11 @@ import ansys.meshing.prime.internals.utils as utils
 from ansys.meshing.prime.internals.client import Client
 
 try:
+    from ansys.meshing.prime.internals import cyberchannel
+except ImportError:
+    cyberchannel = None
+
+try:
     import ansys.platform.instancemanagement as pypim
     from simple_upload_server.client import Client as FileClient
 
@@ -40,13 +49,19 @@ try:
 
     config.set_has_pim(pypim.is_configured())
 except:
-    pass
+    config.set_has_pim(False)
 
 __all__ = ['launch_prime', 'launch_server_process']
 
 
+def _startup_debug_log(logger, message, *args, **kwargs):
+    if logger is not None:
+        timestamp = datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S.%f')[:-3]
+        logger.debug(f'[{timestamp}] {message}', *args, **kwargs)
+
+
 def get_install_locations():
-    supported_versions = ['261']
+    supported_versions = ['271']
     awp_roots = {ver: os.environ.get(f'AWP_ROOT{ver}', '') for ver in supported_versions}
     installed_versions = {
         ver: os.path.join(path, 'meshing', 'Prime')
@@ -134,8 +149,22 @@ def launch_server_process(
         kw = {}
 
     enable_python_server = kw.get('server', 'release')
+    startup_debug_logger = kw.get('startup_debug_logger', None)
+    startup_debug_server_file = kw.get('startup_debug_server_file', None)
     communicator_type = kw.get('communicator_type', 'grpc')
     scheduler = kw.get('scheduler', None)
+    _startup_debug_log(
+        startup_debug_logger,
+        'Preparing server launch with prime_root=%s, ip=%s, port=%s, n_procs=%s, '
+        'connection_type=%s, communicator_type=%s, server=%s',
+        prime_root,
+        ip,
+        port,
+        n_procs,
+        connection_type,
+        communicator_type,
+        enable_python_server,
+    )
 
     if not isinstance(enable_python_server, str):
         raise ValueError(
@@ -160,6 +189,13 @@ def launch_server_process(
     server_args.append(f'--type={communicator_type}')
     server_args.append(f'--ip={ip}')
     server_args.append(f'--port={port}')
+    if startup_debug_server_file:
+        server_args.append(f'--startup-debug-file={startup_debug_server_file}')
+        _startup_debug_log(
+            startup_debug_logger,
+            'Server startup debug file enabled at %s',
+            startup_debug_server_file,
+        )
     if n_procs is not None and isinstance(n_procs, int):
         server_args.append(f'-np')
         server_args.append(f'{n_procs}')
@@ -173,9 +209,8 @@ def launch_server_process(
     kwargs = {
         'stdin': subprocess.DEVNULL,
     }
-    if "PRIME_ENABLE_VERBOSITY" not in os.environ:
-        kwargs['stdout'] = subprocess.DEVNULL
-        kwargs['stderr'] = subprocess.DEVNULL
+    kwargs['stdout'] = subprocess.DEVNULL
+    kwargs['stderr'] = subprocess.DEVNULL
     if sys.platform.startswith('win32'):
         kwargs['creationflags'] = subprocess.CREATE_NEW_PROCESS_GROUP
 
@@ -188,11 +223,10 @@ def launch_server_process(
         server_args.append(f"--server_cert_dir={server_certs_dir}")
 
     logging.getLogger('PyPrimeMesh').info('Launching Ansys Prime Server')
-    # server_args is built entirely from validated internal values (checked file
-    # paths and a restricted set of option strings), not from untrusted external
-    # input, and shell=False (the default) is used, so shell injection is not
-    # possible here.
+    _startup_debug_log(startup_debug_logger, 'Launching server process with args: %s', server_args)
+    # The executable path is validated above and arguments are passed without a shell.
     server = subprocess.Popen(server_args, **kwargs)  # nosec B603
+    _startup_debug_log(startup_debug_logger, 'Server process started with pid=%s', server.pid)
     return server
 
 
@@ -219,9 +253,9 @@ def launch_remote_prime(
     )
 
     client = Client(channel=channel, timeout=timeout)
+    # The service authenticates through headers; this is a required non-secret placeholder.
     file_service = FileClient(
-        token='token',  # nosec B106 - placeholder value, not a real credential;
-        # the http-simple-upload-server service does not use this for authentication.
+        token='token',  # nosec B106
         url=instance.services['http-simple-upload-server'].uri,
         headers=instance.services['http-simple-upload-server'].headers,
     )
@@ -284,7 +318,26 @@ def launch_prime(
         When there is an error in connecting to the gRPC server.
     """
     logging.getLogger('PyPrimeMesh').info("Launching Ansys Prime Server...")
+    startup_debug_logger = kwargs.get('startup_debug_logger', None)
+    startup_debug_server_file = kwargs.get('startup_debug_server_file', None)
+    _startup_debug_log(
+        startup_debug_logger,
+        'launch_prime called with prime_root=%s, ip=%s, port=%s, timeout=%s, '
+        'connection_type=%s, n_procs=%s, version=%s, startup_debug_server_file=%s',
+        prime_root,
+        ip,
+        port,
+        timeout,
+        connection_type,
+        n_procs,
+        version,
+        startup_debug_server_file,
+    )
+
     if config.has_pim():
+        _startup_debug_log(
+            startup_debug_logger, 'PyPIM is configured. Launching remote Prime instance.'
+        )
         return launch_remote_prime(version=version, timeout=timeout)
 
     if prime_root is not None:
@@ -296,7 +349,11 @@ def launch_prime(
 
     # Check for port availability on local host
     if ip == defaults.ip():
+        _startup_debug_log(
+            startup_debug_logger, 'Checking local port availability starting from port=%s.', port
+        )
         port = utils.get_available_local_port(port)
+        _startup_debug_log(startup_debug_logger, 'Selected local port=%s.', port)
 
     channel = None
     if (
@@ -304,6 +361,9 @@ def launch_prime(
         and connection_type == config.ConnectionType.GRPC_SECURE
     ):
         if client_certs_dir is None or server_certs_dir is None:
+            _startup_debug_log(
+                startup_debug_logger, 'Missing certificate directory for remote secure connection.'
+            )
             raise RuntimeError(f"Please provide certificate directory for remote connections.")
         missing = [
             f
@@ -315,15 +375,28 @@ def launch_prime(
             if not os.path.exists(f)
         ]
         if missing:
+            _startup_debug_log(
+                startup_debug_logger, 'Missing required client TLS file(s): %s', missing
+            )
             raise RuntimeError(
                 f"Missing required client TLS file(s) for mutual TLS: {', '.join(missing)}"
             )
+        _startup_debug_log(
+            startup_debug_logger, 'TLS files validated for remote secure connection.'
+        )
 
     launch_container = bool(int(os.environ.get('PYPRIMEMESH_LAUNCH_CONTAINER', '0')))
     logging.getLogger('PyPrimeMesh').info(f'Launch container: {launch_container}')
     if launch_container:
         logging.getLogger('PyPrimeMesh').info("Launching container...")
         container_name = utils.make_unique_container_name('ansys-prime-server')
+
+        _startup_debug_log(
+            startup_debug_logger,
+            'Launching Prime container named %s on port=%s.',
+            container_name,
+            port,
+        )
         utils.launch_prime_github_container(
             port=port,
             name=container_name,
@@ -331,6 +404,7 @@ def launch_prime(
             connection_type=config.ConnectionType.GRPC_INSECURE,
         )
         config.set_using_container(True)
+        _startup_debug_log(startup_debug_logger, 'Creating client for container-backed server.')
         client = Client(
             port=port,
             timeout=timeout,
@@ -339,6 +413,7 @@ def launch_prime(
         )
         logging.getLogger('PyPrimeMesh').info("Client created.")
         client.container_name = container_name
+        _startup_debug_log(startup_debug_logger, 'Client connected to container-backed server.')
         logging.getLogger('PyPrimeMesh').info(
             f'Using server from docker: container name {container_name}'
         )
@@ -348,10 +423,23 @@ def launch_prime(
     uds_folder = None
     socket_filename = None
     if os.name != 'nt' and client_certs_dir is None:
+        if cyberchannel is None:
+            raise ImportError(
+                "The 'grpcio' package is required for UDS connections on Linux "
+                "but could not be imported. Please install it."
+            )
         uds_folder = cyberchannel.determine_uds_folder()
         uds_id = f'{uuid.uuid4()}'
         socket_filename = "pyprimemesh-" + uds_id + ".sock"
+        _startup_debug_log(
+            startup_debug_logger,
+            'Configured Unix domain socket with uds_id=%s, uds_folder=%s, socket_filename=%s.',
+            uds_id,
+            uds_folder,
+            socket_filename,
+        )
 
+    _startup_debug_log(startup_debug_logger, 'Launching local Prime server process.')
     server = launch_server_process(
         prime_root=prime_root,
         ip=ip,
@@ -363,13 +451,21 @@ def launch_prime(
         **kwargs,
     )
 
-    return Client(
-        server_process=server,
-        ip=ip,
-        port=port,
-        timeout=timeout,
-        uds_id=uds_id,
-        connection_type=connection_type,
-        client_certs_dir=client_certs_dir,
-        channel=channel,
-    )
+    _startup_debug_log(startup_debug_logger, 'Creating client connection to launched server.')
+    try:
+        client = Client(
+            server_process=server,
+            ip=ip,
+            port=port,
+            timeout=timeout,
+            uds_id=uds_id,
+            connection_type=connection_type,
+            client_certs_dir=client_certs_dir,
+            channel=channel,
+        )
+    except Exception:
+        _startup_debug_log(startup_debug_logger, 'Client connection failed.', exc_info=True)
+        raise
+
+    _startup_debug_log(startup_debug_logger, 'Client connected to launched server.')
+    return client

@@ -1,4 +1,4 @@
-# Copyright (C) 2024 - 2025 ANSYS, Inc. and/or its affiliates.
+# Copyright (C) 2026 Synopsys, Inc. and ANSYS, Inc. All rights reserved.
 # SPDX-License-Identifier: MIT
 #
 #
@@ -25,7 +25,7 @@ from __future__ import annotations
 from ansys.meshing.prime.internals.comm_manager import CommunicationManager
 from ansys.meshing.prime.params.primestructs import *
 from ansys.meshing.prime.autogen.coreobject import *
-from typing import List, Any, Union
+from typing import Dict, Any, Union, List, Iterable
 
 class AutoQuadMesher(CoreObject):
     """Generate full quad mesh.
@@ -56,13 +56,13 @@ class AutoQuadMesher(CoreObject):
         self._comm.serve(self._model, command_name, self._object_id, args={})
 
     def detect_and_treat_features(self, part_id : int, topo_face_ids : Iterable[int], params : DetectAndTreatFeaturesParams) -> AutoQuadMesherResults:
-        """ Detect features in topology and treat them with given parameters.
+        """ Detects features in topology and treats them with given parameters.
 
 
         Parameters
         ----------
         part_id : int
-            Id of the Part.
+            Id of the part.
         topo_face_ids : Iterable[int]
             Ids of topofaces.
         params : DetectAndTreatFeaturesParams
@@ -71,7 +71,7 @@ class AutoQuadMesher(CoreObject):
         Returns
         -------
         AutoQuadMesherResults
-            Returns the AutoQuadMesherResults structure.
+            Returns the AutoQuadMesherResults.
 
 
         Notes
@@ -80,15 +80,14 @@ class AutoQuadMesher(CoreObject):
 
         Examples
         --------
-        >>> autoQuadMesher = AutoQuadMesher(model=model)
-        >>> results = autoQuadMesher.detect_and_treat_features(part_id, topo_face_ids, params);
+        >>> results = auto_quad_mesher.detect_and_treat_features(part_id, topo_face_ids, params)
 
         """
         if not isinstance(part_id, int):
             raise TypeError("Invalid argument type passed for 'part_id'. Valid argument type is int.")
         if not isinstance(topo_face_ids, Iterable):
             raise TypeError("Invalid argument type passed for 'topo_face_ids'. Valid argument type is Iterable[int].")
-        if not isinstance(params, DetectAndTreatFeaturesParams):
+        if type(params).__name__ != 'DetectAndTreatFeaturesParams':
             raise TypeError("Invalid argument type passed for 'params'. Valid argument type is DetectAndTreatFeaturesParams.")
         args = {"part_id" : part_id,
         "topo_face_ids" : topo_face_ids,
@@ -101,13 +100,13 @@ class AutoQuadMesher(CoreObject):
         return AutoQuadMesherResults(model = self._model, json_data = result)
 
     def repair_topology(self, part_id : int, topo_face_ids : Iterable[int], params : RepairTopologyParams) -> AutoQuadMesherResults:
-        """ Repair topology with given parameters.
+        """ Repairs topology with given parameters.
 
 
         Parameters
         ----------
         part_id : int
-            Id of the Part.
+            Id of the part.
         topo_face_ids : Iterable[int]
             Ids of topofaces.
         params : RepairTopologyParams
@@ -116,7 +115,7 @@ class AutoQuadMesher(CoreObject):
         Returns
         -------
         AutoQuadMesherResults
-            Returns the AutoQuadMesherResults structure.
+            Returns the AutoQuadMesherResults.
 
 
         Notes
@@ -125,15 +124,14 @@ class AutoQuadMesher(CoreObject):
 
         Examples
         --------
-        >>> autoQuadMesher = AutoQuadMesher(model=model)
-        >>> results = autoQuadMesher.repair_topology(part_id, topo_face_ids, params);
+        >>> results = auto_quad_mesher.repair_topology(part_id, topo_face_ids, params)
 
         """
         if not isinstance(part_id, int):
             raise TypeError("Invalid argument type passed for 'part_id'. Valid argument type is int.")
         if not isinstance(topo_face_ids, Iterable):
             raise TypeError("Invalid argument type passed for 'topo_face_ids'. Valid argument type is Iterable[int].")
-        if not isinstance(params, RepairTopologyParams):
+        if type(params).__name__ != 'RepairTopologyParams':
             raise TypeError("Invalid argument type passed for 'params'. Valid argument type is RepairTopologyParams.")
         args = {"part_id" : part_id,
         "topo_face_ids" : topo_face_ids,
@@ -146,13 +144,13 @@ class AutoQuadMesher(CoreObject):
         return AutoQuadMesherResults(model = self._model, json_data = result)
 
     def defeature_topology(self, part_id : int, topo_face_ids : Iterable[int], params : DefeatureTopologyParams) -> AutoQuadMesherResults:
-        """ Defeature topology with given parameters.
+        """ Defeatures topology with given parameters.
 
 
         Parameters
         ----------
         part_id : int
-            Id of the Part.
+            Id of the part.
         topo_face_ids : Iterable[int]
             Ids of topofaces.
         params : DefeatureTopologyParams
@@ -161,7 +159,7 @@ class AutoQuadMesher(CoreObject):
         Returns
         -------
         AutoQuadMesherResults
-            Returns the AutoQuadMesherResults structure.
+            Returns the AutoQuadMesherResults.
 
 
         Notes
@@ -170,15 +168,14 @@ class AutoQuadMesher(CoreObject):
 
         Examples
         --------
-        >>> autoQuadMesher = AutoQuadMesher(model=model)
-        >>> results = autoQuadMesher.defeature_topology(part_id, topo_face_ids, params);
+        >>> results = auto_quad_mesher.defeature_topology(part_id, topo_face_ids, params)
 
         """
         if not isinstance(part_id, int):
             raise TypeError("Invalid argument type passed for 'part_id'. Valid argument type is int.")
         if not isinstance(topo_face_ids, Iterable):
             raise TypeError("Invalid argument type passed for 'topo_face_ids'. Valid argument type is Iterable[int].")
-        if not isinstance(params, DefeatureTopologyParams):
+        if type(params).__name__ != 'DefeatureTopologyParams':
             raise TypeError("Invalid argument type passed for 'params'. Valid argument type is DefeatureTopologyParams.")
         args = {"part_id" : part_id,
         "topo_face_ids" : topo_face_ids,
@@ -191,13 +188,13 @@ class AutoQuadMesher(CoreObject):
         return AutoQuadMesherResults(model = self._model, json_data = result)
 
     def optimize_quad_mesh(self, part_id : int, topo_face_ids : Iterable[int], params : OptimizeQuadMeshParams) -> AutoQuadMesherResults:
-        """ Optimize quad faces with given parameters.
+        """ Optimizes quad faces with given parameters.
 
 
         Parameters
         ----------
         part_id : int
-            Id of the Part.
+            Id of the part.
         topo_face_ids : Iterable[int]
             Ids of topofaces.
         params : OptimizeQuadMeshParams
@@ -206,7 +203,7 @@ class AutoQuadMesher(CoreObject):
         Returns
         -------
         AutoQuadMesherResults
-            Returns the AutoQuadMesherResults structure.
+            Returns the AutoQuadMesherResults.
 
 
         Notes
@@ -215,15 +212,14 @@ class AutoQuadMesher(CoreObject):
 
         Examples
         --------
-        >>> autoQuadMesher = AutoQuadMesher(model=model)
-        >>> results = autoQuadMesher.optimize_quad_mesh(part_id, topo_face_ids, params);
+        >>> results = auto_quad_mesher.optimize_quad_mesh(part_id, topo_face_ids, params)
 
         """
         if not isinstance(part_id, int):
             raise TypeError("Invalid argument type passed for 'part_id'. Valid argument type is int.")
         if not isinstance(topo_face_ids, Iterable):
             raise TypeError("Invalid argument type passed for 'topo_face_ids'. Valid argument type is Iterable[int].")
-        if not isinstance(params, OptimizeQuadMeshParams):
+        if type(params).__name__ != 'OptimizeQuadMeshParams':
             raise TypeError("Invalid argument type passed for 'params'. Valid argument type is OptimizeQuadMeshParams.")
         args = {"part_id" : part_id,
         "topo_face_ids" : topo_face_ids,
@@ -236,13 +232,13 @@ class AutoQuadMesher(CoreObject):
         return AutoQuadMesherResults(model = self._model, json_data = result)
 
     def check_topology(self, part_id : int, topo_face_ids : Iterable[int], params : CheckTopologyParams) -> AutoQuadMesherResults:
-        """ Check topology for inconsistencies with the given parameters.
+        """ Checks topology for inconsistencies with the given parameters.
 
 
         Parameters
         ----------
         part_id : int
-            Id of the Part.
+            Id of the part.
         topo_face_ids : Iterable[int]
             Ids of topofaces.
         params : CheckTopologyParams
@@ -251,7 +247,7 @@ class AutoQuadMesher(CoreObject):
         Returns
         -------
         AutoQuadMesherResults
-            Returns the AutoQuadMesherResults structure.
+            Returns the AutoQuadMesherResults.
 
 
         Notes
@@ -260,15 +256,14 @@ class AutoQuadMesher(CoreObject):
 
         Examples
         --------
-        >>> autoQuadMesher = AutoQuadMesher(model=model)
-        >>> results = autoQuadMesher.check_topology(part_id, topo_face_ids, params);
+        >>> results = auto_quad_mesher.check_topology(part_id, topo_face_ids, params)
 
         """
         if not isinstance(part_id, int):
             raise TypeError("Invalid argument type passed for 'part_id'. Valid argument type is int.")
         if not isinstance(topo_face_ids, Iterable):
             raise TypeError("Invalid argument type passed for 'topo_face_ids'. Valid argument type is Iterable[int].")
-        if not isinstance(params, CheckTopologyParams):
+        if type(params).__name__ != 'CheckTopologyParams':
             raise TypeError("Invalid argument type passed for 'params'. Valid argument type is CheckTopologyParams.")
         args = {"part_id" : part_id,
         "topo_face_ids" : topo_face_ids,

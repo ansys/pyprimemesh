@@ -1,4 +1,4 @@
-# Copyright (C) 2024 - 2025 ANSYS, Inc. and/or its affiliates.
+# Copyright (C) 2026 Synopsys, Inc. and ANSYS, Inc. All rights reserved.
 # SPDX-License-Identifier: MIT
 #
 #
@@ -35,12 +35,13 @@ class VTComposerParams(CoreObject):
 
     Parameters
     ----------
-    model: Model
+    model : Model
         Model to create a ``VTComposerParams`` object with default parameters.
-    thin_stripes_tol: float, optional
+    thin_stripes_tol : float, optional
+        Distance tolerance to detect thin faces.
 
         **This is a beta parameter**. **The behavior and name may change in the future**.
-    json_data: dict, optional
+    json_data : dict, optional
         JSON dictionary to create a ``VTComposerParams`` object with provided parameters.
 
     Examples
@@ -51,25 +52,26 @@ class VTComposerParams(CoreObject):
 
     def __initialize(
             self,
-            thin_stripes_tol: float):
+            thin_stripes_tol : float):
         self._thin_stripes_tol = thin_stripes_tol
 
     def __init__(
             self,
             model: CommunicationManager=None,
-            thin_stripes_tol: float = None,
+            thin_stripes_tol : float = None,
             json_data : dict = None,
              **kwargs):
         """Initialize a ``VTComposerParams`` object.
 
         Parameters
         ----------
-        model: Model
+        model : Model
             Model to create a ``VTComposerParams`` object with default parameters.
-        thin_stripes_tol: float, optional
+        thin_stripes_tol : float, optional
+            Distance tolerance to detect thin faces.
 
             **This is a beta parameter**. **The behavior and name may change in the future**.
-        json_data: dict, optional
+        json_data : dict, optional
             JSON dictionary to create a ``VTComposerParams`` object with provided parameters.
 
         Examples
@@ -101,12 +103,13 @@ class VTComposerParams(CoreObject):
 
     @staticmethod
     def set_default(
-            thin_stripes_tol: float = None):
+            thin_stripes_tol : float = None):
         """Set the default values of the ``VTComposerParams`` object.
 
         Parameters
         ----------
-        thin_stripes_tol: float, optional
+        thin_stripes_tol : float, optional
+            Distance tolerance to detect thin faces.
         """
         args = locals()
         [VTComposerParams._default_params.update({ key: value }) for key, value in args.items() if value is not None]
@@ -137,7 +140,8 @@ class VTComposerParams(CoreObject):
 
     @property
     def thin_stripes_tol(self) -> float:
-        """
+        """Distance tolerance to detect thin faces.
+
         **This is a beta parameter**. **The behavior and name may change in the future**.
         """
         return self._thin_stripes_tol
@@ -151,12 +155,13 @@ class VTComposerResults(CoreObject):
 
     Parameters
     ----------
-    model: Model
+    model : Model
         Model to create a ``VTComposerResults`` object with default parameters.
-    error_code: ErrorCode, optional
+    error_code : ErrorCode, optional
+        Error code associated with VTComposer operation.
 
         **This is a beta parameter**. **The behavior and name may change in the future**.
-    json_data: dict, optional
+    json_data : dict, optional
         JSON dictionary to create a ``VTComposerResults`` object with provided parameters.
 
     Examples
@@ -167,25 +172,26 @@ class VTComposerResults(CoreObject):
 
     def __initialize(
             self,
-            error_code: ErrorCode):
+            error_code : ErrorCode):
         self._error_code = ErrorCode(error_code)
 
     def __init__(
             self,
             model: CommunicationManager=None,
-            error_code: ErrorCode = None,
+            error_code : ErrorCode = None,
             json_data : dict = None,
              **kwargs):
         """Initialize a ``VTComposerResults`` object.
 
         Parameters
         ----------
-        model: Model
+        model : Model
             Model to create a ``VTComposerResults`` object with default parameters.
-        error_code: ErrorCode, optional
+        error_code : ErrorCode, optional
+            Error code associated with VTComposer operation.
 
             **This is a beta parameter**. **The behavior and name may change in the future**.
-        json_data: dict, optional
+        json_data : dict, optional
             JSON dictionary to create a ``VTComposerResults`` object with provided parameters.
 
         Examples
@@ -217,12 +223,13 @@ class VTComposerResults(CoreObject):
 
     @staticmethod
     def set_default(
-            error_code: ErrorCode = None):
+            error_code : ErrorCode = None):
         """Set the default values of the ``VTComposerResults`` object.
 
         Parameters
         ----------
-        error_code: ErrorCode, optional
+        error_code : ErrorCode, optional
+            Error code associated with VTComposer operation.
         """
         args = locals()
         [VTComposerResults._default_params.update({ key: value }) for key, value in args.items() if value is not None]
@@ -253,7 +260,8 @@ class VTComposerResults(CoreObject):
 
     @property
     def error_code(self) -> ErrorCode:
-        """
+        """Error code associated with VTComposer operation.
+
         **This is a beta parameter**. **The behavior and name may change in the future**.
         """
         return self._error_code

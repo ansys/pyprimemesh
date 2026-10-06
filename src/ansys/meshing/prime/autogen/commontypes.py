@@ -1,4 +1,4 @@
-# Copyright (C) 2024 - 2025 ANSYS, Inc. and/or its affiliates.
+# Copyright (C) 2026 Synopsys, Inc. and ANSYS, Inc. All rights reserved.
 # SPDX-License-Identifier: MIT
 #
 #
@@ -30,7 +30,7 @@ import numpy as np
 
 
 class SizeFieldType(enum.IntEnum):
-    """The type of sizing field to be used to fetch element size at given location.
+    """Specifies the type of sizing field used to fetch element size at a given location.
     """
     GEOMETRIC = 0
     """Geometric size field."""
@@ -44,7 +44,7 @@ class SizeFieldType(enum.IntEnum):
     """Computes size field using existing surface mesh sizes and diffuses geodesically. Then uses the computed size field to remesh surfaces. Notes: The type is applicable when remeshing already meshed surfaces."""
 
 class SolverType(enum.IntEnum):
-    """Type of solver.
+    """Specifies the type of solver.
     """
     FLUENT = 1
     """Solver type is Fluent. Creates a group of face quality measures mostly used in Fluent."""
@@ -52,14 +52,14 @@ class SolverType(enum.IntEnum):
     """Solver type is MAPDL. Creates a group of face quality measures mostly used in MAPDL."""
 
 class FaceQualityMeasure(enum.IntEnum):
-    """The type of face quality measures to check face quality metrics.
+    """Specifies the type of face quality measure to check face quality metrics.
     """
     SKEWNESS = 0
     """The Skewness metric ranges between 0 (worst) and 1 (best). A value of 0 indicates an equilateral cell (best) and a value of 1 indicates a completely degenerate cell (worst)."""
     SIZECHANGE = 2
     """Size Change is the maximum ratio of the area of each neighboring face element to the area of face element when the area of the face element is smaller than the neighbor. The minimum value for size change is 1."""
     ASPECTRATIO = 5
-    """The Aspect Ratio metric is greater than 1. A value of 1 indicates an equilateral cell (best) and a value of 20(e.g) indicates a stretched cell (worst)."""
+    """The Aspect Ratio metric is greater than 1. A value of 1 indicates an equilateral cell (best) and a value of 20 (e.g.) indicates a stretched cell (worst)."""
     WARP = 7
     """Face quality metric to check warping factor.
 
@@ -68,12 +68,12 @@ class FaceQualityMeasure(enum.IntEnum):
     """The Element Quality metric ranges between 0 (worst) and 1 (best). A value of 1 indicates a perfect cube or square (best) while a value of 0 indicates that the element has a zero or negative volume (worst)."""
 
 class CellQualityMeasure(enum.IntEnum):
-    """The type of cell quality measures to check cell quality metrics.
+    """Specifies the type of cell quality measure to check cell quality metrics.
     """
     SKEWNESS = 0
     """The Skewness metric ranges between 0 (best) and 1 (worst). A value of 0 indicates an equilateral cell (best) and a value of 1 indicates a completely degenerate cell (worst)."""
     ASPECTRATIO = 5
-    """The Aspect Ratio metric is greater than 1. A value of 1 indicates an equilateral cell (best) and a value of 20(e.g) indicates a stretched cell (worst)."""
+    """The Aspect Ratio metric is greater than 1. A value of 1 indicates an equilateral cell (best) and a value of 20 (e.g.) indicates a stretched cell (worst)."""
     WARP = 7
     """The warp metric ranges between 0 (best) and 2 (worst).
 
@@ -83,7 +83,7 @@ class CellQualityMeasure(enum.IntEnum):
 
     **This is a beta parameter**. **The behavior and name may change in the future**."""
     FLUENTASPECTRATIO = 13
-    """The Fluent aspect Ratio metric is greater than 1. A value of 1 indicates an equilateral cell (best) and a value of 20(e.g) indicates a stretched cell (worst)."""
+    """The Fluent Aspect Ratio metric is greater than 1. A value of 1 indicates an equilateral cell (best) and a value of 20 (e.g.) indicates a stretched cell (worst)."""
     INVERSEORTHOGONAL = 14
     """The inverse orthogonal metric ranges between 0 (best) and 1 (worst)."""
     INVERSEORTHOGONAL_V2 = 25
@@ -92,37 +92,37 @@ class CellQualityMeasure(enum.IntEnum):
     """The Element Quality metric ranges between 0 (worst) and 1 (best). A value of 1 indicates a perfect cube or square (best) while a value of 0 indicates that the element has a zero or negative volume (worst)."""
 
 class SurfaceFeatureType(enum.IntEnum):
-    """Type of face edges considered as features.
+    """Specifies the type of face edges considered as features.
     """
     NONE = 0
-    """None of face edges are considered as feature."""
+    """None of the face edges are considered as features."""
     ZONEBOUNDARY = 1
-    """Face edges at zone boundary are considered as feature."""
+    """Face edges at zone boundary are considered as features."""
     FEATURE = 2
-    """Face edges with normal angle more than threshold are considered as feature."""
+    """Face edges with normal angle more than threshold are considered as features."""
     FEATUREORZONEBOUNDARY = 3
-    """Face edges at zone boundary or with normal angle more than threshold are considered as feature."""
+    """Face edges at zone boundary or with normal angle more than threshold are considered as features."""
     ZONELETBOUNDARY = 4
-    """Face edges at zonelet boundary are considered as feature."""
+    """Face edges at zonelet boundary are considered as features."""
     FEATUREORZONELETBOUNDARY = 5
-    """Face edges at zonelet boundary or with normal angle more than threshold are considered as feature."""
+    """Face edges at zonelet boundary or with normal angle more than threshold are considered as features."""
 
 class ShellBLOffsetType(enum.IntEnum):
-    """Type of offset method during ShellBL generation.
+    """Specifies the offset method during ShellBL generation.
     """
     ASPECTRATIO = 0
-    """Option to set ShellBL offset type as Aspect Ratio.
+    """Sets ShellBL offset type as Aspect Ratio.
 
     **This is a beta parameter**. **The behavior and name may change in the future**."""
     LASTRATIO = 1
-    """Option to set ShellBL offset type as Last Ratio.
+    """Sets ShellBL offset type as Last Ratio.
 
     **This is a beta parameter**. **The behavior and name may change in the future**."""
     UNIFORM = 2
-    """Option to set ShellBL offset type as Uniform.
+    """Sets ShellBL offset type as Uniform.
 
     **This is a beta parameter**. **The behavior and name may change in the future**."""
     CURVATUREBASED = 4
-    """Option to set ShellBL offset type as CurvatureBased.
+    """Sets ShellBL offset type as CurvatureBased.
 
     **This is a beta parameter**. **The behavior and name may change in the future**."""

@@ -1,4 +1,4 @@
-# Copyright (C) 2024 - 2025 ANSYS, Inc. and/or its affiliates.
+# Copyright (C) 2026 Synopsys, Inc. and ANSYS, Inc. All rights reserved.
 # SPDX-License-Identifier: MIT
 #
 #
@@ -35,13 +35,13 @@ class DeleteMeshResults(CoreObject):
 
     Parameters
     ----------
-    model: Model
+    model : Model
         Model to create a ``DeleteMeshResults`` object with default parameters.
-    error_code: ErrorCode, optional
+    error_code : ErrorCode, optional
         Error code associated with the failure of operation.
 
         **This is a beta parameter**. **The behavior and name may change in the future**.
-    json_data: dict, optional
+    json_data : dict, optional
         JSON dictionary to create a ``DeleteMeshResults`` object with provided parameters.
 
     Examples
@@ -52,26 +52,26 @@ class DeleteMeshResults(CoreObject):
 
     def __initialize(
             self,
-            error_code: ErrorCode):
+            error_code : ErrorCode):
         self._error_code = ErrorCode(error_code)
 
     def __init__(
             self,
             model: CommunicationManager=None,
-            error_code: ErrorCode = None,
+            error_code : ErrorCode = None,
             json_data : dict = None,
              **kwargs):
         """Initialize a ``DeleteMeshResults`` object.
 
         Parameters
         ----------
-        model: Model
+        model : Model
             Model to create a ``DeleteMeshResults`` object with default parameters.
-        error_code: ErrorCode, optional
+        error_code : ErrorCode, optional
             Error code associated with the failure of operation.
 
             **This is a beta parameter**. **The behavior and name may change in the future**.
-        json_data: dict, optional
+        json_data : dict, optional
             JSON dictionary to create a ``DeleteMeshResults`` object with provided parameters.
 
         Examples
@@ -103,12 +103,12 @@ class DeleteMeshResults(CoreObject):
 
     @staticmethod
     def set_default(
-            error_code: ErrorCode = None):
+            error_code : ErrorCode = None):
         """Set the default values of the ``DeleteMeshResults`` object.
 
         Parameters
         ----------
-        error_code: ErrorCode, optional
+        error_code : ErrorCode, optional
             Error code associated with the failure of operation.
         """
         args = locals()
@@ -155,13 +155,13 @@ class DeleteMeshParams(CoreObject):
 
     Parameters
     ----------
-    model: Model
+    model : Model
         Model to create a ``DeleteMeshParams`` object with default parameters.
-    delete_mesh_on_connected_topo_edges: bool, optional
+    delete_mesh_on_connected_topo_edges : bool, optional
         Option to delete mesh on topoedges connected only to provided topoentities.
 
         **This is a beta parameter**. **The behavior and name may change in the future**.
-    json_data: dict, optional
+    json_data : dict, optional
         JSON dictionary to create a ``DeleteMeshParams`` object with provided parameters.
 
     Examples
@@ -172,26 +172,26 @@ class DeleteMeshParams(CoreObject):
 
     def __initialize(
             self,
-            delete_mesh_on_connected_topo_edges: bool):
+            delete_mesh_on_connected_topo_edges : bool):
         self._delete_mesh_on_connected_topo_edges = delete_mesh_on_connected_topo_edges
 
     def __init__(
             self,
             model: CommunicationManager=None,
-            delete_mesh_on_connected_topo_edges: bool = None,
+            delete_mesh_on_connected_topo_edges : bool = None,
             json_data : dict = None,
              **kwargs):
         """Initialize a ``DeleteMeshParams`` object.
 
         Parameters
         ----------
-        model: Model
+        model : Model
             Model to create a ``DeleteMeshParams`` object with default parameters.
-        delete_mesh_on_connected_topo_edges: bool, optional
+        delete_mesh_on_connected_topo_edges : bool, optional
             Option to delete mesh on topoedges connected only to provided topoentities.
 
             **This is a beta parameter**. **The behavior and name may change in the future**.
-        json_data: dict, optional
+        json_data : dict, optional
             JSON dictionary to create a ``DeleteMeshParams`` object with provided parameters.
 
         Examples
@@ -223,12 +223,12 @@ class DeleteMeshParams(CoreObject):
 
     @staticmethod
     def set_default(
-            delete_mesh_on_connected_topo_edges: bool = None):
+            delete_mesh_on_connected_topo_edges : bool = None):
         """Set the default values of the ``DeleteMeshParams`` object.
 
         Parameters
         ----------
-        delete_mesh_on_connected_topo_edges: bool, optional
+        delete_mesh_on_connected_topo_edges : bool, optional
             Option to delete mesh on topoedges connected only to provided topoentities.
         """
         args = locals()

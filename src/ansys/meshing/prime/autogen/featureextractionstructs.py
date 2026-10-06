@@ -1,4 +1,4 @@
-# Copyright (C) 2024 - 2025 ANSYS, Inc. and/or its affiliates.
+# Copyright (C) 2026 Synopsys, Inc. and ANSYS, Inc. All rights reserved.
 # SPDX-License-Identifier: MIT
 #
 #
@@ -35,23 +35,23 @@ class ExtractFeatureParams(CoreObject):
 
     Parameters
     ----------
-    model: Model
+    model : Model
         Model to create a ``ExtractFeatureParams`` object with default parameters.
-    replace: bool, optional
+    replace : bool, optional
         Option to replace existing edge zonelets with new extracted edge zonelets.
-    feature_angle: float, optional
+    feature_angle : float, optional
         Angle used to capture face features to be  extracted as edges.
-    separate_features: bool, optional
+    separate_features : bool, optional
         Option to separate extracted features.
-    separation_angle: float, optional
+    separation_angle : float, optional
         Angle used to separate extracted features.
-    disconnect_with_faces: bool, optional
+    disconnect_with_faces : bool, optional
         Option to disconnect edges from faces. If false, edges remain connected to faces by sharing nodes.
-    label_name: str, optional
+    label_name : str, optional
         Label name to be assigned to extracted features.
-    number_of_threads: int, optional
+    number_of_threads : int, optional
         Number of threads used for multithreading.
-    json_data: dict, optional
+    json_data : dict, optional
         JSON dictionary to create a ``ExtractFeatureParams`` object with provided parameters.
 
     Examples
@@ -62,13 +62,13 @@ class ExtractFeatureParams(CoreObject):
 
     def __initialize(
             self,
-            replace: bool,
-            feature_angle: float,
-            separate_features: bool,
-            separation_angle: float,
-            disconnect_with_faces: bool,
-            label_name: str,
-            number_of_threads: int):
+            replace : bool,
+            feature_angle : float,
+            separate_features : bool,
+            separation_angle : float,
+            disconnect_with_faces : bool,
+            label_name : str,
+            number_of_threads : int):
         self._replace = replace
         self._feature_angle = feature_angle
         self._separate_features = separate_features
@@ -80,36 +80,36 @@ class ExtractFeatureParams(CoreObject):
     def __init__(
             self,
             model: CommunicationManager=None,
-            replace: bool = None,
-            feature_angle: float = None,
-            separate_features: bool = None,
-            separation_angle: float = None,
-            disconnect_with_faces: bool = None,
-            label_name: str = None,
-            number_of_threads: int = None,
+            replace : bool = None,
+            feature_angle : float = None,
+            separate_features : bool = None,
+            separation_angle : float = None,
+            disconnect_with_faces : bool = None,
+            label_name : str = None,
+            number_of_threads : int = None,
             json_data : dict = None,
              **kwargs):
         """Initialize a ``ExtractFeatureParams`` object.
 
         Parameters
         ----------
-        model: Model
+        model : Model
             Model to create a ``ExtractFeatureParams`` object with default parameters.
-        replace: bool, optional
+        replace : bool, optional
             Option to replace existing edge zonelets with new extracted edge zonelets.
-        feature_angle: float, optional
+        feature_angle : float, optional
             Angle used to capture face features to be  extracted as edges.
-        separate_features: bool, optional
+        separate_features : bool, optional
             Option to separate extracted features.
-        separation_angle: float, optional
+        separation_angle : float, optional
             Angle used to separate extracted features.
-        disconnect_with_faces: bool, optional
+        disconnect_with_faces : bool, optional
             Option to disconnect edges from faces. If false, edges remain connected to faces by sharing nodes.
-        label_name: str, optional
+        label_name : str, optional
             Label name to be assigned to extracted features.
-        number_of_threads: int, optional
+        number_of_threads : int, optional
             Number of threads used for multithreading.
-        json_data: dict, optional
+        json_data : dict, optional
             JSON dictionary to create a ``ExtractFeatureParams`` object with provided parameters.
 
         Examples
@@ -159,30 +159,30 @@ class ExtractFeatureParams(CoreObject):
 
     @staticmethod
     def set_default(
-            replace: bool = None,
-            feature_angle: float = None,
-            separate_features: bool = None,
-            separation_angle: float = None,
-            disconnect_with_faces: bool = None,
-            label_name: str = None,
-            number_of_threads: int = None):
+            replace : bool = None,
+            feature_angle : float = None,
+            separate_features : bool = None,
+            separation_angle : float = None,
+            disconnect_with_faces : bool = None,
+            label_name : str = None,
+            number_of_threads : int = None):
         """Set the default values of the ``ExtractFeatureParams`` object.
 
         Parameters
         ----------
-        replace: bool, optional
+        replace : bool, optional
             Option to replace existing edge zonelets with new extracted edge zonelets.
-        feature_angle: float, optional
+        feature_angle : float, optional
             Angle used to capture face features to be  extracted as edges.
-        separate_features: bool, optional
+        separate_features : bool, optional
             Option to separate extracted features.
-        separation_angle: float, optional
+        separation_angle : float, optional
             Angle used to separate extracted features.
-        disconnect_with_faces: bool, optional
+        disconnect_with_faces : bool, optional
             Option to disconnect edges from faces. If false, edges remain connected to faces by sharing nodes.
-        label_name: str, optional
+        label_name : str, optional
             Label name to be assigned to extracted features.
-        number_of_threads: int, optional
+        number_of_threads : int, optional
             Number of threads used for multithreading.
         """
         args = locals()
@@ -299,15 +299,15 @@ class ExtractFeatureResults(CoreObject):
 
     Parameters
     ----------
-    model: Model
+    model : Model
         Model to create a ``ExtractFeatureResults`` object with default parameters.
-    processing_time: float, optional
+    processing_time : float, optional
         Time taken for edge extraction.
-    error_code: ErrorCode, optional
+    error_code : ErrorCode, optional
         Error code returned by edge extraction function.
-    new_edge_zonelets: Iterable[int], optional
+    new_edge_zonelets : Iterable[int], optional
         Ids of new edge zonelets extracted.
-    json_data: dict, optional
+    json_data : dict, optional
         JSON dictionary to create a ``ExtractFeatureResults`` object with provided parameters.
 
     Examples
@@ -318,9 +318,9 @@ class ExtractFeatureResults(CoreObject):
 
     def __initialize(
             self,
-            processing_time: float,
-            error_code: ErrorCode,
-            new_edge_zonelets: Iterable[int]):
+            processing_time : float,
+            error_code : ErrorCode,
+            new_edge_zonelets : Iterable[int]):
         self._processing_time = processing_time
         self._error_code = ErrorCode(error_code)
         self._new_edge_zonelets = new_edge_zonelets if isinstance(new_edge_zonelets, np.ndarray) else np.array(new_edge_zonelets, dtype=np.int32) if new_edge_zonelets is not None else None
@@ -328,24 +328,24 @@ class ExtractFeatureResults(CoreObject):
     def __init__(
             self,
             model: CommunicationManager=None,
-            processing_time: float = None,
-            error_code: ErrorCode = None,
-            new_edge_zonelets: Iterable[int] = None,
+            processing_time : float = None,
+            error_code : ErrorCode = None,
+            new_edge_zonelets : Iterable[int] = None,
             json_data : dict = None,
              **kwargs):
         """Initialize a ``ExtractFeatureResults`` object.
 
         Parameters
         ----------
-        model: Model
+        model : Model
             Model to create a ``ExtractFeatureResults`` object with default parameters.
-        processing_time: float, optional
+        processing_time : float, optional
             Time taken for edge extraction.
-        error_code: ErrorCode, optional
+        error_code : ErrorCode, optional
             Error code returned by edge extraction function.
-        new_edge_zonelets: Iterable[int], optional
+        new_edge_zonelets : Iterable[int], optional
             Ids of new edge zonelets extracted.
-        json_data: dict, optional
+        json_data : dict, optional
             JSON dictionary to create a ``ExtractFeatureResults`` object with provided parameters.
 
         Examples
@@ -383,18 +383,18 @@ class ExtractFeatureResults(CoreObject):
 
     @staticmethod
     def set_default(
-            processing_time: float = None,
-            error_code: ErrorCode = None,
-            new_edge_zonelets: Iterable[int] = None):
+            processing_time : float = None,
+            error_code : ErrorCode = None,
+            new_edge_zonelets : Iterable[int] = None):
         """Set the default values of the ``ExtractFeatureResults`` object.
 
         Parameters
         ----------
-        processing_time: float, optional
+        processing_time : float, optional
             Time taken for edge extraction.
-        error_code: ErrorCode, optional
+        error_code : ErrorCode, optional
             Error code returned by edge extraction function.
-        new_edge_zonelets: Iterable[int], optional
+        new_edge_zonelets : Iterable[int], optional
             Ids of new edge zonelets extracted.
         """
         args = locals()
@@ -463,13 +463,13 @@ class ExtractedFeatureIds(CoreObject):
 
     Parameters
     ----------
-    model: Model
+    model : Model
         Model to create a ``ExtractedFeatureIds`` object with default parameters.
-    part_id: int, optional
+    part_id : int, optional
         Id of the part from which edge zonelets are extracted.
-    new_edge_zonelets: Iterable[int], optional
+    new_edge_zonelets : Iterable[int], optional
         Ids of new edge zonelets extracted.
-    json_data: dict, optional
+    json_data : dict, optional
         JSON dictionary to create a ``ExtractedFeatureIds`` object with provided parameters.
 
     Examples
@@ -480,29 +480,29 @@ class ExtractedFeatureIds(CoreObject):
 
     def __initialize(
             self,
-            part_id: int,
-            new_edge_zonelets: Iterable[int]):
+            part_id : int,
+            new_edge_zonelets : Iterable[int]):
         self._part_id = part_id
         self._new_edge_zonelets = new_edge_zonelets if isinstance(new_edge_zonelets, np.ndarray) else np.array(new_edge_zonelets, dtype=np.int32) if new_edge_zonelets is not None else None
 
     def __init__(
             self,
             model: CommunicationManager=None,
-            part_id: int = None,
-            new_edge_zonelets: Iterable[int] = None,
+            part_id : int = None,
+            new_edge_zonelets : Iterable[int] = None,
             json_data : dict = None,
              **kwargs):
         """Initialize a ``ExtractedFeatureIds`` object.
 
         Parameters
         ----------
-        model: Model
+        model : Model
             Model to create a ``ExtractedFeatureIds`` object with default parameters.
-        part_id: int, optional
+        part_id : int, optional
             Id of the part from which edge zonelets are extracted.
-        new_edge_zonelets: Iterable[int], optional
+        new_edge_zonelets : Iterable[int], optional
             Ids of new edge zonelets extracted.
-        json_data: dict, optional
+        json_data : dict, optional
             JSON dictionary to create a ``ExtractedFeatureIds`` object with provided parameters.
 
         Examples
@@ -537,15 +537,15 @@ class ExtractedFeatureIds(CoreObject):
 
     @staticmethod
     def set_default(
-            part_id: int = None,
-            new_edge_zonelets: Iterable[int] = None):
+            part_id : int = None,
+            new_edge_zonelets : Iterable[int] = None):
         """Set the default values of the ``ExtractedFeatureIds`` object.
 
         Parameters
         ----------
-        part_id: int, optional
+        part_id : int, optional
             Id of the part from which edge zonelets are extracted.
-        new_edge_zonelets: Iterable[int], optional
+        new_edge_zonelets : Iterable[int], optional
             Ids of new edge zonelets extracted.
         """
         args = locals()
@@ -602,11 +602,11 @@ class CreateIntersectionEdgeLoopsParams(CoreObject):
 
     Parameters
     ----------
-    model: Model
+    model : Model
         Model to create a ``CreateIntersectionEdgeLoopsParams`` object with default parameters.
-    label_name: str, optional
+    label_name : str, optional
         Label name to be assigned to extracted features.
-    json_data: dict, optional
+    json_data : dict, optional
         JSON dictionary to create a ``CreateIntersectionEdgeLoopsParams`` object with provided parameters.
 
     Examples
@@ -617,24 +617,24 @@ class CreateIntersectionEdgeLoopsParams(CoreObject):
 
     def __initialize(
             self,
-            label_name: str):
+            label_name : str):
         self._label_name = label_name
 
     def __init__(
             self,
             model: CommunicationManager=None,
-            label_name: str = None,
+            label_name : str = None,
             json_data : dict = None,
              **kwargs):
         """Initialize a ``CreateIntersectionEdgeLoopsParams`` object.
 
         Parameters
         ----------
-        model: Model
+        model : Model
             Model to create a ``CreateIntersectionEdgeLoopsParams`` object with default parameters.
-        label_name: str, optional
+        label_name : str, optional
             Label name to be assigned to extracted features.
-        json_data: dict, optional
+        json_data : dict, optional
             JSON dictionary to create a ``CreateIntersectionEdgeLoopsParams`` object with provided parameters.
 
         Examples
@@ -666,12 +666,12 @@ class CreateIntersectionEdgeLoopsParams(CoreObject):
 
     @staticmethod
     def set_default(
-            label_name: str = None):
+            label_name : str = None):
         """Set the default values of the ``CreateIntersectionEdgeLoopsParams`` object.
 
         Parameters
         ----------
-        label_name: str, optional
+        label_name : str, optional
             Label name to be assigned to extracted features.
         """
         args = locals()
@@ -716,15 +716,15 @@ class CreateIntersectionEdgeLoopsResults(CoreObject):
 
     Parameters
     ----------
-    model: Model
+    model : Model
         Model to create a ``CreateIntersectionEdgeLoopsResults`` object with default parameters.
-    processing_time: float, optional
+    processing_time : float, optional
         Time taken to extract edges formed by intersecting faces.
-    error_code: ErrorCode, optional
+    error_code : ErrorCode, optional
         Error code returned by edge extraction function.
-    extracted_ids: List[ExtractedFeatureIds], optional
+    extracted_ids : List[ExtractedFeatureIds], optional
         List of ExtractedFeatureIds that contains ids of extracted edges.
-    json_data: dict, optional
+    json_data : dict, optional
         JSON dictionary to create a ``CreateIntersectionEdgeLoopsResults`` object with provided parameters.
 
     Examples
@@ -735,9 +735,9 @@ class CreateIntersectionEdgeLoopsResults(CoreObject):
 
     def __initialize(
             self,
-            processing_time: float,
-            error_code: ErrorCode,
-            extracted_ids: List[ExtractedFeatureIds]):
+            processing_time : float,
+            error_code : ErrorCode,
+            extracted_ids : List[ExtractedFeatureIds]):
         self._processing_time = processing_time
         self._error_code = ErrorCode(error_code)
         self._extracted_ids = extracted_ids
@@ -745,24 +745,24 @@ class CreateIntersectionEdgeLoopsResults(CoreObject):
     def __init__(
             self,
             model: CommunicationManager=None,
-            processing_time: float = None,
-            error_code: ErrorCode = None,
-            extracted_ids: List[ExtractedFeatureIds] = None,
+            processing_time : float = None,
+            error_code : ErrorCode = None,
+            extracted_ids : List[ExtractedFeatureIds] = None,
             json_data : dict = None,
              **kwargs):
         """Initialize a ``CreateIntersectionEdgeLoopsResults`` object.
 
         Parameters
         ----------
-        model: Model
+        model : Model
             Model to create a ``CreateIntersectionEdgeLoopsResults`` object with default parameters.
-        processing_time: float, optional
+        processing_time : float, optional
             Time taken to extract edges formed by intersecting faces.
-        error_code: ErrorCode, optional
+        error_code : ErrorCode, optional
             Error code returned by edge extraction function.
-        extracted_ids: List[ExtractedFeatureIds], optional
+        extracted_ids : List[ExtractedFeatureIds], optional
             List of ExtractedFeatureIds that contains ids of extracted edges.
-        json_data: dict, optional
+        json_data : dict, optional
             JSON dictionary to create a ``CreateIntersectionEdgeLoopsResults`` object with provided parameters.
 
         Examples
@@ -800,18 +800,18 @@ class CreateIntersectionEdgeLoopsResults(CoreObject):
 
     @staticmethod
     def set_default(
-            processing_time: float = None,
-            error_code: ErrorCode = None,
-            extracted_ids: List[ExtractedFeatureIds] = None):
+            processing_time : float = None,
+            error_code : ErrorCode = None,
+            extracted_ids : List[ExtractedFeatureIds] = None):
         """Set the default values of the ``CreateIntersectionEdgeLoopsResults`` object.
 
         Parameters
         ----------
-        processing_time: float, optional
+        processing_time : float, optional
             Time taken to extract edges formed by intersecting faces.
-        error_code: ErrorCode, optional
+        error_code : ErrorCode, optional
             Error code returned by edge extraction function.
-        extracted_ids: List[ExtractedFeatureIds], optional
+        extracted_ids : List[ExtractedFeatureIds], optional
             List of ExtractedFeatureIds that contains ids of extracted edges.
         """
         args = locals()

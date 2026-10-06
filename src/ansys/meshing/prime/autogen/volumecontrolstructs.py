@@ -1,4 +1,4 @@
-# Copyright (C) 2024 - 2025 ANSYS, Inc. and/or its affiliates.
+# Copyright (C) 2026 Synopsys, Inc. and ANSYS, Inc. All rights reserved.
 # SPDX-License-Identifier: MIT
 #
 #
@@ -35,13 +35,13 @@ class VolumeControlParams(CoreObject):
 
     Parameters
     ----------
-    model: Model
+    model : Model
         Model to create a ``VolumeControlParams`` object with default parameters.
-    cell_zonelet_type: CellZoneletType, optional
+    cell_zonelet_type : CellZoneletType, optional
         Cell zonelet type is used to define the type of the associated volume.
-    skip_hexcore: bool, optional
+    skip_hexcore : bool, optional
         Check whether to skip hexahedral cells generation in the core for this volume or not. Applicable only for volumeFillType set to HexcoreTet or HexcorePoly in the AutoMeshParams structure.
-    json_data: dict, optional
+    json_data : dict, optional
         JSON dictionary to create a ``VolumeControlParams`` object with provided parameters.
 
     Examples
@@ -52,29 +52,29 @@ class VolumeControlParams(CoreObject):
 
     def __initialize(
             self,
-            cell_zonelet_type: CellZoneletType,
-            skip_hexcore: bool):
+            cell_zonelet_type : CellZoneletType,
+            skip_hexcore : bool):
         self._cell_zonelet_type = CellZoneletType(cell_zonelet_type)
         self._skip_hexcore = skip_hexcore
 
     def __init__(
             self,
             model: CommunicationManager=None,
-            cell_zonelet_type: CellZoneletType = None,
-            skip_hexcore: bool = None,
+            cell_zonelet_type : CellZoneletType = None,
+            skip_hexcore : bool = None,
             json_data : dict = None,
              **kwargs):
         """Initialize a ``VolumeControlParams`` object.
 
         Parameters
         ----------
-        model: Model
+        model : Model
             Model to create a ``VolumeControlParams`` object with default parameters.
-        cell_zonelet_type: CellZoneletType, optional
+        cell_zonelet_type : CellZoneletType, optional
             Cell zonelet type is used to define the type of the associated volume.
-        skip_hexcore: bool, optional
+        skip_hexcore : bool, optional
             Check whether to skip hexahedral cells generation in the core for this volume or not. Applicable only for volumeFillType set to HexcoreTet or HexcorePoly in the AutoMeshParams structure.
-        json_data: dict, optional
+        json_data : dict, optional
             JSON dictionary to create a ``VolumeControlParams`` object with provided parameters.
 
         Examples
@@ -109,15 +109,15 @@ class VolumeControlParams(CoreObject):
 
     @staticmethod
     def set_default(
-            cell_zonelet_type: CellZoneletType = None,
-            skip_hexcore: bool = None):
+            cell_zonelet_type : CellZoneletType = None,
+            skip_hexcore : bool = None):
         """Set the default values of the ``VolumeControlParams`` object.
 
         Parameters
         ----------
-        cell_zonelet_type: CellZoneletType, optional
+        cell_zonelet_type : CellZoneletType, optional
             Cell zonelet type is used to define the type of the associated volume.
-        skip_hexcore: bool, optional
+        skip_hexcore : bool, optional
             Check whether to skip hexahedral cells generation in the core for this volume or not. Applicable only for volumeFillType set to HexcoreTet or HexcorePoly in the AutoMeshParams structure.
         """
         args = locals()
@@ -174,9 +174,9 @@ class VolumeControlSummaryParams(CoreObject):
 
     Parameters
     ----------
-    model: Model
+    model : Model
         Model to create a ``VolumeControlSummaryParams`` object with default parameters.
-    json_data: dict, optional
+    json_data : dict, optional
         JSON dictionary to create a ``VolumeControlSummaryParams`` object with provided parameters.
 
     Examples
@@ -198,9 +198,9 @@ class VolumeControlSummaryParams(CoreObject):
 
         Parameters
         ----------
-        model: Model
+        model : Model
             Model to create a ``VolumeControlSummaryParams`` object with default parameters.
-        json_data: dict, optional
+        json_data : dict, optional
             JSON dictionary to create a ``VolumeControlSummaryParams`` object with provided parameters.
 
         Examples
@@ -264,11 +264,11 @@ class VolumeControlSummaryResults(CoreObject):
 
     Parameters
     ----------
-    model: Model
+    model : Model
         Model to create a ``VolumeControlSummaryResults`` object with default parameters.
-    summary: str, optional
+    summary : str, optional
         Summary of control, including parameters and scope.
-    json_data: dict, optional
+    json_data : dict, optional
         JSON dictionary to create a ``VolumeControlSummaryResults`` object with provided parameters.
 
     Examples
@@ -279,24 +279,24 @@ class VolumeControlSummaryResults(CoreObject):
 
     def __initialize(
             self,
-            summary: str):
+            summary : str):
         self._summary = summary
 
     def __init__(
             self,
             model: CommunicationManager=None,
-            summary: str = None,
+            summary : str = None,
             json_data : dict = None,
              **kwargs):
         """Initialize a ``VolumeControlSummaryResults`` object.
 
         Parameters
         ----------
-        model: Model
+        model : Model
             Model to create a ``VolumeControlSummaryResults`` object with default parameters.
-        summary: str, optional
+        summary : str, optional
             Summary of control, including parameters and scope.
-        json_data: dict, optional
+        json_data : dict, optional
             JSON dictionary to create a ``VolumeControlSummaryResults`` object with provided parameters.
 
         Examples
@@ -328,12 +328,12 @@ class VolumeControlSummaryResults(CoreObject):
 
     @staticmethod
     def set_default(
-            summary: str = None):
+            summary : str = None):
         """Set the default values of the ``VolumeControlSummaryResults`` object.
 
         Parameters
         ----------
-        summary: str, optional
+        summary : str, optional
             Summary of control, including parameters and scope.
         """
         args = locals()

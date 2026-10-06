@@ -1,4 +1,4 @@
-# Copyright (C) 2024 - 2025 ANSYS, Inc. and/or its affiliates.
+# Copyright (C) 2026 Synopsys, Inc. and ANSYS, Inc. All rights reserved.
 # SPDX-License-Identifier: MIT
 #
 #
@@ -25,7 +25,7 @@ from __future__ import annotations
 from ansys.meshing.prime.internals.comm_manager import CommunicationManager
 from ansys.meshing.prime.params.primestructs import *
 from ansys.meshing.prime.autogen.coreobject import *
-from typing import List, Any, Union
+from typing import Dict, Any, Union, List, Iterable
 
 class FileIO(CoreObject):
     """Handles reading or writing files from the disk.
@@ -56,7 +56,7 @@ class FileIO(CoreObject):
         self._comm.serve(self._model, command_name, self._object_id, args={})
 
     def read_pmdat(self, file_name : str, file_read_params : FileReadParams) -> FileReadResults:
-        """ Function that reads PRIME's database file.
+        """ Reads PRIME's database file.
 
         PRIME's database files have pmdat extension.
 
@@ -90,7 +90,7 @@ class FileIO(CoreObject):
         """
         if not isinstance(file_name, str):
             raise TypeError("Invalid argument type passed for 'file_name'. Valid argument type is str.")
-        if not isinstance(file_read_params, FileReadParams):
+        if type(file_read_params).__name__ != 'FileReadParams':
             raise TypeError("Invalid argument type passed for 'file_read_params'. Valid argument type is FileReadParams.")
         args = {"file_name" : file_name,
         "file_read_params" : file_read_params._jsonify()}
@@ -124,7 +124,7 @@ class FileIO(CoreObject):
         """
         if not isinstance(file_name, str):
             raise TypeError("Invalid argument type passed for 'file_name'. Valid argument type is str.")
-        if not isinstance(file_write_params, FileWriteParams):
+        if type(file_write_params).__name__ != 'FileWriteParams':
             raise TypeError("Invalid argument type passed for 'file_write_params'. Valid argument type is FileWriteParams.")
         args = {"file_name" : file_name,
         "file_write_params" : file_write_params._jsonify()}
@@ -142,8 +142,8 @@ class FileIO(CoreObject):
 
         Parameters
         ----------
-        partId : int
-            Part Id.
+        part_id : 
+            Part id.
 
         Returns
         -------
@@ -158,7 +158,7 @@ class FileIO(CoreObject):
         Examples
         --------
         >>> import json
-        >>> simdata = json.loads(file_io.get_abaqus_simulation_data(2)
+        >>> simdata = json.loads(file_io.get_abaqus_simulation_data(2))
 
         """
         if not isinstance(partId, int):
@@ -172,7 +172,7 @@ class FileIO(CoreObject):
         return result
 
     def import_abaqus_inp(self, file_name : str, params : ImportAbaqusParams) -> ImportAbaqusResults:
-        """ Import a Abaqus file.
+        """ Imports an Abaqus file.
 
         Import abaqus files as dead mesh and also store simulation-specific information into Prime in the form of JSON documents.
 
@@ -200,7 +200,7 @@ class FileIO(CoreObject):
         """
         if not isinstance(file_name, str):
             raise TypeError("Invalid argument type passed for 'file_name'. Valid argument type is str.")
-        if not isinstance(params, ImportAbaqusParams):
+        if type(params).__name__ != 'ImportAbaqusParams':
             raise TypeError("Invalid argument type passed for 'params'. Valid argument type is ImportAbaqusParams.")
         args = {"file_name" : file_name,
         "params" : params._jsonify()}
@@ -214,12 +214,12 @@ class FileIO(CoreObject):
     def import_fluent_meshing_size_field(self, file_name : str) -> SizeFieldFileReadResults:
         """ Imports Fluent-Meshing's size field file from disk.
 
-        Fluent-Meshing's sizefield files have sf and sf.gz extension.
+        Fluent-Meshing's size field files have sf and sf.gz extension.
 
         Parameters
         ----------
         file_name : str
-            Path to file on disk
+            Path to file on disk.
 
         Returns
         -------
@@ -247,7 +247,7 @@ class FileIO(CoreObject):
         return SizeFieldFileReadResults(model = self._model, json_data = result)
 
     def read_size_field(self, file_name : str, params : ReadSizeFieldParams) -> SizeFieldFileReadResults:
-        """ Read PRIME's sizefield file from disk.
+        """ Reads PRIME's sizefield file from disk.
 
         PRIME's sizefield files have psf and psf.gz extension.
 
@@ -277,7 +277,7 @@ class FileIO(CoreObject):
         """
         if not isinstance(file_name, str):
             raise TypeError("Invalid argument type passed for 'file_name'. Valid argument type is str.")
-        if not isinstance(params, ReadSizeFieldParams):
+        if type(params).__name__ != 'ReadSizeFieldParams':
             raise TypeError("Invalid argument type passed for 'params'. Valid argument type is ReadSizeFieldParams.")
         args = {"file_name" : file_name,
         "params" : params._jsonify()}
@@ -288,7 +288,7 @@ class FileIO(CoreObject):
         return SizeFieldFileReadResults(model = self._model, json_data = result)
 
     def write_size_field(self, file_name : str, params : WriteSizeFieldParams) -> FileWriteResults:
-        """ Write PRIME's sizefield (.psf) to file.
+        """ Writes PRIME's sizefield (.psf) to file.
 
 
         Parameters
@@ -317,7 +317,7 @@ class FileIO(CoreObject):
         """
         if not isinstance(file_name, str):
             raise TypeError("Invalid argument type passed for 'file_name'. Valid argument type is str.")
-        if not isinstance(params, WriteSizeFieldParams):
+        if type(params).__name__ != 'WriteSizeFieldParams':
             raise TypeError("Invalid argument type passed for 'params'. Valid argument type is WriteSizeFieldParams.")
         args = {"file_name" : file_name,
         "params" : params._jsonify()}
@@ -328,7 +328,7 @@ class FileIO(CoreObject):
         return FileWriteResults(model = self._model, json_data = result)
 
     def import_mapdl_cdb(self, file_name : str, params : ImportMapdlCdbParams) -> ImportMapdlCdbResults:
-        """ Function that imports MAPDL CDB file(cdb).
+        """ Imports MAPDL CDB file(cdb).
 
 
         Parameters
@@ -361,7 +361,7 @@ class FileIO(CoreObject):
         """
         if not isinstance(file_name, str):
             raise TypeError("Invalid argument type passed for 'file_name'. Valid argument type is str.")
-        if not isinstance(params, ImportMapdlCdbParams):
+        if type(params).__name__ != 'ImportMapdlCdbParams':
             raise TypeError("Invalid argument type passed for 'params'. Valid argument type is ImportMapdlCdbParams.")
         args = {"file_name" : file_name,
         "params" : params._jsonify()}
@@ -372,7 +372,7 @@ class FileIO(CoreObject):
         return ImportMapdlCdbResults(model = self._model, json_data = result)
 
     def export_mapdl_cdb(self, file_name : str, params : ExportMapdlCdbParams) -> ExportMapdlCdbResults:
-        """ Function that exports MAPDL CDB file(cdb).
+        """ Exports MAPDL CDB file(cdb).
 
 
         Parameters
@@ -405,7 +405,7 @@ class FileIO(CoreObject):
         """
         if not isinstance(file_name, str):
             raise TypeError("Invalid argument type passed for 'file_name'. Valid argument type is str.")
-        if not isinstance(params, ExportMapdlCdbParams):
+        if type(params).__name__ != 'ExportMapdlCdbParams':
             raise TypeError("Invalid argument type passed for 'params'. Valid argument type is ExportMapdlCdbParams.")
         args = {"file_name" : file_name,
         "params" : params._jsonify()}
@@ -416,7 +416,7 @@ class FileIO(CoreObject):
         return ExportMapdlCdbResults(model = self._model, json_data = result)
 
     def import_fluent_meshing_meshes(self, file_names : List[str], import_fluent_meshing_mesh_params : ImportFluentMeshingMeshParams) -> ImportFluentMeshingMeshResults:
-        """ Imports fluent meshing meshes of given files on disk.
+        """ Imports Fluent Meshing meshes of given files on disk.
 
         Fluent Meshing mesh files have msh and msh.gz extension.
 
@@ -425,12 +425,12 @@ class FileIO(CoreObject):
         file_names : List[str]
             Full path of files to be imported.
         import_fluent_meshing_mesh_params : ImportFluentMeshingMeshParams
-            Parameters to import fluent meshing mesh.
+            Parameters to import Fluent Meshing mesh.
 
         Returns
         -------
         ImportFluentMeshingMeshResults
-            Returns the FileReadResults.
+            Returns the FileReadResults structure.
 
 
         Notes
@@ -446,7 +446,7 @@ class FileIO(CoreObject):
         """
         if not isinstance(file_names, List):
             raise TypeError("Invalid argument type passed for 'file_names'. Valid argument type is List[str].")
-        if not isinstance(import_fluent_meshing_mesh_params, ImportFluentMeshingMeshParams):
+        if type(import_fluent_meshing_mesh_params).__name__ != 'ImportFluentMeshingMeshParams':
             raise TypeError("Invalid argument type passed for 'import_fluent_meshing_mesh_params'. Valid argument type is ImportFluentMeshingMeshParams.")
         args = {"file_names" : file_names,
         "import_fluent_meshing_mesh_params" : import_fluent_meshing_mesh_params._jsonify()}
@@ -457,7 +457,7 @@ class FileIO(CoreObject):
         return ImportFluentMeshingMeshResults(model = self._model, json_data = result)
 
     def import_fluent_case(self, file_name : str, import_fluent_case_params : ImportFluentCaseParams) -> ImportFluentCaseResults:
-        """ Imports fluent case file on disk.
+        """ Imports Fluent case file on disk.
 
         Fluent case files have cas extension.
 
@@ -466,7 +466,7 @@ class FileIO(CoreObject):
         file_name : str
             Path to file on disk.
         import_fluent_case_params : ImportFluentCaseParams
-            Parameters to import fluent case file.
+            Parameters to import Fluent case file.
 
         Returns
         -------
@@ -476,7 +476,7 @@ class FileIO(CoreObject):
 
         Notes
         -----
-        This API does not support unicode paths now.
+        This API does not support Unicode paths now.
 
         Examples
         --------
@@ -487,7 +487,7 @@ class FileIO(CoreObject):
         """
         if not isinstance(file_name, str):
             raise TypeError("Invalid argument type passed for 'file_name'. Valid argument type is str.")
-        if not isinstance(import_fluent_case_params, ImportFluentCaseParams):
+        if type(import_fluent_case_params).__name__ != 'ImportFluentCaseParams':
             raise TypeError("Invalid argument type passed for 'import_fluent_case_params'. Valid argument type is ImportFluentCaseParams.")
         args = {"file_name" : file_name,
         "import_fluent_case_params" : import_fluent_case_params._jsonify()}
@@ -506,7 +506,7 @@ class FileIO(CoreObject):
         file_name : str
             Path to file on disk.
         export_fluent_case_params : ExportFluentCaseParams
-            Parameters to export fluent case file.
+            Parameters to export Fluent case file.
 
         Returns
         -------
@@ -522,7 +522,7 @@ class FileIO(CoreObject):
         """
         if not isinstance(file_name, str):
             raise TypeError("Invalid argument type passed for 'file_name'. Valid argument type is str.")
-        if not isinstance(export_fluent_case_params, ExportFluentCaseParams):
+        if type(export_fluent_case_params).__name__ != 'ExportFluentCaseParams':
             raise TypeError("Invalid argument type passed for 'export_fluent_case_params'. Valid argument type is ExportFluentCaseParams.")
         args = {"file_name" : file_name,
         "export_fluent_case_params" : export_fluent_case_params._jsonify()}
@@ -556,7 +556,7 @@ class FileIO(CoreObject):
         """
         if not isinstance(file_name, str):
             raise TypeError("Invalid argument type passed for 'file_name'. Valid argument type is str.")
-        if not isinstance(export_fluent_mesh_params, ExportFluentMeshingMeshParams):
+        if type(export_fluent_mesh_params).__name__ != 'ExportFluentMeshingMeshParams':
             raise TypeError("Invalid argument type passed for 'export_fluent_mesh_params'. Valid argument type is ExportFluentMeshingMeshParams.")
         args = {"file_name" : file_name,
         "export_fluent_mesh_params" : export_fluent_mesh_params._jsonify()}
@@ -567,7 +567,7 @@ class FileIO(CoreObject):
         return FileWriteResults(model = self._model, json_data = result)
 
     def export_lsdyna_keyword_file(self, file_name : str, export_params : ExportLSDynaKeywordFileParams) -> ExportLSDynaResults:
-        """ Export FEA LS-DYNA Keyword file for solid, surface mesh or both.
+        """ Exports FEA LS-DYNA Keyword file for solid, surface mesh or both.
 
 
         Parameters
@@ -593,7 +593,7 @@ class FileIO(CoreObject):
         """
         if not isinstance(file_name, str):
             raise TypeError("Invalid argument type passed for 'file_name'. Valid argument type is str.")
-        if not isinstance(export_params, ExportLSDynaKeywordFileParams):
+        if type(export_params).__name__ != 'ExportLSDynaKeywordFileParams':
             raise TypeError("Invalid argument type passed for 'export_params'. Valid argument type is ExportLSDynaKeywordFileParams.")
         args = {"file_name" : file_name,
         "export_params" : export_params._jsonify()}
@@ -631,7 +631,7 @@ class FileIO(CoreObject):
         """
         if not isinstance(file_name, str):
             raise TypeError("Invalid argument type passed for 'file_name'. Valid argument type is str.")
-        if not isinstance(export_params, ExportLSDynaIgaKeywordFileParams):
+        if type(export_params).__name__ != 'ExportLSDynaIgaKeywordFileParams':
             raise TypeError("Invalid argument type passed for 'export_params'. Valid argument type is ExportLSDynaIgaKeywordFileParams.")
         args = {"file_name" : file_name,
         "export_params" : export_params._jsonify()}
@@ -665,7 +665,7 @@ class FileIO(CoreObject):
         """
         if not isinstance(file_name, str):
             raise TypeError("Invalid argument type passed for 'file_name'. Valid argument type is str.")
-        if not isinstance(export_params, ExportBoundaryFittedSplineParams):
+        if type(export_params).__name__ != 'ExportBoundaryFittedSplineParams':
             raise TypeError("Invalid argument type passed for 'export_params'. Valid argument type is ExportBoundaryFittedSplineParams.")
         args = {"file_name" : file_name,
         "export_params" : export_params._jsonify()}
@@ -705,7 +705,7 @@ class FileIO(CoreObject):
         """
         if not isinstance(file_name, str):
             raise TypeError("Invalid argument type passed for 'file_name'. Valid argument type is str.")
-        if not isinstance(import_cad_params, ImportCadParams):
+        if type(import_cad_params).__name__ != 'ImportCadParams':
             raise TypeError("Invalid argument type passed for 'import_cad_params'. Valid argument type is ImportCadParams.")
         args = {"file_name" : file_name,
         "import_cad_params" : import_cad_params._jsonify()}
@@ -747,7 +747,7 @@ class FileIO(CoreObject):
         """
         if not isinstance(file_name, str):
             raise TypeError("Invalid argument type passed for 'file_name'. Valid argument type is str.")
-        if not isinstance(params, ExportSTLParams):
+        if type(params).__name__ != 'ExportSTLParams':
             raise TypeError("Invalid argument type passed for 'params'. Valid argument type is ExportSTLParams.")
         args = {"file_name" : file_name,
         "params" : params._jsonify()}

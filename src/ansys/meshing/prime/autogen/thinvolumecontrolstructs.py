@@ -1,4 +1,4 @@
-# Copyright (C) 2024 - 2025 ANSYS, Inc. and/or its affiliates.
+# Copyright (C) 2026 Synopsys, Inc. and ANSYS, Inc. All rights reserved.
 # SPDX-License-Identifier: MIT
 #
 #
@@ -35,15 +35,15 @@ class ThinVolumeMeshParams(CoreObject):
 
     Parameters
     ----------
-    model: Model
+    model : Model
         Model to create a ``ThinVolumeMeshParams`` object with default parameters.
-    n_layers: int, optional
+    n_layers : int, optional
         Number of thin volume layers to be generated.
-    imprint_sides: bool, optional
+    imprint_sides : bool, optional
         Checks whether to imprint quad faces on side zonelets.
-    n_ignore_rings: int, optional
+    n_ignore_rings : int, optional
         Number of rings of cells at the sides to ignore when no imprint on sides. Volume fill type will be used in this buffer region at the thin volume sides to transition to thin volume mesh internally.
-    json_data: dict, optional
+    json_data : dict, optional
         JSON dictionary to create a ``ThinVolumeMeshParams`` object with provided parameters.
 
     Examples
@@ -54,9 +54,9 @@ class ThinVolumeMeshParams(CoreObject):
 
     def __initialize(
             self,
-            n_layers: int,
-            imprint_sides: bool,
-            n_ignore_rings: int):
+            n_layers : int,
+            imprint_sides : bool,
+            n_ignore_rings : int):
         self._n_layers = n_layers
         self._imprint_sides = imprint_sides
         self._n_ignore_rings = n_ignore_rings
@@ -64,24 +64,24 @@ class ThinVolumeMeshParams(CoreObject):
     def __init__(
             self,
             model: CommunicationManager=None,
-            n_layers: int = None,
-            imprint_sides: bool = None,
-            n_ignore_rings: int = None,
+            n_layers : int = None,
+            imprint_sides : bool = None,
+            n_ignore_rings : int = None,
             json_data : dict = None,
              **kwargs):
         """Initialize a ``ThinVolumeMeshParams`` object.
 
         Parameters
         ----------
-        model: Model
+        model : Model
             Model to create a ``ThinVolumeMeshParams`` object with default parameters.
-        n_layers: int, optional
+        n_layers : int, optional
             Number of thin volume layers to be generated.
-        imprint_sides: bool, optional
+        imprint_sides : bool, optional
             Checks whether to imprint quad faces on side zonelets.
-        n_ignore_rings: int, optional
+        n_ignore_rings : int, optional
             Number of rings of cells at the sides to ignore when no imprint on sides. Volume fill type will be used in this buffer region at the thin volume sides to transition to thin volume mesh internally.
-        json_data: dict, optional
+        json_data : dict, optional
             JSON dictionary to create a ``ThinVolumeMeshParams`` object with provided parameters.
 
         Examples
@@ -119,18 +119,18 @@ class ThinVolumeMeshParams(CoreObject):
 
     @staticmethod
     def set_default(
-            n_layers: int = None,
-            imprint_sides: bool = None,
-            n_ignore_rings: int = None):
+            n_layers : int = None,
+            imprint_sides : bool = None,
+            n_ignore_rings : int = None):
         """Set the default values of the ``ThinVolumeMeshParams`` object.
 
         Parameters
         ----------
-        n_layers: int, optional
+        n_layers : int, optional
             Number of thin volume layers to be generated.
-        imprint_sides: bool, optional
+        imprint_sides : bool, optional
             Checks whether to imprint quad faces on side zonelets.
-        n_ignore_rings: int, optional
+        n_ignore_rings : int, optional
             Number of rings of cells at the sides to ignore when no imprint on sides. Volume fill type will be used in this buffer region at the thin volume sides to transition to thin volume mesh internally.
         """
         args = locals()
