@@ -1,4 +1,4 @@
-# Copyright (C) 2024 - 2025 ANSYS, Inc. and/or its affiliates.
+# Copyright (C) 2026 Synopsys, Inc. and ANSYS, Inc. All rights reserved.
 # SPDX-License-Identifier: MIT
 #
 #
@@ -25,7 +25,7 @@ from __future__ import annotations
 from ansys.meshing.prime.internals.comm_manager import CommunicationManager
 from ansys.meshing.prime.params.primestructs import *
 from ansys.meshing.prime.autogen.coreobject import *
-from typing import List, Any, Union
+from typing import Dict, Any, Union, List, Iterable
 
 class ControlData(CoreObject):
     """ControlData has all controls like size controls, prism controls, wrapper controls and more.
@@ -102,14 +102,43 @@ class ControlData(CoreObject):
         self._model._print_logs_after_command("create_multi_zone_control")
         return result
 
+    def get_wrapper_control_by_name(self, name : str) -> List[Any]:
+        """ Gets the wrapper control for the given name.
+
+
+        Parameters
+        ----------
+        name : str
+            Wrapper control name.
+
+        Returns
+        -------
+        WrapperControl
+            Returns the wrapper control object based on the name.
+
+
+        Examples
+        --------
+        >>> wrapper_control = control_data.get_wrapper_control_by_name(name)
+
+        """
+        if not isinstance(name, str):
+            raise TypeError("Invalid argument type passed for 'name'. Valid argument type is str.")
+        args = {"name" : name}
+        command_name = "PrimeMesh::ControlData/GetWrapperControlByName"
+        self._model._print_logs_before_command("get_wrapper_control_by_name", args)
+        result = self._comm.serve(self._model, command_name, self._object_id, args=args)
+        self._model._print_logs_after_command("get_wrapper_control_by_name")
+        return result
+
     def get_multi_zone_controls(self) -> Iterable[int]:
-        """ Get ids of all the MultiZone controls.
+        """ Gets ids of all the MultiZone controls.
 
 
         Returns
         -------
         Iterable[int]
-            Return all the MultiZone controls ids.
+            Returns all the MultiZone control ids.
 
         Notes
         -----
@@ -117,7 +146,7 @@ class ControlData(CoreObject):
 
         Examples
         --------
-        >>> MultiZoneControls = model.control_data.get_multi_zone_controls()
+        >>> multizone_controls = model.control_data.get_multi_zone_controls()
 
         """
         args = {}
@@ -128,13 +157,13 @@ class ControlData(CoreObject):
         self._model._print_logs_after_command("get_multi_zone_controls")
         return result
 
-    def create_size_control(self, type : SizingType) -> List[Any]:
+    def create_size_control(self, sizing_type : SizingType) -> List[Any]:
         """ Creates size control for the given sizing type.
 
 
         Parameters
         ----------
-        type : SizingType
+        sizing_type : SizingType
             Sizing type used to create a size control.
 
         Returns
@@ -151,13 +180,43 @@ class ControlData(CoreObject):
         >>> size_control = model.control_data.create_size_control(SizingType.CURVATURE)
 
         """
-        if not isinstance(type, SizingType):
-            raise TypeError("Invalid argument type passed for 'type'. Valid argument type is SizingType.")
-        args = {"type" : type}
+        if type(sizing_type).__name__ != 'SizingType':
+            raise TypeError("Invalid argument type passed for 'sizing_type'. Valid argument type is SizingType.")
+        args = {"sizing_type" : sizing_type}
         command_name = "PrimeMesh::ControlData/CreateSizeControl"
         self._model._print_logs_before_command("create_size_control", args)
         result = self._comm.serve(self._model, command_name, self._object_id, args=args)
         self._model._print_logs_after_command("create_size_control")
+        self._model._update_size_controls()
+        return result
+
+    def get_size_control_by_name(self, name : str) -> List[Any]:
+        """ Gets the SizeControl with the given name.
+
+
+        Parameters
+        ----------
+        name : str
+            Name of the SizeControl.
+
+        Returns
+        -------
+        SizeControl
+            Returns a pointer to the given SizeControl name.
+
+
+        Examples
+        --------
+        >>> size_control = control_data.get_size_control_by_name(name)
+
+        """
+        if not isinstance(name, str):
+            raise TypeError("Invalid argument type passed for 'name'. Valid argument type is str.")
+        args = {"name" : name}
+        command_name = "PrimeMesh::ControlData/GetSizeControlByName"
+        self._model._print_logs_before_command("get_size_control_by_name", args)
+        result = self._comm.serve(self._model, command_name, self._object_id, args=args)
+        self._model._print_logs_after_command("get_size_control_by_name")
         return result
 
     def create_prism_control(self) -> List[Any]:
@@ -231,6 +290,35 @@ class ControlData(CoreObject):
         self._model._print_logs_after_command("create_thin_volume_control")
         return result
 
+    def get_prism_control_by_name(self, name : str) -> List[Any]:
+        """ Gets the PrismControl with the given name.
+
+
+        Parameters
+        ----------
+        name : str
+            Name of the PrismControl.
+
+        Returns
+        -------
+        PrismControl
+            Returns a pointer to the PrismControl with the given name.
+
+
+        Examples
+        --------
+        >>> prism_control = control_data.get_prism_control_by_name(name)
+
+        """
+        if not isinstance(name, str):
+            raise TypeError("Invalid argument type passed for 'name'. Valid argument type is str.")
+        args = {"name" : name}
+        command_name = "PrimeMesh::ControlData/GetPrismControlByName"
+        self._model._print_logs_before_command("get_prism_control_by_name", args)
+        result = self._comm.serve(self._model, command_name, self._object_id, args=args)
+        self._model._print_logs_after_command("get_prism_control_by_name")
+        return result
+
     def create_volume_control(self) -> List[Any]:
         """ Creates the volume control.
 
@@ -250,6 +338,35 @@ class ControlData(CoreObject):
         self._model._print_logs_before_command("create_volume_control", args)
         result = self._comm.serve(self._model, command_name, self._object_id, args=args)
         self._model._print_logs_after_command("create_volume_control")
+        return result
+
+    def get_volume_control_by_name(self, name : str) -> List[Any]:
+        """ Gets the VolumeControl with the given name.
+
+
+        Parameters
+        ----------
+        name : str
+            Name of the VolumeControl.
+
+        Returns
+        -------
+        VolumeControl
+            Returns a pointer to the VolumeControl with the given name.
+
+
+        Examples
+        --------
+        >>> volume_control = control_data.get_volume_control_by_name(name)
+
+        """
+        if not isinstance(name, str):
+            raise TypeError("Invalid argument type passed for 'name'. Valid argument type is str.")
+        args = {"name" : name}
+        command_name = "PrimeMesh::ControlData/GetVolumeControlByName"
+        self._model._print_logs_before_command("get_volume_control_by_name", args)
+        result = self._comm.serve(self._model, command_name, self._object_id, args=args)
+        self._model._print_logs_after_command("get_volume_control_by_name")
         return result
 
     def create_periodic_control(self) -> List[Any]:
@@ -274,7 +391,7 @@ class ControlData(CoreObject):
         return result
 
     def delete_controls(self, control_ids : Iterable[int]) -> DeleteResults:
-        """ Delete the controls of the given ids.
+        """ Deletes the controls of the given ids.
 
 
         Parameters
@@ -302,7 +419,7 @@ class ControlData(CoreObject):
         return DeleteResults(model = self._model, json_data = result)
 
     def get_scope_face_zonelets(self, scope : ScopeDefinition, params : ScopeZoneletParams) -> Iterable[int]:
-        """ Get the face zonelet ids for the given scope.
+        """ Gets the face zonelet ids for the given scope.
 
 
         Parameters
@@ -315,7 +432,7 @@ class ControlData(CoreObject):
         Returns
         -------
         Iterable[int]
-            Return the ids of face zonelets.
+            Returns the ids of face zonelets.
 
         Examples
         --------
@@ -326,9 +443,9 @@ class ControlData(CoreObject):
         >>>                 prime.ScopeZoneletParams(model =model))
 
         """
-        if not isinstance(scope, ScopeDefinition):
+        if type(scope).__name__ != 'ScopeDefinition':
             raise TypeError("Invalid argument type passed for 'scope'. Valid argument type is ScopeDefinition.")
-        if not isinstance(params, ScopeZoneletParams):
+        if type(params).__name__ != 'ScopeZoneletParams':
             raise TypeError("Invalid argument type passed for 'params'. Valid argument type is ScopeZoneletParams.")
         args = {"scope" : scope._jsonify(),
         "params" : params._jsonify()}
@@ -338,8 +455,39 @@ class ControlData(CoreObject):
         self._model._print_logs_after_command("get_scope_face_zonelets")
         return result
 
+    def get_scope_topo_faces(self, scope : ScopeDefinition) -> Iterable[int]:
+        """ Gets the topoface ids for the given scope.
+
+
+        Parameters
+        ----------
+        scope : ScopeDefinition
+            Scope definition to evaluate entities.
+
+        Returns
+        -------
+        Iterable[int]
+            Returns the ids of topofaces.
+
+        Examples
+        --------
+        >>> topo_faces = model.control_data.get_scope_topo_faces(
+        >>>                 prime.ScopeDefinition(model = model,
+        >>>                 entity_type = prime.ScopeEntity.TOPOFACES,
+        >>>                 part_expression = "*"))
+
+        """
+        if type(scope).__name__ != 'ScopeDefinition':
+            raise TypeError("Invalid argument type passed for 'scope'. Valid argument type is ScopeDefinition.")
+        args = {"scope" : scope._jsonify()}
+        command_name = "PrimeMesh::ControlData/GetScopeTopoFaces"
+        self._model._print_logs_before_command("get_scope_topo_faces", args)
+        result = self._comm.serve(self._model, command_name, self._object_id, args=args)
+        self._model._print_logs_after_command("get_scope_topo_faces")
+        return result
+
     def get_scope_parts(self, scope : ScopeDefinition) -> Iterable[int]:
-        """ Get the part ids for the given scope.
+        """ Gets the part ids for the given scope.
 
 
         Parameters
@@ -350,17 +498,16 @@ class ControlData(CoreObject):
         Returns
         -------
         Iterable[int]
-            Return the ids of parts.
+            Returns the ids of parts.
 
         Examples
         --------
         >>> part_ids = model.control_data.get_scope_parts(
         >>>                 prime.ScopeDefinition(model = model,
-        >>>                 part_expression = "*"),
-        >>>                 prime.ScopeZoneletParams(model =model))
+        >>>                 part_expression = "*"))
 
         """
-        if not isinstance(scope, ScopeDefinition):
+        if type(scope).__name__ != 'ScopeDefinition':
             raise TypeError("Invalid argument type passed for 'scope'. Valid argument type is ScopeDefinition.")
         args = {"scope" : scope._jsonify()}
         command_name = "PrimeMesh::ControlData/GetScopeParts"
@@ -389,7 +536,7 @@ class ControlData(CoreObject):
         >>> results = control_data.get_part_zonelets(scope)
 
         """
-        if not isinstance(scope, ScopeDefinition):
+        if type(scope).__name__ != 'ScopeDefinition':
             raise TypeError("Invalid argument type passed for 'scope'. Valid argument type is ScopeDefinition.")
         args = {"scope" : scope._jsonify()}
         command_name = "PrimeMesh::ControlData/GetPartZonelets"

@@ -1,4 +1,4 @@
-# Copyright (C) 2024 - 2025 ANSYS, Inc. and/or its affiliates.
+# Copyright (C) 2026 Synopsys, Inc. and ANSYS, Inc. All rights reserved.
 # SPDX-License-Identifier: MIT
 #
 #
@@ -25,7 +25,7 @@ from __future__ import annotations
 from ansys.meshing.prime.internals.comm_manager import CommunicationManager
 from ansys.meshing.prime.params.primestructs import *
 from ansys.meshing.prime.autogen.coreobject import *
-from typing import List, Any, Union
+from typing import Dict, Any, Union, List, Iterable
 
 class VolumeMeshTool(CoreObject):
     """VolumeMeshTool allows you to check grid and improve volume mesh quality.
@@ -86,7 +86,7 @@ class VolumeMeshTool(CoreObject):
 
         Examples
         --------
-        >>> results = volume_mesh_tool.AssignMeshRegions(target_part_id, target_cell_zonelets, source_part_ids, small_regions_volume_fraction)
+        >>> results = volume_mesh_tool.assign_mesh_regions(target_part_id, target_cell_zonelets, source_part_ids, small_regions_volume_fraction)
 
         """
         if not isinstance(target_part_id, int):
@@ -134,7 +134,7 @@ class VolumeMeshTool(CoreObject):
         >>> results = volume_mesh_tool.improve_by_auto_node_move(part_id,
         >>>                                cell_zonelets,
         >>>                                boundary_zonelets,
-        >>>                                prime.AutoNodeMoveParams(model =model))
+        >>>                                prime.AutoNodeMoveParams(model=model))
 
         """
         if not isinstance(part_id, int):
@@ -143,7 +143,7 @@ class VolumeMeshTool(CoreObject):
             raise TypeError("Invalid argument type passed for 'cell_zonelets'. Valid argument type is Iterable[int].")
         if not isinstance(boundary_zonelets, Iterable):
             raise TypeError("Invalid argument type passed for 'boundary_zonelets'. Valid argument type is Iterable[int].")
-        if not isinstance(params, AutoNodeMoveParams):
+        if type(params).__name__ != 'AutoNodeMoveParams':
             raise TypeError("Invalid argument type passed for 'params'. Valid argument type is AutoNodeMoveParams.")
         args = {"part_id" : part_id,
         "cell_zonelets" : cell_zonelets,
@@ -175,12 +175,12 @@ class VolumeMeshTool(CoreObject):
         Examples
         --------
         >>> results = volume_mesh_tool.check_mesh(part_id,
-        >>>                                prime.CheckMeshParams(model =model))
+        >>>                                prime.CheckMeshParams(model=model))
 
         """
         if not isinstance(part_id, int):
             raise TypeError("Invalid argument type passed for 'part_id'. Valid argument type is int.")
-        if not isinstance(params, CheckMeshParams):
+        if type(params).__name__ != 'CheckMeshParams':
             raise TypeError("Invalid argument type passed for 'params'. Valid argument type is CheckMeshParams.")
         args = {"part_id" : part_id,
         "params" : params._jsonify()}
@@ -218,7 +218,7 @@ class VolumeMeshTool(CoreObject):
         """
         if not isinstance(points, Iterable):
             raise TypeError("Invalid argument type passed for 'points'. Valid argument type is Iterable[float].")
-        if not isinstance(params, PartsForPointsParams):
+        if type(params).__name__ != 'PartsForPointsParams':
             raise TypeError("Invalid argument type passed for 'params'. Valid argument type is PartsForPointsParams.")
         args = {"points" : points,
         "params" : params._jsonify()}
@@ -254,14 +254,14 @@ class VolumeMeshTool(CoreObject):
 
         Examples
         --------
-        >>>> results = volume_mesh_tool.copy_cell_zonelets(cell_zonelets, target_part_id = new_part.id, prime.CopyZoneletsParams(model = model))
+        >>> results = volume_mesh_tool.copy_cell_zonelets(cell_zonelets, target_part_id=new_part.id, prime.CopyZoneletsParams(model=model))
 
         """
         if not isinstance(cell_zonelets, Iterable):
             raise TypeError("Invalid argument type passed for 'cell_zonelets'. Valid argument type is Iterable[int].")
         if not isinstance(target_part_id, int):
             raise TypeError("Invalid argument type passed for 'target_part_id'. Valid argument type is int.")
-        if not isinstance(params, CopyZoneletsParams):
+        if type(params).__name__ != 'CopyZoneletsParams':
             raise TypeError("Invalid argument type passed for 'params'. Valid argument type is CopyZoneletsParams.")
         args = {"cell_zonelets" : cell_zonelets,
         "target_part_id" : target_part_id,

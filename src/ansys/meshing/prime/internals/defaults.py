@@ -1,4 +1,5 @@
-# Copyright (C) 2024 - 2026 ANSYS, Inc. and/or its affiliates.
+# Copyright (C) 2026 ANSYS, Inc. and/or its affiliates.
+# Copyright (C) 2026 Synopsys, Inc. and ANSYS, Inc. All rights reserved.
 # SPDX-License-Identifier: MIT
 #
 # Permission is hereby granted, free of charge, to any person obtaining a copy
@@ -55,11 +56,12 @@ os.makedirs(USER_DATA_PATH, exist_ok=True)
 
 EXAMPLES_PATH = os.path.join(USER_DATA_PATH, 'examples')
 if not os.path.exists(EXAMPLES_PATH):  # pragma: no cover
-    os.makedirs(EXAMPLES_PATH)
+    os.makedirs(EXAMPLES_PATH, exist_ok=True)
 
 LOCAL_OUTDIR = os.path.join(USER_DATA_PATH, 'output')
 if not os.path.exists(LOCAL_OUTDIR):  # pragma: no cover
-    os.makedirs(LOCAL_OUTDIR)
+    os.makedirs(LOCAL_OUTDIR, exist_ok=True)
+
 
 CONTAINER_USER_DATA = os.getenv('PYPRIMEMESH_CONTAINER_USER_DATA ', '/data')
 CONTAINER_EXAMPLES = os.path.join(CONTAINER_USER_DATA, 'examples')

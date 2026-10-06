@@ -1,4 +1,4 @@
-# Copyright (C) 2024 - 2025 ANSYS, Inc. and/or its affiliates.
+# Copyright (C) 2026 Synopsys, Inc. and ANSYS, Inc. All rights reserved.
 # SPDX-License-Identifier: MIT
 #
 #
@@ -51,9 +51,9 @@ class MorphSolveParams(CoreObject):
 
     Parameters
     ----------
-    model: Model
+    model : Model
         Model to create a ``MorphSolveParams`` object with default parameters.
-    json_data: dict, optional
+    json_data : dict, optional
         JSON dictionary to create a ``MorphSolveParams`` object with provided parameters.
 
     Examples
@@ -75,9 +75,9 @@ class MorphSolveParams(CoreObject):
 
         Parameters
         ----------
-        model: Model
+        model : Model
             Model to create a ``MorphSolveParams`` object with default parameters.
-        json_data: dict, optional
+        json_data : dict, optional
             JSON dictionary to create a ``MorphSolveParams`` object with provided parameters.
 
         Examples
@@ -141,9 +141,9 @@ class MatchMorphParams(CoreObject):
 
     Parameters
     ----------
-    model: Model
+    model : Model
         Model to create a ``MatchMorphParams`` object with default parameters.
-    json_data: dict, optional
+    json_data : dict, optional
         JSON dictionary to create a ``MatchMorphParams`` object with provided parameters.
 
     Examples
@@ -165,9 +165,9 @@ class MatchMorphParams(CoreObject):
 
         Parameters
         ----------
-        model: Model
+        model : Model
             Model to create a ``MatchMorphParams`` object with default parameters.
-        json_data: dict, optional
+        json_data : dict, optional
             JSON dictionary to create a ``MatchMorphParams`` object with provided parameters.
 
         Examples
@@ -231,11 +231,11 @@ class MatchMorphResults(CoreObject):
 
     Parameters
     ----------
-    model: Model
+    model : Model
         Model to create a ``MatchMorphResults`` object with default parameters.
-    error_code: ErrorCode, optional
+    error_code : ErrorCode, optional
         Errorcode associated with match morph operation.
-    json_data: dict, optional
+    json_data : dict, optional
         JSON dictionary to create a ``MatchMorphResults`` object with provided parameters.
 
     Examples
@@ -246,24 +246,24 @@ class MatchMorphResults(CoreObject):
 
     def __initialize(
             self,
-            error_code: ErrorCode):
+            error_code : ErrorCode):
         self._error_code = ErrorCode(error_code)
 
     def __init__(
             self,
             model: CommunicationManager=None,
-            error_code: ErrorCode = None,
+            error_code : ErrorCode = None,
             json_data : dict = None,
              **kwargs):
         """Initialize a ``MatchMorphResults`` object.
 
         Parameters
         ----------
-        model: Model
+        model : Model
             Model to create a ``MatchMorphResults`` object with default parameters.
-        error_code: ErrorCode, optional
+        error_code : ErrorCode, optional
             Errorcode associated with match morph operation.
-        json_data: dict, optional
+        json_data : dict, optional
             JSON dictionary to create a ``MatchMorphResults`` object with provided parameters.
 
         Examples
@@ -295,12 +295,12 @@ class MatchMorphResults(CoreObject):
 
     @staticmethod
     def set_default(
-            error_code: ErrorCode = None):
+            error_code : ErrorCode = None):
         """Set the default values of the ``MatchMorphResults`` object.
 
         Parameters
         ----------
-        error_code: ErrorCode, optional
+        error_code : ErrorCode, optional
             Errorcode associated with match morph operation.
         """
         args = locals()
@@ -345,15 +345,15 @@ class BCPair(CoreObject):
 
     Parameters
     ----------
-    model: Model
+    model : Model
         Model to create a ``BCPair`` object with default parameters.
-    source_zonelet: int, optional
+    source_zonelet : int, optional
         Id of source zonelet.
-    target_zonelet: int, optional
+    target_zonelet : int, optional
         Id of target zonelet.
-    type: BCPairType, optional
+    type : BCPairType, optional
         Option to specify boundary condition pair type.
-    json_data: dict, optional
+    json_data : dict, optional
         JSON dictionary to create a ``BCPair`` object with provided parameters.
 
     Examples
@@ -364,9 +364,9 @@ class BCPair(CoreObject):
 
     def __initialize(
             self,
-            source_zonelet: int,
-            target_zonelet: int,
-            type: BCPairType):
+            source_zonelet : int,
+            target_zonelet : int,
+            type : BCPairType):
         self._source_zonelet = source_zonelet
         self._target_zonelet = target_zonelet
         self._type = BCPairType(type)
@@ -374,24 +374,24 @@ class BCPair(CoreObject):
     def __init__(
             self,
             model: CommunicationManager=None,
-            source_zonelet: int = None,
-            target_zonelet: int = None,
-            type: BCPairType = None,
+            source_zonelet : int = None,
+            target_zonelet : int = None,
+            type : BCPairType = None,
             json_data : dict = None,
              **kwargs):
         """Initialize a ``BCPair`` object.
 
         Parameters
         ----------
-        model: Model
+        model : Model
             Model to create a ``BCPair`` object with default parameters.
-        source_zonelet: int, optional
+        source_zonelet : int, optional
             Id of source zonelet.
-        target_zonelet: int, optional
+        target_zonelet : int, optional
             Id of target zonelet.
-        type: BCPairType, optional
+        type : BCPairType, optional
             Option to specify boundary condition pair type.
-        json_data: dict, optional
+        json_data : dict, optional
             JSON dictionary to create a ``BCPair`` object with provided parameters.
 
         Examples
@@ -429,18 +429,18 @@ class BCPair(CoreObject):
 
     @staticmethod
     def set_default(
-            source_zonelet: int = None,
-            target_zonelet: int = None,
-            type: BCPairType = None):
+            source_zonelet : int = None,
+            target_zonelet : int = None,
+            type : BCPairType = None):
         """Set the default values of the ``BCPair`` object.
 
         Parameters
         ----------
-        source_zonelet: int, optional
+        source_zonelet : int, optional
             Id of source zonelet.
-        target_zonelet: int, optional
+        target_zonelet : int, optional
             Id of target zonelet.
-        type: BCPairType, optional
+        type : BCPairType, optional
             Option to specify boundary condition pair type.
         """
         args = locals()
@@ -509,17 +509,17 @@ class MatchPair(CoreObject):
 
     Parameters
     ----------
-    model: Model
+    model : Model
         Model to create a ``MatchPair`` object with default parameters.
-    source_surfaces: Iterable[int], optional
+    source_surfaces : Iterable[int], optional
         Ids of source surfaces.
-    target_surfaces: Iterable[int], optional
+    target_surfaces : Iterable[int], optional
         Ids of target surfaces.
-    target_type: MatchPairTargetType, optional
+    target_type : MatchPairTargetType, optional
         Option to specify target surface type.
-    bc_pairs: List[BCPair], optional
+    bc_pairs : List[BCPair], optional
         Array of boundary condition pairs.
-    json_data: dict, optional
+    json_data : dict, optional
         JSON dictionary to create a ``MatchPair`` object with provided parameters.
 
     Examples
@@ -530,10 +530,10 @@ class MatchPair(CoreObject):
 
     def __initialize(
             self,
-            source_surfaces: Iterable[int],
-            target_surfaces: Iterable[int],
-            target_type: MatchPairTargetType,
-            bc_pairs: List[BCPair]):
+            source_surfaces : Iterable[int],
+            target_surfaces : Iterable[int],
+            target_type : MatchPairTargetType,
+            bc_pairs : List[BCPair]):
         self._source_surfaces = source_surfaces if isinstance(source_surfaces, np.ndarray) else np.array(source_surfaces, dtype=np.int32) if source_surfaces is not None else None
         self._target_surfaces = target_surfaces if isinstance(target_surfaces, np.ndarray) else np.array(target_surfaces, dtype=np.int32) if target_surfaces is not None else None
         self._target_type = MatchPairTargetType(target_type)
@@ -542,27 +542,27 @@ class MatchPair(CoreObject):
     def __init__(
             self,
             model: CommunicationManager=None,
-            source_surfaces: Iterable[int] = None,
-            target_surfaces: Iterable[int] = None,
-            target_type: MatchPairTargetType = None,
-            bc_pairs: List[BCPair] = None,
+            source_surfaces : Iterable[int] = None,
+            target_surfaces : Iterable[int] = None,
+            target_type : MatchPairTargetType = None,
+            bc_pairs : List[BCPair] = None,
             json_data : dict = None,
              **kwargs):
         """Initialize a ``MatchPair`` object.
 
         Parameters
         ----------
-        model: Model
+        model : Model
             Model to create a ``MatchPair`` object with default parameters.
-        source_surfaces: Iterable[int], optional
+        source_surfaces : Iterable[int], optional
             Ids of source surfaces.
-        target_surfaces: Iterable[int], optional
+        target_surfaces : Iterable[int], optional
             Ids of target surfaces.
-        target_type: MatchPairTargetType, optional
+        target_type : MatchPairTargetType, optional
             Option to specify target surface type.
-        bc_pairs: List[BCPair], optional
+        bc_pairs : List[BCPair], optional
             Array of boundary condition pairs.
-        json_data: dict, optional
+        json_data : dict, optional
             JSON dictionary to create a ``MatchPair`` object with provided parameters.
 
         Examples
@@ -603,21 +603,21 @@ class MatchPair(CoreObject):
 
     @staticmethod
     def set_default(
-            source_surfaces: Iterable[int] = None,
-            target_surfaces: Iterable[int] = None,
-            target_type: MatchPairTargetType = None,
-            bc_pairs: List[BCPair] = None):
+            source_surfaces : Iterable[int] = None,
+            target_surfaces : Iterable[int] = None,
+            target_type : MatchPairTargetType = None,
+            bc_pairs : List[BCPair] = None):
         """Set the default values of the ``MatchPair`` object.
 
         Parameters
         ----------
-        source_surfaces: Iterable[int], optional
+        source_surfaces : Iterable[int], optional
             Ids of source surfaces.
-        target_surfaces: Iterable[int], optional
+        target_surfaces : Iterable[int], optional
             Ids of target surfaces.
-        target_type: MatchPairTargetType, optional
+        target_type : MatchPairTargetType, optional
             Option to specify target surface type.
-        bc_pairs: List[BCPair], optional
+        bc_pairs : List[BCPair], optional
             Array of boundary condition pairs.
         """
         args = locals()

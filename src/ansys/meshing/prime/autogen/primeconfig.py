@@ -1,4 +1,4 @@
-# Copyright (C) 2024 - 2025 ANSYS, Inc. and/or its affiliates.
+# Copyright (C) 2026 Synopsys, Inc. and ANSYS, Inc. All rights reserved.
 # SPDX-License-Identifier: MIT
 #
 #
@@ -50,18 +50,28 @@ class ErrorCode(enum.IntEnum):
     """Invalid input for surface meshing."""
     SURFERQUADFAILED = 8
     """Quad surface meshing failed."""
+    SURFERWITHAUTOSIZINGFAILED = 9
+    """Surface meshing with auto sizing failed.
+
+    **This is a beta parameter**. **The behavior and name may change in the future**."""
     FACEZONELETSFEATURESNOTUPTODATE = 10
     """Face zonelets features are not up to date."""
     SURFERAUTOSIZEQUADUNSUPPORTED = 11
     """Auto sizing for quad meshing is not supported."""
     SURFERAUTOSIZEMUSTBEVOLUMETRIC = 12
     """Auto sizing must be of volumetric type."""
+    SURFERDEGENERATEFACE = 13
+    """Face is degenerated for surface meshing.
+
+    **This is a beta parameter**. **The behavior and name may change in the future**."""
     SURFERNONMANIFOLDEDGE = 14
     """Non manifold edge for meshing."""
+    MAPMESHINGFAILED = 15
+    """Surfer map meshing operation failed."""
     SURFEROPENINITIALFRONTLOOP = 16
     """Open initial front loop for meshing."""
     FREEZEMESHERROR = 30
-    """Cannot remesh freezed mesh."""
+    """The mesh is frozen and cannot be remeshed."""
     REMESHFACEZONELETSNOTSUPPORTEDFORTOPOLOGYPART = 31
     """Remesh face zonelets is not supported for topology part."""
     REMESHFACEZONELETSLOCALLYNOTSUPPORTEDFORTOPOLOGYPART = 32
@@ -99,7 +109,7 @@ class ErrorCode(enum.IntEnum):
 
     **This is a beta parameter**. **The behavior and name may change in the future**."""
     SHELLBLQUADS = 61
-    """ShellBL quads.
+    """ShellBL produced quadrilateral elements that require refinement.
 
     **This is a beta parameter**. **The behavior and name may change in the future**."""
     SHELLBLNOMESH = 62
@@ -141,15 +151,17 @@ class ErrorCode(enum.IntEnum):
     TRIANGULATIONFAILED = 102
     """Triangulation failed."""
     DUPLICATENODESFOUND = 103
-    """Duplicate nodes found."""
+    """Duplicate nodes were found in the input mesh."""
     EDGEINTERSECTINGFACEFOUND = 104
     """Edge intersecting face found."""
     DUPLICATEFACESFOUND = 105
-    """Duplicate faces found."""
+    """Duplicate faces were found in the input mesh."""
     TETIMPROVEFAILED = 106
     """Tet improve failed."""
     AUTONODEMOVEFAILED = 107
     """Auto node move failed."""
+    AUTOMESHCELLASSOCIATIONFAILED = 108
+    """Auto mesh cell zonelet association failed."""
     ALREADYVOLUMEMESHED = 110
     """Volume is already meshed."""
     INVALIDPRISMCONTROLS = 111
@@ -160,6 +172,8 @@ class ErrorCode(enum.IntEnum):
     """Quadratic elements can only be generated for tetrahedral elements."""
     NOACTIVESFFOUND = 114
     """No active size fields found."""
+    AUTOMESHSIZEFIELDTYPENOTSUPPORTED = 115
+    """Specified size field type is not supported for the specified volume fill type."""
     AUTOMESHINVALIDMAXSIZE = 116
     """Invalid max size for auto volume meshing."""
     AUTOMESHHEXCOREFAILED = 117
@@ -189,7 +203,7 @@ class ErrorCode(enum.IntEnum):
     COMPUTEVOLUMESFAILED = 129
     """Compute volumes failed."""
     QUADRATICTETNOTSUPPORTEDINPARALLEL = 130
-    """Quadratic tetrahedal meshing is not supported in parallel mode."""
+    """Quadratic tetrahedral meshing is not supported in parallel mode."""
     QUADRATICTETNOTSUPPORTEDWITHPRISMS = 131
     """Quadratic tetrahedral meshing is not supported with prism."""
     EXTRACTVOLUMESFAILED = 132
@@ -218,10 +232,44 @@ class ErrorCode(enum.IntEnum):
     """Incremental volume meshing is not supported."""
     TOPOFACESPLITNOTSUPPORTED = 144
     """ComputeTopoVolumes and ExtractTopoVolumes do not support topoface split."""
+    TOPOLOGYCLEANUPFAILED = 146
+    """Topology cleanup operation failed."""
+    SUPPRESSINTERIORTOPOEDGESFAILED = 147
+    """Suppress interior topology edges operation failed."""
+    SUPPRESSTOPONODESFAILED = 148
+    """Suppress topology nodes operation failed."""
+    REPAIRTOPOEDGESOFTOPOFACESFAILED = 149
+    """Repair topology edges of faces operation failed."""
+    INVALIDCONSTANTMESHSIZE = 150
+    """Invalid constant mesh size parameter."""
+    INVALIDABSOLUTEDISTTOLERANCE = 151
+    """Invalid absolute distance tolerance parameter."""
+    EXTRACTEXTERNALFLOWVOLUMEFAILED = 152
+    """Extract external flow volume failed.
+
+    **This is a beta parameter**. **The behavior and name may change in the future**."""
+    EXTERNALFLOWINTERSECTIONFAILED = 153
+    """External flow part connection with main part failed. Check overlapping surfaces between the parts.
+
+    **This is a beta parameter**. **The behavior and name may change in the future**."""
+    EXTRACTMRFVOLUMEFAILED = 154
+    """Extract MRF volume failed.
+
+    **This is a beta parameter**. **The behavior and name may change in the future**."""
+    MRFINTERSECTIONFAILED = 155
+    """MRF part connection with main part failed. Check overlapping surfaces between the parts.
+
+    **This is a beta parameter**. **The behavior and name may change in the future**."""
+    SUPPRESSNONFEATURETOPOEDGESFAILED = 156
+    """Suppress non-feature topology edges operation failed."""
+    SURFACEMESHCHECKFAILED = 157
+    """Surface mesh check operation failed."""
     OUTOFMEMORY = 200
     """Out of memory."""
     INTERRUPTED = 201
     """Method call interrupted."""
+    COREOBJECTSNOTSYNCEDBETWEENNODES = 202
+    """Core objects are not synchronized between parallel nodes."""
     GETSTATISTICSFAILED = 250
     """Failed to get mesh statistics."""
     GETELEMENTCOUNTFAILED = 251
@@ -239,7 +287,7 @@ class ErrorCode(enum.IntEnum):
     INVALIDINPUTPART = 305
     """Invalid input part."""
     CADGEOMETRYNOTFOUND = 306
-    """No CAD Geometry found for projections."""
+    """No CAD geometry was found for the requested projections."""
     VOLUMENOTFOUND = 307
     """Volumes not found."""
     ZONENOTFOUND = 308
@@ -266,8 +314,8 @@ class ErrorCode(enum.IntEnum):
     """BOI creation failed. Scale factors should not be less than one."""
     CREATEBOI_INVALIDFLOWDIRECTION = 383
     """BOI creation failed. Invalid flow or wake direction."""
-    CREATEBOI_IVALIDWRAPMESHSIZE = 384
-    """BOI creation failed. Wrap cannot be performed with invalid mesh size."""
+    CREATEBOI_INVALIDWRAPMESHSIZE = 384
+    """BOI creation failed because wrapping requires a valid mesh size."""
     CREATEBOI_INVALIDWAKELEVELS = 385
     """BOI creation failed. Invalid wake levels input."""
     CREATEBOI_INVALIDTYPEFORWRAP = 386
@@ -282,12 +330,24 @@ class ErrorCode(enum.IntEnum):
     """Contact patch creation process failed. Invalid contact patch creation axis."""
     CONTACTPATCHRESULTSFAILED = 391
     """Contact patch creation process failed. Check the inputs."""
+    COMPUTEINTERNALREGIONPOINTSFAILED = 392
+    """Computation of cap based internal region points failed."""
+    INTERSECTINGCAPSNOTFOUND = 393
+    """Intersecting caps not found."""
     SIZEFIELDCOMPUTATIONFAILED = 400
     """Size field computation failed."""
     INVALIDSIZECONTROLS = 401
     """Invalid size controls."""
     REFRESHSIZEFIELDSFAILED = 402
     """Refreshing size field failed."""
+    FAILEDTOCREATESIZECONTROL = 403
+    """Failed to create size control."""
+    FAILEDTOCREATEPRISMCONTROL = 404
+    """Failed to create prism control."""
+    DELETEVOLUMETRICSIZEFIELDSFAILED = 405
+    """Deleting volumetric size fields failed."""
+    SIZINGCONTROL_VOLUMEENTITYNOTSUPPORTED = 406
+    """Provided sizing control type does not support volume entity."""
     READMESHFAILED = 500
     """Reading mesh file failed."""
     WRITEMESHFAILED = 501
@@ -376,6 +436,8 @@ class ErrorCode(enum.IntEnum):
     """Stitch with preserved entities failed."""
     STITCHENTITIESFAILED = 859
     """Stitch entities failed."""
+    EXTRACTFLOWVOLUMECAPFAILURE = 860
+    """Flow volume extraction failed due to cap connection failure."""
     NOTSUPPORTEDFORTOPOLOGYPART = 1200
     """Not supported for part with topology data."""
     NOTSUPPORTEDFORHIGHERORDERMESHPART = 1201
@@ -392,6 +454,8 @@ class ErrorCode(enum.IntEnum):
     """Merge volumes is not supported for part with topology data."""
     NOTSUPPORTEDFORPOLYMESHPART = 1208
     """Operation does not support poly elements."""
+    NOPARTSFOUNDWITHEXPRESSION = 1214
+    """No parts found matching the specified expression."""
     MERGEPARTSFAILED = 1301
     """Merge parts failed."""
     MERGEPARTSWANDWOTOPO = 1302
@@ -434,10 +498,14 @@ class ErrorCode(enum.IntEnum):
     """Invalid proximity sizing input."""
     INVALIDSCOPEENTITYTYPEINPUT = 1505
     """Invalid input scope entity type."""
+    SETGLOBALSIZINGPARAMSFAILED = 1509
+    """Setting global sizing parameters failed."""
+    NOSIZECONTROLSMATCHINGEXPRESSION = 1510
+    """No size controls matched the given size control expression."""
     EXTRACTFEATURESBYANGLEFAILED = 1600
     """Feature extraction by angle failed."""
     EXTRACTFEATURESBYEDGESFAILED = 1601
-    """Extracting features by angle failed."""
+    """Extracting features by edges failed."""
     CREATEEDGEZONELETFAILED = 1602
     """Creating edge zonelet failed."""
     EXTRACTFEATURESBYINTERSECTIONFAILED = 1603
@@ -536,6 +604,8 @@ class ErrorCode(enum.IntEnum):
     """Volume search failed."""
     INVALIDCELLQUALITYLIMIT = 2852
     """Invalid cell quality limit."""
+    MESHCHECKFAILED = 2853
+    """Mesh check failed."""
     FILLHOLEFAILED = 2901
     """Unable to create capping surface."""
     SUBTRACTZONELETSFAILED = 2903
@@ -565,7 +635,7 @@ class ErrorCode(enum.IntEnum):
     INVALIDTRANSFORMATIONMATRIX = 3003
     """Invalid transformation matrix."""
     DELETEMESHFACESFAILED = 3200
-    """Delete Mesh faces failed"""
+    """Delete Mesh faces failed."""
     DELETEMESHFACES_TOPOLOGYNOTSUPPORTED = 3201
     """Topoentities do not support deleting faces."""
     DELETEMESHFACES_CELLFOUND = 3202
@@ -582,6 +652,10 @@ class ErrorCode(enum.IntEnum):
     """Material point with the given name does not exist."""
     MATERIALPOINTWITHGIVENIDDOESNTEXIST = 3302
     """Material point with the given ID already exists."""
+    CREATEMATERIALPOINTFAILED = 3304
+    """Creating material point failed."""
+    INVALIDMATERIALPOINT = 3305
+    """Invalid material point provided. Provide the location [x, y, z]."""
     OCTREELIMITREACHED = 3350
     """Limit reached for the number of octants supported.
 
@@ -592,6 +666,8 @@ class ErrorCode(enum.IntEnum):
     """Resolving intersections failed for wrapper."""
     WRAPPERCONNECTFAILED = 3402
     """Wrapper connect failed."""
+    WRAPPERFATALERROR = 3403
+    """Wrapper fatal error."""
     WRAPPERCOULDNOTEXTRACTINTERFACE = 3405
     """Failed to extract wrapper interface."""
     WRAPPERLEAKPREVENTIONFAILED = 3406
@@ -716,10 +792,140 @@ class ErrorCode(enum.IntEnum):
     """VT operation failed.
 
     **This is a beta parameter**. **The behavior and name may change in the future**."""
+    VT_PROTECTEDENTITIESFOUND = 3614
+    """The input for VT operation has protected entities.
+
+    **This is a beta parameter**. **The behavior and name may change in the future**."""
+    VT_INTERIOREDGETRACINGFAILED = 3615
+    """Failed to trace interior edge during VT operation.
+
+    **This is a beta parameter**. **The behavior and name may change in the future**."""
+    VT_REMESHFACEFAILED = 3616
+    """Failed to remesh face during VT operation.
+
+    **This is a beta parameter**. **The behavior and name may change in the future**."""
+    VT_MERGEEDGESFAILED = 3617
+    """Failed to merge edges through common nodes.
+
+    **This is a beta parameter**. **The behavior and name may change in the future**."""
+    VTMERGEVOLUMESNOSHAREDFACESFOUND = 3618
+    """Failed to find input topovolumes with shared faces for merging.
+
+    **This is a beta parameter**. **The behavior and name may change in the future**."""
+    VT_MERGEVOLUMESFAILED = 3619
+    """Merge topovolumes operation failed.
+
+    **This is a beta parameter**. **The behavior and name may change in the future**."""
     JSONKEYNOTFOUND = 3801
     """JSON key not found."""
     NUMENMETHODNOTFOUND = 3901
     """Could not find numen method."""
+    NUMEN_AUTOCOMPUTEDEADMPTS_EMPTYEXTERNALCAPSCOPE = 3902
+    """External cap part expression resolved to an empty scope during automatic dead material point computation."""
+    NUMEN_AUTOCOMPUTEDEADMPTS_NOEXTERNALCAPTOPOFACES = 3903
+    """No external cap topofaces were found for automatic dead material point computation."""
+    NUMEN_AUTOCOMPUTEDEADMPTS_SOLIDEXTERNALCAPPARTS = 3904
+    """External cap part expression includes parts with solid bodies during automatic dead material point computation."""
+    NUMEN_AUTOCOMPUTEDEADMPTS_SOLIDINTERNALCAPPARTS = 3905
+    """Internal cap part expression includes parts with solid bodies during automatic dead material point computation."""
+    NUMEN_AUTOCOMPUTEDEADMPTS_COMPUTEINTERNALREGIONPOINTSFAILED = 3906
+    """Failed to compute internal region points during automatic dead material point computation."""
+    NUMEN_INITDEFAULTSIZE_NOTOPOPARTS = 3907
+    """No topology parts were found matching the part expression during default size initialization."""
+    NUMEN_INITDEFAULTSIZE_NOEDGES = 3908
+    """No topology edges were found for analysis during default size initialization."""
+    NUMEN_INITDEFAULTSIZE_INVALIDBOUNDINGBOX = 3909
+    """Model bounding box is degenerated (zero or negative extent) during default size initialization."""
+    NUMEN_INITDEFAULTSIZE_INVALIDMINEDGELENGTH = 3910
+    """Global minimum edge length could not be determined (all edges filtered out) during default size initialization."""
+    NUMEN_INITDEFAULTSIZE_INVALIDCOMPUTEDRANGE = 3911
+    """Invalid min or max sizes computed (zero, non-finite, or min >= max) during default size initialization."""
+    NUMEN_INITDEFAULTSIZE_SETGLOBALSIZINGFAILED = 3912
+    """SetGlobalSizingParams rejected the computed values during default size initialization."""
+    NUMEN_AUTOASSIGNPARTSTOWRAPPEDSOLIDMESHFAILED = 3913
+    """Auto assign parts to wrapped solid mesh operation failed."""
+    NUMEN_EXTRACTFLOWVOLUMEFAILED = 3914
+    """Extract flow volume operation failed."""
+    NUMEN_EXTRACTFLOWVOLUMEPARTSNOTFOUND = 3936
+    """Extract flow volume parts not found."""
+    NUMEN_CAPFACEEXPRESSIONEMPTY = 3945
+    """Cap face expression is empty for user-defined capping during flow volume extraction."""
+    NUMEN_MRFPARTSMORETHANONE = 3946
+    """Multiple MRF parts found during flow volume extraction; only one MRF part is allowed."""
+    NUMEN_PARTSSAMEASMRFPARTS = 3947
+    """Flow volume parts are the same as MRF parts during flow volume extraction."""
+    NUMEN_EXTERNALFLOWPARTNOTFOUND = 3948
+    """External flow part not found during flow volume extraction."""
+    NUMEN_EXTERNALFLOWPARTSSAMEASMRFPARTS = 3949
+    """External flow parts are the same as MRF parts during flow volume extraction."""
+    NUMEN_EXTERNALFLOWPARTSMORETHANONE = 3950
+    """Multiple external flow parts found during flow volume extraction; only one external flow part is allowed."""
+    NUMEN_PARTSNOTFOUNDAFTERFILTERING = 3951
+    """Flow volume parts are empty after filtering out MRF and external flow parts."""
+    NUMEN_VALIDCAPFACESNOTFOUND = 3952
+    """No valid cap faces were found for the specified cap face expression during flow volume extraction."""
+    NUMEN_CAPPARTSMESHINGFAILED = 3953
+    """Meshing of cap parts using volumetric size fields failed during flow volume extraction."""
+    NUMEN_NOAUTOFLUIDZONENAME = 3954
+    """Flow volume zone name must be defined for the selected capping type."""
+    NUMEN_NOCAPFACESFOUND = 3955
+    """No cap faces found for the specified cap face expression."""
+    NUMEN_MULTIPLESOLIDCAPPARTS = 3956
+    """Multiple solid parts found from the cap face expression during flow volume extraction."""
+    NUMEN_NOFLOWVOLUMEPARTSFORCAPCREATION = 3957
+    """No flow volume parts found for cap creation."""
+    NUMEN_CAPEDGEEXPRESSIONNOTDEFINED = 3958
+    """Parameter cap_edge_expression must be defined for capping_type 'create'."""
+    NUMEN_CAPCREATIONPARTNOTFOUND = 3959
+    """Part could not be resolved for cap creation."""
+    NUMEN_CAPCREATIONPARTHASNOTOPOLOGY = 3960
+    """Part does not have topology required for cap creation."""
+    NUMEN_NOCAPEDGESFOUND = 3961
+    """No cap edges found for the specified edge expression."""
+    NUMEN_CAPCREATIONBYEDGEFAILED = 3962
+    """Cap creation using the specified edge expression failed."""
+    NUMEN_FLOWVOLUMEPARTSNOTFOUND = 3963
+    """No flow volume parts available for flow volume extraction."""
+    NUMEN_SPLITVOLUMESFAILED = 3915
+    """Split volumes operation failed."""
+    NUMEN_CONNECTINTERFACEFAILED = 3915
+    """Connect interface operation failed."""
+    NUMEN_VOLUMEMESHINGFAILED = 3916
+    """Volume meshing operation failed."""
+    NUMEN_SETLABELSONFEATUREEDGESFAILED = 3917
+    """Set labels on feature edges operation failed."""
+    NUMEN_DETECTTHINVOLUMESFAILED = 3918
+    """Detect thin volumes operation failed."""
+    NUMEN_INITIALIZEDEFAULTSIZEFAILED = 3919
+    """Initialize default size operation failed."""
+    NUMEN_CREATEFACEZONESFORFACELABELSFAILED = 3920
+    """Create face zones for face labels operation failed."""
+    NUMEN_POSTMESHCLEANUPFAILED = 3921
+    """Post mesh cleanup operation failed."""
+    NUMEN_SETTINGSFAILED = 3922
+    """Settings operation failed."""
+    NUMEN_TOPOLOGYSUMMARYFAILED = 3923
+    """Topology summary operation failed."""
+    NUMEN_SURFACEMESHSUMMARYFAILED = 3924
+    """Surface mesh summary operation failed."""
+    NUMEN_SURFACEMESHQUALITYFAILED = 3925
+    """Surface mesh quality operation failed."""
+    NUMEN_VOLUMEMESHCHECKFAILED = 3926
+    """Volume mesh check operation failed."""
+    NUMEN_VOLUMEMESHSUMMARYFAILED = 3927
+    """Volume mesh summary operation failed."""
+    NUMEN_VOLUMEMESHQUALITYFAILED = 3928
+    """Volume mesh quality operation failed."""
+    NUMEN_FUSEFAILED = 3929
+    """Fuse operation failed."""
+    NUMEN_FILEREADFAILED = 3930
+    """File read operation failed."""
+    NUMEN_FILEWRITEFAILED = 3931
+    """File write operation failed."""
+    NUMEN_PRECHECKMODELFAILED = 3932
+    """PrecheckModel operation failed."""
+    NUMEN_ZONESCOUNTVALIDATIONFAILED = 3933
+    """Zones count validation operation failed."""
     CELLSEPARATIONFAILED = 6000
     """Cell separation failed."""
     NOCELLSSEPARATED = 6001
@@ -742,6 +948,46 @@ class ErrorCode(enum.IntEnum):
     """Provided file extension is not supported. Supported extension is .cdb."""
     INVALIDFILEEXTENSIONFORFLUENTCASEEXPORT = 9009
     """Provided file extension is invalid. If cff_format is set to False, then supported extensions are .cas and .cas.gz. If cff_format is set to True, then supported extension is .cas.h5 ."""
+    INVALIDFILEEXTENSIONFORPRIMEPROJECT = 9010
+    """Provided file extension is not supported. Supported extension is .prproject.
+
+    **This is a beta parameter**. **The behavior and name may change in the future**."""
+    CREATEPROJECTFILEFOLDERFAILED = 9011
+    """Unable to create folder to store prime project files.
+
+    **This is a beta parameter**. **The behavior and name may change in the future**."""
+    CREATEPROJECTFILEFAILED = 9012
+    """Unable to create prime project file.
+
+    **This is a beta parameter**. **The behavior and name may change in the future**."""
+    CREATESTRIDEFILEFAILED = 9013
+    """Unable to create stride file.
+
+    **This is a beta parameter**. **The behavior and name may change in the future**."""
+    ERRORREADINGSTRIDEDATA = 9014
+    """Unable to read stride data.
+
+    **This is a beta parameter**. **The behavior and name may change in the future**."""
+    STRIDECONVERTFAILED = 9015
+    """Unable to convert to stride file.
+
+    **This is a beta parameter**. **The behavior and name may change in the future**."""
+    INVALIDCHECKPOINTNAME = 9016
+    """Invalid checkpoint name provided. Checkpoint name should not start or end with space character and should not contain special characters.
+
+    **This is a beta parameter**. **The behavior and name may change in the future**."""
+    ERRORREADINGCHECKPOINTHISTORY = 9017
+    """Unable to read checkpoint history.
+
+    **This is a beta parameter**. **The behavior and name may change in the future**."""
+    CHECKPOINTNOTFOUND = 9018
+    """Checkpoint not found.
+
+    **This is a beta parameter**. **The behavior and name may change in the future**."""
+    CHECKPOINTALREADYEXISTS = 9019
+    """Checkpoint already exists.
+
+    **This is a beta parameter**. **The behavior and name may change in the future**."""
     PLUGINLOADFAILURE = 10001
     """Failed to load Surface Editor plugin."""
     TARGETZONELETS_SELFINTERSECTING = 10002
@@ -752,6 +998,30 @@ class ErrorCode(enum.IntEnum):
     """Tool zonelets form a self intersecting volume."""
     TOOLZONELETS_NOTWATERTIGHT = 10005
     """Tool zonelets do not form a watertight volume."""
+    COULDNOTLOADHAMMERSTEINPLUGIN = 10006
+    """Failed to load Hammerstein GPU Plugin.
+
+    **This is a beta parameter**. **The behavior and name may change in the future**."""
+    PRECOMPUTEDVOLUMESEXIST = 10007
+    """Pre-computed volumes exist.
+
+    **This is a beta parameter**. **The behavior and name may change in the future**."""
+    GPUOUTOFMEMORY = 10008
+    """GPU out of memory.
+
+    **This is a beta parameter**. **The behavior and name may change in the future**."""
+    GPUFATALERROR = 10009
+    """Fatal error in GPU Meshing.
+
+    **This is a beta parameter**. **The behavior and name may change in the future**."""
+    CPUOUTOFMEMORY = 10010
+    """CPU out of memory.
+
+    **This is a beta parameter**. **The behavior and name may change in the future**."""
+    NOSIZINGINPUT = 10011
+    """No sizing input provided.
+
+    **This is a beta parameter**. **The behavior and name may change in the future**."""
     STACKER_INVALIDINPUTVOLUMES = 10101
     """Invalid input volumes provided to stacker."""
     STACKER_INVALIDPARAMS = 10102
@@ -772,6 +1042,66 @@ class ErrorCode(enum.IntEnum):
     """Some bodies are intersecting or incorrectly defined."""
     STACKER_BASEFACEUNMESHED = 10111
     """Base face list input has unmeshed topofaces."""
+    STACKER_MESHTRANSFERTOBASEFAILED = 10112
+    """Mesh transfer from model to base face failed. Single seed face cannot project onto multiple faces on the base.
+
+    **This is a beta parameter**. **The behavior and name may change in the future**."""
+    STACKER_NONIDENTICALMESHEDFACESFOUND = 10114
+    """Mesh transfer from model to base face failed because of non-identical mesh on horizontally overlapping faces.
+
+    **This is a beta parameter**. **The behavior and name may change in the future**."""
+    STACKER_MESHTOTOPOASSOCIATIONFAILED = 10115
+    """Stacker failed to associate mesh to model.
+
+    **This is a beta parameter**. **The behavior and name may change in the future**."""
+    STACKER_VOLUMEMESHINGFAILED = 10118
+    """Stacker failed to mesh some input bodies. Check for overlapping or duplicate bodies, and ensure that the mesh size and tolerance are adequate to resolve geometric features.
+
+    **This is a beta parameter**. **The behavior and name may change in the future**."""
+    STACKER_CONFLICTINGSIZES = 10119
+    """Stacker failed because of conflict in seed face stack layers. Check Seed Face Scope for mismatch in layers or conflicts with lateral faces of the model.
+
+    **This is a beta parameter**. **The behavior and name may change in the future**."""
+    MERGENODES_MULTIPARTINPUTNOTSUPPORTED = 10121
+    """Source or target face inputs span multiple parts. Cross-part merge is not supported.
+
+    **This is a beta parameter**. **The behavior and name may change in the future**."""
+    MERGENODES_INPUTNOTCOMPLETE = 10122
+    """Source or target face expression resolved to no meshed face zonelets.
+
+    **This is a beta parameter**. **The behavior and name may change in the future**."""
+    MERGENODES_FAILED = 10123
+    """Merge nodes operation failed.
+
+    **This is a beta parameter**. **The behavior and name may change in the future**."""
+    STACKER_SEEDFACEMESHINVALID = 10124
+    """Stacker failed. Seed faces for stacking should either have edge mesh or fully quad face mesh. Deviation of nodes on face mesh at each layer should be within the stacking tolerance.
+
+    **This is a beta parameter**. **The behavior and name may change in the future**."""
+    STACKER_PARTIALEDGEMESHONBASE = 10125
+    """Stacker failed because edge mesh from Seed Faces could not be transferred due to conflicting mesh from other faces.
+
+    **This is a beta parameter**. **The behavior and name may change in the future**."""
+    STACKER_NONIDENTICALEDGEMESHONBASE = 10126
+    """Stacker failed because edge mesh from Seed Faces are conflicting with each other. Mesh from seed edges projecting to the same set of base edges should have identical mesh.
+
+    **This is a beta parameter**. **The behavior and name may change in the future**."""
+    STACKER_EDGEMESHBASEMAPNOTFOUND = 10127
+    """Stacker failed because some mesh edges could not be assigned to any edge on the base. Base edges may have shifted due to tolerance or the edge may have collapsed. Check lateral defeature tolerance.
+
+    **This is a beta parameter**. **The behavior and name may change in the future**."""
+    STACKER_FACEMESHMISMATCHONBASE = 10128
+    """Mesh transfer to base face failed. Mesh from seed faces projecting to the same set of base faces should have identical mesh.
+
+    **This is a beta parameter**. **The behavior and name may change in the future**."""
+    STACKER_BASEFACEPARTITIONFAILED = 10129
+    """Mesh transfer to base face failed during association of the projected seed face mesh on the base face.
+
+    **This is a beta parameter**. **The behavior and name may change in the future**."""
+    STACKER_SEEDFACEBOUNDARYMERGEFAILED = 10130
+    """Mesh transfer to base face failed because edge mesh from laterally adjacent seed faces were conflicting. Edge mesh from seed faces projecting to the same set of base edges should have identical mesh.
+
+    **This is a beta parameter**. **The behavior and name may change in the future**."""
     FACEZONELETSHAVECELLSCONNECTED = 10205
     """Face zonelets have cells connected."""
     INVALIDTHINVOLUMECONTROLS = 12101
@@ -854,10 +1184,98 @@ class ErrorCode(enum.IntEnum):
     """No elements found for cdb export.
 
     **This is a beta parameter**. **The behavior and name may change in the future**."""
+    TOPODECOMPOSITION_INVALIDPARAMS = 16700
+    """Invalid input parameter(s) provided for topology decomposition.
+
+    **This is a beta parameter**. **The behavior and name may change in the future**."""
+    TOPODECOMPOSITION_EMPTYINPUT = 16701
+    """Empty input provided for topology decomposition.
+
+    **This is a beta parameter**. **The behavior and name may change in the future**."""
+    TOPODECOMPOSITION_UNMESHEDTOPOFACES = 16702
+    """Input contains unmeshed topoface(s).
+
+    **This is a beta parameter**. **The behavior and name may change in the future**."""
+    TOPODECOMPOSITION_ORIENTTOPOVOLUMESFAILED = 16703
+    """Failed to orient input topovolume(s) during topology decomposition.
+
+    **This is a beta parameter**. **The behavior and name may change in the future**."""
+    TOPODECOMPOSITION_INVALIDINPUTFACEZONELETS = 16704
+    """Input face zonelet(s) are invalid for topology decomposition.
+
+    **This is a beta parameter**. **The behavior and name may change in the future**."""
+    TOPODECOMPOSITION_TOPOLOGYUPDATEFAILED = 16705
+    """Topology update failed during topology decomposition.
+
+    **This is a beta parameter**. **The behavior and name may change in the future**."""
     MESHDECOUPLEDFAILED = 16900
     """Invalid load balancing or failed in volume meshing for one or more parts.
 
     **This is a beta parameter**. **The behavior and name may change in the future**."""
+    VOLUMESLICER_INVALIDINPUTLOOPEDGES = 17101
+    """Input edges do not form well-defined closed loops.
+
+    **This is a beta parameter**. **The behavior and name may change in the future**."""
+    VOLUMESLICER_NOINPUTTOPOVOLUMES = 17102
+    """No topovolumes scoped in input for splitting.
+
+    **This is a beta parameter**. **The behavior and name may change in the future**."""
+    VOLUMESLICER_INVALIDPLANEDEFINITIONS = 17103
+    """Invalid input plane definitions.
+
+    **This is a beta parameter**. **The behavior and name may change in the future**."""
+    VOLUMESLICER_INVALIDSOURCETARGETDATA = 17104
+    """Invalid input source or target data for blend.
+
+    **This is a beta parameter**. **The behavior and name may change in the future**."""
+    VOLUMESLICER_SPLITFACESGENERATIONFAILED = 17105
+    """Failed to generate any interfaces to split volumes.
+
+    **This is a beta parameter**. **The behavior and name may change in the future**."""
+    VOLUMESLICER_PREVIEWFACESGENERATIONFAILED = 17106
+    """Failed to generate any interfaces for preview.
+
+    **This is a beta parameter**. **The behavior and name may change in the future**."""
+    VOLUMESLICER_INVALIDCONTROLID = 17107
+    """Invalid input control id.
+
+    **This is a beta parameter**. **The behavior and name may change in the future**."""
+    VOLUMESLICER_SPLITTOPOVOLUMESFAILED = 17108
+    """Failed to split topovolumes after generating the interfaces.
+
+    **This is a beta parameter**. **The behavior and name may change in the future**."""
+    VOLUMESLICER_NOINPUTCONTROLIDS = 17109
+    """No control ids provided as input.
+
+    **This is a beta parameter**. **The behavior and name may change in the future**."""
+    VOLUMESLICER_NOINPUTEDGES = 17110
+    """No input edges provided.
+
+    **This is a beta parameter**. **The behavior and name may change in the future**."""
+    VOLUMESLICER_INVALIDSOURCEEDGES = 17111
+    """Source edges do not form a valid closed loop for blend.
+
+    **This is a beta parameter**. **The behavior and name may change in the future**."""
+    VOLUMESLICER_INVALIDTARGETEDGES = 17112
+    """Target edges do not form a valid closed loop for blend.
+
+    **This is a beta parameter**. **The behavior and name may change in the future**."""
+    VOLUMESLICER_MULTIPLESOURCELOOPS = 17113
+    """Multiple source loops found; blend requires a single loop.
+
+    **This is a beta parameter**. **The behavior and name may change in the future**."""
+    VOLUMESLICER_MULTIPLETARGETLOOPS = 17114
+    """Multiple target loops found; blend requires a single loop.
+
+    **This is a beta parameter**. **The behavior and name may change in the future**."""
+    VOLUMETRICSCAFFOLDER_INVALIDINPUT = 17201
+    """Invalid input provided for the volumetric scaffolder operation.
+
+    **This is a beta parameter**. **The behavior and name may change in the future**."""
+    CADIMPORTXMLFILEGENERATIONFAILED = 17301
+    """CAD Import XML File Generation failed."""
+    CADIMPORTFMTRANSMOGRIFIEREXENOTFOUND = 17302
+    """FMTransmogrifier_XC executable not found."""
 
 class WarningCode(enum.IntEnum):
     """Warning codes associated with the PyPrimeMesh operation.
@@ -886,6 +1304,10 @@ class WarningCode(enum.IntEnum):
     """Invalid size control type provided."""
     OVERRIDEGROWTHRATEPARAM = 209
     """Overriding growth rate parameter."""
+    PRESCRIBEDSIZEBELOWMINREPRESENTABLESINGLEPRECISION = 210
+    """Prescribed sizes are below the minimum representable size for the domain in single precision and will not be respected."""
+    PRESCRIBEDSIZEBELOWMINREPRESENTABLEDOUBLEPRECISION = 211
+    """Prescribed sizes are below the minimum representable size for the domain in double precision and will not be respected."""
     OVERRIDESUGGESTEDNAME = 301
     """Override name by suggested name."""
     OVERRIDESURFACESCOPEENTITY = 401
@@ -962,12 +1384,54 @@ class WarningCode(enum.IntEnum):
     """Mesh has invalid shape."""
     MESHHASLEFTHANDEDNESSFACES = 7107
     """Mesh has invalid shape."""
+    MESHHASINVALIDPARTITIONSTATE = 7108
+    """Mesh has invalid parallel neighborhood."""
     NOCADGEOMETRYFOUND = 7500
     """CAD geometry not found for some or all topo entities. Skipped projection for those topo entities."""
     NOCADGEOMETRYPROJECTONFACETS = 7501
     """CAD geometry not found for some or all topo entities. Projected on facets for those topo entities."""
     DUPLICATEINPUT = 8001
     """Duplicate items in input."""
+    STACKER_MESHTOTOPOASSOCIATIONFAILED = 9001
+    """Stacker failed to associate mesh to model.
+
+    **This is a beta parameter**. **The behavior and name may change in the future**."""
+    STACKER_SIZESLARGERTHANMAXOFFSETFOUND = 9002
+    """Size controls with sizes larger than maximum offset size found.
+
+    **This is a beta parameter**. **The behavior and name may change in the future**."""
+    STACKER_SIZESSMALLERTHANTOLERANCEFOUND = 9003
+    """Size controls with sizes smaller than tolerance found.
+
+    **This is a beta parameter**. **The behavior and name may change in the future**."""
+    STACKER_UNMESHEDFACES = 9005
+    """Stacker failed to mesh some faces. Check for overlapping faces, reduce tolerance value or both.
+
+    **This is a beta parameter**. **The behavior and name may change in the future**."""
+    STACKER_SIZINGSIGNOREDINFAVOROFSEEDFACESCOPE = 9006
+    """Stacker does not respect some sizings due to conflict with mesh from Seed Face Scope.
+
+    **This is a beta parameter**. **The behavior and name may change in the future**."""
+    STACKER_CONFORMALMESHINGFAILED = 9007
+    """Volume meshing is completed and has non-conformal mesh due to intersections among the input volumes.
+
+    **This is a beta parameter**. **The behavior and name may change in the future**."""
+    STACKER_NUMBEROFDIVISIONSSPLITATGEOMETRY = 9008
+    """Number of divisions specified for some edges could not be respected due to geometry constraints.
+
+    **This is a beta parameter**. **The behavior and name may change in the future**."""
+    STACKER_NUMBEROFDIVISIONSNOTRESPECTED = 9009
+    """Number of divisions specified for some edges could not be respected due to conflicting controls. The smaller sizing among the controls was applied.
+
+    **This is a beta parameter**. **The behavior and name may change in the future**."""
+    STACKER_NOSTACKABLEBODIESDETECTED = 9010
+    """No stackable bodies were detected among the input volumes.
+
+    **This is a beta parameter**. **The behavior and name may change in the future**."""
+    STACKER_HORIZONTALEDGESUSEDFORSMALLESTSTACKINGEDGES = 9011
+    """Horizontal edges are used for indicating the span of smallest stacking edges.
+
+    **This is a beta parameter**. **The behavior and name may change in the future**."""
     UNPROCESSEDKEYWORDSINABAQUSFILE = 11001
     """Unprocessed Abaqus keywords have been found."""
     EXPORTMAPDLANALYSISSETTINGSFAILED = 11101
@@ -980,6 +1444,14 @@ class WarningCode(enum.IntEnum):
     """Export of label as element component skipped."""
     IMPORTOFNODALCOMPONENTASLABELSKIPPED = 11201
     """Import of nodal component as label skipped."""
+    CONNECT_NODESINTARGETZONELETSNOTMERGED = 11201
+    """Some or all nodes in target zonelets could not be merged with nodes in the source zonelets.
+
+    **This is a beta parameter**. **The behavior and name may change in the future**."""
+    CONNECT_ONETOONEMAPPINGNOTFOUND = 13202
+    """One-to-one mapping between source and target zonelets not found. Check connectivity information or provide smaller tolerance value.
+
+    **This is a beta parameter**. **The behavior and name may change in the future**."""
     VT_SKIPPEDPROTECTEDENTITIES = 100001
     """Input contains protected entities which have been skipped.
 
@@ -1008,13 +1480,189 @@ class WarningCode(enum.IntEnum):
     """Failed to remesh face(s) during VT operation.
 
     **This is a beta parameter**. **The behavior and name may change in the future**."""
+    VT_FACESEPARATIONFAILED = 100008
+    """Interior edge created but face separation failed during VT operation.
+
+    **This is a beta parameter**. **The behavior and name may change in the future**."""
+    VT_SKIPPEDFACESWITHNOPLANEINTERSECTION = 100009
+    """Skipped one or more faces as the faces do not intersect with the input plane.
+
+    **This is a beta parameter**. **The behavior and name may change in the future**."""
+    VT_SKIPPEDCUSPTOPOEDGES = 100010
+    """Input contains cusp topoedges which have been skipped.
+
+    **This is a beta parameter**. **The behavior and name may change in the future**."""
+    VT_VOLUMENOTMERGEDNOSHAREDFACE = 100012
+    """One or more input volumes were skipped during merge as they have no shared face with any other input volume.
+
+    **This is a beta parameter**. **The behavior and name may change in the future**."""
+    VT_VOLUMEMESHDELETED = 100013
+    """Deleted volume mesh on one or more adjacent volumes to allow face splitting.
+
+    **This is a beta parameter**. **The behavior and name may change in the future**."""
+    VT_VOLUMENOTMERGEDPROTECTEDSHAREDFACE = 100014
+    """One or more input volumes were skipped during merge as their shared face is protected.
+
+    **This is a beta parameter**. **The behavior and name may change in the future**."""
+    VT_VOLUMENOTMERGEDSHAREDFACEDIFFERENTPARTS = 100015
+    """One or more input volumes were skipped during merge as their shared face spans different parts.
+
+    **This is a beta parameter**. **The behavior and name may change in the future**."""
+    VT_VOLUMENOTMERGEDSHAREDFACEDIFFERENTZONES = 100016
+    """One or more input volumes were skipped during merge as their shared face spans different zones.
+
+    **This is a beta parameter**. **The behavior and name may change in the future**."""
     MULTIZONEMESHER_SURFACESCOPEVOLUMESCOPEINCONSISTENCY = 110001
-    """MultiZone warning codes"""
+    """MultiZone warning codes."""
     MULTIZONEMESHER_DEFEATUREDTOPOEDGES = 110002
     """TopoEdges that got defeatured in the MultiZone mesh."""
     MULTIZONEMESHER_DEFEATUREDTOPOFACES = 110003
     """TopoFaces that got defeatured in the MultiZone mesh."""
     MULTIZONEMESHER_DEFEATUREDPROTECTEDTOPOLOGY = 110004
     """Protected toponodes or topoedges that got defeatured in the MultiZone mesh."""
+    VOLUMETRICSCAFFOLDER_SPLITBYINTERIOREDGESFAILURE = 120001
+    """Failed to split using interior edges.
+
+    **This is a beta parameter**. **The behavior and name may change in the future**."""
+    VOLUMETRICSCAFFOLDER_UNRESOLVEDOVERLAPS = 120002
+    """Unresolved overlaps left after resolve surface overlaps operation.
+
+    **This is a beta parameter**. **The behavior and name may change in the future**."""
+    VOLUMETRICSCAFFOLDER_FREEFACES = 120003
+    """Free faces left after resolve surface overlaps operation.
+
+    **This is a beta parameter**. **The behavior and name may change in the future**."""
     REMOVECUSP_PARTWITHMULTIPLEVOLUMES = 130001
     """Parts with multiple volumes do not support Cusp removal."""
+    VOLUMESLICER_SPLITFACEGENERATIONFAILED = 140001
+    """Failed to generate split faces for one or more controls.
+
+    **This is a beta parameter**. **The behavior and name may change in the future**."""
+    VOLUMESLICER_PREVIEWFACEGENERATIONFAILED = 140002
+    """Failed to generate preview faces for one or more controls.
+
+    **This is a beta parameter**. **The behavior and name may change in the future**."""
+    VOLUMESLICERCONTROL_PLANENOINTERSECTION = 140003
+    """Plane does not intersect target volume.
+
+    **This is a beta parameter**. **The behavior and name may change in the future**."""
+    VOLUMESLICERCONTROL_PLANENOCLOSEDBOUNDARY = 140004
+    """Plane intersects the target volume but does not form a valid split region.
+
+    **This is a beta parameter**. **The behavior and name may change in the future**."""
+    VOLUMESLICERCONTROL_UNIQUETOPOVOLUMENOTFOUND = 140005
+    """Failed to find a unique volume to split for the given control.
+
+    **This is a beta parameter**. **The behavior and name may change in the future**."""
+    VOLUMESLICERCONTROL_SOURCETARGETPROJECTIONFAILED = 140006
+    """Failed to project source edges on target faces for the blend control.
+
+    **This is a beta parameter**. **The behavior and name may change in the future**."""
+    VOLUMESLICERCONTROL_SPLITFACEOVERLAPSTOPOLOGY = 140007
+    """Failed to generate split faces for the control. The split region overlaps with the existing topology and cannot divide the volumes into valid regions.
+
+    **This is a beta parameter**. **The behavior and name may change in the future**."""
+    VOLUMESLICERCONTROL_SPLITFACEOUTSIDEVOLUMEBOUNDARY = 140008
+    """Failed to generate split faces for the given control. The split region lies outside of the target volumes and cannot divide the volumes into valid regions.
+
+    **This is a beta parameter**. **The behavior and name may change in the future**."""
+    VOLUMESLICERCONTROL_LOOPSPLITFACEGENERATIONFAILED = 140009
+    """Failed to generate split faces for the loop control.
+
+    **This is a beta parameter**. **The behavior and name may change in the future**."""
+    VOLUMESLICERCONTROL_PLANARSPLITFACEGENERATIONFAILED = 140010
+    """Failed to generate split faces for the plane control.
+
+    **This is a beta parameter**. **The behavior and name may change in the future**."""
+    VOLUMESLICERCONTROL_LOOPPREVIEWFACEGENERATIONFAILED = 140011
+    """Failed to generate preview faces for the loop control.
+
+    **This is a beta parameter**. **The behavior and name may change in the future**."""
+    VOLUMESLICERCONTROL_PLANARPREVIEWFACEGENERATIONFAILED = 140012
+    """Failed to generate preview faces for the plane control.
+
+    **This is a beta parameter**. **The behavior and name may change in the future**."""
+    VOLUMESLICERCONTROL_BLENDSPLITFACEGENERATIONFAILED = 140013
+    """Failed to generate split faces for the blend control.
+
+    **This is a beta parameter**. **The behavior and name may change in the future**."""
+    VOLUMESLICERCONTROL_BLENDPREVIEWFACEGENERATIONFAILED = 140014
+    """Failed to generate preview faces for the blend control.
+
+    **This is a beta parameter**. **The behavior and name may change in the future**."""
+    VOLUMESLICER_UNCLOSEDSEGMENTSIGNORED = 140015
+    """Input contains unclosed edge segments. These segments are ignored during processing.
+
+    **This is a beta parameter**. **The behavior and name may change in the future**."""
+    VOLUMESLICER_INVALIDPLANEDEFINITIONSIGNORED = 140016
+    """Input contains invalid plane definitions. These definitions are ignored during processing.
+
+    **This is a beta parameter**. **The behavior and name may change in the future**."""
+    VOLUMESLICERCONTROL_SPLITFACEINTERSECTSTOPOLOGY = 140017
+    """Failed to generate split faces for the control. The split region intersects with the existing topology.
+
+    **This is a beta parameter**. **The behavior and name may change in the future**."""
+    VOLUMESLICERCONTROL_VOLUMEMESHDELETED = 140018
+    """Deleted volume mesh on one or more volumes to allow volume splitting.
+
+    **This is a beta parameter**. **The behavior and name may change in the future**."""
+    NUMEN_SURFACEMESHELEMENTCOUNTVALIDATIONFAILED = 150001
+    """Numen surface mesh element count validation failed."""
+    NUMEN_SELFINTERSECTIONSVALIDATIONFAILED = 150002
+    """Numen self intersections count validation failed."""
+    NUMEN_FREEEDGESVALIDATIONFAILED = 150003
+    """Numen free edges count validation failed."""
+    NUMEN_MULTIEDGESVALIDATIONFAILED = 150004
+    """Numen multi edges count validation failed."""
+    NUMEN_QUADELEMENTCOUNTVALIDATIONFAILED = 150005
+    """Numen quad element count validation failed."""
+    NUMEN_POLYELEMENTCOUNTVALIDATIONFAILED = 150006
+    """Numen poly element count validation failed."""
+    NUMEN_INVALIDNORMALSCOUNTVALIDATIONFAILED = 150007
+    """Numen invalid normals count validation failed."""
+    NUMEN_FACESABOVECRITERIAVALIDATIONFAILED = 150008
+    """Numen faces above quality criterion validation failed."""
+    NUMEN_DIHEDRALANGLEVALIDATIONFAILED = 150009
+    """Numen dihedral angle validation failed."""
+    NUMEN_VOLUMEMESHCHECKVALIDATIONFAILED = 150010
+    """Numen volume mesh check validation failed."""
+    NUMEN_TOTALFACECOUNTVALIDATIONFAILED = 150011
+    """Numen total face element count validation failed."""
+    NUMEN_TOTALCELLCOUNTVALIDATIONFAILED = 150012
+    """Numen total cell element count validation failed."""
+    NUMEN_FLUIDSPRISMCELLCOUNTVALIDATIONFAILED = 150013
+    """Numen fluids prism cell count validation failed."""
+    NUMEN_SOLIDSPRISMCELLCOUNTVALIDATIONFAILED = 150014
+    """Numen solids prism cell count validation failed."""
+    NUMEN_HEXCELLCOUNTVALIDATIONFAILED = 150015
+    """Numen hex cell count validation failed."""
+    NUMEN_POLYCELLCOUNTVALIDATIONFAILED = 150016
+    """Numen poly cell count validation failed."""
+    NUMEN_PYRAMIDCELLCOUNTVALIDATIONFAILED = 150017
+    """Numen pyramid cell count validation failed."""
+    NUMEN_TETCELLCOUNTVALIDATIONFAILED = 150018
+    """Numen tet cell count validation failed."""
+    NUMEN_CELLSABOVECRITERIAVALIDATIONFAILED = 150019
+    """Numen cells above quality criterion validation failed."""
+    NUMEN_SELFINTERSECTIONSFOUND = 150020
+    """Self intersecting face elements found during surface diagnostics."""
+    NUMEN_FREEEDGESFOUND = 150021
+    """Free edge elements found during surface diagnostics."""
+    NUMEN_AUTOCOMPUTEDEADMPTS_EMPTYINTERNALCAPSCOPE = 150022
+    """Internal cap part expression resolved to an empty scope during automatic dead material point computation."""
+    NUMEN_AUTOCOMPUTEDEADMPTS_NOINTERNALCAPTOPOFACES = 150023
+    """No internal cap topofaces were found for automatic dead material point computation."""
+    NUMEN_NOCAPFOUNDWARNING = 150024
+    """No caps found during model precheck analysis."""
+    NUMEN_BAFFLEDETECTED = 150025
+    """Baffle(s) detected during model precheck analysis."""
+    NUMEN_FACEZONECOUNTVALIDATIONFAILED = 150029
+    """Unique face zone count validation failed for a zone name expression."""
+    NUMEN_VOLUMEZONECOUNTVALIDATIONFAILED = 150030
+    """Unique volume zone count validation failed for a zone name expression."""
+    NUMEN_FACEZONEENTITYCOUNTVALIDATIONFAILED = 150031
+    """Face entity count validation failed for a zone name expression."""
+    NUMEN_VOLUMEZONEENTITYCOUNTVALIDATIONFAILED = 150032
+    """Volume entity count validation failed for a zone name expression."""
+    NUMEN_MRFPARTNOTFOUND = 150033
+    """MRF part not found during flow volume extraction; MRF extraction will be skipped."""

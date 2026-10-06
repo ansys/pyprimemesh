@@ -1,4 +1,4 @@
-# Copyright (C) 2024 - 2025 ANSYS, Inc. and/or its affiliates.
+# Copyright (C) 2026 Synopsys, Inc. and ANSYS, Inc. All rights reserved.
 # SPDX-License-Identifier: MIT
 #
 #
@@ -47,21 +47,21 @@ class TetMeshSplineParams(CoreObject):
 
     Parameters
     ----------
-    model: Model
+    model : Model
         Model to create a ``TetMeshSplineParams`` object with default parameters.
-    feature_angle: float, optional
+    feature_angle : float, optional
         Feature angle used in meshing of the solid spline.
 
         **This is a beta parameter**. **The behavior and name may change in the future**.
-    mode: TrimmedSolidSplineCutMode, optional
+    mode : TrimmedSolidSplineCutMode, optional
         Cut mode to specify rule for mesh cell selection in the volume mesh.
 
         **This is a beta parameter**. **The behavior and name may change in the future**.
-    decimation_factor: float, optional
+    decimation_factor : float, optional
         Decimation factor used in meshing of the trimmed solid spline.
 
         **This is a beta parameter**. **The behavior and name may change in the future**.
-    json_data: dict, optional
+    json_data : dict, optional
         JSON dictionary to create a ``TetMeshSplineParams`` object with provided parameters.
 
     Examples
@@ -72,9 +72,9 @@ class TetMeshSplineParams(CoreObject):
 
     def __initialize(
             self,
-            feature_angle: float,
-            mode: TrimmedSolidSplineCutMode,
-            decimation_factor: float):
+            feature_angle : float,
+            mode : TrimmedSolidSplineCutMode,
+            decimation_factor : float):
         self._feature_angle = feature_angle
         self._mode = TrimmedSolidSplineCutMode(mode)
         self._decimation_factor = decimation_factor
@@ -82,30 +82,30 @@ class TetMeshSplineParams(CoreObject):
     def __init__(
             self,
             model: CommunicationManager=None,
-            feature_angle: float = None,
-            mode: TrimmedSolidSplineCutMode = None,
-            decimation_factor: float = None,
+            feature_angle : float = None,
+            mode : TrimmedSolidSplineCutMode = None,
+            decimation_factor : float = None,
             json_data : dict = None,
              **kwargs):
         """Initialize a ``TetMeshSplineParams`` object.
 
         Parameters
         ----------
-        model: Model
+        model : Model
             Model to create a ``TetMeshSplineParams`` object with default parameters.
-        feature_angle: float, optional
+        feature_angle : float, optional
             Feature angle used in meshing of the solid spline.
 
             **This is a beta parameter**. **The behavior and name may change in the future**.
-        mode: TrimmedSolidSplineCutMode, optional
+        mode : TrimmedSolidSplineCutMode, optional
             Cut mode to specify rule for mesh cell selection in the volume mesh.
 
             **This is a beta parameter**. **The behavior and name may change in the future**.
-        decimation_factor: float, optional
+        decimation_factor : float, optional
             Decimation factor used in meshing of the trimmed solid spline.
 
             **This is a beta parameter**. **The behavior and name may change in the future**.
-        json_data: dict, optional
+        json_data : dict, optional
             JSON dictionary to create a ``TetMeshSplineParams`` object with provided parameters.
 
         Examples
@@ -143,18 +143,18 @@ class TetMeshSplineParams(CoreObject):
 
     @staticmethod
     def set_default(
-            feature_angle: float = None,
-            mode: TrimmedSolidSplineCutMode = None,
-            decimation_factor: float = None):
+            feature_angle : float = None,
+            mode : TrimmedSolidSplineCutMode = None,
+            decimation_factor : float = None):
         """Set the default values of the ``TetMeshSplineParams`` object.
 
         Parameters
         ----------
-        feature_angle: float, optional
+        feature_angle : float, optional
             Feature angle used in meshing of the solid spline.
-        mode: TrimmedSolidSplineCutMode, optional
+        mode : TrimmedSolidSplineCutMode, optional
             Cut mode to specify rule for mesh cell selection in the volume mesh.
-        decimation_factor: float, optional
+        decimation_factor : float, optional
             Decimation factor used in meshing of the trimmed solid spline.
         """
         args = locals()
@@ -224,30 +224,150 @@ class TetMeshSplineParams(CoreObject):
     def decimation_factor(self, value: float):
         self._decimation_factor = value
 
+class TriMeshSplineParams(CoreObject):
+    """Parameters for meshing the solid spline.
+
+    Parameters
+    ----------
+    model : Model
+        Model to create a ``TriMeshSplineParams`` object with default parameters.
+    feature_angle : float, optional
+        Feature angle used in meshing of the solid spline.
+
+        **This is a beta parameter**. **The behavior and name may change in the future**.
+    json_data : dict, optional
+        JSON dictionary to create a ``TriMeshSplineParams`` object with provided parameters.
+
+    Examples
+    --------
+    >>> tri_mesh_spline_params = prime.TriMeshSplineParams(model = model)
+    """
+    _default_params = {}
+
+    def __initialize(
+            self,
+            feature_angle : float):
+        self._feature_angle = feature_angle
+
+    def __init__(
+            self,
+            model: CommunicationManager=None,
+            feature_angle : float = None,
+            json_data : dict = None,
+             **kwargs):
+        """Initialize a ``TriMeshSplineParams`` object.
+
+        Parameters
+        ----------
+        model : Model
+            Model to create a ``TriMeshSplineParams`` object with default parameters.
+        feature_angle : float, optional
+            Feature angle used in meshing of the solid spline.
+
+            **This is a beta parameter**. **The behavior and name may change in the future**.
+        json_data : dict, optional
+            JSON dictionary to create a ``TriMeshSplineParams`` object with provided parameters.
+
+        Examples
+        --------
+        >>> tri_mesh_spline_params = prime.TriMeshSplineParams(model = model)
+        """
+        if json_data:
+            self.__initialize(
+                json_data["featureAngle"] if "featureAngle" in json_data else None)
+        else:
+            all_field_specified = all(arg is not None for arg in [feature_angle])
+            if all_field_specified:
+                self.__initialize(
+                    feature_angle)
+            else:
+                if model is None:
+                    raise ValueError("Invalid assignment. Either pass a model or specify all properties.")
+                else:
+                    param_json = model._communicator.initialize_params(model, "TriMeshSplineParams")
+                    json_data = param_json["TriMeshSplineParams"] if "TriMeshSplineParams" in param_json else {}
+                    self.__initialize(
+                        feature_angle if feature_angle is not None else ( TriMeshSplineParams._default_params["feature_angle"] if "feature_angle" in TriMeshSplineParams._default_params else (json_data["featureAngle"] if "featureAngle" in json_data else None)))
+        self._custom_params = kwargs
+        if model is not None:
+            [ model._logger.debug(f'Unsupported argument : {key}') for key in kwargs ]
+        [setattr(type(self), key, property(lambda self, key = key:  self._custom_params[key] if key in self._custom_params else None,
+        lambda self, value, key = key : self._custom_params.update({ key: value }))) for key in kwargs]
+        self._freeze()
+
+    @staticmethod
+    def set_default(
+            feature_angle : float = None):
+        """Set the default values of the ``TriMeshSplineParams`` object.
+
+        Parameters
+        ----------
+        feature_angle : float, optional
+            Feature angle used in meshing of the solid spline.
+        """
+        args = locals()
+        [TriMeshSplineParams._default_params.update({ key: value }) for key, value in args.items() if value is not None]
+
+    @staticmethod
+    def print_default():
+        """Print the default values of ``TriMeshSplineParams`` object.
+
+        Examples
+        --------
+        >>> TriMeshSplineParams.print_default()
+        """
+        message = ""
+        message += ''.join(str(key) + ' : ' + str(value) + '\n' for key, value in TriMeshSplineParams._default_params.items())
+        print(message)
+
+    def _jsonify(self) -> Dict[str, Any]:
+        json_data = {}
+        if self._feature_angle is not None:
+            json_data["featureAngle"] = self._feature_angle
+        [ json_data.update({ utils.to_camel_case(key) : value }) for key, value in self._custom_params.items()]
+        return json_data
+
+    def __str__(self) -> str:
+        message = "feature_angle :  %s" % (self._feature_angle)
+        message += ''.join('\n' + str(key) + ' : ' + str(value) for key, value in self._custom_params.items())
+        return message
+
+    @property
+    def feature_angle(self) -> float:
+        """Feature angle used in meshing of the solid spline.
+
+        **This is a beta parameter**. **The behavior and name may change in the future**.
+        """
+        return self._feature_angle
+
+    @feature_angle.setter
+    def feature_angle(self, value: float):
+        self._feature_angle = value
+
 class RefineTetMeshParams(CoreObject):
     """Parameters for meshing the solid spline.
 
     Parameters
     ----------
-    model: Model
+    model : Model
         Model to create a ``RefineTetMeshParams`` object with default parameters.
-    nisr: int, optional
+    nisr : int, optional
         Interpolation elements in the local r-direction.
 
         **This is a beta parameter**. **The behavior and name may change in the future**.
-    niss: int, optional
+    niss : int, optional
         Interpolation elements in the local s-direction.
 
         **This is a beta parameter**. **The behavior and name may change in the future**.
-    nist: int, optional
+    nist : int, optional
         Interpolation elements in the local t-direction.
 
         **This is a beta parameter**. **The behavior and name may change in the future**.
-    tolerance: float, optional
+    tolerance : float, optional
         Tolerance for boundary refinement.
 
         **This is a beta parameter**. **The behavior and name may change in the future**.
-    json_data: dict, optional
+    json_data : dict, optional
         JSON dictionary to create a ``RefineTetMeshParams`` object with provided parameters.
 
     Examples
@@ -258,10 +378,10 @@ class RefineTetMeshParams(CoreObject):
 
     def __initialize(
             self,
-            nisr: int,
-            niss: int,
-            nist: int,
-            tolerance: float):
+            nisr : int,
+            niss : int,
+            nist : int,
+            tolerance : float):
         self._nisr = nisr
         self._niss = niss
         self._nist = nist
@@ -270,35 +390,35 @@ class RefineTetMeshParams(CoreObject):
     def __init__(
             self,
             model: CommunicationManager=None,
-            nisr: int = None,
-            niss: int = None,
-            nist: int = None,
-            tolerance: float = None,
+            nisr : int = None,
+            niss : int = None,
+            nist : int = None,
+            tolerance : float = None,
             json_data : dict = None,
              **kwargs):
         """Initialize a ``RefineTetMeshParams`` object.
 
         Parameters
         ----------
-        model: Model
+        model : Model
             Model to create a ``RefineTetMeshParams`` object with default parameters.
-        nisr: int, optional
+        nisr : int, optional
             Interpolation elements in the local r-direction.
 
             **This is a beta parameter**. **The behavior and name may change in the future**.
-        niss: int, optional
+        niss : int, optional
             Interpolation elements in the local s-direction.
 
             **This is a beta parameter**. **The behavior and name may change in the future**.
-        nist: int, optional
+        nist : int, optional
             Interpolation elements in the local t-direction.
 
             **This is a beta parameter**. **The behavior and name may change in the future**.
-        tolerance: float, optional
+        tolerance : float, optional
             Tolerance for boundary refinement.
 
             **This is a beta parameter**. **The behavior and name may change in the future**.
-        json_data: dict, optional
+        json_data : dict, optional
             JSON dictionary to create a ``RefineTetMeshParams`` object with provided parameters.
 
         Examples
@@ -339,21 +459,21 @@ class RefineTetMeshParams(CoreObject):
 
     @staticmethod
     def set_default(
-            nisr: int = None,
-            niss: int = None,
-            nist: int = None,
-            tolerance: float = None):
+            nisr : int = None,
+            niss : int = None,
+            nist : int = None,
+            tolerance : float = None):
         """Set the default values of the ``RefineTetMeshParams`` object.
 
         Parameters
         ----------
-        nisr: int, optional
+        nisr : int, optional
             Interpolation elements in the local r-direction.
-        niss: int, optional
+        niss : int, optional
             Interpolation elements in the local s-direction.
-        nist: int, optional
+        nist : int, optional
             Interpolation elements in the local t-direction.
-        tolerance: float, optional
+        tolerance : float, optional
             Tolerance for boundary refinement.
         """
         args = locals()
@@ -442,33 +562,33 @@ class UniformSolidSplineCreationParams(CoreObject):
 
     Parameters
     ----------
-    model: Model
+    model : Model
         Model to create a ``UniformSolidSplineCreationParams`` object with default parameters.
-    n_control_points_u: int, optional
+    n_control_points_u : int, optional
         Number of control points in u direction.
 
         **This is a beta parameter**. **The behavior and name may change in the future**.
-    n_control_points_v: int, optional
+    n_control_points_v : int, optional
         Number of control points in v direction.
 
         **This is a beta parameter**. **The behavior and name may change in the future**.
-    n_control_points_w: int, optional
+    n_control_points_w : int, optional
         Number of control points in w direction.
 
         **This is a beta parameter**. **The behavior and name may change in the future**.
-    degree_u: int, optional
+    degree_u : int, optional
         Degree in u direction.
 
         **This is a beta parameter**. **The behavior and name may change in the future**.
-    degree_v: int, optional
+    degree_v : int, optional
         Degree in v direction.
 
         **This is a beta parameter**. **The behavior and name may change in the future**.
-    degree_w: int, optional
+    degree_w : int, optional
         Degree in w direction.
 
         **This is a beta parameter**. **The behavior and name may change in the future**.
-    json_data: dict, optional
+    json_data : dict, optional
         JSON dictionary to create a ``UniformSolidSplineCreationParams`` object with provided parameters.
 
     Examples
@@ -479,12 +599,12 @@ class UniformSolidSplineCreationParams(CoreObject):
 
     def __initialize(
             self,
-            n_control_points_u: int,
-            n_control_points_v: int,
-            n_control_points_w: int,
-            degree_u: int,
-            degree_v: int,
-            degree_w: int):
+            n_control_points_u : int,
+            n_control_points_v : int,
+            n_control_points_w : int,
+            degree_u : int,
+            degree_v : int,
+            degree_w : int):
         self._n_control_points_u = n_control_points_u
         self._n_control_points_v = n_control_points_v
         self._n_control_points_w = n_control_points_w
@@ -495,45 +615,45 @@ class UniformSolidSplineCreationParams(CoreObject):
     def __init__(
             self,
             model: CommunicationManager=None,
-            n_control_points_u: int = None,
-            n_control_points_v: int = None,
-            n_control_points_w: int = None,
-            degree_u: int = None,
-            degree_v: int = None,
-            degree_w: int = None,
+            n_control_points_u : int = None,
+            n_control_points_v : int = None,
+            n_control_points_w : int = None,
+            degree_u : int = None,
+            degree_v : int = None,
+            degree_w : int = None,
             json_data : dict = None,
              **kwargs):
         """Initialize a ``UniformSolidSplineCreationParams`` object.
 
         Parameters
         ----------
-        model: Model
+        model : Model
             Model to create a ``UniformSolidSplineCreationParams`` object with default parameters.
-        n_control_points_u: int, optional
+        n_control_points_u : int, optional
             Number of control points in u direction.
 
             **This is a beta parameter**. **The behavior and name may change in the future**.
-        n_control_points_v: int, optional
+        n_control_points_v : int, optional
             Number of control points in v direction.
 
             **This is a beta parameter**. **The behavior and name may change in the future**.
-        n_control_points_w: int, optional
+        n_control_points_w : int, optional
             Number of control points in w direction.
 
             **This is a beta parameter**. **The behavior and name may change in the future**.
-        degree_u: int, optional
+        degree_u : int, optional
             Degree in u direction.
 
             **This is a beta parameter**. **The behavior and name may change in the future**.
-        degree_v: int, optional
+        degree_v : int, optional
             Degree in v direction.
 
             **This is a beta parameter**. **The behavior and name may change in the future**.
-        degree_w: int, optional
+        degree_w : int, optional
             Degree in w direction.
 
             **This is a beta parameter**. **The behavior and name may change in the future**.
-        json_data: dict, optional
+        json_data : dict, optional
             JSON dictionary to create a ``UniformSolidSplineCreationParams`` object with provided parameters.
 
         Examples
@@ -580,27 +700,27 @@ class UniformSolidSplineCreationParams(CoreObject):
 
     @staticmethod
     def set_default(
-            n_control_points_u: int = None,
-            n_control_points_v: int = None,
-            n_control_points_w: int = None,
-            degree_u: int = None,
-            degree_v: int = None,
-            degree_w: int = None):
+            n_control_points_u : int = None,
+            n_control_points_v : int = None,
+            n_control_points_w : int = None,
+            degree_u : int = None,
+            degree_v : int = None,
+            degree_w : int = None):
         """Set the default values of the ``UniformSolidSplineCreationParams`` object.
 
         Parameters
         ----------
-        n_control_points_u: int, optional
+        n_control_points_u : int, optional
             Number of control points in u direction.
-        n_control_points_v: int, optional
+        n_control_points_v : int, optional
             Number of control points in v direction.
-        n_control_points_w: int, optional
+        n_control_points_w : int, optional
             Number of control points in w direction.
-        degree_u: int, optional
+        degree_u : int, optional
             Degree in u direction.
-        degree_v: int, optional
+        degree_v : int, optional
             Degree in v direction.
-        degree_w: int, optional
+        degree_w : int, optional
             Degree in w direction.
         """
         args = locals()
@@ -717,13 +837,13 @@ class TrimmedSplineResults(CoreObject):
 
     Parameters
     ----------
-    model: Model
+    model : Model
         Model to create a ``TrimmedSplineResults`` object with default parameters.
-    error_code: ErrorCode, optional
+    error_code : ErrorCode, optional
         Error code if IGA operation is unsuccessful.
 
         **This is a beta parameter**. **The behavior and name may change in the future**.
-    json_data: dict, optional
+    json_data : dict, optional
         JSON dictionary to create a ``TrimmedSplineResults`` object with provided parameters.
 
     Examples
@@ -734,26 +854,26 @@ class TrimmedSplineResults(CoreObject):
 
     def __initialize(
             self,
-            error_code: ErrorCode):
+            error_code : ErrorCode):
         self._error_code = ErrorCode(error_code)
 
     def __init__(
             self,
             model: CommunicationManager=None,
-            error_code: ErrorCode = None,
+            error_code : ErrorCode = None,
             json_data : dict = None,
              **kwargs):
         """Initialize a ``TrimmedSplineResults`` object.
 
         Parameters
         ----------
-        model: Model
+        model : Model
             Model to create a ``TrimmedSplineResults`` object with default parameters.
-        error_code: ErrorCode, optional
+        error_code : ErrorCode, optional
             Error code if IGA operation is unsuccessful.
 
             **This is a beta parameter**. **The behavior and name may change in the future**.
-        json_data: dict, optional
+        json_data : dict, optional
             JSON dictionary to create a ``TrimmedSplineResults`` object with provided parameters.
 
         Examples
@@ -785,12 +905,12 @@ class TrimmedSplineResults(CoreObject):
 
     @staticmethod
     def set_default(
-            error_code: ErrorCode = None):
+            error_code : ErrorCode = None):
         """Set the default values of the ``TrimmedSplineResults`` object.
 
         Parameters
         ----------
-        error_code: ErrorCode, optional
+        error_code : ErrorCode, optional
             Error code if IGA operation is unsuccessful.
         """
         args = locals()

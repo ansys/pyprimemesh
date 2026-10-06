@@ -1,4 +1,5 @@
-# Copyright (C) 2024 - 2026 ANSYS, Inc. and/or its affiliates.
+# Copyright (C) 2026 ANSYS, Inc. and/or its affiliates.
+# Copyright (C) 2026 Synopsys, Inc. and ANSYS, Inc. All rights reserved.
 # SPDX-License-Identifier: MIT
 #
 # Permission is hereby granted, free of charge, to any person obtaining a copy
@@ -140,8 +141,7 @@ class ControlData(_ControlData):
 
         """
         res = _ControlData.create_size_control(self, sizing_type)
-        new_size_control = SizeControl(self._model, res[0], res[1], res[2])
-        self._size_controls.append(new_size_control)
+        new_size_control = self.get_size_control_by_name(res[2])
         return new_size_control
 
     def create_prism_control(self) -> PrismControl:

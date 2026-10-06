@@ -1,4 +1,4 @@
-# Copyright (C) 2024 - 2025 ANSYS, Inc. and/or its affiliates.
+# Copyright (C) 2026 Synopsys, Inc. and ANSYS, Inc. All rights reserved.
 # SPDX-License-Identifier: MIT
 #
 #
@@ -25,7 +25,7 @@ from __future__ import annotations
 from ansys.meshing.prime.internals.comm_manager import CommunicationManager
 from ansys.meshing.prime.params.primestructs import *
 from ansys.meshing.prime.autogen.coreobject import *
-from typing import List, Any, Union
+from typing import Dict, Any, Union, List, Iterable
 
 class PeriodicControl(CoreObject):
     """Periodic controls provide settings for the recovery of periodic surfaces.
@@ -54,13 +54,13 @@ class PeriodicControl(CoreObject):
         self._freeze()
 
     def get_params(self) -> PeriodicControlParams:
-        """ Get the parameters of the periodic control.
+        """ Gets the parameters of the periodic control.
 
 
         Returns
         -------
         PeriodicControlParams
-            Return parameters of the periodic control.
+            Returns the parameters of the periodic control.
 
 
         Examples
@@ -76,22 +76,28 @@ class PeriodicControl(CoreObject):
         return PeriodicControlParams(model = self._model, json_data = result)
 
     def set_params(self, periodic_control_params : PeriodicControlParams) -> SetParamsResults:
-        """ Set the periodic control parameters.
+        """ Sets the periodic control parameters.
 
 
         Parameters
         ----------
         periodic_control_params : PeriodicControlParams
-            Parameters to control periodic surface recovery.
+            Parameters defining the transformation settings including center, axis, and angle for periodic surface recovery.
+
+        Returns
+        -------
+        SetParamsResults
+            Returns the results of the set parameters operation.
+
 
         Examples
         --------
-        >>> periodic_control.set_params(
-        >>>                  PeriodicControlParams(model=model,
-        >>>                     center=[0,0,0], axis=[0,1,0], angle=180))
+        >>> results = periodic_control.set_params(
+        >>>     PeriodicControlParams(model=model,
+        >>>         center=[0,0,0], axis=[0,1,0], angle=180))
 
         """
-        if not isinstance(periodic_control_params, PeriodicControlParams):
+        if type(periodic_control_params).__name__ != 'PeriodicControlParams':
             raise TypeError("Invalid argument type passed for 'periodic_control_params'. Valid argument type is PeriodicControlParams.")
         args = {"periodic_control_params" : periodic_control_params._jsonify()}
         command_name = "PrimeMesh::PeriodicControl/SetParams"
@@ -101,23 +107,23 @@ class PeriodicControl(CoreObject):
         return SetParamsResults(model = self._model, json_data = result)
 
     def set_suggested_name(self, name : str) -> SetNameResults:
-        """ Sets the unique name for the periodic control based on the suggested name.
+        """ Sets a unique name for the periodic control based on the suggested name.
 
 
         Parameters
         ----------
         name : str
-            Suggested name for the periodic control.
+            Suggested name to assign to the periodic control.
 
         Returns
         -------
         SetNameResults
-            Returns the name of the periodic control.
+            Returns the results of the set name operation.
 
 
         Examples
         --------
-        >>> periodic_control.set_suggested_name("control1")
+        >>> results = periodic_control.set_suggested_name("control1")
 
         """
         if not isinstance(name, str):
@@ -152,19 +158,18 @@ class PeriodicControl(CoreObject):
         return ScopeDefinition(model = self._model, json_data = result)
 
     def set_scope(self, scope : ScopeDefinition) -> SetScopeResults:
-        """ Sets the scope for periodic control to evaluate.
+        """ Sets the scope for the periodic control.
 
-        Periodic Control uses scope to evaluate entities for which periodic surface recovery must be carried out.
 
         Parameters
         ----------
         scope : ScopeDefinition
-            ScopeDefinition to scope entities for periodic surface recovery.
+            Scope definition specifying the entities to evaluate for periodic surface recovery.
 
         Returns
         -------
         SetScopeResults
-            Returns the SetScopeResults.
+            Returns the results of the set scope operation.
 
 
         Examples
@@ -173,10 +178,10 @@ class PeriodicControl(CoreObject):
         >>>                     entity_type=prime.ScopeEntity.FACEZONELETS,
         >>>                     evaluation_type=prime.ScopeEvaluationType.LABELS,
         >>>                     label_expression="periodic-1")
-        >>> periodic_control.set_scope(surface_scope)
+        >>> results = periodic_control.set_scope(surface_scope)
 
         """
-        if not isinstance(scope, ScopeDefinition):
+        if type(scope).__name__ != 'ScopeDefinition':
             raise TypeError("Invalid argument type passed for 'scope'. Valid argument type is ScopeDefinition.")
         args = {"scope" : scope._jsonify()}
         command_name = "PrimeMesh::PeriodicControl/SetScope"
@@ -186,25 +191,26 @@ class PeriodicControl(CoreObject):
         return SetScopeResults(model = self._model, json_data = result)
 
     def get_summary(self, params : PeriodicControlSummaryParams) -> PeriodicControlSummaryResult:
-        """ Get the periodic control summary along with the evaluated scope for the provided parameters.
+        """ Gets the periodic control summary with evaluated scope.
 
 
         Parameters
         ----------
         params : PeriodicControlSummaryParams
-            Periodic control summary parameters.
+            Parameters controlling the summary generation and scope evaluation.
 
         Returns
         -------
         PeriodicControlSummaryResult
-            Return the PeriodicControlSummaryResult.
+            Returns the periodic control summary result with evaluated scope information.
+
 
         Examples
         --------
         >>> results = periodic_control.get_summary(prime.PeriodicControlSummaryParams(model=model))
 
         """
-        if not isinstance(params, PeriodicControlSummaryParams):
+        if type(params).__name__ != 'PeriodicControlSummaryParams':
             raise TypeError("Invalid argument type passed for 'params'. Valid argument type is PeriodicControlSummaryParams.")
         args = {"params" : params._jsonify()}
         command_name = "PrimeMesh::PeriodicControl/GetSummary"

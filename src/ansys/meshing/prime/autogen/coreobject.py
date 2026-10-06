@@ -1,4 +1,4 @@
-# Copyright (C) 2024 - 2025 ANSYS, Inc. and/or its affiliates.
+# Copyright (C) 2026 Synopsys, Inc. and ANSYS, Inc. All rights reserved.
 # SPDX-License-Identifier: MIT
 #
 #
@@ -23,7 +23,7 @@
 """ Auto-generated file. DO NOT MODIFY """
 from __future__ import annotations
 from ansys.meshing.prime.internals.comm_manager import CommunicationManager
-from typing import List, Any, Union
+from typing import Dict, Any, Union, List, Iterable
 
 class CoreObject(object):
     """

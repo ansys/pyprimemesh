@@ -1,4 +1,4 @@
-# Copyright (C) 2024 - 2025 ANSYS, Inc. and/or its affiliates.
+# Copyright (C) 2026 Synopsys, Inc. and ANSYS, Inc. All rights reserved.
 # SPDX-License-Identifier: MIT
 #
 #
@@ -35,23 +35,23 @@ class VolumeQualityResultsPart(CoreObject):
 
     Parameters
     ----------
-    model: Model
+    model : Model
         Model to create a ``VolumeQualityResultsPart`` object with default parameters.
-    cell_quality_measure: CellQualityMeasure, optional
+    cell_quality_measure : CellQualityMeasure, optional
         Type of the cell quality measure.
-    measure_name: str, optional
+    measure_name : str, optional
         Name of the cell quality measure.
-    part_id: int, optional
+    part_id : int, optional
         Id of the part for which quality is computed.
-    quality_limit: float, optional
+    quality_limit : float, optional
         Target quality limit used to find failures.
-    n_found: int, optional
+    n_found : int, optional
         Number of failed cells.
-    max_quality: float, optional
+    max_quality : float, optional
         Maximum value of quality measure.
-    min_quality: float, optional
+    min_quality : float, optional
         Minimum value of quality measure.
-    json_data: dict, optional
+    json_data : dict, optional
         JSON dictionary to create a ``VolumeQualityResultsPart`` object with provided parameters.
 
     Examples
@@ -62,13 +62,13 @@ class VolumeQualityResultsPart(CoreObject):
 
     def __initialize(
             self,
-            cell_quality_measure: CellQualityMeasure,
-            measure_name: str,
-            part_id: int,
-            quality_limit: float,
-            n_found: int,
-            max_quality: float,
-            min_quality: float):
+            cell_quality_measure : CellQualityMeasure,
+            measure_name : str,
+            part_id : int,
+            quality_limit : float,
+            n_found : int,
+            max_quality : float,
+            min_quality : float):
         self._cell_quality_measure = CellQualityMeasure(cell_quality_measure)
         self._measure_name = measure_name
         self._part_id = part_id
@@ -80,36 +80,36 @@ class VolumeQualityResultsPart(CoreObject):
     def __init__(
             self,
             model: CommunicationManager=None,
-            cell_quality_measure: CellQualityMeasure = None,
-            measure_name: str = None,
-            part_id: int = None,
-            quality_limit: float = None,
-            n_found: int = None,
-            max_quality: float = None,
-            min_quality: float = None,
+            cell_quality_measure : CellQualityMeasure = None,
+            measure_name : str = None,
+            part_id : int = None,
+            quality_limit : float = None,
+            n_found : int = None,
+            max_quality : float = None,
+            min_quality : float = None,
             json_data : dict = None,
              **kwargs):
         """Initialize a ``VolumeQualityResultsPart`` object.
 
         Parameters
         ----------
-        model: Model
+        model : Model
             Model to create a ``VolumeQualityResultsPart`` object with default parameters.
-        cell_quality_measure: CellQualityMeasure, optional
+        cell_quality_measure : CellQualityMeasure, optional
             Type of the cell quality measure.
-        measure_name: str, optional
+        measure_name : str, optional
             Name of the cell quality measure.
-        part_id: int, optional
+        part_id : int, optional
             Id of the part for which quality is computed.
-        quality_limit: float, optional
+        quality_limit : float, optional
             Target quality limit used to find failures.
-        n_found: int, optional
+        n_found : int, optional
             Number of failed cells.
-        max_quality: float, optional
+        max_quality : float, optional
             Maximum value of quality measure.
-        min_quality: float, optional
+        min_quality : float, optional
             Minimum value of quality measure.
-        json_data: dict, optional
+        json_data : dict, optional
             JSON dictionary to create a ``VolumeQualityResultsPart`` object with provided parameters.
 
         Examples
@@ -159,30 +159,30 @@ class VolumeQualityResultsPart(CoreObject):
 
     @staticmethod
     def set_default(
-            cell_quality_measure: CellQualityMeasure = None,
-            measure_name: str = None,
-            part_id: int = None,
-            quality_limit: float = None,
-            n_found: int = None,
-            max_quality: float = None,
-            min_quality: float = None):
+            cell_quality_measure : CellQualityMeasure = None,
+            measure_name : str = None,
+            part_id : int = None,
+            quality_limit : float = None,
+            n_found : int = None,
+            max_quality : float = None,
+            min_quality : float = None):
         """Set the default values of the ``VolumeQualityResultsPart`` object.
 
         Parameters
         ----------
-        cell_quality_measure: CellQualityMeasure, optional
+        cell_quality_measure : CellQualityMeasure, optional
             Type of the cell quality measure.
-        measure_name: str, optional
+        measure_name : str, optional
             Name of the cell quality measure.
-        part_id: int, optional
+        part_id : int, optional
             Id of the part for which quality is computed.
-        quality_limit: float, optional
+        quality_limit : float, optional
             Target quality limit used to find failures.
-        n_found: int, optional
+        n_found : int, optional
             Number of failed cells.
-        max_quality: float, optional
+        max_quality : float, optional
             Maximum value of quality measure.
-        min_quality: float, optional
+        min_quality : float, optional
             Minimum value of quality measure.
         """
         args = locals()
@@ -299,15 +299,15 @@ class VolumeQualitySummaryResults(CoreObject):
 
     Parameters
     ----------
-    model: Model
+    model : Model
         Model to create a ``VolumeQualitySummaryResults`` object with default parameters.
-    error_code: ErrorCode, optional
+    error_code : ErrorCode, optional
         Error code associated with the volume quality summary.
-    quality_results_part: List[VolumeQualityResultsPart], optional
+    quality_results_part : List[VolumeQualityResultsPart], optional
         Contains volume quality result per cell quality measure by parts specified in parameters.
-    message: str, optional
+    message : str, optional
         Volume quality summary text.
-    json_data: dict, optional
+    json_data : dict, optional
         JSON dictionary to create a ``VolumeQualitySummaryResults`` object with provided parameters.
 
     Examples
@@ -318,9 +318,9 @@ class VolumeQualitySummaryResults(CoreObject):
 
     def __initialize(
             self,
-            error_code: ErrorCode,
-            quality_results_part: List[VolumeQualityResultsPart],
-            message: str):
+            error_code : ErrorCode,
+            quality_results_part : List[VolumeQualityResultsPart],
+            message : str):
         self._error_code = ErrorCode(error_code)
         self._quality_results_part = quality_results_part
         self._message = message
@@ -328,24 +328,24 @@ class VolumeQualitySummaryResults(CoreObject):
     def __init__(
             self,
             model: CommunicationManager=None,
-            error_code: ErrorCode = None,
-            quality_results_part: List[VolumeQualityResultsPart] = None,
-            message: str = None,
+            error_code : ErrorCode = None,
+            quality_results_part : List[VolumeQualityResultsPart] = None,
+            message : str = None,
             json_data : dict = None,
              **kwargs):
         """Initialize a ``VolumeQualitySummaryResults`` object.
 
         Parameters
         ----------
-        model: Model
+        model : Model
             Model to create a ``VolumeQualitySummaryResults`` object with default parameters.
-        error_code: ErrorCode, optional
+        error_code : ErrorCode, optional
             Error code associated with the volume quality summary.
-        quality_results_part: List[VolumeQualityResultsPart], optional
+        quality_results_part : List[VolumeQualityResultsPart], optional
             Contains volume quality result per cell quality measure by parts specified in parameters.
-        message: str, optional
+        message : str, optional
             Volume quality summary text.
-        json_data: dict, optional
+        json_data : dict, optional
             JSON dictionary to create a ``VolumeQualitySummaryResults`` object with provided parameters.
 
         Examples
@@ -383,18 +383,18 @@ class VolumeQualitySummaryResults(CoreObject):
 
     @staticmethod
     def set_default(
-            error_code: ErrorCode = None,
-            quality_results_part: List[VolumeQualityResultsPart] = None,
-            message: str = None):
+            error_code : ErrorCode = None,
+            quality_results_part : List[VolumeQualityResultsPart] = None,
+            message : str = None):
         """Set the default values of the ``VolumeQualitySummaryResults`` object.
 
         Parameters
         ----------
-        error_code: ErrorCode, optional
+        error_code : ErrorCode, optional
             Error code associated with the volume quality summary.
-        quality_results_part: List[VolumeQualityResultsPart], optional
+        quality_results_part : List[VolumeQualityResultsPart], optional
             Contains volume quality result per cell quality measure by parts specified in parameters.
-        message: str, optional
+        message : str, optional
             Volume quality summary text.
         """
         args = locals()
@@ -463,15 +463,15 @@ class VolumeQualitySummaryParams(CoreObject):
 
     Parameters
     ----------
-    model: Model
+    model : Model
         Model to create a ``VolumeQualitySummaryParams`` object with default parameters.
-    cell_quality_measures: List[CellQualityMeasure], optional
+    cell_quality_measures : List[CellQualityMeasure], optional
         List of cell quality measures for volume quality diagnostics.
-    scope: ScopeDefinition, optional
+    scope : ScopeDefinition, optional
         Scope of the cell zonelets for volume quality diagnostics.
-    quality_limit: Iterable[float], optional
+    quality_limit : Iterable[float], optional
         Quality limit per cell quality measure. If the quality limit is not specified, the default quality limit is used.
-    json_data: dict, optional
+    json_data : dict, optional
         JSON dictionary to create a ``VolumeQualitySummaryParams`` object with provided parameters.
 
     Examples
@@ -482,9 +482,9 @@ class VolumeQualitySummaryParams(CoreObject):
 
     def __initialize(
             self,
-            cell_quality_measures: List[CellQualityMeasure],
-            scope: ScopeDefinition,
-            quality_limit: Iterable[float]):
+            cell_quality_measures : List[CellQualityMeasure],
+            scope : ScopeDefinition,
+            quality_limit : Iterable[float]):
         self._cell_quality_measures = cell_quality_measures
         self._scope = scope
         self._quality_limit = quality_limit if isinstance(quality_limit, np.ndarray) else np.array(quality_limit, dtype=np.double) if quality_limit is not None else None
@@ -492,24 +492,24 @@ class VolumeQualitySummaryParams(CoreObject):
     def __init__(
             self,
             model: CommunicationManager=None,
-            cell_quality_measures: List[CellQualityMeasure] = None,
-            scope: ScopeDefinition = None,
-            quality_limit: Iterable[float] = None,
+            cell_quality_measures : List[CellQualityMeasure] = None,
+            scope : ScopeDefinition = None,
+            quality_limit : Iterable[float] = None,
             json_data : dict = None,
              **kwargs):
         """Initialize a ``VolumeQualitySummaryParams`` object.
 
         Parameters
         ----------
-        model: Model
+        model : Model
             Model to create a ``VolumeQualitySummaryParams`` object with default parameters.
-        cell_quality_measures: List[CellQualityMeasure], optional
+        cell_quality_measures : List[CellQualityMeasure], optional
             List of cell quality measures for volume quality diagnostics.
-        scope: ScopeDefinition, optional
+        scope : ScopeDefinition, optional
             Scope of the cell zonelets for volume quality diagnostics.
-        quality_limit: Iterable[float], optional
+        quality_limit : Iterable[float], optional
             Quality limit per cell quality measure. If the quality limit is not specified, the default quality limit is used.
-        json_data: dict, optional
+        json_data : dict, optional
             JSON dictionary to create a ``VolumeQualitySummaryParams`` object with provided parameters.
 
         Examples
@@ -547,18 +547,18 @@ class VolumeQualitySummaryParams(CoreObject):
 
     @staticmethod
     def set_default(
-            cell_quality_measures: List[CellQualityMeasure] = None,
-            scope: ScopeDefinition = None,
-            quality_limit: Iterable[float] = None):
+            cell_quality_measures : List[CellQualityMeasure] = None,
+            scope : ScopeDefinition = None,
+            quality_limit : Iterable[float] = None):
         """Set the default values of the ``VolumeQualitySummaryParams`` object.
 
         Parameters
         ----------
-        cell_quality_measures: List[CellQualityMeasure], optional
+        cell_quality_measures : List[CellQualityMeasure], optional
             List of cell quality measures for volume quality diagnostics.
-        scope: ScopeDefinition, optional
+        scope : ScopeDefinition, optional
             Scope of the cell zonelets for volume quality diagnostics.
-        quality_limit: Iterable[float], optional
+        quality_limit : Iterable[float], optional
             Quality limit per cell quality measure. If the quality limit is not specified, the default quality limit is used.
         """
         args = locals()
@@ -581,7 +581,7 @@ class VolumeQualitySummaryParams(CoreObject):
         if self._cell_quality_measures is not None:
             json_data["cellQualityMeasures"] = [data for data in self._cell_quality_measures]
         if self._scope is not None:
-            json_data["scope"] = self._scope._jsonify()
+            json_data["scope"] = self._scope if isinstance(self._scope, dict) else self._scope._jsonify()
         if self._quality_limit is not None:
             json_data["qualityLimit"] = self._quality_limit
         [ json_data.update({ utils.to_camel_case(key) : value }) for key, value in self._custom_params.items()]

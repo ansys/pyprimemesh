@@ -1,4 +1,4 @@
-# Copyright (C) 2024 - 2025 ANSYS, Inc. and/or its affiliates.
+# Copyright (C) 2026 Synopsys, Inc. and ANSYS, Inc. All rights reserved.
 # SPDX-License-Identifier: MIT
 #
 #
@@ -69,15 +69,15 @@ class AutoMeshResults(CoreObject):
 
     Parameters
     ----------
-    model: Model
+    model : Model
         Model to create a ``AutoMeshResults`` object with default parameters.
-    error_code: ErrorCode, optional
+    error_code : ErrorCode, optional
         Provides error message when automesh fails.
-    warning_codes: List[WarningCode], optional
+    warning_codes : List[WarningCode], optional
         Warning codes associated with the operation.
-    error_locations: Iterable[float], optional
+    error_locations : Iterable[float], optional
         Error location coordinates returned when automesh fails.
-    json_data: dict, optional
+    json_data : dict, optional
         JSON dictionary to create a ``AutoMeshResults`` object with provided parameters.
 
     Examples
@@ -88,9 +88,9 @@ class AutoMeshResults(CoreObject):
 
     def __initialize(
             self,
-            error_code: ErrorCode,
-            warning_codes: List[WarningCode],
-            error_locations: Iterable[float]):
+            error_code : ErrorCode,
+            warning_codes : List[WarningCode],
+            error_locations : Iterable[float]):
         self._error_code = ErrorCode(error_code)
         self._warning_codes = warning_codes
         self._error_locations = error_locations if isinstance(error_locations, np.ndarray) else np.array(error_locations, dtype=np.double) if error_locations is not None else None
@@ -98,24 +98,24 @@ class AutoMeshResults(CoreObject):
     def __init__(
             self,
             model: CommunicationManager=None,
-            error_code: ErrorCode = None,
-            warning_codes: List[WarningCode] = None,
-            error_locations: Iterable[float] = None,
+            error_code : ErrorCode = None,
+            warning_codes : List[WarningCode] = None,
+            error_locations : Iterable[float] = None,
             json_data : dict = None,
              **kwargs):
         """Initialize a ``AutoMeshResults`` object.
 
         Parameters
         ----------
-        model: Model
+        model : Model
             Model to create a ``AutoMeshResults`` object with default parameters.
-        error_code: ErrorCode, optional
+        error_code : ErrorCode, optional
             Provides error message when automesh fails.
-        warning_codes: List[WarningCode], optional
+        warning_codes : List[WarningCode], optional
             Warning codes associated with the operation.
-        error_locations: Iterable[float], optional
+        error_locations : Iterable[float], optional
             Error location coordinates returned when automesh fails.
-        json_data: dict, optional
+        json_data : dict, optional
             JSON dictionary to create a ``AutoMeshResults`` object with provided parameters.
 
         Examples
@@ -153,18 +153,18 @@ class AutoMeshResults(CoreObject):
 
     @staticmethod
     def set_default(
-            error_code: ErrorCode = None,
-            warning_codes: List[WarningCode] = None,
-            error_locations: Iterable[float] = None):
+            error_code : ErrorCode = None,
+            warning_codes : List[WarningCode] = None,
+            error_locations : Iterable[float] = None):
         """Set the default values of the ``AutoMeshResults`` object.
 
         Parameters
         ----------
-        error_code: ErrorCode, optional
+        error_code : ErrorCode, optional
             Provides error message when automesh fails.
-        warning_codes: List[WarningCode], optional
+        warning_codes : List[WarningCode], optional
             Warning codes associated with the operation.
-        error_locations: Iterable[float], optional
+        error_locations : Iterable[float], optional
             Error location coordinates returned when automesh fails.
         """
         args = locals()
@@ -233,13 +233,13 @@ class PrismStairStep(CoreObject):
 
     Parameters
     ----------
-    model: Model
+    model : Model
         Model to create a ``PrismStairStep`` object with default parameters.
-    check_proximity: bool, optional
+    check_proximity : bool, optional
         Check whether to enable or disable stairstepping at prisms within proximity of boundary or prism cap.
-    gap_factor_scale: float, optional
+    gap_factor_scale : float, optional
         Scale factor for prism proximity detection gap factor.
-    json_data: dict, optional
+    json_data : dict, optional
         JSON dictionary to create a ``PrismStairStep`` object with provided parameters.
 
     Examples
@@ -250,29 +250,29 @@ class PrismStairStep(CoreObject):
 
     def __initialize(
             self,
-            check_proximity: bool,
-            gap_factor_scale: float):
+            check_proximity : bool,
+            gap_factor_scale : float):
         self._check_proximity = check_proximity
         self._gap_factor_scale = gap_factor_scale
 
     def __init__(
             self,
             model: CommunicationManager=None,
-            check_proximity: bool = None,
-            gap_factor_scale: float = None,
+            check_proximity : bool = None,
+            gap_factor_scale : float = None,
             json_data : dict = None,
              **kwargs):
         """Initialize a ``PrismStairStep`` object.
 
         Parameters
         ----------
-        model: Model
+        model : Model
             Model to create a ``PrismStairStep`` object with default parameters.
-        check_proximity: bool, optional
+        check_proximity : bool, optional
             Check whether to enable or disable stairstepping at prisms within proximity of boundary or prism cap.
-        gap_factor_scale: float, optional
+        gap_factor_scale : float, optional
             Scale factor for prism proximity detection gap factor.
-        json_data: dict, optional
+        json_data : dict, optional
             JSON dictionary to create a ``PrismStairStep`` object with provided parameters.
 
         Examples
@@ -307,15 +307,15 @@ class PrismStairStep(CoreObject):
 
     @staticmethod
     def set_default(
-            check_proximity: bool = None,
-            gap_factor_scale: float = None):
+            check_proximity : bool = None,
+            gap_factor_scale : float = None):
         """Set the default values of the ``PrismStairStep`` object.
 
         Parameters
         ----------
-        check_proximity: bool, optional
+        check_proximity : bool, optional
             Check whether to enable or disable stairstepping at prisms within proximity of boundary or prism cap.
-        gap_factor_scale: float, optional
+        gap_factor_scale : float, optional
             Scale factor for prism proximity detection gap factor.
         """
         args = locals()
@@ -372,13 +372,13 @@ class PrismParams(CoreObject):
 
     Parameters
     ----------
-    model: Model
+    model : Model
         Model to create a ``PrismParams`` object with default parameters.
-    stair_step: PrismStairStep, optional
+    stair_step : PrismStairStep, optional
         Prism stairstep parameters.
-    no_imprint_zonelets: Iterable[int], optional
+    no_imprint_zonelets : Iterable[int], optional
         Option to specify zonelets to skip prism imprint.
-    json_data: dict, optional
+    json_data : dict, optional
         JSON dictionary to create a ``PrismParams`` object with provided parameters.
 
     Examples
@@ -389,29 +389,29 @@ class PrismParams(CoreObject):
 
     def __initialize(
             self,
-            stair_step: PrismStairStep,
-            no_imprint_zonelets: Iterable[int]):
+            stair_step : PrismStairStep,
+            no_imprint_zonelets : Iterable[int]):
         self._stair_step = stair_step
         self._no_imprint_zonelets = no_imprint_zonelets if isinstance(no_imprint_zonelets, np.ndarray) else np.array(no_imprint_zonelets, dtype=np.int32) if no_imprint_zonelets is not None else None
 
     def __init__(
             self,
             model: CommunicationManager=None,
-            stair_step: PrismStairStep = None,
-            no_imprint_zonelets: Iterable[int] = None,
+            stair_step : PrismStairStep = None,
+            no_imprint_zonelets : Iterable[int] = None,
             json_data : dict = None,
              **kwargs):
         """Initialize a ``PrismParams`` object.
 
         Parameters
         ----------
-        model: Model
+        model : Model
             Model to create a ``PrismParams`` object with default parameters.
-        stair_step: PrismStairStep, optional
+        stair_step : PrismStairStep, optional
             Prism stairstep parameters.
-        no_imprint_zonelets: Iterable[int], optional
+        no_imprint_zonelets : Iterable[int], optional
             Option to specify zonelets to skip prism imprint.
-        json_data: dict, optional
+        json_data : dict, optional
             JSON dictionary to create a ``PrismParams`` object with provided parameters.
 
         Examples
@@ -446,15 +446,15 @@ class PrismParams(CoreObject):
 
     @staticmethod
     def set_default(
-            stair_step: PrismStairStep = None,
-            no_imprint_zonelets: Iterable[int] = None):
+            stair_step : PrismStairStep = None,
+            no_imprint_zonelets : Iterable[int] = None):
         """Set the default values of the ``PrismParams`` object.
 
         Parameters
         ----------
-        stair_step: PrismStairStep, optional
+        stair_step : PrismStairStep, optional
             Prism stairstep parameters.
-        no_imprint_zonelets: Iterable[int], optional
+        no_imprint_zonelets : Iterable[int], optional
             Option to specify zonelets to skip prism imprint.
         """
         args = locals()
@@ -475,7 +475,7 @@ class PrismParams(CoreObject):
     def _jsonify(self) -> Dict[str, Any]:
         json_data = {}
         if self._stair_step is not None:
-            json_data["stairStep"] = self._stair_step._jsonify()
+            json_data["stairStep"] = self._stair_step if isinstance(self._stair_step, dict) else self._stair_step._jsonify()
         if self._no_imprint_zonelets is not None:
             json_data["noImprintZonelets"] = self._no_imprint_zonelets
         [ json_data.update({ utils.to_camel_case(key) : value }) for key, value in self._custom_params.items()]
@@ -511,15 +511,15 @@ class SurfaceMeshSizeScaling(CoreObject):
 
     Parameters
     ----------
-    model: Model
+    model : Model
         Model to create a ``SurfaceMeshSizeScaling`` object with default parameters.
-    factor: float, optional
+    factor : float, optional
         Value by which size should be multiplied when the size falls within a certain range. Applicable only when size field type is set to Geometric in AutoMeshParams structure.
-    size_range_min: float, optional
+    size_range_min : float, optional
         Minimum size required to apply scaling. Applicable only when size field type is set to Geometric in AutoMeshParams structure.
-    size_range_max: float, optional
+    size_range_max : float, optional
         Maximum size required to apply scaling. Applicable only when size field type is set to Geometric in AutoMeshParams structure.
-    json_data: dict, optional
+    json_data : dict, optional
         JSON dictionary to create a ``SurfaceMeshSizeScaling`` object with provided parameters.
 
     Examples
@@ -530,9 +530,9 @@ class SurfaceMeshSizeScaling(CoreObject):
 
     def __initialize(
             self,
-            factor: float,
-            size_range_min: float,
-            size_range_max: float):
+            factor : float,
+            size_range_min : float,
+            size_range_max : float):
         self._factor = factor
         self._size_range_min = size_range_min
         self._size_range_max = size_range_max
@@ -540,24 +540,24 @@ class SurfaceMeshSizeScaling(CoreObject):
     def __init__(
             self,
             model: CommunicationManager=None,
-            factor: float = None,
-            size_range_min: float = None,
-            size_range_max: float = None,
+            factor : float = None,
+            size_range_min : float = None,
+            size_range_max : float = None,
             json_data : dict = None,
              **kwargs):
         """Initialize a ``SurfaceMeshSizeScaling`` object.
 
         Parameters
         ----------
-        model: Model
+        model : Model
             Model to create a ``SurfaceMeshSizeScaling`` object with default parameters.
-        factor: float, optional
+        factor : float, optional
             Value by which size should be multiplied when the size falls within a certain range. Applicable only when size field type is set to Geometric in AutoMeshParams structure.
-        size_range_min: float, optional
+        size_range_min : float, optional
             Minimum size required to apply scaling. Applicable only when size field type is set to Geometric in AutoMeshParams structure.
-        size_range_max: float, optional
+        size_range_max : float, optional
             Maximum size required to apply scaling. Applicable only when size field type is set to Geometric in AutoMeshParams structure.
-        json_data: dict, optional
+        json_data : dict, optional
             JSON dictionary to create a ``SurfaceMeshSizeScaling`` object with provided parameters.
 
         Examples
@@ -595,18 +595,18 @@ class SurfaceMeshSizeScaling(CoreObject):
 
     @staticmethod
     def set_default(
-            factor: float = None,
-            size_range_min: float = None,
-            size_range_max: float = None):
+            factor : float = None,
+            size_range_min : float = None,
+            size_range_max : float = None):
         """Set the default values of the ``SurfaceMeshSizeScaling`` object.
 
         Parameters
         ----------
-        factor: float, optional
+        factor : float, optional
             Value by which size should be multiplied when the size falls within a certain range. Applicable only when size field type is set to Geometric in AutoMeshParams structure.
-        size_range_min: float, optional
+        size_range_min : float, optional
             Minimum size required to apply scaling. Applicable only when size field type is set to Geometric in AutoMeshParams structure.
-        size_range_max: float, optional
+        size_range_max : float, optional
             Maximum size required to apply scaling. Applicable only when size field type is set to Geometric in AutoMeshParams structure.
         """
         args = locals()
@@ -675,23 +675,23 @@ class HexCoreParams(CoreObject):
 
     Parameters
     ----------
-    model: Model
+    model : Model
         Model to create a ``HexCoreParams`` object with default parameters.
-    transition_size_field_type: SizeFieldType, optional
+    transition_size_field_type : SizeFieldType, optional
         Size field type to be used for transition volume (volume between hexcore and boundary).
-    buffer_layers: int, optional
+    buffer_layers : int, optional
         Minimum number of cell layers of the same size before the cell size halves or doubles.
-    rel_peel_layer_offset: float, optional
+    rel_peel_layer_offset : float, optional
         Gap between hexahedral core and geometry surface relative to the surface mesh size.
-    transition_layer_type: HexCoreTransitionLayerType, optional
+    transition_layer_type : HexCoreTransitionLayerType, optional
         Handle size transition of hex cells.
-    cell_element_type: HexCoreCellElementType, optional
+    cell_element_type : HexCoreCellElementType, optional
         Cell element type of hex-shaped cells.
-    surface_mesh_size_scaling: SurfaceMeshSizeScaling, optional
+    surface_mesh_size_scaling : SurfaceMeshSizeScaling, optional
         Setting for scaling surface mesh size for hexcore refinement.
-    enable_region_based_hexcore: bool, optional
+    enable_region_based_hexcore : bool, optional
         Checks whether to enable region based hexcore or not.
-    json_data: dict, optional
+    json_data : dict, optional
         JSON dictionary to create a ``HexCoreParams`` object with provided parameters.
 
     Examples
@@ -702,13 +702,13 @@ class HexCoreParams(CoreObject):
 
     def __initialize(
             self,
-            transition_size_field_type: SizeFieldType,
-            buffer_layers: int,
-            rel_peel_layer_offset: float,
-            transition_layer_type: HexCoreTransitionLayerType,
-            cell_element_type: HexCoreCellElementType,
-            surface_mesh_size_scaling: SurfaceMeshSizeScaling,
-            enable_region_based_hexcore: bool):
+            transition_size_field_type : SizeFieldType,
+            buffer_layers : int,
+            rel_peel_layer_offset : float,
+            transition_layer_type : HexCoreTransitionLayerType,
+            cell_element_type : HexCoreCellElementType,
+            surface_mesh_size_scaling : SurfaceMeshSizeScaling,
+            enable_region_based_hexcore : bool):
         self._transition_size_field_type = SizeFieldType(transition_size_field_type)
         self._buffer_layers = buffer_layers
         self._rel_peel_layer_offset = rel_peel_layer_offset
@@ -720,36 +720,36 @@ class HexCoreParams(CoreObject):
     def __init__(
             self,
             model: CommunicationManager=None,
-            transition_size_field_type: SizeFieldType = None,
-            buffer_layers: int = None,
-            rel_peel_layer_offset: float = None,
-            transition_layer_type: HexCoreTransitionLayerType = None,
-            cell_element_type: HexCoreCellElementType = None,
-            surface_mesh_size_scaling: SurfaceMeshSizeScaling = None,
-            enable_region_based_hexcore: bool = None,
+            transition_size_field_type : SizeFieldType = None,
+            buffer_layers : int = None,
+            rel_peel_layer_offset : float = None,
+            transition_layer_type : HexCoreTransitionLayerType = None,
+            cell_element_type : HexCoreCellElementType = None,
+            surface_mesh_size_scaling : SurfaceMeshSizeScaling = None,
+            enable_region_based_hexcore : bool = None,
             json_data : dict = None,
              **kwargs):
         """Initialize a ``HexCoreParams`` object.
 
         Parameters
         ----------
-        model: Model
+        model : Model
             Model to create a ``HexCoreParams`` object with default parameters.
-        transition_size_field_type: SizeFieldType, optional
+        transition_size_field_type : SizeFieldType, optional
             Size field type to be used for transition volume (volume between hexcore and boundary).
-        buffer_layers: int, optional
+        buffer_layers : int, optional
             Minimum number of cell layers of the same size before the cell size halves or doubles.
-        rel_peel_layer_offset: float, optional
+        rel_peel_layer_offset : float, optional
             Gap between hexahedral core and geometry surface relative to the surface mesh size.
-        transition_layer_type: HexCoreTransitionLayerType, optional
+        transition_layer_type : HexCoreTransitionLayerType, optional
             Handle size transition of hex cells.
-        cell_element_type: HexCoreCellElementType, optional
+        cell_element_type : HexCoreCellElementType, optional
             Cell element type of hex-shaped cells.
-        surface_mesh_size_scaling: SurfaceMeshSizeScaling, optional
+        surface_mesh_size_scaling : SurfaceMeshSizeScaling, optional
             Setting for scaling surface mesh size for hexcore refinement.
-        enable_region_based_hexcore: bool, optional
+        enable_region_based_hexcore : bool, optional
             Checks whether to enable region based hexcore or not.
-        json_data: dict, optional
+        json_data : dict, optional
             JSON dictionary to create a ``HexCoreParams`` object with provided parameters.
 
         Examples
@@ -799,30 +799,30 @@ class HexCoreParams(CoreObject):
 
     @staticmethod
     def set_default(
-            transition_size_field_type: SizeFieldType = None,
-            buffer_layers: int = None,
-            rel_peel_layer_offset: float = None,
-            transition_layer_type: HexCoreTransitionLayerType = None,
-            cell_element_type: HexCoreCellElementType = None,
-            surface_mesh_size_scaling: SurfaceMeshSizeScaling = None,
-            enable_region_based_hexcore: bool = None):
+            transition_size_field_type : SizeFieldType = None,
+            buffer_layers : int = None,
+            rel_peel_layer_offset : float = None,
+            transition_layer_type : HexCoreTransitionLayerType = None,
+            cell_element_type : HexCoreCellElementType = None,
+            surface_mesh_size_scaling : SurfaceMeshSizeScaling = None,
+            enable_region_based_hexcore : bool = None):
         """Set the default values of the ``HexCoreParams`` object.
 
         Parameters
         ----------
-        transition_size_field_type: SizeFieldType, optional
+        transition_size_field_type : SizeFieldType, optional
             Size field type to be used for transition volume (volume between hexcore and boundary).
-        buffer_layers: int, optional
+        buffer_layers : int, optional
             Minimum number of cell layers of the same size before the cell size halves or doubles.
-        rel_peel_layer_offset: float, optional
+        rel_peel_layer_offset : float, optional
             Gap between hexahedral core and geometry surface relative to the surface mesh size.
-        transition_layer_type: HexCoreTransitionLayerType, optional
+        transition_layer_type : HexCoreTransitionLayerType, optional
             Handle size transition of hex cells.
-        cell_element_type: HexCoreCellElementType, optional
+        cell_element_type : HexCoreCellElementType, optional
             Cell element type of hex-shaped cells.
-        surface_mesh_size_scaling: SurfaceMeshSizeScaling, optional
+        surface_mesh_size_scaling : SurfaceMeshSizeScaling, optional
             Setting for scaling surface mesh size for hexcore refinement.
-        enable_region_based_hexcore: bool, optional
+        enable_region_based_hexcore : bool, optional
             Checks whether to enable region based hexcore or not.
         """
         args = locals()
@@ -853,7 +853,7 @@ class HexCoreParams(CoreObject):
         if self._cell_element_type is not None:
             json_data["cellElementType"] = self._cell_element_type
         if self._surface_mesh_size_scaling is not None:
-            json_data["surfaceMeshSizeScaling"] = self._surface_mesh_size_scaling._jsonify()
+            json_data["surfaceMeshSizeScaling"] = self._surface_mesh_size_scaling if isinstance(self._surface_mesh_size_scaling, dict) else self._surface_mesh_size_scaling._jsonify()
         if self._enable_region_based_hexcore is not None:
             json_data["enableRegionBasedHexcore"] = self._enable_region_based_hexcore
         [ json_data.update({ utils.to_camel_case(key) : value }) for key, value in self._custom_params.items()]
@@ -939,11 +939,11 @@ class TetParams(CoreObject):
 
     Parameters
     ----------
-    model: Model
+    model : Model
         Model to create a ``TetParams`` object with default parameters.
-    quadratic: bool, optional
+    quadratic : bool, optional
         Option to generate quadratic tetrahedral mesh. It is not supported with parallel meshing. It is only supported with pure tetrahedral mesh.
-    json_data: dict, optional
+    json_data : dict, optional
         JSON dictionary to create a ``TetParams`` object with provided parameters.
 
     Examples
@@ -954,24 +954,24 @@ class TetParams(CoreObject):
 
     def __initialize(
             self,
-            quadratic: bool):
+            quadratic : bool):
         self._quadratic = quadratic
 
     def __init__(
             self,
             model: CommunicationManager=None,
-            quadratic: bool = None,
+            quadratic : bool = None,
             json_data : dict = None,
              **kwargs):
         """Initialize a ``TetParams`` object.
 
         Parameters
         ----------
-        model: Model
+        model : Model
             Model to create a ``TetParams`` object with default parameters.
-        quadratic: bool, optional
+        quadratic : bool, optional
             Option to generate quadratic tetrahedral mesh. It is not supported with parallel meshing. It is only supported with pure tetrahedral mesh.
-        json_data: dict, optional
+        json_data : dict, optional
             JSON dictionary to create a ``TetParams`` object with provided parameters.
 
         Examples
@@ -1003,12 +1003,12 @@ class TetParams(CoreObject):
 
     @staticmethod
     def set_default(
-            quadratic: bool = None):
+            quadratic : bool = None):
         """Set the default values of the ``TetParams`` object.
 
         Parameters
         ----------
-        quadratic: bool, optional
+        quadratic : bool, optional
             Option to generate quadratic tetrahedral mesh. It is not supported with parallel meshing. It is only supported with pure tetrahedral mesh.
         """
         args = locals()
@@ -1053,31 +1053,31 @@ class AutoMeshParams(CoreObject):
 
     Parameters
     ----------
-    model: Model
+    model : Model
         Model to create a ``AutoMeshParams`` object with default parameters.
-    size_field_type: SizeFieldType, optional
+    size_field_type : SizeFieldType, optional
         Type of sizing to be used to generate volume mesh.
-    max_size: float, optional
+    max_size : float, optional
         Maximum cell size.
-    prism_control_ids: Iterable[int], optional
+    prism_control_ids : Iterable[int], optional
         Set prism control ids.
-    thin_volume_control_ids: Iterable[int], optional
+    thin_volume_control_ids : Iterable[int], optional
         Set thin volume control ids.
-    multi_zone_control_ids: Iterable[int], optional
+    multi_zone_control_ids : Iterable[int], optional
         Set MultiZone control ids.
-    volume_fill_type: VolumeFillType, optional
+    volume_fill_type : VolumeFillType, optional
         Option to fill volume.
-    prism: PrismParams, optional
+    prism : PrismParams, optional
         Prism control parameters.
-    tet: TetParams, optional
+    tet : TetParams, optional
         Parameters to control tetrahedral mesh generation.
-    hexcore: HexCoreParams, optional
+    hexcore : HexCoreParams, optional
         Parameters to control hexahedral mesh generation.
-    volume_control_ids: Iterable[int], optional
+    volume_control_ids : Iterable[int], optional
         Ids of the volume controls.
-    periodic_control_ids: Iterable[int], optional
+    periodic_control_ids : Iterable[int], optional
         Ids of the periodic controls.
-    json_data: dict, optional
+    json_data : dict, optional
         JSON dictionary to create a ``AutoMeshParams`` object with provided parameters.
 
     Examples
@@ -1088,17 +1088,17 @@ class AutoMeshParams(CoreObject):
 
     def __initialize(
             self,
-            size_field_type: SizeFieldType,
-            max_size: float,
-            prism_control_ids: Iterable[int],
-            thin_volume_control_ids: Iterable[int],
-            multi_zone_control_ids: Iterable[int],
-            volume_fill_type: VolumeFillType,
-            prism: PrismParams,
-            tet: TetParams,
-            hexcore: HexCoreParams,
-            volume_control_ids: Iterable[int],
-            periodic_control_ids: Iterable[int]):
+            size_field_type : SizeFieldType,
+            max_size : float,
+            prism_control_ids : Iterable[int],
+            thin_volume_control_ids : Iterable[int],
+            multi_zone_control_ids : Iterable[int],
+            volume_fill_type : VolumeFillType,
+            prism : PrismParams,
+            tet : TetParams,
+            hexcore : HexCoreParams,
+            volume_control_ids : Iterable[int],
+            periodic_control_ids : Iterable[int]):
         self._size_field_type = SizeFieldType(size_field_type)
         self._max_size = max_size
         self._prism_control_ids = prism_control_ids if isinstance(prism_control_ids, np.ndarray) else np.array(prism_control_ids, dtype=np.int32) if prism_control_ids is not None else None
@@ -1114,48 +1114,48 @@ class AutoMeshParams(CoreObject):
     def __init__(
             self,
             model: CommunicationManager=None,
-            size_field_type: SizeFieldType = None,
-            max_size: float = None,
-            prism_control_ids: Iterable[int] = None,
-            thin_volume_control_ids: Iterable[int] = None,
-            multi_zone_control_ids: Iterable[int] = None,
-            volume_fill_type: VolumeFillType = None,
-            prism: PrismParams = None,
-            tet: TetParams = None,
-            hexcore: HexCoreParams = None,
-            volume_control_ids: Iterable[int] = None,
-            periodic_control_ids: Iterable[int] = None,
+            size_field_type : SizeFieldType = None,
+            max_size : float = None,
+            prism_control_ids : Iterable[int] = None,
+            thin_volume_control_ids : Iterable[int] = None,
+            multi_zone_control_ids : Iterable[int] = None,
+            volume_fill_type : VolumeFillType = None,
+            prism : PrismParams = None,
+            tet : TetParams = None,
+            hexcore : HexCoreParams = None,
+            volume_control_ids : Iterable[int] = None,
+            periodic_control_ids : Iterable[int] = None,
             json_data : dict = None,
              **kwargs):
         """Initialize a ``AutoMeshParams`` object.
 
         Parameters
         ----------
-        model: Model
+        model : Model
             Model to create a ``AutoMeshParams`` object with default parameters.
-        size_field_type: SizeFieldType, optional
+        size_field_type : SizeFieldType, optional
             Type of sizing to be used to generate volume mesh.
-        max_size: float, optional
+        max_size : float, optional
             Maximum cell size.
-        prism_control_ids: Iterable[int], optional
+        prism_control_ids : Iterable[int], optional
             Set prism control ids.
-        thin_volume_control_ids: Iterable[int], optional
+        thin_volume_control_ids : Iterable[int], optional
             Set thin volume control ids.
-        multi_zone_control_ids: Iterable[int], optional
+        multi_zone_control_ids : Iterable[int], optional
             Set MultiZone control ids.
-        volume_fill_type: VolumeFillType, optional
+        volume_fill_type : VolumeFillType, optional
             Option to fill volume.
-        prism: PrismParams, optional
+        prism : PrismParams, optional
             Prism control parameters.
-        tet: TetParams, optional
+        tet : TetParams, optional
             Parameters to control tetrahedral mesh generation.
-        hexcore: HexCoreParams, optional
+        hexcore : HexCoreParams, optional
             Parameters to control hexahedral mesh generation.
-        volume_control_ids: Iterable[int], optional
+        volume_control_ids : Iterable[int], optional
             Ids of the volume controls.
-        periodic_control_ids: Iterable[int], optional
+        periodic_control_ids : Iterable[int], optional
             Ids of the periodic controls.
-        json_data: dict, optional
+        json_data : dict, optional
             JSON dictionary to create a ``AutoMeshParams`` object with provided parameters.
 
         Examples
@@ -1217,42 +1217,42 @@ class AutoMeshParams(CoreObject):
 
     @staticmethod
     def set_default(
-            size_field_type: SizeFieldType = None,
-            max_size: float = None,
-            prism_control_ids: Iterable[int] = None,
-            thin_volume_control_ids: Iterable[int] = None,
-            multi_zone_control_ids: Iterable[int] = None,
-            volume_fill_type: VolumeFillType = None,
-            prism: PrismParams = None,
-            tet: TetParams = None,
-            hexcore: HexCoreParams = None,
-            volume_control_ids: Iterable[int] = None,
-            periodic_control_ids: Iterable[int] = None):
+            size_field_type : SizeFieldType = None,
+            max_size : float = None,
+            prism_control_ids : Iterable[int] = None,
+            thin_volume_control_ids : Iterable[int] = None,
+            multi_zone_control_ids : Iterable[int] = None,
+            volume_fill_type : VolumeFillType = None,
+            prism : PrismParams = None,
+            tet : TetParams = None,
+            hexcore : HexCoreParams = None,
+            volume_control_ids : Iterable[int] = None,
+            periodic_control_ids : Iterable[int] = None):
         """Set the default values of the ``AutoMeshParams`` object.
 
         Parameters
         ----------
-        size_field_type: SizeFieldType, optional
+        size_field_type : SizeFieldType, optional
             Type of sizing to be used to generate volume mesh.
-        max_size: float, optional
+        max_size : float, optional
             Maximum cell size.
-        prism_control_ids: Iterable[int], optional
+        prism_control_ids : Iterable[int], optional
             Set prism control ids.
-        thin_volume_control_ids: Iterable[int], optional
+        thin_volume_control_ids : Iterable[int], optional
             Set thin volume control ids.
-        multi_zone_control_ids: Iterable[int], optional
+        multi_zone_control_ids : Iterable[int], optional
             Set MultiZone control ids.
-        volume_fill_type: VolumeFillType, optional
+        volume_fill_type : VolumeFillType, optional
             Option to fill volume.
-        prism: PrismParams, optional
+        prism : PrismParams, optional
             Prism control parameters.
-        tet: TetParams, optional
+        tet : TetParams, optional
             Parameters to control tetrahedral mesh generation.
-        hexcore: HexCoreParams, optional
+        hexcore : HexCoreParams, optional
             Parameters to control hexahedral mesh generation.
-        volume_control_ids: Iterable[int], optional
+        volume_control_ids : Iterable[int], optional
             Ids of the volume controls.
-        periodic_control_ids: Iterable[int], optional
+        periodic_control_ids : Iterable[int], optional
             Ids of the periodic controls.
         """
         args = locals()
@@ -1285,11 +1285,11 @@ class AutoMeshParams(CoreObject):
         if self._volume_fill_type is not None:
             json_data["volumeFillType"] = self._volume_fill_type
         if self._prism is not None:
-            json_data["prism"] = self._prism._jsonify()
+            json_data["prism"] = self._prism if isinstance(self._prism, dict) else self._prism._jsonify()
         if self._tet is not None:
-            json_data["tet"] = self._tet._jsonify()
+            json_data["tet"] = self._tet if isinstance(self._tet, dict) else self._tet._jsonify()
         if self._hexcore is not None:
-            json_data["hexcore"] = self._hexcore._jsonify()
+            json_data["hexcore"] = self._hexcore if isinstance(self._hexcore, dict) else self._hexcore._jsonify()
         if self._volume_control_ids is not None:
             json_data["volumeControlIds"] = self._volume_control_ids
         if self._periodic_control_ids is not None:

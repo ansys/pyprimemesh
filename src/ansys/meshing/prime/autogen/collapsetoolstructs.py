@@ -1,4 +1,4 @@
-# Copyright (C) 2024 - 2025 ANSYS, Inc. and/or its affiliates.
+# Copyright (C) 2026 Synopsys, Inc. and ANSYS, Inc. All rights reserved.
 # SPDX-License-Identifier: MIT
 #
 #
@@ -35,21 +35,23 @@ class CollapseParams(CoreObject):
 
     Parameters
     ----------
-    model: Model
+    model : Model
         Model to create a ``CollapseParams`` object with default parameters.
-    feature_type: SurfaceFeatureType, optional
+    feature_type : SurfaceFeatureType, optional
         Feature type to be preserved when performing collapse.
-    collapse_ratio: float, optional
+    collapse_ratio : float, optional
         Maximum ratio of shortest face edge length to longest face edge length.
-    preserve_quality: bool, optional
+    preserve_quality : bool, optional
         Option to preserve quality of neighboring triangles when performing collapse.Collapse may lead to quality deterioration beyond target skewness. Such collapse is prevented, when the option is enabled.
-    target_skewness: float, optional
+    target_skewness : float, optional
         Skewness limit used as target to preserve quality. Better quality elements are skipped for collapse.
-    keep_edge_connectivity: bool, optional
+    skip_good_quality_elements : bool, optional
+        Option to skip collapse of good quality elements. That is, face elements whose quality is already better than the target skewness. By default such good quality elements are skipped for collapse. When the value is false,  the option collapses the good quality elements too if the resulting quality is better than target skewness. You can use skipGoodQualityElements option only when you enable preserveQuality and define a valid targetSkewness. The default value is true.
+    keep_edge_connectivity : bool, optional
         Option to keep edge connectivity. The default value is false. When keep edge connectivity is true, edges that were connected to collapsed triangles will be connected to different triangles. Otherwise, edges will be disconnected from faces.
 
         **This is a beta parameter**. **The behavior and name may change in the future**.
-    json_data: dict, optional
+    json_data : dict, optional
         JSON dictionary to create a ``CollapseParams`` object with provided parameters.
 
     Examples
@@ -60,46 +62,51 @@ class CollapseParams(CoreObject):
 
     def __initialize(
             self,
-            feature_type: SurfaceFeatureType,
-            collapse_ratio: float,
-            preserve_quality: bool,
-            target_skewness: float,
-            keep_edge_connectivity: bool):
+            feature_type : SurfaceFeatureType,
+            collapse_ratio : float,
+            preserve_quality : bool,
+            target_skewness : float,
+            skip_good_quality_elements : bool,
+            keep_edge_connectivity : bool):
         self._feature_type = SurfaceFeatureType(feature_type)
         self._collapse_ratio = collapse_ratio
         self._preserve_quality = preserve_quality
         self._target_skewness = target_skewness
+        self._skip_good_quality_elements = skip_good_quality_elements
         self._keep_edge_connectivity = keep_edge_connectivity
 
     def __init__(
             self,
             model: CommunicationManager=None,
-            feature_type: SurfaceFeatureType = None,
-            collapse_ratio: float = None,
-            preserve_quality: bool = None,
-            target_skewness: float = None,
-            keep_edge_connectivity: bool = None,
+            feature_type : SurfaceFeatureType = None,
+            collapse_ratio : float = None,
+            preserve_quality : bool = None,
+            target_skewness : float = None,
+            skip_good_quality_elements : bool = None,
+            keep_edge_connectivity : bool = None,
             json_data : dict = None,
              **kwargs):
         """Initialize a ``CollapseParams`` object.
 
         Parameters
         ----------
-        model: Model
+        model : Model
             Model to create a ``CollapseParams`` object with default parameters.
-        feature_type: SurfaceFeatureType, optional
+        feature_type : SurfaceFeatureType, optional
             Feature type to be preserved when performing collapse.
-        collapse_ratio: float, optional
+        collapse_ratio : float, optional
             Maximum ratio of shortest face edge length to longest face edge length.
-        preserve_quality: bool, optional
+        preserve_quality : bool, optional
             Option to preserve quality of neighboring triangles when performing collapse.Collapse may lead to quality deterioration beyond target skewness. Such collapse is prevented, when the option is enabled.
-        target_skewness: float, optional
+        target_skewness : float, optional
             Skewness limit used as target to preserve quality. Better quality elements are skipped for collapse.
-        keep_edge_connectivity: bool, optional
+        skip_good_quality_elements : bool, optional
+            Option to skip collapse of good quality elements. That is, face elements whose quality is already better than the target skewness. By default such good quality elements are skipped for collapse. When the value is false,  the option collapses the good quality elements too if the resulting quality is better than target skewness. You can use skipGoodQualityElements option only when you enable preserveQuality and define a valid targetSkewness. The default value is true.
+        keep_edge_connectivity : bool, optional
             Option to keep edge connectivity. The default value is false. When keep edge connectivity is true, edges that were connected to collapsed triangles will be connected to different triangles. Otherwise, edges will be disconnected from faces.
 
             **This is a beta parameter**. **The behavior and name may change in the future**.
-        json_data: dict, optional
+        json_data : dict, optional
             JSON dictionary to create a ``CollapseParams`` object with provided parameters.
 
         Examples
@@ -112,15 +119,17 @@ class CollapseParams(CoreObject):
                 json_data["collapseRatio"] if "collapseRatio" in json_data else None,
                 json_data["preserveQuality"] if "preserveQuality" in json_data else None,
                 json_data["targetSkewness"] if "targetSkewness" in json_data else None,
+                json_data["skipGoodQualityElements"] if "skipGoodQualityElements" in json_data else None,
                 json_data["keepEdgeConnectivity"] if "keepEdgeConnectivity" in json_data else None)
         else:
-            all_field_specified = all(arg is not None for arg in [feature_type, collapse_ratio, preserve_quality, target_skewness, keep_edge_connectivity])
+            all_field_specified = all(arg is not None for arg in [feature_type, collapse_ratio, preserve_quality, target_skewness, skip_good_quality_elements, keep_edge_connectivity])
             if all_field_specified:
                 self.__initialize(
                     feature_type,
                     collapse_ratio,
                     preserve_quality,
                     target_skewness,
+                    skip_good_quality_elements,
                     keep_edge_connectivity)
             else:
                 if model is None:
@@ -133,6 +142,7 @@ class CollapseParams(CoreObject):
                         collapse_ratio if collapse_ratio is not None else ( CollapseParams._default_params["collapse_ratio"] if "collapse_ratio" in CollapseParams._default_params else (json_data["collapseRatio"] if "collapseRatio" in json_data else None)),
                         preserve_quality if preserve_quality is not None else ( CollapseParams._default_params["preserve_quality"] if "preserve_quality" in CollapseParams._default_params else (json_data["preserveQuality"] if "preserveQuality" in json_data else None)),
                         target_skewness if target_skewness is not None else ( CollapseParams._default_params["target_skewness"] if "target_skewness" in CollapseParams._default_params else (json_data["targetSkewness"] if "targetSkewness" in json_data else None)),
+                        skip_good_quality_elements if skip_good_quality_elements is not None else ( CollapseParams._default_params["skip_good_quality_elements"] if "skip_good_quality_elements" in CollapseParams._default_params else (json_data["skipGoodQualityElements"] if "skipGoodQualityElements" in json_data else None)),
                         keep_edge_connectivity if keep_edge_connectivity is not None else ( CollapseParams._default_params["keep_edge_connectivity"] if "keep_edge_connectivity" in CollapseParams._default_params else (json_data["keepEdgeConnectivity"] if "keepEdgeConnectivity" in json_data else None)))
         self._custom_params = kwargs
         if model is not None:
@@ -143,24 +153,27 @@ class CollapseParams(CoreObject):
 
     @staticmethod
     def set_default(
-            feature_type: SurfaceFeatureType = None,
-            collapse_ratio: float = None,
-            preserve_quality: bool = None,
-            target_skewness: float = None,
-            keep_edge_connectivity: bool = None):
+            feature_type : SurfaceFeatureType = None,
+            collapse_ratio : float = None,
+            preserve_quality : bool = None,
+            target_skewness : float = None,
+            skip_good_quality_elements : bool = None,
+            keep_edge_connectivity : bool = None):
         """Set the default values of the ``CollapseParams`` object.
 
         Parameters
         ----------
-        feature_type: SurfaceFeatureType, optional
+        feature_type : SurfaceFeatureType, optional
             Feature type to be preserved when performing collapse.
-        collapse_ratio: float, optional
+        collapse_ratio : float, optional
             Maximum ratio of shortest face edge length to longest face edge length.
-        preserve_quality: bool, optional
+        preserve_quality : bool, optional
             Option to preserve quality of neighboring triangles when performing collapse.Collapse may lead to quality deterioration beyond target skewness. Such collapse is prevented, when the option is enabled.
-        target_skewness: float, optional
+        target_skewness : float, optional
             Skewness limit used as target to preserve quality. Better quality elements are skipped for collapse.
-        keep_edge_connectivity: bool, optional
+        skip_good_quality_elements : bool, optional
+            Option to skip collapse of good quality elements. That is, face elements whose quality is already better than the target skewness. By default such good quality elements are skipped for collapse. When the value is false,  the option collapses the good quality elements too if the resulting quality is better than target skewness. You can use skipGoodQualityElements option only when you enable preserveQuality and define a valid targetSkewness. The default value is true.
+        keep_edge_connectivity : bool, optional
             Option to keep edge connectivity. The default value is false. When keep edge connectivity is true, edges that were connected to collapsed triangles will be connected to different triangles. Otherwise, edges will be disconnected from faces.
         """
         args = locals()
@@ -188,13 +201,15 @@ class CollapseParams(CoreObject):
             json_data["preserveQuality"] = self._preserve_quality
         if self._target_skewness is not None:
             json_data["targetSkewness"] = self._target_skewness
+        if self._skip_good_quality_elements is not None:
+            json_data["skipGoodQualityElements"] = self._skip_good_quality_elements
         if self._keep_edge_connectivity is not None:
             json_data["keepEdgeConnectivity"] = self._keep_edge_connectivity
         [ json_data.update({ utils.to_camel_case(key) : value }) for key, value in self._custom_params.items()]
         return json_data
 
     def __str__(self) -> str:
-        message = "feature_type :  %s\ncollapse_ratio :  %s\npreserve_quality :  %s\ntarget_skewness :  %s\nkeep_edge_connectivity :  %s" % (self._feature_type, self._collapse_ratio, self._preserve_quality, self._target_skewness, self._keep_edge_connectivity)
+        message = "feature_type :  %s\ncollapse_ratio :  %s\npreserve_quality :  %s\ntarget_skewness :  %s\nskip_good_quality_elements :  %s\nkeep_edge_connectivity :  %s" % (self._feature_type, self._collapse_ratio, self._preserve_quality, self._target_skewness, self._skip_good_quality_elements, self._keep_edge_connectivity)
         message += ''.join('\n' + str(key) + ' : ' + str(value) for key, value in self._custom_params.items())
         return message
 
@@ -239,6 +254,16 @@ class CollapseParams(CoreObject):
         self._target_skewness = value
 
     @property
+    def skip_good_quality_elements(self) -> bool:
+        """Option to skip collapse of good quality elements. That is, face elements whose quality is already better than the target skewness. By default such good quality elements are skipped for collapse. When the value is false,  the option collapses the good quality elements too if the resulting quality is better than target skewness. You can use skipGoodQualityElements option only when you enable preserveQuality and define a valid targetSkewness. The default value is true.
+        """
+        return self._skip_good_quality_elements
+
+    @skip_good_quality_elements.setter
+    def skip_good_quality_elements(self, value: bool):
+        self._skip_good_quality_elements = value
+
+    @property
     def keep_edge_connectivity(self) -> bool:
         """Option to keep edge connectivity. The default value is false. When keep edge connectivity is true, edges that were connected to collapsed triangles will be connected to different triangles. Otherwise, edges will be disconnected from faces.
 
@@ -255,15 +280,15 @@ class CollapseResults(CoreObject):
 
     Parameters
     ----------
-    model: Model
+    model : Model
         Model to create a ``CollapseResults`` object with default parameters.
-    error_code: ErrorCode, optional
+    error_code : ErrorCode, optional
         Error code associated with the failure of operation.
-    n_collapsed: int, optional
+    n_collapsed : int, optional
         Number of face elements collapsed.
-    n_splits: int, optional
+    n_splits : int, optional
         Number of face elements split.
-    json_data: dict, optional
+    json_data : dict, optional
         JSON dictionary to create a ``CollapseResults`` object with provided parameters.
 
     Examples
@@ -274,9 +299,9 @@ class CollapseResults(CoreObject):
 
     def __initialize(
             self,
-            error_code: ErrorCode,
-            n_collapsed: int,
-            n_splits: int):
+            error_code : ErrorCode,
+            n_collapsed : int,
+            n_splits : int):
         self._error_code = ErrorCode(error_code)
         self._n_collapsed = n_collapsed
         self._n_splits = n_splits
@@ -284,24 +309,24 @@ class CollapseResults(CoreObject):
     def __init__(
             self,
             model: CommunicationManager=None,
-            error_code: ErrorCode = None,
-            n_collapsed: int = None,
-            n_splits: int = None,
+            error_code : ErrorCode = None,
+            n_collapsed : int = None,
+            n_splits : int = None,
             json_data : dict = None,
              **kwargs):
         """Initialize a ``CollapseResults`` object.
 
         Parameters
         ----------
-        model: Model
+        model : Model
             Model to create a ``CollapseResults`` object with default parameters.
-        error_code: ErrorCode, optional
+        error_code : ErrorCode, optional
             Error code associated with the failure of operation.
-        n_collapsed: int, optional
+        n_collapsed : int, optional
             Number of face elements collapsed.
-        n_splits: int, optional
+        n_splits : int, optional
             Number of face elements split.
-        json_data: dict, optional
+        json_data : dict, optional
             JSON dictionary to create a ``CollapseResults`` object with provided parameters.
 
         Examples
@@ -339,18 +364,18 @@ class CollapseResults(CoreObject):
 
     @staticmethod
     def set_default(
-            error_code: ErrorCode = None,
-            n_collapsed: int = None,
-            n_splits: int = None):
+            error_code : ErrorCode = None,
+            n_collapsed : int = None,
+            n_splits : int = None):
         """Set the default values of the ``CollapseResults`` object.
 
         Parameters
         ----------
-        error_code: ErrorCode, optional
+        error_code : ErrorCode, optional
             Error code associated with the failure of operation.
-        n_collapsed: int, optional
+        n_collapsed : int, optional
             Number of face elements collapsed.
-        n_splits: int, optional
+        n_splits : int, optional
             Number of face elements split.
         """
         args = locals()

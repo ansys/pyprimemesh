@@ -1,4 +1,4 @@
-# Copyright (C) 2024 - 2025 ANSYS, Inc. and/or its affiliates.
+# Copyright (C) 2026 Synopsys, Inc. and ANSYS, Inc. All rights reserved.
 # SPDX-License-Identifier: MIT
 #
 #
@@ -75,15 +75,15 @@ class FixInvalidNormalNodeParams(CoreObject):
 
     Parameters
     ----------
-    model: Model
+    model : Model
         Model to create a ``FixInvalidNormalNodeParams`` object with default parameters.
-    nugget_size: float, optional
+    nugget_size : float, optional
         Relative size used to create nugget at invalid normal node. The size is relative to mesh size at the node.
-    nugget_mesh_size: float, optional
+    nugget_mesh_size : float, optional
         Relative size used as max size to mesh nugget created at invalid normal node. The size is relative to mesh size at the node.
-    label: str, optional
+    label : str, optional
         Label to set on new face zonelets created.
-    json_data: dict, optional
+    json_data : dict, optional
         JSON dictionary to create a ``FixInvalidNormalNodeParams`` object with provided parameters.
 
     Examples
@@ -94,9 +94,9 @@ class FixInvalidNormalNodeParams(CoreObject):
 
     def __initialize(
             self,
-            nugget_size: float,
-            nugget_mesh_size: float,
-            label: str):
+            nugget_size : float,
+            nugget_mesh_size : float,
+            label : str):
         self._nugget_size = nugget_size
         self._nugget_mesh_size = nugget_mesh_size
         self._label = label
@@ -104,24 +104,24 @@ class FixInvalidNormalNodeParams(CoreObject):
     def __init__(
             self,
             model: CommunicationManager=None,
-            nugget_size: float = None,
-            nugget_mesh_size: float = None,
-            label: str = None,
+            nugget_size : float = None,
+            nugget_mesh_size : float = None,
+            label : str = None,
             json_data : dict = None,
              **kwargs):
         """Initialize a ``FixInvalidNormalNodeParams`` object.
 
         Parameters
         ----------
-        model: Model
+        model : Model
             Model to create a ``FixInvalidNormalNodeParams`` object with default parameters.
-        nugget_size: float, optional
+        nugget_size : float, optional
             Relative size used to create nugget at invalid normal node. The size is relative to mesh size at the node.
-        nugget_mesh_size: float, optional
+        nugget_mesh_size : float, optional
             Relative size used as max size to mesh nugget created at invalid normal node. The size is relative to mesh size at the node.
-        label: str, optional
+        label : str, optional
             Label to set on new face zonelets created.
-        json_data: dict, optional
+        json_data : dict, optional
             JSON dictionary to create a ``FixInvalidNormalNodeParams`` object with provided parameters.
 
         Examples
@@ -159,18 +159,18 @@ class FixInvalidNormalNodeParams(CoreObject):
 
     @staticmethod
     def set_default(
-            nugget_size: float = None,
-            nugget_mesh_size: float = None,
-            label: str = None):
+            nugget_size : float = None,
+            nugget_mesh_size : float = None,
+            label : str = None):
         """Set the default values of the ``FixInvalidNormalNodeParams`` object.
 
         Parameters
         ----------
-        nugget_size: float, optional
+        nugget_size : float, optional
             Relative size used to create nugget at invalid normal node. The size is relative to mesh size at the node.
-        nugget_mesh_size: float, optional
+        nugget_mesh_size : float, optional
             Relative size used as max size to mesh nugget created at invalid normal node. The size is relative to mesh size at the node.
-        label: str, optional
+        label : str, optional
             Label to set on new face zonelets created.
         """
         args = locals()
@@ -239,11 +239,11 @@ class FixInvalidNormalNodeResults(CoreObject):
 
     Parameters
     ----------
-    model: Model
+    model : Model
         Model to create a ``FixInvalidNormalNodeResults`` object with default parameters.
-    error_code: ErrorCode, optional
+    error_code : ErrorCode, optional
         Error code associated with failure of operation.
-    json_data: dict, optional
+    json_data : dict, optional
         JSON dictionary to create a ``FixInvalidNormalNodeResults`` object with provided parameters.
 
     Examples
@@ -254,24 +254,24 @@ class FixInvalidNormalNodeResults(CoreObject):
 
     def __initialize(
             self,
-            error_code: ErrorCode):
+            error_code : ErrorCode):
         self._error_code = ErrorCode(error_code)
 
     def __init__(
             self,
             model: CommunicationManager=None,
-            error_code: ErrorCode = None,
+            error_code : ErrorCode = None,
             json_data : dict = None,
              **kwargs):
         """Initialize a ``FixInvalidNormalNodeResults`` object.
 
         Parameters
         ----------
-        model: Model
+        model : Model
             Model to create a ``FixInvalidNormalNodeResults`` object with default parameters.
-        error_code: ErrorCode, optional
+        error_code : ErrorCode, optional
             Error code associated with failure of operation.
-        json_data: dict, optional
+        json_data : dict, optional
             JSON dictionary to create a ``FixInvalidNormalNodeResults`` object with provided parameters.
 
         Examples
@@ -303,12 +303,12 @@ class FixInvalidNormalNodeResults(CoreObject):
 
     @staticmethod
     def set_default(
-            error_code: ErrorCode = None):
+            error_code : ErrorCode = None):
         """Set the default values of the ``FixInvalidNormalNodeResults`` object.
 
         Parameters
         ----------
-        error_code: ErrorCode, optional
+        error_code : ErrorCode, optional
             Error code associated with failure of operation.
         """
         args = locals()
@@ -353,17 +353,17 @@ class ProjectOnGeometryParams(CoreObject):
 
     Parameters
     ----------
-    model: Model
+    model : Model
         Model to create a ``ProjectOnGeometryParams`` object with default parameters.
-    project_only_mid_nodes: bool, optional
+    project_only_mid_nodes : bool, optional
         Option to project only the mid nodes.
 
         **This is a beta parameter**. **The behavior and name may change in the future**.
-    project_on_facets_if_cadnot_found: bool, optional
+    project_on_facets_if_cadnot_found : bool, optional
         Option to project on facet if geometry is not found.
 
         **This is a beta parameter**. **The behavior and name may change in the future**.
-    json_data: dict, optional
+    json_data : dict, optional
         JSON dictionary to create a ``ProjectOnGeometryParams`` object with provided parameters.
 
     Examples
@@ -374,33 +374,33 @@ class ProjectOnGeometryParams(CoreObject):
 
     def __initialize(
             self,
-            project_only_mid_nodes: bool,
-            project_on_facets_if_cadnot_found: bool):
+            project_only_mid_nodes : bool,
+            project_on_facets_if_cadnot_found : bool):
         self._project_only_mid_nodes = project_only_mid_nodes
         self._project_on_facets_if_cadnot_found = project_on_facets_if_cadnot_found
 
     def __init__(
             self,
             model: CommunicationManager=None,
-            project_only_mid_nodes: bool = None,
-            project_on_facets_if_cadnot_found: bool = None,
+            project_only_mid_nodes : bool = None,
+            project_on_facets_if_cadnot_found : bool = None,
             json_data : dict = None,
              **kwargs):
         """Initialize a ``ProjectOnGeometryParams`` object.
 
         Parameters
         ----------
-        model: Model
+        model : Model
             Model to create a ``ProjectOnGeometryParams`` object with default parameters.
-        project_only_mid_nodes: bool, optional
+        project_only_mid_nodes : bool, optional
             Option to project only the mid nodes.
 
             **This is a beta parameter**. **The behavior and name may change in the future**.
-        project_on_facets_if_cadnot_found: bool, optional
+        project_on_facets_if_cadnot_found : bool, optional
             Option to project on facet if geometry is not found.
 
             **This is a beta parameter**. **The behavior and name may change in the future**.
-        json_data: dict, optional
+        json_data : dict, optional
             JSON dictionary to create a ``ProjectOnGeometryParams`` object with provided parameters.
 
         Examples
@@ -435,15 +435,15 @@ class ProjectOnGeometryParams(CoreObject):
 
     @staticmethod
     def set_default(
-            project_only_mid_nodes: bool = None,
-            project_on_facets_if_cadnot_found: bool = None):
+            project_only_mid_nodes : bool = None,
+            project_on_facets_if_cadnot_found : bool = None):
         """Set the default values of the ``ProjectOnGeometryParams`` object.
 
         Parameters
         ----------
-        project_only_mid_nodes: bool, optional
+        project_only_mid_nodes : bool, optional
             Option to project only the mid nodes.
-        project_on_facets_if_cadnot_found: bool, optional
+        project_on_facets_if_cadnot_found : bool, optional
             Option to project on facet if geometry is not found.
         """
         args = locals()
@@ -504,21 +504,21 @@ class ProjectOnGeometryResults(CoreObject):
 
     Parameters
     ----------
-    model: Model
+    model : Model
         Model to create a ``ProjectOnGeometryResults`` object with default parameters.
-    success: bool, optional
+    success : bool, optional
         Indicates whether the operation is successful or not. True if successful, else false.
 
         **This is a beta parameter**. **The behavior and name may change in the future**.
-    error_code: ErrorCode, optional
+    error_code : ErrorCode, optional
         Error code associated with failure of operation.
 
         **This is a beta parameter**. **The behavior and name may change in the future**.
-    warning_codes: List[WarningCode], optional
+    warning_codes : List[WarningCode], optional
         Warning code associated with operation.
 
         **This is a beta parameter**. **The behavior and name may change in the future**.
-    json_data: dict, optional
+    json_data : dict, optional
         JSON dictionary to create a ``ProjectOnGeometryResults`` object with provided parameters.
 
     Examples
@@ -529,9 +529,9 @@ class ProjectOnGeometryResults(CoreObject):
 
     def __initialize(
             self,
-            success: bool,
-            error_code: ErrorCode,
-            warning_codes: List[WarningCode]):
+            success : bool,
+            error_code : ErrorCode,
+            warning_codes : List[WarningCode]):
         self._success = success
         self._error_code = ErrorCode(error_code)
         self._warning_codes = warning_codes
@@ -539,30 +539,30 @@ class ProjectOnGeometryResults(CoreObject):
     def __init__(
             self,
             model: CommunicationManager=None,
-            success: bool = None,
-            error_code: ErrorCode = None,
-            warning_codes: List[WarningCode] = None,
+            success : bool = None,
+            error_code : ErrorCode = None,
+            warning_codes : List[WarningCode] = None,
             json_data : dict = None,
              **kwargs):
         """Initialize a ``ProjectOnGeometryResults`` object.
 
         Parameters
         ----------
-        model: Model
+        model : Model
             Model to create a ``ProjectOnGeometryResults`` object with default parameters.
-        success: bool, optional
+        success : bool, optional
             Indicates whether the operation is successful or not. True if successful, else false.
 
             **This is a beta parameter**. **The behavior and name may change in the future**.
-        error_code: ErrorCode, optional
+        error_code : ErrorCode, optional
             Error code associated with failure of operation.
 
             **This is a beta parameter**. **The behavior and name may change in the future**.
-        warning_codes: List[WarningCode], optional
+        warning_codes : List[WarningCode], optional
             Warning code associated with operation.
 
             **This is a beta parameter**. **The behavior and name may change in the future**.
-        json_data: dict, optional
+        json_data : dict, optional
             JSON dictionary to create a ``ProjectOnGeometryResults`` object with provided parameters.
 
         Examples
@@ -600,18 +600,18 @@ class ProjectOnGeometryResults(CoreObject):
 
     @staticmethod
     def set_default(
-            success: bool = None,
-            error_code: ErrorCode = None,
-            warning_codes: List[WarningCode] = None):
+            success : bool = None,
+            error_code : ErrorCode = None,
+            warning_codes : List[WarningCode] = None):
         """Set the default values of the ``ProjectOnGeometryResults`` object.
 
         Parameters
         ----------
-        success: bool, optional
+        success : bool, optional
             Indicates whether the operation is successful or not. True if successful, else false.
-        error_code: ErrorCode, optional
+        error_code : ErrorCode, optional
             Error code associated with failure of operation.
-        warning_codes: List[WarningCode], optional
+        warning_codes : List[WarningCode], optional
             Warning code associated with operation.
         """
         args = locals()
@@ -686,13 +686,13 @@ class FillHolesAtPlaneParams(CoreObject):
 
     Parameters
     ----------
-    model: Model
+    model : Model
         Model to create a ``FillHolesAtPlaneParams`` object with default parameters.
-    create_zone: bool, optional
+    create_zone : bool, optional
         Option to create a face zone for the zonelets created to fill holes.
-    suggested_zone_name: str, optional
+    suggested_zone_name : str, optional
         Suggested name to be set on merged part. If the suggested name is empty, the parameter uses the default name.
-    json_data: dict, optional
+    json_data : dict, optional
         JSON dictionary to create a ``FillHolesAtPlaneParams`` object with provided parameters.
 
     Examples
@@ -703,29 +703,29 @@ class FillHolesAtPlaneParams(CoreObject):
 
     def __initialize(
             self,
-            create_zone: bool,
-            suggested_zone_name: str):
+            create_zone : bool,
+            suggested_zone_name : str):
         self._create_zone = create_zone
         self._suggested_zone_name = suggested_zone_name
 
     def __init__(
             self,
             model: CommunicationManager=None,
-            create_zone: bool = None,
-            suggested_zone_name: str = None,
+            create_zone : bool = None,
+            suggested_zone_name : str = None,
             json_data : dict = None,
              **kwargs):
         """Initialize a ``FillHolesAtPlaneParams`` object.
 
         Parameters
         ----------
-        model: Model
+        model : Model
             Model to create a ``FillHolesAtPlaneParams`` object with default parameters.
-        create_zone: bool, optional
+        create_zone : bool, optional
             Option to create a face zone for the zonelets created to fill holes.
-        suggested_zone_name: str, optional
+        suggested_zone_name : str, optional
             Suggested name to be set on merged part. If the suggested name is empty, the parameter uses the default name.
-        json_data: dict, optional
+        json_data : dict, optional
             JSON dictionary to create a ``FillHolesAtPlaneParams`` object with provided parameters.
 
         Examples
@@ -760,15 +760,15 @@ class FillHolesAtPlaneParams(CoreObject):
 
     @staticmethod
     def set_default(
-            create_zone: bool = None,
-            suggested_zone_name: str = None):
+            create_zone : bool = None,
+            suggested_zone_name : str = None):
         """Set the default values of the ``FillHolesAtPlaneParams`` object.
 
         Parameters
         ----------
-        create_zone: bool, optional
+        create_zone : bool, optional
             Option to create a face zone for the zonelets created to fill holes.
-        suggested_zone_name: str, optional
+        suggested_zone_name : str, optional
             Suggested name to be set on merged part. If the suggested name is empty, the parameter uses the default name.
         """
         args = locals()
@@ -825,19 +825,19 @@ class FillHolesAtPlaneResults(CoreObject):
 
     Parameters
     ----------
-    model: Model
+    model : Model
         Model to create a ``FillHolesAtPlaneResults`` object with default parameters.
-    error_code: ErrorCode, optional
+    error_code : ErrorCode, optional
         Error code associated with the failure of operation.
-    warning_codes: List[WarningCode], optional
+    warning_codes : List[WarningCode], optional
         Warning codes associated with operation.
-    created_face_zonelets: Iterable[int], optional
+    created_face_zonelets : Iterable[int], optional
         Ids of face zonelets created to fill the holes.
-    assigned_zone_name: str, optional
+    assigned_zone_name : str, optional
         Name assigned to zone created. Suffix is added to suggested name if the name not available.
-    created_zone_id: int, optional
+    created_zone_id : int, optional
         Id assigned to zone created.
-    json_data: dict, optional
+    json_data : dict, optional
         JSON dictionary to create a ``FillHolesAtPlaneResults`` object with provided parameters.
 
     Examples
@@ -848,11 +848,11 @@ class FillHolesAtPlaneResults(CoreObject):
 
     def __initialize(
             self,
-            error_code: ErrorCode,
-            warning_codes: List[WarningCode],
-            created_face_zonelets: Iterable[int],
-            assigned_zone_name: str,
-            created_zone_id: int):
+            error_code : ErrorCode,
+            warning_codes : List[WarningCode],
+            created_face_zonelets : Iterable[int],
+            assigned_zone_name : str,
+            created_zone_id : int):
         self._error_code = ErrorCode(error_code)
         self._warning_codes = warning_codes
         self._created_face_zonelets = created_face_zonelets if isinstance(created_face_zonelets, np.ndarray) else np.array(created_face_zonelets, dtype=np.int32) if created_face_zonelets is not None else None
@@ -862,30 +862,30 @@ class FillHolesAtPlaneResults(CoreObject):
     def __init__(
             self,
             model: CommunicationManager=None,
-            error_code: ErrorCode = None,
-            warning_codes: List[WarningCode] = None,
-            created_face_zonelets: Iterable[int] = None,
-            assigned_zone_name: str = None,
-            created_zone_id: int = None,
+            error_code : ErrorCode = None,
+            warning_codes : List[WarningCode] = None,
+            created_face_zonelets : Iterable[int] = None,
+            assigned_zone_name : str = None,
+            created_zone_id : int = None,
             json_data : dict = None,
              **kwargs):
         """Initialize a ``FillHolesAtPlaneResults`` object.
 
         Parameters
         ----------
-        model: Model
+        model : Model
             Model to create a ``FillHolesAtPlaneResults`` object with default parameters.
-        error_code: ErrorCode, optional
+        error_code : ErrorCode, optional
             Error code associated with the failure of operation.
-        warning_codes: List[WarningCode], optional
+        warning_codes : List[WarningCode], optional
             Warning codes associated with operation.
-        created_face_zonelets: Iterable[int], optional
+        created_face_zonelets : Iterable[int], optional
             Ids of face zonelets created to fill the holes.
-        assigned_zone_name: str, optional
+        assigned_zone_name : str, optional
             Name assigned to zone created. Suffix is added to suggested name if the name not available.
-        created_zone_id: int, optional
+        created_zone_id : int, optional
             Id assigned to zone created.
-        json_data: dict, optional
+        json_data : dict, optional
             JSON dictionary to create a ``FillHolesAtPlaneResults`` object with provided parameters.
 
         Examples
@@ -929,24 +929,24 @@ class FillHolesAtPlaneResults(CoreObject):
 
     @staticmethod
     def set_default(
-            error_code: ErrorCode = None,
-            warning_codes: List[WarningCode] = None,
-            created_face_zonelets: Iterable[int] = None,
-            assigned_zone_name: str = None,
-            created_zone_id: int = None):
+            error_code : ErrorCode = None,
+            warning_codes : List[WarningCode] = None,
+            created_face_zonelets : Iterable[int] = None,
+            assigned_zone_name : str = None,
+            created_zone_id : int = None):
         """Set the default values of the ``FillHolesAtPlaneResults`` object.
 
         Parameters
         ----------
-        error_code: ErrorCode, optional
+        error_code : ErrorCode, optional
             Error code associated with the failure of operation.
-        warning_codes: List[WarningCode], optional
+        warning_codes : List[WarningCode], optional
             Warning codes associated with operation.
-        created_face_zonelets: Iterable[int], optional
+        created_face_zonelets : Iterable[int], optional
             Ids of face zonelets created to fill the holes.
-        assigned_zone_name: str, optional
+        assigned_zone_name : str, optional
             Name assigned to zone created. Suffix is added to suggested name if the name not available.
-        created_zone_id: int, optional
+        created_zone_id : int, optional
             Id assigned to zone created.
         """
         args = locals()
@@ -1039,9 +1039,9 @@ class CreateCapParams(CoreObject):
 
     Parameters
     ----------
-    model: Model
+    model : Model
         Model to create a ``CreateCapParams`` object with default parameters.
-    json_data: dict, optional
+    json_data : dict, optional
         JSON dictionary to create a ``CreateCapParams`` object with provided parameters.
 
     Examples
@@ -1063,9 +1063,9 @@ class CreateCapParams(CoreObject):
 
         Parameters
         ----------
-        model: Model
+        model : Model
             Model to create a ``CreateCapParams`` object with default parameters.
-        json_data: dict, optional
+        json_data : dict, optional
             JSON dictionary to create a ``CreateCapParams`` object with provided parameters.
 
         Examples
@@ -1129,13 +1129,13 @@ class CreateCapResults(CoreObject):
 
     Parameters
     ----------
-    model: Model
+    model : Model
         Model to create a ``CreateCapResults`` object with default parameters.
-    error_code: ErrorCode, optional
+    error_code : ErrorCode, optional
         Error code associated with the failure of operation.
-    created_face_zonelets: Iterable[int], optional
+    created_face_zonelets : Iterable[int], optional
         Ids of cap face zonelets created.
-    json_data: dict, optional
+    json_data : dict, optional
         JSON dictionary to create a ``CreateCapResults`` object with provided parameters.
 
     Examples
@@ -1146,29 +1146,29 @@ class CreateCapResults(CoreObject):
 
     def __initialize(
             self,
-            error_code: ErrorCode,
-            created_face_zonelets: Iterable[int]):
+            error_code : ErrorCode,
+            created_face_zonelets : Iterable[int]):
         self._error_code = ErrorCode(error_code)
         self._created_face_zonelets = created_face_zonelets if isinstance(created_face_zonelets, np.ndarray) else np.array(created_face_zonelets, dtype=np.int32) if created_face_zonelets is not None else None
 
     def __init__(
             self,
             model: CommunicationManager=None,
-            error_code: ErrorCode = None,
-            created_face_zonelets: Iterable[int] = None,
+            error_code : ErrorCode = None,
+            created_face_zonelets : Iterable[int] = None,
             json_data : dict = None,
              **kwargs):
         """Initialize a ``CreateCapResults`` object.
 
         Parameters
         ----------
-        model: Model
+        model : Model
             Model to create a ``CreateCapResults`` object with default parameters.
-        error_code: ErrorCode, optional
+        error_code : ErrorCode, optional
             Error code associated with the failure of operation.
-        created_face_zonelets: Iterable[int], optional
+        created_face_zonelets : Iterable[int], optional
             Ids of cap face zonelets created.
-        json_data: dict, optional
+        json_data : dict, optional
             JSON dictionary to create a ``CreateCapResults`` object with provided parameters.
 
         Examples
@@ -1203,15 +1203,15 @@ class CreateCapResults(CoreObject):
 
     @staticmethod
     def set_default(
-            error_code: ErrorCode = None,
-            created_face_zonelets: Iterable[int] = None):
+            error_code : ErrorCode = None,
+            created_face_zonelets : Iterable[int] = None):
         """Set the default values of the ``CreateCapResults`` object.
 
         Parameters
         ----------
-        error_code: ErrorCode, optional
+        error_code : ErrorCode, optional
             Error code associated with the failure of operation.
-        created_face_zonelets: Iterable[int], optional
+        created_face_zonelets : Iterable[int], optional
             Ids of cap face zonelets created.
         """
         args = locals()
@@ -1268,9 +1268,9 @@ class DeleteUnwettedParams(CoreObject):
 
     Parameters
     ----------
-    model: Model
+    model : Model
         Model to create a ``DeleteUnwettedParams`` object with default parameters.
-    json_data: dict, optional
+    json_data : dict, optional
         JSON dictionary to create a ``DeleteUnwettedParams`` object with provided parameters.
 
     Examples
@@ -1292,9 +1292,9 @@ class DeleteUnwettedParams(CoreObject):
 
         Parameters
         ----------
-        model: Model
+        model : Model
             Model to create a ``DeleteUnwettedParams`` object with default parameters.
-        json_data: dict, optional
+        json_data : dict, optional
             JSON dictionary to create a ``DeleteUnwettedParams`` object with provided parameters.
 
         Examples
@@ -1358,11 +1358,11 @@ class DeleteUnwettedResult(CoreObject):
 
     Parameters
     ----------
-    model: Model
+    model : Model
         Model to create a ``DeleteUnwettedResult`` object with default parameters.
-    error_code: ErrorCode, optional
+    error_code : ErrorCode, optional
         Error code associated with delete unwetted surfaces operation.
-    json_data: dict, optional
+    json_data : dict, optional
         JSON dictionary to create a ``DeleteUnwettedResult`` object with provided parameters.
 
     Examples
@@ -1373,24 +1373,24 @@ class DeleteUnwettedResult(CoreObject):
 
     def __initialize(
             self,
-            error_code: ErrorCode):
+            error_code : ErrorCode):
         self._error_code = ErrorCode(error_code)
 
     def __init__(
             self,
             model: CommunicationManager=None,
-            error_code: ErrorCode = None,
+            error_code : ErrorCode = None,
             json_data : dict = None,
              **kwargs):
         """Initialize a ``DeleteUnwettedResult`` object.
 
         Parameters
         ----------
-        model: Model
+        model : Model
             Model to create a ``DeleteUnwettedResult`` object with default parameters.
-        error_code: ErrorCode, optional
+        error_code : ErrorCode, optional
             Error code associated with delete unwetted surfaces operation.
-        json_data: dict, optional
+        json_data : dict, optional
             JSON dictionary to create a ``DeleteUnwettedResult`` object with provided parameters.
 
         Examples
@@ -1422,12 +1422,12 @@ class DeleteUnwettedResult(CoreObject):
 
     @staticmethod
     def set_default(
-            error_code: ErrorCode = None):
+            error_code : ErrorCode = None):
         """Set the default values of the ``DeleteUnwettedResult`` object.
 
         Parameters
         ----------
-        error_code: ErrorCode, optional
+        error_code : ErrorCode, optional
             Error code associated with delete unwetted surfaces operation.
         """
         args = locals()
@@ -1472,11 +1472,11 @@ class ResolveIntersectionsParams(CoreObject):
 
     Parameters
     ----------
-    model: Model
+    model : Model
         Model to create a ``ResolveIntersectionsParams`` object with default parameters.
-    number_of_threads: int, optional
+    number_of_threads : int, optional
         Number of threads for resolve intersections multithreaded operation.
-    json_data: dict, optional
+    json_data : dict, optional
         JSON dictionary to create a ``ResolveIntersectionsParams`` object with provided parameters.
 
     Examples
@@ -1487,24 +1487,24 @@ class ResolveIntersectionsParams(CoreObject):
 
     def __initialize(
             self,
-            number_of_threads: int):
+            number_of_threads : int):
         self._number_of_threads = number_of_threads
 
     def __init__(
             self,
             model: CommunicationManager=None,
-            number_of_threads: int = None,
+            number_of_threads : int = None,
             json_data : dict = None,
              **kwargs):
         """Initialize a ``ResolveIntersectionsParams`` object.
 
         Parameters
         ----------
-        model: Model
+        model : Model
             Model to create a ``ResolveIntersectionsParams`` object with default parameters.
-        number_of_threads: int, optional
+        number_of_threads : int, optional
             Number of threads for resolve intersections multithreaded operation.
-        json_data: dict, optional
+        json_data : dict, optional
             JSON dictionary to create a ``ResolveIntersectionsParams`` object with provided parameters.
 
         Examples
@@ -1536,12 +1536,12 @@ class ResolveIntersectionsParams(CoreObject):
 
     @staticmethod
     def set_default(
-            number_of_threads: int = None):
+            number_of_threads : int = None):
         """Set the default values of the ``ResolveIntersectionsParams`` object.
 
         Parameters
         ----------
-        number_of_threads: int, optional
+        number_of_threads : int, optional
             Number of threads for resolve intersections multithreaded operation.
         """
         args = locals()
@@ -1586,11 +1586,11 @@ class ResolveIntersectionResult(CoreObject):
 
     Parameters
     ----------
-    model: Model
+    model : Model
         Model to create a ``ResolveIntersectionResult`` object with default parameters.
-    error_code: ErrorCode, optional
+    error_code : ErrorCode, optional
         Error code associated with a resolve intersections operation.
-    json_data: dict, optional
+    json_data : dict, optional
         JSON dictionary to create a ``ResolveIntersectionResult`` object with provided parameters.
 
     Examples
@@ -1601,24 +1601,24 @@ class ResolveIntersectionResult(CoreObject):
 
     def __initialize(
             self,
-            error_code: ErrorCode):
+            error_code : ErrorCode):
         self._error_code = ErrorCode(error_code)
 
     def __init__(
             self,
             model: CommunicationManager=None,
-            error_code: ErrorCode = None,
+            error_code : ErrorCode = None,
             json_data : dict = None,
              **kwargs):
         """Initialize a ``ResolveIntersectionResult`` object.
 
         Parameters
         ----------
-        model: Model
+        model : Model
             Model to create a ``ResolveIntersectionResult`` object with default parameters.
-        error_code: ErrorCode, optional
+        error_code : ErrorCode, optional
             Error code associated with a resolve intersections operation.
-        json_data: dict, optional
+        json_data : dict, optional
             JSON dictionary to create a ``ResolveIntersectionResult`` object with provided parameters.
 
         Examples
@@ -1650,12 +1650,12 @@ class ResolveIntersectionResult(CoreObject):
 
     @staticmethod
     def set_default(
-            error_code: ErrorCode = None):
+            error_code : ErrorCode = None):
         """Set the default values of the ``ResolveIntersectionResult`` object.
 
         Parameters
         ----------
-        error_code: ErrorCode, optional
+        error_code : ErrorCode, optional
             Error code associated with a resolve intersections operation.
         """
         args = locals()
@@ -1700,15 +1700,15 @@ class SubtractZoneletsParams(CoreObject):
 
     Parameters
     ----------
-    model: Model
+    model : Model
         Model to create a ``SubtractZoneletsParams`` object with default parameters.
-    retain_cutter: bool, optional
+    retain_cutter : bool, optional
         Retain the zonelets used for removal.
-    extract_edges: bool, optional
+    extract_edges : bool, optional
         Extract edges of intersection during subtract.
-    trace_edges: bool, optional
+    trace_edges : bool, optional
         Trace edges of intersection on target. Only works if extractEdges is true.
-    json_data: dict, optional
+    json_data : dict, optional
         JSON dictionary to create a ``SubtractZoneletsParams`` object with provided parameters.
 
     Examples
@@ -1719,9 +1719,9 @@ class SubtractZoneletsParams(CoreObject):
 
     def __initialize(
             self,
-            retain_cutter: bool,
-            extract_edges: bool,
-            trace_edges: bool):
+            retain_cutter : bool,
+            extract_edges : bool,
+            trace_edges : bool):
         self._retain_cutter = retain_cutter
         self._extract_edges = extract_edges
         self._trace_edges = trace_edges
@@ -1729,24 +1729,24 @@ class SubtractZoneletsParams(CoreObject):
     def __init__(
             self,
             model: CommunicationManager=None,
-            retain_cutter: bool = None,
-            extract_edges: bool = None,
-            trace_edges: bool = None,
+            retain_cutter : bool = None,
+            extract_edges : bool = None,
+            trace_edges : bool = None,
             json_data : dict = None,
              **kwargs):
         """Initialize a ``SubtractZoneletsParams`` object.
 
         Parameters
         ----------
-        model: Model
+        model : Model
             Model to create a ``SubtractZoneletsParams`` object with default parameters.
-        retain_cutter: bool, optional
+        retain_cutter : bool, optional
             Retain the zonelets used for removal.
-        extract_edges: bool, optional
+        extract_edges : bool, optional
             Extract edges of intersection during subtract.
-        trace_edges: bool, optional
+        trace_edges : bool, optional
             Trace edges of intersection on target. Only works if extractEdges is true.
-        json_data: dict, optional
+        json_data : dict, optional
             JSON dictionary to create a ``SubtractZoneletsParams`` object with provided parameters.
 
         Examples
@@ -1784,18 +1784,18 @@ class SubtractZoneletsParams(CoreObject):
 
     @staticmethod
     def set_default(
-            retain_cutter: bool = None,
-            extract_edges: bool = None,
-            trace_edges: bool = None):
+            retain_cutter : bool = None,
+            extract_edges : bool = None,
+            trace_edges : bool = None):
         """Set the default values of the ``SubtractZoneletsParams`` object.
 
         Parameters
         ----------
-        retain_cutter: bool, optional
+        retain_cutter : bool, optional
             Retain the zonelets used for removal.
-        extract_edges: bool, optional
+        extract_edges : bool, optional
             Extract edges of intersection during subtract.
-        trace_edges: bool, optional
+        trace_edges : bool, optional
             Trace edges of intersection on target. Only works if extractEdges is true.
         """
         args = locals()
@@ -1864,13 +1864,13 @@ class SubtractZoneletsResults(CoreObject):
 
     Parameters
     ----------
-    model: Model
+    model : Model
         Model to create a ``SubtractZoneletsResults`` object with default parameters.
-    processing_time: float, optional
+    processing_time : float, optional
         Processing time for subtract operation.
-    error_code: ErrorCode, optional
+    error_code : ErrorCode, optional
         Error Code associated with subtract operation.
-    json_data: dict, optional
+    json_data : dict, optional
         JSON dictionary to create a ``SubtractZoneletsResults`` object with provided parameters.
 
     Examples
@@ -1881,29 +1881,29 @@ class SubtractZoneletsResults(CoreObject):
 
     def __initialize(
             self,
-            processing_time: float,
-            error_code: ErrorCode):
+            processing_time : float,
+            error_code : ErrorCode):
         self._processing_time = processing_time
         self._error_code = ErrorCode(error_code)
 
     def __init__(
             self,
             model: CommunicationManager=None,
-            processing_time: float = None,
-            error_code: ErrorCode = None,
+            processing_time : float = None,
+            error_code : ErrorCode = None,
             json_data : dict = None,
              **kwargs):
         """Initialize a ``SubtractZoneletsResults`` object.
 
         Parameters
         ----------
-        model: Model
+        model : Model
             Model to create a ``SubtractZoneletsResults`` object with default parameters.
-        processing_time: float, optional
+        processing_time : float, optional
             Processing time for subtract operation.
-        error_code: ErrorCode, optional
+        error_code : ErrorCode, optional
             Error Code associated with subtract operation.
-        json_data: dict, optional
+        json_data : dict, optional
             JSON dictionary to create a ``SubtractZoneletsResults`` object with provided parameters.
 
         Examples
@@ -1938,15 +1938,15 @@ class SubtractZoneletsResults(CoreObject):
 
     @staticmethod
     def set_default(
-            processing_time: float = None,
-            error_code: ErrorCode = None):
+            processing_time : float = None,
+            error_code : ErrorCode = None):
         """Set the default values of the ``SubtractZoneletsResults`` object.
 
         Parameters
         ----------
-        processing_time: float, optional
+        processing_time : float, optional
             Processing time for subtract operation.
-        error_code: ErrorCode, optional
+        error_code : ErrorCode, optional
             Error Code associated with subtract operation.
         """
         args = locals()
@@ -2003,15 +2003,15 @@ class SmoothDihedralFaceNodesParams(CoreObject):
 
     Parameters
     ----------
-    model: Model
+    model : Model
         Model to create a ``SmoothDihedralFaceNodesParams`` object with default parameters.
-    min_dihedral_angle: float, optional
+    min_dihedral_angle : float, optional
         Minimum angle to be used to identify dihedral faces.
-    tolerance: float, optional
+    tolerance : float, optional
         Tolerance relative to local mesh size to control smooth movement of nodes.
-    type: SmoothType, optional
+    type : SmoothType, optional
         Option to inflate neighbor nodes of dihedral face edges or smooth dihedral face edge nodes to improve dihedral angle.
-    json_data: dict, optional
+    json_data : dict, optional
         JSON dictionary to create a ``SmoothDihedralFaceNodesParams`` object with provided parameters.
 
     Examples
@@ -2022,9 +2022,9 @@ class SmoothDihedralFaceNodesParams(CoreObject):
 
     def __initialize(
             self,
-            min_dihedral_angle: float,
-            tolerance: float,
-            type: SmoothType):
+            min_dihedral_angle : float,
+            tolerance : float,
+            type : SmoothType):
         self._min_dihedral_angle = min_dihedral_angle
         self._tolerance = tolerance
         self._type = SmoothType(type)
@@ -2032,24 +2032,24 @@ class SmoothDihedralFaceNodesParams(CoreObject):
     def __init__(
             self,
             model: CommunicationManager=None,
-            min_dihedral_angle: float = None,
-            tolerance: float = None,
-            type: SmoothType = None,
+            min_dihedral_angle : float = None,
+            tolerance : float = None,
+            type : SmoothType = None,
             json_data : dict = None,
              **kwargs):
         """Initialize a ``SmoothDihedralFaceNodesParams`` object.
 
         Parameters
         ----------
-        model: Model
+        model : Model
             Model to create a ``SmoothDihedralFaceNodesParams`` object with default parameters.
-        min_dihedral_angle: float, optional
+        min_dihedral_angle : float, optional
             Minimum angle to be used to identify dihedral faces.
-        tolerance: float, optional
+        tolerance : float, optional
             Tolerance relative to local mesh size to control smooth movement of nodes.
-        type: SmoothType, optional
+        type : SmoothType, optional
             Option to inflate neighbor nodes of dihedral face edges or smooth dihedral face edge nodes to improve dihedral angle.
-        json_data: dict, optional
+        json_data : dict, optional
             JSON dictionary to create a ``SmoothDihedralFaceNodesParams`` object with provided parameters.
 
         Examples
@@ -2087,18 +2087,18 @@ class SmoothDihedralFaceNodesParams(CoreObject):
 
     @staticmethod
     def set_default(
-            min_dihedral_angle: float = None,
-            tolerance: float = None,
-            type: SmoothType = None):
+            min_dihedral_angle : float = None,
+            tolerance : float = None,
+            type : SmoothType = None):
         """Set the default values of the ``SmoothDihedralFaceNodesParams`` object.
 
         Parameters
         ----------
-        min_dihedral_angle: float, optional
+        min_dihedral_angle : float, optional
             Minimum angle to be used to identify dihedral faces.
-        tolerance: float, optional
+        tolerance : float, optional
             Tolerance relative to local mesh size to control smooth movement of nodes.
-        type: SmoothType, optional
+        type : SmoothType, optional
             Option to inflate neighbor nodes of dihedral face edges or smooth dihedral face edge nodes to improve dihedral angle.
         """
         args = locals()
@@ -2167,13 +2167,13 @@ class SmoothDihedralFaceNodesResults(CoreObject):
 
     Parameters
     ----------
-    model: Model
+    model : Model
         Model to create a ``SmoothDihedralFaceNodesResults`` object with default parameters.
-    n_nodes_smoothed: int, optional
+    n_nodes_smoothed : int, optional
         Number of dihedral face nodes smoothed.
-    error_code: ErrorCode, optional
+    error_code : ErrorCode, optional
         Error Code associated with creating offset surface.
-    json_data: dict, optional
+    json_data : dict, optional
         JSON dictionary to create a ``SmoothDihedralFaceNodesResults`` object with provided parameters.
 
     Examples
@@ -2184,29 +2184,29 @@ class SmoothDihedralFaceNodesResults(CoreObject):
 
     def __initialize(
             self,
-            n_nodes_smoothed: int,
-            error_code: ErrorCode):
+            n_nodes_smoothed : int,
+            error_code : ErrorCode):
         self._n_nodes_smoothed = n_nodes_smoothed
         self._error_code = ErrorCode(error_code)
 
     def __init__(
             self,
             model: CommunicationManager=None,
-            n_nodes_smoothed: int = None,
-            error_code: ErrorCode = None,
+            n_nodes_smoothed : int = None,
+            error_code : ErrorCode = None,
             json_data : dict = None,
              **kwargs):
         """Initialize a ``SmoothDihedralFaceNodesResults`` object.
 
         Parameters
         ----------
-        model: Model
+        model : Model
             Model to create a ``SmoothDihedralFaceNodesResults`` object with default parameters.
-        n_nodes_smoothed: int, optional
+        n_nodes_smoothed : int, optional
             Number of dihedral face nodes smoothed.
-        error_code: ErrorCode, optional
+        error_code : ErrorCode, optional
             Error Code associated with creating offset surface.
-        json_data: dict, optional
+        json_data : dict, optional
             JSON dictionary to create a ``SmoothDihedralFaceNodesResults`` object with provided parameters.
 
         Examples
@@ -2241,15 +2241,15 @@ class SmoothDihedralFaceNodesResults(CoreObject):
 
     @staticmethod
     def set_default(
-            n_nodes_smoothed: int = None,
-            error_code: ErrorCode = None):
+            n_nodes_smoothed : int = None,
+            error_code : ErrorCode = None):
         """Set the default values of the ``SmoothDihedralFaceNodesResults`` object.
 
         Parameters
         ----------
-        n_nodes_smoothed: int, optional
+        n_nodes_smoothed : int, optional
             Number of dihedral face nodes smoothed.
-        error_code: ErrorCode, optional
+        error_code : ErrorCode, optional
             Error Code associated with creating offset surface.
         """
         args = locals()
@@ -2306,17 +2306,17 @@ class RefineAtContactsParams(CoreObject):
 
     Parameters
     ----------
-    model: Model
+    model : Model
         Model to create a ``RefineAtContactsParams`` object with default parameters.
-    contact_tolerance: float, optional
+    contact_tolerance : float, optional
         Maximum tolerance used to identify face elements as contacts.
-    relative_tolerance: bool, optional
+    relative_tolerance : bool, optional
         Option to specify the contact tolerance is relative or absolute.
-    refine_max_size: float, optional
+    refine_max_size : float, optional
         Maximum size used to refine contact face elements.
-    project_on_geometry: bool, optional
+    project_on_geometry : bool, optional
         Project on geometry on remesh.
-    json_data: dict, optional
+    json_data : dict, optional
         JSON dictionary to create a ``RefineAtContactsParams`` object with provided parameters.
 
     Examples
@@ -2327,10 +2327,10 @@ class RefineAtContactsParams(CoreObject):
 
     def __initialize(
             self,
-            contact_tolerance: float,
-            relative_tolerance: bool,
-            refine_max_size: float,
-            project_on_geometry: bool):
+            contact_tolerance : float,
+            relative_tolerance : bool,
+            refine_max_size : float,
+            project_on_geometry : bool):
         self._contact_tolerance = contact_tolerance
         self._relative_tolerance = relative_tolerance
         self._refine_max_size = refine_max_size
@@ -2339,27 +2339,27 @@ class RefineAtContactsParams(CoreObject):
     def __init__(
             self,
             model: CommunicationManager=None,
-            contact_tolerance: float = None,
-            relative_tolerance: bool = None,
-            refine_max_size: float = None,
-            project_on_geometry: bool = None,
+            contact_tolerance : float = None,
+            relative_tolerance : bool = None,
+            refine_max_size : float = None,
+            project_on_geometry : bool = None,
             json_data : dict = None,
              **kwargs):
         """Initialize a ``RefineAtContactsParams`` object.
 
         Parameters
         ----------
-        model: Model
+        model : Model
             Model to create a ``RefineAtContactsParams`` object with default parameters.
-        contact_tolerance: float, optional
+        contact_tolerance : float, optional
             Maximum tolerance used to identify face elements as contacts.
-        relative_tolerance: bool, optional
+        relative_tolerance : bool, optional
             Option to specify the contact tolerance is relative or absolute.
-        refine_max_size: float, optional
+        refine_max_size : float, optional
             Maximum size used to refine contact face elements.
-        project_on_geometry: bool, optional
+        project_on_geometry : bool, optional
             Project on geometry on remesh.
-        json_data: dict, optional
+        json_data : dict, optional
             JSON dictionary to create a ``RefineAtContactsParams`` object with provided parameters.
 
         Examples
@@ -2400,21 +2400,21 @@ class RefineAtContactsParams(CoreObject):
 
     @staticmethod
     def set_default(
-            contact_tolerance: float = None,
-            relative_tolerance: bool = None,
-            refine_max_size: float = None,
-            project_on_geometry: bool = None):
+            contact_tolerance : float = None,
+            relative_tolerance : bool = None,
+            refine_max_size : float = None,
+            project_on_geometry : bool = None):
         """Set the default values of the ``RefineAtContactsParams`` object.
 
         Parameters
         ----------
-        contact_tolerance: float, optional
+        contact_tolerance : float, optional
             Maximum tolerance used to identify face elements as contacts.
-        relative_tolerance: bool, optional
+        relative_tolerance : bool, optional
             Option to specify the contact tolerance is relative or absolute.
-        refine_max_size: float, optional
+        refine_max_size : float, optional
             Maximum size used to refine contact face elements.
-        project_on_geometry: bool, optional
+        project_on_geometry : bool, optional
             Project on geometry on remesh.
         """
         args = locals()
@@ -2495,15 +2495,15 @@ class RefineAtContactsResults(CoreObject):
 
     Parameters
     ----------
-    model: Model
+    model : Model
         Model to create a ``RefineAtContactsResults`` object with default parameters.
-    n_refined: int, optional
+    n_refined : int, optional
         Number of face elements identified for refinement.
-    size_field_id: int, optional
+    size_field_id : int, optional
         Id of size field created to refine at contacts.
-    error_code: ErrorCode, optional
+    error_code : ErrorCode, optional
         ErrorCode associated with the refine contacts operation.
-    json_data: dict, optional
+    json_data : dict, optional
         JSON dictionary to create a ``RefineAtContactsResults`` object with provided parameters.
 
     Examples
@@ -2514,9 +2514,9 @@ class RefineAtContactsResults(CoreObject):
 
     def __initialize(
             self,
-            n_refined: int,
-            size_field_id: int,
-            error_code: ErrorCode):
+            n_refined : int,
+            size_field_id : int,
+            error_code : ErrorCode):
         self._n_refined = n_refined
         self._size_field_id = size_field_id
         self._error_code = ErrorCode(error_code)
@@ -2524,24 +2524,24 @@ class RefineAtContactsResults(CoreObject):
     def __init__(
             self,
             model: CommunicationManager=None,
-            n_refined: int = None,
-            size_field_id: int = None,
-            error_code: ErrorCode = None,
+            n_refined : int = None,
+            size_field_id : int = None,
+            error_code : ErrorCode = None,
             json_data : dict = None,
              **kwargs):
         """Initialize a ``RefineAtContactsResults`` object.
 
         Parameters
         ----------
-        model: Model
+        model : Model
             Model to create a ``RefineAtContactsResults`` object with default parameters.
-        n_refined: int, optional
+        n_refined : int, optional
             Number of face elements identified for refinement.
-        size_field_id: int, optional
+        size_field_id : int, optional
             Id of size field created to refine at contacts.
-        error_code: ErrorCode, optional
+        error_code : ErrorCode, optional
             ErrorCode associated with the refine contacts operation.
-        json_data: dict, optional
+        json_data : dict, optional
             JSON dictionary to create a ``RefineAtContactsResults`` object with provided parameters.
 
         Examples
@@ -2579,18 +2579,18 @@ class RefineAtContactsResults(CoreObject):
 
     @staticmethod
     def set_default(
-            n_refined: int = None,
-            size_field_id: int = None,
-            error_code: ErrorCode = None):
+            n_refined : int = None,
+            size_field_id : int = None,
+            error_code : ErrorCode = None):
         """Set the default values of the ``RefineAtContactsResults`` object.
 
         Parameters
         ----------
-        n_refined: int, optional
+        n_refined : int, optional
             Number of face elements identified for refinement.
-        size_field_id: int, optional
+        size_field_id : int, optional
             Id of size field created to refine at contacts.
-        error_code: ErrorCode, optional
+        error_code : ErrorCode, optional
             ErrorCode associated with the refine contacts operation.
         """
         args = locals()
@@ -2659,17 +2659,17 @@ class AddThicknessParams(CoreObject):
 
     Parameters
     ----------
-    model: Model
+    model : Model
         Model to create a ``AddThicknessParams`` object with default parameters.
-    thickness: float, optional
+    thickness : float, optional
         To assign the offset distance of inflation.
-    reverse_face_normal: bool, optional
+    reverse_face_normal : bool, optional
         To assign the direction of inflation.
-    suggested_part_name: str, optional
+    suggested_part_name : str, optional
         Suggested part name for created patching surfaces.
-    fix_intersections: bool, optional
+    fix_intersections : bool, optional
         Fix intersections in concave regions.
-    json_data: dict, optional
+    json_data : dict, optional
         JSON dictionary to create a ``AddThicknessParams`` object with provided parameters.
 
     Examples
@@ -2680,10 +2680,10 @@ class AddThicknessParams(CoreObject):
 
     def __initialize(
             self,
-            thickness: float,
-            reverse_face_normal: bool,
-            suggested_part_name: str,
-            fix_intersections: bool):
+            thickness : float,
+            reverse_face_normal : bool,
+            suggested_part_name : str,
+            fix_intersections : bool):
         self._thickness = thickness
         self._reverse_face_normal = reverse_face_normal
         self._suggested_part_name = suggested_part_name
@@ -2692,27 +2692,27 @@ class AddThicknessParams(CoreObject):
     def __init__(
             self,
             model: CommunicationManager=None,
-            thickness: float = None,
-            reverse_face_normal: bool = None,
-            suggested_part_name: str = None,
-            fix_intersections: bool = None,
+            thickness : float = None,
+            reverse_face_normal : bool = None,
+            suggested_part_name : str = None,
+            fix_intersections : bool = None,
             json_data : dict = None,
              **kwargs):
         """Initialize a ``AddThicknessParams`` object.
 
         Parameters
         ----------
-        model: Model
+        model : Model
             Model to create a ``AddThicknessParams`` object with default parameters.
-        thickness: float, optional
+        thickness : float, optional
             To assign the offset distance of inflation.
-        reverse_face_normal: bool, optional
+        reverse_face_normal : bool, optional
             To assign the direction of inflation.
-        suggested_part_name: str, optional
+        suggested_part_name : str, optional
             Suggested part name for created patching surfaces.
-        fix_intersections: bool, optional
+        fix_intersections : bool, optional
             Fix intersections in concave regions.
-        json_data: dict, optional
+        json_data : dict, optional
             JSON dictionary to create a ``AddThicknessParams`` object with provided parameters.
 
         Examples
@@ -2753,21 +2753,21 @@ class AddThicknessParams(CoreObject):
 
     @staticmethod
     def set_default(
-            thickness: float = None,
-            reverse_face_normal: bool = None,
-            suggested_part_name: str = None,
-            fix_intersections: bool = None):
+            thickness : float = None,
+            reverse_face_normal : bool = None,
+            suggested_part_name : str = None,
+            fix_intersections : bool = None):
         """Set the default values of the ``AddThicknessParams`` object.
 
         Parameters
         ----------
-        thickness: float, optional
+        thickness : float, optional
             To assign the offset distance of inflation.
-        reverse_face_normal: bool, optional
+        reverse_face_normal : bool, optional
             To assign the direction of inflation.
-        suggested_part_name: str, optional
+        suggested_part_name : str, optional
             Suggested part name for created patching surfaces.
-        fix_intersections: bool, optional
+        fix_intersections : bool, optional
             Fix intersections in concave regions.
         """
         args = locals()
@@ -2848,13 +2848,13 @@ class AddThicknessResults(CoreObject):
 
     Parameters
     ----------
-    model: Model
+    model : Model
         Model to create a ``AddThicknessResults`` object with default parameters.
-    error_code: ErrorCode, optional
+    error_code : ErrorCode, optional
         Error code associated with failure of operation.
-    part_id: int, optional
+    part_id : int, optional
         The created thickness part id.
-    json_data: dict, optional
+    json_data : dict, optional
         JSON dictionary to create a ``AddThicknessResults`` object with provided parameters.
 
     Examples
@@ -2865,29 +2865,29 @@ class AddThicknessResults(CoreObject):
 
     def __initialize(
             self,
-            error_code: ErrorCode,
-            part_id: int):
+            error_code : ErrorCode,
+            part_id : int):
         self._error_code = ErrorCode(error_code)
         self._part_id = part_id
 
     def __init__(
             self,
             model: CommunicationManager=None,
-            error_code: ErrorCode = None,
-            part_id: int = None,
+            error_code : ErrorCode = None,
+            part_id : int = None,
             json_data : dict = None,
              **kwargs):
         """Initialize a ``AddThicknessResults`` object.
 
         Parameters
         ----------
-        model: Model
+        model : Model
             Model to create a ``AddThicknessResults`` object with default parameters.
-        error_code: ErrorCode, optional
+        error_code : ErrorCode, optional
             Error code associated with failure of operation.
-        part_id: int, optional
+        part_id : int, optional
             The created thickness part id.
-        json_data: dict, optional
+        json_data : dict, optional
             JSON dictionary to create a ``AddThicknessResults`` object with provided parameters.
 
         Examples
@@ -2922,15 +2922,15 @@ class AddThicknessResults(CoreObject):
 
     @staticmethod
     def set_default(
-            error_code: ErrorCode = None,
-            part_id: int = None):
+            error_code : ErrorCode = None,
+            part_id : int = None):
         """Set the default values of the ``AddThicknessResults`` object.
 
         Parameters
         ----------
-        error_code: ErrorCode, optional
+        error_code : ErrorCode, optional
             Error code associated with failure of operation.
-        part_id: int, optional
+        part_id : int, optional
             The created thickness part id.
         """
         args = locals()
@@ -2987,29 +2987,29 @@ class CreateBOIParams(CoreObject):
 
     Parameters
     ----------
-    model: Model
+    model : Model
         Model to create a ``CreateBOIParams`` object with default parameters.
-    boi_type: BOIType, optional
+    boi_type : BOIType, optional
         Type of BOI offsetting.
-    perform_initial_wrap: bool, optional
+    perform_initial_wrap : bool, optional
         Perform an initial wrap to create a BOI if BOI type is OFFSETSURFACE.
-    wrap_size: float, optional
+    wrap_size : float, optional
         Set wrap size greater than the largest gap size in the input when performing_initial_wrap is true.
-    flow_dir: FlowDirection, optional
+    flow_dir : FlowDirection, optional
         Assigns the offset direction of inflation.
-    side_scale: float, optional
+    side_scale : float, optional
         BOI side scaling factor.
-    wake_scale: float, optional
+    wake_scale : float, optional
         BOI flow direction scaling factor.
-    wake_levels: int, optional
+    wake_levels : int, optional
         BOI levels.
-    suggested_part_name: str, optional
+    suggested_part_name : str, optional
         Suggested part name for created BOI surfaces.
-    suggested_label_prefix: str, optional
+    suggested_label_prefix : str, optional
         Suggested label name for created BOI surfaces.
-    number_of_threads: int, optional
+    number_of_threads : int, optional
         Number of threads for multithreading.
-    json_data: dict, optional
+    json_data : dict, optional
         JSON dictionary to create a ``CreateBOIParams`` object with provided parameters.
 
     Examples
@@ -3020,16 +3020,16 @@ class CreateBOIParams(CoreObject):
 
     def __initialize(
             self,
-            boi_type: BOIType,
-            perform_initial_wrap: bool,
-            wrap_size: float,
-            flow_dir: FlowDirection,
-            side_scale: float,
-            wake_scale: float,
-            wake_levels: int,
-            suggested_part_name: str,
-            suggested_label_prefix: str,
-            number_of_threads: int):
+            boi_type : BOIType,
+            perform_initial_wrap : bool,
+            wrap_size : float,
+            flow_dir : FlowDirection,
+            side_scale : float,
+            wake_scale : float,
+            wake_levels : int,
+            suggested_part_name : str,
+            suggested_label_prefix : str,
+            number_of_threads : int):
         self._boi_type = BOIType(boi_type)
         self._perform_initial_wrap = perform_initial_wrap
         self._wrap_size = wrap_size
@@ -3044,45 +3044,45 @@ class CreateBOIParams(CoreObject):
     def __init__(
             self,
             model: CommunicationManager=None,
-            boi_type: BOIType = None,
-            perform_initial_wrap: bool = None,
-            wrap_size: float = None,
-            flow_dir: FlowDirection = None,
-            side_scale: float = None,
-            wake_scale: float = None,
-            wake_levels: int = None,
-            suggested_part_name: str = None,
-            suggested_label_prefix: str = None,
-            number_of_threads: int = None,
+            boi_type : BOIType = None,
+            perform_initial_wrap : bool = None,
+            wrap_size : float = None,
+            flow_dir : FlowDirection = None,
+            side_scale : float = None,
+            wake_scale : float = None,
+            wake_levels : int = None,
+            suggested_part_name : str = None,
+            suggested_label_prefix : str = None,
+            number_of_threads : int = None,
             json_data : dict = None,
              **kwargs):
         """Initialize a ``CreateBOIParams`` object.
 
         Parameters
         ----------
-        model: Model
+        model : Model
             Model to create a ``CreateBOIParams`` object with default parameters.
-        boi_type: BOIType, optional
+        boi_type : BOIType, optional
             Type of BOI offsetting.
-        perform_initial_wrap: bool, optional
+        perform_initial_wrap : bool, optional
             Perform an initial wrap to create a BOI if BOI type is OFFSETSURFACE.
-        wrap_size: float, optional
+        wrap_size : float, optional
             Set wrap size greater than the largest gap size in the input when performing_initial_wrap is true.
-        flow_dir: FlowDirection, optional
+        flow_dir : FlowDirection, optional
             Assigns the offset direction of inflation.
-        side_scale: float, optional
+        side_scale : float, optional
             BOI side scaling factor.
-        wake_scale: float, optional
+        wake_scale : float, optional
             BOI flow direction scaling factor.
-        wake_levels: int, optional
+        wake_levels : int, optional
             BOI levels.
-        suggested_part_name: str, optional
+        suggested_part_name : str, optional
             Suggested part name for created BOI surfaces.
-        suggested_label_prefix: str, optional
+        suggested_label_prefix : str, optional
             Suggested label name for created BOI surfaces.
-        number_of_threads: int, optional
+        number_of_threads : int, optional
             Number of threads for multithreading.
-        json_data: dict, optional
+        json_data : dict, optional
             JSON dictionary to create a ``CreateBOIParams`` object with provided parameters.
 
         Examples
@@ -3141,39 +3141,39 @@ class CreateBOIParams(CoreObject):
 
     @staticmethod
     def set_default(
-            boi_type: BOIType = None,
-            perform_initial_wrap: bool = None,
-            wrap_size: float = None,
-            flow_dir: FlowDirection = None,
-            side_scale: float = None,
-            wake_scale: float = None,
-            wake_levels: int = None,
-            suggested_part_name: str = None,
-            suggested_label_prefix: str = None,
-            number_of_threads: int = None):
+            boi_type : BOIType = None,
+            perform_initial_wrap : bool = None,
+            wrap_size : float = None,
+            flow_dir : FlowDirection = None,
+            side_scale : float = None,
+            wake_scale : float = None,
+            wake_levels : int = None,
+            suggested_part_name : str = None,
+            suggested_label_prefix : str = None,
+            number_of_threads : int = None):
         """Set the default values of the ``CreateBOIParams`` object.
 
         Parameters
         ----------
-        boi_type: BOIType, optional
+        boi_type : BOIType, optional
             Type of BOI offsetting.
-        perform_initial_wrap: bool, optional
+        perform_initial_wrap : bool, optional
             Perform an initial wrap to create a BOI if BOI type is OFFSETSURFACE.
-        wrap_size: float, optional
+        wrap_size : float, optional
             Set wrap size greater than the largest gap size in the input when performing_initial_wrap is true.
-        flow_dir: FlowDirection, optional
+        flow_dir : FlowDirection, optional
             Assigns the offset direction of inflation.
-        side_scale: float, optional
+        side_scale : float, optional
             BOI side scaling factor.
-        wake_scale: float, optional
+        wake_scale : float, optional
             BOI flow direction scaling factor.
-        wake_levels: int, optional
+        wake_levels : int, optional
             BOI levels.
-        suggested_part_name: str, optional
+        suggested_part_name : str, optional
             Suggested part name for created BOI surfaces.
-        suggested_label_prefix: str, optional
+        suggested_label_prefix : str, optional
             Suggested label name for created BOI surfaces.
-        number_of_threads: int, optional
+        number_of_threads : int, optional
             Number of threads for multithreading.
         """
         args = locals()
@@ -3326,13 +3326,13 @@ class CreateBOIResults(CoreObject):
 
     Parameters
     ----------
-    model: Model
+    model : Model
         Model to create a ``CreateBOIResults`` object with default parameters.
-    error_code: ErrorCode, optional
+    error_code : ErrorCode, optional
         Error code associated with failure of operation.
-    part_id: int, optional
+    part_id : int, optional
         The BOI part id.
-    json_data: dict, optional
+    json_data : dict, optional
         JSON dictionary to create a ``CreateBOIResults`` object with provided parameters.
 
     Examples
@@ -3343,29 +3343,29 @@ class CreateBOIResults(CoreObject):
 
     def __initialize(
             self,
-            error_code: ErrorCode,
-            part_id: int):
+            error_code : ErrorCode,
+            part_id : int):
         self._error_code = ErrorCode(error_code)
         self._part_id = part_id
 
     def __init__(
             self,
             model: CommunicationManager=None,
-            error_code: ErrorCode = None,
-            part_id: int = None,
+            error_code : ErrorCode = None,
+            part_id : int = None,
             json_data : dict = None,
              **kwargs):
         """Initialize a ``CreateBOIResults`` object.
 
         Parameters
         ----------
-        model: Model
+        model : Model
             Model to create a ``CreateBOIResults`` object with default parameters.
-        error_code: ErrorCode, optional
+        error_code : ErrorCode, optional
             Error code associated with failure of operation.
-        part_id: int, optional
+        part_id : int, optional
             The BOI part id.
-        json_data: dict, optional
+        json_data : dict, optional
             JSON dictionary to create a ``CreateBOIResults`` object with provided parameters.
 
         Examples
@@ -3400,15 +3400,15 @@ class CreateBOIResults(CoreObject):
 
     @staticmethod
     def set_default(
-            error_code: ErrorCode = None,
-            part_id: int = None):
+            error_code : ErrorCode = None,
+            part_id : int = None):
         """Set the default values of the ``CreateBOIResults`` object.
 
         Parameters
         ----------
-        error_code: ErrorCode, optional
+        error_code : ErrorCode, optional
             Error code associated with failure of operation.
-        part_id: int, optional
+        part_id : int, optional
             The BOI part id.
         """
         args = locals()
@@ -3465,19 +3465,19 @@ class CreateContactPatchParams(CoreObject):
 
     Parameters
     ----------
-    model: Model
+    model : Model
         Model to create a ``CreateContactPatchParams`` object with default parameters.
-    contact_patch_axis: ContactPatchAxis, optional
+    contact_patch_axis : ContactPatchAxis, optional
         Assigns the contact patch direction.
-    offset_distance: float, optional
+    offset_distance : float, optional
         Source offset distance value.
-    grouping_tolerance: float, optional
+    grouping_tolerance : float, optional
         Tolerance distance value to group regions for contact patch creation.
-    suggested_part_name: str, optional
+    suggested_part_name : str, optional
         Suggested part name for created contact patch surfaces.
-    suggested_label_prefix: str, optional
+    suggested_label_prefix : str, optional
         Suggested label name for created contact patch surfaces.
-    json_data: dict, optional
+    json_data : dict, optional
         JSON dictionary to create a ``CreateContactPatchParams`` object with provided parameters.
 
     Examples
@@ -3488,11 +3488,11 @@ class CreateContactPatchParams(CoreObject):
 
     def __initialize(
             self,
-            contact_patch_axis: ContactPatchAxis,
-            offset_distance: float,
-            grouping_tolerance: float,
-            suggested_part_name: str,
-            suggested_label_prefix: str):
+            contact_patch_axis : ContactPatchAxis,
+            offset_distance : float,
+            grouping_tolerance : float,
+            suggested_part_name : str,
+            suggested_label_prefix : str):
         self._contact_patch_axis = ContactPatchAxis(contact_patch_axis)
         self._offset_distance = offset_distance
         self._grouping_tolerance = grouping_tolerance
@@ -3502,30 +3502,30 @@ class CreateContactPatchParams(CoreObject):
     def __init__(
             self,
             model: CommunicationManager=None,
-            contact_patch_axis: ContactPatchAxis = None,
-            offset_distance: float = None,
-            grouping_tolerance: float = None,
-            suggested_part_name: str = None,
-            suggested_label_prefix: str = None,
+            contact_patch_axis : ContactPatchAxis = None,
+            offset_distance : float = None,
+            grouping_tolerance : float = None,
+            suggested_part_name : str = None,
+            suggested_label_prefix : str = None,
             json_data : dict = None,
              **kwargs):
         """Initialize a ``CreateContactPatchParams`` object.
 
         Parameters
         ----------
-        model: Model
+        model : Model
             Model to create a ``CreateContactPatchParams`` object with default parameters.
-        contact_patch_axis: ContactPatchAxis, optional
+        contact_patch_axis : ContactPatchAxis, optional
             Assigns the contact patch direction.
-        offset_distance: float, optional
+        offset_distance : float, optional
             Source offset distance value.
-        grouping_tolerance: float, optional
+        grouping_tolerance : float, optional
             Tolerance distance value to group regions for contact patch creation.
-        suggested_part_name: str, optional
+        suggested_part_name : str, optional
             Suggested part name for created contact patch surfaces.
-        suggested_label_prefix: str, optional
+        suggested_label_prefix : str, optional
             Suggested label name for created contact patch surfaces.
-        json_data: dict, optional
+        json_data : dict, optional
             JSON dictionary to create a ``CreateContactPatchParams`` object with provided parameters.
 
         Examples
@@ -3569,24 +3569,24 @@ class CreateContactPatchParams(CoreObject):
 
     @staticmethod
     def set_default(
-            contact_patch_axis: ContactPatchAxis = None,
-            offset_distance: float = None,
-            grouping_tolerance: float = None,
-            suggested_part_name: str = None,
-            suggested_label_prefix: str = None):
+            contact_patch_axis : ContactPatchAxis = None,
+            offset_distance : float = None,
+            grouping_tolerance : float = None,
+            suggested_part_name : str = None,
+            suggested_label_prefix : str = None):
         """Set the default values of the ``CreateContactPatchParams`` object.
 
         Parameters
         ----------
-        contact_patch_axis: ContactPatchAxis, optional
+        contact_patch_axis : ContactPatchAxis, optional
             Assigns the contact patch direction.
-        offset_distance: float, optional
+        offset_distance : float, optional
             Source offset distance value.
-        grouping_tolerance: float, optional
+        grouping_tolerance : float, optional
             Tolerance distance value to group regions for contact patch creation.
-        suggested_part_name: str, optional
+        suggested_part_name : str, optional
             Suggested part name for created contact patch surfaces.
-        suggested_label_prefix: str, optional
+        suggested_label_prefix : str, optional
             Suggested label name for created contact patch surfaces.
         """
         args = locals()
@@ -3679,13 +3679,13 @@ class CreateContactPatchResults(CoreObject):
 
     Parameters
     ----------
-    model: Model
+    model : Model
         Model to create a ``CreateContactPatchResults`` object with default parameters.
-    error_code: ErrorCode, optional
+    error_code : ErrorCode, optional
         Error code associated with the contact patch creation operation.
-    part_id: int, optional
+    part_id : int, optional
         Contact patch part id.
-    json_data: dict, optional
+    json_data : dict, optional
         JSON dictionary to create a ``CreateContactPatchResults`` object with provided parameters.
 
     Examples
@@ -3696,29 +3696,29 @@ class CreateContactPatchResults(CoreObject):
 
     def __initialize(
             self,
-            error_code: ErrorCode,
-            part_id: int):
+            error_code : ErrorCode,
+            part_id : int):
         self._error_code = ErrorCode(error_code)
         self._part_id = part_id
 
     def __init__(
             self,
             model: CommunicationManager=None,
-            error_code: ErrorCode = None,
-            part_id: int = None,
+            error_code : ErrorCode = None,
+            part_id : int = None,
             json_data : dict = None,
              **kwargs):
         """Initialize a ``CreateContactPatchResults`` object.
 
         Parameters
         ----------
-        model: Model
+        model : Model
             Model to create a ``CreateContactPatchResults`` object with default parameters.
-        error_code: ErrorCode, optional
+        error_code : ErrorCode, optional
             Error code associated with the contact patch creation operation.
-        part_id: int, optional
+        part_id : int, optional
             Contact patch part id.
-        json_data: dict, optional
+        json_data : dict, optional
             JSON dictionary to create a ``CreateContactPatchResults`` object with provided parameters.
 
         Examples
@@ -3753,15 +3753,15 @@ class CreateContactPatchResults(CoreObject):
 
     @staticmethod
     def set_default(
-            error_code: ErrorCode = None,
-            part_id: int = None):
+            error_code : ErrorCode = None,
+            part_id : int = None):
         """Set the default values of the ``CreateContactPatchResults`` object.
 
         Parameters
         ----------
-        error_code: ErrorCode, optional
+        error_code : ErrorCode, optional
             Error code associated with the contact patch creation operation.
-        part_id: int, optional
+        part_id : int, optional
             Contact patch part id.
         """
         args = locals()
@@ -3818,9 +3818,9 @@ class StretchFreeBoundariesParams(CoreObject):
 
     Parameters
     ----------
-    model: Model
+    model : Model
         Model to create a ``StretchFreeBoundariesParams`` object with default parameters.
-    json_data: dict, optional
+    json_data : dict, optional
         JSON dictionary to create a ``StretchFreeBoundariesParams`` object with provided parameters.
 
     Examples
@@ -3842,9 +3842,9 @@ class StretchFreeBoundariesParams(CoreObject):
 
         Parameters
         ----------
-        model: Model
+        model : Model
             Model to create a ``StretchFreeBoundariesParams`` object with default parameters.
-        json_data: dict, optional
+        json_data : dict, optional
             JSON dictionary to create a ``StretchFreeBoundariesParams`` object with provided parameters.
 
         Examples
@@ -3908,11 +3908,11 @@ class StretchFreeBoundariesResults(CoreObject):
 
     Parameters
     ----------
-    model: Model
+    model : Model
         Model to create a ``StretchFreeBoundariesResults`` object with default parameters.
-    error_code: ErrorCode, optional
+    error_code : ErrorCode, optional
         Error code associated with failure of operation.
-    json_data: dict, optional
+    json_data : dict, optional
         JSON dictionary to create a ``StretchFreeBoundariesResults`` object with provided parameters.
 
     Examples
@@ -3923,24 +3923,24 @@ class StretchFreeBoundariesResults(CoreObject):
 
     def __initialize(
             self,
-            error_code: ErrorCode):
+            error_code : ErrorCode):
         self._error_code = ErrorCode(error_code)
 
     def __init__(
             self,
             model: CommunicationManager=None,
-            error_code: ErrorCode = None,
+            error_code : ErrorCode = None,
             json_data : dict = None,
              **kwargs):
         """Initialize a ``StretchFreeBoundariesResults`` object.
 
         Parameters
         ----------
-        model: Model
+        model : Model
             Model to create a ``StretchFreeBoundariesResults`` object with default parameters.
-        error_code: ErrorCode, optional
+        error_code : ErrorCode, optional
             Error code associated with failure of operation.
-        json_data: dict, optional
+        json_data : dict, optional
             JSON dictionary to create a ``StretchFreeBoundariesResults`` object with provided parameters.
 
         Examples
@@ -3972,12 +3972,12 @@ class StretchFreeBoundariesResults(CoreObject):
 
     @staticmethod
     def set_default(
-            error_code: ErrorCode = None):
+            error_code : ErrorCode = None):
         """Set the default values of the ``StretchFreeBoundariesResults`` object.
 
         Parameters
         ----------
-        error_code: ErrorCode, optional
+        error_code : ErrorCode, optional
             Error code associated with failure of operation.
         """
         args = locals()
@@ -4022,9 +4022,9 @@ class TriangulateParams(CoreObject):
 
     Parameters
     ----------
-    model: Model
+    model : Model
         Model to create a ``TriangulateParams`` object with default parameters.
-    json_data: dict, optional
+    json_data : dict, optional
         JSON dictionary to create a ``TriangulateParams`` object with provided parameters.
 
     Examples
@@ -4046,9 +4046,9 @@ class TriangulateParams(CoreObject):
 
         Parameters
         ----------
-        model: Model
+        model : Model
             Model to create a ``TriangulateParams`` object with default parameters.
-        json_data: dict, optional
+        json_data : dict, optional
             JSON dictionary to create a ``TriangulateParams`` object with provided parameters.
 
         Examples
@@ -4112,17 +4112,17 @@ class TriangulateResults(CoreObject):
 
     Parameters
     ----------
-    model: Model
+    model : Model
         Model to create a ``TriangulateResults`` object with default parameters.
-    error_code: ErrorCode, optional
+    error_code : ErrorCode, optional
         Error code associated with failure of the operation.
 
         **This is a beta parameter**. **The behavior and name may change in the future**.
-    n_faces_triangulated: int, optional
+    n_faces_triangulated : int, optional
         Number of faces that were triangulated.
 
         **This is a beta parameter**. **The behavior and name may change in the future**.
-    json_data: dict, optional
+    json_data : dict, optional
         JSON dictionary to create a ``TriangulateResults`` object with provided parameters.
 
     Examples
@@ -4133,33 +4133,33 @@ class TriangulateResults(CoreObject):
 
     def __initialize(
             self,
-            error_code: ErrorCode,
-            n_faces_triangulated: int):
+            error_code : ErrorCode,
+            n_faces_triangulated : int):
         self._error_code = ErrorCode(error_code)
         self._n_faces_triangulated = n_faces_triangulated
 
     def __init__(
             self,
             model: CommunicationManager=None,
-            error_code: ErrorCode = None,
-            n_faces_triangulated: int = None,
+            error_code : ErrorCode = None,
+            n_faces_triangulated : int = None,
             json_data : dict = None,
              **kwargs):
         """Initialize a ``TriangulateResults`` object.
 
         Parameters
         ----------
-        model: Model
+        model : Model
             Model to create a ``TriangulateResults`` object with default parameters.
-        error_code: ErrorCode, optional
+        error_code : ErrorCode, optional
             Error code associated with failure of the operation.
 
             **This is a beta parameter**. **The behavior and name may change in the future**.
-        n_faces_triangulated: int, optional
+        n_faces_triangulated : int, optional
             Number of faces that were triangulated.
 
             **This is a beta parameter**. **The behavior and name may change in the future**.
-        json_data: dict, optional
+        json_data : dict, optional
             JSON dictionary to create a ``TriangulateResults`` object with provided parameters.
 
         Examples
@@ -4194,15 +4194,15 @@ class TriangulateResults(CoreObject):
 
     @staticmethod
     def set_default(
-            error_code: ErrorCode = None,
-            n_faces_triangulated: int = None):
+            error_code : ErrorCode = None,
+            n_faces_triangulated : int = None):
         """Set the default values of the ``TriangulateResults`` object.
 
         Parameters
         ----------
-        error_code: ErrorCode, optional
+        error_code : ErrorCode, optional
             Error code associated with failure of the operation.
-        n_faces_triangulated: int, optional
+        n_faces_triangulated : int, optional
             Number of faces that were triangulated.
         """
         args = locals()
@@ -4257,3 +4257,305 @@ class TriangulateResults(CoreObject):
     @n_faces_triangulated.setter
     def n_faces_triangulated(self, value: int):
         self._n_faces_triangulated = value
+
+class ComputeInternalRegionPointParams(CoreObject):
+    """ComputeInternalRegionPointParams defines parameters for computing internal region points.
+
+    Parameters
+    ----------
+    model : Model
+        Model to create a ``ComputeInternalRegionPointParams`` object with default parameters.
+    offset_distance : float, optional
+        Offset distance for creating temporary offset cap surfaces (optional). If not specified, calculates the offset distance based on active size field or cap circumference.
+
+        **This is a beta parameter**. **The behavior and name may change in the future**.
+    offset_distance_factor : float, optional
+        Offset distance factor relative to offset distance.
+
+        **This is a beta parameter**. **The behavior and name may change in the future**.
+    json_data : dict, optional
+        JSON dictionary to create a ``ComputeInternalRegionPointParams`` object with provided parameters.
+
+    Examples
+    --------
+    >>> compute_internal_region_point_params = prime.ComputeInternalRegionPointParams(model = model)
+    """
+    _default_params = {}
+
+    def __initialize(
+            self,
+            offset_distance : float,
+            offset_distance_factor : float):
+        self._offset_distance = offset_distance
+        self._offset_distance_factor = offset_distance_factor
+
+    def __init__(
+            self,
+            model: CommunicationManager=None,
+            offset_distance : float = None,
+            offset_distance_factor : float = None,
+            json_data : dict = None,
+             **kwargs):
+        """Initialize a ``ComputeInternalRegionPointParams`` object.
+
+        Parameters
+        ----------
+        model : Model
+            Model to create a ``ComputeInternalRegionPointParams`` object with default parameters.
+        offset_distance : float, optional
+            Offset distance for creating temporary offset cap surfaces (optional). If not specified, calculates the offset distance based on active size field or cap circumference.
+
+            **This is a beta parameter**. **The behavior and name may change in the future**.
+        offset_distance_factor : float, optional
+            Offset distance factor relative to offset distance.
+
+            **This is a beta parameter**. **The behavior and name may change in the future**.
+        json_data : dict, optional
+            JSON dictionary to create a ``ComputeInternalRegionPointParams`` object with provided parameters.
+
+        Examples
+        --------
+        >>> compute_internal_region_point_params = prime.ComputeInternalRegionPointParams(model = model)
+        """
+        if json_data:
+            self.__initialize(
+                json_data["offsetDistance"] if "offsetDistance" in json_data else None,
+                json_data["offsetDistanceFactor"] if "offsetDistanceFactor" in json_data else None)
+        else:
+            all_field_specified = all(arg is not None for arg in [offset_distance, offset_distance_factor])
+            if all_field_specified:
+                self.__initialize(
+                    offset_distance,
+                    offset_distance_factor)
+            else:
+                if model is None:
+                    raise ValueError("Invalid assignment. Either pass a model or specify all properties.")
+                else:
+                    param_json = model._communicator.initialize_params(model, "ComputeInternalRegionPointParams")
+                    json_data = param_json["ComputeInternalRegionPointParams"] if "ComputeInternalRegionPointParams" in param_json else {}
+                    self.__initialize(
+                        offset_distance if offset_distance is not None else ( ComputeInternalRegionPointParams._default_params["offset_distance"] if "offset_distance" in ComputeInternalRegionPointParams._default_params else (json_data["offsetDistance"] if "offsetDistance" in json_data else None)),
+                        offset_distance_factor if offset_distance_factor is not None else ( ComputeInternalRegionPointParams._default_params["offset_distance_factor"] if "offset_distance_factor" in ComputeInternalRegionPointParams._default_params else (json_data["offsetDistanceFactor"] if "offsetDistanceFactor" in json_data else None)))
+        self._custom_params = kwargs
+        if model is not None:
+            [ model._logger.debug(f'Unsupported argument : {key}') for key in kwargs ]
+        [setattr(type(self), key, property(lambda self, key = key:  self._custom_params[key] if key in self._custom_params else None,
+        lambda self, value, key = key : self._custom_params.update({ key: value }))) for key in kwargs]
+        self._freeze()
+
+    @staticmethod
+    def set_default(
+            offset_distance : float = None,
+            offset_distance_factor : float = None):
+        """Set the default values of the ``ComputeInternalRegionPointParams`` object.
+
+        Parameters
+        ----------
+        offset_distance : float, optional
+            Offset distance for creating temporary offset cap surfaces (optional). If not specified, calculates the offset distance based on active size field or cap circumference.
+        offset_distance_factor : float, optional
+            Offset distance factor relative to offset distance.
+        """
+        args = locals()
+        [ComputeInternalRegionPointParams._default_params.update({ key: value }) for key, value in args.items() if value is not None]
+
+    @staticmethod
+    def print_default():
+        """Print the default values of ``ComputeInternalRegionPointParams`` object.
+
+        Examples
+        --------
+        >>> ComputeInternalRegionPointParams.print_default()
+        """
+        message = ""
+        message += ''.join(str(key) + ' : ' + str(value) + '\n' for key, value in ComputeInternalRegionPointParams._default_params.items())
+        print(message)
+
+    def _jsonify(self) -> Dict[str, Any]:
+        json_data = {}
+        if self._offset_distance is not None:
+            json_data["offsetDistance"] = self._offset_distance
+        if self._offset_distance_factor is not None:
+            json_data["offsetDistanceFactor"] = self._offset_distance_factor
+        [ json_data.update({ utils.to_camel_case(key) : value }) for key, value in self._custom_params.items()]
+        return json_data
+
+    def __str__(self) -> str:
+        message = "offset_distance :  %s\noffset_distance_factor :  %s" % (self._offset_distance, self._offset_distance_factor)
+        message += ''.join('\n' + str(key) + ' : ' + str(value) for key, value in self._custom_params.items())
+        return message
+
+    @property
+    def offset_distance(self) -> float:
+        """Offset distance for creating temporary offset cap surfaces (optional). If not specified, calculates the offset distance based on active size field or cap circumference.
+
+        **This is a beta parameter**. **The behavior and name may change in the future**.
+        """
+        return self._offset_distance
+
+    @offset_distance.setter
+    def offset_distance(self, value: float):
+        self._offset_distance = value
+
+    @property
+    def offset_distance_factor(self) -> float:
+        """Offset distance factor relative to offset distance.
+
+        **This is a beta parameter**. **The behavior and name may change in the future**.
+        """
+        return self._offset_distance_factor
+
+    @offset_distance_factor.setter
+    def offset_distance_factor(self, value: float):
+        self._offset_distance_factor = value
+
+class ComputeInternalRegionPointResults(CoreObject):
+    """ComputeInternalRegionPointResults defines results of computing internal region points.
+
+    Parameters
+    ----------
+    model : Model
+        Model to create a ``ComputeInternalRegionPointResults`` object with default parameters.
+    error_code : ErrorCode, optional
+        Error code associated with the operation.
+
+        **This is a beta parameter**. **The behavior and name may change in the future**.
+    point_locations : Iterable[float], optional
+        Flattened array of computed point locations (x1, y1, z1, x2, y2, z2, ...).
+
+        **This is a beta parameter**. **The behavior and name may change in the future**.
+    json_data : dict, optional
+        JSON dictionary to create a ``ComputeInternalRegionPointResults`` object with provided parameters.
+
+    Examples
+    --------
+    >>> compute_internal_region_point_results = prime.ComputeInternalRegionPointResults(model = model)
+    """
+    _default_params = {}
+
+    def __initialize(
+            self,
+            error_code : ErrorCode,
+            point_locations : Iterable[float]):
+        self._error_code = ErrorCode(error_code)
+        self._point_locations = point_locations if isinstance(point_locations, np.ndarray) else np.array(point_locations, dtype=np.double) if point_locations is not None else None
+
+    def __init__(
+            self,
+            model: CommunicationManager=None,
+            error_code : ErrorCode = None,
+            point_locations : Iterable[float] = None,
+            json_data : dict = None,
+             **kwargs):
+        """Initialize a ``ComputeInternalRegionPointResults`` object.
+
+        Parameters
+        ----------
+        model : Model
+            Model to create a ``ComputeInternalRegionPointResults`` object with default parameters.
+        error_code : ErrorCode, optional
+            Error code associated with the operation.
+
+            **This is a beta parameter**. **The behavior and name may change in the future**.
+        point_locations : Iterable[float], optional
+            Flattened array of computed point locations (x1, y1, z1, x2, y2, z2, ...).
+
+            **This is a beta parameter**. **The behavior and name may change in the future**.
+        json_data : dict, optional
+            JSON dictionary to create a ``ComputeInternalRegionPointResults`` object with provided parameters.
+
+        Examples
+        --------
+        >>> compute_internal_region_point_results = prime.ComputeInternalRegionPointResults(model = model)
+        """
+        if json_data:
+            self.__initialize(
+                ErrorCode(json_data["errorCode"] if "errorCode" in json_data else None),
+                json_data["pointLocations"] if "pointLocations" in json_data else None)
+        else:
+            all_field_specified = all(arg is not None for arg in [error_code, point_locations])
+            if all_field_specified:
+                self.__initialize(
+                    error_code,
+                    point_locations)
+            else:
+                if model is None:
+                    raise ValueError("Invalid assignment. Either pass a model or specify all properties.")
+                else:
+                    param_json = model._communicator.initialize_params(model, "ComputeInternalRegionPointResults")
+                    json_data = param_json["ComputeInternalRegionPointResults"] if "ComputeInternalRegionPointResults" in param_json else {}
+                    self.__initialize(
+                        error_code if error_code is not None else ( ComputeInternalRegionPointResults._default_params["error_code"] if "error_code" in ComputeInternalRegionPointResults._default_params else ErrorCode(json_data["errorCode"] if "errorCode" in json_data else None)),
+                        point_locations if point_locations is not None else ( ComputeInternalRegionPointResults._default_params["point_locations"] if "point_locations" in ComputeInternalRegionPointResults._default_params else (json_data["pointLocations"] if "pointLocations" in json_data else None)))
+        self._custom_params = kwargs
+        if model is not None:
+            [ model._logger.debug(f'Unsupported argument : {key}') for key in kwargs ]
+        [setattr(type(self), key, property(lambda self, key = key:  self._custom_params[key] if key in self._custom_params else None,
+        lambda self, value, key = key : self._custom_params.update({ key: value }))) for key in kwargs]
+        self._freeze()
+
+    @staticmethod
+    def set_default(
+            error_code : ErrorCode = None,
+            point_locations : Iterable[float] = None):
+        """Set the default values of the ``ComputeInternalRegionPointResults`` object.
+
+        Parameters
+        ----------
+        error_code : ErrorCode, optional
+            Error code associated with the operation.
+        point_locations : Iterable[float], optional
+            Flattened array of computed point locations (x1, y1, z1, x2, y2, z2, ...).
+        """
+        args = locals()
+        [ComputeInternalRegionPointResults._default_params.update({ key: value }) for key, value in args.items() if value is not None]
+
+    @staticmethod
+    def print_default():
+        """Print the default values of ``ComputeInternalRegionPointResults`` object.
+
+        Examples
+        --------
+        >>> ComputeInternalRegionPointResults.print_default()
+        """
+        message = ""
+        message += ''.join(str(key) + ' : ' + str(value) + '\n' for key, value in ComputeInternalRegionPointResults._default_params.items())
+        print(message)
+
+    def _jsonify(self) -> Dict[str, Any]:
+        json_data = {}
+        if self._error_code is not None:
+            json_data["errorCode"] = self._error_code
+        if self._point_locations is not None:
+            json_data["pointLocations"] = self._point_locations
+        [ json_data.update({ utils.to_camel_case(key) : value }) for key, value in self._custom_params.items()]
+        return json_data
+
+    def __str__(self) -> str:
+        message = "error_code :  %s\npoint_locations :  %s" % (self._error_code, self._point_locations)
+        message += ''.join('\n' + str(key) + ' : ' + str(value) for key, value in self._custom_params.items())
+        return message
+
+    @property
+    def error_code(self) -> ErrorCode:
+        """Error code associated with the operation.
+
+        **This is a beta parameter**. **The behavior and name may change in the future**.
+        """
+        return self._error_code
+
+    @error_code.setter
+    def error_code(self, value: ErrorCode):
+        self._error_code = value
+
+    @property
+    def point_locations(self) -> Iterable[float]:
+        """Flattened array of computed point locations (x1, y1, z1, x2, y2, z2, ...).
+
+        **This is a beta parameter**. **The behavior and name may change in the future**.
+        """
+        return self._point_locations
+
+    @point_locations.setter
+    def point_locations(self, value: Iterable[float]):
+        self._point_locations = value

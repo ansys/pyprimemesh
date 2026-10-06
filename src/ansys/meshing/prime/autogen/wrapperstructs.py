@@ -1,4 +1,4 @@
-# Copyright (C) 2024 - 2025 ANSYS, Inc. and/or its affiliates.
+# Copyright (C) 2026 Synopsys, Inc. and ANSYS, Inc. All rights reserved.
 # SPDX-License-Identifier: MIT
 #
 #
@@ -45,27 +45,25 @@ class WrapParams(CoreObject):
 
     Parameters
     ----------
-    model: Model
+    model : Model
         Model to create a ``WrapParams`` object with default parameters.
-    sizing_method: SizeFieldType, optional
+    sizing_method : SizeFieldType, optional
         Used to define sizing method for wrapping.
-    base_size: float, optional
+    base_size : float, optional
         Base size to define octree.
-    size_control_ids: Iterable[int], optional
+    size_control_ids : Iterable[int], optional
         Used to construct geodesic sizes for octree refinement.
-    feature_recovery_control_ids: Iterable[int], optional
-        Used to recover input features for wrapper imprint.
-    size_field_ids: Iterable[int], optional
+    size_field_ids : Iterable[int], optional
         Used to define size field based octree refinement.
-    wrap_region: WrapRegion, optional
+    wrap_region : WrapRegion, optional
         Indicates source type to extract wrapper region.
-    number_of_threads: int, optional
+    number_of_threads : int, optional
         Number of threads for multithreading.
-    imprint_relative_range: float, optional
+    imprint_relative_range : float, optional
         Used to define relative range in imprinting in wrapping.
-    imprint_iterations: int, optional
+    imprint_iterations : int, optional
         Used to define number of imprint iterations in wrapping.
-    json_data: dict, optional
+    json_data : dict, optional
         JSON dictionary to create a ``WrapParams`` object with provided parameters.
 
     Examples
@@ -76,19 +74,17 @@ class WrapParams(CoreObject):
 
     def __initialize(
             self,
-            sizing_method: SizeFieldType,
-            base_size: float,
-            size_control_ids: Iterable[int],
-            feature_recovery_control_ids: Iterable[int],
-            size_field_ids: Iterable[int],
-            wrap_region: WrapRegion,
-            number_of_threads: int,
-            imprint_relative_range: float,
-            imprint_iterations: int):
+            sizing_method : SizeFieldType,
+            base_size : float,
+            size_control_ids : Iterable[int],
+            size_field_ids : Iterable[int],
+            wrap_region : WrapRegion,
+            number_of_threads : int,
+            imprint_relative_range : float,
+            imprint_iterations : int):
         self._sizing_method = SizeFieldType(sizing_method)
         self._base_size = base_size
         self._size_control_ids = size_control_ids if isinstance(size_control_ids, np.ndarray) else np.array(size_control_ids, dtype=np.int32) if size_control_ids is not None else None
-        self._feature_recovery_control_ids = feature_recovery_control_ids if isinstance(feature_recovery_control_ids, np.ndarray) else np.array(feature_recovery_control_ids, dtype=np.int32) if feature_recovery_control_ids is not None else None
         self._size_field_ids = size_field_ids if isinstance(size_field_ids, np.ndarray) else np.array(size_field_ids, dtype=np.int32) if size_field_ids is not None else None
         self._wrap_region = WrapRegion(wrap_region)
         self._number_of_threads = number_of_threads
@@ -98,42 +94,39 @@ class WrapParams(CoreObject):
     def __init__(
             self,
             model: CommunicationManager=None,
-            sizing_method: SizeFieldType = None,
-            base_size: float = None,
-            size_control_ids: Iterable[int] = None,
-            feature_recovery_control_ids: Iterable[int] = None,
-            size_field_ids: Iterable[int] = None,
-            wrap_region: WrapRegion = None,
-            number_of_threads: int = None,
-            imprint_relative_range: float = None,
-            imprint_iterations: int = None,
+            sizing_method : SizeFieldType = None,
+            base_size : float = None,
+            size_control_ids : Iterable[int] = None,
+            size_field_ids : Iterable[int] = None,
+            wrap_region : WrapRegion = None,
+            number_of_threads : int = None,
+            imprint_relative_range : float = None,
+            imprint_iterations : int = None,
             json_data : dict = None,
              **kwargs):
         """Initialize a ``WrapParams`` object.
 
         Parameters
         ----------
-        model: Model
+        model : Model
             Model to create a ``WrapParams`` object with default parameters.
-        sizing_method: SizeFieldType, optional
+        sizing_method : SizeFieldType, optional
             Used to define sizing method for wrapping.
-        base_size: float, optional
+        base_size : float, optional
             Base size to define octree.
-        size_control_ids: Iterable[int], optional
+        size_control_ids : Iterable[int], optional
             Used to construct geodesic sizes for octree refinement.
-        feature_recovery_control_ids: Iterable[int], optional
-            Used to recover input features for wrapper imprint.
-        size_field_ids: Iterable[int], optional
+        size_field_ids : Iterable[int], optional
             Used to define size field based octree refinement.
-        wrap_region: WrapRegion, optional
+        wrap_region : WrapRegion, optional
             Indicates source type to extract wrapper region.
-        number_of_threads: int, optional
+        number_of_threads : int, optional
             Number of threads for multithreading.
-        imprint_relative_range: float, optional
+        imprint_relative_range : float, optional
             Used to define relative range in imprinting in wrapping.
-        imprint_iterations: int, optional
+        imprint_iterations : int, optional
             Used to define number of imprint iterations in wrapping.
-        json_data: dict, optional
+        json_data : dict, optional
             JSON dictionary to create a ``WrapParams`` object with provided parameters.
 
         Examples
@@ -145,20 +138,18 @@ class WrapParams(CoreObject):
                 SizeFieldType(json_data["sizingMethod"] if "sizingMethod" in json_data else None),
                 json_data["baseSize"] if "baseSize" in json_data else None,
                 json_data["sizeControlIDs"] if "sizeControlIDs" in json_data else None,
-                json_data["featureRecoveryControlIDs"] if "featureRecoveryControlIDs" in json_data else None,
                 json_data["sizeFieldIDs"] if "sizeFieldIDs" in json_data else None,
                 WrapRegion(json_data["wrapRegion"] if "wrapRegion" in json_data else None),
                 json_data["numberOfThreads"] if "numberOfThreads" in json_data else None,
                 json_data["imprintRelativeRange"] if "imprintRelativeRange" in json_data else None,
                 json_data["imprintIterations"] if "imprintIterations" in json_data else None)
         else:
-            all_field_specified = all(arg is not None for arg in [sizing_method, base_size, size_control_ids, feature_recovery_control_ids, size_field_ids, wrap_region, number_of_threads, imprint_relative_range, imprint_iterations])
+            all_field_specified = all(arg is not None for arg in [sizing_method, base_size, size_control_ids, size_field_ids, wrap_region, number_of_threads, imprint_relative_range, imprint_iterations])
             if all_field_specified:
                 self.__initialize(
                     sizing_method,
                     base_size,
                     size_control_ids,
-                    feature_recovery_control_ids,
                     size_field_ids,
                     wrap_region,
                     number_of_threads,
@@ -174,7 +165,6 @@ class WrapParams(CoreObject):
                         sizing_method if sizing_method is not None else ( WrapParams._default_params["sizing_method"] if "sizing_method" in WrapParams._default_params else SizeFieldType(json_data["sizingMethod"] if "sizingMethod" in json_data else None)),
                         base_size if base_size is not None else ( WrapParams._default_params["base_size"] if "base_size" in WrapParams._default_params else (json_data["baseSize"] if "baseSize" in json_data else None)),
                         size_control_ids if size_control_ids is not None else ( WrapParams._default_params["size_control_ids"] if "size_control_ids" in WrapParams._default_params else (json_data["sizeControlIDs"] if "sizeControlIDs" in json_data else None)),
-                        feature_recovery_control_ids if feature_recovery_control_ids is not None else ( WrapParams._default_params["feature_recovery_control_ids"] if "feature_recovery_control_ids" in WrapParams._default_params else (json_data["featureRecoveryControlIDs"] if "featureRecoveryControlIDs" in json_data else None)),
                         size_field_ids if size_field_ids is not None else ( WrapParams._default_params["size_field_ids"] if "size_field_ids" in WrapParams._default_params else (json_data["sizeFieldIDs"] if "sizeFieldIDs" in json_data else None)),
                         wrap_region if wrap_region is not None else ( WrapParams._default_params["wrap_region"] if "wrap_region" in WrapParams._default_params else WrapRegion(json_data["wrapRegion"] if "wrapRegion" in json_data else None)),
                         number_of_threads if number_of_threads is not None else ( WrapParams._default_params["number_of_threads"] if "number_of_threads" in WrapParams._default_params else (json_data["numberOfThreads"] if "numberOfThreads" in json_data else None)),
@@ -189,36 +179,33 @@ class WrapParams(CoreObject):
 
     @staticmethod
     def set_default(
-            sizing_method: SizeFieldType = None,
-            base_size: float = None,
-            size_control_ids: Iterable[int] = None,
-            feature_recovery_control_ids: Iterable[int] = None,
-            size_field_ids: Iterable[int] = None,
-            wrap_region: WrapRegion = None,
-            number_of_threads: int = None,
-            imprint_relative_range: float = None,
-            imprint_iterations: int = None):
+            sizing_method : SizeFieldType = None,
+            base_size : float = None,
+            size_control_ids : Iterable[int] = None,
+            size_field_ids : Iterable[int] = None,
+            wrap_region : WrapRegion = None,
+            number_of_threads : int = None,
+            imprint_relative_range : float = None,
+            imprint_iterations : int = None):
         """Set the default values of the ``WrapParams`` object.
 
         Parameters
         ----------
-        sizing_method: SizeFieldType, optional
+        sizing_method : SizeFieldType, optional
             Used to define sizing method for wrapping.
-        base_size: float, optional
+        base_size : float, optional
             Base size to define octree.
-        size_control_ids: Iterable[int], optional
+        size_control_ids : Iterable[int], optional
             Used to construct geodesic sizes for octree refinement.
-        feature_recovery_control_ids: Iterable[int], optional
-            Used to recover input features for wrapper imprint.
-        size_field_ids: Iterable[int], optional
+        size_field_ids : Iterable[int], optional
             Used to define size field based octree refinement.
-        wrap_region: WrapRegion, optional
+        wrap_region : WrapRegion, optional
             Indicates source type to extract wrapper region.
-        number_of_threads: int, optional
+        number_of_threads : int, optional
             Number of threads for multithreading.
-        imprint_relative_range: float, optional
+        imprint_relative_range : float, optional
             Used to define relative range in imprinting in wrapping.
-        imprint_iterations: int, optional
+        imprint_iterations : int, optional
             Used to define number of imprint iterations in wrapping.
         """
         args = locals()
@@ -244,8 +231,6 @@ class WrapParams(CoreObject):
             json_data["baseSize"] = self._base_size
         if self._size_control_ids is not None:
             json_data["sizeControlIDs"] = self._size_control_ids
-        if self._feature_recovery_control_ids is not None:
-            json_data["featureRecoveryControlIDs"] = self._feature_recovery_control_ids
         if self._size_field_ids is not None:
             json_data["sizeFieldIDs"] = self._size_field_ids
         if self._wrap_region is not None:
@@ -260,7 +245,7 @@ class WrapParams(CoreObject):
         return json_data
 
     def __str__(self) -> str:
-        message = "sizing_method :  %s\nbase_size :  %s\nsize_control_ids :  %s\nfeature_recovery_control_ids :  %s\nsize_field_ids :  %s\nwrap_region :  %s\nnumber_of_threads :  %s\nimprint_relative_range :  %s\nimprint_iterations :  %s" % (self._sizing_method, self._base_size, self._size_control_ids, self._feature_recovery_control_ids, self._size_field_ids, self._wrap_region, self._number_of_threads, self._imprint_relative_range, self._imprint_iterations)
+        message = "sizing_method :  %s\nbase_size :  %s\nsize_control_ids :  %s\nsize_field_ids :  %s\nwrap_region :  %s\nnumber_of_threads :  %s\nimprint_relative_range :  %s\nimprint_iterations :  %s" % (self._sizing_method, self._base_size, self._size_control_ids, self._size_field_ids, self._wrap_region, self._number_of_threads, self._imprint_relative_range, self._imprint_iterations)
         message += ''.join('\n' + str(key) + ' : ' + str(value) for key, value in self._custom_params.items())
         return message
 
@@ -293,16 +278,6 @@ class WrapParams(CoreObject):
     @size_control_ids.setter
     def size_control_ids(self, value: Iterable[int]):
         self._size_control_ids = value
-
-    @property
-    def feature_recovery_control_ids(self) -> Iterable[int]:
-        """Used to recover input features for wrapper imprint.
-        """
-        return self._feature_recovery_control_ids
-
-    @feature_recovery_control_ids.setter
-    def feature_recovery_control_ids(self, value: Iterable[int]):
-        self._feature_recovery_control_ids = value
 
     @property
     def size_field_ids(self) -> Iterable[int]:
@@ -359,17 +334,17 @@ class WrapResult(CoreObject):
 
     Parameters
     ----------
-    model: Model
+    model : Model
         Model to create a ``WrapResult`` object with default parameters.
-    warning_codes: List[WarningCode], optional
+    warning_codes : List[WarningCode], optional
         Warning codes associated with the wrap operation.
-    error_code: ErrorCode, optional
+    error_code : ErrorCode, optional
         Error code associated with a wrap operation.
-    id: int, optional
+    id : int, optional
         Id of the wrapper part created.
-    name: str, optional
+    name : str, optional
         Name of wrapper part created.
-    json_data: dict, optional
+    json_data : dict, optional
         JSON dictionary to create a ``WrapResult`` object with provided parameters.
 
     Examples
@@ -380,10 +355,10 @@ class WrapResult(CoreObject):
 
     def __initialize(
             self,
-            warning_codes: List[WarningCode],
-            error_code: ErrorCode,
-            id: int,
-            name: str):
+            warning_codes : List[WarningCode],
+            error_code : ErrorCode,
+            id : int,
+            name : str):
         self._warning_codes = warning_codes
         self._error_code = ErrorCode(error_code)
         self._id = id
@@ -392,27 +367,27 @@ class WrapResult(CoreObject):
     def __init__(
             self,
             model: CommunicationManager=None,
-            warning_codes: List[WarningCode] = None,
-            error_code: ErrorCode = None,
-            id: int = None,
-            name: str = None,
+            warning_codes : List[WarningCode] = None,
+            error_code : ErrorCode = None,
+            id : int = None,
+            name : str = None,
             json_data : dict = None,
              **kwargs):
         """Initialize a ``WrapResult`` object.
 
         Parameters
         ----------
-        model: Model
+        model : Model
             Model to create a ``WrapResult`` object with default parameters.
-        warning_codes: List[WarningCode], optional
+        warning_codes : List[WarningCode], optional
             Warning codes associated with the wrap operation.
-        error_code: ErrorCode, optional
+        error_code : ErrorCode, optional
             Error code associated with a wrap operation.
-        id: int, optional
+        id : int, optional
             Id of the wrapper part created.
-        name: str, optional
+        name : str, optional
             Name of wrapper part created.
-        json_data: dict, optional
+        json_data : dict, optional
             JSON dictionary to create a ``WrapResult`` object with provided parameters.
 
         Examples
@@ -453,21 +428,21 @@ class WrapResult(CoreObject):
 
     @staticmethod
     def set_default(
-            warning_codes: List[WarningCode] = None,
-            error_code: ErrorCode = None,
-            id: int = None,
-            name: str = None):
+            warning_codes : List[WarningCode] = None,
+            error_code : ErrorCode = None,
+            id : int = None,
+            name : str = None):
         """Set the default values of the ``WrapResult`` object.
 
         Parameters
         ----------
-        warning_codes: List[WarningCode], optional
+        warning_codes : List[WarningCode], optional
             Warning codes associated with the wrap operation.
-        error_code: ErrorCode, optional
+        error_code : ErrorCode, optional
             Error code associated with a wrap operation.
-        id: int, optional
+        id : int, optional
             Id of the wrapper part created.
-        name: str, optional
+        name : str, optional
             Name of wrapper part created.
         """
         args = locals()
@@ -548,35 +523,35 @@ class WrapperImproveQualityParams(CoreObject):
 
     Parameters
     ----------
-    model: Model
+    model : Model
         Model to create a ``WrapperImproveQualityParams`` object with default parameters.
-    target_skewness: float, optional
+    target_skewness : float, optional
         Target skewness.
-    island_count: int, optional
+    island_count : int, optional
         Face count of smallest island.
-    island_tol: float, optional
+    island_tol : float, optional
         Relative face count of smallest island.
-    overlap_count: int, optional
+    overlap_count : int, optional
         Face count of non-manifold overlap.
-    overlap_tol: float, optional
+    overlap_tol : float, optional
         Relative face count of non-manifold overlap.
-    resolve_spikes: bool, optional
+    resolve_spikes : bool, optional
         Control to perform removing spikes or not.
-    resolve_intersections: bool, optional
+    resolve_intersections : bool, optional
         Control to resolve face intersections or not.
-    inflate_dihedral_face_nodes: bool, optional
+    inflate_dihedral_face_nodes : bool, optional
         Control to resolve face dihedral angle by inflating opposite nodes or not.
-    resolve_invalid_node_normals: bool, optional
+    resolve_invalid_node_normals : bool, optional
         Control to resolve invalid node normals by inflating opposite nodes or not.
-    aggressively: bool, optional
+    aggressively : bool, optional
         Control to improve surfaces aggressively or not.
-    sharp_angle: float, optional
+    sharp_angle : float, optional
         Maximum off feature sharp node angle.
-    geom_zonelets: Iterable[int], optional
+    geom_zonelets : Iterable[int], optional
         Associated underlying geometry zonelet ids.
-    number_of_threads: int, optional
+    number_of_threads : int, optional
         Number of threads for multithreading.
-    json_data: dict, optional
+    json_data : dict, optional
         JSON dictionary to create a ``WrapperImproveQualityParams`` object with provided parameters.
 
     Examples
@@ -587,19 +562,19 @@ class WrapperImproveQualityParams(CoreObject):
 
     def __initialize(
             self,
-            target_skewness: float,
-            island_count: int,
-            island_tol: float,
-            overlap_count: int,
-            overlap_tol: float,
-            resolve_spikes: bool,
-            resolve_intersections: bool,
-            inflate_dihedral_face_nodes: bool,
-            resolve_invalid_node_normals: bool,
-            aggressively: bool,
-            sharp_angle: float,
-            geom_zonelets: Iterable[int],
-            number_of_threads: int):
+            target_skewness : float,
+            island_count : int,
+            island_tol : float,
+            overlap_count : int,
+            overlap_tol : float,
+            resolve_spikes : bool,
+            resolve_intersections : bool,
+            inflate_dihedral_face_nodes : bool,
+            resolve_invalid_node_normals : bool,
+            aggressively : bool,
+            sharp_angle : float,
+            geom_zonelets : Iterable[int],
+            number_of_threads : int):
         self._target_skewness = target_skewness
         self._island_count = island_count
         self._island_tol = island_tol
@@ -617,54 +592,54 @@ class WrapperImproveQualityParams(CoreObject):
     def __init__(
             self,
             model: CommunicationManager=None,
-            target_skewness: float = None,
-            island_count: int = None,
-            island_tol: float = None,
-            overlap_count: int = None,
-            overlap_tol: float = None,
-            resolve_spikes: bool = None,
-            resolve_intersections: bool = None,
-            inflate_dihedral_face_nodes: bool = None,
-            resolve_invalid_node_normals: bool = None,
-            aggressively: bool = None,
-            sharp_angle: float = None,
-            geom_zonelets: Iterable[int] = None,
-            number_of_threads: int = None,
+            target_skewness : float = None,
+            island_count : int = None,
+            island_tol : float = None,
+            overlap_count : int = None,
+            overlap_tol : float = None,
+            resolve_spikes : bool = None,
+            resolve_intersections : bool = None,
+            inflate_dihedral_face_nodes : bool = None,
+            resolve_invalid_node_normals : bool = None,
+            aggressively : bool = None,
+            sharp_angle : float = None,
+            geom_zonelets : Iterable[int] = None,
+            number_of_threads : int = None,
             json_data : dict = None,
              **kwargs):
         """Initialize a ``WrapperImproveQualityParams`` object.
 
         Parameters
         ----------
-        model: Model
+        model : Model
             Model to create a ``WrapperImproveQualityParams`` object with default parameters.
-        target_skewness: float, optional
+        target_skewness : float, optional
             Target skewness.
-        island_count: int, optional
+        island_count : int, optional
             Face count of smallest island.
-        island_tol: float, optional
+        island_tol : float, optional
             Relative face count of smallest island.
-        overlap_count: int, optional
+        overlap_count : int, optional
             Face count of non-manifold overlap.
-        overlap_tol: float, optional
+        overlap_tol : float, optional
             Relative face count of non-manifold overlap.
-        resolve_spikes: bool, optional
+        resolve_spikes : bool, optional
             Control to perform removing spikes or not.
-        resolve_intersections: bool, optional
+        resolve_intersections : bool, optional
             Control to resolve face intersections or not.
-        inflate_dihedral_face_nodes: bool, optional
+        inflate_dihedral_face_nodes : bool, optional
             Control to resolve face dihedral angle by inflating opposite nodes or not.
-        resolve_invalid_node_normals: bool, optional
+        resolve_invalid_node_normals : bool, optional
             Control to resolve invalid node normals by inflating opposite nodes or not.
-        aggressively: bool, optional
+        aggressively : bool, optional
             Control to improve surfaces aggressively or not.
-        sharp_angle: float, optional
+        sharp_angle : float, optional
             Maximum off feature sharp node angle.
-        geom_zonelets: Iterable[int], optional
+        geom_zonelets : Iterable[int], optional
             Associated underlying geometry zonelet ids.
-        number_of_threads: int, optional
+        number_of_threads : int, optional
             Number of threads for multithreading.
-        json_data: dict, optional
+        json_data : dict, optional
             JSON dictionary to create a ``WrapperImproveQualityParams`` object with provided parameters.
 
         Examples
@@ -732,48 +707,48 @@ class WrapperImproveQualityParams(CoreObject):
 
     @staticmethod
     def set_default(
-            target_skewness: float = None,
-            island_count: int = None,
-            island_tol: float = None,
-            overlap_count: int = None,
-            overlap_tol: float = None,
-            resolve_spikes: bool = None,
-            resolve_intersections: bool = None,
-            inflate_dihedral_face_nodes: bool = None,
-            resolve_invalid_node_normals: bool = None,
-            aggressively: bool = None,
-            sharp_angle: float = None,
-            geom_zonelets: Iterable[int] = None,
-            number_of_threads: int = None):
+            target_skewness : float = None,
+            island_count : int = None,
+            island_tol : float = None,
+            overlap_count : int = None,
+            overlap_tol : float = None,
+            resolve_spikes : bool = None,
+            resolve_intersections : bool = None,
+            inflate_dihedral_face_nodes : bool = None,
+            resolve_invalid_node_normals : bool = None,
+            aggressively : bool = None,
+            sharp_angle : float = None,
+            geom_zonelets : Iterable[int] = None,
+            number_of_threads : int = None):
         """Set the default values of the ``WrapperImproveQualityParams`` object.
 
         Parameters
         ----------
-        target_skewness: float, optional
+        target_skewness : float, optional
             Target skewness.
-        island_count: int, optional
+        island_count : int, optional
             Face count of smallest island.
-        island_tol: float, optional
+        island_tol : float, optional
             Relative face count of smallest island.
-        overlap_count: int, optional
+        overlap_count : int, optional
             Face count of non-manifold overlap.
-        overlap_tol: float, optional
+        overlap_tol : float, optional
             Relative face count of non-manifold overlap.
-        resolve_spikes: bool, optional
+        resolve_spikes : bool, optional
             Control to perform removing spikes or not.
-        resolve_intersections: bool, optional
+        resolve_intersections : bool, optional
             Control to resolve face intersections or not.
-        inflate_dihedral_face_nodes: bool, optional
+        inflate_dihedral_face_nodes : bool, optional
             Control to resolve face dihedral angle by inflating opposite nodes or not.
-        resolve_invalid_node_normals: bool, optional
+        resolve_invalid_node_normals : bool, optional
             Control to resolve invalid node normals by inflating opposite nodes or not.
-        aggressively: bool, optional
+        aggressively : bool, optional
             Control to improve surfaces aggressively or not.
-        sharp_angle: float, optional
+        sharp_angle : float, optional
             Maximum off feature sharp node angle.
-        geom_zonelets: Iterable[int], optional
+        geom_zonelets : Iterable[int], optional
             Associated underlying geometry zonelet ids.
-        number_of_threads: int, optional
+        number_of_threads : int, optional
             Number of threads for multithreading.
         """
         args = locals()
@@ -962,19 +937,19 @@ class WrapperImproveResult(CoreObject):
 
     Parameters
     ----------
-    model: Model
+    model : Model
         Model to create a ``WrapperImproveResult`` object with default parameters.
-    error_code: ErrorCode, optional
+    error_code : ErrorCode, optional
         Error code associated with a wrapper operation.
-    n_skew_found: int, optional
+    n_skew_found : int, optional
         Number of skewed faces found.
-    remaining_skew_faces: int, optional
+    remaining_skew_faces : int, optional
         Number of remaining skew faces.
-    n_face_intersections_found: int, optional
+    n_face_intersections_found : int, optional
         Number of self intersections found.
-    unresolved_face_intersections: int, optional
+    unresolved_face_intersections : int, optional
         Number of remaining self intersections.
-    json_data: dict, optional
+    json_data : dict, optional
         JSON dictionary to create a ``WrapperImproveResult`` object with provided parameters.
 
     Examples
@@ -985,11 +960,11 @@ class WrapperImproveResult(CoreObject):
 
     def __initialize(
             self,
-            error_code: ErrorCode,
-            n_skew_found: int,
-            remaining_skew_faces: int,
-            n_face_intersections_found: int,
-            unresolved_face_intersections: int):
+            error_code : ErrorCode,
+            n_skew_found : int,
+            remaining_skew_faces : int,
+            n_face_intersections_found : int,
+            unresolved_face_intersections : int):
         self._error_code = ErrorCode(error_code)
         self._n_skew_found = n_skew_found
         self._remaining_skew_faces = remaining_skew_faces
@@ -999,30 +974,30 @@ class WrapperImproveResult(CoreObject):
     def __init__(
             self,
             model: CommunicationManager=None,
-            error_code: ErrorCode = None,
-            n_skew_found: int = None,
-            remaining_skew_faces: int = None,
-            n_face_intersections_found: int = None,
-            unresolved_face_intersections: int = None,
+            error_code : ErrorCode = None,
+            n_skew_found : int = None,
+            remaining_skew_faces : int = None,
+            n_face_intersections_found : int = None,
+            unresolved_face_intersections : int = None,
             json_data : dict = None,
              **kwargs):
         """Initialize a ``WrapperImproveResult`` object.
 
         Parameters
         ----------
-        model: Model
+        model : Model
             Model to create a ``WrapperImproveResult`` object with default parameters.
-        error_code: ErrorCode, optional
+        error_code : ErrorCode, optional
             Error code associated with a wrapper operation.
-        n_skew_found: int, optional
+        n_skew_found : int, optional
             Number of skewed faces found.
-        remaining_skew_faces: int, optional
+        remaining_skew_faces : int, optional
             Number of remaining skew faces.
-        n_face_intersections_found: int, optional
+        n_face_intersections_found : int, optional
             Number of self intersections found.
-        unresolved_face_intersections: int, optional
+        unresolved_face_intersections : int, optional
             Number of remaining self intersections.
-        json_data: dict, optional
+        json_data : dict, optional
             JSON dictionary to create a ``WrapperImproveResult`` object with provided parameters.
 
         Examples
@@ -1066,24 +1041,24 @@ class WrapperImproveResult(CoreObject):
 
     @staticmethod
     def set_default(
-            error_code: ErrorCode = None,
-            n_skew_found: int = None,
-            remaining_skew_faces: int = None,
-            n_face_intersections_found: int = None,
-            unresolved_face_intersections: int = None):
+            error_code : ErrorCode = None,
+            n_skew_found : int = None,
+            remaining_skew_faces : int = None,
+            n_face_intersections_found : int = None,
+            unresolved_face_intersections : int = None):
         """Set the default values of the ``WrapperImproveResult`` object.
 
         Parameters
         ----------
-        error_code: ErrorCode, optional
+        error_code : ErrorCode, optional
             Error code associated with a wrapper operation.
-        n_skew_found: int, optional
+        n_skew_found : int, optional
             Number of skewed faces found.
-        remaining_skew_faces: int, optional
+        remaining_skew_faces : int, optional
             Number of remaining skew faces.
-        n_face_intersections_found: int, optional
+        n_face_intersections_found : int, optional
             Number of self intersections found.
-        unresolved_face_intersections: int, optional
+        unresolved_face_intersections : int, optional
             Number of remaining self intersections.
         """
         args = locals()
@@ -1177,23 +1152,23 @@ class WrapperCloseGapsParams(CoreObject):
 
     Parameters
     ----------
-    model: Model
+    model : Model
         Model to create a ``WrapperCloseGapsParams`` object with default parameters.
-    target: ScopeDefinition, optional
+    target : ScopeDefinition, optional
         Scope of target face zonelets to patch gaps between scope and target. If empty scope is provided, CloseGaps patch gaps within scope.
-    gap_size: float, optional
+    gap_size : float, optional
         Maximum gap size to be closed.
-    material_point_name: str, optional
+    material_point_name : str, optional
         Material point name near the gaps to be closed.
-    suggested_part_name: str, optional
+    suggested_part_name : str, optional
         Suggested part name for created patching surfaces.
-    number_of_threads: int, optional
+    number_of_threads : int, optional
         Number of threads for multithreading.
-    create_new_part: bool, optional
+    create_new_part : bool, optional
         Creates a new gap closure part. If set to false, merge the patches to the adjacent face zonelet with the highest face count in the input.
-    resolution_factor: float, optional
+    resolution_factor : float, optional
         Factor to resolve the smallest gap for the given gap size.
-    json_data: dict, optional
+    json_data : dict, optional
         JSON dictionary to create a ``WrapperCloseGapsParams`` object with provided parameters.
 
     Examples
@@ -1204,13 +1179,13 @@ class WrapperCloseGapsParams(CoreObject):
 
     def __initialize(
             self,
-            target: ScopeDefinition,
-            gap_size: float,
-            material_point_name: str,
-            suggested_part_name: str,
-            number_of_threads: int,
-            create_new_part: bool,
-            resolution_factor: float):
+            target : ScopeDefinition,
+            gap_size : float,
+            material_point_name : str,
+            suggested_part_name : str,
+            number_of_threads : int,
+            create_new_part : bool,
+            resolution_factor : float):
         self._target = target
         self._gap_size = gap_size
         self._material_point_name = material_point_name
@@ -1222,36 +1197,36 @@ class WrapperCloseGapsParams(CoreObject):
     def __init__(
             self,
             model: CommunicationManager=None,
-            target: ScopeDefinition = None,
-            gap_size: float = None,
-            material_point_name: str = None,
-            suggested_part_name: str = None,
-            number_of_threads: int = None,
-            create_new_part: bool = None,
-            resolution_factor: float = None,
+            target : ScopeDefinition = None,
+            gap_size : float = None,
+            material_point_name : str = None,
+            suggested_part_name : str = None,
+            number_of_threads : int = None,
+            create_new_part : bool = None,
+            resolution_factor : float = None,
             json_data : dict = None,
              **kwargs):
         """Initialize a ``WrapperCloseGapsParams`` object.
 
         Parameters
         ----------
-        model: Model
+        model : Model
             Model to create a ``WrapperCloseGapsParams`` object with default parameters.
-        target: ScopeDefinition, optional
+        target : ScopeDefinition, optional
             Scope of target face zonelets to patch gaps between scope and target. If empty scope is provided, CloseGaps patch gaps within scope.
-        gap_size: float, optional
+        gap_size : float, optional
             Maximum gap size to be closed.
-        material_point_name: str, optional
+        material_point_name : str, optional
             Material point name near the gaps to be closed.
-        suggested_part_name: str, optional
+        suggested_part_name : str, optional
             Suggested part name for created patching surfaces.
-        number_of_threads: int, optional
+        number_of_threads : int, optional
             Number of threads for multithreading.
-        create_new_part: bool, optional
+        create_new_part : bool, optional
             Creates a new gap closure part. If set to false, merge the patches to the adjacent face zonelet with the highest face count in the input.
-        resolution_factor: float, optional
+        resolution_factor : float, optional
             Factor to resolve the smallest gap for the given gap size.
-        json_data: dict, optional
+        json_data : dict, optional
             JSON dictionary to create a ``WrapperCloseGapsParams`` object with provided parameters.
 
         Examples
@@ -1301,30 +1276,30 @@ class WrapperCloseGapsParams(CoreObject):
 
     @staticmethod
     def set_default(
-            target: ScopeDefinition = None,
-            gap_size: float = None,
-            material_point_name: str = None,
-            suggested_part_name: str = None,
-            number_of_threads: int = None,
-            create_new_part: bool = None,
-            resolution_factor: float = None):
+            target : ScopeDefinition = None,
+            gap_size : float = None,
+            material_point_name : str = None,
+            suggested_part_name : str = None,
+            number_of_threads : int = None,
+            create_new_part : bool = None,
+            resolution_factor : float = None):
         """Set the default values of the ``WrapperCloseGapsParams`` object.
 
         Parameters
         ----------
-        target: ScopeDefinition, optional
+        target : ScopeDefinition, optional
             Scope of target face zonelets to patch gaps between scope and target. If empty scope is provided, CloseGaps patch gaps within scope.
-        gap_size: float, optional
+        gap_size : float, optional
             Maximum gap size to be closed.
-        material_point_name: str, optional
+        material_point_name : str, optional
             Material point name near the gaps to be closed.
-        suggested_part_name: str, optional
+        suggested_part_name : str, optional
             Suggested part name for created patching surfaces.
-        number_of_threads: int, optional
+        number_of_threads : int, optional
             Number of threads for multithreading.
-        create_new_part: bool, optional
+        create_new_part : bool, optional
             Creates a new gap closure part. If set to false, merge the patches to the adjacent face zonelet with the highest face count in the input.
-        resolution_factor: float, optional
+        resolution_factor : float, optional
             Factor to resolve the smallest gap for the given gap size.
         """
         args = locals()
@@ -1345,7 +1320,7 @@ class WrapperCloseGapsParams(CoreObject):
     def _jsonify(self) -> Dict[str, Any]:
         json_data = {}
         if self._target is not None:
-            json_data["target"] = self._target._jsonify()
+            json_data["target"] = self._target if isinstance(self._target, dict) else self._target._jsonify()
         if self._gap_size is not None:
             json_data["gapSize"] = self._gap_size
         if self._material_point_name is not None:
@@ -1441,13 +1416,13 @@ class WrapperCloseGapsResult(CoreObject):
 
     Parameters
     ----------
-    model: Model
+    model : Model
         Model to create a ``WrapperCloseGapsResult`` object with default parameters.
-    error_code: ErrorCode, optional
+    error_code : ErrorCode, optional
         Error code associated with a close gaps operation.
-    part_id: int, optional
+    part_id : int, optional
         Id of part created with gap cover patches.
-    json_data: dict, optional
+    json_data : dict, optional
         JSON dictionary to create a ``WrapperCloseGapsResult`` object with provided parameters.
 
     Examples
@@ -1458,29 +1433,29 @@ class WrapperCloseGapsResult(CoreObject):
 
     def __initialize(
             self,
-            error_code: ErrorCode,
-            part_id: int):
+            error_code : ErrorCode,
+            part_id : int):
         self._error_code = ErrorCode(error_code)
         self._part_id = part_id
 
     def __init__(
             self,
             model: CommunicationManager=None,
-            error_code: ErrorCode = None,
-            part_id: int = None,
+            error_code : ErrorCode = None,
+            part_id : int = None,
             json_data : dict = None,
              **kwargs):
         """Initialize a ``WrapperCloseGapsResult`` object.
 
         Parameters
         ----------
-        model: Model
+        model : Model
             Model to create a ``WrapperCloseGapsResult`` object with default parameters.
-        error_code: ErrorCode, optional
+        error_code : ErrorCode, optional
             Error code associated with a close gaps operation.
-        part_id: int, optional
+        part_id : int, optional
             Id of part created with gap cover patches.
-        json_data: dict, optional
+        json_data : dict, optional
             JSON dictionary to create a ``WrapperCloseGapsResult`` object with provided parameters.
 
         Examples
@@ -1515,15 +1490,15 @@ class WrapperCloseGapsResult(CoreObject):
 
     @staticmethod
     def set_default(
-            error_code: ErrorCode = None,
-            part_id: int = None):
+            error_code : ErrorCode = None,
+            part_id : int = None):
         """Set the default values of the ``WrapperCloseGapsResult`` object.
 
         Parameters
         ----------
-        error_code: ErrorCode, optional
+        error_code : ErrorCode, optional
             Error code associated with a close gaps operation.
-        part_id: int, optional
+        part_id : int, optional
             Id of part created with gap cover patches.
         """
         args = locals()
@@ -1580,21 +1555,21 @@ class DeadRegion(CoreObject):
 
     Parameters
     ----------
-    model: Model
+    model : Model
         Model to create a ``DeadRegion`` object with default parameters.
-    face_zonelet_ids: Iterable[int], optional
+    face_zonelet_ids : Iterable[int], optional
         Face zonelets enclosing dead region.
 
         **This is a beta parameter**. **The behavior and name may change in the future**.
-    dead_material_points: List[str], optional
+    dead_material_points : List[str], optional
         Material points to identify dead region.
 
         **This is a beta parameter**. **The behavior and name may change in the future**.
-    hole_size: float, optional
+    hole_size : float, optional
         Maximum hole size used for patching.
 
         **This is a beta parameter**. **The behavior and name may change in the future**.
-    json_data: dict, optional
+    json_data : dict, optional
         JSON dictionary to create a ``DeadRegion`` object with provided parameters.
 
     Examples
@@ -1605,9 +1580,9 @@ class DeadRegion(CoreObject):
 
     def __initialize(
             self,
-            face_zonelet_ids: Iterable[int],
-            dead_material_points: List[str],
-            hole_size: float):
+            face_zonelet_ids : Iterable[int],
+            dead_material_points : List[str],
+            hole_size : float):
         self._face_zonelet_ids = face_zonelet_ids if isinstance(face_zonelet_ids, np.ndarray) else np.array(face_zonelet_ids, dtype=np.int32) if face_zonelet_ids is not None else None
         self._dead_material_points = dead_material_points
         self._hole_size = hole_size
@@ -1615,30 +1590,30 @@ class DeadRegion(CoreObject):
     def __init__(
             self,
             model: CommunicationManager=None,
-            face_zonelet_ids: Iterable[int] = None,
-            dead_material_points: List[str] = None,
-            hole_size: float = None,
+            face_zonelet_ids : Iterable[int] = None,
+            dead_material_points : List[str] = None,
+            hole_size : float = None,
             json_data : dict = None,
              **kwargs):
         """Initialize a ``DeadRegion`` object.
 
         Parameters
         ----------
-        model: Model
+        model : Model
             Model to create a ``DeadRegion`` object with default parameters.
-        face_zonelet_ids: Iterable[int], optional
+        face_zonelet_ids : Iterable[int], optional
             Face zonelets enclosing dead region.
 
             **This is a beta parameter**. **The behavior and name may change in the future**.
-        dead_material_points: List[str], optional
+        dead_material_points : List[str], optional
             Material points to identify dead region.
 
             **This is a beta parameter**. **The behavior and name may change in the future**.
-        hole_size: float, optional
+        hole_size : float, optional
             Maximum hole size used for patching.
 
             **This is a beta parameter**. **The behavior and name may change in the future**.
-        json_data: dict, optional
+        json_data : dict, optional
             JSON dictionary to create a ``DeadRegion`` object with provided parameters.
 
         Examples
@@ -1676,18 +1651,18 @@ class DeadRegion(CoreObject):
 
     @staticmethod
     def set_default(
-            face_zonelet_ids: Iterable[int] = None,
-            dead_material_points: List[str] = None,
-            hole_size: float = None):
+            face_zonelet_ids : Iterable[int] = None,
+            dead_material_points : List[str] = None,
+            hole_size : float = None):
         """Set the default values of the ``DeadRegion`` object.
 
         Parameters
         ----------
-        face_zonelet_ids: Iterable[int], optional
+        face_zonelet_ids : Iterable[int], optional
             Face zonelets enclosing dead region.
-        dead_material_points: List[str], optional
+        dead_material_points : List[str], optional
             Material points to identify dead region.
-        hole_size: float, optional
+        hole_size : float, optional
             Maximum hole size used for patching.
         """
         args = locals()
@@ -1763,37 +1738,37 @@ class WrapperPatchFlowRegionsParams(CoreObject):
 
     Parameters
     ----------
-    model: Model
+    model : Model
         Model to create a ``WrapperPatchFlowRegionsParams`` object with default parameters.
-    base_size: float, optional
+    base_size : float, optional
         Base size to define octree.
 
         **This is a beta parameter**. **The behavior and name may change in the future**.
-    suggested_part_name: str, optional
+    suggested_part_name : str, optional
         Suggested part name for created patching surfaces.
 
         **This is a beta parameter**. **The behavior and name may change in the future**.
-    number_of_threads: int, optional
+    number_of_threads : int, optional
         Number of threads for multithreading.
 
         **This is a beta parameter**. **The behavior and name may change in the future**.
-    dead_regions: List[DeadRegion], optional
+    dead_regions : List[DeadRegion], optional
         List of dead regions.
 
         **This is a beta parameter**. **The behavior and name may change in the future**.
-    sizing_method: SizeFieldType, optional
+    sizing_method : SizeFieldType, optional
         Method used to define sizing method for patching.
 
         **This is a beta parameter**. **The behavior and name may change in the future**.
-    size_field_ids: Iterable[int], optional
+    size_field_ids : Iterable[int], optional
         Ids used to define size field based octree refinement.
 
         **This is a beta parameter**. **The behavior and name may change in the future**.
-    patch_at_live: bool, optional
+    patch_at_live : bool, optional
         Creates patches closer to live instead of dead.
 
         **This is a beta parameter**. **The behavior and name may change in the future**.
-    json_data: dict, optional
+    json_data : dict, optional
         JSON dictionary to create a ``WrapperPatchFlowRegionsParams`` object with provided parameters.
 
     Examples
@@ -1804,13 +1779,13 @@ class WrapperPatchFlowRegionsParams(CoreObject):
 
     def __initialize(
             self,
-            base_size: float,
-            suggested_part_name: str,
-            number_of_threads: int,
-            dead_regions: List[DeadRegion],
-            sizing_method: SizeFieldType,
-            size_field_ids: Iterable[int],
-            patch_at_live: bool):
+            base_size : float,
+            suggested_part_name : str,
+            number_of_threads : int,
+            dead_regions : List[DeadRegion],
+            sizing_method : SizeFieldType,
+            size_field_ids : Iterable[int],
+            patch_at_live : bool):
         self._base_size = base_size
         self._suggested_part_name = suggested_part_name
         self._number_of_threads = number_of_threads
@@ -1822,50 +1797,50 @@ class WrapperPatchFlowRegionsParams(CoreObject):
     def __init__(
             self,
             model: CommunicationManager=None,
-            base_size: float = None,
-            suggested_part_name: str = None,
-            number_of_threads: int = None,
-            dead_regions: List[DeadRegion] = None,
-            sizing_method: SizeFieldType = None,
-            size_field_ids: Iterable[int] = None,
-            patch_at_live: bool = None,
+            base_size : float = None,
+            suggested_part_name : str = None,
+            number_of_threads : int = None,
+            dead_regions : List[DeadRegion] = None,
+            sizing_method : SizeFieldType = None,
+            size_field_ids : Iterable[int] = None,
+            patch_at_live : bool = None,
             json_data : dict = None,
              **kwargs):
         """Initialize a ``WrapperPatchFlowRegionsParams`` object.
 
         Parameters
         ----------
-        model: Model
+        model : Model
             Model to create a ``WrapperPatchFlowRegionsParams`` object with default parameters.
-        base_size: float, optional
+        base_size : float, optional
             Base size to define octree.
 
             **This is a beta parameter**. **The behavior and name may change in the future**.
-        suggested_part_name: str, optional
+        suggested_part_name : str, optional
             Suggested part name for created patching surfaces.
 
             **This is a beta parameter**. **The behavior and name may change in the future**.
-        number_of_threads: int, optional
+        number_of_threads : int, optional
             Number of threads for multithreading.
 
             **This is a beta parameter**. **The behavior and name may change in the future**.
-        dead_regions: List[DeadRegion], optional
+        dead_regions : List[DeadRegion], optional
             List of dead regions.
 
             **This is a beta parameter**. **The behavior and name may change in the future**.
-        sizing_method: SizeFieldType, optional
+        sizing_method : SizeFieldType, optional
             Method used to define sizing method for patching.
 
             **This is a beta parameter**. **The behavior and name may change in the future**.
-        size_field_ids: Iterable[int], optional
+        size_field_ids : Iterable[int], optional
             Ids used to define size field based octree refinement.
 
             **This is a beta parameter**. **The behavior and name may change in the future**.
-        patch_at_live: bool, optional
+        patch_at_live : bool, optional
             Creates patches closer to live instead of dead.
 
             **This is a beta parameter**. **The behavior and name may change in the future**.
-        json_data: dict, optional
+        json_data : dict, optional
             JSON dictionary to create a ``WrapperPatchFlowRegionsParams`` object with provided parameters.
 
         Examples
@@ -1915,30 +1890,30 @@ class WrapperPatchFlowRegionsParams(CoreObject):
 
     @staticmethod
     def set_default(
-            base_size: float = None,
-            suggested_part_name: str = None,
-            number_of_threads: int = None,
-            dead_regions: List[DeadRegion] = None,
-            sizing_method: SizeFieldType = None,
-            size_field_ids: Iterable[int] = None,
-            patch_at_live: bool = None):
+            base_size : float = None,
+            suggested_part_name : str = None,
+            number_of_threads : int = None,
+            dead_regions : List[DeadRegion] = None,
+            sizing_method : SizeFieldType = None,
+            size_field_ids : Iterable[int] = None,
+            patch_at_live : bool = None):
         """Set the default values of the ``WrapperPatchFlowRegionsParams`` object.
 
         Parameters
         ----------
-        base_size: float, optional
+        base_size : float, optional
             Base size to define octree.
-        suggested_part_name: str, optional
+        suggested_part_name : str, optional
             Suggested part name for created patching surfaces.
-        number_of_threads: int, optional
+        number_of_threads : int, optional
             Number of threads for multithreading.
-        dead_regions: List[DeadRegion], optional
+        dead_regions : List[DeadRegion], optional
             List of dead regions.
-        sizing_method: SizeFieldType, optional
+        sizing_method : SizeFieldType, optional
             Method used to define sizing method for patching.
-        size_field_ids: Iterable[int], optional
+        size_field_ids : Iterable[int], optional
             Ids used to define size field based octree refinement.
-        patch_at_live: bool, optional
+        patch_at_live : bool, optional
             Creates patches closer to live instead of dead.
         """
         args = locals()
@@ -2069,25 +2044,25 @@ class WrapperPatchFlowRegionsResult(CoreObject):
 
     Parameters
     ----------
-    model: Model
+    model : Model
         Model to create a ``WrapperPatchFlowRegionsResult`` object with default parameters.
-    warning_codes: List[WarningCode], optional
+    warning_codes : List[WarningCode], optional
         Warning codes associated with the patch holes operation.
 
         **This is a beta parameter**. **The behavior and name may change in the future**.
-    error_code: ErrorCode, optional
+    error_code : ErrorCode, optional
         Error code associated with a patch holes operation.
 
         **This is a beta parameter**. **The behavior and name may change in the future**.
-    id: int, optional
+    id : int, optional
         Id of part created with hole patches.
 
         **This is a beta parameter**. **The behavior and name may change in the future**.
-    name: str, optional
+    name : str, optional
         Name of part created with hole patches.
 
         **This is a beta parameter**. **The behavior and name may change in the future**.
-    json_data: dict, optional
+    json_data : dict, optional
         JSON dictionary to create a ``WrapperPatchFlowRegionsResult`` object with provided parameters.
 
     Examples
@@ -2098,10 +2073,10 @@ class WrapperPatchFlowRegionsResult(CoreObject):
 
     def __initialize(
             self,
-            warning_codes: List[WarningCode],
-            error_code: ErrorCode,
-            id: int,
-            name: str):
+            warning_codes : List[WarningCode],
+            error_code : ErrorCode,
+            id : int,
+            name : str):
         self._warning_codes = warning_codes
         self._error_code = ErrorCode(error_code)
         self._id = id
@@ -2110,35 +2085,35 @@ class WrapperPatchFlowRegionsResult(CoreObject):
     def __init__(
             self,
             model: CommunicationManager=None,
-            warning_codes: List[WarningCode] = None,
-            error_code: ErrorCode = None,
-            id: int = None,
-            name: str = None,
+            warning_codes : List[WarningCode] = None,
+            error_code : ErrorCode = None,
+            id : int = None,
+            name : str = None,
             json_data : dict = None,
              **kwargs):
         """Initialize a ``WrapperPatchFlowRegionsResult`` object.
 
         Parameters
         ----------
-        model: Model
+        model : Model
             Model to create a ``WrapperPatchFlowRegionsResult`` object with default parameters.
-        warning_codes: List[WarningCode], optional
+        warning_codes : List[WarningCode], optional
             Warning codes associated with the patch holes operation.
 
             **This is a beta parameter**. **The behavior and name may change in the future**.
-        error_code: ErrorCode, optional
+        error_code : ErrorCode, optional
             Error code associated with a patch holes operation.
 
             **This is a beta parameter**. **The behavior and name may change in the future**.
-        id: int, optional
+        id : int, optional
             Id of part created with hole patches.
 
             **This is a beta parameter**. **The behavior and name may change in the future**.
-        name: str, optional
+        name : str, optional
             Name of part created with hole patches.
 
             **This is a beta parameter**. **The behavior and name may change in the future**.
-        json_data: dict, optional
+        json_data : dict, optional
             JSON dictionary to create a ``WrapperPatchFlowRegionsResult`` object with provided parameters.
 
         Examples
@@ -2179,21 +2154,21 @@ class WrapperPatchFlowRegionsResult(CoreObject):
 
     @staticmethod
     def set_default(
-            warning_codes: List[WarningCode] = None,
-            error_code: ErrorCode = None,
-            id: int = None,
-            name: str = None):
+            warning_codes : List[WarningCode] = None,
+            error_code : ErrorCode = None,
+            id : int = None,
+            name : str = None):
         """Set the default values of the ``WrapperPatchFlowRegionsResult`` object.
 
         Parameters
         ----------
-        warning_codes: List[WarningCode], optional
+        warning_codes : List[WarningCode], optional
             Warning codes associated with the patch holes operation.
-        error_code: ErrorCode, optional
+        error_code : ErrorCode, optional
             Error code associated with a patch holes operation.
-        id: int, optional
+        id : int, optional
             Id of part created with hole patches.
-        name: str, optional
+        name : str, optional
             Name of part created with hole patches.
         """
         args = locals()
@@ -2276,3 +2251,117 @@ class WrapperPatchFlowRegionsResult(CoreObject):
     @name.setter
     def name(self, value: str):
         self._name = value
+
+class UpdateSeededSurfaceParams(CoreObject):
+    """Parameters for updating seeded surface on the wrapper part.
+
+    Parameters
+    ----------
+    model : Model
+        Model to create a ``UpdateSeededSurfaceParams`` object with default parameters.
+    copy_seed_surfaces : bool, optional
+        Option to copy seed face zonelets instead of moving them to the wrapper part.
+    json_data : dict, optional
+        JSON dictionary to create a ``UpdateSeededSurfaceParams`` object with provided parameters.
+
+    Examples
+    --------
+    >>> update_seeded_surface_params = prime.UpdateSeededSurfaceParams(model = model)
+    """
+    _default_params = {}
+
+    def __initialize(
+            self,
+            copy_seed_surfaces : bool):
+        self._copy_seed_surfaces = copy_seed_surfaces
+
+    def __init__(
+            self,
+            model: CommunicationManager=None,
+            copy_seed_surfaces : bool = None,
+            json_data : dict = None,
+             **kwargs):
+        """Initialize a ``UpdateSeededSurfaceParams`` object.
+
+        Parameters
+        ----------
+        model : Model
+            Model to create a ``UpdateSeededSurfaceParams`` object with default parameters.
+        copy_seed_surfaces : bool, optional
+            Option to copy seed face zonelets instead of moving them to the wrapper part.
+        json_data : dict, optional
+            JSON dictionary to create a ``UpdateSeededSurfaceParams`` object with provided parameters.
+
+        Examples
+        --------
+        >>> update_seeded_surface_params = prime.UpdateSeededSurfaceParams(model = model)
+        """
+        if json_data:
+            self.__initialize(
+                json_data["copySeedSurfaces"] if "copySeedSurfaces" in json_data else None)
+        else:
+            all_field_specified = all(arg is not None for arg in [copy_seed_surfaces])
+            if all_field_specified:
+                self.__initialize(
+                    copy_seed_surfaces)
+            else:
+                if model is None:
+                    raise ValueError("Invalid assignment. Either pass a model or specify all properties.")
+                else:
+                    param_json = model._communicator.initialize_params(model, "UpdateSeededSurfaceParams")
+                    json_data = param_json["UpdateSeededSurfaceParams"] if "UpdateSeededSurfaceParams" in param_json else {}
+                    self.__initialize(
+                        copy_seed_surfaces if copy_seed_surfaces is not None else ( UpdateSeededSurfaceParams._default_params["copy_seed_surfaces"] if "copy_seed_surfaces" in UpdateSeededSurfaceParams._default_params else (json_data["copySeedSurfaces"] if "copySeedSurfaces" in json_data else None)))
+        self._custom_params = kwargs
+        if model is not None:
+            [ model._logger.debug(f'Unsupported argument : {key}') for key in kwargs ]
+        [setattr(type(self), key, property(lambda self, key = key:  self._custom_params[key] if key in self._custom_params else None,
+        lambda self, value, key = key : self._custom_params.update({ key: value }))) for key in kwargs]
+        self._freeze()
+
+    @staticmethod
+    def set_default(
+            copy_seed_surfaces : bool = None):
+        """Set the default values of the ``UpdateSeededSurfaceParams`` object.
+
+        Parameters
+        ----------
+        copy_seed_surfaces : bool, optional
+            Option to copy seed face zonelets instead of moving them to the wrapper part.
+        """
+        args = locals()
+        [UpdateSeededSurfaceParams._default_params.update({ key: value }) for key, value in args.items() if value is not None]
+
+    @staticmethod
+    def print_default():
+        """Print the default values of ``UpdateSeededSurfaceParams`` object.
+
+        Examples
+        --------
+        >>> UpdateSeededSurfaceParams.print_default()
+        """
+        message = ""
+        message += ''.join(str(key) + ' : ' + str(value) + '\n' for key, value in UpdateSeededSurfaceParams._default_params.items())
+        print(message)
+
+    def _jsonify(self) -> Dict[str, Any]:
+        json_data = {}
+        if self._copy_seed_surfaces is not None:
+            json_data["copySeedSurfaces"] = self._copy_seed_surfaces
+        [ json_data.update({ utils.to_camel_case(key) : value }) for key, value in self._custom_params.items()]
+        return json_data
+
+    def __str__(self) -> str:
+        message = "copy_seed_surfaces :  %s" % (self._copy_seed_surfaces)
+        message += ''.join('\n' + str(key) + ' : ' + str(value) for key, value in self._custom_params.items())
+        return message
+
+    @property
+    def copy_seed_surfaces(self) -> bool:
+        """Option to copy seed face zonelets instead of moving them to the wrapper part.
+        """
+        return self._copy_seed_surfaces
+
+    @copy_seed_surfaces.setter
+    def copy_seed_surfaces(self, value: bool):
+        self._copy_seed_surfaces = value

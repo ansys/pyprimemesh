@@ -1,4 +1,4 @@
-# Copyright (C) 2024 - 2025 ANSYS, Inc. and/or its affiliates.
+# Copyright (C) 2026 Synopsys, Inc. and ANSYS, Inc. All rights reserved.
 # SPDX-License-Identifier: MIT
 #
 #
@@ -25,7 +25,7 @@ from __future__ import annotations
 from ansys.meshing.prime.internals.comm_manager import CommunicationManager
 from ansys.meshing.prime.params.primestructs import *
 from ansys.meshing.prime.autogen.coreobject import *
-from typing import List, Any, Union
+from typing import Dict, Any, Union, List, Iterable
 
 class TrimmedSpline(CoreObject):
     """Handles creation and meshing of trimmed spline.
@@ -55,13 +55,13 @@ class TrimmedSpline(CoreObject):
         command_name = "PrimeMesh::TrimmedSpline/Destruct"
         self._comm.serve(self._model, command_name, self._object_id, args={})
 
-    def create_trimmed_uniform_solid_spline_by_brep_mapping(self, part_id : int, spline_params : UniformSolidSplineCreationParams) -> TrimmedSplineResults:
+    def create_trimmed_uniform_solid_spline_by_brep_mapping(self, part_id :  int, spline_params : UniformSolidSplineCreationParams) -> TrimmedSplineResults:
         """ Creates uniform solid spline and maps the CAD geometry in its parametric space.
 
 
         Parameters
         ----------
-        part_id : int
+        part_id :  int
             Part on which the spline is to be created.
         spline_params : UniformSolidSplineCreationParams
             Parameters used to create the spline.
@@ -81,9 +81,9 @@ class TrimmedSpline(CoreObject):
         >>> results = trimmedSpline.CreateTrimmedUniformSolidSplineByBrepMapping(part_id, spline_params)
 
         """
-        if not isinstance(part_id, int):
-            raise TypeError("Invalid argument type passed for 'part_id'. Valid argument type is int.")
-        if not isinstance(spline_params, UniformSolidSplineCreationParams):
+        if not isinstance(part_id,  int):
+            raise TypeError("Invalid argument type passed for 'part_id'. Valid argument type is  int.")
+        if type(spline_params).__name__ != 'UniformSolidSplineCreationParams':
             raise TypeError("Invalid argument type passed for 'spline_params'. Valid argument type is UniformSolidSplineCreationParams.")
         args = {"part_id" : part_id,
         "spline_params" : spline_params._jsonify()}
@@ -94,13 +94,13 @@ class TrimmedSpline(CoreObject):
         self._model._print_logs_after_command("create_trimmed_uniform_solid_spline_by_brep_mapping", TrimmedSplineResults(model = self._model, json_data = result))
         return TrimmedSplineResults(model = self._model, json_data = result)
 
-    def create_tet_mesh_on_trimmed_solid_spline(self, part_id : int, mesh_params : TetMeshSplineParams) -> TrimmedSplineResults:
+    def create_tet_mesh_on_trimmed_solid_spline(self, part_id :  int, mesh_params : TetMeshSplineParams) -> TrimmedSplineResults:
         """ Creates tetrahedral mesh on trimmed solid spline.
 
 
         Parameters
         ----------
-        part_id : int
+        part_id :  int
             Part on which the tetrahedral meshing is performed.
         mesh_params : TetMeshSplineParams
             Parameters to configure the meshing.
@@ -108,7 +108,7 @@ class TrimmedSpline(CoreObject):
         Returns
         -------
         TrimmedSplineResults
-            Returns the TrimmedSplineResults.
+            Returns the TrimmedSplineResults structure.
 
 
         Notes
@@ -120,9 +120,9 @@ class TrimmedSpline(CoreObject):
         >>> results = trimmedSpline.CreateTetMeshOnTrimmedSolidSpline(part_id, mesh_params)
 
         """
-        if not isinstance(part_id, int):
-            raise TypeError("Invalid argument type passed for 'part_id'. Valid argument type is int.")
-        if not isinstance(mesh_params, TetMeshSplineParams):
+        if not isinstance(part_id,  int):
+            raise TypeError("Invalid argument type passed for 'part_id'. Valid argument type is  int.")
+        if type(mesh_params).__name__ != 'TetMeshSplineParams':
             raise TypeError("Invalid argument type passed for 'mesh_params'. Valid argument type is TetMeshSplineParams.")
         args = {"part_id" : part_id,
         "mesh_params" : mesh_params._jsonify()}
@@ -133,13 +133,52 @@ class TrimmedSpline(CoreObject):
         self._model._print_logs_after_command("create_tet_mesh_on_trimmed_solid_spline", TrimmedSplineResults(model = self._model, json_data = result))
         return TrimmedSplineResults(model = self._model, json_data = result)
 
-    def refine_tet_mesh(self, part_id : int, refine_params : RefineTetMeshParams) -> TrimmedSplineResults:
+    def create_tri_mesh_on_trimmed_solid_spline(self, part_id :  int, mesh_params : TriMeshSplineParams) -> TrimmedSplineResults:
+        """ Creates triangle mesh on trimmed solid spline.
+
+
+        Parameters
+        ----------
+        part_id :  int
+            Part on which the triangle meshing is performed.
+        mesh_params : TriMeshSplineParams
+            Parameters to configure the meshing.
+
+        Returns
+        -------
+        TrimmedSplineResults
+            Returns the TrimmedSplineResults structure.
+
+
+        Notes
+        -----
+        **This is a beta API**. **The behavior and implementation may change in future**.
+
+        Examples
+        --------
+        >>> results = trimmedSpline.CreateTriMeshOnTrimmedSolidSpline(part_id, mesh_params)
+
+        """
+        if not isinstance(part_id,  int):
+            raise TypeError("Invalid argument type passed for 'part_id'. Valid argument type is  int.")
+        if type(mesh_params).__name__ != 'TriMeshSplineParams':
+            raise TypeError("Invalid argument type passed for 'mesh_params'. Valid argument type is TriMeshSplineParams.")
+        args = {"part_id" : part_id,
+        "mesh_params" : mesh_params._jsonify()}
+        command_name = "PrimeMesh::TrimmedSpline/CreateTriMeshOnTrimmedSolidSpline"
+        self._model._print_beta_api_warning("create_tri_mesh_on_trimmed_solid_spline")
+        self._model._print_logs_before_command("create_tri_mesh_on_trimmed_solid_spline", args)
+        result = self._comm.serve(self._model, command_name, self._object_id, args=args)
+        self._model._print_logs_after_command("create_tri_mesh_on_trimmed_solid_spline", TrimmedSplineResults(model = self._model, json_data = result))
+        return TrimmedSplineResults(model = self._model, json_data = result)
+
+    def refine_tet_mesh(self, part_id :  int, refine_params : RefineTetMeshParams) -> TrimmedSplineResults:
         """ Refines tetrahedral mesh.
 
 
         Parameters
         ----------
-        part_id : int
+        part_id :  int
             Part on which mesh refinement is performed.
         refine_params : RefineTetMeshParams
             Parameters to configure mesh refinement.
@@ -147,7 +186,7 @@ class TrimmedSpline(CoreObject):
         Returns
         -------
         TrimmedSplineResults
-            Returns the TrimmedSplineResults.
+            Returns the TrimmedSplineResults structure.
 
 
         Notes
@@ -159,9 +198,9 @@ class TrimmedSpline(CoreObject):
         >>> results = trimmedSpline.RefineTetMesh(part_id, refine_params)
 
         """
-        if not isinstance(part_id, int):
-            raise TypeError("Invalid argument type passed for 'part_id'. Valid argument type is int.")
-        if not isinstance(refine_params, RefineTetMeshParams):
+        if not isinstance(part_id,  int):
+            raise TypeError("Invalid argument type passed for 'part_id'. Valid argument type is  int.")
+        if type(refine_params).__name__ != 'RefineTetMeshParams':
             raise TypeError("Invalid argument type passed for 'refine_params'. Valid argument type is RefineTetMeshParams.")
         args = {"part_id" : part_id,
         "refine_params" : refine_params._jsonify()}

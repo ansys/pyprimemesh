@@ -1,4 +1,4 @@
-# Copyright (C) 2024 - 2025 ANSYS, Inc. and/or its affiliates.
+# Copyright (C) 2026 Synopsys, Inc. and ANSYS, Inc. All rights reserved.
 # SPDX-License-Identifier: MIT
 #
 #
@@ -25,7 +25,7 @@ from __future__ import annotations
 from ansys.meshing.prime.internals.comm_manager import CommunicationManager
 from ansys.meshing.prime.params.primestructs import *
 from ansys.meshing.prime.autogen.coreobject import *
-from typing import List, Any, Union
+from typing import Dict, Any, Union, List, Iterable
 
 class Morpher(CoreObject):
     """Morpher contain functionalities to change the geometry, adapting the mesh accordingly without a recomputation.
@@ -85,13 +85,13 @@ class Morpher(CoreObject):
         """
         if not isinstance(part_id, int):
             raise TypeError("Invalid argument type passed for 'part_id'. Valid argument type is int.")
-        if not isinstance(match_pairs, List):
+        if not isinstance(match_pairs, Iterable):
             raise TypeError("Invalid argument type passed for 'match_pairs'. Valid argument type is List[MatchPair].")
-        if not isinstance(match_morph_params, MatchMorphParams):
+        if type(match_morph_params).__name__ != 'MatchMorphParams':
             raise TypeError("Invalid argument type passed for 'match_morph_params'. Valid argument type is MatchMorphParams.")
-        if not isinstance(bc_params, MorphBCParams):
+        if type(bc_params).__name__ != 'MorphBCParams':
             raise TypeError("Invalid argument type passed for 'bc_params'. Valid argument type is MorphBCParams.")
-        if not isinstance(solve_params, MorphSolveParams):
+        if type(solve_params).__name__ != 'MorphSolveParams':
             raise TypeError("Invalid argument type passed for 'solve_params'. Valid argument type is MorphSolveParams.")
         args = {"part_id" : part_id,
         "match_pairs" : [p._jsonify() for p in match_pairs],

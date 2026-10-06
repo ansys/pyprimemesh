@@ -1,4 +1,4 @@
-# Copyright (C) 2024 - 2025 ANSYS, Inc. and/or its affiliates.
+# Copyright (C) 2026 Synopsys, Inc. and ANSYS, Inc. All rights reserved.
 # SPDX-License-Identifier: MIT
 #
 #
@@ -23,9 +23,9 @@
 """ Auto-generated file. DO NOT MODIFY """
 from __future__ import annotations
 from ansys.meshing.prime.internals.comm_manager import CommunicationManager
-from ansys.meshing.prime.params.primestructs import *
 from ansys.meshing.prime.autogen.coreobject import *
-from typing import List, Any, Union
+from ansys.meshing import prime
+from typing import Dict, Any, Union, List, Iterable
 
 import logging
 from ansys.meshing.prime.internals import utils
@@ -35,6 +35,7 @@ class Model(CoreObject, CommunicationManager):
 
     You can access any information in Prime only through Model.
     Model allows you to query TopoData, ControlData, Parts, SizeFields and more.
+
 
     Parameters
     ----------
@@ -65,6 +66,35 @@ class Model(CoreObject, CommunicationManager):
     def _print_beta_api_warning(self, command):
         utils.print_beta_api_warning(self._logger, command)
 
+    def create_part(self, suggested_name : str) -> List[Any]:
+        """ Creates a part with the given name.
+
+
+        Parameters
+        ----------
+        suggested_name : str
+            Name of the part.
+
+        Returns
+        -------
+        Part
+            Returns a part with the given name.
+
+
+        Examples
+        --------
+        >>> new_part = model.create_part('part_name')
+
+        """
+        if not isinstance(suggested_name, str):
+            raise TypeError("Invalid argument type passed for 'suggested_name'. Valid argument type is str.")
+        args = {"suggested_name" : suggested_name}
+        command_name = "PrimeMesh::Model/CreatePart"
+        self._print_logs_before_command("create_part", args)
+        result = self._comm.serve(self, command_name, self._object_id, args=args)
+        self._print_logs_after_command("create_part")
+        return result
+
     def delete_parts(self, part_ids : Iterable[int]) -> DeleteResults:
         """ Delete the parts and its entities.
 
@@ -91,8 +121,66 @@ class Model(CoreObject, CommunicationManager):
         command_name = "PrimeMesh::Model/DeleteParts"
         self._print_logs_before_command("delete_parts", args)
         result = self._comm.serve(self, command_name, self._object_id, args=args)
-        self._print_logs_after_command("delete_parts", DeleteResults(model = self, json_data = result))
-        return DeleteResults(model = self, json_data = result)
+        self._print_logs_after_command("delete_parts", prime.DeleteResults(model = self, json_data = result))
+        return prime.DeleteResults(model = self, json_data = result)
+
+    def get_part(self, id : int) -> List[Any]:
+        """ Gets the part by id.
+
+
+        Parameters
+        ----------
+        id : int
+            Id of the part to be accessed.
+
+        Returns
+        -------
+        Part
+            Returns the part with the given id.
+
+
+        Examples
+        --------
+        >>> part = model.get_part(part_id)
+
+        """
+        if not isinstance(id, int):
+            raise TypeError("Invalid argument type passed for 'id'. Valid argument type is int.")
+        args = {"id" : id}
+        command_name = "PrimeMesh::Model/GetPart"
+        self._print_logs_before_command("get_part", args)
+        result = self._comm.serve(self, command_name, self._object_id, args=args)
+        self._print_logs_after_command("get_part")
+        return result
+
+    def get_part_by_name(self, name : str) -> List[Any]:
+        """ Gets the part by name.
+
+
+        Parameters
+        ----------
+        name : str
+            Name of the part to be accessed.
+
+        Returns
+        -------
+        Part
+            Returns the part with the given name.
+
+
+        Examples
+        --------
+        >>> part = model.get_part_by_name("part_name")
+
+        """
+        if not isinstance(name, str):
+            raise TypeError("Invalid argument type passed for 'name'. Valid argument type is str.")
+        args = {"name" : name}
+        command_name = "PrimeMesh::Model/GetPartByName"
+        self._print_logs_before_command("get_part_by_name", args)
+        result = self._comm.serve(self, command_name, self._object_id, args=args)
+        self._print_logs_after_command("get_part_by_name")
+        return result
 
     def merge_parts(self, part_ids : Iterable[int], params : MergePartsParams) -> MergePartsResults:
         """ Merge given parts into one.
@@ -109,7 +197,7 @@ class Model(CoreObject, CommunicationManager):
         -------
         MergePartsResults
             Returns the MergePartsResults.
-
+*
 
         Examples
         --------
@@ -119,18 +207,40 @@ class Model(CoreObject, CommunicationManager):
         """
         if not isinstance(part_ids, Iterable):
             raise TypeError("Invalid argument type passed for 'part_ids'. Valid argument type is Iterable[int].")
-        if not isinstance(params, MergePartsParams):
+        if type(params).__name__ != 'MergePartsParams':
             raise TypeError("Invalid argument type passed for 'params'. Valid argument type is MergePartsParams.")
         args = {"part_ids" : part_ids,
         "params" : params._jsonify()}
         command_name = "PrimeMesh::Model/MergeParts"
         self._print_logs_before_command("merge_parts", args)
         result = self._comm.serve(self, command_name, self._object_id, args=args)
-        self._print_logs_after_command("merge_parts", MergePartsResults(model = self, json_data = result))
-        return MergePartsResults(model = self, json_data = result)
+        self._print_logs_after_command("merge_parts", prime.MergePartsResults(model = self, json_data = result))
+        return prime.MergePartsResults(model = self, json_data = result)
+
+    def get_global_sizing_params(self) -> GlobalSizingParams:
+        """ Gets the global size field parameters.
+
+
+        Returns
+        -------
+        GlobalSizingParams
+            Returns the global size field parameters.
+
+
+        Examples
+        --------
+        >>> params = model.get_global_sizing_params()
+
+        """
+        args = {}
+        command_name = "PrimeMesh::Model/GetGlobalSizingParams"
+        self._print_logs_before_command("get_global_sizing_params", args)
+        result = self._comm.serve(self, command_name, self._object_id, args=args)
+        self._print_logs_after_command("get_global_sizing_params", prime.GlobalSizingParams(model = self, json_data = result))
+        return prime.GlobalSizingParams(model = self, json_data = result)
 
     def set_global_sizing_params(self, params : GlobalSizingParams) -> SetSizingResults:
-        """ Set the global sizing parameters to initialize surfer parameters and various size control parameters.
+        """ Sets the global sizing parameters to initialize surfer parameters and various size control parameters.
 
 
         Parameters
@@ -146,14 +256,75 @@ class Model(CoreObject, CommunicationManager):
         >>>           min = 0.1, max = 1.0, growth_rate = 1.2))
 
         """
-        if not isinstance(params, GlobalSizingParams):
+        if type(params).__name__ != 'GlobalSizingParams':
             raise TypeError("Invalid argument type passed for 'params'. Valid argument type is GlobalSizingParams.")
         args = {"params" : params._jsonify()}
         command_name = "PrimeMesh::Model/SetGlobalSizingParams"
         self._print_logs_before_command("set_global_sizing_params", args)
         result = self._comm.serve(self, command_name, self._object_id, args=args)
-        self._print_logs_after_command("set_global_sizing_params", SetSizingResults(model = self, json_data = result))
-        return SetSizingResults(model = self, json_data = result)
+        self._print_logs_after_command("set_global_sizing_params", prime.SetSizingResults(model = self, json_data = result))
+        return prime.SetSizingResults(model = self, json_data = result)
+
+    def set_verbosity_level(self, verbosity : int):
+        """ Sets the verbosity level used for model logging.
+
+
+        Parameters
+        ----------
+        verbosity : int
+            Level to increase or decrease logging verbosity.
+
+        Notes
+        -----
+        **This is a beta API**. **The behavior and implementation may change in future**.
+
+        Examples
+        --------
+        >>> model.set_verbosity_level(1)
+
+        """
+        if not isinstance(verbosity, int):
+            raise TypeError("Invalid argument type passed for 'verbosity'. Valid argument type is int.")
+        args = {"verbosity" : verbosity}
+        command_name = "PrimeMesh::Model/SetVerbosityLevel"
+        self._print_beta_api_warning("set_verbosity_level")
+        self._print_logs_before_command("set_verbosity_level", args)
+        self._comm.serve(self, command_name, self._object_id, args=args)
+        self._print_logs_after_command("set_verbosity_level")
+
+    def set_log_file(self, file_name : str) -> bool:
+        """ Sets the log file used for model logging.
+
+
+        Parameters
+        ----------
+        file_name : str
+            Path to the log file. Passing an empty string stops file logging.
+
+        Returns
+        -------
+        bool
+            Returns true when the requested logging state is applied successfully.
+
+
+        Notes
+        -----
+        **This is a beta API**. **The behavior and implementation may change in future**.
+
+        Examples
+        --------
+        >>> model.set_log_file("C:/logs/prime_server.log")
+
+        """
+        if not isinstance(file_name, str):
+            raise TypeError("Invalid argument type passed for 'file_name'. Valid argument type is str.")
+        args = {"file_name" : file_name}
+        command_name = "PrimeMesh::Model/SetLogFile"
+        self._print_beta_api_warning("set_log_file")
+        self._print_logs_before_command("set_log_file", args)
+        result = self._comm.serve(self, command_name, self._object_id, args=args)
+        self._print_logs_after_command("set_log_file")
+        return result
 
     def get_active_volumetric_size_fields(self) -> Iterable[int]:
         """ Get the active sizefield ids.
@@ -281,6 +452,12 @@ class Model(CoreObject, CommunicationManager):
         name : str
             Name of the size field.
 
+        Returns
+        -------
+        SetNameResults
+            Returns the SetNameResults structure having the suggested name of size field.
+
+
         Notes
         -----
         **This is a beta API**. **The behavior and implementation may change in future**.
@@ -301,8 +478,8 @@ class Model(CoreObject, CommunicationManager):
         self._print_beta_api_warning("set_suggested_size_field_name")
         self._print_logs_before_command("set_suggested_size_field_name", args)
         result = self._comm.serve(self, command_name, self._object_id, args=args)
-        self._print_logs_after_command("set_suggested_size_field_name", SetNameResults(model = self, json_data = result))
-        return SetNameResults(model = self, json_data = result)
+        self._print_logs_after_command("set_suggested_size_field_name", prime.SetNameResults(model = self, json_data = result))
+        return prime.SetNameResults(model = self, json_data = result)
 
     def get_size_field_name(self, size_field_id : int) -> str:
         """ Gets the name of size field with the given id.
@@ -425,7 +602,7 @@ class Model(CoreObject, CommunicationManager):
         self._comm.serve(self, command_name, self._object_id, args=args)
         self._print_logs_after_command("start_distributed_meshing")
 
-    def create_zone(self, suggested_name : str, type : ZoneType) -> CreateZoneResults:
+    def create_zone(self, suggested_name : str, zone_type : ZoneType) -> CreateZoneResults:
         """ Creates zone for the given zone type.
 
 
@@ -433,7 +610,7 @@ class Model(CoreObject, CommunicationManager):
         ----------
         suggested_name : str
             Suggested name for the zone to be created.
-        type : ZoneType
+        zone_type : ZoneType
             Type of the zone to be created.
 
         Returns
@@ -451,15 +628,15 @@ class Model(CoreObject, CommunicationManager):
         """
         if not isinstance(suggested_name, str):
             raise TypeError("Invalid argument type passed for 'suggested_name'. Valid argument type is str.")
-        if not isinstance(type, ZoneType):
-            raise TypeError("Invalid argument type passed for 'type'. Valid argument type is ZoneType.")
+        if type(zone_type).__name__ != 'ZoneType':
+            raise TypeError("Invalid argument type passed for 'zone_type'. Valid argument type is ZoneType.")
         args = {"suggested_name" : suggested_name,
-        "type" : type}
+        "zone_type" : zone_type}
         command_name = "PrimeMesh::Model/CreateZone"
         self._print_logs_before_command("create_zone", args)
         result = self._comm.serve(self, command_name, self._object_id, args=args)
-        self._print_logs_after_command("create_zone", CreateZoneResults(model = self, json_data = result))
-        return CreateZoneResults(model = self, json_data = result)
+        self._print_logs_after_command("create_zone", prime.CreateZoneResults(model = self, json_data = result))
+        return prime.CreateZoneResults(model = self, json_data = result)
 
     def delete_zone(self, zone_id : int) -> DeleteZoneResults:
         """ Deletes zone with the given id.
@@ -489,8 +666,8 @@ class Model(CoreObject, CommunicationManager):
         command_name = "PrimeMesh::Model/DeleteZone"
         self._print_logs_before_command("delete_zone", args)
         result = self._comm.serve(self, command_name, self._object_id, args=args)
-        self._print_logs_after_command("delete_zone", DeleteZoneResults(model = self, json_data = result))
-        return DeleteZoneResults(model = self, json_data = result)
+        self._print_logs_after_command("delete_zone", prime.DeleteZoneResults(model = self, json_data = result))
+        return prime.DeleteZoneResults(model = self, json_data = result)
 
     def get_zone_by_name(self, zone_name : str) -> int:
         """ Gets the zone with the provided name.
@@ -554,6 +731,108 @@ class Model(CoreObject, CommunicationManager):
         self._print_logs_after_command("get_zone_name")
         return result
 
+    def get_edge_zone_names_of_parts(self, part_ids : Iterable[int]) -> List[str]:
+        """ Gets the names of all edge zone names across the given parts.
+
+
+        Parameters
+        ----------
+        part_ids : Iterable[int]
+            List of part ids to query edge zone names from.
+
+        Returns
+        -------
+        List[str]
+            Returns a list of unique edge zone names from the specified parts.
+
+
+        Notes
+        -----
+        **This is a beta API**. **The behavior and implementation may change in future**.
+
+        Examples
+        --------
+        >>> zone_names = model.get_edge_zone_names_of_parts(part_ids)
+
+        """
+        if not isinstance(part_ids, Iterable):
+            raise TypeError("Invalid argument type passed for 'part_ids'. Valid argument type is Iterable[int].")
+        args = {"part_ids" : part_ids}
+        command_name = "PrimeMesh::Model/GetEdgeZoneNamesOfParts"
+        self._print_beta_api_warning("get_edge_zone_names_of_parts")
+        self._print_logs_before_command("get_edge_zone_names_of_parts", args)
+        result = self._comm.serve(self, command_name, self._object_id, args=args)
+        self._print_logs_after_command("get_edge_zone_names_of_parts")
+        return result
+
+    def get_volume_zone_names_of_parts(self, part_ids : Iterable[int]) -> List[str]:
+        """ Gets the names of all volume zones across the given parts.
+
+
+        Parameters
+        ----------
+        part_ids : Iterable[int]
+            List of part ids to query volume zone names from.
+
+        Returns
+        -------
+        List[str]
+            Returns a list of unique volume zone names from the specified parts.
+
+
+        Notes
+        -----
+        **This is a beta API**. **The behavior and implementation may change in future**.
+
+        Examples
+        --------
+        >>> zone_names = model.get_volume_zone_names_of_parts(part_ids)
+
+        """
+        if not isinstance(part_ids, Iterable):
+            raise TypeError("Invalid argument type passed for 'part_ids'. Valid argument type is Iterable[int].")
+        args = {"part_ids" : part_ids}
+        command_name = "PrimeMesh::Model/GetVolumeZoneNamesOfParts"
+        self._print_beta_api_warning("get_volume_zone_names_of_parts")
+        self._print_logs_before_command("get_volume_zone_names_of_parts", args)
+        result = self._comm.serve(self, command_name, self._object_id, args=args)
+        self._print_logs_after_command("get_volume_zone_names_of_parts")
+        return result
+
+    def get_face_zone_names_of_parts(self, part_ids : Iterable[int]) -> List[str]:
+        """ Gets the names of all face zones across the given parts.
+
+
+        Parameters
+        ----------
+        part_ids : Iterable[int]
+            List of part ids to query face zone names from.
+
+        Returns
+        -------
+        List[str]
+            Returns a list of unique face zone names from the specified parts.
+
+
+        Notes
+        -----
+        **This is a beta API**. **The behavior and implementation may change in future**.
+
+        Examples
+        --------
+        >>> zone_names = model.get_face_zone_names_of_parts(part_ids)
+
+        """
+        if not isinstance(part_ids, Iterable):
+            raise TypeError("Invalid argument type passed for 'part_ids'. Valid argument type is Iterable[int].")
+        args = {"part_ids" : part_ids}
+        command_name = "PrimeMesh::Model/GetFaceZoneNamesOfParts"
+        self._print_beta_api_warning("get_face_zone_names_of_parts")
+        self._print_logs_before_command("get_face_zone_names_of_parts", args)
+        result = self._comm.serve(self, command_name, self._object_id, args=args)
+        self._print_logs_after_command("get_face_zone_names_of_parts")
+        return result
+
     def set_suggested_zone_name(self, id : int, name : str) -> SetNameResults:
         """ Sets the unique name for zone with given id based on the suggested name.
 
@@ -587,13 +866,12 @@ class Model(CoreObject, CommunicationManager):
         command_name = "PrimeMesh::Model/SetSuggestedZoneName"
         self._print_logs_before_command("set_suggested_zone_name", args)
         result = self._comm.serve(self, command_name, self._object_id, args=args)
-        self._print_logs_after_command("set_suggested_zone_name", SetNameResults(model = self, json_data = result))
-        return SetNameResults(model = self, json_data = result)
+        self._print_logs_after_command("set_suggested_zone_name", prime.SetNameResults(model = self, json_data = result))
+        return prime.SetNameResults(model = self, json_data = result)
 
     def set_working_directory(self, path : str):
-        """ Set working directory.
+        """ Set working directory to be considered for file i/o when file paths are relative.
 
-        Set working directory to be considered for file i/o when file paths are relative.
 
         Parameters
         ----------
@@ -619,6 +897,33 @@ class Model(CoreObject, CommunicationManager):
         self._print_logs_before_command("set_working_directory", args)
         self._comm.serve(self, command_name, self._object_id, args=args)
         self._print_logs_after_command("set_working_directory")
+
+    def get_parts_with_topology(self) -> Iterable[int]:
+        """ Gets the list of parts ids that contain topology.
+
+
+        Returns
+        -------
+        Iterable[int]
+            Returns the ids of parts with topology.
+
+
+        Notes
+        -----
+        **This is a beta API**. **The behavior and implementation may change in future**.
+
+        Examples
+        --------
+        >>> result = model.get_parts_with_topology()
+
+        """
+        args = {}
+        command_name = "PrimeMesh::Model/GetPartsWithTopology"
+        self._print_beta_api_warning("get_parts_with_topology")
+        self._print_logs_before_command("get_parts_with_topology", args)
+        result = self._comm.serve(self, command_name, self._object_id, args=args)
+        self._print_logs_after_command("get_parts_with_topology")
+        return result
 
     @property
     def id(self):

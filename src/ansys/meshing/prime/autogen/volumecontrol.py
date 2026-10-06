@@ -1,4 +1,4 @@
-# Copyright (C) 2024 - 2025 ANSYS, Inc. and/or its affiliates.
+# Copyright (C) 2026 Synopsys, Inc. and ANSYS, Inc. All rights reserved.
 # SPDX-License-Identifier: MIT
 #
 #
@@ -25,7 +25,7 @@ from __future__ import annotations
 from ansys.meshing.prime.internals.comm_manager import CommunicationManager
 from ansys.meshing.prime.params.primestructs import *
 from ansys.meshing.prime.autogen.coreobject import *
-from typing import List, Any, Union
+from typing import Dict, Any, Union, List, Iterable
 
 class VolumeControl(CoreObject):
     """Volume controls provide volume specific settings on volumes specified by scope and settings specified by parameters.
@@ -67,7 +67,7 @@ class VolumeControl(CoreObject):
         >>>                  cell_zonelet_type = prime.CellZoneletType.FLUID))
 
         """
-        if not isinstance(volume_control_params, VolumeControlParams):
+        if type(volume_control_params).__name__ != 'VolumeControlParams':
             raise TypeError("Invalid argument type passed for 'volume_control_params'. Valid argument type is VolumeControlParams.")
         args = {"volume_control_params" : volume_control_params._jsonify()}
         command_name = "PrimeMesh::VolumeControl/SetParams"
@@ -99,7 +99,7 @@ class VolumeControl(CoreObject):
         >>>                        zone_expression = "vol_in"))
 
         """
-        if not isinstance(scope, ScopeDefinition):
+        if type(scope).__name__ != 'ScopeDefinition':
             raise TypeError("Invalid argument type passed for 'scope'. Valid argument type is ScopeDefinition.")
         args = {"scope" : scope._jsonify()}
         command_name = "PrimeMesh::VolumeControl/SetScope"
@@ -200,7 +200,7 @@ class VolumeControl(CoreObject):
         >>> results = volume_control.get_summary(prime.VolumeControlSummaryParams(model=model))
 
         """
-        if not isinstance(params, VolumeControlSummaryParams):
+        if type(params).__name__ != 'VolumeControlSummaryParams':
             raise TypeError("Invalid argument type passed for 'params'. Valid argument type is VolumeControlSummaryParams.")
         args = {"params" : params._jsonify()}
         command_name = "PrimeMesh::VolumeControl/GetSummary"

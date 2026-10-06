@@ -1,4 +1,4 @@
-# Copyright (C) 2024 - 2025 ANSYS, Inc. and/or its affiliates.
+# Copyright (C) 2026 Synopsys, Inc. and ANSYS, Inc. All rights reserved.
 # SPDX-License-Identifier: MIT
 #
 #
@@ -35,21 +35,21 @@ class AutoNodeMoveParams(CoreObject):
 
     Parameters
     ----------
-    model: Model
+    model : Model
         Model to create a ``AutoNodeMoveParams`` object with default parameters.
-    quality_measure: CellQualityMeasure, optional
+    quality_measure : CellQualityMeasure, optional
         Specify cell quality measure to be used for volume mesh improvement. The default value for cell quality measure is skewness.
-    target_quality: float, optional
+    target_quality : float, optional
         Specify target quality used for the mesh improvement based on specified quality measure.
-    dihedral_angle: float, optional
+    dihedral_angle : float, optional
         Dihedral angle used to maintain features of boundary face zonelets.
-    n_iterations_per_node: int, optional
+    n_iterations_per_node : int, optional
         Number of iterations per node to be moved.
-    restrict_boundary_nodes_along_surface: bool, optional
+    restrict_boundary_nodes_along_surface : bool, optional
         Option to restrict the movement of the boundary node to the plane containing the boundary faces sharing the boundary node.
-    n_attempts: int, optional
+    n_attempts : int, optional
         Number of attempts to improve specified quality measure by node movement.
-    json_data: dict, optional
+    json_data : dict, optional
         JSON dictionary to create a ``AutoNodeMoveParams`` object with provided parameters.
 
     Examples
@@ -60,12 +60,12 @@ class AutoNodeMoveParams(CoreObject):
 
     def __initialize(
             self,
-            quality_measure: CellQualityMeasure,
-            target_quality: float,
-            dihedral_angle: float,
-            n_iterations_per_node: int,
-            restrict_boundary_nodes_along_surface: bool,
-            n_attempts: int):
+            quality_measure : CellQualityMeasure,
+            target_quality : float,
+            dihedral_angle : float,
+            n_iterations_per_node : int,
+            restrict_boundary_nodes_along_surface : bool,
+            n_attempts : int):
         self._quality_measure = CellQualityMeasure(quality_measure)
         self._target_quality = target_quality
         self._dihedral_angle = dihedral_angle
@@ -76,33 +76,33 @@ class AutoNodeMoveParams(CoreObject):
     def __init__(
             self,
             model: CommunicationManager=None,
-            quality_measure: CellQualityMeasure = None,
-            target_quality: float = None,
-            dihedral_angle: float = None,
-            n_iterations_per_node: int = None,
-            restrict_boundary_nodes_along_surface: bool = None,
-            n_attempts: int = None,
+            quality_measure : CellQualityMeasure = None,
+            target_quality : float = None,
+            dihedral_angle : float = None,
+            n_iterations_per_node : int = None,
+            restrict_boundary_nodes_along_surface : bool = None,
+            n_attempts : int = None,
             json_data : dict = None,
              **kwargs):
         """Initialize a ``AutoNodeMoveParams`` object.
 
         Parameters
         ----------
-        model: Model
+        model : Model
             Model to create a ``AutoNodeMoveParams`` object with default parameters.
-        quality_measure: CellQualityMeasure, optional
+        quality_measure : CellQualityMeasure, optional
             Specify cell quality measure to be used for volume mesh improvement. The default value for cell quality measure is skewness.
-        target_quality: float, optional
+        target_quality : float, optional
             Specify target quality used for the mesh improvement based on specified quality measure.
-        dihedral_angle: float, optional
+        dihedral_angle : float, optional
             Dihedral angle used to maintain features of boundary face zonelets.
-        n_iterations_per_node: int, optional
+        n_iterations_per_node : int, optional
             Number of iterations per node to be moved.
-        restrict_boundary_nodes_along_surface: bool, optional
+        restrict_boundary_nodes_along_surface : bool, optional
             Option to restrict the movement of the boundary node to the plane containing the boundary faces sharing the boundary node.
-        n_attempts: int, optional
+        n_attempts : int, optional
             Number of attempts to improve specified quality measure by node movement.
-        json_data: dict, optional
+        json_data : dict, optional
             JSON dictionary to create a ``AutoNodeMoveParams`` object with provided parameters.
 
         Examples
@@ -149,27 +149,27 @@ class AutoNodeMoveParams(CoreObject):
 
     @staticmethod
     def set_default(
-            quality_measure: CellQualityMeasure = None,
-            target_quality: float = None,
-            dihedral_angle: float = None,
-            n_iterations_per_node: int = None,
-            restrict_boundary_nodes_along_surface: bool = None,
-            n_attempts: int = None):
+            quality_measure : CellQualityMeasure = None,
+            target_quality : float = None,
+            dihedral_angle : float = None,
+            n_iterations_per_node : int = None,
+            restrict_boundary_nodes_along_surface : bool = None,
+            n_attempts : int = None):
         """Set the default values of the ``AutoNodeMoveParams`` object.
 
         Parameters
         ----------
-        quality_measure: CellQualityMeasure, optional
+        quality_measure : CellQualityMeasure, optional
             Specify cell quality measure to be used for volume mesh improvement. The default value for cell quality measure is skewness.
-        target_quality: float, optional
+        target_quality : float, optional
             Specify target quality used for the mesh improvement based on specified quality measure.
-        dihedral_angle: float, optional
+        dihedral_angle : float, optional
             Dihedral angle used to maintain features of boundary face zonelets.
-        n_iterations_per_node: int, optional
+        n_iterations_per_node : int, optional
             Number of iterations per node to be moved.
-        restrict_boundary_nodes_along_surface: bool, optional
+        restrict_boundary_nodes_along_surface : bool, optional
             Option to restrict the movement of the boundary node to the plane containing the boundary faces sharing the boundary node.
-        n_attempts: int, optional
+        n_attempts : int, optional
             Number of attempts to improve specified quality measure by node movement.
         """
         args = locals()
@@ -274,9 +274,9 @@ class CheckMeshParams(CoreObject):
 
     Parameters
     ----------
-    model: Model
+    model : Model
         Model to create a ``CheckMeshParams`` object with default parameters.
-    json_data: dict, optional
+    json_data : dict, optional
         JSON dictionary to create a ``CheckMeshParams`` object with provided parameters.
 
     Examples
@@ -298,9 +298,9 @@ class CheckMeshParams(CoreObject):
 
         Parameters
         ----------
-        model: Model
+        model : Model
             Model to create a ``CheckMeshParams`` object with default parameters.
-        json_data: dict, optional
+        json_data : dict, optional
             JSON dictionary to create a ``CheckMeshParams`` object with provided parameters.
 
         Examples
@@ -364,11 +364,11 @@ class VolumeMeshToolResults(CoreObject):
 
     Parameters
     ----------
-    model: Model
+    model : Model
         Model to create a ``VolumeMeshToolResults`` object with default parameters.
-    error_code: ErrorCode, optional
+    error_code : ErrorCode, optional
         Error code associated with the volume mesh tool operation.
-    json_data: dict, optional
+    json_data : dict, optional
         JSON dictionary to create a ``VolumeMeshToolResults`` object with provided parameters.
 
     Examples
@@ -379,24 +379,24 @@ class VolumeMeshToolResults(CoreObject):
 
     def __initialize(
             self,
-            error_code: ErrorCode):
+            error_code : ErrorCode):
         self._error_code = ErrorCode(error_code)
 
     def __init__(
             self,
             model: CommunicationManager=None,
-            error_code: ErrorCode = None,
+            error_code : ErrorCode = None,
             json_data : dict = None,
              **kwargs):
         """Initialize a ``VolumeMeshToolResults`` object.
 
         Parameters
         ----------
-        model: Model
+        model : Model
             Model to create a ``VolumeMeshToolResults`` object with default parameters.
-        error_code: ErrorCode, optional
+        error_code : ErrorCode, optional
             Error code associated with the volume mesh tool operation.
-        json_data: dict, optional
+        json_data : dict, optional
             JSON dictionary to create a ``VolumeMeshToolResults`` object with provided parameters.
 
         Examples
@@ -428,12 +428,12 @@ class VolumeMeshToolResults(CoreObject):
 
     @staticmethod
     def set_default(
-            error_code: ErrorCode = None):
+            error_code : ErrorCode = None):
         """Set the default values of the ``VolumeMeshToolResults`` object.
 
         Parameters
         ----------
-        error_code: ErrorCode, optional
+        error_code : ErrorCode, optional
             Error code associated with the volume mesh tool operation.
         """
         args = locals()
@@ -478,21 +478,21 @@ class CheckMeshResults(CoreObject):
 
     Parameters
     ----------
-    model: Model
+    model : Model
         Model to create a ``CheckMeshResults`` object with default parameters.
-    has_non_positive_volumes: bool, optional
+    has_non_positive_volumes : bool, optional
         Indicates whether mesh has non positive volumes.
-    has_non_positive_areas: bool, optional
+    has_non_positive_areas : bool, optional
         Indicates whether mesh has non positive areas.
-    has_invalid_shape: bool, optional
+    has_invalid_shape : bool, optional
         Indicates whether mesh has invalid shape.
-    has_left_handed_faces: bool, optional
+    has_left_handed_faces : bool, optional
         Indicates whether mesh has left handed faces.
-    error_code: ErrorCode, optional
+    error_code : ErrorCode, optional
         Error code associated with the check grid operation.
-    warning_codes: List[WarningCode], optional
+    warning_codes : List[WarningCode], optional
         Warning codes associated with the check grid operation.
-    json_data: dict, optional
+    json_data : dict, optional
         JSON dictionary to create a ``CheckMeshResults`` object with provided parameters.
 
     Examples
@@ -503,12 +503,12 @@ class CheckMeshResults(CoreObject):
 
     def __initialize(
             self,
-            has_non_positive_volumes: bool,
-            has_non_positive_areas: bool,
-            has_invalid_shape: bool,
-            has_left_handed_faces: bool,
-            error_code: ErrorCode,
-            warning_codes: List[WarningCode]):
+            has_non_positive_volumes : bool,
+            has_non_positive_areas : bool,
+            has_invalid_shape : bool,
+            has_left_handed_faces : bool,
+            error_code : ErrorCode,
+            warning_codes : List[WarningCode]):
         self._has_non_positive_volumes = has_non_positive_volumes
         self._has_non_positive_areas = has_non_positive_areas
         self._has_invalid_shape = has_invalid_shape
@@ -519,33 +519,33 @@ class CheckMeshResults(CoreObject):
     def __init__(
             self,
             model: CommunicationManager=None,
-            has_non_positive_volumes: bool = None,
-            has_non_positive_areas: bool = None,
-            has_invalid_shape: bool = None,
-            has_left_handed_faces: bool = None,
-            error_code: ErrorCode = None,
-            warning_codes: List[WarningCode] = None,
+            has_non_positive_volumes : bool = None,
+            has_non_positive_areas : bool = None,
+            has_invalid_shape : bool = None,
+            has_left_handed_faces : bool = None,
+            error_code : ErrorCode = None,
+            warning_codes : List[WarningCode] = None,
             json_data : dict = None,
              **kwargs):
         """Initialize a ``CheckMeshResults`` object.
 
         Parameters
         ----------
-        model: Model
+        model : Model
             Model to create a ``CheckMeshResults`` object with default parameters.
-        has_non_positive_volumes: bool, optional
+        has_non_positive_volumes : bool, optional
             Indicates whether mesh has non positive volumes.
-        has_non_positive_areas: bool, optional
+        has_non_positive_areas : bool, optional
             Indicates whether mesh has non positive areas.
-        has_invalid_shape: bool, optional
+        has_invalid_shape : bool, optional
             Indicates whether mesh has invalid shape.
-        has_left_handed_faces: bool, optional
+        has_left_handed_faces : bool, optional
             Indicates whether mesh has left handed faces.
-        error_code: ErrorCode, optional
+        error_code : ErrorCode, optional
             Error code associated with the check grid operation.
-        warning_codes: List[WarningCode], optional
+        warning_codes : List[WarningCode], optional
             Warning codes associated with the check grid operation.
-        json_data: dict, optional
+        json_data : dict, optional
             JSON dictionary to create a ``CheckMeshResults`` object with provided parameters.
 
         Examples
@@ -592,27 +592,27 @@ class CheckMeshResults(CoreObject):
 
     @staticmethod
     def set_default(
-            has_non_positive_volumes: bool = None,
-            has_non_positive_areas: bool = None,
-            has_invalid_shape: bool = None,
-            has_left_handed_faces: bool = None,
-            error_code: ErrorCode = None,
-            warning_codes: List[WarningCode] = None):
+            has_non_positive_volumes : bool = None,
+            has_non_positive_areas : bool = None,
+            has_invalid_shape : bool = None,
+            has_left_handed_faces : bool = None,
+            error_code : ErrorCode = None,
+            warning_codes : List[WarningCode] = None):
         """Set the default values of the ``CheckMeshResults`` object.
 
         Parameters
         ----------
-        has_non_positive_volumes: bool, optional
+        has_non_positive_volumes : bool, optional
             Indicates whether mesh has non positive volumes.
-        has_non_positive_areas: bool, optional
+        has_non_positive_areas : bool, optional
             Indicates whether mesh has non positive areas.
-        has_invalid_shape: bool, optional
+        has_invalid_shape : bool, optional
             Indicates whether mesh has invalid shape.
-        has_left_handed_faces: bool, optional
+        has_left_handed_faces : bool, optional
             Indicates whether mesh has left handed faces.
-        error_code: ErrorCode, optional
+        error_code : ErrorCode, optional
             Error code associated with the check grid operation.
-        warning_codes: List[WarningCode], optional
+        warning_codes : List[WarningCode], optional
             Warning codes associated with the check grid operation.
         """
         args = locals()
@@ -711,3 +711,93 @@ class CheckMeshResults(CoreObject):
     @warning_codes.setter
     def warning_codes(self, value: List[WarningCode]):
         self._warning_codes = value
+
+class PartsForPointsParams(CoreObject):
+    """Parameters for finding parts enclosing the given point array.
+
+    Parameters
+    ----------
+    model : Model
+        Model to create a ``PartsForPointsParams`` object with default parameters.
+    json_data : dict, optional
+        JSON dictionary to create a ``PartsForPointsParams`` object with provided parameters.
+
+    Examples
+    --------
+    >>> parts_for_points_params = prime.PartsForPointsParams(model = model)
+    """
+    _default_params = {}
+
+    def __initialize(
+            self):
+        pass
+
+    def __init__(
+            self,
+            model: CommunicationManager=None,
+            json_data : dict = None,
+             **kwargs):
+        """Initialize a ``PartsForPointsParams`` object.
+
+        Parameters
+        ----------
+        model : Model
+            Model to create a ``PartsForPointsParams`` object with default parameters.
+        json_data : dict, optional
+            JSON dictionary to create a ``PartsForPointsParams`` object with provided parameters.
+
+        Examples
+        --------
+        >>> parts_for_points_params = prime.PartsForPointsParams(model = model)
+        """
+        if json_data:
+            self.__initialize()
+        else:
+            all_field_specified = all(arg is not None for arg in [])
+            if all_field_specified:
+                self.__initialize()
+            else:
+                if model is None:
+                    raise ValueError("Invalid assignment. Either pass a model or specify all properties.")
+                else:
+                    param_json = model._communicator.initialize_params(model, "PartsForPointsParams")
+                    json_data = param_json["PartsForPointsParams"] if "PartsForPointsParams" in param_json else {}
+                    self.__initialize()
+        self._custom_params = kwargs
+        if model is not None:
+            [ model._logger.debug(f'Unsupported argument : {key}') for key in kwargs ]
+        [setattr(type(self), key, property(lambda self, key = key:  self._custom_params[key] if key in self._custom_params else None,
+        lambda self, value, key = key : self._custom_params.update({ key: value }))) for key in kwargs]
+        self._freeze()
+
+    @staticmethod
+    def set_default():
+        """Set the default values of the ``PartsForPointsParams`` object.
+
+        """
+        args = locals()
+        [PartsForPointsParams._default_params.update({ key: value }) for key, value in args.items() if value is not None]
+
+    @staticmethod
+    def print_default():
+        """Print the default values of ``PartsForPointsParams`` object.
+
+        Examples
+        --------
+        >>> PartsForPointsParams.print_default()
+        """
+        message = ""
+        message += ''.join(str(key) + ' : ' + str(value) + '\n' for key, value in PartsForPointsParams._default_params.items())
+        print(message)
+
+    def _jsonify(self) -> Dict[str, Any]:
+        json_data = {}
+        [ json_data.update({ utils.to_camel_case(key) : value }) for key, value in self._custom_params.items()]
+        return json_data
+
+    def __str__(self) -> str:
+        message = "" % ()
+        message += ''.join('\n' + str(key) + ' : ' + str(value) for key, value in self._custom_params.items())
+        if len(message) == 0:
+            message = 'The object has no parameters to print.'
+        return message

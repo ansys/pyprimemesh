@@ -1,4 +1,4 @@
-# Copyright (C) 2024 - 2025 ANSYS, Inc. and/or its affiliates.
+# Copyright (C) 2026 Synopsys, Inc. and ANSYS, Inc. All rights reserved.
 # SPDX-License-Identifier: MIT
 #
 #
@@ -35,11 +35,11 @@ class MergePartsParams(CoreObject):
 
     Parameters
     ----------
-    model: Model
+    model : Model
         Model to create a ``MergePartsParams`` object with default parameters.
-    merged_part_suggested_name: str, optional
+    merged_part_suggested_name : str, optional
         Suggested name to be set on merged part. First in alphabetical order of given part names will be used, when empty name is given.
-    json_data: dict, optional
+    json_data : dict, optional
         JSON dictionary to create a ``MergePartsParams`` object with provided parameters.
 
     Examples
@@ -50,24 +50,24 @@ class MergePartsParams(CoreObject):
 
     def __initialize(
             self,
-            merged_part_suggested_name: str):
+            merged_part_suggested_name : str):
         self._merged_part_suggested_name = merged_part_suggested_name
 
     def __init__(
             self,
             model: CommunicationManager=None,
-            merged_part_suggested_name: str = None,
+            merged_part_suggested_name : str = None,
             json_data : dict = None,
              **kwargs):
         """Initialize a ``MergePartsParams`` object.
 
         Parameters
         ----------
-        model: Model
+        model : Model
             Model to create a ``MergePartsParams`` object with default parameters.
-        merged_part_suggested_name: str, optional
+        merged_part_suggested_name : str, optional
             Suggested name to be set on merged part. First in alphabetical order of given part names will be used, when empty name is given.
-        json_data: dict, optional
+        json_data : dict, optional
             JSON dictionary to create a ``MergePartsParams`` object with provided parameters.
 
         Examples
@@ -99,12 +99,12 @@ class MergePartsParams(CoreObject):
 
     @staticmethod
     def set_default(
-            merged_part_suggested_name: str = None):
+            merged_part_suggested_name : str = None):
         """Set the default values of the ``MergePartsParams`` object.
 
         Parameters
         ----------
-        merged_part_suggested_name: str, optional
+        merged_part_suggested_name : str, optional
             Suggested name to be set on merged part. First in alphabetical order of given part names will be used, when empty name is given.
         """
         args = locals()
@@ -149,15 +149,15 @@ class MergePartsResults(CoreObject):
 
     Parameters
     ----------
-    model: Model
+    model : Model
         Model to create a ``MergePartsResults`` object with default parameters.
-    error_code: ErrorCode, optional
+    error_code : ErrorCode, optional
         Error code associated with the failure of operation.
-    merged_part_assigned_name: str, optional
+    merged_part_assigned_name : str, optional
         Name assigned to merged part. Suffix is added to suggested name if the name not available.
-    merged_part_id: int, optional
+    merged_part_id : int, optional
         Id assigned to merged part.
-    json_data: dict, optional
+    json_data : dict, optional
         JSON dictionary to create a ``MergePartsResults`` object with provided parameters.
 
     Examples
@@ -168,9 +168,9 @@ class MergePartsResults(CoreObject):
 
     def __initialize(
             self,
-            error_code: ErrorCode,
-            merged_part_assigned_name: str,
-            merged_part_id: int):
+            error_code : ErrorCode,
+            merged_part_assigned_name : str,
+            merged_part_id : int):
         self._error_code = ErrorCode(error_code)
         self._merged_part_assigned_name = merged_part_assigned_name
         self._merged_part_id = merged_part_id
@@ -178,24 +178,24 @@ class MergePartsResults(CoreObject):
     def __init__(
             self,
             model: CommunicationManager=None,
-            error_code: ErrorCode = None,
-            merged_part_assigned_name: str = None,
-            merged_part_id: int = None,
+            error_code : ErrorCode = None,
+            merged_part_assigned_name : str = None,
+            merged_part_id : int = None,
             json_data : dict = None,
              **kwargs):
         """Initialize a ``MergePartsResults`` object.
 
         Parameters
         ----------
-        model: Model
+        model : Model
             Model to create a ``MergePartsResults`` object with default parameters.
-        error_code: ErrorCode, optional
+        error_code : ErrorCode, optional
             Error code associated with the failure of operation.
-        merged_part_assigned_name: str, optional
+        merged_part_assigned_name : str, optional
             Name assigned to merged part. Suffix is added to suggested name if the name not available.
-        merged_part_id: int, optional
+        merged_part_id : int, optional
             Id assigned to merged part.
-        json_data: dict, optional
+        json_data : dict, optional
             JSON dictionary to create a ``MergePartsResults`` object with provided parameters.
 
         Examples
@@ -233,18 +233,18 @@ class MergePartsResults(CoreObject):
 
     @staticmethod
     def set_default(
-            error_code: ErrorCode = None,
-            merged_part_assigned_name: str = None,
-            merged_part_id: int = None):
+            error_code : ErrorCode = None,
+            merged_part_assigned_name : str = None,
+            merged_part_id : int = None):
         """Set the default values of the ``MergePartsResults`` object.
 
         Parameters
         ----------
-        error_code: ErrorCode, optional
+        error_code : ErrorCode, optional
             Error code associated with the failure of operation.
-        merged_part_assigned_name: str, optional
+        merged_part_assigned_name : str, optional
             Name assigned to merged part. Suffix is added to suggested name if the name not available.
-        merged_part_id: int, optional
+        merged_part_id : int, optional
             Id assigned to merged part.
         """
         args = locals()
@@ -308,184 +308,20 @@ class MergePartsResults(CoreObject):
     def merged_part_id(self, value: int):
         self._merged_part_id = value
 
-class GlobalSizingParams(CoreObject):
-    """Global sizing parameters.
-
-    Parameters
-    ----------
-    model: Model
-        Model to create a ``GlobalSizingParams`` object with default parameters.
-    min: float, optional
-        Minimum value of global sizing parameters.
-    max: float, optional
-        Maximum value of global sizing parameters.
-    growth_rate: float, optional
-        Growth rate of global sizing parameters.
-    json_data: dict, optional
-        JSON dictionary to create a ``GlobalSizingParams`` object with provided parameters.
-
-    Examples
-    --------
-    >>> global_sizing_params = prime.GlobalSizingParams(model = model)
-    """
-    _default_params = {}
-
-    def __initialize(
-            self,
-            min: float,
-            max: float,
-            growth_rate: float):
-        self._min = min
-        self._max = max
-        self._growth_rate = growth_rate
-
-    def __init__(
-            self,
-            model: CommunicationManager=None,
-            min: float = None,
-            max: float = None,
-            growth_rate: float = None,
-            json_data : dict = None,
-             **kwargs):
-        """Initialize a ``GlobalSizingParams`` object.
-
-        Parameters
-        ----------
-        model: Model
-            Model to create a ``GlobalSizingParams`` object with default parameters.
-        min: float, optional
-            Minimum value of global sizing parameters.
-        max: float, optional
-            Maximum value of global sizing parameters.
-        growth_rate: float, optional
-            Growth rate of global sizing parameters.
-        json_data: dict, optional
-            JSON dictionary to create a ``GlobalSizingParams`` object with provided parameters.
-
-        Examples
-        --------
-        >>> global_sizing_params = prime.GlobalSizingParams(model = model)
-        """
-        if json_data:
-            self.__initialize(
-                json_data["min"] if "min" in json_data else None,
-                json_data["max"] if "max" in json_data else None,
-                json_data["growthRate"] if "growthRate" in json_data else None)
-        else:
-            all_field_specified = all(arg is not None for arg in [min, max, growth_rate])
-            if all_field_specified:
-                self.__initialize(
-                    min,
-                    max,
-                    growth_rate)
-            else:
-                if model is None:
-                    raise ValueError("Invalid assignment. Either pass a model or specify all properties.")
-                else:
-                    param_json = model._communicator.initialize_params(model, "GlobalSizingParams")
-                    json_data = param_json["GlobalSizingParams"] if "GlobalSizingParams" in param_json else {}
-                    self.__initialize(
-                        min if min is not None else ( GlobalSizingParams._default_params["min"] if "min" in GlobalSizingParams._default_params else (json_data["min"] if "min" in json_data else None)),
-                        max if max is not None else ( GlobalSizingParams._default_params["max"] if "max" in GlobalSizingParams._default_params else (json_data["max"] if "max" in json_data else None)),
-                        growth_rate if growth_rate is not None else ( GlobalSizingParams._default_params["growth_rate"] if "growth_rate" in GlobalSizingParams._default_params else (json_data["growthRate"] if "growthRate" in json_data else None)))
-        self._custom_params = kwargs
-        if model is not None:
-            [ model._logger.debug(f'Unsupported argument : {key}') for key in kwargs ]
-        [setattr(type(self), key, property(lambda self, key = key:  self._custom_params[key] if key in self._custom_params else None,
-        lambda self, value, key = key : self._custom_params.update({ key: value }))) for key in kwargs]
-        self._freeze()
-
-    @staticmethod
-    def set_default(
-            min: float = None,
-            max: float = None,
-            growth_rate: float = None):
-        """Set the default values of the ``GlobalSizingParams`` object.
-
-        Parameters
-        ----------
-        min: float, optional
-            Minimum value of global sizing parameters.
-        max: float, optional
-            Maximum value of global sizing parameters.
-        growth_rate: float, optional
-            Growth rate of global sizing parameters.
-        """
-        args = locals()
-        [GlobalSizingParams._default_params.update({ key: value }) for key, value in args.items() if value is not None]
-
-    @staticmethod
-    def print_default():
-        """Print the default values of ``GlobalSizingParams`` object.
-
-        Examples
-        --------
-        >>> GlobalSizingParams.print_default()
-        """
-        message = ""
-        message += ''.join(str(key) + ' : ' + str(value) + '\n' for key, value in GlobalSizingParams._default_params.items())
-        print(message)
-
-    def _jsonify(self) -> Dict[str, Any]:
-        json_data = {}
-        if self._min is not None:
-            json_data["min"] = self._min
-        if self._max is not None:
-            json_data["max"] = self._max
-        if self._growth_rate is not None:
-            json_data["growthRate"] = self._growth_rate
-        [ json_data.update({ utils.to_camel_case(key) : value }) for key, value in self._custom_params.items()]
-        return json_data
-
-    def __str__(self) -> str:
-        message = "min :  %s\nmax :  %s\ngrowth_rate :  %s" % (self._min, self._max, self._growth_rate)
-        message += ''.join('\n' + str(key) + ' : ' + str(value) for key, value in self._custom_params.items())
-        return message
-
-    @property
-    def min(self) -> float:
-        """Minimum value of global sizing parameters.
-        """
-        return self._min
-
-    @min.setter
-    def min(self, value: float):
-        self._min = value
-
-    @property
-    def max(self) -> float:
-        """Maximum value of global sizing parameters.
-        """
-        return self._max
-
-    @max.setter
-    def max(self, value: float):
-        self._max = value
-
-    @property
-    def growth_rate(self) -> float:
-        """Growth rate of global sizing parameters.
-        """
-        return self._growth_rate
-
-    @growth_rate.setter
-    def growth_rate(self, value: float):
-        self._growth_rate = value
-
 class CreateZoneResults(CoreObject):
     """Results associated with the create zone.
 
     Parameters
     ----------
-    model: Model
+    model : Model
         Model to create a ``CreateZoneResults`` object with default parameters.
-    error_code: ErrorCode, optional
+    error_code : ErrorCode, optional
         Error code associated with the create zone operation.
-    zone_id: int, optional
+    zone_id : int, optional
         Id of newly created zone.
-    assigned_name: str, optional
+    assigned_name : str, optional
         Assigned name of newly created zone.
-    json_data: dict, optional
+    json_data : dict, optional
         JSON dictionary to create a ``CreateZoneResults`` object with provided parameters.
 
     Examples
@@ -496,9 +332,9 @@ class CreateZoneResults(CoreObject):
 
     def __initialize(
             self,
-            error_code: ErrorCode,
-            zone_id: int,
-            assigned_name: str):
+            error_code : ErrorCode,
+            zone_id : int,
+            assigned_name : str):
         self._error_code = ErrorCode(error_code)
         self._zone_id = zone_id
         self._assigned_name = assigned_name
@@ -506,24 +342,24 @@ class CreateZoneResults(CoreObject):
     def __init__(
             self,
             model: CommunicationManager=None,
-            error_code: ErrorCode = None,
-            zone_id: int = None,
-            assigned_name: str = None,
+            error_code : ErrorCode = None,
+            zone_id : int = None,
+            assigned_name : str = None,
             json_data : dict = None,
              **kwargs):
         """Initialize a ``CreateZoneResults`` object.
 
         Parameters
         ----------
-        model: Model
+        model : Model
             Model to create a ``CreateZoneResults`` object with default parameters.
-        error_code: ErrorCode, optional
+        error_code : ErrorCode, optional
             Error code associated with the create zone operation.
-        zone_id: int, optional
+        zone_id : int, optional
             Id of newly created zone.
-        assigned_name: str, optional
+        assigned_name : str, optional
             Assigned name of newly created zone.
-        json_data: dict, optional
+        json_data : dict, optional
             JSON dictionary to create a ``CreateZoneResults`` object with provided parameters.
 
         Examples
@@ -561,18 +397,18 @@ class CreateZoneResults(CoreObject):
 
     @staticmethod
     def set_default(
-            error_code: ErrorCode = None,
-            zone_id: int = None,
-            assigned_name: str = None):
+            error_code : ErrorCode = None,
+            zone_id : int = None,
+            assigned_name : str = None):
         """Set the default values of the ``CreateZoneResults`` object.
 
         Parameters
         ----------
-        error_code: ErrorCode, optional
+        error_code : ErrorCode, optional
             Error code associated with the create zone operation.
-        zone_id: int, optional
+        zone_id : int, optional
             Id of newly created zone.
-        assigned_name: str, optional
+        assigned_name : str, optional
             Assigned name of newly created zone.
         """
         args = locals()
@@ -641,11 +477,11 @@ class DeleteZoneResults(CoreObject):
 
     Parameters
     ----------
-    model: Model
+    model : Model
         Model to create a ``DeleteZoneResults`` object with default parameters.
-    error_code: ErrorCode, optional
+    error_code : ErrorCode, optional
         Error code associated with the delete zone operation.
-    json_data: dict, optional
+    json_data : dict, optional
         JSON dictionary to create a ``DeleteZoneResults`` object with provided parameters.
 
     Examples
@@ -656,24 +492,24 @@ class DeleteZoneResults(CoreObject):
 
     def __initialize(
             self,
-            error_code: ErrorCode):
+            error_code : ErrorCode):
         self._error_code = ErrorCode(error_code)
 
     def __init__(
             self,
             model: CommunicationManager=None,
-            error_code: ErrorCode = None,
+            error_code : ErrorCode = None,
             json_data : dict = None,
              **kwargs):
         """Initialize a ``DeleteZoneResults`` object.
 
         Parameters
         ----------
-        model: Model
+        model : Model
             Model to create a ``DeleteZoneResults`` object with default parameters.
-        error_code: ErrorCode, optional
+        error_code : ErrorCode, optional
             Error code associated with the delete zone operation.
-        json_data: dict, optional
+        json_data : dict, optional
             JSON dictionary to create a ``DeleteZoneResults`` object with provided parameters.
 
         Examples
@@ -705,12 +541,12 @@ class DeleteZoneResults(CoreObject):
 
     @staticmethod
     def set_default(
-            error_code: ErrorCode = None):
+            error_code : ErrorCode = None):
         """Set the default values of the ``DeleteZoneResults`` object.
 
         Parameters
         ----------
-        error_code: ErrorCode, optional
+        error_code : ErrorCode, optional
             Error code associated with the delete zone operation.
         """
         args = locals()

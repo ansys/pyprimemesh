@@ -1,4 +1,5 @@
-# Copyright (C) 2024 - 2026 ANSYS, Inc. and/or its affiliates.
+# Copyright (C) 2026 ANSYS, Inc. and/or its affiliates.
+# Copyright (C) 2026 Synopsys, Inc. and ANSYS, Inc. All rights reserved.
 # SPDX-License-Identifier: MIT
 #
 # Permission is hereby granted, free of charge, to any person obtaining a copy
@@ -21,18 +22,20 @@
 
 """Module for client communication implementations."""
 
+import atexit
+import json
 import logging
 import os
-from pathlib import Path
+import platform
+import re
+import signal
+import subprocess
 from typing import Optional, Union
-
-from ansys.tools.common.example_download import DownloadManager
 
 import ansys.meshing.prime.internals.config as config
 import ansys.meshing.prime.internals.defaults as defaults
 import ansys.meshing.prime.internals.utils as utils
 from ansys.meshing.prime.core.model import Model
-from ansys.meshing.prime.internals.utils import terminate_process
 
 __all__ = ['Client']
 
@@ -91,7 +94,8 @@ class Client(object):
         self._local = local
         self._process = server_process
         self._comm = None
-        self._cleanup_script_path: Path = None
+        self._server_cleanup_targets = []
+        self._atexit_registered = False
         if not local:
             if (
                 connection_type == config.ConnectionType.GRPC_SECURE
@@ -162,20 +166,38 @@ class Client(object):
                 logging.getLogger('PyPrimeMesh').error(
                     f'Failed to load prime_communicator with message: {err.msg}'
                 )
+        if self._process is not None and self._comm is not None:
+            try:
+                model = self.model
+                results = json.loads(
+                    model._comm.serve(
+                        model,
+                        "PrimeMesh::Model/GetServerProcessInformation",
+                        model._object_id,
+                        args={},
+                    )
+                )
+                self._store_server_cleanup_targets(results.get('hostNames'), results.get('pids'))
+            except Exception as err:
+                logging.getLogger('PyPrimeMesh').info(
+                    f"Skipped server cleanup target collection: {err}"
+                )
 
     @property
     def model(self):
         """Get model associated with the client."""
+        from ansys.meshing import prime
+
         if self._default_model is None and hasattr(self._comm, 'models'):
             if self._comm.models:
                 model_info = self._comm.models[0]
-                self._default_model = Model(
+                self._default_model = prime.Model(
                     self._comm, model_info['id'], model_info['index'], "Default"
                 )
 
         if self._default_model is None:
             # This assumes that the Model is always object id 1....
-            self._default_model = Model(self._comm, 1, 1, "Default")
+            self._default_model = prime.Model(self._comm, 1, 1, "Default")
         return self._default_model
 
     def run_on_server(self, recipe: str):
@@ -189,6 +211,117 @@ class Client(object):
         if self._comm is not None:
             result = self._comm.run_on_server(recipe)
             return result['Results']
+
+    def _store_server_cleanup_targets(self, hostNames, pids):
+        """Store launched server host/PID pairs for later in-process cleanup.
+
+        Parameters
+        ----------
+        hostNames : list of str
+            Hostnames where server processes are running.
+        pids : list of int
+            Process IDs corresponding to the hostnames.
+        """
+        logger = logging.getLogger('PyPrimeMesh')
+        self._server_cleanup_targets = []
+        if not hostNames or not pids or len(hostNames) != len(pids):
+            logger.info("Found invalid hostnames and PIDs, skipped server cleanup targets.")
+            return
+
+        owner_pid = os.getpid()
+        hostname_re = re.compile(r'^[A-Za-z0-9._-]+$')
+        seen = set()
+        targets = []
+        for hostname, pid in zip(hostNames, pids):
+            try:
+                pid = int(pid)
+            except (TypeError, ValueError):
+                continue
+            if pid <= 0 or pid == owner_pid:
+                continue
+            if not isinstance(hostname, str) or not hostname_re.match(hostname):
+                continue
+            key = (hostname.lower(), pid)
+            if key in seen:
+                continue
+            seen.add(key)
+            targets.append((hostname, pid))
+
+        if not targets:
+            logger.info("No server PIDs to kill, skipped server cleanup targets.")
+            return
+
+        self._server_cleanup_targets = targets
+        if not self._atexit_registered:
+            atexit.register(self.exit)
+            self._atexit_registered = True
+
+    def _is_local_host(self, hostname):
+        host = hostname.lower()
+        if host in ('localhost', '127.0.0.1', '::1'):
+            return True
+        return host == platform.node().lower()
+
+    def _is_prime_server_process(self, pid):
+        try:
+            if os.name == "nt":
+                result = subprocess.run(
+                    ["tasklist", "/FI", f"PID eq {pid}", "/FO", "CSV", "/NH"],
+                    capture_output=True,
+                    text=True,
+                    timeout=5,
+                )
+                return "AnsysPrimeServer" in result.stdout
+            exe = os.readlink(f"/proc/{pid}/exe")
+            return "AnsysPrimeServer" in os.path.basename(exe)
+        except Exception:
+            return False
+
+    def _kill_server_cleanup_targets(self):
+        logger = logging.getLogger('PyPrimeMesh')
+        for hostname, pid in self._server_cleanup_targets:
+            try:
+                if self._is_local_host(hostname):
+                    if not self._is_prime_server_process(pid):
+                        continue
+                    if os.name == "nt":
+                        subprocess.run(
+                            ["taskkill", "/F", "/PID", str(pid)],
+                            stdout=subprocess.DEVNULL,
+                            stderr=subprocess.DEVNULL,
+                        )
+                    else:
+                        os.kill(pid, signal.SIGKILL)
+                else:
+                    if os.name == "nt":
+                        remote = (
+                            f'tasklist /FI "PID eq {pid}" /FO CSV /NH | '
+                            f"findstr /I AnsysPrimeServer >nul && "
+                            f"taskkill /F /PID {pid} >nul 2>&1"
+                        )
+                    else:
+                        remote = (
+                            f'exe=$(readlink /proc/{pid}/exe 2>/dev/null); '
+                            f'case "$exe" in *AnsysPrimeServer*) kill -9 {pid};; esac'
+                        )
+                    subprocess.run(
+                        [
+                            "ssh",
+                            "-o",
+                            "BatchMode=yes",
+                            "-o",
+                            "ConnectTimeout=5",
+                            hostname,
+                            remote,
+                        ],
+                        stdout=subprocess.DEVNULL,
+                        stderr=subprocess.DEVNULL,
+                    )
+            except ProcessLookupError:
+                pass
+            except Exception as err:
+                logger.info(f"Failed to kill server process {pid} on {hostname}: {err}")
+        self._server_cleanup_targets = []
 
     def exit(self):
         """Close the connection with the server.
@@ -206,13 +339,31 @@ class Client(object):
         >>> print(result)
         >>> prime_client.exit() # Sever connection with server and kill the server.
         """
+        if self._comm is None and self._process is None and not self._server_cleanup_targets:
+            return
         if self._comm is not None:
+            # close() issues the Finalize RPC to the server, which triggers a graceful, in-process
+            # shutdown (gRPC server Shutdown -> PrimeMesh::Finalize). On a distributed (n_procs > 1)
+            # server this also broadcasts the exit to all MPI worker ranks and calls MPI_Finalize.
+            # We rely on this cooperative path instead of raising an OS termination signal at the
+            # launched process, which does not reach the MPI-spawned worker ranks and left them
+            # behind.
             self._comm.close()
             self._comm = None
         if self._process is not None:
-            if self._local:
-                raise ValueError('Local client cannot have a server process')
-            terminate_process(self._process)
+            assert self._local == False  # nosec B101
+            # Do not signal/kill the launched process. The Finalize RPC above tears the server (and
+            # its distributed workers) down cleanly; just wait for the launched process to exit and
+            # reap it so it does not linger as a zombie.
+            try:
+                self._process.wait(timeout=min(5.0, defaults.connection_timeout()))
+            except Exception:
+                # Graceful shutdown did not finish in time or the process was already gone; force
+                # termination so it is not orphaned when no cleanup targets were collected.
+                utils.terminate_process(self._process)
+            self._process = None
+        if self._server_cleanup_targets:
+            self._kill_server_cleanup_targets()
         if config.using_container():
             container_name = getattr(self, 'container_name', None)
             if container_name:
@@ -220,15 +371,22 @@ class Client(object):
         elif config.has_pim():
             self.remote_instance.delete()
             self.pim_client.close()
+        self._server_cleanup_targets = []
         clear_examples = bool(int(os.environ.get('PYPRIMEMESH_CLEAR_EXAMPLES', '1')))
         if clear_examples:
-            download_manager = DownloadManager()
             try:
+                DownloadManager = utils._get_download_manager()
+                download_manager = DownloadManager()
                 download_manager.clear_download_cache()
             except FileNotFoundError:
                 # examples download to a shared temporary directory, so a concurrent
                 # session may have cleared the same files first. Cleanup is best
                 # effort and must not bring down an otherwise successful session.
+                pass
+            except ImportError:
+                # The 'ansys-tools-common' package is optional and only needed for
+                # example downloads. Its absence must not bring down an otherwise
+                # successful session.
                 pass
 
     def __enter__(self):

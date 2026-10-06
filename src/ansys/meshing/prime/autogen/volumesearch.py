@@ -1,4 +1,4 @@
-# Copyright (C) 2024 - 2025 ANSYS, Inc. and/or its affiliates.
+# Copyright (C) 2026 Synopsys, Inc. and ANSYS, Inc. All rights reserved.
 # SPDX-License-Identifier: MIT
 #
 #
@@ -25,7 +25,7 @@ from __future__ import annotations
 from ansys.meshing.prime.internals.comm_manager import CommunicationManager
 from ansys.meshing.prime.params.primestructs import *
 from ansys.meshing.prime.autogen.coreobject import *
-from typing import List, Any, Union
+from typing import Dict, Any, Union, List, Iterable
 
 class VolumeSearch(CoreObject):
     """VolumeSearch allows you to check volume mesh quality.
@@ -61,7 +61,7 @@ class VolumeSearch(CoreObject):
     def get_volume_quality_summary(self, params : VolumeQualitySummaryParams) -> VolumeQualitySummaryResults:
         """ Gets the volume quality summary.
 
-        Diagnose volume quality for the given scope and cell quality measures provided in the VolumeQualitySummaryParams structure.
+        Diagnoses volume quality for the given scope and cell quality measures provided in the VolumeQualitySummaryParams structure.
         Use default quality limit if the parameters are not specified.
 
         Parameters
@@ -74,13 +74,14 @@ class VolumeSearch(CoreObject):
         VolumeQualitySummaryResults
             Returns the VolumeQualitySummaryResults.
 
+
         Examples
         --------
         >>> vol_search = VolumeSearch(model=model)
         >>> results = vol_search.get_volume_quality_summary(VolumeQualitySummaryParams(model=model))
 
         """
-        if not isinstance(params, VolumeQualitySummaryParams):
+        if type(params).__name__ != 'VolumeQualitySummaryParams':
             raise TypeError("Invalid argument type passed for 'params'. Valid argument type is VolumeQualitySummaryParams.")
         args = {"params" : params._jsonify()}
         command_name = "PrimeMesh::VolumeSearch/GetVolumeQualitySummary"

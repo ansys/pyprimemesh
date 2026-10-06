@@ -1,4 +1,4 @@
-# Copyright (C) 2024 - 2025 ANSYS, Inc. and/or its affiliates.
+# Copyright (C) 2026 Synopsys, Inc. and ANSYS, Inc. All rights reserved.
 # SPDX-License-Identifier: MIT
 #
 #
@@ -35,17 +35,17 @@ class DeleteFringesAndOverlapsParams(CoreObject):
 
     Parameters
     ----------
-    model: Model
+    model : Model
         Model to create a ``DeleteFringesAndOverlapsParams`` object with default parameters.
-    fringe_element_count: int, optional
+    fringe_element_count : int, optional
         Maximum count of free face elements identified as fringe to be deleted.
-    overlap_element_count: int, optional
+    overlap_element_count : int, optional
         Maximum count of overlapping face elements identified as overlap to be deleted.
-    delete_fringes: bool, optional
+    delete_fringes : bool, optional
         Option to delete fringes. The default is true.
-    delete_overlaps: bool, optional
+    delete_overlaps : bool, optional
         Option to delete overlaps. The default is false.
-    json_data: dict, optional
+    json_data : dict, optional
         JSON dictionary to create a ``DeleteFringesAndOverlapsParams`` object with provided parameters.
 
     Examples
@@ -56,10 +56,10 @@ class DeleteFringesAndOverlapsParams(CoreObject):
 
     def __initialize(
             self,
-            fringe_element_count: int,
-            overlap_element_count: int,
-            delete_fringes: bool,
-            delete_overlaps: bool):
+            fringe_element_count : int,
+            overlap_element_count : int,
+            delete_fringes : bool,
+            delete_overlaps : bool):
         self._fringe_element_count = fringe_element_count
         self._overlap_element_count = overlap_element_count
         self._delete_fringes = delete_fringes
@@ -68,27 +68,27 @@ class DeleteFringesAndOverlapsParams(CoreObject):
     def __init__(
             self,
             model: CommunicationManager=None,
-            fringe_element_count: int = None,
-            overlap_element_count: int = None,
-            delete_fringes: bool = None,
-            delete_overlaps: bool = None,
+            fringe_element_count : int = None,
+            overlap_element_count : int = None,
+            delete_fringes : bool = None,
+            delete_overlaps : bool = None,
             json_data : dict = None,
              **kwargs):
         """Initialize a ``DeleteFringesAndOverlapsParams`` object.
 
         Parameters
         ----------
-        model: Model
+        model : Model
             Model to create a ``DeleteFringesAndOverlapsParams`` object with default parameters.
-        fringe_element_count: int, optional
+        fringe_element_count : int, optional
             Maximum count of free face elements identified as fringe to be deleted.
-        overlap_element_count: int, optional
+        overlap_element_count : int, optional
             Maximum count of overlapping face elements identified as overlap to be deleted.
-        delete_fringes: bool, optional
+        delete_fringes : bool, optional
             Option to delete fringes. The default is true.
-        delete_overlaps: bool, optional
+        delete_overlaps : bool, optional
             Option to delete overlaps. The default is false.
-        json_data: dict, optional
+        json_data : dict, optional
             JSON dictionary to create a ``DeleteFringesAndOverlapsParams`` object with provided parameters.
 
         Examples
@@ -129,21 +129,21 @@ class DeleteFringesAndOverlapsParams(CoreObject):
 
     @staticmethod
     def set_default(
-            fringe_element_count: int = None,
-            overlap_element_count: int = None,
-            delete_fringes: bool = None,
-            delete_overlaps: bool = None):
+            fringe_element_count : int = None,
+            overlap_element_count : int = None,
+            delete_fringes : bool = None,
+            delete_overlaps : bool = None):
         """Set the default values of the ``DeleteFringesAndOverlapsParams`` object.
 
         Parameters
         ----------
-        fringe_element_count: int, optional
+        fringe_element_count : int, optional
             Maximum count of free face elements identified as fringe to be deleted.
-        overlap_element_count: int, optional
+        overlap_element_count : int, optional
             Maximum count of overlapping face elements identified as overlap to be deleted.
-        delete_fringes: bool, optional
+        delete_fringes : bool, optional
             Option to delete fringes. The default is true.
-        delete_overlaps: bool, optional
+        delete_overlaps : bool, optional
             Option to delete overlaps. The default is false.
         """
         args = locals()
@@ -224,13 +224,13 @@ class DeleteFringesAndOverlapsResults(CoreObject):
 
     Parameters
     ----------
-    model: Model
+    model : Model
         Model to create a ``DeleteFringesAndOverlapsResults`` object with default parameters.
-    error_code: ErrorCode, optional
+    error_code : ErrorCode, optional
         Error code associated with the failure of operation.
-    n_deleted: int, optional
+    n_deleted : int, optional
         Number of face elements deleted.
-    json_data: dict, optional
+    json_data : dict, optional
         JSON dictionary to create a ``DeleteFringesAndOverlapsResults`` object with provided parameters.
 
     Examples
@@ -241,29 +241,29 @@ class DeleteFringesAndOverlapsResults(CoreObject):
 
     def __initialize(
             self,
-            error_code: ErrorCode,
-            n_deleted: int):
+            error_code : ErrorCode,
+            n_deleted : int):
         self._error_code = ErrorCode(error_code)
         self._n_deleted = n_deleted
 
     def __init__(
             self,
             model: CommunicationManager=None,
-            error_code: ErrorCode = None,
-            n_deleted: int = None,
+            error_code : ErrorCode = None,
+            n_deleted : int = None,
             json_data : dict = None,
              **kwargs):
         """Initialize a ``DeleteFringesAndOverlapsResults`` object.
 
         Parameters
         ----------
-        model: Model
+        model : Model
             Model to create a ``DeleteFringesAndOverlapsResults`` object with default parameters.
-        error_code: ErrorCode, optional
+        error_code : ErrorCode, optional
             Error code associated with the failure of operation.
-        n_deleted: int, optional
+        n_deleted : int, optional
             Number of face elements deleted.
-        json_data: dict, optional
+        json_data : dict, optional
             JSON dictionary to create a ``DeleteFringesAndOverlapsResults`` object with provided parameters.
 
         Examples
@@ -298,15 +298,15 @@ class DeleteFringesAndOverlapsResults(CoreObject):
 
     @staticmethod
     def set_default(
-            error_code: ErrorCode = None,
-            n_deleted: int = None):
+            error_code : ErrorCode = None,
+            n_deleted : int = None):
         """Set the default values of the ``DeleteFringesAndOverlapsResults`` object.
 
         Parameters
         ----------
-        error_code: ErrorCode, optional
+        error_code : ErrorCode, optional
             Error code associated with the failure of operation.
-        n_deleted: int, optional
+        n_deleted : int, optional
             Number of face elements deleted.
         """
         args = locals()

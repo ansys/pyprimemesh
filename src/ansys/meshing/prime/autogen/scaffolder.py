@@ -1,4 +1,4 @@
-# Copyright (C) 2024 - 2025 ANSYS, Inc. and/or its affiliates.
+# Copyright (C) 2026 Synopsys, Inc. and ANSYS, Inc. All rights reserved.
 # SPDX-License-Identifier: MIT
 #
 #
@@ -25,10 +25,13 @@ from __future__ import annotations
 from ansys.meshing.prime.internals.comm_manager import CommunicationManager
 from ansys.meshing.prime.params.primestructs import *
 from ansys.meshing.prime.autogen.coreobject import *
-from typing import List, Any, Union
+from typing import Dict, Any, Union, List, Iterable
 
 class Scaffolder(CoreObject):
-    """Scaffolder is used for achieving connections in structures made of sheets and beams. Solid bodies should be suppressed before applying scaffolding.
+    """Connects structures made of sheets and beams.
+
+    Scaffolder is used for achieving connections in structures made of sheets and beams.
+    Solid bodies should be suppressed before applying scaffolding.
 
     Parameters
     ----------
@@ -85,7 +88,7 @@ class Scaffolder(CoreObject):
             raise TypeError("Invalid argument type passed for 'topo_faces'. Valid argument type is Iterable[int].")
         if not isinstance(topo_beams, Iterable):
             raise TypeError("Invalid argument type passed for 'topo_beams'. Valid argument type is Iterable[int].")
-        if not isinstance(params, ScaffolderParams):
+        if type(params).__name__ != 'ScaffolderParams':
             raise TypeError("Invalid argument type passed for 'params'. Valid argument type is ScaffolderParams.")
         args = {"topo_faces" : topo_faces,
         "topo_beams" : topo_beams,
@@ -149,7 +152,7 @@ class Scaffolder(CoreObject):
         """
         if not isinstance(topo_faces, Iterable):
             raise TypeError("Invalid argument type passed for 'topo_faces'. Valid argument type is Iterable[int].")
-        if not isinstance(params, ScaffolderParams):
+        if type(params).__name__ != 'ScaffolderParams':
             raise TypeError("Invalid argument type passed for 'params'. Valid argument type is ScaffolderParams.")
         args = {"topo_faces" : topo_faces,
         "params" : params._jsonify()}
@@ -183,7 +186,7 @@ class Scaffolder(CoreObject):
         """
         if not isinstance(topo_faces, Iterable):
             raise TypeError("Invalid argument type passed for 'topo_faces'. Valid argument type is Iterable[int].")
-        if not isinstance(params, VolumetricScaffolderParams):
+        if type(params).__name__ != 'VolumetricScaffolderParams':
             raise TypeError("Invalid argument type passed for 'params'. Valid argument type is VolumetricScaffolderParams.")
         args = {"topo_faces" : topo_faces,
         "params" : params._jsonify()}

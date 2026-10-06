@@ -1,4 +1,4 @@
-# Copyright (C) 2024 - 2025 ANSYS, Inc. and/or its affiliates.
+# Copyright (C) 2026 Synopsys, Inc. and ANSYS, Inc. All rights reserved.
 # SPDX-License-Identifier: MIT
 #
 #
@@ -91,21 +91,21 @@ class BoundingBox(CoreObject):
 
     Parameters
     ----------
-    model: Model
+    model : Model
         Model to create a ``BoundingBox`` object with default parameters.
-    xmin: float, optional
+    xmin : float, optional
         Minimal X coordinate of the bounding box.
-    ymin: float, optional
+    ymin : float, optional
         Minimal Y coordinate of the bounding box.
-    zmin: float, optional
+    zmin : float, optional
         Minimal Z coordinate of the bounding box.
-    xmax: float, optional
+    xmax : float, optional
         Maximal X coordinate of the bounding box.
-    ymax: float, optional
+    ymax : float, optional
         Maximal Y coordinate of the bounding box.
-    zmax: float, optional
+    zmax : float, optional
         Maximal Z coordinate of the bounding box.
-    json_data: dict, optional
+    json_data : dict, optional
         JSON dictionary to create a ``BoundingBox`` object with provided parameters.
 
     Examples
@@ -116,12 +116,12 @@ class BoundingBox(CoreObject):
 
     def __initialize(
             self,
-            xmin: float,
-            ymin: float,
-            zmin: float,
-            xmax: float,
-            ymax: float,
-            zmax: float):
+            xmin : float,
+            ymin : float,
+            zmin : float,
+            xmax : float,
+            ymax : float,
+            zmax : float):
         self._xmin = xmin
         self._ymin = ymin
         self._zmin = zmin
@@ -132,33 +132,33 @@ class BoundingBox(CoreObject):
     def __init__(
             self,
             model: CommunicationManager=None,
-            xmin: float = None,
-            ymin: float = None,
-            zmin: float = None,
-            xmax: float = None,
-            ymax: float = None,
-            zmax: float = None,
+            xmin : float = None,
+            ymin : float = None,
+            zmin : float = None,
+            xmax : float = None,
+            ymax : float = None,
+            zmax : float = None,
             json_data : dict = None,
              **kwargs):
         """Initialize a ``BoundingBox`` object.
 
         Parameters
         ----------
-        model: Model
+        model : Model
             Model to create a ``BoundingBox`` object with default parameters.
-        xmin: float, optional
+        xmin : float, optional
             Minimal X coordinate of the bounding box.
-        ymin: float, optional
+        ymin : float, optional
             Minimal Y coordinate of the bounding box.
-        zmin: float, optional
+        zmin : float, optional
             Minimal Z coordinate of the bounding box.
-        xmax: float, optional
+        xmax : float, optional
             Maximal X coordinate of the bounding box.
-        ymax: float, optional
+        ymax : float, optional
             Maximal Y coordinate of the bounding box.
-        zmax: float, optional
+        zmax : float, optional
             Maximal Z coordinate of the bounding box.
-        json_data: dict, optional
+        json_data : dict, optional
             JSON dictionary to create a ``BoundingBox`` object with provided parameters.
 
         Examples
@@ -205,27 +205,27 @@ class BoundingBox(CoreObject):
 
     @staticmethod
     def set_default(
-            xmin: float = None,
-            ymin: float = None,
-            zmin: float = None,
-            xmax: float = None,
-            ymax: float = None,
-            zmax: float = None):
+            xmin : float = None,
+            ymin : float = None,
+            zmin : float = None,
+            xmax : float = None,
+            ymax : float = None,
+            zmax : float = None):
         """Set the default values of the ``BoundingBox`` object.
 
         Parameters
         ----------
-        xmin: float, optional
+        xmin : float, optional
             Minimal X coordinate of the bounding box.
-        ymin: float, optional
+        ymin : float, optional
             Minimal Y coordinate of the bounding box.
-        zmin: float, optional
+        zmin : float, optional
             Minimal Z coordinate of the bounding box.
-        xmax: float, optional
+        xmax : float, optional
             Maximal X coordinate of the bounding box.
-        ymax: float, optional
+        ymax : float, optional
             Maximal Y coordinate of the bounding box.
-        zmax: float, optional
+        zmax : float, optional
             Maximal Z coordinate of the bounding box.
         """
         args = locals()
@@ -330,13 +330,13 @@ class MergeZoneletsResults(CoreObject):
 
     Parameters
     ----------
-    model: Model
+    model : Model
         Model to create a ``MergeZoneletsResults`` object with default parameters.
-    merged_zonelets: Iterable[int], optional
+    merged_zonelets : Iterable[int], optional
         Ids of zonelets to which input zonelets are merged.
-    error_code: ErrorCode, optional
+    error_code : ErrorCode, optional
         Error code associated with the failure of operation.
-    json_data: dict, optional
+    json_data : dict, optional
         JSON dictionary to create a ``MergeZoneletsResults`` object with provided parameters.
 
     Examples
@@ -347,29 +347,29 @@ class MergeZoneletsResults(CoreObject):
 
     def __initialize(
             self,
-            merged_zonelets: Iterable[int],
-            error_code: ErrorCode):
+            merged_zonelets : Iterable[int],
+            error_code : ErrorCode):
         self._merged_zonelets = merged_zonelets if isinstance(merged_zonelets, np.ndarray) else np.array(merged_zonelets, dtype=np.int32) if merged_zonelets is not None else None
         self._error_code = ErrorCode(error_code)
 
     def __init__(
             self,
             model: CommunicationManager=None,
-            merged_zonelets: Iterable[int] = None,
-            error_code: ErrorCode = None,
+            merged_zonelets : Iterable[int] = None,
+            error_code : ErrorCode = None,
             json_data : dict = None,
              **kwargs):
         """Initialize a ``MergeZoneletsResults`` object.
 
         Parameters
         ----------
-        model: Model
+        model : Model
             Model to create a ``MergeZoneletsResults`` object with default parameters.
-        merged_zonelets: Iterable[int], optional
+        merged_zonelets : Iterable[int], optional
             Ids of zonelets to which input zonelets are merged.
-        error_code: ErrorCode, optional
+        error_code : ErrorCode, optional
             Error code associated with the failure of operation.
-        json_data: dict, optional
+        json_data : dict, optional
             JSON dictionary to create a ``MergeZoneletsResults`` object with provided parameters.
 
         Examples
@@ -404,15 +404,15 @@ class MergeZoneletsResults(CoreObject):
 
     @staticmethod
     def set_default(
-            merged_zonelets: Iterable[int] = None,
-            error_code: ErrorCode = None):
+            merged_zonelets : Iterable[int] = None,
+            error_code : ErrorCode = None):
         """Set the default values of the ``MergeZoneletsResults`` object.
 
         Parameters
         ----------
-        merged_zonelets: Iterable[int], optional
+        merged_zonelets : Iterable[int], optional
             Ids of zonelets to which input zonelets are merged.
-        error_code: ErrorCode, optional
+        error_code : ErrorCode, optional
             Error code associated with the failure of operation.
         """
         args = locals()
@@ -469,13 +469,15 @@ class MergeZoneletsParams(CoreObject):
 
     Parameters
     ----------
-    model: Model
+    model : Model
         Model to create a ``MergeZoneletsParams`` object with default parameters.
-    merge_small_zonelets_with_neighbors: bool, optional
-        Merge zonelets with element count smaller than the given element count limit to neighboring zonelets sharing manifold face edges. Notes: Works better if zonelets are separated by region.
-    element_count_limit: int, optional
-        Element count limit to identify small zonelets.
-    json_data: dict, optional
+    merge_small_zonelets_with_neighbors : bool, optional
+        Controls whether to merge small zonelets into neighboring zonelets that share manifold face edges. A zonelet is small when its element count is less than elementCountLimit. Notes: Works better if zonelets are separated by region. The default value is false.
+    element_count_limit : int, optional
+        Specifies the element count threshold for identifying small zonelets. Zonelets with fewer elements than this value are considered small. The default value is 5.
+    merge_into_neighbors_outside_selection : bool, optional
+        Controls whether small input zonelets can merge into neighboring face zonelets outside the input selection. When true, neighboring face zonelets outside the input selection can receive faces from small input zonelets. When false, only zonelets in the input selection can receive faces from small input zonelets. The default value is false.
+    json_data : dict, optional
         JSON dictionary to create a ``MergeZoneletsParams`` object with provided parameters.
 
     Examples
@@ -486,29 +488,34 @@ class MergeZoneletsParams(CoreObject):
 
     def __initialize(
             self,
-            merge_small_zonelets_with_neighbors: bool,
-            element_count_limit: int):
+            merge_small_zonelets_with_neighbors : bool,
+            element_count_limit : int,
+            merge_into_neighbors_outside_selection : bool):
         self._merge_small_zonelets_with_neighbors = merge_small_zonelets_with_neighbors
         self._element_count_limit = element_count_limit
+        self._merge_into_neighbors_outside_selection = merge_into_neighbors_outside_selection
 
     def __init__(
             self,
             model: CommunicationManager=None,
-            merge_small_zonelets_with_neighbors: bool = None,
-            element_count_limit: int = None,
+            merge_small_zonelets_with_neighbors : bool = None,
+            element_count_limit : int = None,
+            merge_into_neighbors_outside_selection : bool = None,
             json_data : dict = None,
              **kwargs):
         """Initialize a ``MergeZoneletsParams`` object.
 
         Parameters
         ----------
-        model: Model
+        model : Model
             Model to create a ``MergeZoneletsParams`` object with default parameters.
-        merge_small_zonelets_with_neighbors: bool, optional
-            Merge zonelets with element count smaller than the given element count limit to neighboring zonelets sharing manifold face edges. Notes: Works better if zonelets are separated by region.
-        element_count_limit: int, optional
-            Element count limit to identify small zonelets.
-        json_data: dict, optional
+        merge_small_zonelets_with_neighbors : bool, optional
+            Controls whether to merge small zonelets into neighboring zonelets that share manifold face edges. A zonelet is small when its element count is less than elementCountLimit. Notes: Works better if zonelets are separated by region. The default value is false.
+        element_count_limit : int, optional
+            Specifies the element count threshold for identifying small zonelets. Zonelets with fewer elements than this value are considered small. The default value is 5.
+        merge_into_neighbors_outside_selection : bool, optional
+            Controls whether small input zonelets can merge into neighboring face zonelets outside the input selection. When true, neighboring face zonelets outside the input selection can receive faces from small input zonelets. When false, only zonelets in the input selection can receive faces from small input zonelets. The default value is false.
+        json_data : dict, optional
             JSON dictionary to create a ``MergeZoneletsParams`` object with provided parameters.
 
         Examples
@@ -518,13 +525,15 @@ class MergeZoneletsParams(CoreObject):
         if json_data:
             self.__initialize(
                 json_data["mergeSmallZoneletsWithNeighbors"] if "mergeSmallZoneletsWithNeighbors" in json_data else None,
-                json_data["elementCountLimit"] if "elementCountLimit" in json_data else None)
+                json_data["elementCountLimit"] if "elementCountLimit" in json_data else None,
+                json_data["mergeIntoNeighborsOutsideSelection"] if "mergeIntoNeighborsOutsideSelection" in json_data else None)
         else:
-            all_field_specified = all(arg is not None for arg in [merge_small_zonelets_with_neighbors, element_count_limit])
+            all_field_specified = all(arg is not None for arg in [merge_small_zonelets_with_neighbors, element_count_limit, merge_into_neighbors_outside_selection])
             if all_field_specified:
                 self.__initialize(
                     merge_small_zonelets_with_neighbors,
-                    element_count_limit)
+                    element_count_limit,
+                    merge_into_neighbors_outside_selection)
             else:
                 if model is None:
                     raise ValueError("Invalid assignment. Either pass a model or specify all properties.")
@@ -533,7 +542,8 @@ class MergeZoneletsParams(CoreObject):
                     json_data = param_json["MergeZoneletsParams"] if "MergeZoneletsParams" in param_json else {}
                     self.__initialize(
                         merge_small_zonelets_with_neighbors if merge_small_zonelets_with_neighbors is not None else ( MergeZoneletsParams._default_params["merge_small_zonelets_with_neighbors"] if "merge_small_zonelets_with_neighbors" in MergeZoneletsParams._default_params else (json_data["mergeSmallZoneletsWithNeighbors"] if "mergeSmallZoneletsWithNeighbors" in json_data else None)),
-                        element_count_limit if element_count_limit is not None else ( MergeZoneletsParams._default_params["element_count_limit"] if "element_count_limit" in MergeZoneletsParams._default_params else (json_data["elementCountLimit"] if "elementCountLimit" in json_data else None)))
+                        element_count_limit if element_count_limit is not None else ( MergeZoneletsParams._default_params["element_count_limit"] if "element_count_limit" in MergeZoneletsParams._default_params else (json_data["elementCountLimit"] if "elementCountLimit" in json_data else None)),
+                        merge_into_neighbors_outside_selection if merge_into_neighbors_outside_selection is not None else ( MergeZoneletsParams._default_params["merge_into_neighbors_outside_selection"] if "merge_into_neighbors_outside_selection" in MergeZoneletsParams._default_params else (json_data["mergeIntoNeighborsOutsideSelection"] if "mergeIntoNeighborsOutsideSelection" in json_data else None)))
         self._custom_params = kwargs
         if model is not None:
             [ model._logger.debug(f'Unsupported argument : {key}') for key in kwargs ]
@@ -543,16 +553,19 @@ class MergeZoneletsParams(CoreObject):
 
     @staticmethod
     def set_default(
-            merge_small_zonelets_with_neighbors: bool = None,
-            element_count_limit: int = None):
+            merge_small_zonelets_with_neighbors : bool = None,
+            element_count_limit : int = None,
+            merge_into_neighbors_outside_selection : bool = None):
         """Set the default values of the ``MergeZoneletsParams`` object.
 
         Parameters
         ----------
-        merge_small_zonelets_with_neighbors: bool, optional
-            Merge zonelets with element count smaller than the given element count limit to neighboring zonelets sharing manifold face edges. Notes: Works better if zonelets are separated by region.
-        element_count_limit: int, optional
-            Element count limit to identify small zonelets.
+        merge_small_zonelets_with_neighbors : bool, optional
+            Controls whether to merge small zonelets into neighboring zonelets that share manifold face edges. A zonelet is small when its element count is less than elementCountLimit. Notes: Works better if zonelets are separated by region. The default value is false.
+        element_count_limit : int, optional
+            Specifies the element count threshold for identifying small zonelets. Zonelets with fewer elements than this value are considered small. The default value is 5.
+        merge_into_neighbors_outside_selection : bool, optional
+            Controls whether small input zonelets can merge into neighboring face zonelets outside the input selection. When true, neighboring face zonelets outside the input selection can receive faces from small input zonelets. When false, only zonelets in the input selection can receive faces from small input zonelets. The default value is false.
         """
         args = locals()
         [MergeZoneletsParams._default_params.update({ key: value }) for key, value in args.items() if value is not None]
@@ -575,17 +588,19 @@ class MergeZoneletsParams(CoreObject):
             json_data["mergeSmallZoneletsWithNeighbors"] = self._merge_small_zonelets_with_neighbors
         if self._element_count_limit is not None:
             json_data["elementCountLimit"] = self._element_count_limit
+        if self._merge_into_neighbors_outside_selection is not None:
+            json_data["mergeIntoNeighborsOutsideSelection"] = self._merge_into_neighbors_outside_selection
         [ json_data.update({ utils.to_camel_case(key) : value }) for key, value in self._custom_params.items()]
         return json_data
 
     def __str__(self) -> str:
-        message = "merge_small_zonelets_with_neighbors :  %s\nelement_count_limit :  %s" % (self._merge_small_zonelets_with_neighbors, self._element_count_limit)
+        message = "merge_small_zonelets_with_neighbors :  %s\nelement_count_limit :  %s\nmerge_into_neighbors_outside_selection :  %s" % (self._merge_small_zonelets_with_neighbors, self._element_count_limit, self._merge_into_neighbors_outside_selection)
         message += ''.join('\n' + str(key) + ' : ' + str(value) for key, value in self._custom_params.items())
         return message
 
     @property
     def merge_small_zonelets_with_neighbors(self) -> bool:
-        """Merge zonelets with element count smaller than the given element count limit to neighboring zonelets sharing manifold face edges. Notes: Works better if zonelets are separated by region.
+        """Controls whether to merge small zonelets into neighboring zonelets that share manifold face edges. A zonelet is small when its element count is less than elementCountLimit. Notes: Works better if zonelets are separated by region. The default value is false.
         """
         return self._merge_small_zonelets_with_neighbors
 
@@ -595,7 +610,7 @@ class MergeZoneletsParams(CoreObject):
 
     @property
     def element_count_limit(self) -> int:
-        """Element count limit to identify small zonelets.
+        """Specifies the element count threshold for identifying small zonelets. Zonelets with fewer elements than this value are considered small. The default value is 5.
         """
         return self._element_count_limit
 
@@ -603,26 +618,36 @@ class MergeZoneletsParams(CoreObject):
     def element_count_limit(self, value: int):
         self._element_count_limit = value
 
+    @property
+    def merge_into_neighbors_outside_selection(self) -> bool:
+        """Controls whether small input zonelets can merge into neighboring face zonelets outside the input selection. When true, neighboring face zonelets outside the input selection can receive faces from small input zonelets. When false, only zonelets in the input selection can receive faces from small input zonelets. The default value is false.
+        """
+        return self._merge_into_neighbors_outside_selection
+
+    @merge_into_neighbors_outside_selection.setter
+    def merge_into_neighbors_outside_selection(self, value: bool):
+        self._merge_into_neighbors_outside_selection = value
+
 class ComputeVolumesResults(CoreObject):
     """Results associated with compute volumes.
 
     Parameters
     ----------
-    model: Model
+    model : Model
         Model to create a ``ComputeVolumesResults`` object with default parameters.
-    error_code: ErrorCode, optional
+    error_code : ErrorCode, optional
         Error code associated with the failure of operation.
-    error_locations: Iterable[float], optional
+    error_locations : Iterable[float], optional
         Coordinates of problematic locations in the surface mesh.
-    volumes: Iterable[int], optional
+    volumes : Iterable[int], optional
         Ids of computed volumes.
-    material_point_volumes: Iterable[int], optional
+    material_point_volumes : Iterable[int], optional
         Ids of computed volumes enclosing material points.
-    external_open_face_zonelets: Iterable[int], optional
+    external_open_face_zonelets : Iterable[int], optional
         Face zonelet ids that are in external space and not part of any computed volumes.
-    warning_codes: List[WarningCode], optional
+    warning_codes : List[WarningCode], optional
         Warning codes associated with the compute volumes.
-    json_data: dict, optional
+    json_data : dict, optional
         JSON dictionary to create a ``ComputeVolumesResults`` object with provided parameters.
 
     Examples
@@ -633,12 +658,12 @@ class ComputeVolumesResults(CoreObject):
 
     def __initialize(
             self,
-            error_code: ErrorCode,
-            error_locations: Iterable[float],
-            volumes: Iterable[int],
-            material_point_volumes: Iterable[int],
-            external_open_face_zonelets: Iterable[int],
-            warning_codes: List[WarningCode]):
+            error_code : ErrorCode,
+            error_locations : Iterable[float],
+            volumes : Iterable[int],
+            material_point_volumes : Iterable[int],
+            external_open_face_zonelets : Iterable[int],
+            warning_codes : List[WarningCode]):
         self._error_code = ErrorCode(error_code)
         self._error_locations = error_locations if isinstance(error_locations, np.ndarray) else np.array(error_locations, dtype=np.double) if error_locations is not None else None
         self._volumes = volumes if isinstance(volumes, np.ndarray) else np.array(volumes, dtype=np.int32) if volumes is not None else None
@@ -649,33 +674,33 @@ class ComputeVolumesResults(CoreObject):
     def __init__(
             self,
             model: CommunicationManager=None,
-            error_code: ErrorCode = None,
-            error_locations: Iterable[float] = None,
-            volumes: Iterable[int] = None,
-            material_point_volumes: Iterable[int] = None,
-            external_open_face_zonelets: Iterable[int] = None,
-            warning_codes: List[WarningCode] = None,
+            error_code : ErrorCode = None,
+            error_locations : Iterable[float] = None,
+            volumes : Iterable[int] = None,
+            material_point_volumes : Iterable[int] = None,
+            external_open_face_zonelets : Iterable[int] = None,
+            warning_codes : List[WarningCode] = None,
             json_data : dict = None,
              **kwargs):
         """Initialize a ``ComputeVolumesResults`` object.
 
         Parameters
         ----------
-        model: Model
+        model : Model
             Model to create a ``ComputeVolumesResults`` object with default parameters.
-        error_code: ErrorCode, optional
+        error_code : ErrorCode, optional
             Error code associated with the failure of operation.
-        error_locations: Iterable[float], optional
+        error_locations : Iterable[float], optional
             Coordinates of problematic locations in the surface mesh.
-        volumes: Iterable[int], optional
+        volumes : Iterable[int], optional
             Ids of computed volumes.
-        material_point_volumes: Iterable[int], optional
+        material_point_volumes : Iterable[int], optional
             Ids of computed volumes enclosing material points.
-        external_open_face_zonelets: Iterable[int], optional
+        external_open_face_zonelets : Iterable[int], optional
             Face zonelet ids that are in external space and not part of any computed volumes.
-        warning_codes: List[WarningCode], optional
+        warning_codes : List[WarningCode], optional
             Warning codes associated with the compute volumes.
-        json_data: dict, optional
+        json_data : dict, optional
             JSON dictionary to create a ``ComputeVolumesResults`` object with provided parameters.
 
         Examples
@@ -722,27 +747,27 @@ class ComputeVolumesResults(CoreObject):
 
     @staticmethod
     def set_default(
-            error_code: ErrorCode = None,
-            error_locations: Iterable[float] = None,
-            volumes: Iterable[int] = None,
-            material_point_volumes: Iterable[int] = None,
-            external_open_face_zonelets: Iterable[int] = None,
-            warning_codes: List[WarningCode] = None):
+            error_code : ErrorCode = None,
+            error_locations : Iterable[float] = None,
+            volumes : Iterable[int] = None,
+            material_point_volumes : Iterable[int] = None,
+            external_open_face_zonelets : Iterable[int] = None,
+            warning_codes : List[WarningCode] = None):
         """Set the default values of the ``ComputeVolumesResults`` object.
 
         Parameters
         ----------
-        error_code: ErrorCode, optional
+        error_code : ErrorCode, optional
             Error code associated with the failure of operation.
-        error_locations: Iterable[float], optional
+        error_locations : Iterable[float], optional
             Coordinates of problematic locations in the surface mesh.
-        volumes: Iterable[int], optional
+        volumes : Iterable[int], optional
             Ids of computed volumes.
-        material_point_volumes: Iterable[int], optional
+        material_point_volumes : Iterable[int], optional
             Ids of computed volumes enclosing material points.
-        external_open_face_zonelets: Iterable[int], optional
+        external_open_face_zonelets : Iterable[int], optional
             Face zonelet ids that are in external space and not part of any computed volumes.
-        warning_codes: List[WarningCode], optional
+        warning_codes : List[WarningCode], optional
             Warning codes associated with the compute volumes.
         """
         args = locals()
@@ -847,25 +872,25 @@ class ComputeTopoVolumesResults(CoreObject):
 
     Parameters
     ----------
-    model: Model
+    model : Model
         Model to create a ``ComputeTopoVolumesResults`` object with default parameters.
-    error_code: ErrorCode, optional
+    error_code : ErrorCode, optional
         Error code associated with the failure of operation.
-    error_locations: Iterable[float], optional
+    error_locations : Iterable[float], optional
         Coordinates of problematic locations in the surface mesh.
-    topo_volumes: Iterable[int], optional
+    topo_volumes : Iterable[int], optional
         Ids of all topovolumes computed.
-    material_point_topo_volumes: Iterable[int], optional
+    material_point_topo_volumes : Iterable[int], optional
         Ids of topovolumes enclosing material points.
-    external_open_topo_faces: Iterable[int], optional
+    external_open_topo_faces : Iterable[int], optional
         Topoface ids that are in external space and not part of any topovolumes.
-    new_topo_volumes: Iterable[int], optional
+    new_topo_volumes : Iterable[int], optional
         Ids of new topovolumes computed.
-    deleted_topo_volumes: Iterable[int], optional
+    deleted_topo_volumes : Iterable[int], optional
         Ids of existing topovolumes that got deleted.
-    warning_codes: List[WarningCode], optional
+    warning_codes : List[WarningCode], optional
         Warning codes associated with the compute topovolumes.
-    json_data: dict, optional
+    json_data : dict, optional
         JSON dictionary to create a ``ComputeTopoVolumesResults`` object with provided parameters.
 
     Examples
@@ -876,14 +901,14 @@ class ComputeTopoVolumesResults(CoreObject):
 
     def __initialize(
             self,
-            error_code: ErrorCode,
-            error_locations: Iterable[float],
-            topo_volumes: Iterable[int],
-            material_point_topo_volumes: Iterable[int],
-            external_open_topo_faces: Iterable[int],
-            new_topo_volumes: Iterable[int],
-            deleted_topo_volumes: Iterable[int],
-            warning_codes: List[WarningCode]):
+            error_code : ErrorCode,
+            error_locations : Iterable[float],
+            topo_volumes : Iterable[int],
+            material_point_topo_volumes : Iterable[int],
+            external_open_topo_faces : Iterable[int],
+            new_topo_volumes : Iterable[int],
+            deleted_topo_volumes : Iterable[int],
+            warning_codes : List[WarningCode]):
         self._error_code = ErrorCode(error_code)
         self._error_locations = error_locations if isinstance(error_locations, np.ndarray) else np.array(error_locations, dtype=np.double) if error_locations is not None else None
         self._topo_volumes = topo_volumes if isinstance(topo_volumes, np.ndarray) else np.array(topo_volumes, dtype=np.int32) if topo_volumes is not None else None
@@ -896,39 +921,39 @@ class ComputeTopoVolumesResults(CoreObject):
     def __init__(
             self,
             model: CommunicationManager=None,
-            error_code: ErrorCode = None,
-            error_locations: Iterable[float] = None,
-            topo_volumes: Iterable[int] = None,
-            material_point_topo_volumes: Iterable[int] = None,
-            external_open_topo_faces: Iterable[int] = None,
-            new_topo_volumes: Iterable[int] = None,
-            deleted_topo_volumes: Iterable[int] = None,
-            warning_codes: List[WarningCode] = None,
+            error_code : ErrorCode = None,
+            error_locations : Iterable[float] = None,
+            topo_volumes : Iterable[int] = None,
+            material_point_topo_volumes : Iterable[int] = None,
+            external_open_topo_faces : Iterable[int] = None,
+            new_topo_volumes : Iterable[int] = None,
+            deleted_topo_volumes : Iterable[int] = None,
+            warning_codes : List[WarningCode] = None,
             json_data : dict = None,
              **kwargs):
         """Initialize a ``ComputeTopoVolumesResults`` object.
 
         Parameters
         ----------
-        model: Model
+        model : Model
             Model to create a ``ComputeTopoVolumesResults`` object with default parameters.
-        error_code: ErrorCode, optional
+        error_code : ErrorCode, optional
             Error code associated with the failure of operation.
-        error_locations: Iterable[float], optional
+        error_locations : Iterable[float], optional
             Coordinates of problematic locations in the surface mesh.
-        topo_volumes: Iterable[int], optional
+        topo_volumes : Iterable[int], optional
             Ids of all topovolumes computed.
-        material_point_topo_volumes: Iterable[int], optional
+        material_point_topo_volumes : Iterable[int], optional
             Ids of topovolumes enclosing material points.
-        external_open_topo_faces: Iterable[int], optional
+        external_open_topo_faces : Iterable[int], optional
             Topoface ids that are in external space and not part of any topovolumes.
-        new_topo_volumes: Iterable[int], optional
+        new_topo_volumes : Iterable[int], optional
             Ids of new topovolumes computed.
-        deleted_topo_volumes: Iterable[int], optional
+        deleted_topo_volumes : Iterable[int], optional
             Ids of existing topovolumes that got deleted.
-        warning_codes: List[WarningCode], optional
+        warning_codes : List[WarningCode], optional
             Warning codes associated with the compute topovolumes.
-        json_data: dict, optional
+        json_data : dict, optional
             JSON dictionary to create a ``ComputeTopoVolumesResults`` object with provided parameters.
 
         Examples
@@ -981,33 +1006,33 @@ class ComputeTopoVolumesResults(CoreObject):
 
     @staticmethod
     def set_default(
-            error_code: ErrorCode = None,
-            error_locations: Iterable[float] = None,
-            topo_volumes: Iterable[int] = None,
-            material_point_topo_volumes: Iterable[int] = None,
-            external_open_topo_faces: Iterable[int] = None,
-            new_topo_volumes: Iterable[int] = None,
-            deleted_topo_volumes: Iterable[int] = None,
-            warning_codes: List[WarningCode] = None):
+            error_code : ErrorCode = None,
+            error_locations : Iterable[float] = None,
+            topo_volumes : Iterable[int] = None,
+            material_point_topo_volumes : Iterable[int] = None,
+            external_open_topo_faces : Iterable[int] = None,
+            new_topo_volumes : Iterable[int] = None,
+            deleted_topo_volumes : Iterable[int] = None,
+            warning_codes : List[WarningCode] = None):
         """Set the default values of the ``ComputeTopoVolumesResults`` object.
 
         Parameters
         ----------
-        error_code: ErrorCode, optional
+        error_code : ErrorCode, optional
             Error code associated with the failure of operation.
-        error_locations: Iterable[float], optional
+        error_locations : Iterable[float], optional
             Coordinates of problematic locations in the surface mesh.
-        topo_volumes: Iterable[int], optional
+        topo_volumes : Iterable[int], optional
             Ids of all topovolumes computed.
-        material_point_topo_volumes: Iterable[int], optional
+        material_point_topo_volumes : Iterable[int], optional
             Ids of topovolumes enclosing material points.
-        external_open_topo_faces: Iterable[int], optional
+        external_open_topo_faces : Iterable[int], optional
             Topoface ids that are in external space and not part of any topovolumes.
-        new_topo_volumes: Iterable[int], optional
+        new_topo_volumes : Iterable[int], optional
             Ids of new topovolumes computed.
-        deleted_topo_volumes: Iterable[int], optional
+        deleted_topo_volumes : Iterable[int], optional
             Ids of existing topovolumes that got deleted.
-        warning_codes: List[WarningCode], optional
+        warning_codes : List[WarningCode], optional
             Warning codes associated with the compute topovolumes.
         """
         args = locals()
@@ -1136,19 +1161,19 @@ class ExtractVolumesResults(CoreObject):
 
     Parameters
     ----------
-    model: Model
+    model : Model
         Model to create a ``ExtractVolumesResults`` object with default parameters.
-    error_code: ErrorCode, optional
+    error_code : ErrorCode, optional
         Error code associated with the failure of operation.
-    volumes: Iterable[int], optional
+    volumes : Iterable[int], optional
         Ids of computed volumes.
-    warning_codes: List[WarningCode], optional
+    warning_codes : List[WarningCode], optional
         Warning codes associated with the compute volumes.
-    assigned_zone_name: str, optional
+    assigned_zone_name : str, optional
         Assigned name of zone for extracted flow volumes.
-    face_zonelets_without_volumes: Iterable[int], optional
+    face_zonelets_without_volumes : Iterable[int], optional
         Ids of face zonelets for which volumes were not extracted.
-    json_data: dict, optional
+    json_data : dict, optional
         JSON dictionary to create a ``ExtractVolumesResults`` object with provided parameters.
 
     Examples
@@ -1159,11 +1184,11 @@ class ExtractVolumesResults(CoreObject):
 
     def __initialize(
             self,
-            error_code: ErrorCode,
-            volumes: Iterable[int],
-            warning_codes: List[WarningCode],
-            assigned_zone_name: str,
-            face_zonelets_without_volumes: Iterable[int]):
+            error_code : ErrorCode,
+            volumes : Iterable[int],
+            warning_codes : List[WarningCode],
+            assigned_zone_name : str,
+            face_zonelets_without_volumes : Iterable[int]):
         self._error_code = ErrorCode(error_code)
         self._volumes = volumes if isinstance(volumes, np.ndarray) else np.array(volumes, dtype=np.int32) if volumes is not None else None
         self._warning_codes = warning_codes
@@ -1173,30 +1198,30 @@ class ExtractVolumesResults(CoreObject):
     def __init__(
             self,
             model: CommunicationManager=None,
-            error_code: ErrorCode = None,
-            volumes: Iterable[int] = None,
-            warning_codes: List[WarningCode] = None,
-            assigned_zone_name: str = None,
-            face_zonelets_without_volumes: Iterable[int] = None,
+            error_code : ErrorCode = None,
+            volumes : Iterable[int] = None,
+            warning_codes : List[WarningCode] = None,
+            assigned_zone_name : str = None,
+            face_zonelets_without_volumes : Iterable[int] = None,
             json_data : dict = None,
              **kwargs):
         """Initialize a ``ExtractVolumesResults`` object.
 
         Parameters
         ----------
-        model: Model
+        model : Model
             Model to create a ``ExtractVolumesResults`` object with default parameters.
-        error_code: ErrorCode, optional
+        error_code : ErrorCode, optional
             Error code associated with the failure of operation.
-        volumes: Iterable[int], optional
+        volumes : Iterable[int], optional
             Ids of computed volumes.
-        warning_codes: List[WarningCode], optional
+        warning_codes : List[WarningCode], optional
             Warning codes associated with the compute volumes.
-        assigned_zone_name: str, optional
+        assigned_zone_name : str, optional
             Assigned name of zone for extracted flow volumes.
-        face_zonelets_without_volumes: Iterable[int], optional
+        face_zonelets_without_volumes : Iterable[int], optional
             Ids of face zonelets for which volumes were not extracted.
-        json_data: dict, optional
+        json_data : dict, optional
             JSON dictionary to create a ``ExtractVolumesResults`` object with provided parameters.
 
         Examples
@@ -1240,24 +1265,24 @@ class ExtractVolumesResults(CoreObject):
 
     @staticmethod
     def set_default(
-            error_code: ErrorCode = None,
-            volumes: Iterable[int] = None,
-            warning_codes: List[WarningCode] = None,
-            assigned_zone_name: str = None,
-            face_zonelets_without_volumes: Iterable[int] = None):
+            error_code : ErrorCode = None,
+            volumes : Iterable[int] = None,
+            warning_codes : List[WarningCode] = None,
+            assigned_zone_name : str = None,
+            face_zonelets_without_volumes : Iterable[int] = None):
         """Set the default values of the ``ExtractVolumesResults`` object.
 
         Parameters
         ----------
-        error_code: ErrorCode, optional
+        error_code : ErrorCode, optional
             Error code associated with the failure of operation.
-        volumes: Iterable[int], optional
+        volumes : Iterable[int], optional
             Ids of computed volumes.
-        warning_codes: List[WarningCode], optional
+        warning_codes : List[WarningCode], optional
             Warning codes associated with the compute volumes.
-        assigned_zone_name: str, optional
+        assigned_zone_name : str, optional
             Assigned name of zone for extracted flow volumes.
-        face_zonelets_without_volumes: Iterable[int], optional
+        face_zonelets_without_volumes : Iterable[int], optional
             Ids of face zonelets for which volumes were not extracted.
         """
         args = locals()
@@ -1350,17 +1375,17 @@ class ComputeVolumesParams(CoreObject):
 
     Parameters
     ----------
-    model: Model
+    model : Model
         Model to create a ``ComputeVolumesParams`` object with default parameters.
-    volume_naming_type: VolumeNamingType, optional
+    volume_naming_type : VolumeNamingType, optional
         Indicates source type used to compute zone name for volumes.
-    create_zones_type: CreateVolumeZonesType, optional
+    create_zones_type : CreateVolumeZonesType, optional
         Option to control volume zone creation for volumes.
-    priority_ordered_names: List[str], optional
+    priority_ordered_names : List[str], optional
         Zone names for volumes are identified based on the priority in the list. Position index of name in the list determines its priority. Lower the index, higher the priority. Name with highest priority among names from volumeNamingType of face zonelets is identified as zone name for volume. Lowest priority is assigned to all names that are not in the list. When all names identified are of lowest priority, names having higher surface area of faces zonelets are identified as zone name for volume.
-    material_point_names: List[str], optional
+    material_point_names : List[str], optional
         Material point names provided to identify volumes. Material point names will have precedence over the volume names.
-    json_data: dict, optional
+    json_data : dict, optional
         JSON dictionary to create a ``ComputeVolumesParams`` object with provided parameters.
 
     Examples
@@ -1371,10 +1396,10 @@ class ComputeVolumesParams(CoreObject):
 
     def __initialize(
             self,
-            volume_naming_type: VolumeNamingType,
-            create_zones_type: CreateVolumeZonesType,
-            priority_ordered_names: List[str],
-            material_point_names: List[str]):
+            volume_naming_type : VolumeNamingType,
+            create_zones_type : CreateVolumeZonesType,
+            priority_ordered_names : List[str],
+            material_point_names : List[str]):
         self._volume_naming_type = VolumeNamingType(volume_naming_type)
         self._create_zones_type = CreateVolumeZonesType(create_zones_type)
         self._priority_ordered_names = priority_ordered_names
@@ -1383,27 +1408,27 @@ class ComputeVolumesParams(CoreObject):
     def __init__(
             self,
             model: CommunicationManager=None,
-            volume_naming_type: VolumeNamingType = None,
-            create_zones_type: CreateVolumeZonesType = None,
-            priority_ordered_names: List[str] = None,
-            material_point_names: List[str] = None,
+            volume_naming_type : VolumeNamingType = None,
+            create_zones_type : CreateVolumeZonesType = None,
+            priority_ordered_names : List[str] = None,
+            material_point_names : List[str] = None,
             json_data : dict = None,
              **kwargs):
         """Initialize a ``ComputeVolumesParams`` object.
 
         Parameters
         ----------
-        model: Model
+        model : Model
             Model to create a ``ComputeVolumesParams`` object with default parameters.
-        volume_naming_type: VolumeNamingType, optional
+        volume_naming_type : VolumeNamingType, optional
             Indicates source type used to compute zone name for volumes.
-        create_zones_type: CreateVolumeZonesType, optional
+        create_zones_type : CreateVolumeZonesType, optional
             Option to control volume zone creation for volumes.
-        priority_ordered_names: List[str], optional
+        priority_ordered_names : List[str], optional
             Zone names for volumes are identified based on the priority in the list. Position index of name in the list determines its priority. Lower the index, higher the priority. Name with highest priority among names from volumeNamingType of face zonelets is identified as zone name for volume. Lowest priority is assigned to all names that are not in the list. When all names identified are of lowest priority, names having higher surface area of faces zonelets are identified as zone name for volume.
-        material_point_names: List[str], optional
+        material_point_names : List[str], optional
             Material point names provided to identify volumes. Material point names will have precedence over the volume names.
-        json_data: dict, optional
+        json_data : dict, optional
             JSON dictionary to create a ``ComputeVolumesParams`` object with provided parameters.
 
         Examples
@@ -1444,21 +1469,21 @@ class ComputeVolumesParams(CoreObject):
 
     @staticmethod
     def set_default(
-            volume_naming_type: VolumeNamingType = None,
-            create_zones_type: CreateVolumeZonesType = None,
-            priority_ordered_names: List[str] = None,
-            material_point_names: List[str] = None):
+            volume_naming_type : VolumeNamingType = None,
+            create_zones_type : CreateVolumeZonesType = None,
+            priority_ordered_names : List[str] = None,
+            material_point_names : List[str] = None):
         """Set the default values of the ``ComputeVolumesParams`` object.
 
         Parameters
         ----------
-        volume_naming_type: VolumeNamingType, optional
+        volume_naming_type : VolumeNamingType, optional
             Indicates source type used to compute zone name for volumes.
-        create_zones_type: CreateVolumeZonesType, optional
+        create_zones_type : CreateVolumeZonesType, optional
             Option to control volume zone creation for volumes.
-        priority_ordered_names: List[str], optional
+        priority_ordered_names : List[str], optional
             Zone names for volumes are identified based on the priority in the list. Position index of name in the list determines its priority. Lower the index, higher the priority. Name with highest priority among names from volumeNamingType of face zonelets is identified as zone name for volume. Lowest priority is assigned to all names that are not in the list. When all names identified are of lowest priority, names having higher surface area of faces zonelets are identified as zone name for volume.
-        material_point_names: List[str], optional
+        material_point_names : List[str], optional
             Material point names provided to identify volumes. Material point names will have precedence over the volume names.
         """
         args = locals()
@@ -1539,13 +1564,13 @@ class ExtractVolumesParams(CoreObject):
 
     Parameters
     ----------
-    model: Model
+    model : Model
         Model to create a ``ExtractVolumesParams`` object with default parameters.
-    create_zone: bool, optional
+    create_zone : bool, optional
         Option to create zone for flow volumes extracted.
-    suggested_zone_name: str, optional
+    suggested_zone_name : str, optional
         Name suggested for the created zone. If there is a volume zone existing with suggested name, then extracted flow volumes will be added to it.
-    json_data: dict, optional
+    json_data : dict, optional
         JSON dictionary to create a ``ExtractVolumesParams`` object with provided parameters.
 
     Examples
@@ -1556,29 +1581,29 @@ class ExtractVolumesParams(CoreObject):
 
     def __initialize(
             self,
-            create_zone: bool,
-            suggested_zone_name: str):
+            create_zone : bool,
+            suggested_zone_name : str):
         self._create_zone = create_zone
         self._suggested_zone_name = suggested_zone_name
 
     def __init__(
             self,
             model: CommunicationManager=None,
-            create_zone: bool = None,
-            suggested_zone_name: str = None,
+            create_zone : bool = None,
+            suggested_zone_name : str = None,
             json_data : dict = None,
              **kwargs):
         """Initialize a ``ExtractVolumesParams`` object.
 
         Parameters
         ----------
-        model: Model
+        model : Model
             Model to create a ``ExtractVolumesParams`` object with default parameters.
-        create_zone: bool, optional
+        create_zone : bool, optional
             Option to create zone for flow volumes extracted.
-        suggested_zone_name: str, optional
+        suggested_zone_name : str, optional
             Name suggested for the created zone. If there is a volume zone existing with suggested name, then extracted flow volumes will be added to it.
-        json_data: dict, optional
+        json_data : dict, optional
             JSON dictionary to create a ``ExtractVolumesParams`` object with provided parameters.
 
         Examples
@@ -1613,15 +1638,15 @@ class ExtractVolumesParams(CoreObject):
 
     @staticmethod
     def set_default(
-            create_zone: bool = None,
-            suggested_zone_name: str = None):
+            create_zone : bool = None,
+            suggested_zone_name : str = None):
         """Set the default values of the ``ExtractVolumesParams`` object.
 
         Parameters
         ----------
-        create_zone: bool, optional
+        create_zone : bool, optional
             Option to create zone for flow volumes extracted.
-        suggested_zone_name: str, optional
+        suggested_zone_name : str, optional
             Name suggested for the created zone. If there is a volume zone existing with suggested name, then extracted flow volumes will be added to it.
         """
         args = locals()
@@ -1678,11 +1703,11 @@ class ExtractTopoVolumesParams(CoreObject):
 
     Parameters
     ----------
-    model: Model
+    model : Model
         Model to create a ``ExtractTopoVolumesParams`` object with default parameters.
-    zone_name: str, optional
+    zone_name : str, optional
         Specifies zone name to associate extracted flow topovolumes.
-    json_data: dict, optional
+    json_data : dict, optional
         JSON dictionary to create a ``ExtractTopoVolumesParams`` object with provided parameters.
 
     Examples
@@ -1693,24 +1718,24 @@ class ExtractTopoVolumesParams(CoreObject):
 
     def __initialize(
             self,
-            zone_name: str):
+            zone_name : str):
         self._zone_name = zone_name
 
     def __init__(
             self,
             model: CommunicationManager=None,
-            zone_name: str = None,
+            zone_name : str = None,
             json_data : dict = None,
              **kwargs):
         """Initialize a ``ExtractTopoVolumesParams`` object.
 
         Parameters
         ----------
-        model: Model
+        model : Model
             Model to create a ``ExtractTopoVolumesParams`` object with default parameters.
-        zone_name: str, optional
+        zone_name : str, optional
             Specifies zone name to associate extracted flow topovolumes.
-        json_data: dict, optional
+        json_data : dict, optional
             JSON dictionary to create a ``ExtractTopoVolumesParams`` object with provided parameters.
 
         Examples
@@ -1742,12 +1767,12 @@ class ExtractTopoVolumesParams(CoreObject):
 
     @staticmethod
     def set_default(
-            zone_name: str = None):
+            zone_name : str = None):
         """Set the default values of the ``ExtractTopoVolumesParams`` object.
 
         Parameters
         ----------
-        zone_name: str, optional
+        zone_name : str, optional
             Specifies zone name to associate extracted flow topovolumes.
         """
         args = locals()
@@ -1792,13 +1817,13 @@ class ExtractTopoVolumesResults(CoreObject):
 
     Parameters
     ----------
-    model: Model
+    model : Model
         Model to create a ``ExtractTopoVolumesResults`` object with default parameters.
-    volumes: Iterable[int], optional
+    volumes : Iterable[int], optional
         Ids of extracted flow topovolumes.
-    error_code: ErrorCode, optional
+    error_code : ErrorCode, optional
         Error code associated with the failure of operation.
-    json_data: dict, optional
+    json_data : dict, optional
         JSON dictionary to create a ``ExtractTopoVolumesResults`` object with provided parameters.
 
     Examples
@@ -1809,29 +1834,29 @@ class ExtractTopoVolumesResults(CoreObject):
 
     def __initialize(
             self,
-            volumes: Iterable[int],
-            error_code: ErrorCode):
+            volumes : Iterable[int],
+            error_code : ErrorCode):
         self._volumes = volumes if isinstance(volumes, np.ndarray) else np.array(volumes, dtype=np.int32) if volumes is not None else None
         self._error_code = ErrorCode(error_code)
 
     def __init__(
             self,
             model: CommunicationManager=None,
-            volumes: Iterable[int] = None,
-            error_code: ErrorCode = None,
+            volumes : Iterable[int] = None,
+            error_code : ErrorCode = None,
             json_data : dict = None,
              **kwargs):
         """Initialize a ``ExtractTopoVolumesResults`` object.
 
         Parameters
         ----------
-        model: Model
+        model : Model
             Model to create a ``ExtractTopoVolumesResults`` object with default parameters.
-        volumes: Iterable[int], optional
+        volumes : Iterable[int], optional
             Ids of extracted flow topovolumes.
-        error_code: ErrorCode, optional
+        error_code : ErrorCode, optional
             Error code associated with the failure of operation.
-        json_data: dict, optional
+        json_data : dict, optional
             JSON dictionary to create a ``ExtractTopoVolumesResults`` object with provided parameters.
 
         Examples
@@ -1866,15 +1891,15 @@ class ExtractTopoVolumesResults(CoreObject):
 
     @staticmethod
     def set_default(
-            volumes: Iterable[int] = None,
-            error_code: ErrorCode = None):
+            volumes : Iterable[int] = None,
+            error_code : ErrorCode = None):
         """Set the default values of the ``ExtractTopoVolumesResults`` object.
 
         Parameters
         ----------
-        volumes: Iterable[int], optional
+        volumes : Iterable[int], optional
             Ids of extracted flow topovolumes.
-        error_code: ErrorCode, optional
+        error_code : ErrorCode, optional
             Error code associated with the failure of operation.
         """
         args = locals()
@@ -1926,14 +1951,440 @@ class ExtractTopoVolumesResults(CoreObject):
     def error_code(self, value: ErrorCode):
         self._error_code = value
 
+class CreateFaceZoneletByFacetsParams(CoreObject):
+    """Parameters used to create face zonelet by facets.
+
+    Parameters
+    ----------
+    model : Model
+        Model to create a ``CreateFaceZoneletByFacetsParams`` object with default parameters.
+    node_coords : Iterable[float], optional
+        Node coordinates used to create the faces.
+
+        **This is a beta parameter**. **The behavior and name may change in the future**.
+    face_list : Iterable[int], optional
+        Defines the connectivity of the faces as a list where first value denotes the number of nodes followed by the node indices in nodeCoords list.
+
+        **This is a beta parameter**. **The behavior and name may change in the future**.
+    json_data : dict, optional
+        JSON dictionary to create a ``CreateFaceZoneletByFacetsParams`` object with provided parameters.
+
+    Examples
+    --------
+    >>> create_face_zonelet_by_facets_params = prime.CreateFaceZoneletByFacetsParams(model = model)
+    """
+    _default_params = {}
+
+    def __initialize(
+            self,
+            node_coords : Iterable[float],
+            face_list : Iterable[int]):
+        self._node_coords = node_coords if isinstance(node_coords, np.ndarray) else np.array(node_coords, dtype=np.double) if node_coords is not None else None
+        self._face_list = face_list if isinstance(face_list, np.ndarray) else np.array(face_list, dtype=np.int32) if face_list is not None else None
+
+    def __init__(
+            self,
+            model: CommunicationManager=None,
+            node_coords : Iterable[float] = None,
+            face_list : Iterable[int] = None,
+            json_data : dict = None,
+             **kwargs):
+        """Initialize a ``CreateFaceZoneletByFacetsParams`` object.
+
+        Parameters
+        ----------
+        model : Model
+            Model to create a ``CreateFaceZoneletByFacetsParams`` object with default parameters.
+        node_coords : Iterable[float], optional
+            Node coordinates used to create the faces.
+
+            **This is a beta parameter**. **The behavior and name may change in the future**.
+        face_list : Iterable[int], optional
+            Defines the connectivity of the faces as a list where first value denotes the number of nodes followed by the node indices in nodeCoords list.
+
+            **This is a beta parameter**. **The behavior and name may change in the future**.
+        json_data : dict, optional
+            JSON dictionary to create a ``CreateFaceZoneletByFacetsParams`` object with provided parameters.
+
+        Examples
+        --------
+        >>> create_face_zonelet_by_facets_params = prime.CreateFaceZoneletByFacetsParams(model = model)
+        """
+        if json_data:
+            self.__initialize(
+                json_data["nodeCoords"] if "nodeCoords" in json_data else None,
+                json_data["faceList"] if "faceList" in json_data else None)
+        else:
+            all_field_specified = all(arg is not None for arg in [node_coords, face_list])
+            if all_field_specified:
+                self.__initialize(
+                    node_coords,
+                    face_list)
+            else:
+                if model is None:
+                    raise ValueError("Invalid assignment. Either pass a model or specify all properties.")
+                else:
+                    param_json = model._communicator.initialize_params(model, "CreateFaceZoneletByFacetsParams")
+                    json_data = param_json["CreateFaceZoneletByFacetsParams"] if "CreateFaceZoneletByFacetsParams" in param_json else {}
+                    self.__initialize(
+                        node_coords if node_coords is not None else ( CreateFaceZoneletByFacetsParams._default_params["node_coords"] if "node_coords" in CreateFaceZoneletByFacetsParams._default_params else (json_data["nodeCoords"] if "nodeCoords" in json_data else None)),
+                        face_list if face_list is not None else ( CreateFaceZoneletByFacetsParams._default_params["face_list"] if "face_list" in CreateFaceZoneletByFacetsParams._default_params else (json_data["faceList"] if "faceList" in json_data else None)))
+        self._custom_params = kwargs
+        if model is not None:
+            [ model._logger.debug(f'Unsupported argument : {key}') for key in kwargs ]
+        [setattr(type(self), key, property(lambda self, key = key:  self._custom_params[key] if key in self._custom_params else None,
+        lambda self, value, key = key : self._custom_params.update({ key: value }))) for key in kwargs]
+        self._freeze()
+
+    @staticmethod
+    def set_default(
+            node_coords : Iterable[float] = None,
+            face_list : Iterable[int] = None):
+        """Set the default values of the ``CreateFaceZoneletByFacetsParams`` object.
+
+        Parameters
+        ----------
+        node_coords : Iterable[float], optional
+            Node coordinates used to create the faces.
+        face_list : Iterable[int], optional
+            Defines the connectivity of the faces as a list where first value denotes the number of nodes followed by the node indices in nodeCoords list.
+        """
+        args = locals()
+        [CreateFaceZoneletByFacetsParams._default_params.update({ key: value }) for key, value in args.items() if value is not None]
+
+    @staticmethod
+    def print_default():
+        """Print the default values of ``CreateFaceZoneletByFacetsParams`` object.
+
+        Examples
+        --------
+        >>> CreateFaceZoneletByFacetsParams.print_default()
+        """
+        message = ""
+        message += ''.join(str(key) + ' : ' + str(value) + '\n' for key, value in CreateFaceZoneletByFacetsParams._default_params.items())
+        print(message)
+
+    def _jsonify(self) -> Dict[str, Any]:
+        json_data = {}
+        if self._node_coords is not None:
+            json_data["nodeCoords"] = self._node_coords
+        if self._face_list is not None:
+            json_data["faceList"] = self._face_list
+        [ json_data.update({ utils.to_camel_case(key) : value }) for key, value in self._custom_params.items()]
+        return json_data
+
+    def __str__(self) -> str:
+        message = "node_coords :  %s\nface_list :  %s" % (self._node_coords, self._face_list)
+        message += ''.join('\n' + str(key) + ' : ' + str(value) for key, value in self._custom_params.items())
+        return message
+
+    @property
+    def node_coords(self) -> Iterable[float]:
+        """Node coordinates used to create the faces.
+
+        **This is a beta parameter**. **The behavior and name may change in the future**.
+        """
+        return self._node_coords
+
+    @node_coords.setter
+    def node_coords(self, value: Iterable[float]):
+        self._node_coords = value
+
+    @property
+    def face_list(self) -> Iterable[int]:
+        """Defines the connectivity of the faces as a list where first value denotes the number of nodes followed by the node indices in nodeCoords list.
+
+        **This is a beta parameter**. **The behavior and name may change in the future**.
+        """
+        return self._face_list
+
+    @face_list.setter
+    def face_list(self, value: Iterable[int]):
+        self._face_list = value
+
+class CreateFaceZoneletByFacetsResults(CoreObject):
+    """Results associated with create face zonelet by facets operation.
+
+    Parameters
+    ----------
+    model : Model
+        Model to create a ``CreateFaceZoneletByFacetsResults`` object with default parameters.
+    success : bool, optional
+        Indicates whether the operation is successful or not.
+
+        **This is a beta parameter**. **The behavior and name may change in the future**.
+    error_code : ErrorCode, optional
+        Specifies the cause or type of error if operation is unsuccessful.
+
+        **This is a beta parameter**. **The behavior and name may change in the future**.
+    processing_time : float, optional
+        Time taken by the operation.
+
+        **This is a beta parameter**. **The behavior and name may change in the future**.
+    face_zonelet_id : int, optional
+        Newly created face zonelet id.
+
+        **This is a beta parameter**. **The behavior and name may change in the future**.
+    node_ids : Iterable[int], optional
+        Ids of created nodes.
+
+        **This is a beta parameter**. **The behavior and name may change in the future**.
+    face_ids : Iterable[int], optional
+        Ids of created faces.
+
+        **This is a beta parameter**. **The behavior and name may change in the future**.
+    json_data : dict, optional
+        JSON dictionary to create a ``CreateFaceZoneletByFacetsResults`` object with provided parameters.
+
+    Examples
+    --------
+    >>> create_face_zonelet_by_facets_results = prime.CreateFaceZoneletByFacetsResults(model = model)
+    """
+    _default_params = {}
+
+    def __initialize(
+            self,
+            success : bool,
+            error_code : ErrorCode,
+            processing_time : float,
+            face_zonelet_id : int,
+            node_ids : Iterable[int],
+            face_ids : Iterable[int]):
+        self._success = success
+        self._error_code = ErrorCode(error_code)
+        self._processing_time = processing_time
+        self._face_zonelet_id = face_zonelet_id
+        self._node_ids = node_ids if isinstance(node_ids, np.ndarray) else np.array(node_ids, dtype=np.int64) if node_ids is not None else None
+        self._face_ids = face_ids if isinstance(face_ids, np.ndarray) else np.array(face_ids, dtype=np.int64) if face_ids is not None else None
+
+    def __init__(
+            self,
+            model: CommunicationManager=None,
+            success : bool = None,
+            error_code : ErrorCode = None,
+            processing_time : float = None,
+            face_zonelet_id : int = None,
+            node_ids : Iterable[int] = None,
+            face_ids : Iterable[int] = None,
+            json_data : dict = None,
+             **kwargs):
+        """Initialize a ``CreateFaceZoneletByFacetsResults`` object.
+
+        Parameters
+        ----------
+        model : Model
+            Model to create a ``CreateFaceZoneletByFacetsResults`` object with default parameters.
+        success : bool, optional
+            Indicates whether the operation is successful or not.
+
+            **This is a beta parameter**. **The behavior and name may change in the future**.
+        error_code : ErrorCode, optional
+            Specifies the cause or type of error if operation is unsuccessful.
+
+            **This is a beta parameter**. **The behavior and name may change in the future**.
+        processing_time : float, optional
+            Time taken by the operation.
+
+            **This is a beta parameter**. **The behavior and name may change in the future**.
+        face_zonelet_id : int, optional
+            Newly created face zonelet id.
+
+            **This is a beta parameter**. **The behavior and name may change in the future**.
+        node_ids : Iterable[int], optional
+            Ids of created nodes.
+
+            **This is a beta parameter**. **The behavior and name may change in the future**.
+        face_ids : Iterable[int], optional
+            Ids of created faces.
+
+            **This is a beta parameter**. **The behavior and name may change in the future**.
+        json_data : dict, optional
+            JSON dictionary to create a ``CreateFaceZoneletByFacetsResults`` object with provided parameters.
+
+        Examples
+        --------
+        >>> create_face_zonelet_by_facets_results = prime.CreateFaceZoneletByFacetsResults(model = model)
+        """
+        if json_data:
+            self.__initialize(
+                json_data["success"] if "success" in json_data else None,
+                ErrorCode(json_data["errorCode"] if "errorCode" in json_data else None),
+                json_data["processingTime"] if "processingTime" in json_data else None,
+                json_data["faceZoneletId"] if "faceZoneletId" in json_data else None,
+                json_data["nodeIds"] if "nodeIds" in json_data else None,
+                json_data["faceIds"] if "faceIds" in json_data else None)
+        else:
+            all_field_specified = all(arg is not None for arg in [success, error_code, processing_time, face_zonelet_id, node_ids, face_ids])
+            if all_field_specified:
+                self.__initialize(
+                    success,
+                    error_code,
+                    processing_time,
+                    face_zonelet_id,
+                    node_ids,
+                    face_ids)
+            else:
+                if model is None:
+                    raise ValueError("Invalid assignment. Either pass a model or specify all properties.")
+                else:
+                    param_json = model._communicator.initialize_params(model, "CreateFaceZoneletByFacetsResults")
+                    json_data = param_json["CreateFaceZoneletByFacetsResults"] if "CreateFaceZoneletByFacetsResults" in param_json else {}
+                    self.__initialize(
+                        success if success is not None else ( CreateFaceZoneletByFacetsResults._default_params["success"] if "success" in CreateFaceZoneletByFacetsResults._default_params else (json_data["success"] if "success" in json_data else None)),
+                        error_code if error_code is not None else ( CreateFaceZoneletByFacetsResults._default_params["error_code"] if "error_code" in CreateFaceZoneletByFacetsResults._default_params else ErrorCode(json_data["errorCode"] if "errorCode" in json_data else None)),
+                        processing_time if processing_time is not None else ( CreateFaceZoneletByFacetsResults._default_params["processing_time"] if "processing_time" in CreateFaceZoneletByFacetsResults._default_params else (json_data["processingTime"] if "processingTime" in json_data else None)),
+                        face_zonelet_id if face_zonelet_id is not None else ( CreateFaceZoneletByFacetsResults._default_params["face_zonelet_id"] if "face_zonelet_id" in CreateFaceZoneletByFacetsResults._default_params else (json_data["faceZoneletId"] if "faceZoneletId" in json_data else None)),
+                        node_ids if node_ids is not None else ( CreateFaceZoneletByFacetsResults._default_params["node_ids"] if "node_ids" in CreateFaceZoneletByFacetsResults._default_params else (json_data["nodeIds"] if "nodeIds" in json_data else None)),
+                        face_ids if face_ids is not None else ( CreateFaceZoneletByFacetsResults._default_params["face_ids"] if "face_ids" in CreateFaceZoneletByFacetsResults._default_params else (json_data["faceIds"] if "faceIds" in json_data else None)))
+        self._custom_params = kwargs
+        if model is not None:
+            [ model._logger.debug(f'Unsupported argument : {key}') for key in kwargs ]
+        [setattr(type(self), key, property(lambda self, key = key:  self._custom_params[key] if key in self._custom_params else None,
+        lambda self, value, key = key : self._custom_params.update({ key: value }))) for key in kwargs]
+        self._freeze()
+
+    @staticmethod
+    def set_default(
+            success : bool = None,
+            error_code : ErrorCode = None,
+            processing_time : float = None,
+            face_zonelet_id : int = None,
+            node_ids : Iterable[int] = None,
+            face_ids : Iterable[int] = None):
+        """Set the default values of the ``CreateFaceZoneletByFacetsResults`` object.
+
+        Parameters
+        ----------
+        success : bool, optional
+            Indicates whether the operation is successful or not.
+        error_code : ErrorCode, optional
+            Specifies the cause or type of error if operation is unsuccessful.
+        processing_time : float, optional
+            Time taken by the operation.
+        face_zonelet_id : int, optional
+            Newly created face zonelet id.
+        node_ids : Iterable[int], optional
+            Ids of created nodes.
+        face_ids : Iterable[int], optional
+            Ids of created faces.
+        """
+        args = locals()
+        [CreateFaceZoneletByFacetsResults._default_params.update({ key: value }) for key, value in args.items() if value is not None]
+
+    @staticmethod
+    def print_default():
+        """Print the default values of ``CreateFaceZoneletByFacetsResults`` object.
+
+        Examples
+        --------
+        >>> CreateFaceZoneletByFacetsResults.print_default()
+        """
+        message = ""
+        message += ''.join(str(key) + ' : ' + str(value) + '\n' for key, value in CreateFaceZoneletByFacetsResults._default_params.items())
+        print(message)
+
+    def _jsonify(self) -> Dict[str, Any]:
+        json_data = {}
+        if self._success is not None:
+            json_data["success"] = self._success
+        if self._error_code is not None:
+            json_data["errorCode"] = self._error_code
+        if self._processing_time is not None:
+            json_data["processingTime"] = self._processing_time
+        if self._face_zonelet_id is not None:
+            json_data["faceZoneletId"] = self._face_zonelet_id
+        if self._node_ids is not None:
+            json_data["nodeIds"] = self._node_ids
+        if self._face_ids is not None:
+            json_data["faceIds"] = self._face_ids
+        [ json_data.update({ utils.to_camel_case(key) : value }) for key, value in self._custom_params.items()]
+        return json_data
+
+    def __str__(self) -> str:
+        message = "success :  %s\nerror_code :  %s\nprocessing_time :  %s\nface_zonelet_id :  %s\nnode_ids :  %s\nface_ids :  %s" % (self._success, self._error_code, self._processing_time, self._face_zonelet_id, self._node_ids, self._face_ids)
+        message += ''.join('\n' + str(key) + ' : ' + str(value) for key, value in self._custom_params.items())
+        return message
+
+    @property
+    def success(self) -> bool:
+        """Indicates whether the operation is successful or not.
+
+        **This is a beta parameter**. **The behavior and name may change in the future**.
+        """
+        return self._success
+
+    @success.setter
+    def success(self, value: bool):
+        self._success = value
+
+    @property
+    def error_code(self) -> ErrorCode:
+        """Specifies the cause or type of error if operation is unsuccessful.
+
+        **This is a beta parameter**. **The behavior and name may change in the future**.
+        """
+        return self._error_code
+
+    @error_code.setter
+    def error_code(self, value: ErrorCode):
+        self._error_code = value
+
+    @property
+    def processing_time(self) -> float:
+        """Time taken by the operation.
+
+        **This is a beta parameter**. **The behavior and name may change in the future**.
+        """
+        return self._processing_time
+
+    @processing_time.setter
+    def processing_time(self, value: float):
+        self._processing_time = value
+
+    @property
+    def face_zonelet_id(self) -> int:
+        """Newly created face zonelet id.
+
+        **This is a beta parameter**. **The behavior and name may change in the future**.
+        """
+        return self._face_zonelet_id
+
+    @face_zonelet_id.setter
+    def face_zonelet_id(self, value: int):
+        self._face_zonelet_id = value
+
+    @property
+    def node_ids(self) -> Iterable[int]:
+        """Ids of created nodes.
+
+        **This is a beta parameter**. **The behavior and name may change in the future**.
+        """
+        return self._node_ids
+
+    @node_ids.setter
+    def node_ids(self, value: Iterable[int]):
+        self._node_ids = value
+
+    @property
+    def face_ids(self) -> Iterable[int]:
+        """Ids of created faces.
+
+        **This is a beta parameter**. **The behavior and name may change in the future**.
+        """
+        return self._face_ids
+
+    @face_ids.setter
+    def face_ids(self, value: Iterable[int]):
+        self._face_ids = value
+
 class NamePatternParams(CoreObject):
     """Parameters to be used to match name pattern with names.
 
     Parameters
     ----------
-    model: Model
+    model : Model
         Model to create a ``NamePatternParams`` object with default parameters.
-    json_data: dict, optional
+    json_data : dict, optional
         JSON dictionary to create a ``NamePatternParams`` object with provided parameters.
 
     Examples
@@ -1955,9 +2406,9 @@ class NamePatternParams(CoreObject):
 
         Parameters
         ----------
-        model: Model
+        model : Model
             Model to create a ``NamePatternParams`` object with default parameters.
-        json_data: dict, optional
+        json_data : dict, optional
             JSON dictionary to create a ``NamePatternParams`` object with provided parameters.
 
         Examples
@@ -2021,13 +2472,13 @@ class PartSummaryParams(CoreObject):
 
     Parameters
     ----------
-    model: Model
+    model : Model
         Model to create a ``PartSummaryParams`` object with default parameters.
-    print_id: bool, optional
+    print_id : bool, optional
         Boolean to control print ids. The default is false.
-    print_mesh: bool, optional
+    print_mesh : bool, optional
         Boolean to control print mesh information. The default is true.
-    json_data: dict, optional
+    json_data : dict, optional
         JSON dictionary to create a ``PartSummaryParams`` object with provided parameters.
 
     Examples
@@ -2038,29 +2489,29 @@ class PartSummaryParams(CoreObject):
 
     def __initialize(
             self,
-            print_id: bool,
-            print_mesh: bool):
+            print_id : bool,
+            print_mesh : bool):
         self._print_id = print_id
         self._print_mesh = print_mesh
 
     def __init__(
             self,
             model: CommunicationManager=None,
-            print_id: bool = None,
-            print_mesh: bool = None,
+            print_id : bool = None,
+            print_mesh : bool = None,
             json_data : dict = None,
              **kwargs):
         """Initialize a ``PartSummaryParams`` object.
 
         Parameters
         ----------
-        model: Model
+        model : Model
             Model to create a ``PartSummaryParams`` object with default parameters.
-        print_id: bool, optional
+        print_id : bool, optional
             Boolean to control print ids. The default is false.
-        print_mesh: bool, optional
+        print_mesh : bool, optional
             Boolean to control print mesh information. The default is true.
-        json_data: dict, optional
+        json_data : dict, optional
             JSON dictionary to create a ``PartSummaryParams`` object with provided parameters.
 
         Examples
@@ -2095,15 +2546,15 @@ class PartSummaryParams(CoreObject):
 
     @staticmethod
     def set_default(
-            print_id: bool = None,
-            print_mesh: bool = None):
+            print_id : bool = None,
+            print_mesh : bool = None):
         """Set the default values of the ``PartSummaryParams`` object.
 
         Parameters
         ----------
-        print_id: bool, optional
+        print_id : bool, optional
             Boolean to control print ids. The default is false.
-        print_mesh: bool, optional
+        print_mesh : bool, optional
             Boolean to control print mesh information. The default is true.
         """
         args = locals()
@@ -2160,9 +2611,9 @@ class ComponentChildrenParams(CoreObject):
 
     Parameters
     ----------
-    model: Model
+    model : Model
         Model to create a ``ComponentChildrenParams`` object with default parameters.
-    json_data: dict, optional
+    json_data : dict, optional
         JSON dictionary to create a ``ComponentChildrenParams`` object with provided parameters.
 
     Examples
@@ -2184,9 +2635,9 @@ class ComponentChildrenParams(CoreObject):
 
         Parameters
         ----------
-        model: Model
+        model : Model
             Model to create a ``ComponentChildrenParams`` object with default parameters.
-        json_data: dict, optional
+        json_data : dict, optional
             JSON dictionary to create a ``ComponentChildrenParams`` object with provided parameters.
 
         Examples
@@ -2250,25 +2701,25 @@ class ComponentChildrenResults(CoreObject):
 
     Parameters
     ----------
-    model: Model
+    model : Model
         Model to create a ``ComponentChildrenResults`` object with default parameters.
-    component_ids: Iterable[int], optional
+    component_ids : Iterable[int], optional
         Ids of components that are queried.
 
         **This is a beta parameter**. **The behavior and name may change in the future**.
-    component_names: List[str], optional
+    component_names : List[str], optional
         Names of components that are queried.
 
         **This is a beta parameter**. **The behavior and name may change in the future**.
-    body_ids: Iterable[int], optional
+    body_ids : Iterable[int], optional
         Ids of bodies that are queried.
 
         **This is a beta parameter**. **The behavior and name may change in the future**.
-    body_names: List[str], optional
+    body_names : List[str], optional
         Names of bodies that are queried.
 
         **This is a beta parameter**. **The behavior and name may change in the future**.
-    json_data: dict, optional
+    json_data : dict, optional
         JSON dictionary to create a ``ComponentChildrenResults`` object with provided parameters.
 
     Examples
@@ -2279,10 +2730,10 @@ class ComponentChildrenResults(CoreObject):
 
     def __initialize(
             self,
-            component_ids: Iterable[int],
-            component_names: List[str],
-            body_ids: Iterable[int],
-            body_names: List[str]):
+            component_ids : Iterable[int],
+            component_names : List[str],
+            body_ids : Iterable[int],
+            body_names : List[str]):
         self._component_ids = component_ids if isinstance(component_ids, np.ndarray) else np.array(component_ids, dtype=np.int32) if component_ids is not None else None
         self._component_names = component_names
         self._body_ids = body_ids if isinstance(body_ids, np.ndarray) else np.array(body_ids, dtype=np.int32) if body_ids is not None else None
@@ -2291,35 +2742,35 @@ class ComponentChildrenResults(CoreObject):
     def __init__(
             self,
             model: CommunicationManager=None,
-            component_ids: Iterable[int] = None,
-            component_names: List[str] = None,
-            body_ids: Iterable[int] = None,
-            body_names: List[str] = None,
+            component_ids : Iterable[int] = None,
+            component_names : List[str] = None,
+            body_ids : Iterable[int] = None,
+            body_names : List[str] = None,
             json_data : dict = None,
              **kwargs):
         """Initialize a ``ComponentChildrenResults`` object.
 
         Parameters
         ----------
-        model: Model
+        model : Model
             Model to create a ``ComponentChildrenResults`` object with default parameters.
-        component_ids: Iterable[int], optional
+        component_ids : Iterable[int], optional
             Ids of components that are queried.
 
             **This is a beta parameter**. **The behavior and name may change in the future**.
-        component_names: List[str], optional
+        component_names : List[str], optional
             Names of components that are queried.
 
             **This is a beta parameter**. **The behavior and name may change in the future**.
-        body_ids: Iterable[int], optional
+        body_ids : Iterable[int], optional
             Ids of bodies that are queried.
 
             **This is a beta parameter**. **The behavior and name may change in the future**.
-        body_names: List[str], optional
+        body_names : List[str], optional
             Names of bodies that are queried.
 
             **This is a beta parameter**. **The behavior and name may change in the future**.
-        json_data: dict, optional
+        json_data : dict, optional
             JSON dictionary to create a ``ComponentChildrenResults`` object with provided parameters.
 
         Examples
@@ -2360,21 +2811,21 @@ class ComponentChildrenResults(CoreObject):
 
     @staticmethod
     def set_default(
-            component_ids: Iterable[int] = None,
-            component_names: List[str] = None,
-            body_ids: Iterable[int] = None,
-            body_names: List[str] = None):
+            component_ids : Iterable[int] = None,
+            component_names : List[str] = None,
+            body_ids : Iterable[int] = None,
+            body_names : List[str] = None):
         """Set the default values of the ``ComponentChildrenResults`` object.
 
         Parameters
         ----------
-        component_ids: Iterable[int], optional
+        component_ids : Iterable[int], optional
             Ids of components that are queried.
-        component_names: List[str], optional
+        component_names : List[str], optional
             Names of components that are queried.
-        body_ids: Iterable[int], optional
+        body_ids : Iterable[int], optional
             Ids of bodies that are queried.
-        body_names: List[str], optional
+        body_names : List[str], optional
             Names of bodies that are queried.
         """
         args = locals()
@@ -2463,67 +2914,67 @@ class PartSummaryResults(CoreObject):
 
     Parameters
     ----------
-    model: Model
+    model : Model
         Model to create a ``PartSummaryResults`` object with default parameters.
-    message: str, optional
+    message : str, optional
         Part summary text.
-    n_topo_edges: int, optional
+    n_topo_edges : int, optional
         Number of topoedges.
-    n_topo_faces: int, optional
+    n_topo_faces : int, optional
         Number of topofaces.
-    n_topo_volumes: int, optional
+    n_topo_volumes : int, optional
         Number of topovolumes.
-    n_edge_zonelets: int, optional
+    n_edge_zonelets : int, optional
         Number of edge zonelets.
-    n_face_zonelets: int, optional
+    n_face_zonelets : int, optional
         Number of face zonelets.
-    n_cell_zonelets: int, optional
+    n_cell_zonelets : int, optional
         Number of cell zonelets.
-    n_edge_zones: int, optional
+    n_edge_zones : int, optional
         Number of edge zones.
-    n_face_zones: int, optional
+    n_face_zones : int, optional
         Number of face zones.
-    n_volume_zones: int, optional
+    n_volume_zones : int, optional
         Number of volume zones.
-    n_labels: int, optional
+    n_labels : int, optional
         Number of labels.
-    n_nodes: int, optional
+    n_nodes : int, optional
         Number of nodes.
-    n_faces: int, optional
+    n_faces : int, optional
         Number of faces.
-    n_cells: int, optional
+    n_cells : int, optional
         Number of cells.
-    n_tri_faces: int, optional
+    n_tri_faces : int, optional
         Number of triangular faces.
-    n_poly_faces: int, optional
+    n_poly_faces : int, optional
         Number of polygonal faces.
-    n_quad_faces: int, optional
+    n_quad_faces : int, optional
         Number of quadrilateral faces.
-    n_second_order_tri_faces: int, optional
+    n_second_order_tri_faces : int, optional
         Number of second order triangular faces.
-    n_second_order_quad_faces: int, optional
+    n_second_order_quad_faces : int, optional
         Number of second order quadrilateral faces.
-    n_tet_cells: int, optional
+    n_tet_cells : int, optional
         Number of tetrahedral cells.
-    n_pyra_cells: int, optional
+    n_pyra_cells : int, optional
         Number of pyramid cells.
-    n_prism_cells: int, optional
+    n_prism_cells : int, optional
         Number of prism cells.
-    n_poly_cells: int, optional
+    n_poly_cells : int, optional
         Number of polyhedral cells.
-    n_hex_cells: int, optional
+    n_hex_cells : int, optional
         Number of hexahedral cells.
-    n_second_order_tet_cells: int, optional
+    n_second_order_tet_cells : int, optional
         Number of second order tetrahedral cells.
-    n_second_order_pyra_cells: int, optional
+    n_second_order_pyra_cells : int, optional
         Number of second order pyramid cells.
-    n_second_order_prism_cells: int, optional
+    n_second_order_prism_cells : int, optional
         Number of second order prism cells.
-    n_second_order_hex_cells: int, optional
+    n_second_order_hex_cells : int, optional
         Number of second order hexahedral cells.
-    n_unmeshed_topo_faces: int, optional
+    n_unmeshed_topo_faces : int, optional
         Number of unmeshed topofaces.
-    json_data: dict, optional
+    json_data : dict, optional
         JSON dictionary to create a ``PartSummaryResults`` object with provided parameters.
 
     Examples
@@ -2534,35 +2985,35 @@ class PartSummaryResults(CoreObject):
 
     def __initialize(
             self,
-            message: str,
-            n_topo_edges: int,
-            n_topo_faces: int,
-            n_topo_volumes: int,
-            n_edge_zonelets: int,
-            n_face_zonelets: int,
-            n_cell_zonelets: int,
-            n_edge_zones: int,
-            n_face_zones: int,
-            n_volume_zones: int,
-            n_labels: int,
-            n_nodes: int,
-            n_faces: int,
-            n_cells: int,
-            n_tri_faces: int,
-            n_poly_faces: int,
-            n_quad_faces: int,
-            n_second_order_tri_faces: int,
-            n_second_order_quad_faces: int,
-            n_tet_cells: int,
-            n_pyra_cells: int,
-            n_prism_cells: int,
-            n_poly_cells: int,
-            n_hex_cells: int,
-            n_second_order_tet_cells: int,
-            n_second_order_pyra_cells: int,
-            n_second_order_prism_cells: int,
-            n_second_order_hex_cells: int,
-            n_unmeshed_topo_faces: int):
+            message : str,
+            n_topo_edges : int,
+            n_topo_faces : int,
+            n_topo_volumes : int,
+            n_edge_zonelets : int,
+            n_face_zonelets : int,
+            n_cell_zonelets : int,
+            n_edge_zones : int,
+            n_face_zones : int,
+            n_volume_zones : int,
+            n_labels : int,
+            n_nodes : int,
+            n_faces : int,
+            n_cells : int,
+            n_tri_faces : int,
+            n_poly_faces : int,
+            n_quad_faces : int,
+            n_second_order_tri_faces : int,
+            n_second_order_quad_faces : int,
+            n_tet_cells : int,
+            n_pyra_cells : int,
+            n_prism_cells : int,
+            n_poly_cells : int,
+            n_hex_cells : int,
+            n_second_order_tet_cells : int,
+            n_second_order_pyra_cells : int,
+            n_second_order_prism_cells : int,
+            n_second_order_hex_cells : int,
+            n_unmeshed_topo_faces : int):
         self._message = message
         self._n_topo_edges = n_topo_edges
         self._n_topo_faces = n_topo_faces
@@ -2596,102 +3047,102 @@ class PartSummaryResults(CoreObject):
     def __init__(
             self,
             model: CommunicationManager=None,
-            message: str = None,
-            n_topo_edges: int = None,
-            n_topo_faces: int = None,
-            n_topo_volumes: int = None,
-            n_edge_zonelets: int = None,
-            n_face_zonelets: int = None,
-            n_cell_zonelets: int = None,
-            n_edge_zones: int = None,
-            n_face_zones: int = None,
-            n_volume_zones: int = None,
-            n_labels: int = None,
-            n_nodes: int = None,
-            n_faces: int = None,
-            n_cells: int = None,
-            n_tri_faces: int = None,
-            n_poly_faces: int = None,
-            n_quad_faces: int = None,
-            n_second_order_tri_faces: int = None,
-            n_second_order_quad_faces: int = None,
-            n_tet_cells: int = None,
-            n_pyra_cells: int = None,
-            n_prism_cells: int = None,
-            n_poly_cells: int = None,
-            n_hex_cells: int = None,
-            n_second_order_tet_cells: int = None,
-            n_second_order_pyra_cells: int = None,
-            n_second_order_prism_cells: int = None,
-            n_second_order_hex_cells: int = None,
-            n_unmeshed_topo_faces: int = None,
+            message : str = None,
+            n_topo_edges : int = None,
+            n_topo_faces : int = None,
+            n_topo_volumes : int = None,
+            n_edge_zonelets : int = None,
+            n_face_zonelets : int = None,
+            n_cell_zonelets : int = None,
+            n_edge_zones : int = None,
+            n_face_zones : int = None,
+            n_volume_zones : int = None,
+            n_labels : int = None,
+            n_nodes : int = None,
+            n_faces : int = None,
+            n_cells : int = None,
+            n_tri_faces : int = None,
+            n_poly_faces : int = None,
+            n_quad_faces : int = None,
+            n_second_order_tri_faces : int = None,
+            n_second_order_quad_faces : int = None,
+            n_tet_cells : int = None,
+            n_pyra_cells : int = None,
+            n_prism_cells : int = None,
+            n_poly_cells : int = None,
+            n_hex_cells : int = None,
+            n_second_order_tet_cells : int = None,
+            n_second_order_pyra_cells : int = None,
+            n_second_order_prism_cells : int = None,
+            n_second_order_hex_cells : int = None,
+            n_unmeshed_topo_faces : int = None,
             json_data : dict = None,
              **kwargs):
         """Initialize a ``PartSummaryResults`` object.
 
         Parameters
         ----------
-        model: Model
+        model : Model
             Model to create a ``PartSummaryResults`` object with default parameters.
-        message: str, optional
+        message : str, optional
             Part summary text.
-        n_topo_edges: int, optional
+        n_topo_edges : int, optional
             Number of topoedges.
-        n_topo_faces: int, optional
+        n_topo_faces : int, optional
             Number of topofaces.
-        n_topo_volumes: int, optional
+        n_topo_volumes : int, optional
             Number of topovolumes.
-        n_edge_zonelets: int, optional
+        n_edge_zonelets : int, optional
             Number of edge zonelets.
-        n_face_zonelets: int, optional
+        n_face_zonelets : int, optional
             Number of face zonelets.
-        n_cell_zonelets: int, optional
+        n_cell_zonelets : int, optional
             Number of cell zonelets.
-        n_edge_zones: int, optional
+        n_edge_zones : int, optional
             Number of edge zones.
-        n_face_zones: int, optional
+        n_face_zones : int, optional
             Number of face zones.
-        n_volume_zones: int, optional
+        n_volume_zones : int, optional
             Number of volume zones.
-        n_labels: int, optional
+        n_labels : int, optional
             Number of labels.
-        n_nodes: int, optional
+        n_nodes : int, optional
             Number of nodes.
-        n_faces: int, optional
+        n_faces : int, optional
             Number of faces.
-        n_cells: int, optional
+        n_cells : int, optional
             Number of cells.
-        n_tri_faces: int, optional
+        n_tri_faces : int, optional
             Number of triangular faces.
-        n_poly_faces: int, optional
+        n_poly_faces : int, optional
             Number of polygonal faces.
-        n_quad_faces: int, optional
+        n_quad_faces : int, optional
             Number of quadrilateral faces.
-        n_second_order_tri_faces: int, optional
+        n_second_order_tri_faces : int, optional
             Number of second order triangular faces.
-        n_second_order_quad_faces: int, optional
+        n_second_order_quad_faces : int, optional
             Number of second order quadrilateral faces.
-        n_tet_cells: int, optional
+        n_tet_cells : int, optional
             Number of tetrahedral cells.
-        n_pyra_cells: int, optional
+        n_pyra_cells : int, optional
             Number of pyramid cells.
-        n_prism_cells: int, optional
+        n_prism_cells : int, optional
             Number of prism cells.
-        n_poly_cells: int, optional
+        n_poly_cells : int, optional
             Number of polyhedral cells.
-        n_hex_cells: int, optional
+        n_hex_cells : int, optional
             Number of hexahedral cells.
-        n_second_order_tet_cells: int, optional
+        n_second_order_tet_cells : int, optional
             Number of second order tetrahedral cells.
-        n_second_order_pyra_cells: int, optional
+        n_second_order_pyra_cells : int, optional
             Number of second order pyramid cells.
-        n_second_order_prism_cells: int, optional
+        n_second_order_prism_cells : int, optional
             Number of second order prism cells.
-        n_second_order_hex_cells: int, optional
+        n_second_order_hex_cells : int, optional
             Number of second order hexahedral cells.
-        n_unmeshed_topo_faces: int, optional
+        n_unmeshed_topo_faces : int, optional
             Number of unmeshed topofaces.
-        json_data: dict, optional
+        json_data : dict, optional
             JSON dictionary to create a ``PartSummaryResults`` object with provided parameters.
 
         Examples
@@ -2807,96 +3258,96 @@ class PartSummaryResults(CoreObject):
 
     @staticmethod
     def set_default(
-            message: str = None,
-            n_topo_edges: int = None,
-            n_topo_faces: int = None,
-            n_topo_volumes: int = None,
-            n_edge_zonelets: int = None,
-            n_face_zonelets: int = None,
-            n_cell_zonelets: int = None,
-            n_edge_zones: int = None,
-            n_face_zones: int = None,
-            n_volume_zones: int = None,
-            n_labels: int = None,
-            n_nodes: int = None,
-            n_faces: int = None,
-            n_cells: int = None,
-            n_tri_faces: int = None,
-            n_poly_faces: int = None,
-            n_quad_faces: int = None,
-            n_second_order_tri_faces: int = None,
-            n_second_order_quad_faces: int = None,
-            n_tet_cells: int = None,
-            n_pyra_cells: int = None,
-            n_prism_cells: int = None,
-            n_poly_cells: int = None,
-            n_hex_cells: int = None,
-            n_second_order_tet_cells: int = None,
-            n_second_order_pyra_cells: int = None,
-            n_second_order_prism_cells: int = None,
-            n_second_order_hex_cells: int = None,
-            n_unmeshed_topo_faces: int = None):
+            message : str = None,
+            n_topo_edges : int = None,
+            n_topo_faces : int = None,
+            n_topo_volumes : int = None,
+            n_edge_zonelets : int = None,
+            n_face_zonelets : int = None,
+            n_cell_zonelets : int = None,
+            n_edge_zones : int = None,
+            n_face_zones : int = None,
+            n_volume_zones : int = None,
+            n_labels : int = None,
+            n_nodes : int = None,
+            n_faces : int = None,
+            n_cells : int = None,
+            n_tri_faces : int = None,
+            n_poly_faces : int = None,
+            n_quad_faces : int = None,
+            n_second_order_tri_faces : int = None,
+            n_second_order_quad_faces : int = None,
+            n_tet_cells : int = None,
+            n_pyra_cells : int = None,
+            n_prism_cells : int = None,
+            n_poly_cells : int = None,
+            n_hex_cells : int = None,
+            n_second_order_tet_cells : int = None,
+            n_second_order_pyra_cells : int = None,
+            n_second_order_prism_cells : int = None,
+            n_second_order_hex_cells : int = None,
+            n_unmeshed_topo_faces : int = None):
         """Set the default values of the ``PartSummaryResults`` object.
 
         Parameters
         ----------
-        message: str, optional
+        message : str, optional
             Part summary text.
-        n_topo_edges: int, optional
+        n_topo_edges : int, optional
             Number of topoedges.
-        n_topo_faces: int, optional
+        n_topo_faces : int, optional
             Number of topofaces.
-        n_topo_volumes: int, optional
+        n_topo_volumes : int, optional
             Number of topovolumes.
-        n_edge_zonelets: int, optional
+        n_edge_zonelets : int, optional
             Number of edge zonelets.
-        n_face_zonelets: int, optional
+        n_face_zonelets : int, optional
             Number of face zonelets.
-        n_cell_zonelets: int, optional
+        n_cell_zonelets : int, optional
             Number of cell zonelets.
-        n_edge_zones: int, optional
+        n_edge_zones : int, optional
             Number of edge zones.
-        n_face_zones: int, optional
+        n_face_zones : int, optional
             Number of face zones.
-        n_volume_zones: int, optional
+        n_volume_zones : int, optional
             Number of volume zones.
-        n_labels: int, optional
+        n_labels : int, optional
             Number of labels.
-        n_nodes: int, optional
+        n_nodes : int, optional
             Number of nodes.
-        n_faces: int, optional
+        n_faces : int, optional
             Number of faces.
-        n_cells: int, optional
+        n_cells : int, optional
             Number of cells.
-        n_tri_faces: int, optional
+        n_tri_faces : int, optional
             Number of triangular faces.
-        n_poly_faces: int, optional
+        n_poly_faces : int, optional
             Number of polygonal faces.
-        n_quad_faces: int, optional
+        n_quad_faces : int, optional
             Number of quadrilateral faces.
-        n_second_order_tri_faces: int, optional
+        n_second_order_tri_faces : int, optional
             Number of second order triangular faces.
-        n_second_order_quad_faces: int, optional
+        n_second_order_quad_faces : int, optional
             Number of second order quadrilateral faces.
-        n_tet_cells: int, optional
+        n_tet_cells : int, optional
             Number of tetrahedral cells.
-        n_pyra_cells: int, optional
+        n_pyra_cells : int, optional
             Number of pyramid cells.
-        n_prism_cells: int, optional
+        n_prism_cells : int, optional
             Number of prism cells.
-        n_poly_cells: int, optional
+        n_poly_cells : int, optional
             Number of polyhedral cells.
-        n_hex_cells: int, optional
+        n_hex_cells : int, optional
             Number of hexahedral cells.
-        n_second_order_tet_cells: int, optional
+        n_second_order_tet_cells : int, optional
             Number of second order tetrahedral cells.
-        n_second_order_pyra_cells: int, optional
+        n_second_order_pyra_cells : int, optional
             Number of second order pyramid cells.
-        n_second_order_prism_cells: int, optional
+        n_second_order_prism_cells : int, optional
             Number of second order prism cells.
-        n_second_order_hex_cells: int, optional
+        n_second_order_hex_cells : int, optional
             Number of second order hexahedral cells.
-        n_unmeshed_topo_faces: int, optional
+        n_unmeshed_topo_faces : int, optional
             Number of unmeshed topofaces.
         """
         args = locals()
@@ -3277,13 +3728,13 @@ class DeleteTopoEntitiesParams(CoreObject):
 
     Parameters
     ----------
-    model: Model
+    model : Model
         Model to create a ``DeleteTopoEntitiesParams`` object with default parameters.
-    delete_geom_zonelets: bool, optional
+    delete_geom_zonelets : bool, optional
         Option to delete geometry zonelets of topology.
-    delete_mesh_zonelets: bool, optional
+    delete_mesh_zonelets : bool, optional
         Option to delete mesh zonelets of topology.
-    json_data: dict, optional
+    json_data : dict, optional
         JSON dictionary to create a ``DeleteTopoEntitiesParams`` object with provided parameters.
 
     Examples
@@ -3294,29 +3745,29 @@ class DeleteTopoEntitiesParams(CoreObject):
 
     def __initialize(
             self,
-            delete_geom_zonelets: bool,
-            delete_mesh_zonelets: bool):
+            delete_geom_zonelets : bool,
+            delete_mesh_zonelets : bool):
         self._delete_geom_zonelets = delete_geom_zonelets
         self._delete_mesh_zonelets = delete_mesh_zonelets
 
     def __init__(
             self,
             model: CommunicationManager=None,
-            delete_geom_zonelets: bool = None,
-            delete_mesh_zonelets: bool = None,
+            delete_geom_zonelets : bool = None,
+            delete_mesh_zonelets : bool = None,
             json_data : dict = None,
              **kwargs):
         """Initialize a ``DeleteTopoEntitiesParams`` object.
 
         Parameters
         ----------
-        model: Model
+        model : Model
             Model to create a ``DeleteTopoEntitiesParams`` object with default parameters.
-        delete_geom_zonelets: bool, optional
+        delete_geom_zonelets : bool, optional
             Option to delete geometry zonelets of topology.
-        delete_mesh_zonelets: bool, optional
+        delete_mesh_zonelets : bool, optional
             Option to delete mesh zonelets of topology.
-        json_data: dict, optional
+        json_data : dict, optional
             JSON dictionary to create a ``DeleteTopoEntitiesParams`` object with provided parameters.
 
         Examples
@@ -3351,15 +3802,15 @@ class DeleteTopoEntitiesParams(CoreObject):
 
     @staticmethod
     def set_default(
-            delete_geom_zonelets: bool = None,
-            delete_mesh_zonelets: bool = None):
+            delete_geom_zonelets : bool = None,
+            delete_mesh_zonelets : bool = None):
         """Set the default values of the ``DeleteTopoEntitiesParams`` object.
 
         Parameters
         ----------
-        delete_geom_zonelets: bool, optional
+        delete_geom_zonelets : bool, optional
             Option to delete geometry zonelets of topology.
-        delete_mesh_zonelets: bool, optional
+        delete_mesh_zonelets : bool, optional
             Option to delete mesh zonelets of topology.
         """
         args = locals()
@@ -3416,11 +3867,11 @@ class DeleteTopoEntitiesResults(CoreObject):
 
     Parameters
     ----------
-    model: Model
+    model : Model
         Model to create a ``DeleteTopoEntitiesResults`` object with default parameters.
-    error_code: ErrorCode, optional
+    error_code : ErrorCode, optional
         Error code associated with delete topoentities.
-    json_data: dict, optional
+    json_data : dict, optional
         JSON dictionary to create a ``DeleteTopoEntitiesResults`` object with provided parameters.
 
     Examples
@@ -3431,24 +3882,24 @@ class DeleteTopoEntitiesResults(CoreObject):
 
     def __initialize(
             self,
-            error_code: ErrorCode):
+            error_code : ErrorCode):
         self._error_code = ErrorCode(error_code)
 
     def __init__(
             self,
             model: CommunicationManager=None,
-            error_code: ErrorCode = None,
+            error_code : ErrorCode = None,
             json_data : dict = None,
              **kwargs):
         """Initialize a ``DeleteTopoEntitiesResults`` object.
 
         Parameters
         ----------
-        model: Model
+        model : Model
             Model to create a ``DeleteTopoEntitiesResults`` object with default parameters.
-        error_code: ErrorCode, optional
+        error_code : ErrorCode, optional
             Error code associated with delete topoentities.
-        json_data: dict, optional
+        json_data : dict, optional
             JSON dictionary to create a ``DeleteTopoEntitiesResults`` object with provided parameters.
 
         Examples
@@ -3480,12 +3931,12 @@ class DeleteTopoEntitiesResults(CoreObject):
 
     @staticmethod
     def set_default(
-            error_code: ErrorCode = None):
+            error_code : ErrorCode = None):
         """Set the default values of the ``DeleteTopoEntitiesResults`` object.
 
         Parameters
         ----------
-        error_code: ErrorCode, optional
+        error_code : ErrorCode, optional
             Error code associated with delete topoentities.
         """
         args = locals()
@@ -3530,13 +3981,13 @@ class AddToZoneResults(CoreObject):
 
     Parameters
     ----------
-    model: Model
+    model : Model
         Model to create a ``AddToZoneResults`` object with default parameters.
-    error_code: ErrorCode, optional
+    error_code : ErrorCode, optional
         Error code associated with the failure of operation.
-    warning_codes: List[WarningCode], optional
+    warning_codes : List[WarningCode], optional
         Warning codes associated with the add to zone operation.
-    json_data: dict, optional
+    json_data : dict, optional
         JSON dictionary to create a ``AddToZoneResults`` object with provided parameters.
 
     Examples
@@ -3547,29 +3998,29 @@ class AddToZoneResults(CoreObject):
 
     def __initialize(
             self,
-            error_code: ErrorCode,
-            warning_codes: List[WarningCode]):
+            error_code : ErrorCode,
+            warning_codes : List[WarningCode]):
         self._error_code = ErrorCode(error_code)
         self._warning_codes = warning_codes
 
     def __init__(
             self,
             model: CommunicationManager=None,
-            error_code: ErrorCode = None,
-            warning_codes: List[WarningCode] = None,
+            error_code : ErrorCode = None,
+            warning_codes : List[WarningCode] = None,
             json_data : dict = None,
              **kwargs):
         """Initialize a ``AddToZoneResults`` object.
 
         Parameters
         ----------
-        model: Model
+        model : Model
             Model to create a ``AddToZoneResults`` object with default parameters.
-        error_code: ErrorCode, optional
+        error_code : ErrorCode, optional
             Error code associated with the failure of operation.
-        warning_codes: List[WarningCode], optional
+        warning_codes : List[WarningCode], optional
             Warning codes associated with the add to zone operation.
-        json_data: dict, optional
+        json_data : dict, optional
             JSON dictionary to create a ``AddToZoneResults`` object with provided parameters.
 
         Examples
@@ -3604,15 +4055,15 @@ class AddToZoneResults(CoreObject):
 
     @staticmethod
     def set_default(
-            error_code: ErrorCode = None,
-            warning_codes: List[WarningCode] = None):
+            error_code : ErrorCode = None,
+            warning_codes : List[WarningCode] = None):
         """Set the default values of the ``AddToZoneResults`` object.
 
         Parameters
         ----------
-        error_code: ErrorCode, optional
+        error_code : ErrorCode, optional
             Error code associated with the failure of operation.
-        warning_codes: List[WarningCode], optional
+        warning_codes : List[WarningCode], optional
             Warning codes associated with the add to zone operation.
         """
         args = locals()
@@ -3669,13 +4120,13 @@ class RemoveZoneResults(CoreObject):
 
     Parameters
     ----------
-    model: Model
+    model : Model
         Model to create a ``RemoveZoneResults`` object with default parameters.
-    error_code: ErrorCode, optional
+    error_code : ErrorCode, optional
         Error code associated with the failure of operation.
-    warning_codes: List[WarningCode], optional
+    warning_codes : List[WarningCode], optional
         Warning codes associated with the remove zone operation.
-    json_data: dict, optional
+    json_data : dict, optional
         JSON dictionary to create a ``RemoveZoneResults`` object with provided parameters.
 
     Examples
@@ -3686,29 +4137,29 @@ class RemoveZoneResults(CoreObject):
 
     def __initialize(
             self,
-            error_code: ErrorCode,
-            warning_codes: List[WarningCode]):
+            error_code : ErrorCode,
+            warning_codes : List[WarningCode]):
         self._error_code = ErrorCode(error_code)
         self._warning_codes = warning_codes
 
     def __init__(
             self,
             model: CommunicationManager=None,
-            error_code: ErrorCode = None,
-            warning_codes: List[WarningCode] = None,
+            error_code : ErrorCode = None,
+            warning_codes : List[WarningCode] = None,
             json_data : dict = None,
              **kwargs):
         """Initialize a ``RemoveZoneResults`` object.
 
         Parameters
         ----------
-        model: Model
+        model : Model
             Model to create a ``RemoveZoneResults`` object with default parameters.
-        error_code: ErrorCode, optional
+        error_code : ErrorCode, optional
             Error code associated with the failure of operation.
-        warning_codes: List[WarningCode], optional
+        warning_codes : List[WarningCode], optional
             Warning codes associated with the remove zone operation.
-        json_data: dict, optional
+        json_data : dict, optional
             JSON dictionary to create a ``RemoveZoneResults`` object with provided parameters.
 
         Examples
@@ -3743,15 +4194,15 @@ class RemoveZoneResults(CoreObject):
 
     @staticmethod
     def set_default(
-            error_code: ErrorCode = None,
-            warning_codes: List[WarningCode] = None):
+            error_code : ErrorCode = None,
+            warning_codes : List[WarningCode] = None):
         """Set the default values of the ``RemoveZoneResults`` object.
 
         Parameters
         ----------
-        error_code: ErrorCode, optional
+        error_code : ErrorCode, optional
             Error code associated with the failure of operation.
-        warning_codes: List[WarningCode], optional
+        warning_codes : List[WarningCode], optional
             Warning codes associated with the remove zone operation.
         """
         args = locals()
@@ -3808,11 +4259,11 @@ class AddLabelResults(CoreObject):
 
     Parameters
     ----------
-    model: Model
+    model : Model
         Model to create a ``AddLabelResults`` object with default parameters.
-    error_code: ErrorCode, optional
+    error_code : ErrorCode, optional
         Error code associated with the add label operation.
-    json_data: dict, optional
+    json_data : dict, optional
         JSON dictionary to create a ``AddLabelResults`` object with provided parameters.
 
     Examples
@@ -3823,24 +4274,24 @@ class AddLabelResults(CoreObject):
 
     def __initialize(
             self,
-            error_code: ErrorCode):
+            error_code : ErrorCode):
         self._error_code = ErrorCode(error_code)
 
     def __init__(
             self,
             model: CommunicationManager=None,
-            error_code: ErrorCode = None,
+            error_code : ErrorCode = None,
             json_data : dict = None,
              **kwargs):
         """Initialize a ``AddLabelResults`` object.
 
         Parameters
         ----------
-        model: Model
+        model : Model
             Model to create a ``AddLabelResults`` object with default parameters.
-        error_code: ErrorCode, optional
+        error_code : ErrorCode, optional
             Error code associated with the add label operation.
-        json_data: dict, optional
+        json_data : dict, optional
             JSON dictionary to create a ``AddLabelResults`` object with provided parameters.
 
         Examples
@@ -3872,12 +4323,12 @@ class AddLabelResults(CoreObject):
 
     @staticmethod
     def set_default(
-            error_code: ErrorCode = None):
+            error_code : ErrorCode = None):
         """Set the default values of the ``AddLabelResults`` object.
 
         Parameters
         ----------
-        error_code: ErrorCode, optional
+        error_code : ErrorCode, optional
             Error code associated with the add label operation.
         """
         args = locals()
@@ -3922,11 +4373,11 @@ class RemoveLabelResults(CoreObject):
 
     Parameters
     ----------
-    model: Model
+    model : Model
         Model to create a ``RemoveLabelResults`` object with default parameters.
-    error_code: ErrorCode, optional
+    error_code : ErrorCode, optional
         Error code associated with the remove label operation.
-    json_data: dict, optional
+    json_data : dict, optional
         JSON dictionary to create a ``RemoveLabelResults`` object with provided parameters.
 
     Examples
@@ -3937,24 +4388,24 @@ class RemoveLabelResults(CoreObject):
 
     def __initialize(
             self,
-            error_code: ErrorCode):
+            error_code : ErrorCode):
         self._error_code = ErrorCode(error_code)
 
     def __init__(
             self,
             model: CommunicationManager=None,
-            error_code: ErrorCode = None,
+            error_code : ErrorCode = None,
             json_data : dict = None,
              **kwargs):
         """Initialize a ``RemoveLabelResults`` object.
 
         Parameters
         ----------
-        model: Model
+        model : Model
             Model to create a ``RemoveLabelResults`` object with default parameters.
-        error_code: ErrorCode, optional
+        error_code : ErrorCode, optional
             Error code associated with the remove label operation.
-        json_data: dict, optional
+        json_data : dict, optional
             JSON dictionary to create a ``RemoveLabelResults`` object with provided parameters.
 
         Examples
@@ -3986,12 +4437,12 @@ class RemoveLabelResults(CoreObject):
 
     @staticmethod
     def set_default(
-            error_code: ErrorCode = None):
+            error_code : ErrorCode = None):
         """Set the default values of the ``RemoveLabelResults`` object.
 
         Parameters
         ----------
-        error_code: ErrorCode, optional
+        error_code : ErrorCode, optional
             Error code associated with the remove label operation.
         """
         args = locals()
@@ -4036,13 +4487,13 @@ class DeleteVolumesParams(CoreObject):
 
     Parameters
     ----------
-    model: Model
+    model : Model
         Model to create a ``DeleteVolumesParams`` object with default parameters.
-    delete_small_volumes: bool, optional
+    delete_small_volumes : bool, optional
         Option to delete only volumes smaller than provided volume limit.
-    volume_limit: float, optional
+    volume_limit : float, optional
         Maximum volume limit to identify smaller volumes to be deleted.
-    json_data: dict, optional
+    json_data : dict, optional
         JSON dictionary to create a ``DeleteVolumesParams`` object with provided parameters.
 
     Examples
@@ -4053,29 +4504,29 @@ class DeleteVolumesParams(CoreObject):
 
     def __initialize(
             self,
-            delete_small_volumes: bool,
-            volume_limit: float):
+            delete_small_volumes : bool,
+            volume_limit : float):
         self._delete_small_volumes = delete_small_volumes
         self._volume_limit = volume_limit
 
     def __init__(
             self,
             model: CommunicationManager=None,
-            delete_small_volumes: bool = None,
-            volume_limit: float = None,
+            delete_small_volumes : bool = None,
+            volume_limit : float = None,
             json_data : dict = None,
              **kwargs):
         """Initialize a ``DeleteVolumesParams`` object.
 
         Parameters
         ----------
-        model: Model
+        model : Model
             Model to create a ``DeleteVolumesParams`` object with default parameters.
-        delete_small_volumes: bool, optional
+        delete_small_volumes : bool, optional
             Option to delete only volumes smaller than provided volume limit.
-        volume_limit: float, optional
+        volume_limit : float, optional
             Maximum volume limit to identify smaller volumes to be deleted.
-        json_data: dict, optional
+        json_data : dict, optional
             JSON dictionary to create a ``DeleteVolumesParams`` object with provided parameters.
 
         Examples
@@ -4110,15 +4561,15 @@ class DeleteVolumesParams(CoreObject):
 
     @staticmethod
     def set_default(
-            delete_small_volumes: bool = None,
-            volume_limit: float = None):
+            delete_small_volumes : bool = None,
+            volume_limit : float = None):
         """Set the default values of the ``DeleteVolumesParams`` object.
 
         Parameters
         ----------
-        delete_small_volumes: bool, optional
+        delete_small_volumes : bool, optional
             Option to delete only volumes smaller than provided volume limit.
-        volume_limit: float, optional
+        volume_limit : float, optional
             Maximum volume limit to identify smaller volumes to be deleted.
         """
         args = locals()
@@ -4175,13 +4626,13 @@ class DeleteVolumesResults(CoreObject):
 
     Parameters
     ----------
-    model: Model
+    model : Model
         Model to create a ``DeleteVolumesResults`` object with default parameters.
-    deleted_volumes: Iterable[int], optional
+    deleted_volumes : Iterable[int], optional
         Ids of deleted volumes.
-    error_code: ErrorCode, optional
+    error_code : ErrorCode, optional
         Error code associated with the volume deletion operation.
-    json_data: dict, optional
+    json_data : dict, optional
         JSON dictionary to create a ``DeleteVolumesResults`` object with provided parameters.
 
     Examples
@@ -4192,29 +4643,29 @@ class DeleteVolumesResults(CoreObject):
 
     def __initialize(
             self,
-            deleted_volumes: Iterable[int],
-            error_code: ErrorCode):
+            deleted_volumes : Iterable[int],
+            error_code : ErrorCode):
         self._deleted_volumes = deleted_volumes if isinstance(deleted_volumes, np.ndarray) else np.array(deleted_volumes, dtype=np.int32) if deleted_volumes is not None else None
         self._error_code = ErrorCode(error_code)
 
     def __init__(
             self,
             model: CommunicationManager=None,
-            deleted_volumes: Iterable[int] = None,
-            error_code: ErrorCode = None,
+            deleted_volumes : Iterable[int] = None,
+            error_code : ErrorCode = None,
             json_data : dict = None,
              **kwargs):
         """Initialize a ``DeleteVolumesResults`` object.
 
         Parameters
         ----------
-        model: Model
+        model : Model
             Model to create a ``DeleteVolumesResults`` object with default parameters.
-        deleted_volumes: Iterable[int], optional
+        deleted_volumes : Iterable[int], optional
             Ids of deleted volumes.
-        error_code: ErrorCode, optional
+        error_code : ErrorCode, optional
             Error code associated with the volume deletion operation.
-        json_data: dict, optional
+        json_data : dict, optional
             JSON dictionary to create a ``DeleteVolumesResults`` object with provided parameters.
 
         Examples
@@ -4249,15 +4700,15 @@ class DeleteVolumesResults(CoreObject):
 
     @staticmethod
     def set_default(
-            deleted_volumes: Iterable[int] = None,
-            error_code: ErrorCode = None):
+            deleted_volumes : Iterable[int] = None,
+            error_code : ErrorCode = None):
         """Set the default values of the ``DeleteVolumesResults`` object.
 
         Parameters
         ----------
-        deleted_volumes: Iterable[int], optional
+        deleted_volumes : Iterable[int], optional
             Ids of deleted volumes.
-        error_code: ErrorCode, optional
+        error_code : ErrorCode, optional
             Error code associated with the volume deletion operation.
         """
         args = locals()
@@ -4314,13 +4765,13 @@ class MergeVolumesParams(CoreObject):
 
     Parameters
     ----------
-    model: Model
+    model : Model
         Model to create a ``MergeVolumesParams`` object with default parameters.
-    merge_to_neighbor_volume: bool, optional
+    merge_to_neighbor_volume : bool, optional
         Option to merge given volumes to their neighbor volume.
-    neighbor_volumes: Iterable[int], optional
+    neighbor_volumes : Iterable[int], optional
         Ids of volume that are neighbors to given volumes for merging.
-    json_data: dict, optional
+    json_data : dict, optional
         JSON dictionary to create a ``MergeVolumesParams`` object with provided parameters.
 
     Examples
@@ -4331,29 +4782,29 @@ class MergeVolumesParams(CoreObject):
 
     def __initialize(
             self,
-            merge_to_neighbor_volume: bool,
-            neighbor_volumes: Iterable[int]):
+            merge_to_neighbor_volume : bool,
+            neighbor_volumes : Iterable[int]):
         self._merge_to_neighbor_volume = merge_to_neighbor_volume
         self._neighbor_volumes = neighbor_volumes if isinstance(neighbor_volumes, np.ndarray) else np.array(neighbor_volumes, dtype=np.int32) if neighbor_volumes is not None else None
 
     def __init__(
             self,
             model: CommunicationManager=None,
-            merge_to_neighbor_volume: bool = None,
-            neighbor_volumes: Iterable[int] = None,
+            merge_to_neighbor_volume : bool = None,
+            neighbor_volumes : Iterable[int] = None,
             json_data : dict = None,
              **kwargs):
         """Initialize a ``MergeVolumesParams`` object.
 
         Parameters
         ----------
-        model: Model
+        model : Model
             Model to create a ``MergeVolumesParams`` object with default parameters.
-        merge_to_neighbor_volume: bool, optional
+        merge_to_neighbor_volume : bool, optional
             Option to merge given volumes to their neighbor volume.
-        neighbor_volumes: Iterable[int], optional
+        neighbor_volumes : Iterable[int], optional
             Ids of volume that are neighbors to given volumes for merging.
-        json_data: dict, optional
+        json_data : dict, optional
             JSON dictionary to create a ``MergeVolumesParams`` object with provided parameters.
 
         Examples
@@ -4388,15 +4839,15 @@ class MergeVolumesParams(CoreObject):
 
     @staticmethod
     def set_default(
-            merge_to_neighbor_volume: bool = None,
-            neighbor_volumes: Iterable[int] = None):
+            merge_to_neighbor_volume : bool = None,
+            neighbor_volumes : Iterable[int] = None):
         """Set the default values of the ``MergeVolumesParams`` object.
 
         Parameters
         ----------
-        merge_to_neighbor_volume: bool, optional
+        merge_to_neighbor_volume : bool, optional
             Option to merge given volumes to their neighbor volume.
-        neighbor_volumes: Iterable[int], optional
+        neighbor_volumes : Iterable[int], optional
             Ids of volume that are neighbors to given volumes for merging.
         """
         args = locals()
@@ -4453,13 +4904,13 @@ class MergeVolumesResults(CoreObject):
 
     Parameters
     ----------
-    model: Model
+    model : Model
         Model to create a ``MergeVolumesResults`` object with default parameters.
-    merged_volumes: Iterable[int], optional
+    merged_volumes : Iterable[int], optional
         Ids of volumes to which input volumes are merged.
-    error_code: ErrorCode, optional
+    error_code : ErrorCode, optional
         Error code associated with the volume merge operation.
-    json_data: dict, optional
+    json_data : dict, optional
         JSON dictionary to create a ``MergeVolumesResults`` object with provided parameters.
 
     Examples
@@ -4470,29 +4921,29 @@ class MergeVolumesResults(CoreObject):
 
     def __initialize(
             self,
-            merged_volumes: Iterable[int],
-            error_code: ErrorCode):
+            merged_volumes : Iterable[int],
+            error_code : ErrorCode):
         self._merged_volumes = merged_volumes if isinstance(merged_volumes, np.ndarray) else np.array(merged_volumes, dtype=np.int32) if merged_volumes is not None else None
         self._error_code = ErrorCode(error_code)
 
     def __init__(
             self,
             model: CommunicationManager=None,
-            merged_volumes: Iterable[int] = None,
-            error_code: ErrorCode = None,
+            merged_volumes : Iterable[int] = None,
+            error_code : ErrorCode = None,
             json_data : dict = None,
              **kwargs):
         """Initialize a ``MergeVolumesResults`` object.
 
         Parameters
         ----------
-        model: Model
+        model : Model
             Model to create a ``MergeVolumesResults`` object with default parameters.
-        merged_volumes: Iterable[int], optional
+        merged_volumes : Iterable[int], optional
             Ids of volumes to which input volumes are merged.
-        error_code: ErrorCode, optional
+        error_code : ErrorCode, optional
             Error code associated with the volume merge operation.
-        json_data: dict, optional
+        json_data : dict, optional
             JSON dictionary to create a ``MergeVolumesResults`` object with provided parameters.
 
         Examples
@@ -4527,15 +4978,15 @@ class MergeVolumesResults(CoreObject):
 
     @staticmethod
     def set_default(
-            merged_volumes: Iterable[int] = None,
-            error_code: ErrorCode = None):
+            merged_volumes : Iterable[int] = None,
+            error_code : ErrorCode = None):
         """Set the default values of the ``MergeVolumesResults`` object.
 
         Parameters
         ----------
-        merged_volumes: Iterable[int], optional
+        merged_volumes : Iterable[int], optional
             Ids of volumes to which input volumes are merged.
-        error_code: ErrorCode, optional
+        error_code : ErrorCode, optional
             Error code associated with the volume merge operation.
         """
         args = locals()
@@ -4586,3 +5037,793 @@ class MergeVolumesResults(CoreObject):
     @error_code.setter
     def error_code(self, value: ErrorCode):
         self._error_code = value
+
+class ExtractExternalFlowVolumeParams(CoreObject):
+    """Parameters for extract external flow volume operation.
+
+    Parameters
+    ----------
+    model : Model
+        Model to create a ``ExtractExternalFlowVolumeParams`` object with default parameters.
+    intersect_tolerance : float, optional
+        Tolerance to be used for intersection with external flow part. Default is 0.05.
+
+        **This is a beta parameter**. **The behavior and name may change in the future**.
+    use_absolute_tolerance : bool, optional
+        Option to use absolute intersection tolerance. The default value is false.
+
+        **This is a beta parameter**. **The behavior and name may change in the future**.
+    remesh : bool, optional
+        Option to remesh faces around intersected area of external flow part. The default value is true.
+
+        **This is a beta parameter**. **The behavior and name may change in the future**.
+    suggested_zone_name : str, optional
+        Zone name for volume zone of the external flow volumes that gets extracted.
+
+        **This is a beta parameter**. **The behavior and name may change in the future**.
+    json_data : dict, optional
+        JSON dictionary to create a ``ExtractExternalFlowVolumeParams`` object with provided parameters.
+
+    Examples
+    --------
+    >>> extract_external_flow_volume_params = prime.ExtractExternalFlowVolumeParams(model = model)
+    """
+    _default_params = {}
+
+    def __initialize(
+            self,
+            intersect_tolerance : float,
+            use_absolute_tolerance : bool,
+            remesh : bool,
+            suggested_zone_name : str):
+        self._intersect_tolerance = intersect_tolerance
+        self._use_absolute_tolerance = use_absolute_tolerance
+        self._remesh = remesh
+        self._suggested_zone_name = suggested_zone_name
+
+    def __init__(
+            self,
+            model: CommunicationManager=None,
+            intersect_tolerance : float = None,
+            use_absolute_tolerance : bool = None,
+            remesh : bool = None,
+            suggested_zone_name : str = None,
+            json_data : dict = None,
+             **kwargs):
+        """Initialize a ``ExtractExternalFlowVolumeParams`` object.
+
+        Parameters
+        ----------
+        model : Model
+            Model to create a ``ExtractExternalFlowVolumeParams`` object with default parameters.
+        intersect_tolerance : float, optional
+            Tolerance to be used for intersection with external flow part. Default is 0.05.
+
+            **This is a beta parameter**. **The behavior and name may change in the future**.
+        use_absolute_tolerance : bool, optional
+            Option to use absolute intersection tolerance. The default value is false.
+
+            **This is a beta parameter**. **The behavior and name may change in the future**.
+        remesh : bool, optional
+            Option to remesh faces around intersected area of external flow part. The default value is true.
+
+            **This is a beta parameter**. **The behavior and name may change in the future**.
+        suggested_zone_name : str, optional
+            Zone name for volume zone of the external flow volumes that gets extracted.
+
+            **This is a beta parameter**. **The behavior and name may change in the future**.
+        json_data : dict, optional
+            JSON dictionary to create a ``ExtractExternalFlowVolumeParams`` object with provided parameters.
+
+        Examples
+        --------
+        >>> extract_external_flow_volume_params = prime.ExtractExternalFlowVolumeParams(model = model)
+        """
+        if json_data:
+            self.__initialize(
+                json_data["intersectTolerance"] if "intersectTolerance" in json_data else None,
+                json_data["useAbsoluteTolerance"] if "useAbsoluteTolerance" in json_data else None,
+                json_data["remesh"] if "remesh" in json_data else None,
+                json_data["suggestedZoneName"] if "suggestedZoneName" in json_data else None)
+        else:
+            all_field_specified = all(arg is not None for arg in [intersect_tolerance, use_absolute_tolerance, remesh, suggested_zone_name])
+            if all_field_specified:
+                self.__initialize(
+                    intersect_tolerance,
+                    use_absolute_tolerance,
+                    remesh,
+                    suggested_zone_name)
+            else:
+                if model is None:
+                    raise ValueError("Invalid assignment. Either pass a model or specify all properties.")
+                else:
+                    param_json = model._communicator.initialize_params(model, "ExtractExternalFlowVolumeParams")
+                    json_data = param_json["ExtractExternalFlowVolumeParams"] if "ExtractExternalFlowVolumeParams" in param_json else {}
+                    self.__initialize(
+                        intersect_tolerance if intersect_tolerance is not None else ( ExtractExternalFlowVolumeParams._default_params["intersect_tolerance"] if "intersect_tolerance" in ExtractExternalFlowVolumeParams._default_params else (json_data["intersectTolerance"] if "intersectTolerance" in json_data else None)),
+                        use_absolute_tolerance if use_absolute_tolerance is not None else ( ExtractExternalFlowVolumeParams._default_params["use_absolute_tolerance"] if "use_absolute_tolerance" in ExtractExternalFlowVolumeParams._default_params else (json_data["useAbsoluteTolerance"] if "useAbsoluteTolerance" in json_data else None)),
+                        remesh if remesh is not None else ( ExtractExternalFlowVolumeParams._default_params["remesh"] if "remesh" in ExtractExternalFlowVolumeParams._default_params else (json_data["remesh"] if "remesh" in json_data else None)),
+                        suggested_zone_name if suggested_zone_name is not None else ( ExtractExternalFlowVolumeParams._default_params["suggested_zone_name"] if "suggested_zone_name" in ExtractExternalFlowVolumeParams._default_params else (json_data["suggestedZoneName"] if "suggestedZoneName" in json_data else None)))
+        self._custom_params = kwargs
+        if model is not None:
+            [ model._logger.debug(f'Unsupported argument : {key}') for key in kwargs ]
+        [setattr(type(self), key, property(lambda self, key = key:  self._custom_params[key] if key in self._custom_params else None,
+        lambda self, value, key = key : self._custom_params.update({ key: value }))) for key in kwargs]
+        self._freeze()
+
+    @staticmethod
+    def set_default(
+            intersect_tolerance : float = None,
+            use_absolute_tolerance : bool = None,
+            remesh : bool = None,
+            suggested_zone_name : str = None):
+        """Set the default values of the ``ExtractExternalFlowVolumeParams`` object.
+
+        Parameters
+        ----------
+        intersect_tolerance : float, optional
+            Tolerance to be used for intersection with external flow part. Default is 0.05.
+        use_absolute_tolerance : bool, optional
+            Option to use absolute intersection tolerance. The default value is false.
+        remesh : bool, optional
+            Option to remesh faces around intersected area of external flow part. The default value is true.
+        suggested_zone_name : str, optional
+            Zone name for volume zone of the external flow volumes that gets extracted.
+        """
+        args = locals()
+        [ExtractExternalFlowVolumeParams._default_params.update({ key: value }) for key, value in args.items() if value is not None]
+
+    @staticmethod
+    def print_default():
+        """Print the default values of ``ExtractExternalFlowVolumeParams`` object.
+
+        Examples
+        --------
+        >>> ExtractExternalFlowVolumeParams.print_default()
+        """
+        message = ""
+        message += ''.join(str(key) + ' : ' + str(value) + '\n' for key, value in ExtractExternalFlowVolumeParams._default_params.items())
+        print(message)
+
+    def _jsonify(self) -> Dict[str, Any]:
+        json_data = {}
+        if self._intersect_tolerance is not None:
+            json_data["intersectTolerance"] = self._intersect_tolerance
+        if self._use_absolute_tolerance is not None:
+            json_data["useAbsoluteTolerance"] = self._use_absolute_tolerance
+        if self._remesh is not None:
+            json_data["remesh"] = self._remesh
+        if self._suggested_zone_name is not None:
+            json_data["suggestedZoneName"] = self._suggested_zone_name
+        [ json_data.update({ utils.to_camel_case(key) : value }) for key, value in self._custom_params.items()]
+        return json_data
+
+    def __str__(self) -> str:
+        message = "intersect_tolerance :  %s\nuse_absolute_tolerance :  %s\nremesh :  %s\nsuggested_zone_name :  %s" % (self._intersect_tolerance, self._use_absolute_tolerance, self._remesh, self._suggested_zone_name)
+        message += ''.join('\n' + str(key) + ' : ' + str(value) for key, value in self._custom_params.items())
+        return message
+
+    @property
+    def intersect_tolerance(self) -> float:
+        """Tolerance to be used for intersection with external flow part. Default is 0.05.
+
+        **This is a beta parameter**. **The behavior and name may change in the future**.
+        """
+        return self._intersect_tolerance
+
+    @intersect_tolerance.setter
+    def intersect_tolerance(self, value: float):
+        self._intersect_tolerance = value
+
+    @property
+    def use_absolute_tolerance(self) -> bool:
+        """Option to use absolute intersection tolerance. The default value is false.
+
+        **This is a beta parameter**. **The behavior and name may change in the future**.
+        """
+        return self._use_absolute_tolerance
+
+    @use_absolute_tolerance.setter
+    def use_absolute_tolerance(self, value: bool):
+        self._use_absolute_tolerance = value
+
+    @property
+    def remesh(self) -> bool:
+        """Option to remesh faces around intersected area of external flow part. The default value is true.
+
+        **This is a beta parameter**. **The behavior and name may change in the future**.
+        """
+        return self._remesh
+
+    @remesh.setter
+    def remesh(self, value: bool):
+        self._remesh = value
+
+    @property
+    def suggested_zone_name(self) -> str:
+        """Zone name for volume zone of the external flow volumes that gets extracted.
+
+        **This is a beta parameter**. **The behavior and name may change in the future**.
+        """
+        return self._suggested_zone_name
+
+    @suggested_zone_name.setter
+    def suggested_zone_name(self, value: str):
+        self._suggested_zone_name = value
+
+class ExtractExternalFlowVolumeResults(CoreObject):
+    """Results associated with extract external flow volume operation.
+
+    Parameters
+    ----------
+    model : Model
+        Model to create a ``ExtractExternalFlowVolumeResults`` object with default parameters.
+    error_code : ErrorCode, optional
+        Error code associated with the failure of operation.
+
+        **This is a beta parameter**. **The behavior and name may change in the future**.
+    volumes : Iterable[int], optional
+        Ids of the extracted external flow volumes.
+
+        **This is a beta parameter**. **The behavior and name may change in the future**.
+    assigned_zone_name : str, optional
+        Zone names assigned to the extracted external flow volumes.
+
+        **This is a beta parameter**. **The behavior and name may change in the future**.
+    json_data : dict, optional
+        JSON dictionary to create a ``ExtractExternalFlowVolumeResults`` object with provided parameters.
+
+    Examples
+    --------
+    >>> extract_external_flow_volume_results = prime.ExtractExternalFlowVolumeResults(model = model)
+    """
+    _default_params = {}
+
+    def __initialize(
+            self,
+            error_code : ErrorCode,
+            volumes : Iterable[int],
+            assigned_zone_name : str):
+        self._error_code = ErrorCode(error_code)
+        self._volumes = volumes if isinstance(volumes, np.ndarray) else np.array(volumes, dtype=np.int32) if volumes is not None else None
+        self._assigned_zone_name = assigned_zone_name
+
+    def __init__(
+            self,
+            model: CommunicationManager=None,
+            error_code : ErrorCode = None,
+            volumes : Iterable[int] = None,
+            assigned_zone_name : str = None,
+            json_data : dict = None,
+             **kwargs):
+        """Initialize a ``ExtractExternalFlowVolumeResults`` object.
+
+        Parameters
+        ----------
+        model : Model
+            Model to create a ``ExtractExternalFlowVolumeResults`` object with default parameters.
+        error_code : ErrorCode, optional
+            Error code associated with the failure of operation.
+
+            **This is a beta parameter**. **The behavior and name may change in the future**.
+        volumes : Iterable[int], optional
+            Ids of the extracted external flow volumes.
+
+            **This is a beta parameter**. **The behavior and name may change in the future**.
+        assigned_zone_name : str, optional
+            Zone names assigned to the extracted external flow volumes.
+
+            **This is a beta parameter**. **The behavior and name may change in the future**.
+        json_data : dict, optional
+            JSON dictionary to create a ``ExtractExternalFlowVolumeResults`` object with provided parameters.
+
+        Examples
+        --------
+        >>> extract_external_flow_volume_results = prime.ExtractExternalFlowVolumeResults(model = model)
+        """
+        if json_data:
+            self.__initialize(
+                ErrorCode(json_data["errorCode"] if "errorCode" in json_data else None),
+                json_data["volumes"] if "volumes" in json_data else None,
+                json_data["assignedZoneName"] if "assignedZoneName" in json_data else None)
+        else:
+            all_field_specified = all(arg is not None for arg in [error_code, volumes, assigned_zone_name])
+            if all_field_specified:
+                self.__initialize(
+                    error_code,
+                    volumes,
+                    assigned_zone_name)
+            else:
+                if model is None:
+                    raise ValueError("Invalid assignment. Either pass a model or specify all properties.")
+                else:
+                    param_json = model._communicator.initialize_params(model, "ExtractExternalFlowVolumeResults")
+                    json_data = param_json["ExtractExternalFlowVolumeResults"] if "ExtractExternalFlowVolumeResults" in param_json else {}
+                    self.__initialize(
+                        error_code if error_code is not None else ( ExtractExternalFlowVolumeResults._default_params["error_code"] if "error_code" in ExtractExternalFlowVolumeResults._default_params else ErrorCode(json_data["errorCode"] if "errorCode" in json_data else None)),
+                        volumes if volumes is not None else ( ExtractExternalFlowVolumeResults._default_params["volumes"] if "volumes" in ExtractExternalFlowVolumeResults._default_params else (json_data["volumes"] if "volumes" in json_data else None)),
+                        assigned_zone_name if assigned_zone_name is not None else ( ExtractExternalFlowVolumeResults._default_params["assigned_zone_name"] if "assigned_zone_name" in ExtractExternalFlowVolumeResults._default_params else (json_data["assignedZoneName"] if "assignedZoneName" in json_data else None)))
+        self._custom_params = kwargs
+        if model is not None:
+            [ model._logger.debug(f'Unsupported argument : {key}') for key in kwargs ]
+        [setattr(type(self), key, property(lambda self, key = key:  self._custom_params[key] if key in self._custom_params else None,
+        lambda self, value, key = key : self._custom_params.update({ key: value }))) for key in kwargs]
+        self._freeze()
+
+    @staticmethod
+    def set_default(
+            error_code : ErrorCode = None,
+            volumes : Iterable[int] = None,
+            assigned_zone_name : str = None):
+        """Set the default values of the ``ExtractExternalFlowVolumeResults`` object.
+
+        Parameters
+        ----------
+        error_code : ErrorCode, optional
+            Error code associated with the failure of operation.
+        volumes : Iterable[int], optional
+            Ids of the extracted external flow volumes.
+        assigned_zone_name : str, optional
+            Zone names assigned to the extracted external flow volumes.
+        """
+        args = locals()
+        [ExtractExternalFlowVolumeResults._default_params.update({ key: value }) for key, value in args.items() if value is not None]
+
+    @staticmethod
+    def print_default():
+        """Print the default values of ``ExtractExternalFlowVolumeResults`` object.
+
+        Examples
+        --------
+        >>> ExtractExternalFlowVolumeResults.print_default()
+        """
+        message = ""
+        message += ''.join(str(key) + ' : ' + str(value) + '\n' for key, value in ExtractExternalFlowVolumeResults._default_params.items())
+        print(message)
+
+    def _jsonify(self) -> Dict[str, Any]:
+        json_data = {}
+        if self._error_code is not None:
+            json_data["errorCode"] = self._error_code
+        if self._volumes is not None:
+            json_data["volumes"] = self._volumes
+        if self._assigned_zone_name is not None:
+            json_data["assignedZoneName"] = self._assigned_zone_name
+        [ json_data.update({ utils.to_camel_case(key) : value }) for key, value in self._custom_params.items()]
+        return json_data
+
+    def __str__(self) -> str:
+        message = "error_code :  %s\nvolumes :  %s\nassigned_zone_name :  %s" % (self._error_code, self._volumes, self._assigned_zone_name)
+        message += ''.join('\n' + str(key) + ' : ' + str(value) for key, value in self._custom_params.items())
+        return message
+
+    @property
+    def error_code(self) -> ErrorCode:
+        """Error code associated with the failure of operation.
+
+        **This is a beta parameter**. **The behavior and name may change in the future**.
+        """
+        return self._error_code
+
+    @error_code.setter
+    def error_code(self, value: ErrorCode):
+        self._error_code = value
+
+    @property
+    def volumes(self) -> Iterable[int]:
+        """Ids of the extracted external flow volumes.
+
+        **This is a beta parameter**. **The behavior and name may change in the future**.
+        """
+        return self._volumes
+
+    @volumes.setter
+    def volumes(self, value: Iterable[int]):
+        self._volumes = value
+
+    @property
+    def assigned_zone_name(self) -> str:
+        """Zone names assigned to the extracted external flow volumes.
+
+        **This is a beta parameter**. **The behavior and name may change in the future**.
+        """
+        return self._assigned_zone_name
+
+    @assigned_zone_name.setter
+    def assigned_zone_name(self, value: str):
+        self._assigned_zone_name = value
+
+class ExtractMrfVolumeParams(CoreObject):
+    """Parameters for extract MRF volume operation.
+
+    Parameters
+    ----------
+    model : Model
+        Model to create a ``ExtractMrfVolumeParams`` object with default parameters.
+    intersect_tolerance : float, optional
+        Tolerance to be used for intersecting with MRF part. Default is 0.05.
+
+        **This is a beta parameter**. **The behavior and name may change in the future**.
+    use_absolute_tolerance : bool, optional
+        Option to use absolute intersection tolerance. The default value is false. When the value is false, the option uses relative tolerance.
+
+        **This is a beta parameter**. **The behavior and name may change in the future**.
+    remesh : bool, optional
+        Option to remesh faces around intersected area of both the parts. The default value is true. When the value is true, the option remeshes the faces.
+
+        **This is a beta parameter**. **The behavior and name may change in the future**.
+    suggested_zone_name : str, optional
+        Zone name for volume zone of the MRF volumes that gets extracted.
+
+        **This is a beta parameter**. **The behavior and name may change in the future**.
+    json_data : dict, optional
+        JSON dictionary to create a ``ExtractMrfVolumeParams`` object with provided parameters.
+
+    Examples
+    --------
+    >>> extract_mrf_volume_params = prime.ExtractMrfVolumeParams(model = model)
+    """
+    _default_params = {}
+
+    def __initialize(
+            self,
+            intersect_tolerance : float,
+            use_absolute_tolerance : bool,
+            remesh : bool,
+            suggested_zone_name : str):
+        self._intersect_tolerance = intersect_tolerance
+        self._use_absolute_tolerance = use_absolute_tolerance
+        self._remesh = remesh
+        self._suggested_zone_name = suggested_zone_name
+
+    def __init__(
+            self,
+            model: CommunicationManager=None,
+            intersect_tolerance : float = None,
+            use_absolute_tolerance : bool = None,
+            remesh : bool = None,
+            suggested_zone_name : str = None,
+            json_data : dict = None,
+             **kwargs):
+        """Initialize a ``ExtractMrfVolumeParams`` object.
+
+        Parameters
+        ----------
+        model : Model
+            Model to create a ``ExtractMrfVolumeParams`` object with default parameters.
+        intersect_tolerance : float, optional
+            Tolerance to be used for intersecting with MRF part. Default is 0.05.
+
+            **This is a beta parameter**. **The behavior and name may change in the future**.
+        use_absolute_tolerance : bool, optional
+            Option to use absolute intersection tolerance. The default value is false. When the value is false, the option uses relative tolerance.
+
+            **This is a beta parameter**. **The behavior and name may change in the future**.
+        remesh : bool, optional
+            Option to remesh faces around intersected area of both the parts. The default value is true. When the value is true, the option remeshes the faces.
+
+            **This is a beta parameter**. **The behavior and name may change in the future**.
+        suggested_zone_name : str, optional
+            Zone name for volume zone of the MRF volumes that gets extracted.
+
+            **This is a beta parameter**. **The behavior and name may change in the future**.
+        json_data : dict, optional
+            JSON dictionary to create a ``ExtractMrfVolumeParams`` object with provided parameters.
+
+        Examples
+        --------
+        >>> extract_mrf_volume_params = prime.ExtractMrfVolumeParams(model = model)
+        """
+        if json_data:
+            self.__initialize(
+                json_data["intersectTolerance"] if "intersectTolerance" in json_data else None,
+                json_data["useAbsoluteTolerance"] if "useAbsoluteTolerance" in json_data else None,
+                json_data["remesh"] if "remesh" in json_data else None,
+                json_data["suggestedZoneName"] if "suggestedZoneName" in json_data else None)
+        else:
+            all_field_specified = all(arg is not None for arg in [intersect_tolerance, use_absolute_tolerance, remesh, suggested_zone_name])
+            if all_field_specified:
+                self.__initialize(
+                    intersect_tolerance,
+                    use_absolute_tolerance,
+                    remesh,
+                    suggested_zone_name)
+            else:
+                if model is None:
+                    raise ValueError("Invalid assignment. Either pass a model or specify all properties.")
+                else:
+                    param_json = model._communicator.initialize_params(model, "ExtractMrfVolumeParams")
+                    json_data = param_json["ExtractMrfVolumeParams"] if "ExtractMrfVolumeParams" in param_json else {}
+                    self.__initialize(
+                        intersect_tolerance if intersect_tolerance is not None else ( ExtractMrfVolumeParams._default_params["intersect_tolerance"] if "intersect_tolerance" in ExtractMrfVolumeParams._default_params else (json_data["intersectTolerance"] if "intersectTolerance" in json_data else None)),
+                        use_absolute_tolerance if use_absolute_tolerance is not None else ( ExtractMrfVolumeParams._default_params["use_absolute_tolerance"] if "use_absolute_tolerance" in ExtractMrfVolumeParams._default_params else (json_data["useAbsoluteTolerance"] if "useAbsoluteTolerance" in json_data else None)),
+                        remesh if remesh is not None else ( ExtractMrfVolumeParams._default_params["remesh"] if "remesh" in ExtractMrfVolumeParams._default_params else (json_data["remesh"] if "remesh" in json_data else None)),
+                        suggested_zone_name if suggested_zone_name is not None else ( ExtractMrfVolumeParams._default_params["suggested_zone_name"] if "suggested_zone_name" in ExtractMrfVolumeParams._default_params else (json_data["suggestedZoneName"] if "suggestedZoneName" in json_data else None)))
+        self._custom_params = kwargs
+        if model is not None:
+            [ model._logger.debug(f'Unsupported argument : {key}') for key in kwargs ]
+        [setattr(type(self), key, property(lambda self, key = key:  self._custom_params[key] if key in self._custom_params else None,
+        lambda self, value, key = key : self._custom_params.update({ key: value }))) for key in kwargs]
+        self._freeze()
+
+    @staticmethod
+    def set_default(
+            intersect_tolerance : float = None,
+            use_absolute_tolerance : bool = None,
+            remesh : bool = None,
+            suggested_zone_name : str = None):
+        """Set the default values of the ``ExtractMrfVolumeParams`` object.
+
+        Parameters
+        ----------
+        intersect_tolerance : float, optional
+            Tolerance to be used for intersecting with MRF part. Default is 0.05.
+        use_absolute_tolerance : bool, optional
+            Option to use absolute intersection tolerance. The default value is false. When the value is false, the option uses relative tolerance.
+        remesh : bool, optional
+            Option to remesh faces around intersected area of both the parts. The default value is true. When the value is true, the option remeshes the faces.
+        suggested_zone_name : str, optional
+            Zone name for volume zone of the MRF volumes that gets extracted.
+        """
+        args = locals()
+        [ExtractMrfVolumeParams._default_params.update({ key: value }) for key, value in args.items() if value is not None]
+
+    @staticmethod
+    def print_default():
+        """Print the default values of ``ExtractMrfVolumeParams`` object.
+
+        Examples
+        --------
+        >>> ExtractMrfVolumeParams.print_default()
+        """
+        message = ""
+        message += ''.join(str(key) + ' : ' + str(value) + '\n' for key, value in ExtractMrfVolumeParams._default_params.items())
+        print(message)
+
+    def _jsonify(self) -> Dict[str, Any]:
+        json_data = {}
+        if self._intersect_tolerance is not None:
+            json_data["intersectTolerance"] = self._intersect_tolerance
+        if self._use_absolute_tolerance is not None:
+            json_data["useAbsoluteTolerance"] = self._use_absolute_tolerance
+        if self._remesh is not None:
+            json_data["remesh"] = self._remesh
+        if self._suggested_zone_name is not None:
+            json_data["suggestedZoneName"] = self._suggested_zone_name
+        [ json_data.update({ utils.to_camel_case(key) : value }) for key, value in self._custom_params.items()]
+        return json_data
+
+    def __str__(self) -> str:
+        message = "intersect_tolerance :  %s\nuse_absolute_tolerance :  %s\nremesh :  %s\nsuggested_zone_name :  %s" % (self._intersect_tolerance, self._use_absolute_tolerance, self._remesh, self._suggested_zone_name)
+        message += ''.join('\n' + str(key) + ' : ' + str(value) for key, value in self._custom_params.items())
+        return message
+
+    @property
+    def intersect_tolerance(self) -> float:
+        """Tolerance to be used for intersecting with MRF part. Default is 0.05.
+
+        **This is a beta parameter**. **The behavior and name may change in the future**.
+        """
+        return self._intersect_tolerance
+
+    @intersect_tolerance.setter
+    def intersect_tolerance(self, value: float):
+        self._intersect_tolerance = value
+
+    @property
+    def use_absolute_tolerance(self) -> bool:
+        """Option to use absolute intersection tolerance. The default value is false. When the value is false, the option uses relative tolerance.
+
+        **This is a beta parameter**. **The behavior and name may change in the future**.
+        """
+        return self._use_absolute_tolerance
+
+    @use_absolute_tolerance.setter
+    def use_absolute_tolerance(self, value: bool):
+        self._use_absolute_tolerance = value
+
+    @property
+    def remesh(self) -> bool:
+        """Option to remesh faces around intersected area of both the parts. The default value is true. When the value is true, the option remeshes the faces.
+
+        **This is a beta parameter**. **The behavior and name may change in the future**.
+        """
+        return self._remesh
+
+    @remesh.setter
+    def remesh(self, value: bool):
+        self._remesh = value
+
+    @property
+    def suggested_zone_name(self) -> str:
+        """Zone name for volume zone of the MRF volumes that gets extracted.
+
+        **This is a beta parameter**. **The behavior and name may change in the future**.
+        """
+        return self._suggested_zone_name
+
+    @suggested_zone_name.setter
+    def suggested_zone_name(self, value: str):
+        self._suggested_zone_name = value
+
+class ExtractMrfVolumeResults(CoreObject):
+    """Results associated with extract MRF volume operation.
+
+    Parameters
+    ----------
+    model : Model
+        Model to create a ``ExtractMrfVolumeResults`` object with default parameters.
+    error_code : ErrorCode, optional
+        Error code associated with the failure of operation.
+
+        **This is a beta parameter**. **The behavior and name may change in the future**.
+    volumes : Iterable[int], optional
+        Ids of the extracted MRF volumes.
+
+        **This is a beta parameter**. **The behavior and name may change in the future**.
+    assigned_zone_name : str, optional
+        Zone name assigned to the extracted MRF volumes.
+
+        **This is a beta parameter**. **The behavior and name may change in the future**.
+    json_data : dict, optional
+        JSON dictionary to create a ``ExtractMrfVolumeResults`` object with provided parameters.
+
+    Examples
+    --------
+    >>> extract_mrf_volume_results = prime.ExtractMrfVolumeResults(model = model)
+    """
+    _default_params = {}
+
+    def __initialize(
+            self,
+            error_code : ErrorCode,
+            volumes : Iterable[int],
+            assigned_zone_name : str):
+        self._error_code = ErrorCode(error_code)
+        self._volumes = volumes if isinstance(volumes, np.ndarray) else np.array(volumes, dtype=np.int32) if volumes is not None else None
+        self._assigned_zone_name = assigned_zone_name
+
+    def __init__(
+            self,
+            model: CommunicationManager=None,
+            error_code : ErrorCode = None,
+            volumes : Iterable[int] = None,
+            assigned_zone_name : str = None,
+            json_data : dict = None,
+             **kwargs):
+        """Initialize a ``ExtractMrfVolumeResults`` object.
+
+        Parameters
+        ----------
+        model : Model
+            Model to create a ``ExtractMrfVolumeResults`` object with default parameters.
+        error_code : ErrorCode, optional
+            Error code associated with the failure of operation.
+
+            **This is a beta parameter**. **The behavior and name may change in the future**.
+        volumes : Iterable[int], optional
+            Ids of the extracted MRF volumes.
+
+            **This is a beta parameter**. **The behavior and name may change in the future**.
+        assigned_zone_name : str, optional
+            Zone name assigned to the extracted MRF volumes.
+
+            **This is a beta parameter**. **The behavior and name may change in the future**.
+        json_data : dict, optional
+            JSON dictionary to create a ``ExtractMrfVolumeResults`` object with provided parameters.
+
+        Examples
+        --------
+        >>> extract_mrf_volume_results = prime.ExtractMrfVolumeResults(model = model)
+        """
+        if json_data:
+            self.__initialize(
+                ErrorCode(json_data["errorCode"] if "errorCode" in json_data else None),
+                json_data["volumes"] if "volumes" in json_data else None,
+                json_data["assignedZoneName"] if "assignedZoneName" in json_data else None)
+        else:
+            all_field_specified = all(arg is not None for arg in [error_code, volumes, assigned_zone_name])
+            if all_field_specified:
+                self.__initialize(
+                    error_code,
+                    volumes,
+                    assigned_zone_name)
+            else:
+                if model is None:
+                    raise ValueError("Invalid assignment. Either pass a model or specify all properties.")
+                else:
+                    param_json = model._communicator.initialize_params(model, "ExtractMrfVolumeResults")
+                    json_data = param_json["ExtractMrfVolumeResults"] if "ExtractMrfVolumeResults" in param_json else {}
+                    self.__initialize(
+                        error_code if error_code is not None else ( ExtractMrfVolumeResults._default_params["error_code"] if "error_code" in ExtractMrfVolumeResults._default_params else ErrorCode(json_data["errorCode"] if "errorCode" in json_data else None)),
+                        volumes if volumes is not None else ( ExtractMrfVolumeResults._default_params["volumes"] if "volumes" in ExtractMrfVolumeResults._default_params else (json_data["volumes"] if "volumes" in json_data else None)),
+                        assigned_zone_name if assigned_zone_name is not None else ( ExtractMrfVolumeResults._default_params["assigned_zone_name"] if "assigned_zone_name" in ExtractMrfVolumeResults._default_params else (json_data["assignedZoneName"] if "assignedZoneName" in json_data else None)))
+        self._custom_params = kwargs
+        if model is not None:
+            [ model._logger.debug(f'Unsupported argument : {key}') for key in kwargs ]
+        [setattr(type(self), key, property(lambda self, key = key:  self._custom_params[key] if key in self._custom_params else None,
+        lambda self, value, key = key : self._custom_params.update({ key: value }))) for key in kwargs]
+        self._freeze()
+
+    @staticmethod
+    def set_default(
+            error_code : ErrorCode = None,
+            volumes : Iterable[int] = None,
+            assigned_zone_name : str = None):
+        """Set the default values of the ``ExtractMrfVolumeResults`` object.
+
+        Parameters
+        ----------
+        error_code : ErrorCode, optional
+            Error code associated with the failure of operation.
+        volumes : Iterable[int], optional
+            Ids of the extracted MRF volumes.
+        assigned_zone_name : str, optional
+            Zone name assigned to the extracted MRF volumes.
+        """
+        args = locals()
+        [ExtractMrfVolumeResults._default_params.update({ key: value }) for key, value in args.items() if value is not None]
+
+    @staticmethod
+    def print_default():
+        """Print the default values of ``ExtractMrfVolumeResults`` object.
+
+        Examples
+        --------
+        >>> ExtractMrfVolumeResults.print_default()
+        """
+        message = ""
+        message += ''.join(str(key) + ' : ' + str(value) + '\n' for key, value in ExtractMrfVolumeResults._default_params.items())
+        print(message)
+
+    def _jsonify(self) -> Dict[str, Any]:
+        json_data = {}
+        if self._error_code is not None:
+            json_data["errorCode"] = self._error_code
+        if self._volumes is not None:
+            json_data["volumes"] = self._volumes
+        if self._assigned_zone_name is not None:
+            json_data["assignedZoneName"] = self._assigned_zone_name
+        [ json_data.update({ utils.to_camel_case(key) : value }) for key, value in self._custom_params.items()]
+        return json_data
+
+    def __str__(self) -> str:
+        message = "error_code :  %s\nvolumes :  %s\nassigned_zone_name :  %s" % (self._error_code, self._volumes, self._assigned_zone_name)
+        message += ''.join('\n' + str(key) + ' : ' + str(value) for key, value in self._custom_params.items())
+        return message
+
+    @property
+    def error_code(self) -> ErrorCode:
+        """Error code associated with the failure of operation.
+
+        **This is a beta parameter**. **The behavior and name may change in the future**.
+        """
+        return self._error_code
+
+    @error_code.setter
+    def error_code(self, value: ErrorCode):
+        self._error_code = value
+
+    @property
+    def volumes(self) -> Iterable[int]:
+        """Ids of the extracted MRF volumes.
+
+        **This is a beta parameter**. **The behavior and name may change in the future**.
+        """
+        return self._volumes
+
+    @volumes.setter
+    def volumes(self, value: Iterable[int]):
+        self._volumes = value
+
+    @property
+    def assigned_zone_name(self) -> str:
+        """Zone name assigned to the extracted MRF volumes.
+
+        **This is a beta parameter**. **The behavior and name may change in the future**.
+        """
+        return self._assigned_zone_name
+
+    @assigned_zone_name.setter
+    def assigned_zone_name(self, value: str):
+        self._assigned_zone_name = value

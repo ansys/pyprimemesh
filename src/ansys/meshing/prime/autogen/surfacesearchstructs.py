@@ -1,4 +1,4 @@
-# Copyright (C) 2024 - 2025 ANSYS, Inc. and/or its affiliates.
+# Copyright (C) 2026 Synopsys, Inc. and ANSYS, Inc. All rights reserved.
 # SPDX-License-Identifier: MIT
 #
 #
@@ -45,11 +45,11 @@ class SearchBySpikeParams(CoreObject):
 
     Parameters
     ----------
-    model: Model
+    model : Model
         Model to create a ``SearchBySpikeParams`` object with default parameters.
-    spike_angle: float, optional
+    spike_angle : float, optional
         Threshold angle for spike detection.
-    json_data: dict, optional
+    json_data : dict, optional
         JSON dictionary to create a ``SearchBySpikeParams`` object with provided parameters.
 
     Examples
@@ -60,24 +60,24 @@ class SearchBySpikeParams(CoreObject):
 
     def __initialize(
             self,
-            spike_angle: float):
+            spike_angle : float):
         self._spike_angle = spike_angle
 
     def __init__(
             self,
             model: CommunicationManager=None,
-            spike_angle: float = None,
+            spike_angle : float = None,
             json_data : dict = None,
              **kwargs):
         """Initialize a ``SearchBySpikeParams`` object.
 
         Parameters
         ----------
-        model: Model
+        model : Model
             Model to create a ``SearchBySpikeParams`` object with default parameters.
-        spike_angle: float, optional
+        spike_angle : float, optional
             Threshold angle for spike detection.
-        json_data: dict, optional
+        json_data : dict, optional
             JSON dictionary to create a ``SearchBySpikeParams`` object with provided parameters.
 
         Examples
@@ -109,12 +109,12 @@ class SearchBySpikeParams(CoreObject):
 
     @staticmethod
     def set_default(
-            spike_angle: float = None):
+            spike_angle : float = None):
         """Set the default values of the ``SearchBySpikeParams`` object.
 
         Parameters
         ----------
-        spike_angle: float, optional
+        spike_angle : float, optional
             Threshold angle for spike detection.
         """
         args = locals()
@@ -159,13 +159,13 @@ class SearchBySpikeResults(CoreObject):
 
     Parameters
     ----------
-    model: Model
+    model : Model
         Model to create a ``SearchBySpikeResults`` object with default parameters.
-    n_found: int, optional
+    n_found : int, optional
         Number of spikes detected.
-    error_code: ErrorCode, optional
+    error_code : ErrorCode, optional
         Error code associated with search spikes operation.
-    json_data: dict, optional
+    json_data : dict, optional
         JSON dictionary to create a ``SearchBySpikeResults`` object with provided parameters.
 
     Examples
@@ -176,29 +176,29 @@ class SearchBySpikeResults(CoreObject):
 
     def __initialize(
             self,
-            n_found: int,
-            error_code: ErrorCode):
+            n_found : int,
+            error_code : ErrorCode):
         self._n_found = n_found
         self._error_code = ErrorCode(error_code)
 
     def __init__(
             self,
             model: CommunicationManager=None,
-            n_found: int = None,
-            error_code: ErrorCode = None,
+            n_found : int = None,
+            error_code : ErrorCode = None,
             json_data : dict = None,
              **kwargs):
         """Initialize a ``SearchBySpikeResults`` object.
 
         Parameters
         ----------
-        model: Model
+        model : Model
             Model to create a ``SearchBySpikeResults`` object with default parameters.
-        n_found: int, optional
+        n_found : int, optional
             Number of spikes detected.
-        error_code: ErrorCode, optional
+        error_code : ErrorCode, optional
             Error code associated with search spikes operation.
-        json_data: dict, optional
+        json_data : dict, optional
             JSON dictionary to create a ``SearchBySpikeResults`` object with provided parameters.
 
         Examples
@@ -233,15 +233,15 @@ class SearchBySpikeResults(CoreObject):
 
     @staticmethod
     def set_default(
-            n_found: int = None,
-            error_code: ErrorCode = None):
+            n_found : int = None,
+            error_code : ErrorCode = None):
         """Set the default values of the ``SearchBySpikeResults`` object.
 
         Parameters
         ----------
-        n_found: int, optional
+        n_found : int, optional
             Number of spikes detected.
-        error_code: ErrorCode, optional
+        error_code : ErrorCode, optional
             Error code associated with search spikes operation.
         """
         args = locals()
@@ -298,11 +298,11 @@ class SearchByFoldsParams(CoreObject):
 
     Parameters
     ----------
-    model: Model
+    model : Model
         Model to create a ``SearchByFoldsParams`` object with default parameters.
-    critical_angle: float, optional
+    critical_angle : float, optional
         Threshold angle for fold detection.
-    json_data: dict, optional
+    json_data : dict, optional
         JSON dictionary to create a ``SearchByFoldsParams`` object with provided parameters.
 
     Examples
@@ -313,24 +313,24 @@ class SearchByFoldsParams(CoreObject):
 
     def __initialize(
             self,
-            critical_angle: float):
+            critical_angle : float):
         self._critical_angle = critical_angle
 
     def __init__(
             self,
             model: CommunicationManager=None,
-            critical_angle: float = None,
+            critical_angle : float = None,
             json_data : dict = None,
              **kwargs):
         """Initialize a ``SearchByFoldsParams`` object.
 
         Parameters
         ----------
-        model: Model
+        model : Model
             Model to create a ``SearchByFoldsParams`` object with default parameters.
-        critical_angle: float, optional
+        critical_angle : float, optional
             Threshold angle for fold detection.
-        json_data: dict, optional
+        json_data : dict, optional
             JSON dictionary to create a ``SearchByFoldsParams`` object with provided parameters.
 
         Examples
@@ -362,12 +362,12 @@ class SearchByFoldsParams(CoreObject):
 
     @staticmethod
     def set_default(
-            critical_angle: float = None):
+            critical_angle : float = None):
         """Set the default values of the ``SearchByFoldsParams`` object.
 
         Parameters
         ----------
-        critical_angle: float, optional
+        critical_angle : float, optional
             Threshold angle for fold detection.
         """
         args = locals()
@@ -412,13 +412,13 @@ class SearchByFoldsResults(CoreObject):
 
     Parameters
     ----------
-    model: Model
+    model : Model
         Model to create a ``SearchByFoldsResults`` object with default parameters.
-    n_found: int, optional
+    n_found : int, optional
         Number of folds identified.
-    error_code: ErrorCode, optional
+    error_code : ErrorCode, optional
         Error code associated with search folds operation.
-    json_data: dict, optional
+    json_data : dict, optional
         JSON dictionary to create a ``SearchByFoldsResults`` object with provided parameters.
 
     Examples
@@ -429,29 +429,29 @@ class SearchByFoldsResults(CoreObject):
 
     def __initialize(
             self,
-            n_found: int,
-            error_code: ErrorCode):
+            n_found : int,
+            error_code : ErrorCode):
         self._n_found = n_found
         self._error_code = ErrorCode(error_code)
 
     def __init__(
             self,
             model: CommunicationManager=None,
-            n_found: int = None,
-            error_code: ErrorCode = None,
+            n_found : int = None,
+            error_code : ErrorCode = None,
             json_data : dict = None,
              **kwargs):
         """Initialize a ``SearchByFoldsResults`` object.
 
         Parameters
         ----------
-        model: Model
+        model : Model
             Model to create a ``SearchByFoldsResults`` object with default parameters.
-        n_found: int, optional
+        n_found : int, optional
             Number of folds identified.
-        error_code: ErrorCode, optional
+        error_code : ErrorCode, optional
             Error code associated with search folds operation.
-        json_data: dict, optional
+        json_data : dict, optional
             JSON dictionary to create a ``SearchByFoldsResults`` object with provided parameters.
 
         Examples
@@ -486,15 +486,15 @@ class SearchByFoldsResults(CoreObject):
 
     @staticmethod
     def set_default(
-            n_found: int = None,
-            error_code: ErrorCode = None):
+            n_found : int = None,
+            error_code : ErrorCode = None):
         """Set the default values of the ``SearchByFoldsResults`` object.
 
         Parameters
         ----------
-        n_found: int, optional
+        n_found : int, optional
             Number of folds identified.
-        error_code: ErrorCode, optional
+        error_code : ErrorCode, optional
             Error code associated with search folds operation.
         """
         args = locals()
@@ -551,13 +551,13 @@ class SearchByInvalidNormalsResults(CoreObject):
 
     Parameters
     ----------
-    model: Model
+    model : Model
         Model to create a ``SearchByInvalidNormalsResults`` object with default parameters.
-    n_found: int, optional
+    n_found : int, optional
         Number of invalid normals identified.
-    error_code: ErrorCode, optional
+    error_code : ErrorCode, optional
         Error code associated with search invalid normals operation.
-    json_data: dict, optional
+    json_data : dict, optional
         JSON dictionary to create a ``SearchByInvalidNormalsResults`` object with provided parameters.
 
     Examples
@@ -568,29 +568,29 @@ class SearchByInvalidNormalsResults(CoreObject):
 
     def __initialize(
             self,
-            n_found: int,
-            error_code: ErrorCode):
+            n_found : int,
+            error_code : ErrorCode):
         self._n_found = n_found
         self._error_code = ErrorCode(error_code)
 
     def __init__(
             self,
             model: CommunicationManager=None,
-            n_found: int = None,
-            error_code: ErrorCode = None,
+            n_found : int = None,
+            error_code : ErrorCode = None,
             json_data : dict = None,
              **kwargs):
         """Initialize a ``SearchByInvalidNormalsResults`` object.
 
         Parameters
         ----------
-        model: Model
+        model : Model
             Model to create a ``SearchByInvalidNormalsResults`` object with default parameters.
-        n_found: int, optional
+        n_found : int, optional
             Number of invalid normals identified.
-        error_code: ErrorCode, optional
+        error_code : ErrorCode, optional
             Error code associated with search invalid normals operation.
-        json_data: dict, optional
+        json_data : dict, optional
             JSON dictionary to create a ``SearchByInvalidNormalsResults`` object with provided parameters.
 
         Examples
@@ -625,15 +625,15 @@ class SearchByInvalidNormalsResults(CoreObject):
 
     @staticmethod
     def set_default(
-            n_found: int = None,
-            error_code: ErrorCode = None):
+            n_found : int = None,
+            error_code : ErrorCode = None):
         """Set the default values of the ``SearchByInvalidNormalsResults`` object.
 
         Parameters
         ----------
-        n_found: int, optional
+        n_found : int, optional
             Number of invalid normals identified.
-        error_code: ErrorCode, optional
+        error_code : ErrorCode, optional
             Error code associated with search invalid normals operation.
         """
         args = locals()
@@ -690,9 +690,9 @@ class SearchBySelfIntersectionParams(CoreObject):
 
     Parameters
     ----------
-    model: Model
+    model : Model
         Model to create a ``SearchBySelfIntersectionParams`` object with default parameters.
-    json_data: dict, optional
+    json_data : dict, optional
         JSON dictionary to create a ``SearchBySelfIntersectionParams`` object with provided parameters.
 
     Examples
@@ -714,9 +714,9 @@ class SearchBySelfIntersectionParams(CoreObject):
 
         Parameters
         ----------
-        model: Model
+        model : Model
             Model to create a ``SearchBySelfIntersectionParams`` object with default parameters.
-        json_data: dict, optional
+        json_data : dict, optional
             JSON dictionary to create a ``SearchBySelfIntersectionParams`` object with provided parameters.
 
         Examples
@@ -780,13 +780,13 @@ class SearchByIntersectionResults(CoreObject):
 
     Parameters
     ----------
-    model: Model
+    model : Model
         Model to create a ``SearchByIntersectionResults`` object with default parameters.
-    n_found: int, optional
+    n_found : int, optional
         Number of face elements identified by intersection(face elements interfering with each other).
-    error_code: ErrorCode, optional
+    error_code : ErrorCode, optional
         Error code associated with search intersection operation.
-    json_data: dict, optional
+    json_data : dict, optional
         JSON dictionary to create a ``SearchByIntersectionResults`` object with provided parameters.
 
     Examples
@@ -797,29 +797,29 @@ class SearchByIntersectionResults(CoreObject):
 
     def __initialize(
             self,
-            n_found: int,
-            error_code: ErrorCode):
+            n_found : int,
+            error_code : ErrorCode):
         self._n_found = n_found
         self._error_code = ErrorCode(error_code)
 
     def __init__(
             self,
             model: CommunicationManager=None,
-            n_found: int = None,
-            error_code: ErrorCode = None,
+            n_found : int = None,
+            error_code : ErrorCode = None,
             json_data : dict = None,
              **kwargs):
         """Initialize a ``SearchByIntersectionResults`` object.
 
         Parameters
         ----------
-        model: Model
+        model : Model
             Model to create a ``SearchByIntersectionResults`` object with default parameters.
-        n_found: int, optional
+        n_found : int, optional
             Number of face elements identified by intersection(face elements interfering with each other).
-        error_code: ErrorCode, optional
+        error_code : ErrorCode, optional
             Error code associated with search intersection operation.
-        json_data: dict, optional
+        json_data : dict, optional
             JSON dictionary to create a ``SearchByIntersectionResults`` object with provided parameters.
 
         Examples
@@ -854,15 +854,15 @@ class SearchByIntersectionResults(CoreObject):
 
     @staticmethod
     def set_default(
-            n_found: int = None,
-            error_code: ErrorCode = None):
+            n_found : int = None,
+            error_code : ErrorCode = None):
         """Set the default values of the ``SearchByIntersectionResults`` object.
 
         Parameters
         ----------
-        n_found: int, optional
+        n_found : int, optional
             Number of face elements identified by intersection(face elements interfering with each other).
-        error_code: ErrorCode, optional
+        error_code : ErrorCode, optional
             Error code associated with search intersection operation.
         """
         args = locals()
@@ -919,13 +919,13 @@ class SearchByQualityParams(CoreObject):
 
     Parameters
     ----------
-    model: Model
+    model : Model
         Model to create a ``SearchByQualityParams`` object with default parameters.
-    quality_limit: float, optional
+    quality_limit : float, optional
         Quality limit used for search face elements.
-    face_quality_measure: FaceQualityMeasure, optional
+    face_quality_measure : FaceQualityMeasure, optional
         Quality measure used for search face elements.
-    json_data: dict, optional
+    json_data : dict, optional
         JSON dictionary to create a ``SearchByQualityParams`` object with provided parameters.
 
     Examples
@@ -936,29 +936,29 @@ class SearchByQualityParams(CoreObject):
 
     def __initialize(
             self,
-            quality_limit: float,
-            face_quality_measure: FaceQualityMeasure):
+            quality_limit : float,
+            face_quality_measure : FaceQualityMeasure):
         self._quality_limit = quality_limit
         self._face_quality_measure = FaceQualityMeasure(face_quality_measure)
 
     def __init__(
             self,
             model: CommunicationManager=None,
-            quality_limit: float = None,
-            face_quality_measure: FaceQualityMeasure = None,
+            quality_limit : float = None,
+            face_quality_measure : FaceQualityMeasure = None,
             json_data : dict = None,
              **kwargs):
         """Initialize a ``SearchByQualityParams`` object.
 
         Parameters
         ----------
-        model: Model
+        model : Model
             Model to create a ``SearchByQualityParams`` object with default parameters.
-        quality_limit: float, optional
+        quality_limit : float, optional
             Quality limit used for search face elements.
-        face_quality_measure: FaceQualityMeasure, optional
+        face_quality_measure : FaceQualityMeasure, optional
             Quality measure used for search face elements.
-        json_data: dict, optional
+        json_data : dict, optional
             JSON dictionary to create a ``SearchByQualityParams`` object with provided parameters.
 
         Examples
@@ -993,15 +993,15 @@ class SearchByQualityParams(CoreObject):
 
     @staticmethod
     def set_default(
-            quality_limit: float = None,
-            face_quality_measure: FaceQualityMeasure = None):
+            quality_limit : float = None,
+            face_quality_measure : FaceQualityMeasure = None):
         """Set the default values of the ``SearchByQualityParams`` object.
 
         Parameters
         ----------
-        quality_limit: float, optional
+        quality_limit : float, optional
             Quality limit used for search face elements.
-        face_quality_measure: FaceQualityMeasure, optional
+        face_quality_measure : FaceQualityMeasure, optional
             Quality measure used for search face elements.
         """
         args = locals()
@@ -1058,17 +1058,17 @@ class SearchByQualityResults(CoreObject):
 
     Parameters
     ----------
-    model: Model
+    model : Model
         Model to create a ``SearchByQualityResults`` object with default parameters.
-    n_found: int, optional
+    n_found : int, optional
         Number of face elements found by search for given quality limit.
-    error_code: ErrorCode, optional
+    error_code : ErrorCode, optional
         Error code associated with failure of operation.
-    max_quality: float, optional
+    max_quality : float, optional
         Maximum quality found by search.
-    min_quality: float, optional
+    min_quality : float, optional
         Minimum quality found by search.
-    json_data: dict, optional
+    json_data : dict, optional
         JSON dictionary to create a ``SearchByQualityResults`` object with provided parameters.
 
     Examples
@@ -1079,10 +1079,10 @@ class SearchByQualityResults(CoreObject):
 
     def __initialize(
             self,
-            n_found: int,
-            error_code: ErrorCode,
-            max_quality: float,
-            min_quality: float):
+            n_found : int,
+            error_code : ErrorCode,
+            max_quality : float,
+            min_quality : float):
         self._n_found = n_found
         self._error_code = ErrorCode(error_code)
         self._max_quality = max_quality
@@ -1091,27 +1091,27 @@ class SearchByQualityResults(CoreObject):
     def __init__(
             self,
             model: CommunicationManager=None,
-            n_found: int = None,
-            error_code: ErrorCode = None,
-            max_quality: float = None,
-            min_quality: float = None,
+            n_found : int = None,
+            error_code : ErrorCode = None,
+            max_quality : float = None,
+            min_quality : float = None,
             json_data : dict = None,
              **kwargs):
         """Initialize a ``SearchByQualityResults`` object.
 
         Parameters
         ----------
-        model: Model
+        model : Model
             Model to create a ``SearchByQualityResults`` object with default parameters.
-        n_found: int, optional
+        n_found : int, optional
             Number of face elements found by search for given quality limit.
-        error_code: ErrorCode, optional
+        error_code : ErrorCode, optional
             Error code associated with failure of operation.
-        max_quality: float, optional
+        max_quality : float, optional
             Maximum quality found by search.
-        min_quality: float, optional
+        min_quality : float, optional
             Minimum quality found by search.
-        json_data: dict, optional
+        json_data : dict, optional
             JSON dictionary to create a ``SearchByQualityResults`` object with provided parameters.
 
         Examples
@@ -1152,21 +1152,21 @@ class SearchByQualityResults(CoreObject):
 
     @staticmethod
     def set_default(
-            n_found: int = None,
-            error_code: ErrorCode = None,
-            max_quality: float = None,
-            min_quality: float = None):
+            n_found : int = None,
+            error_code : ErrorCode = None,
+            max_quality : float = None,
+            min_quality : float = None):
         """Set the default values of the ``SearchByQualityResults`` object.
 
         Parameters
         ----------
-        n_found: int, optional
+        n_found : int, optional
             Number of face elements found by search for given quality limit.
-        error_code: ErrorCode, optional
+        error_code : ErrorCode, optional
             Error code associated with failure of operation.
-        max_quality: float, optional
+        max_quality : float, optional
             Maximum quality found by search.
-        min_quality: float, optional
+        min_quality : float, optional
             Minimum quality found by search.
         """
         args = locals()
@@ -1247,19 +1247,19 @@ class SearchByThinStripParams(CoreObject):
 
     Parameters
     ----------
-    model: Model
+    model : Model
         Model to create a ``SearchByThinStripParams`` object with default parameters.
-    strip_height_limit: float, optional
+    strip_height_limit : float, optional
         Absolute height limit to ignore strips with height more than provided limit.
-    quality_limit: float, optional
+    quality_limit : float, optional
         Quality limit used for search strip of face elements.
-    face_quality_measure: FaceQualityMeasure, optional
+    face_quality_measure : FaceQualityMeasure, optional
         Quality measure used for search strip of face elements.
-    feature_type: SurfaceFeatureType, optional
+    feature_type : SurfaceFeatureType, optional
         Used to identify thin strip of face elements based on the provided feature type.
-    feature_angle: float, optional
+    feature_angle : float, optional
         Angle used to identify angle based features.
-    json_data: dict, optional
+    json_data : dict, optional
         JSON dictionary to create a ``SearchByThinStripParams`` object with provided parameters.
 
     Examples
@@ -1270,11 +1270,11 @@ class SearchByThinStripParams(CoreObject):
 
     def __initialize(
             self,
-            strip_height_limit: float,
-            quality_limit: float,
-            face_quality_measure: FaceQualityMeasure,
-            feature_type: SurfaceFeatureType,
-            feature_angle: float):
+            strip_height_limit : float,
+            quality_limit : float,
+            face_quality_measure : FaceQualityMeasure,
+            feature_type : SurfaceFeatureType,
+            feature_angle : float):
         self._strip_height_limit = strip_height_limit
         self._quality_limit = quality_limit
         self._face_quality_measure = FaceQualityMeasure(face_quality_measure)
@@ -1284,30 +1284,30 @@ class SearchByThinStripParams(CoreObject):
     def __init__(
             self,
             model: CommunicationManager=None,
-            strip_height_limit: float = None,
-            quality_limit: float = None,
-            face_quality_measure: FaceQualityMeasure = None,
-            feature_type: SurfaceFeatureType = None,
-            feature_angle: float = None,
+            strip_height_limit : float = None,
+            quality_limit : float = None,
+            face_quality_measure : FaceQualityMeasure = None,
+            feature_type : SurfaceFeatureType = None,
+            feature_angle : float = None,
             json_data : dict = None,
              **kwargs):
         """Initialize a ``SearchByThinStripParams`` object.
 
         Parameters
         ----------
-        model: Model
+        model : Model
             Model to create a ``SearchByThinStripParams`` object with default parameters.
-        strip_height_limit: float, optional
+        strip_height_limit : float, optional
             Absolute height limit to ignore strips with height more than provided limit.
-        quality_limit: float, optional
+        quality_limit : float, optional
             Quality limit used for search strip of face elements.
-        face_quality_measure: FaceQualityMeasure, optional
+        face_quality_measure : FaceQualityMeasure, optional
             Quality measure used for search strip of face elements.
-        feature_type: SurfaceFeatureType, optional
+        feature_type : SurfaceFeatureType, optional
             Used to identify thin strip of face elements based on the provided feature type.
-        feature_angle: float, optional
+        feature_angle : float, optional
             Angle used to identify angle based features.
-        json_data: dict, optional
+        json_data : dict, optional
             JSON dictionary to create a ``SearchByThinStripParams`` object with provided parameters.
 
         Examples
@@ -1351,24 +1351,24 @@ class SearchByThinStripParams(CoreObject):
 
     @staticmethod
     def set_default(
-            strip_height_limit: float = None,
-            quality_limit: float = None,
-            face_quality_measure: FaceQualityMeasure = None,
-            feature_type: SurfaceFeatureType = None,
-            feature_angle: float = None):
+            strip_height_limit : float = None,
+            quality_limit : float = None,
+            face_quality_measure : FaceQualityMeasure = None,
+            feature_type : SurfaceFeatureType = None,
+            feature_angle : float = None):
         """Set the default values of the ``SearchByThinStripParams`` object.
 
         Parameters
         ----------
-        strip_height_limit: float, optional
+        strip_height_limit : float, optional
             Absolute height limit to ignore strips with height more than provided limit.
-        quality_limit: float, optional
+        quality_limit : float, optional
             Quality limit used for search strip of face elements.
-        face_quality_measure: FaceQualityMeasure, optional
+        face_quality_measure : FaceQualityMeasure, optional
             Quality measure used for search strip of face elements.
-        feature_type: SurfaceFeatureType, optional
+        feature_type : SurfaceFeatureType, optional
             Used to identify thin strip of face elements based on the provided feature type.
-        feature_angle: float, optional
+        feature_angle : float, optional
             Angle used to identify angle based features.
         """
         args = locals()
@@ -1461,13 +1461,13 @@ class SearchByThinStripResults(CoreObject):
 
     Parameters
     ----------
-    model: Model
+    model : Model
         Model to create a ``SearchByThinStripResults`` object with default parameters.
-    n_found: int, optional
+    n_found : int, optional
         Number of face elements identified as thin strips.
-    error_code: ErrorCode, optional
+    error_code : ErrorCode, optional
         Error code associated with search thin strips operation.
-    json_data: dict, optional
+    json_data : dict, optional
         JSON dictionary to create a ``SearchByThinStripResults`` object with provided parameters.
 
     Examples
@@ -1478,29 +1478,29 @@ class SearchByThinStripResults(CoreObject):
 
     def __initialize(
             self,
-            n_found: int,
-            error_code: ErrorCode):
+            n_found : int,
+            error_code : ErrorCode):
         self._n_found = n_found
         self._error_code = ErrorCode(error_code)
 
     def __init__(
             self,
             model: CommunicationManager=None,
-            n_found: int = None,
-            error_code: ErrorCode = None,
+            n_found : int = None,
+            error_code : ErrorCode = None,
             json_data : dict = None,
              **kwargs):
         """Initialize a ``SearchByThinStripResults`` object.
 
         Parameters
         ----------
-        model: Model
+        model : Model
             Model to create a ``SearchByThinStripResults`` object with default parameters.
-        n_found: int, optional
+        n_found : int, optional
             Number of face elements identified as thin strips.
-        error_code: ErrorCode, optional
+        error_code : ErrorCode, optional
             Error code associated with search thin strips operation.
-        json_data: dict, optional
+        json_data : dict, optional
             JSON dictionary to create a ``SearchByThinStripResults`` object with provided parameters.
 
         Examples
@@ -1535,15 +1535,15 @@ class SearchByThinStripResults(CoreObject):
 
     @staticmethod
     def set_default(
-            n_found: int = None,
-            error_code: ErrorCode = None):
+            n_found : int = None,
+            error_code : ErrorCode = None):
         """Set the default values of the ``SearchByThinStripResults`` object.
 
         Parameters
         ----------
-        n_found: int, optional
+        n_found : int, optional
             Number of face elements identified as thin strips.
-        error_code: ErrorCode, optional
+        error_code : ErrorCode, optional
             Error code associated with search thin strips operation.
         """
         args = locals()
@@ -1600,21 +1600,21 @@ class SurfaceQualityResult(CoreObject):
 
     Parameters
     ----------
-    model: Model
+    model : Model
         Model to create a ``SurfaceQualityResult`` object with default parameters.
-    face_quality_measure: FaceQualityMeasure, optional
+    face_quality_measure : FaceQualityMeasure, optional
         Type of the face quality measure.
-    measure_name: str, optional
+    measure_name : str, optional
         Name of the face quality measure.
-    quality_limit: float, optional
+    quality_limit : float, optional
         Target quality limit used to find failures.
-    n_found: int, optional
+    n_found : int, optional
         Number of failed faces.
-    max_quality: float, optional
+    max_quality : float, optional
         Maximum value of quality measure.
-    min_quality: float, optional
+    min_quality : float, optional
         Minimum value of quality measure.
-    json_data: dict, optional
+    json_data : dict, optional
         JSON dictionary to create a ``SurfaceQualityResult`` object with provided parameters.
 
     Examples
@@ -1625,12 +1625,12 @@ class SurfaceQualityResult(CoreObject):
 
     def __initialize(
             self,
-            face_quality_measure: FaceQualityMeasure,
-            measure_name: str,
-            quality_limit: float,
-            n_found: int,
-            max_quality: float,
-            min_quality: float):
+            face_quality_measure : FaceQualityMeasure,
+            measure_name : str,
+            quality_limit : float,
+            n_found : int,
+            max_quality : float,
+            min_quality : float):
         self._face_quality_measure = FaceQualityMeasure(face_quality_measure)
         self._measure_name = measure_name
         self._quality_limit = quality_limit
@@ -1641,33 +1641,33 @@ class SurfaceQualityResult(CoreObject):
     def __init__(
             self,
             model: CommunicationManager=None,
-            face_quality_measure: FaceQualityMeasure = None,
-            measure_name: str = None,
-            quality_limit: float = None,
-            n_found: int = None,
-            max_quality: float = None,
-            min_quality: float = None,
+            face_quality_measure : FaceQualityMeasure = None,
+            measure_name : str = None,
+            quality_limit : float = None,
+            n_found : int = None,
+            max_quality : float = None,
+            min_quality : float = None,
             json_data : dict = None,
              **kwargs):
         """Initialize a ``SurfaceQualityResult`` object.
 
         Parameters
         ----------
-        model: Model
+        model : Model
             Model to create a ``SurfaceQualityResult`` object with default parameters.
-        face_quality_measure: FaceQualityMeasure, optional
+        face_quality_measure : FaceQualityMeasure, optional
             Type of the face quality measure.
-        measure_name: str, optional
+        measure_name : str, optional
             Name of the face quality measure.
-        quality_limit: float, optional
+        quality_limit : float, optional
             Target quality limit used to find failures.
-        n_found: int, optional
+        n_found : int, optional
             Number of failed faces.
-        max_quality: float, optional
+        max_quality : float, optional
             Maximum value of quality measure.
-        min_quality: float, optional
+        min_quality : float, optional
             Minimum value of quality measure.
-        json_data: dict, optional
+        json_data : dict, optional
             JSON dictionary to create a ``SurfaceQualityResult`` object with provided parameters.
 
         Examples
@@ -1714,27 +1714,27 @@ class SurfaceQualityResult(CoreObject):
 
     @staticmethod
     def set_default(
-            face_quality_measure: FaceQualityMeasure = None,
-            measure_name: str = None,
-            quality_limit: float = None,
-            n_found: int = None,
-            max_quality: float = None,
-            min_quality: float = None):
+            face_quality_measure : FaceQualityMeasure = None,
+            measure_name : str = None,
+            quality_limit : float = None,
+            n_found : int = None,
+            max_quality : float = None,
+            min_quality : float = None):
         """Set the default values of the ``SurfaceQualityResult`` object.
 
         Parameters
         ----------
-        face_quality_measure: FaceQualityMeasure, optional
+        face_quality_measure : FaceQualityMeasure, optional
             Type of the face quality measure.
-        measure_name: str, optional
+        measure_name : str, optional
             Name of the face quality measure.
-        quality_limit: float, optional
+        quality_limit : float, optional
             Target quality limit used to find failures.
-        n_found: int, optional
+        n_found : int, optional
             Number of failed faces.
-        max_quality: float, optional
+        max_quality : float, optional
             Maximum value of quality measure.
-        min_quality: float, optional
+        min_quality : float, optional
             Minimum value of quality measure.
         """
         args = locals()
@@ -1839,15 +1839,15 @@ class SurfaceQualitySummaryResults(CoreObject):
 
     Parameters
     ----------
-    model: Model
+    model : Model
         Model to create a ``SurfaceQualitySummaryResults`` object with default parameters.
-    error_code: ErrorCode, optional
+    error_code : ErrorCode, optional
         Error code associated with the surface quality summary.
-    quality_results: List[SurfaceQualityResult], optional
+    quality_results : List[SurfaceQualityResult], optional
         Contains surface quality result per face quality measure specified in parameters.
-    summary: str, optional
+    summary : str, optional
         Surface quality summary text.
-    json_data: dict, optional
+    json_data : dict, optional
         JSON dictionary to create a ``SurfaceQualitySummaryResults`` object with provided parameters.
 
     Examples
@@ -1858,9 +1858,9 @@ class SurfaceQualitySummaryResults(CoreObject):
 
     def __initialize(
             self,
-            error_code: ErrorCode,
-            quality_results: List[SurfaceQualityResult],
-            summary: str):
+            error_code : ErrorCode,
+            quality_results : List[SurfaceQualityResult],
+            summary : str):
         self._error_code = ErrorCode(error_code)
         self._quality_results = quality_results
         self._summary = summary
@@ -1868,24 +1868,24 @@ class SurfaceQualitySummaryResults(CoreObject):
     def __init__(
             self,
             model: CommunicationManager=None,
-            error_code: ErrorCode = None,
-            quality_results: List[SurfaceQualityResult] = None,
-            summary: str = None,
+            error_code : ErrorCode = None,
+            quality_results : List[SurfaceQualityResult] = None,
+            summary : str = None,
             json_data : dict = None,
              **kwargs):
         """Initialize a ``SurfaceQualitySummaryResults`` object.
 
         Parameters
         ----------
-        model: Model
+        model : Model
             Model to create a ``SurfaceQualitySummaryResults`` object with default parameters.
-        error_code: ErrorCode, optional
+        error_code : ErrorCode, optional
             Error code associated with the surface quality summary.
-        quality_results: List[SurfaceQualityResult], optional
+        quality_results : List[SurfaceQualityResult], optional
             Contains surface quality result per face quality measure specified in parameters.
-        summary: str, optional
+        summary : str, optional
             Surface quality summary text.
-        json_data: dict, optional
+        json_data : dict, optional
             JSON dictionary to create a ``SurfaceQualitySummaryResults`` object with provided parameters.
 
         Examples
@@ -1923,18 +1923,18 @@ class SurfaceQualitySummaryResults(CoreObject):
 
     @staticmethod
     def set_default(
-            error_code: ErrorCode = None,
-            quality_results: List[SurfaceQualityResult] = None,
-            summary: str = None):
+            error_code : ErrorCode = None,
+            quality_results : List[SurfaceQualityResult] = None,
+            summary : str = None):
         """Set the default values of the ``SurfaceQualitySummaryResults`` object.
 
         Parameters
         ----------
-        error_code: ErrorCode, optional
+        error_code : ErrorCode, optional
             Error code associated with the surface quality summary.
-        quality_results: List[SurfaceQualityResult], optional
+        quality_results : List[SurfaceQualityResult], optional
             Contains surface quality result per face quality measure specified in parameters.
-        summary: str, optional
+        summary : str, optional
             Surface quality summary text.
         """
         args = locals()
@@ -2003,15 +2003,15 @@ class SurfaceQualitySummaryParams(CoreObject):
 
     Parameters
     ----------
-    model: Model
+    model : Model
         Model to create a ``SurfaceQualitySummaryParams`` object with default parameters.
-    face_quality_measures: List[FaceQualityMeasure], optional
+    face_quality_measures : List[FaceQualityMeasure], optional
         List of face quality measures for surface quality diagnostics.
-    scope: ScopeDefinition, optional
+    scope : ScopeDefinition, optional
         Scope the face zonelets for surface quality diagnostics.
-    quality_limit: Iterable[float], optional
+    quality_limit : Iterable[float], optional
         Quality limit per face quality measure. If the quality limit is not specified, the default quality limit is used.
-    json_data: dict, optional
+    json_data : dict, optional
         JSON dictionary to create a ``SurfaceQualitySummaryParams`` object with provided parameters.
 
     Examples
@@ -2022,9 +2022,9 @@ class SurfaceQualitySummaryParams(CoreObject):
 
     def __initialize(
             self,
-            face_quality_measures: List[FaceQualityMeasure],
-            scope: ScopeDefinition,
-            quality_limit: Iterable[float]):
+            face_quality_measures : List[FaceQualityMeasure],
+            scope : ScopeDefinition,
+            quality_limit : Iterable[float]):
         self._face_quality_measures = face_quality_measures
         self._scope = scope
         self._quality_limit = quality_limit if isinstance(quality_limit, np.ndarray) else np.array(quality_limit, dtype=np.double) if quality_limit is not None else None
@@ -2032,24 +2032,24 @@ class SurfaceQualitySummaryParams(CoreObject):
     def __init__(
             self,
             model: CommunicationManager=None,
-            face_quality_measures: List[FaceQualityMeasure] = None,
-            scope: ScopeDefinition = None,
-            quality_limit: Iterable[float] = None,
+            face_quality_measures : List[FaceQualityMeasure] = None,
+            scope : ScopeDefinition = None,
+            quality_limit : Iterable[float] = None,
             json_data : dict = None,
              **kwargs):
         """Initialize a ``SurfaceQualitySummaryParams`` object.
 
         Parameters
         ----------
-        model: Model
+        model : Model
             Model to create a ``SurfaceQualitySummaryParams`` object with default parameters.
-        face_quality_measures: List[FaceQualityMeasure], optional
+        face_quality_measures : List[FaceQualityMeasure], optional
             List of face quality measures for surface quality diagnostics.
-        scope: ScopeDefinition, optional
+        scope : ScopeDefinition, optional
             Scope the face zonelets for surface quality diagnostics.
-        quality_limit: Iterable[float], optional
+        quality_limit : Iterable[float], optional
             Quality limit per face quality measure. If the quality limit is not specified, the default quality limit is used.
-        json_data: dict, optional
+        json_data : dict, optional
             JSON dictionary to create a ``SurfaceQualitySummaryParams`` object with provided parameters.
 
         Examples
@@ -2087,18 +2087,18 @@ class SurfaceQualitySummaryParams(CoreObject):
 
     @staticmethod
     def set_default(
-            face_quality_measures: List[FaceQualityMeasure] = None,
-            scope: ScopeDefinition = None,
-            quality_limit: Iterable[float] = None):
+            face_quality_measures : List[FaceQualityMeasure] = None,
+            scope : ScopeDefinition = None,
+            quality_limit : Iterable[float] = None):
         """Set the default values of the ``SurfaceQualitySummaryParams`` object.
 
         Parameters
         ----------
-        face_quality_measures: List[FaceQualityMeasure], optional
+        face_quality_measures : List[FaceQualityMeasure], optional
             List of face quality measures for surface quality diagnostics.
-        scope: ScopeDefinition, optional
+        scope : ScopeDefinition, optional
             Scope the face zonelets for surface quality diagnostics.
-        quality_limit: Iterable[float], optional
+        quality_limit : Iterable[float], optional
             Quality limit per face quality measure. If the quality limit is not specified, the default quality limit is used.
         """
         args = locals()
@@ -2121,7 +2121,7 @@ class SurfaceQualitySummaryParams(CoreObject):
         if self._face_quality_measures is not None:
             json_data["faceQualityMeasures"] = [data for data in self._face_quality_measures]
         if self._scope is not None:
-            json_data["scope"] = self._scope._jsonify()
+            json_data["scope"] = self._scope if isinstance(self._scope, dict) else self._scope._jsonify()
         if self._quality_limit is not None:
             json_data["qualityLimit"] = self._quality_limit
         [ json_data.update({ utils.to_camel_case(key) : value }) for key, value in self._custom_params.items()]
@@ -2167,19 +2167,19 @@ class SurfaceDiagnosticSummaryResults(CoreObject):
 
     Parameters
     ----------
-    model: Model
+    model : Model
         Model to create a ``SurfaceDiagnosticSummaryResults`` object with default parameters.
-    error_code: ErrorCode, optional
+    error_code : ErrorCode, optional
         Error code associated with the surface diagnostic summary.
-    n_self_intersections: int, optional
+    n_self_intersections : int, optional
         Number of self intersecting faces identified.
-    n_free_edges: int, optional
+    n_free_edges : int, optional
         Number of free face edges identified.
-    n_multi_edges: int, optional
+    n_multi_edges : int, optional
         Number of multi face edges identified.
-    n_duplicate_faces: int, optional
+    n_duplicate_faces : int, optional
         Number of duplicate faces identified.
-    json_data: dict, optional
+    json_data : dict, optional
         JSON dictionary to create a ``SurfaceDiagnosticSummaryResults`` object with provided parameters.
 
     Examples
@@ -2190,11 +2190,11 @@ class SurfaceDiagnosticSummaryResults(CoreObject):
 
     def __initialize(
             self,
-            error_code: ErrorCode,
-            n_self_intersections: int,
-            n_free_edges: int,
-            n_multi_edges: int,
-            n_duplicate_faces: int):
+            error_code : ErrorCode,
+            n_self_intersections : int,
+            n_free_edges : int,
+            n_multi_edges : int,
+            n_duplicate_faces : int):
         self._error_code = ErrorCode(error_code)
         self._n_self_intersections = n_self_intersections
         self._n_free_edges = n_free_edges
@@ -2204,30 +2204,30 @@ class SurfaceDiagnosticSummaryResults(CoreObject):
     def __init__(
             self,
             model: CommunicationManager=None,
-            error_code: ErrorCode = None,
-            n_self_intersections: int = None,
-            n_free_edges: int = None,
-            n_multi_edges: int = None,
-            n_duplicate_faces: int = None,
+            error_code : ErrorCode = None,
+            n_self_intersections : int = None,
+            n_free_edges : int = None,
+            n_multi_edges : int = None,
+            n_duplicate_faces : int = None,
             json_data : dict = None,
              **kwargs):
         """Initialize a ``SurfaceDiagnosticSummaryResults`` object.
 
         Parameters
         ----------
-        model: Model
+        model : Model
             Model to create a ``SurfaceDiagnosticSummaryResults`` object with default parameters.
-        error_code: ErrorCode, optional
+        error_code : ErrorCode, optional
             Error code associated with the surface diagnostic summary.
-        n_self_intersections: int, optional
+        n_self_intersections : int, optional
             Number of self intersecting faces identified.
-        n_free_edges: int, optional
+        n_free_edges : int, optional
             Number of free face edges identified.
-        n_multi_edges: int, optional
+        n_multi_edges : int, optional
             Number of multi face edges identified.
-        n_duplicate_faces: int, optional
+        n_duplicate_faces : int, optional
             Number of duplicate faces identified.
-        json_data: dict, optional
+        json_data : dict, optional
             JSON dictionary to create a ``SurfaceDiagnosticSummaryResults`` object with provided parameters.
 
         Examples
@@ -2271,24 +2271,24 @@ class SurfaceDiagnosticSummaryResults(CoreObject):
 
     @staticmethod
     def set_default(
-            error_code: ErrorCode = None,
-            n_self_intersections: int = None,
-            n_free_edges: int = None,
-            n_multi_edges: int = None,
-            n_duplicate_faces: int = None):
+            error_code : ErrorCode = None,
+            n_self_intersections : int = None,
+            n_free_edges : int = None,
+            n_multi_edges : int = None,
+            n_duplicate_faces : int = None):
         """Set the default values of the ``SurfaceDiagnosticSummaryResults`` object.
 
         Parameters
         ----------
-        error_code: ErrorCode, optional
+        error_code : ErrorCode, optional
             Error code associated with the surface diagnostic summary.
-        n_self_intersections: int, optional
+        n_self_intersections : int, optional
             Number of self intersecting faces identified.
-        n_free_edges: int, optional
+        n_free_edges : int, optional
             Number of free face edges identified.
-        n_multi_edges: int, optional
+        n_multi_edges : int, optional
             Number of multi face edges identified.
-        n_duplicate_faces: int, optional
+        n_duplicate_faces : int, optional
             Number of duplicate faces identified.
         """
         args = locals()
@@ -2381,19 +2381,19 @@ class SurfaceDiagnosticSummaryParams(CoreObject):
 
     Parameters
     ----------
-    model: Model
+    model : Model
         Model to create a ``SurfaceDiagnosticSummaryParams`` object with default parameters.
-    scope: ScopeDefinition, optional
+    scope : ScopeDefinition, optional
         Scope the face zonelets for surface diagnostics.
-    compute_self_intersections: bool, optional
+    compute_self_intersections : bool, optional
         Control to identify face intersections are present or not.
-    compute_free_edges: bool, optional
+    compute_free_edges : bool, optional
         Control to identify free face edges are present or not.
-    compute_multi_edges: bool, optional
+    compute_multi_edges : bool, optional
         Control to identify multi face edges are present or not.
-    compute_duplicate_faces: bool, optional
+    compute_duplicate_faces : bool, optional
         Control to identify duplicate faces are present or not.
-    json_data: dict, optional
+    json_data : dict, optional
         JSON dictionary to create a ``SurfaceDiagnosticSummaryParams`` object with provided parameters.
 
     Examples
@@ -2404,11 +2404,11 @@ class SurfaceDiagnosticSummaryParams(CoreObject):
 
     def __initialize(
             self,
-            scope: ScopeDefinition,
-            compute_self_intersections: bool,
-            compute_free_edges: bool,
-            compute_multi_edges: bool,
-            compute_duplicate_faces: bool):
+            scope : ScopeDefinition,
+            compute_self_intersections : bool,
+            compute_free_edges : bool,
+            compute_multi_edges : bool,
+            compute_duplicate_faces : bool):
         self._scope = scope
         self._compute_self_intersections = compute_self_intersections
         self._compute_free_edges = compute_free_edges
@@ -2418,30 +2418,30 @@ class SurfaceDiagnosticSummaryParams(CoreObject):
     def __init__(
             self,
             model: CommunicationManager=None,
-            scope: ScopeDefinition = None,
-            compute_self_intersections: bool = None,
-            compute_free_edges: bool = None,
-            compute_multi_edges: bool = None,
-            compute_duplicate_faces: bool = None,
+            scope : ScopeDefinition = None,
+            compute_self_intersections : bool = None,
+            compute_free_edges : bool = None,
+            compute_multi_edges : bool = None,
+            compute_duplicate_faces : bool = None,
             json_data : dict = None,
              **kwargs):
         """Initialize a ``SurfaceDiagnosticSummaryParams`` object.
 
         Parameters
         ----------
-        model: Model
+        model : Model
             Model to create a ``SurfaceDiagnosticSummaryParams`` object with default parameters.
-        scope: ScopeDefinition, optional
+        scope : ScopeDefinition, optional
             Scope the face zonelets for surface diagnostics.
-        compute_self_intersections: bool, optional
+        compute_self_intersections : bool, optional
             Control to identify face intersections are present or not.
-        compute_free_edges: bool, optional
+        compute_free_edges : bool, optional
             Control to identify free face edges are present or not.
-        compute_multi_edges: bool, optional
+        compute_multi_edges : bool, optional
             Control to identify multi face edges are present or not.
-        compute_duplicate_faces: bool, optional
+        compute_duplicate_faces : bool, optional
             Control to identify duplicate faces are present or not.
-        json_data: dict, optional
+        json_data : dict, optional
             JSON dictionary to create a ``SurfaceDiagnosticSummaryParams`` object with provided parameters.
 
         Examples
@@ -2485,24 +2485,24 @@ class SurfaceDiagnosticSummaryParams(CoreObject):
 
     @staticmethod
     def set_default(
-            scope: ScopeDefinition = None,
-            compute_self_intersections: bool = None,
-            compute_free_edges: bool = None,
-            compute_multi_edges: bool = None,
-            compute_duplicate_faces: bool = None):
+            scope : ScopeDefinition = None,
+            compute_self_intersections : bool = None,
+            compute_free_edges : bool = None,
+            compute_multi_edges : bool = None,
+            compute_duplicate_faces : bool = None):
         """Set the default values of the ``SurfaceDiagnosticSummaryParams`` object.
 
         Parameters
         ----------
-        scope: ScopeDefinition, optional
+        scope : ScopeDefinition, optional
             Scope the face zonelets for surface diagnostics.
-        compute_self_intersections: bool, optional
+        compute_self_intersections : bool, optional
             Control to identify face intersections are present or not.
-        compute_free_edges: bool, optional
+        compute_free_edges : bool, optional
             Control to identify free face edges are present or not.
-        compute_multi_edges: bool, optional
+        compute_multi_edges : bool, optional
             Control to identify multi face edges are present or not.
-        compute_duplicate_faces: bool, optional
+        compute_duplicate_faces : bool, optional
             Control to identify duplicate faces are present or not.
         """
         args = locals()
@@ -2523,7 +2523,7 @@ class SurfaceDiagnosticSummaryParams(CoreObject):
     def _jsonify(self) -> Dict[str, Any]:
         json_data = {}
         if self._scope is not None:
-            json_data["scope"] = self._scope._jsonify()
+            json_data["scope"] = self._scope if isinstance(self._scope, dict) else self._scope._jsonify()
         if self._compute_self_intersections is not None:
             json_data["computeSelfIntersections"] = self._compute_self_intersections
         if self._compute_free_edges is not None:
@@ -2595,9 +2595,9 @@ class SearchInfoByRegisterIdParams(CoreObject):
 
     Parameters
     ----------
-    model: Model
+    model : Model
         Model to create a ``SearchInfoByRegisterIdParams`` object with default parameters.
-    json_data: dict, optional
+    json_data : dict, optional
         JSON dictionary to create a ``SearchInfoByRegisterIdParams`` object with provided parameters.
 
     Examples
@@ -2619,9 +2619,9 @@ class SearchInfoByRegisterIdParams(CoreObject):
 
         Parameters
         ----------
-        model: Model
+        model : Model
             Model to create a ``SearchInfoByRegisterIdParams`` object with default parameters.
-        json_data: dict, optional
+        json_data : dict, optional
             JSON dictionary to create a ``SearchInfoByRegisterIdParams`` object with provided parameters.
 
         Examples
@@ -2685,17 +2685,17 @@ class SearchInfoByRegisterIdResults(CoreObject):
 
     Parameters
     ----------
-    model: Model
+    model : Model
         Model to create a ``SearchInfoByRegisterIdResults`` object with default parameters.
-    error_code: ErrorCode, optional
+    error_code : ErrorCode, optional
         Error code associated with the retrieving information based on register id.
-    n_found: int, optional
+    n_found : int, optional
         Number of registered face elements.
-    locations_found: Iterable[float], optional
+    locations_found : Iterable[float], optional
         Locations of each cluster of registered face elements.
-    face_zonelets_found: Iterable[int], optional
+    face_zonelets_found : Iterable[int], optional
         Ids of the face zonelets containing at least one registered face element.
-    json_data: dict, optional
+    json_data : dict, optional
         JSON dictionary to create a ``SearchInfoByRegisterIdResults`` object with provided parameters.
 
     Examples
@@ -2706,10 +2706,10 @@ class SearchInfoByRegisterIdResults(CoreObject):
 
     def __initialize(
             self,
-            error_code: ErrorCode,
-            n_found: int,
-            locations_found: Iterable[float],
-            face_zonelets_found: Iterable[int]):
+            error_code : ErrorCode,
+            n_found : int,
+            locations_found : Iterable[float],
+            face_zonelets_found : Iterable[int]):
         self._error_code = ErrorCode(error_code)
         self._n_found = n_found
         self._locations_found = locations_found if isinstance(locations_found, np.ndarray) else np.array(locations_found, dtype=np.double) if locations_found is not None else None
@@ -2718,27 +2718,27 @@ class SearchInfoByRegisterIdResults(CoreObject):
     def __init__(
             self,
             model: CommunicationManager=None,
-            error_code: ErrorCode = None,
-            n_found: int = None,
-            locations_found: Iterable[float] = None,
-            face_zonelets_found: Iterable[int] = None,
+            error_code : ErrorCode = None,
+            n_found : int = None,
+            locations_found : Iterable[float] = None,
+            face_zonelets_found : Iterable[int] = None,
             json_data : dict = None,
              **kwargs):
         """Initialize a ``SearchInfoByRegisterIdResults`` object.
 
         Parameters
         ----------
-        model: Model
+        model : Model
             Model to create a ``SearchInfoByRegisterIdResults`` object with default parameters.
-        error_code: ErrorCode, optional
+        error_code : ErrorCode, optional
             Error code associated with the retrieving information based on register id.
-        n_found: int, optional
+        n_found : int, optional
             Number of registered face elements.
-        locations_found: Iterable[float], optional
+        locations_found : Iterable[float], optional
             Locations of each cluster of registered face elements.
-        face_zonelets_found: Iterable[int], optional
+        face_zonelets_found : Iterable[int], optional
             Ids of the face zonelets containing at least one registered face element.
-        json_data: dict, optional
+        json_data : dict, optional
             JSON dictionary to create a ``SearchInfoByRegisterIdResults`` object with provided parameters.
 
         Examples
@@ -2779,21 +2779,21 @@ class SearchInfoByRegisterIdResults(CoreObject):
 
     @staticmethod
     def set_default(
-            error_code: ErrorCode = None,
-            n_found: int = None,
-            locations_found: Iterable[float] = None,
-            face_zonelets_found: Iterable[int] = None):
+            error_code : ErrorCode = None,
+            n_found : int = None,
+            locations_found : Iterable[float] = None,
+            face_zonelets_found : Iterable[int] = None):
         """Set the default values of the ``SearchInfoByRegisterIdResults`` object.
 
         Parameters
         ----------
-        error_code: ErrorCode, optional
+        error_code : ErrorCode, optional
             Error code associated with the retrieving information based on register id.
-        n_found: int, optional
+        n_found : int, optional
             Number of registered face elements.
-        locations_found: Iterable[float], optional
+        locations_found : Iterable[float], optional
             Locations of each cluster of registered face elements.
-        face_zonelets_found: Iterable[int], optional
+        face_zonelets_found : Iterable[int], optional
             Ids of the face zonelets containing at least one registered face element.
         """
         args = locals()
@@ -2874,11 +2874,11 @@ class CheckFaceDeviationParams(CoreObject):
 
     Parameters
     ----------
-    model: Model
+    model : Model
         Model to create a ``CheckFaceDeviationParams`` object with default parameters.
-    distance: float, optional
+    distance : float, optional
         Distance above which deviated entities are collected.
-    json_data: dict, optional
+    json_data : dict, optional
         JSON dictionary to create a ``CheckFaceDeviationParams`` object with provided parameters.
 
     Examples
@@ -2889,24 +2889,24 @@ class CheckFaceDeviationParams(CoreObject):
 
     def __initialize(
             self,
-            distance: float):
+            distance : float):
         self._distance = distance
 
     def __init__(
             self,
             model: CommunicationManager=None,
-            distance: float = None,
+            distance : float = None,
             json_data : dict = None,
              **kwargs):
         """Initialize a ``CheckFaceDeviationParams`` object.
 
         Parameters
         ----------
-        model: Model
+        model : Model
             Model to create a ``CheckFaceDeviationParams`` object with default parameters.
-        distance: float, optional
+        distance : float, optional
             Distance above which deviated entities are collected.
-        json_data: dict, optional
+        json_data : dict, optional
             JSON dictionary to create a ``CheckFaceDeviationParams`` object with provided parameters.
 
         Examples
@@ -2938,12 +2938,12 @@ class CheckFaceDeviationParams(CoreObject):
 
     @staticmethod
     def set_default(
-            distance: float = None):
+            distance : float = None):
         """Set the default values of the ``CheckFaceDeviationParams`` object.
 
         Parameters
         ----------
-        distance: float, optional
+        distance : float, optional
             Distance above which deviated entities are collected.
         """
         args = locals()
@@ -2988,13 +2988,13 @@ class CheckFaceDeviationResults(CoreObject):
 
     Parameters
     ----------
-    model: Model
+    model : Model
         Model to create a ``CheckFaceDeviationResults`` object with default parameters.
-    n_deviated: int, optional
+    n_deviated : int, optional
         Number of faces with deviation.
-    maximum_deviation: float, optional
+    maximum_deviation : float, optional
         Maximum deviation found.
-    json_data: dict, optional
+    json_data : dict, optional
         JSON dictionary to create a ``CheckFaceDeviationResults`` object with provided parameters.
 
     Examples
@@ -3005,29 +3005,29 @@ class CheckFaceDeviationResults(CoreObject):
 
     def __initialize(
             self,
-            n_deviated: int,
-            maximum_deviation: float):
+            n_deviated : int,
+            maximum_deviation : float):
         self._n_deviated = n_deviated
         self._maximum_deviation = maximum_deviation
 
     def __init__(
             self,
             model: CommunicationManager=None,
-            n_deviated: int = None,
-            maximum_deviation: float = None,
+            n_deviated : int = None,
+            maximum_deviation : float = None,
             json_data : dict = None,
              **kwargs):
         """Initialize a ``CheckFaceDeviationResults`` object.
 
         Parameters
         ----------
-        model: Model
+        model : Model
             Model to create a ``CheckFaceDeviationResults`` object with default parameters.
-        n_deviated: int, optional
+        n_deviated : int, optional
             Number of faces with deviation.
-        maximum_deviation: float, optional
+        maximum_deviation : float, optional
             Maximum deviation found.
-        json_data: dict, optional
+        json_data : dict, optional
             JSON dictionary to create a ``CheckFaceDeviationResults`` object with provided parameters.
 
         Examples
@@ -3062,15 +3062,15 @@ class CheckFaceDeviationResults(CoreObject):
 
     @staticmethod
     def set_default(
-            n_deviated: int = None,
-            maximum_deviation: float = None):
+            n_deviated : int = None,
+            maximum_deviation : float = None):
         """Set the default values of the ``CheckFaceDeviationResults`` object.
 
         Parameters
         ----------
-        n_deviated: int, optional
+        n_deviated : int, optional
             Number of faces with deviation.
-        maximum_deviation: float, optional
+        maximum_deviation : float, optional
             Maximum deviation found.
         """
         args = locals()

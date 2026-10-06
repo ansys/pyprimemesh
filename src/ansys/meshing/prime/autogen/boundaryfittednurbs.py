@@ -1,4 +1,4 @@
-# Copyright (C) 2024 - 2025 ANSYS, Inc. and/or its affiliates.
+# Copyright (C) 2026 Synopsys, Inc. and ANSYS, Inc. All rights reserved.
 # SPDX-License-Identifier: MIT
 #
 #
@@ -25,7 +25,7 @@ from __future__ import annotations
 from ansys.meshing.prime.internals.comm_manager import CommunicationManager
 from ansys.meshing.prime.params.primestructs import *
 from ansys.meshing.prime.autogen.coreobject import *
-from typing import List, Any, Union
+from typing import Dict, Any, Union, List, Iterable
 
 class BoundaryFittedSpline(CoreObject):
     """BoundaryFittedSpline helps you to create splines for structured hex-mesh model.
@@ -57,7 +57,7 @@ class BoundaryFittedSpline(CoreObject):
         command_name = "PrimeMesh::BoundaryFittedSpline/Destruct"
         self._comm.serve(self._model, command_name, self._object_id, args={})
 
-    def create_boundary_fitted_spline(self, part_id : int, cell_zonelet_ids : Iterable[int], boundary_fitted_spline_params : BoundaryFittedSplineParams) -> IGAResults:
+    def create_boundary_fitted_spline(self, part_id :  int, cell_zonelet_ids : Iterable[int], boundary_fitted_spline_params : BoundaryFittedSplineParams) -> IGAResults:
         """ Create boundary fitted spline for structured hex-mesh.
 
         The hex-mesh can be structured in blocks but must be conformally connected.
@@ -66,7 +66,7 @@ class BoundaryFittedSpline(CoreObject):
 
         Parameters
         ----------
-        part_id : int
+        part_id :  int
             Id of the part.
         cell_zonelet_ids : Iterable[int]
             Ids of the cell zonelets on which spline will be fit.
@@ -89,11 +89,11 @@ class BoundaryFittedSpline(CoreObject):
         >>> results = boundary_fitted_spline.create_boundary_fitted_spline(part_id, cell_zonelet_ids, boundary_fitted_spline_params)
 
         """
-        if not isinstance(part_id, int):
-            raise TypeError("Invalid argument type passed for 'part_id'. Valid argument type is int.")
+        if not isinstance(part_id,  int):
+            raise TypeError("Invalid argument type passed for 'part_id'. Valid argument type is  int.")
         if not isinstance(cell_zonelet_ids, Iterable):
             raise TypeError("Invalid argument type passed for 'cell_zonelet_ids'. Valid argument type is Iterable[int].")
-        if not isinstance(boundary_fitted_spline_params, BoundaryFittedSplineParams):
+        if type(boundary_fitted_spline_params).__name__ != 'BoundaryFittedSplineParams':
             raise TypeError("Invalid argument type passed for 'boundary_fitted_spline_params'. Valid argument type is BoundaryFittedSplineParams.")
         args = {"part_id" : part_id,
         "cell_zonelet_ids" : cell_zonelet_ids,
@@ -104,7 +104,7 @@ class BoundaryFittedSpline(CoreObject):
         self._model._print_logs_after_command("create_boundary_fitted_spline", IGAResults(model = self._model, json_data = result))
         return IGAResults(model = self._model, json_data = result)
 
-    def refine_spline(self, part_id : int, spline_ids : Iterable[int], refine_spline_params : RefineSplineParams) -> IGAResults:
+    def refine_spline(self, part_id :  int, spline_ids : Iterable[int], refine_spline_params : RefineSplineParams) -> IGAResults:
         """ Refine boundary fitted splines.
 
         Now H and P refinement are supported.
@@ -112,7 +112,7 @@ class BoundaryFittedSpline(CoreObject):
 
         Parameters
         ----------
-        part_id : int
+        part_id :  int
             Id of the part.
         spline_ids : Iterable[int]
             Ids of the splines on which refinement is performed.
@@ -135,11 +135,11 @@ class BoundaryFittedSpline(CoreObject):
         >>> results = boundary_fitted_spline.refine_spline(part_id, spline_ids, refine_spline_params)
 
         """
-        if not isinstance(part_id, int):
-            raise TypeError("Invalid argument type passed for 'part_id'. Valid argument type is int.")
+        if not isinstance(part_id,  int):
+            raise TypeError("Invalid argument type passed for 'part_id'. Valid argument type is  int.")
         if not isinstance(spline_ids, Iterable):
             raise TypeError("Invalid argument type passed for 'spline_ids'. Valid argument type is Iterable[int].")
-        if not isinstance(refine_spline_params, RefineSplineParams):
+        if type(refine_spline_params).__name__ != 'RefineSplineParams':
             raise TypeError("Invalid argument type passed for 'refine_spline_params'. Valid argument type is RefineSplineParams.")
         args = {"part_id" : part_id,
         "spline_ids" : spline_ids,

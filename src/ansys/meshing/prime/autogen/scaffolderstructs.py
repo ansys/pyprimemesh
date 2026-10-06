@@ -1,4 +1,4 @@
-# Copyright (C) 2024 - 2025 ANSYS, Inc. and/or its affiliates.
+# Copyright (C) 2026 Synopsys, Inc. and ANSYS, Inc. All rights reserved.
 # SPDX-License-Identifier: MIT
 #
 #
@@ -73,39 +73,39 @@ class ScaffolderParams(CoreObject):
 
     Parameters
     ----------
-    model: Model
+    model : Model
         Model to create a ``ScaffolderParams`` object with default parameters.
-    absolute_dist_tol: float, optional
+    absolute_dist_tol : float, optional
         Defines the maximum gap to connect.
-    repair_mode: ScaffolderRepairMode, optional
+    repair_mode : ScaffolderRepairMode, optional
         Defines the mode to be used during repair or connect.
 
         **This is a beta parameter**. **The behavior and name may change in the future**.
-    size_field_type: int, optional
+    size_field_type : int, optional
         Specifies the type of size field used for scaffolding.
 
         **This is a beta parameter**. **The behavior and name may change in the future**.
-    intersection_control_mask: IntersectionMask, optional
+    intersection_control_mask : IntersectionMask, optional
         Specifies the nature of intersection to be computed.
-    edge_merge_control: int, optional
+    edge_merge_control : int, optional
         Specifies type of edge pairs to be merged during scaffold operation.
 
         **This is a beta parameter**. **The behavior and name may change in the future**.
-    constant_mesh_size: float, optional
+    constant_mesh_size : float, optional
         Defines the constant edge mesh size to check connection.
-    remove_holes_critical_radius: float, optional
+    remove_holes_critical_radius : float, optional
         Defines the maximum radius of holes to be removed.
 
         **This is a beta parameter**. **The behavior and name may change in the future**.
-    remove_slivers_abs_dist_tol_ratio: float, optional
+    remove_slivers_abs_dist_tol_ratio : float, optional
         Defines the maximum aspect ratio to remove sliver faces.
 
         **This is a beta parameter**. **The behavior and name may change in the future**.
-    triangles_coplanar_angle_cos: float, optional
+    triangles_coplanar_angle_cos : float, optional
         Lower bound for cos angle to consider coplanar faces for scaffolding.
 
         **This is a beta parameter**. **The behavior and name may change in the future**.
-    json_data: dict, optional
+    json_data : dict, optional
         JSON dictionary to create a ``ScaffolderParams`` object with provided parameters.
 
     Examples
@@ -116,15 +116,15 @@ class ScaffolderParams(CoreObject):
 
     def __initialize(
             self,
-            absolute_dist_tol: float,
-            repair_mode: ScaffolderRepairMode,
-            size_field_type: int,
-            intersection_control_mask: IntersectionMask,
-            edge_merge_control: int,
-            constant_mesh_size: float,
-            remove_holes_critical_radius: float,
-            remove_slivers_abs_dist_tol_ratio: float,
-            triangles_coplanar_angle_cos: float):
+            absolute_dist_tol : float,
+            repair_mode : ScaffolderRepairMode,
+            size_field_type : int,
+            intersection_control_mask : IntersectionMask,
+            edge_merge_control : int,
+            constant_mesh_size : float,
+            remove_holes_critical_radius : float,
+            remove_slivers_abs_dist_tol_ratio : float,
+            triangles_coplanar_angle_cos : float):
         self._absolute_dist_tol = absolute_dist_tol
         self._repair_mode = ScaffolderRepairMode(repair_mode)
         self._size_field_type = size_field_type
@@ -138,54 +138,54 @@ class ScaffolderParams(CoreObject):
     def __init__(
             self,
             model: CommunicationManager=None,
-            absolute_dist_tol: float = None,
-            repair_mode: ScaffolderRepairMode = None,
-            size_field_type: int = None,
-            intersection_control_mask: IntersectionMask = None,
-            edge_merge_control: int = None,
-            constant_mesh_size: float = None,
-            remove_holes_critical_radius: float = None,
-            remove_slivers_abs_dist_tol_ratio: float = None,
-            triangles_coplanar_angle_cos: float = None,
+            absolute_dist_tol : float = None,
+            repair_mode : ScaffolderRepairMode = None,
+            size_field_type : int = None,
+            intersection_control_mask : IntersectionMask = None,
+            edge_merge_control : int = None,
+            constant_mesh_size : float = None,
+            remove_holes_critical_radius : float = None,
+            remove_slivers_abs_dist_tol_ratio : float = None,
+            triangles_coplanar_angle_cos : float = None,
             json_data : dict = None,
              **kwargs):
         """Initialize a ``ScaffolderParams`` object.
 
         Parameters
         ----------
-        model: Model
+        model : Model
             Model to create a ``ScaffolderParams`` object with default parameters.
-        absolute_dist_tol: float, optional
+        absolute_dist_tol : float, optional
             Defines the maximum gap to connect.
-        repair_mode: ScaffolderRepairMode, optional
+        repair_mode : ScaffolderRepairMode, optional
             Defines the mode to be used during repair or connect.
 
             **This is a beta parameter**. **The behavior and name may change in the future**.
-        size_field_type: int, optional
+        size_field_type : int, optional
             Specifies the type of size field used for scaffolding.
 
             **This is a beta parameter**. **The behavior and name may change in the future**.
-        intersection_control_mask: IntersectionMask, optional
+        intersection_control_mask : IntersectionMask, optional
             Specifies the nature of intersection to be computed.
-        edge_merge_control: int, optional
+        edge_merge_control : int, optional
             Specifies type of edge pairs to be merged during scaffold operation.
 
             **This is a beta parameter**. **The behavior and name may change in the future**.
-        constant_mesh_size: float, optional
+        constant_mesh_size : float, optional
             Defines the constant edge mesh size to check connection.
-        remove_holes_critical_radius: float, optional
+        remove_holes_critical_radius : float, optional
             Defines the maximum radius of holes to be removed.
 
             **This is a beta parameter**. **The behavior and name may change in the future**.
-        remove_slivers_abs_dist_tol_ratio: float, optional
+        remove_slivers_abs_dist_tol_ratio : float, optional
             Defines the maximum aspect ratio to remove sliver faces.
 
             **This is a beta parameter**. **The behavior and name may change in the future**.
-        triangles_coplanar_angle_cos: float, optional
+        triangles_coplanar_angle_cos : float, optional
             Lower bound for cos angle to consider coplanar faces for scaffolding.
 
             **This is a beta parameter**. **The behavior and name may change in the future**.
-        json_data: dict, optional
+        json_data : dict, optional
             JSON dictionary to create a ``ScaffolderParams`` object with provided parameters.
 
         Examples
@@ -241,36 +241,36 @@ class ScaffolderParams(CoreObject):
 
     @staticmethod
     def set_default(
-            absolute_dist_tol: float = None,
-            repair_mode: ScaffolderRepairMode = None,
-            size_field_type: int = None,
-            intersection_control_mask: IntersectionMask = None,
-            edge_merge_control: int = None,
-            constant_mesh_size: float = None,
-            remove_holes_critical_radius: float = None,
-            remove_slivers_abs_dist_tol_ratio: float = None,
-            triangles_coplanar_angle_cos: float = None):
+            absolute_dist_tol : float = None,
+            repair_mode : ScaffolderRepairMode = None,
+            size_field_type : int = None,
+            intersection_control_mask : IntersectionMask = None,
+            edge_merge_control : int = None,
+            constant_mesh_size : float = None,
+            remove_holes_critical_radius : float = None,
+            remove_slivers_abs_dist_tol_ratio : float = None,
+            triangles_coplanar_angle_cos : float = None):
         """Set the default values of the ``ScaffolderParams`` object.
 
         Parameters
         ----------
-        absolute_dist_tol: float, optional
+        absolute_dist_tol : float, optional
             Defines the maximum gap to connect.
-        repair_mode: ScaffolderRepairMode, optional
+        repair_mode : ScaffolderRepairMode, optional
             Defines the mode to be used during repair or connect.
-        size_field_type: int, optional
+        size_field_type : int, optional
             Specifies the type of size field used for scaffolding.
-        intersection_control_mask: IntersectionMask, optional
+        intersection_control_mask : IntersectionMask, optional
             Specifies the nature of intersection to be computed.
-        edge_merge_control: int, optional
+        edge_merge_control : int, optional
             Specifies type of edge pairs to be merged during scaffold operation.
-        constant_mesh_size: float, optional
+        constant_mesh_size : float, optional
             Defines the constant edge mesh size to check connection.
-        remove_holes_critical_radius: float, optional
+        remove_holes_critical_radius : float, optional
             Defines the maximum radius of holes to be removed.
-        remove_slivers_abs_dist_tol_ratio: float, optional
+        remove_slivers_abs_dist_tol_ratio : float, optional
             Defines the maximum aspect ratio to remove sliver faces.
-        triangles_coplanar_angle_cos: float, optional
+        triangles_coplanar_angle_cos : float, optional
             Lower bound for cos angle to consider coplanar faces for scaffolding.
         """
         args = locals()
@@ -423,13 +423,13 @@ class VolumetricScaffolderParams(CoreObject):
 
     Parameters
     ----------
-    model: Model
+    model : Model
         Model to create a ``VolumetricScaffolderParams`` object with default parameters.
-    absolute_dist_tol: float, optional
+    absolute_dist_tol : float, optional
         Specify distance tolerance between overlapping faces.
-    only_check_exact_overlaps: bool, optional
+    only_check_exact_overlaps : bool, optional
         Check only for fully overlapping topofaces when true.
-    json_data: dict, optional
+    json_data : dict, optional
         JSON dictionary to create a ``VolumetricScaffolderParams`` object with provided parameters.
 
     Examples
@@ -440,29 +440,29 @@ class VolumetricScaffolderParams(CoreObject):
 
     def __initialize(
             self,
-            absolute_dist_tol: float,
-            only_check_exact_overlaps: bool):
+            absolute_dist_tol : float,
+            only_check_exact_overlaps : bool):
         self._absolute_dist_tol = absolute_dist_tol
         self._only_check_exact_overlaps = only_check_exact_overlaps
 
     def __init__(
             self,
             model: CommunicationManager=None,
-            absolute_dist_tol: float = None,
-            only_check_exact_overlaps: bool = None,
+            absolute_dist_tol : float = None,
+            only_check_exact_overlaps : bool = None,
             json_data : dict = None,
              **kwargs):
         """Initialize a ``VolumetricScaffolderParams`` object.
 
         Parameters
         ----------
-        model: Model
+        model : Model
             Model to create a ``VolumetricScaffolderParams`` object with default parameters.
-        absolute_dist_tol: float, optional
+        absolute_dist_tol : float, optional
             Specify distance tolerance between overlapping faces.
-        only_check_exact_overlaps: bool, optional
+        only_check_exact_overlaps : bool, optional
             Check only for fully overlapping topofaces when true.
-        json_data: dict, optional
+        json_data : dict, optional
             JSON dictionary to create a ``VolumetricScaffolderParams`` object with provided parameters.
 
         Examples
@@ -497,15 +497,15 @@ class VolumetricScaffolderParams(CoreObject):
 
     @staticmethod
     def set_default(
-            absolute_dist_tol: float = None,
-            only_check_exact_overlaps: bool = None):
+            absolute_dist_tol : float = None,
+            only_check_exact_overlaps : bool = None):
         """Set the default values of the ``VolumetricScaffolderParams`` object.
 
         Parameters
         ----------
-        absolute_dist_tol: float, optional
+        absolute_dist_tol : float, optional
             Specify distance tolerance between overlapping faces.
-        only_check_exact_overlaps: bool, optional
+        only_check_exact_overlaps : bool, optional
             Check only for fully overlapping topofaces when true.
         """
         args = locals()
@@ -562,13 +562,13 @@ class ScaffolderResults(CoreObject):
 
     Parameters
     ----------
-    model: Model
+    model : Model
         Model to create a ``ScaffolderResults`` object with default parameters.
-    n_incomplete_topo_faces: int, optional
+    n_incomplete_topo_faces : int, optional
         Number of topofaces failed in scaffold operation.
-    error_code: ErrorCode, optional
+    error_code : ErrorCode, optional
         Error code associated with scaffold operation.
-    json_data: dict, optional
+    json_data : dict, optional
         JSON dictionary to create a ``ScaffolderResults`` object with provided parameters.
 
     Examples
@@ -579,29 +579,29 @@ class ScaffolderResults(CoreObject):
 
     def __initialize(
             self,
-            n_incomplete_topo_faces: int,
-            error_code: ErrorCode):
+            n_incomplete_topo_faces : int,
+            error_code : ErrorCode):
         self._n_incomplete_topo_faces = n_incomplete_topo_faces
         self._error_code = ErrorCode(error_code)
 
     def __init__(
             self,
             model: CommunicationManager=None,
-            n_incomplete_topo_faces: int = None,
-            error_code: ErrorCode = None,
+            n_incomplete_topo_faces : int = None,
+            error_code : ErrorCode = None,
             json_data : dict = None,
              **kwargs):
         """Initialize a ``ScaffolderResults`` object.
 
         Parameters
         ----------
-        model: Model
+        model : Model
             Model to create a ``ScaffolderResults`` object with default parameters.
-        n_incomplete_topo_faces: int, optional
+        n_incomplete_topo_faces : int, optional
             Number of topofaces failed in scaffold operation.
-        error_code: ErrorCode, optional
+        error_code : ErrorCode, optional
             Error code associated with scaffold operation.
-        json_data: dict, optional
+        json_data : dict, optional
             JSON dictionary to create a ``ScaffolderResults`` object with provided parameters.
 
         Examples
@@ -636,15 +636,15 @@ class ScaffolderResults(CoreObject):
 
     @staticmethod
     def set_default(
-            n_incomplete_topo_faces: int = None,
-            error_code: ErrorCode = None):
+            n_incomplete_topo_faces : int = None,
+            error_code : ErrorCode = None):
         """Set the default values of the ``ScaffolderResults`` object.
 
         Parameters
         ----------
-        n_incomplete_topo_faces: int, optional
+        n_incomplete_topo_faces : int, optional
             Number of topofaces failed in scaffold operation.
-        error_code: ErrorCode, optional
+        error_code : ErrorCode, optional
             Error code associated with scaffold operation.
         """
         args = locals()
@@ -701,13 +701,13 @@ class ScaffolderSplitResults(CoreObject):
 
     Parameters
     ----------
-    model: Model
+    model : Model
         Model to create a ``ScaffolderSplitResults`` object with default parameters.
-    new_faces: Iterable[int], optional
+    new_faces : Iterable[int], optional
         Topofaces created after split operation.
-    error_code: ErrorCode, optional
+    error_code : ErrorCode, optional
         Error code associated with split topofaces operation.
-    json_data: dict, optional
+    json_data : dict, optional
         JSON dictionary to create a ``ScaffolderSplitResults`` object with provided parameters.
 
     Examples
@@ -718,29 +718,29 @@ class ScaffolderSplitResults(CoreObject):
 
     def __initialize(
             self,
-            new_faces: Iterable[int],
-            error_code: ErrorCode):
+            new_faces : Iterable[int],
+            error_code : ErrorCode):
         self._new_faces = new_faces if isinstance(new_faces, np.ndarray) else np.array(new_faces, dtype=np.int32) if new_faces is not None else None
         self._error_code = ErrorCode(error_code)
 
     def __init__(
             self,
             model: CommunicationManager=None,
-            new_faces: Iterable[int] = None,
-            error_code: ErrorCode = None,
+            new_faces : Iterable[int] = None,
+            error_code : ErrorCode = None,
             json_data : dict = None,
              **kwargs):
         """Initialize a ``ScaffolderSplitResults`` object.
 
         Parameters
         ----------
-        model: Model
+        model : Model
             Model to create a ``ScaffolderSplitResults`` object with default parameters.
-        new_faces: Iterable[int], optional
+        new_faces : Iterable[int], optional
             Topofaces created after split operation.
-        error_code: ErrorCode, optional
+        error_code : ErrorCode, optional
             Error code associated with split topofaces operation.
-        json_data: dict, optional
+        json_data : dict, optional
             JSON dictionary to create a ``ScaffolderSplitResults`` object with provided parameters.
 
         Examples
@@ -775,15 +775,15 @@ class ScaffolderSplitResults(CoreObject):
 
     @staticmethod
     def set_default(
-            new_faces: Iterable[int] = None,
-            error_code: ErrorCode = None):
+            new_faces : Iterable[int] = None,
+            error_code : ErrorCode = None):
         """Set the default values of the ``ScaffolderSplitResults`` object.
 
         Parameters
         ----------
-        new_faces: Iterable[int], optional
+        new_faces : Iterable[int], optional
             Topofaces created after split operation.
-        error_code: ErrorCode, optional
+        error_code : ErrorCode, optional
             Error code associated with split topofaces operation.
         """
         args = locals()
@@ -840,13 +840,13 @@ class ScaffolderMergeResults(CoreObject):
 
     Parameters
     ----------
-    model: Model
+    model : Model
         Model to create a ``ScaffolderMergeResults`` object with default parameters.
-    n_merged: int, optional
+    n_merged : int, optional
         Number of merged topofaces.
-    error_code: ErrorCode, optional
+    error_code : ErrorCode, optional
         Error code associated with merge overlapping topofaces operation.
-    json_data: dict, optional
+    json_data : dict, optional
         JSON dictionary to create a ``ScaffolderMergeResults`` object with provided parameters.
 
     Examples
@@ -857,29 +857,29 @@ class ScaffolderMergeResults(CoreObject):
 
     def __initialize(
             self,
-            n_merged: int,
-            error_code: ErrorCode):
+            n_merged : int,
+            error_code : ErrorCode):
         self._n_merged = n_merged
         self._error_code = ErrorCode(error_code)
 
     def __init__(
             self,
             model: CommunicationManager=None,
-            n_merged: int = None,
-            error_code: ErrorCode = None,
+            n_merged : int = None,
+            error_code : ErrorCode = None,
             json_data : dict = None,
              **kwargs):
         """Initialize a ``ScaffolderMergeResults`` object.
 
         Parameters
         ----------
-        model: Model
+        model : Model
             Model to create a ``ScaffolderMergeResults`` object with default parameters.
-        n_merged: int, optional
+        n_merged : int, optional
             Number of merged topofaces.
-        error_code: ErrorCode, optional
+        error_code : ErrorCode, optional
             Error code associated with merge overlapping topofaces operation.
-        json_data: dict, optional
+        json_data : dict, optional
             JSON dictionary to create a ``ScaffolderMergeResults`` object with provided parameters.
 
         Examples
@@ -914,15 +914,15 @@ class ScaffolderMergeResults(CoreObject):
 
     @staticmethod
     def set_default(
-            n_merged: int = None,
-            error_code: ErrorCode = None):
+            n_merged : int = None,
+            error_code : ErrorCode = None):
         """Set the default values of the ``ScaffolderMergeResults`` object.
 
         Parameters
         ----------
-        n_merged: int, optional
+        n_merged : int, optional
             Number of merged topofaces.
-        error_code: ErrorCode, optional
+        error_code : ErrorCode, optional
             Error code associated with merge overlapping topofaces operation.
         """
         args = locals()

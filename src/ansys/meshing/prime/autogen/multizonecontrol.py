@@ -1,4 +1,4 @@
-# Copyright (C) 2024 - 2025 ANSYS, Inc. and/or its affiliates.
+# Copyright (C) 2026 Synopsys, Inc. and ANSYS, Inc. All rights reserved.
 # SPDX-License-Identifier: MIT
 #
 #
@@ -25,13 +25,14 @@ from __future__ import annotations
 from ansys.meshing.prime.internals.comm_manager import CommunicationManager
 from ansys.meshing.prime.params.primestructs import *
 from ansys.meshing.prime.autogen.coreobject import *
-from typing import List, Any, Union
+from typing import Dict, Any, Union, List, Iterable
 
 class MultiZoneControl(CoreObject):
     """MultiZoneControl provides a way to gather all the information required for MultiZone meshing.
 
     The MultiZone meshing provides hex meshing capabilities.
     Different type of mesh can be generated using MultiZoneControl. For example, sweep mesh, map mesh and edge biased mesh.
+
 
     Parameters
     ----------
@@ -72,7 +73,7 @@ class MultiZoneControl(CoreObject):
         >>> multizone_control.set_volume_scope(scope_info)
 
         """
-        if not isinstance(scope_info, ScopeDefinition):
+        if type(scope_info).__name__ != 'ScopeDefinition':
             raise TypeError("Invalid argument type passed for 'scope_info'. Valid argument type is ScopeDefinition.")
         args = {"scope_info" : scope_info._jsonify()}
         command_name = "PrimeMesh::MultiZoneControl/SetVolumeScope"
@@ -99,7 +100,7 @@ class MultiZoneControl(CoreObject):
         >>> multizone_control.set_surface_scope(scope_info)
 
         """
-        if not isinstance(scope_info, ScopeDefinition):
+        if type(scope_info).__name__ != 'ScopeDefinition':
             raise TypeError("Invalid argument type passed for 'scope_info'. Valid argument type is ScopeDefinition.")
         args = {"scope_info" : scope_info._jsonify()}
         command_name = "PrimeMesh::MultiZoneControl/SetSurfaceScope"
@@ -126,7 +127,7 @@ class MultiZoneControl(CoreObject):
         >>> multizone_control.set_map_mesh_params(scope_info)
 
         """
-        if not isinstance(scope_info, MultiZoneMapMeshParams):
+        if type(scope_info).__name__ != 'MultiZoneMapMeshParams':
             raise TypeError("Invalid argument type passed for 'scope_info'. Valid argument type is MultiZoneMapMeshParams.")
         args = {"scope_info" : scope_info._jsonify()}
         command_name = "PrimeMesh::MultiZoneControl/SetMapMeshParams"
@@ -153,7 +154,7 @@ class MultiZoneControl(CoreObject):
         >>> multizone_control.set_sweep_mesh_params(scope_info)
 
         """
-        if not isinstance(scope_info, MultiZoneSweepMeshParams):
+        if type(scope_info).__name__ != 'MultiZoneSweepMeshParams':
             raise TypeError("Invalid argument type passed for 'scope_info'. Valid argument type is MultiZoneSweepMeshParams.")
         args = {"scope_info" : scope_info._jsonify()}
         command_name = "PrimeMesh::MultiZoneControl/SetSweepMeshParams"
@@ -180,7 +181,7 @@ class MultiZoneControl(CoreObject):
         >>> multizone_control.set_edge_biasing_params(scope_info)
 
         """
-        if not isinstance(scope_info, MultiZoneEdgeBiasingParams):
+        if type(scope_info).__name__ != 'MultiZoneEdgeBiasingParams':
             raise TypeError("Invalid argument type passed for 'scope_info'. Valid argument type is MultiZoneEdgeBiasingParams.")
         args = {"scope_info" : scope_info._jsonify()}
         command_name = "PrimeMesh::MultiZoneControl/SetEdgeBiasingParams"
@@ -207,7 +208,7 @@ class MultiZoneControl(CoreObject):
         >>> multizone_control.set_multi_zone_params(params)
 
         """
-        if not isinstance(params, MultiZoneSizingParams):
+        if type(params).__name__ != 'MultiZoneSizingParams':
             raise TypeError("Invalid argument type passed for 'params'. Valid argument type is MultiZoneSizingParams.")
         args = {"params" : params._jsonify()}
         command_name = "PrimeMesh::MultiZoneControl/SetMultiZoneSizingParams"

@@ -1,4 +1,4 @@
-# Copyright (C) 2024 - 2025 ANSYS, Inc. and/or its affiliates.
+# Copyright (C) 2026 Synopsys, Inc. and ANSYS, Inc. All rights reserved.
 # SPDX-License-Identifier: MIT
 #
 #
@@ -43,35 +43,39 @@ class SurferParams(CoreObject):
 
     Parameters
     ----------
-    model: Model
+    model : Model
         Model to create a ``SurferParams`` object with default parameters.
-    max_angle: float, optional
+    max_angle : float, optional
         Maximum feature angle limit to be used to identify and preserve features.
-    size_field_type: SizeFieldType, optional
+    size_field_type : SizeFieldType, optional
         Size field type used to generate surface mesh.
-    min_size: float, optional
+    min_size : float, optional
         Minimum size to be used in sizing for the surfer.
-    max_size: float, optional
+    max_size : float, optional
         Maximum size to be used in sizing for the surfer.
-    growth_rate: float, optional
+    growth_rate : float, optional
         Growth rate to be used to propagate sizes.
-    constant_size: float, optional
+    constant_size : float, optional
         Size used in constant size surface meshing.
-    generate_quads: bool, optional
+    generate_quads : bool, optional
         Option to generate quadrilateral surface mesh.
-    check_non_manifolds: bool, optional
+    check_non_manifolds : bool, optional
         Option to avoid new non-manifolds(multi-connection) if generated in surface mesh.
-    avoid_corner_triangles: bool, optional
+    avoid_corner_triangles : bool, optional
         Option to avoid corner triangles(with all three boundary nodes) generated.
-    smooth_size_transition: bool, optional
+    smooth_size_transition : bool, optional
         Option to generate mesh with smooth size transition from neighbors of selected surfaces. This includes neighboring face edge sizes in sizing provided for surface meshing to achieve smooth size transition.
-    advanced_surfer_setup: AdvancedSurferSetup, optional
+        Notes
+        -----
+        - Input facets or mesh with finer sizes compared to neighboring face edge sizes are required for this option to work.
+        - Valid min, max sizes and growth rate are required to include the neighboring face edges sizes in sizing.
+    advanced_surfer_setup : AdvancedSurferSetup, optional
         Option to define advanced settings for remeshing operation.
-    project_on_geometry: bool, optional
+    project_on_geometry : bool, optional
         Option to project on CAD geometry when meshing.
-    enable_multi_threading: bool, optional
+    enable_multi_threading : bool, optional
         Option to perform surface meshing in parallel using multithreads.
-    json_data: dict, optional
+    json_data : dict, optional
         JSON dictionary to create a ``SurferParams`` object with provided parameters.
 
     Examples
@@ -82,19 +86,19 @@ class SurferParams(CoreObject):
 
     def __initialize(
             self,
-            max_angle: float,
-            size_field_type: SizeFieldType,
-            min_size: float,
-            max_size: float,
-            growth_rate: float,
-            constant_size: float,
-            generate_quads: bool,
-            check_non_manifolds: bool,
-            avoid_corner_triangles: bool,
-            smooth_size_transition: bool,
-            advanced_surfer_setup: AdvancedSurferSetup,
-            project_on_geometry: bool,
-            enable_multi_threading: bool):
+            max_angle : float,
+            size_field_type : SizeFieldType,
+            min_size : float,
+            max_size : float,
+            growth_rate : float,
+            constant_size : float,
+            generate_quads : bool,
+            check_non_manifolds : bool,
+            avoid_corner_triangles : bool,
+            smooth_size_transition : bool,
+            advanced_surfer_setup : AdvancedSurferSetup,
+            project_on_geometry : bool,
+            enable_multi_threading : bool):
         self._max_angle = max_angle
         self._size_field_type = SizeFieldType(size_field_type)
         self._min_size = min_size
@@ -112,54 +116,58 @@ class SurferParams(CoreObject):
     def __init__(
             self,
             model: CommunicationManager=None,
-            max_angle: float = None,
-            size_field_type: SizeFieldType = None,
-            min_size: float = None,
-            max_size: float = None,
-            growth_rate: float = None,
-            constant_size: float = None,
-            generate_quads: bool = None,
-            check_non_manifolds: bool = None,
-            avoid_corner_triangles: bool = None,
-            smooth_size_transition: bool = None,
-            advanced_surfer_setup: AdvancedSurferSetup = None,
-            project_on_geometry: bool = None,
-            enable_multi_threading: bool = None,
+            max_angle : float = None,
+            size_field_type : SizeFieldType = None,
+            min_size : float = None,
+            max_size : float = None,
+            growth_rate : float = None,
+            constant_size : float = None,
+            generate_quads : bool = None,
+            check_non_manifolds : bool = None,
+            avoid_corner_triangles : bool = None,
+            smooth_size_transition : bool = None,
+            advanced_surfer_setup : AdvancedSurferSetup = None,
+            project_on_geometry : bool = None,
+            enable_multi_threading : bool = None,
             json_data : dict = None,
              **kwargs):
         """Initialize a ``SurferParams`` object.
 
         Parameters
         ----------
-        model: Model
+        model : Model
             Model to create a ``SurferParams`` object with default parameters.
-        max_angle: float, optional
+        max_angle : float, optional
             Maximum feature angle limit to be used to identify and preserve features.
-        size_field_type: SizeFieldType, optional
+        size_field_type : SizeFieldType, optional
             Size field type used to generate surface mesh.
-        min_size: float, optional
+        min_size : float, optional
             Minimum size to be used in sizing for the surfer.
-        max_size: float, optional
+        max_size : float, optional
             Maximum size to be used in sizing for the surfer.
-        growth_rate: float, optional
+        growth_rate : float, optional
             Growth rate to be used to propagate sizes.
-        constant_size: float, optional
+        constant_size : float, optional
             Size used in constant size surface meshing.
-        generate_quads: bool, optional
+        generate_quads : bool, optional
             Option to generate quadrilateral surface mesh.
-        check_non_manifolds: bool, optional
+        check_non_manifolds : bool, optional
             Option to avoid new non-manifolds(multi-connection) if generated in surface mesh.
-        avoid_corner_triangles: bool, optional
+        avoid_corner_triangles : bool, optional
             Option to avoid corner triangles(with all three boundary nodes) generated.
-        smooth_size_transition: bool, optional
+        smooth_size_transition : bool, optional
             Option to generate mesh with smooth size transition from neighbors of selected surfaces. This includes neighboring face edge sizes in sizing provided for surface meshing to achieve smooth size transition.
-        advanced_surfer_setup: AdvancedSurferSetup, optional
+            Notes
+            -----
+            - Input facets or mesh with finer sizes compared to neighboring face edge sizes are required for this option to work.
+            - Valid min, max sizes and growth rate are required to include the neighboring face edges sizes in sizing.
+        advanced_surfer_setup : AdvancedSurferSetup, optional
             Option to define advanced settings for remeshing operation.
-        project_on_geometry: bool, optional
+        project_on_geometry : bool, optional
             Option to project on CAD geometry when meshing.
-        enable_multi_threading: bool, optional
+        enable_multi_threading : bool, optional
             Option to perform surface meshing in parallel using multithreads.
-        json_data: dict, optional
+        json_data : dict, optional
             JSON dictionary to create a ``SurferParams`` object with provided parameters.
 
         Examples
@@ -227,48 +235,48 @@ class SurferParams(CoreObject):
 
     @staticmethod
     def set_default(
-            max_angle: float = None,
-            size_field_type: SizeFieldType = None,
-            min_size: float = None,
-            max_size: float = None,
-            growth_rate: float = None,
-            constant_size: float = None,
-            generate_quads: bool = None,
-            check_non_manifolds: bool = None,
-            avoid_corner_triangles: bool = None,
-            smooth_size_transition: bool = None,
-            advanced_surfer_setup: AdvancedSurferSetup = None,
-            project_on_geometry: bool = None,
-            enable_multi_threading: bool = None):
+            max_angle : float = None,
+            size_field_type : SizeFieldType = None,
+            min_size : float = None,
+            max_size : float = None,
+            growth_rate : float = None,
+            constant_size : float = None,
+            generate_quads : bool = None,
+            check_non_manifolds : bool = None,
+            avoid_corner_triangles : bool = None,
+            smooth_size_transition : bool = None,
+            advanced_surfer_setup : AdvancedSurferSetup = None,
+            project_on_geometry : bool = None,
+            enable_multi_threading : bool = None):
         """Set the default values of the ``SurferParams`` object.
 
         Parameters
         ----------
-        max_angle: float, optional
+        max_angle : float, optional
             Maximum feature angle limit to be used to identify and preserve features.
-        size_field_type: SizeFieldType, optional
+        size_field_type : SizeFieldType, optional
             Size field type used to generate surface mesh.
-        min_size: float, optional
+        min_size : float, optional
             Minimum size to be used in sizing for the surfer.
-        max_size: float, optional
+        max_size : float, optional
             Maximum size to be used in sizing for the surfer.
-        growth_rate: float, optional
+        growth_rate : float, optional
             Growth rate to be used to propagate sizes.
-        constant_size: float, optional
+        constant_size : float, optional
             Size used in constant size surface meshing.
-        generate_quads: bool, optional
+        generate_quads : bool, optional
             Option to generate quadrilateral surface mesh.
-        check_non_manifolds: bool, optional
+        check_non_manifolds : bool, optional
             Option to avoid new non-manifolds(multi-connection) if generated in surface mesh.
-        avoid_corner_triangles: bool, optional
+        avoid_corner_triangles : bool, optional
             Option to avoid corner triangles(with all three boundary nodes) generated.
-        smooth_size_transition: bool, optional
+        smooth_size_transition : bool, optional
             Option to generate mesh with smooth size transition from neighbors of selected surfaces. This includes neighboring face edge sizes in sizing provided for surface meshing to achieve smooth size transition.
-        advanced_surfer_setup: AdvancedSurferSetup, optional
+        advanced_surfer_setup : AdvancedSurferSetup, optional
             Option to define advanced settings for remeshing operation.
-        project_on_geometry: bool, optional
+        project_on_geometry : bool, optional
             Option to project on CAD geometry when meshing.
-        enable_multi_threading: bool, optional
+        enable_multi_threading : bool, optional
             Option to perform surface meshing in parallel using multithreads.
         """
         args = locals()
@@ -462,13 +470,13 @@ class SurferResults(CoreObject):
 
     Parameters
     ----------
-    model: Model
+    model : Model
         Model to create a ``SurferResults`` object with default parameters.
-    error_code: ErrorCode, optional
+    error_code : ErrorCode, optional
         Error code associated with the failure of operation.
-    topofaces_not_projected_on_geometry: Iterable[int], optional
+    topofaces_not_projected_on_geometry : Iterable[int], optional
         Ids of topofaces projected to facets instead of CAD geometry, when projectOnGeometry is enabled.
-    json_data: dict, optional
+    json_data : dict, optional
         JSON dictionary to create a ``SurferResults`` object with provided parameters.
 
     Examples
@@ -479,29 +487,29 @@ class SurferResults(CoreObject):
 
     def __initialize(
             self,
-            error_code: ErrorCode,
-            topofaces_not_projected_on_geometry: Iterable[int]):
+            error_code : ErrorCode,
+            topofaces_not_projected_on_geometry : Iterable[int]):
         self._error_code = ErrorCode(error_code)
         self._topofaces_not_projected_on_geometry = topofaces_not_projected_on_geometry if isinstance(topofaces_not_projected_on_geometry, np.ndarray) else np.array(topofaces_not_projected_on_geometry, dtype=np.int32) if topofaces_not_projected_on_geometry is not None else None
 
     def __init__(
             self,
             model: CommunicationManager=None,
-            error_code: ErrorCode = None,
-            topofaces_not_projected_on_geometry: Iterable[int] = None,
+            error_code : ErrorCode = None,
+            topofaces_not_projected_on_geometry : Iterable[int] = None,
             json_data : dict = None,
              **kwargs):
         """Initialize a ``SurferResults`` object.
 
         Parameters
         ----------
-        model: Model
+        model : Model
             Model to create a ``SurferResults`` object with default parameters.
-        error_code: ErrorCode, optional
+        error_code : ErrorCode, optional
             Error code associated with the failure of operation.
-        topofaces_not_projected_on_geometry: Iterable[int], optional
+        topofaces_not_projected_on_geometry : Iterable[int], optional
             Ids of topofaces projected to facets instead of CAD geometry, when projectOnGeometry is enabled.
-        json_data: dict, optional
+        json_data : dict, optional
             JSON dictionary to create a ``SurferResults`` object with provided parameters.
 
         Examples
@@ -536,15 +544,15 @@ class SurferResults(CoreObject):
 
     @staticmethod
     def set_default(
-            error_code: ErrorCode = None,
-            topofaces_not_projected_on_geometry: Iterable[int] = None):
+            error_code : ErrorCode = None,
+            topofaces_not_projected_on_geometry : Iterable[int] = None):
         """Set the default values of the ``SurferResults`` object.
 
         Parameters
         ----------
-        error_code: ErrorCode, optional
+        error_code : ErrorCode, optional
             Error code associated with the failure of operation.
-        topofaces_not_projected_on_geometry: Iterable[int], optional
+        topofaces_not_projected_on_geometry : Iterable[int], optional
             Ids of topofaces projected to facets instead of CAD geometry, when projectOnGeometry is enabled.
         """
         args = locals()
@@ -601,27 +609,27 @@ class LocalSurferParams(CoreObject):
 
     Parameters
     ----------
-    model: Model
+    model : Model
         Model to create a ``LocalSurferParams`` object with default parameters.
-    min_angle: float, optional
+    min_angle : float, optional
         Minimum feature angle limit used to identify and preserve features.
-    max_angle: float, optional
+    max_angle : float, optional
         Maximum feature angle limit used to identify and preserve features.
-    size_field_type: SizeFieldType, optional
+    size_field_type : SizeFieldType, optional
         Size field type used to generate surface mesh.
-    min_size: float, optional
+    min_size : float, optional
         Minimum size to be used in sizing for the surfer.
-    max_size: float, optional
+    max_size : float, optional
         Maximum size to be used in sizing for the surfer.
-    growth_rate: float, optional
+    growth_rate : float, optional
         Growth rate to be used to propagate sizes.
-    constant_size: float, optional
+    constant_size : float, optional
         Constant size to be used in case of constant size field.
-    smooth_boundary: bool, optional
+    smooth_boundary : bool, optional
         Option to extend local selection to get smooth boundary of selected elements.
-    n_rings: int, optional
+    n_rings : int, optional
         Number of rings to extend the registered face selection for remeshing.
-    json_data: dict, optional
+    json_data : dict, optional
         JSON dictionary to create a ``LocalSurferParams`` object with provided parameters.
 
     Examples
@@ -632,15 +640,15 @@ class LocalSurferParams(CoreObject):
 
     def __initialize(
             self,
-            min_angle: float,
-            max_angle: float,
-            size_field_type: SizeFieldType,
-            min_size: float,
-            max_size: float,
-            growth_rate: float,
-            constant_size: float,
-            smooth_boundary: bool,
-            n_rings: int):
+            min_angle : float,
+            max_angle : float,
+            size_field_type : SizeFieldType,
+            min_size : float,
+            max_size : float,
+            growth_rate : float,
+            constant_size : float,
+            smooth_boundary : bool,
+            n_rings : int):
         self._min_angle = min_angle
         self._max_angle = max_angle
         self._size_field_type = SizeFieldType(size_field_type)
@@ -654,42 +662,42 @@ class LocalSurferParams(CoreObject):
     def __init__(
             self,
             model: CommunicationManager=None,
-            min_angle: float = None,
-            max_angle: float = None,
-            size_field_type: SizeFieldType = None,
-            min_size: float = None,
-            max_size: float = None,
-            growth_rate: float = None,
-            constant_size: float = None,
-            smooth_boundary: bool = None,
-            n_rings: int = None,
+            min_angle : float = None,
+            max_angle : float = None,
+            size_field_type : SizeFieldType = None,
+            min_size : float = None,
+            max_size : float = None,
+            growth_rate : float = None,
+            constant_size : float = None,
+            smooth_boundary : bool = None,
+            n_rings : int = None,
             json_data : dict = None,
              **kwargs):
         """Initialize a ``LocalSurferParams`` object.
 
         Parameters
         ----------
-        model: Model
+        model : Model
             Model to create a ``LocalSurferParams`` object with default parameters.
-        min_angle: float, optional
+        min_angle : float, optional
             Minimum feature angle limit used to identify and preserve features.
-        max_angle: float, optional
+        max_angle : float, optional
             Maximum feature angle limit used to identify and preserve features.
-        size_field_type: SizeFieldType, optional
+        size_field_type : SizeFieldType, optional
             Size field type used to generate surface mesh.
-        min_size: float, optional
+        min_size : float, optional
             Minimum size to be used in sizing for the surfer.
-        max_size: float, optional
+        max_size : float, optional
             Maximum size to be used in sizing for the surfer.
-        growth_rate: float, optional
+        growth_rate : float, optional
             Growth rate to be used to propagate sizes.
-        constant_size: float, optional
+        constant_size : float, optional
             Constant size to be used in case of constant size field.
-        smooth_boundary: bool, optional
+        smooth_boundary : bool, optional
             Option to extend local selection to get smooth boundary of selected elements.
-        n_rings: int, optional
+        n_rings : int, optional
             Number of rings to extend the registered face selection for remeshing.
-        json_data: dict, optional
+        json_data : dict, optional
             JSON dictionary to create a ``LocalSurferParams`` object with provided parameters.
 
         Examples
@@ -745,36 +753,36 @@ class LocalSurferParams(CoreObject):
 
     @staticmethod
     def set_default(
-            min_angle: float = None,
-            max_angle: float = None,
-            size_field_type: SizeFieldType = None,
-            min_size: float = None,
-            max_size: float = None,
-            growth_rate: float = None,
-            constant_size: float = None,
-            smooth_boundary: bool = None,
-            n_rings: int = None):
+            min_angle : float = None,
+            max_angle : float = None,
+            size_field_type : SizeFieldType = None,
+            min_size : float = None,
+            max_size : float = None,
+            growth_rate : float = None,
+            constant_size : float = None,
+            smooth_boundary : bool = None,
+            n_rings : int = None):
         """Set the default values of the ``LocalSurferParams`` object.
 
         Parameters
         ----------
-        min_angle: float, optional
+        min_angle : float, optional
             Minimum feature angle limit used to identify and preserve features.
-        max_angle: float, optional
+        max_angle : float, optional
             Maximum feature angle limit used to identify and preserve features.
-        size_field_type: SizeFieldType, optional
+        size_field_type : SizeFieldType, optional
             Size field type used to generate surface mesh.
-        min_size: float, optional
+        min_size : float, optional
             Minimum size to be used in sizing for the surfer.
-        max_size: float, optional
+        max_size : float, optional
             Maximum size to be used in sizing for the surfer.
-        growth_rate: float, optional
+        growth_rate : float, optional
             Growth rate to be used to propagate sizes.
-        constant_size: float, optional
+        constant_size : float, optional
             Constant size to be used in case of constant size field.
-        smooth_boundary: bool, optional
+        smooth_boundary : bool, optional
             Option to extend local selection to get smooth boundary of selected elements.
-        n_rings: int, optional
+        n_rings : int, optional
             Number of rings to extend the registered face selection for remeshing.
         """
         args = locals()
@@ -915,13 +923,13 @@ class LocalSurferResults(CoreObject):
 
     Parameters
     ----------
-    model: Model
+    model : Model
         Model to create a ``LocalSurferResults`` object with default parameters.
-    error_code: ErrorCode, optional
+    error_code : ErrorCode, optional
         Error code associated with the failure of operation.
-    warning_codes: List[WarningCode], optional
+    warning_codes : List[WarningCode], optional
         Warning codes associated with the operation.
-    json_data: dict, optional
+    json_data : dict, optional
         JSON dictionary to create a ``LocalSurferResults`` object with provided parameters.
 
     Examples
@@ -932,29 +940,29 @@ class LocalSurferResults(CoreObject):
 
     def __initialize(
             self,
-            error_code: ErrorCode,
-            warning_codes: List[WarningCode]):
+            error_code : ErrorCode,
+            warning_codes : List[WarningCode]):
         self._error_code = ErrorCode(error_code)
         self._warning_codes = warning_codes
 
     def __init__(
             self,
             model: CommunicationManager=None,
-            error_code: ErrorCode = None,
-            warning_codes: List[WarningCode] = None,
+            error_code : ErrorCode = None,
+            warning_codes : List[WarningCode] = None,
             json_data : dict = None,
              **kwargs):
         """Initialize a ``LocalSurferResults`` object.
 
         Parameters
         ----------
-        model: Model
+        model : Model
             Model to create a ``LocalSurferResults`` object with default parameters.
-        error_code: ErrorCode, optional
+        error_code : ErrorCode, optional
             Error code associated with the failure of operation.
-        warning_codes: List[WarningCode], optional
+        warning_codes : List[WarningCode], optional
             Warning codes associated with the operation.
-        json_data: dict, optional
+        json_data : dict, optional
             JSON dictionary to create a ``LocalSurferResults`` object with provided parameters.
 
         Examples
@@ -989,15 +997,15 @@ class LocalSurferResults(CoreObject):
 
     @staticmethod
     def set_default(
-            error_code: ErrorCode = None,
-            warning_codes: List[WarningCode] = None):
+            error_code : ErrorCode = None,
+            warning_codes : List[WarningCode] = None):
         """Set the default values of the ``LocalSurferResults`` object.
 
         Parameters
         ----------
-        error_code: ErrorCode, optional
+        error_code : ErrorCode, optional
             Error code associated with the failure of operation.
-        warning_codes: List[WarningCode], optional
+        warning_codes : List[WarningCode], optional
             Warning codes associated with the operation.
         """
         args = locals()
@@ -1054,17 +1062,17 @@ class CreateShellBLResults(CoreObject):
 
     Parameters
     ----------
-    model: Model
+    model : Model
         Model to create a ``CreateShellBLResults`` object with default parameters.
-    error_code: ErrorCode, optional
+    error_code : ErrorCode, optional
         Error code associated with the failure of operation.
 
         **This is a beta parameter**. **The behavior and name may change in the future**.
-    warning_codes: List[WarningCode], optional
+    warning_codes : List[WarningCode], optional
         Warning codes associated with the operation.
 
         **This is a beta parameter**. **The behavior and name may change in the future**.
-    json_data: dict, optional
+    json_data : dict, optional
         JSON dictionary to create a ``CreateShellBLResults`` object with provided parameters.
 
     Examples
@@ -1075,33 +1083,33 @@ class CreateShellBLResults(CoreObject):
 
     def __initialize(
             self,
-            error_code: ErrorCode,
-            warning_codes: List[WarningCode]):
+            error_code : ErrorCode,
+            warning_codes : List[WarningCode]):
         self._error_code = ErrorCode(error_code)
         self._warning_codes = warning_codes
 
     def __init__(
             self,
             model: CommunicationManager=None,
-            error_code: ErrorCode = None,
-            warning_codes: List[WarningCode] = None,
+            error_code : ErrorCode = None,
+            warning_codes : List[WarningCode] = None,
             json_data : dict = None,
              **kwargs):
         """Initialize a ``CreateShellBLResults`` object.
 
         Parameters
         ----------
-        model: Model
+        model : Model
             Model to create a ``CreateShellBLResults`` object with default parameters.
-        error_code: ErrorCode, optional
+        error_code : ErrorCode, optional
             Error code associated with the failure of operation.
 
             **This is a beta parameter**. **The behavior and name may change in the future**.
-        warning_codes: List[WarningCode], optional
+        warning_codes : List[WarningCode], optional
             Warning codes associated with the operation.
 
             **This is a beta parameter**. **The behavior and name may change in the future**.
-        json_data: dict, optional
+        json_data : dict, optional
             JSON dictionary to create a ``CreateShellBLResults`` object with provided parameters.
 
         Examples
@@ -1136,15 +1144,15 @@ class CreateShellBLResults(CoreObject):
 
     @staticmethod
     def set_default(
-            error_code: ErrorCode = None,
-            warning_codes: List[WarningCode] = None):
+            error_code : ErrorCode = None,
+            warning_codes : List[WarningCode] = None):
         """Set the default values of the ``CreateShellBLResults`` object.
 
         Parameters
         ----------
-        error_code: ErrorCode, optional
+        error_code : ErrorCode, optional
             Error code associated with the failure of operation.
-        warning_codes: List[WarningCode], optional
+        warning_codes : List[WarningCode], optional
             Warning codes associated with the operation.
         """
         args = locals()
@@ -1205,9 +1213,9 @@ class ShellBLParams(CoreObject):
 
     Parameters
     ----------
-    model: Model
+    model : Model
         Model to create a ``ShellBLParams`` object with default parameters.
-    json_data: dict, optional
+    json_data : dict, optional
         JSON dictionary to create a ``ShellBLParams`` object with provided parameters.
 
     Examples
@@ -1229,9 +1237,9 @@ class ShellBLParams(CoreObject):
 
         Parameters
         ----------
-        model: Model
+        model : Model
             Model to create a ``ShellBLParams`` object with default parameters.
-        json_data: dict, optional
+        json_data : dict, optional
             JSON dictionary to create a ``ShellBLParams`` object with provided parameters.
 
         Examples

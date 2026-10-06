@@ -1,4 +1,4 @@
-# Copyright (C) 2024 - 2025 ANSYS, Inc. and/or its affiliates.
+# Copyright (C) 2026 Synopsys, Inc. and ANSYS, Inc. All rights reserved.
 # SPDX-License-Identifier: MIT
 #
 #
@@ -25,7 +25,7 @@ from __future__ import annotations
 from ansys.meshing.prime.internals.comm_manager import CommunicationManager
 from ansys.meshing.prime.params.primestructs import *
 from ansys.meshing.prime.autogen.coreobject import *
-from typing import List, Any, Union
+from typing import Dict, Any, Union, List, Iterable
 
 class ShellBLControl(CoreObject):
     """ShellBLControl allows you to generate quad mesh on face zonelets.
@@ -98,7 +98,7 @@ class ShellBLControl(CoreObject):
         >>> results = shellbl_control.set_growth_params(ShellBLControlGrowthParams(model=model))
 
         """
-        if not isinstance(params, ShellBLControlGrowthParams):
+        if type(params).__name__ != 'ShellBLControlGrowthParams':
             raise TypeError("Invalid argument type passed for 'params'. Valid argument type is ShellBLControlGrowthParams.")
         args = {"params" : params._jsonify()}
         command_name = "PrimeMesh::ShellBLControl/SetGrowthParams"
@@ -131,7 +131,7 @@ class ShellBLControl(CoreObject):
         >>> results = shellbl_control.set_edge_scope(entities)
 
         """
-        if not isinstance(entities, ScopeDefinition):
+        if type(entities).__name__ != 'ScopeDefinition':
             raise TypeError("Invalid argument type passed for 'entities'. Valid argument type is ScopeDefinition.")
         args = {"entities" : entities._jsonify()}
         command_name = "PrimeMesh::ShellBLControl/SetEdgeScope"
@@ -165,7 +165,7 @@ class ShellBLControl(CoreObject):
         >>> results = shellbl_control.set_surface_scope(entities)
 
         """
-        if not isinstance(entities, ScopeDefinition):
+        if type(entities).__name__ != 'ScopeDefinition':
             raise TypeError("Invalid argument type passed for 'entities'. Valid argument type is ScopeDefinition.")
         args = {"entities" : entities._jsonify()}
         command_name = "PrimeMesh::ShellBLControl/SetSurfaceScope"

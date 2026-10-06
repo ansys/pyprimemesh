@@ -1,4 +1,5 @@
-# Copyright (C) 2024 - 2026 ANSYS, Inc. and/or its affiliates.
+# Copyright (C) 2026 ANSYS, Inc. and/or its affiliates.
+# Copyright (C) 2026 Synopsys, Inc. and ANSYS, Inc. All rights reserved.
 # SPDX-License-Identifier: MIT
 #
 # Permission is hereby granted, free of charge, to any person obtaining a copy
@@ -22,13 +23,16 @@
 """Module for managing file inputs and outputs."""
 import copy
 import json
+import logging
 import traceback
+from pathlib import Path
 
 # isort: split
 from ansys.meshing.prime.autogen.fileio import FileIO as _FileIO
 
 # isort: split
 import ansys.meshing.prime.core.dynaexportutils as dynaexportutils
+import ansys.meshing.prime.core.fe2ansys_html_log as fe2ansys_html_log
 import ansys.meshing.prime.core.mapdlcdbexportutils as mapdlcdbexportutils
 import ansys.meshing.prime.internals.utils as utils
 from ansys.meshing.prime.autogen.fileiostructs import (
@@ -62,6 +66,7 @@ from ansys.meshing.prime.autogen.fileiostructs import (
     WriteSizeFieldParams,
 )
 from ansys.meshing.prime.core.model import Model
+from ansys.meshing.prime.internals import yaml_converter
 from ansys.meshing.prime.params.primestructs import ErrorCode
 
 
@@ -80,6 +85,52 @@ class FileIO(_FileIO):
         """Initialize model and parent class."""
         self._model = model
         super().__init__(model)
+
+    def _get_customization_schema_json(self, customization_file_name: str) -> str:
+        """Convert custom YAML schema to JSON and return the content as a string.
+
+        This runs on the client side before Abaqus import or MAPDL export so
+        the server side C++ code can directly consume the JSON schema content.
+
+        Parameters
+        ----------
+        customization_file_name : str
+            Path to the YAML customization file.
+
+        Returns
+        -------
+        str
+            JSON string content of the converted schema, or empty string if
+            no custom YAML schema is found or conversion fails.
+        """
+        logger = getattr(self._model, "python_logger", logging.getLogger(__name__))
+
+        yaml_file = Path(customization_file_name)
+        if not yaml_file.is_file():
+            return ""
+
+        try:
+            schema_content = yaml_converter.convert_yaml_to_json_string(str(yaml_file))
+            logger.info("Converted custom YAML schema to JSON: %s", yaml_file)
+            return schema_content
+        except FileNotFoundError as ex:
+            logger.warning(
+                "Custom YAML schema file not found: %s",
+                ex,
+            )
+            return ""
+        except ValueError as ex:
+            logger.warning(
+                "Failed to convert custom YAML schema to JSON: %s",
+                ex,
+            )
+            return ""
+        except Exception as ex:
+            logger.warning(
+                "Unexpected error converting custom YAML schema: %s",
+                ex,
+            )
+            return ""
 
     def read_pmdat(self, file_name: str, file_read_params: FileReadParams) -> FileReadResults:
         """Read a PyPrimeMesh data (PMDAT) file.
@@ -165,10 +216,21 @@ class FileIO(_FileIO):
         >>> results = file_io.import_abaqus(r"/tmp/file.inp")
 
         """
-        with utils.file_read_context(self._model, file_name) as temp_file_name:
-            result = super().import_abaqus_inp(temp_file_name, params)
-            if result.error_code == ErrorCode.NOERROR:
-                self._model._sync_up_model()
+        try:
+            with utils.file_read_context(self._model, file_name) as temp_file_name:
+                result = super().import_abaqus_inp(temp_file_name, params)
+                if result.error_code == ErrorCode.NOERROR:
+                    self._model._sync_up_model()
+        except Exception as crash_exc:
+            # Crash: server died during RPC; write crash report, then re-raise.
+            if params.write_html_log:
+                fe2ansys_html_log.write_abaqus_import_html_log(
+                    self, file_name, crash_error=str(crash_exc)
+                )
+            raise
+        # Best-effort HTML log render; never raises.
+        if params.write_html_log:
+            fe2ansys_html_log.write_abaqus_import_html_log(self, file_name)
         return result
 
     def import_fluent_meshing_size_field(self, file_name: str) -> SizeFieldFileReadResults:
@@ -326,35 +388,59 @@ class FileIO(_FileIO):
         >>> results = file_io.export_mapdl_cdb("/tmp/file.cdb", params)
         """
         params = copy.copy(params)
-        with utils.file_write_context(self._model, file_name) as temp_file_name:
-            # part_id = 1
-            # if len(self._model.parts) > 0:
-            #    part_id = self._model.parts[0].id
-            args = {"partId": 0}
-            command_name = "PrimeMesh::FileIO/GetAbaqusSimulationData"
-            sim_data_str = self._comm.serve(self._model, command_name, self._object_id, args=args)
-            if params.config_settings is None:
-                params.config_settings = ''
-            generate_mapdl_commands_error = None
-            generate_mapdl_commands_traceback = None
-            try:
-                all_mat_cmds, analysis_settings = mapdlcdbexportutils.generate_mapdl_commands(
-                    self._model, sim_data_str, params
+        # Support hidden transport fields through custom params when these
+        # members are not part of the released client API surface.
+        customization_file = getattr(params, "customization_file_name", None)
+        if not customization_file:
+            customization_file = params._custom_params.get("customization_file_name")
+        if customization_file:
+            params._custom_params["customization_schema"] = self._get_customization_schema_json(
+                customization_file
+            )
+            params._custom_params["customization_file_name"] = customization_file
+        try:
+            with utils.file_write_context(self._model, file_name) as temp_file_name:
+                args = {"partId": 0}
+                command_name = "PrimeMesh::FileIO/GetAbaqusSimulationData"
+                sim_data_str = self._comm.serve(
+                    self._model, command_name, self._object_id, args=args
                 )
-            except Exception as e:
-                generate_mapdl_commands_error = e
-                generate_mapdl_commands_traceback = traceback.format_exc()
-                all_mat_cmds, analysis_settings = "", ""
-            params.material_properties = all_mat_cmds + params.material_properties
-            params.analysis_settings = analysis_settings
-            result = super().export_mapdl_cdb(temp_file_name, params)
-            if generate_mapdl_commands_error is not None:
-                self._model.python_logger.warning(
-                    "Failed to generate MAPDL material/analysis commands. "
-                    "Export proceeded with empty settings. \nError: %s\n%s",
-                    generate_mapdl_commands_error,
-                    generate_mapdl_commands_traceback,
+                if params.config_settings is None:
+                    params.config_settings = ''
+                generate_mapdl_commands_error = None
+                generate_mapdl_commands_traceback = None
+                with utils.capture_log_records(self._model.python_logger) as collected_logs:
+                    all_mat_cmds, analysis_settings = "", ""
+                    try:
+                        all_mat_cmds, analysis_settings = (
+                            mapdlcdbexportutils.generate_mapdl_commands(
+                                self._model, sim_data_str, params
+                            )
+                        )
+                    except Exception as e:
+                        generate_mapdl_commands_error = e
+                        generate_mapdl_commands_traceback = traceback.format_exc()
+                    if generate_mapdl_commands_error is not None:
+                        self._model.python_logger.warning(
+                            "Failed to generate MAPDL material/analysis commands. "
+                            "Export proceeded with empty settings. \nError: %s\n%s",
+                            generate_mapdl_commands_error,
+                            generate_mapdl_commands_traceback,
+                        )
+                params.material_properties = all_mat_cmds + params.material_properties
+                params.analysis_settings = analysis_settings
+                params._custom_params["client_log_messages"] = json.dumps(collected_logs)
+                result = super().export_mapdl_cdb(temp_file_name, params)
+        except Exception as crash_exc:
+            # Crash: server died during RPC; write crash report, then re-raise.
+            if params.write_html_log:
+                fe2ansys_html_log.write_cdb_export_html_log(
+                    self, file_name, crash_error=str(crash_exc)
                 )
+            raise
+        # Best-effort HTML log render; never raises.
+        if params.write_html_log:
+            fe2ansys_html_log.write_cdb_export_html_log(self, file_name)
         return result
 
     def initialize_cdb_export_params(
@@ -591,12 +677,31 @@ class FileIO(_FileIO):
             #    part_id = self._model.parts[0].id
             args = {"partId": 0}
             command_name = "PrimeMesh::FileIO/GetAbaqusSimulationData"
-            sim_data = self._comm.serve(self._model, command_name, self._object_id, args=args)
-            sim_data = json.loads(sim_data)
-            if sim_data is not None:
-                mp = dynaexportutils.MaterialProcessor(self._model, sim_data)
-                all_mat_cmds = mp.get_all_material_commands()
-                params.material_properties = all_mat_cmds + params.material_properties
+            sim_data_str = self._comm.serve(self._model, command_name, self._object_id, args=args)
+            if not sim_data_str or sim_data_str.strip() == "":
+                sim_data = None
+            else:
+                sim_data = json.loads(sim_data_str)
+            generate_lsdyna_commands_error = None
+            generate_lsdyna_commands_traceback = None
+            with utils.capture_log_records(self._model.python_logger) as collected_logs:
+                all_mat_cmds = ""
+                try:
+                    if sim_data is not None:
+                        mp = dynaexportutils.MaterialProcessor(self._model, sim_data)
+                        all_mat_cmds = mp.get_all_material_commands()
+                except Exception as e:
+                    generate_lsdyna_commands_error = e
+                    generate_lsdyna_commands_traceback = traceback.format_exc()
+                if generate_lsdyna_commands_error is not None:
+                    self._model.python_logger.warning(
+                        "Failed to generate LS-DYNA material commands. "
+                        "Export proceeded with empty settings. \nError: %s\n%s",
+                        generate_lsdyna_commands_error,
+                        generate_lsdyna_commands_traceback,
+                    )
+            params.material_properties = all_mat_cmds + params.material_properties
+            params._custom_params["client_log_messages"] = json.dumps(collected_logs)
             result = super().export_lsdyna_keyword_file(temp_file_name, params)
         return result
 

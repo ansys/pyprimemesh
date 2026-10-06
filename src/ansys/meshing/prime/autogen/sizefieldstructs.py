@@ -1,4 +1,4 @@
-# Copyright (C) 2024 - 2025 ANSYS, Inc. and/or its affiliates.
+# Copyright (C) 2026 Synopsys, Inc. and ANSYS, Inc. All rights reserved.
 # SPDX-License-Identifier: MIT
 #
 #
@@ -35,15 +35,15 @@ class SFPeriodicParams(CoreObject):
 
     Parameters
     ----------
-    model: Model
+    model : Model
         Model to create a ``SFPeriodicParams`` object with default parameters.
-    axis: Iterable[float], optional
+    axis : Iterable[float], optional
         Axis vector coordinates.
-    angle: float, optional
+    angle : float, optional
         Angle in degrees.
-    center: Iterable[float], optional
+    center : Iterable[float], optional
         Center coordinates.
-    json_data: dict, optional
+    json_data : dict, optional
         JSON dictionary to create a ``SFPeriodicParams`` object with provided parameters.
 
     Examples
@@ -54,9 +54,9 @@ class SFPeriodicParams(CoreObject):
 
     def __initialize(
             self,
-            axis: Iterable[float],
-            angle: float,
-            center: Iterable[float]):
+            axis : Iterable[float],
+            angle : float,
+            center : Iterable[float]):
         self._axis = axis if isinstance(axis, np.ndarray) else np.array(axis, dtype=np.double) if axis is not None else None
         self._angle = angle
         self._center = center if isinstance(center, np.ndarray) else np.array(center, dtype=np.double) if center is not None else None
@@ -64,24 +64,24 @@ class SFPeriodicParams(CoreObject):
     def __init__(
             self,
             model: CommunicationManager=None,
-            axis: Iterable[float] = None,
-            angle: float = None,
-            center: Iterable[float] = None,
+            axis : Iterable[float] = None,
+            angle : float = None,
+            center : Iterable[float] = None,
             json_data : dict = None,
              **kwargs):
         """Initialize a ``SFPeriodicParams`` object.
 
         Parameters
         ----------
-        model: Model
+        model : Model
             Model to create a ``SFPeriodicParams`` object with default parameters.
-        axis: Iterable[float], optional
+        axis : Iterable[float], optional
             Axis vector coordinates.
-        angle: float, optional
+        angle : float, optional
             Angle in degrees.
-        center: Iterable[float], optional
+        center : Iterable[float], optional
             Center coordinates.
-        json_data: dict, optional
+        json_data : dict, optional
             JSON dictionary to create a ``SFPeriodicParams`` object with provided parameters.
 
         Examples
@@ -119,18 +119,18 @@ class SFPeriodicParams(CoreObject):
 
     @staticmethod
     def set_default(
-            axis: Iterable[float] = None,
-            angle: float = None,
-            center: Iterable[float] = None):
+            axis : Iterable[float] = None,
+            angle : float = None,
+            center : Iterable[float] = None):
         """Set the default values of the ``SFPeriodicParams`` object.
 
         Parameters
         ----------
-        axis: Iterable[float], optional
+        axis : Iterable[float], optional
             Axis vector coordinates.
-        angle: float, optional
+        angle : float, optional
             Angle in degrees.
-        center: Iterable[float], optional
+        center : Iterable[float], optional
             Center coordinates.
         """
         args = locals()
@@ -199,13 +199,13 @@ class VolumetricSizeFieldComputeResults(CoreObject):
 
     Parameters
     ----------
-    model: Model
+    model : Model
         Model to create a ``VolumetricSizeFieldComputeResults`` object with default parameters.
-    error_code: ErrorCode, optional
+    error_code : ErrorCode, optional
         Error code associated with the compute volumetric size field operation.
-    size_field_id: int, optional
+    size_field_id : int, optional
         Id of the computed size field.
-    json_data: dict, optional
+    json_data : dict, optional
         JSON dictionary to create a ``VolumetricSizeFieldComputeResults`` object with provided parameters.
 
     Examples
@@ -216,29 +216,29 @@ class VolumetricSizeFieldComputeResults(CoreObject):
 
     def __initialize(
             self,
-            error_code: ErrorCode,
-            size_field_id: int):
+            error_code : ErrorCode,
+            size_field_id : int):
         self._error_code = ErrorCode(error_code)
         self._size_field_id = size_field_id
 
     def __init__(
             self,
             model: CommunicationManager=None,
-            error_code: ErrorCode = None,
-            size_field_id: int = None,
+            error_code : ErrorCode = None,
+            size_field_id : int = None,
             json_data : dict = None,
              **kwargs):
         """Initialize a ``VolumetricSizeFieldComputeResults`` object.
 
         Parameters
         ----------
-        model: Model
+        model : Model
             Model to create a ``VolumetricSizeFieldComputeResults`` object with default parameters.
-        error_code: ErrorCode, optional
+        error_code : ErrorCode, optional
             Error code associated with the compute volumetric size field operation.
-        size_field_id: int, optional
+        size_field_id : int, optional
             Id of the computed size field.
-        json_data: dict, optional
+        json_data : dict, optional
             JSON dictionary to create a ``VolumetricSizeFieldComputeResults`` object with provided parameters.
 
         Examples
@@ -273,15 +273,15 @@ class VolumetricSizeFieldComputeResults(CoreObject):
 
     @staticmethod
     def set_default(
-            error_code: ErrorCode = None,
-            size_field_id: int = None):
+            error_code : ErrorCode = None,
+            size_field_id : int = None):
         """Set the default values of the ``VolumetricSizeFieldComputeResults`` object.
 
         Parameters
         ----------
-        error_code: ErrorCode, optional
+        error_code : ErrorCode, optional
             Error code associated with the compute volumetric size field operation.
-        size_field_id: int, optional
+        size_field_id : int, optional
             Id of the computed size field.
         """
         args = locals()
@@ -338,19 +338,19 @@ class VolumetricSizeFieldComputeParams(CoreObject):
 
     Parameters
     ----------
-    model: Model
+    model : Model
         Model to create a ``VolumetricSizeFieldComputeParams`` object with default parameters.
-    enable_multi_threading: bool, optional
+    enable_multi_threading : bool, optional
         Option to compute volumetric size field in parallel using multithreads.
-    enable_periodicity: bool, optional
+    enable_periodicity : bool, optional
         Option to enable periodic size field computations.
-    periodic_params: SFPeriodicParams, optional
+    periodic_params : SFPeriodicParams, optional
         Periodic parameters to compute the size field.
-    growth_rate_lower_bound: float, optional
+    growth_rate_lower_bound : float, optional
         Lower bound for growth rate.
 
         **This is a beta parameter**. **The behavior and name may change in the future**.
-    json_data: dict, optional
+    json_data : dict, optional
         JSON dictionary to create a ``VolumetricSizeFieldComputeParams`` object with provided parameters.
 
     Examples
@@ -361,10 +361,10 @@ class VolumetricSizeFieldComputeParams(CoreObject):
 
     def __initialize(
             self,
-            enable_multi_threading: bool,
-            enable_periodicity: bool,
-            periodic_params: SFPeriodicParams,
-            growth_rate_lower_bound: float):
+            enable_multi_threading : bool,
+            enable_periodicity : bool,
+            periodic_params : SFPeriodicParams,
+            growth_rate_lower_bound : float):
         self._enable_multi_threading = enable_multi_threading
         self._enable_periodicity = enable_periodicity
         self._periodic_params = periodic_params
@@ -373,29 +373,29 @@ class VolumetricSizeFieldComputeParams(CoreObject):
     def __init__(
             self,
             model: CommunicationManager=None,
-            enable_multi_threading: bool = None,
-            enable_periodicity: bool = None,
-            periodic_params: SFPeriodicParams = None,
-            growth_rate_lower_bound: float = None,
+            enable_multi_threading : bool = None,
+            enable_periodicity : bool = None,
+            periodic_params : SFPeriodicParams = None,
+            growth_rate_lower_bound : float = None,
             json_data : dict = None,
              **kwargs):
         """Initialize a ``VolumetricSizeFieldComputeParams`` object.
 
         Parameters
         ----------
-        model: Model
+        model : Model
             Model to create a ``VolumetricSizeFieldComputeParams`` object with default parameters.
-        enable_multi_threading: bool, optional
+        enable_multi_threading : bool, optional
             Option to compute volumetric size field in parallel using multithreads.
-        enable_periodicity: bool, optional
+        enable_periodicity : bool, optional
             Option to enable periodic size field computations.
-        periodic_params: SFPeriodicParams, optional
+        periodic_params : SFPeriodicParams, optional
             Periodic parameters to compute the size field.
-        growth_rate_lower_bound: float, optional
+        growth_rate_lower_bound : float, optional
             Lower bound for growth rate.
 
             **This is a beta parameter**. **The behavior and name may change in the future**.
-        json_data: dict, optional
+        json_data : dict, optional
             JSON dictionary to create a ``VolumetricSizeFieldComputeParams`` object with provided parameters.
 
         Examples
@@ -436,21 +436,21 @@ class VolumetricSizeFieldComputeParams(CoreObject):
 
     @staticmethod
     def set_default(
-            enable_multi_threading: bool = None,
-            enable_periodicity: bool = None,
-            periodic_params: SFPeriodicParams = None,
-            growth_rate_lower_bound: float = None):
+            enable_multi_threading : bool = None,
+            enable_periodicity : bool = None,
+            periodic_params : SFPeriodicParams = None,
+            growth_rate_lower_bound : float = None):
         """Set the default values of the ``VolumetricSizeFieldComputeParams`` object.
 
         Parameters
         ----------
-        enable_multi_threading: bool, optional
+        enable_multi_threading : bool, optional
             Option to compute volumetric size field in parallel using multithreads.
-        enable_periodicity: bool, optional
+        enable_periodicity : bool, optional
             Option to enable periodic size field computations.
-        periodic_params: SFPeriodicParams, optional
+        periodic_params : SFPeriodicParams, optional
             Periodic parameters to compute the size field.
-        growth_rate_lower_bound: float, optional
+        growth_rate_lower_bound : float, optional
             Lower bound for growth rate.
         """
         args = locals()
@@ -475,7 +475,7 @@ class VolumetricSizeFieldComputeParams(CoreObject):
         if self._enable_periodicity is not None:
             json_data["enablePeriodicity"] = self._enable_periodicity
         if self._periodic_params is not None:
-            json_data["periodicParams"] = self._periodic_params._jsonify()
+            json_data["periodicParams"] = self._periodic_params if isinstance(self._periodic_params, dict) else self._periodic_params._jsonify()
         if self._growth_rate_lower_bound is not None:
             json_data["growthRateLowerBound"] = self._growth_rate_lower_bound
         [ json_data.update({ utils.to_camel_case(key) : value }) for key, value in self._custom_params.items()]

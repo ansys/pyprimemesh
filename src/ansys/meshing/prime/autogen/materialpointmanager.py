@@ -1,4 +1,4 @@
-# Copyright (C) 2024 - 2025 ANSYS, Inc. and/or its affiliates.
+# Copyright (C) 2026 Synopsys, Inc. and ANSYS, Inc. All rights reserved.
 # SPDX-License-Identifier: MIT
 #
 #
@@ -25,7 +25,7 @@ from __future__ import annotations
 from ansys.meshing.prime.internals.comm_manager import CommunicationManager
 from ansys.meshing.prime.params.primestructs import *
 from ansys.meshing.prime.autogen.coreobject import *
-from typing import List, Any, Union
+from typing import Dict, Any, Union, List, Iterable
 
 class MaterialPointManager(CoreObject):
     """Provide functions for material point creation, deletion and queries.
@@ -82,7 +82,7 @@ class MaterialPointManager(CoreObject):
             raise TypeError("Invalid argument type passed for 'suggested_name'. Valid argument type is str.")
         if not isinstance(coords, Iterable):
             raise TypeError("Invalid argument type passed for 'coords'. Valid argument type is Iterable[float].")
-        if not isinstance(params, CreateMaterialPointParams):
+        if type(params).__name__ != 'CreateMaterialPointParams':
             raise TypeError("Invalid argument type passed for 'params'. Valid argument type is CreateMaterialPointParams.")
         args = {"suggested_name" : suggested_name,
         "coords" : coords,

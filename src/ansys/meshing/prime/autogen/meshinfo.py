@@ -1,4 +1,4 @@
-# Copyright (C) 2024 - 2025 ANSYS, Inc. and/or its affiliates.
+# Copyright (C) 2026 Synopsys, Inc. and ANSYS, Inc. All rights reserved.
 # SPDX-License-Identifier: MIT
 #
 #
@@ -25,7 +25,7 @@ from __future__ import annotations
 from ansys.meshing.prime.internals.comm_manager import CommunicationManager
 from ansys.meshing.prime.params.primestructs import *
 from ansys.meshing.prime.autogen.coreobject import *
-from typing import List, Any, Union
+from typing import Dict, Any, Union, List, Iterable
 
 class MeshInfo(CoreObject):
     """MeshInfo provides information about the mesh connectivity and more.
@@ -61,7 +61,6 @@ class MeshInfo(CoreObject):
     def get_face_and_edge_connectivity(self, part_ids : Iterable[int], params : FaceAndEdgeConnectivityParams) -> FaceAndEdgeConnectivityResults:
         """ Gets the connectivity of face and edge zonelets of the given part ids.
 
-        Connectivity result is used in graphics rendering.
 
         Parameters
         ----------
@@ -78,15 +77,12 @@ class MeshInfo(CoreObject):
 
         Examples
         --------
-        >>> mesh_info = prime.MeshInfo(model)
-        >>> part_ids = [part.id for part in model.parts]
-        >>> result = mesh_info.get_face_and_edge_connectivity(part_ids,
-        >>>                  prime.FaceAndEdgeConnectivityParams(model =model))
+        >>> result = mesh_info.get_face_and_edge_connectivity(part_ids, params)
 
         """
         if not isinstance(part_ids, Iterable):
             raise TypeError("Invalid argument type passed for 'part_ids'. Valid argument type is Iterable[int].")
-        if not isinstance(params, FaceAndEdgeConnectivityParams):
+        if type(params).__name__ != 'FaceAndEdgeConnectivityParams':
             raise TypeError("Invalid argument type passed for 'params'. Valid argument type is FaceAndEdgeConnectivityParams.")
         args = {"part_ids" : part_ids,
         "params" : params._jsonify()}
@@ -115,15 +111,12 @@ class MeshInfo(CoreObject):
 
         Examples
         --------
-        >>> mesh_info = prime.MeshInfo(model)
-        >>> part = model.get_part_by_name("part_name")
-        >>> result = mesh_info.get_statistics_of_cell_zonelets(part.get_cell_zonelets(),
-        >>>                  prime.CellStatisticsParams(model=model))
+        >>> result = mesh_info.get_statistics_of_cell_zonelets(cell_zonelets, params)
 
         """
         if not isinstance(cell_zonelets, Iterable):
             raise TypeError("Invalid argument type passed for 'cell_zonelets'. Valid argument type is Iterable[int].")
-        if not isinstance(params, CellStatisticsParams):
+        if type(params).__name__ != 'CellStatisticsParams':
             raise TypeError("Invalid argument type passed for 'params'. Valid argument type is CellStatisticsParams.")
         args = {"cell_zonelets" : cell_zonelets,
         "params" : params._jsonify()}

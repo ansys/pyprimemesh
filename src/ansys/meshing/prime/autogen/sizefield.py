@@ -1,4 +1,4 @@
-# Copyright (C) 2024 - 2025 ANSYS, Inc. and/or its affiliates.
+# Copyright (C) 2026 Synopsys, Inc. and ANSYS, Inc. All rights reserved.
 # SPDX-License-Identifier: MIT
 #
 #
@@ -25,7 +25,7 @@ from __future__ import annotations
 from ansys.meshing.prime.internals.comm_manager import CommunicationManager
 from ansys.meshing.prime.params.primestructs import *
 from ansys.meshing.prime.autogen.coreobject import *
-from typing import List, Any, Union
+from typing import Dict, Any, Union, List, Iterable
 
 class SizeField(CoreObject):
     """The size field is computed based on the size control defined.
@@ -66,16 +66,24 @@ class SizeField(CoreObject):
         ----------
         size_control_ids : Iterable[int]
             Ids of size controls.
+        volumetric_sizefield_params : VolumetricSizeFieldComputeParams
+            Parameters for volumetric size field computation.
+
+        Returns
+        -------
+        VolumetricSizeFieldComputeResults
+            Returns the VolumetricSizeFieldComputeResults structure.
+
 
         Examples
         --------
-        >>> size_field.compute_volumetric(
+        >>> results = size_field.compute_volumetric(
         >>>           [size_control.id for size_control in model.control_data.size_controls], volumetric_sizefield_params))
 
         """
         if not isinstance(size_control_ids, Iterable):
             raise TypeError("Invalid argument type passed for 'size_control_ids'. Valid argument type is Iterable[int].")
-        if not isinstance(volumetric_sizefield_params, VolumetricSizeFieldComputeParams):
+        if type(volumetric_sizefield_params).__name__ != 'VolumetricSizeFieldComputeParams':
             raise TypeError("Invalid argument type passed for 'volumetric_sizefield_params'. Valid argument type is VolumetricSizeFieldComputeParams.")
         args = {"size_control_ids" : size_control_ids,
         "volumetric_sizefield_params" : volumetric_sizefield_params._jsonify()}

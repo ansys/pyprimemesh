@@ -1,4 +1,4 @@
-# Copyright (C) 2024 - 2025 ANSYS, Inc. and/or its affiliates.
+# Copyright (C) 2026 Synopsys, Inc. and ANSYS, Inc. All rights reserved.
 # SPDX-License-Identifier: MIT
 #
 #
@@ -25,7 +25,7 @@ from __future__ import annotations
 from ansys.meshing.prime.internals.comm_manager import CommunicationManager
 from ansys.meshing.prime.params.primestructs import *
 from ansys.meshing.prime.autogen.coreobject import *
-from typing import List, Any, Union
+from typing import Dict, Any, Union, List, Iterable
 
 class VolumeSweeper(CoreObject):
     """VolumeSweeper class provide functions to volume mesh a given set of topovolumes by sweeping or stacking a set of face and edge zonelets. Provide operations to generate volume mesh using stacker technology.
@@ -34,16 +34,14 @@ class VolumeSweeper(CoreObject):
     ----------
     model : Model
         Server model to create VolumeSweeper object.
-    part_id : int
-        Id of the part.
     """
 
-    def __init__(self, model: CommunicationManager, part_id: int):
-        """ Initialize VolumeSweeper  """
+    def __init__(self, model: CommunicationManager):
+        """ Initialize VolumeSweeper """
         self._model = model
         self._comm = model._communicator
         command_name = "PrimeMesh::VolumeSweeper/Construct"
-        args = {"ModelID" : model._object_id , "PartID" : part_id, "MaxID" : -1}
+        args = {"ModelID" : model._object_id , "MaxID" : -1 }
         result = self._comm.serve(model, command_name, args=args)
         self._object_id = result["ObjectIndex"]
         self._freeze()
@@ -57,12 +55,14 @@ class VolumeSweeper(CoreObject):
         command_name = "PrimeMesh::VolumeSweeper/Destruct"
         self._comm.serve(self._model, command_name, self._object_id, args={})
 
-    def create_base_face(self, topo_volume_ids : Iterable[int], params : MeshStackerParams) -> MeshStackerResults:
+    def create_base_face(self, part_id :  int, topo_volume_ids : Iterable[int], params : MeshStackerParams) -> MeshStackerResults:
         """ Creates a face at the specified origin perpendicular to the specified direction. Also, imprint model edges on the face, make necessary edge repairs, and duplicate relevant size controls on the base face.
 
 
         Parameters
         ----------
+        part_id :  int
+            Id of the part.
         topo_volume_ids : Iterable[int]
             Ids of volumes that need to be meshed.
         params : MeshStackerParams
@@ -76,14 +76,17 @@ class VolumeSweeper(CoreObject):
 
         Examples
         --------
-        >>> results = volumesweeper.create_base_face(topo_volume_ids, params)
+        >>> results = volume_sweeper.create_base_face(part_id, topo_volume_ids, params)
 
         """
+        if not isinstance(part_id,  int):
+            raise TypeError("Invalid argument type passed for 'part_id'. Valid argument type is  int.")
         if not isinstance(topo_volume_ids, Iterable):
             raise TypeError("Invalid argument type passed for 'topo_volume_ids'. Valid argument type is Iterable[int].")
-        if not isinstance(params, MeshStackerParams):
+        if type(params).__name__ != 'MeshStackerParams':
             raise TypeError("Invalid argument type passed for 'params'. Valid argument type is MeshStackerParams.")
-        args = {"topo_volume_ids" : topo_volume_ids,
+        args = {"part_id" : part_id,
+        "topo_volume_ids" : topo_volume_ids,
         "params" : params._jsonify()}
         command_name = "PrimeMesh::VolumeSweeper/CreateBaseFace"
         self._model._print_logs_before_command("create_base_face", args)
@@ -91,12 +94,14 @@ class VolumeSweeper(CoreObject):
         self._model._print_logs_after_command("create_base_face", MeshStackerResults(model = self._model, json_data = result))
         return MeshStackerResults(model = self._model, json_data = result)
 
-    def stack_base_face(self, base_face_ids : Iterable[int], topo_volume_ids : Iterable[int], params : MeshStackerParams) -> MeshStackerResults:
+    def stack_base_face(self, part_id :  int, base_face_ids : Iterable[int], topo_volume_ids : Iterable[int], params : MeshStackerParams) -> MeshStackerResults:
         """ Generates volume mesh stacking a meshed face layer by layer along the given direction. Calculates the stack layers using size controls and global size parameters.
 
 
         Parameters
         ----------
+        part_id :  int
+            Id of the part.
         base_face_ids : Iterable[int]
             Ids of base faces to be stacked
         topo_volume_ids : Iterable[int]
@@ -112,16 +117,19 @@ class VolumeSweeper(CoreObject):
 
         Examples
         --------
-        >>> results = volumesweeper.stack_base_face(base_face_ids, topo_volume_ids, params)
+        >>> results = volume_sweeper.stack_base_face(part_id, base_face_ids, topo_volume_ids, params)
 
         """
+        if not isinstance(part_id,  int):
+            raise TypeError("Invalid argument type passed for 'part_id'. Valid argument type is  int.")
         if not isinstance(base_face_ids, Iterable):
             raise TypeError("Invalid argument type passed for 'base_face_ids'. Valid argument type is Iterable[int].")
         if not isinstance(topo_volume_ids, Iterable):
             raise TypeError("Invalid argument type passed for 'topo_volume_ids'. Valid argument type is Iterable[int].")
-        if not isinstance(params, MeshStackerParams):
+        if type(params).__name__ != 'MeshStackerParams':
             raise TypeError("Invalid argument type passed for 'params'. Valid argument type is MeshStackerParams.")
-        args = {"base_face_ids" : base_face_ids,
+        args = {"part_id" : part_id,
+        "base_face_ids" : base_face_ids,
         "topo_volume_ids" : topo_volume_ids,
         "params" : params._jsonify()}
         command_name = "PrimeMesh::VolumeSweeper/StackBaseFace"

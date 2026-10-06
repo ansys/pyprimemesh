@@ -1,4 +1,4 @@
-# Copyright (C) 2024 - 2025 ANSYS, Inc. and/or its affiliates.
+# Copyright (C) 2026 Synopsys, Inc. and ANSYS, Inc. All rights reserved.
 # SPDX-License-Identifier: MIT
 #
 #
@@ -25,7 +25,7 @@ from __future__ import annotations
 from ansys.meshing.prime.internals.comm_manager import CommunicationManager
 from ansys.meshing.prime.params.primestructs import *
 from ansys.meshing.prime.autogen.coreobject import *
-from typing import List, Any, Union
+from typing import Dict, Any, Union, List, Iterable
 
 class PrismControl(CoreObject):
     """PrismControl allows you to generate prisms.
@@ -67,7 +67,7 @@ class PrismControl(CoreObject):
         >>> results = prism_control.set_growth_params(PrismControlGrowthParams(model=model))
 
         """
-        if not isinstance(prism_control_growth_params, PrismControlGrowthParams):
+        if type(prism_control_growth_params).__name__ != 'PrismControlGrowthParams':
             raise TypeError("Invalid argument type passed for 'prism_control_growth_params'. Valid argument type is PrismControlGrowthParams.")
         args = {"prism_control_growth_params" : prism_control_growth_params._jsonify()}
         command_name = "PrimeMesh::PrismControl/SetGrowthParams"
@@ -95,7 +95,7 @@ class PrismControl(CoreObject):
         >>> results = prism_control.set_surface_scope(entities)
 
         """
-        if not isinstance(entities, ScopeDefinition):
+        if type(entities).__name__ != 'ScopeDefinition':
             raise TypeError("Invalid argument type passed for 'entities'. Valid argument type is ScopeDefinition.")
         args = {"entities" : entities._jsonify()}
         command_name = "PrimeMesh::PrismControl/SetSurfaceScope"
@@ -124,7 +124,7 @@ class PrismControl(CoreObject):
         >>> results = prism_control.set_volume_scope(entities)
 
         """
-        if not isinstance(entities, ScopeDefinition):
+        if type(entities).__name__ != 'ScopeDefinition':
             raise TypeError("Invalid argument type passed for 'entities'. Valid argument type is ScopeDefinition.")
         args = {"entities" : entities._jsonify()}
         command_name = "PrimeMesh::PrismControl/SetVolumeScope"

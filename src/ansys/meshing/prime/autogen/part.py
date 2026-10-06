@@ -1,4 +1,4 @@
-# Copyright (C) 2024 - 2025 ANSYS, Inc. and/or its affiliates.
+# Copyright (C) 2026 Synopsys, Inc. and ANSYS, Inc. All rights reserved.
 # SPDX-License-Identifier: MIT
 #
 #
@@ -25,29 +25,10 @@ from __future__ import annotations
 from ansys.meshing.prime.internals.comm_manager import CommunicationManager
 from ansys.meshing.prime.params.primestructs import *
 from ansys.meshing.prime.autogen.coreobject import *
-from typing import List, Any, Union
+from typing import Dict, Any, Union, List, Iterable
 
 class Part(CoreObject):
     """Part contains zonelets and topoentities.
-
-    Topoentities and zonelets are characterized by dimension of entities.
-    Zonelets are a group of interconnected elements in a mesh. There are three types of zonelets. They are:
-
-    * FaceZonelet: A group of interconnected face elements.
-    * EdgeZonelet: A group of interconnected edge elements.
-    * CellZonelet: A group of interconnected cell elements.
-
-    Topoentities represent connectivity information.
-    Topoentities can be queried from higher order to lower order topoentities and vice versa.
-    Topoentities have geometric representation which may be defined by splines or facets.
-    The mesh generated on topoentities will be projected on geometry representation.
-
-    * TopoFace: Topoentity representing surfaces.
-    * TopoEdge: Topoentity representing curves.
-    * TopoVolume: Topoentity representing volumes.
-
-
-
 
     Parameters
     ----------
@@ -59,6 +40,10 @@ class Part(CoreObject):
         Object id of the Part.
     name : str
         Name of the Part.
+
+    Notes
+    -----
+    Each Part is assigned with an id. Each Part id is unique. The value cannot be zero or negative.
     """
 
     def __init__(self, model: CommunicationManager, id: int, object_id: int, name: str):
@@ -104,7 +89,7 @@ class Part(CoreObject):
         Returns
         -------
         SetNameResults
-            Returns the SetNameResults.
+            Returns the results of the set name operation.
 
 
         Examples
@@ -122,13 +107,13 @@ class Part(CoreObject):
         return SetNameResults(model = self._model, json_data = result)
 
     def get_face_zonelets(self) -> Iterable[int]:
-        """ Get the face zonelets of a part.
+        """ Gets the face zonelets of a part.
 
 
         Returns
         -------
         Iterable[int]
-            Return the ids of face zonelets. Returns an empty list for a topology part.
+            Returns the ids of face zonelets or an empty list for a topology part.
 
 
         Examples
@@ -144,13 +129,13 @@ class Part(CoreObject):
         return result
 
     def get_cell_zonelets(self) -> Iterable[int]:
-        """ Get the cell zonelet ids in the part.
+        """ Gets the cell zonelet ids in the part.
 
 
         Returns
         -------
         Iterable[int]
-            Return the ids of cell zonelets. Returns an empty list for a topology part.
+            Returns the ids of cell zonelets or an empty list for a topology part.
 
 
         Examples
@@ -167,13 +152,13 @@ class Part(CoreObject):
         return result
 
     def get_edge_zonelets(self) -> Iterable[int]:
-        """ Get the edge zonelets of a part.
+        """ Gets the edge zonelets of a part.
 
 
         Returns
         -------
         Iterable[int]
-            Return the ids of edge zonelets. Returns an empty list for a topology part.
+            Returns the ids of edge zonelets or an empty list for a topology part.
 
 
         Examples
@@ -189,7 +174,7 @@ class Part(CoreObject):
         return result
 
     def add_labels_on_zonelets(self, labels : List[str], zonelets : Iterable[int]) -> AddLabelResults:
-        """ Add the given labels on the provided zonelets.
+        """ Adds the given labels on the provided zonelets.
 
 
         Parameters
@@ -202,7 +187,7 @@ class Part(CoreObject):
         Returns
         -------
         AddLabelResults
-            Returns the AddLabelResults.
+            Returns the results of the add label operation.
 
 
         Examples
@@ -224,7 +209,7 @@ class Part(CoreObject):
         return AddLabelResults(model = self._model, json_data = result)
 
     def remove_labels_from_zonelets(self, labels : List[str], zonelets : Iterable[int]) -> RemoveLabelResults:
-        """ Remove the given labels from the provided zonelets.
+        """ Removes the given labels from the provided zonelets.
 
 
         Parameters
@@ -237,7 +222,7 @@ class Part(CoreObject):
         Returns
         -------
         RemoveLabelResults
-            Returns the RemoveLabelResults.
+            Returns the results of the remove label operation.
 
 
         Examples
@@ -259,7 +244,7 @@ class Part(CoreObject):
         return RemoveLabelResults(model = self._model, json_data = result)
 
     def add_labels_on_topo_entities(self, labels : List[str], topo_entities : Iterable[int]) -> AddLabelResults:
-        """ Add the given labels on the provided topoentities.
+        """ Adds the given labels on the provided topoentities.
 
 
         Parameters
@@ -272,7 +257,7 @@ class Part(CoreObject):
         Returns
         -------
         AddLabelResults
-            Returns the AddLabelResults.
+            Returns the results of the add label operation.
 
 
         Examples
@@ -294,7 +279,7 @@ class Part(CoreObject):
         return AddLabelResults(model = self._model, json_data = result)
 
     def remove_labels_from_topo_entities(self, labels : List[str], topo_entities : Iterable[int]) -> RemoveLabelResults:
-        """ Remove the given labels from the provided topoentities.
+        """ Removes the given labels from the provided topoentities.
 
 
         Parameters
@@ -307,7 +292,7 @@ class Part(CoreObject):
         Returns
         -------
         RemoveLabelResults
-            Returns the RemoveLabelResults.
+            Returns the results of the remove label operation.
 
 
         Examples
@@ -329,7 +314,7 @@ class Part(CoreObject):
         return RemoveLabelResults(model = self._model, json_data = result)
 
     def get_face_zones_of_name_pattern(self, zone_name_pattern : str, name_pattern_params : NamePatternParams) -> Iterable[int]:
-        """ Get ids of face zones with name matching the given name pattern.
+        """ Gets ids of face zones with name matching the given name pattern.
 
 
         Parameters
@@ -342,7 +327,7 @@ class Part(CoreObject):
         Returns
         -------
         Iterable[int]
-            Return list of face zone ids matching the zone name pattern.
+            Returns list of face zone ids matching the zone name pattern.
 
 
         Examples
@@ -353,7 +338,7 @@ class Part(CoreObject):
         """
         if not isinstance(zone_name_pattern, str):
             raise TypeError("Invalid argument type passed for 'zone_name_pattern'. Valid argument type is str.")
-        if not isinstance(name_pattern_params, NamePatternParams):
+        if type(name_pattern_params).__name__ != 'NamePatternParams':
             raise TypeError("Invalid argument type passed for 'name_pattern_params'. Valid argument type is NamePatternParams.")
         args = {"zone_name_pattern" : zone_name_pattern,
         "name_pattern_params" : name_pattern_params._jsonify()}
@@ -364,7 +349,7 @@ class Part(CoreObject):
         return result
 
     def get_volume_zones_of_name_pattern(self, zone_name_pattern : str, name_pattern_params : NamePatternParams) -> Iterable[int]:
-        """ Get ids of volume zones with name matching the given name pattern.
+        """ Gets ids of volume zones with name matching the given name pattern.
 
 
         Parameters
@@ -388,7 +373,7 @@ class Part(CoreObject):
         """
         if not isinstance(zone_name_pattern, str):
             raise TypeError("Invalid argument type passed for 'zone_name_pattern'. Valid argument type is str.")
-        if not isinstance(name_pattern_params, NamePatternParams):
+        if type(name_pattern_params).__name__ != 'NamePatternParams':
             raise TypeError("Invalid argument type passed for 'name_pattern_params'. Valid argument type is NamePatternParams.")
         args = {"zone_name_pattern" : zone_name_pattern,
         "name_pattern_params" : name_pattern_params._jsonify()}
@@ -399,7 +384,7 @@ class Part(CoreObject):
         return result
 
     def get_face_zonelets_of_zone_name_pattern(self, zone_name_pattern : str, name_pattern_params : NamePatternParams) -> Iterable[int]:
-        """ Get ids of face zonelets of zones with name matching the given name pattern.
+        """ Gets ids of face zonelets of zones with name matching the given name pattern.
 
 
         Parameters
@@ -412,7 +397,7 @@ class Part(CoreObject):
         Returns
         -------
         Iterable[int]
-            Return face zonelet ids of zones with name matching the name pattern. Returns an empty list for a topology part.
+            Returns face zonelet ids of zones with name matching the name pattern or an empty list for a topology part.
 
 
         Examples
@@ -423,7 +408,7 @@ class Part(CoreObject):
         """
         if not isinstance(zone_name_pattern, str):
             raise TypeError("Invalid argument type passed for 'zone_name_pattern'. Valid argument type is str.")
-        if not isinstance(name_pattern_params, NamePatternParams):
+        if type(name_pattern_params).__name__ != 'NamePatternParams':
             raise TypeError("Invalid argument type passed for 'name_pattern_params'. Valid argument type is NamePatternParams.")
         args = {"zone_name_pattern" : zone_name_pattern,
         "name_pattern_params" : name_pattern_params._jsonify()}
@@ -434,7 +419,7 @@ class Part(CoreObject):
         return result
 
     def get_volumes_of_zone_name_pattern(self, zone_name_pattern : str, name_pattern_params : NamePatternParams) -> Iterable[int]:
-        """ Get volume ids of zones with name matching the given name pattern.
+        """ Gets volume ids of zones with name matching the given name pattern.
 
 
         Parameters
@@ -447,7 +432,7 @@ class Part(CoreObject):
         Returns
         -------
         Iterable[int]
-            Return volume ids of zones with name matching the name pattern. Returns an empty list for a topology part.
+            Returns volume ids of zones with name matching the name pattern or an empty list for a topology part.
 
 
         Examples
@@ -458,7 +443,7 @@ class Part(CoreObject):
         """
         if not isinstance(zone_name_pattern, str):
             raise TypeError("Invalid argument type passed for 'zone_name_pattern'. Valid argument type is str.")
-        if not isinstance(name_pattern_params, NamePatternParams):
+        if type(name_pattern_params).__name__ != 'NamePatternParams':
             raise TypeError("Invalid argument type passed for 'name_pattern_params'. Valid argument type is NamePatternParams.")
         args = {"zone_name_pattern" : zone_name_pattern,
         "name_pattern_params" : name_pattern_params._jsonify()}
@@ -468,8 +453,48 @@ class Part(CoreObject):
         self._model._print_logs_after_command("get_volumes_of_zone_name_pattern")
         return result
 
+    def get_volumes_of_label_name_pattern(self, label_name_pattern : str, name_pattern_params : NamePatternParams) -> Iterable[int]:
+        """ Gets ids of volumes with label matching the given name pattern.
+
+
+        Parameters
+        ----------
+        label_name_pattern : str
+            Name pattern to be matched with label.
+        name_pattern_params : NamePatternParams
+            Name pattern parameters used to match label name pattern.
+
+        Returns
+        -------
+        Iterable[int]
+            Returns ids of volumes with label matching the name pattern or an empty list for a topology part.
+
+
+        Notes
+        -----
+        **This is a beta API**. **The behavior and implementation may change in future**.
+
+        Examples
+        --------
+        >>> name_pattern_params = prime.NamePatternParams(model = model)
+        >>> volumes = part.get_volumes_of_label_name_pattern("body*", name_pattern_params)
+
+        """
+        if not isinstance(label_name_pattern, str):
+            raise TypeError("Invalid argument type passed for 'label_name_pattern'. Valid argument type is str.")
+        if type(name_pattern_params).__name__ != 'NamePatternParams':
+            raise TypeError("Invalid argument type passed for 'name_pattern_params'. Valid argument type is NamePatternParams.")
+        args = {"label_name_pattern" : label_name_pattern,
+        "name_pattern_params" : name_pattern_params._jsonify()}
+        command_name = "PrimeMesh::Part/GetVolumesOfLabelNamePattern"
+        self._model._print_beta_api_warning("get_volumes_of_label_name_pattern")
+        self._model._print_logs_before_command("get_volumes_of_label_name_pattern", args)
+        result = self._comm.serve(self._model, command_name, self._object_id, args=args)
+        self._model._print_logs_after_command("get_volumes_of_label_name_pattern")
+        return result
+
     def get_topo_faces_of_zone_name_pattern(self, zone_name_pattern : str, name_pattern_params : NamePatternParams) -> Iterable[int]:
-        """ Get topoface ids of zones with name matching the given name pattern.
+        """ Gets topoface ids of zones with name matching the given name pattern.
 
 
         Parameters
@@ -482,7 +507,7 @@ class Part(CoreObject):
         Returns
         -------
         Iterable[int]
-            Return topoface ids of zones with name matching the name pattern.
+            Returns topoface ids of zones with name matching the name pattern.
 
 
         Examples
@@ -493,7 +518,7 @@ class Part(CoreObject):
         """
         if not isinstance(zone_name_pattern, str):
             raise TypeError("Invalid argument type passed for 'zone_name_pattern'. Valid argument type is str.")
-        if not isinstance(name_pattern_params, NamePatternParams):
+        if type(name_pattern_params).__name__ != 'NamePatternParams':
             raise TypeError("Invalid argument type passed for 'name_pattern_params'. Valid argument type is NamePatternParams.")
         args = {"zone_name_pattern" : zone_name_pattern,
         "name_pattern_params" : name_pattern_params._jsonify()}
@@ -532,7 +557,7 @@ class Part(CoreObject):
         """
         if not isinstance(zone_name_pattern, str):
             raise TypeError("Invalid argument type passed for 'zone_name_pattern'. Valid argument type is str.")
-        if not isinstance(name_pattern_params, NamePatternParams):
+        if type(name_pattern_params).__name__ != 'NamePatternParams':
             raise TypeError("Invalid argument type passed for 'name_pattern_params'. Valid argument type is NamePatternParams.")
         args = {"zone_name_pattern" : zone_name_pattern,
         "name_pattern_params" : name_pattern_params._jsonify()}
@@ -578,7 +603,7 @@ class Part(CoreObject):
         return result
 
     def get_edge_zonelets_of_label_name_pattern(self, label_name_pattern : str, name_pattern_params : NamePatternParams) -> Iterable[int]:
-        """ Get edge zonelet ids of labels with name matching the given name pattern.
+        """ Gets edge zonelet ids of labels with name matching the given name pattern.
 
 
         Parameters
@@ -591,7 +616,7 @@ class Part(CoreObject):
         Returns
         -------
         Iterable[int]
-            Return edge zonelet ids of labels with name matching the name pattern. Returns an empty list for a topology part.
+            Returns edge zonelet ids of labels with name matching the name pattern or an empty list for a topology part.
 
 
         Examples
@@ -602,7 +627,7 @@ class Part(CoreObject):
         """
         if not isinstance(label_name_pattern, str):
             raise TypeError("Invalid argument type passed for 'label_name_pattern'. Valid argument type is str.")
-        if not isinstance(name_pattern_params, NamePatternParams):
+        if type(name_pattern_params).__name__ != 'NamePatternParams':
             raise TypeError("Invalid argument type passed for 'name_pattern_params'. Valid argument type is NamePatternParams.")
         args = {"label_name_pattern" : label_name_pattern,
         "name_pattern_params" : name_pattern_params._jsonify()}
@@ -613,7 +638,7 @@ class Part(CoreObject):
         return result
 
     def get_face_zonelets_of_label_name_pattern(self, label_name_pattern : str, name_pattern_params : NamePatternParams) -> Iterable[int]:
-        """ Get face zonelet ids of labels with name matching the given name pattern.
+        """ Gets face zonelet ids of labels with name matching the given name pattern.
 
 
         Parameters
@@ -626,7 +651,7 @@ class Part(CoreObject):
         Returns
         -------
         Iterable[int]
-            Return face zonelet ids of labels with name matching the name pattern. Returns an empty list for a topology part.
+            Returns face zonelet ids of labels with name matching the name pattern or an empty list for a topology part.
 
 
         Examples
@@ -637,7 +662,7 @@ class Part(CoreObject):
         """
         if not isinstance(label_name_pattern, str):
             raise TypeError("Invalid argument type passed for 'label_name_pattern'. Valid argument type is str.")
-        if not isinstance(name_pattern_params, NamePatternParams):
+        if type(name_pattern_params).__name__ != 'NamePatternParams':
             raise TypeError("Invalid argument type passed for 'name_pattern_params'. Valid argument type is NamePatternParams.")
         args = {"label_name_pattern" : label_name_pattern,
         "name_pattern_params" : name_pattern_params._jsonify()}
@@ -647,7 +672,7 @@ class Part(CoreObject):
         self._model._print_logs_after_command("get_face_zonelets_of_label_name_pattern")
         return result
 
-    def get_face_zonelets_of_component_body_name_pattern(self, component_body_name_pattern : str, type : BodyQueryType, name_pattern_params : NamePatternParams) -> Iterable[int]:
+    def get_face_zonelets_of_component_body_name_pattern(self, component_body_name_pattern : str, body_query_type : BodyQueryType, name_pattern_params : NamePatternParams) -> Iterable[int]:
         """ Gets face zonelet ids belonging to components or bodies with name matching the given name pattern.
 
 
@@ -655,7 +680,7 @@ class Part(CoreObject):
         ----------
         component_body_name_pattern : str
             Name pattern to be matched with component or body names.
-        type : BodyQueryType
+        body_query_type : BodyQueryType
             Type of query used to match component or body name pattern.
         name_pattern_params : NamePatternParams
             Name pattern parameters used to match component or body name pattern.
@@ -663,7 +688,7 @@ class Part(CoreObject):
         Returns
         -------
         Iterable[int]
-            Returns face zonelet ids of labels with name matching the name pattern. Returns an empty list for a topology part.
+            Returns face zonelet ids belonging to components or bodies with names matching the name pattern or an empty list for a topology part.
 
 
         Notes
@@ -673,17 +698,17 @@ class Part(CoreObject):
         Examples
         --------
         >>> name_pattern_params = prime.NamePatternParams(model = model)
-        >>> face_zonelets = part.get_face_zonelets_of_component_body_pattern("/body*", type, name_pattern_params)
+        >>> face_zonelets = part.get_face_zonelets_of_component_body_pattern("/body*", body_query_type, name_pattern_params)
 
         """
         if not isinstance(component_body_name_pattern, str):
             raise TypeError("Invalid argument type passed for 'component_body_name_pattern'. Valid argument type is str.")
-        if not isinstance(type, BodyQueryType):
-            raise TypeError("Invalid argument type passed for 'type'. Valid argument type is BodyQueryType.")
-        if not isinstance(name_pattern_params, NamePatternParams):
+        if type(body_query_type).__name__ != 'BodyQueryType':
+            raise TypeError("Invalid argument type passed for 'body_query_type'. Valid argument type is BodyQueryType.")
+        if type(name_pattern_params).__name__ != 'NamePatternParams':
             raise TypeError("Invalid argument type passed for 'name_pattern_params'. Valid argument type is NamePatternParams.")
         args = {"component_body_name_pattern" : component_body_name_pattern,
-        "type" : type,
+        "body_query_type" : body_query_type,
         "name_pattern_params" : name_pattern_params._jsonify()}
         command_name = "PrimeMesh::Part/GetFaceZoneletsOfComponentBodyNamePattern"
         self._model._print_beta_api_warning("get_face_zonelets_of_component_body_name_pattern")
@@ -693,7 +718,7 @@ class Part(CoreObject):
         return result
 
     def get_topo_edges_of_label_name_pattern(self, label_name_pattern : str, name_pattern_params : NamePatternParams) -> Iterable[int]:
-        """ Get topoedge ids of labels with name matching the given name pattern.
+        """ Gets topoedge ids of labels with name matching the given name pattern.
 
 
         Parameters
@@ -706,7 +731,7 @@ class Part(CoreObject):
         Returns
         -------
         Iterable[int]
-            Return the ids of topoedges.
+            Returns the ids of topoedges.
 
 
         Examples
@@ -718,7 +743,7 @@ class Part(CoreObject):
         """
         if not isinstance(label_name_pattern, str):
             raise TypeError("Invalid argument type passed for 'label_name_pattern'. Valid argument type is str.")
-        if not isinstance(name_pattern_params, NamePatternParams):
+        if type(name_pattern_params).__name__ != 'NamePatternParams':
             raise TypeError("Invalid argument type passed for 'name_pattern_params'. Valid argument type is NamePatternParams.")
         args = {"label_name_pattern" : label_name_pattern,
         "name_pattern_params" : name_pattern_params._jsonify()}
@@ -729,7 +754,7 @@ class Part(CoreObject):
         return result
 
     def get_topo_faces_of_label_name_pattern(self, label_name_pattern : str, name_pattern_params : NamePatternParams) -> Iterable[int]:
-        """ Get topoface ids of labels with name matching the given name pattern.
+        """ Gets topoface ids of labels with name matching the given name pattern.
 
 
         Parameters
@@ -742,7 +767,7 @@ class Part(CoreObject):
         Returns
         -------
         Iterable[int]
-            Return the ids of topofaces.
+            Returns the ids of topofaces.
 
 
         Examples
@@ -754,7 +779,7 @@ class Part(CoreObject):
         """
         if not isinstance(label_name_pattern, str):
             raise TypeError("Invalid argument type passed for 'label_name_pattern'. Valid argument type is str.")
-        if not isinstance(name_pattern_params, NamePatternParams):
+        if type(name_pattern_params).__name__ != 'NamePatternParams':
             raise TypeError("Invalid argument type passed for 'name_pattern_params'. Valid argument type is NamePatternParams.")
         args = {"label_name_pattern" : label_name_pattern,
         "name_pattern_params" : name_pattern_params._jsonify()}
@@ -764,7 +789,7 @@ class Part(CoreObject):
         self._model._print_logs_after_command("get_topo_faces_of_label_name_pattern")
         return result
 
-    def get_topo_faces_of_component_body_name_pattern(self, component_body_name_pattern : str, type : BodyQueryType, name_pattern_params : NamePatternParams) -> Iterable[int]:
+    def get_topo_faces_of_component_body_name_pattern(self, component_body_name_pattern : str, body_query_type : BodyQueryType, name_pattern_params : NamePatternParams) -> Iterable[int]:
         """ Gets topoface ids of component or bodies with name matching the given name pattern.
 
 
@@ -772,7 +797,7 @@ class Part(CoreObject):
         ----------
         component_body_name_pattern : str
             Name pattern to be matched with component or body name.
-        type : BodyQueryType
+        body_query_type : BodyQueryType
             Type of query used to match component or body name pattern.
         name_pattern_params : NamePatternParams
             Name pattern parameters used to match component or body name pattern.
@@ -791,18 +816,18 @@ class Part(CoreObject):
         --------
         >>> topo_faces = part.get_topo_faces_of_component_body_name_pattern(
         >>>                   component_body_name_pattern = "body*",
-        >>>                   type = BodyQueryType_All,
+        >>>                   body_query_type = BodyQueryType_All,
         >>>                   params = prime.NamePatternParams(model=model))
 
         """
         if not isinstance(component_body_name_pattern, str):
             raise TypeError("Invalid argument type passed for 'component_body_name_pattern'. Valid argument type is str.")
-        if not isinstance(type, BodyQueryType):
-            raise TypeError("Invalid argument type passed for 'type'. Valid argument type is BodyQueryType.")
-        if not isinstance(name_pattern_params, NamePatternParams):
+        if type(body_query_type).__name__ != 'BodyQueryType':
+            raise TypeError("Invalid argument type passed for 'body_query_type'. Valid argument type is BodyQueryType.")
+        if type(name_pattern_params).__name__ != 'NamePatternParams':
             raise TypeError("Invalid argument type passed for 'name_pattern_params'. Valid argument type is NamePatternParams.")
         args = {"component_body_name_pattern" : component_body_name_pattern,
-        "type" : type,
+        "body_query_type" : body_query_type,
         "name_pattern_params" : name_pattern_params._jsonify()}
         command_name = "PrimeMesh::Part/GetTopoFacesOfComponentBodyNamePattern"
         self._model._print_beta_api_warning("get_topo_faces_of_component_body_name_pattern")
@@ -818,7 +843,7 @@ class Part(CoreObject):
         Parameters
         ----------
         label_name_pattern : str
-            Name pattern to be matched with topovolume name
+            Name pattern to be matched with topovolume name.
         name_pattern_params : NamePatternParams
             Name pattern parameters used to match topovolume name pattern.
 
@@ -841,7 +866,7 @@ class Part(CoreObject):
         """
         if not isinstance(label_name_pattern, str):
             raise TypeError("Invalid argument type passed for 'label_name_pattern'. Valid argument type is str.")
-        if not isinstance(name_pattern_params, NamePatternParams):
+        if type(name_pattern_params).__name__ != 'NamePatternParams':
             raise TypeError("Invalid argument type passed for 'name_pattern_params'. Valid argument type is NamePatternParams.")
         args = {"label_name_pattern" : label_name_pattern,
         "name_pattern_params" : name_pattern_params._jsonify()}
@@ -853,7 +878,7 @@ class Part(CoreObject):
         return result
 
     def merge_zonelets(self, zonelets : Iterable[int], params : MergeZoneletsParams) -> MergeZoneletsResults:
-        """ Merge zonelets.
+        """ Merges zonelets.
 
 
         Parameters
@@ -866,18 +891,18 @@ class Part(CoreObject):
         Returns
         -------
         MergeZoneletsResults
-            Returns the MergeZoneletsResults.
+            Returns the results of the merge operation including merged zonelet information.
 
 
         Examples
         --------
-        params = prime.MergeZoneletsParams(model = model)
-        results = part.merge_zonelets(zonelets, params)
+        >>> params = prime.MergeZoneletsParams(model = model)
+        >>> results = part.merge_zonelets(zonelets, params)
 
         """
         if not isinstance(zonelets, Iterable):
             raise TypeError("Invalid argument type passed for 'zonelets'. Valid argument type is Iterable[int].")
-        if not isinstance(params, MergeZoneletsParams):
+        if type(params).__name__ != 'MergeZoneletsParams':
             raise TypeError("Invalid argument type passed for 'params'. Valid argument type is MergeZoneletsParams.")
         args = {"zonelets" : zonelets,
         "params" : params._jsonify()}
@@ -888,7 +913,7 @@ class Part(CoreObject):
         return MergeZoneletsResults(model = self._model, json_data = result)
 
     def merge_volumes(self, volumes : Iterable[int], params : MergeVolumesParams) -> MergeVolumesResults:
-        """ Merge volumes by removing shared face zonelets.
+        """ Merges volumes by removing shared face zonelets.
 
 
         Parameters
@@ -901,18 +926,18 @@ class Part(CoreObject):
         Returns
         -------
         MergeVolumesResults
-            Returns the MergeVolumesResults.
+            Returns the results of the merge operation including merged volume information.
 
 
         Examples
         --------
-        params = prime.MergeVolumesParams(model = model)
-        results = part.merge_volumes(volumes, params)
+        >>> params = prime.MergeVolumesParams(model = model)
+        >>> results = part.merge_volumes(volumes, params)
 
         """
         if not isinstance(volumes, Iterable):
             raise TypeError("Invalid argument type passed for 'volumes'. Valid argument type is Iterable[int].")
-        if not isinstance(params, MergeVolumesParams):
+        if type(params).__name__ != 'MergeVolumesParams':
             raise TypeError("Invalid argument type passed for 'params'. Valid argument type is MergeVolumesParams.")
         args = {"volumes" : volumes,
         "params" : params._jsonify()}
@@ -923,7 +948,7 @@ class Part(CoreObject):
         return MergeVolumesResults(model = self._model, json_data = result)
 
     def delete_volumes(self, volumes : Iterable[int], params : DeleteVolumesParams) -> DeleteVolumesResults:
-        """ Delete volumes by deleting its face zonelets.
+        """ Deletes volumes by deleting their face zonelets.
 
 
         Parameters
@@ -936,18 +961,18 @@ class Part(CoreObject):
         Returns
         -------
         DeleteVolumesResults
-            Returns the DeleteVolumesResults.
+            Returns the results of the delete operation.
 
 
         Examples
         --------
-        params = prime.DeleteVolumesParams(model = model)
-        results = part.delete_volumes(volumes, params)
+        >>> params = prime.DeleteVolumesParams(model = model)
+        >>> results = part.delete_volumes(volumes, params)
 
         """
         if not isinstance(volumes, Iterable):
             raise TypeError("Invalid argument type passed for 'volumes'. Valid argument type is Iterable[int].")
-        if not isinstance(params, DeleteVolumesParams):
+        if type(params).__name__ != 'DeleteVolumesParams':
             raise TypeError("Invalid argument type passed for 'params'. Valid argument type is DeleteVolumesParams.")
         args = {"volumes" : volumes,
         "params" : params._jsonify()}
@@ -958,7 +983,7 @@ class Part(CoreObject):
         return DeleteVolumesResults(model = self._model, json_data = result)
 
     def get_face_zonelets_of_volumes(self, volumes : Iterable[int]) -> Iterable[int]:
-        """ Get the face zonelets of given volumes.
+        """ Gets the face zonelets of given volumes.
 
 
         Parameters
@@ -969,7 +994,7 @@ class Part(CoreObject):
         Returns
         -------
         Iterable[int]
-            Return the ids of face zonelets.
+            Returns the ids of face zonelets.
 
 
         Examples
@@ -998,7 +1023,7 @@ class Part(CoreObject):
         Returns
         -------
         ComputeVolumesResults
-            Returns the ComputeVolumesResults.
+            Returns the results of volume computation including created volume ids.
 
 
         Examples
@@ -1007,7 +1032,7 @@ class Part(CoreObject):
         >>> results = part.compute_closed_volumes(params)
 
         """
-        if not isinstance(params, ComputeVolumesParams):
+        if type(params).__name__ != 'ComputeVolumesParams':
             raise TypeError("Invalid argument type passed for 'params'. Valid argument type is ComputeVolumesParams.")
         args = {"params" : params._jsonify()}
         command_name = "PrimeMesh::Part/ComputeClosedVolumes"
@@ -1017,7 +1042,7 @@ class Part(CoreObject):
         return ComputeVolumesResults(model = self._model, json_data = result)
 
     def extract_volumes(self, face_zonelets : Iterable[int], params : ExtractVolumesParams) -> ExtractVolumesResults:
-        """ Extract volumes connected to given face zonelets.
+        """ Extracts volumes connected to given face zonelets.
 
 
         Parameters
@@ -1030,7 +1055,7 @@ class Part(CoreObject):
         Returns
         -------
         ExtractVolumesResults
-            Return the ExtractVolumesResults.
+            Returns the results of volume extraction including extracted volume ids.
 
 
         Examples
@@ -1040,7 +1065,7 @@ class Part(CoreObject):
         """
         if not isinstance(face_zonelets, Iterable):
             raise TypeError("Invalid argument type passed for 'face_zonelets'. Valid argument type is Iterable[int].")
-        if not isinstance(params, ExtractVolumesParams):
+        if type(params).__name__ != 'ExtractVolumesParams':
             raise TypeError("Invalid argument type passed for 'params'. Valid argument type is ExtractVolumesParams.")
         args = {"face_zonelets" : face_zonelets,
         "params" : params._jsonify()}
@@ -1051,7 +1076,7 @@ class Part(CoreObject):
         return ExtractVolumesResults(model = self._model, json_data = result)
 
     def compute_topo_volumes(self, params : ComputeVolumesParams) -> ComputeTopoVolumesResults:
-        """ Compute topovolumes by identifying closed volumes defined by topofaces of the part.
+        """ Computes topovolumes by identifying closed volumes defined by topofaces of the part.
 
 
         Parameters
@@ -1062,7 +1087,7 @@ class Part(CoreObject):
         Returns
         -------
         ComputeTopoVolumesResults
-            Return the ComputeTopoVolumesResults.
+            Returns the results of topovolume computation including created topovolume ids.
 
 
         Examples
@@ -1071,7 +1096,7 @@ class Part(CoreObject):
         >>> results = part.compute_topo_volumes(params)
 
         """
-        if not isinstance(params, ComputeVolumesParams):
+        if type(params).__name__ != 'ComputeVolumesParams':
             raise TypeError("Invalid argument type passed for 'params'. Valid argument type is ComputeVolumesParams.")
         args = {"params" : params._jsonify()}
         command_name = "PrimeMesh::Part/ComputeTopoVolumes"
@@ -1081,7 +1106,7 @@ class Part(CoreObject):
         return ComputeTopoVolumesResults(model = self._model, json_data = result)
 
     def extract_topo_volumes(self, topo_faces : Iterable[int], params : ExtractTopoVolumesParams) -> ExtractTopoVolumesResults:
-        """ Extract topovolumes connected to given cap topofaces.
+        """ Extracts topovolumes connected to given cap topofaces.
 
 
         Parameters
@@ -1094,7 +1119,7 @@ class Part(CoreObject):
         Returns
         -------
         ExtractTopoVolumesResults
-            Return the ExtractTopoVolumesResults.
+            Returns the results of topovolume extraction including extracted topovolume ids.
 
 
         Examples
@@ -1104,7 +1129,7 @@ class Part(CoreObject):
         """
         if not isinstance(topo_faces, Iterable):
             raise TypeError("Invalid argument type passed for 'topo_faces'. Valid argument type is Iterable[int].")
-        if not isinstance(params, ExtractTopoVolumesParams):
+        if type(params).__name__ != 'ExtractTopoVolumesParams':
             raise TypeError("Invalid argument type passed for 'params'. Valid argument type is ExtractTopoVolumesParams.")
         args = {"topo_faces" : topo_faces,
         "params" : params._jsonify()}
@@ -1114,8 +1139,86 @@ class Part(CoreObject):
         self._model._print_logs_after_command("extract_topo_volumes", ExtractTopoVolumesResults(model = self._model, json_data = result))
         return ExtractTopoVolumesResults(model = self._model, json_data = result)
 
+    def extract_external_flow_volume(self, external_flow_part_id : int, params : ExtractExternalFlowVolumeParams) -> ExtractExternalFlowVolumeResults:
+        """ Extracts external flow volume by merging, intersecting, and computing volumes.Merges external flow part into the current part (main part), intersects their face zonelets,computes volumes through closed volume identification, and separates volumes intoexternal flow and outer solid volumes. Also, deletes outer solid volumes with proper label or zone transfer.
+
+
+        Parameters
+        ----------
+        external_flow_part_id : int
+            Id of the external flow part.
+        params : ExtractExternalFlowVolumeParams
+            Parameters for the extract external flow volume operation.
+
+        Returns
+        -------
+        ExtractExternalFlowVolumeResults
+            Returns the results including external flow volume id and outer solid volume ids.
+
+
+        Notes
+        -----
+        **This is a beta API**. **The behavior and implementation may change in future**.
+
+        Examples
+        --------
+        >>> results = main_part.extract_external_flow_volume(external_flow_part_id, params)
+
+        """
+        if not isinstance(external_flow_part_id, int):
+            raise TypeError("Invalid argument type passed for 'external_flow_part_id'. Valid argument type is int.")
+        if type(params).__name__ != 'ExtractExternalFlowVolumeParams':
+            raise TypeError("Invalid argument type passed for 'params'. Valid argument type is ExtractExternalFlowVolumeParams.")
+        args = {"external_flow_part_id" : external_flow_part_id,
+        "params" : params._jsonify()}
+        command_name = "PrimeMesh::Part/ExtractExternalFlowVolume"
+        self._model._print_beta_api_warning("extract_external_flow_volume")
+        self._model._print_logs_before_command("extract_external_flow_volume", args)
+        result = self._comm.serve(self._model, command_name, self._object_id, args=args)
+        self._model._print_logs_after_command("extract_external_flow_volume", ExtractExternalFlowVolumeResults(model = self._model, json_data = result))
+        return ExtractExternalFlowVolumeResults(model = self._model, json_data = result)
+
+    def extract_mrf_volume(self, mrf_part_id : int, params : ExtractMrfVolumeParams) -> ExtractMrfVolumeResults:
+        """ Extracts MRF (Multiple Reference Frame) volume by merging, intersecting, and computing volumes.Merges MRF part into the current part (main part), intersects their face zonelets,computes volumes through closed volume identification, and extracts the MRF volume.Also, deletes the interface zonelets of the MRF part (those shared between two closed boundary regions)after volume extraction.
+
+
+        Parameters
+        ----------
+        mrf_part_id : int
+            Id of the MRF part.
+        params : ExtractMrfVolumeParams
+            Parameters for the extract MRF volume operation.
+
+        Returns
+        -------
+        ExtractMrfVolumeResults
+            Returns the results including extracted MRF volume id(s).
+
+
+        Notes
+        -----
+        **This is a beta API**. **The behavior and implementation may change in future**.
+
+        Examples
+        --------
+        >>> results = main_part.extract_mrf_volume(mrf_part_id, params)
+
+        """
+        if not isinstance(mrf_part_id, int):
+            raise TypeError("Invalid argument type passed for 'mrf_part_id'. Valid argument type is int.")
+        if type(params).__name__ != 'ExtractMrfVolumeParams':
+            raise TypeError("Invalid argument type passed for 'params'. Valid argument type is ExtractMrfVolumeParams.")
+        args = {"mrf_part_id" : mrf_part_id,
+        "params" : params._jsonify()}
+        command_name = "PrimeMesh::Part/ExtractMrfVolume"
+        self._model._print_beta_api_warning("extract_mrf_volume")
+        self._model._print_logs_before_command("extract_mrf_volume", args)
+        result = self._comm.serve(self._model, command_name, self._object_id, args=args)
+        self._model._print_logs_after_command("extract_mrf_volume", ExtractMrfVolumeResults(model = self._model, json_data = result))
+        return ExtractMrfVolumeResults(model = self._model, json_data = result)
+
     def get_volumes_of_face_zonelet(self, face_zonelet : int) -> Iterable[int]:
-        """ Get volume ids of given face zonelet.
+        """ Gets volume ids of given face zonelet.
 
 
         Parameters
@@ -1126,7 +1229,7 @@ class Part(CoreObject):
         Returns
         -------
         Iterable[int]
-            Return volume ids of given face zonelet.
+            Returns volume ids of given face zonelet.
 
 
         Examples
@@ -1144,13 +1247,13 @@ class Part(CoreObject):
         return result
 
     def get_volumes(self) -> Iterable[int]:
-        """ Get all the volumes of the part.
+        """ Gets all the volumes of the part.
 
 
         Returns
         -------
         Iterable[int]
-            Return ids of volumes.
+            Returns ids of volumes.
 
 
         Examples
@@ -1166,7 +1269,7 @@ class Part(CoreObject):
         return result
 
     def get_adjacent_volumes_of_volumes(self, volumes : Iterable[int]) -> Iterable[int]:
-        """ Get the adjacent volumes for the provided volume ids.
+        """ Gets the adjacent volumes for the provided volume ids.
 
 
         Parameters
@@ -1195,7 +1298,7 @@ class Part(CoreObject):
         return result
 
     def delete_zonelets(self, zonelets : Iterable[int]) -> DeleteResults:
-        """ Delete given face zonelets.
+        """ Deletes given face zonelets.
 
 
         Parameters
@@ -1206,7 +1309,7 @@ class Part(CoreObject):
         Returns
         -------
         DeleteResults
-            Return DeleteResults.
+            Returns the results of the delete operation.
 
 
         Examples
@@ -1223,14 +1326,48 @@ class Part(CoreObject):
         self._model._print_logs_after_command("delete_zonelets", DeleteResults(model = self._model, json_data = result))
         return DeleteResults(model = self._model, json_data = result)
 
+    def create_face_zonelet_by_facets(self, params : CreateFaceZoneletByFacetsParams) -> CreateFaceZoneletByFacetsResults:
+        """ Creates face zonelet by facets with the given node coordinates and face connectivity.
+
+
+        Parameters
+        ----------
+        params : CreateFaceZoneletByFacetsParams
+            Parameters containing node coordinates and face connectivity list.
+
+        Returns
+        -------
+        CreateFaceZoneletByFacetsResults
+            Returns the CreateFaceZoneletByFacetsResults structure containing created face zonelet id, node ids, and face ids.
+
+
+        Notes
+        -----
+        **This is a beta API**. **The behavior and implementation may change in future**.
+
+        Examples
+        --------
+        >>> results = part.create_face_zonelet_by_facets(params)
+
+        """
+        if type(params).__name__ != 'CreateFaceZoneletByFacetsParams':
+            raise TypeError("Invalid argument type passed for 'params'. Valid argument type is CreateFaceZoneletByFacetsParams.")
+        args = {"params" : params._jsonify()}
+        command_name = "PrimeMesh::Part/CreateFaceZoneletByFacets"
+        self._model._print_beta_api_warning("create_face_zonelet_by_facets")
+        self._model._print_logs_before_command("create_face_zonelet_by_facets", args)
+        result = self._comm.serve(self._model, command_name, self._object_id, args=args)
+        self._model._print_logs_after_command("create_face_zonelet_by_facets", CreateFaceZoneletByFacetsResults(model = self._model, json_data = result))
+        return CreateFaceZoneletByFacetsResults(model = self._model, json_data = result)
+
     def get_topo_edges(self) -> Iterable[int]:
-        """ Get the topoedges of a part.
+        """ Gets the topoedges of a part.
 
 
         Returns
         -------
         Iterable[int]
-            Return the ids of topoedges.
+            Returns the ids of topoedges.
 
         Examples
         --------
@@ -1244,15 +1381,13 @@ class Part(CoreObject):
         return result
 
     def get_topo_faces(self) -> Iterable[int]:
-        """ Get the topofaces of a part.
+        """ Gets the topofaces of a part.
 
 
         Returns
         -------
         Iterable[int]
-            Return the ids of topofaces.
-
-Return the ids of topofaces.
+            Returns the ids of topofaces.
 
 
         Examples
@@ -1268,7 +1403,7 @@ Return the ids of topofaces.
         return result
 
     def get_topo_volumes(self) -> Iterable[int]:
-        """ Get topovolumes of part.
+        """ Gets topovolumes of the part.
 
 
         Returns
@@ -1290,20 +1425,20 @@ Return the ids of topofaces.
         return result
 
     def add_topo_entities_to_zone(self, zone_id : int, topo_entities : Iterable[int]) -> AddToZoneResults:
-        """ Add topoentities to zone.
+        """ Adds topoentities to zone.
 
 
         Parameters
         ----------
         zone_id : int
-            Id of a zone .
+            Id of a zone.
         topo_entities : Iterable[int]
             Ids of topoentities to be added.
 
         Returns
         -------
         AddToZoneResults
-            Returns the AddToZoneResults.
+            Returns the results of the add to zone operation.
 
 
         Examples
@@ -1324,20 +1459,20 @@ Return the ids of topofaces.
         return AddToZoneResults(model = self._model, json_data = result)
 
     def add_zonelets_to_zone(self, zone_id : int, zonelets : Iterable[int]) -> AddToZoneResults:
-        """ Add zonelets to zone.
+        """ Adds zonelets to zone.
 
 
         Parameters
         ----------
         zone_id : int
-            Id of a zone .
+            Id of a zone.
         zonelets : Iterable[int]
             Ids of zonelets to be added.
 
         Returns
         -------
         AddToZoneResults
-            Returns the AddToZoneResults.
+            Returns the results of the add to zone operation.
 
 
         Examples
@@ -1358,20 +1493,20 @@ Return the ids of topofaces.
         return AddToZoneResults(model = self._model, json_data = result)
 
     def add_volumes_to_zone(self, zone_id : int, volumes : Iterable[int]) -> AddToZoneResults:
-        """ Add volumes to zone.
+        """ Adds volumes to zone.
 
 
         Parameters
         ----------
         zone_id : int
-            Id of a zone .
+            Id of a zone.
         volumes : Iterable[int]
             Ids of volumes to be added.
 
         Returns
         -------
         AddToZoneResults
-            Returns the AddToZoneResults.
+            Returns the results of the add to zone operation.
 
 
         Examples
@@ -1398,7 +1533,7 @@ Return the ids of topofaces.
         Parameters
         ----------
         volume : int
-            Id of volume.
+            Id of the volume.
 
         Returns
         -------
@@ -1427,7 +1562,7 @@ Return the ids of topofaces.
         Parameters
         ----------
         zonelet : int
-            Id of zonelet.
+            Id of the zonelet.
 
         Returns
         -------
@@ -1450,18 +1585,18 @@ Return the ids of topofaces.
         return result
 
     def get_adjacent_face_zonelets_of_face_zonelets(self, face_zonelets : Iterable[int]) -> Iterable[int]:
-        """ Gets the adjacent facezonelets for the provided facezonelet ids.
+        """ Gets the adjacent face zonelets for the provided face zonelets ids.
 
 
         Parameters
         ----------
         face_zonelets : Iterable[int]
-            Ids of facezonelets.
+            Ids of the face zonelets.
 
         Returns
         -------
         Iterable[int]
-            Returns the list of adjacent facezonelet ids.
+            Returns the list of adjacent face zonelet ids.
 
 
         Examples
@@ -1479,13 +1614,13 @@ Return the ids of topofaces.
         return result
 
     def get_edge_zones(self) -> Iterable[int]:
-        """ Get all the edge zones of the part.
+        """ Gets all the edge zones of the part.
 
 
         Returns
         -------
         Iterable[int]
-            Return ids of edge zones.
+            Returns ids of edge zones.
 
 
         Examples
@@ -1501,13 +1636,13 @@ Return the ids of topofaces.
         return result
 
     def get_face_zones(self) -> Iterable[int]:
-        """ Get all the face zones of the part.
+        """ Gets all the face zones of the part.
 
 
         Returns
         -------
         Iterable[int]
-            Return ids of face zones.
+            Returns ids of face zones.
 
 
         Examples
@@ -1523,13 +1658,13 @@ Return the ids of topofaces.
         return result
 
     def get_volume_zones(self) -> Iterable[int]:
-        """ Get all the volume zones of the part.
+        """ Gets all the volume zones of the part.
 
 
         Returns
         -------
         Iterable[int]
-            Return ids of volume zones.
+            Returns ids of volume zones.
 
 
         Examples
@@ -1556,7 +1691,7 @@ Return the ids of topofaces.
         Returns
         -------
         RemoveZoneResults
-            Returns the RemoveZoneResults.
+            Returns the results of the remove zone operation including error codes if any.
 
 
         Examples
@@ -1585,7 +1720,7 @@ Return the ids of topofaces.
         Returns
         -------
         RemoveZoneResults
-            Returns the RemoveZoneResults.
+            Returns the results of the remove zone operation including error codes if any.
 
 
         Examples
@@ -1614,7 +1749,7 @@ Return the ids of topofaces.
         Returns
         -------
         RemoveZoneResults
-            Returns the RemoveZoneResults.
+            Returns the results of the remove zone operation including error codes if any.
 
 
         Examples
@@ -1632,13 +1767,13 @@ Return the ids of topofaces.
         return RemoveZoneResults(model = self._model, json_data = result)
 
     def get_labels(self) -> List[str]:
-        """ Get all labels on entities of part.
+        """ Gets all labels on entities of part.
 
 
         Returns
         -------
         List[str]
-            Return labels on entities of part.
+            Returns labels on entities of part.
 
 
         Examples
@@ -1683,7 +1818,7 @@ Return the ids of topofaces.
         return result
 
     def delete_topo_entities(self, params : DeleteTopoEntitiesParams) -> DeleteTopoEntitiesResults:
-        """ Delete topoentities of part controlled by parameters.
+        """ Deletes topoentities of part controlled by parameters.
 
 
         Parameters
@@ -1694,7 +1829,7 @@ Return the ids of topofaces.
         Returns
         -------
         DeleteTopoEntitiesResults
-            Return results of delete topoentities.
+            Returns results of delete topoentities.
 
 
         Examples
@@ -1702,7 +1837,7 @@ Return the ids of topofaces.
         >>> results = part.delete_topo_entities(params)
 
         """
-        if not isinstance(params, DeleteTopoEntitiesParams):
+        if type(params).__name__ != 'DeleteTopoEntitiesParams':
             raise TypeError("Invalid argument type passed for 'params'. Valid argument type is DeleteTopoEntitiesParams.")
         args = {"params" : params._jsonify()}
         command_name = "PrimeMesh::Part/DeleteTopoEntities"
@@ -1791,9 +1926,8 @@ Return the ids of topofaces.
         return IGAUnstructuredSplineSolid(model = self._model, json_data = result)
 
     def get_summary(self, params : PartSummaryParams) -> PartSummaryResults:
-        """ Get the part summary.
+        """ Gets the part summary for the given parameters.
 
-        Provides the part summary for the given parameters.
 
         Parameters
         ----------
@@ -1803,14 +1937,15 @@ Return the ids of topofaces.
         Returns
         -------
         PartSummaryResults
-            Return the PartSummaryResults.
+            Returns the part summary including zonelet counts, entity counts, and volume information.
+
 
         Examples
         --------
         >>> results = part.get_summary(PartSummaryParams(model=model))
 
         """
-        if not isinstance(params, PartSummaryParams):
+        if type(params).__name__ != 'PartSummaryParams':
             raise TypeError("Invalid argument type passed for 'params'. Valid argument type is PartSummaryParams.")
         args = {"params" : params._jsonify()}
         command_name = "PrimeMesh::Part/GetSummary"
@@ -1847,7 +1982,7 @@ Return the ids of topofaces.
         """
         if not isinstance(path, str):
             raise TypeError("Invalid argument type passed for 'path'. Valid argument type is str.")
-        if not isinstance(params, ComponentChildrenParams):
+        if type(params).__name__ != 'ComponentChildrenParams':
             raise TypeError("Invalid argument type passed for 'params'. Valid argument type is ComponentChildrenParams.")
         args = {"path" : path,
         "params" : params._jsonify()}

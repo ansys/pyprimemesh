@@ -1,4 +1,4 @@
-# Copyright (C) 2024 - 2025 ANSYS, Inc. and/or its affiliates.
+# Copyright (C) 2026 Synopsys, Inc. and ANSYS, Inc. All rights reserved.
 # SPDX-License-Identifier: MIT
 #
 #
@@ -25,7 +25,7 @@ from __future__ import annotations
 from ansys.meshing.prime.internals.comm_manager import CommunicationManager
 from ansys.meshing.prime.params.primestructs import *
 from ansys.meshing.prime.autogen.coreobject import *
-from typing import List, Any, Union
+from typing import Dict, Any, Union, List, Iterable
 
 class TopoUtilities(CoreObject):
     """Performs various general topology utility algorithms. For example, fill hole.
@@ -58,7 +58,7 @@ class TopoUtilities(CoreObject):
         self._comm.serve(self._model, command_name, self._object_id, args={})
 
     def fill_hole(self, topo_edges : Iterable[int], params : TopoFillHoleParams) -> TopoFillHoleResult:
-        """ Fill holes bounded by given topoedges.
+        """ Fills holes bounded by given topoedges.
 
 
         Parameters
@@ -71,7 +71,7 @@ class TopoUtilities(CoreObject):
         Returns
         -------
         TopoFillHoleResult
-            Return the TopoFillHoleResult.
+            Returns the TopoFillHoleResult.
 
 
         Examples
@@ -81,7 +81,7 @@ class TopoUtilities(CoreObject):
         """
         if not isinstance(topo_edges, Iterable):
             raise TypeError("Invalid argument type passed for 'topo_edges'. Valid argument type is Iterable[int].")
-        if not isinstance(params, TopoFillHoleParams):
+        if type(params).__name__ != 'TopoFillHoleParams':
             raise TypeError("Invalid argument type passed for 'params'. Valid argument type is TopoFillHoleParams.")
         args = {"topo_edges" : topo_edges,
         "params" : params._jsonify()}
