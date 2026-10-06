@@ -5,7 +5,6 @@ updates:
     cooldown:
       default-days: 10 # Fallback cooldown if no specific rule applies
     directory: "/"
-    insecure-external-code-execution: allow
     schedule:
       interval: "weekly"
     labels:
