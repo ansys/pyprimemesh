@@ -38,7 +38,7 @@ pygeometry = [
   "ansys-geometry-core>=0.7.6,<1"
 ]
 tests = [
-  "ansys-tools-visualization-interface[usd]==0.14.0",
+  "ansys-tools-visualization-interface[usd]==0.14.1",
   "pytest==9.1.1",
   "pytest-cov==7.1.0",
   "pytest-pyvista==0.3.3",
@@ -47,11 +47,11 @@ tests = [
   "pyvista[trame]==0.49.0"
 ]
 doc = [
-  "ansys-tools-visualization-interface[usd]==0.14.0",
+  "ansys-tools-visualization-interface[usd]==0.14.1",
   "ansys-sphinx-theme[autoapi]==1.11.0",
   "joblib==1.6.0",
   "jupyter-sphinx==0.5.3",
-  "nest-asyncio2==1.7.2",
+  "nest-asyncio2==1.7.3",
   "numpydoc==1.11.0",
   "pyvista==0.49.0",
   "sphinx-autodoc-typehints==3.13.7",
