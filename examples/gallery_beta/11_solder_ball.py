@@ -71,7 +71,7 @@ import os
 import tempfile
 
 import ansys.meshing.prime as prime
-from ansys.meshing.prime.graphics import PrimePlotter
+from ansys.meshing.prime.graphics.plotter import ColorByType, PrimePlotter
 
 ###############################################################################
 # Launch Ansys Prime Server
@@ -124,6 +124,7 @@ display = PrimePlotter()
 display.plot(
     model, scope=prime.ScopeDefinition(model=model, label_expression="solder_cyl*,pad*,layer*")
 )
+display.set_color_by_type(ColorByType.CONNECTIVITY)
 display.show()
 
 ###############################################################################
@@ -168,6 +169,7 @@ scaffolder.merge_overlapping_topo_faces(merged_part.get_topo_faces(), params)
 
 display = PrimePlotter()
 display.plot(model, update=True)
+display.set_color_by_type(ColorByType.CONNECTIVITY)
 display.show()
 
 ###############################################################################
