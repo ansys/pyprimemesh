@@ -101,7 +101,6 @@ jobs:
           library-namespace: ${{ env.PACKAGE_NAMESPACE }}
           operating-system: ${{ matrix.os }}
           python-version: ${{ matrix.python-version }}
-          check-licenses: ${{ matrix.os != 'windows-latest' }}
 
   docs:
     name: Documentation
