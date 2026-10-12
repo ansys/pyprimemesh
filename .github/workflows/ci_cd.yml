@@ -98,6 +98,7 @@ jobs:
         uses: ansys/actions/build-wheelhouse@v10
         with:
           library-name: ${{ env.PACKAGE_NAME }}
+          library-namespace: ${{ env.PACKAGE_NAMESPACE }}
           operating-system: ${{ matrix.os }}
           python-version: ${{ matrix.python-version }}
           check-licenses: ${{ matrix.os != 'windows-latest' }}
