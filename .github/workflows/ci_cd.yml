@@ -20,7 +20,6 @@ env:
   DOCKER_IMAGE_TAG: '26.1.0.dev30'
   MAIN_PYTHON_VERSION: '3.14'
   PACKAGE_NAME: 'ansys-meshing-prime'
-  PACKAGE_NAMESPACE: 'ansys.meshing.prime'
   DOCUMENTATION_CNAME: 'prime.docs.pyansys.com'
   RESET_IMAGE_CACHE: 2
 
@@ -28,27 +27,29 @@ concurrency:
   group: ${{ github.workflow }}-${{ github.ref }}
   cancel-in-progress: true
 
+# Apply the principle of least privilege by declaring permissions per job.
+permissions: {}
+
 jobs:
-  update-changelog:
-    name: "Update CHANGELOG for new tag"
-    if: github.event_name == 'push' && contains(github.ref, 'refs/tags')
+  check-pr-title:
+    name: "Check pull-request title follows conventional commits"
+    if: github.event_name == 'pull_request'
     runs-on: ubuntu-latest
     permissions:
-      contents: write
-      pull-requests: write
+      pull-requests: read # Required to read the pull request title
     steps:
-      - uses: ansys/actions/doc-deploy-changelog@v11.0.8
+      - uses: ansys/actions/check-pr-title@7410037bfb276c79ae91eb3617b9f5d2876f0c94 # v11.0.8
         with:
-          token: ${{ secrets.PYANSYS_CI_BOT_TOKEN }}
-          bot-user: ${{ secrets.PYANSYS_CI_BOT_USERNAME }}
-          bot-email: ${{ secrets.PYANSYS_CI_BOT_EMAIL }}
+          token: ${{ secrets.GITHUB_TOKEN }}
 
   vulnerabilities:
     name: Vulnerabilities
     runs-on: ubuntu-latest
     if: github.event.action != 'closed'
+    permissions:
+      contents: read # Read the dependencies and source code of the library
     steps:
-      - uses: ansys/actions/check-vulnerabilities@v11.0.8
+      - uses: ansys/actions/check-vulnerabilities@7410037bfb276c79ae91eb3617b9f5d2876f0c94 # v11.0.8
         with:
           python-version: ${{ env.MAIN_PYTHON_VERSION }}
           token: ${{ secrets.PYANSYS_CI_BOT_TOKEN }}
@@ -56,13 +57,42 @@ jobs:
           dev-mode: ${{ github.ref != 'refs/heads/main' }}
           hide-log: true
 
+  actions-security:
+    name: Actions Security
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read # Read the workflow files in the project
+    steps:
+      - uses: ansys/actions/check-actions-security@7410037bfb276c79ae91eb3617b9f5d2876f0c94 # v11.0.8
+        with:
+          generate-summary: true
+          token: ${{ secrets.GITHUB_TOKEN }}
+          auditing-level: 'high'
+
+  update-changelog:
+    name: "Update CHANGELOG for new tag"
+    if: github.event_name == 'push' && contains(github.ref, 'refs/tags')
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write # Update the changelog on the release branch
+      pull-requests: write # Create the changelog pull request
+    steps:
+      - uses: ansys/actions/doc-deploy-changelog@7410037bfb276c79ae91eb3617b9f5d2876f0c94 # v11.0.8
+        with:
+          token: ${{ secrets.PYANSYS_CI_BOT_TOKEN }}
+          bot-user: ${{ secrets.PYANSYS_CI_BOT_USERNAME }}
+          bot-email: ${{ secrets.PYANSYS_CI_BOT_EMAIL }}
+
+
   style:
     name: Code style
     if: github.event.action != 'closed'
     runs-on: ubuntu-latest
+    permissions:
+      contents: read # Read the source files checked by the action
     steps:
       - name: PyAnsys code style checks
-        uses: ansys/actions/code-style@v11.0.8
+        uses: ansys/actions/code-style@7410037bfb276c79ae91eb3617b9f5d2876f0c94 # v11.0.8
         with:
           python-version: ${{ env.MAIN_PYTHON_VERSION }}
           vale-config: "doc/.vale.ini"
@@ -72,9 +102,11 @@ jobs:
     name: Documentation Style Check
     if: github.event.action != 'closed'
     runs-on: ubuntu-latest
+    permissions:
+      contents: read # Read the documentation files checked by the action
     steps:
       - name: PyAnsys documentation style checks
-        uses: ansys/actions/doc-style@v11.0.8
+        uses: ansys/actions/doc-style@7410037bfb276c79ae91eb3617b9f5d2876f0c94 # v11.0.8
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
 
@@ -83,6 +115,8 @@ jobs:
     if: github.event.action != 'closed'
     runs-on: ${{ matrix.os }}
     needs: [style]
+    permissions:
+      contents: read # Read the source files used to build the wheelhouse
     strategy:
       fail-fast: false
       matrix:
@@ -95,10 +129,9 @@ jobs:
             os: macos-latest
     steps:
       - name: Build wheelhouse and perform smoke test
-        uses: ansys/actions/build-wheelhouse@v11.0.8
+        uses: ansys/actions/build-wheelhouse@7410037bfb276c79ae91eb3617b9f5d2876f0c94 # v11.0.8
         with:
           library-name: ${{ env.PACKAGE_NAME }}
-          library-namespace: ${{ env.PACKAGE_NAMESPACE }}
           operating-system: ${{ matrix.os }}
           python-version: ${{ matrix.python-version }}
 
@@ -107,22 +140,27 @@ jobs:
     if: github.event.action != 'closed'
     runs-on: public-ubuntu-latest-16-cores
     needs: [docs-style]
+    permissions:
+      contents: read # Read the source and documentation files
+      packages: read # Pull the Prime service image from GHCR
     steps:
       - name: Login in Github Container registry
-        uses: docker/login-action@v4.6.0
+        uses: docker/login-action@dbcb813823bdd20940b903addbd779551569679f # v4.6.0
         with:
           registry: ghcr.io
           username: ansys-bot
           password: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Pull, launch, and validate prime service
-        run: docker pull ${{ env.DOCKER_IMAGE_NAME }}:${{ env.DOCKER_IMAGE_TAG }}
+        run: docker pull "$PRIME_IMAGE"
+        env:
+          PRIME_IMAGE: ${{ env.DOCKER_IMAGE_NAME }}:${{ env.DOCKER_IMAGE_TAG }}
 
       - name: Setup headless display
-        uses: pyvista/setup-headless-display-action@v5
+        uses: pyvista/setup-headless-display-action@c103a2ff45650d38cb71684b5dc6cdfeb9442c79 # v5.1.0
 
       - name: "Run Ansys documentation building action"
-        uses: ansys/actions/doc-build@v11.0.8
+        uses: ansys/actions/doc-build@7410037bfb276c79ae91eb3617b9f5d2876f0c94 # v11.0.8
         with:
           python-version: ${{ env.MAIN_PYTHON_VERSION }}
           check-links: false
@@ -144,8 +182,11 @@ jobs:
     needs: docs
     # Run when the PR is closed i.e. when docs job is skipped
     if: always() && github.event_name == 'pull_request' && contains(github.event.pull_request.labels.*.name, 'docs:deploy') && (needs.docs.result == 'success' || needs.docs.result == 'skipped')
+    permissions:
+      contents: write # Deploy the pull-request documentation
+      pull-requests: write # Update the pull request with deployment details
     steps:
-      - uses: ansys/actions/doc-deploy-pr@v11.0.8
+      - uses: ansys/actions/doc-deploy-pr@7410037bfb276c79ae91eb3617b9f5d2876f0c94 # v11.0.8
         with:
           cname: ${{ env.DOCUMENTATION_CNAME }}
           token: ${{ secrets.GITHUB_TOKEN }}
@@ -158,30 +199,37 @@ jobs:
     if: github.event.action != 'closed'
     needs: [ smoke-tests ]
     runs-on: ubuntu-latest
-
+    permissions:
+      contents: read # Read the source files used by the test suite
+      packages: read # Pull test service images from GHCR
     steps:
       - name: Login in Github Container registry
-        uses: docker/login-action@v4.6.0
+        uses: docker/login-action@dbcb813823bdd20940b903addbd779551569679f # v4.6.0
         with:
           registry: ghcr.io
           username: ansys-bot
           password: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Pull Ansys Prime Server
-        run: docker pull ${{ env.DOCKER_IMAGE_NAME }}:${{ env.DOCKER_IMAGE_TAG }}
+        run: docker pull "$PRIME_IMAGE"
+        env:
+          PRIME_IMAGE: ${{ env.DOCKER_IMAGE_NAME }}:${{ env.DOCKER_IMAGE_TAG }}
       
       - name: Pull Ansys Geometry Server
-        run: docker run -d --rm --name ans_geo -e LICENSE_SERVER=1055@${{ secrets.LICENSE_SERVER }} --dns "8.8.8.8" -p 654:50051 ghcr.io/ansys/geometry:core-linux-latest
+        run: docker run -d --rm --name ans_geo -e "LICENSE_SERVER=1055@$LICENSE_SERVER" --dns "8.8.8.8" -p 654:50051 ghcr.io/ansys/geometry:core-linux-latest
+        env:
+          LICENSE_SERVER: ${{ secrets.LICENSE_SERVER }}
 
       - name: Restore images cache
-        uses: actions/cache@v6.1.0
+        uses: actions/cache@55cc8345863c7cc4c66a329aec7e433d2d1c52a9 # v6.1.0
         with:
           path: tests/graphics/image_cache
           key: pyvista-image-cache-${{ runner.os }}-v-${{ env.RESET_IMAGE_CACHE }}-${{ hashFiles('pyproject.toml') }}
           restore-keys: pyvista-image-cache-${{ runner.os }}-v-${{ env.RESET_IMAGE_CACHE }}
+          lookup-only: false # zizmor: ignore[cache-poisoning]
 
       - name: "Run pytest"
-        uses: ansys/actions/tests-pytest@v11.0.8
+        uses: ansys/actions/tests-pytest@7410037bfb276c79ae91eb3617b9f5d2876f0c94 # v11.0.8
         env:
           PYPRIMEMESH_LAUNCH_CONTAINER: 1
           PYPRIMEMESH_IMAGE_TAG: ${{ env.DOCKER_IMAGE_TAG }}
@@ -190,13 +238,13 @@ jobs:
           python-version: ${{ env.MAIN_PYTHON_VERSION }}
       - name: Upload PyVista generated images (cache and results)
         if: always()
-        uses: actions/upload-artifact@v7
+        uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7.0.1
         with:
           name: pytest-pyvista-images-${{ runner.os }}
           path: tests/graphics/image_cache
           retention-days: 7
 
-      - uses: codecov/codecov-action@v7.0.0
+      - uses: codecov/codecov-action@303a32d7a59b442fa8d48b6a1cc6825c09c847a5 # v7.1.1
         name: 'Upload coverage to CodeCov'
 
   package:
@@ -204,9 +252,11 @@ jobs:
     if: github.event.action != 'closed'
     needs: [testing, docs]
     runs-on: ubuntu-latest
+    permissions:
+      contents: read # Read the source files used to build the package
     steps:
       - name: Build library source and wheel artifacts
-        uses: ansys/actions/build-library@v11.0.8
+        uses: ansys/actions/build-library@7410037bfb276c79ae91eb3617b9f5d2876f0c94 # v11.0.8
         with:
           library-name: ${{ env.PACKAGE_NAME }}
           python-version: ${{ env.MAIN_PYTHON_VERSION }}
@@ -218,8 +268,8 @@ jobs:
     runs-on: ubuntu-latest
     environment: release
     permissions:
-      id-token: write
-      contents: write
+      id-token: write # Authenticate to PyPI using trusted publishing
+      contents: write # Create the GitHub release
     steps:
       - name: "Download the library artifacts from package step"
         uses: actions/download-artifact@3e5f45b2cfb9172054b4087a40e8e0b5a5461e7c # v8.0.1
@@ -234,7 +284,7 @@ jobs:
           packages-dir: ${{ env.PACKAGE_NAME }}-artifacts
 
       - name: Release to GitHub
-        uses: ansys/actions/release-github@v11.0.8
+        uses: ansys/actions/release-github@7410037bfb276c79ae91eb3617b9f5d2876f0c94 # v11.0.8
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
           library-name: ${{ env.PACKAGE_NAME }}
@@ -244,9 +294,11 @@ jobs:
     if: github.ref == 'refs/heads/main' || github.event_name == 'merge_group'
     runs-on: ubuntu-latest
     needs: [package]
+    permissions:
+      contents: write # Deploy the development documentation
     steps:
       - name: Deploy the latest documentation
-        uses: ansys/actions/doc-deploy-dev@v11.0.8
+        uses: ansys/actions/doc-deploy-dev@7410037bfb276c79ae91eb3617b9f5d2876f0c94 # v11.0.8
         with:
           cname: ${{ env.DOCUMENTATION_CNAME }}
           token: ${{ secrets.PYANSYS_CI_BOT_TOKEN }}
@@ -255,12 +307,14 @@ jobs:
 
   upload_docs_release:
     name: Upload release documentation
-    if: contains('["push","merge_group"]', github.event_name) && startsWith(github.ref, 'refs/tags/v') && !contains(github.ref, 'dev')
+    if: github.event_name == 'push' && startsWith(github.ref, 'refs/tags/v') && !contains(github.ref, 'dev')
     runs-on: ubuntu-latest
     needs: [release]
+    permissions:
+      contents: write # Deploy the stable documentation
     steps:
       - name: Deploy the stable documentation
-        uses: ansys/actions/doc-deploy-stable@v11.0.8
+        uses: ansys/actions/doc-deploy-stable@7410037bfb276c79ae91eb3617b9f5d2876f0c94 # v11.0.8
         with:
           cname: ${{ env.DOCUMENTATION_CNAME }}
           token: ${{ secrets.PYANSYS_CI_BOT_TOKEN }}
