@@ -477,6 +477,8 @@ class MergeZoneletsParams(CoreObject):
         Specifies the element count threshold for identifying small zonelets. Zonelets with fewer elements than this value are considered small. The default value is 5.
     merge_into_neighbors_outside_selection : bool, optional
         Controls whether small input zonelets can merge into neighboring face zonelets outside the input selection. When true, neighboring face zonelets outside the input selection can receive faces from small input zonelets. When false, only zonelets in the input selection can receive faces from small input zonelets. The default value is false.
+
+        **This is a beta parameter**. **The behavior and name may change in the future**.
     json_data : dict, optional
         JSON dictionary to create a ``MergeZoneletsParams`` object with provided parameters.
 
@@ -515,6 +517,8 @@ class MergeZoneletsParams(CoreObject):
             Specifies the element count threshold for identifying small zonelets. Zonelets with fewer elements than this value are considered small. The default value is 5.
         merge_into_neighbors_outside_selection : bool, optional
             Controls whether small input zonelets can merge into neighboring face zonelets outside the input selection. When true, neighboring face zonelets outside the input selection can receive faces from small input zonelets. When false, only zonelets in the input selection can receive faces from small input zonelets. The default value is false.
+
+            **This is a beta parameter**. **The behavior and name may change in the future**.
         json_data : dict, optional
             JSON dictionary to create a ``MergeZoneletsParams`` object with provided parameters.
 
@@ -621,6 +625,8 @@ class MergeZoneletsParams(CoreObject):
     @property
     def merge_into_neighbors_outside_selection(self) -> bool:
         """Controls whether small input zonelets can merge into neighboring face zonelets outside the input selection. When true, neighboring face zonelets outside the input selection can receive faces from small input zonelets. When false, only zonelets in the input selection can receive faces from small input zonelets. The default value is false.
+
+        **This is a beta parameter**. **The behavior and name may change in the future**.
         """
         return self._merge_into_neighbors_outside_selection
 

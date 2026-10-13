@@ -121,6 +121,10 @@ class Surfer(CoreObject):
             Returns the SurferResults.
 
 
+        Notes
+        -----
+        **This is a beta API**. **The behavior and implementation may change in future**.
+
         Examples
         --------
         >>> results = surfer.refacet_topo_faces(part_id, topo_faces, params)
@@ -136,6 +140,7 @@ class Surfer(CoreObject):
         "topo_faces" : topo_faces,
         "params" : params._jsonify()}
         command_name = "PrimeMesh::Surfer/RefacetTopoFaces"
+        self._model._print_beta_api_warning("refacet_topo_faces")
         self._model._print_logs_before_command("refacet_topo_faces", args)
         result = self._comm.serve(self._model, command_name, self._object_id, args=args)
         self._model._print_logs_after_command("refacet_topo_faces", SurferResults(model = self._model, json_data = result))

@@ -132,6 +132,259 @@ class FileIO(_FileIO):
             )
             return ""
 
+    @staticmethod
+    def _build_customization_count_report(filtered_custom_translations: dict) -> dict:
+        """Build per-keyword and total counts for customization instances."""
+        per_keyword_instances = {}
+        per_keyword_instance_ids = {}
+        total_instances = 0
+
+        def _instance_label(instance: object, idx: int) -> str:
+            if isinstance(instance, dict):
+                params = instance.get("Parameters")
+                if isinstance(params, dict) and params:
+                    ordered = sorted((str(k).upper(), str(v)) for k, v in params.items())
+                    return "{" + "|".join(f"{k}={v}" for k, v in ordered) + "}"
+
+            return f"instance_{idx + 1}"
+
+        for keyword, instances in filtered_custom_translations.items():
+            instance_count = len(instances) if isinstance(instances, list) else 0
+            per_keyword_instances[keyword] = instance_count
+            if isinstance(instances, list):
+                per_keyword_instance_ids[keyword] = [
+                    _instance_label(instance, i) for i, instance in enumerate(instances)
+                ]
+            else:
+                per_keyword_instance_ids[keyword] = []
+            total_instances += instance_count
+
+        return {
+            "KeywordsThatSkipNativeFe2AnsysTranslation": len(per_keyword_instances),
+            "InstancesThatSkipNativeFe2AnsysTranslation": total_instances,
+            "skipByKeyword": per_keyword_instances,
+            "skipByInstances": per_keyword_instance_ids,
+        }
+
+    @staticmethod
+    def _append_customization_report_to_formatted_summary(
+        formatted_summary: str, customization_report: dict
+    ) -> str:
+        """Append customization count report to formatted MAPDL summary."""
+        if not customization_report:
+            return formatted_summary
+
+        per_keyword = customization_report.get("perKeywordInstances", {})
+        per_keyword_instance_ids = customization_report.get("perKeywordInstanceIds", {})
+        skip_by_keyword = customization_report.get("skipByKeyword", per_keyword)
+        skip_by_instances = customization_report.get("skipByInstances", per_keyword_instance_ids)
+        cpp = customization_report.get("Cpp", {})
+        combined = customization_report.get("Combined", {})
+
+        lines = [
+            "",
+            "CUSTOMIZATION REPORT",
+            "---------------------------------------------------",
+        ]
+
+        if skip_by_keyword:
+            lines.append("Full Customization Breakdown:")
+            for keyword in sorted(skip_by_keyword.keys()):
+                lines.append(f"  - {keyword}: {int(skip_by_keyword[keyword])}")
+        if skip_by_instances:
+            lines.append("Full Customization Instance Breakdown:")
+            for keyword in sorted(skip_by_instances.keys()):
+                lines.append(f"  - {keyword}:")
+                keyword_instances = skip_by_instances.get(keyword, [])
+                for instance_label in keyword_instances:
+                    lines.append(f"      * {instance_label}")
+        if cpp or combined:
+            tweaked_keywords = combined.get(
+                "tweakingKeywordsTouched", cpp.get("tweakingKeywordsTouched", 0)
+            )
+            keyopt_updates = combined.get(
+                "tweakingKeyoptUpdates", cpp.get("tweakingKeyoptUpdates", 0)
+            )
+            constant_updates = combined.get(
+                "tweakingConstantUpdates", cpp.get("tweakingConstantUpdates", 0)
+            )
+            lines.extend(
+                [
+                    f"CPP Tweaked Keywords: {int(tweaked_keywords)}",
+                    f"CPP Keyopt Tweaks Applied: {int(keyopt_updates)}",
+                    f"CPP Constant Tweaks Applied: {int(constant_updates)}",
+                ]
+            )
+
+        if per_keyword:
+            lines.append("Per-Keyword Instances:")
+            for keyword in sorted(per_keyword.keys()):
+                lines.append(f"  - {keyword}: {int(per_keyword[keyword])}")
+                keyword_instances = per_keyword_instance_ids.get(keyword, [])
+                if keyword_instances:
+                    lines.append("    Instances:")
+                    for instance_label in keyword_instances:
+                        lines.append(f"      * {instance_label}")
+
+        return formatted_summary + "\n" + "\n".join(lines) + "\n"
+
+    @staticmethod
+    def _combine_python_cpp_customization_report(summary: dict, py_report: dict) -> dict:
+        """Combine Python skip/customization reporting with C++ tweaking metrics."""
+        counts = summary.get("Counts", {}) if isinstance(summary, dict) else {}
+        cpp_customization = {}
+        if isinstance(summary, dict):
+            customization_root = summary.get("Customization", {})
+            if isinstance(customization_root, dict):
+                cpp_customization = customization_root.get("Cpp", {})
+        if not isinstance(cpp_customization, dict):
+            cpp_customization = {}
+
+        cpp_tweaked_keywords = int(
+            cpp_customization.get(
+                "tweakingKeywordsTouched", counts.get("cpp_tweaking_keywords_touched", 0) or 0
+            )
+        )
+        cpp_keyopt_updates = int(
+            cpp_customization.get(
+                "tweakingKeyoptUpdates", counts.get("cpp_tweaking_keyopt_updates", 0) or 0
+            )
+        )
+        cpp_constant_updates = int(
+            cpp_customization.get(
+                "tweakingConstantUpdates", counts.get("cpp_tweaking_constant_updates", 0) or 0
+            )
+        )
+
+        skip_keywords = int(py_report.get("KeywordsThatSkipNativeFe2AnsysTranslation"))
+        skip_instances = int(py_report.get("InstancesThatSkipNativeFe2AnsysTranslation", 0))
+        skip_by_keyword = py_report.get("skipByKeyword", py_report.get("perKeywordInstances", {}))
+        if not isinstance(skip_by_keyword, dict):
+            skip_by_keyword = {}
+        skip_by_instances = py_report.get(
+            "skipByInstances", py_report.get("perKeywordInstanceIds", {})
+        )
+        if not isinstance(skip_by_instances, dict):
+            skip_by_instances = {}
+        combined = {
+            "KeywordsThatSkipNativeFe2AnsysTranslation": skip_keywords,
+            "InstancesThatSkipNativeFe2AnsysTranslation": skip_instances,
+            "skipByKeyword": skip_by_keyword,
+            "skipByInstances": skip_by_instances,
+            "tweakingKeywordsTouched": cpp_tweaked_keywords,
+            "tweakingKeyoptUpdates": cpp_keyopt_updates,
+            "tweakingConstantUpdates": cpp_constant_updates,
+        }
+        py_report["Combined"] = combined
+        return py_report
+
+    @staticmethod
+    def _merge_custom_sections(merged_sections: dict, keyword_sections: dict) -> None:
+        """Merge translated section text from one keyword into the final output."""
+        for section_name, content in keyword_sections.items():
+            mapdlcdbexportutils._append_section_text(merged_sections, section_name, content)
+
+    @staticmethod
+    def _read_custom_keyword_block(
+        source_file_path: str, keyword_offset: int, keyword_size: int
+    ) -> str:
+        """Read one custom keyword block from the original Abaqus source file."""
+        with open(source_file_path, "rb") as source_file:
+            source_file.seek(keyword_offset)
+            raw_bytes = source_file.read(keyword_size)
+        return raw_bytes.decode("utf-8", errors="replace")
+
+    @staticmethod
+    def _parse_keyword_parameters(keyword_line: str) -> dict:
+        """Parse the Abaqus keyword line into a parameters dictionary."""
+        parameters = {}
+        if not keyword_line:
+            return parameters
+
+        keyword_tokens = [token.strip() for token in keyword_line.lstrip("*").split(",")]
+        for token in keyword_tokens[1:]:
+            if not token:
+                continue
+            if "=" in token:
+                key, value = token.split("=", 1)
+                parameters[key.strip().upper()] = value.strip()
+            else:
+                parameters[token.strip().upper()] = True
+
+        return parameters
+
+    @classmethod
+    def _parse_raw_keyword_block(cls, raw_keyword_block: str) -> dict:
+        """Convert one raw Abaqus keyword block into keyword, parameters, and data."""
+        parsed_keyword = ""
+        parameters = {}
+        data_lines = []
+
+        for raw_line in raw_keyword_block.splitlines():
+            stripped_line = raw_line.strip()
+            if not stripped_line or stripped_line.startswith("**"):
+                continue
+
+            if not parsed_keyword and stripped_line.startswith("*"):
+                keyword_tokens = [token.strip() for token in stripped_line.lstrip("*").split(",")]
+                parsed_keyword = (
+                    keyword_tokens[0].upper() if keyword_tokens and keyword_tokens[0] else ""
+                )
+                parameters = cls._parse_keyword_parameters(stripped_line)
+                continue
+
+            data_lines.append(stripped_line)
+
+        return {
+            "Keyword": parsed_keyword,
+            "Parameters": parameters,
+            "Data": data_lines,
+        }
+
+    def _hydrate_keyword_instances(self, keyword: str, keyword_instances: object) -> list:
+        """Hydrate one keyword's instances with transient parsed source content."""
+        if not isinstance(keyword_instances, list):
+            return keyword_instances
+
+        hydrated_instances = []
+        for idx, instance in enumerate(keyword_instances):
+            if not isinstance(instance, dict):
+                hydrated_instances.append({"Parameters": {}, "Data": []})
+                continue
+
+            source_file_path = instance.get("SourceFilepath")
+            keyword_offset = instance.get("KeywordOffset")
+            keyword_size = instance.get("KeywordSize")
+            hydrated_instance = dict(instance)
+            hydrated_instance.pop("SourceFilepath", None)
+            hydrated_instance.pop("KeywordOffset", None)
+            hydrated_instance.pop("KeywordSize", None)
+            hydrated_instance["Parameters"] = {}
+            hydrated_instance["Data"] = []
+
+            if source_file_path and keyword_offset is not None and keyword_size is not None:
+                try:
+                    raw_keyword_block = self._read_custom_keyword_block(
+                        source_file_path,
+                        int(keyword_offset),
+                        int(keyword_size),
+                    )
+                    parsed_keyword_block = self._parse_raw_keyword_block(raw_keyword_block)
+                    hydrated_instance["Parameters"] = parsed_keyword_block["Parameters"]
+                    hydrated_instance["Data"] = parsed_keyword_block["Data"]
+                except Exception as ex:
+                    self._model.python_logger.warning(
+                        "Failed to hydrate custom keyword %s instance %s from %s. Error: %s",
+                        keyword,
+                        idx + 1,
+                        source_file_path,
+                        ex,
+                    )
+
+            hydrated_instances.append(hydrated_instance)
+
+        return hydrated_instances
+
     def read_pmdat(self, file_name: str, file_read_params: FileReadParams) -> FileReadResults:
         """Read a PyPrimeMesh data (PMDAT) file.
 
@@ -391,15 +644,25 @@ class FileIO(_FileIO):
         # Support hidden transport fields through custom params when these
         # members are not part of the released client API surface.
         customization_file = getattr(params, "customization_file_name", None)
-        if not customization_file:
-            customization_file = params._custom_params.get("customization_file_name")
+        customization_file_json_format = None
         if customization_file:
-            params._custom_params["customization_schema"] = self._get_customization_schema_json(
-                customization_file
+            customization_file_json_format = self._get_customization_schema_json(customization_file)
+            params._custom_params["customization_schema"] = customization_file_json_format
+            customization_file_json_format = (
+                json.loads(customization_file_json_format)
+                if customization_file_json_format
+                else None
             )
-            params._custom_params["customization_file_name"] = customization_file
+        customization_functions_file = getattr(params, "customization_functions_file_name", None)
+        if not customization_functions_file:
+            customization_functions_file = params._custom_params.get(
+                "customization_functions_file_name"
+            )
         try:
             with utils.file_write_context(self._model, file_name) as temp_file_name:
+                # part_id = 1
+                # if len(self._model.parts) > 0:
+                #    part_id = self._model.parts[0].id
                 args = {"partId": 0}
                 command_name = "PrimeMesh::FileIO/GetAbaqusSimulationData"
                 sim_data_str = self._comm.serve(
@@ -431,6 +694,130 @@ class FileIO(_FileIO):
                 params.analysis_settings = analysis_settings
                 params._custom_params["client_log_messages"] = json.dumps(collected_logs)
                 result = super().export_mapdl_cdb(temp_file_name, params)
+                sim_data_str_with_export_side_modifications = self._comm.serve(
+                    self._model, command_name, self._object_id, args=args
+                )
+                counters = {}
+                summary = None
+                if result.summary_log:
+                    summary = json.loads(result.summary_log)
+                    counters = summary.get("Ids", {})
+                customization_report = {}
+
+                # Custom translation - user mutates counters in-place
+                custom_translations_str = self._comm.serve(
+                    self._model,
+                    "PrimeMesh::FileIO/GetAbaqusCustomKeywordsData",
+                    self._object_id,
+                    args={},
+                )
+                json_custom_translations = json.loads(custom_translations_str or "null") or {}
+                json_sim_data_str = json.loads(sim_data_str_with_export_side_modifications)
+
+                if (
+                    "FilteredCustomTranslations" in json_custom_translations
+                    and json_custom_translations["FilteredCustomTranslations"]
+                ):
+                    customization_report = self._build_customization_count_report(
+                        json_custom_translations["FilteredCustomTranslations"]
+                    )
+                    sections = {}
+                    if mapdlcdbexportutils._translators_loaded is False:
+                        mapdlcdbexportutils._load_keyword_translators(
+                            customization_functions_file, customization_file_json_format
+                        )
+                    custom_translations = json_custom_translations["FilteredCustomTranslations"]
+                    # In order to empower the user to control which custom function executes first
+                    # Iterate through the customization file in definition order.
+                    for kw_key, user_data in customization_file_json_format.items():
+                        kw_instances = custom_translations.get(kw_key)
+                        hydrated_instances = self._hydrate_keyword_instances(kw_key, kw_instances)
+                        surface_payloads = {}
+                        entry = mapdlcdbexportutils._keyword_translators.get(kw_key.upper())
+                        if entry is None:
+                            entry = None
+                        if entry is not None:
+                            _, template_def = entry
+                            if template_def and template_def.get("MeshScopings"):
+                                try:
+                                    keyword_instances_json = json.dumps(hydrated_instances)
+                                    schema_json = json.dumps(template_def)
+                                    for part in self._model.parts:
+                                        part_id = part.id
+                                        payload_str = self._comm.serve(
+                                            self._model,
+                                            "PrimeMesh::FileIO/GetSurfaceMeshPayloadForKeyword",
+                                            self._object_id,
+                                            args={
+                                                "part_id": part_id,
+                                                "keyword_instances_json": keyword_instances_json,
+                                                "schema_entry_json": schema_json,
+                                            },
+                                        )
+                                        if payload_str:
+                                            if surface_payloads.get(kw_key.upper()) is None:
+                                                surface_payloads[kw_key.upper()] = json.loads(
+                                                    payload_str
+                                                )
+                                            else:
+                                                # Merge payloads returned by multiple parts.
+                                                existing_payload = surface_payloads[kw_key.upper()]
+                                                new_payload = json.loads(payload_str)
+                                                for field, surfaces in new_payload.items():
+                                                    if existing_payload.get(field) is None:
+                                                        existing_payload[field] = surfaces
+                                                    else:
+                                                        existing_payload[field].extend(surfaces)
+                                except Exception as e:
+                                    self._model.python_logger.warning(
+                                        "Failed to get surface mesh payload for keyword "
+                                        "%s. Error: %s",
+                                        kw_key,
+                                        e,
+                                    )
+
+                        keyword_sections = mapdlcdbexportutils._translate_custom_keywords(
+                            {kw_key: hydrated_instances},
+                            json_sim_data_str,
+                            self._model,
+                            counters,
+                            surface_payloads,
+                        )
+                        self._merge_custom_sections(sections, keyword_sections)
+                    mapdlcdbexportutils._inject_custom_content(temp_file_name, sections)
+                if summary is not None:
+                    if customization_report:
+                        customization_report = self._combine_python_cpp_customization_report(
+                            summary, customization_report
+                        )
+                        counts = summary.setdefault("Counts", {})
+                        counts["skip_keywords"] = int(customization_report.get("skipKeywords", 0))
+                        counts["skip_instances"] = int(customization_report.get("skipInstances", 0))
+                        counts["cpp_tweaking_keywords_touched"] = int(
+                            customization_report.get("Cpp", {}).get("tweakingKeywordsTouched", 0)
+                        )
+                        counts["cpp_tweaking_keyopt_updates"] = int(
+                            customization_report.get("Cpp", {}).get("tweakingKeyoptUpdates", 0)
+                        )
+                        counts["cpp_tweaking_constant_updates"] = int(
+                            customization_report.get("Cpp", {}).get("tweakingConstantUpdates", 0)
+                        )
+
+                        customization_root = summary.get("Customization")
+                        if not isinstance(customization_root, dict):
+                            customization_root = {}
+                        customization_root["Python"] = customization_report
+                        customization_root["Cpp"] = customization_report.get("Cpp", {})
+                        customization_root["Combined"] = customization_report.get("Combined", {})
+                        summary["Customization"] = customization_root
+                    result.summary_log = json.dumps(summary)
+                    if customization_report:
+                        result.formatted_summary_log = (
+                            self._append_customization_report_to_formatted_summary(
+                                result.formatted_summary_log,
+                                customization_report,
+                            )
+                        )
         except Exception as crash_exc:
             # Crash: server died during RPC; write crash report, then re-raise.
             if params.write_html_log:
@@ -442,6 +829,8 @@ class FileIO(_FileIO):
         if params.write_html_log:
             fe2ansys_html_log.write_cdb_export_html_log(self, file_name)
         return result
+        # Support hidden transport fields through custom params when these
+        # members are not part of the released client API surface.
 
     def initialize_cdb_export_params(
         self, params: ExportMapdlCdbParams, major_version: int, minor_version: int

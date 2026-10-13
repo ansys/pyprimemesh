@@ -30,16 +30,6 @@ import numpy as np
 
 from ansys.meshing.prime.params.primestructs import *
 
-class GapSealEvaluationOption(enum.IntEnum):
-    """Indicates the scope granularity to apply gap sealing.
-    """
-    ZONELETS = 0
-    """Applies gap sealing on the selected zonelets."""
-    BODIES = 1
-    """Applies gap sealing on the bodies."""
-    PARTS = 2
-    """Applies gap sealing on the parts."""
-
 class SweepType(enum.IntEnum):
     """Provides the Sweep Mesh Decomposition type.
     """
@@ -87,6 +77,8 @@ class LeakPreventionParams(CoreObject):
         Material points used for leak prevention control.
     scope : ScopeDefinition, optional
         Scope used for leak prevention control.
+
+        **This is a beta parameter**. **The behavior and name may change in the future**.
     max_hole_size : float, optional
         Maximum hole size to prevent leakage into region.
     n_expansion_layers : int, optional
@@ -130,6 +122,8 @@ class LeakPreventionParams(CoreObject):
             Material points used for leak prevention control.
         scope : ScopeDefinition, optional
             Scope used for leak prevention control.
+
+            **This is a beta parameter**. **The behavior and name may change in the future**.
         max_hole_size : float, optional
             Maximum hole size to prevent leakage into region.
         n_expansion_layers : int, optional
@@ -238,6 +232,8 @@ class LeakPreventionParams(CoreObject):
     @property
     def scope(self) -> ScopeDefinition:
         """Scope used for leak prevention control.
+
+        **This is a beta parameter**. **The behavior and name may change in the future**.
         """
         return self._scope
 
@@ -404,170 +400,6 @@ class SetLeakPreventionsResults(CoreObject):
     def ids(self, value: Iterable[int]):
         self._ids = value
 
-class GapSealParams(CoreObject):
-    """GapSealParams defines gap sealing control parameters for wrapper.
-
-    Parameters
-    ----------
-    model : Model
-        Model to create a ``GapSealParams`` object with default parameters.
-    scope : ScopeDefinition, optional
-        Scope used for gap sealing control.
-    gap_size : float, optional
-        Maximum gap size to seal.
-    evaluation_option : GapSealEvaluationOption, optional
-        Granularity at which gap sealing is applied.
-    json_data : dict, optional
-        JSON dictionary to create a ``GapSealParams`` object with provided parameters.
-
-    Examples
-    --------
-    >>> gap_seal_params = prime.GapSealParams(model = model)
-    """
-    _default_params = {}
-
-    def __initialize(
-            self,
-            scope : ScopeDefinition,
-            gap_size : float,
-            evaluation_option : GapSealEvaluationOption):
-        self._scope = scope
-        self._gap_size = gap_size
-        self._evaluation_option = GapSealEvaluationOption(evaluation_option)
-
-    def __init__(
-            self,
-            model: CommunicationManager=None,
-            scope : ScopeDefinition = None,
-            gap_size : float = None,
-            evaluation_option : GapSealEvaluationOption = None,
-            json_data : dict = None,
-             **kwargs):
-        """Initialize a ``GapSealParams`` object.
-
-        Parameters
-        ----------
-        model : Model
-            Model to create a ``GapSealParams`` object with default parameters.
-        scope : ScopeDefinition, optional
-            Scope used for gap sealing control.
-        gap_size : float, optional
-            Maximum gap size to seal.
-        evaluation_option : GapSealEvaluationOption, optional
-            Granularity at which gap sealing is applied.
-        json_data : dict, optional
-            JSON dictionary to create a ``GapSealParams`` object with provided parameters.
-
-        Examples
-        --------
-        >>> gap_seal_params = prime.GapSealParams(model = model)
-        """
-        if json_data:
-            self.__initialize(
-                ScopeDefinition(model = model, json_data = json_data["scope"] if "scope" in json_data else None),
-                json_data["gapSize"] if "gapSize" in json_data else None,
-                GapSealEvaluationOption(json_data["evaluationOption"] if "evaluationOption" in json_data else None))
-        else:
-            all_field_specified = all(arg is not None for arg in [scope, gap_size, evaluation_option])
-            if all_field_specified:
-                self.__initialize(
-                    scope,
-                    gap_size,
-                    evaluation_option)
-            else:
-                if model is None:
-                    raise ValueError("Invalid assignment. Either pass a model or specify all properties.")
-                else:
-                    param_json = model._communicator.initialize_params(model, "GapSealParams")
-                    json_data = param_json["GapSealParams"] if "GapSealParams" in param_json else {}
-                    self.__initialize(
-                        scope if scope is not None else ( GapSealParams._default_params["scope"] if "scope" in GapSealParams._default_params else ScopeDefinition(model = model, json_data = (json_data["scope"] if "scope" in json_data else None))),
-                        gap_size if gap_size is not None else ( GapSealParams._default_params["gap_size"] if "gap_size" in GapSealParams._default_params else (json_data["gapSize"] if "gapSize" in json_data else None)),
-                        evaluation_option if evaluation_option is not None else ( GapSealParams._default_params["evaluation_option"] if "evaluation_option" in GapSealParams._default_params else GapSealEvaluationOption(json_data["evaluationOption"] if "evaluationOption" in json_data else None)))
-        self._custom_params = kwargs
-        if model is not None:
-            [ model._logger.debug(f'Unsupported argument : {key}') for key in kwargs ]
-        [setattr(type(self), key, property(lambda self, key = key:  self._custom_params[key] if key in self._custom_params else None,
-        lambda self, value, key = key : self._custom_params.update({ key: value }))) for key in kwargs]
-        self._freeze()
-
-    @staticmethod
-    def set_default(
-            scope : ScopeDefinition = None,
-            gap_size : float = None,
-            evaluation_option : GapSealEvaluationOption = None):
-        """Set the default values of the ``GapSealParams`` object.
-
-        Parameters
-        ----------
-        scope : ScopeDefinition, optional
-            Scope used for gap sealing control.
-        gap_size : float, optional
-            Maximum gap size to seal.
-        evaluation_option : GapSealEvaluationOption, optional
-            Granularity at which gap sealing is applied.
-        """
-        args = locals()
-        [GapSealParams._default_params.update({ key: value }) for key, value in args.items() if value is not None]
-
-    @staticmethod
-    def print_default():
-        """Print the default values of ``GapSealParams`` object.
-
-        Examples
-        --------
-        >>> GapSealParams.print_default()
-        """
-        message = ""
-        message += ''.join(str(key) + ' : ' + str(value) + '\n' for key, value in GapSealParams._default_params.items())
-        print(message)
-
-    def _jsonify(self) -> Dict[str, Any]:
-        json_data = {}
-        if self._scope is not None:
-            json_data["scope"] = self._scope if isinstance(self._scope, dict) else self._scope._jsonify()
-        if self._gap_size is not None:
-            json_data["gapSize"] = self._gap_size
-        if self._evaluation_option is not None:
-            json_data["evaluationOption"] = self._evaluation_option
-        [ json_data.update({ utils.to_camel_case(key) : value }) for key, value in self._custom_params.items()]
-        return json_data
-
-    def __str__(self) -> str:
-        message = "scope :  %s\ngap_size :  %s\nevaluation_option :  %s" % ('{ ' + str(self._scope) + ' }', self._gap_size, self._evaluation_option)
-        message += ''.join('\n' + str(key) + ' : ' + str(value) for key, value in self._custom_params.items())
-        return message
-
-    @property
-    def scope(self) -> ScopeDefinition:
-        """Scope used for gap sealing control.
-        """
-        return self._scope
-
-    @scope.setter
-    def scope(self, value: ScopeDefinition):
-        self._scope = value
-
-    @property
-    def gap_size(self) -> float:
-        """Maximum gap size to seal.
-        """
-        return self._gap_size
-
-    @gap_size.setter
-    def gap_size(self, value: float):
-        self._gap_size = value
-
-    @property
-    def evaluation_option(self) -> GapSealEvaluationOption:
-        """Granularity at which gap sealing is applied.
-        """
-        return self._evaluation_option
-
-    @evaluation_option.setter
-    def evaluation_option(self, value: GapSealEvaluationOption):
-        self._evaluation_option = value
-
 class SetGapSealsResults(CoreObject):
     """Results associated with set gap seals.
 
@@ -575,10 +407,6 @@ class SetGapSealsResults(CoreObject):
     ----------
     model : Model
         Model to create a ``SetGapSealsResults`` object with default parameters.
-    error_code : ErrorCode, optional
-        Error code associated with the set gap seals.
-    ids : Iterable[int], optional
-        Ids of added gap seal controls.
     json_data : dict, optional
         JSON dictionary to create a ``SetGapSealsResults`` object with provided parameters.
 
@@ -589,17 +417,12 @@ class SetGapSealsResults(CoreObject):
     _default_params = {}
 
     def __initialize(
-            self,
-            error_code : ErrorCode,
-            ids : Iterable[int]):
-        self._error_code = ErrorCode(error_code)
-        self._ids = ids if isinstance(ids, np.ndarray) else np.array(ids, dtype=np.int32) if ids is not None else None
+            self):
+        pass
 
     def __init__(
             self,
             model: CommunicationManager=None,
-            error_code : ErrorCode = None,
-            ids : Iterable[int] = None,
             json_data : dict = None,
              **kwargs):
         """Initialize a ``SetGapSealsResults`` object.
@@ -608,10 +431,6 @@ class SetGapSealsResults(CoreObject):
         ----------
         model : Model
             Model to create a ``SetGapSealsResults`` object with default parameters.
-        error_code : ErrorCode, optional
-            Error code associated with the set gap seals.
-        ids : Iterable[int], optional
-            Ids of added gap seal controls.
         json_data : dict, optional
             JSON dictionary to create a ``SetGapSealsResults`` object with provided parameters.
 
@@ -620,24 +439,18 @@ class SetGapSealsResults(CoreObject):
         >>> set_gap_seals_results = prime.SetGapSealsResults(model = model)
         """
         if json_data:
-            self.__initialize(
-                ErrorCode(json_data["errorCode"] if "errorCode" in json_data else None),
-                json_data["ids"] if "ids" in json_data else None)
+            self.__initialize()
         else:
-            all_field_specified = all(arg is not None for arg in [error_code, ids])
+            all_field_specified = all(arg is not None for arg in [])
             if all_field_specified:
-                self.__initialize(
-                    error_code,
-                    ids)
+                self.__initialize()
             else:
                 if model is None:
                     raise ValueError("Invalid assignment. Either pass a model or specify all properties.")
                 else:
                     param_json = model._communicator.initialize_params(model, "SetGapSealsResults")
                     json_data = param_json["SetGapSealsResults"] if "SetGapSealsResults" in param_json else {}
-                    self.__initialize(
-                        error_code if error_code is not None else ( SetGapSealsResults._default_params["error_code"] if "error_code" in SetGapSealsResults._default_params else ErrorCode(json_data["errorCode"] if "errorCode" in json_data else None)),
-                        ids if ids is not None else ( SetGapSealsResults._default_params["ids"] if "ids" in SetGapSealsResults._default_params else (json_data["ids"] if "ids" in json_data else None)))
+                    self.__initialize()
         self._custom_params = kwargs
         if model is not None:
             [ model._logger.debug(f'Unsupported argument : {key}') for key in kwargs ]
@@ -646,17 +459,9 @@ class SetGapSealsResults(CoreObject):
         self._freeze()
 
     @staticmethod
-    def set_default(
-            error_code : ErrorCode = None,
-            ids : Iterable[int] = None):
+    def set_default():
         """Set the default values of the ``SetGapSealsResults`` object.
 
-        Parameters
-        ----------
-        error_code : ErrorCode, optional
-            Error code associated with the set gap seals.
-        ids : Iterable[int], optional
-            Ids of added gap seal controls.
         """
         args = locals()
         [SetGapSealsResults._default_params.update({ key: value }) for key, value in args.items() if value is not None]
@@ -675,37 +480,15 @@ class SetGapSealsResults(CoreObject):
 
     def _jsonify(self) -> Dict[str, Any]:
         json_data = {}
-        if self._error_code is not None:
-            json_data["errorCode"] = self._error_code
-        if self._ids is not None:
-            json_data["ids"] = self._ids
         [ json_data.update({ utils.to_camel_case(key) : value }) for key, value in self._custom_params.items()]
         return json_data
 
     def __str__(self) -> str:
-        message = "error_code :  %s\nids :  %s" % (self._error_code, self._ids)
+        message = "" % ()
         message += ''.join('\n' + str(key) + ' : ' + str(value) for key, value in self._custom_params.items())
+        if len(message) == 0:
+            message = 'The object has no parameters to print.'
         return message
-
-    @property
-    def error_code(self) -> ErrorCode:
-        """Error code associated with the set gap seals.
-        """
-        return self._error_code
-
-    @error_code.setter
-    def error_code(self, value: ErrorCode):
-        self._error_code = value
-
-    @property
-    def ids(self) -> Iterable[int]:
-        """Ids of added gap seal controls.
-        """
-        return self._ids
-
-    @ids.setter
-    def ids(self, value: Iterable[int]):
-        self._ids = value
 
 class ContactPreventionParams(CoreObject):
     """ContactPreventionParams defines contact prevention control parameters for wrapper.

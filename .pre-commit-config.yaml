@@ -54,4 +54,6 @@ repos:
   hooks:
     - id: add-license-headers
       args:
+          - --start_year
+          - "2026"
           - LICENSE

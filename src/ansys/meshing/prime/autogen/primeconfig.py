@@ -322,6 +322,8 @@ class ErrorCode(enum.IntEnum):
     """BOI creation failed. Wrapping is invalid for this BOI type."""
     CREATEBOI_INVALIDSCOPE = 387
     """BOI creation failed. Invalid face zonelets as input."""
+    CREATEBOI_INVALIDFLOWDIRVEC = 394
+    """BOI creation failed. Invalid flow direction vector."""
     CREATECONTACTPATCH_INVALIDOFFSETDISTANCE = 388
     """Contact patch creation process failed. Scale factors should not be less than zero."""
     CREATECONTACTPATCH_INVALIDTOLERANCEVALUE = 389
@@ -480,6 +482,8 @@ class ErrorCode(enum.IntEnum):
     """Merge small zonelets option is supported for only face zonelets."""
     INVALIDINPUTVOLUMES = 1312
     """List of volume ids provided is empty or incorrect."""
+    SETFLUENTSOLVERZONETYPEFAILED = 1319
+    """Set Fluent solver zone type failed."""
     MORPHER_COMPUTEBCS = 1410
     """Failed to compute boundary conditions."""
     MATCHMORPH_INVALIDSOURCEINPUT = 1450
@@ -886,6 +890,10 @@ class ErrorCode(enum.IntEnum):
     """Cap creation using the specified edge expression failed."""
     NUMEN_FLOWVOLUMEPARTSNOTFOUND = 3963
     """No flow volume parts available for flow volume extraction."""
+    NUMEN_MRFPARTNOTSOLID = 3964
+    """MRF part matched a surface part with no volumes during flow volume extraction."""
+    NUMEN_EXTERNALFLOWPARTNOTSOLID = 3965
+    """External flow part matched a surface part with no volumes during flow volume extraction."""
     NUMEN_SPLITVOLUMESFAILED = 3915
     """Split volumes operation failed."""
     NUMEN_CONNECTINTERFACEFAILED = 3915

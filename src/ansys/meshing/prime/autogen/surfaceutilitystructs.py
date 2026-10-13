@@ -51,6 +51,10 @@ class FlowDirection(enum.IntEnum):
     """Flow or wake inflation in the Y direction for BOI creation."""
     Z = 3
     """Flow or wake inflation in the Z direction for BOI creation."""
+    VECTOR = 4
+    """Flow or wake inflation in a custom direction given by ``flowDirVector`` for BOI creation.
+
+    **This is a beta parameter**. **The behavior and name may change in the future**."""
 
 class ContactPatchAxis(enum.IntEnum):
     """Flow or wake direction for BOI creation.
@@ -2997,6 +3001,10 @@ class CreateBOIParams(CoreObject):
         Set wrap size greater than the largest gap size in the input when performing_initial_wrap is true.
     flow_dir : FlowDirection, optional
         Assigns the offset direction of inflation.
+    flow_dir_vector : Iterable[float], optional
+        Custom flow or wake direction vector used when flowDir is FlowDirection_Vector. Only supported when boiType is BOIType_OffsetSurface. Must have size 3 and a magnitude greater than epsilon.
+
+        **This is a beta parameter**. **The behavior and name may change in the future**.
     side_scale : float, optional
         BOI side scaling factor.
     wake_scale : float, optional
@@ -3024,6 +3032,7 @@ class CreateBOIParams(CoreObject):
             perform_initial_wrap : bool,
             wrap_size : float,
             flow_dir : FlowDirection,
+            flow_dir_vector : Iterable[float],
             side_scale : float,
             wake_scale : float,
             wake_levels : int,
@@ -3034,6 +3043,7 @@ class CreateBOIParams(CoreObject):
         self._perform_initial_wrap = perform_initial_wrap
         self._wrap_size = wrap_size
         self._flow_dir = FlowDirection(flow_dir)
+        self._flow_dir_vector = flow_dir_vector if isinstance(flow_dir_vector, np.ndarray) else np.array(flow_dir_vector, dtype=np.double) if flow_dir_vector is not None else None
         self._side_scale = side_scale
         self._wake_scale = wake_scale
         self._wake_levels = wake_levels
@@ -3048,6 +3058,7 @@ class CreateBOIParams(CoreObject):
             perform_initial_wrap : bool = None,
             wrap_size : float = None,
             flow_dir : FlowDirection = None,
+            flow_dir_vector : Iterable[float] = None,
             side_scale : float = None,
             wake_scale : float = None,
             wake_levels : int = None,
@@ -3070,6 +3081,10 @@ class CreateBOIParams(CoreObject):
             Set wrap size greater than the largest gap size in the input when performing_initial_wrap is true.
         flow_dir : FlowDirection, optional
             Assigns the offset direction of inflation.
+        flow_dir_vector : Iterable[float], optional
+            Custom flow or wake direction vector used when flowDir is FlowDirection_Vector. Only supported when boiType is BOIType_OffsetSurface. Must have size 3 and a magnitude greater than epsilon.
+
+            **This is a beta parameter**. **The behavior and name may change in the future**.
         side_scale : float, optional
             BOI side scaling factor.
         wake_scale : float, optional
@@ -3095,6 +3110,7 @@ class CreateBOIParams(CoreObject):
                 json_data["performInitialWrap"] if "performInitialWrap" in json_data else None,
                 json_data["wrapSize"] if "wrapSize" in json_data else None,
                 FlowDirection(json_data["flowDir"] if "flowDir" in json_data else None),
+                json_data["flowDirVector"] if "flowDirVector" in json_data else None,
                 json_data["sideScale"] if "sideScale" in json_data else None,
                 json_data["wakeScale"] if "wakeScale" in json_data else None,
                 json_data["wakeLevels"] if "wakeLevels" in json_data else None,
@@ -3102,13 +3118,14 @@ class CreateBOIParams(CoreObject):
                 json_data["suggestedLabelPrefix"] if "suggestedLabelPrefix" in json_data else None,
                 json_data["numberOfThreads"] if "numberOfThreads" in json_data else None)
         else:
-            all_field_specified = all(arg is not None for arg in [boi_type, perform_initial_wrap, wrap_size, flow_dir, side_scale, wake_scale, wake_levels, suggested_part_name, suggested_label_prefix, number_of_threads])
+            all_field_specified = all(arg is not None for arg in [boi_type, perform_initial_wrap, wrap_size, flow_dir, flow_dir_vector, side_scale, wake_scale, wake_levels, suggested_part_name, suggested_label_prefix, number_of_threads])
             if all_field_specified:
                 self.__initialize(
                     boi_type,
                     perform_initial_wrap,
                     wrap_size,
                     flow_dir,
+                    flow_dir_vector,
                     side_scale,
                     wake_scale,
                     wake_levels,
@@ -3126,6 +3143,7 @@ class CreateBOIParams(CoreObject):
                         perform_initial_wrap if perform_initial_wrap is not None else ( CreateBOIParams._default_params["perform_initial_wrap"] if "perform_initial_wrap" in CreateBOIParams._default_params else (json_data["performInitialWrap"] if "performInitialWrap" in json_data else None)),
                         wrap_size if wrap_size is not None else ( CreateBOIParams._default_params["wrap_size"] if "wrap_size" in CreateBOIParams._default_params else (json_data["wrapSize"] if "wrapSize" in json_data else None)),
                         flow_dir if flow_dir is not None else ( CreateBOIParams._default_params["flow_dir"] if "flow_dir" in CreateBOIParams._default_params else FlowDirection(json_data["flowDir"] if "flowDir" in json_data else None)),
+                        flow_dir_vector if flow_dir_vector is not None else ( CreateBOIParams._default_params["flow_dir_vector"] if "flow_dir_vector" in CreateBOIParams._default_params else (json_data["flowDirVector"] if "flowDirVector" in json_data else None)),
                         side_scale if side_scale is not None else ( CreateBOIParams._default_params["side_scale"] if "side_scale" in CreateBOIParams._default_params else (json_data["sideScale"] if "sideScale" in json_data else None)),
                         wake_scale if wake_scale is not None else ( CreateBOIParams._default_params["wake_scale"] if "wake_scale" in CreateBOIParams._default_params else (json_data["wakeScale"] if "wakeScale" in json_data else None)),
                         wake_levels if wake_levels is not None else ( CreateBOIParams._default_params["wake_levels"] if "wake_levels" in CreateBOIParams._default_params else (json_data["wakeLevels"] if "wakeLevels" in json_data else None)),
@@ -3145,6 +3163,7 @@ class CreateBOIParams(CoreObject):
             perform_initial_wrap : bool = None,
             wrap_size : float = None,
             flow_dir : FlowDirection = None,
+            flow_dir_vector : Iterable[float] = None,
             side_scale : float = None,
             wake_scale : float = None,
             wake_levels : int = None,
@@ -3163,6 +3182,8 @@ class CreateBOIParams(CoreObject):
             Set wrap size greater than the largest gap size in the input when performing_initial_wrap is true.
         flow_dir : FlowDirection, optional
             Assigns the offset direction of inflation.
+        flow_dir_vector : Iterable[float], optional
+            Custom flow or wake direction vector used when flowDir is FlowDirection_Vector. Only supported when boiType is BOIType_OffsetSurface. Must have size 3 and a magnitude greater than epsilon.
         side_scale : float, optional
             BOI side scaling factor.
         wake_scale : float, optional
@@ -3201,6 +3222,8 @@ class CreateBOIParams(CoreObject):
             json_data["wrapSize"] = self._wrap_size
         if self._flow_dir is not None:
             json_data["flowDir"] = self._flow_dir
+        if self._flow_dir_vector is not None:
+            json_data["flowDirVector"] = self._flow_dir_vector
         if self._side_scale is not None:
             json_data["sideScale"] = self._side_scale
         if self._wake_scale is not None:
@@ -3217,7 +3240,7 @@ class CreateBOIParams(CoreObject):
         return json_data
 
     def __str__(self) -> str:
-        message = "boi_type :  %s\nperform_initial_wrap :  %s\nwrap_size :  %s\nflow_dir :  %s\nside_scale :  %s\nwake_scale :  %s\nwake_levels :  %s\nsuggested_part_name :  %s\nsuggested_label_prefix :  %s\nnumber_of_threads :  %s" % (self._boi_type, self._perform_initial_wrap, self._wrap_size, self._flow_dir, self._side_scale, self._wake_scale, self._wake_levels, self._suggested_part_name, self._suggested_label_prefix, self._number_of_threads)
+        message = "boi_type :  %s\nperform_initial_wrap :  %s\nwrap_size :  %s\nflow_dir :  %s\nflow_dir_vector :  %s\nside_scale :  %s\nwake_scale :  %s\nwake_levels :  %s\nsuggested_part_name :  %s\nsuggested_label_prefix :  %s\nnumber_of_threads :  %s" % (self._boi_type, self._perform_initial_wrap, self._wrap_size, self._flow_dir, self._flow_dir_vector, self._side_scale, self._wake_scale, self._wake_levels, self._suggested_part_name, self._suggested_label_prefix, self._number_of_threads)
         message += ''.join('\n' + str(key) + ' : ' + str(value) for key, value in self._custom_params.items())
         return message
 
@@ -3260,6 +3283,18 @@ class CreateBOIParams(CoreObject):
     @flow_dir.setter
     def flow_dir(self, value: FlowDirection):
         self._flow_dir = value
+
+    @property
+    def flow_dir_vector(self) -> Iterable[float]:
+        """Custom flow or wake direction vector used when flowDir is FlowDirection_Vector. Only supported when boiType is BOIType_OffsetSurface. Must have size 3 and a magnitude greater than epsilon.
+
+        **This is a beta parameter**. **The behavior and name may change in the future**.
+        """
+        return self._flow_dir_vector
+
+    @flow_dir_vector.setter
+    def flow_dir_vector(self, value: Iterable[float]):
+        self._flow_dir_vector = value
 
     @property
     def side_scale(self) -> float:

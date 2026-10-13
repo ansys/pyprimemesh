@@ -47,6 +47,8 @@ class CollapseParams(CoreObject):
         Skewness limit used as target to preserve quality. Better quality elements are skipped for collapse.
     skip_good_quality_elements : bool, optional
         Option to skip collapse of good quality elements. That is, face elements whose quality is already better than the target skewness. By default such good quality elements are skipped for collapse. When the value is false,  the option collapses the good quality elements too if the resulting quality is better than target skewness. You can use skipGoodQualityElements option only when you enable preserveQuality and define a valid targetSkewness. The default value is true.
+
+        **This is a beta parameter**. **The behavior and name may change in the future**.
     keep_edge_connectivity : bool, optional
         Option to keep edge connectivity. The default value is false. When keep edge connectivity is true, edges that were connected to collapsed triangles will be connected to different triangles. Otherwise, edges will be disconnected from faces.
 
@@ -102,6 +104,8 @@ class CollapseParams(CoreObject):
             Skewness limit used as target to preserve quality. Better quality elements are skipped for collapse.
         skip_good_quality_elements : bool, optional
             Option to skip collapse of good quality elements. That is, face elements whose quality is already better than the target skewness. By default such good quality elements are skipped for collapse. When the value is false,  the option collapses the good quality elements too if the resulting quality is better than target skewness. You can use skipGoodQualityElements option only when you enable preserveQuality and define a valid targetSkewness. The default value is true.
+
+            **This is a beta parameter**. **The behavior and name may change in the future**.
         keep_edge_connectivity : bool, optional
             Option to keep edge connectivity. The default value is false. When keep edge connectivity is true, edges that were connected to collapsed triangles will be connected to different triangles. Otherwise, edges will be disconnected from faces.
 
@@ -256,6 +260,8 @@ class CollapseParams(CoreObject):
     @property
     def skip_good_quality_elements(self) -> bool:
         """Option to skip collapse of good quality elements. That is, face elements whose quality is already better than the target skewness. By default such good quality elements are skipped for collapse. When the value is false,  the option collapses the good quality elements too if the resulting quality is better than target skewness. You can use skipGoodQualityElements option only when you enable preserveQuality and define a valid targetSkewness. The default value is true.
+
+        **This is a beta parameter**. **The behavior and name may change in the future**.
         """
         return self._skip_good_quality_elements
 

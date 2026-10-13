@@ -376,14 +376,13 @@ class GRPCCommunicator(Communicator):
     def progress_callback(self, callback):
         """Set a callback function to receive progress updates from the server.
 
-        The callback function should accept a single argument, which will be a dictionary
-        containing progress information.
+        The callback function should accept one argument containing progress information.
 
         Parameters
         ----------
         callback : Callable[[dict], None]
-            A function that takes a dictionary as input and returns None. This function will
-            be called with progress updates from the server.
+            A function that takes a dictionary and returns None. It receives
+            progress updates from the server.
         """
         self._progress_callback = callback
 

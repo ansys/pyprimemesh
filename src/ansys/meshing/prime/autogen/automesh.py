@@ -109,6 +109,10 @@ class AutoMesh(CoreObject):
             Returns the estimated total number of cells across all parts.
 
 
+        Notes
+        -----
+        **This is a beta API**. **The behavior and implementation may change in future**.
+
         Examples
         --------
         >>> n_cells = auto_mesh.get_number_of_cells_estimation(part_ids, automesh_params)
@@ -121,6 +125,7 @@ class AutoMesh(CoreObject):
         args = {"part_ids" : part_ids,
         "automesh_params" : automesh_params._jsonify()}
         command_name = "PrimeMesh::AutoMesh/GetNumberOfCellsEstimation"
+        self._model._print_beta_api_warning("get_number_of_cells_estimation")
         self._model._print_logs_before_command("get_number_of_cells_estimation", args)
         result = self._comm.serve(self._model, command_name, self._object_id, args=args)
         self._model._print_logs_after_command("get_number_of_cells_estimation")

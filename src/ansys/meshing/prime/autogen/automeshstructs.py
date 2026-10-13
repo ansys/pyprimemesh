@@ -374,6 +374,10 @@ class PrismParams(CoreObject):
     ----------
     model : Model
         Model to create a ``PrismParams`` object with default parameters.
+    orthogonal_layers : int, optional
+        Performs node normal smoothing after orthogonal transition.
+
+        **This is a beta parameter**. **The behavior and name may change in the future**.
     stair_step : PrismStairStep, optional
         Prism stairstep parameters.
     no_imprint_zonelets : Iterable[int], optional
@@ -389,14 +393,17 @@ class PrismParams(CoreObject):
 
     def __initialize(
             self,
+            orthogonal_layers : int,
             stair_step : PrismStairStep,
             no_imprint_zonelets : Iterable[int]):
+        self._orthogonal_layers = orthogonal_layers
         self._stair_step = stair_step
         self._no_imprint_zonelets = no_imprint_zonelets if isinstance(no_imprint_zonelets, np.ndarray) else np.array(no_imprint_zonelets, dtype=np.int32) if no_imprint_zonelets is not None else None
 
     def __init__(
             self,
             model: CommunicationManager=None,
+            orthogonal_layers : int = None,
             stair_step : PrismStairStep = None,
             no_imprint_zonelets : Iterable[int] = None,
             json_data : dict = None,
@@ -407,6 +414,10 @@ class PrismParams(CoreObject):
         ----------
         model : Model
             Model to create a ``PrismParams`` object with default parameters.
+        orthogonal_layers : int, optional
+            Performs node normal smoothing after orthogonal transition.
+
+            **This is a beta parameter**. **The behavior and name may change in the future**.
         stair_step : PrismStairStep, optional
             Prism stairstep parameters.
         no_imprint_zonelets : Iterable[int], optional
@@ -420,12 +431,14 @@ class PrismParams(CoreObject):
         """
         if json_data:
             self.__initialize(
+                json_data["orthogonalLayers"] if "orthogonalLayers" in json_data else None,
                 PrismStairStep(model = model, json_data = json_data["stairStep"] if "stairStep" in json_data else None),
                 json_data["noImprintZonelets"] if "noImprintZonelets" in json_data else None)
         else:
-            all_field_specified = all(arg is not None for arg in [stair_step, no_imprint_zonelets])
+            all_field_specified = all(arg is not None for arg in [orthogonal_layers, stair_step, no_imprint_zonelets])
             if all_field_specified:
                 self.__initialize(
+                    orthogonal_layers,
                     stair_step,
                     no_imprint_zonelets)
             else:
@@ -435,6 +448,7 @@ class PrismParams(CoreObject):
                     param_json = model._communicator.initialize_params(model, "PrismParams")
                     json_data = param_json["PrismParams"] if "PrismParams" in param_json else {}
                     self.__initialize(
+                        orthogonal_layers if orthogonal_layers is not None else ( PrismParams._default_params["orthogonal_layers"] if "orthogonal_layers" in PrismParams._default_params else (json_data["orthogonalLayers"] if "orthogonalLayers" in json_data else None)),
                         stair_step if stair_step is not None else ( PrismParams._default_params["stair_step"] if "stair_step" in PrismParams._default_params else PrismStairStep(model = model, json_data = (json_data["stairStep"] if "stairStep" in json_data else None))),
                         no_imprint_zonelets if no_imprint_zonelets is not None else ( PrismParams._default_params["no_imprint_zonelets"] if "no_imprint_zonelets" in PrismParams._default_params else (json_data["noImprintZonelets"] if "noImprintZonelets" in json_data else None)))
         self._custom_params = kwargs
@@ -446,12 +460,14 @@ class PrismParams(CoreObject):
 
     @staticmethod
     def set_default(
+            orthogonal_layers : int = None,
             stair_step : PrismStairStep = None,
             no_imprint_zonelets : Iterable[int] = None):
         """Set the default values of the ``PrismParams`` object.
 
         Parameters
         ----------
+        orthogonal_layers : int, optional
         stair_step : PrismStairStep, optional
             Prism stairstep parameters.
         no_imprint_zonelets : Iterable[int], optional
@@ -474,6 +490,8 @@ class PrismParams(CoreObject):
 
     def _jsonify(self) -> Dict[str, Any]:
         json_data = {}
+        if self._orthogonal_layers is not None:
+            json_data["orthogonalLayers"] = self._orthogonal_layers
         if self._stair_step is not None:
             json_data["stairStep"] = self._stair_step if isinstance(self._stair_step, dict) else self._stair_step._jsonify()
         if self._no_imprint_zonelets is not None:
@@ -482,9 +500,22 @@ class PrismParams(CoreObject):
         return json_data
 
     def __str__(self) -> str:
-        message = "stair_step :  %s\nno_imprint_zonelets :  %s" % ('{ ' + str(self._stair_step) + ' }', self._no_imprint_zonelets)
+        message = "orthogonal_layers :  %s\nstair_step :  %s\nno_imprint_zonelets :  %s" % (self._orthogonal_layers, '{ ' + str(self._stair_step) + ' }', self._no_imprint_zonelets)
         message += ''.join('\n' + str(key) + ' : ' + str(value) for key, value in self._custom_params.items())
         return message
+
+    @property
+    def orthogonal_layers(self) -> int:
+        """
+        Performs node normal smoothing after orthogonal transition.
+
+        **This is a beta parameter**. **The behavior and name may change in the future**.
+        """
+        return self._orthogonal_layers
+
+    @orthogonal_layers.setter
+    def orthogonal_layers(self, value: int):
+        self._orthogonal_layers = value
 
     @property
     def stair_step(self) -> PrismStairStep:
