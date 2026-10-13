@@ -1,0 +1,11 @@
+remove\_labels\_from\_topo\_entities
+====================================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. automethod:: ansys.meshing.prime.Part.remove_labels_from_topo_entities
+
+.. minigallery::
+   :add-heading: Examples using Part.remove_labels_from_topo_entities
+
+   ansys.meshing.prime.Part.remove_labels_from_topo_entities

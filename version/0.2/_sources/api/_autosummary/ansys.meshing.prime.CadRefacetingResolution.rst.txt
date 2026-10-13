@@ -1,0 +1,24 @@
+CadRefacetingResolution
+=======================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoclass:: CadRefacetingResolution
+   
+   
+   
+   
+
+   
+   
+   .. rubric:: Attributes
+
+   .. autosummary::
+      :toctree:
+   
+      CadRefacetingResolution.COARSE
+      CadRefacetingResolution.MEDIUM
+      CadRefacetingResolution.FINE
+      CadRefacetingResolution.CUSTOM
+   
+   

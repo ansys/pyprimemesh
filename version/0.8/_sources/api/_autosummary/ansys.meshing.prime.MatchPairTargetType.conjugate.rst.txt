@@ -1,0 +1,11 @@
+conjugate
+=========
+
+.. currentmodule:: ansys.meshing.prime
+
+.. automethod:: ansys.meshing.prime.MatchPairTargetType.conjugate
+
+.. minigallery::
+   :add-heading: Examples using MatchPairTargetType.conjugate
+
+   ansys.meshing.prime.MatchPairTargetType.conjugate

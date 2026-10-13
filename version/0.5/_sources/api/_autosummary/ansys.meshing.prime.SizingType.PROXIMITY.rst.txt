@@ -1,0 +1,6 @@
+PROXIMITY
+=========
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoattribute:: SizingType.PROXIMITY

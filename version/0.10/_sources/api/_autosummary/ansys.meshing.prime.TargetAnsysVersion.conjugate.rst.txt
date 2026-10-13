@@ -1,0 +1,11 @@
+conjugate
+=========
+
+.. currentmodule:: ansys.meshing.prime
+
+.. automethod:: ansys.meshing.prime.TargetAnsysVersion.conjugate
+
+.. minigallery::
+   :add-heading: Examples using TargetAnsysVersion.conjugate
+
+   ansys.meshing.prime.TargetAnsysVersion.conjugate

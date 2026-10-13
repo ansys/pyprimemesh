@@ -1,0 +1,6 @@
+partial\_defeature
+==================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoproperty:: DefeatureTopologyParams.partial_defeature

@@ -1,0 +1,6 @@
+aggressive\_edge\_merge
+=======================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoproperty:: DefeatureTopologyParams.aggressive_edge_merge

@@ -1,0 +1,11 @@
+set\_default
+============
+
+.. currentmodule:: ansys.meshing.prime
+
+.. automethod:: ansys.meshing.prime.TransformParams.set_default
+
+.. minigallery::
+   :add-heading: Examples using TransformParams.set_default
+
+   ansys.meshing.prime.TransformParams.set_default

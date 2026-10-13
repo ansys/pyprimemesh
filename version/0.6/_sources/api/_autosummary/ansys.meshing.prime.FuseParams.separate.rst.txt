@@ -1,0 +1,6 @@
+separate
+========
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoproperty:: FuseParams.separate

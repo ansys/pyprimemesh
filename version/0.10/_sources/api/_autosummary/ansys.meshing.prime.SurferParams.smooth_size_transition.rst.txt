@@ -1,0 +1,6 @@
+smooth\_size\_transition
+========================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoproperty:: SurferParams.smooth_size_transition

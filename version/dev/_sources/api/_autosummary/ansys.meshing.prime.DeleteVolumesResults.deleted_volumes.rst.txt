@@ -1,0 +1,6 @@
+deleted\_volumes
+================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoproperty:: DeleteVolumesResults.deleted_volumes

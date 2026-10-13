@@ -1,0 +1,6 @@
+delete\_material\_point
+=======================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. automethod:: MaterialPointManager.delete_material_point

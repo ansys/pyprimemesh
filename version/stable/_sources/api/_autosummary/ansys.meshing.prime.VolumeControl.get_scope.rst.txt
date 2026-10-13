@@ -1,0 +1,11 @@
+get\_scope
+==========
+
+.. currentmodule:: ansys.meshing.prime
+
+.. automethod:: ansys.meshing.prime.VolumeControl.get_scope
+
+.. minigallery::
+   :add-heading: Examples using VolumeControl.get_scope
+
+   ansys.meshing.prime.VolumeControl.get_scope

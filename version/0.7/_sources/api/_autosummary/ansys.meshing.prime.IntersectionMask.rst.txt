@@ -1,0 +1,48 @@
+.. vale off
+
+IntersectionMask
+================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoclass:: IntersectionMask
+   
+   
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+      :toctree:
+   
+      IntersectionMask.conjugate
+      IntersectionMask.bit_length
+      IntersectionMask.bit_count
+      IntersectionMask.to_bytes
+      IntersectionMask.from_bytes
+      IntersectionMask.as_integer_ratio
+   
+   
+
+   
+   
+   .. rubric:: Attributes
+
+   .. autosummary::
+      :toctree:
+   
+      IntersectionMask.real
+      IntersectionMask.imag
+      IntersectionMask.numerator
+      IntersectionMask.denominator
+      IntersectionMask.EDGEEDGE
+      IntersectionMask.FACEFACE
+      IntersectionMask.FACEFACEANDEDGEEDGE
+   
+   
+
+.. minigallery::
+    :add-heading: Examples using IntersectionMask
+
+    ansys.meshing.prime.IntersectionMask
+
+.. vale on

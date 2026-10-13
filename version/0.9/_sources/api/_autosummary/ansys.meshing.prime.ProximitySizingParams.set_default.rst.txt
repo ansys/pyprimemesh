@@ -1,0 +1,11 @@
+set\_default
+============
+
+.. currentmodule:: ansys.meshing.prime
+
+.. automethod:: ansys.meshing.prime.ProximitySizingParams.set_default
+
+.. minigallery::
+   :add-heading: Examples using ProximitySizingParams.set_default
+
+   ansys.meshing.prime.ProximitySizingParams.set_default

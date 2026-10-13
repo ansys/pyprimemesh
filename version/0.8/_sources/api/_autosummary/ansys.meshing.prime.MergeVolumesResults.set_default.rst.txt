@@ -1,0 +1,11 @@
+set\_default
+============
+
+.. currentmodule:: ansys.meshing.prime
+
+.. automethod:: ansys.meshing.prime.MergeVolumesResults.set_default
+
+.. minigallery::
+   :add-heading: Examples using MergeVolumesResults.set_default
+
+   ansys.meshing.prime.MergeVolumesResults.set_default

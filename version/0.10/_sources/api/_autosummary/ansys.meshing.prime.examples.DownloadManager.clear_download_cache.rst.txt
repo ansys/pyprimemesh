@@ -1,0 +1,11 @@
+clear\_download\_cache
+======================
+
+.. currentmodule:: ansys.meshing.prime.examples
+
+.. automethod:: ansys.meshing.prime.examples.DownloadManager.clear_download_cache
+
+.. minigallery::
+   :add-heading: Examples using DownloadManager.clear_download_cache
+
+   ansys.meshing.prime.examples.DownloadManager.clear_download_cache

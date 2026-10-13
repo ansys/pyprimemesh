@@ -1,0 +1,11 @@
+get\_meshed\_sizing\_params
+===========================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. automethod:: ansys.meshing.prime.SizeControl.get_meshed_sizing_params
+
+.. minigallery::
+   :add-heading: Examples using SizeControl.get_meshed_sizing_params
+
+   ansys.meshing.prime.SizeControl.get_meshed_sizing_params

@@ -1,0 +1,11 @@
+conjugate
+=========
+
+.. currentmodule:: ansys.meshing.prime
+
+.. automethod:: ansys.meshing.prime.ZoneType.conjugate
+
+.. minigallery::
+   :add-heading: Examples using ZoneType.conjugate
+
+   ansys.meshing.prime.ZoneType.conjugate

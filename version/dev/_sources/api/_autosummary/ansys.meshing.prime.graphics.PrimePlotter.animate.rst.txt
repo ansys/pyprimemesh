@@ -1,0 +1,11 @@
+animate
+=======
+
+.. currentmodule:: ansys.meshing.prime.graphics
+
+.. automethod:: ansys.meshing.prime.graphics.PrimePlotter.animate
+
+.. minigallery::
+   :add-heading: Examples using PrimePlotter.animate
+
+   ansys.meshing.prime.graphics.PrimePlotter.animate

@@ -1,0 +1,6 @@
+THINVOLUMECONTROLTOPOLOGYNOTSUPPORTED
+=====================================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoattribute:: ErrorCode.THINVOLUMECONTROLTOPOLOGYNOTSUPPORTED

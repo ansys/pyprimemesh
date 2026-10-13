@@ -1,0 +1,6 @@
+analysis\_type
+==============
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoproperty:: ExportLSDynaKeywordFileParams.analysis_type

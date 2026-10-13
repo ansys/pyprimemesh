@@ -1,0 +1,11 @@
+set\_default
+============
+
+.. currentmodule:: ansys.meshing.prime
+
+.. automethod:: ansys.meshing.prime.PartSummaryParams.set_default
+
+.. minigallery::
+   :add-heading: Examples using PartSummaryParams.set_default
+
+   ansys.meshing.prime.PartSummaryParams.set_default

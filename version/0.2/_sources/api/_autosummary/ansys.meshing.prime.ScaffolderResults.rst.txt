@@ -1,0 +1,31 @@
+ScaffolderResults
+=================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoclass:: ScaffolderResults
+   
+   
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+      :toctree:
+   
+      
+      ScaffolderResults.print_default
+      ScaffolderResults.set_default
+   
+   
+
+   
+   
+   .. rubric:: Attributes
+
+   .. autosummary::
+      :toctree:
+   
+      ScaffolderResults.error_code
+      ScaffolderResults.n_incomplete_topo_faces
+   
+   

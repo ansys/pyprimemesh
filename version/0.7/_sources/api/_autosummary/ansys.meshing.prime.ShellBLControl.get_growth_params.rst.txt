@@ -1,0 +1,11 @@
+get\_growth\_params
+===================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. automethod:: ansys.meshing.prime.ShellBLControl.get_growth_params
+
+.. minigallery::
+   :add-heading: Examples using ShellBLControl.get_growth_params
+
+   ansys.meshing.prime.ShellBLControl.get_growth_params

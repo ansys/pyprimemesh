@@ -1,0 +1,6 @@
+INVALIDFILEEXTENSIONFORFLUENTCASEEXPORT
+=======================================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoattribute:: ErrorCode.INVALIDFILEEXTENSIONFORFLUENTCASEEXPORT

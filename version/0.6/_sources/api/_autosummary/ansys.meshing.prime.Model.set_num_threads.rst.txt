@@ -1,0 +1,6 @@
+set\_num\_threads
+=================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. automethod:: Model.set_num_threads

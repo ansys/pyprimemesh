@@ -1,0 +1,11 @@
+is\_integer
+===========
+
+.. currentmodule:: ansys.meshing.prime
+
+.. automethod:: ansys.meshing.prime.FlowDirection.is_integer
+
+.. minigallery::
+   :add-heading: Examples using FlowDirection.is_integer
+
+   ansys.meshing.prime.FlowDirection.is_integer

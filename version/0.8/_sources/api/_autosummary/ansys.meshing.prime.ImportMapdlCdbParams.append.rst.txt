@@ -1,0 +1,6 @@
+append
+======
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoproperty:: ImportMapdlCdbParams.append

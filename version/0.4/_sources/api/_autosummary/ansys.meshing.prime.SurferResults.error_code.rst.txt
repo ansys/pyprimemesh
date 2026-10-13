@@ -1,0 +1,6 @@
+﻿error\_code
+===========
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoproperty:: SurferResults.error_code

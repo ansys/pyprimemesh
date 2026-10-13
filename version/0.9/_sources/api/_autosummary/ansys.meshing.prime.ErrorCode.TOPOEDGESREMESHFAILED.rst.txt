@@ -1,0 +1,6 @@
+TOPOEDGESREMESHFAILED
+=====================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoattribute:: ErrorCode.TOPOEDGESREMESHFAILED

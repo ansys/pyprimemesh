@@ -1,0 +1,6 @@
+face\_zonelets\_found
+=====================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoproperty:: SearchInfoByRegisterIdResults.face_zonelets_found

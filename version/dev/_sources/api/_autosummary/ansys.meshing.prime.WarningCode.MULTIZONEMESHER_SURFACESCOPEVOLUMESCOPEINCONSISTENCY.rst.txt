@@ -1,0 +1,6 @@
+MULTIZONEMESHER\_SURFACESCOPEVOLUMESCOPEINCONSISTENCY
+=====================================================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoattribute:: WarningCode.MULTIZONEMESHER_SURFACESCOPEVOLUMESCOPEINCONSISTENCY

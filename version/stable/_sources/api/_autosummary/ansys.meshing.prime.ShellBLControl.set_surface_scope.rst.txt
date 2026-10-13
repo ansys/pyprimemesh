@@ -1,0 +1,11 @@
+set\_surface\_scope
+===================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. automethod:: ansys.meshing.prime.ShellBLControl.set_surface_scope
+
+.. minigallery::
+   :add-heading: Examples using ShellBLControl.set_surface_scope
+
+   ansys.meshing.prime.ShellBLControl.set_surface_scope

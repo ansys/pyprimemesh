@@ -1,0 +1,6 @@
+size\_field\_type
+=================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoproperty:: ScaffolderParams.size_field_type

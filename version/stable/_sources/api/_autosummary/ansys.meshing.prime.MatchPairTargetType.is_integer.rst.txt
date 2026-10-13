@@ -1,0 +1,11 @@
+is\_integer
+===========
+
+.. currentmodule:: ansys.meshing.prime
+
+.. automethod:: ansys.meshing.prime.MatchPairTargetType.is_integer
+
+.. minigallery::
+   :add-heading: Examples using MatchPairTargetType.is_integer
+
+   ansys.meshing.prime.MatchPairTargetType.is_integer

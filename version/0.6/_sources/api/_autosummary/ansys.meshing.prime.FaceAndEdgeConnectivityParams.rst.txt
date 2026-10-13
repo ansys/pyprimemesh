@@ -1,0 +1,35 @@
+.. vale off
+
+FaceAndEdgeConnectivityParams
+=============================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoclass:: FaceAndEdgeConnectivityParams
+   
+   
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+      :toctree:
+   
+      
+      FaceAndEdgeConnectivityParams.print_default
+      FaceAndEdgeConnectivityParams.set_default
+   
+   
+
+   
+   
+   .. rubric:: Attributes
+
+   .. autosummary::
+      :toctree:
+   
+      FaceAndEdgeConnectivityParams.reorder_edge_zonelets_mid_nodes
+      FaceAndEdgeConnectivityParams.reorder_face_zonelets_mid_nodes
+   
+   
+
+.. vale on

@@ -1,0 +1,11 @@
+print\_default
+==============
+
+.. currentmodule:: ansys.meshing.prime
+
+.. automethod:: ansys.meshing.prime.SizeControlSummaryResult.print_default
+
+.. minigallery::
+   :add-heading: Examples using SizeControlSummaryResult.print_default
+
+   ansys.meshing.prime.SizeControlSummaryResult.print_default

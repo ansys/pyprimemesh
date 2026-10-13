@@ -1,0 +1,6 @@
+UNSUPPORTEDFILEEXTENSIONFORMAPDLCDB
+===================================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoattribute:: ErrorCode.UNSUPPORTEDFILEEXTENSIONFORMAPDLCDB

@@ -1,0 +1,11 @@
+set\_default
+============
+
+.. currentmodule:: ansys.meshing.prime
+
+.. automethod:: ansys.meshing.prime.ExportFluentCaseParams.set_default
+
+.. minigallery::
+   :add-heading: Examples using ExportFluentCaseParams.set_default
+
+   ansys.meshing.prime.ExportFluentCaseParams.set_default
