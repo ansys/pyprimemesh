@@ -81,6 +81,10 @@ class Model(CoreObject, CommunicationManager):
             Returns a part with the given name.
 
 
+        Notes
+        -----
+        **This is a beta API**. **The behavior and implementation may change in future**.
+
         Examples
         --------
         >>> new_part = model.create_part('part_name')
@@ -90,6 +94,7 @@ class Model(CoreObject, CommunicationManager):
             raise TypeError("Invalid argument type passed for 'suggested_name'. Valid argument type is str.")
         args = {"suggested_name" : suggested_name}
         command_name = "PrimeMesh::Model/CreatePart"
+        self._print_beta_api_warning("create_part")
         self._print_logs_before_command("create_part", args)
         result = self._comm.serve(self, command_name, self._object_id, args=args)
         self._print_logs_after_command("create_part")
@@ -868,6 +873,56 @@ class Model(CoreObject, CommunicationManager):
         result = self._comm.serve(self, command_name, self._object_id, args=args)
         self._print_logs_after_command("set_suggested_zone_name", prime.SetNameResults(model = self, json_data = result))
         return prime.SetNameResults(model = self, json_data = result)
+
+    def set_fluent_solver_zone_type(self, zone_ids : Iterable[int], params : SetFluentSolverZoneTypeParams) -> SetFluentSolverZoneTypeResults:
+        """ Sets the Fluent solver zone type on the specified face or volume zones.
+
+        Assigns the specified Fluent zone type (for example, FluentZoneType_Wall for a face zone or
+        FluentZoneType_Fluid for a volume zone) to each of the zones identified by the given ids.
+        The zone type category (face or volume) of each zone is determined from the model and the
+        corresponding Fluent symbol is applied.
+
+        Parameters
+        ----------
+        zone_ids : Iterable[int]
+            Ids of the face or volume zones to assign the Fluent zone type to.
+        params : SetFluentSolverZoneTypeParams
+            Parameters of SetFluentSolverZoneTypeParams structure.
+
+        Returns
+        -------
+        SetFluentSolverZoneTypeResults
+            Returns the SetFluentSolverZoneTypeResults.
+
+
+        Notes
+        -----
+        **This is a beta API**. **The behavior and implementation may change in future**.
+
+        Examples
+        --------
+        >>> # set type on face zones
+        >>> params = prime.SetFluentSolverZoneTypeParams(
+        >>>     model=model, fluent_zone_type=prime.FluentZoneType.VELOCITY_INLET)
+        >>> results = model.set_fluent_solver_zone_type([zone_id], params)
+        >>> # set type on volume zones
+        >>> params = prime.SetFluentSolverZoneTypeParams(
+        >>>     model=model, fluent_zone_type=prime.FluentZoneType.FLUID)
+        >>> results = model.set_fluent_solver_zone_type([zone_id], params)
+
+        """
+        if not isinstance(zone_ids, Iterable):
+            raise TypeError("Invalid argument type passed for 'zone_ids'. Valid argument type is Iterable[int].")
+        if type(params).__name__ != 'SetFluentSolverZoneTypeParams':
+            raise TypeError("Invalid argument type passed for 'params'. Valid argument type is SetFluentSolverZoneTypeParams.")
+        args = {"zone_ids" : zone_ids,
+        "params" : params._jsonify()}
+        command_name = "PrimeMesh::Model/SetFluentSolverZoneType"
+        self._print_beta_api_warning("set_fluent_solver_zone_type")
+        self._print_logs_before_command("set_fluent_solver_zone_type", args)
+        result = self._comm.serve(self, command_name, self._object_id, args=args)
+        self._print_logs_after_command("set_fluent_solver_zone_type", prime.SetFluentSolverZoneTypeResults(model = self, json_data = result))
+        return prime.SetFluentSolverZoneTypeResults(model = self, json_data = result)
 
     def set_working_directory(self, path : str):
         """ Set working directory to be considered for file i/o when file paths are relative.

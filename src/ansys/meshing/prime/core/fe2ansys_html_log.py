@@ -604,7 +604,7 @@ def _severity_tree(
     is_export: bool,
     css: str,
 ) -> str:
-    """Build a Warnings/Errors tab with all messages and source locations."""
+    """Build a top-level Warnings/Errors tab with source-location branches."""
     glyph, msg_prefix = _severity_glyphs(severity)
     children = _leaf(
         _root_summary(f"All {label}", len(all_msgs)), all_msgs, classes="all", prefix=msg_prefix
@@ -694,9 +694,9 @@ def _span_msgs(span: dict, severity: str) -> List[str]:
 
 
 def _iter_spans(log_doc: dict) -> Iterator[Tuple[str, str, dict]]:
-    """Yield each occurrence span from Map.Translated and Map.Skipped.
+    """Yield occurrence spans from translated and skipped map entries.
 
-    Include both IDs and identifiers.
+    Each yielded tuple contains the entity label, keyword, and span.
     """
     m = log_doc.get("Map") if isinstance(log_doc, dict) else None
     if not isinstance(m, dict):
@@ -762,9 +762,9 @@ def _resolve_inp_file(
 def _read_snippet(
     path: Optional[str], offset: int, size: int, cap: int = 800
 ) -> Optional[Tuple[str, bool]]:
-    """Read up to `cap` bytes and return the text and truncation state.
+    """Read a bounded snippet and return its text and truncation state.
 
-    Return None when there is no real range.
+    Return None when there is no valid range.
     """
     if not path or not size or size <= 0 or offset is None or offset < 0:
         return None
@@ -783,7 +783,7 @@ def _read_snippet(
 def _skipped_keywords_dropdown(
     skipped_counts, occ_by_kw: dict, snippet_file_path: Optional[str], files: List[dict]
 ) -> str:
-    """Render a Skipped Keywords dropdown with occurrence leaves and snippets."""
+    """Build a dropdown whose keywords expand to skipped occurrence leaves."""
     items = _count_items(skipped_counts)
     if not items:
         # Always render the Skipped Keywords dropdown (even at 0) — absence reads as "unknown".
@@ -855,10 +855,7 @@ def _skipped_occurrences_by_keyword(log_doc: dict) -> dict:
 
 
 def _names_dropdown(title: str, names: List[str], total: int, *, empty_note: str) -> str:
-    """Render a collapsible list of names.
-
-    The root badge is ``total`` and the secondary label is the distinct-name count.
-    """
+    """Build a collapsible list of names with total and distinct counts."""
     if names:
         body = _pre([html.escape(n) for n in names])
     else:
@@ -868,10 +865,7 @@ def _names_dropdown(title: str, names: List[str], total: int, *, empty_note: str
 
 
 def _map_keyword_names(log_doc: dict, keyword: str) -> List[str]:
-    """Return sorted identifier names under Map.Keywords[``keyword``].
-
-    The result may be empty.
-    """
+    """Return sorted identifier names under a map keyword."""
     m = log_doc.get("Map") if isinstance(log_doc, dict) else None
     if not isinstance(m, dict):
         return []
@@ -904,10 +898,7 @@ def _count_dict_dropdown(
 def _breakdown_branch(
     title: str, items: List[Tuple[str, int]], singular: str, plural: str = ""
 ) -> str:
-    """Build a nested ``tree.branch`` and omit it when empty.
-
-    The root shows the total of its leaves and a muted secondary label.
-    """
+    """Build a nested tree branch with a total and secondary count label."""
     if not items:
         return ""
     total = sum(n for _, n in items)
@@ -944,10 +935,7 @@ def _count_items(mapping) -> List[Tuple[str, int]]:
 def _labeled_count_items(
     mapping, *, count_key: str = "Count", label_key: str = "Label"
 ) -> List[Tuple[str, int]]:
-    """Return sorted label and count pairs from supported mappings.
-
-    Supported mappings are ``{label: count}`` and ``{code: {Label, Count}}``.
-    """
+    """Return sorted label/count pairs from supported mapping formats."""
     if not isinstance(mapping, dict):
         return []
     items: List[Tuple[str, int]] = []
@@ -985,10 +973,7 @@ def _stat_rows(rows: List[Tuple[str, Union[int, str]]]) -> str:
 
 
 def _root_summary(title: str, total: int, branch_text: str = "") -> str:
-    """Build a dropdown summary line ending in the total badge.
-
-    Optionally precede the badge with a muted ``branch_text`` secondary.
-    """
+    """Build a dropdown summary ending in a total badge."""
     tail = []
     if branch_text:
         tail.append(f'<span class="sub-count">{html.escape(branch_text)}</span>')
@@ -1056,7 +1041,7 @@ def _severity_glyphs(severity: str) -> Tuple[str, str]:
 
 
 def _crash_banner(heading: str, detail: str = "") -> str:
-    """Build a prominent red banner for crash reports."""
+    """Build a prominent red banner for a crash report."""
     detail_html = f'<pre>{html.escape(detail)}</pre>' if detail else ""
     return (
         '<div class="crash-banner"><span class="crash-glyph">\u2717</span>'
@@ -1077,10 +1062,7 @@ def _crash_text(log_doc: Optional[dict], crash_error: Optional[str]) -> str:
 
 
 def _file_link_field(label: str, path: Optional[str]) -> str:
-    """Build a labeled field with containing-folder and file links.
-
-    The file link uses the basename as its label and the full path as its href and tooltip.
-    """
+    """Build a labeled field with containing-folder and file links."""
     if not path:
         return ""
     name = Path(path).name or path

@@ -99,8 +99,7 @@ class Model(_Model):
         Parameters
         ----------
         callback : function
-            A function that takes a single argument, which will be the progress update data
-            from the server.
+            A function that takes one argument containing progress update data.
 
         Examples
         --------

@@ -1658,12 +1658,20 @@ class ImportCadParams(CoreObject):
         Specify whether to validate the shared topology information.
     cleanup_temporary_files : bool, optional
         Option to disable the auto-deletion of temporary files generated as a part of import.
+
+        **This is a beta parameter**. **The behavior and name may change in the future**.
     prime_root_path : str, optional
         Provides the path for the Prime Root folder.
+
+        **This is a beta parameter**. **The behavior and name may change in the future**.
     prefix_zone_name_by_part_name : bool, optional
         Option to enable addition of part names as prefix to zone names.
+
+        **This is a beta parameter**. **The behavior and name may change in the future**.
     use_legacy_naming : bool, optional
         Name filtering that replaces all non-ASCII characters with '_', converts the names to lowercase, and prefixes names that start with a digit.
+
+        **This is a beta parameter**. **The behavior and name may change in the future**.
     json_data : dict, optional
         JSON dictionary to create a ``ImportCadParams`` object with provided parameters.
 
@@ -1756,12 +1764,20 @@ class ImportCadParams(CoreObject):
             Specify whether to validate the shared topology information.
         cleanup_temporary_files : bool, optional
             Option to disable the auto-deletion of temporary files generated as a part of import.
+
+            **This is a beta parameter**. **The behavior and name may change in the future**.
         prime_root_path : str, optional
             Provides the path for the Prime Root folder.
+
+            **This is a beta parameter**. **The behavior and name may change in the future**.
         prefix_zone_name_by_part_name : bool, optional
             Option to enable addition of part names as prefix to zone names.
+
+            **This is a beta parameter**. **The behavior and name may change in the future**.
         use_legacy_naming : bool, optional
             Name filtering that replaces all non-ASCII characters with '_', converts the names to lowercase, and prefixes names that start with a digit.
+
+            **This is a beta parameter**. **The behavior and name may change in the future**.
         json_data : dict, optional
             JSON dictionary to create a ``ImportCadParams`` object with provided parameters.
 
@@ -2054,6 +2070,8 @@ class ImportCadParams(CoreObject):
     @property
     def cleanup_temporary_files(self) -> bool:
         """Option to disable the auto-deletion of temporary files generated as a part of import.
+
+        **This is a beta parameter**. **The behavior and name may change in the future**.
         """
         return self._cleanup_temporary_files
 
@@ -2064,6 +2082,8 @@ class ImportCadParams(CoreObject):
     @property
     def prime_root_path(self) -> str:
         """Provides the path for the Prime Root folder.
+
+        **This is a beta parameter**. **The behavior and name may change in the future**.
         """
         return self._prime_root_path
 
@@ -2074,6 +2094,8 @@ class ImportCadParams(CoreObject):
     @property
     def prefix_zone_name_by_part_name(self) -> bool:
         """Option to enable addition of part names as prefix to zone names.
+
+        **This is a beta parameter**. **The behavior and name may change in the future**.
         """
         return self._prefix_zone_name_by_part_name
 
@@ -2084,6 +2106,8 @@ class ImportCadParams(CoreObject):
     @property
     def use_legacy_naming(self) -> bool:
         """Name filtering that replaces all non-ASCII characters with '_', converts the names to lowercase, and prefixes names that start with a digit.
+
+        **This is a beta parameter**. **The behavior and name may change in the future**.
         """
         return self._use_legacy_naming
 

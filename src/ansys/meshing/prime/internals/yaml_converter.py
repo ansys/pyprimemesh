@@ -46,6 +46,20 @@ DATA_FIELDS = "Data_Fields"
 OUTPUT_TEMPLATE = "Output_Template"
 DEFAULT_PARAMETERS = "Default_Parameters"
 
+# Canonical control labels supported in customization schema. These are the
+# only keys normalized case-insensitively to avoid changing user payload keys.
+_CANONICAL_LABELS = {
+    "Pattern",
+    "Condition",
+    "Tweaking",
+    "Overrides",
+    "Keyopts",
+    "RealConstants",
+    "OutputFunction",
+    "MeshScopings",
+}
+_CANONICAL_LABELS_BY_LOWER = {label.lower(): label for label in _CANONICAL_LABELS}
+
 
 class YamlToPrimeJsonConverter:
     """Converts YAML keyword definitions to PRIME JSON schema format."""
@@ -73,20 +87,54 @@ class YamlToPrimeJsonConverter:
         if yaml_data is None:
             raise ValueError(f"Empty or invalid YAML file: {yaml_file_path}")
 
+        yaml_data = self._canonicalize_known_labels(yaml_data)
+
         for keyword_name, keyword_def in yaml_data.items():
             if not isinstance(keyword_def, dict):
                 raise ValueError(f"Invalid schema for {keyword_name}")
-
-            if keyword_name.startswith('TranslationRulesTweaking'):
-                for key, value in keyword_def.items():
-                    self.schemas[key] = value
-                continue
-
             pattern = self._extract_pattern(keyword_def)
             json_schema = self._convert_simple_keyword(keyword_def)
             self.schemas[pattern] = json_schema
 
         return self.schemas
+
+    def _canonicalize_known_labels(self, node: Any, path: str = "root") -> Any:
+        """Recursively canonicalize known control labels in YAML dictionaries.
+
+        Unknown keys are left unchanged. If two keys in the same object differ
+        only by case and map to the same canonical label, raise ValueError to
+        avoid ambiguous behavior.
+        """
+        if isinstance(node, dict):
+            normalized = {}
+            original_key_for_canonical = {}
+
+            for key, value in node.items():
+                canonical_key = key
+                if isinstance(key, str):
+                    canonical_key = _CANONICAL_LABELS_BY_LOWER.get(key.lower(), key)
+
+                if canonical_key in normalized:
+                    previous = original_key_for_canonical[canonical_key]
+                    if previous != key:
+                        raise ValueError(
+                            "Duplicate keys differing only by case at "
+                            f"{path}: '{previous}' and '{key}'"
+                        )
+
+                child_path = f"{path}.{canonical_key}" if isinstance(canonical_key, str) else path
+                normalized[canonical_key] = self._canonicalize_known_labels(value, child_path)
+                original_key_for_canonical[canonical_key] = key
+
+            return normalized
+
+        if isinstance(node, list):
+            return [
+                self._canonicalize_known_labels(item, f"{path}[{idx}]")
+                for idx, item in enumerate(node)
+            ]
+
+        return node
 
     def _extract_pattern(self, keyword_def: Dict) -> str:
         """Extract and validate the pattern from a keyword definition."""

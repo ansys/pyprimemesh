@@ -33,7 +33,629 @@ from typing import Tuple
 import ansys.meshing.prime as prime
 from ansys.meshing.prime.autogen.fileiostructs import ExportMapdlCdbParams
 
-__all__ = ['generate_mapdl_commands']
+__all__ = ['generate_mapdl_commands', 'set_custom_schemas_path']
+
+_custom_schemas_dir: str = None
+_keyword_translators: dict = {}
+_translators_loaded: bool = False
+_helper_module = None  # cached helper_functions module; set by _load_keyword_translators
+
+
+def _parse_field_spec(spec_str: str) -> list:
+    """Parse a field spec string into a list of (name, type) tuples.
+
+    Examples
+    --------
+    'name'                         → [('name', 'str')]
+    'node1:int, node2:int'         → [('node1', 'int'), ('node2', 'int')]
+    'mpc_type, node1:int, val:real' → [('mpc_type', 'str'), ('node1', 'int'), ('val', 'real')]
+    """
+    if not spec_str:
+        return []
+    result = []
+    for item in spec_str.split(','):
+        item = item.strip()
+        if not item:
+            continue
+        if ':' in item:
+            name, typ = item.split(':', 1)
+            result.append((name.strip(), typ.strip()))
+        else:
+            result.append((item, 'str'))
+    return result
+
+
+def _cast_value(raw, field_type: str):
+    if field_type == 'int':
+        try:
+            return int(raw)
+        except (ValueError, TypeError) as e:
+            raise ValueError(
+                "Type coercion error: field declared as 'int' but got value "
+                f"{raw!r} ({type(raw).__name__}).\n"
+                "Fix: Either change the field type declaration to 'str', or "
+                "ensure CSV contains numeric values."
+            ) from e
+    if field_type in ('real', 'float'):
+        try:
+            return float(raw)
+        except (ValueError, TypeError) as e:
+            raise ValueError(
+                f"Type coercion error: field declared as '{field_type}' but got "
+                f"value {raw!r} ({type(raw).__name__}).\n"
+                "Fix: Either change the field type declaration to 'str', or "
+                "ensure CSV contains numeric values."
+            ) from e
+    return str(raw) if raw is not None else ''
+
+
+# multiple CDB sections.
+_SECTION_TAG_ALIASES: dict = {
+    'etblock': 'et',
+    'eblock': 'eblock',
+    'cmblock': 'cmblock',
+    'nblock': 'nblock',
+    'rlblock': 'rlblock',
+}
+
+_KNOWN_SENTINELS = {'ET', 'RL', 'CMBLOCK', 'EBLOCK', 'NBLOCK', 'SOLU', 'HEADER'}
+
+
+def _append_section_text(sections: dict, section_name: str, content: str):
+    """Append content to a section, preserving existing data and newlines."""
+    if not content or not content.strip():
+        return
+    if section_name in sections and sections[section_name].strip():
+        sections[section_name] = sections[section_name].rstrip('\n') + '\n' + content.lstrip('\n')
+    else:
+        sections[section_name] = content
+
+
+def _split_section_markers(rendered: str, default_section: str) -> dict:
+    start_re = re.compile(r'^\s*\{([A-Za-z0-9_]+)_start\}\s*$')
+    end_re = re.compile(r'^\s*\{([A-Za-z0-9_]+)_end\}\s*$')
+
+    chunks = {}
+    active_tag = None
+    active_section = 'et'
+    for raw_line in rendered.split('\n'):
+        line = raw_line.strip()
+        m_start = start_re.match(line)
+        if m_start and active_tag is None:
+            tag = m_start.group(1).lower()
+            mapped = _SECTION_TAG_ALIASES.get(tag)
+            if mapped:
+                active_tag = tag
+                active_section = mapped
+                chunks.setdefault(active_section, [])
+                continue
+
+        m_end = end_re.match(line)
+        if m_end and active_tag is not None:
+            tag = m_end.group(1).lower()
+            if tag == active_tag:
+                active_tag = None
+                active_section = 'et'
+                continue
+
+        chunks.setdefault(active_section, []).append(raw_line)
+    result = {}
+    for section_name, lines in chunks.items():
+        text = '\n'.join(lines).strip('\n')
+        if text.strip():
+            result[section_name] = text
+    return result
+
+
+def _counter_get(counters: dict, dotted_path: str, default=0):
+    """Read a nested counter value by dotted path."""
+    node = counters
+    for part in dotted_path.split('.'):
+        if not isinstance(node, dict):
+            return default
+        node = node.get(part, default)
+    return node
+
+
+def _counter_set(counters: dict, dotted_path: str, value):
+    """Write a nested counter value by dotted path, creating intermediate dicts."""
+    parts = dotted_path.split('.')
+    node = counters
+    for part in parts[:-1]:
+        node = node.setdefault(part, {})
+    node[parts[-1]] = value
+
+
+def _load_keyword_translators(helper_functions_file=None, schema_prime_format_json=None):
+    global _translators_loaded, _helper_module
+    import importlib.util
+
+    helper_module = None
+    if helper_functions_file:
+        spec = importlib.util.spec_from_file_location("helper_functions", helper_functions_file)
+        helper_module = importlib.util.module_from_spec(spec)
+        spec.loader.exec_module(helper_module)
+    _helper_module = helper_module  # cache for builder override lookup
+
+    def _register_hybrid(keyword_name, func_name, template_def):
+        """Register a keyword that has an OutputFunction (hybrid mode)."""
+        prop = keyword_name.upper()
+        template_exists = template_def is not None
+        function_exists = func_name and helper_module and hasattr(helper_module, func_name)
+        if template_exists and function_exists:
+            _keyword_translators[prop] = (getattr(helper_module, func_name), template_def)
+            return True
+        elif template_exists and not function_exists:
+            _keyword_translators[prop] = (None, template_def)
+            return True
+        _keyword_translators[prop] = None
+        return False
+
+    any_loaded = False
+
+    for original_prop, schema in schema_prime_format_json.items():
+        func_name = schema.get('OutputFunction')
+        if func_name:
+            template_def = {
+                k: v
+                for k, v in schema.items()
+                if k not in ('Pattern', 'OutputFunction', 'Description', 'Tweaking')
+            }
+            if _register_hybrid(original_prop, func_name, template_def):
+                any_loaded = True
+    _translators_loaded = any_loaded
+
+
+def _translate_custom_keywords(
+    custom_translations, sim_data, model, counters, surface_payloads=None
+) -> dict:
+    sections = {}
+    if surface_payloads is None:
+        surface_payloads = {}
+    for key, value in custom_translations.items():
+        entry = _keyword_translators.get(key)
+        if entry is None:
+            model.python_logger.warning(
+                f"Warning: No translator is registered for keyword '{key}' in CustomTranslations. "
+                f"This keyword will not be processed."
+            )
+            continue
+        translator_function, template_def = entry
+        if translator_function is None:
+            model.python_logger.warning(
+                f"Warning: Translator function for keyword '{key}' is registered but is None. "
+                f"Check that the function is defined in the customization functions file."
+            )
+            continue
+        kwargs = {}
+        if template_def and template_def.get("MeshScopings"):
+            kwargs["MeshScopings"] = surface_payloads.get(key.upper(), {})
+
+        translation = translator_function(value, sim_data, model, counters, **kwargs)
+        for section_name, content in translation.items():
+            _append_section_text(sections, section_name, content)
+    return sections
+
+
+# def _inject_custom_content(file_path: str, sections:dict):
+#     with open(file_path, 'r') as file:
+#         content = file.read()
+#     for section_name, section_content in sections.items():
+#         sentinel = section_name.upper()
+#         is_step = bool(re.fullmatch(r"STEP\d+", sentinel))
+#         if sentinel not in _KNOWN_SENTINELS and not is_step:
+#             sentinel = 'RL'
+#         content = content.replace(
+#             f"! == PRIME_CUSTOM:{sentinel}==",
+#             section_content + f"\n! == PRIME_CUSTOM:{sentinel}==\n",
+#         )
+#     for sentinel in _KNOWN_SENTINELS:
+#         content = content.replace(f"! == PRIME_CUSTOM:{sentinel}==", "")
+#     content = re.sub(r"! == PRIME_CUSTOM:STEP\d+==\n?", "", content)
+#     with open(file_path, 'w') as file:
+#         file.write(content)
+
+# module-level compiled regexes
+_SENTINEL_MARKER_RE = re.compile(r"! == PRIME_CUSTOM:([A-Z0-9_]+)==")
+_DYNAMIC_SENTINEL_RE = re.compile(r"(?:STEP|MATERIAL|CONNECTORBEHAVIOR)\d+$")
+
+
+def _inject_custom_content(file_path: str, sections: dict):
+    with open(file_path, "r", encoding="utf-8") as f:
+        content = f.read()
+
+    # Normalize section keys once; unknown section names map to RL.
+    injected = {}
+    for section_name, section_content in sections.items():
+        s = section_name.upper()
+        if s not in _KNOWN_SENTINELS and not _DYNAMIC_SENTINEL_RE.fullmatch(s):
+            s = "RL"
+        injected[s] = section_content.rstrip("\n")
+
+    def repl(match):
+        s = match.group(1)
+
+        # Inject content if provided; do not re-emit marker.
+        # This guarantees markers like STEP60 are removed.
+        if s in injected:
+            txt = injected[s]
+            return (txt + "\n") if txt else ""
+
+        # Remove unmatched markers too (known + STEPn + unknown).
+        return ""
+
+    content = _SENTINEL_MARKER_RE.sub(repl, content)
+
+    with open(file_path, "w", encoding="utf-8") as f:
+        f.write(content)
+
+
+class MAPDLETBlock:
+    def __init__(self, counters_or_id, et_type):
+        if isinstance(counters_or_id, dict):
+            # auto-claim from counters (used by Python helper functions)
+            self.et_id = counters_or_id['et']['max'] + 1
+            counters_or_id['et']['max'] = self.et_id
+        else:
+            # explicit pre-claimed ID (used from OutputExpression templates)
+            self.et_id = int(counters_or_id)
+        self.et_type = et_type
+        self.keyopts = {}
+
+    def add_keyopt(self, key, value):
+        self.keyopts[key] = value
+        return self
+
+    def to_string(self):
+        lines = [f'ET,{self.et_id},{self.et_type}']
+        for kn in sorted(self.keyopts):
+            lines.append(f'KEYOPT,{self.et_id},{kn},{self.keyopts[kn]}')
+        return '\n'.join(lines)
+
+
+class MAPDLEBlock:
+    """Builds an MAPDL EBLOCK in LONG format (19i10).
+
+    All elements in one block share the same mat, ET, real, section,
+    csys, and shape-flag values. For mixed properties create separate
+    MAPDLEBlock instances.
+
+    Parameters
+    ----------
+    et_id : int
+        Element type ID — typically ``MAPDLETBlock.et_id``.
+    mat_id : int, optional
+        Material ID (EBLOCK field 1). Default ``1``.
+    real_id : int, optional
+        Real constant set ID (EBLOCK field 3). Default ``0``.
+    section_id : int, optional
+        Section ID (EBLOCK field 4). Default ``0``.
+
+    Examples
+    --------
+    >>> et = MAPDLETBlock(5, 'MPC184').add_keyopt(1, 1).add_keyopt(2, 1)
+    >>> eb = MAPDLEBlock(et.et_id).set_eblock_title('MPC TIE constraints')
+    >>> eb.add_element(1001, [101, 102])
+    >>> eb.add_element(1002, [201, 202])
+    >>> print(eb.to_string())
+    ! MPC TIE constraints
+    EBLOCK,19,LONG,,2
+    (19i10)
+    ...
+            -1
+    """
+
+    _FW = 10  # field width for LONG format (19i10)
+
+    def __init__(self, et_id: int, mat_id: int = 1, real_id: int = 0, section_id: int = 0):
+        self._et_id = et_id
+        self._mat_id = mat_id
+        self._real_id = real_id
+        self._section_id = section_id
+        self._csys_id = 0
+        self._shape_flag = 0
+        self._title = ''
+        self._elements = []  # list of (elem_id, [node_ids])
+
+    # ------------------------------------------------------------------ #
+    # Setters — mirror CdbFileWriter::EBlock setters in CdbUtils.hpp.     #
+    # All return self to allow method chaining.                           #
+    # ------------------------------------------------------------------ #
+
+    def set_material(self, mat_id: int) -> 'MAPDLEBlock':
+        """Set material ID — EBLOCK field 1 (mirrors EBlock::SetMaterial)."""
+        self._mat_id = mat_id
+        return self
+
+    def set_real_constant(self, real_id: int) -> 'MAPDLEBlock':
+        """Set real constant set ID — EBLOCK field 3 (mirrors EBlock::SetConstant)."""
+        self._real_id = real_id
+        return self
+
+    def set_section(self, section_id: int) -> 'MAPDLEBlock':
+        """Set section ID — EBLOCK field 4 (mirrors EBlock::SetSection)."""
+        self._section_id = section_id
+        return self
+
+    def set_csys(self, csys_id: int) -> 'MAPDLEBlock':
+        """Set element coordinate system ID — EBLOCK field 5 (mirrors EBlock::SetCSys)."""
+        self._csys_id = csys_id
+        return self
+
+    def set_shape_flag(self, flag: int) -> 'MAPDLEBlock':
+        """Set birth/death shape flag — EBLOCK field 6 (mirrors EBlock::SetShapeFlag)."""
+        self._shape_flag = flag
+        return self
+
+    def set_eblock_title(self, title: str) -> 'MAPDLEBlock':
+        """Write a comment line before the EBLOCK header (mirrors EBlock::SetEBlockTitle)."""
+        self._title = title
+        return self
+
+    # ------------------------------------------------------------------ #
+    # Data                                                                 #
+    # ------------------------------------------------------------------ #
+
+    def add_element(self, elem_id: int, nodes: list) -> 'MAPDLEBlock':
+        """Add one element to this block.
+
+        Number of constituent nodes is inferred automatically from
+        ``len(nodes)`` — no separate SetNumberOfConstituentNodes call needed.
+        Up to 20 nodes are supported (a continuation line is written for > 8 nodes).
+
+        Parameters
+        ----------
+        elem_id : int
+            Unique element ID. Must be claimed from ``counters`` before calling.
+        nodes : list[int]
+            Ordered node IDs for this element.
+        """
+        if not nodes:
+            raise ValueError('nodes list must not be empty')
+        self._elements.append((elem_id, list(nodes)))
+        return self
+
+    # ------------------------------------------------------------------ #
+    # Output                                                               #
+    # ------------------------------------------------------------------ #
+
+    def rows_string(self) -> str:
+        """Return data rows and -1 terminator only — no EBLOCK header or format line.
+
+        Used when the surrounding header is provided by a string.Template
+        (``output_eblock``). Returns empty string if no elements have been added.
+        The returned string has no trailing newline; the template's | block provides it.
+        """
+        if not self._elements:
+            return ''
+
+        FW = self._FW
+        lines = []
+
+        for elem_id, nodes in self._elements:
+            nnodes = len(nodes)
+            first_nodes = nodes[:8]  # up to 8 nodes on the first row
+            rest_nodes = nodes[8:]  # overflow onto a continuation row
+
+            row = [
+                self._mat_id,  # 1  material ID
+                self._et_id,  # 2  element type ID
+                self._real_id,  # 3  real constant set
+                self._section_id,  # 4  section ID
+                self._csys_id,  # 5  element coordinate system
+                0,  # 6  birth/death flag
+                0,
+                self._shape_flag,  # element shape flag
+                nnodes,  # 10 number of nodes
+                0,
+                elem_id,  # 11 element ID
+            ] + first_nodes  # 12-19
+
+            lines.append(''.join(f'{v:{FW}d}' for v in row))
+
+            # Continuation line for elements with more than 8 nodes
+            if rest_nodes:
+                padded = rest_nodes + [0] * (19 - len(rest_nodes))
+                lines.append(''.join(f'{v:{FW}d}' for v in padded))
+
+        lines.append(f'{-1:{FW}d}')
+        return '\n'.join(lines)
+
+    def to_string(self) -> str:
+        """Render the complete EBLOCK including header, data rows, and -1 terminator.
+
+        Returns empty string if no elements have been added.
+
+        EBLOCK field layout (SOLID format, 19 fields x 10 chars):
+          [1] mat  [2] etype  [3] real  [4] secn  [5] esys  [6] ib
+          [7-9] unused  [10] nnodes  [11] elem_id  [12-19] node IDs (zero-padded)
+        """
+        if not self._elements:
+            return ''
+
+        lines = []
+
+        if self._title:
+            lines.append(f'! {self._title}')
+
+        lines.append(f'EBLOCK,19,SOLID,,{len(self._elements)}')
+        lines.append('(19i10)')
+        lines.append(self.rows_string())
+        return '\n'.join(lines) + '\n'
+
+    @staticmethod
+    def combine_blocks_to_string(blocks: list, title: str = '') -> str:
+        """Render a single EBLOCK from multiple ``MAPDLEBlock`` instances.
+
+        This method is useful when rows must carry mixed ET/REAL IDs but
+        should still be emitted under one EBLOCK header.
+
+        Parameters
+        ----------
+        blocks : list[MAPDLEBlock]
+            Source blocks to merge. Block-local headers are ignored.
+        title : str, optional
+            Optional comment line written before the EBLOCK header.
+
+        Returns
+        -------
+        str
+            Full EBLOCK text including one header and one ``-1`` terminator.
+            Returns empty string if no valid rows are present.
+        """
+        if not blocks:
+            return ''
+
+        merged_rows = []
+        total_elements = 0
+
+        for block in blocks:
+            if not isinstance(block, MAPDLEBlock) or not block._elements:
+                continue
+            total_elements += len(block._elements)
+            rows = block.rows_string()
+            if not rows:
+                continue
+            row_lines = rows.splitlines()
+            if row_lines and row_lines[-1].strip() == '-1':
+                row_lines = row_lines[:-1]
+            merged_rows.extend(row_lines)
+
+        if not merged_rows:
+            return ''
+
+        lines = []
+        if title:
+            lines.append(f'! {title}')
+        lines.append(f'EBLOCK,19,SOLID,,{total_elements}')
+        lines.append('(19i10)')
+        lines.extend(merged_rows)
+        lines.append(f'{-1:10d}')
+        return '\n'.join(lines) + '\n'
+
+
+class MAPDLCMBlock:
+    """Builds an MAPDL CMBLOCK in (8i10) format.
+
+    Parameters
+    ----------
+    name : str
+        Component name. Automatically truncated to 32 characters.
+    comp_type : str
+        ``'ELEM'`` for element component, ``'NODE'`` for node component.
+
+    Examples
+    --------
+    >>> cm = MAPDLCMBlock('MPC_TIE', 'ELEM')
+    >>> cm.add_ids([1001, 1002, 1003])
+    >>> print(cm.to_string())
+    CMBLOCK,MPC_TIE,ELEM,       3
+    (8i10)
+          1001      1002      1003
+    """
+
+    def __init__(self, name: str, comp_type: str):
+        self._name = name[:32]
+        self._comp_type = comp_type.upper()
+        self._ids = []
+
+    def add_ids(self, ids: list) -> 'MAPDLCMBlock':
+        """Append IDs to this component."""
+        self._ids.extend(ids)
+        return self
+
+    def rows_string(self) -> str:
+        """Return the ID data rows only — no CMBLOCK header or format line.
+
+        Used when the surrounding header is provided by a string.Template
+        (``output_cmblock``). Returns empty string if no IDs have been added.
+        The returned string has no trailing newline; the template's | block provides it.
+        """
+        if not self._ids:
+            return ''
+        lines = []
+        for i in range(0, len(self._ids), 8):
+            chunk = self._ids[i : i + 8]
+            lines.append(''.join(f'{v:10d}' for v in chunk))
+        return '\n'.join(lines)
+
+    def to_string(self) -> str:
+        if not self._ids:
+            return ''
+        lines = [
+            f'CMBLOCK,{self._name},{self._comp_type},{len(self._ids):8d}',
+            '(8i10)',
+            self.rows_string(),
+        ]
+        return '\n'.join(lines) + '\n'
+
+
+class RLBlock:
+    def __init__(self, counters: dict):
+        self._counters = counters
+        self._lines = []  # list of formatted line strings
+        self._count = 0  # number of constant sets added
+        self._max_constant = 0  # highest constant ID issued
+        self._max_items = 0  # max numValues seen across all sets
+        self._constant_id = 0  # ID of the most recently added set
+
+    def add_constant(self, value_map: dict, write_zeros: bool = False) -> int:
+        num_values = (max(value_map.keys()) + 1) if value_map else 0
+
+        constant = _counter_get(self._counters, 'constant.max', 0) + 1
+        _counter_set(self._counters, 'constant.max', constant)
+
+        self._constant_id = constant
+        self._max_constant = _counter_get(self._counters, 'rl.max', 0)
+        self._count += 1
+        self._max_items = max(self._max_items, num_values)
+
+        # First line: constantId (8 wide) + numValues (8 wide) + up to 6 values (16 wide each)
+        line = f'{constant:8d}{num_values:8d}'
+        capacity = 6
+        pending_lines = [line]
+
+        for idx in range(num_values):
+            if capacity == 0:
+                pending_lines.append('')  # start continuation line
+                capacity = 7
+
+            if idx in value_map:
+                pending_lines[-1] += f'{value_map[idx]:16.9e}'
+            else:
+                if write_zeros:
+                    pending_lines[-1] += f'{0.0:16.9e}'
+                else:
+                    pending_lines[-1] += ' ' * 16
+            capacity -= 1
+
+        self._lines.extend(pending_lines)
+
+        return constant
+
+    def get_constant_id(self) -> int:
+        """Return the ID of the most recently added constant set."""
+        return self._constant_id
+
+    def to_string(self) -> str:
+        """Render the complete RLBLOCK including header and format lines.
+
+        Returns empty string if no constant sets have been added.
+
+        Output structure (mirrors RLBlock::Flush in CdbUtils.cpp):
+            RLBLOCK,<count>,<maxConstant>,<maxItems>,7
+            (2i8,6g16.9)
+            (7g16.9)
+            <data lines>
+        """
+        if self._count == 0:
+            return ''
+        header = (
+            f'RLBLOCK,{self._count},{self._max_constant},{self._max_items},7\n'
+            f'(2i8,6g16.9)\n'
+            f'(7g16.9)\n'
+        )
+        return header + '\n'.join(self._lines) + '\n'
 
 
 class _TractionProperties:
@@ -158,8 +780,8 @@ class _InitialConditionProcessor:
             if data:
                 if len(data) > 1:
                     self._logger.warning(
-                        "Warning: Same Initial Temperature set for all nodes may not be "
-                        "correct. check the translation"
+                        "Warning: Same Initial Temperature set for all nodes may "
+                        "not be correct. check the translation"
                     )
                 first_data = data[0]
                 temperature = first_data['temperature'][0]
@@ -851,6 +1473,11 @@ class _MaterialProcessor:
             mapdl_text_data += f'!!{self._mat_id:>10} "{material}"\n'
         else:
             mapdl_text_data += f"! material '{material}' \n"
+        custom_params = (
+            getattr(self._params, "_custom_params", {}) if self._params is not None else {}
+        )
+        if custom_params.get("customization_functions_file_name"):
+            mapdl_text_data += f'! == PRIME_CUSTOM:MATERIAL{self._mat_id}==\n'
         if "Parameters" in mat_data:
             self._logger.warning(f"Parameter on Material {material} are not processed.")
         for prop in mat_data:
@@ -1417,6 +2044,8 @@ class _MaterialProcessor:
         conductivity_data = ''
         data = property_dict.get('Data', {})
         parameters = property_dict.get('Parameters', {})
+        if parameters is None:
+            return ''
         exp_type = parameters.get('TYPE', 'ISO')
 
         if parameters and any(param in parameters for param in ['DEPENDENCIES', 'SLURRY']):
@@ -1630,8 +2259,8 @@ class _MaterialProcessor:
                     if temperature:
                         if len(temperature) != len(youngs_mod) or len(temperature) != len(nu):
                             self._logger.warning(
-                                "data values on *ELASTIC are not consistent for material "
-                                f"{material}."
+                                "data values on *ELASTIC are not consistent for "
+                                f"material {material}."
                             )
                         elastic_modulus += f"TB, ELAS, {mat_id}, , 2,ISOT\n"
                         for e, v, t in zip(youngs_mod, nu, temperature):
@@ -1644,8 +2273,8 @@ class _MaterialProcessor:
                     if temperature:
                         if len(temperature) != len(youngs_mod) or len(temperature) != len(nu):
                             self._logger.warning(
-                                "data values on *ELASTIC are not consistent for material "
-                                f"{material}."
+                                "data values on *ELASTIC are not consistent for "
+                                f"material {material}."
                             )
                         elastic_modulus += f"TB, GASKET, {mat_id}, , 2,ELAS\n"
                         for e, v, t in zip(youngs_mod, nu, temperature):
@@ -2429,10 +3058,16 @@ class _JointMaterialProcessor:
         '_model',
         '_logger',
         '_skip_comments',
+        '_has_custom_yaml',
     )
 
     def __init__(
-        self, model: prime.Model, raw_joint_materials_data, hm_comments=False, skip_comments=True
+        self,
+        model: prime.Model,
+        raw_joint_materials_data,
+        hm_comments=False,
+        skip_comments=True,
+        params=None,
     ):
         self._raw_joint_materials_data = raw_joint_materials_data
         self._mat_id = 0
@@ -2444,6 +3079,8 @@ class _JointMaterialProcessor:
         self._model = model
         self._logger = model.python_logger
         self._skip_comments = skip_comments
+        custom_params = getattr(params, "_custom_params", {}) if params is not None else {}
+        self._has_custom_yaml = bool(custom_params.get("customization_functions_file_name"))
 
     def get_all_material_commands(self):
         mapdl_text_data_list = []
@@ -2465,6 +3102,8 @@ class _JointMaterialProcessor:
             mapdl_text_data += f'!!{self._mat_id:>10} "{material}"\n'
         else:
             mapdl_text_data += f"! material '{material}' \n"
+        if self._has_custom_yaml:
+            mapdl_text_data += f'! == PRIME_CUSTOM:CONNECTORBEHAVIOR{self._mat_id}==\n'
         if "Parameters" in mat_data:
             self._logger.warning(f"Parameter on Material {material} are not processed.")
         for prop in mat_data:
@@ -2990,6 +3629,18 @@ class _JointMaterialProcessor:
         return ref_length
 
 
+_BOUNDARY_TYPE_DOFS = {
+    'ENCASTRE': (1, 2, 3, 4, 5, 6),
+    'PINNED': (1, 2, 3),
+    'XSYMM': (1, 5, 6),
+    'YSYMM': (2, 4, 6),
+    'ZSYMM': (3, 4, 5),
+    'XASYMM': (2, 3, 4),
+    'YASYMM': (1, 3, 5),
+    'ZASYMM': (1, 2, 6),
+}
+
+
 class _BoundaryProcessor:
     __slots__ = (
         '_simulation_data',
@@ -3200,16 +3851,19 @@ class _BoundaryProcessor:
             if len(data_line) == 0:
                 continue
             additional_bcs = ''
-            first = int(data_line['first_degree'])
+            label = str(data_line['first_degree']).strip().upper()
+            type_dofs = _BOUNDARY_TYPE_DOFS.get(label)
             mag = 0.0
-            if 'magnitude' in data_line:
-                mag = data_line['magnitude']
-            if 'last_degree' not in data_line:
-                last = first + 1
-            elif data_line['last_degree'].strip() == '':
-                last = first + 1
-            else:
-                last = int(data_line['last_degree']) + 1
+            if type_dofs is None:
+                first = int(data_line['first_degree'])
+                if 'magnitude' in data_line:
+                    mag = data_line['magnitude']
+                if 'last_degree' not in data_line:
+                    last = first + 1
+                elif data_line['last_degree'].strip() == '':
+                    last = first + 1
+                else:
+                    last = int(data_line['last_degree']) + 1
             if amplitude is not None:
                 modified_amplitude_name = "AMPL_BOUNDARY"
                 if str(data_line['node_set']).isnumeric():
@@ -3230,14 +3884,15 @@ class _BoundaryProcessor:
                     scale_factor=mag,
                 )
                 self._ampl_commands += ampl_commands
-            if last > 7:
+            if type_dofs is None and last > 7:
                 self._logger.warning(
                     f"Warning: only "
                     f"({[i for i in range(first, min(last,7))]}) "
                     f"boundary data dofs from {first} to {last} are processed"
                 )
+            dofs = type_dofs if type_dofs is not None else range(first, min(last, 7))
 
-            for i in range(first, min(last, 7)):
+            for i in dofs:
                 if data_line['node_set'].isnumeric():
                     cmname = data_line['node_set']
                 else:
@@ -4347,6 +5002,7 @@ class _StepProcessor:
         '_time_points',
         '_params',
         '_is_prestressed_modal_analysis',
+        '_has_custom_yaml',
     )
 
     def __init__(
@@ -4392,6 +5048,8 @@ class _StepProcessor:
         self._boundary_component_data = boundary_component_data
         self._time_points = time_points
         self._params = params
+        _custom_params = getattr(params, "_custom_params", {}) if params is not None else {}
+        self._has_custom_yaml = bool(_custom_params.get("customization_functions_file_name"))
         self._is_prestressed_modal_analysis = True
 
     def get_cload_ampl_commands(self):
@@ -6004,6 +6662,8 @@ class _StepProcessor:
             mapdl_step_commands = self.add_modal_dynamic_zero_step(mapdl_step_commands)
         if step_name:
             mapdl_step_commands += f'!STEP_NAME {step_name}\n'
+        if self._has_custom_yaml:
+            mapdl_step_commands += f'! == PRIME_CUSTOM:STEP{step_data["id"]}==\n'
         mapdl_step_commands += 'SOLVE\n'
         return mapdl_step_commands
 
@@ -6306,6 +6966,7 @@ def generate_mapdl_commands(
             json_simulation_data["ConnectorBehavior"],
             params.write_separate_blocks,
             params.skip_comments,
+            params=params,
         )
         joint_all_mat_cmds = jmp.get_all_material_commands()
         all_mat_cmds += joint_all_mat_cmds

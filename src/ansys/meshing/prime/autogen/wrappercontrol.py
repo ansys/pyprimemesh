@@ -305,6 +305,10 @@ class WrapperControl(CoreObject):
         scope : ScopeDefinition
             ScopeDefinition defining the penetration guard geometry entities for wrapping.
 
+        Notes
+        -----
+        **This is a beta API**. **The behavior and implementation may change in future**.
+
         Examples
         --------
         >>> wrapper_control.set_penetration_guard_geometry_scope(scope)
@@ -314,6 +318,7 @@ class WrapperControl(CoreObject):
             raise TypeError("Invalid argument type passed for 'scope'. Valid argument type is ScopeDefinition.")
         args = {"scope" : scope._jsonify()}
         command_name = "PrimeMesh::WrapperControl/SetPenetrationGuardGeometryScope"
+        self._model._print_beta_api_warning("set_penetration_guard_geometry_scope")
         self._model._print_logs_before_command("set_penetration_guard_geometry_scope", args)
         self._comm.serve(self._model, command_name, self._object_id, args=args)
         self._model._print_logs_after_command("set_penetration_guard_geometry_scope")
@@ -328,6 +333,10 @@ class WrapperControl(CoreObject):
             Returns ScopeDefinition having the shadow geometry scope entities from wrapper control.
 
 
+        Notes
+        -----
+        **This is a beta API**. **The behavior and implementation may change in future**.
+
         Examples
         --------
         >>> scope = wrapper_control.get_shadow_geometry_scope()
@@ -335,53 +344,10 @@ class WrapperControl(CoreObject):
         """
         args = {}
         command_name = "PrimeMesh::WrapperControl/GetShadowGeometryScope"
+        self._model._print_beta_api_warning("get_shadow_geometry_scope")
         self._model._print_logs_before_command("get_shadow_geometry_scope", args)
         result = self._comm.serve(self._model, command_name, self._object_id, args=args)
         self._model._print_logs_after_command("get_shadow_geometry_scope", ScopeDefinition(model = self._model, json_data = result))
-        return ScopeDefinition(model = self._model, json_data = result)
-
-    def set_seed_face_scope(self, scope : ScopeDefinition):
-        """ Sets seed face scope to given scope.
-
-
-        Parameters
-        ----------
-        scope : ScopeDefinition
-            ScopeDefinition to scope seed face entities for wrapping.
-
-        Examples
-        --------
-        >>> wrapper_control.set_seed_face_scope(scope)
-
-        """
-        if type(scope).__name__ != 'ScopeDefinition':
-            raise TypeError("Invalid argument type passed for 'scope'. Valid argument type is ScopeDefinition.")
-        args = {"scope" : scope._jsonify()}
-        command_name = "PrimeMesh::WrapperControl/SetSeedFaceScope"
-        self._model._print_logs_before_command("set_seed_face_scope", args)
-        self._comm.serve(self._model, command_name, self._object_id, args=args)
-        self._model._print_logs_after_command("set_seed_face_scope")
-
-    def get_seed_face_scope(self) -> ScopeDefinition:
-        """ Gets the seed face scope.
-
-
-        Returns
-        -------
-        ScopeDefinition
-            Returns ScopeDefinition having the seed face scope entities from wrapper control.
-
-
-        Examples
-        --------
-        >>> scope = wrapper_control.get_seed_face_scope()
-
-        """
-        args = {}
-        command_name = "PrimeMesh::WrapperControl/GetSeedFaceScope"
-        self._model._print_logs_before_command("get_seed_face_scope", args)
-        result = self._comm.serve(self._model, command_name, self._object_id, args=args)
-        self._model._print_logs_after_command("get_seed_face_scope", ScopeDefinition(model = self._model, json_data = result))
         return ScopeDefinition(model = self._model, json_data = result)
 
     def get_penetration_guard_geometry_scope(self) -> ScopeDefinition:
@@ -394,6 +360,10 @@ class WrapperControl(CoreObject):
             Returns ScopeDefinition containing the penetration guard geometry entities assigned to the wrapper control.
 
 
+        Notes
+        -----
+        **This is a beta API**. **The behavior and implementation may change in future**.
+
         Examples
         --------
         >>> scope = wrapper_control.get_penetration_guard_geometry_scope()
@@ -401,6 +371,7 @@ class WrapperControl(CoreObject):
         """
         args = {}
         command_name = "PrimeMesh::WrapperControl/GetPenetrationGuardGeometryScope"
+        self._model._print_beta_api_warning("get_penetration_guard_geometry_scope")
         self._model._print_logs_before_command("get_penetration_guard_geometry_scope", args)
         result = self._comm.serve(self._model, command_name, self._object_id, args=args)
         self._model._print_logs_after_command("get_penetration_guard_geometry_scope", ScopeDefinition(model = self._model, json_data = result))

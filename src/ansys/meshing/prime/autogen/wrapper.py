@@ -209,6 +209,10 @@ class Wrapper(CoreObject):
         seed_face_zonelets : Iterable[int]
             Face zonelet ids that define the seeded surface.
 
+        Notes
+        -----
+        **This is a beta API**. **The behavior and implementation may change in future**.
+
         Examples
         --------
         >>> wrapper.replace_surface_with_seeded_surface(wrapper_part_id, face_zonelets_to_replace, seed_face_zonelets)
@@ -224,6 +228,7 @@ class Wrapper(CoreObject):
         "face_zonelets_to_replace" : face_zonelets_to_replace,
         "seed_face_zonelets" : seed_face_zonelets}
         command_name = "PrimeMesh::Wrapper/ReplaceSurfaceWithSeededSurface"
+        self._model._print_beta_api_warning("replace_surface_with_seeded_surface")
         self._model._print_logs_before_command("replace_surface_with_seeded_surface", args)
         self._comm.serve(self._model, command_name, self._object_id, args=args)
         self._model._print_logs_after_command("replace_surface_with_seeded_surface")
@@ -239,6 +244,10 @@ class Wrapper(CoreObject):
         params : UpdateSeededSurfaceParams
             Parameters to update seeded surface.
 
+        Notes
+        -----
+        **This is a beta API**. **The behavior and implementation may change in future**.
+
         Examples
         --------
         >>> wrapper.update_seeded_surface(wrapper_control_id, params)
@@ -251,6 +260,7 @@ class Wrapper(CoreObject):
         args = {"wrapper_control_id" : wrapper_control_id,
         "params" : params._jsonify()}
         command_name = "PrimeMesh::Wrapper/UpdateSeededSurface"
+        self._model._print_beta_api_warning("update_seeded_surface")
         self._model._print_logs_before_command("update_seeded_surface", args)
         self._comm.serve(self._model, command_name, self._object_id, args=args)
         self._model._print_logs_after_command("update_seeded_surface")

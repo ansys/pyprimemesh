@@ -2261,6 +2261,8 @@ class UpdateSeededSurfaceParams(CoreObject):
         Model to create a ``UpdateSeededSurfaceParams`` object with default parameters.
     copy_seed_surfaces : bool, optional
         Option to copy seed face zonelets instead of moving them to the wrapper part.
+
+        **This is a beta parameter**. **The behavior and name may change in the future**.
     json_data : dict, optional
         JSON dictionary to create a ``UpdateSeededSurfaceParams`` object with provided parameters.
 
@@ -2289,6 +2291,8 @@ class UpdateSeededSurfaceParams(CoreObject):
             Model to create a ``UpdateSeededSurfaceParams`` object with default parameters.
         copy_seed_surfaces : bool, optional
             Option to copy seed face zonelets instead of moving them to the wrapper part.
+
+            **This is a beta parameter**. **The behavior and name may change in the future**.
         json_data : dict, optional
             JSON dictionary to create a ``UpdateSeededSurfaceParams`` object with provided parameters.
 
@@ -2359,6 +2363,8 @@ class UpdateSeededSurfaceParams(CoreObject):
     @property
     def copy_seed_surfaces(self) -> bool:
         """Option to copy seed face zonelets instead of moving them to the wrapper part.
+
+        **This is a beta parameter**. **The behavior and name may change in the future**.
         """
         return self._copy_seed_surfaces
 

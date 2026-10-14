@@ -469,6 +469,10 @@ class ControlData(CoreObject):
         Iterable[int]
             Returns the ids of topofaces.
 
+        Notes
+        -----
+        **This is a beta API**. **The behavior and implementation may change in future**.
+
         Examples
         --------
         >>> topo_faces = model.control_data.get_scope_topo_faces(
@@ -481,6 +485,7 @@ class ControlData(CoreObject):
             raise TypeError("Invalid argument type passed for 'scope'. Valid argument type is ScopeDefinition.")
         args = {"scope" : scope._jsonify()}
         command_name = "PrimeMesh::ControlData/GetScopeTopoFaces"
+        self._model._print_beta_api_warning("get_scope_topo_faces")
         self._model._print_logs_before_command("get_scope_topo_faces", args)
         result = self._comm.serve(self._model, command_name, self._object_id, args=args)
         self._model._print_logs_after_command("get_scope_topo_faces")

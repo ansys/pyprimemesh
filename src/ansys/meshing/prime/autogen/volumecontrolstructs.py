@@ -41,6 +41,14 @@ class VolumeControlParams(CoreObject):
         Cell zonelet type is used to define the type of the associated volume.
     skip_hexcore : bool, optional
         Check whether to skip hexahedral cells generation in the core for this volume or not. Applicable only for volumeFillType set to HexcoreTet or HexcorePoly in the AutoMeshParams structure.
+    max_size : float, optional
+        Maximum cell size in the volume.
+
+        **This is a beta parameter**. **The behavior and name may change in the future**.
+    growth_rate : float, optional
+        Impose cell size growth rate in the volume.
+
+        **This is a beta parameter**. **The behavior and name may change in the future**.
     json_data : dict, optional
         JSON dictionary to create a ``VolumeControlParams`` object with provided parameters.
 
@@ -53,15 +61,21 @@ class VolumeControlParams(CoreObject):
     def __initialize(
             self,
             cell_zonelet_type : CellZoneletType,
-            skip_hexcore : bool):
+            skip_hexcore : bool,
+            max_size : float,
+            growth_rate : float):
         self._cell_zonelet_type = CellZoneletType(cell_zonelet_type)
         self._skip_hexcore = skip_hexcore
+        self._max_size = max_size
+        self._growth_rate = growth_rate
 
     def __init__(
             self,
             model: CommunicationManager=None,
             cell_zonelet_type : CellZoneletType = None,
             skip_hexcore : bool = None,
+            max_size : float = None,
+            growth_rate : float = None,
             json_data : dict = None,
              **kwargs):
         """Initialize a ``VolumeControlParams`` object.
@@ -74,6 +88,14 @@ class VolumeControlParams(CoreObject):
             Cell zonelet type is used to define the type of the associated volume.
         skip_hexcore : bool, optional
             Check whether to skip hexahedral cells generation in the core for this volume or not. Applicable only for volumeFillType set to HexcoreTet or HexcorePoly in the AutoMeshParams structure.
+        max_size : float, optional
+            Maximum cell size in the volume.
+
+            **This is a beta parameter**. **The behavior and name may change in the future**.
+        growth_rate : float, optional
+            Impose cell size growth rate in the volume.
+
+            **This is a beta parameter**. **The behavior and name may change in the future**.
         json_data : dict, optional
             JSON dictionary to create a ``VolumeControlParams`` object with provided parameters.
 
@@ -84,13 +106,17 @@ class VolumeControlParams(CoreObject):
         if json_data:
             self.__initialize(
                 CellZoneletType(json_data["cellZoneletType"] if "cellZoneletType" in json_data else None),
-                json_data["skipHexcore"] if "skipHexcore" in json_data else None)
+                json_data["skipHexcore"] if "skipHexcore" in json_data else None,
+                json_data["maxSize"] if "maxSize" in json_data else None,
+                json_data["growthRate"] if "growthRate" in json_data else None)
         else:
-            all_field_specified = all(arg is not None for arg in [cell_zonelet_type, skip_hexcore])
+            all_field_specified = all(arg is not None for arg in [cell_zonelet_type, skip_hexcore, max_size, growth_rate])
             if all_field_specified:
                 self.__initialize(
                     cell_zonelet_type,
-                    skip_hexcore)
+                    skip_hexcore,
+                    max_size,
+                    growth_rate)
             else:
                 if model is None:
                     raise ValueError("Invalid assignment. Either pass a model or specify all properties.")
@@ -99,7 +125,9 @@ class VolumeControlParams(CoreObject):
                     json_data = param_json["VolumeControlParams"] if "VolumeControlParams" in param_json else {}
                     self.__initialize(
                         cell_zonelet_type if cell_zonelet_type is not None else ( VolumeControlParams._default_params["cell_zonelet_type"] if "cell_zonelet_type" in VolumeControlParams._default_params else CellZoneletType(json_data["cellZoneletType"] if "cellZoneletType" in json_data else None)),
-                        skip_hexcore if skip_hexcore is not None else ( VolumeControlParams._default_params["skip_hexcore"] if "skip_hexcore" in VolumeControlParams._default_params else (json_data["skipHexcore"] if "skipHexcore" in json_data else None)))
+                        skip_hexcore if skip_hexcore is not None else ( VolumeControlParams._default_params["skip_hexcore"] if "skip_hexcore" in VolumeControlParams._default_params else (json_data["skipHexcore"] if "skipHexcore" in json_data else None)),
+                        max_size if max_size is not None else ( VolumeControlParams._default_params["max_size"] if "max_size" in VolumeControlParams._default_params else (json_data["maxSize"] if "maxSize" in json_data else None)),
+                        growth_rate if growth_rate is not None else ( VolumeControlParams._default_params["growth_rate"] if "growth_rate" in VolumeControlParams._default_params else (json_data["growthRate"] if "growthRate" in json_data else None)))
         self._custom_params = kwargs
         if model is not None:
             [ model._logger.debug(f'Unsupported argument : {key}') for key in kwargs ]
@@ -110,7 +138,9 @@ class VolumeControlParams(CoreObject):
     @staticmethod
     def set_default(
             cell_zonelet_type : CellZoneletType = None,
-            skip_hexcore : bool = None):
+            skip_hexcore : bool = None,
+            max_size : float = None,
+            growth_rate : float = None):
         """Set the default values of the ``VolumeControlParams`` object.
 
         Parameters
@@ -119,6 +149,10 @@ class VolumeControlParams(CoreObject):
             Cell zonelet type is used to define the type of the associated volume.
         skip_hexcore : bool, optional
             Check whether to skip hexahedral cells generation in the core for this volume or not. Applicable only for volumeFillType set to HexcoreTet or HexcorePoly in the AutoMeshParams structure.
+        max_size : float, optional
+            Maximum cell size in the volume.
+        growth_rate : float, optional
+            Impose cell size growth rate in the volume.
         """
         args = locals()
         [VolumeControlParams._default_params.update({ key: value }) for key, value in args.items() if value is not None]
@@ -141,11 +175,15 @@ class VolumeControlParams(CoreObject):
             json_data["cellZoneletType"] = self._cell_zonelet_type
         if self._skip_hexcore is not None:
             json_data["skipHexcore"] = self._skip_hexcore
+        if self._max_size is not None:
+            json_data["maxSize"] = self._max_size
+        if self._growth_rate is not None:
+            json_data["growthRate"] = self._growth_rate
         [ json_data.update({ utils.to_camel_case(key) : value }) for key, value in self._custom_params.items()]
         return json_data
 
     def __str__(self) -> str:
-        message = "cell_zonelet_type :  %s\nskip_hexcore :  %s" % (self._cell_zonelet_type, self._skip_hexcore)
+        message = "cell_zonelet_type :  %s\nskip_hexcore :  %s\nmax_size :  %s\ngrowth_rate :  %s" % (self._cell_zonelet_type, self._skip_hexcore, self._max_size, self._growth_rate)
         message += ''.join('\n' + str(key) + ' : ' + str(value) for key, value in self._custom_params.items())
         return message
 
@@ -168,6 +206,30 @@ class VolumeControlParams(CoreObject):
     @skip_hexcore.setter
     def skip_hexcore(self, value: bool):
         self._skip_hexcore = value
+
+    @property
+    def max_size(self) -> float:
+        """Maximum cell size in the volume.
+
+        **This is a beta parameter**. **The behavior and name may change in the future**.
+        """
+        return self._max_size
+
+    @max_size.setter
+    def max_size(self, value: float):
+        self._max_size = value
+
+    @property
+    def growth_rate(self) -> float:
+        """Impose cell size growth rate in the volume.
+
+        **This is a beta parameter**. **The behavior and name may change in the future**.
+        """
+        return self._growth_rate
+
+    @growth_rate.setter
+    def growth_rate(self, value: float):
+        self._growth_rate = value
 
 class VolumeControlSummaryParams(CoreObject):
     """Volume control summary parameters.
