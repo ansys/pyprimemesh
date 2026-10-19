@@ -1,4 +1,4 @@
-# Copyright (C) 2024 - 2025 ANSYS, Inc. and/or its affiliates.
+# Copyright (C) 2026 Synopsys, Inc. and ANSYS, Inc. All rights reserved.
 # SPDX-License-Identifier: MIT
 #
 #
@@ -21,6 +21,7 @@
 # SOFTWARE.
 
 """Script to build linux based docker image for the pyprimemesh project."""
+
 import json
 import logging
 import os
@@ -81,7 +82,7 @@ def create_symlink(link, target):
     """Create symlinks as specified in PyPrimeMesh package manifest."""
     cmd = ['ln', '-s', target, link]
     p = subprocess.Popen(cmd, stdin=subprocess.PIPE, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
-    (stdoutdata, stderrdata) = p.communicate()
+    stdoutdata, stderrdata = p.communicate()
 
 
 def assemble_full_package(unifiedPathDict, allFileDict, dest_package_path):
@@ -187,10 +188,7 @@ if __name__ == "__main__":
     except SystemExit:
         raise
     except Exception as msg:
-        logging.info(
-            """ %s\n
-        An internal error occurred."""
-            % msg
-        )
+        logging.info(""" %s\n
+        An internal error occurred.""" % msg)
         print("""%s""" % msg)
         sys.exit(1)
