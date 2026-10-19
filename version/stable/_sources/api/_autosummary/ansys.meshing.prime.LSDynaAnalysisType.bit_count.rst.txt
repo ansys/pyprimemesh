@@ -1,0 +1,11 @@
+bit\_count
+==========
+
+.. currentmodule:: ansys.meshing.prime
+
+.. automethod:: ansys.meshing.prime.LSDynaAnalysisType.bit_count
+
+.. minigallery::
+   :add-heading: Examples using LSDynaAnalysisType.bit_count
+
+   ansys.meshing.prime.LSDynaAnalysisType.bit_count

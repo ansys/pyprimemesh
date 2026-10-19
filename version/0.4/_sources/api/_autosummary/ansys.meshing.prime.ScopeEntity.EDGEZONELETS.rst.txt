@@ -1,0 +1,6 @@
+﻿EDGEZONELETS
+============
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoattribute:: ScopeEntity.EDGEZONELETS

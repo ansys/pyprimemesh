@@ -1,0 +1,11 @@
+conjugate
+=========
+
+.. currentmodule:: ansys.meshing.prime
+
+.. automethod:: ansys.meshing.prime.EdgeConnectType.conjugate
+
+.. minigallery::
+   :add-heading: Examples using EdgeConnectType.conjugate
+
+   ansys.meshing.prime.EdgeConnectType.conjugate

@@ -1,0 +1,6 @@
+﻿periodic\_params
+================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoproperty:: VolumetricSizeFieldComputeParams.periodic_params

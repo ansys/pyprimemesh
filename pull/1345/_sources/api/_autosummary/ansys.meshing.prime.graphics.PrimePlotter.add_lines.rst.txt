@@ -1,0 +1,11 @@
+add\_lines
+==========
+
+.. currentmodule:: ansys.meshing.prime.graphics
+
+.. automethod:: ansys.meshing.prime.graphics.PrimePlotter.add_lines
+
+.. minigallery::
+   :add-heading: Examples using PrimePlotter.add_lines
+
+   ansys.meshing.prime.graphics.PrimePlotter.add_lines

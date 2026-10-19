@@ -1,0 +1,11 @@
+conjugate
+=========
+
+.. currentmodule:: ansys.meshing.prime
+
+.. automethod:: ansys.meshing.prime.TopoSearchField.conjugate
+
+.. minigallery::
+   :add-heading: Examples using TopoSearchField.conjugate
+
+   ansys.meshing.prime.TopoSearchField.conjugate

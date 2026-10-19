@@ -1,0 +1,31 @@
+.. vale off
+
+VTComposer
+==========
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoclass:: VTComposer
+   
+   
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+      :toctree:
+   
+      
+      VTComposer.separate_faces_with_interior_edges
+   
+   
+
+   
+   
+   
+
+.. minigallery::
+    :add-heading: Examples using VTComposer
+
+    ansys.meshing.prime.VTComposer
+
+.. vale on

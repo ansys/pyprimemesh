@@ -1,0 +1,6 @@
+INVALIDFIRSTASPECTRATIO
+=======================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoattribute:: ErrorCode.INVALIDFIRSTASPECTRATIO

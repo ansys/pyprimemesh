@@ -1,0 +1,6 @@
+fillet\_spanning\_angle
+=======================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoproperty:: DefeatureTopologyParams.fillet_spanning_angle

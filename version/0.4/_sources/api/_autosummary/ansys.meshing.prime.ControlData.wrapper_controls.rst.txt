@@ -1,0 +1,6 @@
+﻿wrapper\_controls
+=================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoproperty:: ControlData.wrapper_controls

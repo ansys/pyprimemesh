@@ -1,0 +1,6 @@
+get\_adjacent\_topo\_edges\_of\_topo\_edges
+===========================================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. automethod:: TopoData.get_adjacent_topo_edges_of_topo_edges

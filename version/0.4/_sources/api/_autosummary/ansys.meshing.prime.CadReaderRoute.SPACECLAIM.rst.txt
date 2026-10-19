@@ -1,0 +1,6 @@
+﻿SPACECLAIM
+==========
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoattribute:: CadReaderRoute.SPACECLAIM

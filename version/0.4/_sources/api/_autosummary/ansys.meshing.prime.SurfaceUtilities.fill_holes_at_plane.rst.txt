@@ -1,0 +1,6 @@
+﻿fill\_holes\_at\_plane
+======================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. automethod:: SurfaceUtilities.fill_holes_at_plane

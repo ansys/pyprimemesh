@@ -1,0 +1,6 @@
+PYRAMIDMESHFAILED
+=================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoattribute:: ErrorCode.PYRAMIDMESHFAILED

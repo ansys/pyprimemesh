@@ -1,0 +1,6 @@
+label\_name
+===========
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoproperty:: CreateIntersectionEdgeLoopsParams.label_name

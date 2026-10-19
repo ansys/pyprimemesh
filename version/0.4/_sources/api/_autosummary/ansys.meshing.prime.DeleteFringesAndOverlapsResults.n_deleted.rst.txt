@@ -1,0 +1,6 @@
+﻿n\_deleted
+==========
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoproperty:: DeleteFringesAndOverlapsResults.n_deleted

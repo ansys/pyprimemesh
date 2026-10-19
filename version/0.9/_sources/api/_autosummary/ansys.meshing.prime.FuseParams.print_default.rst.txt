@@ -1,0 +1,11 @@
+print\_default
+==============
+
+.. currentmodule:: ansys.meshing.prime
+
+.. automethod:: ansys.meshing.prime.FuseParams.print_default
+
+.. minigallery::
+   :add-heading: Examples using FuseParams.print_default
+
+   ansys.meshing.prime.FuseParams.print_default

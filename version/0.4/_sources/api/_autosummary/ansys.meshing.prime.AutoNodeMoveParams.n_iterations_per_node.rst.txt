@@ -1,0 +1,6 @@
+﻿n\_iterations\_per\_node
+========================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoproperty:: AutoNodeMoveParams.n_iterations_per_node

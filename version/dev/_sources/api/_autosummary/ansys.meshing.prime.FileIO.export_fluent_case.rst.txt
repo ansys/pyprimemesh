@@ -1,0 +1,11 @@
+export\_fluent\_case
+====================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. automethod:: ansys.meshing.prime.FileIO.export_fluent_case
+
+.. minigallery::
+   :add-heading: Examples using FileIO.export_fluent_case
+
+   ansys.meshing.prime.FileIO.export_fluent_case

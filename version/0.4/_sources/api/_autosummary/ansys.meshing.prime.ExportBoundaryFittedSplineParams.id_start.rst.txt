@@ -1,0 +1,6 @@
+﻿id\_start
+=========
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoproperty:: ExportBoundaryFittedSplineParams.id_start

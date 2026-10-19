@@ -1,0 +1,6 @@
+add\_file
+=========
+
+.. currentmodule:: ansys.meshing.prime.examples
+
+.. automethod:: DownloadManager.add_file

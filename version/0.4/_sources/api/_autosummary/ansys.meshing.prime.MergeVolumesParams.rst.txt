@@ -1,0 +1,35 @@
+.. vale off
+
+MergeVolumesParams
+==================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoclass:: MergeVolumesParams
+   
+   
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+      :toctree:
+   
+      
+      MergeVolumesParams.print_default
+      MergeVolumesParams.set_default
+   
+   
+
+   
+   
+   .. rubric:: Attributes
+
+   .. autosummary::
+      :toctree:
+   
+      MergeVolumesParams.merge_to_neighbor_volume
+      MergeVolumesParams.neighbor_volumes
+   
+   
+
+.. vale on

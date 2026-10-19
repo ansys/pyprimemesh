@@ -1,0 +1,6 @@
+﻿smooth\_boundary
+================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoproperty:: LocalSurferParams.smooth_boundary

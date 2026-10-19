@@ -1,0 +1,11 @@
+print\_default
+==============
+
+.. currentmodule:: ansys.meshing.prime
+
+.. automethod:: ansys.meshing.prime.FillHolesAtPlaneParams.print_default
+
+.. minigallery::
+   :add-heading: Examples using FillHolesAtPlaneParams.print_default
+
+   ansys.meshing.prime.FillHolesAtPlaneParams.print_default

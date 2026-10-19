@@ -1,0 +1,11 @@
+get\_params
+===========
+
+.. currentmodule:: ansys.meshing.prime
+
+.. automethod:: ansys.meshing.prime.PeriodicControl.get_params
+
+.. minigallery::
+   :add-heading: Examples using PeriodicControl.get_params
+
+   ansys.meshing.prime.PeriodicControl.get_params

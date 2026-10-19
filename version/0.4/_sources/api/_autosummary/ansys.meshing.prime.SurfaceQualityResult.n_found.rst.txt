@@ -1,0 +1,6 @@
+﻿n\_found
+========
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoproperty:: SurfaceQualityResult.n_found

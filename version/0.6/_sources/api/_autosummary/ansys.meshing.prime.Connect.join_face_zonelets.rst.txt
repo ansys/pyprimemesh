@@ -1,0 +1,6 @@
+join\_face\_zonelets
+====================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. automethod:: Connect.join_face_zonelets

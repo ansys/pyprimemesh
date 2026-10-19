@@ -1,0 +1,48 @@
+.. vale off
+
+SplineFeatureCaptureType
+========================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoclass:: SplineFeatureCaptureType
+   
+   
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+      :toctree:
+   
+      SplineFeatureCaptureType.conjugate
+      SplineFeatureCaptureType.bit_length
+      SplineFeatureCaptureType.bit_count
+      SplineFeatureCaptureType.to_bytes
+      SplineFeatureCaptureType.from_bytes
+      SplineFeatureCaptureType.as_integer_ratio
+   
+   
+
+   
+   
+   .. rubric:: Attributes
+
+   .. autosummary::
+      :toctree:
+   
+      SplineFeatureCaptureType.real
+      SplineFeatureCaptureType.imag
+      SplineFeatureCaptureType.numerator
+      SplineFeatureCaptureType.denominator
+      SplineFeatureCaptureType.IGNORE
+      SplineFeatureCaptureType.BYANGLE
+      SplineFeatureCaptureType.BYEDGES
+   
+   
+
+.. minigallery::
+    :add-heading: Examples using SplineFeatureCaptureType
+
+    ansys.meshing.prime.SplineFeatureCaptureType
+
+.. vale on

@@ -1,0 +1,6 @@
+WRAPPERCLOSEGAPS\_INVALIDRESOLUTIONFACTOR
+=========================================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoattribute:: ErrorCode.WRAPPERCLOSEGAPS_INVALIDRESOLUTIONFACTOR

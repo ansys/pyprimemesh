@@ -1,0 +1,6 @@
+﻿transformation\_matrix
+======================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoproperty:: TransformParams.transformation_matrix

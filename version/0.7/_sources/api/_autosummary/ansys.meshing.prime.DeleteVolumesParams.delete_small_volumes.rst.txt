@@ -1,0 +1,6 @@
+delete\_small\_volumes
+======================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoproperty:: DeleteVolumesParams.delete_small_volumes

@@ -1,0 +1,6 @@
+n\_nodes\_smoothed
+==================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoproperty:: SmoothDihedralFaceNodesResults.n_nodes_smoothed

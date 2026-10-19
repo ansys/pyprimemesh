@@ -1,0 +1,11 @@
+is\_integer
+===========
+
+.. currentmodule:: ansys.meshing.prime
+
+.. automethod:: ansys.meshing.prime.CreateVolumeZonesType.is_integer
+
+.. minigallery::
+   :add-heading: Examples using CreateVolumeZonesType.is_integer
+
+   ansys.meshing.prime.CreateVolumeZonesType.is_integer

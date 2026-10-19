@@ -1,0 +1,6 @@
+get\_surface\_quality\_summary
+==============================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. automethod:: SurfaceSearch.get_surface_quality_summary

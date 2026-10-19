@@ -1,0 +1,6 @@
+SURFACESEARCHFAILED
+===================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoattribute:: ErrorCode.SURFACESEARCHFAILED

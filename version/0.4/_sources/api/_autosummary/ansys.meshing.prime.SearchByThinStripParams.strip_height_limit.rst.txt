@@ -1,0 +1,6 @@
+﻿strip\_height\_limit
+====================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoproperty:: SearchByThinStripParams.strip_height_limit

@@ -1,0 +1,6 @@
+UNSUPPORTEDFILEEXTENSIONFORSIZEFIELD
+====================================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoattribute:: ErrorCode.UNSUPPORTEDFILEEXTENSIONFORSIZEFIELD

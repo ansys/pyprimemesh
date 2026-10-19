@@ -1,0 +1,6 @@
+summary\_log
+============
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoproperty:: ImportAbaqusResults.summary_log

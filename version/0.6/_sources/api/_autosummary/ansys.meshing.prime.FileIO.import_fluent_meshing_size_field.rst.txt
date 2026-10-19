@@ -1,0 +1,6 @@
+import\_fluent\_meshing\_size\_field
+====================================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. automethod:: FileIO.import_fluent_meshing_size_field

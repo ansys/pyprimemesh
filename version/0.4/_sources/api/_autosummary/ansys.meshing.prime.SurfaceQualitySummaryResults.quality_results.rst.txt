@@ -1,0 +1,6 @@
+﻿quality\_results
+================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoproperty:: SurfaceQualitySummaryResults.quality_results

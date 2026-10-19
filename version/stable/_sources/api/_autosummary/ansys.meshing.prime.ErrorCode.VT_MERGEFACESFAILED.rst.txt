@@ -1,0 +1,6 @@
+VT\_MERGEFACESFAILED
+====================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoattribute:: ErrorCode.VT_MERGEFACESFAILED

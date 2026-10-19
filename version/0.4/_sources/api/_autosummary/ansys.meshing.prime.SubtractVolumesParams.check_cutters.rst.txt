@@ -1,0 +1,6 @@
+﻿check\_cutters
+==============
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoproperty:: SubtractVolumesParams.check_cutters

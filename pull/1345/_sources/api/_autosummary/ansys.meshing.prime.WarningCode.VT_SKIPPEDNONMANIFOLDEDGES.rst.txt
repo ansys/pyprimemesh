@@ -1,0 +1,6 @@
+VT\_SKIPPEDNONMANIFOLDEDGES
+===========================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoattribute:: WarningCode.VT_SKIPPEDNONMANIFOLDEDGES

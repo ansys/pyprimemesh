@@ -1,0 +1,6 @@
+SURFERINVALIDCONSTANTSIZE
+=========================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoattribute:: ErrorCode.SURFERINVALIDCONSTANTSIZE

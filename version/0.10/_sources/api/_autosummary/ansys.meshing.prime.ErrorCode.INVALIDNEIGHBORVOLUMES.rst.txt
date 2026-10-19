@@ -1,0 +1,6 @@
+INVALIDNEIGHBORVOLUMES
+======================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoattribute:: ErrorCode.INVALIDNEIGHBORVOLUMES

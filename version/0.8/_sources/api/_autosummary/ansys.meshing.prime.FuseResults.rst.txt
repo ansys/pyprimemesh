@@ -1,0 +1,44 @@
+.. vale off
+
+FuseResults
+===========
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoclass:: FuseResults
+   
+   
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+      :toctree:
+   
+      
+      FuseResults.print_default
+      FuseResults.set_default
+   
+   
+
+   
+   
+   .. rubric:: Attributes
+
+   .. autosummary::
+      :toctree:
+   
+      FuseResults.error_code
+      FuseResults.fused_area
+      FuseResults.fused_pairs
+      FuseResults.intersecting_locations
+      FuseResults.intersecting_zonelet_pairs
+      FuseResults.warning_codes
+   
+   
+
+.. minigallery::
+    :add-heading: Examples using FuseResults
+
+    ansys.meshing.prime.FuseResults
+
+.. vale on

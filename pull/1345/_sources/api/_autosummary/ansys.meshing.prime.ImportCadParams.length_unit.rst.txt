@@ -1,0 +1,6 @@
+length\_unit
+============
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoproperty:: ImportCadParams.length_unit

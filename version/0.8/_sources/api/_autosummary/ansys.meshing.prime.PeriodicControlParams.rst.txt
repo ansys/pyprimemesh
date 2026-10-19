@@ -1,0 +1,41 @@
+.. vale off
+
+PeriodicControlParams
+=====================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoclass:: PeriodicControlParams
+   
+   
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+      :toctree:
+   
+      
+      PeriodicControlParams.print_default
+      PeriodicControlParams.set_default
+   
+   
+
+   
+   
+   .. rubric:: Attributes
+
+   .. autosummary::
+      :toctree:
+   
+      PeriodicControlParams.angle
+      PeriodicControlParams.axis
+      PeriodicControlParams.center
+   
+   
+
+.. minigallery::
+    :add-heading: Examples using PeriodicControlParams
+
+    ansys.meshing.prime.PeriodicControlParams
+
+.. vale on

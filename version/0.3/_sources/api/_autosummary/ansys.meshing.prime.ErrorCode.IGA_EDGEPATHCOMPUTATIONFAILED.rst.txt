@@ -1,0 +1,6 @@
+IGA\_EDGEPATHCOMPUTATIONFAILED
+==============================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoattribute:: ErrorCode.IGA_EDGEPATHCOMPUTATIONFAILED
