@@ -54,7 +54,7 @@ doc = [
   "nest-asyncio2==1.7.3",
   "numpydoc==1.11.0",
   "pyvista==0.49.0",
-  "sphinx-autodoc-typehints==3.13.8",
+  "sphinx-autodoc-typehints==3.13.9",
   "sphinx-copybutton==0.5.2",
   "sphinx-gallery==0.22.1",
   "sphinx-jinja==2.0.2",
