@@ -1,0 +1,33 @@
+DeleteFringesAndOverlapsParams
+==============================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoclass:: DeleteFringesAndOverlapsParams
+   
+   
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+      :toctree:
+   
+      
+      DeleteFringesAndOverlapsParams.print_default
+      DeleteFringesAndOverlapsParams.set_default
+   
+   
+
+   
+   
+   .. rubric:: Attributes
+
+   .. autosummary::
+      :toctree:
+   
+      DeleteFringesAndOverlapsParams.delete_fringes
+      DeleteFringesAndOverlapsParams.delete_overlaps
+      DeleteFringesAndOverlapsParams.fringe_element_count
+      DeleteFringesAndOverlapsParams.overlap_element_count
+   
+   

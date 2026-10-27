@@ -1,0 +1,40 @@
+.. vale off
+
+MergeZoneletsResults
+====================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoclass:: MergeZoneletsResults
+   
+   
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+      :toctree:
+   
+      
+      MergeZoneletsResults.print_default
+      MergeZoneletsResults.set_default
+   
+   
+
+   
+   
+   .. rubric:: Attributes
+
+   .. autosummary::
+      :toctree:
+   
+      MergeZoneletsResults.error_code
+      MergeZoneletsResults.merged_zonelets
+   
+   
+
+.. minigallery::
+    :add-heading: Examples using MergeZoneletsResults
+
+    ansys.meshing.prime.MergeZoneletsResults
+
+.. vale on

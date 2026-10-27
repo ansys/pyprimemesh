@@ -1,0 +1,6 @@
+merge\_node\_type
+=================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoproperty:: MergeBoundaryNodesParams.merge_node_type

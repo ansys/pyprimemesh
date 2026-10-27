@@ -1,0 +1,6 @@
+﻿set\_feature\_recoveries
+========================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. automethod:: WrapperControl.set_feature_recoveries

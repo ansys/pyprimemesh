@@ -1,0 +1,11 @@
+compute\_closed\_volumes
+========================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. automethod:: ansys.meshing.prime.Part.compute_closed_volumes
+
+.. minigallery::
+   :add-heading: Examples using Part.compute_closed_volumes
+
+   ansys.meshing.prime.Part.compute_closed_volumes

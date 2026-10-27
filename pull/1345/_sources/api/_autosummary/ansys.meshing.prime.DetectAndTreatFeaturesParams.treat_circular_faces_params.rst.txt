@@ -1,0 +1,6 @@
+treat\_circular\_faces\_params
+==============================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoproperty:: DetectAndTreatFeaturesParams.treat_circular_faces_params

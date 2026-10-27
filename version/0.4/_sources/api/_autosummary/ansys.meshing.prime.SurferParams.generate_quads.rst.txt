@@ -1,0 +1,6 @@
+﻿generate\_quads
+===============
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoproperty:: SurferParams.generate_quads

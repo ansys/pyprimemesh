@@ -1,0 +1,43 @@
+.. vale off
+
+StitchParams
+============
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoclass:: StitchParams
+   
+   
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+      :toctree:
+   
+      
+      StitchParams.print_default
+      StitchParams.set_default
+   
+   
+
+   
+   
+   .. rubric:: Attributes
+
+   .. autosummary::
+      :toctree:
+   
+      StitchParams.enable_multi_threading
+      StitchParams.remesh
+      StitchParams.tolerance
+      StitchParams.type
+      StitchParams.use_absolute_tolerance
+   
+   
+
+.. minigallery::
+    :add-heading: Examples using StitchParams
+
+    ansys.meshing.prime.StitchParams
+
+.. vale on

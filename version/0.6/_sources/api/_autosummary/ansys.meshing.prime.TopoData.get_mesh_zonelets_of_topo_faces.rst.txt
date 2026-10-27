@@ -1,0 +1,6 @@
+get\_mesh\_zonelets\_of\_topo\_faces
+====================================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. automethod:: TopoData.get_mesh_zonelets_of_topo_faces

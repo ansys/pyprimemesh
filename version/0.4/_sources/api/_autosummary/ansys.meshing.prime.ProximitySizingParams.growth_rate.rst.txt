@@ -1,0 +1,6 @@
+﻿growth\_rate
+============
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoproperty:: ProximitySizingParams.growth_rate

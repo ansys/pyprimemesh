@@ -1,0 +1,6 @@
+get\_boi\_sizing\_params
+========================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. automethod:: SizeControl.get_boi_sizing_params

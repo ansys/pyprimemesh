@@ -1,0 +1,6 @@
+INCONSISTENTNORMALORIENTATIONTOPOFACES
+======================================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoattribute:: TopoSearchField.INCONSISTENTNORMALORIENTATIONTOPOFACES

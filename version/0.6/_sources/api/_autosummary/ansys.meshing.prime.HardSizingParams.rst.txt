@@ -1,0 +1,35 @@
+.. vale off
+
+HardSizingParams
+================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoclass:: HardSizingParams
+   
+   
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+      :toctree:
+   
+      
+      HardSizingParams.print_default
+      HardSizingParams.set_default
+   
+   
+
+   
+   
+   .. rubric:: Attributes
+
+   .. autosummary::
+      :toctree:
+   
+      HardSizingParams.growth_rate
+      HardSizingParams.min
+   
+   
+
+.. vale on

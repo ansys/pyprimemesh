@@ -1,0 +1,36 @@
+.. vale off
+
+MergeBoundaryNodesParams
+========================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoclass:: MergeBoundaryNodesParams
+   
+   
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+      :toctree:
+   
+      
+      MergeBoundaryNodesParams.print_default
+      MergeBoundaryNodesParams.set_default
+   
+   
+
+   
+   
+   .. rubric:: Attributes
+
+   .. autosummary::
+      :toctree:
+   
+      MergeBoundaryNodesParams.merge_node_type
+      MergeBoundaryNodesParams.tolerance
+      MergeBoundaryNodesParams.use_absolute_tolerance
+   
+   
+
+.. vale on

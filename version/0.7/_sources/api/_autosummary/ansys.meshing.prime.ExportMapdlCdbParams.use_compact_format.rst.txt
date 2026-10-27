@@ -1,0 +1,6 @@
+use\_compact\_format
+====================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoproperty:: ExportMapdlCdbParams.use_compact_format

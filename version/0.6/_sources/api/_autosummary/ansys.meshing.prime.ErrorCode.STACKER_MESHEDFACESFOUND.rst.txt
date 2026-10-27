@@ -1,0 +1,6 @@
+STACKER\_MESHEDFACESFOUND
+=========================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoattribute:: ErrorCode.STACKER_MESHEDFACESFOUND

@@ -1,0 +1,11 @@
+set\_default
+============
+
+.. currentmodule:: ansys.meshing.prime
+
+.. automethod:: ansys.meshing.prime.MatchMorphResults.set_default
+
+.. minigallery::
+   :add-heading: Examples using MatchMorphResults.set_default
+
+   ansys.meshing.prime.MatchMorphResults.set_default

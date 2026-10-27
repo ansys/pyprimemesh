@@ -1,0 +1,6 @@
+GEOMETRIC
+=========
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoattribute:: SizeFieldType.GEOMETRIC

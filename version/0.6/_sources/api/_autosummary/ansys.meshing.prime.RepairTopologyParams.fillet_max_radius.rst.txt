@@ -1,0 +1,6 @@
+fillet\_max\_radius
+===================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoproperty:: RepairTopologyParams.fillet_max_radius

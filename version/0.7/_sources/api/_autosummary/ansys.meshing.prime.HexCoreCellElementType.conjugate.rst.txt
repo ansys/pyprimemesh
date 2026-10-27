@@ -1,0 +1,11 @@
+conjugate
+=========
+
+.. currentmodule:: ansys.meshing.prime
+
+.. automethod:: ansys.meshing.prime.HexCoreCellElementType.conjugate
+
+.. minigallery::
+   :add-heading: Examples using HexCoreCellElementType.conjugate
+
+   ansys.meshing.prime.HexCoreCellElementType.conjugate

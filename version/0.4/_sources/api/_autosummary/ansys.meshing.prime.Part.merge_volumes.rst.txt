@@ -1,0 +1,6 @@
+﻿merge\_volumes
+==============
+
+.. currentmodule:: ansys.meshing.prime
+
+.. automethod:: Part.merge_volumes

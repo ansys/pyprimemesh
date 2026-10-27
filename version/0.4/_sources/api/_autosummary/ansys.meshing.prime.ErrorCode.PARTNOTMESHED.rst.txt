@@ -1,0 +1,6 @@
+﻿PARTNOTMESHED
+=============
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoattribute:: ErrorCode.PARTNOTMESHED

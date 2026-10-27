@@ -1,0 +1,11 @@
+set\_default
+============
+
+.. currentmodule:: ansys.meshing.prime
+
+.. automethod:: ansys.meshing.prime.AutoMeshResults.set_default
+
+.. minigallery::
+   :add-heading: Examples using AutoMeshResults.set_default
+
+   ansys.meshing.prime.AutoMeshResults.set_default

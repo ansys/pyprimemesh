@@ -1,0 +1,49 @@
+.. vale off
+
+HexCoreTransitionLayerType
+==========================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoclass:: HexCoreTransitionLayerType
+   
+   
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+      :toctree:
+   
+      HexCoreTransitionLayerType.conjugate
+      HexCoreTransitionLayerType.bit_length
+      HexCoreTransitionLayerType.bit_count
+      HexCoreTransitionLayerType.to_bytes
+      HexCoreTransitionLayerType.from_bytes
+      HexCoreTransitionLayerType.as_integer_ratio
+   
+   
+
+   
+   
+   .. rubric:: Attributes
+
+   .. autosummary::
+      :toctree:
+   
+      HexCoreTransitionLayerType.real
+      HexCoreTransitionLayerType.imag
+      HexCoreTransitionLayerType.numerator
+      HexCoreTransitionLayerType.denominator
+      HexCoreTransitionLayerType.HANGINGNODES
+      HexCoreTransitionLayerType.DELETESMALL
+      HexCoreTransitionLayerType.DELETELARGE
+      HexCoreTransitionLayerType.DELETEBOTH
+   
+   
+
+.. minigallery::
+    :add-heading: Examples using HexCoreTransitionLayerType
+
+    ansys.meshing.prime.HexCoreTransitionLayerType
+
+.. vale on

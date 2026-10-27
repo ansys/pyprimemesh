@@ -1,0 +1,6 @@
+MICROSTRUCTUREREMESHNOTSUPPORTED
+================================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoattribute:: ErrorCode.MICROSTRUCTUREREMESHNOTSUPPORTED

@@ -1,0 +1,6 @@
+face\_zonelet\_ids
+==================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoproperty:: DeadRegion.face_zonelet_ids

@@ -1,0 +1,11 @@
+surface\_mesh
+=============
+
+.. currentmodule:: ansys.meshing.prime.lucid
+
+.. automethod:: ansys.meshing.prime.lucid.Mesh.surface_mesh
+
+.. minigallery::
+   :add-heading: Examples using Mesh.surface_mesh
+
+   ansys.meshing.prime.lucid.Mesh.surface_mesh

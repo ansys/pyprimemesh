@@ -1,0 +1,31 @@
+.. vale off
+
+AutoMesh
+========
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoclass:: AutoMesh
+   
+   
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+      :toctree:
+   
+      
+      AutoMesh.mesh
+   
+   
+
+   
+   
+   
+
+.. minigallery::
+    :add-heading: Examples using AutoMesh
+
+    ansys.meshing.prime.AutoMesh
+
+.. vale on

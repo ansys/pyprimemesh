@@ -1,0 +1,6 @@
+extract\_edges
+==============
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoproperty:: SubtractZoneletsParams.extract_edges

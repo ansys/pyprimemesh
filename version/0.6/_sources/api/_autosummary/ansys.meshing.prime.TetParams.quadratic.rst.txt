@@ -1,0 +1,6 @@
+quadratic
+=========
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoproperty:: TetParams.quadratic

@@ -1,0 +1,6 @@
+﻿SKEWNESS
+========
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoattribute:: FaceQualityMeasure.SKEWNESS

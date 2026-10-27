@@ -1,0 +1,11 @@
+from\_bytes
+===========
+
+.. currentmodule:: ansys.meshing.prime
+
+.. automethod:: ansys.meshing.prime.SurfaceFeatureType.from_bytes
+
+.. minigallery::
+   :add-heading: Examples using SurfaceFeatureType.from_bytes
+
+   ansys.meshing.prime.SurfaceFeatureType.from_bytes

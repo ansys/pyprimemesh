@@ -1,0 +1,11 @@
+to\_bytes
+=========
+
+.. currentmodule:: ansys.meshing.prime
+
+.. automethod:: ansys.meshing.prime.CreateVolumeZonesType.to_bytes
+
+.. minigallery::
+   :add-heading: Examples using CreateVolumeZonesType.to_bytes
+
+   ansys.meshing.prime.CreateVolumeZonesType.to_bytes

@@ -1,0 +1,6 @@
+resolve\_intersections
+======================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoproperty:: WrapperImproveQualityParams.resolve_intersections

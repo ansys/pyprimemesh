@@ -1,0 +1,6 @@
+THINVOLUMECONTROLINVALIDNUMBEROFLAYER
+=====================================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoattribute:: ErrorCode.THINVOLUMECONTROLINVALIDNUMBEROFLAYER

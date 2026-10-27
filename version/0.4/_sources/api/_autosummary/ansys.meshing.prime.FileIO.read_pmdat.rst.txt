@@ -1,0 +1,6 @@
+﻿read\_pmdat
+===========
+
+.. currentmodule:: ansys.meshing.prime
+
+.. automethod:: FileIO.read_pmdat

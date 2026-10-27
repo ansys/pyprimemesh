@@ -1,0 +1,6 @@
+﻿deleted\_topo\_volumes
+======================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoproperty:: ComputeTopoVolumesResults.deleted_topo_volumes

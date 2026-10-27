@@ -1,0 +1,6 @@
+edge\_connect\_type
+===================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoproperty:: RepairTopologyParams.edge_connect_type

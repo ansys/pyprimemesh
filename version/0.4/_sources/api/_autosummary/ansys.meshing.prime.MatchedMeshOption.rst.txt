@@ -1,0 +1,27 @@
+.. vale off
+
+MatchedMeshOption
+=================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoclass:: MatchedMeshOption
+   
+   
+   
+   
+
+   
+   
+   .. rubric:: Attributes
+
+   .. autosummary::
+      :toctree:
+   
+      MatchedMeshOption.NONE
+      MatchedMeshOption.TRIMONESIDE
+      MatchedMeshOption.TRIMTWOSIDES
+   
+   
+
+.. vale on

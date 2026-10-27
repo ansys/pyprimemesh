@@ -1,0 +1,6 @@
+BYFACELABEL
+===========
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoattribute:: VolumeNamingType.BYFACELABEL

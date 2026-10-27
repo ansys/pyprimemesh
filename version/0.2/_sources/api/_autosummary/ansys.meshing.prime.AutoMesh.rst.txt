@@ -1,0 +1,22 @@
+AutoMesh
+========
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoclass:: AutoMesh
+   
+   
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+      :toctree:
+   
+      
+      AutoMesh.mesh
+   
+   
+
+   
+   
+   

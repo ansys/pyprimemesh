@@ -1,0 +1,11 @@
+fill\_hole
+==========
+
+.. currentmodule:: ansys.meshing.prime
+
+.. automethod:: ansys.meshing.prime.TopoUtilities.fill_hole
+
+.. minigallery::
+   :add-heading: Examples using TopoUtilities.fill_hole
+
+   ansys.meshing.prime.TopoUtilities.fill_hole

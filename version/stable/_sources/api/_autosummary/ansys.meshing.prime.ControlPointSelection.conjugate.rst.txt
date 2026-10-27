@@ -1,0 +1,11 @@
+conjugate
+=========
+
+.. currentmodule:: ansys.meshing.prime
+
+.. automethod:: ansys.meshing.prime.ControlPointSelection.conjugate
+
+.. minigallery::
+   :add-heading: Examples using ControlPointSelection.conjugate
+
+   ansys.meshing.prime.ControlPointSelection.conjugate

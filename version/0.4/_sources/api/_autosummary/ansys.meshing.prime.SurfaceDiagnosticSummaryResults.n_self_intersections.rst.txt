@@ -1,0 +1,6 @@
+﻿n\_self\_intersections
+======================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoproperty:: SurfaceDiagnosticSummaryResults.n_self_intersections

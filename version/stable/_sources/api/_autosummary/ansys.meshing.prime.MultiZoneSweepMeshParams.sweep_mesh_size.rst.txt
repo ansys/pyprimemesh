@@ -1,0 +1,6 @@
+sweep\_mesh\_size
+=================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoproperty:: MultiZoneSweepMeshParams.sweep_mesh_size

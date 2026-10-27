@@ -1,0 +1,6 @@
+direction
+=========
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoproperty:: MeshStackerParams.direction

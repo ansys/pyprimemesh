@@ -1,0 +1,6 @@
+GETSTATISTICSFAILED
+===================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoattribute:: ErrorCode.GETSTATISTICSFAILED

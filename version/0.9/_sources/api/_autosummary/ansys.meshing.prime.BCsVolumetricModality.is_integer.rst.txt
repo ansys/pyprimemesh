@@ -1,0 +1,11 @@
+is\_integer
+===========
+
+.. currentmodule:: ansys.meshing.prime
+
+.. automethod:: ansys.meshing.prime.BCsVolumetricModality.is_integer
+
+.. minigallery::
+   :add-heading: Examples using BCsVolumetricModality.is_integer
+
+   ansys.meshing.prime.BCsVolumetricModality.is_integer

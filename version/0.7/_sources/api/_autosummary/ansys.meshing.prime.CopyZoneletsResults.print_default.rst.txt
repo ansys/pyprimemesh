@@ -1,0 +1,11 @@
+print\_default
+==============
+
+.. currentmodule:: ansys.meshing.prime
+
+.. automethod:: ansys.meshing.prime.CopyZoneletsResults.print_default
+
+.. minigallery::
+   :add-heading: Examples using CopyZoneletsResults.print_default
+
+   ansys.meshing.prime.CopyZoneletsResults.print_default

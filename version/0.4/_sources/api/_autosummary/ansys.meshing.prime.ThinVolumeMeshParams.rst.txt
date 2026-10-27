@@ -1,0 +1,34 @@
+.. vale off
+
+ThinVolumeMeshParams
+====================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoclass:: ThinVolumeMeshParams
+   
+   
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+      :toctree:
+   
+      
+      ThinVolumeMeshParams.print_default
+      ThinVolumeMeshParams.set_default
+   
+   
+
+   
+   
+   .. rubric:: Attributes
+
+   .. autosummary::
+      :toctree:
+   
+      ThinVolumeMeshParams.n_layers
+   
+   
+
+.. vale on

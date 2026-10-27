@@ -1,0 +1,40 @@
+.. vale off
+
+TriangulateResults
+==================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoclass:: TriangulateResults
+   
+   
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+      :toctree:
+   
+      
+      TriangulateResults.print_default
+      TriangulateResults.set_default
+   
+   
+
+   
+   
+   .. rubric:: Attributes
+
+   .. autosummary::
+      :toctree:
+   
+      TriangulateResults.error_code
+      TriangulateResults.n_faces_triangulated
+   
+   
+
+.. minigallery::
+    :add-heading: Examples using TriangulateResults
+
+    ansys.meshing.prime.TriangulateResults
+
+.. vale on
