@@ -1,0 +1,1 @@
+Added a beta gallery example that meshes ribbon and wire bonds on a direct copper bond module from shared topology and from separate bodies. Ribbons are thin-swept, wires are filled with tetrahedra, and the substrate stack sweeps the wire feet into wedges. The mesh is exported as a MAPDL CDB file.
