@@ -87,11 +87,11 @@ class Examples(Enum):
     BRACKET_DSCO = {"filename": "bracket_mid_surface.dsco", "git_folder": "bracket_scaffold"}
     DCB_BONDING_SHARED_TOPOLOGY_PMDAT = {
         "filename": "dcb_bonding_shared_topology.pmdat",
-        "git_folder": "dcb_bonding",
+        "git_folder": "dcb_bondings",
     }
     DCB_BONDING_SEPARATE_PARTS_FMD = {
         "filename": "dcb_bonding_separate_parts.fmd",
-        "git_folder": "dcb_bonding",
+        "git_folder": "dcb_bondings",
     }
     TOY_CAR_PMDAT = {"filename": "toy_car.pmdat", "git_folder": "toy_car"}
     TOY_CAR_FMD = {"filename": "toy_car.fmd", "git_folder": "toy_car"}
