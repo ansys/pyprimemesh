@@ -93,7 +93,6 @@ exclude = '''
   | dist
   # The following are specific to Black, you probably don't want those.
   | blib2to3
-  | tests
   | profiling
   | src/ansys/meshing/prime/autogen
   | .md
