@@ -35,17 +35,17 @@ class DeleteFringesAndOverlapsParams(CoreObject):
 
     Parameters
     ----------
-    model: Model
+    model : Model
         Model to create a ``DeleteFringesAndOverlapsParams`` object with default parameters.
-    fringe_element_count: int, optional
+    fringe_element_count : int, optional
         Maximum count of free face elements identified as fringe to be deleted.
-    overlap_element_count: int, optional
+    overlap_element_count : int, optional
         Maximum count of overlapping face elements identified as overlap to be deleted.
-    delete_fringes: bool, optional
+    delete_fringes : bool, optional
         Option to delete fringes. The default is true.
-    delete_overlaps: bool, optional
+    delete_overlaps : bool, optional
         Option to delete overlaps. The default is false.
-    json_data: dict, optional
+    json_data : dict, optional
         JSON dictionary to create a ``DeleteFringesAndOverlapsParams`` object with provided parameters.
 
     Examples
@@ -56,10 +56,10 @@ class DeleteFringesAndOverlapsParams(CoreObject):
 
     def __initialize(
             self,
-            fringe_element_count: int,
-            overlap_element_count: int,
-            delete_fringes: bool,
-            delete_overlaps: bool):
+            fringe_element_count : int,
+            overlap_element_count : int,
+            delete_fringes : bool,
+            delete_overlaps : bool):
         self._fringe_element_count = fringe_element_count
         self._overlap_element_count = overlap_element_count
         self._delete_fringes = delete_fringes
@@ -68,27 +68,27 @@ class DeleteFringesAndOverlapsParams(CoreObject):
     def __init__(
             self,
             model: CommunicationManager=None,
-            fringe_element_count: int = None,
-            overlap_element_count: int = None,
-            delete_fringes: bool = None,
-            delete_overlaps: bool = None,
+            fringe_element_count : int = None,
+            overlap_element_count : int = None,
+            delete_fringes : bool = None,
+            delete_overlaps : bool = None,
             json_data : dict = None,
              **kwargs):
         """Initialize a ``DeleteFringesAndOverlapsParams`` object.
 
         Parameters
         ----------
-        model: Model
+        model : Model
             Model to create a ``DeleteFringesAndOverlapsParams`` object with default parameters.
-        fringe_element_count: int, optional
+        fringe_element_count : int, optional
             Maximum count of free face elements identified as fringe to be deleted.
-        overlap_element_count: int, optional
+        overlap_element_count : int, optional
             Maximum count of overlapping face elements identified as overlap to be deleted.
-        delete_fringes: bool, optional
+        delete_fringes : bool, optional
             Option to delete fringes. The default is true.
-        delete_overlaps: bool, optional
+        delete_overlaps : bool, optional
             Option to delete overlaps. The default is false.
-        json_data: dict, optional
+        json_data : dict, optional
             JSON dictionary to create a ``DeleteFringesAndOverlapsParams`` object with provided parameters.
 
         Examples
@@ -122,28 +122,28 @@ class DeleteFringesAndOverlapsParams(CoreObject):
                         delete_overlaps if delete_overlaps is not None else ( DeleteFringesAndOverlapsParams._default_params["delete_overlaps"] if "delete_overlaps" in DeleteFringesAndOverlapsParams._default_params else (json_data["deleteOverlaps"] if "deleteOverlaps" in json_data else None)))
         self._custom_params = kwargs
         if model is not None:
-            [ model._logger.debug(f'Unsupported argument : {key}') for key in kwargs ]
+            [ model._logger.warning(f'Unsupported argument : {key}') for key in kwargs ]
         [setattr(type(self), key, property(lambda self, key = key:  self._custom_params[key] if key in self._custom_params else None,
         lambda self, value, key = key : self._custom_params.update({ key: value }))) for key in kwargs]
         self._freeze()
 
     @staticmethod
     def set_default(
-            fringe_element_count: int = None,
-            overlap_element_count: int = None,
-            delete_fringes: bool = None,
-            delete_overlaps: bool = None):
+            fringe_element_count : int = None,
+            overlap_element_count : int = None,
+            delete_fringes : bool = None,
+            delete_overlaps : bool = None):
         """Set the default values of the ``DeleteFringesAndOverlapsParams`` object.
 
         Parameters
         ----------
-        fringe_element_count: int, optional
+        fringe_element_count : int, optional
             Maximum count of free face elements identified as fringe to be deleted.
-        overlap_element_count: int, optional
+        overlap_element_count : int, optional
             Maximum count of overlapping face elements identified as overlap to be deleted.
-        delete_fringes: bool, optional
+        delete_fringes : bool, optional
             Option to delete fringes. The default is true.
-        delete_overlaps: bool, optional
+        delete_overlaps : bool, optional
             Option to delete overlaps. The default is false.
         """
         args = locals()
@@ -224,13 +224,13 @@ class DeleteFringesAndOverlapsResults(CoreObject):
 
     Parameters
     ----------
-    model: Model
+    model : Model
         Model to create a ``DeleteFringesAndOverlapsResults`` object with default parameters.
-    error_code: ErrorCode, optional
+    error_code : ErrorCode, optional
         Error code associated with the failure of operation.
-    n_deleted: int, optional
+    n_deleted : int, optional
         Number of face elements deleted.
-    json_data: dict, optional
+    json_data : dict, optional
         JSON dictionary to create a ``DeleteFringesAndOverlapsResults`` object with provided parameters.
 
     Examples
@@ -241,29 +241,29 @@ class DeleteFringesAndOverlapsResults(CoreObject):
 
     def __initialize(
             self,
-            error_code: ErrorCode,
-            n_deleted: int):
+            error_code : ErrorCode,
+            n_deleted : int):
         self._error_code = ErrorCode(error_code)
         self._n_deleted = n_deleted
 
     def __init__(
             self,
             model: CommunicationManager=None,
-            error_code: ErrorCode = None,
-            n_deleted: int = None,
+            error_code : ErrorCode = None,
+            n_deleted : int = None,
             json_data : dict = None,
              **kwargs):
         """Initialize a ``DeleteFringesAndOverlapsResults`` object.
 
         Parameters
         ----------
-        model: Model
+        model : Model
             Model to create a ``DeleteFringesAndOverlapsResults`` object with default parameters.
-        error_code: ErrorCode, optional
+        error_code : ErrorCode, optional
             Error code associated with the failure of operation.
-        n_deleted: int, optional
+        n_deleted : int, optional
             Number of face elements deleted.
-        json_data: dict, optional
+        json_data : dict, optional
             JSON dictionary to create a ``DeleteFringesAndOverlapsResults`` object with provided parameters.
 
         Examples
@@ -291,22 +291,22 @@ class DeleteFringesAndOverlapsResults(CoreObject):
                         n_deleted if n_deleted is not None else ( DeleteFringesAndOverlapsResults._default_params["n_deleted"] if "n_deleted" in DeleteFringesAndOverlapsResults._default_params else (json_data["nDeleted"] if "nDeleted" in json_data else None)))
         self._custom_params = kwargs
         if model is not None:
-            [ model._logger.debug(f'Unsupported argument : {key}') for key in kwargs ]
+            [ model._logger.warning(f'Unsupported argument : {key}') for key in kwargs ]
         [setattr(type(self), key, property(lambda self, key = key:  self._custom_params[key] if key in self._custom_params else None,
         lambda self, value, key = key : self._custom_params.update({ key: value }))) for key in kwargs]
         self._freeze()
 
     @staticmethod
     def set_default(
-            error_code: ErrorCode = None,
-            n_deleted: int = None):
+            error_code : ErrorCode = None,
+            n_deleted : int = None):
         """Set the default values of the ``DeleteFringesAndOverlapsResults`` object.
 
         Parameters
         ----------
-        error_code: ErrorCode, optional
+        error_code : ErrorCode, optional
             Error code associated with the failure of operation.
-        n_deleted: int, optional
+        n_deleted : int, optional
             Number of face elements deleted.
         """
         args = locals()

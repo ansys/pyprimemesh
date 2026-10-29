@@ -25,7 +25,7 @@ from __future__ import annotations
 from ansys.meshing.prime.internals.comm_manager import CommunicationManager
 from ansys.meshing.prime.params.primestructs import *
 from ansys.meshing.prime.autogen.coreobject import *
-from typing import List, Any, Union
+from typing import Dict, Any, Union, List, Iterable
 
 class WrapperControl(CoreObject):
     """Wrapper Control to describe all parameters and controls used for wrapping.
@@ -65,7 +65,7 @@ class WrapperControl(CoreObject):
         >>> wrapper_control.set_geometry_scope(scope)
 
         """
-        if not isinstance(scope, ScopeDefinition):
+        if type(scope).__name__ != 'ScopeDefinition':
             raise TypeError("Invalid argument type passed for 'scope'. Valid argument type is ScopeDefinition.")
         args = {"scope" : scope._jsonify()}
         command_name = "PrimeMesh::WrapperControl/SetGeometryScope"
@@ -92,7 +92,7 @@ class WrapperControl(CoreObject):
         >>> set_leak_prev_results = wrapper_control.set_leak_preventions([params])
 
         """
-        if not isinstance(params, List):
+        if not isinstance(params, Iterable):
             raise TypeError("Invalid argument type passed for 'params'. Valid argument type is List[LeakPreventionParams].")
         args = {"params" : [p._jsonify() for p in params]}
         command_name = "PrimeMesh::WrapperControl/SetLeakPreventions"
@@ -120,7 +120,7 @@ class WrapperControl(CoreObject):
         >>> set_cont_prev_results = wrapper_control.set_contact_preventions([params])
 
         """
-        if not isinstance(params, List):
+        if not isinstance(params, Iterable):
             raise TypeError("Invalid argument type passed for 'params'. Valid argument type is List[ContactPreventionParams].")
         args = {"params" : [p._jsonify() for p in params]}
         command_name = "PrimeMesh::WrapperControl/SetContactPreventions"
@@ -170,7 +170,7 @@ class WrapperControl(CoreObject):
         >>> set_feat_rec_results = wrapper_control.set_feature_recoveries([params])
 
         """
-        if not isinstance(params, List):
+        if not isinstance(params, Iterable):
             raise TypeError("Invalid argument type passed for 'params'. Valid argument type is List[FeatureRecoveryParams].")
         args = {"params" : [p._jsonify() for p in params]}
         command_name = "PrimeMesh::WrapperControl/SetFeatureRecoveries"
@@ -288,13 +288,94 @@ class WrapperControl(CoreObject):
         >>> wrapper_control.set_shadow_geometry_scope(scope)
 
         """
-        if not isinstance(scope, ScopeDefinition):
+        if type(scope).__name__ != 'ScopeDefinition':
             raise TypeError("Invalid argument type passed for 'scope'. Valid argument type is ScopeDefinition.")
         args = {"scope" : scope._jsonify()}
         command_name = "PrimeMesh::WrapperControl/SetShadowGeometryScope"
         self._model._print_logs_before_command("set_shadow_geometry_scope", args)
         self._comm.serve(self._model, command_name, self._object_id, args=args)
         self._model._print_logs_after_command("set_shadow_geometry_scope")
+
+    def set_penetration_guard_geometry_scope(self, scope : ScopeDefinition):
+        """ Sets the penetration guard geometry scope for the wrapper control.
+
+
+        Parameters
+        ----------
+        scope : ScopeDefinition
+            ScopeDefinition defining the penetration guard geometry entities for wrapping.
+
+        Notes
+        -----
+        **This is a beta API**. **The behavior and implementation may change in future**.
+
+        Examples
+        --------
+        >>> wrapper_control.set_penetration_guard_geometry_scope(scope)
+
+        """
+        if type(scope).__name__ != 'ScopeDefinition':
+            raise TypeError("Invalid argument type passed for 'scope'. Valid argument type is ScopeDefinition.")
+        args = {"scope" : scope._jsonify()}
+        command_name = "PrimeMesh::WrapperControl/SetPenetrationGuardGeometryScope"
+        self._model._print_beta_api_warning("set_penetration_guard_geometry_scope")
+        self._model._print_logs_before_command("set_penetration_guard_geometry_scope", args)
+        self._comm.serve(self._model, command_name, self._object_id, args=args)
+        self._model._print_logs_after_command("set_penetration_guard_geometry_scope")
+
+    def get_shadow_geometry_scope(self) -> ScopeDefinition:
+        """ Gets the shadow geometry scope.
+
+
+        Returns
+        -------
+        ScopeDefinition
+            Returns ScopeDefinition having the shadow geometry scope entities from wrapper control.
+
+
+        Notes
+        -----
+        **This is a beta API**. **The behavior and implementation may change in future**.
+
+        Examples
+        --------
+        >>> scope = wrapper_control.get_shadow_geometry_scope()
+
+        """
+        args = {}
+        command_name = "PrimeMesh::WrapperControl/GetShadowGeometryScope"
+        self._model._print_beta_api_warning("get_shadow_geometry_scope")
+        self._model._print_logs_before_command("get_shadow_geometry_scope", args)
+        result = self._comm.serve(self._model, command_name, self._object_id, args=args)
+        self._model._print_logs_after_command("get_shadow_geometry_scope", ScopeDefinition(model = self._model, json_data = result))
+        return ScopeDefinition(model = self._model, json_data = result)
+
+    def get_penetration_guard_geometry_scope(self) -> ScopeDefinition:
+        """ Gets the penetration guard geometry scope from the wrapper control.
+
+
+        Returns
+        -------
+        ScopeDefinition
+            Returns ScopeDefinition containing the penetration guard geometry entities assigned to the wrapper control.
+
+
+        Notes
+        -----
+        **This is a beta API**. **The behavior and implementation may change in future**.
+
+        Examples
+        --------
+        >>> scope = wrapper_control.get_penetration_guard_geometry_scope()
+
+        """
+        args = {}
+        command_name = "PrimeMesh::WrapperControl/GetPenetrationGuardGeometryScope"
+        self._model._print_beta_api_warning("get_penetration_guard_geometry_scope")
+        self._model._print_logs_before_command("get_penetration_guard_geometry_scope", args)
+        result = self._comm.serve(self._model, command_name, self._object_id, args=args)
+        self._model._print_logs_after_command("get_penetration_guard_geometry_scope", ScopeDefinition(model = self._model, json_data = result))
+        return ScopeDefinition(model = self._model, json_data = result)
 
     @property
     def id(self):

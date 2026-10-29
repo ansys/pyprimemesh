@@ -35,11 +35,11 @@ class SplitParams(CoreObject):
 
     Parameters
     ----------
-    model: Model
+    model : Model
         Model to create a ``SplitParams`` object with default parameters.
-    split_ratio: float, optional
+    split_ratio : float, optional
         Minimum ratio of split edge length to original edge length.
-    json_data: dict, optional
+    json_data : dict, optional
         JSON dictionary to create a ``SplitParams`` object with provided parameters.
 
     Examples
@@ -50,24 +50,24 @@ class SplitParams(CoreObject):
 
     def __initialize(
             self,
-            split_ratio: float):
+            split_ratio : float):
         self._split_ratio = split_ratio
 
     def __init__(
             self,
             model: CommunicationManager=None,
-            split_ratio: float = None,
+            split_ratio : float = None,
             json_data : dict = None,
              **kwargs):
         """Initialize a ``SplitParams`` object.
 
         Parameters
         ----------
-        model: Model
+        model : Model
             Model to create a ``SplitParams`` object with default parameters.
-        split_ratio: float, optional
+        split_ratio : float, optional
             Minimum ratio of split edge length to original edge length.
-        json_data: dict, optional
+        json_data : dict, optional
             JSON dictionary to create a ``SplitParams`` object with provided parameters.
 
         Examples
@@ -92,19 +92,19 @@ class SplitParams(CoreObject):
                         split_ratio if split_ratio is not None else ( SplitParams._default_params["split_ratio"] if "split_ratio" in SplitParams._default_params else (json_data["splitRatio"] if "splitRatio" in json_data else None)))
         self._custom_params = kwargs
         if model is not None:
-            [ model._logger.debug(f'Unsupported argument : {key}') for key in kwargs ]
+            [ model._logger.warning(f'Unsupported argument : {key}') for key in kwargs ]
         [setattr(type(self), key, property(lambda self, key = key:  self._custom_params[key] if key in self._custom_params else None,
         lambda self, value, key = key : self._custom_params.update({ key: value }))) for key in kwargs]
         self._freeze()
 
     @staticmethod
     def set_default(
-            split_ratio: float = None):
+            split_ratio : float = None):
         """Set the default values of the ``SplitParams`` object.
 
         Parameters
         ----------
-        split_ratio: float, optional
+        split_ratio : float, optional
             Minimum ratio of split edge length to original edge length.
         """
         args = locals()

@@ -35,11 +35,11 @@ class TransformResults(CoreObject):
 
     Parameters
     ----------
-    model: Model
+    model : Model
         Model to create a ``TransformResults`` object with default parameters.
-    error_code: ErrorCode, optional
+    error_code : ErrorCode, optional
         Error code associated with the failure of operation.
-    json_data: dict, optional
+    json_data : dict, optional
         JSON dictionary to create a ``TransformResults`` object with provided parameters.
 
     Examples
@@ -50,24 +50,24 @@ class TransformResults(CoreObject):
 
     def __initialize(
             self,
-            error_code: ErrorCode):
+            error_code : ErrorCode):
         self._error_code = ErrorCode(error_code)
 
     def __init__(
             self,
             model: CommunicationManager=None,
-            error_code: ErrorCode = None,
+            error_code : ErrorCode = None,
             json_data : dict = None,
              **kwargs):
         """Initialize a ``TransformResults`` object.
 
         Parameters
         ----------
-        model: Model
+        model : Model
             Model to create a ``TransformResults`` object with default parameters.
-        error_code: ErrorCode, optional
+        error_code : ErrorCode, optional
             Error code associated with the failure of operation.
-        json_data: dict, optional
+        json_data : dict, optional
             JSON dictionary to create a ``TransformResults`` object with provided parameters.
 
         Examples
@@ -92,19 +92,19 @@ class TransformResults(CoreObject):
                         error_code if error_code is not None else ( TransformResults._default_params["error_code"] if "error_code" in TransformResults._default_params else ErrorCode(json_data["errorCode"] if "errorCode" in json_data else None)))
         self._custom_params = kwargs
         if model is not None:
-            [ model._logger.debug(f'Unsupported argument : {key}') for key in kwargs ]
+            [ model._logger.warning(f'Unsupported argument : {key}') for key in kwargs ]
         [setattr(type(self), key, property(lambda self, key = key:  self._custom_params[key] if key in self._custom_params else None,
         lambda self, value, key = key : self._custom_params.update({ key: value }))) for key in kwargs]
         self._freeze()
 
     @staticmethod
     def set_default(
-            error_code: ErrorCode = None):
+            error_code : ErrorCode = None):
         """Set the default values of the ``TransformResults`` object.
 
         Parameters
         ----------
-        error_code: ErrorCode, optional
+        error_code : ErrorCode, optional
             Error code associated with the failure of operation.
         """
         args = locals()
@@ -149,11 +149,11 @@ class TransformParams(CoreObject):
 
     Parameters
     ----------
-    model: Model
+    model : Model
         Model to create a ``TransformParams`` object with default parameters.
-    transformation_matrix: Iterable[float], optional
+    transformation_matrix : Iterable[float], optional
         Transformation matrix(4x4) to be used to transform.
-    json_data: dict, optional
+    json_data : dict, optional
         JSON dictionary to create a ``TransformParams`` object with provided parameters.
 
     Examples
@@ -164,24 +164,24 @@ class TransformParams(CoreObject):
 
     def __initialize(
             self,
-            transformation_matrix: Iterable[float]):
+            transformation_matrix : Iterable[float]):
         self._transformation_matrix = transformation_matrix if isinstance(transformation_matrix, np.ndarray) else np.array(transformation_matrix, dtype=np.double) if transformation_matrix is not None else None
 
     def __init__(
             self,
             model: CommunicationManager=None,
-            transformation_matrix: Iterable[float] = None,
+            transformation_matrix : Iterable[float] = None,
             json_data : dict = None,
              **kwargs):
         """Initialize a ``TransformParams`` object.
 
         Parameters
         ----------
-        model: Model
+        model : Model
             Model to create a ``TransformParams`` object with default parameters.
-        transformation_matrix: Iterable[float], optional
+        transformation_matrix : Iterable[float], optional
             Transformation matrix(4x4) to be used to transform.
-        json_data: dict, optional
+        json_data : dict, optional
             JSON dictionary to create a ``TransformParams`` object with provided parameters.
 
         Examples
@@ -206,19 +206,19 @@ class TransformParams(CoreObject):
                         transformation_matrix if transformation_matrix is not None else ( TransformParams._default_params["transformation_matrix"] if "transformation_matrix" in TransformParams._default_params else (json_data["transformationMatrix"] if "transformationMatrix" in json_data else None)))
         self._custom_params = kwargs
         if model is not None:
-            [ model._logger.debug(f'Unsupported argument : {key}') for key in kwargs ]
+            [ model._logger.warning(f'Unsupported argument : {key}') for key in kwargs ]
         [setattr(type(self), key, property(lambda self, key = key:  self._custom_params[key] if key in self._custom_params else None,
         lambda self, value, key = key : self._custom_params.update({ key: value }))) for key in kwargs]
         self._freeze()
 
     @staticmethod
     def set_default(
-            transformation_matrix: Iterable[float] = None):
+            transformation_matrix : Iterable[float] = None):
         """Set the default values of the ``TransformParams`` object.
 
         Parameters
         ----------
-        transformation_matrix: Iterable[float], optional
+        transformation_matrix : Iterable[float], optional
             Transformation matrix(4x4) to be used to transform.
         """
         args = locals()

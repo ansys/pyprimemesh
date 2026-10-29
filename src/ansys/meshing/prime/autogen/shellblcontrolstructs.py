@@ -35,25 +35,25 @@ class ShellBLControlGrowthParams(CoreObject):
 
     Parameters
     ----------
-    model: Model
+    model : Model
         Model to create a ``ShellBLControlGrowthParams`` object with default parameters.
-    n_layers: int, optional
+    n_layers : int, optional
         Number of layers to be generated.
 
         **This is a beta parameter**. **The behavior and name may change in the future**.
-    offset_type: ShellBLOffsetType, optional
+    offset_type : ShellBLOffsetType, optional
         Offset type for ShellBL.
 
         **This is a beta parameter**. **The behavior and name may change in the future**.
-    growth_rate: float, optional
+    growth_rate : float, optional
         Ratio of height of the current layer to the previous layer.
 
         **This is a beta parameter**. **The behavior and name may change in the future**.
-    first_height: float, optional
+    first_height : float, optional
         Height of first layer of ShellBL.
 
         **This is a beta parameter**. **The behavior and name may change in the future**.
-    json_data: dict, optional
+    json_data : dict, optional
         JSON dictionary to create a ``ShellBLControlGrowthParams`` object with provided parameters.
 
     Examples
@@ -64,10 +64,10 @@ class ShellBLControlGrowthParams(CoreObject):
 
     def __initialize(
             self,
-            n_layers: int,
-            offset_type: ShellBLOffsetType,
-            growth_rate: float,
-            first_height: float):
+            n_layers : int,
+            offset_type : ShellBLOffsetType,
+            growth_rate : float,
+            first_height : float):
         self._n_layers = n_layers
         self._offset_type = ShellBLOffsetType(offset_type)
         self._growth_rate = growth_rate
@@ -76,35 +76,35 @@ class ShellBLControlGrowthParams(CoreObject):
     def __init__(
             self,
             model: CommunicationManager=None,
-            n_layers: int = None,
-            offset_type: ShellBLOffsetType = None,
-            growth_rate: float = None,
-            first_height: float = None,
+            n_layers : int = None,
+            offset_type : ShellBLOffsetType = None,
+            growth_rate : float = None,
+            first_height : float = None,
             json_data : dict = None,
              **kwargs):
         """Initialize a ``ShellBLControlGrowthParams`` object.
 
         Parameters
         ----------
-        model: Model
+        model : Model
             Model to create a ``ShellBLControlGrowthParams`` object with default parameters.
-        n_layers: int, optional
+        n_layers : int, optional
             Number of layers to be generated.
 
             **This is a beta parameter**. **The behavior and name may change in the future**.
-        offset_type: ShellBLOffsetType, optional
+        offset_type : ShellBLOffsetType, optional
             Offset type for ShellBL.
 
             **This is a beta parameter**. **The behavior and name may change in the future**.
-        growth_rate: float, optional
+        growth_rate : float, optional
             Ratio of height of the current layer to the previous layer.
 
             **This is a beta parameter**. **The behavior and name may change in the future**.
-        first_height: float, optional
+        first_height : float, optional
             Height of first layer of ShellBL.
 
             **This is a beta parameter**. **The behavior and name may change in the future**.
-        json_data: dict, optional
+        json_data : dict, optional
             JSON dictionary to create a ``ShellBLControlGrowthParams`` object with provided parameters.
 
         Examples
@@ -138,28 +138,28 @@ class ShellBLControlGrowthParams(CoreObject):
                         first_height if first_height is not None else ( ShellBLControlGrowthParams._default_params["first_height"] if "first_height" in ShellBLControlGrowthParams._default_params else (json_data["firstHeight"] if "firstHeight" in json_data else None)))
         self._custom_params = kwargs
         if model is not None:
-            [ model._logger.debug(f'Unsupported argument : {key}') for key in kwargs ]
+            [ model._logger.warning(f'Unsupported argument : {key}') for key in kwargs ]
         [setattr(type(self), key, property(lambda self, key = key:  self._custom_params[key] if key in self._custom_params else None,
         lambda self, value, key = key : self._custom_params.update({ key: value }))) for key in kwargs]
         self._freeze()
 
     @staticmethod
     def set_default(
-            n_layers: int = None,
-            offset_type: ShellBLOffsetType = None,
-            growth_rate: float = None,
-            first_height: float = None):
+            n_layers : int = None,
+            offset_type : ShellBLOffsetType = None,
+            growth_rate : float = None,
+            first_height : float = None):
         """Set the default values of the ``ShellBLControlGrowthParams`` object.
 
         Parameters
         ----------
-        n_layers: int, optional
+        n_layers : int, optional
             Number of layers to be generated.
-        offset_type: ShellBLOffsetType, optional
+        offset_type : ShellBLOffsetType, optional
             Offset type for ShellBL.
-        growth_rate: float, optional
+        growth_rate : float, optional
             Ratio of height of the current layer to the previous layer.
-        first_height: float, optional
+        first_height : float, optional
             Height of first layer of ShellBL.
         """
         args = locals()
@@ -221,7 +221,7 @@ class ShellBLControlGrowthParams(CoreObject):
 
     @property
     def growth_rate(self) -> float:
-        """Ratio of height of the current layer to previous layer.
+        """Ratio of height of the current layer to the previous layer.
 
         **This is a beta parameter**. **The behavior and name may change in the future**.
         """
