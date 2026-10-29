@@ -106,7 +106,7 @@ Procedure
 #. Write each mesh to a MAPDL CDB file.
 """
 
-# sphinx_gallery_tags = ["Structural", "Semiconductor", "Hex", "Tet", "Quad", "MultiZone", "Stacker", "Beta"]
+# sphinx_gallery_tags=["Structural","Semiconductor","Hex","Tet","Quad","MultiZone","Stacker","Beta"]
 # sphinx_gallery_thumbnail_number = 2
 
 ###############################################################################
@@ -192,9 +192,7 @@ def _label_wire_feet(model):
         foot = min(ymin for _, ymin, _ in boxes)
         # The sides of the wire make the stacker reject the seed. Keep the flat foot.
         contact = [
-            face
-            for face, ymin, ymax in boxes
-            if ymin <= foot + 0.02 and ymax <= foot + 0.05
+            face for face, ymin, ymax in boxes if ymin <= foot + 0.02 and ymax <= foot + 0.05
         ]
         if contact:
             part.add_labels_on_topo_entities(["wire_contact"], contact)
