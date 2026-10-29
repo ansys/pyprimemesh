@@ -2459,7 +2459,7 @@ class MaterialProcessor:
                         zone_details = zone_details
                         return zone_name, zone_details
                 except:
-                    pass
+                    zone_details = None
         elif self._part_data is not None:
             for part in self._part_data:
                 part_info = self._part_data[part]
@@ -2472,7 +2472,7 @@ class MaterialProcessor:
                                 zone_details = zone_details
                                 return zone_name, zone_details
                         except:
-                            pass
+                            zone_details = None
         return None, {}
 
     def _is_material_used_with_shell(self, mat_name):
@@ -2933,12 +2933,13 @@ class MaterialProcessor:
             mat_elastic_card += "*MAT_COHESIVE_ELASTIC_TITLE\n"
             mat_elastic_card += f"{mat_name}\n"
             mat_elastic_card += (
-                f"${self._formatter.field_str('MID|')}"
-                f"{self._formatter.field_str('RO|')}"
-                f"{self._formatter.field_str('E|')}"
-                f"{self._formatter.field_str('PR|')}"
-                f"{self._formatter.field_str('KS|')}"
-                f"{self._formatter.field_str('KN|')}\n"
+                f"${self._formatter.field_str('MID')}"
+                f"{self._formatter.field_str('RHO')}"
+                f"{self._formatter.field_str('ROFLG')}"
+                f"{self._formatter.field_str('INTFAIL')}"
+                f"{self._formatter.field_str('ET')}"
+                f"{self._formatter.field_str('EN')}"
+                f"{self._formatter.field_str('FN_FAIL')}\n"
             )
             mat_elastic_card += (
                 f"{self._formatter.field_int(mat_id)}"

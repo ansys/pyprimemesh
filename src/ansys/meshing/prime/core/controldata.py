@@ -140,8 +140,7 @@ class ControlData(_ControlData):
 
         """
         res = _ControlData.create_size_control(self, sizing_type)
-        new_size_control = SizeControl(self._model, res[0], res[1], res[2])
-        self._size_controls.append(new_size_control)
+        new_size_control = self.get_size_control_by_name(res[2])
         return new_size_control
 
     def create_prism_control(self) -> PrismControl:

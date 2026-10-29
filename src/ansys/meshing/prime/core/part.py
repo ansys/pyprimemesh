@@ -69,6 +69,7 @@ class Part(_Part):
         self._model = model
         self._print_mesh = False
         self._print_id = False
+        self._name = name
         _Part.__init__(self, model, id, object_id, name)
 
     def __call__(self, *args: Any, **kwds: Any) -> str:
@@ -178,6 +179,13 @@ class Part(_Part):
         """Whether IDs of TopoEntities or zonelets are set to print along with the part summary."""
         return self._print_id
 
+    @property
+    def name(self) -> str:
+        """Name of the part."""
+        if self._name is None:
+            self._name = _Part.get_name(self)
+        return self._name
+    
     @print_id.setter
     def print_id(self, value: bool):
         self._print_id = value
