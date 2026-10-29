@@ -890,7 +890,7 @@ class Mesh:
         automesh_params = prime.AutoMeshParams(model=self._model)
         automesh_params.volume_fill_type = volume_fill_type
         if quadratic:
-            automesh_params.tet = prime.TetParams(self._model, True)
+            automesh_params.tet = prime.TetParams(self._model, quadratic=True)
         automesh = prime.AutoMesh(self._model)
         for part in self._model.parts:
             if check_name_pattern(scope._part_expression, part.name):
