@@ -106,7 +106,7 @@ Procedure
 #. Write each mesh to a MAPDL CDB file.
 """
 
-# sphinx_gallery_tags=["Structural","Semiconductor","Hex","Tet","Quad","MultiZone","Stacker","Beta"]
+# sphinx_gallery_tags = ["Structural", "Semiconductor", "Hex", "Tet", "Quad", "MultiZone", "Stacker", "Beta"]  # noqa: E501
 # sphinx_gallery_thumbnail_number = 2
 
 ###############################################################################
