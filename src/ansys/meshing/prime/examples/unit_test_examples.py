@@ -1,4 +1,4 @@
-# Copyright (C) 2024 - 2026 ANSYS, Inc. and/or its affiliates.
+# Copyright © 2026 Synopsys, Inc. and ANSYS, Inc. All rights reserved.
 # SPDX-License-Identifier: MIT
 #
 #
@@ -23,7 +23,7 @@
 import os
 from typing import Optional, Union
 
-from ansys.tools.common.example_download import DownloadManager
+import ansys.meshing.prime.internals.utils as utils
 
 FILE_NAMES = [
     "box.psf",
@@ -70,6 +70,7 @@ def download_test_examples(
 
     """
 
+    DownloadManager = utils._get_download_manager()
     download_manager = DownloadManager()
     if destination is not None:
         destination = os.fspath(destination)
