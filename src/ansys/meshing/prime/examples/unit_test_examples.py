@@ -20,6 +20,8 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Download geometry and mesh files used by the unit tests."""
+
 import os
 from typing import Optional, Union
 
@@ -69,7 +71,6 @@ def download_test_examples(
 
 
     """
-
     download_manager = DownloadManager()
     if destination is not None:
         destination = os.fspath(destination)

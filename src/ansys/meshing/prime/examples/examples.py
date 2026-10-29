@@ -252,7 +252,6 @@ def download_elbow_fmd(
     >>>     print(model)
 
     """
-
     return get_file(Examples.ELBOW_FMD, destination, force)
 
 
@@ -946,7 +945,7 @@ def download_pcb_scdoc(
 def download_saddle_bracket_fmd(
     destination: Optional[Union[str, os.PathLike]] = None, force: bool = False
 ) -> Union[str, os.PathLike]:
-    """Download FMD file for the saddle bracket example
+    """Download the FMD file for the saddle bracket example.
 
     Parameters
     ----------
@@ -976,7 +975,6 @@ def download_saddle_bracket_fmd(
     >>>     print(model)
 
     """
-
     return get_file(Examples.SADDLE_BRACKET_FMD, destination, force)
 
 
