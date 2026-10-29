@@ -25,7 +25,7 @@ import os
 from enum import Enum
 from typing import Optional, Union
 
-from ansys.tools.common.example_download import DownloadManager
+import ansys.meshing.prime.internals.utils as utils
 
 __all__ = [
     'get_file',
@@ -167,6 +167,7 @@ def get_file(
     ValueError
         When the provided destination path for the example file does not exist.
     """
+    DownloadManager = utils._get_download_manager()
     download_manager = DownloadManager()
     if destination is not None:
         destination = os.fspath(destination)
