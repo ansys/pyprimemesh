@@ -326,9 +326,17 @@ class GRPCCommunicator(Communicator):
                     f'Data Transfer: Received {len(message)} bytes'
                 )
             res = json.loads(message)
-            while res is not None and 'Results' in res and isinstance(res['Results'], dict) and 'Progress' in res['Results']:
-                command = {"Command":"PrimeMesh::Model/WaitForNextMessage", 
-                           "ObjectID": model._object_id, "Args" : {}}
+            while (
+                res is not None
+                and 'Results' in res
+                and isinstance(res['Results'], dict)
+                and 'Progress' in res['Results']
+            ):
+                command = {
+                    "Command": "PrimeMesh::Model/WaitForNextMessage",
+                    "ObjectID": model._object_id,
+                    "Args": {},
+                }
                 response = self._stub.ServeJson(
                     request_iterator(
                         model._object_id,
@@ -341,11 +349,16 @@ class GRPCCommunicator(Communicator):
                 )
                 message = get_response(response, '')
                 res = {key: json.loads(value) for key, value in json.loads(message).items()}
-                if self._progress_callback is not None and 'Results' in res and isinstance(res['Results'], dict) and 'Progress' in res['Results']:
+                if (
+                    self._progress_callback is not None
+                    and 'Results' in res
+                    and isinstance(res['Results'], dict)
+                    and 'Progress' in res['Results']
+                ):
                     self._progress_callback(res['Results'])
                 else:
                     self._progress_callback({"Progress": {"Percentage": 100}})
-                
+
             return res
         else:
             raise RuntimeError("No connection with server")
@@ -365,12 +378,14 @@ class GRPCCommunicator(Communicator):
     def progress_callback(self, callback):
         """Set a callback function to receive progress updates from the server.
 
-        The callback function should accept a single argument, which will be a dictionary containing progress information.
+        The callback function should accept a single argument, which will be a
+        dictionary containing progress information.
 
         Parameters
         ----------
         callback : Callable[[dict], None]
-            A function that takes a dictionary as input and returns None. This function will be called with progress updates from the server.
+            A function that takes a dictionary as input and returns None. This function
+            will be called with progress updates from the server.
         """
         self._progress_callback = callback
 

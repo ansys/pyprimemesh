@@ -338,7 +338,9 @@ def launch_prime(
     )
 
     if config.has_pim():
-        _startup_debug_log(startup_debug_logger, 'PyPIM is configured. Launching remote Prime instance.')
+        _startup_debug_log(
+            startup_debug_logger, 'PyPIM is configured. Launching remote Prime instance.'
+        )
         return launch_remote_prime(version=version, timeout=timeout)
 
     if prime_root is not None:
@@ -350,7 +352,9 @@ def launch_prime(
 
     # Check for port availability on local host
     if ip == defaults.ip():
-        _startup_debug_log(startup_debug_logger, 'Checking local port availability starting from port=%s.', port)
+        _startup_debug_log(
+            startup_debug_logger, 'Checking local port availability starting from port=%s.', port
+        )
         port = utils.get_available_local_port(port)
         _startup_debug_log(startup_debug_logger, 'Selected local port=%s.', port)
 
@@ -360,7 +364,9 @@ def launch_prime(
         and connection_type == config.ConnectionType.GRPC_SECURE
     ):
         if client_certs_dir is None or server_certs_dir is None:
-            _startup_debug_log(startup_debug_logger, 'Missing certificate directory for remote secure connection.')
+            _startup_debug_log(
+                startup_debug_logger, 'Missing certificate directory for remote secure connection.'
+            )
             raise RuntimeError(f"Please provide certificate directory for remote connections.")
         missing = [
             f
@@ -372,19 +378,28 @@ def launch_prime(
             if not os.path.exists(f)
         ]
         if missing:
-            _startup_debug_log(startup_debug_logger, 'Missing required client TLS file(s): %s', missing)
+            _startup_debug_log(
+                startup_debug_logger, 'Missing required client TLS file(s): %s', missing
+            )
             raise RuntimeError(
                 f"Missing required client TLS file(s) for mutual TLS: {', '.join(missing)}"
             )
-        _startup_debug_log(startup_debug_logger, 'TLS files validated for remote secure connection.')
-        
+        _startup_debug_log(
+            startup_debug_logger, 'TLS files validated for remote secure connection.'
+        )
+
     launch_container = bool(int(os.environ.get('PYPRIMEMESH_LAUNCH_CONTAINER', '0')))
     logging.getLogger('PyPrimeMesh').info(f'Launch container: {launch_container}')
     if launch_container:
         logging.getLogger('PyPrimeMesh').info("Launching container...")
         container_name = utils.make_unique_container_name('ansys-prime-server')
 
-        _startup_debug_log(startup_debug_logger, 'Launching Prime container named %s on port=%s.', container_name, port)
+        _startup_debug_log(
+            startup_debug_logger,
+            'Launching Prime container named %s on port=%s.',
+            container_name,
+            port,
+        )
         utils.launch_prime_github_container(
             port=port,
             name=container_name,

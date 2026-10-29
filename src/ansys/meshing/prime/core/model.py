@@ -100,7 +100,8 @@ class Model(_Model):
         Parameters
         ----------
         callback : function
-            A function that takes a single argument, which will be the progress update data from the server.
+            A function that takes a single argument, which will be the progress update
+            data from the server.
 
         Examples
         --------
@@ -147,8 +148,10 @@ class Model(_Model):
             model=self, min=sf_params[0], max=sf_params[1], growth_rate=sf_params[2]
         )
         from ansys.meshing.prime import Part as PPart
+
         self._parts = [PPart(self, part[0], part[1], part[2]) for part in part_data]
         from ansys.meshing.prime import ControlData as CData
+
         self._control_data = CData(self, -1, res["ControlData"], "")
         self._control_data._update_size_controls(sc_data)
         self._control_data._update_prism_controls(pc_data)
@@ -158,6 +161,7 @@ class Model(_Model):
         self._control_data._update_volume_controls(vc_data)
         self._control_data._update_thin_volume_controls(tvc_data)
         from ansys.meshing.prime import TopoData as TData
+
         self._topo_data = TData(self, -1, res["TopoData"], "")
         if "PeriodicControl" in res:
             self._control_data._update_periodic_controls(percon_data)
@@ -169,6 +173,7 @@ class Model(_Model):
             self._comm.serve(self, "PrimeMesh::Model/GetChildObjectsJson", self._object_id, args={})
         )
         from ansys.meshing.prime import ControlData as CData
+
         if self._control_data is None:
             self._control_data = CData(self, -1, res["ControlData"], "")
         self._control_data._update_size_controls(res["SizeControl"])
@@ -179,6 +184,7 @@ class Model(_Model):
             self._comm.serve(self, "PrimeMesh::Model/GetChildObjectsJson", self._object_id, args={})
         )
         from ansys.meshing.prime import ControlData as CData
+
         if self._control_data is None:
             self._control_data = CData(self, -1, res["ControlData"], "")
         self._control_data._update_prism_controls(res["PrismControl"])
@@ -189,6 +195,7 @@ class Model(_Model):
             self._comm.serve(self, "PrimeMesh::Model/GetChildObjectsJson", self._object_id, args={})
         )
         from ansys.meshing.prime import ControlData as CData
+
         if self._control_data is None:
             self._control_data = CData(self, -1, res["ControlData"], "")
         self._control_data._update_wrapper_controls(res["WrapperControl"])
@@ -220,7 +227,7 @@ class Model(_Model):
             raise PrimeRuntimeError("Unable to create part", ErrorCode.PARTNOTFOUND)
 
     def _add_parts(self, ids: Iterable[int]):
-        """Adds parts that are present on the server.
+        """Add parts that are present on the server.
 
         Parameters
         ----------
@@ -242,13 +249,15 @@ class Model(_Model):
                 new_part = Part(self, part[0], part[1], part[2])
                 self._parts.append(new_part)
                 added_parts.append(part[0])
-        
+
         missing_parts = set(ids) - set(added_parts)
         if missing_parts:
-            raise PrimeRuntimeError(f"Unable to create parts with IDs: {missing_parts}", ErrorCode.PARTNOTFOUND)
+            raise PrimeRuntimeError(
+                f"Unable to create parts with IDs: {missing_parts}", ErrorCode.PARTNOTFOUND
+            )
 
     def _remove_parts(self, part_ids: Iterable[int]):
-        """Removes already deleted parts from the client model.
+        """Remove already deleted parts from the client model.
 
         Parameters
         ----------
@@ -566,7 +575,7 @@ class Model(_Model):
 
         """
         return PrimeLogger()
-    
+
     @property
     def use_standby_apis(self) -> bool:
         """Get the status of using standby APIs.
@@ -596,7 +605,7 @@ class Model(_Model):
             >>> model.use_standby_apis = True
         """
         self._use_standby_apis = value
-        
+
     def as_polydata(self, update: bool = False):
         """Get the model as a polydata.
 
@@ -706,9 +715,8 @@ class Model(_Model):
             self._model_pv_mesh = Mesh(self)
         return self._model_pv_mesh.get_scoped_polydata(scope, update=update)
 
-    def create_part(self, suggested_name : str) -> Part:
-        """ Creates a part with the given name.
-
+    def create_part(self, suggested_name: str) -> Part:
+        """Create a part with the given name.
 
         Parameters
         ----------
@@ -729,7 +737,7 @@ class Model(_Model):
         res = super().create_part(suggested_name)
         self._add_part(res[0])
         return self.get_part(res[0])
-    
+
     def as_usd(self, update: bool = False):
         """Get the model as USD geometry DTOs.
 

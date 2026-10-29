@@ -22,7 +22,6 @@
 """Module for managing file inputs and outputs."""
 import copy
 import json
-import os
 import logging
 import traceback
 from pathlib import Path
@@ -199,11 +198,15 @@ class FileIO(_FileIO):
                 for instance_label in keyword_instances:
                     lines.append(f"      * {instance_label}")
         if cpp or combined:
+
+            def _tweak_count(key):
+                return int(combined.get(key, cpp.get(key, 0)))
+
             lines.extend(
                 [
-                    f"CPP Tweaked Keywords: {int(combined.get('tweakingKeywordsTouched', cpp.get('tweakingKeywordsTouched', 0)))}",
-                    f"CPP Keyopt Tweaks Applied: {int(combined.get('tweakingKeyoptUpdates', cpp.get('tweakingKeyoptUpdates', 0)))}",
-                    f"CPP Constant Tweaks Applied: {int(combined.get('tweakingConstantUpdates', cpp.get('tweakingConstantUpdates', 0)))}",
+                    f"CPP Tweaked Keywords: {_tweak_count('tweakingKeywordsTouched')}",
+                    f"CPP Keyopt Tweaks Applied: {_tweak_count('tweakingKeyoptUpdates')}",
+                    f"CPP Constant Tweaks Applied: {_tweak_count('tweakingConstantUpdates')}",
                 ]
             )
 
@@ -232,13 +235,19 @@ class FileIO(_FileIO):
             cpp_customization = {}
 
         cpp_tweaked_keywords = int(
-            cpp_customization.get("tweakingKeywordsTouched", counts.get("cpp_tweaking_keywords_touched", 0) or 0)
+            cpp_customization.get(
+                "tweakingKeywordsTouched", counts.get("cpp_tweaking_keywords_touched", 0) or 0
+            )
         )
         cpp_keyopt_updates = int(
-            cpp_customization.get("tweakingKeyoptUpdates", counts.get("cpp_tweaking_keyopt_updates", 0) or 0)
+            cpp_customization.get(
+                "tweakingKeyoptUpdates", counts.get("cpp_tweaking_keyopt_updates", 0) or 0
+            )
         )
         cpp_constant_updates = int(
-            cpp_customization.get("tweakingConstantUpdates", counts.get("cpp_tweaking_constant_updates", 0) or 0)
+            cpp_customization.get(
+                "tweakingConstantUpdates", counts.get("cpp_tweaking_constant_updates", 0) or 0
+            )
         )
 
         skip_keywords = int(py_report.get("KeywordsThatSkipNativeFe2AnsysTranslation"))
@@ -246,7 +255,9 @@ class FileIO(_FileIO):
         skip_by_keyword = py_report.get("skipByKeyword", py_report.get("perKeywordInstances", {}))
         if not isinstance(skip_by_keyword, dict):
             skip_by_keyword = {}
-        skip_by_instances = py_report.get("skipByInstances", py_report.get("perKeywordInstanceIds", {}))
+        skip_by_instances = py_report.get(
+            "skipByInstances", py_report.get("perKeywordInstanceIds", {})
+        )
         if not isinstance(skip_by_instances, dict):
             skip_by_instances = {}
         combined = {
@@ -268,7 +279,9 @@ class FileIO(_FileIO):
             mapdlcdbexportutils._append_section_text(merged_sections, section_name, content)
 
     @staticmethod
-    def _read_custom_keyword_block(source_file_path: str, keyword_offset: int, keyword_size: int) -> str:
+    def _read_custom_keyword_block(
+        source_file_path: str, keyword_offset: int, keyword_size: int
+    ) -> str:
         """Read one custom keyword block from the original Abaqus source file."""
         with open(source_file_path, "rb") as source_file:
             source_file.seek(keyword_offset)
@@ -308,7 +321,9 @@ class FileIO(_FileIO):
 
             if not parsed_keyword and stripped_line.startswith("*"):
                 keyword_tokens = [token.strip() for token in stripped_line.lstrip("*").split(",")]
-                parsed_keyword = keyword_tokens[0].upper() if keyword_tokens and keyword_tokens[0] else ""
+                parsed_keyword = (
+                    keyword_tokens[0].upper() if keyword_tokens and keyword_tokens[0] else ""
+                )
                 parameters = cls._parse_keyword_parameters(stripped_line)
                 continue
 
@@ -448,7 +463,6 @@ class FileIO(_FileIO):
         >>> results = file_io.import_abaqus(r"/tmp/file.inp")
 
         """
-
         try:
             with utils.file_read_context(self._model, file_name) as temp_file_name:
                 result = super().import_abaqus_inp(temp_file_name, params)
@@ -457,7 +471,9 @@ class FileIO(_FileIO):
         except Exception as crash_exc:
             # Crash: server died during RPC; write crash report, then re-raise.
             if params.write_html_log:
-                fe2ansys_html_log.write_abaqus_import_html_log(self, file_name, crash_error=str(crash_exc))
+                fe2ansys_html_log.write_abaqus_import_html_log(
+                    self, file_name, crash_error=str(crash_exc)
+                )
             raise
         # Best-effort HTML log render; never raises.
         if params.write_html_log:
@@ -624,31 +640,39 @@ class FileIO(_FileIO):
         customization_file = getattr(params, "customization_file_name", None)
         customization_file_json_format = None
         if customization_file:
-            customization_file_json_format = self._get_customization_schema_json(
-                customization_file
-            )
+            customization_file_json_format = self._get_customization_schema_json(customization_file)
             params._custom_params["customization_schema"] = customization_file_json_format
-            customization_file_json_format = json.loads(customization_file_json_format) if customization_file_json_format else None
+            customization_file_json_format = (
+                json.loads(customization_file_json_format)
+                if customization_file_json_format
+                else None
+            )
         customization_functions_file = getattr(params, "customization_functions_file_name", None)
         if not customization_functions_file:
-            customization_functions_file = params._custom_params.get("customization_functions_file_name")
-        try:    
+            customization_functions_file = params._custom_params.get(
+                "customization_functions_file_name"
+            )
+        try:
             with utils.file_write_context(self._model, file_name) as temp_file_name:
                 # part_id = 1
                 # if len(self._model.parts) > 0:
                 #    part_id = self._model.parts[0].id
-                args = {"partId" : 0}
+                args = {"partId": 0}
                 command_name = "PrimeMesh::FileIO/GetAbaqusSimulationData"
-                sim_data_str = self._comm.serve(self._model, command_name, self._object_id, args=args)
+                sim_data_str = self._comm.serve(
+                    self._model, command_name, self._object_id, args=args
+                )
                 if params.config_settings is None:
                     params.config_settings = ''
                 generate_mapdl_commands_error = None
                 generate_mapdl_commands_traceback = None
                 with utils.capture_log_records(self._model.python_logger) as collected_logs:
-                    all_mat_cmds, analysis_settings = "",""
+                    all_mat_cmds, analysis_settings = "", ""
                     try:
-                        all_mat_cmds, analysis_settings = mapdlcdbexportutils.generate_mapdl_commands(
-                            self._model, sim_data_str, params
+                        all_mat_cmds, analysis_settings = (
+                            mapdlcdbexportutils.generate_mapdl_commands(
+                                self._model, sim_data_str, params
+                            )
                         )
                     except Exception as e:
                         generate_mapdl_commands_error = e
@@ -664,7 +688,9 @@ class FileIO(_FileIO):
                 params.analysis_settings = analysis_settings
                 params._custom_params["client_log_messages"] = json.dumps(collected_logs)
                 result = super().export_mapdl_cdb(temp_file_name, params)
-                sim_data_str_with_export_side_modifications = self._comm.serve(self._model, command_name, self._object_id, args=args)
+                sim_data_str_with_export_side_modifications = self._comm.serve(
+                    self._model, command_name, self._object_id, args=args
+                )
                 counters = {}
                 summary = None
                 if result.summary_log:
@@ -673,20 +699,31 @@ class FileIO(_FileIO):
                 customization_report = {}
 
                 # Custom translation - user mutates counters in-place
-                custom_translations_str = self._comm.serve(self._model, "PrimeMesh::FileIO/GetAbaqusCustomKeywordsData", self._object_id, args={})
+                custom_translations_str = self._comm.serve(
+                    self._model,
+                    "PrimeMesh::FileIO/GetAbaqusCustomKeywordsData",
+                    self._object_id,
+                    args={},
+                )
                 json_custom_translations = json.loads(custom_translations_str or "null") or {}
                 json_sim_data_str = json.loads(sim_data_str_with_export_side_modifications)
-                
-                if "FilteredCustomTranslations" in json_custom_translations and json_custom_translations["FilteredCustomTranslations"]:
+
+                if (
+                    "FilteredCustomTranslations" in json_custom_translations
+                    and json_custom_translations["FilteredCustomTranslations"]
+                ):
                     customization_report = self._build_customization_count_report(
                         json_custom_translations["FilteredCustomTranslations"]
                     )
                     sections = {}
                     if mapdlcdbexportutils._translators_loaded is False:
-                        mapdlcdbexportutils._load_keyword_translators(customization_functions_file, customization_file_json_format)
+                        mapdlcdbexportutils._load_keyword_translators(
+                            customization_functions_file, customization_file_json_format
+                        )
                     custom_translations = json_custom_translations["FilteredCustomTranslations"]
                     # In order to empower the user to control which custom function executes first
-                    # we need to iterate through the customization file in the order it was defined, rather than the order of the filtered translations.
+                    # we need to iterate through the customization file in the order it was defined,
+                    # rather than the order of the filtered translations.
                     for kw_key, user_data in customization_file_json_format.items():
                         kw_instances = custom_translations.get(kw_key)
                         hydrated_instances = self._hydrate_keyword_instances(kw_key, kw_instances)
@@ -709,15 +746,18 @@ class FileIO(_FileIO):
                                             args={
                                                 "part_id": part_id,
                                                 "keyword_instances_json": keyword_instances_json,
-                                                "schema_entry_json": schema_json
-                                            }
+                                                "schema_entry_json": schema_json,
+                                            },
                                         )
                                         if payload_str:
                                             if surface_payloads.get(kw_key.upper()) is None:
-                                                surface_payloads[kw_key.upper()] = json.loads(payload_str)
+                                                surface_payloads[kw_key.upper()] = json.loads(
+                                                    payload_str
+                                                )
                                             else:
-                                                # In case multiple parts return the payload for the same keyword,
-                                                # merge them together before invoking the translator.
+                                                # In case multiple parts return the payload for the
+                                                # same keyword, merge them together before invoking
+                                                # the translator.
                                                 existing_payload = surface_payloads[kw_key.upper()]
                                                 new_payload = json.loads(payload_str)
                                                 for field, surfaces in new_payload.items():
@@ -727,9 +767,10 @@ class FileIO(_FileIO):
                                                         existing_payload[field].extend(surfaces)
                                 except Exception as e:
                                     self._model.python_logger.warning(
-                                        "Failed to get surface mesh payload for keyword %s. Error: %s",
+                                        "Failed to get surface mesh payload for keyword %s. "
+                                        "Error: %s",
                                         kw_key,
-                                        e
+                                        e,
                                     )
 
                         keyword_sections = mapdlcdbexportutils._translate_custom_keywords(
@@ -743,7 +784,9 @@ class FileIO(_FileIO):
                     mapdlcdbexportutils._inject_custom_content(temp_file_name, sections)
                 if summary is not None:
                     if customization_report:
-                        customization_report = self._combine_python_cpp_customization_report(summary, customization_report)
+                        customization_report = self._combine_python_cpp_customization_report(
+                            summary, customization_report
+                        )
                         counts = summary.setdefault("Counts", {})
                         counts["skip_keywords"] = int(customization_report.get("skipKeywords", 0))
                         counts["skip_instances"] = int(customization_report.get("skipInstances", 0))
@@ -766,14 +809,18 @@ class FileIO(_FileIO):
                         summary["Customization"] = customization_root
                     result.summary_log = json.dumps(summary)
                     if customization_report:
-                        result.formatted_summary_log = self._append_customization_report_to_formatted_summary(
-                            result.formatted_summary_log,
-                            customization_report,
+                        result.formatted_summary_log = (
+                            self._append_customization_report_to_formatted_summary(
+                                result.formatted_summary_log,
+                                customization_report,
+                            )
                         )
         except Exception as crash_exc:
             # Crash: server died during RPC; write crash report, then re-raise.
             if params.write_html_log:
-                fe2ansys_html_log.write_cdb_export_html_log(self, file_name, crash_error=str(crash_exc))
+                fe2ansys_html_log.write_cdb_export_html_log(
+                    self, file_name, crash_error=str(crash_exc)
+                )
             raise
         # Best-effort HTML log render; never raises.
         if params.write_html_log:

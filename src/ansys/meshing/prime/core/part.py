@@ -185,7 +185,7 @@ class Part(_Part):
         if self._name is None:
             self._name = _Part.get_name(self)
         return self._name
-    
+
     @print_id.setter
     def print_id(self, value: bool):
         self._print_id = value

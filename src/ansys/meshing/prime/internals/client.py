@@ -31,7 +31,6 @@ import signal
 import subprocess
 from typing import Optional, Union
 
-
 import ansys.meshing.prime.internals.config as config
 import ansys.meshing.prime.internals.defaults as defaults
 import ansys.meshing.prime.internals.utils as utils
@@ -187,6 +186,7 @@ class Client(object):
     def model(self):
         """Get model associated with the client."""
         from ansys.meshing import prime
+
         if self._default_model is None and hasattr(self._comm, 'models'):
             if self._comm.models:
                 model_info = self._comm.models[0]
@@ -265,7 +265,14 @@ class Client(object):
         try:
             if os.name == "nt":
                 result = subprocess.run(
-                    ["tasklist", "/FI", f"PID eq {pid}", "/FO", "CSV", "/NH"],
+                    [
+                        "tasklist",
+                        "/FI",
+                        f"PID eq {pid}",
+                        "/FO",
+                        "CSV",
+                        "/NH",
+                    ],
                     capture_output=True,
                     text=True,
                     timeout=5,

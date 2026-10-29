@@ -109,9 +109,7 @@ prime_error_messages = {
     ErrorCode.NUMEN_INITDEFAULTSIZE_SETGLOBALSIZINGFAILED: "SetGlobalSizingParams rejected the computed values during default size initialization.",
     ErrorCode.NUMEN_AUTOASSIGNPARTSTOWRAPPEDSOLIDMESHFAILED: "Auto assign parts to wrapped solid mesh operation failed.",
     ErrorCode.NUMEN_EXTRACTFLOWVOLUMEFAILED: "Extract flow volume operation failed.",
-
     ErrorCode.NUMEN_EXTRACTFLOWVOLUMEPARTSNOTFOUND: "Flow volume parts not found. Ensure the part expression matches at least one part.",
-
     ErrorCode.NUMEN_CAPFACEEXPRESSIONEMPTY: "Cap face expression is empty for user-defined capping. Ensure the cap face expression is specified.",
     ErrorCode.NUMEN_MRFPARTSMORETHANONE: "Multiple MRF parts found. Only one MRF part is allowed.",
     ErrorCode.NUMEN_PARTSSAMEASMRFPARTS: "Flow volume parts are the same as MRF parts. Specify different parts for flow volume and MRF.",
@@ -598,7 +596,6 @@ prime_warning_messages = {
     WarningCode.VOLUMETRICSCAFFOLDER_SPLITBYINTERIOREDGESFAILURE: "Split by interior edges failed at one or more locations.",
     WarningCode.VOLUMETRICSCAFFOLDER_UNRESOLVEDOVERLAPS: "One or more unresolved overlapping faces are present after resolving surface overlaps.",
     WarningCode.VOLUMETRICSCAFFOLDER_FREEFACES: "One or more free faces are present after resolving surface overlaps.",
-
     WarningCode.OVERRIDECURVATURESIZINGPARAMS: "Invalid curvature sizing parameters override by global sizing parameters.",
     WarningCode.OVERRIDESOFTSIZINGPARAMS: "Invalid soft sizing parameters override by global sizing parameters.",
     WarningCode.OVERRIDEHARDSIZINGPARAMS: "Invalid hard sizing parameters override by global sizing parameters.",

@@ -1,6 +1,5 @@
-# Copyright © 2026 Synopsys, Inc. and ANSYS, Inc. All rights reserved.
+# Copyright (C) 2024 - 2026 ANSYS, Inc. and/or its affiliates.
 # SPDX-License-Identifier: MIT
-#
 #
 # Permission is hereby granted, free of charge, to any person obtaining a copy
 # of this software and associated documentation files (the "Software"), to deal
@@ -89,10 +88,10 @@ class YamlToPrimeJsonConverter:
             raise ValueError(f"Empty or invalid YAML file: {yaml_file_path}")
 
         yaml_data = self._canonicalize_known_labels(yaml_data)
-        
+
         for keyword_name, keyword_def in yaml_data.items():
             if not isinstance(keyword_def, dict):
-                raise ValueError(f"Invalid schema for {keyword_name}")                        
+                raise ValueError(f"Invalid schema for {keyword_name}")
             pattern = self._extract_pattern(keyword_def)
             json_schema = self._convert_simple_keyword(keyword_def)
             self.schemas[pattern] = json_schema
@@ -130,10 +129,13 @@ class YamlToPrimeJsonConverter:
             return normalized
 
         if isinstance(node, list):
-            return [self._canonicalize_known_labels(item, f"{path}[{idx}]") for idx, item in enumerate(node)]
+            return [
+                self._canonicalize_known_labels(item, f"{path}[{idx}]")
+                for idx, item in enumerate(node)
+            ]
 
         return node
-    
+
     def _extract_pattern(self, keyword_def: Dict) -> str:
         """Extract and validate the pattern from a keyword definition."""
         pattern = keyword_def.get('Pattern', '')

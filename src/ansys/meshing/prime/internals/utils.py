@@ -35,6 +35,8 @@ import ansys.meshing.prime.internals.defaults as defaults
 
 _LOCAL_PORTS = []
 _DOCKER_CLIENT = None
+
+
 def _get_docker():
     """Get the docker module, importing it on first use.
 
@@ -71,6 +73,7 @@ def _get_download_manager():
             "Downloading examples requires the 'ansys-tools-common' package. "
             "Install it using the command 'pip install ansys-tools-common'."
         ) from None
+
 
 # Paths accepted by FileIO / lucid and normalized before they reach the server.
 FileName = Union[str, os.PathLike]

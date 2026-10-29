@@ -1,4 +1,4 @@
-# Copyright © 2026 Synopsys, Inc. and ANSYS, Inc. All rights reserved.
+# Copyright (C) 2024 - 2026 ANSYS, Inc. and/or its affiliates.
 # SPDX-License-Identifier: MIT
 #
 # Permission is hereby granted, free of charge, to any person obtaining a copy
@@ -51,8 +51,9 @@ def _load_js() -> str:
         return fh.read()
 
 
-def write_abaqus_import_html_log(fileio, inp_file_name: str, *,
-               crash_error: Optional[str] = None) -> None:
+def write_abaqus_import_html_log(
+    fileio, inp_file_name: str, *, crash_error: Optional[str] = None
+) -> None:
     """Write the Abaqus import translation-log HTML report next to the input file.
 
     Parameters
@@ -75,23 +76,28 @@ def write_abaqus_import_html_log(fileio, inp_file_name: str, *,
     try:
         if crash_error is not None:
             _render_abaqus_import_html_log(
-                None, inp_file_name + ".html",
-                inp_file_name=inp_file_name, crash_error=crash_error,
+                None,
+                inp_file_name + ".html",
+                inp_file_name=inp_file_name,
+                crash_error=crash_error,
             )
             return
         log_doc = _fetch_log_doc(fileio, "PrimeMesh::FileIO/GetImportLog")
         if log_doc is None:
             return
         _render_abaqus_import_html_log(
-            log_doc, inp_file_name + ".html", inp_file_name=inp_file_name,
+            log_doc,
+            inp_file_name + ".html",
+            inp_file_name=inp_file_name,
         )
     except Exception as e:
         if logger is not None:
             logger.warning("Failed to render import translation log to HTML: %s", e)
 
 
-def write_cdb_export_html_log(fileio, cdb_file_name: str, *,
-               crash_error: Optional[str] = None) -> None:
+def write_cdb_export_html_log(
+    fileio, cdb_file_name: str, *, crash_error: Optional[str] = None
+) -> None:
     """Write the MAPDL CDB export translation-log HTML report next to the .cdb.
 
     Parameters
@@ -118,8 +124,10 @@ def write_cdb_export_html_log(fileio, cdb_file_name: str, *,
     try:
         if crash_error is not None:
             _render_cdb_export_html_log(
-                None, cdb_file_name + ".html",
-                export_file_name=cdb_file_name, import_log_doc=None,
+                None,
+                cdb_file_name + ".html",
+                export_file_name=cdb_file_name,
+                import_log_doc=None,
                 crash_error=crash_error,
             )
             return
@@ -128,16 +136,19 @@ def write_cdb_export_html_log(fileio, cdb_file_name: str, *,
             return
         import_doc = _fetch_log_doc(fileio, "PrimeMesh::FileIO/GetImportLog")
         _render_cdb_export_html_log(
-            export_doc, cdb_file_name + ".html",
-            export_file_name=cdb_file_name, import_log_doc=import_doc,
+            export_doc,
+            cdb_file_name + ".html",
+            export_file_name=cdb_file_name,
+            import_log_doc=import_doc,
         )
     except Exception as e:
         if logger is not None:
             logger.warning("Failed to render export translation log to HTML: %s", e)
 
 
-def write_dyna_export_html_log(fileio, k_file_name: str, *,
-               crash_error: Optional[str] = None) -> None:
+def write_dyna_export_html_log(
+    fileio, k_file_name: str, *, crash_error: Optional[str] = None
+) -> None:
     """Write the LS-DYNA (K) export translation-log HTML report next to the .k file.
 
     Parameters
@@ -164,8 +175,10 @@ def write_dyna_export_html_log(fileio, k_file_name: str, *,
     try:
         if crash_error is not None:
             _render_dyna_export_html_log(
-                None, k_file_name + ".html",
-                export_file_name=k_file_name, import_log_doc=None,
+                None,
+                k_file_name + ".html",
+                export_file_name=k_file_name,
+                import_log_doc=None,
                 crash_error=crash_error,
             )
             return
@@ -174,8 +187,10 @@ def write_dyna_export_html_log(fileio, k_file_name: str, *,
             return
         import_doc = _fetch_log_doc(fileio, "PrimeMesh::FileIO/GetImportLog")
         _render_dyna_export_html_log(
-            export_doc, k_file_name + ".html",
-            export_file_name=k_file_name, import_log_doc=import_doc,
+            export_doc,
+            k_file_name + ".html",
+            export_file_name=k_file_name,
+            import_log_doc=import_doc,
         )
     except Exception as e:
         if logger is not None:
@@ -210,20 +225,27 @@ def _render_abaqus_import_html_log(
     """
     header = _file_link_field("Import Source:", inp_file_name)
     if log_doc is None:
-        heading = ("Import did not complete \u2014 the PRIME server process likely "
-                   "crashed during this operation.")
-        note = ("No C++ translation log is available: the server terminated "
-                "before the log could be retrieved.")
-        body = _crash_banner(heading, crash_error or "") + \
-            f'<p class="empty-note">{html.escape(note)}</p>'
+        heading = (
+            "Import did not complete \u2014 the PRIME server process likely "
+            "crashed during this operation."
+        )
+        note = (
+            "No C++ translation log is available: the server terminated "
+            "before the log could be retrieved."
+        )
+        body = (
+            _crash_banner(heading, crash_error or "")
+            + f'<p class="empty-note">{html.escape(note)}</p>'
+        )
         _render("Abaqus Import Translation Report", body, out_file_name, header)
         return
     crash = _crash_text(log_doc, crash_error)
     banner = _crash_banner("Import ended with a crash.", crash) if crash else ""
     body = (
         banner
-        + _warnings_errors_section(log_doc, label="Warnings &amp; Errors",
-                                   snippet_file_path=inp_file_name, is_export=False)
+        + _warnings_errors_section(
+            log_doc, label="Warnings &amp; Errors", snippet_file_path=inp_file_name, is_export=False
+        )
         + _abaqus_import_summary_section(log_doc, snippet_file_path=inp_file_name)
     )
     _render("Abaqus Import Translation Report", body, out_file_name, header)
@@ -248,13 +270,19 @@ def _render_cdb_export_html_log(
     exception.
     """
     if log_doc is None:
-        heading = ("Export did not complete \u2014 the PRIME server process likely "
-                   "crashed during this operation.")
-        note = ("No C++ translation log is available: the server terminated "
-                "before the log could be retrieved.")
+        heading = (
+            "Export did not complete \u2014 the PRIME server process likely "
+            "crashed during this operation."
+        )
+        note = (
+            "No C++ translation log is available: the server terminated "
+            "before the log could be retrieved."
+        )
         header = _file_link_field("Exported CDB:", export_file_name)
-        body = _crash_banner(heading, crash_error or "") + \
-            f'<p class="empty-note">{html.escape(note)}</p>'
+        body = (
+            _crash_banner(heading, crash_error or "")
+            + f'<p class="empty-note">{html.escape(note)}</p>'
+        )
         _render("MAPDL CDB Export Translation Report", body, out_file_name, header)
         return
     import_inp_path = _first_inp_filepath(import_log_doc)
@@ -262,16 +290,23 @@ def _render_cdb_export_html_log(
     banner = _crash_banner("Export ended with a crash.", crash) if crash else ""
     body = banner
     if import_log_doc:
-        body += _warnings_errors_section(import_log_doc, label="Import Warnings &amp; Errors",
-                                         snippet_file_path=import_inp_path, is_export=False)
-    body += _warnings_errors_section(log_doc, label="Export Warnings &amp; Errors",
-                                     snippet_file_path=export_file_name, is_export=True)
+        body += _warnings_errors_section(
+            import_log_doc,
+            label="Import Warnings &amp; Errors",
+            snippet_file_path=import_inp_path,
+            is_export=False,
+        )
+    body += _warnings_errors_section(
+        log_doc,
+        label="Export Warnings &amp; Errors",
+        snippet_file_path=export_file_name,
+        is_export=True,
+    )
     if import_log_doc:
         body += _abaqus_import_summary_section(import_log_doc, snippet_file_path=import_inp_path)
     body += _cdb_export_summary_section(log_doc)
-    header = (
-        _file_link_field("Import Source:", import_inp_path)
-        + _file_link_field("Exported CDB:", export_file_name)
+    header = _file_link_field("Import Source:", import_inp_path) + _file_link_field(
+        "Exported CDB:", export_file_name
     )
     _render("MAPDL CDB Export Translation Report", body, out_file_name, header)
 
@@ -312,9 +347,9 @@ def _page(title: str, body: str, header_extras: str) -> str:
         + f"<h1>{html.escape(title)}</h1>\n{header_extras}\n"
         # Filter bar (behavior in fe2ansys_translation_log.js, styles in the .css).
         + '<div class="search-bar"><input id="tl-search" type="search"'
-          ' placeholder="Filter report… (press /)" autocomplete="off"'
-          ' spellcheck="false"><span id="tl-clear" class="tl-clear"'
-          ' title="clear (Esc)">×</span><span id="tl-count"></span></div>\n'
+        ' placeholder="Filter report… (press /)" autocomplete="off"'
+        ' spellcheck="false"><span id="tl-clear" class="tl-clear"'
+        ' title="clear (Esc)">×</span><span id="tl-count"></span></div>\n'
         + "</div>\n<div class=\"content\">\n"
         + body
         # Inline the filter JS so the report stays self-contained (opens offline).
@@ -322,25 +357,36 @@ def _page(title: str, body: str, header_extras: str) -> str:
     )
 
 
-def _warnings_errors_section(log_doc: dict, *, label: str,
-                             snippet_file_path: Optional[str] = None,
-                             is_export: bool = False) -> str:
-    """A Warnings & Errors section: two top tabs (Errors, Warnings), each a tree."""
+def _warnings_errors_section(
+    log_doc: dict, *, label: str, snippet_file_path: Optional[str] = None, is_export: bool = False
+) -> str:
+    """Build the Warnings & Errors section: two top tabs (Errors, Warnings), each a tree."""
     logs = _logs(log_doc)
     warnings: List[str] = logs.get("warnings", []) or []
     errors: List[str] = logs.get("errors", []) or []
-    body = (
-        _severity_tree("Errors", errors, log_doc,
-                         severity="errors", snippet_file_path=snippet_file_path,
-                         is_export=is_export, css="err")
-        + _severity_tree("Warnings", warnings, log_doc,
-                        severity="warnings", snippet_file_path=snippet_file_path,
-                        is_export=is_export, css="warn")
+    body = _severity_tree(
+        "Errors",
+        errors,
+        log_doc,
+        severity="errors",
+        snippet_file_path=snippet_file_path,
+        is_export=is_export,
+        css="err",
+    ) + _severity_tree(
+        "Warnings",
+        warnings,
+        log_doc,
+        severity="warnings",
+        snippet_file_path=snippet_file_path,
+        is_export=is_export,
+        css="warn",
     )
     return f'<div class="section"><h2>{label}</h2>{body}</div>'
 
 
-def _abaqus_import_summary_section(log_doc: dict, *, snippet_file_path: Optional[str] = None) -> str:
+def _abaqus_import_summary_section(
+    log_doc: dict, *, snippet_file_path: Optional[str] = None
+) -> str:
     """Import summary mirroring AbaqusUtils::GetSummaryLoggerString.
 
     Two collapsible subsections: **Keywords** (Processed / Skipped / Unrecognized
@@ -372,15 +418,21 @@ def _abaqus_import_summary_section(log_doc: dict, *, snippet_file_path: Optional
     unp_kw = _count_items(kw.get("unprocessed_keywords"))
     distinct_keywords = len(proc_kw) + len(sk_kw) + len(unp_kw)
     if kw_found or distinct_keywords:
-        kw_root = _root_summary("Keywords", kw_found,
-                               _plural(distinct_keywords, "distinct keyword", "distinct keywords"))
+        kw_root = _root_summary(
+            "Keywords",
+            kw_found,
+            _plural(distinct_keywords, "distinct keyword", "distinct keywords"),
+        )
     else:
         kw_root = "Keywords"
     kw_lists = (
         _count_dict_dropdown("Processed Keywords", kw.get("processed_keywords"))
-        + _skipped_keywords_dropdown(kw.get("skipped_keywords"),
-                                     _skipped_occurrences_by_keyword(log_doc),
-                                     snippet_file_path, _map_files(log_doc))
+        + _skipped_keywords_dropdown(
+            kw.get("skipped_keywords"),
+            _skipped_occurrences_by_keyword(log_doc),
+            snippet_file_path,
+            _map_files(log_doc),
+        )
         + _count_dict_dropdown("Unrecognized Keywords", kw.get("unprocessed_keywords"))
     )
     keywords_sub = _tree(kw_root, kw_lists, classes="subsection", open_attr=True)
@@ -389,16 +441,25 @@ def _abaqus_import_summary_section(log_doc: dict, *, snippet_file_path: Optional
     # Order: Nodes, Elements Found dropdown, then Nsets + Elsets.
     nodes_node = _count_stub("Nodes", _int(counts, "node"))
     # Nsets / Elsets: name-list dropdowns from Map.Keywords (no snippets/links).
-    nsets_drop = _names_dropdown("Nsets", _map_keyword_names(log_doc, "NSET"),
-                                 _int(counts, "nsets"), empty_note="(no nsets)")
-    elsets_drop = _names_dropdown("Elsets", _map_keyword_names(log_doc, "ELSET"),
-                                  _int(counts, "elsets"), empty_note="(no elsets)")
+    nsets_drop = _names_dropdown(
+        "Nsets", _map_keyword_names(log_doc, "NSET"), _int(counts, "nsets"), empty_note="(no nsets)"
+    )
+    elsets_drop = _names_dropdown(
+        "Elsets",
+        _map_keyword_names(log_doc, "ELSET"),
+        _int(counts, "elsets"),
+        empty_note="(no elsets)",
+    )
     mesh_stats_tail = nsets_drop + elsets_drop
     # found = processed + skipped; each processed element falls into exactly one
     # classification (incl. MASS/ROTARYI), so breakdowns sum to `element`.
     class_items: List[Tuple[str, int]] = []
-    for k, label in (("beam", "Beam"), ("shell", "Shell"), ("solid", "Solid"),
-                     ("connector", "Connector")):
+    for k, label in (
+        ("beam", "Beam"),
+        ("shell", "Shell"),
+        ("solid", "Solid"),
+        ("connector", "Connector"),
+    ):
         n = _int(counts, k)
         if n:
             class_items.append((label, n))
@@ -417,40 +478,59 @@ def _abaqus_import_summary_section(log_doc: dict, *, snippet_file_path: Optional
 
     # Aggregate breakdown children under roots with descriptive secondaries.
     processed_children: List[str] = []
-    class_branch = _breakdown_branch("By Classification", class_items,
-                                     "classification", "classifications")
-    type_branch = _breakdown_branch("By Abaqus Type", type_items,
-                                    "distinct abaqus type", "distinct abaqus types")
+    class_branch = _breakdown_branch(
+        "By Classification", class_items, "classification", "classifications"
+    )
+    type_branch = _breakdown_branch(
+        "By Abaqus Type", type_items, "distinct abaqus type", "distinct abaqus types"
+    )
     if class_branch:
         processed_children.append(class_branch)
     if type_branch:
         processed_children.append(type_branch)
     processed_node = _tree(
         _root_summary("Elements Processed", processed_total),
-        ("".join(processed_children)
-         if processed_total and processed_children
-         else ('<div class="empty-note">(no breakdown available)</div>'
-               if processed_total else '<div class="empty-note">(no processed elements)</div>')),
-        classes="branch")
+        (
+            "".join(processed_children)
+            if processed_total and processed_children
+            else (
+                '<div class="empty-note">(no breakdown available)</div>'
+                if processed_total
+                else '<div class="empty-note">(no processed elements)</div>'
+            )
+        ),
+        classes="branch",
+    )
     sk_children: List[str] = []
-    sk_type_branch = _breakdown_branch("By Abaqus Type", skipped_type_items,
-                                       "distinct abaqus type", "distinct abaqus types")
+    sk_type_branch = _breakdown_branch(
+        "By Abaqus Type", skipped_type_items, "distinct abaqus type", "distinct abaqus types"
+    )
     if sk_type_branch:
         sk_children.append(sk_type_branch)
     # Always render Elements Skipped (even at 0) — absence reads as "unknown".
     skipped_node = _tree(
         _root_summary("Elements Skipped", skipped_total, "by abaqus type"),
-        ("".join(sk_children)
-         if skipped_total and sk_children
-         else ('<div class="empty-note">(no breakdown available)</div>'
-               if skipped_total else '<div class="empty-note">(no skipped elements)</div>')),
-        classes="branch")
+        (
+            "".join(sk_children)
+            if skipped_total and sk_children
+            else (
+                '<div class="empty-note">(no breakdown available)</div>'
+                if skipped_total
+                else '<div class="empty-note">(no skipped elements)</div>'
+            )
+        ),
+        classes="branch",
+    )
     found_children = [processed_node, skipped_node]
-    mesh_lists = _tree(_root_summary("Elements Found", found_total,
-                                     "processed + skipped"),
-                       "".join(found_children))
-    mesh_sub = _tree("Imported Mesh", nodes_node + mesh_lists + mesh_stats_tail,
-                     classes="subsection", open_attr=True)
+    mesh_lists = _tree(
+        _root_summary("Elements Found", found_total, "processed + skipped"), "".join(found_children)
+    )
+    mesh_sub = _tree(
+        "Imported Mesh",
+        nodes_node + mesh_lists + mesh_stats_tail,
+        classes="subsection",
+        open_attr=True,
+    )
 
     return f'<div class="section"><h2>Import Summary</h2>{keywords_sub}{mesh_sub}</div>'
 
@@ -475,9 +555,12 @@ def _cdb_export_summary_section(log_doc: dict) -> str:
     if output_type_items:
         elements_node = _tree(
             _root_summary("Elements", _int(counts, "element")),
-            _breakdown_branch("By ANSYS Type", output_type_items,
-                              "distinct ansys element type",
-                              "distinct ansys element types"),
+            _breakdown_branch(
+                "By ANSYS Type",
+                output_type_items,
+                "distinct ansys element type",
+                "distinct ansys element types",
+            ),
         )
     else:
         elements_node = _count_stub("Elements", _int(counts, "element"))
@@ -499,44 +582,48 @@ def _cdb_export_summary_section(log_doc: dict) -> str:
         _int(counts, "element_components"),
         classes="branch",
     )
-    components_total = (_int(counts, "node_components")
-                        + _int(counts, "element_components"))
+    components_total = _int(counts, "node_components") + _int(counts, "element_components")
     components_node = _tree(
         _root_summary("Components (CMBLOCKs)", components_total),
         node_components + element_components,
     )
 
-    mesh_body = (
-        nodes_node
-        + elements_node
-        + nblocks_node
-        + eblocks_node
-        + components_node
-    )
-    mesh_sub = _tree("Exported Mesh", mesh_body,
-                     classes="subsection", open_attr=True)
+    mesh_body = nodes_node + elements_node + nblocks_node + eblocks_node + components_node
+    mesh_sub = _tree("Exported Mesh", mesh_body, classes="subsection", open_attr=True)
 
     return f'<div class="section"><h2>Export Summary</h2>{mesh_sub}</div>'
 
 
-def _severity_tree(label: str, all_msgs: List[str], log_doc: dict, *,
-                   severity: str, snippet_file_path: Optional[str], is_export: bool,
-                   css: str) -> str:
-    """A top-level Warnings/Errors tab: 'All <label>' leaf + 'By Source Location' branch."""
+def _severity_tree(
+    label: str,
+    all_msgs: List[str],
+    log_doc: dict,
+    *,
+    severity: str,
+    snippet_file_path: Optional[str],
+    is_export: bool,
+    css: str,
+) -> str:
+    """Build a top-level Warnings/Errors tab.
+
+    It has an 'All <label>' leaf and a 'By Source Location' branch.
+    """
     glyph, msg_prefix = _severity_glyphs(severity)
-    children = _leaf(_root_summary(f"All {label}", len(all_msgs)), all_msgs,
-                   classes="all", prefix=msg_prefix)
-    branch = _by_source_branch(log_doc, severity=severity,
-                                snippet_file_path=snippet_file_path, is_export=is_export)
+    children = _leaf(
+        _root_summary(f"All {label}", len(all_msgs)), all_msgs, classes="all", prefix=msg_prefix
+    )
+    branch = _by_source_branch(
+        log_doc, severity=severity, snippet_file_path=snippet_file_path, is_export=is_export
+    )
     if not branch:
         branch = '<div class="empty-note">(none located)</div>'
-    return _tree(_root_summary(f"{glyph} {label}", len(all_msgs)),
-                 children + branch, classes=css)
+    return _tree(_root_summary(f"{glyph} {label}", len(all_msgs)), children + branch, classes=css)
 
 
-def _by_source_branch(log_doc: dict, *, severity: str,
-                      snippet_file_path: Optional[str], is_export: bool) -> str:
-    """'By Source Location' branch: one leaf per occurrence span with messages."""
+def _by_source_branch(
+    log_doc: dict, *, severity: str, snippet_file_path: Optional[str], is_export: bool
+) -> str:
+    """Build the 'By Source Location' branch: one leaf per occurrence span with messages."""
     files = _map_files(log_doc)
     offsets = log_doc.get("Map", {}).get("Offsets", {}) if is_export else {}
     if not isinstance(offsets, dict):
@@ -552,29 +639,43 @@ def _by_source_branch(log_doc: dict, *, severity: str,
             base = offsets.get(stream, 0) if isinstance(stream, str) else 0
             offset = (base or 0) + (sp.get("Offset", 0) or 0)
             fpath, flabel = snippet_file_path, (
-                os.path.basename(snippet_file_path) if snippet_file_path else (stream or "?"))
+                os.path.basename(snippet_file_path) if snippet_file_path else (stream or "?")
+            )
         else:
             offset = sp.get("Offset", 0) or 0
             fpath, flabel = _resolve_inp_file(sp.get("FileIndex"), files, snippet_file_path)
         snippet = _read_snippet(fpath, offset, size)
-        leaves.append(_located_leaf(entity, keyword, msgs, severity,
-                                    fpath, flabel, offset, size, snippet))
+        leaves.append(
+            _located_leaf(entity, keyword, msgs, severity, fpath, flabel, offset, size, snippet)
+        )
     if not leaves:
         return ""
-    return _tree(_root_summary("By Source Location", len(leaves)),
-                 "".join(leaves), classes="branch")
+    return _tree(
+        _root_summary("By Source Location", len(leaves)), "".join(leaves), classes="branch"
+    )
 
 
-def _located_leaf(entity: str, keyword: str, msgs: List[str], severity: str,
-                  fpath: Optional[str], flabel: str, offset: int, size: int,
-                  snippet: Optional[Tuple[str, bool]]) -> str:
+def _located_leaf(
+    entity: str,
+    keyword: str,
+    msgs: List[str],
+    severity: str,
+    fpath: Optional[str],
+    flabel: str,
+    offset: int,
+    size: int,
+    snippet: Optional[Tuple[str, bool]],
+) -> str:
     _, msg_prefix = _severity_glyphs(severity)
     children = _pre(msgs, prefix=msg_prefix)
     # Skip the source-location line when there's no real byte range (Size=0).
     if size and size > 0:
         if fpath:
             uri = _file_uri(fpath)
-            loc = (f'<a href="{html.escape(uri)}" title="{html.escape(fpath)}">' f'{html.escape(flabel)}</a> @ {offset:,} ({size:,} B)')
+            loc = (
+                f'<a href="{html.escape(uri)}" title="{html.escape(fpath)}">'
+                f'{html.escape(flabel)}</a> @ {offset:,} ({size:,} B)'
+            )
         else:
             loc = f"{html.escape(flabel)} @ {offset:,} ({size:,} B)"
         children = f'<div class="loc-meta">{loc}</div>' + children
@@ -587,8 +688,7 @@ def _located_leaf(entity: str, keyword: str, msgs: List[str], severity: str,
             f'<details class="tree snip"><summary>source ({size:,} B)</summary>'
             f'<div class="tree-children"><pre class="snippet">{disp}</pre></div></details>'
         )
-    return _tree(_root_summary(f"{entity} \u203a {keyword}", len(msgs)),
-                 children, classes="loc")
+    return _tree(_root_summary(f"{entity} \u203a {keyword}", len(msgs)), children, classes="loc")
 
 
 def _span_msgs(span: dict, severity: str) -> List[str]:
@@ -597,8 +697,10 @@ def _span_msgs(span: dict, severity: str) -> List[str]:
 
 
 def _iter_spans(log_doc: dict) -> Iterator[Tuple[str, str, dict]]:
-    """Yield (entity_label, keyword, span) for every occurrence span in
-    Map.Translated and Map.Skipped (Ids + Identifiers)."""
+    """Yield (entity_label, keyword, span) for every occurrence span.
+
+    Covers Map.Translated and Map.Skipped (Ids + Identifiers).
+    """
     m = log_doc.get("Map") if isinstance(log_doc, dict) else None
     if not isinstance(m, dict):
         return
@@ -633,8 +735,9 @@ def _map_files(log_doc: dict) -> List[dict]:
     return files if isinstance(files, list) else []
 
 
-def _resolve_inp_file(file_index, files: List[dict], inp_file_path: Optional[str]
-                         ) -> Tuple[Optional[str], str]:
+def _resolve_inp_file(
+    file_index, files: List[dict], inp_file_path: Optional[str]
+) -> Tuple[Optional[str], str]:
     """Resolve a readable path for an import span's FileIndex.
 
     Map.Files[].Filepath is the full path stored by the importer; a relative
@@ -642,8 +745,11 @@ def _resolve_inp_file(file_index, files: List[dict], inp_file_path: Optional[str
     (readable_path_or_None, label).
     """
     fp = ""
-    if isinstance(file_index, int) and 0 <= file_index < len(files) \
-            and isinstance(files[file_index], dict):
+    if (
+        isinstance(file_index, int)
+        and 0 <= file_index < len(files)
+        and isinstance(files[file_index], dict)
+    ):
         fp = files[file_index].get("Filepath", "") or ""
     label = os.path.basename(fp) if fp else "?"
     if not fp:
@@ -656,10 +762,13 @@ def _resolve_inp_file(file_index, files: List[dict], inp_file_path: Optional[str
     return fp, label  # best-effort (relative to CWD)
 
 
-def _read_snippet(path: Optional[str], offset: int, size: int,
-                  cap: int = 800) -> Optional[Tuple[str, bool]]:
-    """Read up to `cap` bytes from `path` at `offset`; returns (text, truncated)
-    or None when there's no real range (size<=0 / offset missing)."""
+def _read_snippet(
+    path: Optional[str], offset: int, size: int, cap: int = 800
+) -> Optional[Tuple[str, bool]]:
+    """Read up to `cap` bytes from `path` at `offset`.
+
+    Returns (text, truncated), or None when there's no real range (size<=0 / offset missing).
+    """
     if not path or not size or size <= 0 or offset is None or offset < 0:
         return None
     try:
@@ -674,17 +783,22 @@ def _read_snippet(path: Optional[str], offset: int, size: int,
     return text, size > cap
 
 
-def _skipped_keywords_dropdown(skipped_counts, occ_by_kw: dict,
-                                 snippet_file_path: Optional[str],
-                                 files: List[dict]) -> str:
-    """'Skipped Keywords' dropdown: each keyword expands to its Map.Skipped
-    occurrence leaves (with snippets)."""
+def _skipped_keywords_dropdown(
+    skipped_counts, occ_by_kw: dict, snippet_file_path: Optional[str], files: List[dict]
+) -> str:
+    """Build the 'Skipped Keywords' dropdown.
+
+    Each keyword expands to its Map.Skipped occurrence leaves (with snippets).
+    """
     items = _count_items(skipped_counts)
     if not items:
         # Always render the Skipped Keywords dropdown (even at 0) — absence reads as "unknown".
-        return _tree(_root_summary("Skipped Keywords", 0,
-                               _plural(0, "distinct keyword", "distinct keywords")),
-                     '<div class="empty-note">(no skipped keywords)</div>')
+        return _tree(
+            _root_summary(
+                "Skipped Keywords", 0, _plural(0, "distinct keyword", "distinct keywords")
+            ),
+            '<div class="empty-note">(no skipped keywords)</div>',
+        )
     total = sum(n for _, n in items)
     nodes = []
     for keyword, count in items:
@@ -697,13 +811,17 @@ def _skipped_keywords_dropdown(skipped_counts, occ_by_kw: dict,
         else:
             body = '<div class="empty-note">(no located occurrences)</div>'
         nodes.append(_tree(_root_summary(keyword, count), body))
-    return _tree(_root_summary("Skipped Keywords", total,
-                               _plural(len(items), "distinct keyword", "distinct keywords")),
-                 "".join(nodes))
+    return _tree(
+        _root_summary(
+            "Skipped Keywords", total, _plural(len(items), "distinct keyword", "distinct keywords")
+        ),
+        "".join(nodes),
+    )
 
 
-def _skipped_keyword_occ_leaf(entity: str, keyword: str, span: dict,
-                               files: List[dict], snippet_file_path: Optional[str]) -> str:
+def _skipped_keyword_occ_leaf(
+    entity: str, keyword: str, span: dict, files: List[dict], snippet_file_path: Optional[str]
+) -> str:
     """One Map.Skipped occurrence as a located leaf with a source snippet."""
     msgs = _as_str_list(span.get("Warnings")) or ["Skipped keyword block (no message recorded)"]
     offset = span.get("Offset", 0) or 0
@@ -743,8 +861,10 @@ def _skipped_occurrences_by_keyword(log_doc: dict) -> dict:
 
 
 def _names_dropdown(title: str, names: List[str], total: int, *, empty_note: str) -> str:
-    """Collapsible list of names; root badge is ``total``, secondary is
-    distinct-name count. Always rendered."""
+    """Build a collapsible list of names (always rendered).
+
+    The root badge is ``total``; the secondary label is the distinct-name count.
+    """
     if names:
         body = _pre([html.escape(n) for n in names])
     else:
@@ -754,8 +874,10 @@ def _names_dropdown(title: str, names: List[str], total: int, *, empty_note: str
 
 
 def _map_keyword_names(log_doc: dict, keyword: str) -> List[str]:
-    """Distinct identifier names under Map.Keywords[``keyword``] (``{name: null}``).
-    Sorted, may be empty."""
+    """Return distinct identifier names under Map.Keywords[``keyword``] (``{name: null}``).
+
+    Sorted, may be empty.
+    """
     m = log_doc.get("Map") if isinstance(log_doc, dict) else None
     if not isinstance(m, dict):
         return []
@@ -768,9 +890,14 @@ def _map_keyword_names(log_doc: dict, keyword: str) -> List[str]:
     return sorted(str(k) for k in bucket.keys())
 
 
-def _count_dict_dropdown(title: str, mapping, *, css: str = "",
-                          singular: str = "distinct keyword",
-                          plural: str = "distinct keywords") -> str:
+def _count_dict_dropdown(
+    title: str,
+    mapping,
+    *,
+    css: str = "",
+    singular: str = "distinct keyword",
+    plural: str = "distinct keywords",
+) -> str:
     """Collapsible 'count: key' lines for a {key: count} dict; root badge is the total."""
     items = _count_items(mapping)
     if not items:
@@ -780,10 +907,13 @@ def _count_dict_dropdown(title: str, mapping, *, css: str = "",
     return _tree(summary, _count_lines(items), classes=css)
 
 
-def _breakdown_branch(title: str, items: List[Tuple[str, int]],
-                      singular: str, plural: str = "") -> str:
-    """A nested ``tree.branch`` whose root shows the total of its leaves and a
-    muted 'N <singular/plural>' secondary label. Omitted when empty."""
+def _breakdown_branch(
+    title: str, items: List[Tuple[str, int]], singular: str, plural: str = ""
+) -> str:
+    """Build a nested ``tree.branch`` whose root shows the total of its leaves.
+
+    The root has a muted 'N <singular/plural>' secondary label. Omitted when empty.
+    """
     if not items:
         return ""
     total = sum(n for _, n in items)
@@ -817,10 +947,13 @@ def _count_items(mapping) -> List[Tuple[str, int]]:
     return items
 
 
-def _labeled_count_items(mapping, *, count_key: str = "Count",
-                         label_key: str = "Label") -> List[Tuple[str, int]]:
-    """Sorted (label, count) pairs from either ``{label: count}`` or
-    ``{code: {Label, Count}}`` mappings."""
+def _labeled_count_items(
+    mapping, *, count_key: str = "Count", label_key: str = "Label"
+) -> List[Tuple[str, int]]:
+    """Return sorted (label, count) pairs.
+
+    Accepts either ``{label: count}`` or ``{code: {Label, Count}}`` mappings.
+    """
     if not isinstance(mapping, dict):
         return []
     items: List[Tuple[str, int]] = []
@@ -848,6 +981,7 @@ def _labeled_count_items(mapping, *, count_key: str = "Count",
 def _stat_rows(rows: List[Tuple[str, Union[int, str]]]) -> str:
     def _fmt(v: Union[int, str]) -> str:
         return v if isinstance(v, str) else f"{int(v):,}"
+
     parts = [
         f'<div class="stat"><span class="stat-label">{html.escape(label)}</span>'
         f'<span class="stat-val">{_fmt(value)}</span></div>'
@@ -857,8 +991,10 @@ def _stat_rows(rows: List[Tuple[str, Union[int, str]]]) -> str:
 
 
 def _root_summary(title: str, total: int, branch_text: str = "") -> str:
-    """Dropdown summary line: title + right-aligned tail ending in the total badge,
-    optionally preceded by a muted ``branch_text`` secondary."""
+    """Build a dropdown summary line: title + right-aligned tail ending in the total badge.
+
+    Optionally preceded by a muted ``branch_text`` secondary.
+    """
     tail = []
     if branch_text:
         tail.append(f'<span class="sub-count">{html.escape(branch_text)}</span>')
@@ -926,7 +1062,7 @@ def _severity_glyphs(severity: str) -> Tuple[str, str]:
 
 
 def _crash_banner(heading: str, detail: str = "") -> str:
-    """A prominent red banner for crash reports (soft or hard)."""
+    """Build a prominent red banner for crash reports (soft or hard)."""
     detail_html = f'<pre>{html.escape(detail)}</pre>' if detail else ""
     return (
         '<div class="crash-banner"><span class="crash-glyph">\u2717</span>'
@@ -947,8 +1083,10 @@ def _crash_text(log_doc: Optional[dict], crash_error: Optional[str]) -> str:
 
 
 def _file_link_field(label: str, path: Optional[str]) -> str:
-    """Labeled field: a containing-folder link, then the file link (basename,
-    full path as href + tooltip)."""
+    """Build a labeled field: a containing-folder link, then the file link.
+
+    The file link shows the basename, with the full path as href + tooltip.
+    """
     if not path:
         return ""
     name = Path(path).name or path
@@ -963,7 +1101,7 @@ def _file_link_field(label: str, path: Optional[str]) -> str:
 
 
 def _folder_link(path: Optional[str]) -> str:
-    """A hyperlink to the containing folder, shown as a folder glyph + folder name."""
+    """Build a hyperlink to the containing folder, shown as a folder glyph + folder name."""
     if not path:
         return ""
     parent = os.path.dirname(path)
@@ -975,7 +1113,7 @@ def _folder_link(path: Optional[str]) -> str:
         uri += "/"
     return (
         f'<a class="folder-link" href="{html.escape(uri)}" title="{html.escape(parent)}">'
-        f'\U0001F4C1 {html.escape(name)}</a>'
+        f'\U0001f4c1 {html.escape(name)}</a>'
     )
 
 
