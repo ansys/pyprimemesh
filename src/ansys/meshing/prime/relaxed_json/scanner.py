@@ -1,4 +1,4 @@
-# Copyright (C) 2024 - 2026 ANSYS, Inc. and/or its affiliates.
+# Copyright © 2026 Synopsys, Inc. and ANSYS, Inc. All rights reserved.
 # SPDX-License-Identifier: MIT
 #
 #
@@ -25,7 +25,7 @@ import re
 from typing import Callable, Tuple
 
 NUMBER_RE = re.compile(
-    b'(-?(?:0|[1-9]\d*))(\.\d+)?([eE][-+]?\d+)?', re.VERBOSE | re.MULTILINE | re.DOTALL
+    rb'(-?(?:0|[1-9]\d*))(\.\d+)?([eE][-+]?\d+)?', re.VERBOSE | re.MULTILINE | re.DOTALL
 )
 
 
