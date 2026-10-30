@@ -1,0 +1,6 @@
+NOERROR
+=======
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoattribute:: ErrorCode.NOERROR

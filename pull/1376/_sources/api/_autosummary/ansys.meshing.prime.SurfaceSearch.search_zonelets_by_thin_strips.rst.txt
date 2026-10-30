@@ -1,0 +1,11 @@
+search\_zonelets\_by\_thin\_strips
+==================================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. automethod:: ansys.meshing.prime.SurfaceSearch.search_zonelets_by_thin_strips
+
+.. minigallery::
+   :add-heading: Examples using SurfaceSearch.search_zonelets_by_thin_strips
+
+   ansys.meshing.prime.SurfaceSearch.search_zonelets_by_thin_strips

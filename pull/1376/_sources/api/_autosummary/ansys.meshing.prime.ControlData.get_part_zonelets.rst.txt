@@ -1,0 +1,11 @@
+get\_part\_zonelets
+===================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. automethod:: ansys.meshing.prime.ControlData.get_part_zonelets
+
+.. minigallery::
+   :add-heading: Examples using ControlData.get_part_zonelets
+
+   ansys.meshing.prime.ControlData.get_part_zonelets

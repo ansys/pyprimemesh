@@ -1,0 +1,11 @@
+get\_summary
+============
+
+.. currentmodule:: ansys.meshing.prime
+
+.. automethod:: ansys.meshing.prime.PeriodicControl.get_summary
+
+.. minigallery::
+   :add-heading: Examples using PeriodicControl.get_summary
+
+   ansys.meshing.prime.PeriodicControl.get_summary

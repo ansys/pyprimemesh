@@ -1,0 +1,6 @@
+info\_actor\_map
+================
+
+.. currentmodule:: ansys.meshing.prime.graphics
+
+.. autoproperty:: PrimePlotter.info_actor_map
