@@ -22,6 +22,7 @@
 
 """Tests for pathlib.Path support on file I/O helpers."""
 from pathlib import Path
+from unittest.mock import Mock
 
 from ansys.tools.common.example_download import DownloadManager
 
@@ -113,15 +114,25 @@ def test_exit_survives_already_cleared_downloads(monkeypatch):
     race to unlink the same files when their clients exit.
     """
 
-    def raise_missing(self):
-        raise FileNotFoundError(2, "No such file or directory", "/tmp/mixing_elbow.fmd")
-
-    monkeypatch.setattr(DownloadManager, "clear_download_cache", raise_missing)
+    clear_download_cache = Mock(
+        side_effect=FileNotFoundError(2, "No such file or directory", "/tmp/mixing_elbow.fmd")
+    )
+    monkeypatch.setattr(DownloadManager, "clear_download_cache", clear_download_cache)
     monkeypatch.setenv("PYPRIMEMESH_CLEAR_EXAMPLES", "1")
+    monkeypatch.setattr(config, "using_container", lambda: False)
+    monkeypatch.setattr(config, "has_pim", lambda: False)
 
     client = Client.__new__(Client)
-    client._comm = None
+    communicator = Mock()
+    client._comm = communicator
     client._process = None
     client._local = True
+    client._server_cleanup_targets = []
+    client._atexit_registered = False
 
     client.exit()
+    client.exit()
+
+    communicator.close.assert_called_once_with()
+    clear_download_cache.assert_called_once_with()
+    assert client._comm is None

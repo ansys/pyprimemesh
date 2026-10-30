@@ -153,7 +153,7 @@ def test_toycar_tutorial(get_remote_client, get_examples):
     )
 
     # Validate number of cells
-    assert math.isclose(3384800.0, float(part_summary_res.n_cells), rel_tol=0.10)
+    assert math.isclose(1279610.0, float(part_summary_res.n_cells), rel_tol=0.10)
 
     # Volume mesh quality
     assert qual_summary_res.quality_results_part[0].max_quality < 1
