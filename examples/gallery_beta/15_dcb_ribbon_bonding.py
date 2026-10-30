@@ -59,12 +59,13 @@ thickness.
 The CAD is prepared in two ways. The mesh recipe above is the same for both.
 Only the connectivity changes:
 
-* Shared topology, stored as a PMDAT. The wire feet and the copper are the
-  same faces, so the tetrahedra and the swept wedges already share them. No
-  node merge is required.
-* Separate bodies, stored as an FMD. The flat faces on each wire foot are
-  seeded onto the stacker base, the parts are meshed, and boundary nodes
-  within 0.01 mm are fused.
+* Shared topology, stored as a PMDAT. The bond landings and the faces they
+  sit on are the same faces, on the copper and on the devices. The tetrahedra,
+  the ribbon hexahedra, and the swept stack already share them. No node merge
+  is required.
+* Separate bodies, stored as an FMD. The flat landings of the wires and the
+  ribbons are seeded onto the stacker, on the copper and on the device tops.
+  The parts are meshed, and boundary nodes within 0.01 mm are fused.
 
 The shared-topology PMDAT starts as a Discovery document (``.dsco``) in which
 the solids already share faces. Prime reads it with the Workbench CAD reader,
@@ -100,8 +101,8 @@ Procedure
 ~~~~~~~~~~
 #. Launch Ansys Prime Server.
 #. Read the shared-topology module and mesh it.
-#. Import the same module as separate bodies and mesh it with the foot faces
-   seeded onto the stack.
+#. Import the same module as separate bodies and mesh it with the bond
+   landings seeded onto the stack.
 #. Merge boundary nodes on the separate-body mesh.
 #. Write each mesh to a MAPDL CDB file.
 """
@@ -171,31 +172,69 @@ def _python_ids(values):
     return [int(value) for value in values]
 
 
-def _label_wire_feet(model):
-    """Mark each wire volume, and the flat faces that sit on the copper."""
+def _face_boxes(model, part):
+    """Return each topo face with the bounding box of its geometry."""
     utilities = prime.SurfaceUtilities(model)
+    boxes = []
+    for face in _python_ids(part.get_topo_faces()):
+        zonelets = _python_ids(model.topo_data.get_geom_zonelets_of_topo_faces([face]))
+        if not zonelets:
+            continue
+        boxes.append((face, utilities.get_bounding_box_of_zonelets(zonelets)))
+    return boxes
+
+
+def _is_flat(box):
+    """True when a face is thin in the stack direction."""
+    return box.ymax - box.ymin <= 0.05
+
+
+def _lies_on(contact, target):
+    """True when most of a flat contact face lies on a stack face."""
+    separated = contact.ymin > target.ymax + 0.02 or target.ymin > contact.ymax + 0.02
+    if separated:
+        return False
+    overlap_x = min(contact.xmax, target.xmax) - max(contact.xmin, target.xmin)
+    overlap_z = min(contact.zmax, target.zmax) - max(contact.zmin, target.zmin)
+    if overlap_x <= 0.0 or overlap_z <= 0.0:
+        return False
+    contact_area = (contact.xmax - contact.xmin) * (contact.zmax - contact.zmin)
+    return overlap_x * overlap_z >= 0.5 * contact_area
+
+
+def _label_bond_contacts(model):
+    """Mark the wire volumes and the flat faces where a bond meets the stack.
+
+    Landings are the thin faces on the copper and on the device tops. The
+    vertical sides of a wire are left unlabeled. Seeding those sides makes
+    the stacker reject the base.
+    """
+    ribbons = []
+    wires = []
+    stack = []
     for part in list(model.parts):
         labels = list(part.get_labels())
-        if not (part.name.startswith("solid") and not any("ribbon" in label for label in labels)):
-            continue
+        if any("ribbon" in label for label in labels):
+            ribbons.append(part)
+        elif part.name.startswith("solid"):
+            wires.append(part)
+        else:
+            stack.append(part)
+    targets = [box for part in stack for _face, box in _face_boxes(model, part) if _is_flat(box)]
+    for part in wires:
         part.add_labels_on_topo_entities(["wire_solid"], _python_ids(part.get_topo_volumes()))
-        faces = _python_ids(part.get_topo_faces())
-        boxes = []
-        for face in faces:
-            zonelets = _python_ids(model.topo_data.get_geom_zonelets_of_topo_faces([face]))
-            if not zonelets:
-                continue
-            box = utilities.get_bounding_box_of_zonelets(zonelets)
-            boxes.append((face, box.ymin, box.ymax))
-        if not boxes:
-            continue
-        foot = min(ymin for _, ymin, _ in boxes)
-        # The sides of the wire make the stacker reject the seed. Keep the flat foot.
-        contact = [
-            face for face, ymin, ymax in boxes if ymin <= foot + 0.02 and ymax <= foot + 0.05
-        ]
-        if contact:
-            part.add_labels_on_topo_entities(["wire_contact"], contact)
+    labeled = {"wire": 0, "ribbon": 0}
+    for kind, parts in (("wire", wires), ("ribbon", ribbons)):
+        for part in parts:
+            contact = [
+                face
+                for face, box in _face_boxes(model, part)
+                if _is_flat(box) and any(_lies_on(box, target) for target in targets)
+            ]
+            if contact:
+                part.add_labels_on_topo_entities(["bond_contact"], contact)
+                labeled[kind] += len(contact)
+    print(f"Bond contacts: wires={labeled['wire']} ribbons={labeled['ribbon']}")
 
 
 def mesh_bonded_module(model, part, use_contact_seeds=False):
@@ -208,8 +247,8 @@ def mesh_bonded_module(model, part, use_contact_seeds=False):
     part : prime.Part
         Part that contains the wires, the ribbons, and the substrate.
     use_contact_seeds : bool, optional
-        Imprint the ``wire_contact`` faces onto the stacker base. Separate
-        bodies need this. Shared topology already has those faces in common.
+        Imprint the ``bond_contact`` faces onto the stacker. Separate bodies
+        need this. Shared topology already has those faces in common.
 
     Returns
     -------
@@ -310,7 +349,7 @@ def mesh_bonded_module(model, part, use_contact_seeds=False):
         # Beta: MeshStackerParams.seed_faces.
         # The behavior and name may change in the future.
         stacker_params.seed_faces = _python_ids(
-            part.get_topo_faces_of_label_name_pattern("wire_contact", name_params)
+            part.get_topo_faces_of_label_name_pattern("bond_contact", name_params)
         )
     sweeper = prime.VolumeSweeper(model)
     base_faces = sweeper.create_base_face(
@@ -346,10 +385,10 @@ def mesh_bonded_module(model, part, use_contact_seeds=False):
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 # The PMDAT was written from the Discovery document with the Workbench CAD
 # reader, as described above, so the shared faces are already in the file.
-# Read that file. One part holds every solid, and the wire feet are faces of
-# both the wire and the copper. Multi-zone meshes the ribbons, the wires are
-# filled with tetrahedra, and the stacker sweeps the foot triangles with the
-# substrate. No node merge is required.
+# Read that file. One part holds every solid. Each bond landing is a face of
+# both the bond and the copper or device it sits on. Multi-zone meshes the
+# ribbons, the wires are filled with tetrahedra, and the stacker sweeps those
+# landing triangles with the substrate. No node merge is required.
 
 shared_topology = prime.examples.download_dcb_bonding_shared_topology_pmdat()
 
@@ -371,9 +410,10 @@ prime_client.exit()
 ###############################################################################
 # Import the module as separate bodies
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-# Import each body as its own part. Label the wire volumes and the flat faces
-# on each wire foot, then merge the parts. The foot faces are seeded onto the
-# stacker so the substrate inherits the same triangles the tetrahedra use.
+# Import each body as its own part. Label the wire volumes and the flat
+# landings of the wires and the ribbons, on the copper and on the device tops,
+# then merge the parts. Those landings are seeded onto the stacker so the
+# stack inherits the same mesh the bonds use.
 #
 # .. image:: ../../../images/dcb_ribbon_separate_parts.png
 #    :align: center
@@ -394,7 +434,7 @@ prime.FileIO(model).import_cad(
 )
 print(model)
 show_model(model)
-_label_wire_feet(model)
+_label_bond_contacts(model)
 merge_result = model.merge_parts(
     [part.id for part in model.parts],
     prime.MergePartsParams(model),
@@ -405,9 +445,9 @@ part = mesh_bonded_module(model, part, use_contact_seeds=True)
 ###############################################################################
 # Merge the boundary nodes
 # ~~~~~~~~~~~~~~~~~~~~~~~~
-# Drop the topology, then fuse boundary nodes within 0.01 mm. The seeded feet
-# give the wire and the copper the same triangles, so the fuse welds that
-# interface along with the other contacts between the separate bodies.
+# Drop the topology, then fuse boundary nodes within 0.01 mm. The seeded
+# landings give each bond and the face it sits on the same mesh, so the fuse
+# welds the copper and device contacts.
 
 before = mesh_counts(model, part)
 part.delete_topo_entities(
