@@ -100,7 +100,7 @@ Instantiate meshing utilities from the ``lucid`` class.
 
     Warning (Client): Modification of these configurations is not recommended.
     Refer the documentation for your installed product for additional information.
-    /home/runner/work/pyprimemesh/pyprimemesh/.venv/lib/python3.14/site-packages/ansys/meshing/prime/internals/cyberchannel.py:183: UserWarning: Starting gRPC client without TLS on 127.0.0.1:48317. This is INSECURE. Consider using a secure connection.
+    /home/runner/work/pyprimemesh/pyprimemesh/.venv/lib/python3.14/site-packages/ansys/meshing/prime/internals/cyberchannel.py:183: UserWarning: Starting gRPC client without TLS on 127.0.0.1:49809. This is INSECURE. Consider using a secure connection.
       warn(
 
 
@@ -348,7 +348,7 @@ This configuration allows retaining the topology data along with mesh data.
 
 
     Exported file:
-     /tmp/tmpr9944dyd/pyprime_block_mesh.pmdat
+     /tmp/tmppu30wq_t/pyprime_block_mesh.pmdat
 
 
 
@@ -383,7 +383,7 @@ containing nodes.
 
 
     Exported file:
-     /tmp/tmpr9944dyd/pyprime_block_mesh.cdb
+     /tmp/tmppu30wq_t/pyprime_block_mesh.cdb
 
 
 
@@ -453,7 +453,7 @@ automatically when export to Fluent(MSH or CAS) formats.
 
 
     Exported file:
-     /tmp/tmpr9944dyd/pyprime_block_mesh.cas
+     /tmp/tmppu30wq_t/pyprime_block_mesh.cas
 
 
 
@@ -706,7 +706,7 @@ Exit PyPrimeMesh
 
 .. rst-class:: sphx-glr-timing
 
-   **Total running time of the script:** (0 minutes 30.915 seconds)
+   **Total running time of the script:** (0 minutes 21.966 seconds)
 
 
 .. rst-class:: sphx-glr-example-tags

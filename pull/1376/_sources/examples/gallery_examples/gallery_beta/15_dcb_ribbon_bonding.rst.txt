@@ -139,7 +139,7 @@ The geometry files are downloaded from the PyPrimeMesh example data.
     WIRE_SIZE = 0.25
 
 
-    def show_model(model, update=False):
+    def show_model(model, update=True):
         """Show the module from above so the bonds are visible.
 
         The board lies in the XZ plane and is only a few millimeters thick, so the
@@ -387,7 +387,7 @@ substrate. No node merge is required.
     show_model(model)
 
     part = mesh_bonded_module(model, model.parts[0], use_contact_seeds=False)
-    show_model(model, update=True)
+    show_model(model)
     part.delete_topo_entities(
         prime.DeleteTopoEntitiesParams(model, delete_geom_zonelets=True, delete_mesh_zonelets=False)
     )
@@ -459,7 +459,7 @@ substrate. No node merge is required.
 
     Warning (Client): Modification of these configurations is not recommended.
     Refer the documentation for your installed product for additional information.
-    /home/runner/work/pyprimemesh/pyprimemesh/.venv/lib/python3.14/site-packages/ansys/meshing/prime/internals/cyberchannel.py:183: UserWarning: Starting gRPC client without TLS on 127.0.0.1:39889. This is INSECURE. Consider using a secure connection.
+    /home/runner/work/pyprimemesh/pyprimemesh/.venv/lib/python3.14/site-packages/ansys/meshing/prime/internals/cyberchannel.py:183: UserWarning: Starting gRPC client without TLS on 127.0.0.1:60999. This is INSECURE. Consider using a secure connection.
       warn(
     Part Summary:
 
@@ -490,7 +490,7 @@ substrate. No node merge is required.
     14929 nodes, 6814 hex, 5440 prism, 0 pyramid, 6763 tet (19017 cells)
 
     Exported file:
-     /tmp/tmp54oeuxda/dcb_bonding_shared_topology.cdb
+     /tmp/tmp4vp204nr/dcb_bonding_shared_topology.cdb
 
 
 
@@ -572,7 +572,7 @@ stacker so the substrate inherits the same triangles the tetrahedra use.
 
     Warning (Client): Modification of these configurations is not recommended.
     Refer the documentation for your installed product for additional information.
-    /home/runner/work/pyprimemesh/pyprimemesh/.venv/lib/python3.14/site-packages/ansys/meshing/prime/internals/cyberchannel.py:183: UserWarning: Starting gRPC client without TLS on 127.0.0.1:59407. This is INSECURE. Consider using a secure connection.
+    /home/runner/work/pyprimemesh/pyprimemesh/.venv/lib/python3.14/site-packages/ansys/meshing/prime/internals/cyberchannel.py:183: UserWarning: Starting gRPC client without TLS on 127.0.0.1:49635. This is INSECURE. Consider using a secure connection.
       warn(
     Part Summary:
 
@@ -1109,7 +1109,7 @@ interface along with the other contacts between the separate bodies.
     )
     after = mesh_counts(model, part)
     print(f"\nMerged {before.n_nodes - after.n_nodes} nodes")
-    show_model(model, update=True)
+    show_model(model)
     export_mapdl_cdb(model, "dcb_bonding_separate_parts.cdb")
     prime_client.exit()
 
@@ -1155,7 +1155,7 @@ interface along with the other contacts between the separate bodies.
     Merged 6300 nodes
 
     Exported file:
-     /tmp/tmpce7b7li8/dcb_bonding_separate_parts.cdb
+     /tmp/tmpnjtswq39/dcb_bonding_separate_parts.cdb
 
 
 
@@ -1163,7 +1163,7 @@ interface along with the other contacts between the separate bodies.
 
 .. rst-class:: sphx-glr-timing
 
-   **Total running time of the script:** (0 minutes 29.446 seconds)
+   **Total running time of the script:** (0 minutes 31.713 seconds)
 
 
 .. rst-class:: sphx-glr-example-tags

@@ -125,7 +125,7 @@ QUAD_SIZE = 0.8
 WIRE_SIZE = 0.25
 
 
-def show_model(model, update=False):
+def show_model(model, update=True):
     """Show the module from above so the bonds are visible.
 
     The board lies in the XZ plane and is only a few millimeters thick, so the
@@ -360,7 +360,7 @@ print(model)
 show_model(model)
 
 part = mesh_bonded_module(model, model.parts[0], use_contact_seeds=False)
-show_model(model, update=True)
+show_model(model)
 part.delete_topo_entities(
     prime.DeleteTopoEntitiesParams(model, delete_geom_zonelets=True, delete_mesh_zonelets=False)
 )
@@ -427,6 +427,6 @@ prime.Connect(model).merge_boundary_nodes(
 )
 after = mesh_counts(model, part)
 print(f"\nMerged {before.n_nodes - after.n_nodes} nodes")
-show_model(model, update=True)
+show_model(model)
 export_mapdl_cdb(model, "dcb_bonding_separate_parts.cdb")
 prime_client.exit()

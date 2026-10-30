@@ -104,7 +104,7 @@ Instantiate meshing utilities from the ``lucid`` class.
 
     Warning (Client): Modification of these configurations is not recommended.
     Refer the documentation for your installed product for additional information.
-    /home/runner/work/pyprimemesh/pyprimemesh/.venv/lib/python3.14/site-packages/ansys/meshing/prime/internals/cyberchannel.py:183: UserWarning: Starting gRPC client without TLS on 127.0.0.1:55443. This is INSECURE. Consider using a secure connection.
+    /home/runner/work/pyprimemesh/pyprimemesh/.venv/lib/python3.14/site-packages/ansys/meshing/prime/internals/cyberchannel.py:183: UserWarning: Starting gRPC client without TLS on 127.0.0.1:47203. This is INSECURE. Consider using a secure connection.
       warn(
 
 
@@ -305,7 +305,7 @@ the growth and refinement of the volume mesh.
  .. code-block:: none
 
 
-    <ansys.meshing.prime.autogen.sizefieldstructs.VolumetricSizeFieldComputeResults object at 0x7f9ee41af390>
+    <ansys.meshing.prime.autogen.sizefieldstructs.VolumetricSizeFieldComputeResults object at 0x7fc088443d90>
 
 
 
@@ -425,7 +425,7 @@ for ``f1_rw_enclosure``.
  .. code-block:: none
 
 
-    <ansys.meshing.prime.autogen.controlstructs.SetScopeResults object at 0x7f9ee417c5f0>
+    <ansys.meshing.prime.autogen.controlstructs.SetScopeResults object at 0x7fc0884ee0f0>
 
 
 
@@ -508,7 +508,7 @@ Volume mesh with hexcore polyhedral elements and boundary layer refinement.
  .. code-block:: none
 
 
-    <ansys.meshing.prime.autogen.automeshstructs.AutoMeshResults object at 0x7f9ee41af390>
+    <ansys.meshing.prime.autogen.automeshstructs.AutoMeshResults object at 0x7fc088443d90>
 
 
 
@@ -689,10 +689,10 @@ Export as CAS file for external aero simulations.
 
  .. code-block:: none
 
-    /tmp/tmpckcpz8sk
+    /tmp/tmp1vx95kmj
 
     Exported file:
-     /tmp/tmpckcpz8sk/f1_rear_wing_vol_mesh.cas
+     /tmp/tmp1vx95kmj/f1_rear_wing_vol_mesh.cas
 
 
 
@@ -718,7 +718,7 @@ Exit PyPrimeMesh
 
 .. rst-class:: sphx-glr-timing
 
-   **Total running time of the script:** (1 minutes 42.783 seconds)
+   **Total running time of the script:** (1 minutes 40.019 seconds)
 
 
 .. rst-class:: sphx-glr-example-tags

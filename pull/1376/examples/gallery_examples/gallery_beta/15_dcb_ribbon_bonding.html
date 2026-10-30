@@ -719,7 +719,7 @@ The geometry files are downloaded from the PyPrimeMesh example data.</p>
 </span><a class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance reference external" href="https://docs.python.org/3.11/library/functions.html#float" title="float"><span class="n">WIRE_SIZE</span></a> <span class="o">=</span> <span class="mf">0.25</span><span class="w">
 </span><span class="w">
 </span><span class="w">
-</span><span class="k">def</span><span class="w"> </span><span class="nf">show_model</span><span class="p">(</span><a class="sphx-glr-backref-module-ansys-meshing-prime sphx-glr-backref-type-py-class sphx-glr-backref-instance reference internal" href="../../../api/_autosummary/ansys.meshing.prime.Model.html#ansys.meshing.prime.Model" title="ansys.meshing.prime.Model"><span class="n">model</span></a><span class="p">,</span> <span class="n">update</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span><span class="p">:</span><span class="w">
+</span><span class="k">def</span><span class="w"> </span><span class="nf">show_model</span><span class="p">(</span><a class="sphx-glr-backref-module-ansys-meshing-prime sphx-glr-backref-type-py-class sphx-glr-backref-instance reference internal" href="../../../api/_autosummary/ansys.meshing.prime.Model.html#ansys.meshing.prime.Model" title="ansys.meshing.prime.Model"><span class="n">model</span></a><span class="p">,</span> <span class="n">update</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span><span class="p">:</span><span class="w">
 </span><span class="w">    </span><span class="sd">&quot;&quot;&quot;Show the module from above so the bonds are visible.
 
     The board lies in the XZ plane and is only a few millimeters thick, so the
@@ -952,7 +952,7 @@ substrate. No node merge is required.</p>
 </span><span class="n">show_model</span><span class="p">(</span><a class="sphx-glr-backref-module-ansys-meshing-prime sphx-glr-backref-type-py-class sphx-glr-backref-instance reference internal" href="../../../api/_autosummary/ansys.meshing.prime.Model.html#ansys.meshing.prime.Model" title="ansys.meshing.prime.Model"><span class="n">model</span></a><span class="p">)</span><span class="w">
 </span><span class="w">
 </span><a class="sphx-glr-backref-module-ansys-meshing-prime sphx-glr-backref-type-py-class sphx-glr-backref-instance reference internal" href="../../../api/_autosummary/ansys.meshing.prime.Part.html#ansys.meshing.prime.Part" title="ansys.meshing.prime.Part"><span class="n">part</span></a> <span class="o">=</span> <span class="n">mesh_bonded_module</span><span class="p">(</span><a class="sphx-glr-backref-module-ansys-meshing-prime sphx-glr-backref-type-py-class sphx-glr-backref-instance reference internal" href="../../../api/_autosummary/ansys.meshing.prime.Model.html#ansys.meshing.prime.Model" title="ansys.meshing.prime.Model"><span class="n">model</span></a><span class="p">,</span> <a class="sphx-glr-backref-module-ansys-meshing-prime sphx-glr-backref-type-py-property reference internal" href="../../../api/_autosummary/ansys.meshing.prime.Model.parts.html#ansys.meshing.prime.Model.parts" title="ansys.meshing.prime.Model.parts"><span class="n">model</span><span class="o">.</span><span class="n">parts</span></a><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="p">,</span> <span class="n">use_contact_seeds</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span><span class="w">
-</span><span class="n">show_model</span><span class="p">(</span><a class="sphx-glr-backref-module-ansys-meshing-prime sphx-glr-backref-type-py-class sphx-glr-backref-instance reference internal" href="../../../api/_autosummary/ansys.meshing.prime.Model.html#ansys.meshing.prime.Model" title="ansys.meshing.prime.Model"><span class="n">model</span></a><span class="p">,</span> <span class="n">update</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span><span class="w">
+</span><span class="n">show_model</span><span class="p">(</span><a class="sphx-glr-backref-module-ansys-meshing-prime sphx-glr-backref-type-py-class sphx-glr-backref-instance reference internal" href="../../../api/_autosummary/ansys.meshing.prime.Model.html#ansys.meshing.prime.Model" title="ansys.meshing.prime.Model"><span class="n">model</span></a><span class="p">)</span><span class="w">
 </span><a class="sphx-glr-backref-module-ansys-meshing-prime sphx-glr-backref-type-py-method reference internal" href="../../../api/_autosummary/ansys.meshing.prime.Part.delete_topo_entities.html#ansys.meshing.prime.Part.delete_topo_entities" title="ansys.meshing.prime.Part.delete_topo_entities"><span class="n">part</span><span class="o">.</span><span class="n">delete_topo_entities</span></a><span class="p">(</span><span class="w">
 </span>    <a class="sphx-glr-backref-module-ansys-meshing-prime sphx-glr-backref-type-py-class reference internal" href="../../../api/_autosummary/ansys.meshing.prime.DeleteTopoEntitiesParams.html#ansys.meshing.prime.DeleteTopoEntitiesParams" title="ansys.meshing.prime.DeleteTopoEntitiesParams"><span class="n">prime</span><span class="o">.</span><span class="n">DeleteTopoEntitiesParams</span></a><span class="p">(</span><a class="sphx-glr-backref-module-ansys-meshing-prime sphx-glr-backref-type-py-class sphx-glr-backref-instance reference internal" href="../../../api/_autosummary/ansys.meshing.prime.Model.html#ansys.meshing.prime.Model" title="ansys.meshing.prime.Model"><span class="n">model</span></a><span class="p">,</span> <span class="n">delete_geom_zonelets</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">delete_mesh_zonelets</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span><span class="w">
 </span><span class="p">)</span><span class="w">
@@ -982,7 +982,7 @@ Interactive Scene</label><div class="sd-tab-content docutils">
 </div>
 <div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>Warning (Client): Modification of these configurations is not recommended.
 Refer the documentation for your installed product for additional information.
-/home/runner/work/pyprimemesh/pyprimemesh/.venv/lib/python3.14/site-packages/ansys/meshing/prime/internals/cyberchannel.py:183: UserWarning: Starting gRPC client without TLS on 127.0.0.1:39889. This is INSECURE. Consider using a secure connection.
+/home/runner/work/pyprimemesh/pyprimemesh/.venv/lib/python3.14/site-packages/ansys/meshing/prime/internals/cyberchannel.py:183: UserWarning: Starting gRPC client without TLS on 127.0.0.1:60999. This is INSECURE. Consider using a secure connection.
   warn(
 Part Summary:
 
@@ -1013,7 +1013,7 @@ Ribbons=3 wires=4
 14929 nodes, 6814 hex, 5440 prism, 0 pyramid, 6763 tet (19017 cells)
 
 Exported file:
- /tmp/tmp54oeuxda/dcb_bonding_shared_topology.cdb
+ /tmp/tmp4vp204nr/dcb_bonding_shared_topology.cdb
 </pre></div>
 </div>
 </section>
@@ -1058,7 +1058,7 @@ Interactive Scene</label><div class="sd-tab-content docutils">
 </div>
 <div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>Warning (Client): Modification of these configurations is not recommended.
 Refer the documentation for your installed product for additional information.
-/home/runner/work/pyprimemesh/pyprimemesh/.venv/lib/python3.14/site-packages/ansys/meshing/prime/internals/cyberchannel.py:183: UserWarning: Starting gRPC client without TLS on 127.0.0.1:59407. This is INSECURE. Consider using a secure connection.
+/home/runner/work/pyprimemesh/pyprimemesh/.venv/lib/python3.14/site-packages/ansys/meshing/prime/internals/cyberchannel.py:183: UserWarning: Starting gRPC client without TLS on 127.0.0.1:49635. This is INSECURE. Consider using a secure connection.
   warn(
 Part Summary:
 
@@ -1586,7 +1586,7 @@ interface along with the other contacts between the separate bodies.</p>
 </span><span class="p">)</span><span class="w">
 </span><a class="sphx-glr-backref-module-ansys-meshing-prime sphx-glr-backref-type-py-class sphx-glr-backref-instance reference internal" href="../../../api/_autosummary/ansys.meshing.prime.PartSummaryResults.html#ansys.meshing.prime.PartSummaryResults" title="ansys.meshing.prime.PartSummaryResults"><span class="n">after</span></a> <span class="o">=</span> <span class="n">mesh_counts</span><span class="p">(</span><a class="sphx-glr-backref-module-ansys-meshing-prime sphx-glr-backref-type-py-class sphx-glr-backref-instance reference internal" href="../../../api/_autosummary/ansys.meshing.prime.Model.html#ansys.meshing.prime.Model" title="ansys.meshing.prime.Model"><span class="n">model</span></a><span class="p">,</span> <a class="sphx-glr-backref-module-ansys-meshing-prime sphx-glr-backref-type-py-class sphx-glr-backref-instance reference internal" href="../../../api/_autosummary/ansys.meshing.prime.Part.html#ansys.meshing.prime.Part" title="ansys.meshing.prime.Part"><span class="n">part</span></a><span class="p">)</span><span class="w">
 </span><span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Merged </span><span class="si">{</span><a class="sphx-glr-backref-module-ansys-meshing-prime sphx-glr-backref-type-py-property reference internal" href="../../../api/_autosummary/ansys.meshing.prime.PartSummaryResults.n_nodes.html#ansys.meshing.prime.PartSummaryResults.n_nodes" title="ansys.meshing.prime.PartSummaryResults.n_nodes"><span class="n">before</span><span class="o">.</span><span class="n">n_nodes</span></a><span class="w"> </span><span class="o">-</span><span class="w"> </span><a class="sphx-glr-backref-module-ansys-meshing-prime sphx-glr-backref-type-py-property reference internal" href="../../../api/_autosummary/ansys.meshing.prime.PartSummaryResults.n_nodes.html#ansys.meshing.prime.PartSummaryResults.n_nodes" title="ansys.meshing.prime.PartSummaryResults.n_nodes"><span class="n">after</span><span class="o">.</span><span class="n">n_nodes</span></a><span class="si">}</span><span class="s2"> nodes</span><span class="s2">&quot;</span><span class="p">)</span><span class="w">
-</span><span class="n">show_model</span><span class="p">(</span><a class="sphx-glr-backref-module-ansys-meshing-prime sphx-glr-backref-type-py-class sphx-glr-backref-instance reference internal" href="../../../api/_autosummary/ansys.meshing.prime.Model.html#ansys.meshing.prime.Model" title="ansys.meshing.prime.Model"><span class="n">model</span></a><span class="p">,</span> <span class="n">update</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span><span class="w">
+</span><span class="n">show_model</span><span class="p">(</span><a class="sphx-glr-backref-module-ansys-meshing-prime sphx-glr-backref-type-py-class sphx-glr-backref-instance reference internal" href="../../../api/_autosummary/ansys.meshing.prime.Model.html#ansys.meshing.prime.Model" title="ansys.meshing.prime.Model"><span class="n">model</span></a><span class="p">)</span><span class="w">
 </span><span class="n">export_mapdl_cdb</span><span class="p">(</span><a class="sphx-glr-backref-module-ansys-meshing-prime sphx-glr-backref-type-py-class sphx-glr-backref-instance reference internal" href="../../../api/_autosummary/ansys.meshing.prime.Model.html#ansys.meshing.prime.Model" title="ansys.meshing.prime.Model"><span class="n">model</span></a><span class="p">,</span> <span class="s2">&quot;</span><span class="s2">dcb_bonding_separate_parts.cdb</span><span class="s2">&quot;</span><span class="p">)</span><span class="w">
 </span><a class="sphx-glr-backref-module-ansys-meshing-prime sphx-glr-backref-type-py-method reference internal" href="../../../api/_autosummary/ansys.meshing.prime.Client.exit.html#ansys.meshing.prime.Client.exit" title="ansys.meshing.prime.Client.exit"><span class="n">prime_client</span><span class="o">.</span><span class="n">exit</span></a><span class="p">(</span><span class="p">)</span><span class="w">
 </span></pre></div></div>
@@ -1607,10 +1607,10 @@ Interactive Scene</label><div class="sd-tab-content docutils">
 Merged 6300 nodes
 
 Exported file:
- /tmp/tmpce7b7li8/dcb_bonding_separate_parts.cdb
+ /tmp/tmpnjtswq39/dcb_bonding_separate_parts.cdb
 </pre></div>
 </div>
-<p class="sphx-glr-timing"><strong>Total running time of the script:</strong> (0 minutes 29.446 seconds)</p>
+<p class="sphx-glr-timing"><strong>Total running time of the script:</strong> (0 minutes 31.713 seconds)</p>
 <p class="sphx-glr-example-tags">🏷 Tags: Structural, Semiconductor, Hex, Tet, Quad, MultiZone, Stacker, Beta</p>
 <div class="sphx-glr-footer sphx-glr-footer-example docutils container" id="sphx-glr-download-examples-gallery-examples-gallery-beta-15-dcb-ribbon-bonding-py">
 <div class="sphx-glr-download sphx-glr-download-jupyter docutils container">

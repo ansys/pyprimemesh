@@ -94,7 +94,7 @@ Get the client model and instantiate meshing utilities from the ``lucid`` class.
 
     Warning (Client): Modification of these configurations is not recommended.
     Refer the documentation for your installed product for additional information.
-    /home/runner/work/pyprimemesh/pyprimemesh/.venv/lib/python3.14/site-packages/ansys/meshing/prime/internals/cyberchannel.py:183: UserWarning: Starting gRPC client without TLS on 127.0.0.1:51659. This is INSECURE. Consider using a secure connection.
+    /home/runner/work/pyprimemesh/pyprimemesh/.venv/lib/python3.14/site-packages/ansys/meshing/prime/internals/cyberchannel.py:183: UserWarning: Starting gRPC client without TLS on 127.0.0.1:46859. This is INSECURE. Consider using a secure connection.
       warn(
 
 
@@ -329,7 +329,7 @@ file.
 
 
     Exported file:
-     /tmp/tmpwmr0_o_o/morphed_turbine_blade.cdb
+     /tmp/tmpa5wmqgrj/morphed_turbine_blade.cdb
 
 
 
@@ -355,7 +355,7 @@ Exit PyPrimeMesh
 
 .. rst-class:: sphx-glr-timing
 
-   **Total running time of the script:** (0 minutes 33.183 seconds)
+   **Total running time of the script:** (0 minutes 24.567 seconds)
 
 
 .. rst-class:: sphx-glr-example-tags

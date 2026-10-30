@@ -107,7 +107,7 @@ Instantiate meshing utilities from the ``lucid`` class.
 
     Warning (Client): Modification of these configurations is not recommended.
     Refer the documentation for your installed product for additional information.
-    /home/runner/work/pyprimemesh/pyprimemesh/.venv/lib/python3.14/site-packages/ansys/meshing/prime/internals/cyberchannel.py:183: UserWarning: Starting gRPC client without TLS on 127.0.0.1:50333. This is INSECURE. Consider using a secure connection.
+    /home/runner/work/pyprimemesh/pyprimemesh/.venv/lib/python3.14/site-packages/ansys/meshing/prime/internals/cyberchannel.py:183: UserWarning: Starting gRPC client without TLS on 127.0.0.1:57615. This is INSECURE. Consider using a secure connection.
       warn(
 
 
@@ -261,7 +261,7 @@ requires face zonelets from mesh parts as input.
  .. code-block:: none
 
 
-    [<ansys.meshing.prime.autogen.partstructs.DeleteTopoEntitiesResults object at 0x7fbce9dd1310>, <ansys.meshing.prime.autogen.partstructs.DeleteTopoEntitiesResults object at 0x7fbc8023ba80>]
+    [<ansys.meshing.prime.autogen.partstructs.DeleteTopoEntitiesResults object at 0x7efdf81cd310>, <ansys.meshing.prime.autogen.partstructs.DeleteTopoEntitiesResults object at 0x7efdb419a780>]
 
 
 
@@ -666,7 +666,7 @@ Write a CAS file for use in the Fluent solver.
 
  .. code-block:: none
 
-    Fluent case exported at /tmp/tmpnykxrhit/wheel_ground_contact.cas.h5
+    Fluent case exported at /tmp/tmp34r8htnl/wheel_ground_contact.cas.h5
 
 
 
@@ -692,7 +692,7 @@ Exit the PyPrimeMesh session
 
 .. rst-class:: sphx-glr-timing
 
-   **Total running time of the script:** (1 minutes 28.793 seconds)
+   **Total running time of the script:** (1 minutes 24.041 seconds)
 
 
 .. rst-class:: sphx-glr-example-tags

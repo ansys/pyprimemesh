@@ -6,7 +6,7 @@
 
 Computation times
 =================
-**00:49.030** total execution time for 2 files **from examples/gallery_examples/gallery_beta**:
+**00:51.424** total execution time for 2 files **from examples/gallery_examples/gallery_beta**:
 
 .. container::
 
@@ -33,8 +33,8 @@ Computation times
      - Time
      - Mem (MB)
    * - :ref:`sphx_glr_examples_gallery_examples_gallery_beta_15_dcb_ribbon_bonding.py` (``15_dcb_ribbon_bonding.py``)
-     - 00:29.446
+     - 00:31.713
      - 0.0
    * - :ref:`sphx_glr_examples_gallery_examples_gallery_beta_11_solder_ball.py` (``11_solder_ball.py``)
-     - 00:19.584
+     - 00:19.711
      - 0.0

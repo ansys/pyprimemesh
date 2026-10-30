@@ -111,7 +111,7 @@ After this preamble is the first code block:
 
     Warning (Client): Modification of these configurations is not recommended.
     Refer the documentation for your installed product for additional information.
-    /home/runner/work/pyprimemesh/pyprimemesh/.venv/lib/python3.14/site-packages/ansys/meshing/prime/internals/cyberchannel.py:183: UserWarning: Starting gRPC client without TLS on 127.0.0.1:42495. This is INSECURE. Consider using a secure connection.
+    /home/runner/work/pyprimemesh/pyprimemesh/.venv/lib/python3.14/site-packages/ansys/meshing/prime/internals/cyberchannel.py:183: UserWarning: Starting gRPC client without TLS on 127.0.0.1:59691. This is INSECURE. Consider using a secure connection.
       warn(
     Part Summary:
 
@@ -259,7 +259,7 @@ Stop Ansys Prime Server
 
 .. rst-class:: sphx-glr-timing
 
-   **Total running time of the script:** (0 minutes 9.476 seconds)
+   **Total running time of the script:** (0 minutes 9.618 seconds)
 
 
 .. rst-class:: sphx-glr-example-tags

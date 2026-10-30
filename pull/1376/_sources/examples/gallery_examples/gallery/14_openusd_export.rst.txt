@@ -102,7 +102,7 @@ and connect the PyPrimeMesh client.
 
     Warning (Client): Modification of these configurations is not recommended.
     Refer the documentation for your installed product for additional information.
-    /home/runner/work/pyprimemesh/pyprimemesh/.venv/lib/python3.14/site-packages/ansys/meshing/prime/internals/cyberchannel.py:183: UserWarning: Starting gRPC client without TLS on 127.0.0.1:50757. This is INSECURE. Consider using a secure connection.
+    /home/runner/work/pyprimemesh/pyprimemesh/.venv/lib/python3.14/site-packages/ansys/meshing/prime/internals/cyberchannel.py:183: UserWarning: Starting gRPC client without TLS on 127.0.0.1:43115. This is INSECURE. Consider using a secure connection.
       warn(
 
 
@@ -245,7 +245,7 @@ as both a ``.usd`` file and a self-contained Three.js HTML viewer.
 
 .. rst-class:: sphx-glr-timing
 
-   **Total running time of the script:** (0 minutes 31.009 seconds)
+   **Total running time of the script:** (0 minutes 20.067 seconds)
 
 
 .. rst-class:: sphx-glr-example-tags

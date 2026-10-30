@@ -129,7 +129,7 @@ Key data model concepts demonstrated:
 
     Warning (Client): Modification of these configurations is not recommended.
     Refer the documentation for your installed product for additional information.
-    /home/runner/work/pyprimemesh/pyprimemesh/.venv/lib/python3.14/site-packages/ansys/meshing/prime/internals/cyberchannel.py:183: UserWarning: Starting gRPC client without TLS on 127.0.0.1:60709. This is INSECURE. Consider using a secure connection.
+    /home/runner/work/pyprimemesh/pyprimemesh/.venv/lib/python3.14/site-packages/ansys/meshing/prime/internals/cyberchannel.py:183: UserWarning: Starting gRPC client without TLS on 127.0.0.1:48887. This is INSECURE. Consider using a secure connection.
       warn(
     Part Summary:
 
@@ -1399,7 +1399,7 @@ Demonstrates:
 
 .. rst-class:: sphx-glr-timing
 
-   **Total running time of the script:** (0 minutes 59.629 seconds)
+   **Total running time of the script:** (0 minutes 46.242 seconds)
 
 
 .. rst-class:: sphx-glr-example-tags
