@@ -29,6 +29,8 @@ from .examples import (
     download_bracket_dsco,
     download_bracket_fmd,
     download_bracket_scdoc,
+    download_dcb_bonding_separate_parts_fmd,
+    download_dcb_bonding_shared_topology_pmdat,
     download_deformed_blade_dsco,
     download_deformed_blade_fmd,
     download_deformed_blade_scdoc,
