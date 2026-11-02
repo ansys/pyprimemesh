@@ -20,6 +20,8 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""A small JSON encoder and decoder used by the Prime client."""
+
 __version__ = '1.0.0'
 
 __all__ = ['loads', 'dumps', 'JSONEncoder', 'JSONDecoder', 'JSONDecodeError']
@@ -126,6 +128,11 @@ def loads(
     object_pairs_hook=None,
     **kw,
 ):
+    """Decode a JSON document into a Python object.
+
+    ``s`` is the document as ``str``, ``bytes``, or ``bytearray``.
+    The remaining arguments match :func:`json.loads`.
+    """
     if isinstance(s, str):
         import json
 

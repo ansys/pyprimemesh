@@ -23,3 +23,5 @@
 """Graphics and plotting utilities for visualizing PyPrimeMesh models."""
 
 from ansys.meshing.prime.graphics.plotter import Graphics, PrimePlotter
+
+__all__ = ["Graphics", "PrimePlotter"]
