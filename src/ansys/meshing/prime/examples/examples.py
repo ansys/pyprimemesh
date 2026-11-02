@@ -32,6 +32,8 @@ __all__ = [
     "download_bracket_dsco",
     "download_bracket_fmd",
     "download_bracket_scdoc",
+    "download_dcb_bonding_separate_parts_fmd",
+    "download_dcb_bonding_shared_topology_pmdat",
     "download_deformed_blade_dsco",
     "download_deformed_blade_fmd",
     "download_deformed_blade_scdoc",
@@ -83,6 +85,14 @@ class Examples(Enum):
     BRACKET_FMD = {"filename": "bracket_mid_surface.fmd", "git_folder": "bracket_scaffold"}
     BRACKET_SCDOC = {"filename": "bracket_mid_surface.scdoc", "git_folder": "bracket_scaffold"}
     BRACKET_DSCO = {"filename": "bracket_mid_surface.dsco", "git_folder": "bracket_scaffold"}
+    DCB_BONDING_SHARED_TOPOLOGY_PMDAT = {
+        "filename": "dcb_bonding_shared_topology.pmdat",
+        "git_folder": "dcb_bondings",
+    }
+    DCB_BONDING_SEPARATE_PARTS_FMD = {
+        "filename": "dcb_bonding_separate_parts.fmd",
+        "git_folder": "dcb_bondings",
+    }
     TOY_CAR_PMDAT = {"filename": "toy_car.pmdat", "git_folder": "toy_car"}
     TOY_CAR_FMD = {"filename": "toy_car.fmd", "git_folder": "toy_car"}
     TOY_CAR_SCDOC = {"filename": "toy_car.scdoc", "git_folder": "toy_car"}
@@ -1662,3 +1672,84 @@ def download_solder_ball_target_fmd(
 
     """
     return get_file(Examples.SOLDER_BALL_TARGET_FMD, destination, force)
+
+
+def download_dcb_bonding_shared_topology_pmdat(
+    destination: Optional[Union[str, os.PathLike]] = None, force: bool = False
+) -> Union[str, os.PathLike]:
+    """Download the shared-topology direct copper bond module.
+
+    The file is a PMDAT session in which the ribbon bonds, wire bonds, and the
+    substrate already share faces. It is written from a Discovery document by
+    importing that document with the Workbench CAD reader, which keeps the
+    shared topology, and then saving the Prime session.
+
+    Parameters
+    ----------
+    destination : str, os.PathLike, optional
+        Path to download the example file to. The default
+        is ``None``, in which case the default path for app data
+        is used.
+    force : bool, optional
+        Whether to download the example file. The default is
+        ``False``, in which case if the example file is cached, it
+        is reused.
+
+    Returns
+    -------
+    str
+        Local path to the downloaded file.
+
+    Examples
+    --------
+    >>> import ansys.meshing.prime as prime
+    >>> import ansys.meshing.prime.examples as prime_examples
+    >>> with prime.launch_prime() as session:
+    >>>     model = session.model
+    >>>     dcb = prime_examples.download_dcb_bonding_shared_topology_pmdat()
+    >>>     with prime.FileIO(model) as io:
+    >>>         _ = io.read_pmdat(dcb, params=prime.FileReadParams(model))
+    >>>     print(model)
+
+    """
+    return get_file(Examples.DCB_BONDING_SHARED_TOPOLOGY_PMDAT, destination, force)
+
+
+def download_dcb_bonding_separate_parts_fmd(
+    destination: Optional[Union[str, os.PathLike]] = None, force: bool = False
+) -> Union[str, os.PathLike]:
+    """Download the direct copper bond module as separate bodies.
+
+    The file is an FMD in which each solid is its own part. The ribbon bonds
+    carry the ``ribbon_bonding`` label. The wire bonds are the unlabeled parts
+    whose names start with ``solid``.
+
+    Parameters
+    ----------
+    destination : str, os.PathLike, optional
+        Path to download the example file to. The default
+        is ``None``, in which case the default path for app data
+        is used.
+    force : bool, optional
+        Whether to download the example file. The default is
+        ``False``, in which case if the example file is cached, it
+        is reused.
+
+    Returns
+    -------
+    str
+        Local path to the downloaded file.
+
+    Examples
+    --------
+    >>> import ansys.meshing.prime as prime
+    >>> import ansys.meshing.prime.examples as prime_examples
+    >>> with prime.launch_prime() as session:
+    >>>     model = session.model
+    >>>     dcb = prime_examples.download_dcb_bonding_separate_parts_fmd()
+    >>>     with prime.FileIO(model) as io:
+    >>>         _ = io.import_cad(dcb, params=prime.ImportCADParams(model))
+    >>>     print(model)
+
+    """
+    return get_file(Examples.DCB_BONDING_SEPARATE_PARTS_FMD, destination, force)
