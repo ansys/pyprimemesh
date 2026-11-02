@@ -1,0 +1,6 @@
+NAMEPATTERN
+===========
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoattribute:: ScopeExpressionType.NAMEPATTERN

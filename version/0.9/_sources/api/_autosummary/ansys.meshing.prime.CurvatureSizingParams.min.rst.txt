@@ -1,0 +1,6 @@
+min
+===
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoproperty:: CurvatureSizingParams.min

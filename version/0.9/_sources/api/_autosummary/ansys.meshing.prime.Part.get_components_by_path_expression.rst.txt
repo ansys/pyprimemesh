@@ -1,0 +1,11 @@
+get\_components\_by\_path\_expression
+=====================================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. automethod:: ansys.meshing.prime.Part.get_components_by_path_expression
+
+.. minigallery::
+   :add-heading: Examples using Part.get_components_by_path_expression
+
+   ansys.meshing.prime.Part.get_components_by_path_expression

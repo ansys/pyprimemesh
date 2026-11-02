@@ -1,0 +1,49 @@
+.. vale off
+
+EdgeConnectType
+===============
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoclass:: EdgeConnectType
+   
+   
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+      :toctree:
+   
+      EdgeConnectType.conjugate
+      EdgeConnectType.bit_length
+      EdgeConnectType.bit_count
+      EdgeConnectType.to_bytes
+      EdgeConnectType.from_bytes
+      EdgeConnectType.as_integer_ratio
+   
+   
+
+   
+   
+   .. rubric:: Attributes
+
+   .. autosummary::
+      :toctree:
+   
+      EdgeConnectType.real
+      EdgeConnectType.imag
+      EdgeConnectType.numerator
+      EdgeConnectType.denominator
+      EdgeConnectType.NONE
+      EdgeConnectType.ALLTOALL
+      EdgeConnectType.FREETOALL
+      EdgeConnectType.FREETOFREE
+   
+   
+
+.. minigallery::
+    :add-heading: Examples using EdgeConnectType
+
+    ansys.meshing.prime.EdgeConnectType
+
+.. vale on

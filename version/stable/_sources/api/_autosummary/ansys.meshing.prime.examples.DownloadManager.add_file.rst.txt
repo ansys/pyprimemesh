@@ -1,0 +1,11 @@
+add\_file
+=========
+
+.. currentmodule:: ansys.meshing.prime.examples
+
+.. automethod:: ansys.meshing.prime.examples.DownloadManager.add_file
+
+.. minigallery::
+   :add-heading: Examples using DownloadManager.add_file
+
+   ansys.meshing.prime.examples.DownloadManager.add_file

@@ -1,0 +1,11 @@
+refine\_tet\_mesh
+=================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. automethod:: ansys.meshing.prime.TrimmedSpline.refine_tet_mesh
+
+.. minigallery::
+   :add-heading: Examples using TrimmedSpline.refine_tet_mesh
+
+   ansys.meshing.prime.TrimmedSpline.refine_tet_mesh

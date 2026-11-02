@@ -1,0 +1,28 @@
+.. vale off
+
+PartCreationType
+================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoclass:: PartCreationType
+   
+   
+   
+   
+
+   
+   
+   .. rubric:: Attributes
+
+   .. autosummary::
+      :toctree:
+   
+      PartCreationType.MODEL
+      PartCreationType.ASSEMBLY
+      PartCreationType.PART
+      PartCreationType.BODY
+   
+   
+
+.. vale on

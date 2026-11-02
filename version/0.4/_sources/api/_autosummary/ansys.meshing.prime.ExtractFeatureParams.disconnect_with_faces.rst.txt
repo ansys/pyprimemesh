@@ -1,0 +1,6 @@
+﻿disconnect\_with\_faces
+=======================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoproperty:: ExtractFeatureParams.disconnect_with_faces

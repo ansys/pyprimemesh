@@ -1,0 +1,6 @@
+remaining\_skew\_faces
+======================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoproperty:: WrapperImproveResult.remaining_skew_faces

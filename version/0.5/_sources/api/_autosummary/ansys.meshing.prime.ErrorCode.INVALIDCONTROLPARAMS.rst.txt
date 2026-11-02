@@ -1,0 +1,6 @@
+INVALIDCONTROLPARAMS
+====================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoattribute:: ErrorCode.INVALIDCONTROLPARAMS

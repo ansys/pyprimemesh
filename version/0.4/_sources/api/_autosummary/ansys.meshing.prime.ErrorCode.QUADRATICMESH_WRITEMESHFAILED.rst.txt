@@ -1,0 +1,6 @@
+﻿QUADRATICMESH\_WRITEMESHFAILED
+==============================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoattribute:: ErrorCode.QUADRATICMESH_WRITEMESHFAILED

@@ -1,0 +1,11 @@
+set\_live\_material\_points
+===========================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. automethod:: ansys.meshing.prime.WrapperControl.set_live_material_points
+
+.. minigallery::
+   :add-heading: Examples using WrapperControl.set_live_material_points
+
+   ansys.meshing.prime.WrapperControl.set_live_material_points

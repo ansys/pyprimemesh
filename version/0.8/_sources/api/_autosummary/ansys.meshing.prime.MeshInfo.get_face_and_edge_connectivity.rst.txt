@@ -1,0 +1,11 @@
+get\_face\_and\_edge\_connectivity
+==================================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. automethod:: ansys.meshing.prime.MeshInfo.get_face_and_edge_connectivity
+
+.. minigallery::
+   :add-heading: Examples using MeshInfo.get_face_and_edge_connectivity
+
+   ansys.meshing.prime.MeshInfo.get_face_and_edge_connectivity

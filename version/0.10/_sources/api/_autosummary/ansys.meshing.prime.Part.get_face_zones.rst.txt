@@ -1,0 +1,11 @@
+get\_face\_zones
+================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. automethod:: ansys.meshing.prime.Part.get_face_zones
+
+.. minigallery::
+   :add-heading: Examples using Part.get_face_zones
+
+   ansys.meshing.prime.Part.get_face_zones

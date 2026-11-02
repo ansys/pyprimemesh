@@ -1,0 +1,6 @@
+﻿zmin
+====
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoproperty:: BoundingBox.zmin

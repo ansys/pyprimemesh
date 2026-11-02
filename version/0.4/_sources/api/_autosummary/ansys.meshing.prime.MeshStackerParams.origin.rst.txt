@@ -1,0 +1,6 @@
+﻿origin
+======
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoproperty:: MeshStackerParams.origin

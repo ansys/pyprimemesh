@@ -1,0 +1,31 @@
+ExportBoundaryFittedSplineParams
+================================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoclass:: ExportBoundaryFittedSplineParams
+   
+   
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+      :toctree:
+   
+      
+      ExportBoundaryFittedSplineParams.print_default
+      ExportBoundaryFittedSplineParams.set_default
+   
+   
+
+   
+   
+   .. rubric:: Attributes
+
+   .. autosummary::
+      :toctree:
+   
+      ExportBoundaryFittedSplineParams.id_offset
+      ExportBoundaryFittedSplineParams.id_start
+   
+   

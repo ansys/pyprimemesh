@@ -1,0 +1,11 @@
+set\_entities\_visible
+======================
+
+.. currentmodule:: ansys.meshing.prime.graphics
+
+.. automethod:: ansys.meshing.prime.graphics.PrimePlotter.set_entities_visible
+
+.. minigallery::
+   :add-heading: Examples using PrimePlotter.set_entities_visible
+
+   ansys.meshing.prime.graphics.PrimePlotter.set_entities_visible

@@ -1,0 +1,6 @@
+REMESHFACEZONELETSLOCALLYNOTSUPPORTEDFORTOPOLOGYPART
+====================================================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoattribute:: ErrorCode.REMESHFACEZONELETSLOCALLYNOTSUPPORTEDFORTOPOLOGYPART

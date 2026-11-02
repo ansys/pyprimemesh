@@ -1,0 +1,11 @@
+compute\_volumes
+================
+
+.. currentmodule:: ansys.meshing.prime.lucid
+
+.. automethod:: ansys.meshing.prime.lucid.Mesh.compute_volumes
+
+.. minigallery::
+   :add-heading: Examples using Mesh.compute_volumes
+
+   ansys.meshing.prime.lucid.Mesh.compute_volumes

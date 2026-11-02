@@ -1,0 +1,23 @@
+ScopeZoneletParams
+==================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoclass:: ScopeZoneletParams
+   
+   
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+      :toctree:
+   
+      
+      ScopeZoneletParams.print_default
+      ScopeZoneletParams.set_default
+   
+   
+
+   
+   
+   

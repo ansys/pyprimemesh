@@ -1,0 +1,6 @@
+label\_expression
+=================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoproperty:: ScopeDefinition.label_expression

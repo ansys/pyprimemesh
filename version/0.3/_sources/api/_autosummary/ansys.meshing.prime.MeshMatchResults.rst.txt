@@ -1,0 +1,34 @@
+.. vale off
+
+MeshMatchResults
+================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoclass:: MeshMatchResults
+   
+   
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+      :toctree:
+   
+      
+      MeshMatchResults.print_default
+      MeshMatchResults.set_default
+   
+   
+
+   
+   
+   .. rubric:: Attributes
+
+   .. autosummary::
+      :toctree:
+   
+      MeshMatchResults.error_code
+   
+   
+
+.. vale on

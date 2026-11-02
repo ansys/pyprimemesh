@@ -1,0 +1,6 @@
+﻿split\_ratio
+============
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoproperty:: SplitParams.split_ratio

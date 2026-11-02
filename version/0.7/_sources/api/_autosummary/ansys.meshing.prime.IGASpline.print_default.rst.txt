@@ -1,0 +1,11 @@
+print\_default
+==============
+
+.. currentmodule:: ansys.meshing.prime
+
+.. automethod:: ansys.meshing.prime.IGASpline.print_default
+
+.. minigallery::
+   :add-heading: Examples using IGASpline.print_default
+
+   ansys.meshing.prime.IGASpline.print_default

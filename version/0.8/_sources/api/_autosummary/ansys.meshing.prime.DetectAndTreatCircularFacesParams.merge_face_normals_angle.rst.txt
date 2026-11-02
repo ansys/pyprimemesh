@@ -1,0 +1,6 @@
+merge\_face\_normals\_angle
+===========================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoproperty:: DetectAndTreatCircularFacesParams.merge_face_normals_angle

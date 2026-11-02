@@ -1,0 +1,6 @@
+﻿collapse\_ratio
+===============
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoproperty:: CollapseParams.collapse_ratio

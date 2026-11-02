@@ -1,0 +1,11 @@
+set\_default
+============
+
+.. currentmodule:: ansys.meshing.prime
+
+.. automethod:: ansys.meshing.prime.IGAUnstructuredSplineSolid.set_default
+
+.. minigallery::
+   :add-heading: Examples using IGAUnstructuredSplineSolid.set_default
+
+   ansys.meshing.prime.IGAUnstructuredSplineSolid.set_default

@@ -1,0 +1,55 @@
+.. vale off
+
+TargetAnsysVersion
+==================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoclass:: TargetAnsysVersion
+
+   
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+      :toctree:
+   
+      TargetAnsysVersion.conjugate
+      TargetAnsysVersion.bit_length
+      TargetAnsysVersion.bit_count
+      TargetAnsysVersion.to_bytes
+      TargetAnsysVersion.from_bytes
+      TargetAnsysVersion.as_integer_ratio
+      TargetAnsysVersion.is_integer
+      
+   
+   
+
+   
+   
+   .. rubric:: Attributes
+
+   .. autosummary::
+      :toctree:
+   
+      TargetAnsysVersion.real
+      TargetAnsysVersion.imag
+      TargetAnsysVersion.numerator
+      TargetAnsysVersion.denominator
+      TargetAnsysVersion.V231
+      TargetAnsysVersion.V232
+      TargetAnsysVersion.V241
+      TargetAnsysVersion.V242
+      TargetAnsysVersion.V251
+      TargetAnsysVersion.V252
+      TargetAnsysVersion.V261
+      TargetAnsysVersion.LATEST
+   
+   
+
+.. minigallery::
+    :add-heading: Examples using TargetAnsysVersion
+
+    ansys.meshing.prime.TargetAnsysVersion
+
+.. vale on

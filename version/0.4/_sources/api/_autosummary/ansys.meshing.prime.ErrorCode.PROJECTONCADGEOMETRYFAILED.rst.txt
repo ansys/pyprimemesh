@@ -1,0 +1,6 @@
+﻿PROJECTONCADGEOMETRYFAILED
+==========================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoattribute:: ErrorCode.PROJECTONCADGEOMETRYFAILED

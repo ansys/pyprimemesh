@@ -1,0 +1,6 @@
+entity\_infos
+=============
+
+.. currentmodule:: ansys.meshing.prime.graphics
+
+.. autoproperty:: PrimePlotter.entity_infos

@@ -1,0 +1,40 @@
+.. vale off
+
+PartSummaryParams
+=================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoclass:: PartSummaryParams
+   
+   
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+      :toctree:
+   
+      
+      PartSummaryParams.print_default
+      PartSummaryParams.set_default
+   
+   
+
+   
+   
+   .. rubric:: Attributes
+
+   .. autosummary::
+      :toctree:
+   
+      PartSummaryParams.print_id
+      PartSummaryParams.print_mesh
+   
+   
+
+.. minigallery::
+    :add-heading: Examples using PartSummaryParams
+
+    ansys.meshing.prime.PartSummaryParams
+
+.. vale on

@@ -1,0 +1,6 @@
+﻿get\_face\_zonelets\_of\_zone\_name\_pattern
+============================================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. automethod:: Part.get_face_zonelets_of_zone_name_pattern

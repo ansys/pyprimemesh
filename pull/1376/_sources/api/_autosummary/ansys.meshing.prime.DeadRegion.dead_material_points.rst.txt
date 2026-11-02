@@ -1,0 +1,6 @@
+dead\_material\_points
+======================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoproperty:: DeadRegion.dead_material_points

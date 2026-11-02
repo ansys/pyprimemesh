@@ -1,0 +1,6 @@
+intersecting\_zonelet\_pairs
+============================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoproperty:: FuseResults.intersecting_zonelet_pairs

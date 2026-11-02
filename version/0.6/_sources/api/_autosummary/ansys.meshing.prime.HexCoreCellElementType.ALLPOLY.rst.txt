@@ -1,0 +1,6 @@
+ALLPOLY
+=======
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoattribute:: HexCoreCellElementType.ALLPOLY

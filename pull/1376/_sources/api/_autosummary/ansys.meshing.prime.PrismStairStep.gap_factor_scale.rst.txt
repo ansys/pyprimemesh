@@ -1,0 +1,6 @@
+gap\_factor\_scale
+==================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoproperty:: PrismStairStep.gap_factor_scale

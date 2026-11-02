@@ -1,0 +1,6 @@
+OUTOFMEMORY
+===========
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoattribute:: ErrorCode.OUTOFMEMORY

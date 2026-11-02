@@ -1,0 +1,39 @@
+.. vale off
+
+VolumeControlSummaryResults
+===========================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoclass:: VolumeControlSummaryResults
+
+   
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+      :toctree:
+   
+      
+      VolumeControlSummaryResults.print_default
+      VolumeControlSummaryResults.set_default
+   
+   
+
+   
+   
+   .. rubric:: Attributes
+
+   .. autosummary::
+      :toctree:
+   
+      VolumeControlSummaryResults.summary
+   
+   
+
+.. minigallery::
+    :add-heading: Examples using VolumeControlSummaryResults
+
+    ansys.meshing.prime.VolumeControlSummaryResults
+
+.. vale on

@@ -1,0 +1,6 @@
+boundary\_conditions
+====================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoproperty:: ExportMapdlCdbParams.boundary_conditions

@@ -1,0 +1,6 @@
+compute\_duplicate\_faces
+=========================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoproperty:: SurfaceDiagnosticSummaryParams.compute_duplicate_faces

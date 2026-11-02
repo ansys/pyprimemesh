@@ -1,0 +1,6 @@
+﻿has\_non\_positive\_volumes
+===========================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoproperty:: CheckMeshResults.has_non_positive_volumes

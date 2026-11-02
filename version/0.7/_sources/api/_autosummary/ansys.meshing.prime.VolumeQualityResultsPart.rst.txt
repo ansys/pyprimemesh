@@ -1,0 +1,45 @@
+.. vale off
+
+VolumeQualityResultsPart
+========================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoclass:: VolumeQualityResultsPart
+   
+   
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+      :toctree:
+   
+      
+      VolumeQualityResultsPart.print_default
+      VolumeQualityResultsPart.set_default
+   
+   
+
+   
+   
+   .. rubric:: Attributes
+
+   .. autosummary::
+      :toctree:
+   
+      VolumeQualityResultsPart.cell_quality_measure
+      VolumeQualityResultsPart.max_quality
+      VolumeQualityResultsPart.measure_name
+      VolumeQualityResultsPart.min_quality
+      VolumeQualityResultsPart.n_found
+      VolumeQualityResultsPart.part_id
+      VolumeQualityResultsPart.quality_limit
+   
+   
+
+.. minigallery::
+    :add-heading: Examples using VolumeQualityResultsPart
+
+    ansys.meshing.prime.VolumeQualityResultsPart
+
+.. vale on

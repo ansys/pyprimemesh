@@ -1,0 +1,6 @@
+CREATEBOI\_INVALIDWAKELEVELS
+============================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoattribute:: ErrorCode.CREATEBOI_INVALIDWAKELEVELS

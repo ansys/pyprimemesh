@@ -1,0 +1,6 @@
+get\_multi\_zone\_controls
+==========================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. automethod:: ControlData.get_multi_zone_controls

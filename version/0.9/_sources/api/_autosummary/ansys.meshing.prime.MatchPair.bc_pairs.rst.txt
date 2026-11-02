@@ -1,0 +1,6 @@
+bc\_pairs
+=========
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoproperty:: MatchPair.bc_pairs

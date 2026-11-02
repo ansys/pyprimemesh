@@ -1,0 +1,6 @@
+no\_imprint\_zonelets
+=====================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoproperty:: PrismParams.no_imprint_zonelets

@@ -1,0 +1,6 @@
+import\_abaqus\_inp
+===================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. automethod:: FileIO.import_abaqus_inp

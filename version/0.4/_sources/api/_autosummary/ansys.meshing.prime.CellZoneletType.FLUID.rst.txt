@@ -1,0 +1,6 @@
+﻿FLUID
+=====
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoattribute:: CellZoneletType.FLUID

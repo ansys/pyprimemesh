@@ -1,0 +1,6 @@
+﻿GETELEMENTCOUNTFAILED
+=====================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoattribute:: ErrorCode.GETELEMENTCOUNTFAILED

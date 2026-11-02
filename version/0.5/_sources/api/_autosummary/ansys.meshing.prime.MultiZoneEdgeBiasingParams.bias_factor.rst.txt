@@ -1,0 +1,6 @@
+bias\_factor
+============
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoproperty:: MultiZoneEdgeBiasingParams.bias_factor

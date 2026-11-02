@@ -1,0 +1,32 @@
+.. vale off
+
+TopoSearchField
+===============
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoclass:: TopoSearchField
+   
+   
+   
+   
+
+   
+   
+   .. rubric:: Attributes
+
+   .. autosummary::
+      :toctree:
+   
+      TopoSearchField.OVERLAPPINGTOPOFACES
+      TopoSearchField.INTERSECTINGTOPOFACES
+      TopoSearchField.SELFINTERSECTINGTOPOFACES
+      TopoSearchField.BROKENLOOPTOPOFACES
+      TopoSearchField.NOBOUNDARYLOOPTOPOFACES
+      TopoSearchField.INVALIDBOUNDARYTOPOFACES
+      TopoSearchField.SMALLTOPOEDGES
+      TopoSearchField.NUMBEROFFIELDS
+   
+   
+
+.. vale on

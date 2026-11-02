@@ -1,0 +1,11 @@
+download\_dcb\_bonding\_separate\_parts\_fmd
+============================================
+
+.. currentmodule:: ansys.meshing.prime.examples
+
+.. autofunction:: ansys.meshing.prime.examples.download_dcb_bonding_separate_parts_fmd
+
+.. minigallery::
+    :add-heading: Examples using download_dcb_bonding_separate_parts_fmd
+
+    ansys.meshing.prime.examples.download_dcb_bonding_separate_parts_fmd

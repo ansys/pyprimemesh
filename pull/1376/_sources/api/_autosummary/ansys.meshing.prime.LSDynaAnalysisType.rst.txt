@@ -1,0 +1,32 @@
+.. vale off
+
+LSDynaAnalysisType
+==================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoclass:: LSDynaAnalysisType
+
+   
+   
+   
+   
+
+   
+   
+   .. rubric:: Attributes
+
+   .. autosummary::
+      :toctree:
+   
+      LSDynaAnalysisType.DOORSLAM
+      LSDynaAnalysisType.SEATBELT
+   
+   
+
+.. minigallery::
+    :add-heading: Examples using LSDynaAnalysisType
+
+    ansys.meshing.prime.LSDynaAnalysisType
+
+.. vale on

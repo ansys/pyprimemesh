@@ -1,0 +1,6 @@
+﻿disable\_optimizing\_numpy\_arrays
+==================================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autofunction:: disable_optimizing_numpy_arrays

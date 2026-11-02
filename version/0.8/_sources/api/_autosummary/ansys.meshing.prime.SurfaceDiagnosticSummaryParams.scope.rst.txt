@@ -1,0 +1,6 @@
+scope
+=====
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoproperty:: SurfaceDiagnosticSummaryParams.scope

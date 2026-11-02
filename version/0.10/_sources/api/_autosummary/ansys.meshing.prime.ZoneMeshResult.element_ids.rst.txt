@@ -1,0 +1,6 @@
+element\_ids
+============
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoproperty:: ZoneMeshResult.element_ids

@@ -1,0 +1,6 @@
+ZEROELEMENTSREADFROMCDBFILE
+===========================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoattribute:: ErrorCode.ZEROELEMENTSREADFROMCDBFILE

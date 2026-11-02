@@ -1,0 +1,40 @@
+.. vale off
+
+DeleteVolumesParams
+===================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoclass:: DeleteVolumesParams
+   
+   
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+      :toctree:
+   
+      
+      DeleteVolumesParams.print_default
+      DeleteVolumesParams.set_default
+   
+   
+
+   
+   
+   .. rubric:: Attributes
+
+   .. autosummary::
+      :toctree:
+   
+      DeleteVolumesParams.delete_small_volumes
+      DeleteVolumesParams.volume_limit
+   
+   
+
+.. minigallery::
+    :add-heading: Examples using DeleteVolumesParams
+
+    ansys.meshing.prime.DeleteVolumesParams
+
+.. vale on

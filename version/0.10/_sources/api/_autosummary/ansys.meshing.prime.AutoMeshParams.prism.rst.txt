@@ -1,0 +1,6 @@
+prism
+=====
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoproperty:: AutoMeshParams.prism

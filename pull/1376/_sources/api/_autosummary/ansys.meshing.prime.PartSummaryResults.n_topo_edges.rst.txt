@@ -1,0 +1,6 @@
+n\_topo\_edges
+==============
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoproperty:: PartSummaryResults.n_topo_edges

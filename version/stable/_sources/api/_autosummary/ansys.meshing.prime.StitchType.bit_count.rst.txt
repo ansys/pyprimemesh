@@ -1,0 +1,11 @@
+bit\_count
+==========
+
+.. currentmodule:: ansys.meshing.prime
+
+.. automethod:: ansys.meshing.prime.StitchType.bit_count
+
+.. minigallery::
+   :add-heading: Examples using StitchType.bit_count
+
+   ansys.meshing.prime.StitchType.bit_count

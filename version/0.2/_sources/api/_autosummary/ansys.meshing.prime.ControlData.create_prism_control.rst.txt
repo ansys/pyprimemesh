@@ -1,0 +1,6 @@
+create\_prism\_control
+======================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. automethod:: ControlData.create_prism_control

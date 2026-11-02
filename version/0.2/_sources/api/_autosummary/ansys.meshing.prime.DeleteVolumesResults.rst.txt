@@ -1,0 +1,23 @@
+DeleteVolumesResults
+====================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoclass:: DeleteVolumesResults
+   
+   
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+      :toctree:
+   
+      
+      DeleteVolumesResults.print_default
+      DeleteVolumesResults.set_default
+   
+   
+
+   
+   
+   

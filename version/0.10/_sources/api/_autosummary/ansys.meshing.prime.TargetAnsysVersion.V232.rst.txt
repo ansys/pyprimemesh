@@ -1,0 +1,6 @@
+V232
+====
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoattribute:: TargetAnsysVersion.V232

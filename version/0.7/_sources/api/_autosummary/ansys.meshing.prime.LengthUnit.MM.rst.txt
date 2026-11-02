@@ -1,0 +1,6 @@
+MM
+==
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoattribute:: LengthUnit.MM

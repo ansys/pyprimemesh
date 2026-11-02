@@ -1,0 +1,11 @@
+bit\_count
+==========
+
+.. currentmodule:: ansys.meshing.prime
+
+.. automethod:: ansys.meshing.prime.ContactPatchAxis.bit_count
+
+.. minigallery::
+   :add-heading: Examples using ContactPatchAxis.bit_count
+
+   ansys.meshing.prime.ContactPatchAxis.bit_count

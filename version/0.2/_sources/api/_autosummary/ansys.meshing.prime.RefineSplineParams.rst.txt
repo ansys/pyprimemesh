@@ -1,0 +1,33 @@
+RefineSplineParams
+==================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoclass:: RefineSplineParams
+   
+   
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+      :toctree:
+   
+      
+      RefineSplineParams.print_default
+      RefineSplineParams.set_default
+   
+   
+
+   
+   
+   .. rubric:: Attributes
+
+   .. autosummary::
+      :toctree:
+   
+      RefineSplineParams.refine_flag_u
+      RefineSplineParams.refine_flag_v
+      RefineSplineParams.refine_flag_w
+      RefineSplineParams.spline_refinement_type
+   
+   

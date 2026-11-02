@@ -1,0 +1,6 @@
+DELETEPARTSFAILED
+=================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoattribute:: ErrorCode.DELETEPARTSFAILED

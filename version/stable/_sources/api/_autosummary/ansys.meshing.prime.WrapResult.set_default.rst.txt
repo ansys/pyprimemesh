@@ -1,0 +1,11 @@
+set\_default
+============
+
+.. currentmodule:: ansys.meshing.prime
+
+.. automethod:: ansys.meshing.prime.WrapResult.set_default
+
+.. minigallery::
+   :add-heading: Examples using WrapResult.set_default
+
+   ansys.meshing.prime.WrapResult.set_default

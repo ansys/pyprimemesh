@@ -1,0 +1,6 @@
+﻿SCAFFOLDERINVALIDCONSTANTMESHSIZE
+=================================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoattribute:: ErrorCode.SCAFFOLDERINVALIDCONSTANTMESHSIZE

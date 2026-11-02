@@ -1,0 +1,6 @@
+run\_on\_server
+===============
+
+.. currentmodule:: ansys.meshing.prime
+
+.. automethod:: Client.run_on_server

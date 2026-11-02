@@ -1,0 +1,6 @@
+set\_sweep\_mesh\_params
+========================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. automethod:: MultiZoneControl.set_sweep_mesh_params

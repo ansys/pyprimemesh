@@ -1,0 +1,6 @@
+ZERONODESREADFROMCDBFILE
+========================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoattribute:: ErrorCode.ZERONODESREADFROMCDBFILE

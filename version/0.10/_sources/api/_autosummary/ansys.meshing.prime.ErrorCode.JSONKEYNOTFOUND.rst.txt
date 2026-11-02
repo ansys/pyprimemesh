@@ -1,0 +1,6 @@
+JSONKEYNOTFOUND
+===============
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoattribute:: ErrorCode.JSONKEYNOTFOUND

@@ -1,0 +1,6 @@
+﻿fix\_intersections
+==================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoproperty:: AddThicknessParams.fix_intersections

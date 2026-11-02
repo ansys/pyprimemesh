@@ -1,0 +1,6 @@
+EXACT
+=====
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoattribute:: TrimmedSolidSplineCutMode.EXACT

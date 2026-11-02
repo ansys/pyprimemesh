@@ -1,0 +1,6 @@
+﻿zone\_expression
+================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoproperty:: ScopeDefinition.zone_expression

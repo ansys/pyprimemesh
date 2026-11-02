@@ -1,0 +1,23 @@
+WrapRegion
+==========
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoclass:: WrapRegion
+   
+   
+   
+   
+
+   
+   
+   .. rubric:: Attributes
+
+   .. autosummary::
+      :toctree:
+   
+      WrapRegion.MATERIALPOINT
+      WrapRegion.EXTERNAL
+      WrapRegion.LARGESTINTERNAL
+   
+   

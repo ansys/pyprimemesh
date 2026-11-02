@@ -1,0 +1,6 @@
+﻿error\_code
+===========
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoproperty:: CellStatisticsResults.error_code

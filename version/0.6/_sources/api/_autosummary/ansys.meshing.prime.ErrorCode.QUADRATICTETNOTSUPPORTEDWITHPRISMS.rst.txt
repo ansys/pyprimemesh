@@ -1,0 +1,6 @@
+QUADRATICTETNOTSUPPORTEDWITHPRISMS
+==================================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoattribute:: ErrorCode.QUADRATICTETNOTSUPPORTEDWITHPRISMS

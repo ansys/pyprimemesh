@@ -1,0 +1,11 @@
+mesh\_topo\_faces
+=================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. automethod:: ansys.meshing.prime.Surfer.mesh_topo_faces
+
+.. minigallery::
+   :add-heading: Examples using Surfer.mesh_topo_faces
+
+   ansys.meshing.prime.Surfer.mesh_topo_faces

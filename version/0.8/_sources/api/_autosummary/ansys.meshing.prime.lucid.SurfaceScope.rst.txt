@@ -1,0 +1,34 @@
+.. vale off
+
+SurfaceScope
+============
+
+.. currentmodule:: ansys.meshing.prime.lucid
+
+.. autoclass:: SurfaceScope
+   
+   
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+      :toctree:
+   
+      
+      SurfaceScope.get_face_zonelets
+      SurfaceScope.get_parts
+      SurfaceScope.get_scope_definition
+      SurfaceScope.get_topo_faces
+   
+   
+
+   
+   
+   
+
+.. minigallery::
+    :add-heading: Examples using SurfaceScope
+
+    ansys.meshing.prime.lucid.SurfaceScope
+
+.. vale on

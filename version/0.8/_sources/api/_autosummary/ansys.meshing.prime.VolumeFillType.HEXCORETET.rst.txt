@@ -1,0 +1,6 @@
+HEXCORETET
+==========
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoattribute:: VolumeFillType.HEXCORETET

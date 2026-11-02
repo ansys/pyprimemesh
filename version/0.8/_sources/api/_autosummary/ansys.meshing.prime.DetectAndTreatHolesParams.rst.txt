@@ -1,0 +1,53 @@
+.. vale off
+
+DetectAndTreatHolesParams
+=========================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoclass:: DetectAndTreatHolesParams
+   
+   
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+      :toctree:
+   
+      
+      DetectAndTreatHolesParams.print_default
+      DetectAndTreatHolesParams.set_default
+   
+   
+
+   
+   
+   .. rubric:: Attributes
+
+   .. autosummary::
+      :toctree:
+   
+      DetectAndTreatHolesParams.detect_and_defeature_edges_near_holes
+      DetectAndTreatHolesParams.detect_circular_holes
+      DetectAndTreatHolesParams.detect_circular_holes_params
+      DetectAndTreatHolesParams.detect_holes_params
+      DetectAndTreatHolesParams.detect_non_circular_holes
+      DetectAndTreatHolesParams.detect_non_circular_holes_params
+      DetectAndTreatHolesParams.edge_mesh_constant_size
+      DetectAndTreatHolesParams.edge_sharp_corner_angle
+      DetectAndTreatHolesParams.fragmented_edge_tolerance
+      DetectAndTreatHolesParams.hole_proximity_tolerance
+      DetectAndTreatHolesParams.merge_face_normals_angle
+      DetectAndTreatHolesParams.mesh_offset_faces
+      DetectAndTreatHolesParams.offset_distance
+      DetectAndTreatHolesParams.offset_holes
+      DetectAndTreatHolesParams.surface_mesh_constant_size
+   
+   
+
+.. minigallery::
+    :add-heading: Examples using DetectAndTreatHolesParams
+
+    ansys.meshing.prime.DetectAndTreatHolesParams
+
+.. vale on

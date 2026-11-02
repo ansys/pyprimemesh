@@ -1,0 +1,6 @@
+PARASOLID
+=========
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoattribute:: CadFaceter.PARASOLID

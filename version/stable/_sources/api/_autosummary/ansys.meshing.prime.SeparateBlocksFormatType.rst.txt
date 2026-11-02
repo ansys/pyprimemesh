@@ -1,0 +1,49 @@
+.. vale off
+
+SeparateBlocksFormatType
+========================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoclass:: SeparateBlocksFormatType
+
+   
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+      :toctree:
+   
+      SeparateBlocksFormatType.conjugate
+      SeparateBlocksFormatType.bit_length
+      SeparateBlocksFormatType.bit_count
+      SeparateBlocksFormatType.to_bytes
+      SeparateBlocksFormatType.from_bytes
+      SeparateBlocksFormatType.as_integer_ratio
+      SeparateBlocksFormatType.is_integer
+      
+   
+   
+
+   
+   
+   .. rubric:: Attributes
+
+   .. autosummary::
+      :toctree:
+   
+      SeparateBlocksFormatType.real
+      SeparateBlocksFormatType.imag
+      SeparateBlocksFormatType.numerator
+      SeparateBlocksFormatType.denominator
+      SeparateBlocksFormatType.STANDARD
+      SeparateBlocksFormatType.COMPACT
+   
+   
+
+.. minigallery::
+    :add-heading: Examples using SeparateBlocksFormatType
+
+    ansys.meshing.prime.SeparateBlocksFormatType
+
+.. vale on

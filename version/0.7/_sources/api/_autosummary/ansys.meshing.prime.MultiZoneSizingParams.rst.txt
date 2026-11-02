@@ -1,0 +1,42 @@
+.. vale off
+
+MultiZoneSizingParams
+=====================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoclass:: MultiZoneSizingParams
+   
+   
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+      :toctree:
+   
+      
+      MultiZoneSizingParams.print_default
+      MultiZoneSizingParams.set_default
+   
+   
+
+   
+   
+   .. rubric:: Attributes
+
+   .. autosummary::
+      :toctree:
+   
+      MultiZoneSizingParams.growth_rate
+      MultiZoneSizingParams.max_size
+      MultiZoneSizingParams.min_size
+      MultiZoneSizingParams.use_volumetric_size_field
+   
+   
+
+.. minigallery::
+    :add-heading: Examples using MultiZoneSizingParams
+
+    ansys.meshing.prime.MultiZoneSizingParams
+
+.. vale on

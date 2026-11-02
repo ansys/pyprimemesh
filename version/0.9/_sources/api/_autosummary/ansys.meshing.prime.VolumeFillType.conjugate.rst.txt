@@ -1,0 +1,11 @@
+conjugate
+=========
+
+.. currentmodule:: ansys.meshing.prime
+
+.. automethod:: ansys.meshing.prime.VolumeFillType.conjugate
+
+.. minigallery::
+   :add-heading: Examples using VolumeFillType.conjugate
+
+   ansys.meshing.prime.VolumeFillType.conjugate

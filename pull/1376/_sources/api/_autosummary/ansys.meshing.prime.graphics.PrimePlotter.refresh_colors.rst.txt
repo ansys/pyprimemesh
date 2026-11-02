@@ -1,0 +1,11 @@
+refresh\_colors
+===============
+
+.. currentmodule:: ansys.meshing.prime.graphics
+
+.. automethod:: ansys.meshing.prime.graphics.PrimePlotter.refresh_colors
+
+.. minigallery::
+   :add-heading: Examples using PrimePlotter.refresh_colors
+
+   ansys.meshing.prime.graphics.PrimePlotter.refresh_colors

@@ -1,0 +1,6 @@
+extracted\_ids
+==============
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoproperty:: CreateIntersectionEdgeLoopsResults.extracted_ids

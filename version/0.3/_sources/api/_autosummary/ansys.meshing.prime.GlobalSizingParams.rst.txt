@@ -1,0 +1,36 @@
+.. vale off
+
+GlobalSizingParams
+==================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoclass:: GlobalSizingParams
+   
+   
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+      :toctree:
+   
+      
+      GlobalSizingParams.print_default
+      GlobalSizingParams.set_default
+   
+   
+
+   
+   
+   .. rubric:: Attributes
+
+   .. autosummary::
+      :toctree:
+   
+      GlobalSizingParams.growth_rate
+      GlobalSizingParams.max
+      GlobalSizingParams.min
+   
+   
+
+.. vale on

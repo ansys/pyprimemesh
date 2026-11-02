@@ -1,0 +1,6 @@
+﻿parts
+=====
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoproperty:: Model.parts

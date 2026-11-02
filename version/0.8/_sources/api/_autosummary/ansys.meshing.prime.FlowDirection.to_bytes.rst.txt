@@ -1,0 +1,11 @@
+to\_bytes
+=========
+
+.. currentmodule:: ansys.meshing.prime
+
+.. automethod:: ansys.meshing.prime.FlowDirection.to_bytes
+
+.. minigallery::
+   :add-heading: Examples using FlowDirection.to_bytes
+
+   ansys.meshing.prime.FlowDirection.to_bytes

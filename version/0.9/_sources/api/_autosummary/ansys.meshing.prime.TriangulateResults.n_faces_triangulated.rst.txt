@@ -1,0 +1,6 @@
+n\_faces\_triangulated
+======================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoproperty:: TriangulateResults.n_faces_triangulated

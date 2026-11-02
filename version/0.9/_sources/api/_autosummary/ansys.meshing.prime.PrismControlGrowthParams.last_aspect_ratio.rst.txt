@@ -1,0 +1,6 @@
+last\_aspect\_ratio
+===================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoproperty:: PrismControlGrowthParams.last_aspect_ratio

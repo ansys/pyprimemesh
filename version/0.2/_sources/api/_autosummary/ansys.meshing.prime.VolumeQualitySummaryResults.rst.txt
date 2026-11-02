@@ -1,0 +1,32 @@
+VolumeQualitySummaryResults
+===========================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoclass:: VolumeQualitySummaryResults
+   
+   
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+      :toctree:
+   
+      
+      VolumeQualitySummaryResults.print_default
+      VolumeQualitySummaryResults.set_default
+   
+   
+
+   
+   
+   .. rubric:: Attributes
+
+   .. autosummary::
+      :toctree:
+   
+      VolumeQualitySummaryResults.error_code
+      VolumeQualitySummaryResults.message
+      VolumeQualitySummaryResults.quality_results_part
+   
+   
