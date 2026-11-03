@@ -329,6 +329,8 @@ display.show()
 # Export as CAS file for external aero simulations.
 with tempfile.TemporaryDirectory() as temp_folder:
     print(temp_folder)
+    mesh_util.write(os.path.join(temp_folder, "f1_rear_wing_vol_mesh.pmdat"))
+    mesh_util.read(os.path.join(temp_folder, "f1_rear_wing_vol_mesh.pmdat"))
     mesh_file = os.path.join(temp_folder, "f1_rear_wing_vol_mesh.cas")
     mesh_util.write(mesh_file)
     assert os.path.exists(mesh_file)
