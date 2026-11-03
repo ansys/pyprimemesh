@@ -1,4 +1,4 @@
-# Copyright (C) 2024 - 2025 ANSYS, Inc. and/or its affiliates.
+# Copyright © 2026 Synopsys, Inc. and ANSYS, Inc. All rights reserved.
 # SPDX-License-Identifier: MIT
 #
 #
@@ -25,7 +25,7 @@ from __future__ import annotations
 from ansys.meshing.prime.internals.comm_manager import CommunicationManager
 from ansys.meshing.prime.params.primestructs import *
 from ansys.meshing.prime.autogen.coreobject import *
-from typing import List, Any, Union
+from typing import Dict, Any, Union, List, Iterable
 
 class AutoMesh(CoreObject):
     """Generates volume mesh.
@@ -77,14 +77,12 @@ class AutoMesh(CoreObject):
 
         Examples
         --------
-        >>> auto_mesh = AutoMesh(model = model)
-        >>> automesh_params = AutoMeshParams(model = model)
         >>> results = auto_mesh.mesh(part_id, automesh_params)
 
         """
         if not isinstance(part_id, int):
             raise TypeError("Invalid argument type passed for 'part_id'. Valid argument type is int.")
-        if not isinstance(automesh_params, AutoMeshParams):
+        if type(automesh_params).__name__ != 'AutoMeshParams':
             raise TypeError("Invalid argument type passed for 'automesh_params'. Valid argument type is AutoMeshParams.")
         args = {"part_id" : part_id,
         "automesh_params" : automesh_params._jsonify()}
@@ -93,3 +91,4 @@ class AutoMesh(CoreObject):
         result = self._comm.serve(self._model, command_name, self._object_id, args=args)
         self._model._print_logs_after_command("mesh", AutoMeshResults(model = self._model, json_data = result))
         return AutoMeshResults(model = self._model, json_data = result)
+

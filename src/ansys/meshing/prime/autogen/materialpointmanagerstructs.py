@@ -1,4 +1,4 @@
-# Copyright (C) 2024 - 2025 ANSYS, Inc. and/or its affiliates.
+# Copyright © 2026 Synopsys, Inc. and ANSYS, Inc. All rights reserved.
 # SPDX-License-Identifier: MIT
 #
 #
@@ -43,11 +43,11 @@ class CreateMaterialPointParams(CoreObject):
 
     Parameters
     ----------
-    model: Model
+    model : Model
         Model to create a ``CreateMaterialPointParams`` object with default parameters.
-    type: MaterialPointType, optional
+    type : MaterialPointType, optional
         Defines the type of material point.
-    json_data: dict, optional
+    json_data : dict, optional
         JSON dictionary to create a ``CreateMaterialPointParams`` object with provided parameters.
 
     Examples
@@ -58,24 +58,24 @@ class CreateMaterialPointParams(CoreObject):
 
     def __initialize(
             self,
-            type: MaterialPointType):
+            type : MaterialPointType):
         self._type = MaterialPointType(type)
 
     def __init__(
             self,
             model: CommunicationManager=None,
-            type: MaterialPointType = None,
+            type : MaterialPointType = None,
             json_data : dict = None,
              **kwargs):
         """Initialize a ``CreateMaterialPointParams`` object.
 
         Parameters
         ----------
-        model: Model
+        model : Model
             Model to create a ``CreateMaterialPointParams`` object with default parameters.
-        type: MaterialPointType, optional
+        type : MaterialPointType, optional
             Defines the type of material point.
-        json_data: dict, optional
+        json_data : dict, optional
             JSON dictionary to create a ``CreateMaterialPointParams`` object with provided parameters.
 
         Examples
@@ -100,19 +100,19 @@ class CreateMaterialPointParams(CoreObject):
                         type if type is not None else ( CreateMaterialPointParams._default_params["type"] if "type" in CreateMaterialPointParams._default_params else MaterialPointType(json_data["type"] if "type" in json_data else None)))
         self._custom_params = kwargs
         if model is not None:
-            [ model._logger.debug(f'Unsupported argument : {key}') for key in kwargs ]
+            [ model._logger.warning(f'Unsupported argument : {key}') for key in kwargs ]
         [setattr(type(self), key, property(lambda self, key = key:  self._custom_params[key] if key in self._custom_params else None,
         lambda self, value, key = key : self._custom_params.update({ key: value }))) for key in kwargs]
         self._freeze()
 
     @staticmethod
     def set_default(
-            type: MaterialPointType = None):
+            type : MaterialPointType = None):
         """Set the default values of the ``CreateMaterialPointParams`` object.
 
         Parameters
         ----------
-        type: MaterialPointType, optional
+        type : MaterialPointType, optional
             Defines the type of material point.
         """
         args = locals()
@@ -157,17 +157,17 @@ class CreateMaterialPointResults(CoreObject):
 
     Parameters
     ----------
-    model: Model
+    model : Model
         Model to create a ``CreateMaterialPointResults`` object with default parameters.
-    id: int, optional
+    id : int, optional
         Id of the material point created.
-    assigned_name: str, optional
+    assigned_name : str, optional
         Assigned name of the material point created.
-    error_code: ErrorCode, optional
+    error_code : ErrorCode, optional
         Error code associated with create material point operation.
-    warning_codes: List[WarningCode], optional
+    warning_codes : List[WarningCode], optional
         Warning codes associated with create material point operation.
-    json_data: dict, optional
+    json_data : dict, optional
         JSON dictionary to create a ``CreateMaterialPointResults`` object with provided parameters.
 
     Examples
@@ -178,10 +178,10 @@ class CreateMaterialPointResults(CoreObject):
 
     def __initialize(
             self,
-            id: int,
-            assigned_name: str,
-            error_code: ErrorCode,
-            warning_codes: List[WarningCode]):
+            id : int,
+            assigned_name : str,
+            error_code : ErrorCode,
+            warning_codes : List[WarningCode]):
         self._id = id
         self._assigned_name = assigned_name
         self._error_code = ErrorCode(error_code)
@@ -190,27 +190,27 @@ class CreateMaterialPointResults(CoreObject):
     def __init__(
             self,
             model: CommunicationManager=None,
-            id: int = None,
-            assigned_name: str = None,
-            error_code: ErrorCode = None,
-            warning_codes: List[WarningCode] = None,
+            id : int = None,
+            assigned_name : str = None,
+            error_code : ErrorCode = None,
+            warning_codes : List[WarningCode] = None,
             json_data : dict = None,
              **kwargs):
         """Initialize a ``CreateMaterialPointResults`` object.
 
         Parameters
         ----------
-        model: Model
+        model : Model
             Model to create a ``CreateMaterialPointResults`` object with default parameters.
-        id: int, optional
+        id : int, optional
             Id of the material point created.
-        assigned_name: str, optional
+        assigned_name : str, optional
             Assigned name of the material point created.
-        error_code: ErrorCode, optional
+        error_code : ErrorCode, optional
             Error code associated with create material point operation.
-        warning_codes: List[WarningCode], optional
+        warning_codes : List[WarningCode], optional
             Warning codes associated with create material point operation.
-        json_data: dict, optional
+        json_data : dict, optional
             JSON dictionary to create a ``CreateMaterialPointResults`` object with provided parameters.
 
         Examples
@@ -244,28 +244,28 @@ class CreateMaterialPointResults(CoreObject):
                         warning_codes if warning_codes is not None else ( CreateMaterialPointResults._default_params["warning_codes"] if "warning_codes" in CreateMaterialPointResults._default_params else [WarningCode(data) for data in (json_data["warningCodes"] if "warningCodes" in json_data else None)]))
         self._custom_params = kwargs
         if model is not None:
-            [ model._logger.debug(f'Unsupported argument : {key}') for key in kwargs ]
+            [ model._logger.warning(f'Unsupported argument : {key}') for key in kwargs ]
         [setattr(type(self), key, property(lambda self, key = key:  self._custom_params[key] if key in self._custom_params else None,
         lambda self, value, key = key : self._custom_params.update({ key: value }))) for key in kwargs]
         self._freeze()
 
     @staticmethod
     def set_default(
-            id: int = None,
-            assigned_name: str = None,
-            error_code: ErrorCode = None,
-            warning_codes: List[WarningCode] = None):
+            id : int = None,
+            assigned_name : str = None,
+            error_code : ErrorCode = None,
+            warning_codes : List[WarningCode] = None):
         """Set the default values of the ``CreateMaterialPointResults`` object.
 
         Parameters
         ----------
-        id: int, optional
+        id : int, optional
             Id of the material point created.
-        assigned_name: str, optional
+        assigned_name : str, optional
             Assigned name of the material point created.
-        error_code: ErrorCode, optional
+        error_code : ErrorCode, optional
             Error code associated with create material point operation.
-        warning_codes: List[WarningCode], optional
+        warning_codes : List[WarningCode], optional
             Warning codes associated with create material point operation.
         """
         args = locals()
@@ -346,11 +346,11 @@ class DeleteMaterialPointResults(CoreObject):
 
     Parameters
     ----------
-    model: Model
+    model : Model
         Model to create a ``DeleteMaterialPointResults`` object with default parameters.
-    error_code: ErrorCode, optional
+    error_code : ErrorCode, optional
         Error code associated with the failure of operation.
-    json_data: dict, optional
+    json_data : dict, optional
         JSON dictionary to create a ``DeleteMaterialPointResults`` object with provided parameters.
 
     Examples
@@ -361,24 +361,24 @@ class DeleteMaterialPointResults(CoreObject):
 
     def __initialize(
             self,
-            error_code: ErrorCode):
+            error_code : ErrorCode):
         self._error_code = ErrorCode(error_code)
 
     def __init__(
             self,
             model: CommunicationManager=None,
-            error_code: ErrorCode = None,
+            error_code : ErrorCode = None,
             json_data : dict = None,
              **kwargs):
         """Initialize a ``DeleteMaterialPointResults`` object.
 
         Parameters
         ----------
-        model: Model
+        model : Model
             Model to create a ``DeleteMaterialPointResults`` object with default parameters.
-        error_code: ErrorCode, optional
+        error_code : ErrorCode, optional
             Error code associated with the failure of operation.
-        json_data: dict, optional
+        json_data : dict, optional
             JSON dictionary to create a ``DeleteMaterialPointResults`` object with provided parameters.
 
         Examples
@@ -403,19 +403,19 @@ class DeleteMaterialPointResults(CoreObject):
                         error_code if error_code is not None else ( DeleteMaterialPointResults._default_params["error_code"] if "error_code" in DeleteMaterialPointResults._default_params else ErrorCode(json_data["errorCode"] if "errorCode" in json_data else None)))
         self._custom_params = kwargs
         if model is not None:
-            [ model._logger.debug(f'Unsupported argument : {key}') for key in kwargs ]
+            [ model._logger.warning(f'Unsupported argument : {key}') for key in kwargs ]
         [setattr(type(self), key, property(lambda self, key = key:  self._custom_params[key] if key in self._custom_params else None,
         lambda self, value, key = key : self._custom_params.update({ key: value }))) for key in kwargs]
         self._freeze()
 
     @staticmethod
     def set_default(
-            error_code: ErrorCode = None):
+            error_code : ErrorCode = None):
         """Set the default values of the ``DeleteMaterialPointResults`` object.
 
         Parameters
         ----------
-        error_code: ErrorCode, optional
+        error_code : ErrorCode, optional
             Error code associated with the failure of operation.
         """
         args = locals()
