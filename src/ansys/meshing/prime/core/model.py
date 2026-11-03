@@ -78,7 +78,6 @@ class Model(_Model):
         self._control_data = None
         self._material_point_data = None
         self._model_pv_mesh = None
-        self._model_usd_mesh = None
         self._use_standby_apis = False
         self._freeze()
 
