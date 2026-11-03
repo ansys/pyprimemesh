@@ -1,44 +1,49 @@
-exclude: |
-    (?x)^(
-      src/ansys/meshing/prime/autogen/|
-      src/ansys/meshing/prime/__init__.py
-    )
-
 repos:
 
 - repo: https://github.com/psf/black
   rev: 25.12.0  # IF VERSION CHANGES --> MODIFY "blacken-docs" MANUALLY AS WELL!!
   hooks:
   - id: black
+    exclude: &generated_files |
+      (?x)^(
+        src/ansys/meshing/prime/autogen/|
+        src/ansys/meshing/prime/__init__.py
+      )
 
 - repo: https://github.com/adamchainz/blacken-docs
   rev: 1.20.0
   hooks:
   - id: blacken-docs
     additional_dependencies: [black==22.12.0]
+    exclude: *generated_files
 
 - repo: https://github.com/PyCQA/flake8
   rev: 7.3.0
   hooks:
   - id: flake8
+    exclude: *generated_files
 
 - repo: https://github.com/pycqa/isort
   rev: 7.0.0
   hooks:
   - id: isort
     args: ["--profile", "black"]
+    exclude: *generated_files
 
 - repo: https://github.com/codespell-project/codespell
   rev: v2.4.1
   hooks:
   - id: codespell
     args: ["--ignore-words", "doc/styles/config/vocabularies/ANSYS/accept.txt"]
+    exclude: *generated_files
 
 - repo: https://github.com/pre-commit/pre-commit-hooks
   rev: v6.0.0
   hooks:
   - id: check-merge-conflict
+    exclude: *generated_files
   - id: debug-statements
+    exclude: *generated_files
 
 # To be activated after quick dev cycles
 #
@@ -46,12 +51,13 @@ repos:
   rev: 6.3.0
   hooks:
   - id: pydocstyle
-    additional_dependencies: [toml]
-    exclude: "tests/|examples/|__init__.py"
+    additional_dependencies: [toml, tomli]
+    exclude: "tests/|examples/|__init__.py|src/ansys/meshing/prime/autogen/"
 
 - repo: https://github.com/ansys/pre-commit-hooks
-  rev: v0.2.8
+  rev: v0.8.0
   hooks:
     - id: add-license-headers
+      files: .*\.py$
       args:
-          - LICENSE
+        - --start_year=2026

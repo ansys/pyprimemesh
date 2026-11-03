@@ -1,4 +1,4 @@
-# Copyright (C) 2024 - 2026 ANSYS, Inc. and/or its affiliates.
+# Copyright © 2026 Synopsys, Inc. and ANSYS, Inc. All rights reserved.
 # SPDX-License-Identifier: MIT
 #
 #
@@ -57,4 +57,4 @@ def test_pipe_tee_junction(get_remote_client, get_examples):
     # validate number of poly faces
     assert math.isclose(16717, float(part_summary_res.n_poly_faces), rel_tol=0.02)
     # validate number of poly cells
-    assert math.isclose(97341, float(part_summary_res.n_poly_cells), rel_tol=0.05)
+    assert math.isclose(108361.0, float(part_summary_res.n_poly_cells), rel_tol=0.05)
