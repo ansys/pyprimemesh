@@ -30,11 +30,16 @@ updates:
         patterns:
           - "pyvista*"
   - package-ecosystem: "github-actions"
-    cooldown:
-      default-days: 10 # Fallback cooldown if no specific rule applies
     directory: "/"
     schedule:
       interval: "weekly"
+    cooldown:
+      default-days: 7
+    open-pull-requests-limit: 10
+    groups:
+      actions:
+        patterns:
+          - "*"
   - package-ecosystem: "pre-commit"
     directory: "/"
     schedule:
@@ -52,4 +57,4 @@ updates:
         patterns:
           - "*"
     assignees:
-      - "rchopade7"
+      - "alejandrofernandezluces"
