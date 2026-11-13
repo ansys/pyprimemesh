@@ -1,0 +1,6 @@
+n\_divisions
+============
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoproperty:: MultiZoneEdgeBiasingParams.n_divisions

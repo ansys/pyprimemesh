@@ -1,0 +1,11 @@
+mesh
+====
+
+.. currentmodule:: ansys.meshing.prime
+
+.. automethod:: ansys.meshing.prime.AutoMesh.mesh
+
+.. minigallery::
+   :add-heading: Examples using AutoMesh.mesh
+
+   ansys.meshing.prime.AutoMesh.mesh

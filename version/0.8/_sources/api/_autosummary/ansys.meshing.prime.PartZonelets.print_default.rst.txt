@@ -1,0 +1,11 @@
+print\_default
+==============
+
+.. currentmodule:: ansys.meshing.prime
+
+.. automethod:: ansys.meshing.prime.PartZonelets.print_default
+
+.. minigallery::
+   :add-heading: Examples using PartZonelets.print_default
+
+   ansys.meshing.prime.PartZonelets.print_default

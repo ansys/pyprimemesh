@@ -1,0 +1,6 @@
+﻿delete\_parts
+=============
+
+.. currentmodule:: ansys.meshing.prime
+
+.. automethod:: Model.delete_parts

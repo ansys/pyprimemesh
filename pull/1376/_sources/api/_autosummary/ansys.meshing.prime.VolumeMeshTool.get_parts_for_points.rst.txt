@@ -1,0 +1,11 @@
+get\_parts\_for\_points
+=======================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. automethod:: ansys.meshing.prime.VolumeMeshTool.get_parts_for_points
+
+.. minigallery::
+   :add-heading: Examples using VolumeMeshTool.get_parts_for_points
+
+   ansys.meshing.prime.VolumeMeshTool.get_parts_for_points

@@ -1,0 +1,11 @@
+bit\_length
+===========
+
+.. currentmodule:: ansys.meshing.prime
+
+.. automethod:: ansys.meshing.prime.SmoothType.bit_length
+
+.. minigallery::
+   :add-heading: Examples using SmoothType.bit_length
+
+   ansys.meshing.prime.SmoothType.bit_length

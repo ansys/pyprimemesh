@@ -1,0 +1,40 @@
+.. vale off
+
+ImportFluentMeshingMeshResults
+==============================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoclass:: ImportFluentMeshingMeshResults
+   
+   
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+      :toctree:
+   
+      
+      ImportFluentMeshingMeshResults.print_default
+      ImportFluentMeshingMeshResults.set_default
+   
+   
+
+   
+   
+   .. rubric:: Attributes
+
+   .. autosummary::
+      :toctree:
+   
+      ImportFluentMeshingMeshResults.error_code
+      ImportFluentMeshingMeshResults.new_parts_created
+   
+   
+
+.. minigallery::
+    :add-heading: Examples using ImportFluentMeshingMeshResults
+
+    ansys.meshing.prime.ImportFluentMeshingMeshResults
+
+.. vale on

@@ -1,0 +1,23 @@
+CellZoneletType
+===============
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoclass:: CellZoneletType
+   
+   
+   
+   
+
+   
+   
+   .. rubric:: Attributes
+
+   .. autosummary::
+      :toctree:
+   
+      CellZoneletType.DEAD
+      CellZoneletType.FLUID
+      CellZoneletType.SOLID
+   
+   

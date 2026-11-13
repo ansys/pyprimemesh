@@ -1,0 +1,11 @@
+set\_selection\_target
+======================
+
+.. currentmodule:: ansys.meshing.prime.graphics
+
+.. automethod:: ansys.meshing.prime.graphics.PrimePlotter.set_selection_target
+
+.. minigallery::
+   :add-heading: Examples using PrimePlotter.set_selection_target
+
+   ansys.meshing.prime.graphics.PrimePlotter.set_selection_target

@@ -1,0 +1,6 @@
+label\_export\_params
+=====================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoproperty:: ExportMapdlCdbParams.label_export_params

@@ -1,0 +1,6 @@
+V231
+====
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoattribute:: TargetAnsysVersion.V231

@@ -1,0 +1,47 @@
+.. vale off
+
+SplineRefinementType
+====================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoclass:: SplineRefinementType
+   
+   
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+      :toctree:
+   
+      SplineRefinementType.conjugate
+      SplineRefinementType.bit_length
+      SplineRefinementType.bit_count
+      SplineRefinementType.to_bytes
+      SplineRefinementType.from_bytes
+      SplineRefinementType.as_integer_ratio
+   
+   
+
+   
+   
+   .. rubric:: Attributes
+
+   .. autosummary::
+      :toctree:
+   
+      SplineRefinementType.real
+      SplineRefinementType.imag
+      SplineRefinementType.numerator
+      SplineRefinementType.denominator
+      SplineRefinementType.H
+      SplineRefinementType.P
+   
+   
+
+.. minigallery::
+    :add-heading: Examples using SplineRefinementType
+
+    ansys.meshing.prime.SplineRefinementType
+
+.. vale on

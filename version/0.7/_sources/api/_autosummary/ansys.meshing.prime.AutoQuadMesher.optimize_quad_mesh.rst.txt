@@ -1,0 +1,11 @@
+optimize\_quad\_mesh
+====================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. automethod:: ansys.meshing.prime.AutoQuadMesher.optimize_quad_mesh
+
+.. minigallery::
+   :add-heading: Examples using AutoQuadMesher.optimize_quad_mesh
+
+   ansys.meshing.prime.AutoQuadMesher.optimize_quad_mesh

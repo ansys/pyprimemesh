@@ -1,0 +1,6 @@
+﻿ignore\_orientation
+===================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoproperty:: ProximitySizingParams.ignore_orientation

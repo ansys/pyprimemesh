@@ -1,0 +1,6 @@
+﻿cad\_reader\_route
+==================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoproperty:: ImportCadParams.cad_reader_route

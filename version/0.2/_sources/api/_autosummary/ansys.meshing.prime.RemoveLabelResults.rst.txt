@@ -1,0 +1,30 @@
+RemoveLabelResults
+==================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoclass:: RemoveLabelResults
+   
+   
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+      :toctree:
+   
+      
+      RemoveLabelResults.print_default
+      RemoveLabelResults.set_default
+   
+   
+
+   
+   
+   .. rubric:: Attributes
+
+   .. autosummary::
+      :toctree:
+   
+      RemoveLabelResults.error_code
+   
+   

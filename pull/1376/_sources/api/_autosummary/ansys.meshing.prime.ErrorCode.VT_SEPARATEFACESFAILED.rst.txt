@@ -1,0 +1,6 @@
+VT\_SEPARATEFACESFAILED
+=======================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoattribute:: ErrorCode.VT_SEPARATEFACESFAILED

@@ -1,0 +1,6 @@
+﻿warning\_code
+=============
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoproperty:: SetNameResults.warning_code

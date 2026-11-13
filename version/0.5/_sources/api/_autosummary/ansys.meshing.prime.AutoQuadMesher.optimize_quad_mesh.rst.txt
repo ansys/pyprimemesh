@@ -1,0 +1,6 @@
+optimize\_quad\_mesh
+====================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. automethod:: AutoQuadMesher.optimize_quad_mesh

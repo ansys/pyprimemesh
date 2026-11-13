@@ -1,0 +1,6 @@
+trace\_edges
+============
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoproperty:: SubtractZoneletsParams.trace_edges

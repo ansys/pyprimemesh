@@ -1,0 +1,6 @@
+MICROSTRUCTUREWRONGAPICALLSEQUENCE
+==================================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoattribute:: ErrorCode.MICROSTRUCTUREWRONGAPICALLSEQUENCE

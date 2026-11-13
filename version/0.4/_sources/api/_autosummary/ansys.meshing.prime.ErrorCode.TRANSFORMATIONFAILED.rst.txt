@@ -1,0 +1,6 @@
+﻿TRANSFORMATIONFAILED
+====================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoattribute:: ErrorCode.TRANSFORMATIONFAILED

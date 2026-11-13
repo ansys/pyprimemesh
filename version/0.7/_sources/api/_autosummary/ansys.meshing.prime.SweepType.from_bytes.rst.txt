@@ -1,0 +1,11 @@
+from\_bytes
+===========
+
+.. currentmodule:: ansys.meshing.prime
+
+.. automethod:: ansys.meshing.prime.SweepType.from_bytes
+
+.. minigallery::
+   :add-heading: Examples using SweepType.from_bytes
+
+   ansys.meshing.prime.SweepType.from_bytes

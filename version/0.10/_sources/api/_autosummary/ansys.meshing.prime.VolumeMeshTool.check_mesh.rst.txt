@@ -1,0 +1,11 @@
+check\_mesh
+===========
+
+.. currentmodule:: ansys.meshing.prime
+
+.. automethod:: ansys.meshing.prime.VolumeMeshTool.check_mesh
+
+.. minigallery::
+   :add-heading: Examples using VolumeMeshTool.check_mesh
+
+   ansys.meshing.prime.VolumeMeshTool.check_mesh

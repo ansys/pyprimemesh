@@ -1,0 +1,11 @@
+set\_default
+============
+
+.. currentmodule:: ansys.meshing.prime
+
+.. automethod:: ansys.meshing.prime.DeadRegion.set_default
+
+.. minigallery::
+   :add-heading: Examples using DeadRegion.set_default
+
+   ansys.meshing.prime.DeadRegion.set_default

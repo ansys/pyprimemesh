@@ -1,0 +1,40 @@
+.. vale off
+
+SearchByInvalidNormalsResults
+=============================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoclass:: SearchByInvalidNormalsResults
+   
+   
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+      :toctree:
+   
+      
+      SearchByInvalidNormalsResults.print_default
+      SearchByInvalidNormalsResults.set_default
+   
+   
+
+   
+   
+   .. rubric:: Attributes
+
+   .. autosummary::
+      :toctree:
+   
+      SearchByInvalidNormalsResults.error_code
+      SearchByInvalidNormalsResults.n_found
+   
+   
+
+.. minigallery::
+    :add-heading: Examples using SearchByInvalidNormalsResults
+
+    ansys.meshing.prime.SearchByInvalidNormalsResults
+
+.. vale on

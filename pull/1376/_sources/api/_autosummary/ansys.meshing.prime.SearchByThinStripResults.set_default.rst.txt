@@ -1,0 +1,11 @@
+set\_default
+============
+
+.. currentmodule:: ansys.meshing.prime
+
+.. automethod:: ansys.meshing.prime.SearchByThinStripResults.set_default
+
+.. minigallery::
+   :add-heading: Examples using SearchByThinStripResults.set_default
+
+   ansys.meshing.prime.SearchByThinStripResults.set_default

@@ -1,0 +1,6 @@
+set\_meshed\_sizing\_params
+===========================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. automethod:: SizeControl.set_meshed_sizing_params

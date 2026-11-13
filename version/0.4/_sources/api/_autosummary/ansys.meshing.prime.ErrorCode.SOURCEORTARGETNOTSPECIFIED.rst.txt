@@ -1,0 +1,6 @@
+﻿SOURCEORTARGETNOTSPECIFIED
+==========================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoattribute:: ErrorCode.SOURCEORTARGETNOTSPECIFIED

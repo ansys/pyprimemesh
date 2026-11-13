@@ -1,0 +1,37 @@
+.. vale off
+
+WrapperPatchFlowRegionsParams
+=============================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoclass:: WrapperPatchFlowRegionsParams
+   
+   
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+      :toctree:
+   
+      
+      WrapperPatchFlowRegionsParams.print_default
+      WrapperPatchFlowRegionsParams.set_default
+   
+   
+
+   
+   
+   .. rubric:: Attributes
+
+   .. autosummary::
+      :toctree:
+   
+      WrapperPatchFlowRegionsParams.base_size
+      WrapperPatchFlowRegionsParams.dead_regions
+      WrapperPatchFlowRegionsParams.number_of_threads
+      WrapperPatchFlowRegionsParams.suggested_part_name
+   
+   
+
+.. vale on

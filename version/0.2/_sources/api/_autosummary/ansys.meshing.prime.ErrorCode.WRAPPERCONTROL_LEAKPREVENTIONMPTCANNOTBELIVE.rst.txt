@@ -1,0 +1,6 @@
+WRAPPERCONTROL\_LEAKPREVENTIONMPTCANNOTBELIVE
+=============================================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoattribute:: ErrorCode.WRAPPERCONTROL_LEAKPREVENTIONMPTCANNOTBELIVE

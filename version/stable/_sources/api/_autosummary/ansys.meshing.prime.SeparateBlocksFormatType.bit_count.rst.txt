@@ -1,0 +1,11 @@
+bit\_count
+==========
+
+.. currentmodule:: ansys.meshing.prime
+
+.. automethod:: ansys.meshing.prime.SeparateBlocksFormatType.bit_count
+
+.. minigallery::
+   :add-heading: Examples using SeparateBlocksFormatType.bit_count
+
+   ansys.meshing.prime.SeparateBlocksFormatType.bit_count

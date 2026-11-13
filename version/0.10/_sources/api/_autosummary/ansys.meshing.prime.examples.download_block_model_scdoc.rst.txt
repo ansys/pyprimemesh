@@ -1,0 +1,11 @@
+download\_block\_model\_scdoc
+=============================
+
+.. currentmodule:: ansys.meshing.prime.examples
+
+.. autofunction:: ansys.meshing.prime.examples.download_block_model_scdoc
+
+.. minigallery::
+    :add-heading: Examples using download_block_model_scdoc
+
+    ansys.meshing.prime.examples.download_block_model_scdoc

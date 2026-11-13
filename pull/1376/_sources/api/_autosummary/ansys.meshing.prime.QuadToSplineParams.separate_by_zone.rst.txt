@@ -1,0 +1,6 @@
+separate\_by\_zone
+==================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoproperty:: QuadToSplineParams.separate_by_zone

@@ -1,0 +1,6 @@
+nisr
+====
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoproperty:: RefineTetMeshParams.nisr

@@ -1,0 +1,6 @@
+wrap
+====
+
+.. currentmodule:: ansys.meshing.prime
+
+.. automethod:: Wrapper.wrap

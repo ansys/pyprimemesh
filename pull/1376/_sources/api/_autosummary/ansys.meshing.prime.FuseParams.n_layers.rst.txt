@@ -1,0 +1,6 @@
+n\_layers
+=========
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoproperty:: FuseParams.n_layers

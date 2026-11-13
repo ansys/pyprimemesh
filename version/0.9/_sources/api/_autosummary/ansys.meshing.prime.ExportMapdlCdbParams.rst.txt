@@ -1,0 +1,67 @@
+.. vale off
+
+
+ExportMapdlCdbParams
+====================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoclass:: ExportMapdlCdbParams
+
+   
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+      :toctree:
+
+   
+      
+      ExportMapdlCdbParams.print_default
+      ExportMapdlCdbParams.set_default
+   
+   
+
+   
+   
+   .. rubric:: Attributes
+
+   .. autosummary::
+      :toctree:
+   
+      ExportMapdlCdbParams.analysis_settings
+      ExportMapdlCdbParams.analysis_settings_file_name
+      ExportMapdlCdbParams.analysis_type
+      ExportMapdlCdbParams.boundary_conditions
+      ExportMapdlCdbParams.config_settings
+      ExportMapdlCdbParams.consider_general_connectors_as_spot_weld
+      ExportMapdlCdbParams.contact_element_types
+      ExportMapdlCdbParams.enable_face_based_labels
+      ExportMapdlCdbParams.export_coupling_as_sfcgen
+      ExportMapdlCdbParams.export_fasteners_as_swgen
+      ExportMapdlCdbParams.export_rigid_bodies_as_rbgen
+      ExportMapdlCdbParams.export_tie_as_cntgen
+      ExportMapdlCdbParams.initial_counters
+      ExportMapdlCdbParams.label_export_params
+      ExportMapdlCdbParams.material_properties
+      ExportMapdlCdbParams.mortar_contact_for_ties
+      ExportMapdlCdbParams.pre_solution_settings
+      ExportMapdlCdbParams.reorder_spotweldsurface
+      ExportMapdlCdbParams.separate_blocks_format_type
+      ExportMapdlCdbParams.simulation_type
+      ExportMapdlCdbParams.skip_comments
+      ExportMapdlCdbParams.write_by_zones
+      ExportMapdlCdbParams.write_cells
+      ExportMapdlCdbParams.write_component_based_ties
+      ExportMapdlCdbParams.write_components_with_element_blocks
+      ExportMapdlCdbParams.write_separate_blocks
+      ExportMapdlCdbParams.write_thickness_file
+   
+   
+
+.. minigallery::
+    :add-heading: Examples using ExportMapdlCdbParams
+
+    ansys.meshing.prime.ExportMapdlCdbParams
+
+.. vale on

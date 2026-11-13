@@ -1,0 +1,6 @@
+﻿imprint\_relative\_range
+========================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoproperty:: WrapParams.imprint_relative_range

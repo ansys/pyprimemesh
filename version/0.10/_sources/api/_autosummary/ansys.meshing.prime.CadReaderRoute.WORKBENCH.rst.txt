@@ -1,0 +1,6 @@
+WORKBENCH
+=========
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoattribute:: CadReaderRoute.WORKBENCH

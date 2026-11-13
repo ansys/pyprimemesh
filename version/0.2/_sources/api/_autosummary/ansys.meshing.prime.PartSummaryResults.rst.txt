@@ -1,0 +1,52 @@
+PartSummaryResults
+==================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoclass:: PartSummaryResults
+   
+   
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+      :toctree:
+   
+      
+      PartSummaryResults.print_default
+      PartSummaryResults.set_default
+   
+   
+
+   
+   
+   .. rubric:: Attributes
+
+   .. autosummary::
+      :toctree:
+   
+      PartSummaryResults.message
+      PartSummaryResults.n_cell_zonelets
+      PartSummaryResults.n_cells
+      PartSummaryResults.n_edge_zonelets
+      PartSummaryResults.n_edge_zones
+      PartSummaryResults.n_face_zonelets
+      PartSummaryResults.n_face_zones
+      PartSummaryResults.n_faces
+      PartSummaryResults.n_hex_cells
+      PartSummaryResults.n_labels
+      PartSummaryResults.n_nodes
+      PartSummaryResults.n_poly_cells
+      PartSummaryResults.n_poly_faces
+      PartSummaryResults.n_prism_cells
+      PartSummaryResults.n_pyra_cells
+      PartSummaryResults.n_quad_faces
+      PartSummaryResults.n_tet_cells
+      PartSummaryResults.n_topo_edges
+      PartSummaryResults.n_topo_faces
+      PartSummaryResults.n_topo_volumes
+      PartSummaryResults.n_tri_faces
+      PartSummaryResults.n_unmeshed_topo_faces
+      PartSummaryResults.n_volume_zones
+   
+   

@@ -1,0 +1,6 @@
+﻿offset\_type
+============
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoproperty:: PrismControlGrowthParams.offset_type

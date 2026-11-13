@@ -1,0 +1,11 @@
+clear
+=====
+
+.. currentmodule:: ansys.meshing.prime.graphics
+
+.. automethod:: ansys.meshing.prime.graphics.PrimePlotter.clear
+
+.. minigallery::
+   :add-heading: Examples using PrimePlotter.clear
+
+   ansys.meshing.prime.graphics.PrimePlotter.clear

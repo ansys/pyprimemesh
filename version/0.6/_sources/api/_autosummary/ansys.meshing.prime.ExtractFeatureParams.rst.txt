@@ -1,0 +1,40 @@
+.. vale off
+
+ExtractFeatureParams
+====================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoclass:: ExtractFeatureParams
+   
+   
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+      :toctree:
+   
+      
+      ExtractFeatureParams.print_default
+      ExtractFeatureParams.set_default
+   
+   
+
+   
+   
+   .. rubric:: Attributes
+
+   .. autosummary::
+      :toctree:
+   
+      ExtractFeatureParams.disconnect_with_faces
+      ExtractFeatureParams.feature_angle
+      ExtractFeatureParams.label_name
+      ExtractFeatureParams.number_of_threads
+      ExtractFeatureParams.replace
+      ExtractFeatureParams.separate_features
+      ExtractFeatureParams.separation_angle
+   
+   
+
+.. vale on

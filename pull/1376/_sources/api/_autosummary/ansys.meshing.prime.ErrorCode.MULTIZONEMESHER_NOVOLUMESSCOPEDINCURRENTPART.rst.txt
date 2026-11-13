@@ -1,0 +1,6 @@
+MULTIZONEMESHER\_NOVOLUMESSCOPEDINCURRENTPART
+=============================================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoattribute:: ErrorCode.MULTIZONEMESHER_NOVOLUMESSCOPEDINCURRENTPART

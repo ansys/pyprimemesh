@@ -1,0 +1,6 @@
+MATCHMORPH\_INVALIDSOURCEINPUT
+==============================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoattribute:: ErrorCode.MATCHMORPH_INVALIDSOURCEINPUT

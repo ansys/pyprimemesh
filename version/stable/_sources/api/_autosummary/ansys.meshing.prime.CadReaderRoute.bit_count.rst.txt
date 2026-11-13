@@ -1,0 +1,11 @@
+bit\_count
+==========
+
+.. currentmodule:: ansys.meshing.prime
+
+.. automethod:: ansys.meshing.prime.CadReaderRoute.bit_count
+
+.. minigallery::
+   :add-heading: Examples using CadReaderRoute.bit_count
+
+   ansys.meshing.prime.CadReaderRoute.bit_count

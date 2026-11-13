@@ -1,0 +1,11 @@
+delete\_shadowed\_topo\_faces
+=============================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. automethod:: ansys.meshing.prime.Scaffolder.delete_shadowed_topo_faces
+
+.. minigallery::
+   :add-heading: Examples using Scaffolder.delete_shadowed_topo_faces
+
+   ansys.meshing.prime.Scaffolder.delete_shadowed_topo_faces

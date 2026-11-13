@@ -1,0 +1,36 @@
+.. vale off
+
+VolumeQualitySummaryParams
+==========================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoclass:: VolumeQualitySummaryParams
+   
+   
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+      :toctree:
+   
+      
+      VolumeQualitySummaryParams.print_default
+      VolumeQualitySummaryParams.set_default
+   
+   
+
+   
+   
+   .. rubric:: Attributes
+
+   .. autosummary::
+      :toctree:
+   
+      VolumeQualitySummaryParams.cell_quality_measures
+      VolumeQualitySummaryParams.quality_limit
+      VolumeQualitySummaryParams.scope
+   
+   
+
+.. vale on

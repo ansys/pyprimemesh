@@ -1,0 +1,11 @@
+import\_fluent\_meshing\_meshes
+===============================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. automethod:: ansys.meshing.prime.FileIO.import_fluent_meshing_meshes
+
+.. minigallery::
+   :add-heading: Examples using FileIO.import_fluent_meshing_meshes
+
+   ansys.meshing.prime.FileIO.import_fluent_meshing_meshes

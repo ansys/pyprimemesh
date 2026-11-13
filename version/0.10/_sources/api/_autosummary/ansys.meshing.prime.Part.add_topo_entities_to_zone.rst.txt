@@ -1,0 +1,11 @@
+add\_topo\_entities\_to\_zone
+=============================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. automethod:: ansys.meshing.prime.Part.add_topo_entities_to_zone
+
+.. minigallery::
+   :add-heading: Examples using Part.add_topo_entities_to_zone
+
+   ansys.meshing.prime.Part.add_topo_entities_to_zone

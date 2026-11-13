@@ -1,0 +1,6 @@
+repair\_topology
+================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. automethod:: AutoQuadMesher.repair_topology

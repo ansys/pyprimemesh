@@ -1,0 +1,6 @@
+validate\_shared\_topology
+==========================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoproperty:: ImportCadParams.validate_shared_topology

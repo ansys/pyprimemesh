@@ -1,0 +1,11 @@
+wrap
+====
+
+.. currentmodule:: ansys.meshing.prime
+
+.. automethod:: ansys.meshing.prime.Wrapper.wrap
+
+.. minigallery::
+   :add-heading: Examples using Wrapper.wrap
+
+   ansys.meshing.prime.Wrapper.wrap

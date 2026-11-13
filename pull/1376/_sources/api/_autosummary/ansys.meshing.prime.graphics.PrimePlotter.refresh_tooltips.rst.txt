@@ -1,0 +1,11 @@
+refresh\_tooltips
+=================
+
+.. currentmodule:: ansys.meshing.prime.graphics
+
+.. automethod:: ansys.meshing.prime.graphics.PrimePlotter.refresh_tooltips
+
+.. minigallery::
+   :add-heading: Examples using PrimePlotter.refresh_tooltips
+
+   ansys.meshing.prime.graphics.PrimePlotter.refresh_tooltips

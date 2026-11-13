@@ -1,0 +1,6 @@
+﻿get\_adjacent\_face\_zonelets\_of\_face\_zonelets
+=================================================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. automethod:: Part.get_adjacent_face_zonelets_of_face_zonelets

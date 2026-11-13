@@ -1,0 +1,11 @@
+print\_default
+==============
+
+.. currentmodule:: ansys.meshing.prime
+
+.. automethod:: ansys.meshing.prime.AddToZoneResults.print_default
+
+.. minigallery::
+   :add-heading: Examples using AddToZoneResults.print_default
+
+   ansys.meshing.prime.AddToZoneResults.print_default

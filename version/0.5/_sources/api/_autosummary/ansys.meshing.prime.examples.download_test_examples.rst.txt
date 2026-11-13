@@ -1,0 +1,6 @@
+download\_test\_examples
+========================
+
+.. currentmodule:: ansys.meshing.prime.examples
+
+.. autofunction:: download_test_examples

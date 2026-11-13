@@ -1,0 +1,6 @@
+﻿entity\_type
+============
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoproperty:: ScopeDefinition.entity_type

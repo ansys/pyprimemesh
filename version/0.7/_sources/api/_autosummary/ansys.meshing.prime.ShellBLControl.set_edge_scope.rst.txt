@@ -1,0 +1,11 @@
+set\_edge\_scope
+================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. automethod:: ansys.meshing.prime.ShellBLControl.set_edge_scope
+
+.. minigallery::
+   :add-heading: Examples using ShellBLControl.set_edge_scope
+
+   ansys.meshing.prime.ShellBLControl.set_edge_scope

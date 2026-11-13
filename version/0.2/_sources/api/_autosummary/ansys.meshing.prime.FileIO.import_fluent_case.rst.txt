@@ -1,0 +1,6 @@
+import\_fluent\_case
+====================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. automethod:: FileIO.import_fluent_case

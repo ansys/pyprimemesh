@@ -1,0 +1,6 @@
+WRAPPERPATCHFLOWREGIONS\_INVALIDHOLESIZE
+========================================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoattribute:: ErrorCode.WRAPPERPATCHFLOWREGIONS_INVALIDHOLESIZE

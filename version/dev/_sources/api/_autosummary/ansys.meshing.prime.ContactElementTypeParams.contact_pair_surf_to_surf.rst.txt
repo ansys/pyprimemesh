@@ -1,0 +1,6 @@
+contact\_pair\_surf\_to\_surf
+=============================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoproperty:: ContactElementTypeParams.contact_pair_surf_to_surf

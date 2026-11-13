@@ -1,0 +1,6 @@
+export\_fasteners\_as\_swgen
+============================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoproperty:: ExportMapdlCdbParams.export_fasteners_as_swgen

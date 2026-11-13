@@ -1,0 +1,6 @@
+n\_splits
+=========
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoproperty:: CollapseResults.n_splits

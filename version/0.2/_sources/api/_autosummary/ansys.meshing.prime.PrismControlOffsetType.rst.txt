@@ -1,0 +1,22 @@
+PrismControlOffsetType
+======================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoclass:: PrismControlOffsetType
+   
+   
+   
+   
+
+   
+   
+   .. rubric:: Attributes
+
+   .. autosummary::
+      :toctree:
+   
+      PrismControlOffsetType.UNIFORM
+      PrismControlOffsetType.ASPECTRATIO
+   
+   

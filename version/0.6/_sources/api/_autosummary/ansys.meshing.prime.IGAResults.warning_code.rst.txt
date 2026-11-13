@@ -1,0 +1,6 @@
+warning\_code
+=============
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoproperty:: IGAResults.warning_code

@@ -1,0 +1,6 @@
+cad\_refaceting\_params
+=======================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoproperty:: ImportCadParams.cad_refaceting_params

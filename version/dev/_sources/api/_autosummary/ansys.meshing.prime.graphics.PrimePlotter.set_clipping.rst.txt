@@ -1,0 +1,11 @@
+set\_clipping
+=============
+
+.. currentmodule:: ansys.meshing.prime.graphics
+
+.. automethod:: ansys.meshing.prime.graphics.PrimePlotter.set_clipping
+
+.. minigallery::
+   :add-heading: Examples using PrimePlotter.set_clipping
+
+   ansys.meshing.prime.graphics.PrimePlotter.set_clipping

@@ -1,0 +1,6 @@
+collapse\_feature\_angle
+========================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoproperty:: IntersectParams.collapse_feature_angle

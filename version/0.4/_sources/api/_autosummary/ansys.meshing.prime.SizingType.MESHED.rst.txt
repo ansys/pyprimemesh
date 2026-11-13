@@ -1,0 +1,6 @@
+﻿MESHED
+======
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoattribute:: SizingType.MESHED

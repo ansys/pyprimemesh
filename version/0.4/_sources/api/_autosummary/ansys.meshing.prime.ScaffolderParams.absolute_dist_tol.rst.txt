@@ -1,0 +1,6 @@
+﻿absolute\_dist\_tol
+===================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoproperty:: ScaffolderParams.absolute_dist_tol
