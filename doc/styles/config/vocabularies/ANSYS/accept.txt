@@ -3,6 +3,7 @@ abc
 (?i)Ansys
 (?i)Apis
 AutoMesh
+FO
 automesh
 Boolean
 BRep

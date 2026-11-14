@@ -1,3 +1,25 @@
+# Copyright © 2026 Synopsys, Inc. and ANSYS, Inc. All rights reserved.
+# SPDX-License-Identifier: MIT
+#
+#
+# Permission is hereby granted, free of charge, to any person obtaining a copy
+# of this software and associated documentation files (the "Software"), to deal
+# in the Software without restriction, including without limitation the rights
+# to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+# copies of the Software, and to permit persons to whom the Software is
+# furnished to do so, subject to the following conditions:
+#
+# The above copyright notice and this permission notice shall be included in all
+# copies or substantial portions of the Software.
+#
+# THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+# IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+# FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+# AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+# LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+# OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+# SOFTWARE.
+
 '''PyPrimeMesh Client library.'''
 
 # isort: skip_file
@@ -5,8 +27,6 @@ from ansys.meshing.prime._version import __version__
 from ansys.meshing.prime.core.model import Model
 from ansys.meshing.prime.core.part import Part
 from ansys.meshing.prime.core.fileio import FileIO
-from ansys.meshing.prime.core.surfer import Surfer
-from ansys.meshing.prime.core.volumesweeper import VolumeSweeper
 from ansys.meshing.prime.autogen.surfacesearch import SurfaceSearch
 from ansys.meshing.prime.autogen.volumesearch import VolumeSearch
 from ansys.meshing.prime.core.wrappercontrol import WrapperControl
@@ -21,6 +41,8 @@ from ansys.meshing.prime.autogen.surfaceutilitystructs import *
 from ansys.meshing.prime.autogen.wrapperstructs import *
 from ansys.meshing.prime.autogen.scaffolder import Scaffolder
 from ansys.meshing.prime.autogen.automesh import AutoMesh
+from ansys.meshing.prime.autogen.surfer import Surfer
+from ansys.meshing.prime.autogen.volumesweeper import VolumeSweeper
 from ansys.meshing.prime.autogen.boundaryfittednurbs import BoundaryFittedSpline
 from ansys.meshing.prime.autogen.quadtospline import QuadToSpline
 from ansys.meshing.prime.autogen.hextospline import HexToSpline
@@ -81,6 +103,7 @@ from ansys.meshing.prime.autogen.toposearchstructs import *
 from ansys.meshing.prime.autogen.vtcomposerstructs import *
 from ansys.meshing.prime.autogen.shellblcontrolstructs import *
 from ansys.meshing.prime.autogen.shellblcontrol import *
+from ansys.meshing.prime.autogen.modelquery import *
 
 from ansys.meshing.prime.internals.error_handling import PrimeRuntimeError, PrimeRuntimeWarning
 from ansys.meshing.prime.internals.client import Client
@@ -97,6 +120,40 @@ from ansys.meshing.prime.internals.config import (
 import ansys.meshing.prime.examples as examples
 import ansys.meshing.prime.lucid as lucid
 
+import os
+
+if os.getenv('PRIME_ENABLE_STANDBY_IMPORT'):
+    # Import all symbols from Python files in the standby folder
+    import importlib.util
+    from pathlib import Path
+
+    __standby_folder = Path(__file__).parent.parent / 'standby'
+    __core_folder = Path(__file__).parent / 'core'
+    if __standby_folder.exists() and __standby_folder.is_dir():
+        # Sort files to prioritize commonstructs.py and commontypes.py
+        __py_files = list(__standby_folder.glob('*.py'))
+        __priority_files = ['commontypes.py', 'commonstructs.py']
+        __py_files.sort(key=lambda f: (
+            __priority_files.index(f.name) if f.name in __priority_files else len(__priority_files),
+            f.name
+        ))
+        # Move all *struct.py and *structs.py files to the end
+        __struct_files = [f for f in __py_files if f.name.endswith('struct.py') or f.name.endswith('structs.py')]
+        __non_struct_files = [f for f in __py_files if not (f.name.endswith('struct.py') or f.name.endswith('structs.py'))]
+        __py_files = __non_struct_files + __struct_files
+        for __py_file in __py_files:
+            if __py_file.name.startswith('_'):
+                continue
+            
+            __module_name = f"ansys.meshing.prime.{__py_file.stem}"
+            __spec = importlib.util.spec_from_file_location(__module_name, __py_file)
+            if __spec and __spec.loader:
+                __module = importlib.util.module_from_spec(__spec)
+                __spec.loader.exec_module(__module)
+                # Import all public symbols from the module
+                for __attr_name in dir(__module):
+                    if not __attr_name.startswith('_'):
+                        globals()[__attr_name] = getattr(__module, __attr_name)
 
 __LOCAL_CLIENT = None
 
