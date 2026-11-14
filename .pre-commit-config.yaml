@@ -1,7 +1,6 @@
 exclude: |
     (?x)^(
-      src/ansys/meshing/prime/autogen/|
-      src/ansys/meshing/prime/__init__.py
+      src/ansys/meshing/prime/autogen/
     )
 
 repos:
@@ -47,7 +46,7 @@ repos:
   hooks:
   - id: pydocstyle
     additional_dependencies: [toml]
-    exclude: "tests/|examples/|__init__.py"
+    exclude: "^tests/|^examples/"
 
 - repo: https://github.com/ansys/pre-commit-hooks
   rev: v0.2.8
