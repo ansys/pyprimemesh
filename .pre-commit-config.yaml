@@ -47,7 +47,7 @@ repos:
       - id: add-license-headers
         files: (src|examples|tests|docker)/.*\.(py)|\.(proto)
         args:
-          - --start_year=2025
+          - --start_year=2024
 
   - repo: https://github.com/python-jsonschema/check-jsonschema
     rev: 0.39.0
