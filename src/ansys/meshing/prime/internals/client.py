@@ -1,5 +1,7 @@
-# Copyright (C) 2024 - 2026 ANSYS, Inc. and/or its affiliates.
+# Copyright (C) 2024 - 2026 Synopsys, Inc. and ANSYS, Inc. All rights reserved.
 # SPDX-License-Identifier: MIT
+#
+#
 #
 # Permission is hereby granted, free of charge, to any person obtaining a copy
 # of this software and associated documentation files (the "Software"), to deal
@@ -26,15 +28,14 @@ import os
 from pathlib import Path
 from typing import Optional, Union
 
-from ansys.tools.common.example_download import DownloadManager
-
+from ansys.meshing.prime.core.model import Model
 import ansys.meshing.prime.internals.config as config
 import ansys.meshing.prime.internals.defaults as defaults
 import ansys.meshing.prime.internals.utils as utils
-from ansys.meshing.prime.core.model import Model
 from ansys.meshing.prime.internals.utils import terminate_process
+from ansys.tools.common.example_download import DownloadManager
 
-__all__ = ['Client']
+__all__ = ["Client"]
 
 
 class Client(object):
@@ -56,6 +57,7 @@ class Client(object):
         Id for the Unix Domain Socket (UDS). The default is ``None``.
     client_certs_dir : str, os.PathLike, optional
         Directory containing client certificates for mutual TLS.
+
     Raises
     ------
     ValueError
@@ -77,9 +79,9 @@ class Client(object):
     ):
         """Initialize the client."""
         self._default_model: Model = None
-        local = kwargs.get('local', False)
+        local = kwargs.get("local", False)
         if local and server_process is not None:
-            raise ValueError('Local client cannot be instantiated with a server process')
+            raise ValueError("Local client cannot be instantiated with a server process")
 
         if connection_type == config.ConnectionType.GRPC_INSECURE:
             print("Warning (Client): Modification of these configurations is not recommended.")
@@ -102,7 +104,7 @@ class Client(object):
                         GRPCCommunicator,
                     )
 
-                    channel = kwargs.get('channel', None)
+                    channel = kwargs.get("channel", None)
 
                     if channel is not None:
                         self._comm = GRPCCommunicator(channel=channel, timeout=timeout)
@@ -114,7 +116,7 @@ class Client(object):
                             if client_certs_dir is not None:
                                 transport_mode = "mtls"
                             else:
-                                if os.name == 'nt':
+                                if os.name == "nt":
                                     transport_mode = "wnua"
                                 else:
                                     transport_mode = "uds"
@@ -129,16 +131,16 @@ class Client(object):
                         uds_id=uds_id,
                     )
 
-                    setattr(self, 'port', port)
+                    setattr(self, "port", port)
                 except ImportError as err:
-                    logging.getLogger('PyPrimeMesh').error(
-                        f'Failed to load grpc_communicator with message: {err.msg}'
+                    logging.getLogger("PyPrimeMesh").error(
+                        f"Failed to load grpc_communicator with message: {err.msg}"
                     )
                     raise
                 except ConnectionError:
                     self.exit()
 
-                    logging.getLogger('PyPrimeMesh').error('Failed to connect to PRIME GRPC server')
+                    logging.getLogger("PyPrimeMesh").error("Failed to connect to PRIME GRPC server")
                     raise
             elif communicator_type == "socket":
                 from ansys.meshing.prime.internals.socket_communicator import (
@@ -146,9 +148,9 @@ class Client(object):
                 )
 
                 self._comm = SocketCommunicator(ip=ip, port=port)
-                setattr(self, 'port', port)
+                setattr(self, "port", port)
             else:
-                logging.getLogger('PyPrimeMesh').error(f'Invalid server type: {communicator_type}')
+                logging.getLogger("PyPrimeMesh").error(f"Invalid server type: {communicator_type}")
                 raise
 
         else:
@@ -159,18 +161,18 @@ class Client(object):
 
                 self._comm = PrimeCommunicator()
             except ImportError as err:
-                logging.getLogger('PyPrimeMesh').error(
-                    f'Failed to load prime_communicator with message: {err.msg}'
+                logging.getLogger("PyPrimeMesh").error(
+                    f"Failed to load prime_communicator with message: {err.msg}"
                 )
 
     @property
     def model(self):
         """Get model associated with the client."""
-        if self._default_model is None and hasattr(self._comm, 'models'):
+        if self._default_model is None and hasattr(self._comm, "models"):
             if self._comm.models:
                 model_info = self._comm.models[0]
                 self._default_model = Model(
-                    self._comm, model_info['id'], model_info['index'], "Default"
+                    self._comm, model_info["id"], model_info["index"], "Default"
                 )
 
         if self._default_model is None:
@@ -188,7 +190,7 @@ class Client(object):
         """
         if self._comm is not None:
             result = self._comm.run_on_server(recipe)
-            return result['Results']
+            return result["Results"]
 
     def exit(self):
         """Close the connection with the server.
@@ -199,28 +201,28 @@ class Client(object):
         Examples
         --------
         >>> import ansys.meshing.prime as prime
-        >>> prime_client = prime.launch_prime() # This launches a server process.
+        >>> prime_client = prime.launch_prime()  # This launches a server process.
         >>> model = prime_client.model
         >>> fileio = prime.FileIO(model)
-        >>> result = fileio.read_pmdat('example.pmdat', prime.FileReadParams(model=model))
+        >>> result = fileio.read_pmdat("example.pmdat", prime.FileReadParams(model=model))
         >>> print(result)
-        >>> prime_client.exit() # Sever connection with server and kill the server.
+        >>> prime_client.exit()  # Sever connection with server and kill the server.
         """
         if self._comm is not None:
             self._comm.close()
             self._comm = None
         if self._process is not None:
             if self._local:
-                raise ValueError('Local client cannot have a server process')
+                raise ValueError("Local client cannot have a server process")
             terminate_process(self._process)
         if config.using_container():
-            container_name = getattr(self, 'container_name', None)
+            container_name = getattr(self, "container_name", None)
             if container_name:
                 utils.stop_prime_github_container(container_name)
         elif config.has_pim():
             self.remote_instance.delete()
             self.pim_client.close()
-        clear_examples = bool(int(os.environ.get('PYPRIMEMESH_CLEAR_EXAMPLES', '1')))
+        clear_examples = bool(int(os.environ.get("PYPRIMEMESH_CLEAR_EXAMPLES", "1")))
         if clear_examples:
             download_manager = DownloadManager()
             try:

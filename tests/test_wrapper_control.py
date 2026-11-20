@@ -1,5 +1,6 @@
-# Copyright (C) 2024 - 2026 ANSYS, Inc. and/or its affiliates.
+# Copyright (C) 2024 - 2026 Synopsys, Inc. and ANSYS, Inc. All rights reserved.
 # SPDX-License-Identifier: MIT
+#
 #
 #
 # Permission is hereby granted, free of charge, to any person obtaining a copy
@@ -21,6 +22,7 @@
 # SOFTWARE.
 
 """Integration test for wrapper control."""
+
 import ansys.meshing.prime as prime
 
 
@@ -84,7 +86,10 @@ def test_wrapper_control(get_remote_client):
     wrapper_control = model.control_data.create_wrapper_control()
     scope = prime.ScopeDefinition(model=model, part_expression="*!tunnel")
     feat_params1 = prime.FeatureRecoveryParams(
-        model=model, scope=scope, enable_feature_octree_refinement=True, size_at_features=0.3
+        model=model,
+        scope=scope,
+        enable_feature_octree_refinement=True,
+        size_at_features=0.3,
     )
     scope2 = prime.ScopeDefinition(model=model, part_expression="tunnel")
     feat_params2 = prime.FeatureRecoveryParams(model=model, scope=scope2)

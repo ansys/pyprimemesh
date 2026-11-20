@@ -1,5 +1,7 @@
-# Copyright (C) 2024 - 2026 ANSYS, Inc. and/or its affiliates.
+# Copyright (C) 2024 - 2026 Synopsys, Inc. and ANSYS, Inc. All rights reserved.
 # SPDX-License-Identifier: MIT
+#
+#
 #
 # Permission is hereby granted, free of charge, to any person obtaining a copy
 # of this software and associated documentation files (the "Software"), to deal
@@ -20,15 +22,16 @@
 # SOFTWARE.
 
 """Module for Prime Server communications."""
+
 import PrimePyAnsysPrimeServer as Prime
 
-import ansys.meshing.prime.internals.config as config
-import ansys.meshing.prime.internals.json_utils as json
 from ansys.meshing.prime.internals.communicator import Communicator
+import ansys.meshing.prime.internals.config as config
 from ansys.meshing.prime.internals.error_handling import (
     communicator_error_handler,
     error_code_handler,
 )
+import ansys.meshing.prime.internals.json_utils as json
 
 global return_value
 return_value = ""
@@ -42,10 +45,10 @@ class PrimeCommunicator(Communicator):
         Prime.SetupForPyPrime_Beta(1)
         self._models = []
         message = json.loads(Prime.GetModelInfo().Get())
-        if 'ServerError' in message:
-            raise ConnectionError(message['ServerError'])
-        elif 'Results' in message:
-            self._models = message['Results']
+        if "ServerError" in message:
+            raise ConnectionError(message["ServerError"])
+        elif "Results" in message:
+            self._models = message["Results"]
 
     @error_code_handler
     @communicator_error_handler

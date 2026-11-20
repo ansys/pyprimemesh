@@ -1,5 +1,7 @@
-# Copyright (C) 2024 - 2026 ANSYS, Inc. and/or its affiliates.
+# Copyright (C) 2024 - 2026 Synopsys, Inc. and ANSYS, Inc. All rights reserved.
 # SPDX-License-Identifier: MIT
+#
+#
 #
 # Permission is hereby granted, free of charge, to any person obtaining a copy
 # of this software and associated documentation files (the "Software"), to deal
@@ -20,6 +22,7 @@
 # SOFTWARE.
 
 """Module for managing file inputs and outputs."""
+
 import copy
 import json
 import traceback
@@ -28,9 +31,6 @@ import traceback
 from ansys.meshing.prime.autogen.fileio import FileIO as _FileIO
 
 # isort: split
-import ansys.meshing.prime.core.dynaexportutils as dynaexportutils
-import ansys.meshing.prime.core.mapdlcdbexportutils as mapdlcdbexportutils
-import ansys.meshing.prime.internals.utils as utils
 from ansys.meshing.prime.autogen.fileiostructs import (
     ExportBoundaryFittedSplineParams,
     ExportFluentCaseParams,
@@ -61,7 +61,10 @@ from ansys.meshing.prime.autogen.fileiostructs import (
     SizeFieldFileReadResults,
     WriteSizeFieldParams,
 )
+import ansys.meshing.prime.core.dynaexportutils as dynaexportutils
+import ansys.meshing.prime.core.mapdlcdbexportutils as mapdlcdbexportutils
 from ansys.meshing.prime.core.model import Model
+import ansys.meshing.prime.internals.utils as utils
 from ansys.meshing.prime.params.primestructs import ErrorCode
 
 
@@ -103,7 +106,7 @@ class FileIO(_FileIO):
         Examples
         --------
         >>> import ansys.meshing.prime as prime
-        >>> #connect client to server and get model from it
+        >>> # connect client to server and get model from it
         >>> client = prime.Client(ip="localhost", port=50060)
         >>> model = client.model
         >>> file_io = prime.FileIO(model=model)
@@ -318,7 +321,7 @@ class FileIO(_FileIO):
         Examples
         --------
         >>> import ansys.meshing.prime as prime
-        >>> #connect client to server and get model from it
+        >>> # connect client to server and get model from it
         >>> client = prime.Client(ip="localhost", port=50060)
         >>> model = client.model
         >>> file_io = prime.FileIO(model=model)
@@ -334,7 +337,7 @@ class FileIO(_FileIO):
             command_name = "PrimeMesh::FileIO/GetAbaqusSimulationData"
             sim_data_str = self._comm.serve(self._model, command_name, self._object_id, args=args)
             if params.config_settings is None:
-                params.config_settings = ''
+                params.config_settings = ""
             generate_mapdl_commands_error = None
             generate_mapdl_commands_traceback = None
             try:
@@ -733,8 +736,8 @@ class FileIO(_FileIO):
         >>> fileio = prime.FileIO(model=model)
         >>> out_file_path = r"/tmp/output.stl"
         >>> part_ids = [part.id for part in model.parts]
-        >>> export_stl_params=prime.ExportSTLParams(model=model,part_ids=part_ids)
-        >>> results = fileio.export_stl(out_file_path,export_stl_params)
+        >>> export_stl_params = prime.ExportSTLParams(model=model, part_ids=part_ids)
+        >>> results = fileio.export_stl(out_file_path, export_stl_params)
 
         """
         with utils.file_write_context(self._model, file_name) as temp_file_name:

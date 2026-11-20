@@ -6,12 +6,12 @@ MultiZone controls
 
 *This is a beta feature. API behavior and implementation may change in future.*
 
-The :class:`MultiZoneControl <ansys.meshing.prime.MultiZoneControl>` class provides automatic geometry decomposition into mapped (sweepable) regions and free regions. 
+The :class:`MultiZoneControl <ansys.meshing.prime.MultiZoneControl>` class provides automatic geometry decomposition into mapped (sweepable) regions and free regions.
 Mapped (sweepable) regions are filled with hexahedral elements and free regions are filled with non-hexahedral elements.
-When you perform MultiZone Method meshing, all regions are meshed with a pure hexahedral mesh if possible.  
+When you perform MultiZone Method meshing, all regions are meshed with a pure hexahedral mesh if possible.
 
-The :class:`AutoMesh <ansys.meshing.prime.automesh>` class lets you to automatically create the hex mesh on the scoped bodies using MultiZone meshing algorithms. 
-:func:`AutoMesh.mesh() <ansys.meshing.prime.AutoMesh.mesh>` function lets you  perform MultiZone meshing with the given MultiZone control. 
+The :class:`AutoMesh <ansys.meshing.prime.automesh>` class lets you to automatically create the hex mesh on the scoped bodies using MultiZone meshing algorithms.
+:func:`AutoMesh.mesh() <ansys.meshing.prime.AutoMesh.mesh>` function lets you  perform MultiZone meshing with the given MultiZone control.
 
 The following example shows to apply a MultiZone control on a body:
 
@@ -56,7 +56,7 @@ The following example shows to apply a MultiZone control on a body:
         :width: 400pt
         :align: center
 
-2. Initialize the MultiZone control. MultiZone control sets the parameters and controls used for MultiZone meshing.  
+2. Initialize the MultiZone control. MultiZone control sets the parameters and controls used for MultiZone meshing.
 
     .. code-block:: python
 
@@ -94,7 +94,7 @@ The following example shows to apply a MultiZone control on a body:
 4. Sets the MultiZone sizing parameters to initialize MultiZone sizing control parameters.
 
     .. note::
-        When you provide the sizefield, MultiZone method uses the provided sizefield and impacts the MultiZone mesh. 
+        When you provide the sizefield, MultiZone method uses the provided sizefield and impacts the MultiZone mesh.
 
     .. code-block:: python
 
@@ -134,29 +134,29 @@ The following example shows to apply a MultiZone control on a body:
         :width: 400pt
         :align: center
 
-Some points to remember while performing MultiZone Meshing: 
+Some points to remember while performing MultiZone Meshing:
 
-* MultiZone Meshing supports only topology. 
+* MultiZone Meshing supports only topology.
 * If the MultiZone meshing scopes only a few bodies of a multibody part, the remaining bodies of the part are auto meshed conformally.
 
-* After creating the MultiZone control, you should specify its id in the automesh params for it to be considered for MultiZone meshing. 
+* After creating the MultiZone control, you should specify its id in the automesh params for it to be considered for MultiZone meshing.
 
-* When you use the MultiZone mesh method in combination with other mesh methods in a multibody part, the bodies are meshed with conformally. 
+* When you use the MultiZone mesh method in combination with other mesh methods in a multibody part, the bodies are meshed with conformally.
   For example, in the model below, the multibody part meshes with the MultiZone Method and AutoMesh.
 
   .. figure:: ../images/multizone_automesh.png
     :width: 400pt
     :align: center
 
-* Sometimes MultiZone is not automatically able to decompose a geometry into sweepable regions, though such decomposition may be possible. 
-  For example, in the model below the MultiZone mesh produces free mesh.  
+* Sometimes MultiZone is not automatically able to decompose a geometry into sweepable regions, though such decomposition may be possible.
+  For example, in the model below the MultiZone mesh produces free mesh. 
 
   .. figure:: ../images/multizone_freemeshpng.png
     :width: 400pt
     :align: center
 
-* When you scope the source and target faces to MultiZone, MultiZone automates the geometry decomposition and generates the pure hex mesh 
-  into sweepable regions to produce a purely hex mesh. In the below images, if the faces highlighted in green 
+* When you scope the source and target faces to MultiZone, MultiZone automates the geometry decomposition and generates the pure hex mesh
+  into sweepable regions to produce a purely hex mesh. In the below images, if the faces highlighted in green
   color are scoped as source and target faces, MultiZone produces a purely hex mesh on the source and target faces.
 
   .. figure:: ../images/multizone_source_target.png

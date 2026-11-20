@@ -1,5 +1,7 @@
-# Copyright (C) 2024 - 2026 ANSYS, Inc. and/or its affiliates.
+# Copyright (C) 2024 - 2026 Synopsys, Inc. and ANSYS, Inc. All rights reserved.
 # SPDX-License-Identifier: MIT
+#
+#
 #
 # Permission is hereby granted, free of charge, to any person obtaining a copy
 # of this software and associated documentation files (the "Software"), to deal
@@ -20,6 +22,7 @@
 # SOFTWARE.
 
 """Module containing the managing logic of the Prime model."""
+
 from typing import Iterable, List, Union
 
 # isort: split
@@ -28,7 +31,6 @@ from ansys.meshing.prime.autogen.model import Model as _Model
 # isort: split
 import os
 
-import ansys.meshing.prime.internals.json_utils as json
 from ansys.meshing.prime.autogen.commonstructs import DeleteResults
 from ansys.meshing.prime.autogen.materialpointmanager import MaterialPointManager
 from ansys.meshing.prime.autogen.modelstructs import (
@@ -42,6 +44,7 @@ from ansys.meshing.prime.core.controldata import ControlData
 from ansys.meshing.prime.core.part import Part
 from ansys.meshing.prime.internals.communicator import Communicator
 from ansys.meshing.prime.internals.error_handling import PrimeRuntimeError
+import ansys.meshing.prime.internals.json_utils as json
 from ansys.meshing.prime.internals.logger import PrimeLogger
 
 
@@ -220,7 +223,7 @@ class Model(_Model):
 
         Examples
         --------
-        >>> params = prime.MergePartsParams(model = model)
+        >>> params = prime.MergePartsParams(model=model)
         >>> results = model.merge_parts(part_ids, params)
 
         """
@@ -289,10 +292,9 @@ class Model(_Model):
         Examples
         --------
         >>> model = client.model
-        >>> model.set_global_sizing_params(GlobalSizingParams(model=model,
-        ...                                          min=0.1,
-        ...                                          max=1.0,
-        ...                                          growth_rate=1.2))
+        >>> model.set_global_sizing_params(
+        ...     GlobalSizingParams(model=model, min=0.1, max=1.0, growth_rate=1.2)
+        ... )
         """
         _Model.set_global_sizing_params(self, params)
         self._global_sf_params = params
@@ -370,7 +372,7 @@ class Model(_Model):
 
         Examples
         --------
-            >>> topo_data=model.topo_data
+            >>> topo_data = model.topo_data
         """
         return self._topo_data
 

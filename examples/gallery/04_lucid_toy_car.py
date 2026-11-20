@@ -1,5 +1,6 @@
-# Copyright (C) 2024 - 2026 ANSYS, Inc. and/or its affiliates.
+# Copyright (C) 2024 - 2026 Synopsys, Inc. and ANSYS, Inc. All rights reserved.
 # SPDX-License-Identifier: MIT
+#
 #
 #
 # Permission is hereby granted, free of charge, to any person obtaining a copy
@@ -164,13 +165,19 @@ diag_params = prime.SurfaceDiagnosticSummaryParams(
 
 diag_res = diag.get_surface_diagnostic_summary(diag_params)
 
-print('Number of free edges', diag_res.n_free_edges)
-print('Number of multi edges', diag_res.n_multi_edges)
-print('Number of self intersections', diag_res.n_self_intersections)
+print("Number of free edges", diag_res.n_free_edges)
+print("Number of multi edges", diag_res.n_multi_edges)
+print("Number of self intersections", diag_res.n_self_intersections)
 
-face_quality_measures = [prime.FaceQualityMeasure.SKEWNESS, prime.FaceQualityMeasure.ASPECTRATIO]
+face_quality_measures = [
+    prime.FaceQualityMeasure.SKEWNESS,
+    prime.FaceQualityMeasure.ASPECTRATIO,
+]
 quality_params = prime.SurfaceQualitySummaryParams(
-    model=model, scope=scope, face_quality_measures=face_quality_measures, quality_limit=[0.9, 20]
+    model=model,
+    scope=scope,
+    face_quality_measures=face_quality_measures,
+    quality_limit=[0.9, 20],
 )
 
 quality = prime.SurfaceSearch(model)
@@ -234,7 +241,9 @@ print(model)
 # Print statistics on the generated mesh.
 
 vtool = prime.VolumeMeshTool(model=model)
-result = vtool.check_mesh(part_id=wrap_part.id, params=prime.CheckMeshParams(model=model))
+result = vtool.check_mesh(
+    part_id=wrap_part.id, params=prime.CheckMeshParams(model=model)
+)
 
 print("Non positive volumes:", result.has_non_positive_volumes)
 print("Non positive areas:", result.has_non_positive_areas)
@@ -287,7 +296,9 @@ improve.improve_by_auto_node_move(
     params=params,
 )
 
-result = vtool.check_mesh(part_id=wrap_part.id, params=prime.CheckMeshParams(model=model))
+result = vtool.check_mesh(
+    part_id=wrap_part.id, params=prime.CheckMeshParams(model=model)
+)
 
 print("Non positive volumes:", result.has_non_positive_volumes)
 print("Non positive areas:", result.has_non_positive_areas)

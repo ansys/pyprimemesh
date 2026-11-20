@@ -77,8 +77,8 @@ minimum and maximum size, growth rate, and the number of element per gap:
     size_control.set_scope(prime.ScopeDefinition(model=model))
 .. figure:: ../images/proximity.png
     :width: 400pt
-    :align: center     
-    
+    :align: center
+
 The :attr:`ignore_self_proximity <ansys.meshing.prime.ProximitySizingParams.ignore_self_proximity>`
 and :attr:`ignore_orientation <ansys.meshing.prime.ProximitySizingParams.ignore_orientation>`
 parameters are also considered for proximity sizing. The ``ignore_self_proximity`` parameter
@@ -88,13 +88,13 @@ proximity calculation. This Boolean parameter is set to ``False`` by default. In
 the proximity depends on the direction of face normals.
 
 This example explains the use of the ``ignore_orientation`` parameter for face proximity.
-The normals on the grooved box point inward. With the default setting of ``False``, the 
+The normals on the grooved box point inward. With the default setting of ``False``, the
 proximity size function does not refine the surface along the entire groove length.
-If the ``ignore_orientation`` is set to ``True``, the surface is refined along the groove length 
+If the ``ignore_orientation`` is set to ``True``, the surface is refined along the groove length
 
 .. figure:: ../images/proximityorientation.png
     :width: 400pt
-    :align: center  
+    :align: center
 
 
 Hard sizing
@@ -185,7 +185,7 @@ Size fields
 -----------
 
 The :class:`SizeFieldType <ansys.meshing.prime.SizeFieldType>` class helps you to fetch the element size
-at a given location. These size field types are available in PyPrimeMesh: 
+at a given location. These size field types are available in PyPrimeMesh:
 
 
 * ``Constant``
@@ -201,7 +201,7 @@ part of various surface and volume meshing operations.
 
 Constant size field
 ^^^^^^^^^^^^^^^^^^^
-  
+
 In the :class:`SizeFieldType <ansys.meshing.prime.SizeFieldType>` class, selecting the
 :attr:`CONSTANT <ansys.meshing.prime.SizeFieldType.CONSTANT>` parameter computes the size field
 based on the size controls specified.
@@ -235,7 +235,7 @@ dead space refinement.
 .. figure:: ../images/meshvolumetricsize.png
     :width: 400pt
     :align: center
-  
+
 .. figure:: ../images/meshgeodesicsize.png
     :width: 400pt
     :align: center
@@ -265,7 +265,7 @@ the size field using average mesh edge lengths and is diffused geodesical.
 .. figure:: ../images/meshedgeodesic.png
     :width: 400pt
     :align: center
-    
+
 .. figure:: ../images/meshedgeodesic1.png
     :width: 400pt
     :align: center

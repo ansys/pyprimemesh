@@ -1,5 +1,6 @@
-# Copyright (C) 2024 - 2026 ANSYS, Inc. and/or its affiliates.
+# Copyright (C) 2024 - 2026 Synopsys, Inc. and ANSYS, Inc. All rights reserved.
 # SPDX-License-Identifier: MIT
+#
 #
 #
 # Permission is hereby granted, free of charge, to any person obtaining a copy
@@ -32,12 +33,12 @@ from ansys.meshing.prime import ErrorCode, PrimeRuntimeError
 def test_io_file_not_found_error(get_remote_client, get_examples):
     model = get_remote_client.model
     with prime.FileIO(model) as io:
-        file_name = r'/doesnotexist/file.pmdat'
+        file_name = r"/doesnotexist/file.pmdat"
         with pytest.raises(FileNotFoundError) as error:
             _ = io.read_pmdat(file_name, prime.FileReadParams(model=model))
             assert f'Given file name "{file_name}" is not found on local disk' in str(error.value)
 
-        files = [r'/doesnotexist/file.pmdat', get_examples["elbow_lucid"]]
+        files = [r"/doesnotexist/file.pmdat", get_examples["elbow_lucid"]]
         error_msg = "File /doesnotexist/file.pmdat given for read is missing from local disk."
         with pytest.raises(FileNotFoundError, match=error_msg) as error:
             _ = io.import_fluent_meshing_meshes(

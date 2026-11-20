@@ -1,5 +1,6 @@
-# Copyright (C) 2024 - 2026 ANSYS, Inc. and/or its affiliates.
+# Copyright (C) 2024 - 2026 Synopsys, Inc. and ANSYS, Inc. All rights reserved.
 # SPDX-License-Identifier: MIT
+#
 #
 #
 # Permission is hereby granted, free of charge, to any person obtaining a copy
@@ -21,6 +22,7 @@
 # SOFTWARE.
 
 """Implementation of Relaxed JSON Decoder."""
+
 import re
 from typing import Any, Callable, Dict, Tuple, Union
 
@@ -28,18 +30,18 @@ import numpy as np
 
 from . import scanner
 
-__all__ = ['JSONDecoder', 'JSONDecodeError']
+__all__ = ["JSONDecoder", "JSONDecodeError"]
 
 FLAGS = re.VERBOSE | re.MULTILINE | re.DOTALL
 
-NaN = float('nan')
-PosInf = float('inf')
-NegInf = float('-inf')
+NaN = float("nan")
+PosInf = float("inf")
+NegInf = float("-inf")
 
 _CONSTANTS = {
-    b'-Infinity': NegInf,
-    b'Infinity': PosInf,
-    b'NaN': NaN,
+    b"-Infinity": NegInf,
+    b"Infinity": PosInf,
+    b"NaN": NaN,
 }
 
 
@@ -58,7 +60,7 @@ class JSONDecodeError(ValueError):
 
     def __init__(self, msg: str, document: Union[str, bytes, bytearray], pos: int):
         """Initialize error handler."""
-        newline = b'\n' if isinstance(document, (bytes, bytearray)) else '\n'
+        newline = b"\n" if isinstance(document, (bytes, bytearray)) else "\n"
         lineno = document.count(newline, 0, pos) + 1
         colno = pos - document.rfind(newline, 0, pos)
         error_msg = f"{msg}: line {lineno} column {colno} (char {pos})"
@@ -69,19 +71,19 @@ class JSONDecodeError(ValueError):
         self.pos = pos
 
 
-WHITESPACE = re.compile(r'[ \t\n\r]*'.encode("utf-8"), FLAGS)
-WHITESPACE_STR = b' \t\n\r'
+WHITESPACE = re.compile(r"[ \t\n\r]*".encode("utf-8"), FLAGS)
+WHITESPACE_STR = b" \t\n\r"
 
-STRINGCHUNK = re.compile(r'(.*?)(["\\])'.encode('utf-8'), FLAGS)
+STRINGCHUNK = re.compile(r'(.*?)(["\\])'.encode("utf-8"), FLAGS)
 BACKSLASH = {
     '"': b'"',
-    '\\': b'\\',
-    '/': b'/',
-    'b': b'\b',
-    'f': b'\f',
-    'n': b'\n',
-    'r': b'\r',
-    't': b'\t',
+    "\\": b"\\",
+    "/": b"/",
+    "b": b"\b",
+    "f": b"\f",
+    "n": b"\n",
+    "r": b"\r",
+    "t": b"\t",
 }
 
 
@@ -109,11 +111,11 @@ TYPEMAP = {
 }
 
 TYPEDATA = {
-    'int32': {'type': int, 'object_size': 4, 'signed': True},
-    'int64': {'type': int, 'object_size': 8, 'signed': True},
-    'uint32': {'type': int, 'object_size': 4, 'signed': False},
-    'uint64': {'type': int, 'object_size': 8, 'signed': True},
-    'double': {'type': float, 'object_size': 8},
+    "int32": {"type": int, "object_size": 4, "signed": True},
+    "int64": {"type": int, "object_size": 8, "signed": True},
+    "uint32": {"type": int, "object_size": 4, "signed": False},
+    "uint64": {"type": int, "object_size": 8, "signed": True},
+    "double": {"type": float, "object_size": 8},
 }
 
 
@@ -144,7 +146,7 @@ def scan_string(str: bytes or bytearray, end: int, _b=BACKSLASH, _m=STRINGCHUNK.
         # or a backslash denoting that an escape sequence follows
         if terminator == b'"':
             break
-        elif terminator != b'\\':
+        elif terminator != b"\\":
             chunks += terminator
             continue
         try:
@@ -152,19 +154,19 @@ def scan_string(str: bytes or bytearray, end: int, _b=BACKSLASH, _m=STRINGCHUNK.
         except IndexError:
             raise JSONDecodeError("Unterminated string starting at", str, begin) from None
         # If not a unicode escape sequence, must be in the lookup table
-        if esc == b'u':
+        if esc == b"u":
             raise JSONDecodeError("Unicode not supported", str, end)
         else:
             try:
-                char: bytes or bytearray = _b[esc.decode('utf-8')]
+                char: bytes or bytearray = _b[esc.decode("utf-8")]
             except KeyError:
-                msg = "Invalid \\escape: {0!r}".format(esc.decode('utf-8'))
+                msg = "Invalid \\escape: {0!r}".format(esc.decode("utf-8"))
                 raise JSONDecodeError(msg, str, end)
             end += 1
         chunks += char
 
     try:
-        chunks = chunks.decode('utf-8')
+        chunks = chunks.decode("utf-8")
     except:
         raise JSONDecodeError("String needs to be utf-8 encoded", str, begin)
     return chunks, end
@@ -191,22 +193,22 @@ def decode_bytes(s, end):
         Invalid values.
     """
     begin = end - 1
-    size = int.from_bytes(bytes(s[end : end + 8]), byteorder='big')
+    size = int.from_bytes(bytes(s[end : end + 8]), byteorder="big")
     end += 8
-    type = int.from_bytes(s[end : end + 1], byteorder='big')
+    type = int.from_bytes(s[end : end + 1], byteorder="big")
     end += 1
     value = bytes(s[end : end + size])
     end += size
 
-    if s[end : end + 1] != b'>':
+    if s[end : end + 1] != b">":
         raise JSONDecodeError("Unterminated bytes object starting at", s, begin) from None
     end += 1  # '>' character
 
     dtype = TYPEMAP.get(type, None)
     if dtype is None:
-        raise JSONDecodeError(f'Invalid type ({type}) decoded while reading bytes', s, end)
+        raise JSONDecodeError(f"Invalid type ({type}) decoded while reading bytes", s, end)
     dtype = np.dtype(dtype)
-    data = np.frombuffer(value, dtype=dtype.newbyteorder('>'))
+    data = np.frombuffer(value, dtype=dtype.newbyteorder(">"))
     return np.array(data, dtype=dtype), end
 
 
@@ -264,7 +266,7 @@ def decode_object(
             end = _w(s, end).end()
             nextchar = bytes(s[end : end + 1])
         # Trivial empty object
-        if nextchar == b'}':
+        if nextchar == b"}":
             if object_pairs_hook is not None:
                 result = object_pairs_hook(pairs)
                 return result, end + 1
@@ -280,9 +282,9 @@ def decode_object(
         key = memo_get(key, key)
         # To skip some function call overhead we optimize the fast paths where
         # the JSON key separator is ": " or just ":".
-        if s[end : end + 1] != b':':
+        if s[end : end + 1] != b":":
             end = _w(s, end).end()
-            if s[end : end + 1] != b':':
+            if s[end : end + 1] != b":":
                 raise JSONDecodeError("Expecting ':' delimiter", s, end)
         end += 1
 
@@ -305,12 +307,12 @@ def decode_object(
                 end = _w(s, end + 1).end()
                 nextchar = bytes(s[end : end + 1])
         except IndexError:
-            nextchar = b''
+            nextchar = b""
         end += 1
 
-        if nextchar == b'}':
+        if nextchar == b"}":
             break
-        elif nextchar != b',':
+        elif nextchar != b",":
             raise JSONDecodeError("Expecting ',' delimiter", s, end - 1)
         end = _w(s, end).end()
         nextchar = s[end : end + 1]
@@ -364,7 +366,7 @@ def decode_array(
         end = _w(s, end + 1).end()
         nextchar = s[end : end + 1]
     # Look-ahead for trivial empty array
-    if nextchar == b']':
+    if nextchar == b"]":
         return values, end + 1
     _append = values.append
     while True:
@@ -378,9 +380,9 @@ def decode_array(
             end = _w(s, end + 1).end()
             nextchar = s[end : end + 1]
         end += 1
-        if nextchar == b']':
+        if nextchar == b"]":
             break
-        elif nextchar != b',':
+        elif nextchar != b",":
             raise JSONDecodeError("Expecting ',' delimiter", s, end - 1)
         try:
             if bytes(s[end : end + 1]) in _ws:
@@ -486,4 +488,4 @@ class JSONDecoder:
         end = _w(s, end).end()
         if end != len(s):
             raise JSONDecodeError("Extra data at end of document", s, end)
-        return obj.decode('utf-8') if isinstance(obj, (bytes, bytearray)) else obj
+        return obj.decode("utf-8") if isinstance(obj, (bytes, bytearray)) else obj

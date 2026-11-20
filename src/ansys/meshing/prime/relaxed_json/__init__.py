@@ -1,5 +1,6 @@
-# Copyright (C) 2024 - 2026 ANSYS, Inc. and/or its affiliates.
+# Copyright (C) 2024 - 2026 Synopsys, Inc. and ANSYS, Inc. All rights reserved.
 # SPDX-License-Identifier: MIT
+#
 #
 #
 # Permission is hereby granted, free of charge, to any person obtaining a copy
@@ -20,9 +21,9 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
-__version__ = '1.0.0'
+__version__ = "1.0.0"
 
-__all__ = ['loads', 'dumps', 'JSONEncoder', 'JSONDecoder', 'JSONDecodeError']
+__all__ = ["loads", "dumps", "JSONEncoder", "JSONDecoder", "JSONDecodeError"]
 
 from .decoder import JSONDecodeError, JSONDecoder
 from .encoder import JSONEncoder
@@ -141,7 +142,7 @@ def loads(
         )
     if not isinstance(s, (bytes, bytearray)):
         raise TypeError(
-            f'the JSON object must be str, bytes or bytearray, ' f'not {s.__class__.__name__}'
+            f"the JSON object must be str, bytes or bytearray, not {s.__class__.__name__}"
         )
 
     if (
@@ -157,13 +158,13 @@ def loads(
     if cls is None:
         cls = JSONDecoder
     if object_hook is not None:
-        kw['object_hook'] = object_hook
+        kw["object_hook"] = object_hook
     if object_pairs_hook is not None:
-        kw['object_pairs_hook'] = object_pairs_hook
+        kw["object_pairs_hook"] = object_pairs_hook
     if parse_float is not None:
-        kw['parse_float'] = parse_float
+        kw["parse_float"] = parse_float
     if parse_int is not None:
-        kw['parse_int'] = parse_int
+        kw["parse_int"] = parse_int
     if parse_constant is not None:
-        kw['parse_constant'] = parse_constant
+        kw["parse_constant"] = parse_constant
     return cls(**kw).decode(s)

@@ -1,10 +1,10 @@
 """Sphinx documentation configuration file."""
 
+from datetime import datetime
 import glob
 import os
 import subprocess
 import sys
-from datetime import datetime
 
 # Set PRIME_MODE if not already set (to avoid warnings during doc build)
 if "PRIME_MODE" not in os.environ:
@@ -12,19 +12,19 @@ if "PRIME_MODE" not in os.environ:
 
 os.environ["SPHINX_GALLERY_CONF_FORCE_FRESH"] = "0"
 
-import ansys.tools.visualization_interface as viz_interface
-import pyvista
 from ansys_sphinx_theme import ansys_favicon, get_version_match, pyansys_logo_black
 from joblib import Parallel, delayed
+import pyvista
 from pyvista.plotting.utilities.sphinx_gallery import DynamicScraper
 from sphinx_gallery.sorting import FileNameSortKey
 
 from ansys.meshing.prime import __version__
+import ansys.tools.visualization_interface as viz_interface
 
 viz_interface.DOCUMENTATION_BUILD = True
 
 # Project information
-project = 'ansys-meshing-prime'
+project = "ansys-meshing-prime"
 copyright = f"(c) {datetime.now().year} ANSYS, Inc. All rights reserved"
 author = "Ansys Inc."
 release = version = __version__
@@ -33,7 +33,7 @@ cname = os.getenv("DOCUMENTATION_CNAME", default="nocname.com")
 # HTML options
 html_short_title = html_title = "PyPrimeMesh"
 html_logo = pyansys_logo_black
-html_theme = 'ansys_sphinx_theme'
+html_theme = "ansys_sphinx_theme"
 
 html_favicon = ansys_favicon
 
@@ -77,8 +77,8 @@ html_theme_options = {
 
 # Sphinx extensions
 extensions = [
-    'sphinx.ext.autodoc',
-    'sphinx.ext.autosummary',
+    "sphinx.ext.autodoc",
+    "sphinx.ext.autosummary",
     "numpydoc",
     "sphinx.ext.intersphinx",
     "sphinx_copybutton",
@@ -143,10 +143,10 @@ html_static_path = ["_static"]
 templates_path = ["_templates"]
 
 # The suffix(es) of source filenames.
-source_suffix = '.rst'
+source_suffix = ".rst"
 
 # The master toctree document.
-master_doc = 'index'
+master_doc = "index"
 
 autosummary_generate = True
 autosummary_imported_members = True

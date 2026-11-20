@@ -1,5 +1,7 @@
-# Copyright (C) 2024 - 2026 ANSYS, Inc. and/or its affiliates.
+# Copyright (C) 2024 - 2026 Synopsys, Inc. and ANSYS, Inc. All rights reserved.
 # SPDX-License-Identifier: MIT
+#
+#
 #
 # Permission is hereby granted, free of charge, to any person obtaining a copy
 # of this software and associated documentation files (the "Software"), to deal
@@ -18,25 +20,19 @@
 # LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
+
 """Module for the Prime plotter."""
 
-import warnings
 from typing import Any, Dict, Iterable, List, Optional, Sequence
+import warnings
 
 import numpy as np
 import pyvista as pv
-from ansys.tools.visualization_interface import Plotter
-from ansys.tools.visualization_interface.backends.pyvista import PyVistaBackend
-from ansys.tools.visualization_interface.backends.pyvista.widgets.mesh_slider import (
-    MeshSliderWidget,
-)
-from ansys.tools.visualization_interface.utils.color import Color
 from vtk import vtkPlane, vtkTextActor
 
 import ansys.meshing.prime as prime
 
 # Kept importable from here for callers that build their own coloring.
-from ansys.meshing.prime.core.mesh import color_matrix  # noqa: F401
 from ansys.meshing.prime.core.mesh import (
     ENTITY_COLOR_ARRAY,
     RENDER_ENTITY_ID_ARRAY,
@@ -51,6 +47,7 @@ from ansys.meshing.prime.core.mesh import (
     build_element_edge_batches,
     build_face_render_batches,
     classify_face_connectivity,
+    color_matrix,  # noqa: F401
     entity_color,
     selectable_display_types,
 )
@@ -62,6 +59,12 @@ from ansys.meshing.prime.graphics.widgets.picked_info import PickedInfo
 from ansys.meshing.prime.graphics.widgets.reset_display import ResetDisplay
 from ansys.meshing.prime.graphics.widgets.selection_target import SelectionTargetWidget
 from ansys.meshing.prime.graphics.widgets.toggle_edges import ToggleEdges
+from ansys.tools.visualization_interface import Plotter
+from ansys.tools.visualization_interface.backends.pyvista import PyVistaBackend
+from ansys.tools.visualization_interface.backends.pyvista.widgets.mesh_slider import (
+    MeshSliderWidget,
+)
+from ansys.tools.visualization_interface.utils.color import Color
 
 # Depth-buffer offset applied to a face actor when element outlines are drawn as
 # separate line geometry.

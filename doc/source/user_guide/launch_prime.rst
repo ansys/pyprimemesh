@@ -8,7 +8,7 @@ Launching PyPrimeMesh
 Launch server from a Python script
 ==================================
 
-The :func:`launch_prime() <ansys.meshing.prime.launch_prime>` method launches Ansys Prime Server.  
+The :func:`launch_prime() <ansys.meshing.prime.launch_prime>` method launches Ansys Prime Server.
 
 This code returns an instance of the PyPrimeMesh :class:`Client <ansys.meshing.prime.Client>` class
 connected to the launched server session:
@@ -33,7 +33,7 @@ parameter associated with the client instance:
 Launch server from a Windows or Linux console and connect the client
 ====================================================================
 
-You can launch Ansys Prime Server on Linux or Windows from a command prompt and then connect to the client as needed.  
+You can launch Ansys Prime Server on Linux or Windows from a command prompt and then connect to the client as needed.
 
 This example starts the server in parallel mode on four nodes and specifies the IP address and port on Windows:
 
@@ -42,8 +42,8 @@ This example starts the server in parallel mode on four nodes and specifies the 
    .. code-block:: shell-session
 
       "%AWP_ROOT252%\meshing\Prime\runPrime.bat" server -np 4 --ip 127.0.0.1 --port 50055
-      
-      
+
+
 #. Connect to the server in Python using the :class:`Client <ansys.meshing.prime.Client>` class:
 
    .. code-block:: python
@@ -92,7 +92,7 @@ Recommendations for launching the server
 
 When developing, you can use Python context to launch the server so that if an exception
 occurs during runtime the server closes cleanly. This prevents servers being spawned and
-left open blocking ports. 
+left open blocking ports.
 
 This code example shows how to manage the server lifecycle using context to make development easier:
 

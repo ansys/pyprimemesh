@@ -1,5 +1,7 @@
-# Copyright (C) 2024 - 2026 ANSYS, Inc. and/or its affiliates.
+# Copyright (C) 2024 - 2026 Synopsys, Inc. and ANSYS, Inc. All rights reserved.
 # SPDX-License-Identifier: MIT
+#
+#
 #
 # Permission is hereby granted, free of charge, to any person obtaining a copy
 # of this software and associated documentation files (the "Software"), to deal
@@ -20,6 +22,7 @@
 # SOFTWARE.
 
 """Module for meshing utility functions."""
+
 import enum
 import os
 import tempfile
@@ -150,7 +153,8 @@ class Mesh:
         filename, fileext = os.path.splitext(file_name)
         if fileext == ".msh" or file_name.endswith(".msh.gz") or file_name.endswith(".msh.h5"):
             prime.FileIO(self._model).import_fluent_meshing_meshes(
-                [file_name], prime.ImportFluentMeshingMeshParams(self._model, append=append)
+                [file_name],
+                prime.ImportFluentMeshingMeshParams(self._model, append=append),
             )
         elif fileext == ".cas" or file_name.endswith(".cas.gz") or file_name.endswith(".cas.h5"):
             prime.FileIO(self._model).import_fluent_case(
@@ -213,7 +217,8 @@ class Mesh:
             )
         elif file_name.endswith(".msh.h5"):
             prime.FileIO(self._model).export_fluent_meshing_mesh(
-                file_name, prime.ExportFluentMeshingMeshParams(self._model, cff_format=True)
+                file_name,
+                prime.ExportFluentMeshingMeshParams(self._model, cff_format=True),
             )
         elif fileext == ".stl":
             part_ids = [part.id for part in self._model.parts]
@@ -337,13 +342,13 @@ class Mesh:
             for face in labels_of_face:
                 name_exists = False
                 for label_list in lists_of_labels:
-                    zone_name = '_'.join(labels_of_face[face])
+                    zone_name = "_".join(labels_of_face[face])
                     if set(label_list) == set(labels_of_face[face]):
                         name_exists = True
                         label_zone_definitions[zone_name].append(face)
                 if not name_exists:
                     lists_of_labels.append(labels_of_face[face])
-                    label_zone_definitions['_'.join(labels_of_face[face])] = [face]
+                    label_zone_definitions["_".join(labels_of_face[face])] = [face]
             # remove empty labels
             if "" in label_zone_definitions:
                 label_zone_definitions.pop("")
@@ -405,7 +410,11 @@ class Mesh:
                     surfer.remesh_face_zonelets(part_id, tf, te, params)
 
     def __variable_size_surface_mesh(
-        self, min_size: float, max_size: float, generate_quads: bool, scope: SurfaceScope
+        self,
+        min_size: float,
+        max_size: float,
+        generate_quads: bool,
+        scope: SurfaceScope,
     ):
         self._model.set_global_sizing_params(
             prime.GlobalSizingParams(model=self._model, min=min_size, max=max_size, growth_rate=1.2)
@@ -454,7 +463,10 @@ class Mesh:
                     )
                     sizecontrol1.set_curvature_sizing_params(
                         prime.CurvatureSizingParams(
-                            model=self._model, min=min_size, max=max_size, growth_rate=1.2
+                            model=self._model,
+                            min=min_size,
+                            max=max_size,
+                            growth_rate=1.2,
                         )
                     )
                     sizecontrol1.set_scope(
@@ -550,7 +562,10 @@ class Mesh:
                 )
         else:
             self.__variable_size_surface_mesh(
-                min_size=min_size, max_size=max_size, generate_quads=generate_quads, scope=scope
+                min_size=min_size,
+                max_size=max_size,
+                generate_quads=generate_quads,
+                scope=scope,
             )
 
     def create_constant_size_control(
@@ -620,7 +635,10 @@ class Mesh:
         sizecontrol = self._model.control_data.create_size_control(prime.SizingType.CURVATURE)
         sizecontrol.set_curvature_sizing_params(
             prime.CurvatureSizingParams(
-                model=self._model, min=min, max=max, growth_rate=global_sizes.growth_rate
+                model=self._model,
+                min=min,
+                max=max,
+                growth_rate=global_sizes.growth_rate,
             )
         )
         sizecontrol.set_scope(scope.get_scope_definition(self._model))
@@ -755,7 +773,9 @@ class Mesh:
             if check_name_pattern(part_expression, part.name):
                 part.delete_topo_entities(
                     prime.DeleteTopoEntitiesParams(
-                        model=self._model, delete_geom_zonelets=True, delete_mesh_zonelets=False
+                        model=self._model,
+                        delete_geom_zonelets=True,
+                        delete_mesh_zonelets=False,
                     )
                 )
                 if delete_edges:
@@ -771,17 +791,24 @@ class Mesh:
         return res.created_face_zonelets
 
     def __compute_flow_volume(
-        self, part_id: int, face_zonelets: Iterable[int], flow_volume_zone_name: str = "flow_volume"
+        self,
+        part_id: int,
+        face_zonelets: Iterable[int],
+        flow_volume_zone_name: str = "flow_volume",
     ):
         part = self._model.get_part(part_id)
         if part:
             params = prime.ExtractVolumesParams(
-                model=self._model, create_zone=True, suggested_zone_name=flow_volume_zone_name
+                model=self._model,
+                create_zone=True,
+                suggested_zone_name=flow_volume_zone_name,
             )
             res = part.extract_volumes(face_zonelets=face_zonelets, params=params)
 
     def create_flow_volume(
-        self, flow_volume_zone_name: str = "flow_volume", cap_scope: SurfaceScope = SurfaceScope()
+        self,
+        flow_volume_zone_name: str = "flow_volume",
+        cap_scope: SurfaceScope = SurfaceScope(),
     ):
         """Create flow volume by the face labels defining the boundary of the volume.
 
@@ -910,7 +937,9 @@ class Mesh:
                         )
                         prism_control.set_growth_params(
                             prime.PrismControlGrowthParams(
-                                self._model, n_layers=prism_layers, growth_rate=growth_rate
+                                self._model,
+                                n_layers=prism_layers,
+                                growth_rate=growth_rate,
                             )
                         )
                         prism_control.set_volume_scope(
@@ -1151,7 +1180,9 @@ class Mesh:
                 source = prime.ScopeDefinition(model=self._model, part_expression=part.name)
                 contact_prevention_params.append(
                     prime.ContactPreventionParams(
-                        model=self._model, source_scope=source, size=contact_prevention_size
+                        model=self._model,
+                        source_scope=source,
+                        size=contact_prevention_size,
                     )
                 )
                 for label in part.get_labels():
@@ -1162,7 +1193,9 @@ class Mesh:
                         source = prime.ScopeDefinition(model=self._model, label_expression=label)
                         contact_prevention_params.append(
                             prime.ContactPreventionParams(
-                                model=self._model, source_scope=source, size=contact_prevention_size
+                                model=self._model,
+                                source_scope=source,
+                                size=contact_prevention_size,
                             )
                         )
         else:
@@ -1210,7 +1243,7 @@ class Mesh:
             for part in self._model.parts:
                 others = [item.name for item in self._model.parts if item.name != part.name]
                 scope1 = prime.ScopeDefinition(self._model, part_expression=part.name)
-                scope2 = prime.ScopeDefinition(self._model, part_expression=','.join(others))
+                scope2 = prime.ScopeDefinition(self._model, part_expression=",".join(others))
                 scope1_zonelets_array = self._model.control_data.get_part_zonelets(scope=scope1)
                 scope2_zonelets_array = self._model.control_data.get_part_zonelets(scope=scope2)
                 intersect_loops_params = prime.CreateIntersectionEdgeLoopsParams(
@@ -1225,7 +1258,9 @@ class Mesh:
                 model=self._model,
                 enable_feature_octree_refinement=enable_feature_octree_refinement,
                 scope=prime.ScopeDefinition(
-                    model=self._model, part_expression="*", label_expression="__intersect_loops__"
+                    model=self._model,
+                    part_expression="*",
+                    label_expression="__intersect_loops__",
                 ),
             )
             feature_recovery_params.append(intersect_feature_params)
@@ -1319,7 +1354,6 @@ class Mesh:
         if remesh_postwrap and wrapped_part:
             if not use_existing_size_fields and (global_size_controls + remesh_size_controls):
                 if recompute_remesh_sizes:
-
                     if is_geodesic:
                         self._logger.info(
                             "Recomputing sizing after geodesic wrap:"
@@ -1336,7 +1370,8 @@ class Mesh:
                             geodesic_global_size_controls[i] = control
                         created_size_fields.append(
                             self.__compute_size_field(
-                                geodesic_global_size_controls + remesh_size_controls, field
+                                geodesic_global_size_controls + remesh_size_controls,
+                                field,
                             )
                         )
                     else:
@@ -1528,7 +1563,9 @@ class Mesh:
             if len(part.get_topo_faces()) > 0:
                 part.delete_topo_entities(
                     prime.DeleteTopoEntitiesParams(
-                        self._model, delete_geom_zonelets=False, delete_mesh_zonelets=True
+                        self._model,
+                        delete_geom_zonelets=False,
+                        delete_mesh_zonelets=True,
                     )
                 )
 
@@ -1639,14 +1676,18 @@ class Mesh:
 
         volume_results = wrapped_part.compute_closed_volumes(
             prime.ComputeVolumesParams(
-                model=self._model, create_zones_type=prime.CreateVolumeZonesType.PERVOLUME
+                model=self._model,
+                create_zones_type=prime.CreateVolumeZonesType.PERVOLUME,
             )
         )
         self._logger.info(str(volume_results.volumes) + " volumes found.")
 
         self._model.set_global_sizing_params(
             prime.GlobalSizingParams(
-                self._model, min=global_sf.min, max=global_sf.max, growth_rate=global_sf.growth_rate
+                self._model,
+                min=global_sf.min,
+                max=global_sf.max,
+                growth_rate=global_sf.growth_rate,
             )
         )
         self._model.control_data.delete_controls(

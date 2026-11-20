@@ -8,7 +8,7 @@ Overall guidance on contributing to a PyAnsys library appears in the
 `Contributing <https://dev.docs.pyansys.com/how-to/contributing.html>`_ topic
 in the *PyAnsys Developer's Guide*. Ensure that you are thoroughly familiar
 with this guide before attempting to contribute to PyPrimeMesh.
- 
+
 The following contribution information is specific to PyPrimeMesh.
 
 --------------------
@@ -43,8 +43,8 @@ released versions.
 --------------------------------
 Code structure and contributions
 --------------------------------
-The PyPrimeMesh code base is primarily auto-generated from Ansys Prime Server. For the auto-generated 
-code, contributions are limited to raising issues and enhancement requests.  
+The PyPrimeMesh code base is primarily auto-generated from Ansys Prime Server. For the auto-generated
+code, contributions are limited to raising issues and enhancement requests.
 
 You should not modify files marked as auto-generated.
 
@@ -61,7 +61,7 @@ PyPrimeMesh repository:
   provides high-level APIs.
 
 
-If you have an idea on how to enhance PyPrimeMesh, consider first creating an issue as a feature request 
+If you have an idea on how to enhance PyPrimeMesh, consider first creating an issue as a feature request
 The PyPrimeMesh team can then use the request as a discussion thread to work on implementing the contribution.
 
 ----------
@@ -92,6 +92,6 @@ call code styling standards must pass::
 Licensing
 ---------
 All contributed code is licensed under the MIT License found in the repository.
-If you did not write the code yourself, it is your responsibility to ensure that the existing license is compatible 
+If you did not write the code yourself, it is your responsibility to ensure that the existing license is compatible
 and included in the contributed files or you obtain permission from the original author to relicense the code.
 
