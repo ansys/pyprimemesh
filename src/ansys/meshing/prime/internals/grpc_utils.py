@@ -1,5 +1,6 @@
-# Copyright (C) 2024 - 2026 ANSYS, Inc. and/or its affiliates.
+# Copyright (C) 2025 - 2026 Synopsys, Inc. and ANSYS, Inc. All rights reserved.
 # SPDX-License-Identifier: MIT
+#
 #
 # Permission is hereby granted, free of charge, to any person obtaining a copy
 # of this software and associated documentation files (the "Software"), to deal
@@ -20,6 +21,7 @@
 # SOFTWARE.
 
 """Module for gRPC utilities."""
+
 import ansys.meshing.prime.internals.defaults as defaults
 
 
@@ -36,15 +38,15 @@ def get_default_channel_args():
     return (
         [
             # ('grpc.keepalive_time_ms', 60000), # 1 minute
-            ('grpc.keepalive_timeout_ms', 60000),  # 60 seconds
-            ('grpc.keepalive_permit_without_calls', True),
-            ('grpc.http2.max_pings_without_data', 0),  # Disable
-            ('grpc.max_send_message_length', defaults.max_message_length()),
-            ('grpc.max_receive_message_length', defaults.max_message_length()),
+            ("grpc.keepalive_timeout_ms", 60000),  # 60 seconds
+            ("grpc.keepalive_permit_without_calls", True),
+            ("grpc.http2.max_pings_without_data", 0),  # Disable
+            ("grpc.max_send_message_length", defaults.max_message_length()),
+            ("grpc.max_receive_message_length", defaults.max_message_length()),
         ]
         if "PYPRIMEMESH_DEVELOPER_MODE" not in os.environ
         else [
-            ('grpc.max_send_message_length', defaults.max_message_length()),
-            ('grpc.max_receive_message_length', defaults.max_message_length()),
+            ("grpc.max_send_message_length", defaults.max_message_length()),
+            ("grpc.max_receive_message_length", defaults.max_message_length()),
         ]
     )

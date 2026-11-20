@@ -1,4 +1,4 @@
-# Copyright (C) 2024 - 2026 ANSYS, Inc. and/or its affiliates.
+# Copyright (C) 2025 - 2026 Synopsys, Inc. and ANSYS, Inc. All rights reserved.
 # SPDX-License-Identifier: MIT
 #
 #
@@ -21,6 +21,7 @@
 # SOFTWARE.
 
 """This module tests the different methods in Surfer class."""
+
 import ansys.meshing.prime as prime
 
 
@@ -53,10 +54,14 @@ def test_remesh_face_zonelets_locally(initialized_model_elbow):
 
     part = model.parts[0]
     part.delete_topo_entities(
-        prime.DeleteTopoEntitiesParams(model, delete_geom_zonelets=False, delete_mesh_zonelets=True)
+        prime.DeleteTopoEntitiesParams(
+            model, delete_geom_zonelets=False, delete_mesh_zonelets=True
+        )
     )
     face_zonelets = part.get_face_zonelets()
-    results = surfer.remesh_face_zonelets_locally(part.id, face_zonelets, 1, local_surfer_params)
+    results = surfer.remesh_face_zonelets_locally(
+        part.id, face_zonelets, 1, local_surfer_params
+    )
     assert results.error_code is prime.ErrorCode.NOERROR
 
 
@@ -72,12 +77,16 @@ def test_remesh_face_zonelets(initialized_model_elbow):
     surfer_params = prime.SurferParams(model)
     part = model.parts[0]
     part.delete_topo_entities(
-        prime.DeleteTopoEntitiesParams(model, delete_geom_zonelets=False, delete_mesh_zonelets=True)
+        prime.DeleteTopoEntitiesParams(
+            model, delete_geom_zonelets=False, delete_mesh_zonelets=True
+        )
     )
     face_zonelets = part.get_face_zonelets()
     edge_zonelets = part.get_edge_zonelets()
 
-    results = surfer.remesh_face_zonelets(part.id, face_zonelets, edge_zonelets, surfer_params)
+    results = surfer.remesh_face_zonelets(
+        part.id, face_zonelets, edge_zonelets, surfer_params
+    )
     assert results.error_code is prime.ErrorCode.NOERROR
 
 

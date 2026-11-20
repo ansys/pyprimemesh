@@ -1,5 +1,6 @@
-# Copyright (C) 2024 - 2026 ANSYS, Inc. and/or its affiliates.
+# Copyright (C) 2025 - 2026 Synopsys, Inc. and ANSYS, Inc. All rights reserved.
 # SPDX-License-Identifier: MIT
+#
 #
 # Permission is hereby granted, free of charge, to any person obtaining a copy
 # of this software and associated documentation files (the "Software"), to deal
@@ -20,6 +21,7 @@
 # SOFTWARE.
 
 """Module for managing file inputs and outputs."""
+
 import copy
 import json
 import traceback
@@ -81,7 +83,9 @@ class FileIO(_FileIO):
         self._model = model
         super().__init__(model)
 
-    def read_pmdat(self, file_name: str, file_read_params: FileReadParams) -> FileReadResults:
+    def read_pmdat(
+        self, file_name: str, file_read_params: FileReadParams
+    ) -> FileReadResults:
         """Read a PyPrimeMesh data (PMDAT) file.
 
         Parameters
@@ -117,7 +121,9 @@ class FileIO(_FileIO):
                 self._model._sync_up_model()
         return result
 
-    def write_pmdat(self, file_name: str, file_write_params: FileWriteParams) -> FileWriteResults:
+    def write_pmdat(
+        self, file_name: str, file_write_params: FileWriteParams
+    ) -> FileWriteResults:
         """Write a PyPrimeMesh data (PMDAT) file.
 
         Parameters
@@ -141,7 +147,9 @@ class FileIO(_FileIO):
             result = super().write_pmdat(temp_file_name, file_write_params)
         return result
 
-    def import_abaqus_inp(self, file_name: str, params: ImportAbaqusParams) -> ImportAbaqusResults:
+    def import_abaqus_inp(
+        self, file_name: str, params: ImportAbaqusParams
+    ) -> ImportAbaqusResults:
         """(BETA FEATURE) Import a Abaqus file.
 
         This is a beta feature to import abaqus files as dead mesh and also store
@@ -171,7 +179,9 @@ class FileIO(_FileIO):
                 self._model._sync_up_model()
         return result
 
-    def import_fluent_meshing_size_field(self, file_name: str) -> SizeFieldFileReadResults:
+    def import_fluent_meshing_size_field(
+        self, file_name: str
+    ) -> SizeFieldFileReadResults:
         """Import a Fluent Meshing size field (SF and SF.GZ) file from disk.
 
         Parameters
@@ -228,7 +238,9 @@ class FileIO(_FileIO):
             result = super().read_size_field(temp_file_name, params)
         return result
 
-    def write_size_field(self, file_name: str, params: WriteSizeFieldParams) -> FileWriteResults:
+    def write_size_field(
+        self, file_name: str, params: WriteSizeFieldParams
+    ) -> FileWriteResults:
         """Write a PyPrimeMesh size field (PSF) file to a file on disk.
 
         Parameters
@@ -332,14 +344,18 @@ class FileIO(_FileIO):
             #    part_id = self._model.parts[0].id
             args = {"partId": 0}
             command_name = "PrimeMesh::FileIO/GetAbaqusSimulationData"
-            sim_data_str = self._comm.serve(self._model, command_name, self._object_id, args=args)
+            sim_data_str = self._comm.serve(
+                self._model, command_name, self._object_id, args=args
+            )
             if params.config_settings is None:
-                params.config_settings = ''
+                params.config_settings = ""
             generate_mapdl_commands_error = None
             generate_mapdl_commands_traceback = None
             try:
-                all_mat_cmds, analysis_settings = mapdlcdbexportutils.generate_mapdl_commands(
-                    self._model, sim_data_str, params
+                all_mat_cmds, analysis_settings = (
+                    mapdlcdbexportutils.generate_mapdl_commands(
+                        self._model, sim_data_str, params
+                    )
                 )
             except Exception as e:
                 generate_mapdl_commands_error = e
@@ -496,7 +512,9 @@ class FileIO(_FileIO):
 
         """
         with utils.file_read_context(self._model, file_name) as temp_file_name:
-            result = super().import_fluent_case(temp_file_name, import_fluent_case_params)
+            result = super().import_fluent_case(
+                temp_file_name, import_fluent_case_params
+            )
             if result.error_code == ErrorCode.NOERROR:
                 self._model._sync_up_model()
         return result
@@ -526,7 +544,9 @@ class FileIO(_FileIO):
                         prime.ExportFluentCaseParams(model=model))
         """
         with utils.file_write_context(self._model, file_name) as temp_file_name:
-            result = super().export_fluent_case(temp_file_name, export_fluent_case_params)
+            result = super().export_fluent_case(
+                temp_file_name, export_fluent_case_params
+            )
         return result
 
     def export_fluent_meshing_mesh(
@@ -553,7 +573,9 @@ class FileIO(_FileIO):
                         ExportFluentMeshingMeshParams(model=model))
         """
         with utils.file_write_context(self._model, file_name) as temp_file_name:
-            result = super().export_fluent_meshing_mesh(temp_file_name, export_fluent_mesh_params)
+            result = super().export_fluent_meshing_mesh(
+                temp_file_name, export_fluent_mesh_params
+            )
         return result
 
     def export_lsdyna_keyword_file(
@@ -591,7 +613,9 @@ class FileIO(_FileIO):
             #    part_id = self._model.parts[0].id
             args = {"partId": 0}
             command_name = "PrimeMesh::FileIO/GetAbaqusSimulationData"
-            sim_data = self._comm.serve(self._model, command_name, self._object_id, args=args)
+            sim_data = self._comm.serve(
+                self._model, command_name, self._object_id, args=args
+            )
             sim_data = json.loads(sim_data)
             if sim_data is not None:
                 mp = dynaexportutils.MaterialProcessor(self._model, sim_data)
@@ -656,7 +680,9 @@ class FileIO(_FileIO):
                         ExportBoundaryFittedSplineParams(model=model))
         """
         with utils.file_write_context(self._model, file_name) as temp_file_name:
-            result = super().export_boundary_fitted_spline_kfile(temp_file_name, export_params)
+            result = super().export_boundary_fitted_spline_kfile(
+                temp_file_name, export_params
+            )
         return result
 
     def import_cad(self, file_name: str, params: ImportCadParams) -> ImportCadResults:

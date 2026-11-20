@@ -65,7 +65,7 @@ Prism controls for polyhedral mesh
 The :class:`PrismControl <ansys.meshing.prime.PrismControl>` class helps you to control prism mesh generation
 based on the face scope, volume scope and growth rate. You can use one or more prism controls. Each prism control
 definition is applied to one or more boundary zones and affects the height distribution and number of layers of
-the prism cells in the adjacent boundary layers.  
+the prism cells in the adjacent boundary layers.
 
 This example shows how to perform these steps:
 
@@ -189,25 +189,25 @@ This example shows how to perform these steps:
 Thin volume mesh controls
 =========================
 
-The :class:`ThinVolumeControl <ansys.meshing.prime.ThinVolumeControl>` class creates prisms from a source face mesh projecting to a target with the specified number of layers. 
+The :class:`ThinVolumeControl <ansys.meshing.prime.ThinVolumeControl>` class creates prisms from a source face mesh projecting to a target with the specified number of layers.
 
 .. note::
     Thin volume controls can only be applied on the meshed surfaces.
 
-Some guidelines for the thin volume mesh controls: 
+Some guidelines for the thin volume mesh controls:
 
- - Source and target face zonelets should not be the same. 
- - The number of prism layers to be created between source and target must be greater than zero. 
- - A source face zonelet cannot be a target face zonelet in a subsequent control. 
- - A source can only belong to two thin volume controls. 
- - Always choose the one with most features as the source. 
- - Target face zonelets cannot be adjacent to regions with cells whereas source face zonelets can. 
- - Sides of the new thin volume control cannot be adjacent to regions with existing cells. 
- - Sides of one thin volume control can only be a source to another thin volume control. 
+ - Source and target face zonelets should not be the same.
+ - The number of prism layers to be created between source and target must be greater than zero.
+ - A source face zonelet cannot be a target face zonelet in a subsequent control.
+ - A source can only belong to two thin volume controls.
+ - Always choose the one with most features as the source.
+ - Target face zonelets cannot be adjacent to regions with cells whereas source face zonelets can.
+ - Sides of the new thin volume control cannot be adjacent to regions with existing cells.
+ - Sides of one thin volume control can only be a source to another thin volume control.
 
-The below example shows how to: 
+The below example shows how to:
 
-* Create a thin volume control and set source and target. 
+* Create a thin volume control and set source and target.
 * Set the thin volume mesh parameters and perform volume meshing.
 
 .. code-block:: python

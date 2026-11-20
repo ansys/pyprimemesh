@@ -26,15 +26,15 @@ The following example shows the translation of Abaqus INP file to CDB file forma
            prime.ImportAbaqusParams(model),
        )
        print(import_results)
-   
+
     The import_abaqus_inp imports the INP file as mesh, extracts simulation specific information from the INP file and
     stores the information internally as a JSON document. :class:`ImportAbaqusParams <ansys.meshing.prime.ImportAbaqusParams>`
     allows you to set the parameters for importing the model. The example uses default parameters for importing the model.
 
     **Output**:
-	
+
 	.. code-block:: pycon
-	
+
 	   summary_log : {"Counts": {"beam": 1,"connector": 3,"element": 6944,"elsets": 7,"errors": 0,"node": 6523,
 	   "nsets": 2, "physical": 1,"shell": 5375,"skipped": 0,"solid": 1564,"translated": 65,"warnings": 0},"Ids":
 	   {"beam": {"max": 7928,"min": 7928},"connector": {"max": 10001,"min": 7929},"element": {"max": 100000,"min": 1},
@@ -48,9 +48,9 @@ The following example shows the translation of Abaqus INP file to CDB file forma
 	   "RIGID BODY": 1,"SECTION CONTROLS": 1,"SHELL SECTION": 2,"SOLID SECTION": 2,"SPRING": 1,"STATIC": 1,"STEP": 1,
 	   "SURFACE": 12,"TIE": 4},"skipped_keywords": null,"unprocessed_keywords": null}}
 	   error_code : ErrorCode.NOERROR
-	   warning_codes : []	
-    
-	
+	   warning_codes : []
+
+
     Here, the import summary provides information on the following:
 
     - Total number of keywords in the imported file.
@@ -87,15 +87,15 @@ The following example shows the translation of Abaqus INP file to CDB file forma
     result of the export process in json format. This writes the CDB file to the specified location.
 
     .. code-block:: pycon
-		
-	   summary_log : {"Counts": {"errors": 0,"skipped": 1,"translated": 40,"warnings": 0},"Ids": {"beam": 
+
+	   summary_log : {"Counts": {"errors": 0,"skipped": 1,"translated": 40,"warnings": 0},"Ids": {"beam":
 	   {"max": 7928},"constant": {"max": 44},"csys": {"max": 2},"element": {"max": 100117},"et": {"max": 28},
 	   "material": {"max": 114},"node": {"max": 100002},"section": {"max": 114},"shell": {"max": 100088},
 	   "solid": {"max": 7287}}}
 	   zone_mesh_results : []
 	   error_code : ErrorCode.NOERROR
-	   warning_codes : []	
-	
+	   warning_codes : []
+
 
     CDB Export summary provides information about:
 
@@ -231,28 +231,28 @@ The following example shows the translation of Abaqus INP file to CDB file forma
        * - FREQUENCY
          - DAMPING PROJECTION=ON; EIGENSOLVER=AMS; NORMALIZATION=MASS; RESIDUAL MODES; SIMULATION=STEADY STATE
 
-Abaqus to LS-DYNA Conversion 
+Abaqus to LS-DYNA Conversion
 -----------------------------
 
-Abaqus to LS-DYNA conversion helps you migrate models between solvers for different types of analysis. 
+Abaqus to LS-DYNA conversion helps you migrate models between solvers for different types of analysis.
 It avoids rebuilding the model from scratch and saves time and effort.
 
-The following example shows the translation of Abaqus INP file to K file format: 
+The following example shows the translation of Abaqus INP file to K file format:
 
-1. Import the Abaqus INP file. 
+1. Import the Abaqus INP file.
 
     .. code-block:: python
-    
+
         fileio = prime.FileIO(model=model)
         import_results = fileio.import_abaqus_inp(
             r"E:\test3\spot_weld_test.inp",
             prime.ImportAbaqusParams(model),
         )
 
-    The import_abaqus_inp imports the INP file as mesh, extracts simulation specific information from the INP file 
-    and stores the information internally as a JSON document. 
-    :class:`ImportAbaqusParams <ansys.meshing.prime.ImportAbaqusParams>` allows you to set the parameters for importing the model. 
-    The example uses default parameters for importing the model.  
+    The import_abaqus_inp imports the INP file as mesh, extracts simulation specific information from the INP file
+    and stores the information internally as a JSON document.
+    :class:`ImportAbaqusParams <ansys.meshing.prime.ImportAbaqusParams>` allows you to set the parameters for importing the model.
+    The example uses default parameters for importing the model.
 
     **Output**
 
@@ -267,28 +267,28 @@ The following example shows the translation of Abaqus INP file to K file format:
         "ELEMENT OUTPUT": 1,"ELSET": 5,"END STEP": 1,"ENERGY OUTPUT": 1,"FASTENER": 1,"FASTENER PROPERTY": 1,
         "FIXED MASS SCALING": 1,"HEADING": 1,"MATERIAL": 2,"NODE": 1,"NODE OUTPUT": 1,"NSET": 19,"ORIENTATION": 1,
         "OUTPUT": 2,"PLASTIC": 2,"SHELL SECTION": 2,"STEP": 1,"SURFACE": 2,"VARIABLE MASS SCALING": 1},
-        "skipped_keywords": null,"unprocessed_keywords": null}} 
-        formatted_summary_log : None 
-        error_code : 0 
-        warning_codes : []  
+        "skipped_keywords": null,"unprocessed_keywords": null}}
+        formatted_summary_log : None
+        error_code : 0
+        warning_codes : []
 
-    Here, the import summary provides information on the following: 
+    Here, the import summary provides information on the following:
 
-    - Total number of keywords in the imported file. 
+    - Total number of keywords in the imported file.
 
-    - Total number of processed keywords. 
+    - Total number of processed keywords.
 
-    - Total number of skipped or unprocessed keywords. 
+    - Total number of skipped or unprocessed keywords.
 
-    - Number of imported nodes. 
+    - Number of imported nodes.
 
-    - Number of imported elements (solid, shell, beam and more). 
+    - Number of imported elements (solid, shell, beam and more).
 
-    - Number and type of skipped elements. 
+    - Number and type of skipped elements.
 
-    - Ids of imported nodes and elements. 
+    - Ids of imported nodes and elements.
 
-    - Number of errors and warnings that occurred while importing the file. 
+    - Number of errors and warnings that occurred while importing the file.
 
 2. Export the K file.
 
@@ -300,17 +300,17 @@ The following example shows the translation of Abaqus INP file to K file format:
         print(export_K_result)
 
 
-   
-   :func:`FileIO.export_lsdyna_keyword_file <ansys.meshing.prime.FileIO.export_lsdyna_keyword_file>` allows you 
-   to write out an LS-DYNA Keyword `(*.k)` file that contains the mesh definition and other necessary information 
-   to carry out the analysis run using the LS-DYNA solver.  
-    
-   :func:`ExportLSDynaKeywordFileParams<ansys.meshing.prime.FileIO.export_lsdyna_keyword_file>` allows you to 
-   specify the application type (SEATBELT, DOORSLAM), indicate whether to compute the spot weld thickness, 
+
+   :func:`FileIO.export_lsdyna_keyword_file <ansys.meshing.prime.FileIO.export_lsdyna_keyword_file>` allows you
+   to write out an LS-DYNA Keyword `(*.k)` file that contains the mesh definition and other necessary information
+   to carry out the analysis run using the LS-DYNA solver.
+
+   :func:`ExportLSDynaKeywordFileParams<ansys.meshing.prime.FileIO.export_lsdyna_keyword_file>` allows you to
+   specify the application type (SEATBELT, DOORSLAM), indicate whether to compute the spot weld thickness,
    append the material cards in the K file, provide the database cards to append in the K file, and specify
    the LS-DYNA data field format.
-   You should specify the material properties card and the database keywords card in LS-DYNA format. 
-    
+   You should specify the material properties card and the database keywords card in LS-DYNA format.
+
    **Output**
 
     .. code-block:: pycon
@@ -323,11 +323,11 @@ The following example shows the translation of Abaqus INP file to K file format:
         "compute_spotweld_thickness": "true","output_format": "LSDynaFormat_i10"}}
         zone_mesh_results : []
         error_code : 0
-        warning_codes : [] 
+        warning_codes : []
 
-    
-  Export summary provides information about: 
 
-    - Number of error and warnings that occurred while exporting the K file. 
+  Export summary provides information about:
+
+    - Number of error and warnings that occurred while exporting the K file.
 
     - Maximum number of node ids and elements ids that are exported.

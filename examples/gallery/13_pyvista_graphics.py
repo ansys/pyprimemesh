@@ -1,4 +1,4 @@
-# Copyright (C) 2024 - 2026 ANSYS, Inc. and/or its affiliates.
+# Copyright (C) 2025 - 2026 Synopsys, Inc. and ANSYS, Inc. All rights reserved.
 # SPDX-License-Identifier: MIT
 #
 #
@@ -169,7 +169,9 @@ for idx, part_id in enumerate(part_ids):
             if item is None:
                 continue
             polydata, metadata = item
-            plotter.add_mesh(polydata, metadata, color=color, opacity=1.0, show_edges=False)
+            plotter.add_mesh(
+                polydata, metadata, color=color, opacity=1.0, show_edges=False
+            )
 
     # Add edges for this part with same part color
     if "edges" in part_data:
@@ -238,7 +240,11 @@ for part_id, part_data in graphics_data.items():
                     zname = zone_id_to_name.get(metadata.zone_id)
                 if not zname:
                     # Auto-name for faces with no zone assignment
-                    zname = f"zone_{metadata.zone_id}" if metadata.zone_id else metadata.part_name
+                    zname = (
+                        f"zone_{metadata.zone_id}"
+                        if metadata.zone_id
+                        else metadata.part_name
+                    )
                     if zname not in zone_colors:
                         hue = (len(zone_colors) * 0.618) % 1.0  # golden ratio spacing
                         rgb = colorsys.hsv_to_rgb(hue, 0.7, 0.9)
@@ -246,12 +252,16 @@ for part_id, part_data in graphics_data.items():
                         zone_list.append(zname)
                 color = zone_colors.get(zname, [0.5, 0.5, 0.5])
                 zone_face_meshes.setdefault(zname, []).append(polydata.mesh)
-                plotter.add_mesh(polydata, metadata, color=color, opacity=1.0, show_edges=False)
+                plotter.add_mesh(
+                    polydata, metadata, color=color, opacity=1.0, show_edges=False
+                )
         elif entity_type == "edges":
             for edge_obj in entity_list:
                 if edge_obj is None:
                     continue
-                plotter.add_mesh(edge_obj.mesh, color=[0.3, 0.3, 0.3], line_width=2, pickable=False)
+                plotter.add_mesh(
+                    edge_obj.mesh, color=[0.3, 0.3, 0.3], line_width=2, pickable=False
+                )
 
 # Add bounding boxes and labels for zones that have face geometry
 for zname, meshes in zone_face_meshes.items():
@@ -343,18 +353,26 @@ for part_id, part_data in graphics_data.items():
                     if face_label and face_label in label_colors:
                         color = label_colors[face_label]
                         opacity = 1.0
-                        label_face_meshes.setdefault(face_label, []).append(polydata.mesh)
+                        label_face_meshes.setdefault(face_label, []).append(
+                            polydata.mesh
+                        )
                     else:
                         color = [0.5, 0.5, 0.5]
                         opacity = 0.3
                     plotter.add_mesh(
-                        polydata, metadata, color=color, opacity=opacity, show_edges=False
+                        polydata,
+                        metadata,
+                        color=color,
+                        opacity=opacity,
+                        show_edges=False,
                     )
         elif entity_type == "edges":
             for edge_obj in entity_list:
                 if edge_obj is None:
                     continue
-                plotter.add_mesh(edge_obj.mesh, color=[0.2, 0.2, 0.2], line_width=2, pickable=False)
+                plotter.add_mesh(
+                    edge_obj.mesh, color=[0.2, 0.2, 0.2], line_width=2, pickable=False
+                )
 
 # Bounding boxes and labels
 for label_name, meshes in label_face_meshes.items():
@@ -412,7 +430,11 @@ for part_id, part_data in graphics_data.items():
                 continue
             polydata, metadata = item
             plotter.add_mesh(
-                polydata, metadata, color=[0.85, 0.85, 0.85], opacity=0.3, show_edges=False
+                polydata,
+                metadata,
+                color=[0.85, 0.85, 0.85],
+                opacity=0.3,
+                show_edges=False,
             )
     # Add edges with their native type-based colors
     if "edges" in part_data:
@@ -446,7 +468,9 @@ plotter.show(title="Plot 5 \u2014 Edge Type Coloring")
 plotter = PrimePlotter()
 
 # Show only inlet and outlet faces using label-based scoping
-scope_inlets = prime.ScopeDefinition(model, label_expression="in1_inlet,in2_inlet,outlet_main")
+scope_inlets = prime.ScopeDefinition(
+    model, label_expression="in1_inlet,in2_inlet,outlet_main"
+)
 plotter.plot(model, scope=scope_inlets)
 plotter.add_text(
     "Plot 6 \u2014 Scope-Based: Inlet & Outlet Faces Only",
@@ -494,7 +518,10 @@ for part_id, part_data in volume_graphics_data.items():
                 if item is None:
                     continue
                 polydata, metadata = item
-                if metadata.has_mesh and metadata.display_mesh_type == DisplayMeshType.FACEZONELET:
+                if (
+                    metadata.has_mesh
+                    and metadata.display_mesh_type == DisplayMeshType.FACEZONELET
+                ):
                     zonelet_items.append((polydata, metadata))
 
 # Assign distinct colors and add ID labels
@@ -552,7 +579,9 @@ for part_id, part_data in volume_graphics_data.items():
                     mesh_copy = polydata.mesh.copy()
                     n_cells = mesh_copy.n_cells
                     if n_cells > 0:
-                        cell_colors = rng.integers(0, 256, size=(n_cells, 3), dtype=np.uint8)
+                        cell_colors = rng.integers(
+                            0, 256, size=(n_cells, 3), dtype=np.uint8
+                        )
                         mesh_copy.cell_data["RGB"] = cell_colors
                         plotter.add_mesh(
                             mesh_copy,

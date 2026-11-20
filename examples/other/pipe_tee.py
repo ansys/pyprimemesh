@@ -1,4 +1,4 @@
-# Copyright (C) 2024 - 2026 ANSYS, Inc. and/or its affiliates.
+# Copyright (C) 2025 - 2026 Synopsys, Inc. and ANSYS, Inc. All rights reserved.
 # SPDX-License-Identifier: MIT
 #
 #
@@ -167,7 +167,9 @@ mesh_util.volume_mesh(
 # Display mesh without unwanted edge zonelets. You can clearly see the
 # prism layers that were specified by the ``Prism`` control.
 display = PrimePlotter()
-display.plot(model, scope=prime.ScopeDefinition(model=model, label_expression="* !*__*"))
+display.plot(
+    model, scope=prime.ScopeDefinition(model=model, label_expression="* !*__*")
+)
 display.show()
 
 ###############################################################################

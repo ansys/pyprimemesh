@@ -1,4 +1,4 @@
-# Copyright (C) 2024 - 2025 ANSYS, Inc. and/or its affiliates.
+# Copyright (C) 2025 - 2026 Synopsys, Inc. and ANSYS, Inc. All rights reserved.
 # SPDX-License-Identifier: MIT
 #
 #
@@ -21,6 +21,7 @@
 # SOFTWARE.
 
 """Script to build linux based docker image for the pyprimemesh project."""
+
 import json
 import logging
 import os
@@ -29,7 +30,7 @@ import shutil
 import subprocess
 import sys
 
-if sys.platform != 'linux':
+if sys.platform != "linux":
     print("This script should be run on linux platform.")
     sys.exit(1)
 
@@ -42,12 +43,18 @@ if len(sys.argv) < 2:
 
 AWP_ROOT = sys.argv[1]
 if not os.path.exists(AWP_ROOT):
-    print("Could not find Ansys installation folder '{}'. Please try again.".format(AWP_ROOT))
+    print(
+        "Could not find Ansys installation folder '{}'. Please try again.".format(
+            AWP_ROOT
+        )
+    )
     sys.exit(1)
 
 # -------------------------------------------------------------------------------
 # Globals
-MANIFEST_SYMLINKS = os.path.join(AWP_ROOT, "meshing", "Prime", "Manifest_PyPrimeSymlinks.json")
+MANIFEST_SYMLINKS = os.path.join(
+    AWP_ROOT, "meshing", "Prime", "Manifest_PyPrimeSymlinks.json"
+)
 MANIFEST_FOUND_IN_UNIFIED = os.path.join(
     AWP_ROOT, "meshing", "Prime", "Manifest_AnsysInstallation.json"
 )
@@ -67,11 +74,11 @@ logging.basicConfig(
 
 def load_manifest():
     """Load Ansys unified installation match manifest."""
-    with open(MANIFEST_FOUND_IN_UNIFIED, 'r', encoding='utf-8') as file:
+    with open(MANIFEST_FOUND_IN_UNIFIED, "r", encoding="utf-8") as file:
         unifiedPathDict = json.load(file)
 
     # Load symlink manifest
-    with open(MANIFEST_SYMLINKS, 'r', encoding='utf-8') as file:
+    with open(MANIFEST_SYMLINKS, "r", encoding="utf-8") as file:
         allSymlinkDict = json.load(file)
 
     return unifiedPathDict, allSymlinkDict
@@ -79,8 +86,10 @@ def load_manifest():
 
 def create_symlink(link, target):
     """Create symlinks as specified in PyPrimeMesh package manifest."""
-    cmd = ['ln', '-s', target, link]
-    p = subprocess.Popen(cmd, stdin=subprocess.PIPE, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+    cmd = ["ln", "-s", target, link]
+    p = subprocess.Popen(
+        cmd, stdin=subprocess.PIPE, stdout=subprocess.PIPE, stderr=subprocess.PIPE
+    )
     (stdoutdata, stderrdata) = p.communicate()
 
 
@@ -110,7 +119,7 @@ def assemble_full_package(unifiedPathDict, allFileDict, dest_package_path):
 
     # Copy symlinks
     for key, value in allSymlinkDict.items():
-        dest_folder = re.sub(r'.*meshing/Prime', 'meshing/Prime', value["path"])
+        dest_folder = re.sub(r".*meshing/Prime", "meshing/Prime", value["path"])
         symlink_folder = os.path.join(dest_package_path, dest_folder)
         try:
             os.chdir(symlink_folder)
@@ -144,7 +153,15 @@ def create_docker_image(dest_package_path):
     # Build the docker image
     print(">>> Building docker image. This might take some time...")
     out = subprocess.run(
-        ["docker", "build", "-f", "linux/Dockerfile", "-t", "ghcr.io/ansys/prime:latest", "."],
+        [
+            "docker",
+            "build",
+            "-f",
+            "linux/Dockerfile",
+            "-t",
+            "ghcr.io/ansys/prime:latest",
+            ".",
+        ],
         cwd=os.path.dirname(os.path.abspath(__file__)),
         capture_output=True,
     )
@@ -156,9 +173,7 @@ def create_docker_image(dest_package_path):
 #
 
 if __name__ == "__main__":
-
     try:
-
         # change into the directory where the script resides
         root = os.path.dirname(os.path.abspath(__file__))
         dest_package_path = os.path.join(root, ASSEMBLED_PACKAGE_ROOT)

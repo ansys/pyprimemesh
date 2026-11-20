@@ -1,4 +1,4 @@
-# Copyright (C) 2024 - 2026 ANSYS, Inc. and/or its affiliates.
+# Copyright (C) 2025 - 2026 Synopsys, Inc. and ANSYS, Inc. All rights reserved.
 # SPDX-License-Identifier: MIT
 #
 #
@@ -31,29 +31,29 @@ import ansys.meshing.prime as prime
 import ansys.meshing.prime.graphics as pyprime_graphics
 
 with prime.launch_prime() as session:
-    print('Connected to server!')
+    print("Connected to server!")
     model = session.model
 
     mixing_elbow = prime.examples.download_elbow_pmdat()
 
-    print(f'Reading file {mixing_elbow}...')
+    print(f"Reading file {mixing_elbow}...")
     with prime.FileIO(model) as io:
         _ = io.read_pmdat(mixing_elbow, prime.FileReadParams(model=model))
 
     display = pyprime_graphics.Graphics(model)
     display()
 
-    part = model.get_part_by_name('flow_volume')
+    part = model.get_part_by_name("flow_volume")
 
-    inlet_zone = model.create_zone('inlet', prime.ZoneType.FACE).zone_id
+    inlet_zone = model.create_zone("inlet", prime.ZoneType.FACE).zone_id
     inlet_faces = part.get_topo_faces_of_label_name_pattern(
-        'inlet', prime.NamePatternParams(model=model)
+        "inlet", prime.NamePatternParams(model=model)
     )
     _ = part.add_topo_entities_to_zone(inlet_zone, inlet_faces)
 
-    outlet_zone = model.create_zone('outlet', prime.ZoneType.FACE).zone_id
+    outlet_zone = model.create_zone("outlet", prime.ZoneType.FACE).zone_id
     outlet_faces = part.get_topo_faces_of_label_name_pattern(
-        'outlet', prime.NamePatternParams(model=model)
+        "outlet", prime.NamePatternParams(model=model)
     )
     _ = part.add_topo_entities_to_zone(outlet_zone, outlet_faces)
 
@@ -66,14 +66,17 @@ with prime.launch_prime() as session:
 
     field = prime.SizeField(model)
     _ = field.compute_volumetric(
-        [control.id], prime.VolumetricSizeFieldComputeParams(enable_multi_threading=False)
+        [control.id],
+        prime.VolumetricSizeFieldComputeParams(enable_multi_threading=False),
     )
 
     with prime.Surfer(model) as surfacemesher:
         _ = surfacemesher.mesh_topo_faces(
             part.id,
             part.get_topo_faces(),
-            prime.SurferParams(model=model, size_field_type=prime.SizeFieldType.VOLUMETRIC),
+            prime.SurferParams(
+                model=model, size_field_type=prime.SizeFieldType.VOLUMETRIC
+            ),
         )
 
     display(update=True)
@@ -83,7 +86,7 @@ with prime.launch_prime() as session:
         model=model,
         entity_type=prime.ScopeEntity.FACEZONELETS,
         evaluation_type=prime.ScopeEvaluationType.ZONES,
-        zone_expression='* !inlet !outlet',
+        zone_expression="* !inlet !outlet",
     )
     volume_scope = prime.ScopeDefinition(
         model=model,
@@ -117,9 +120,11 @@ with prime.launch_prime() as session:
     display(update=True)
 
     with tempfile.TemporaryDirectory() as temp_folder:
-        fluent_case = os.path.join(temp_folder, 'mixing_elbow.cas')
+        fluent_case = os.path.join(temp_folder, "mixing_elbow.cas")
         with prime.FileIO(model) as io:
-            _ = io.export_fluent_case(fluent_case, prime.ExportFluentCaseParams(model=model))
+            _ = io.export_fluent_case(
+                fluent_case, prime.ExportFluentCaseParams(model=model)
+            )
 
         assert os.path.exists(fluent_case)
-        print(f'Fluent case exported at {fluent_case}')
+        print(f"Fluent case exported at {fluent_case}")

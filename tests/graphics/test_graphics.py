@@ -1,5 +1,6 @@
-# Copyright (C) 2024 - 2026 ANSYS, Inc. and/or its affiliates.
+# Copyright (C) 2025 - 2026 Synopsys, Inc. and ANSYS, Inc. All rights reserved.
 # SPDX-License-Identifier: MIT
+#
 #
 # Permission is hereby granted, free of charge, to any person obtaining a copy
 # of this software and associated documentation files (the "Software"), to deal
@@ -107,7 +108,9 @@ def _mesh_elbow(model, mixing_elbow, quadratic):
     mesh_util = prime.lucid.Mesh(model=model)
     mesh_util.read(mixing_elbow)
     mesh_util.surface_mesh(min_size=5, max_size=20)
-    mesh_util.volume_mesh(quadratic=quadratic, volume_fill_type=prime.VolumeFillType.TET)
+    mesh_util.volume_mesh(
+        quadratic=quadratic, volume_fill_type=prime.VolumeFillType.TET
+    )
     return model.as_polydata(update=True)
 
 
@@ -149,7 +152,9 @@ def _read_only(model, file_name):
 
 def _cells_for_key(batch, key):
     """Return a mask selecting one model-unique entity in a batch."""
-    render_ids = {int(render_id) for render_id, info in batch.infos.items() if info.key == key}
+    render_ids = {
+        int(render_id) for render_id, info in batch.infos.items() if info.key == key
+    }
     return np.isin(batch.render_entity_ids, tuple(render_ids))
 
 
@@ -171,7 +176,10 @@ def test_quadratic_element_outlines(get_remote_client, get_examples):
     linear_pd = _mesh_elbow(model, mixing_elbow, quadratic=False)
     assert _check_element_outlines(linear_pd) == set()
     linear_meshed_keys = {
-        info.key for part_pd in linear_pd.values() for _, info in part_pd["faces"] if info.has_mesh
+        info.key
+        for part_pd in linear_pd.values()
+        for _, info in part_pd["faces"]
+        if info.has_mesh
     }
     assert linear_meshed_keys
     linear_display = PrimePlotter()
@@ -180,7 +188,9 @@ def test_quadratic_element_outlines(get_remote_client, get_examples):
         assert linear_display.element_edge_actors
         represented = set()
         for actor, batch in linear_display.element_edge_actors.items():
-            represented.update(_keys_in_mesh(batch, linear_display._drawn_geometry[actor]))
+            represented.update(
+                _keys_in_mesh(batch, linear_display._drawn_geometry[actor])
+            )
         assert linear_meshed_keys <= represented
     finally:
         linear_display.scene.close()
@@ -205,7 +215,9 @@ def test_quadratic_element_outlines(get_remote_client, get_examples):
         hidden_key = next(iter(expected_keys))
         display.set_entities_visible([hidden_key], False)
         for actor, batch in outlines.items():
-            assert hidden_key not in _keys_in_mesh(batch, display._drawn_geometry[actor])
+            assert hidden_key not in _keys_in_mesh(
+                batch, display._drawn_geometry[actor]
+            )
 
         display.set_entities_visible([hidden_key], True)
         represented = set()
@@ -216,7 +228,9 @@ def test_quadratic_element_outlines(get_remote_client, get_examples):
         display.scene.close()
 
 
-def test_add_model_shows_linear_meshed_element_outlines(get_remote_client, get_examples):
+def test_add_model_shows_linear_meshed_element_outlines(
+    get_remote_client, get_examples
+):
     """Fast render path draws element outlines for linear meshed faces."""
     model = get_remote_client.model
     _mesh_elbow(model, get_examples["elbow_lucid"], quadratic=False)
@@ -247,7 +261,11 @@ def test_cad_without_mesh_is_outlined_by_its_facets(get_remote_client, get_examp
     _read_only(model, get_examples["elbow_lucid"])
 
     model_pd = model.as_polydata(update=True)
-    assert all(not info.has_mesh for part_pd in model_pd.values() for _, info in part_pd["faces"])
+    assert all(
+        not info.has_mesh
+        for part_pd in model_pd.values()
+        for _, info in part_pd["faces"]
+    )
 
     display = PrimePlotter(allow_picking=False)
     try:
@@ -259,7 +277,9 @@ def test_cad_without_mesh_is_outlined_by_its_facets(get_remote_client, get_examp
         for actor, batch in display.facet_edge_actors.items():
             assert all(not info.has_mesh for info in batch.infos.values())
             outlined.update(_keys_in_mesh(batch, display._drawn_geometry[actor]))
-        expected = {info.key for part_pd in model_pd.values() for _, info in part_pd["faces"]}
+        expected = {
+            info.key for part_pd in model_pd.values() for _, info in part_pd["faces"]
+        }
         assert expected <= outlined
 
         # Facets stand in for a mesh that is not there, so they start hidden and the
@@ -273,7 +293,9 @@ def test_cad_without_mesh_is_outlined_by_its_facets(get_remote_client, get_examp
         display.scene.close()
 
 
-def test_picking_a_face_preserves_explicit_connectivity_coloring(get_remote_client, get_examples):
+def test_picking_a_face_preserves_explicit_connectivity_coloring(
+    get_remote_client, get_examples
+):
     """Selecting a face leaves explicitly selected edge connectivity colors untouched."""
     model = get_remote_client.model
     part_ids = [part.id for part in model.parts]
@@ -289,18 +311,23 @@ def test_picking_a_face_preserves_explicit_connectivity_coloring(get_remote_clie
         edge_batches = [
             batch
             for batch in display._batches.values()
-            if batch.display_mesh_type in (DisplayMeshType.TOPOEDGE, DisplayMeshType.EDGEZONELET)
+            if batch.display_mesh_type
+            in (DisplayMeshType.TOPOEDGE, DisplayMeshType.EDGEZONELET)
         ]
         assert edge_batches
         assert all(batch.base_colors is not None for batch in edge_batches)
-        before = [batch.mesh.cell_data[ENTITY_COLOR_ARRAY].copy() for batch in edge_batches]
+        before = [
+            batch.mesh.cell_data[ENTITY_COLOR_ARRAY].copy() for batch in edge_batches
+        ]
 
         actor, batch = _largest_pickable_batch(display)
         assert display._pick_entity(actor, batch.mesh.cell_centers().points[0])
         assert display.selected_entity_infos
 
         for edge_batch, original in zip(edge_batches, before):
-            assert np.array_equal(edge_batch.mesh.cell_data[ENTITY_COLOR_ARRAY], original)
+            assert np.array_equal(
+                edge_batch.mesh.cell_data[ENTITY_COLOR_ARRAY], original
+            )
     finally:
         display.scene.close()
 
@@ -324,19 +351,27 @@ def test_connectivity_mode_colors_faces_by_volume_membership(
         display.add_model(model, update=True)
         faces = _batches_of_types(display, FACE_DISPLAY_MESH_TYPES)
         assert faces
-        assert all(info.connectivity is None for _, batch in faces for info in batch.infos.values())
+        assert all(
+            info.connectivity is None
+            for _, batch in faces
+            for info in batch.infos.values()
+        )
 
         display.set_color_by_type(ColorByType.CONNECTIVITY)
 
         wanted = np.asarray(FACE_CONNECTIVITY_COLORS[expected], dtype=np.uint8)
         for _, batch in faces:
-            assert all(info.connectivity == int(expected) for info in batch.infos.values())
+            assert all(
+                info.connectivity == int(expected) for info in batch.infos.values()
+            )
             assert np.all(batch.mesh.cell_data[ENTITY_COLOR_ARRAY] == wanted)
     finally:
         display.scene.close()
 
 
-def test_connectivity_mode_keeps_edge_connectivity_colors(get_remote_client, get_examples):
+def test_connectivity_mode_keeps_edge_connectivity_colors(
+    get_remote_client, get_examples
+):
     """Edges already carry connectivity colors, so the mode leaves them alone."""
     model = get_remote_client.model
     _read_only(model, get_examples["bracket"])
@@ -446,7 +481,9 @@ def test_multiple_parts_keep_connectivity_colors_and_pick_correctly(
                 cell = int(np.flatnonzero(batch.render_entity_ids == render_id)[0])
                 display._picked_entities.clear()
                 assert display._pick_entity(actor, centers[cell])
-                assert [picked.key for picked in display.selected_entity_infos] == [info.key]
+                assert [picked.key for picked in display.selected_entity_infos] == [
+                    info.key
+                ]
                 picked_parts.add(info.part_id)
         assert picked_parts == {part.id for part in model.parts}
     finally:
@@ -472,7 +509,9 @@ def _face_keys(render_data):
     }
 
 
-def test_scoped_render_data_returns_only_the_scoped_faces(get_remote_client, get_examples):
+def test_scoped_render_data_returns_only_the_scoped_faces(
+    get_remote_client, get_examples
+):
     """A face scope delivers the scoped faces and no other entity."""
     model = get_remote_client.model
     _read_only(model, get_examples["elbow_fmd"])
@@ -482,7 +521,9 @@ def test_scoped_render_data_returns_only_the_scoped_faces(get_remote_client, get
     assert labels
 
     everything = _face_keys(model.build_render_data(update=True))
-    scoped_data = model.get_scoped_render_data(_face_scope(model, labels[0]), update=True)
+    scoped_data = model.get_scoped_render_data(
+        _face_scope(model, labels[0]), update=True
+    )
     scoped = _face_keys(scoped_data)
 
     assert scoped
@@ -497,16 +538,22 @@ def test_scoped_render_data_returns_only_the_scoped_faces(get_remote_client, get
     assert outlined <= scoped
 
 
-def test_scope_matching_nothing_returns_empty_render_data(get_remote_client, get_examples):
+def test_scope_matching_nothing_returns_empty_render_data(
+    get_remote_client, get_examples
+):
     """A scope that matches nothing terminates rather than recursing forever."""
     model = get_remote_client.model
     _read_only(model, get_examples["elbow_fmd"])
 
-    data = model.get_scoped_render_data(_face_scope(model, "no_such_label"), update=True)
+    data = model.get_scoped_render_data(
+        _face_scope(model, "no_such_label"), update=True
+    )
     assert data.batches == {}
 
 
-def test_connectivity_classifies_mesh_parts_without_topology(get_remote_client, get_examples):
+def test_connectivity_classifies_mesh_parts_without_topology(
+    get_remote_client, get_examples
+):
     """Face zonelets classify from mesh volumes once topology is deleted."""
     model = get_remote_client.model
     _read_only(model, get_examples["elbow_fmd"])
@@ -522,7 +569,9 @@ def test_connectivity_classifies_mesh_parts_without_topology(get_remote_client, 
         display.add_model(model, update=True)
         faces = _batches_of_types(display, FACE_DISPLAY_MESH_TYPES)
         assert faces
-        assert all(batch.display_mesh_type == DisplayMeshType.FACEZONELET for _, batch in faces)
+        assert all(
+            batch.display_mesh_type == DisplayMeshType.FACEZONELET for _, batch in faces
+        )
 
         display.set_color_by_type(ColorByType.CONNECTIVITY)
         assert all(
@@ -667,7 +716,9 @@ def test_model_uses_actor_per_entity_type(get_remote_client, get_examples):
         face_entities = sum(len(part_pd["faces"]) for part_pd in model_pd.values())
         face_types = {DisplayMeshType.TOPOFACE, DisplayMeshType.FACEZONELET}
         registered_faces = sum(
-            1 for info in display.entity_infos.values() if info.display_mesh_type in face_types
+            1
+            for info in display.entity_infos.values()
+            if info.display_mesh_type in face_types
         )
         model_actors = len(display.scene.actors) - baseline
         # Four geometry types, two outline roles, and two spline roles at most.
@@ -695,7 +746,9 @@ def test_pick_resolves_to_model_unique_entity(get_remote_client, get_examples):
             _, expected_info, expected_key = _entry_info(batch, cell_id)
             display._picked_entities.clear()
             assert display._pick_entity(actor, centers[cell_id])
-            assert [info.key for info in display.selected_entity_infos] == [expected_key]
+            assert [info.key for info in display.selected_entity_infos] == [
+                expected_key
+            ]
 
             highlight = np.asarray(pv.Color(Color.PICKED.value).int_rgb, dtype=np.uint8)
             highlighted = np.all(
@@ -770,7 +823,9 @@ def test_hidden_entities_cannot_be_picked(get_remote_client, get_examples):
         actor, batch = _largest_pickable_batch(display)
         _, _, hidden_key = _entry_info(batch)
         visible_render_id = next(
-            render_id for render_id, info in batch.infos.items() if info.key != hidden_key
+            render_id
+            for render_id, info in batch.infos.items()
+            if info.key != hidden_key
         )
 
         cell_id = np.flatnonzero(batch.render_entity_ids == visible_render_id)[0]
@@ -794,7 +849,9 @@ def _pick_display_point(display, world_point):
     scene.iren.picker.Pick(x, y, 0, scene.renderer)
 
 
-def test_clicking_shared_actor_selects_and_labels_entity(get_remote_client, get_examples):
+def test_clicking_shared_actor_selects_and_labels_entity(
+    get_remote_client, get_examples
+):
     """A backend click selects and labels one model-unique entity."""
     model = get_remote_client.model
     model_pd = _mesh_elbow(model, get_examples["elbow_lucid"], quadratic=False)
@@ -848,7 +905,9 @@ def test_hiding_picked_entity_hides_its_label(get_remote_client, get_examples):
         display.scene.close()
 
 
-def test_hide_picked_widget_hides_and_restores_entities(get_remote_client, get_examples):
+def test_hide_picked_widget_hides_and_restores_entities(
+    get_remote_client, get_examples
+):
     """The hide widget filters and restores exactly the picked entity."""
     model = get_remote_client.model
     model_pd = _mesh_elbow(model, get_examples["elbow_lucid"], quadratic=False)
@@ -861,10 +920,14 @@ def test_hide_picked_widget_hides_and_restores_entities(get_remote_client, get_e
         display._pick_entity(actor, batch.mesh.cell_centers().points[0])
 
         widget = next(
-            widget for widget in display._backend._widgets if isinstance(widget, HidePicked)
+            widget
+            for widget in display._backend._widgets
+            if isinstance(widget, HidePicked)
         )
         widget.callback(True)
-        assert display._drawn_geometry[actor].n_cells == batch.mesh.n_cells - hidden_cells
+        assert (
+            display._drawn_geometry[actor].n_cells == batch.mesh.n_cells - hidden_cells
+        )
         assert widget._hidden_entities == [key]
 
         widget.callback(False)
@@ -921,7 +984,9 @@ def test_selection_target_restricts_what_a_pick_selects(
         display.scene.close()
 
 
-def test_selection_target_leaves_only_target_actors_pickable(get_remote_client, get_examples):
+def test_selection_target_leaves_only_target_actors_pickable(
+    get_remote_client, get_examples
+):
     """Untargeted actors drop out of hit testing so they cannot shadow a pick."""
     model = get_remote_client.model
     _read_only(model, get_examples["bracket"])
@@ -931,7 +996,9 @@ def test_selection_target_leaves_only_target_actors_pickable(get_remote_client, 
 
         display.set_selection_target(SelectionTarget.EDGES)
         for actor, batch in display._batches.items():
-            expected = batch.pickable and batch.display_mesh_type in EDGE_DISPLAY_MESH_TYPES
+            expected = (
+                batch.pickable and batch.display_mesh_type in EDGE_DISPLAY_MESH_TYPES
+            )
             assert bool(actor.GetPickable()) == expected
 
         display.set_selection_target(SelectionTarget.BOTH)
@@ -941,7 +1008,9 @@ def test_selection_target_leaves_only_target_actors_pickable(get_remote_client, 
         display.scene.close()
 
 
-def test_selection_target_keeps_entities_already_selected(get_remote_client, get_examples):
+def test_selection_target_keeps_entities_already_selected(
+    get_remote_client, get_examples
+):
     """Switching target collects faces and edges together rather than replacing."""
     model = get_remote_client.model
     _read_only(model, get_examples["bracket"])
@@ -982,7 +1051,9 @@ def test_reset_display_restores_the_opening_state(get_remote_client, get_example
         _pick_first_cell(display, actor, batch)
         assert display.selected_entity_infos
         hide_widget = next(
-            widget for widget in display._prime_widgets() if isinstance(widget, HidePicked)
+            widget
+            for widget in display._prime_widgets()
+            if isinstance(widget, HidePicked)
         )
         hide_widget.callback(True)
         display.set_color_by_type(ColorByType.PART)
@@ -1012,7 +1083,9 @@ def test_reset_display_restores_the_opening_state(get_remote_client, get_example
 def _partly_meshed_model_pd():
     """Build a model where one face is meshed and another is not."""
     meshed = _synthetic_face_entry(part_id=1, entity_id=1, x_offset=-2.0, has_mesh=True)
-    unmeshed = _synthetic_face_entry(part_id=2, entity_id=2, x_offset=2.0, has_mesh=False)
+    unmeshed = _synthetic_face_entry(
+        part_id=2, entity_id=2, x_offset=2.0, has_mesh=False
+    )
     return {
         1: {"faces": [meshed], "edges": [], "ctrlpts": [], "splinesurf": []},
         2: {"faces": [unmeshed], "edges": [], "ctrlpts": [], "splinesurf": []},
@@ -1063,7 +1136,9 @@ def test_button_tooltips_report_state_and_next_click(get_remote_client, get_exam
         display.scene.close()
 
 
-def test_show_edges_tooltip_names_what_is_actually_on_display(get_remote_client, get_examples):
+def test_show_edges_tooltip_names_what_is_actually_on_display(
+    get_remote_client, get_examples
+):
     """The wording follows whether anything shown is meshed, unmeshed, or both."""
     model = get_remote_client.model
     _read_only(model, get_examples["elbow_lucid"])
@@ -1117,7 +1192,9 @@ def test_show_edges_tooltip_names_what_is_actually_on_display(get_remote_client,
         display.scene.close()
 
 
-def test_clipping_cuts_the_view_without_altering_entities(get_remote_client, get_examples):
+def test_clipping_cuts_the_view_without_altering_entities(
+    get_remote_client, get_examples
+):
     """Clipping happens in the mappers, so the model itself is untouched."""
     model = get_remote_client.model
     _read_only(model, get_examples["bracket"])
@@ -1132,9 +1209,14 @@ def test_clipping_cuts_the_view_without_altering_entities(get_remote_client, get
         display.set_clipping(True)
 
         assert display.clipping
-        assert all(actor.GetMapper().GetNumberOfClippingPlanes() == 1 for actor in display._batches)
+        assert all(
+            actor.GetMapper().GetNumberOfClippingPlanes() == 1
+            for actor in display._batches
+        )
         # The geometry is intact; only what the mapper draws has changed.
-        assert {actor: batch.mesh.n_cells for actor, batch in display._batches.items()} == cells
+        assert {
+            actor: batch.mesh.n_cells for actor, batch in display._batches.items()
+        } == cells
         assert _drawn_pixels(display) < whole
 
         actor, batch = _largest_pickable_batch(display)
@@ -1144,7 +1226,10 @@ def test_clipping_cuts_the_view_without_altering_entities(get_remote_client, get
         display.set_clipping(False)
 
         assert not display.clipping
-        assert all(actor.GetMapper().GetNumberOfClippingPlanes() == 0 for actor in display._batches)
+        assert all(
+            actor.GetMapper().GetNumberOfClippingPlanes() == 0
+            for actor in display._batches
+        )
     finally:
         display.scene.close()
 
@@ -1158,8 +1243,12 @@ def test_backend_clip_slider_is_replaced(get_remote_client, get_examples):
         display.add_model(model, update=True)
         display.show(auto_close=False)
 
-        assert not any(isinstance(widget, MeshSliderWidget) for widget in display._backend._widgets)
-        assert any(isinstance(widget, ClipPlaneWidget) for widget in display._prime_widgets())
+        assert not any(
+            isinstance(widget, MeshSliderWidget) for widget in display._backend._widgets
+        )
+        assert any(
+            isinstance(widget, ClipPlaneWidget) for widget in display._prime_widgets()
+        )
     finally:
         display.scene.close()
 
@@ -1173,7 +1262,9 @@ def test_reset_display_recovers_from_clipping(get_remote_client, get_examples):
         display.add_model(model, update=True)
         display.show(auto_close=False)
         clip = next(
-            widget for widget in display._prime_widgets() if isinstance(widget, ClipPlaneWidget)
+            widget
+            for widget in display._prime_widgets()
+            if isinstance(widget, ClipPlaneWidget)
         )
         before = _drawn_pixels(display)
 
@@ -1190,7 +1281,9 @@ def test_reset_display_recovers_from_clipping(get_remote_client, get_examples):
         display.scene.close()
 
 
-def test_reset_display_returns_the_camera_to_the_opening_view(get_remote_client, get_examples):
+def test_reset_display_returns_the_camera_to_the_opening_view(
+    get_remote_client, get_examples
+):
     """The camera goes back to the view captured when the model was first shown."""
     model = get_remote_client.model
     model_pd = _mesh_elbow(model, get_examples["elbow_lucid"], quadratic=False)
@@ -1220,7 +1313,9 @@ def test_color_by_type_recolors_shared_meshes(get_remote_client, get_examples):
     model_pd = _mesh_elbow(model, get_examples["elbow_lucid"], quadratic=False)
     display = _plot_model(model_pd)
     try:
-        batch = max(display._batches.values(), key=lambda candidate: len(candidate.infos))
+        batch = max(
+            display._batches.values(), key=lambda candidate: len(candidate.infos)
+        )
         actor_count = len(display.scene.actors)
 
         display.set_color_by_type(ColorByType.PART)

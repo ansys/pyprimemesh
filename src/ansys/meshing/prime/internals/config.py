@@ -1,5 +1,6 @@
-# Copyright (C) 2024 - 2026 ANSYS, Inc. and/or its affiliates.
+# Copyright (C) 2025 - 2026 Synopsys, Inc. and ANSYS, Inc. All rights reserved.
 # SPDX-License-Identifier: MIT
+#
 #
 # Permission is hereby granted, free of charge, to any person obtaining a copy
 # of this software and associated documentation files (the "Software"), to deal
@@ -25,16 +26,16 @@ from contextlib import contextmanager
 from enum import Enum
 
 __all__ = [
-    'enable_optimizing_numpy_arrays',
-    'disable_optimizing_numpy_arrays',
-    'is_optimizing_numpy_arrays',
-    'numpy_array_optimization_enabled',
-    'numpy_array_optimization_disabled',
-    'set_using_container',
-    'using_container',
-    'set_has_pim',
-    'has_pim',
-    'enable_log_output',
+    "enable_optimizing_numpy_arrays",
+    "disable_optimizing_numpy_arrays",
+    "is_optimizing_numpy_arrays",
+    "numpy_array_optimization_enabled",
+    "numpy_array_optimization_disabled",
+    "set_using_container",
+    "using_container",
+    "set_has_pim",
+    "has_pim",
+    "enable_log_output",
 ]
 
 __DEFAULT_USE_BINARY = False
@@ -79,7 +80,7 @@ def _set_optimize_vectors(optimize_vectors: bool):
     """
     global __DEFAULT_USE_BINARY
     if not isinstance(optimize_vectors, bool):
-        raise ValueError(f'Value to set optimize vectors flag should be Boolean.')
+        raise ValueError(f"Value to set optimize vectors flag should be Boolean.")
 
     __DEFAULT_USE_BINARY = optimize_vectors
 

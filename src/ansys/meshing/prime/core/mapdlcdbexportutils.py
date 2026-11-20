@@ -1,5 +1,6 @@
-# Copyright (C) 2024 - 2026 ANSYS, Inc. and/or its affiliates.
+# Copyright (C) 2025 - 2026 Synopsys, Inc. and ANSYS, Inc. All rights reserved.
 # SPDX-License-Identifier: MIT
+#
 #
 # Permission is hereby granted, free of charge, to any person obtaining a copy
 # of this software and associated documentation files (the "Software"), to deal
@@ -29,7 +30,7 @@ from typing import Tuple
 import ansys.meshing.prime as prime
 from ansys.meshing.prime.autogen.fileiostructs import ExportMapdlCdbParams
 
-__all__ = ['generate_mapdl_commands']
+__all__ = ["generate_mapdl_commands"]
 
 
 class _TractionProperties:
@@ -40,7 +41,7 @@ class _TractionProperties:
 
 
 class _FormatEntities:
-    __slots__ = ('_card_format', '_format_map')
+    __slots__ = ("_card_format", "_format_map")
 
     def __init__(self, card_format="LONG"):
         self._card_format = card_format
@@ -50,7 +51,7 @@ class _FormatEntities:
         field_len = self._format_map[self._card_format]
         if len(str(num)) <= field_len:
             blank_space = field_len - len(str(num))
-            field = ' ' * blank_space + str(num)
+            field = " " * blank_space + str(num)
         else:
             field = self.field_exp(num)
         return field
@@ -60,10 +61,10 @@ class _FormatEntities:
         if field_len < 7:
             field_len = 7
         s = "%.*e" % (field_len - 7, f)
-        mantissa, exp = s.split('e')
-        sign = ' '
+        mantissa, exp = s.split("e")
+        sign = " "
         if f < 0:
-            sign = ''
+            sign = ""
         # add 1 to digits as 1 is taken by sign +/-
         return sign + "%se%+0*d" % (mantissa, 2 + 1, int(exp))
 
@@ -71,7 +72,7 @@ class _FormatEntities:
         field_len = self._format_map[self._card_format]
         if len(str(num)) <= field_len:
             blank_space = field_len - len(str(num))
-            field = ' ' * blank_space + str(num)
+            field = " " * blank_space + str(num)
         else:
             if abs(float(num)) < 1000:
                 field = str(num)[:field_len]
@@ -85,7 +86,7 @@ class _FormatEntities:
         field_len = self._format_map[self._card_format]
         if len(string) <= field_len:
             blank_space = field_len - len(string)
-            field = ' ' * blank_space + str(string)
+            field = " " * blank_space + str(string)
         else:
             field = string[0:field_len]
         return field
@@ -94,7 +95,7 @@ class _FormatEntities:
         field_len = self._format_map[self._card_format]
         if len(string) <= field_len - 1:
             blank_space = field_len - 1 - len(string)
-            field = ' ' * blank_space + str(string)
+            field = " " * blank_space + str(string)
         else:
             field = string[0 : field_len - 1]
         return field
@@ -105,9 +106,9 @@ class _ModelInformation:
 
 
 class _TimePointsProcessor:
-    __slots__ = ('_time_data', '_file_name', '_formatter', '_model', '_logger')
+    __slots__ = ("_time_data", "_file_name", "_formatter", "_model", "_logger")
 
-    def __init__(self, model: prime.Model, data, file_name=''):
+    def __init__(self, model: prime.Model, data, file_name=""):
         self._time_data = data
         self._file_name = file_name
         self._formatter = _FormatEntities()
@@ -115,14 +116,16 @@ class _TimePointsProcessor:
         self._logger = model.python_logger
 
     def write_timepoint_table_to_file(self, mapdl_commands):
-        with open(self._file_name, 'a') as file_time_pt:
+        with open(self._file_name, "a") as file_time_pt:
             file_time_pt.write(mapdl_commands)
 
     def get_all_timepoints_commands(self):
         time_pt_data = self._time_data
-        time_pt_commands = ''
+        time_pt_commands = ""
         for time_pt_table_name, time_pt_table_data in time_pt_data.items():
-            time_pt_commands += self._get_commands(time_pt_table_name, time_pt_table_data)
+            time_pt_commands += self._get_commands(
+                time_pt_table_name, time_pt_table_data
+            )
         if os.path.isfile(self._file_name) and time_pt_commands != "":
             self.write_timepoint_table_to_file(time_pt_commands)
         else:
@@ -133,8 +136,8 @@ class _TimePointsProcessor:
         return time_pt_commands
 
     def _get_commands(self, time_pt_table_name, time_pt_table_data):
-        mapdl_commands = ''
-        params = time_pt_table_data['Parameters']
+        mapdl_commands = ""
+        params = time_pt_table_data["Parameters"]
         if "GENERATE" in params:
             self._logger.warning(
                 f"Warning: timepoint table with argument generate is not processed."
@@ -144,14 +147,14 @@ class _TimePointsProcessor:
             self._logger.warning(
                 f"Warning: timepoint table with argument generate is not processed."
             )
-        pt_data = time_pt_table_data['Data']['time_points']
+        pt_data = time_pt_table_data["Data"]["time_points"]
         formatter_pt_data = [f"{self._formatter.field_str(pt)}" for pt in pt_data]
         all_values = []
         all_values.extend(formatter_pt_data)
         format_output = ""
         for i in range(0, len(all_values), 4):
             values = all_values[i : i + 4]
-            format_output += ''.join(values) + '\n'
+            format_output += "".join(values) + "\n"
         tpname = get_modified_component_name(time_pt_table_name)
         mapdl_commands += f"*DIM, {tpname}, ARRAY, {len(pt_data)}, 1, 1,\n"
         mapdl_commands += f"*PREAD, {tpname}, {len(pt_data)}\n"
@@ -161,7 +164,7 @@ class _TimePointsProcessor:
 
 
 class _OutputIntervalProcessor:
-    __slots__ = ('_formatter', '_model', '_logger')
+    __slots__ = ("_formatter", "_model", "_logger")
 
     def __init__(self, model: prime.Model):
         self._formatter = _FormatEntities()
@@ -170,10 +173,10 @@ class _OutputIntervalProcessor:
 
     def write_interval_points_table_to_file(self, mapdl_commands):
         if os.path.isfile(_AmplitudeProcessor._amplitude_file):
-            with open(_AmplitudeProcessor._amplitude_file, 'w') as file_ampl:
-                file_ampl.write('/prep7\n')
+            with open(_AmplitudeProcessor._amplitude_file, "w") as file_ampl:
+                file_ampl.write("/prep7\n")
         if _AmplitudeProcessor._amplitude_file:
-            with open(_AmplitudeProcessor._amplitude_file, 'a') as file_ampl:
+            with open(_AmplitudeProcessor._amplitude_file, "a") as file_ampl:
                 file_ampl.write(mapdl_commands)
         else:
             self._logger.info(
@@ -182,8 +185,10 @@ class _OutputIntervalProcessor:
                 f"Interval Tables are not written to the file"
             )
 
-    def get_commands(self, time_pt_table_name, number_interval, delta_time, step_start_time):
-        mapdl_commands = ''
+    def get_commands(
+        self, time_pt_table_name, number_interval, delta_time, step_start_time
+    ):
+        mapdl_commands = ""
         formatter_pt_data = [
             step_start_time + i * delta_time / number_interval
             for i in range(1, number_interval + 1)
@@ -195,8 +200,10 @@ class _OutputIntervalProcessor:
         format_output = ""
         for i in range(0, len(all_values), 4):
             values = all_values[i : i + 4]
-            format_output += ''.join(values) + '\n'
-        mapdl_commands += f"*DIM, {time_pt_table_name}, ARRAY, {len(formatter_pt_data)}, 1, 1,\n"
+            format_output += "".join(values) + "\n"
+        mapdl_commands += (
+            f"*DIM, {time_pt_table_name}, ARRAY, {len(formatter_pt_data)}, 1, 1,\n"
+        )
         mapdl_commands += f"*PREAD, {time_pt_table_name}, {len(formatter_pt_data)}\n"
         mapdl_commands += format_output
         mapdl_commands += "END PREAD\n"
@@ -207,17 +214,17 @@ class _AmplitudeProcessor:
     _amplitude_file = ""
     _amplitude_count = 0
     __slots__ = (
-        '_amplitudes_data',
-        '_step_start_time',
-        '_step_end_time',
-        '_scale_factor',
-        '_relative_value',
-        '_step_time',
-        '_definition',
-        '_modified_amplitude_name',
-        '_formatter',
-        '_model',
-        '_logger',
+        "_amplitudes_data",
+        "_step_start_time",
+        "_step_end_time",
+        "_scale_factor",
+        "_relative_value",
+        "_step_time",
+        "_definition",
+        "_modified_amplitude_name",
+        "_formatter",
+        "_model",
+        "_logger",
     )
 
     def __init__(self, model: prime.Model, data):
@@ -227,7 +234,7 @@ class _AmplitudeProcessor:
         self._scale_factor = 1.0
         self._relative_value = True
         self._step_time = True
-        self._definition = 'TABULAR'
+        self._definition = "TABULAR"
         self._modified_amplitude_name = None
         self._formatter = _FormatEntities()
         self._model = model
@@ -235,7 +242,7 @@ class _AmplitudeProcessor:
 
     def write_amplitude_table_to_file(self, mapdl_commands):
         if _AmplitudeProcessor._amplitude_file:
-            with open(_AmplitudeProcessor._amplitude_file, 'a') as file_ampl:
+            with open(_AmplitudeProcessor._amplitude_file, "a") as file_ampl:
                 file_ampl.write(mapdl_commands)
         else:
             self._logger.info(
@@ -245,7 +252,7 @@ class _AmplitudeProcessor:
 
     def get_all_amplitude_commands(self):
         amplitudes_data = self._amplitudes_data
-        amplitude_commands = ''
+        amplitude_commands = ""
         for ampl_name, ampl_table_data in amplitudes_data.items():
             self._modified_amplitude_name = ampl_name
             amplitude_commands += self._get_commands(ampl_name, ampl_table_data)
@@ -268,7 +275,7 @@ class _AmplitudeProcessor:
         self._step_start_time = float(step_start_time)
         self._step_end_time = float(step_end_time)
         amplitudes_data = self._amplitudes_data
-        amplitude_commands = ''
+        amplitude_commands = ""
         if amplitude_name not in amplitudes_data.keys():
             self._logger.warning(
                 f"Amplitude table '{amplitude_name}' is not defined with *AMPLITUDE."
@@ -276,14 +283,16 @@ class _AmplitudeProcessor:
             return amplitude_commands
         for ampl_name, ampl_table_data in amplitudes_data.items():
             if amplitude_name == ampl_name:
-                amplitude_commands += self._get_commands(ampl_name, ampl_table_data, applied_on)
+                amplitude_commands += self._get_commands(
+                    ampl_name, ampl_table_data, applied_on
+                )
                 break
         return amplitude_commands
 
     def _get_commands(self, amplitude_name, ampl_table_data, applied_on="Not Provided"):
-        amplitude_commands = ''
+        amplitude_commands = ""
         if type(ampl_table_data) == dict:
-            if 'Data' not in ampl_table_data or ampl_table_data['Data'] is None:
+            if "Data" not in ampl_table_data or ampl_table_data["Data"] is None:
                 self._logger.warning(
                     f"Warning: datalines are not present on Amplitude table '{amplitude_name}', "
                     f" this is not processed"
@@ -293,53 +302,58 @@ class _AmplitudeProcessor:
             self._step_time = True
             interval = None
             begin = 0.0
-            self._definition = 'TABULAR'
-            if 'Parameters' in ampl_table_data and ampl_table_data['Parameters'] is not None:
+            self._definition = "TABULAR"
+            if (
+                "Parameters" in ampl_table_data
+                and ampl_table_data["Parameters"] is not None
+            ):
                 if (
-                    "VALUE" in ampl_table_data['Parameters']
-                    and ampl_table_data['Parameters']["VALUE"] == "RELATIVE"
+                    "VALUE" in ampl_table_data["Parameters"]
+                    and ampl_table_data["Parameters"]["VALUE"] == "RELATIVE"
                 ):
                     self._relative_value = False
                 if (
-                    "TIME" in ampl_table_data['Parameters']
-                    and ampl_table_data['Parameters']["TIME"] == "TOTAL TIME"
+                    "TIME" in ampl_table_data["Parameters"]
+                    and ampl_table_data["Parameters"]["TIME"] == "TOTAL TIME"
                 ):
                     self._step_time = False
-                if "FIXED INTERVAL" in ampl_table_data['Parameters']:
-                    interval = float(ampl_table_data['Parameters']["FIXED INTERVAL"])
-                if "BEGIN" in ampl_table_data['Parameters']:
-                    begin = float(ampl_table_data['Parameters']["BEGIN"])
-                if "SMOOTH" in ampl_table_data['Parameters']:
+                if "FIXED INTERVAL" in ampl_table_data["Parameters"]:
+                    interval = float(ampl_table_data["Parameters"]["FIXED INTERVAL"])
+                if "BEGIN" in ampl_table_data["Parameters"]:
+                    begin = float(ampl_table_data["Parameters"]["BEGIN"])
+                if "SMOOTH" in ampl_table_data["Parameters"]:
                     self._logger.warning(
                         f"Warning: SMOOTH Parameter on Amplitude table '{amplitude_name}' "
                         f"is not processed"
                     )
-                if "INPUT" in ampl_table_data['Parameters']:
+                if "INPUT" in ampl_table_data["Parameters"]:
                     self._logger.warning(
                         f"Warning: INPUT Parameter on Amplitude table '{amplitude_name}' "
                         f"is not processed"
                     )
                     return amplitude_commands
-                if "DEFINITION" not in ampl_table_data['Parameters']:
-                    self._definition = 'TABULAR'
+                if "DEFINITION" not in ampl_table_data["Parameters"]:
+                    self._definition = "TABULAR"
                 else:
-                    self._definition = ampl_table_data['Parameters']["DEFINITION"]
+                    self._definition = ampl_table_data["Parameters"]["DEFINITION"]
             amplitude_commands += "\n"
             amplitude_commands += f"! Defining table with name: {amplitude_name}, "
             if applied_on != "Not Provided":
-                amplitude_commands += f"and it is used with component name/node id : {applied_on}"
+                amplitude_commands += (
+                    f"and it is used with component name/node id : {applied_on}"
+                )
             amplitude_commands += "\n"
-            if self._definition == 'TABULAR':
+            if self._definition == "TABULAR":
                 amplitude_commands += self._process_tabular_data(
-                    amplitude_name, ampl_table_data['Data']
+                    amplitude_name, ampl_table_data["Data"]
                 )
-            elif self._definition == 'EQUALLY SPACED':
+            elif self._definition == "EQUALLY SPACED":
                 amplitude_commands += self._process_equally_spaced_data(
-                    amplitude_name, ampl_table_data['Data'], begin, interval
+                    amplitude_name, ampl_table_data["Data"], begin, interval
                 )
-            elif self._definition == 'PERIODIC':
+            elif self._definition == "PERIODIC":
                 amplitude_commands += self._process_periodic_data(
-                    amplitude_name, ampl_table_data['Data']
+                    amplitude_name, ampl_table_data["Data"]
                 )
             else:
                 self._logger.warning(
@@ -504,25 +518,31 @@ class _AmplitudeProcessor:
             A1 = A[0]
         if B:
             B1 = B[0]
-        amplitude_commands += self._process_periodic_amplitude_table_complete_single_term(
-            self._modified_amplitude_name, self._scale_factor, A0, t0, A1, B1, freq
+        amplitude_commands += (
+            self._process_periodic_amplitude_table_complete_single_term(
+                self._modified_amplitude_name, self._scale_factor, A0, t0, A1, B1, freq
+            )
         )
         return amplitude_commands
 
-    def _process_equally_spaced_data(self, amplitude_name, ampl_table_data, begin, interval):
+    def _process_equally_spaced_data(
+        self, amplitude_name, ampl_table_data, begin, interval
+    ):
         amplitude_commands = ""
         data_lines = ampl_table_data
         formatted_amp = []
         formatted_time = []
-        if 'amplitude' in data_lines:
-            amp = data_lines['amplitude']
+        if "amplitude" in data_lines:
+            amp = data_lines["amplitude"]
             if self._relative_value:
                 formatted_amp = [
-                    f"{self._formatter.field_float(float(value)*self._scale_factor)}"
+                    f"{self._formatter.field_float(float(value) * self._scale_factor)}"
                     for value in amp
                 ]
             else:
-                formatted_amp = [f"{self._formatter.field_float(float(value))}" for value in amp]
+                formatted_amp = [
+                    f"{self._formatter.field_float(float(value))}" for value in amp
+                ]
         initial_time_skip = (self._step_end_time - self._step_start_time) * 1e-5
         if interval is None:
             self._logger.warning(
@@ -532,36 +552,42 @@ class _AmplitudeProcessor:
             return amplitude_commands
         if not self._step_time:
             formatted_time = [
-                f"{self._formatter.field_float(i*float(interval)+begin)}"
+                f"{self._formatter.field_float(i * float(interval) + begin)}"
                 for i in range(0, len(formatted_amp))
             ]
         else:
             formatted_time = [
-                f"{self._formatter.field_float(i*float(interval)+begin+self._step_start_time)}"
+                f"{self._formatter.field_float(i * float(interval) + begin + self._step_start_time)}"
                 for i in range(0, len(formatted_amp))
             ]
             if self._step_start_time != 0.0:
-                ff = self._formatter.field_float(float(formatted_time[0]) + initial_time_skip)
+                ff = self._formatter.field_float(
+                    float(formatted_time[0]) + initial_time_skip
+                )
                 formatted_time[0] = f"{ff}"
         if self._step_time and self._step_start_time != 0.0:
             formatted_time.insert(0, f"{self._formatter.field_float(0.0)}")
-            formatted_time.insert(1, f"{self._formatter.field_float(float(self._step_start_time))}")
+            formatted_time.insert(
+                1, f"{self._formatter.field_float(float(self._step_start_time))}"
+            )
             formatted_amp.insert(0, f"{self._formatter.field_float(0.0)}")
             formatted_amp.insert(1, f"{self._formatter.field_float(0.0)}")
             # add two times there! 0, current step start time
-        fixed_value = [self._formatter.field_str('0.7888609052210E-30')]
+        fixed_value = [self._formatter.field_str("0.7888609052210E-30")]
         all_values = []
         all_values.extend(fixed_value)
         all_values.extend(formatted_time)
         all_values.extend(fixed_value)
         all_values.extend(formatted_amp)
-        format_output = ''
+        format_output = ""
         for i in range(0, len(all_values), 4):
             values = all_values[i : i + 4]
-            format_output += ''.join(values) + '\n'
+            format_output += "".join(values) + "\n"
         man = self._modified_amplitude_name
         amplitude_commands += f"*DIM, {man}, TABLE, {len(formatted_amp)}, 1, 1,\n"
-        amplitude_commands += f"*PREAD, {man}, {len(formatted_amp)+len(formatted_time)+2}\n"
+        amplitude_commands += (
+            f"*PREAD, {man}, {len(formatted_amp) + len(formatted_time) + 2}\n"
+        )
         amplitude_commands += format_output
         amplitude_commands += "END PREAD\n"
         amplitude_commands += "\n"
@@ -572,47 +598,57 @@ class _AmplitudeProcessor:
         data_lines = ampl_table_data
         formatted_amp = []
         formatted_time = []
-        if 'amplitude' in data_lines:
-            amp = data_lines['amplitude']
+        if "amplitude" in data_lines:
+            amp = data_lines["amplitude"]
             if self._relative_value:
                 formatted_amp = [
-                    f"{self._formatter.field_float(float(value)*self._scale_factor)}"
+                    f"{self._formatter.field_float(float(value) * self._scale_factor)}"
                     for value in amp
                 ]
             else:
-                formatted_amp = [f"{self._formatter.field_float(float(value))}" for value in amp]
+                formatted_amp = [
+                    f"{self._formatter.field_float(float(value))}" for value in amp
+                ]
         initial_time_skip = (self._step_end_time - self._step_start_time) * 1e-5
-        if 'time_or_frequency' in data_lines:
-            time = data_lines['time_or_frequency']
+        if "time_or_frequency" in data_lines:
+            time = data_lines["time_or_frequency"]
             if not self._step_time:
-                formatted_time = [f"{self._formatter.field_float(float(value))}" for value in time]
+                formatted_time = [
+                    f"{self._formatter.field_float(float(value))}" for value in time
+                ]
             else:
                 formatted_time = [
-                    f"{self._formatter.field_float(float(value)+self._step_start_time)}"
+                    f"{self._formatter.field_float(float(value) + self._step_start_time)}"
                     for value in time
                 ]
                 if self._step_start_time != 0.0:
-                    ff = self._formatter.field_float(float(formatted_time[0]) + initial_time_skip)
+                    ff = self._formatter.field_float(
+                        float(formatted_time[0]) + initial_time_skip
+                    )
                     formatted_time[0] = f"{ff}"
         if self._step_time and self._step_start_time != 0.0:
             formatted_time.insert(0, f"{self._formatter.field_float(0.0)}")
-            formatted_time.insert(1, f"{self._formatter.field_float(float(self._step_start_time))}")
+            formatted_time.insert(
+                1, f"{self._formatter.field_float(float(self._step_start_time))}"
+            )
             formatted_amp.insert(0, f"{self._formatter.field_float(0.0)}")
             formatted_amp.insert(1, f"{self._formatter.field_float(0.0)}")
             # add two times there! 0, current step start time
-        fixed_value = [self._formatter.field_str('0.7888609052210E-30')]
+        fixed_value = [self._formatter.field_str("0.7888609052210E-30")]
         all_values = []
         all_values.extend(fixed_value)
         all_values.extend(formatted_time)
         all_values.extend(fixed_value)
         all_values.extend(formatted_amp)
-        format_output = ''
+        format_output = ""
         for i in range(0, len(all_values), 4):
             values = all_values[i : i + 4]
-            format_output += ''.join(values) + '\n'
+            format_output += "".join(values) + "\n"
         man = self._modified_amplitude_name
         amplitude_commands += f"*DIM, {man}, TABLE, {len(formatted_amp)}, 1, 1,\n"
-        amplitude_commands += f"*PREAD, {man}, {len(formatted_amp)+len(formatted_time)+2}\n"
+        amplitude_commands += (
+            f"*PREAD, {man}, {len(formatted_amp) + len(formatted_time) + 2}\n"
+        )
         amplitude_commands += format_output
         amplitude_commands += "END PREAD\n"
         return amplitude_commands
@@ -620,16 +656,16 @@ class _AmplitudeProcessor:
 
 class _MaterialProcessor:
     __slots__ = (
-        '_raw_materials_data',
-        '_zone_data',
-        '_enable_hm_comments',
-        '_mat_id',
-        '_material_linked_to_zone_type',
-        '_cohezive_zone_thickness_data',
-        '_property_function_map',
-        '_model',
-        '_logger',
-        '_skip_comments',
+        "_raw_materials_data",
+        "_zone_data",
+        "_enable_hm_comments",
+        "_mat_id",
+        "_material_linked_to_zone_type",
+        "_cohezive_zone_thickness_data",
+        "_property_function_map",
+        "_model",
+        "_logger",
+        "_skip_comments",
     )
 
     def __init__(
@@ -647,16 +683,16 @@ class _MaterialProcessor:
         self._material_linked_to_zone_type = {}
         self._cohezive_zone_thickness_data = {}
         self._property_function_map = {
-            'DENSITY': self._process_density,
-            'ELASTIC': self._process_elastic_modulus,
-            'PLASTIC': self._process_plastic_data,
-            'HYPERELASTIC': self._process_hyperelastic_data,
-            'DAMPING': self._process_damping_data,
-            'EXPANSION': self._process_expansion_data,
-            'DAMAGE EVOLUTION': self._process_damage_evolution_data,
-            'DAMAGE INITIATION': self._process_damage_initiation_data,
-            'HYPERFOAM': self._process_hyperfoam_data,
-            'VISCOELASTIC': self._process_viscoelastic_data,
+            "DENSITY": self._process_density,
+            "ELASTIC": self._process_elastic_modulus,
+            "PLASTIC": self._process_plastic_data,
+            "HYPERELASTIC": self._process_hyperelastic_data,
+            "DAMPING": self._process_damping_data,
+            "EXPANSION": self._process_expansion_data,
+            "DAMAGE EVOLUTION": self._process_damage_evolution_data,
+            "DAMAGE INITIATION": self._process_damage_initiation_data,
+            "HYPERFOAM": self._process_hyperfoam_data,
+            "VISCOELASTIC": self._process_viscoelastic_data,
         }
         self._model = model
         self._logger = model.python_logger
@@ -667,51 +703,58 @@ class _MaterialProcessor:
             return
         for zone in self._zone_data:
             zone_details = self._zone_data[zone]
-            if 'Type' not in zone_details:
-                self._logger.warning(f'Warning: Type is not specified for zone {zone}')
+            if "Type" not in zone_details:
+                self._logger.warning(f"Warning: Type is not specified for zone {zone}")
                 continue
-            if zone_details['Type'] not in ['Shell', 'Solid', 'Cohesive', 'Beam']:
+            if zone_details["Type"] not in ["Shell", "Solid", "Cohesive", "Beam"]:
                 self._logger.warning(
                     f"Warning: Type of {zone} in not mapped to "
                     f"material ({zone_details['Type']})"
                 )
-                self._logger.info(zone_details['Type'])
+                self._logger.info(zone_details["Type"])
                 continue
-            if 'Material' not in zone_details:
-                self._logger.warning(f'Warning: Material is not specified for zone {zone}')
+            if "Material" not in zone_details:
+                self._logger.warning(
+                    f"Warning: Material is not specified for zone {zone}"
+                )
                 continue
-            if zone_details['Type'] == 'Cohesive':
-                self._cohezive_zone_thickness_data[zone_details['Material']] = {
-                    'ThicknessMode': None,
-                    'Thickness': 1.0,
+            if zone_details["Type"] == "Cohesive":
+                self._cohezive_zone_thickness_data[zone_details["Material"]] = {
+                    "ThicknessMode": None,
+                    "Thickness": 1.0,
                 }
-                if 'ThicknessMode' in zone_details:
-                    self._cohezive_zone_thickness_data[zone_details['Material']][
-                        'ThicknessMode'
-                    ] = zone_details['ThicknessMode']
-                if 'Thickness' in zone_details:
-                    self._cohezive_zone_thickness_data[zone_details['Material']]['Thickness'] = (
-                        zone_details['Thickness']
-                    )
-            if zone_details['Material'] in self._material_linked_to_zone_type:
-                if self._material_linked_to_zone_type[zone_details['Material']] in [
-                    'Shell',
-                    'Solid',
-                    'beam',
+                if "ThicknessMode" in zone_details:
+                    self._cohezive_zone_thickness_data[zone_details["Material"]][
+                        "ThicknessMode"
+                    ] = zone_details["ThicknessMode"]
+                if "Thickness" in zone_details:
+                    self._cohezive_zone_thickness_data[zone_details["Material"]][
+                        "Thickness"
+                    ] = zone_details["Thickness"]
+            if zone_details["Material"] in self._material_linked_to_zone_type:
+                if self._material_linked_to_zone_type[zone_details["Material"]] in [
+                    "Shell",
+                    "Solid",
+                    "beam",
                 ]:
-                    if zone_details['Type'] == 'Cohesive':
+                    if zone_details["Type"] == "Cohesive":
                         self._logger.warning(
                             f"Warning: Material:'{zone_details['Material']}' is used for "
                             f" {zone_details['Type']} and one of these [Shell, Solid, beam]"
                         )
-                elif self._material_linked_to_zone_type[zone_details['Material']] == 'Cohesive':
-                    if zone_details['Type'] in ['Shell', 'Solid', 'beam']:
+                elif (
+                    self._material_linked_to_zone_type[zone_details["Material"]]
+                    == "Cohesive"
+                ):
+                    if zone_details["Type"] in ["Shell", "Solid", "beam"]:
                         self._logger.warning(
                             f"Warning: Material:'{zone_details['Material']}' is used for "
                             f"{zone_details['Type']} and cohesive"
                         )
             else:
-                self._material_linked_to_zone_type[zone_details['Material']] = zone_details['Type']
+                self._material_linked_to_zone_type[zone_details["Material"]] = (
+                    zone_details["Type"]
+                )
 
     def get_all_material_commands(self):
         mapdl_text_data_list = []
@@ -721,23 +764,23 @@ class _MaterialProcessor:
                 self._material_linked_to_zone_type[material] = None
             mapdl_text_data = self._get_mat_comands(material)
             mapdl_text_data_list.append(mapdl_text_data)
-        return '\n\n'.join(mapdl_text_data_list)
+        return "\n\n".join(mapdl_text_data_list)
 
     def _get_mat_comands(self, material):
         mat_data = self._raw_materials_data[material]
-        self._mat_id = mat_data['id']
+        self._mat_id = mat_data["id"]
         processed_entities = [
-            'DENSITY',
-            'ELASTIC',
-            'PLASTIC',
-            'Parameters',
+            "DENSITY",
+            "ELASTIC",
+            "PLASTIC",
+            "Parameters",
             "HYPERELASTIC",
             "DAMPING",
             "EXPANSION",
-            'DAMAGE INITIATION',
-            'DAMAGE EVOLUTION',
-            'HYPERFOAM',
-            'VISCOELASTIC',
+            "DAMAGE INITIATION",
+            "DAMAGE EVOLUTION",
+            "HYPERFOAM",
+            "VISCOELASTIC",
         ]
         mapdl_text_data = ""
         hm_comment = self._enable_hm_comments and self._skip_comments is False
@@ -749,10 +792,10 @@ class _MaterialProcessor:
         if "Parameters" in mat_data:
             self._logger.warning(f"Parameter on Material {material} are not processed.")
         for prop in mat_data:
-            if prop == 'id':
+            if prop == "id":
                 continue
             elif prop not in processed_entities:
-                if prop not in ['HMComments', 'Comments', "UNIAXIAL TEST DATA"]:
+                if prop not in ["HMComments", "Comments", "UNIAXIAL TEST DATA"]:
                     self._logger.warning(
                         f"The property {prop} for Material {material} is not processed."
                     )
@@ -770,10 +813,10 @@ class _MaterialProcessor:
 
     def get_material_commands_by_material_id(self, id):
         self._map_zone_type_with_material()
-        mapdl_text_data = ''
+        mapdl_text_data = ""
         for material in self._raw_materials_data:
             mat_data = self._raw_materials_data[material]
-            if mat_data['id'] == id:
+            if mat_data["id"] == id:
                 if material not in self._material_linked_to_zone_type:
                     self._material_linked_to_zone_type[material] = None
                 mapdl_text_data = self._get_mat_comands(material)
@@ -782,31 +825,31 @@ class _MaterialProcessor:
 
     def _process_damage_initiation_data(self, property_dict, material, mat_id):
 
-        damage_init_data = ''
+        damage_init_data = ""
 
         data = []
         parameters = []
 
-        if self._material_linked_to_zone_type[material] == 'Cohesive':
-            return ''
+        if self._material_linked_to_zone_type[material] == "Cohesive":
+            return ""
 
-        if 'Parameters' in property_dict and property_dict['Parameters'] is not None:
-            parameters = property_dict['Parameters']
-        if 'Data' in property_dict and property_dict['Data'] is not None:
-            data = property_dict['Data']
-        if 'DEPENDENCIES' in parameters:
+        if "Parameters" in property_dict and property_dict["Parameters"] is not None:
+            parameters = property_dict["Parameters"]
+        if "Data" in property_dict and property_dict["Data"] is not None:
+            data = property_dict["Data"]
+        if "DEPENDENCIES" in parameters:
             self._logger.warning(
                 f"*DAMAGE INITIATION has argument DEPENDENCIES. "
                 f"*DAMAGE INITIATION is not processed for material {material}"
             )
-            return ''
+            return ""
 
         if parameters["CRITERION"] != "DUCTILE":
             self._logger.warning(
                 f"*DAMAGE INITIATION has argument Criteron-{parameters['CRITERION']}. "
                 f"*DAMAGE INITIATION is not processed for material {material}"
             )
-            return ''
+            return ""
         if parameters["CRITERION"] == "DUCTILE":
             f_strain = [None]
             t_stress = [None]
@@ -826,7 +869,7 @@ class _MaterialProcessor:
                     f"Inconsistent temperature/strain_rate data on *DAMAGE INITIATION."
                     f"*DAMAGE INITIATION is not processed for material {material}"
                 )
-                return ''
+                return ""
 
             damage_init_data += f"TB, CDM, {mat_id},,,DUCT\n"
             for fs, ts, sr, temp in zip(f_strain, t_stress, strain_rate, temperature):
@@ -840,7 +883,7 @@ class _MaterialProcessor:
         weight_sum = 0
         weight_factor = 1
         all_mat_props = self._raw_materials_data[material]
-        if 'VISCOELASTIC' not in all_mat_props:
+        if "VISCOELASTIC" not in all_mat_props:
             return weight_factor
         mat_props = all_mat_props["VISCOELASTIC"]
         if (
@@ -848,12 +891,12 @@ class _MaterialProcessor:
             and "TIME" in mat_props["Parameters"]
             and mat_props["Parameters"]["TIME"] == "PRONY"
         ):
-            g = mat_props["Data"]['g']
-            if 'k' in mat_props["Data"]:
-                k = mat_props["Data"]['k']
+            g = mat_props["Data"]["g"]
+            if "k" in mat_props["Data"]:
+                k = mat_props["Data"]["k"]
             else:
                 k = [0.0] * len(g)
-            t = mat_props["Data"]['t']
+            t = mat_props["Data"]["t"]
             plastic_data = {}
             for pnt in zip(g, k, t):
                 if float(pnt[1]) in plastic_data.keys():
@@ -867,7 +910,6 @@ class _MaterialProcessor:
                     f"(ID : {mat_id} Name: {material}). Please verify the material data."
                 )
             for tb_temp, data_temp in plastic_data.items():
-
                 data_for_temp = sorted(data_temp, key=lambda x: x[0])
                 for count, plst_data in enumerate(data_for_temp):
                     weight_sum += float(plst_data[0])
@@ -887,20 +929,20 @@ class _MaterialProcessor:
             return weight_factor
 
     def _process_viscoelastic_data(self, property_dict, material, mat_id):
-        viscoelastic_data = ''
+        viscoelastic_data = ""
 
         if (
             property_dict["Parameters"]
             and "TIME" in property_dict["Parameters"]
             and property_dict["Parameters"]["TIME"] == "PRONY"
         ):
-            g = property_dict["Data"]['g']
-            if 'k' in property_dict["Data"]:
-                k = property_dict["Data"]['k']
+            g = property_dict["Data"]["g"]
+            if "k" in property_dict["Data"]:
+                k = property_dict["Data"]["k"]
             else:
                 k = [0.0] * len(g)
-            if 't' in property_dict["Data"]:
-                t = property_dict["Data"]['t']
+            if "t" in property_dict["Data"]:
+                t = property_dict["Data"]["t"]
             else:
                 t = [0.0] * len(g)
             plastic_data = {}
@@ -938,78 +980,80 @@ class _MaterialProcessor:
         return viscoelastic_data
 
     def _process_hyperfoam_data(self, property_dict, material, mat_id):
-        hyperfoam_data = ''
+        hyperfoam_data = ""
         data = []
         parameters = []
-        if 'Parameters' in property_dict and property_dict['Parameters'] is not None:
-            parameters = property_dict['Parameters']
-        if 'Data' in property_dict and property_dict['Data'] is not None:
-            data = property_dict['Data']
+        if "Parameters" in property_dict and property_dict["Parameters"] is not None:
+            parameters = property_dict["Parameters"]
+        if "Data" in property_dict and property_dict["Data"] is not None:
+            data = property_dict["Data"]
         n = 1
-        if 'N' in parameters:
-            n = int(parameters['N'])
+        if "N" in parameters:
+            n = int(parameters["N"])
         poisson = None
-        if 'POISSON' in parameters:
-            poisson = float(parameters['POISSON'])
-        if 'TEST DATA INPUT' in parameters:
+        if "POISSON" in parameters:
+            poisson = float(parameters["POISSON"])
+        if "TEST DATA INPUT" in parameters:
             uniaxial_test_data = []
-            if 'UNIAXIAL TEST DATA' in self._raw_materials_data[material]:
-                if 'Data' in self._raw_materials_data[material]['UNIAXIAL TEST DATA']:
-                    uniaxial_test_data = self._raw_materials_data[material]['UNIAXIAL TEST DATA'][
-                        'Data'
-                    ]
-            hyperfoam_data = self._hyperfoam_with_test_data(n, uniaxial_test_data, poisson, mat_id)
+            if "UNIAXIAL TEST DATA" in self._raw_materials_data[material]:
+                if "Data" in self._raw_materials_data[material]["UNIAXIAL TEST DATA"]:
+                    uniaxial_test_data = self._raw_materials_data[material][
+                        "UNIAXIAL TEST DATA"
+                    ]["Data"]
+            hyperfoam_data = self._hyperfoam_with_test_data(
+                n, uniaxial_test_data, poisson, mat_id
+            )
         else:
             weight_factor = 1
-            if not ('MODULI' in parameters and parameters['MODULI'] == 'INSTANTANEOUS'):
+            if not ("MODULI" in parameters and parameters["MODULI"] == "INSTANTANEOUS"):
                 weight_factor = self.get_weight_factor(mat_id, material)
             hyperfoam_data = self._hyperfoam_with_coeffs(n, data, mat_id, weight_factor)
         return hyperfoam_data
 
     def _hyperfoam_with_coeffs(self, n, data, mat_id, weight_factor):
-        hyperfoam_coeff_data = ''
+        hyperfoam_coeff_data = ""
         data = {
             k: [float(x) for x in v if x is not None] if v is not None else None
             for k, v in data.items()
         }
-        u1 = data['u1']
-        a1 = data['a1']
+        u1 = data["u1"]
+        a1 = data["a1"]
         v1 = [0.0] * len(u1)
-        if 'v1' in data and data['v1'] is not None:
-            v1 = data['v1']
+        if "v1" in data and data["v1"] is not None:
+            v1 = data["v1"]
         if n > 1:
-            u2 = data['u2']
-            a2 = data['a2']
+            u2 = data["u2"]
+            a2 = data["a2"]
             v2 = [0.0] * len(u2)
-            if 'v2' in data and data['v2'] is not None:
-                v2 = data['v2']
+            if "v2" in data and data["v2"] is not None:
+                v2 = data["v2"]
         if n > 2:
-            u3 = data['u3']
-            a3 = data['a3']
+            u3 = data["u3"]
+            a3 = data["a3"]
             v3 = [0.0] * len(u3)
-            if 'v3' in data and data['v3'] is not None:
-                v3 = data['v3']
+            if "v3" in data and data["v3"] is not None:
+                v3 = data["v3"]
         if n > 3:
-            u4 = data['u4']
-            a4 = data['a4']
+            u4 = data["u4"]
+            a4 = data["a4"]
             v4 = [0.0] * len(u4)
-            if 'v4' in data and data['v4'] is not None:
-                v4 = data['v4']
+            if "v4" in data and data["v4"] is not None:
+                v4 = data["v4"]
         if n > 4:
-            u5 = data['u5']
-            a5 = data['a5']
+            u5 = data["u5"]
+            a5 = data["a5"]
             v5 = [0.0] * len(u5)
-            if 'v5' in data and data['v5'] is not None:
-                v5 = data['v5']
+            if "v5" in data and data["v5"] is not None:
+                v5 = data["v5"]
         if n > 5:
-            u6 = data['u6']
-            a6 = data['a6']
+            u6 = data["u6"]
+            a6 = data["a6"]
             v6 = [0.0] * len(u6)
-            if 'v6' in data and data['v6'] is not None:
-                v6 = data['v6']
+            if "v6" in data and data["v6"] is not None:
+                v6 = data["v6"]
         temperature = [None] * len(u1)
-        if 'Temperature' in data:
-            temperature = data['Temperature']
+        if "Temperature" in data:
+            temperature = data["Temperature"]
 
         hyperfoam_coeff_data += f"TB, HYPE, {mat_id},,{n},FOAM\n"
         for i in range(len(temperature)):
@@ -1042,7 +1086,7 @@ class _MaterialProcessor:
             hyperfoam_coeff_data += "\n"
 
             b1a = v1[i] / (1 - 2 * v1[i])
-            hyperfoam_coeff_data += f"TBDATA, {n*2 + 1}, {b1a}"
+            hyperfoam_coeff_data += f"TBDATA, {n * 2 + 1}, {b1a}"
             if n > 1:
                 b2a = v2[i] / (1 - 2 * v2[i])
                 hyperfoam_coeff_data += f", {b2a}"
@@ -1063,8 +1107,8 @@ class _MaterialProcessor:
         return hyperfoam_coeff_data
 
     def _hyperfoam_with_test_data(self, n, data, poisson, mat_id):
-        stress = data['Nominal stress']
-        strain = data['Nominal strain']
+        stress = data["Nominal stress"]
+        strain = data["Nominal strain"]
         lateral_strain = [0.0] * len(stress)
         lateral_strain_key = (
             "Nominal lateral strain, . Default is zero. Not needed if the POISSON "
@@ -1075,13 +1119,13 @@ class _MaterialProcessor:
         if poisson is None:
             poisson = float(lateral_strain[0])
         beta_ansys = poisson / (1 - 2 * poisson)
-        hyperfoam_test_to_data = ''
-        hyperfoam_test_to_data += f'*create, unia_test_material_{mat_id}.exp\n'
-        hyperfoam_test_to_data += f'/1, epto\n'
-        hyperfoam_test_to_data += f'/2, s\n'
+        hyperfoam_test_to_data = ""
+        hyperfoam_test_to_data += f"*create, unia_test_material_{mat_id}.exp\n"
+        hyperfoam_test_to_data += f"/1, epto\n"
+        hyperfoam_test_to_data += f"/2, s\n"
         for i in range(len(stress)):
-            hyperfoam_test_to_data += f'{strain[i]}, {stress[i]}\n'
-        hyperfoam_test_to_data += f'*end\n'
+            hyperfoam_test_to_data += f"{strain[i]}, {stress[i]}\n"
+        hyperfoam_test_to_data += f"*end\n"
 
         hyperfoam_test_to_data += f"TB, HYPE, {mat_id},,{n},FOAM\n"
         hyperfoam_test_to_data += f"TBTEMP,0\n"
@@ -1100,7 +1144,7 @@ class _MaterialProcessor:
             hyperfoam_test_to_data += f", 1, 1"
         hyperfoam_test_to_data += "\n"
 
-        hyperfoam_test_to_data += f"TBDATA, {n*2 + 1}, {beta_ansys}"
+        hyperfoam_test_to_data += f"TBDATA, {n * 2 + 1}, {beta_ansys}"
         if n > 1:
             hyperfoam_test_to_data += f", {beta_ansys}"
         if n > 2:
@@ -1113,72 +1157,82 @@ class _MaterialProcessor:
             hyperfoam_test_to_data += f", {beta_ansys}"
         hyperfoam_test_to_data += "\n"
 
-        hyperfoam_test_to_data += f'\n'
-        hyperfoam_test_to_data += f'TBFT, EADD, {mat_id}, UNIA, unia_test_material_{mat_id}.exp\n'
-        hyperfoam_test_to_data += f'TBFT, FADD, {mat_id}, HYPER, FOAM, {n}\n'
-        for i in range(1, n + 1):
-            hyperfoam_test_to_data += f'TBFT, SET, {mat_id}, HYPER, FOAM, {n}, {2*i-1}, 0.001\n'
-            hyperfoam_test_to_data += f'TBFT, SET, {mat_id}, HYPER, FOAM, {n}, {2*i}, 0.001\n'
+        hyperfoam_test_to_data += f"\n"
+        hyperfoam_test_to_data += (
+            f"TBFT, EADD, {mat_id}, UNIA, unia_test_material_{mat_id}.exp\n"
+        )
+        hyperfoam_test_to_data += f"TBFT, FADD, {mat_id}, HYPER, FOAM, {n}\n"
         for i in range(1, n + 1):
             hyperfoam_test_to_data += (
-                f'TBFT, SET, {mat_id}, HYPER, FOAM, {n}, {2*n+i}, {beta_ansys}\n'
+                f"TBFT, SET, {mat_id}, HYPER, FOAM, {n}, {2 * i - 1}, 0.001\n"
             )
-        hyperfoam_test_to_data += f'\n'
+            hyperfoam_test_to_data += (
+                f"TBFT, SET, {mat_id}, HYPER, FOAM, {n}, {2 * i}, 0.001\n"
+            )
         for i in range(1, n + 1):
-            hyperfoam_test_to_data += f'TBFT, FIX, {mat_id}, HYPER, FOAM, {n}, {2*n+i}, 1\n'
-        hyperfoam_test_to_data += f'\n'
-        hyperfoam_test_to_data += f'\n'
-        hyperfoam_test_to_data += f'TBFT, SOLVE, {mat_id}, HYPER, FOAM, {n}, 1, 100, 0, 0\n'
-        hyperfoam_test_to_data += f'\n'
-        hyperfoam_test_to_data += f'TBFT, FSET, {mat_id}, HYPER, FOAM, {n}\n'
+            hyperfoam_test_to_data += (
+                f"TBFT, SET, {mat_id}, HYPER, FOAM, {n}, {2 * n + i}, {beta_ansys}\n"
+            )
+        hyperfoam_test_to_data += f"\n"
+        for i in range(1, n + 1):
+            hyperfoam_test_to_data += (
+                f"TBFT, FIX, {mat_id}, HYPER, FOAM, {n}, {2 * n + i}, 1\n"
+            )
+        hyperfoam_test_to_data += f"\n"
+        hyperfoam_test_to_data += f"\n"
+        hyperfoam_test_to_data += (
+            f"TBFT, SOLVE, {mat_id}, HYPER, FOAM, {n}, 1, 100, 0, 0\n"
+        )
+        hyperfoam_test_to_data += f"\n"
+        hyperfoam_test_to_data += f"TBFT, FSET, {mat_id}, HYPER, FOAM, {n}\n"
 
         return hyperfoam_test_to_data
 
     def _process_damage_evolution_data(self, property_dict, material, mat_id):
 
-        damage_evol_data = ''
+        damage_evol_data = ""
 
-        if self._material_linked_to_zone_type[material] == 'Cohesive':
-            return ''
+        if self._material_linked_to_zone_type[material] == "Cohesive":
+            return ""
 
         data = []
         parameters = []
 
-        if 'Parameters' in property_dict and property_dict['Parameters'] is not None:
-            parameters = property_dict['Parameters']
-        if 'Data' in property_dict and property_dict['Data'] is not None:
-            data = property_dict['Data']
+        if "Parameters" in property_dict and property_dict["Parameters"] is not None:
+            parameters = property_dict["Parameters"]
+        if "Data" in property_dict and property_dict["Data"] is not None:
+            data = property_dict["Data"]
 
-        if 'DEPENDENCIES' in parameters:
+        if "DEPENDENCIES" in parameters:
             self._logger.warning(
                 f"*DAMAGE EVOLUTION has argument DEPENDENCIES. "
                 f"*DAMAGE EVOLUTION is not processed for material {material}"
             )
-            return ''
-        if parameters['TYPE'] != "DISPLACEMENT":
+            return ""
+        if parameters["TYPE"] != "DISPLACEMENT":
             self._logger.warning(
                 f"*DAMAGE EVOLUTION has argument TYPE - {parameters['TYPE']}. "
                 f"*DAMAGE EVOLUTION is not processed for material {material}"
             )
-            return ''
-        if "SOFTENING" in parameters and parameters['SOFTENING'] != "LINEAR":
+            return ""
+        if "SOFTENING" in parameters and parameters["SOFTENING"] != "LINEAR":
             self._logger.warning(
                 f"*DAMAGE EVOLUTION has argument SOFTENING - {parameters['SOFTENING']}. "
                 f"*DAMAGE EVOLUTION is not processed for material {material}"
             )
-            return ''
-        if "DEGRADATION" in parameters and parameters['DEGRADATION'] != "MAXIMUM":
+            return ""
+        if "DEGRADATION" in parameters and parameters["DEGRADATION"] != "MAXIMUM":
             self._logger.warning(
                 f"*DAMAGE EVOLUTION has argument DEGRADATION - {parameters['DEGRADATION']}. "
                 f"*DAMAGE EVOLUTION is not processed for material {material}"
             )
-            return ''
+            return ""
         if "MIXED MODE BEHAVIOR" in parameters:
             self._logger.warning(
                 f"*DAMAGE EVOLUTION has argument MIXED MODE BEHAVIOR. "
                 f"*DAMAGE EVOLUTION is not processed for material {material}"
             )
-            return ''
+            return ""
 
         disp_at_failure = []
         disp_str = (
@@ -1191,7 +1245,7 @@ class _MaterialProcessor:
         temperature = [None] * len(disp_at_failure)
 
         if "Temperature" in data:
-            temperature = data['Temperature']
+            temperature = data["Temperature"]
 
         damage_evol_data += f"TB, CDM, {mat_id},,,LIND\n"
         for disp, temp in zip(disp_at_failure, temperature):
@@ -1199,63 +1253,67 @@ class _MaterialProcessor:
                 damage_evol_data += f"TBTEMP,{temp}\n"
             d = disp
             if float(disp) == 0:
-                d = '1e-6'
+                d = "1e-6"
             damage_evol_data += f"TBDATA, 1, {d}\n"
         damage_evol_data += "\n"
         return damage_evol_data
 
     def _process_expansion_data(self, property_dict, material, mat_id):
-        expansion_data = ''
+        expansion_data = ""
         zero = 0.0
         data = []
         parameters = []
-        if 'Parameters' in property_dict and property_dict['Parameters'] is not None:
-            parameters = property_dict['Parameters']
-        if 'Data' in property_dict and property_dict['Data'] is not None:
-            data = property_dict['Data']
-        exp_type = 'ISO'
-        if 'ZERO' in parameters:
-            zero = float(parameters['ZERO'])
-        if 'TYPE' in parameters:
-            exp_type = parameters['TYPE']
-        if 'DEPENDENCIES' in parameters or 'PORE FLUID' in parameters or 'USER' in parameters:
+        if "Parameters" in property_dict and property_dict["Parameters"] is not None:
+            parameters = property_dict["Parameters"]
+        if "Data" in property_dict and property_dict["Data"] is not None:
+            data = property_dict["Data"]
+        exp_type = "ISO"
+        if "ZERO" in parameters:
+            zero = float(parameters["ZERO"])
+        if "TYPE" in parameters:
+            exp_type = parameters["TYPE"]
+        if (
+            "DEPENDENCIES" in parameters
+            or "PORE FLUID" in parameters
+            or "USER" in parameters
+        ):
             self._logger.warning(
                 f"Arguments PORE FLUID, DEPENDENCIES and USER on "
                 f"*EXPANSION are not processed for material {material}"
             )
-            return ''
-        if exp_type == 'SHORT FIBER' or exp_type == 'ANISO':
+            return ""
+        if exp_type == "SHORT FIBER" or exp_type == "ANISO":
             self._logger.warning(
                 f"*EXPANSION of type SHORT FIBER and ANISO are "
                 f"not processed for material {material}."
             )
-            return ''
-        if 'ZERO' in parameters:
+            return ""
+        if "ZERO" in parameters:
             expansion_data += f"MP,REFT,{mat_id},{zero}\n"
-        if exp_type == 'ISO':
+        if exp_type == "ISO":
             temperature = [None]
             ctes = [None]
-            if 'Temperature' in data:
-                temperature = data['Temperature']
-            if 'A' in data:
-                ctes = data['A']
+            if "Temperature" in data:
+                temperature = data["Temperature"]
+            if "A" in data:
+                ctes = data["A"]
             expansion_data += f"TB, CTE, {mat_id},,,\n"
             for temp, cte in zip(temperature, ctes):
                 if temp is not None:
                     expansion_data += f"TBTEMP,{temp}\n"
                 expansion_data += f"TBDATA, 1, {cte}\n"
-        if exp_type == 'ORTHO':
-            if 'A11' in data:
-                ctexs = data['A11']
-            cteys = ['0.0'] * len(ctexs)
-            if 'A22' in data:
-                cteys = data['A22']
-            ctezs = ['0.0'] * len(ctexs)
-            if 'A33' in data:
-                ctezs = data['A33']
+        if exp_type == "ORTHO":
+            if "A11" in data:
+                ctexs = data["A11"]
+            cteys = ["0.0"] * len(ctexs)
+            if "A22" in data:
+                cteys = data["A22"]
+            ctezs = ["0.0"] * len(ctexs)
+            if "A33" in data:
+                ctezs = data["A33"]
             temperature = [None] * len(ctexs)
-            if 'Temperature' in data:
-                temperature = data['Temperature']
+            if "Temperature" in data:
+                temperature = data["Temperature"]
             expansion_data += f"TB, CTE, {mat_id},,,\n"
             for temp, ctex, ctey, ctez in zip(temperature, ctexs, cteys, ctezs):
                 if temp is not None:
@@ -1265,29 +1323,35 @@ class _MaterialProcessor:
         return expansion_data
 
     def _process_damping_data(self, property_dict, material, mat_id):
-        damping_data = ''
-        if property_dict['Parameters'] is None:
+        damping_data = ""
+        if property_dict["Parameters"] is None:
             self._logger.warning(f"*DAMPING does not have parameters to process.")
         else:
-            if 'ALPHA' in property_dict['Parameters']:
-                damping_data += f"MP, ALPD, {mat_id}, {property_dict['Parameters']['ALPHA']} \n"
-            if float(property_dict['Parameters']['BETA']) != 0.0:
-                damping_data += f"MP, BETD, {mat_id}, {property_dict['Parameters']['BETA']} \n"
-            if float(property_dict['Parameters']['COMPOSITE']) != 0.0:
-                self._logger.warning(f"Parameter {'COMPOSITE'} on *DAMPING is not processed.")
+            if "ALPHA" in property_dict["Parameters"]:
+                damping_data += (
+                    f"MP, ALPD, {mat_id}, {property_dict['Parameters']['ALPHA']} \n"
+                )
+            if float(property_dict["Parameters"]["BETA"]) != 0.0:
+                damping_data += (
+                    f"MP, BETD, {mat_id}, {property_dict['Parameters']['BETA']} \n"
+                )
+            if float(property_dict["Parameters"]["COMPOSITE"]) != 0.0:
+                self._logger.warning(
+                    f"Parameter {'COMPOSITE'} on *DAMPING is not processed."
+                )
         damping_data += f"\n"
         return damping_data
 
     def _process_density(self, property_dict, material, mat_id):
-        density_data = ''
+        density_data = ""
         data = []
-        if 'Data' in property_dict and property_dict['Data'] is not None:
-            data = property_dict['Data']
-        if "Parameters" in property_dict and property_dict['Parameters'] is not None:
+        if "Data" in property_dict and property_dict["Data"] is not None:
+            data = property_dict["Data"]
+        if "Parameters" in property_dict and property_dict["Parameters"] is not None:
             self._logger.warning(f"Parameter on *DENSITY are not processed.")
-        density = data['Mass density']
-        if 'Temperature' in data:
-            temperature = data['Temperature']
+        density = data["Mass density"]
+        if "Temperature" in data:
+            temperature = data["Temperature"]
             if len(density) != len(temperature):
                 self._logger.warning(
                     f"data values on *DENSITY are not consistent for material {material}."
@@ -1305,18 +1369,18 @@ class _MaterialProcessor:
         return density_data
 
     def _process_elastic_modulus(self, property_dict, material, mat_id):
-        elastic_modulus = ''
+        elastic_modulus = ""
         data = []
-        if 'Data' in property_dict and property_dict['Data'] is not None:
-            data = property_dict['Data']
+        if "Data" in property_dict and property_dict["Data"] is not None:
+            data = property_dict["Data"]
         if (
             property_dict["Parameters"]["TYPE"] == "ISOTROPIC"
             or property_dict["Parameters"]["TYPE"] == "ISO"
         ):
-            youngs_mod = data['E']
-            nu = data['V']
-            if 'Temperature' in data:
-                temperature = data['Temperature']
+            youngs_mod = data["E"]
+            nu = data["V"]
+            if "Temperature" in data:
+                temperature = data["Temperature"]
                 if len(youngs_mod) != len(temperature):
                     self._logger.warning(
                         f"data values on *ELASTIC are not consistent for material {material}."
@@ -1332,14 +1396,14 @@ class _MaterialProcessor:
                     f"elastic properties are not processed correctly "
                     f"for material {material}"
                 )
-                if self._material_linked_to_zone_type[material] == 'Cohesive':
+                if self._material_linked_to_zone_type[material] == "Cohesive":
                     elastic_modulus += f"TB, ELAS, {mat_id}, 1, 2,ISOT\n"
                     elastic_modulus += f"TBDATA, 1, {youngs_mod[0]}, {nu[0]}\n"
                 else:
                     elastic_modulus += f"MP,EX,{mat_id},{youngs_mod[0]}\n"
                     elastic_modulus += f"MP,NUXY,{mat_id},{nu[0]}\n"
             else:
-                if self._material_linked_to_zone_type[material] == 'Cohesive':
+                if self._material_linked_to_zone_type[material] == "Cohesive":
                     elastic_modulus += f"TB, ELAS, {mat_id}, 1, 2,ISOT\n"
                     elastic_modulus += f"TBDATA, 1, {youngs_mod[0]}, {nu[0]}\n"
                 else:
@@ -1347,19 +1411,19 @@ class _MaterialProcessor:
                     elastic_modulus += f"MP,NUXY,{mat_id},{nu[0]}\n"
             elastic_modulus += f"\n"
         elif property_dict["Parameters"]["TYPE"] == "TRACTION":
-            if self._material_linked_to_zone_type[material] != 'Cohesive':
+            if self._material_linked_to_zone_type[material] != "Cohesive":
                 self._logger.warning(
                     f"Elastic Modulus with type = TRACTION is defined "
                     f"for non cohesive material {material}, "
                     f" this is not processed."
                 )
-                return ''
-            knn = data['E/Knn']
-            kss = data['G1/Kss']
-            ktt = data['G2/Ktt']
-            t = self._cohezive_zone_thickness_data[material]['Thickness']
-            if 'Temperature' in data:
-                temperature = data['Temperature']
+                return ""
+            knn = data["E/Knn"]
+            kss = data["G1/Kss"]
+            ktt = data["G2/Ktt"]
+            t = self._cohezive_zone_thickness_data[material]["Thickness"]
+            if "Temperature" in data:
+                temperature = data["Temperature"]
                 if len(knn) != len(temperature):
                     self._logger.warning(
                         f"data values on *ELASTIC are not consistent for material {material}."
@@ -1400,7 +1464,7 @@ class _MaterialProcessor:
             }
             # Initialize 6x6 stiffness matrix (Voigt)
             elastic_modulus = f"TB,ELASTIC,{mat_id},{len(data['D1111'])},21,AELS\n"
-            for nn in range(len(data['D1111'])):
+            for nn in range(len(data["D1111"])):
                 C = [[0.0 for _ in range(6)] for _ in range(6)]
                 for key, value in data.items():
                     if not key.startswith("D"):
@@ -1419,11 +1483,11 @@ class _MaterialProcessor:
                     C[i][j] = float(value[nn])
 
                 C_ansys = [C[i][j] for i in range(6) for j in range(i, 6)]
-                if 'Temperature' in data:
+                if "Temperature" in data:
                     elastic_modulus += f"TBTEMP, {data['Temperature'][nn]}"
                 for i, val in enumerate(C_ansys):
                     if i % 6 == 0:
-                        elastic_modulus += f"\nTBDATA,{i+1}"
+                        elastic_modulus += f"\nTBDATA,{i + 1}"
                     elastic_modulus += f",{C_ansys[i]}"
                 elastic_modulus += "\n"
         else:
@@ -1431,29 +1495,29 @@ class _MaterialProcessor:
                 f"Elastic Modulus with type = "
                 f"{property_dict['Parameters']['TYPE']} is not processed."
             )
-            return ''
+            return ""
         return elastic_modulus
 
     def _process_plastic_data(self, property_dict, material, mat_id):
-        plastic_data = ''
+        plastic_data = ""
         data = []
-        if 'Data' in property_dict and property_dict['Data'] is not None:
-            data = property_dict['Data']
+        if "Data" in property_dict and property_dict["Data"] is not None:
+            data = property_dict["Data"]
         if property_dict["Parameters"]["HARDENING"] != "ISOTROPIC":
             self._logger.warning(
                 f"Only HARDENING=ISOTROPIC is processed, "
                 f"*PLASTIC for the material {material} "
                 f"is not processed."
             )
-            return ''
-        if self._material_linked_to_zone_type[material] == 'Cohesive':
-            return ''
-        strains = data['Plastic strain']
-        stresses = data['Yield stress']
+            return ""
+        if self._material_linked_to_zone_type[material] == "Cohesive":
+            return ""
+        strains = data["Plastic strain"]
+        stresses = data["Yield stress"]
         data_points = len(strains)
         skip_temp = False
-        if 'Temperature' in data:
-            temperature = data['Temperature']
+        if "Temperature" in data:
+            temperature = data["Temperature"]
             unique_temperatures = len(list(set(temperature)))
             data_points = len(strains) / unique_temperatures
             if len(stresses) != len(temperature):
@@ -1469,7 +1533,7 @@ class _MaterialProcessor:
         plastic_data += f"TB,PLAS,{mat_id},,{int(data_points)},MISO\n"
         curr_temp = None
         for i, strain in enumerate(strains):
-            if 'Temperature' in data and not skip_temp:
+            if "Temperature" in data and not skip_temp:
                 if curr_temp != temperature[i]:
                     curr_temp = temperature[i]
                     plastic_data += f"TBTEMP,{curr_temp}\n"
@@ -1478,12 +1542,12 @@ class _MaterialProcessor:
         return plastic_data
 
     def _process_hyperelastic_data(self, property_dict, material, mat_id):
-        hyperelastic_data = ''
+        hyperelastic_data = ""
         param_keys = property_dict["Parameters"].keys()
         parameters = property_dict["Parameters"]
         data = []
 
-        if 'TEST DATA INPUT' in parameters:
+        if "TEST DATA INPUT" in parameters:
             self._logger.warning(
                 f"Uniaxial test data for HYPERELASTIC material is not processed"
                 f"Material {material} is not processed completely."
@@ -1491,16 +1555,16 @@ class _MaterialProcessor:
             return hyperelastic_data
 
         weight_factor = 1
-        if not ('MODULI' in parameters and parameters['MODULI'] == 'INSTANTANEOUS'):
+        if not ("MODULI" in parameters and parameters["MODULI"] == "INSTANTANEOUS"):
             weight_factor = self.get_weight_factor(mat_id, material)
 
-        if 'Data' in property_dict and property_dict['Data'] is not None:
-            data = property_dict['Data']
+        if "Data" in property_dict and property_dict["Data"] is not None:
+            data = property_dict["Data"]
         if (
-            'REDUCED POLYNOMIAL' not in param_keys
-            and 'YEOH' not in param_keys
-            and 'NEO HOOKE' not in param_keys
-            and 'POLYNOMIAL' not in param_keys
+            "REDUCED POLYNOMIAL" not in param_keys
+            and "YEOH" not in param_keys
+            and "NEO HOOKE" not in param_keys
+            and "POLYNOMIAL" not in param_keys
         ):
             self._logger.warning(
                 f"Only parameter REDUCED POLYNOMIAL, "
@@ -1508,12 +1572,12 @@ class _MaterialProcessor:
                 f"there are more parameters on *HYPERELASTIC,*HYPERELASTIC "
                 f"for material {material} is not processed."
             )
-            return ''
-        if self._material_linked_to_zone_type[material] == 'Cohesive':
-            return ''
-        if 'NEO HOOKE' in param_keys:
-            if 'Temperature' in data:
-                temperature = data['Temperature']
+            return ""
+        if self._material_linked_to_zone_type[material] == "Cohesive":
+            return ""
+        if "NEO HOOKE" in param_keys:
+            if "Temperature" in data:
+                temperature = data["Temperature"]
                 temp_data_points = len(temperature)
             else:
                 self._logger.warning(
@@ -1521,20 +1585,20 @@ class _MaterialProcessor:
                 )
                 temp_data_points = 1
                 temperature = [None]
-            if 'C10' in data.keys():
-                c10 = data['C10']
-                if 'D1' in data.keys():
-                    d1 = data['D1']
+            if "C10" in data.keys():
+                c10 = data["C10"]
+                if "D1" in data.keys():
+                    d1 = data["D1"]
                 else:
                     d1 = [0.0] * len(c10)
             hyperelastic_data += f"TB,HYPE,{mat_id},,,NEO\n"
             for i in range(len(temperature)):
                 if temperature[i] is not None:
                     hyperelastic_data += f"TBTEMP, {temperature[i]}\n"
-                hyperelastic_data += f"TBDATA, 1, {float(c10[i])*2}, {d1[i]}\n"
-        if 'REDUCED POLYNOMIAL' in param_keys or 'YEOH' in param_keys:
-            if 'Temperature' in data:
-                temperature = data['Temperature']
+                hyperelastic_data += f"TBDATA, 1, {float(c10[i]) * 2}, {d1[i]}\n"
+        if "REDUCED POLYNOMIAL" in param_keys or "YEOH" in param_keys:
+            if "Temperature" in data:
+                temperature = data["Temperature"]
                 temp_data_points = len(temperature)
             else:
                 self._logger.warning(
@@ -1547,25 +1611,25 @@ class _MaterialProcessor:
                 k: [float(x) for x in v if x is not None] if v is not None else None
                 for k, v in data.items()
             }
-            if 'C10' in data.keys():
+            if "C10" in data.keys():
                 number_of_constants = 1
-                c10 = data['C10']
-                if 'D1' in data.keys():
-                    d1 = data['D1']
+                c10 = data["C10"]
+                if "D1" in data.keys():
+                    d1 = data["D1"]
                 else:
                     d1 = [0.0] * len(c10)
-            if 'C20' in data.keys():
+            if "C20" in data.keys():
                 number_of_constants = 2
-                c20 = data['C20']
-                if 'D2' in data.keys():
-                    d2 = data['D2']
+                c20 = data["C20"]
+                if "D2" in data.keys():
+                    d2 = data["D2"]
                 else:
                     d2 = [0.0] * len(c20)
-            if 'C30' in data.keys():
+            if "C30" in data.keys():
                 number_of_constants = 3
-                c30 = data['C30']
-                if 'D3' in data.keys():
-                    d3 = data['D3']
+                c30 = data["C30"]
+                if "D3" in data.keys():
+                    d3 = data["D3"]
                 else:
                     d3 = [0.0] * len(c30)
             hyperelastic_data += f"TB,HYPE,{mat_id},,{number_of_constants},YEOH\n"
@@ -1573,20 +1637,22 @@ class _MaterialProcessor:
                 if temperature[i] is not None:
                     hyperelastic_data += f"TBTEMP, {temperature[i]}\n"
                 if number_of_constants == 1:
-                    hyperelastic_data += f"TBDATA, 1, {c10[i]*weight_factor}, {d1[i]}\n"
+                    hyperelastic_data += (
+                        f"TBDATA, 1, {c10[i] * weight_factor}, {d1[i]}\n"
+                    )
                 elif number_of_constants == 2:
-                    hyperelastic_data += f"TBDATA, 1, {c10[i]*weight_factor}, "
-                    hyperelastic_data += f"{c20[i]*weight_factor}, {d1[i]}, {d2[i]}\n"
+                    hyperelastic_data += f"TBDATA, 1, {c10[i] * weight_factor}, "
+                    hyperelastic_data += f"{c20[i] * weight_factor}, {d1[i]}, {d2[i]}\n"
                 elif number_of_constants == 3:
                     hyperelastic_data += (
-                        f"TBDATA, 1, {c10[i]*weight_factor}, {c20[i]*weight_factor}, "
-                        f"{c30[i]*weight_factor}, {d1[i]}, {d2[i]}, {d3[i]}\n"
+                        f"TBDATA, 1, {c10[i] * weight_factor}, {c20[i] * weight_factor}, "
+                        f"{c30[i] * weight_factor}, {d1[i]}, {d2[i]}, {d3[i]}\n"
                     )
                 else:
                     pass
-        if 'POLYNOMIAL' in param_keys:
-            if 'Temperature' in data:
-                temperature = data['Temperature']
+        if "POLYNOMIAL" in param_keys:
+            if "Temperature" in data:
+                temperature = data["Temperature"]
                 temp_data_points = len(temperature)
             else:
                 self._logger.warning(
@@ -1595,51 +1661,51 @@ class _MaterialProcessor:
                 temp_data_points = 1
                 temperature = [None]
             number_of_constants = 3
-            if 'C10' in data.keys():
+            if "C10" in data.keys():
                 number_of_constants = 1
-                c10 = data['C10']
-                if 'D1' in data.keys():
-                    d1 = data['D1']
+                c10 = data["C10"]
+                if "D1" in data.keys():
+                    d1 = data["D1"]
                 else:
                     d1 = [0.0] * len(c10)
-                if 'C01' in data.keys():
-                    c01 = data['C01']
+                if "C01" in data.keys():
+                    c01 = data["C01"]
                 else:
                     c01 = [0.0] * len(c10)
 
-            if 'C20' in data.keys():
+            if "C20" in data.keys():
                 number_of_constants = 2
-                c20 = data['C20']
-                if 'D2' in data.keys():
-                    d2 = data['D2']
+                c20 = data["C20"]
+                if "D2" in data.keys():
+                    d2 = data["D2"]
                 else:
                     d2 = [0.0] * len(c20)
-                if 'C02' in data.keys():
-                    c02 = data['C02']
+                if "C02" in data.keys():
+                    c02 = data["C02"]
                 else:
                     c02 = [0.0] * len(c20)
-                if 'C11' in data.keys():
-                    c11 = data['C11']
+                if "C11" in data.keys():
+                    c11 = data["C11"]
                 else:
                     c11 = [0.0] * len(c20)
 
-            if 'C30' in data.keys():
+            if "C30" in data.keys():
                 number_of_constants = 3
-                c30 = data['C30']
-                if 'D3' in data.keys():
-                    d3 = data['D3']
+                c30 = data["C30"]
+                if "D3" in data.keys():
+                    d3 = data["D3"]
                 else:
                     d3 = [0.0] * len(c30)
-                if 'C03' in data.keys():
-                    c03 = data['C03']
+                if "C03" in data.keys():
+                    c03 = data["C03"]
                 else:
                     c03 = [0.0] * len(c30)
-                if 'C21' in data.keys():
-                    c21 = data['C21']
+                if "C21" in data.keys():
+                    c21 = data["C21"]
                 else:
                     c21 = [0.0] * len(c30)
-                if 'C12' in data.keys():
-                    c12 = data['C12']
+                if "C12" in data.keys():
+                    c12 = data["C12"]
                 else:
                     c12 = [0.0] * len(c30)
             order_N = number_of_constants
@@ -1660,17 +1726,11 @@ class _MaterialProcessor:
                 if number_of_constants == 1:
                     hyperelastic_data += f"TBDATA, 1, {c10[i]}, {c01[i]}, {d1[i]}\n"
                 elif number_of_constants == 2:
-                    hyperelastic_data += (
-                        f"TBDATA, 1, {c10[i]}, {c01[i]}, {c20[i]}, {c11[i]}, {c02[i]}, {d1[i]}\n"
-                    )
+                    hyperelastic_data += f"TBDATA, 1, {c10[i]}, {c01[i]}, {c20[i]}, {c11[i]}, {c02[i]}, {d1[i]}\n"
                     hyperelastic_data += f"TBDATA, 7, {d2[i]}\n"
                 elif number_of_constants == 3:
-                    hyperelastic_data += (
-                        f"TBDATA, 1, {c10[i]}, {c01[i]}, {c20[i]}, {c11[i]}, {c02[i]}, {c30[i]}\n"
-                    )
-                    hyperelastic_data += (
-                        f"TBDATA, 7, {c21[i]}, {c12[i]}, {c03[i]}, {d1[i]}, {d2[i]}, {d3[i]}\n"
-                    )
+                    hyperelastic_data += f"TBDATA, 1, {c10[i]}, {c01[i]}, {c20[i]}, {c11[i]}, {c02[i]}, {c30[i]}\n"
+                    hyperelastic_data += f"TBDATA, 7, {c21[i]}, {c12[i]}, {c03[i]}, {d1[i]}, {d2[i]}, {d3[i]}\n"
                 else:
                     pass
         hyperelastic_data += f"\n"
@@ -1679,24 +1739,28 @@ class _MaterialProcessor:
 
 class _JointMaterialProcessor:
     __slots__ = (
-        '_raw_joint_materials_data',
-        '_mat_id',
-        '_enable_hm_comments',
-        '_property_function_map',
-        '_model',
-        '_logger',
-        '_skip_comments',
+        "_raw_joint_materials_data",
+        "_mat_id",
+        "_enable_hm_comments",
+        "_property_function_map",
+        "_model",
+        "_logger",
+        "_skip_comments",
     )
 
     def __init__(
-        self, model: prime.Model, raw_joint_materials_data, hm_comments=False, skip_comments=True
+        self,
+        model: prime.Model,
+        raw_joint_materials_data,
+        hm_comments=False,
+        skip_comments=True,
     ):
         self._raw_joint_materials_data = raw_joint_materials_data
         self._mat_id = 0
         self._enable_hm_comments = hm_comments
         self._property_function_map = {
-            'CONNECTOR ELASTICITY': self._process_elasticity,
-            'CONNECTOR DAMPING': self._process_damping,
+            "CONNECTOR ELASTICITY": self._process_elasticity,
+            "CONNECTOR DAMPING": self._process_damping,
         }
         self._model = model
         self._logger = model.python_logger
@@ -1709,12 +1773,12 @@ class _JointMaterialProcessor:
                 self._logger.info(f"Processing Material: {material}")
                 mapdl_text_data = self._get_mat_comands(material)
                 mapdl_text_data_list.append(mapdl_text_data)
-        return '\n\n'.join(mapdl_text_data_list)
+        return "\n\n".join(mapdl_text_data_list)
 
     def _get_mat_comands(self, material):
         mat_data = self._raw_joint_materials_data[material]
-        self._mat_id = mat_data['id']
-        processed_entities = ['CONNECTOR ELASTICITY', 'CONNECTOR DAMPING']
+        self._mat_id = mat_data["id"]
+        processed_entities = ["CONNECTOR ELASTICITY", "CONNECTOR DAMPING"]
         mapdl_text_data = ""
         hm_comment = self._enable_hm_comments and self._skip_comments is False
         if hm_comment:
@@ -1725,10 +1789,10 @@ class _JointMaterialProcessor:
         if "Parameters" in mat_data:
             self._logger.warning(f"Parameter on Material {material} are not processed.")
         for prop in mat_data:
-            if prop == 'id' or prop == "CONNECTOR CONSTITUTIVE REFERENCE":
+            if prop == "id" or prop == "CONNECTOR CONSTITUTIVE REFERENCE":
                 continue
             elif prop not in processed_entities:
-                if prop not in ['HMComments', 'Comments']:
+                if prop not in ["HMComments", "Comments"]:
                     self._logger.warning(
                         f"The property {prop} for Material {material} is not processed."
                     )
@@ -1742,10 +1806,10 @@ class _JointMaterialProcessor:
         return mapdl_text_data
 
     def get_material_commands_by_material_id(self, id):
-        mapdl_text_data = ''
+        mapdl_text_data = ""
         for material in self._raw_joint_materials_data:
             mat_data = self._raw_joint_materials_data[material]
-            if mat_data['id'] == id:
+            if mat_data["id"] == id:
                 mapdl_text_data = self._get_mat_comands(material)
                 break
         return mapdl_text_data
@@ -1757,54 +1821,57 @@ class _JointMaterialProcessor:
 
     def _process_elasticity(self, property_dict, material, mat_id):
         comps_linear_mapping = {
-            '1': '1',
-            '2': '7',
-            '3': '12',
-            '4': '16',
-            '5': '19',
-            '6': '21',
+            "1": "1",
+            "2": "7",
+            "3": "12",
+            "4": "16",
+            "5": "19",
+            "6": "21",
         }
         comps_nonlinear_mapping = {
-            '1': 'JNS1',
-            '2': 'JNS2',
-            '3': 'JNS3',
-            '4': 'JNS4',
-            '5': 'JNS5',
-            '6': 'JNS6',
+            "1": "JNS1",
+            "2": "JNS2",
+            "3": "JNS3",
+            "4": "JNS4",
+            "5": "JNS5",
+            "6": "JNS6",
         }
         all_linear = True
         for comp_data in property_dict:
-            if 'Parameters' not in comp_data:
+            if "Parameters" not in comp_data:
                 self._logger.warning(
                     f"Parameter on Connector elasticity for "
                     f"Material {material} is not available."
                 )
             else:
-                if 'NONLINEAR' in comp_data['Parameters']:
+                if "NONLINEAR" in comp_data["Parameters"]:
                     all_linear = False
                     break
         all_rigid = True
         for comp_data in property_dict:
-            if 'Parameters' not in comp_data:
+            if "Parameters" not in comp_data:
                 self._logger.warning(
                     f"Parameter on Connector elasticity for "
                     f"Material {material} is not available."
                 )
             else:
-                if 'RIGID' not in comp_data['Parameters']:
-                    all_rigid = False
-                    break
-                elif 'RIGID' in comp_data['Parameters'] and 'COMPONENT' in comp_data['Parameters']:
+                if "RIGID" not in comp_data["Parameters"]:
                     all_rigid = False
                     break
                 elif (
-                    'RIGID' in comp_data['Parameters']
-                    and 'COMPONENT' not in comp_data['Parameters']
+                    "RIGID" in comp_data["Parameters"]
+                    and "COMPONENT" in comp_data["Parameters"]
                 ):
-                    if "Data" in comp_data and comp_data['Data'] is not None:
+                    all_rigid = False
+                    break
+                elif (
+                    "RIGID" in comp_data["Parameters"]
+                    and "COMPONENT" not in comp_data["Parameters"]
+                ):
+                    if "Data" in comp_data and comp_data["Data"] is not None:
                         if (
                             len(
-                                comp_data['Data'][
+                                comp_data["Data"][
                                     "Nth available component of relative motion for which"
                                     " rigid-like elastic behavior is defined"
                                 ]
@@ -1814,8 +1881,8 @@ class _JointMaterialProcessor:
                             all_rigid = False
                             break
 
-        elasticity_data = ''
-        tbdata_str = ''
+        elasticity_data = ""
+        tbdata_str = ""
         if all_linear or all_rigid:
             elasticity_data += f"TB, JOIN, {mat_id}, 1,, STIF\n"
             tbdata_str = (
@@ -1825,26 +1892,35 @@ class _JointMaterialProcessor:
         if not all_rigid:
             diagonal_stiffness = ["1", "2", "3", "4", "5", "6"]
             for comp_data in property_dict:
-                if 'Parameters' not in comp_data:
+                if "Parameters" not in comp_data:
                     self._logger.warning(
                         f"Parameter on Connector elasticity for "
                         f"Material {material} is not available."
                     )
                 else:
-                    if 'RIGID' in comp_data['Parameters']:
-                        if "COMPONENT" in comp_data['Parameters']:
+                    if "RIGID" in comp_data["Parameters"]:
+                        if "COMPONENT" in comp_data["Parameters"]:
                             if all_linear:
-                                ff = comps_linear_mapping[comp_data['Parameters']['COMPONENT']]
-                                tbtbdata_str_split = tbdata_str.split(',')
+                                ff = comps_linear_mapping[
+                                    comp_data["Parameters"]["COMPONENT"]
+                                ]
+                                tbtbdata_str_split = tbdata_str.split(",")
                                 if tbtbdata_str_split[int(ff)] == "0.0":
                                     tbtbdata_str_split[int(ff)] = "1e6"
                                 else:
                                     tbtbdata_str_split[int(ff)] = "1e6\n"
-                                tbdata_str = ','.join(tbtbdata_str_split)
-                                if comp_data['Parameters']['COMPONENT'] in diagonal_stiffness:
-                                    diagonal_stiffness.remove(comp_data['Parameters']['COMPONENT'])
+                                tbdata_str = ",".join(tbtbdata_str_split)
+                                if (
+                                    comp_data["Parameters"]["COMPONENT"]
+                                    in diagonal_stiffness
+                                ):
+                                    diagonal_stiffness.remove(
+                                        comp_data["Parameters"]["COMPONENT"]
+                                    )
                             else:
-                                clms = comps_nonlinear_mapping[comp_data['Parameters']['COMPONENT']]
+                                clms = comps_nonlinear_mapping[
+                                    comp_data["Parameters"]["COMPONENT"]
+                                ]
                                 stiff_val = float("1e6") * 1000
                                 elasticity_data += f"TB, JOIN, {mat_id}, 1, 3, {clms}\n"
                                 elasticity_data += f"TBPT, , -1000.0, -{stiff_val}\n"
@@ -1852,40 +1928,46 @@ class _JointMaterialProcessor:
                                 elasticity_data += f"TBPT, , 1000.0, {stiff_val}\n"
                             # continue
                         else:
-                            if "Data" in comp_data and comp_data['Data'] is not None:
+                            if "Data" in comp_data and comp_data["Data"] is not None:
                                 if all_linear:
-                                    for comp in comp_data['Data'][
+                                    for comp in comp_data["Data"][
                                         "Nth available component of relative motion for which "
                                         "rigid-like elastic behavior is defined"
                                     ]:
                                         ff = comps_linear_mapping[str(comp)]
-                                        tbtbdata_str_split = tbdata_str.split(',')
+                                        tbtbdata_str_split = tbdata_str.split(",")
                                         if tbtbdata_str_split[int(ff)] == "0.0":
                                             tbtbdata_str_split[int(ff)] = "1e6"
                                         else:
                                             tbtbdata_str_split[int(ff)] = "1e6\n"
-                                        tbdata_str = ','.join(tbtbdata_str_split)
+                                        tbdata_str = ",".join(tbtbdata_str_split)
                                         if str(comp) in diagonal_stiffness:
                                             diagonal_stiffness.remove(str(comp))
                                 else:
-                                    for comp in comp_data['Data'][
+                                    for comp in comp_data["Data"][
                                         "Nth available component of relative motion for which "
                                         "rigid-like elastic behavior is defined"
                                     ]:
                                         clms = comps_nonlinear_mapping[str(comp)]
                                         stiff_val = float("1e6") * 1000
-                                        elasticity_data += f"TB, JOIN, {mat_id}, 1, 3, {clms}\n"
-                                        elasticity_data += f"TBPT, , -1000.0, -{stiff_val}\n"
+                                        elasticity_data += (
+                                            f"TB, JOIN, {mat_id}, 1, 3, {clms}\n"
+                                        )
+                                        elasticity_data += (
+                                            f"TBPT, , -1000.0, -{stiff_val}\n"
+                                        )
                                         elasticity_data += "TBPT, , 0.0, 0.0\n"
-                                        elasticity_data += f"TBPT, , 1000.0, {stiff_val}\n"
+                                        elasticity_data += (
+                                            f"TBPT, , 1000.0, {stiff_val}\n"
+                                        )
                             # continue
-                    elif 'NONLINEAR' in comp_data['Parameters']:
-                        relative_disp = comp_data['Data']["Displacement"]
+                    elif "NONLINEAR" in comp_data["Parameters"]:
+                        relative_disp = comp_data["Data"]["Displacement"]
                         relative_disp = [float(i) for i in relative_disp]
-                        stiff = comp_data['Data']["Load"]
+                        stiff = comp_data["Data"]["Load"]
                         stiff = [float(i) for i in stiff]
-                        if 'temperature' in comp_data['Data']:
-                            temperatures = comp_data['Data']["temperature"]
+                        if "temperature" in comp_data["Data"]:
+                            temperatures = comp_data["Data"]["temperature"]
                             if len(temperatures) != len(stiff):
                                 self._logger.warning(
                                     f"Data for Connector elasticity for Material {material}, "
@@ -1916,7 +1998,9 @@ class _JointMaterialProcessor:
                                             relative_disp[super_counter - 1],
                                             stiff[super_counter - 1],
                                         )
-                                        elasticity_temporary_data += f"TBPT,,{d_temp},{f_temp}\n"
+                                        elasticity_temporary_data += (
+                                            f"TBPT,,{d_temp},{f_temp}\n"
+                                        )
                                         point_added = True
                                     if temp_val != float(t):
                                         elasticity_temporary_data += f"TBTEMP, {t}\n"
@@ -1936,7 +2020,9 @@ class _JointMaterialProcessor:
                                             relative_disp[super_counter + 1],
                                             stiff[super_counter + 1],
                                         )
-                                        elasticity_temporary_data += f"TBPT,,{d_temp},{f_temp}\n"
+                                        elasticity_temporary_data += (
+                                            f"TBPT,,{d_temp},{f_temp}\n"
+                                        )
                                         point_added = True
                                     elif d == 0 and starts_with_negative == True:
                                         reached_positive = True
@@ -1947,7 +2033,9 @@ class _JointMaterialProcessor:
                                         d_temp, f_temp = self.get_new_point(
                                             1e-5, d_previous, f_previous, d, f
                                         )
-                                        elasticity_temporary_data += f"TBPT,,{d_temp},{f_temp}\n"
+                                        elasticity_temporary_data += (
+                                            f"TBPT,,{d_temp},{f_temp}\n"
+                                        )
                                         reached_positive = False
                                         point_added = True
                                     d_previous = d
@@ -1962,14 +2050,25 @@ class _JointMaterialProcessor:
                                         relative_disp[-1],
                                         stiff[-1],
                                     )
-                                    elasticity_temporary_data += f"TBPT,,{d_temp},{f_temp}\n"
+                                    elasticity_temporary_data += (
+                                        f"TBPT,,{d_temp},{f_temp}\n"
+                                    )
                                     point_added = True
                                 if point_added == False:
-                                    points = int(len(stiff) / len(list(set(temperatures))))
+                                    points = int(
+                                        len(stiff) / len(list(set(temperatures)))
+                                    )
                                 else:
-                                    points = int(len(stiff) / len(list(set(temperatures)))) + 1
-                                clms = comps_nonlinear_mapping[comp_data['Parameters']['COMPONENT']]
-                                elasticity_data += f"TB, JOIN, {mat_id}, , {points}, {clms}\n"
+                                    points = (
+                                        int(len(stiff) / len(list(set(temperatures))))
+                                        + 1
+                                    )
+                                clms = comps_nonlinear_mapping[
+                                    comp_data["Parameters"]["COMPONENT"]
+                                ]
+                                elasticity_data += (
+                                    f"TB, JOIN, {mat_id}, , {points}, {clms}\n"
+                                )
                                 elasticity_data += elasticity_temporary_data
                         else:
                             elasticity_temporary_data = ""
@@ -1989,7 +2088,9 @@ class _JointMaterialProcessor:
                                         relative_disp[1],
                                         stiff[1],
                                     )
-                                    elasticity_temporary_data += f"TBPT,,{d_temp},{f_temp}\n"
+                                    elasticity_temporary_data += (
+                                        f"TBPT,,{d_temp},{f_temp}\n"
+                                    )
                                     point_added = True
                                 elif d == 0 and starts_with_negative == True:
                                     reached_positive = True
@@ -2003,7 +2104,9 @@ class _JointMaterialProcessor:
                                     d_temp, f_temp = self.get_new_point(
                                         1e-5, d_previous, f_previous, d, f
                                     )
-                                    elasticity_temporary_data += f"TBPT,,{d_temp},{f_temp}\n"
+                                    elasticity_temporary_data += (
+                                        f"TBPT,,{d_temp},{f_temp}\n"
+                                    )
                                     point_added = True
                                     reached_positive = False
                                 d_previous = d
@@ -2017,113 +2120,125 @@ class _JointMaterialProcessor:
                                     relative_disp[-1],
                                     stiff[-1],
                                 )
-                                elasticity_temporary_data += f"TBPT,,{d_temp},{f_temp}\n"
+                                elasticity_temporary_data += (
+                                    f"TBPT,,{d_temp},{f_temp}\n"
+                                )
                                 point_added = True
                             if point_added == False:
                                 points = len(stiff)
                             else:
                                 points = len(stiff) + 1
-                            clms = comps_nonlinear_mapping[comp_data['Parameters']['COMPONENT']]
-                            elasticity_data += f"TB, JOIN, {mat_id}, , {points}, {clms}\n"
+                            clms = comps_nonlinear_mapping[
+                                comp_data["Parameters"]["COMPONENT"]
+                            ]
+                            elasticity_data += (
+                                f"TB, JOIN, {mat_id}, , {points}, {clms}\n"
+                            )
                             elasticity_data += elasticity_temporary_data
                     elif not all_linear:
-                        if len(comp_data['Data']['Stiffness']) != 1:
+                        if len(comp_data["Data"]["Stiffness"]) != 1:
                             self._logger.warning(
                                 f"Data for Connector elasticity for Material {material}, "
                                 f"has multiple stiffness values, "
                                 f"tempereture dependent values are not processed"
                             )
-                        clms = comps_nonlinear_mapping[comp_data['Parameters']['COMPONENT']]
-                        stiff_val = float(comp_data['Data']['Stiffness'][0]) * 1000
+                        clms = comps_nonlinear_mapping[
+                            comp_data["Parameters"]["COMPONENT"]
+                        ]
+                        stiff_val = float(comp_data["Data"]["Stiffness"][0]) * 1000
                         elasticity_data += f"TB, JOIN, {mat_id}, 1, 3, {clms}\n"
                         elasticity_data += f"TBPT, , -1000.0, -{stiff_val}\n"
                         elasticity_data += "TBPT, , 0.0, 0.0\n"
                         elasticity_data += f"TBPT, , 1000.0, {stiff_val}\n"
                     else:
-                        if len(comp_data['Data']['Stiffness']) != 1:
+                        if len(comp_data["Data"]["Stiffness"]) != 1:
                             self._logger.warning(
                                 f"Data for Connector elasticity for Material {material}, "
                                 f"has multiple stiffness values, "
                                 f"tempereture dependent values are not processed"
                             )
-                        clms = comps_linear_mapping[comp_data['Parameters']['COMPONENT']]
-                        cds = comp_data['Data']['Stiffness'][0]
-                        tbtbdata_str_split = tbdata_str.split(',')
+                        clms = comps_linear_mapping[
+                            comp_data["Parameters"]["COMPONENT"]
+                        ]
+                        cds = comp_data["Data"]["Stiffness"][0]
+                        tbtbdata_str_split = tbdata_str.split(",")
 
                         if tbtbdata_str_split[int(clms)] == "0.0":
                             tbtbdata_str_split[int(clms)] = f"{cds}"
                         else:
                             tbtbdata_str_split[int(clms)] = f"{cds}\n"
 
-                        tbdata_str = ','.join(tbtbdata_str_split)
+                        tbdata_str = ",".join(tbtbdata_str_split)
 
-                        if comp_data['Parameters']['COMPONENT'] in diagonal_stiffness:
-                            diagonal_stiffness.remove(comp_data['Parameters']['COMPONENT'])
+                        if comp_data["Parameters"]["COMPONENT"] in diagonal_stiffness:
+                            diagonal_stiffness.remove(
+                                comp_data["Parameters"]["COMPONENT"]
+                            )
             insert_stiffness = os.getenv("MAPDL_JOINT_SMALL_STIFF")
             if (
                 insert_stiffness
-                and insert_stiffness.lower().strip() == 'true'
+                and insert_stiffness.lower().strip() == "true"
                 and len(diagonal_stiffness) != 6
             ):
                 for component_number in diagonal_stiffness:
                     clms = comps_linear_mapping[component_number]
                     cds = "0.000001"
-                    tbtbdata_str_split = tbdata_str.split(',')
+                    tbtbdata_str_split = tbdata_str.split(",")
 
                     if tbtbdata_str_split[int(clms)] == "0.0":
                         tbtbdata_str_split[int(clms)] = f"{cds}"
                     else:
                         tbtbdata_str_split[int(clms)] = f"{cds}\n"
 
-                    tbdata_str = ','.join(tbtbdata_str_split)
+                    tbdata_str = ",".join(tbtbdata_str_split)
         else:
-            tbtbdata_str_split = tbdata_str.split(',')
+            tbtbdata_str_split = tbdata_str.split(",")
             for i in range(22):
                 if i in [1, 7, 12, 16, 19, 21]:
                     if tbtbdata_str_split[int(i)] == "0.0":
-                        tbtbdata_str_split[int(i)] = '1e6'
+                        tbtbdata_str_split[int(i)] = "1e6"
                     else:
-                        tbtbdata_str_split[int(i)] = '1e6\n'
-            tbdata_str = ','.join(tbtbdata_str_split)
+                        tbtbdata_str_split[int(i)] = "1e6\n"
+            tbdata_str = ",".join(tbtbdata_str_split)
         if tbdata_str:
-            tbtbdata_str_split = tbdata_str.split('\n')
+            tbtbdata_str_split = tbdata_str.split("\n")
             tbtbdata_str_split[0] = "TBDATA,1" + tbtbdata_str_split[0]
             tbtbdata_str_split[1] = "TBDATA,7" + tbtbdata_str_split[1]
             tbtbdata_str_split[2] = "TBDATA,13" + tbtbdata_str_split[2]
             tbtbdata_str_split[3] = "TBDATA,19" + tbtbdata_str_split[3]
-            tbdata_str = '\n'.join(tbtbdata_str_split)
+            tbdata_str = "\n".join(tbtbdata_str_split)
         elasticity_data += tbdata_str
         return elasticity_data
 
     def _process_damping(self, property_dict, material, mat_id):
         comps_linear_mapping = {
-            '1': '1',
-            '2': '7',
-            '3': '12',
-            '4': '16',
-            '5': '19',
-            '6': '21',
+            "1": "1",
+            "2": "7",
+            "3": "12",
+            "4": "16",
+            "5": "19",
+            "6": "21",
         }
         comps_nonlinear_mapping = {
-            '1': 'JND1',
-            '2': 'JND2',
-            '3': 'JND3',
-            '4': 'JND4',
-            '5': 'JND5',
-            '6': 'JND6',
+            "1": "JND1",
+            "2": "JND2",
+            "3": "JND3",
+            "4": "JND4",
+            "5": "JND5",
+            "6": "JND6",
         }
         all_linear = True
         for comp_data in property_dict:
-            if 'Parameters' not in comp_data:
+            if "Parameters" not in comp_data:
                 self._logger.warning(
                     f"Parameter on Connector elasticity for "
                     f"Material {material} is not available."
                 )
             else:
-                if 'NONLINEAR' in comp_data['Parameters']:
+                if "NONLINEAR" in comp_data["Parameters"]:
                     all_linear = False
                     break
-        damping_data = ''
+        damping_data = ""
         tbdata_str = ""
         if all_linear:
             damping_data += f"TB, JOIN, {mat_id}, 1,, DAMP\n"
@@ -2132,24 +2247,25 @@ class _JointMaterialProcessor:
                 ",0.0,0.0,0.0,0.0,0.0,0.0\n,0.0,0.0,0.0\n"
             )
         for comp_data in property_dict:
-            if 'Parameters' not in comp_data:
+            if "Parameters" not in comp_data:
                 self._logger.warning(
-                    f"Parameter on Connector damping for " f"Material {material} is not available."
+                    f"Parameter on Connector damping for "
+                    f"Material {material} is not available."
                 )
             else:
-                if 'TYPE' in comp_data['Parameters']:
-                    if comp_data['Parameters']['TYPE'] != "VISCOUS":
+                if "TYPE" in comp_data["Parameters"]:
+                    if comp_data["Parameters"]["TYPE"] != "VISCOUS":
                         self._logger.warning(
                             f"Parameter TYPE on Connector damping for Material {material}"
                             f" is {comp_data['Parameters']['TYPE']}, "
                             f"only TYPE= VISCOUS is processed."
                         )
-                if 'NONLINEAR' in comp_data['Parameters']:
-                    relative_disp = comp_data['Data']["velocity"]
-                    damp = comp_data['Data']["force"]
-                    if 'temperature' in comp_data['Data']:
-                        self._logger.info('nonlinear temp')
-                        temperatures = comp_data['Data']["temperature"]
+                if "NONLINEAR" in comp_data["Parameters"]:
+                    relative_disp = comp_data["Data"]["velocity"]
+                    damp = comp_data["Data"]["force"]
+                    if "temperature" in comp_data["Data"]:
+                        self._logger.info("nonlinear temp")
+                        temperatures = comp_data["Data"]["temperature"]
                         if len(temperatures) != len(damp):
                             self._logger.warning(
                                 f"Data for Connector elasticity for Material {material}, "
@@ -2165,7 +2281,9 @@ class _JointMaterialProcessor:
                                     temp_val = float(t)
                                 damp_temporary_data += f"TBPT,,{d},{f}\n"
                             s1 = int(len(damp) / len(list(set(temperatures))))
-                            s2 = comps_nonlinear_mapping[comp_data['Parameters']['COMPONENT']]
+                            s2 = comps_nonlinear_mapping[
+                                comp_data["Parameters"]["COMPONENT"]
+                            ]
                             damping_data += f"TB, JOIN, {mat_id}, , {s1}, {s2}\n"
                             damping_data += damp_temporary_data
                     else:
@@ -2173,53 +2291,55 @@ class _JointMaterialProcessor:
                         for d, f in zip(relative_disp, damp):
                             damp_temporary_data += f"TBPT,,{d},{f}\n"
                         s1 = len(damp)
-                        s2 = comps_nonlinear_mapping[comp_data['Parameters']['COMPONENT']]
+                        s2 = comps_nonlinear_mapping[
+                            comp_data["Parameters"]["COMPONENT"]
+                        ]
                         damping_data += f"TB, JOIN, {mat_id}, , {s1}, {s2}\n"
                         damping_data += damp_temporary_data
                 elif not all_linear:
-                    if len(comp_data['Data']['damping_coeff']) != 1:
+                    if len(comp_data["Data"]["damping_coeff"]) != 1:
                         self._logger.warning(
                             f"Data for Connector elasticity for Material {material}, "
                             f"has multiple damping values, "
                             f"tempereture dependent values are not processed"
                         )
-                    s1 = comps_nonlinear_mapping[comp_data['Parameters']['COMPONENT']]
-                    damp_coeff = float(comp_data['Data']['damping_coeff'][0]) * 1000
+                    s1 = comps_nonlinear_mapping[comp_data["Parameters"]["COMPONENT"]]
+                    damp_coeff = float(comp_data["Data"]["damping_coeff"][0]) * 1000
                     damping_data += f"TB, JOIN, {mat_id}, 1, 3, {s1}\n"
                     damping_data += f"TBPT, , -1000.0, -{damp_coeff}\n"
                     damping_data += "TBPT, , 0.0, 0.0\n"
                     damping_data += f"TBPT, , 1000.0, {damp_coeff}\n"
                 else:
-                    if len(comp_data['Data']['damping_coeff']) != 1:
+                    if len(comp_data["Data"]["damping_coeff"]) != 1:
                         self._logger.warning(
                             f"Data for Connector elasticity for Material {material}, "
                             f"has multiple damping values, "
                             f"tempereture dependent values are not processed"
                         )
-                    s1 = comps_linear_mapping[comp_data['Parameters']['COMPONENT']]
-                    s2 = comp_data['Data']['damping_coeff'][0]
+                    s1 = comps_linear_mapping[comp_data["Parameters"]["COMPONENT"]]
+                    s2 = comp_data["Data"]["damping_coeff"][0]
 
-                    tbtbdata_str_split = tbdata_str.split(',')
+                    tbtbdata_str_split = tbdata_str.split(",")
 
                     if tbtbdata_str_split[int(s1)] == "0.0":
                         tbtbdata_str_split[int(s1)] = f"{s2}"
                     else:
                         tbtbdata_str_split[int(s1)] = f"{s2}\n"
 
-                    tbdata_str = ','.join(tbtbdata_str_split)
+                    tbdata_str = ",".join(tbtbdata_str_split)
         if tbdata_str:
-            tbtbdata_str_split = tbdata_str.split('\n')
+            tbtbdata_str_split = tbdata_str.split("\n")
             tbtbdata_str_split[0] = "TBDATA,1" + tbtbdata_str_split[0]
             tbtbdata_str_split[1] = "TBDATA,7" + tbtbdata_str_split[1]
             tbtbdata_str_split[2] = "TBDATA,13" + tbtbdata_str_split[2]
             tbtbdata_str_split[3] = "TBDATA,19" + tbtbdata_str_split[3]
-            tbdata_str = '\n'.join(tbtbdata_str_split)
+            tbdata_str = "\n".join(tbtbdata_str_split)
         damping_data += tbdata_str
 
         return damping_data
 
     def _precess_ref_length(self, property_dict):
-        ref_length = [''] * 6
+        ref_length = [""] * 6
         property_dict = property_dict[0]
         comp1_str = "Length1"
         comp2_str = "Length2"
@@ -2228,8 +2348,8 @@ class _JointMaterialProcessor:
         comp5_str = "Angle2"
         comp6_str = "Angle3"
         data = []
-        if 'Data' in property_dict and property_dict['Data'] is not None:
-            data = property_dict['Data']
+        if "Data" in property_dict and property_dict["Data"] is not None:
+            data = property_dict["Data"]
         if comp1_str in data:
             ref_length[0] = data[comp1_str]
         if comp2_str in data:
@@ -2247,17 +2367,17 @@ class _JointMaterialProcessor:
 
 class _BoundaryProcessor:
     __slots__ = (
-        '_simulation_data',
-        '_boundaries_data',
-        '_step_start_time',
-        '_step_end_time',
-        '_ddele_added',
-        '_ampl_commands',
-        '_model',
-        '_need_base_id',
-        '_base_id_mapping',
-        '_base_id_counter',
-        '_logger',
+        "_simulation_data",
+        "_boundaries_data",
+        "_step_start_time",
+        "_step_end_time",
+        "_ddele_added",
+        "_ampl_commands",
+        "_model",
+        "_need_base_id",
+        "_base_id_mapping",
+        "_base_id_counter",
+        "_logger",
     )
 
     def __init__(
@@ -2286,7 +2406,7 @@ class _BoundaryProcessor:
 
     def get_all_boundary_commands(self):
         boundaries_data = self._boundaries_data
-        boundary_commands = ''
+        boundary_commands = ""
         boundary_counter = 1
         for boundary_data in boundaries_data:
             boundary_commands += self._get_commands(boundary_data, boundary_counter)
@@ -2300,73 +2420,77 @@ class _BoundaryProcessor:
         boundaries_data = self._boundaries_data
         comp_names = []
         for boundary_data in boundaries_data:
-            if 'Parameters' in boundary_data:
-                params = boundary_data['Parameters']
-                if params is not None and 'BASE NAME' in params:
-                    if params['BASE NAME'] == base_motion_name:
-                        data_lines = boundary_data['Data']
+            if "Parameters" in boundary_data:
+                params = boundary_data["Parameters"]
+                if params is not None and "BASE NAME" in params:
+                    if params["BASE NAME"] == base_motion_name:
+                        data_lines = boundary_data["Data"]
                         if data_lines is not None:
                             for data_line in data_lines:
                                 comp_names.append(
                                     get_modified_component_name(
-                                        str(data_line['node_set']), 'NSET', self._simulation_data
+                                        str(data_line["node_set"]),
+                                        "NSET",
+                                        self._simulation_data,
                                     )
                                 )
                 else:
                     if base_motion_name == "":
-                        data_lines = boundary_data['Data']
+                        data_lines = boundary_data["Data"]
                         if data_lines is not None:
                             for data_line in data_lines:
                                 comp_names.append(
                                     get_modified_component_name(
-                                        str(data_line['node_set']), 'NSET', self._simulation_data
+                                        str(data_line["node_set"]),
+                                        "NSET",
+                                        self._simulation_data,
                                     )
                                 )
 
         return comp_names
 
     def _get_commands(self, boundary_data, boundary_counter):
-        boundary_commands = ''
+        boundary_commands = ""
         dof_map = {
-            1: 'UX',
-            2: 'UY',
-            3: 'UZ',
-            4: 'ROTX',
-            5: 'ROTY',
-            6: 'ROTZ',
+            1: "UX",
+            2: "UY",
+            3: "UZ",
+            4: "ROTX",
+            5: "ROTY",
+            6: "ROTZ",
         }
         amplitude = None
         base_name = None
-        if 'Parameters' in boundary_data and boundary_data['Parameters'] is not None:
-            params = boundary_data['Parameters']
-            if 'OP' in params and params['OP'] == 'NEW' and self._ddele_added == False:
+        if "Parameters" in boundary_data and boundary_data["Parameters"] is not None:
+            params = boundary_data["Parameters"]
+            if "OP" in params and params["OP"] == "NEW" and self._ddele_added == False:
                 self._ddele_added = True
                 boundary_commands += "DDELE,ALL,ALL \n"
-            if 'AMPLITUDE' in params:
-                amplitude = params['AMPLITUDE']
-            if 'BASE NAME' in params:
-                base_name = params['BASE NAME']
-        data_lines = boundary_data['Data']
+            if "AMPLITUDE" in params:
+                amplitude = params["AMPLITUDE"]
+            if "BASE NAME" in params:
+                base_name = params["BASE NAME"]
+        data_lines = boundary_data["Data"]
 
         self._base_id_mapping[boundary_counter] = []
         for data_line in data_lines:
             if len(data_line) == 0:
                 continue
-            additional_bcs = ''
-            first = int(data_line['first_degree'])
+            additional_bcs = ""
+            first = int(data_line["first_degree"])
             mag = 0.0
-            if 'magnitude' in data_line:
-                mag = data_line['magnitude']
-            if 'last_degree' not in data_line:
+            if "magnitude" in data_line:
+                mag = data_line["magnitude"]
+            if "last_degree" not in data_line:
                 last = first + 1
-            elif data_line['last_degree'].strip() == '':
+            elif data_line["last_degree"].strip() == "":
                 last = first + 1
             else:
-                last = int(data_line['last_degree']) + 1
+                last = int(data_line["last_degree"]) + 1
             if amplitude is not None:
                 modified_amplitude_name = "AMPL_BOUNDARY"
                 applied_on = get_modified_component_name(
-                    str(data_line['node_set']), 'NSET', self._simulation_data
+                    str(data_line["node_set"]), "NSET", self._simulation_data
                 )
                 ampl_processor = _AmplitudeProcessor(
                     self._model, self._simulation_data["Amplitude"]
@@ -2383,26 +2507,26 @@ class _BoundaryProcessor:
             if last > 7:
                 self._logger.warning(
                     f"Warning: only "
-                    f"({[i for i in range(first, min(last,7))]}) "
+                    f"({[i for i in range(first, min(last, 7))]}) "
                     f"boundary data dofs from {first} to {last} are processed"
                 )
 
             for i in range(first, min(last, 7)):
-                if data_line['node_set'].isnumeric():
-                    cmname = data_line['node_set']
+                if data_line["node_set"].isnumeric():
+                    cmname = data_line["node_set"]
                 else:
                     cmname = get_modified_component_name(
-                        data_line['node_set'], 'NSET', self._simulation_data
+                        data_line["node_set"], "NSET", self._simulation_data
                     )
                 boundary_commands += f"D, {cmname}, {dof_map[i]}, "
 
                 if self._need_base_id:
                     self._base_id_mapping[boundary_counter].append(
                         {
-                            'Component': cmname,
-                            'BaseName': base_name,
+                            "Component": cmname,
+                            "BaseName": base_name,
                             dof_map[i]: self._base_id_counter,
-                            'BaseMotionType': None,
+                            "BaseMotionType": None,
                         }
                     )
                     boundary_commands += f"{self._base_id_counter}"
@@ -2419,16 +2543,21 @@ class _BoundaryProcessor:
 
 class _DloadProcessor:
     __slots__ = (
-        '_simulation_data',
-        '_dloads_data',
-        '_step_start_time',
-        '_step_end_time',
-        '_model',
-        '_logger',
+        "_simulation_data",
+        "_dloads_data",
+        "_step_start_time",
+        "_step_end_time",
+        "_model",
+        "_logger",
     )
 
     def __init__(
-        self, model: prime.Model, data, step_start_time=0.0, step_end_time=1.0, sim_data=None
+        self,
+        model: prime.Model,
+        data,
+        step_start_time=0.0,
+        step_end_time=1.0,
+        sim_data=None,
     ):
         self._simulation_data = sim_data
         self._dloads_data = data
@@ -2439,7 +2568,7 @@ class _DloadProcessor:
 
     def get_all_dload_commands(self):
         dloads_data = self._dloads_data
-        dload_commands = ''
+        dload_commands = ""
         for dload_data in dloads_data:
             dload_commands += self._get_commands(dload_data)
         return dload_commands
@@ -2448,67 +2577,73 @@ class _DloadProcessor:
         pass
 
     def _get_commands(self, dload_data):
-        dload_commands = ''
+        dload_commands = ""
         op = None
-        if 'Parameters' in dload_data and dload_data['Parameters'] is not None:
-            params = dload_data['Parameters']
-            if 'OP' in params:
-                if params['OP'] == 'NEW':
-                    op = 'NEW'
+        if "Parameters" in dload_data and dload_data["Parameters"] is not None:
+            params = dload_data["Parameters"]
+            if "OP" in params:
+                if params["OP"] == "NEW":
+                    op = "NEW"
                 if len(params) > 1:
-                    self._logger.warning(f"Warning: parameter on DLOAD keyword are not processed")
+                    self._logger.warning(
+                        f"Warning: parameter on DLOAD keyword are not processed"
+                    )
             else:
-                self._logger.warning(f"Warning: parameter on DLOAD keyword are not processed")
-        data_lines = dload_data['Data']
+                self._logger.warning(
+                    f"Warning: parameter on DLOAD keyword are not processed"
+                )
+        data_lines = dload_data["Data"]
         for data_line in data_lines:
             if len(data_line) == 0:
                 continue
             mag = 0
             load_type = None
             elset = None
-            if 'element_number_or_set' in data_line:
+            if "element_number_or_set" in data_line:
                 elset = get_modified_component_name(
-                    data_line['element_number_or_set'], 'ELSET', self._simulation_data
+                    data_line["element_number_or_set"], "ELSET", self._simulation_data
                 )
-            if 'magnitude' in data_line:
-                mag = float(data_line['magnitude'])
-            if 'type' in data_line:
-                load_type = data_line['type']
+            if "magnitude" in data_line:
+                mag = float(data_line["magnitude"])
+            if "type" in data_line:
+                load_type = data_line["type"]
             if load_type == "GRAV":
                 x = 0.0
                 y = 0.0
                 z = 0.0
-                if 'x' in data_line:
-                    x = float(data_line['x'])
-                if 'y' in data_line:
-                    y = float(data_line['y'])
-                if 'z' in data_line:
-                    z = float(data_line['z'])
+                if "x" in data_line:
+                    x = float(data_line["x"])
+                if "y" in data_line:
+                    y = float(data_line["y"])
+                if "z" in data_line:
+                    z = float(data_line["z"])
                 if elset:
-                    if op == 'NEW':
+                    if op == "NEW":
                         dload_commands += f"CMACEL, {elset}, 0.0, 0.0, 0.0 \n"
-                    dload_commands += f"CMACEL, {elset}, {-x*mag}, {-y*mag}, {-z*mag}\n"
+                    dload_commands += (
+                        f"CMACEL, {elset}, {-x * mag}, {-y * mag}, {-z * mag}\n"
+                    )
                 else:
-                    if op == 'NEW':
+                    if op == "NEW":
                         dload_commands += "ACEL, 0.0, 0.0, 0.0 \n"
-                    dload_commands += f"ACEL, {-x*mag}, {-y*mag}, {-z*mag}\n"
+                    dload_commands += f"ACEL, {-x * mag}, {-y * mag}, {-z * mag}\n"
         dload_commands += "\n"
         return dload_commands
 
 
 class _CloadProcessor:
     __slots__ = (
-        '_simulation_data',
-        '_modal_load_vectors',
-        '_step_MSUP',
-        '_cloads_data',
-        '_step_start_time',
-        '_step_end_time',
-        '_fedele_added',
-        '_load_vestors_in_current_step',
-        '_ampl_commands',
-        '_model',
-        '_logger',
+        "_simulation_data",
+        "_modal_load_vectors",
+        "_step_MSUP",
+        "_cloads_data",
+        "_step_start_time",
+        "_step_end_time",
+        "_fedele_added",
+        "_load_vestors_in_current_step",
+        "_ampl_commands",
+        "_model",
+        "_logger",
     )
 
     def __init__(
@@ -2529,7 +2664,7 @@ class _CloadProcessor:
         self._step_end_time = step_end_time
         self._fedele_added = False
         self._load_vestors_in_current_step = []
-        self._ampl_commands = ''
+        self._ampl_commands = ""
         self._model = model
         self._logger = model.python_logger
 
@@ -2538,13 +2673,13 @@ class _CloadProcessor:
 
     def get_all_cload_commands(self):
         cloads_data = self._cloads_data
-        cload_commands = ''
+        cload_commands = ""
         if self._step_MSUP:
-            cload_commands += f'FDELE, ALL, ALL \n'
-            cload_commands += f'SFDELE, ALL, ALL \n'
-            cload_commands += f'SFEDELE, ALL, ALL, ALL \n'
-            cload_commands += f'ACEL, 0, 0, 0 \n'
-            cload_commands += f'\n'
+            cload_commands += f"FDELE, ALL, ALL \n"
+            cload_commands += f"SFDELE, ALL, ALL \n"
+            cload_commands += f"SFEDELE, ALL, ALL, ALL \n"
+            cload_commands += f"ACEL, 0, 0, 0 \n"
+            cload_commands += f"\n"
         for cload_data in cloads_data:
             cload_commands += self._get_commands(cload_data)
         if self._step_MSUP:
@@ -2560,36 +2695,36 @@ class _CloadProcessor:
         pass
 
     def _get_commands(self, cload_data):
-        cload_commands = ''
+        cload_commands = ""
         cload_lv_scale_commands = ""
         dof_map = {
-            1: 'FX',
-            2: 'FY',
-            3: 'FZ',
-            4: 'MX',
-            5: 'MY',
-            6: 'MZ',
+            1: "FX",
+            2: "FY",
+            3: "FZ",
+            4: "MX",
+            5: "MY",
+            6: "MZ",
         }
         amplitude = None
-        if 'Parameters' in cload_data and cload_data['Parameters'] is not None:
-            params = cload_data['Parameters']
-            if 'OP' in params and params['OP'] == 'NEW' and self._fedele_added == False:
+        if "Parameters" in cload_data and cload_data["Parameters"] is not None:
+            params = cload_data["Parameters"]
+            if "OP" in params and params["OP"] == "NEW" and self._fedele_added == False:
                 self._fedele_added = True
                 cload_commands += "FDELE,ALL,ALL \n"
-            if 'AMPLITUDE' in params:
-                amplitude = params['AMPLITUDE']
-        data_lines = cload_data['Data']
+            if "AMPLITUDE" in params:
+                amplitude = params["AMPLITUDE"]
+        data_lines = cload_data["Data"]
         for data_line in data_lines:
             if len(data_line) == 0:
                 continue
-            dof = int(data_line['degree_of_freedom'])
+            dof = int(data_line["degree_of_freedom"])
             mag = 0
-            if 'magnitude' in data_line:
-                mag = float(data_line['magnitude'])
+            if "magnitude" in data_line:
+                mag = float(data_line["magnitude"])
             if amplitude is not None:
                 modified_amplitude_name = "AMPL_CLOAD"
                 applied_on = get_modified_component_name(
-                    str(data_line['node_set']), 'NSET', self._simulation_data
+                    str(data_line["node_set"]), "NSET", self._simulation_data
                 )
                 ampl_processor = _AmplitudeProcessor(
                     self._model, self._simulation_data["Amplitude"]
@@ -2603,11 +2738,11 @@ class _CloadProcessor:
                     scale_factor=mag,
                 )
                 self._ampl_commands += ampl_commands
-            if data_line['node_set'].isnumeric():
+            if data_line["node_set"].isnumeric():
                 cload_commands += f"F, {data_line['node_set']}, {dof_map[dof]}, "
             else:
                 cmname = get_modified_component_name(
-                    data_line['node_set'], 'NSET', self._simulation_data
+                    data_line["node_set"], "NSET", self._simulation_data
                 )
                 cload_commands += f"F, {cmname}, {dof_map[dof]}, "
             if amplitude is not None:
@@ -2618,9 +2753,11 @@ class _CloadProcessor:
             cload_commands += "\n"
             for dict_key, val in self._modal_load_vectors.items():
                 if (
-                    get_modified_component_name(val["SET"], 'NSET', self._simulation_data)
+                    get_modified_component_name(
+                        val["SET"], "NSET", self._simulation_data
+                    )
                     == get_modified_component_name(
-                        data_line['node_set'], 'NSET', self._simulation_data
+                        data_line["node_set"], "NSET", self._simulation_data
                     )
                     and val["COMP"] == dof_map[dof]
                 ):
@@ -2629,7 +2766,9 @@ class _CloadProcessor:
                     if amplitude:
                         man = modified_amplitude_name
                         ac = _AmplitudeProcessor._amplitude_count
-                        cload_lv_scale_commands += f"LVSCALE, %{man}_{ac}%, {dict_key}\n"
+                        cload_lv_scale_commands += (
+                            f"LVSCALE, %{man}_{ac}%, {dict_key}\n"
+                        )
                     else:
                         cload_lv_scale_commands += f"LVSCALE, {mag}, {dict_key}\n"
         if self._step_MSUP:
@@ -2639,25 +2778,30 @@ class _CloadProcessor:
 
 class _ConnectorMotionProcessor:
     __slots__ = (
-        '_simulation_data',
-        '_connector_motions_data',
-        '_step_start_time',
-        '_step_end_time',
-        '_fedele_added',
-        '_ampl_commands',
-        '_model',
-        '_logger',
+        "_simulation_data",
+        "_connector_motions_data",
+        "_step_start_time",
+        "_step_end_time",
+        "_fedele_added",
+        "_ampl_commands",
+        "_model",
+        "_logger",
     )
 
     def __init__(
-        self, model: prime.Model, data, step_start_time=0.0, step_end_time=1.0, sim_data=None
+        self,
+        model: prime.Model,
+        data,
+        step_start_time=0.0,
+        step_end_time=1.0,
+        sim_data=None,
     ):
         self._simulation_data = sim_data
         self._connector_motions_data = data
         self._step_start_time = step_start_time
         self._step_end_time = step_end_time
         self._fedele_added = False
-        self._ampl_commands = ''
+        self._ampl_commands = ""
         self._model = model
         self._logger = model.python_logger
 
@@ -2666,7 +2810,7 @@ class _ConnectorMotionProcessor:
 
     def get_all_connector_motion_commands(self):
         connector_motions_data = self._connector_motions_data
-        connector_motion_commands = ''
+        connector_motion_commands = ""
         for connector_motion_data in connector_motions_data:
             connector_motion_commands += self._get_commands(connector_motion_data)
         return connector_motion_commands
@@ -2675,62 +2819,64 @@ class _ConnectorMotionProcessor:
         pass
 
     def _get_commands(self, connector_motion_data):
-        connector_motion_commands = ''
+        connector_motion_commands = ""
         dof_map = {
-            1: 'UX',
-            2: 'UY',
-            3: 'UZ',
-            4: 'ROTX',
-            5: 'ROTY',
-            6: 'ROTZ',
+            1: "UX",
+            2: "UY",
+            3: "UZ",
+            4: "ROTX",
+            5: "ROTY",
+            6: "ROTZ",
         }
         vel_map = {
-            1: 'VELX',
-            2: 'VELY',
-            3: 'VELZ',
-            4: 'OMGX',
-            5: 'OMGY',
-            6: 'OMGZ',
+            1: "VELX",
+            2: "VELY",
+            3: "VELZ",
+            4: "OMGX",
+            5: "OMGY",
+            6: "OMGZ",
         }
         acc_map = {
-            1: 'ACCX',
-            2: 'ACCY',
-            3: 'ACCZ',
-            4: 'DMGX',
-            5: 'DMGY',
-            6: 'DMGZ',
+            1: "ACCX",
+            2: "ACCY",
+            3: "ACCZ",
+            4: "DMGX",
+            5: "DMGY",
+            6: "DMGZ",
         }
         amplitude = None
         fixed = False
-        connnector_motion_type = 'DISPLACEMENT'
+        connnector_motion_type = "DISPLACEMENT"
         if (
-            'Parameters' in connector_motion_data
-            and connector_motion_data['Parameters'] is not None
+            "Parameters" in connector_motion_data
+            and connector_motion_data["Parameters"] is not None
         ):
-            params = connector_motion_data['Parameters']
-            if 'OP' in params and params['OP'] == 'NEW' and self._fedele_added == False:
+            params = connector_motion_data["Parameters"]
+            if "OP" in params and params["OP"] == "NEW" and self._fedele_added == False:
                 self._fedele_added = True
                 connector_motion_commands += "DJDELE,ALL,ALL \n"
-            if 'AMPLITUDE' in params:
-                amplitude = params['AMPLITUDE']
-            if 'LOAD CASE' in params:
+            if "AMPLITUDE" in params:
+                amplitude = params["AMPLITUDE"]
+            if "LOAD CASE" in params:
                 self._logger.warning("Load Case in Connector Motion is not processed.")
-            if 'TYPE' in params:
-                connnector_motion_type = params['TYPE']
-            if 'FIXED' in params:
+            if "TYPE" in params:
+                connnector_motion_type = params["TYPE"]
+            if "FIXED" in params:
                 fixed = True
-        data_lines = connector_motion_data['Data']
+        data_lines = connector_motion_data["Data"]
         for data_line in data_lines:
             if len(data_line) == 0:
                 continue
-            dof = int(data_line['component_of_motion'])
+            dof = int(data_line["component_of_motion"])
             mag = 0
-            if 'magnitude' in data_line:
-                mag = float(data_line['magnitude'])
+            if "magnitude" in data_line:
+                mag = float(data_line["magnitude"])
             if amplitude is not None:
                 modified_amplitude_name = "AMPL_CONNECTOR_MOTION"
                 applied_on = get_modified_component_name(
-                    str(data_line['element_number_or_set']), 'ELSET', self._simulation_data
+                    str(data_line["element_number_or_set"]),
+                    "ELSET",
+                    self._simulation_data,
                 )
                 ampl_processor = _AmplitudeProcessor(
                     self._model, self._simulation_data["Amplitude"]
@@ -2743,23 +2889,25 @@ class _ConnectorMotionProcessor:
                     step_end_time=self._step_end_time,
                     scale_factor=mag,
                 )
-            if data_line['element_number_or_set'].isnumeric() == False:
+            if data_line["element_number_or_set"].isnumeric() == False:
                 dls = get_modified_component_name(
-                    data_line['element_number_or_set'], 'ELSET', self._simulation_data
+                    data_line["element_number_or_set"], "ELSET", self._simulation_data
                 )
                 connector_motion_commands += f"CMSEL, S, {dls}, ELEM\n"
                 connector_motion_commands += f"ELEM_NUM = ELNEXT(0)\n"
                 connector_motion_commands += f"DJ, ELEM_NUM, "
             else:
                 cmname = get_modified_component_name(
-                    str(data_line['element_number_or_set']), 'ELSET', self._simulation_data
+                    str(data_line["element_number_or_set"]),
+                    "ELSET",
+                    self._simulation_data,
                 )
                 connector_motion_commands += f"DJ, {cmname}, "
-            if connnector_motion_type == 'DISPLACEMENT':
+            if connnector_motion_type == "DISPLACEMENT":
                 connector_motion_commands += f"{dof_map[dof]}, "
-            elif connnector_motion_type == 'VELOCITY':
+            elif connnector_motion_type == "VELOCITY":
                 connector_motion_commands += f"{vel_map[dof]}, "
-            elif connnector_motion_type == 'ACCELERATION':
+            elif connnector_motion_type == "ACCELERATION":
                 connector_motion_commands += f"{acc_map[dof]}, "
             if fixed:
                 connector_motion_commands += f"%_FIX%"
@@ -2776,21 +2924,21 @@ class _ConnectorMotionProcessor:
 
 class _BaseMotionProcessor:
     __slots__ = (
-        '_simulation_data',
-        '_modal_load_vectors',
-        '_step_MSUP',
-        '_base_motions_data',
-        '_step_start_time',
-        '_step_end_time',
-        '_fedele_added',
-        '_load_vestors_in_current_step',
-        '_ampl_commands',
-        '_model',
-        '_use_LMM_as_applicable',
-        '_base_id_mapping',
-        '_is_relative',
-        '_base_motion_counter',
-        '_logger',
+        "_simulation_data",
+        "_modal_load_vectors",
+        "_step_MSUP",
+        "_base_motions_data",
+        "_step_start_time",
+        "_step_end_time",
+        "_fedele_added",
+        "_load_vestors_in_current_step",
+        "_ampl_commands",
+        "_model",
+        "_use_LMM_as_applicable",
+        "_base_id_mapping",
+        "_is_relative",
+        "_base_motion_counter",
+        "_logger",
     )
 
     def __init__(
@@ -2814,7 +2962,7 @@ class _BaseMotionProcessor:
         self._step_end_time = step_end_time
         self._fedele_added = False
         self._load_vestors_in_current_step = []
-        self._ampl_commands = ''
+        self._ampl_commands = ""
         self._model = model
         self._use_LMM_as_applicable = use_LMM_as_applicable
         self._is_relative = is_relative
@@ -2827,7 +2975,7 @@ class _BaseMotionProcessor:
 
     def get_all_base_motion_commands(self):
         base_motions_data = self._base_motions_data
-        base_motion_commands = ''
+        base_motion_commands = ""
         for base_motion_data in base_motions_data:
             base_motion_commands += self._get_commands(base_motion_data)
         return base_motion_commands
@@ -2836,57 +2984,62 @@ class _BaseMotionProcessor:
         pass
 
     def _get_commands(self, base_motion_data):
-        base_motion_commands = ''
-        base_motion_lv_scale_commands = ''
+        base_motion_commands = ""
+        base_motion_lv_scale_commands = ""
         fval_dof_map = {
-            1: 'FX',
-            2: 'FY',
-            3: 'FZ',
-            4: 'MX',
-            5: 'MY',
-            6: 'MZ',
+            1: "FX",
+            2: "FY",
+            3: "FZ",
+            4: "MX",
+            5: "MY",
+            6: "MZ",
         }
         dval_dof_map = {
-            1: 'UX',
-            2: 'UY',
-            3: 'UZ',
-            4: 'ROTX',
-            5: 'ROTY',
-            6: 'ROTZ',
+            1: "UX",
+            2: "UY",
+            3: "UZ",
+            4: "ROTX",
+            5: "ROTY",
+            6: "ROTZ",
         }
         amplitude = None
         dof = 0
         scale = 1.0
-        base_name = ''
-        base_motion_type = 'ACCELERATION'
+        base_name = ""
+        base_motion_type = "ACCELERATION"
         real = True
-        if 'Parameters' in base_motion_data and base_motion_data['Parameters'] is not None:
-            params = base_motion_data['Parameters']
-            if 'AMPLITUDE' in params:
-                amplitude = params['AMPLITUDE']
+        if (
+            "Parameters" in base_motion_data
+            and base_motion_data["Parameters"] is not None
+        ):
+            params = base_motion_data["Parameters"]
+            if "AMPLITUDE" in params:
+                amplitude = params["AMPLITUDE"]
             else:
                 self._logger.warning(
                     f"Warning: Base Motion is not processed for current analysis type."
                 )
                 return base_motion_commands
-            if 'LOAD CASE' in params:
+            if "LOAD CASE" in params:
                 self._logger.warning("Load Case in base Motion is not processed.")
-            if 'TYPE' in params:
-                base_motion_type = params['TYPE']
-            if 'DOF' in params:
-                dof = int(params['DOF'])
-            if 'SCALE' in params:
-                scale = float(params['SCALE'])
-            if 'BASE NAME' in params:
-                base_name = params['BASE NAME']
-            if 'IMAGINARY' in params:
+            if "TYPE" in params:
+                base_motion_type = params["TYPE"]
+            if "DOF" in params:
+                dof = int(params["DOF"])
+            if "SCALE" in params:
+                scale = float(params["SCALE"])
+            if "BASE NAME" in params:
+                base_name = params["BASE NAME"]
+            if "IMAGINARY" in params:
                 real = False
 
         # Processing the Base Motion
         if amplitude is not None:
             modified_amplitude_name = "AMPL_BASE_MOTION_" + base_motion_type
             applied_on = base_name
-            ampl_processor = _AmplitudeProcessor(self._model, self._simulation_data["Amplitude"])
+            ampl_processor = _AmplitudeProcessor(
+                self._model, self._simulation_data["Amplitude"]
+            )
             ampl_commands = ampl_processor.get_mapdl_commands_for_amplitude(
                 amplitude,
                 modified_amplitude_name,
@@ -2899,41 +3052,43 @@ class _BaseMotionProcessor:
         man = modified_amplitude_name
         ac = _AmplitudeProcessor._amplitude_count
 
-        lab = 'ACC'
-        if base_motion_type == 'DISPLACEMENT':
-            lab = 'U'
-        elif base_motion_type == 'VELOCITY':
-            lab = 'VEL'
+        lab = "ACC"
+        if base_motion_type == "DISPLACEMENT":
+            lab = "U"
+        elif base_motion_type == "VELOCITY":
+            lab = "VEL"
 
         temp_count = 0
         lists_bc_base = None
 
         for key, val in self._base_id_mapping.items():
             if not base_name:
-                if val[0]['BaseName'] is None:
+                if val[0]["BaseName"] is None:
                     temp_count += 1
                     if temp_count == self._base_motion_counter:
                         lists_bc_base = self._base_id_mapping[key]
                         self._base_motion_counter += 1
                         break
             else:
-                if val[0]['BaseName'] == base_name:
+                if val[0]["BaseName"] == base_name:
                     lists_bc_base = self._base_id_mapping[key]
                     break
 
         if lists_bc_base is not None:
             if not base_name:
-                if lab == 'VEL':
+                if lab == "VEL":
                     for i, list_bcs in enumerate(lists_bc_base):
                         if dval_dof_map[dof] in list_bcs:
                             self._logger.warning(
                                 f"Base motion of type 'Velocity' is not Processed."
                             )
-                        self._base_id_mapping[key][i]['BaseMotionType'] = lab
+                        self._base_id_mapping[key][i]["BaseMotionType"] = lab
                 else:
                     for i, list_bcs in enumerate(lists_bc_base):
                         if dval_dof_map[dof] in list_bcs:
-                            base_motion_commands += f"DVAL, {list_bcs[dval_dof_map[dof]]}, {lab}, "
+                            base_motion_commands += (
+                                f"DVAL, {list_bcs[dval_dof_map[dof]]}, {lab}, "
+                            )
                             if real:
                                 base_motion_commands += f"%{man}_{ac}%, "
                             else:
@@ -2941,34 +3096,41 @@ class _BaseMotionProcessor:
                             if self._is_relative:
                                 base_motion_commands += f", OFF"
 
-                        self._base_id_mapping[key][i]['BaseMotionType'] = lab
+                        self._base_id_mapping[key][i]["BaseMotionType"] = lab
                 self._base_motion_counter += 1
             else:
-                if self._use_LMM_as_applicable or lab == 'VEL':
+                if self._use_LMM_as_applicable or lab == "VEL":
                     for i, list_bcs in enumerate(lists_bc_base):
                         if dval_dof_map[dof] in list_bcs:
                             self._logger.warning(
                                 f"Base motion on {base_name} is not Translated to "
                                 f"LMM method in Ansys"
                             )
-                        self._base_id_mapping[key][i]['BaseMotionType'] = lab
+                        self._base_id_mapping[key][i]["BaseMotionType"] = lab
                 else:
                     for i, list_bcs in enumerate(lists_bc_base):
                         if dval_dof_map[dof] in list_bcs:
-                            base_motion_commands += f"DVAL, {list_bcs[dval_dof_map[dof]]}, {lab}, "
+                            base_motion_commands += (
+                                f"DVAL, {list_bcs[dval_dof_map[dof]]}, {lab}, "
+                            )
                             if real:
                                 base_motion_commands += f"%{man}_{ac}%, "
                             else:
                                 base_motion_commands += f", %{man}_{ac}% "
                             if self._is_relative:
                                 base_motion_commands += f", OFF"
-                        self._base_id_mapping[key][i]['BaseMotionType'] = lab
+                        self._base_id_mapping[key][i]["BaseMotionType"] = lab
         base_motion_commands += f"\n"
         return base_motion_commands
 
 
 class _GeneralContactProcessing:
-    __slots__ = ('_general_contact_data', '_surface_interaction_data', '_model', '_logger')
+    __slots__ = (
+        "_general_contact_data",
+        "_surface_interaction_data",
+        "_model",
+        "_logger",
+    )
 
     def __init__(self, model: prime.Model, cont_data, surf_interaction_data):
         self._general_contact_data = cont_data
@@ -2977,7 +3139,9 @@ class _GeneralContactProcessing:
         self._logger = model.python_logger
 
     def get_all_general_contact_commands(self):
-        gen_c_commands = "! --------------------- General Contact Commands ------------! \n"
+        gen_c_commands = (
+            "! --------------------- General Contact Commands ------------! \n"
+        )
         if type(self._general_contact_data) == dict:
             self._logger.info(self._general_contact_data)
             self._logger.info("dict")
@@ -3002,35 +3166,40 @@ class _GeneralContactProcessing:
             self._logger.warning(
                 f"Argument on *CONTACT is not processed, please check the definitions"
             )
-        if "ContactPropertyAssignment" in data and data["ContactPropertyAssignment"] is not None:
+        if (
+            "ContactPropertyAssignment" in data
+            and data["ContactPropertyAssignment"] is not None
+        ):
             prop_assign = data["ContactPropertyAssignment"]
-            if 'Data' in prop_assign and prop_assign['Data']:
-                prop_data = prop_assign['Data'][0]
-                if 'surface1' in prop_data or 'surface2' in prop_data:
+            if "Data" in prop_assign and prop_assign["Data"]:
+                prop_data = prop_assign["Data"][0]
+                if "surface1" in prop_data or "surface2" in prop_data:
                     self._logger.warning(
                         "the surfaces on CONTACT PROPERTY ASSIGNMENT are not processed"
                     )
-                if 'surface_interaction' in prop_data:
+                if "surface_interaction" in prop_data:
                     surf_interaction_processor = _SurfaceInteractionProcessing(
                         self._model, self._surface_interaction_data
                     )
-                    fric = surf_interaction_processor._get_friction_value_for_interaction(
-                        prop_data['surface_interaction']
+                    fric = (
+                        surf_interaction_processor._get_friction_value_for_interaction(
+                            prop_data["surface_interaction"]
+                        )
                     )
                     mapdl_commands += f"{fric}\n"
         mapdl_commands += "\n"
         mapdl_commands += "! NUMCMP,ELEM\n"
         mapdl_commands += "! NUMCMP,NODE\n"
-        mapdl_commands_exclude = ''
+        mapdl_commands_exclude = ""
         if "ContactExclusions" in data and data["ContactExclusions"] is not None:
             exclude = data["ContactExclusions"]
-            if 'Data' in exclude and exclude['Data']:
+            if "Data" in exclude and exclude["Data"]:
                 mapdl_commands_exclude += "ESEL, NONE\n"
-                ex_data = exclude['Data']
+                ex_data = exclude["Data"]
                 for d in ex_data:
-                    if 'surface1' in d:
+                    if "surface1" in d:
                         mapdl_commands_exclude += f"ESEL, A, {d['surface1']}\n"
-                    if 'surface2' in d:
+                    if "surface2" in d:
                         mapdl_commands_exclude += f"ESEL, A, {d['surface2']}\n"
                 mapdl_commands_exclude += "CM, GEN_C_EXCLUDE, ELEM\n"
                 mapdl_commands_exclude += "\n"
@@ -3043,16 +3212,16 @@ class _GeneralContactProcessing:
                 mapdl_commands_include += f"ESEL, A, ENAME, ,181\n"
                 mapdl_commands_include += f"ESEL, A, ENAME, ,185\n"
             else:
-                if 'Data' in include and include['Data']:
+                if "Data" in include and include["Data"]:
                     mapdl_commands_include += "ESEL, NONE\n"
-                    in_data = include['Data']
+                    in_data = include["Data"]
                     for d in in_data:
-                        if 'surface1' in d:
+                        if "surface1" in d:
                             mapdl_commands_include += f"ESEL, A, {d['surface1']}\n"
                         else:
                             mapdl_commands_include += f"ESEL, A, ENAME, ,181\n"
                             mapdl_commands_include += f"ESEL, A, ENAME, ,185\n"
-                        if 'surface2' in d:
+                        if "surface2" in d:
                             mapdl_commands_include += f"ESEL, A, {d['surface2']}\n"
         mapdl_commands += mapdl_commands_include
         if mapdl_commands_exclude:
@@ -3072,7 +3241,7 @@ class _GeneralContactProcessing:
 
 
 class _SurfaceInteractionProcessing:
-    __slots__ = ('_surface_interaction', '_model', '_logger')
+    __slots__ = ("_surface_interaction", "_model", "_logger")
 
     def __init__(self, model: prime.Model, data):
         self._surface_interaction = data
@@ -3093,7 +3262,7 @@ class _SurfaceInteractionProcessing:
 
 
 class _MonitorProcessor:
-    __slots__ = ('_simulation_data', '_monitor_data', '_model', '_logger')
+    __slots__ = ("_simulation_data", "_monitor_data", "_model", "_logger")
 
     def __init__(self, model: prime.Model, data, sim_data=None):
         self._monitor_data = data
@@ -3104,25 +3273,25 @@ class _MonitorProcessor:
     def get_monitor_commands(self):
         monitor_commands = ""
         dof_map = {
-            1: 'UX',
-            2: 'UY',
-            3: 'UZ',
-            4: 'ROTX',
-            5: 'ROTY',
-            6: 'ROTZ',
+            1: "UX",
+            2: "UY",
+            3: "UZ",
+            4: "ROTX",
+            5: "ROTY",
+            6: "ROTZ",
         }
         counter = 0
         for monitor_data in self._monitor_data:
-            params = monitor_data['Parameters']
+            params = monitor_data["Parameters"]
             if params is not None:
                 dof = None
                 node = None
-                if 'FREQUENCY' in params:
-                    self._logger.warning('FREQUENCY on *MONITOR is not processed.')
-                if 'DOF' in params:
-                    dof = int(params['DOF'])
-                if 'NODE' in params:
-                    node = params['NODE']
+                if "FREQUENCY" in params:
+                    self._logger.warning("FREQUENCY on *MONITOR is not processed.")
+                if "DOF" in params:
+                    dof = int(params["DOF"])
+                if "NODE" in params:
+                    node = params["NODE"]
                 if dof is None or node is None:
                     self._logger.warning(
                         f"NODE/DOF is not provided on *MONITOR. "
@@ -3142,18 +3311,20 @@ class _MonitorProcessor:
                     if node.isnumeric():
                         str_node = node
                     else:
-                        cmname = get_modified_component_name(node, 'NSET', self._simulation_data)
+                        cmname = get_modified_component_name(
+                            node, "NSET", self._simulation_data
+                        )
                         monitor_commands += f"CMSEL,S,{cmname},NODE\n"
                         monitor_commands += f"node_id = NDNEXT(0)\n"
                         monitor_commands += f"ALLSEL\n"
-                        str_node = 'node_id'
+                        str_node = "node_id"
                     counter += 1
                     monitor_commands += f"MONITOR,{counter},{str_node},{str_dof}\n"
         return monitor_commands
 
 
 class _GlobalDampingProcessing:
-    __slots__ = ('_global_damping_data', '_model', '_logger')
+    __slots__ = ("_global_damping_data", "_model", "_logger")
 
     def __init__(self, model: prime.Model, data):
         self._global_damping_data = data
@@ -3162,21 +3333,21 @@ class _GlobalDampingProcessing:
 
     def get_global_damping_commands(self, analysis, msup=False):
         damping_commands = ""
-        params = self._global_damping_data[0]['Parameters']
-        filed = 'ALL'
+        params = self._global_damping_data[0]["Parameters"]
+        filed = "ALL"
         alpha = 0.0
         beta = 0.0
         structural = 0.0
-        if 'FIELD' in params:
-            field = params['FIELD']
-        if 'ALPHA' in params:
-            alpha = float(params['ALPHA'])
-        if 'BETA' in params:
-            beta = float(params['BETA'])
-        if 'STRUCTURAL' in params:
-            structural = float(params['STRUCTURAL'])
-        if filed == 'ACOUSTIC':
-            self._logger.warning('Global damping under STEP is not processed.')
+        if "FIELD" in params:
+            field = params["FIELD"]
+        if "ALPHA" in params:
+            alpha = float(params["ALPHA"])
+        if "BETA" in params:
+            beta = float(params["BETA"])
+        if "STRUCTURAL" in params:
+            structural = float(params["STRUCTURAL"])
+        if filed == "ACOUSTIC":
+            self._logger.warning("Global damping under STEP is not processed.")
             return damping_commands
 
         if alpha != 0.0:
@@ -3185,51 +3356,56 @@ class _GlobalDampingProcessing:
             damping_commands += f"BETAD, {beta}\n"
         if structural != 0.0:
             if analysis == "MODAL DYNAMIC":
-                damping_commands += f"DMPRAT, {structural/2}\n"
+                damping_commands += f"DMPRAT, {structural / 2}\n"
             elif analysis == "STEADY STATE DYNAMICS":
                 damping_commands += f"DMPSTR, {structural}\n"
             elif analysis == "FREQUENCY":
                 damping_commands += f"DMPSTR, {structural}\n"
             else:
                 self._logger.warning(
-                    'Global damping under STEP is not processed. Please check the results'
+                    "Global damping under STEP is not processed. Please check the results"
                 )
         return damping_commands, structural
 
 
 class _StepProcessor:
     __slots__ = (
-        '_simulation_data',
-        '_steps_data',
-        '_curr_step',
-        '_analysis_sequence',
-        '_assign_analysis',
-        '_time',
-        '_step_counter',
-        '_ninterval_counter',
-        '_previous_analysis',
-        '_step_start_time',
-        '_step_end_time',
-        '_previous_modal_resvec',
-        '_step_MSUP',
-        '_nrm_key',
-        '_modal_load_vectors',
-        '_ninterval_mapdl_commands',
-        '_cload_ampl_commands',
-        '_base_motion_ampl_commands',
-        '_boundary_ampl_commands',
-        '_connector_motion_ampl_commands',
-        '_model',
-        '_logger',
-        '_model_application',
-        '_transient_output_controls',
-        '_global_structural_damping_value',
-        '_use_LMM_as_applicable',
-        '_base_id_mapping',
+        "_simulation_data",
+        "_steps_data",
+        "_curr_step",
+        "_analysis_sequence",
+        "_assign_analysis",
+        "_time",
+        "_step_counter",
+        "_ninterval_counter",
+        "_previous_analysis",
+        "_step_start_time",
+        "_step_end_time",
+        "_previous_modal_resvec",
+        "_step_MSUP",
+        "_nrm_key",
+        "_modal_load_vectors",
+        "_ninterval_mapdl_commands",
+        "_cload_ampl_commands",
+        "_base_motion_ampl_commands",
+        "_boundary_ampl_commands",
+        "_connector_motion_ampl_commands",
+        "_model",
+        "_logger",
+        "_model_application",
+        "_transient_output_controls",
+        "_global_structural_damping_value",
+        "_use_LMM_as_applicable",
+        "_base_id_mapping",
     )
 
     def __init__(
-        self, model: prime.Model, data, sim_data, model_application, use_LMM_as_applicable=False
+        self,
+        model: prime.Model,
+        data,
+        sim_data,
+        model_application,
+        use_LMM_as_applicable=False,
     ):
         self._simulation_data = sim_data
         self._steps_data = data
@@ -3246,11 +3422,11 @@ class _StepProcessor:
         self._step_MSUP = False
         self._nrm_key = None
         self._modal_load_vectors = {}
-        self._ninterval_mapdl_commands = ''
-        self._cload_ampl_commands = ''
-        self._base_motion_ampl_commands = ''
-        self._boundary_ampl_commands = ''
-        self._connector_motion_ampl_commands = ''
+        self._ninterval_mapdl_commands = ""
+        self._cload_ampl_commands = ""
+        self._base_motion_ampl_commands = ""
+        self._boundary_ampl_commands = ""
+        self._connector_motion_ampl_commands = ""
         self._model = model
         self._logger = model.python_logger
         self._model_application = model_application
@@ -3277,39 +3453,39 @@ class _StepProcessor:
         self._analysis_sequence.append(None)
         for step in steps:
             if "Static" in step:
-                analysis_type = 'STATIC'
+                analysis_type = "STATIC"
             elif "ModalDynamic" in step:
-                analysis_type = 'MODAL DYNAMIC'
+                analysis_type = "MODAL DYNAMIC"
             elif "Dynamic" in step:
-                analysis_type = 'DYNAMIC'
+                analysis_type = "DYNAMIC"
             elif "Frequency" in step:
-                analysis_type = 'FREQUENCY'
+                analysis_type = "FREQUENCY"
             elif "SteadyStateDynamics" in step:
-                analysis_type = 'STEADY STATE DYNAMICS'
+                analysis_type = "STEADY STATE DYNAMICS"
             else:
                 self._logger.warning("Warning: analysis type not recognized")
             self._analysis_sequence.append(analysis_type)
 
     def get_static_analysis_data(self, static_data):
         """Get static analysis details."""
-        static_analysis_commands = ''
+        static_analysis_commands = ""
         if type(static_data) == list:
             static_data = static_data[0]
         time_increment = 1.0
         time_period = 1.0
         min_time_increment = 1e-05
         max_time_increment = 1.0
-        if 'Data' in static_data and static_data['Data'] is not None:
-            data = static_data['Data']
-            if 'time_increment' in data:
-                time_increment = float(data['time_increment'])
-            if 'time_period' in data:
-                time_period = float(data['time_period'])
+        if "Data" in static_data and static_data["Data"] is not None:
+            data = static_data["Data"]
+            if "time_increment" in data:
+                time_increment = float(data["time_increment"])
+            if "time_period" in data:
+                time_period = float(data["time_period"])
                 min_time_increment = time_period * 1e-05
-            if 'min_time_increment' in data:
-                min_time_increment = float(data['min_time_increment'])
-            if 'max_time_increment' in data:
-                max_time_increment = float(data['max_time_increment'])
+            if "min_time_increment" in data:
+                min_time_increment = float(data["min_time_increment"])
+            if "max_time_increment" in data:
+                max_time_increment = float(data["max_time_increment"])
             else:
                 max_time_increment = time_period
         max_output_intervals = self.get_maximum_output_interval()
@@ -3328,33 +3504,31 @@ class _StepProcessor:
         self._time += time_period
         self._step_end_time = self._time
         static_analysis_commands += (
-            f'! ------------------------------- '
-            f'STEP: {self._step_counter} -----------------------\n'
+            f"! ------------------------------- "
+            f"STEP: {self._step_counter} -----------------------\n"
         )
         if self._previous_analysis != "STATIC":
             if self._model_application == prime.CdbAnalysisType.OUTERPANELSTIFFNESS:
                 use_quasi = os.getenv("APDL_QUASI")
                 if use_quasi == "1":
-                    static_analysis_commands += 'ANTYPE, TRANS \n'
-                    static_analysis_commands += 'TIMINT, ON\n'
-                    static_analysis_commands += 'TINTP, QUASI\n'
-                    static_analysis_commands += 'NROPT, FULL\n'
+                    static_analysis_commands += "ANTYPE, TRANS \n"
+                    static_analysis_commands += "TIMINT, ON\n"
+                    static_analysis_commands += "TINTP, QUASI\n"
+                    static_analysis_commands += "NROPT, FULL\n"
                 else:
-                    static_analysis_commands += 'ANTYPE, STATIC\n'
+                    static_analysis_commands += "ANTYPE, STATIC\n"
             else:
-                static_analysis_commands += 'ANTYPE, STATIC\n'
-        static_analysis_commands += f'TIME,{self._time}\n'
-        static_analysis_commands += f'AUTOTS,ON\n'
-        static_analysis_commands += (
-            f'DELTIM, {time_increment}, {min_time_increment}, {max_time_increment}, , FORCE\n'
-        )
-        static_analysis_commands += '\n'
+                static_analysis_commands += "ANTYPE, STATIC\n"
+        static_analysis_commands += f"TIME,{self._time}\n"
+        static_analysis_commands += f"AUTOTS,ON\n"
+        static_analysis_commands += f"DELTIM, {time_increment}, {min_time_increment}, {max_time_increment}, , FORCE\n"
+        static_analysis_commands += "\n"
         self._previous_analysis = "STATIC"
         return static_analysis_commands
 
     def get_modal_dynamic_analysis_data(self, dynamic_data):
         """Get modal dynamic analysis details."""
-        dynamic_analysis_commands = ''
+        dynamic_analysis_commands = ""
         self._step_MSUP = True
         if type(dynamic_data) == list:
             dynamic_data = dynamic_data[0]
@@ -3364,92 +3538,92 @@ class _StepProcessor:
         max_time_increment = 1.0
         res_modes = None
         if self._previous_modal_resvec:
-            res_modes = 'ON'
-        transient_integration_param = ''
-        if 'Data' in dynamic_data and dynamic_data['Data'] is not None:
-            data = dynamic_data['Data']
-            if 'time_increment' in data:
-                time_increment = float(data['time_increment'])
-                min_time_increment = float(data['time_increment'])
-                max_time_increment = float(data['time_increment'])
-            if 'time_period' in data:
-                time_period = float(data['time_period'])
+            res_modes = "ON"
+        transient_integration_param = ""
+        if "Data" in dynamic_data and dynamic_data["Data"] is not None:
+            data = dynamic_data["Data"]
+            if "time_increment" in data:
+                time_increment = float(data["time_increment"])
+                min_time_increment = float(data["time_increment"])
+                max_time_increment = float(data["time_increment"])
+            if "time_period" in data:
+                time_period = float(data["time_period"])
         if time_increment > max_time_increment:
             time_increment = max_time_increment
-        if 'Parameters' in dynamic_data:
-            data = dynamic_data['Parameters']
+        if "Parameters" in dynamic_data:
+            data = dynamic_data["Parameters"]
             if data:
-                if 'APPLICATION' in data:
-                    if data['APPLICATION'] == 'QUASI-STATIC':
-                        transient_integration_param = 'QUASI'
+                if "APPLICATION" in data:
+                    if data["APPLICATION"] == "QUASI-STATIC":
+                        transient_integration_param = "QUASI"
         self._step_start_time = self._time
         self._time += time_period
         self._step_end_time = self._time
-        dynamic_analysis_commands += (
-            f'! ---------------------------- STEP: {self._step_counter} -----------------------\n'
-        )
+        dynamic_analysis_commands += f"! ---------------------------- STEP: {self._step_counter} -----------------------\n"
         if self._previous_analysis == "STATIC":
-            dynamic_analysis_commands += 'TINTP, 0.41421,,,,,,-1\n'
-            dynamic_analysis_commands += '\n'
-            dynamic_analysis_commands += 'SOLOPT,STOT,FORCE,HHT\n'
-            dynamic_analysis_commands += '\n'
-            dynamic_analysis_commands += 'IC,ALL,VELX,0,,,,LSIC\n'
-            dynamic_analysis_commands += 'IC,ALL,VELY,0,,,,LSIC\n'
-            dynamic_analysis_commands += 'IC,ALL,VELZ,0,,,,LSIC\n'
-            dynamic_analysis_commands += 'IC,ALL,OMGX,0,,,,LSIC\n'
-            dynamic_analysis_commands += 'IC,ALL,OMGY,0,,,,LSIC\n'
-            dynamic_analysis_commands += 'IC,ALL,OMGZ,0,,,,LSIC\n'
-            dynamic_analysis_commands += 'IC,ALL,ACCX,0,,,,LSIC\n'
-            dynamic_analysis_commands += 'IC,ALL,ACCY,0,,,,LSIC\n'
-            dynamic_analysis_commands += 'IC,ALL,ACCZ,0,,,,LSIC\n'
-            dynamic_analysis_commands += 'IC,ALL,DMGX,0,,,,LSIC\n'
-            dynamic_analysis_commands += 'IC,ALL,DMGY,0,,,,LSIC\n'
-            dynamic_analysis_commands += 'IC,ALL,DMGZ,0,,,,LSIC\n'
-            dynamic_analysis_commands += '\n'
-            dynamic_analysis_commands += 'NROPT,FULL\n'
-            dynamic_analysis_commands += '\n'
+            dynamic_analysis_commands += "TINTP, 0.41421,,,,,,-1\n"
+            dynamic_analysis_commands += "\n"
+            dynamic_analysis_commands += "SOLOPT,STOT,FORCE,HHT\n"
+            dynamic_analysis_commands += "\n"
+            dynamic_analysis_commands += "IC,ALL,VELX,0,,,,LSIC\n"
+            dynamic_analysis_commands += "IC,ALL,VELY,0,,,,LSIC\n"
+            dynamic_analysis_commands += "IC,ALL,VELZ,0,,,,LSIC\n"
+            dynamic_analysis_commands += "IC,ALL,OMGX,0,,,,LSIC\n"
+            dynamic_analysis_commands += "IC,ALL,OMGY,0,,,,LSIC\n"
+            dynamic_analysis_commands += "IC,ALL,OMGZ,0,,,,LSIC\n"
+            dynamic_analysis_commands += "IC,ALL,ACCX,0,,,,LSIC\n"
+            dynamic_analysis_commands += "IC,ALL,ACCY,0,,,,LSIC\n"
+            dynamic_analysis_commands += "IC,ALL,ACCZ,0,,,,LSIC\n"
+            dynamic_analysis_commands += "IC,ALL,DMGX,0,,,,LSIC\n"
+            dynamic_analysis_commands += "IC,ALL,DMGY,0,,,,LSIC\n"
+            dynamic_analysis_commands += "IC,ALL,DMGZ,0,,,,LSIC\n"
+            dynamic_analysis_commands += "\n"
+            dynamic_analysis_commands += "NROPT,FULL\n"
+            dynamic_analysis_commands += "\n"
         if self._previous_analysis == "FREQUENCY":
-            dynamic_analysis_commands += f'FINISH\n'
-            dynamic_analysis_commands += f'\n'
+            dynamic_analysis_commands += f"FINISH\n"
+            dynamic_analysis_commands += f"\n"
             dynamic_analysis_commands += (
-                f'/ASSIGN, rst, step_{self._step_counter}_transient_analysis, rst\n'
+                f"/ASSIGN, rst, step_{self._step_counter}_transient_analysis, rst\n"
             )
-            self._assign_analysis.append(f'step_{self._step_counter}_transient_analysis')
-            dynamic_analysis_commands += f'/SOLU\n'
+            self._assign_analysis.append(
+                f"step_{self._step_counter}_transient_analysis"
+            )
+            dynamic_analysis_commands += f"/SOLU\n"
         if self._previous_analysis != "MODAL DYNAMIC":
-            dynamic_analysis_commands += f'ANTYPE, TRANS \n'
-            dynamic_analysis_commands += f'TRNOPT, '
+            dynamic_analysis_commands += f"ANTYPE, TRANS \n"
+            dynamic_analysis_commands += f"TRNOPT, "
             if "FREQUENCY" in self._analysis_sequence[: self._step_counter]:
-                dynamic_analysis_commands += f'MSUP'
+                dynamic_analysis_commands += f"MSUP"
                 self._step_MSUP = True
                 has_modal_output, has_velocities = self.check_modal_output()
                 if has_modal_output:
-                    dynamic_analysis_commands += f' , , , , YES'
+                    dynamic_analysis_commands += f" , , , , YES"
                 if has_velocities:
-                    dynamic_analysis_commands += f' , , YES'
+                    dynamic_analysis_commands += f" , , YES"
             else:
-                dynamic_analysis_commands += f'FULL'
-            dynamic_analysis_commands += f'\n'
+                dynamic_analysis_commands += f"FULL"
+            dynamic_analysis_commands += f"\n"
         if transient_integration_param:
-            dynamic_analysis_commands += f'TINTP, {transient_integration_param}\n'
-        dynamic_analysis_commands += f'TIME, {self._time}\n'
+            dynamic_analysis_commands += f"TINTP, {transient_integration_param}\n"
+        dynamic_analysis_commands += f"TIME, {self._time}\n"
         dynamic_analysis_commands += (
-            f'DELTIM, {time_increment}, {min_time_increment}, {max_time_increment}\n'
+            f"DELTIM, {time_increment}, {min_time_increment}, {max_time_increment}\n"
         )
-        dynamic_analysis_commands += f'\n'
+        dynamic_analysis_commands += f"\n"
         if res_modes:
-            dynamic_analysis_commands += f'RESVEC, {res_modes}\n'
-        dynamic_analysis_commands += f'\n'
+            dynamic_analysis_commands += f"RESVEC, {res_modes}\n"
+        dynamic_analysis_commands += f"\n"
         self._previous_analysis = "MODAL DYNAMIC"
         if self.is_base_motion_present():
             dynamic_analysis_commands = dynamic_analysis_commands.replace(
-                'RESVEC, ON', '! RESVEC, ON'
+                "RESVEC, ON", "! RESVEC, ON"
             )
         return dynamic_analysis_commands
 
     def get_dynamic_analysis_data(self, dynamic_data):
         """Get dynamic analysis details."""
-        dynamic_analysis_commands = ''
+        dynamic_analysis_commands = ""
         self._step_MSUP = False
         if type(dynamic_data) == list:
             dynamic_data = dynamic_data[0]
@@ -3459,19 +3633,19 @@ class _StepProcessor:
         max_time_increment = 1.0
         res_modes = None
         if self._previous_modal_resvec:
-            res_modes = 'ON'
-        transient_integration_param = ''
-        if 'Data' in dynamic_data and dynamic_data['Data'] is not None:
-            data = dynamic_data['Data']
-            if 'time_increment' in data:
-                time_increment = float(data['time_increment'])
-            if 'time_period' in data:
-                time_period = float(data['time_period'])
+            res_modes = "ON"
+        transient_integration_param = ""
+        if "Data" in dynamic_data and dynamic_data["Data"] is not None:
+            data = dynamic_data["Data"]
+            if "time_increment" in data:
+                time_increment = float(data["time_increment"])
+            if "time_period" in data:
+                time_period = float(data["time_period"])
                 min_time_increment = time_period * 1e-5
-            if 'min_time_increment' in data:
-                min_time_increment = float(data['min_time_increment'])
-            if 'max_time_increment' in data:
-                max_time_increment = float(data['max_time_increment'])
+            if "min_time_increment" in data:
+                min_time_increment = float(data["min_time_increment"])
+            if "max_time_increment" in data:
+                max_time_increment = float(data["max_time_increment"])
             else:
                 max_time_increment = time_period
         max_output_intervals = self.get_maximum_output_interval()
@@ -3486,65 +3660,63 @@ class _StepProcessor:
             max_time_increment = time_interval_val
         if time_increment > max_time_increment:
             time_increment = max_time_increment
-        if 'Parameters' in dynamic_data:
-            data = dynamic_data['Parameters']
+        if "Parameters" in dynamic_data:
+            data = dynamic_data["Parameters"]
             if data:
-                if 'APPLICATION' in data:
-                    if data['APPLICATION'] == 'QUASI-STATIC':
-                        transient_integration_param = 'QUASI'
+                if "APPLICATION" in data:
+                    if data["APPLICATION"] == "QUASI-STATIC":
+                        transient_integration_param = "QUASI"
         self._step_start_time = self._time
         self._time += time_period
         self._step_end_time = self._time
-        dynamic_analysis_commands += (
-            f'! ------------------------- STEP: {self._step_counter} -----------------------\n'
-        )
+        dynamic_analysis_commands += f"! ------------------------- STEP: {self._step_counter} -----------------------\n"
         if self._previous_analysis == "STATIC":
-            dynamic_analysis_commands += 'TINTP, 0.41421,,,,,,-1\n'
-            dynamic_analysis_commands += '\n'
-            dynamic_analysis_commands += 'SOLOPT,STOT,FORCE,HHT\n'
-            dynamic_analysis_commands += '\n'
-            dynamic_analysis_commands += 'IC,ALL,VELX,0,,,,LSIC\n'
-            dynamic_analysis_commands += 'IC,ALL,VELY,0,,,,LSIC\n'
-            dynamic_analysis_commands += 'IC,ALL,VELZ,0,,,,LSIC\n'
-            dynamic_analysis_commands += 'IC,ALL,OMGX,0,,,,LSIC\n'
-            dynamic_analysis_commands += 'IC,ALL,OMGY,0,,,,LSIC\n'
-            dynamic_analysis_commands += 'IC,ALL,OMGZ,0,,,,LSIC\n'
-            dynamic_analysis_commands += 'IC,ALL,ACCX,0,,,,LSIC\n'
-            dynamic_analysis_commands += 'IC,ALL,ACCY,0,,,,LSIC\n'
-            dynamic_analysis_commands += 'IC,ALL,ACCZ,0,,,,LSIC\n'
-            dynamic_analysis_commands += 'IC,ALL,DMGX,0,,,,LSIC\n'
-            dynamic_analysis_commands += 'IC,ALL,DMGY,0,,,,LSIC\n'
-            dynamic_analysis_commands += 'IC,ALL,DMGZ,0,,,,LSIC\n'
-            dynamic_analysis_commands += '\n'
-            dynamic_analysis_commands += 'NROPT,FULL\n'
-            dynamic_analysis_commands += '\n'
+            dynamic_analysis_commands += "TINTP, 0.41421,,,,,,-1\n"
+            dynamic_analysis_commands += "\n"
+            dynamic_analysis_commands += "SOLOPT,STOT,FORCE,HHT\n"
+            dynamic_analysis_commands += "\n"
+            dynamic_analysis_commands += "IC,ALL,VELX,0,,,,LSIC\n"
+            dynamic_analysis_commands += "IC,ALL,VELY,0,,,,LSIC\n"
+            dynamic_analysis_commands += "IC,ALL,VELZ,0,,,,LSIC\n"
+            dynamic_analysis_commands += "IC,ALL,OMGX,0,,,,LSIC\n"
+            dynamic_analysis_commands += "IC,ALL,OMGY,0,,,,LSIC\n"
+            dynamic_analysis_commands += "IC,ALL,OMGZ,0,,,,LSIC\n"
+            dynamic_analysis_commands += "IC,ALL,ACCX,0,,,,LSIC\n"
+            dynamic_analysis_commands += "IC,ALL,ACCY,0,,,,LSIC\n"
+            dynamic_analysis_commands += "IC,ALL,ACCZ,0,,,,LSIC\n"
+            dynamic_analysis_commands += "IC,ALL,DMGX,0,,,,LSIC\n"
+            dynamic_analysis_commands += "IC,ALL,DMGY,0,,,,LSIC\n"
+            dynamic_analysis_commands += "IC,ALL,DMGZ,0,,,,LSIC\n"
+            dynamic_analysis_commands += "\n"
+            dynamic_analysis_commands += "NROPT,FULL\n"
+            dynamic_analysis_commands += "\n"
         if self._previous_analysis == "FREQUENCY":
-            dynamic_analysis_commands += f'FINISH\n'
-            dynamic_analysis_commands += f'\n'
+            dynamic_analysis_commands += f"FINISH\n"
+            dynamic_analysis_commands += f"\n"
             dynamic_analysis_commands += (
-                f'/ASSIGN, rst, step_{self._step_counter}_transient_analysis, rst\n'
+                f"/ASSIGN, rst, step_{self._step_counter}_transient_analysis, rst\n"
             )
-            self._assign_analysis.append(f'step_{self._step_counter}_transient_analysis')
-            dynamic_analysis_commands += f'/SOLU\n'
+            self._assign_analysis.append(
+                f"step_{self._step_counter}_transient_analysis"
+            )
+            dynamic_analysis_commands += f"/SOLU\n"
         if self._previous_analysis != "DYNAMIC" and self._previous_analysis != "STATIC":
-            dynamic_analysis_commands += f'ANTYPE, TRANS \n'
-            dynamic_analysis_commands += f'TRNOPT, '
+            dynamic_analysis_commands += f"ANTYPE, TRANS \n"
+            dynamic_analysis_commands += f"TRNOPT, "
             if "FREQUENCY" in self._analysis_sequence[: self._step_counter]:
-                dynamic_analysis_commands += f'MSUP\n'
+                dynamic_analysis_commands += f"MSUP\n"
                 self._step_MSUP = True
             else:
-                dynamic_analysis_commands += f'FULL\n'
+                dynamic_analysis_commands += f"FULL\n"
         if transient_integration_param:
-            dynamic_analysis_commands += f'TINTP, {transient_integration_param}\n'
-        dynamic_analysis_commands += f'TIME, {self._time}\n'
-        dynamic_analysis_commands += f'AUTOTS,ON\n'
-        dynamic_analysis_commands += (
-            f'DELTIM, {time_increment}, {min_time_increment}, {max_time_increment},, FORCE\n'
-        )
-        dynamic_analysis_commands += f'\n'
+            dynamic_analysis_commands += f"TINTP, {transient_integration_param}\n"
+        dynamic_analysis_commands += f"TIME, {self._time}\n"
+        dynamic_analysis_commands += f"AUTOTS,ON\n"
+        dynamic_analysis_commands += f"DELTIM, {time_increment}, {min_time_increment}, {max_time_increment},, FORCE\n"
+        dynamic_analysis_commands += f"\n"
         if res_modes:
-            dynamic_analysis_commands += f'RESVEC, {res_modes}\n'
-        dynamic_analysis_commands += f'\n'
+            dynamic_analysis_commands += f"RESVEC, {res_modes}\n"
+        dynamic_analysis_commands += f"\n"
         self._previous_analysis = "DYNAMIC"
         return dynamic_analysis_commands
 
@@ -3552,152 +3724,161 @@ class _StepProcessor:
         """Get frequency analysis details."""
         # This is to reset the counter of time when modal analysis is there.
         self._time = 0.0
-        frequency_analysis_commands = ''
+        frequency_analysis_commands = ""
         if type(frequency_data) == list:
             frequency_data = frequency_data[0]
         steady_state_dynamics_data = self._steps_data
-        modopt_method = 'LANB'
+        modopt_method = "LANB"
         nmodes = 1000
-        min_frequency = ''
-        max_frequency = ''
-        cpxmod = ''
-        nrm_key = 'OFF'
+        min_frequency = ""
+        max_frequency = ""
+        cpxmod = ""
+        nrm_key = "OFF"
         res_modes = None
-        data = frequency_data['Data'] if 'Data' in frequency_data else None
+        data = frequency_data["Data"] if "Data" in frequency_data else None
         if data is not None and isinstance(data, list):
             first_line = data[0]
         else:
             first_line = data
         if first_line is not None:
-            if 'num_eigenvalues' in first_line:
-                nmodes = int(first_line['num_eigenvalues'])
-            if 'min_frequency' in first_line:
-                min_frequency = float(first_line['min_frequency'])
-            if 'max_frequency' in first_line:
-                max_frequency = float(first_line['max_frequency'])
+            if "num_eigenvalues" in first_line:
+                nmodes = int(first_line["num_eigenvalues"])
+            if "min_frequency" in first_line:
+                min_frequency = float(first_line["min_frequency"])
+            if "max_frequency" in first_line:
+                max_frequency = float(first_line["max_frequency"])
         mn, mx = self.get_select_eigenmodes()
         if mx:
             max_frequency = mx
         if mn:
             min_frequency = mn
-        if 'Parameters' in frequency_data:
-            data = frequency_data['Parameters']
-            if data is not None and 'EIGENSOLVER' in data:
-                if data['EIGENSOLVER'] == 'SUBSPACE':
-                    modopt_method = 'SUBSP'
-            if data is not None and 'NORMALIZATION' in data:
-                if data['NORMALIZATION'] == 'MASS':
-                    nrm_key = 'OFF'
+        if "Parameters" in frequency_data:
+            data = frequency_data["Parameters"]
+            if data is not None and "EIGENSOLVER" in data:
+                if data["EIGENSOLVER"] == "SUBSPACE":
+                    modopt_method = "SUBSP"
+            if data is not None and "NORMALIZATION" in data:
+                if data["NORMALIZATION"] == "MASS":
+                    nrm_key = "OFF"
                 else:
-                    nrm_key = 'ON'
+                    nrm_key = "ON"
             else:
-                if data is not None and 'EIGENSOLVER' in data and data['EIGENSOLVER'] == 'AMS':
-                    nrm_key = 'OFF'
+                if (
+                    data is not None
+                    and "EIGENSOLVER" in data
+                    and data["EIGENSOLVER"] == "AMS"
+                ):
+                    nrm_key = "OFF"
                 else:
-                    nrm_key = 'ON'
-            if data is not None and 'RESIDUAL MODES' in data:
-                res_modes = 'ON'
-                self._previous_modal_resvec = 'ON'
+                    nrm_key = "ON"
+            if data is not None and "RESIDUAL MODES" in data:
+                res_modes = "ON"
+                self._previous_modal_resvec = "ON"
         if self._simulation_data is not None:
-            if "GlobalDamping" in self._curr_step and self._curr_step['GlobalDamping']:
-                modopt_method = 'QRDAMP'
+            if "GlobalDamping" in self._curr_step and self._curr_step["GlobalDamping"]:
+                modopt_method = "QRDAMP"
             if "ConnectorBehavior" in self._simulation_data:
-                all_conn_behavior = self._simulation_data['ConnectorBehavior']
+                all_conn_behavior = self._simulation_data["ConnectorBehavior"]
                 if all_conn_behavior:
                     for mat in all_conn_behavior:
                         conn_mat = all_conn_behavior[mat]
-                        if conn_mat and 'CONNECTOR DAMPING' in conn_mat:
-                            for conn_damp in conn_mat['CONNECTOR DAMPING']:
-                                if conn_damp and 'Parameters' in conn_damp:
+                        if conn_mat and "CONNECTOR DAMPING" in conn_mat:
+                            for conn_damp in conn_mat["CONNECTOR DAMPING"]:
+                                if conn_damp and "Parameters" in conn_damp:
                                     if (
-                                        "TYPE" in conn_damp['Parameters']
-                                        and conn_damp['Parameters']['TYPE'] == 'VISCOUS'
+                                        "TYPE" in conn_damp["Parameters"]
+                                        and conn_damp["Parameters"]["TYPE"] == "VISCOUS"
                                     ):
-                                        modopt_method = 'QRDAMP'
+                                        modopt_method = "QRDAMP"
                                         break
             if "Materials" in self._simulation_data:
-                all_mats = self._simulation_data['Materials']
+                all_mats = self._simulation_data["Materials"]
                 if all_mats:
                     for mat in all_mats:
                         _mat = all_mats[mat]
-                        if _mat and 'DAMPING' in _mat:
-                            if 'Parameters' in _mat['DAMPING']:
-                                if "ALPHA" in _mat['DAMPING']['Parameters']:
-                                    modopt_method = 'QRDAMP'
+                        if _mat and "DAMPING" in _mat:
+                            if "Parameters" in _mat["DAMPING"]:
+                                if "ALPHA" in _mat["DAMPING"]["Parameters"]:
+                                    modopt_method = "QRDAMP"
                                     break
             if "Mass" in self._simulation_data:
-                all_mass = self._simulation_data['Mass']
+                all_mass = self._simulation_data["Mass"]
                 if all_mass:
                     for m in all_mass:
                         _m = all_mass[m]
-                        if 'Parameters' in _m:
-                            if "ALPHA" in _m['Parameters']:
-                                modopt_method = 'QRDAMP'
+                        if "Parameters" in _m:
+                            if "ALPHA" in _m["Parameters"]:
+                                modopt_method = "QRDAMP"
                                 break
             if "RotaryInertia" in self._simulation_data:
-                all_mass = self._simulation_data['RotaryInertia']
+                all_mass = self._simulation_data["RotaryInertia"]
                 if all_mass:
                     for m in all_mass:
                         _m = all_mass[m]
-                        if 'Parameters' in _m:
-                            if "ALPHA" in _m['Parameters']:
-                                modopt_method = 'QRDAMP'
+                        if "Parameters" in _m:
+                            if "ALPHA" in _m["Parameters"]:
+                                modopt_method = "QRDAMP"
                                 break
-        frequency_analysis_commands += (
-            f'! -------------------------- STEP: {self._step_counter} -----------------------\n'
-        )
+        frequency_analysis_commands += f"! -------------------------- STEP: {self._step_counter} -----------------------\n"
         if self._previous_analysis == "STATIC":
-            frequency_analysis_commands += f'FINISH\n'
-            frequency_analysis_commands += f'\n'
+            frequency_analysis_commands += f"FINISH\n"
+            frequency_analysis_commands += f"\n"
             frequency_analysis_commands += (
-                f'/ASSIGN, rst, step_{self._step_counter}_modal_analysis, rst\n'
+                f"/ASSIGN, rst, step_{self._step_counter}_modal_analysis, rst\n"
             )
-            self._assign_analysis.append(f'step_{self._step_counter}_modal_analysis')
-            frequency_analysis_commands += f'/SOLU\n'
-        if self._previous_analysis != 'FREQUENCY':
-            frequency_analysis_commands += f'ANTYPE, MODAL\n'
+            self._assign_analysis.append(f"step_{self._step_counter}_modal_analysis")
+            frequency_analysis_commands += f"/SOLU\n"
+        if self._previous_analysis != "FREQUENCY":
+            frequency_analysis_commands += f"ANTYPE, MODAL\n"
         frequency_analysis_commands += (
-            f'MODOPT, {modopt_method}, {nmodes}, {min_frequency}, '
-            f'{max_frequency}, {cpxmod}, {nrm_key}\n'
+            f"MODOPT, {modopt_method}, {nmodes}, {min_frequency}, "
+            f"{max_frequency}, {cpxmod}, {nrm_key}\n"
         )
         if res_modes:
-            frequency_analysis_commands += f'RESVEC, {res_modes}\n'
+            frequency_analysis_commands += f"RESVEC, {res_modes}\n"
             if not (
-                ("Boundary" in self._curr_step and self._curr_step['Boundary'])
-                or ("Boundary" in self._simulation_data and self._simulation_data['Boundary'])
+                ("Boundary" in self._curr_step and self._curr_step["Boundary"])
+                or (
+                    "Boundary" in self._simulation_data
+                    and self._simulation_data["Boundary"]
+                )
             ):
                 if self._previous_analysis == "STATIC":
                     """No Assign Command is needed when AIRL, AUTO for Modal Analysis"""
-                    temp_frequency_analysis_commands = frequency_analysis_commands.split('\n')[5:]
+                    temp_frequency_analysis_commands = (
+                        frequency_analysis_commands.split("\n")[5:]
+                    )
                     temp_frequency_analysis_commands.insert(
                         0,
                         f"! --------------------------"
                         f" STEP: {self._step_counter} -----------------------\n",
                     )
-                    frequency_analysis_commands = '\n'.join(temp_frequency_analysis_commands)
+                    frequency_analysis_commands = "\n".join(
+                        temp_frequency_analysis_commands
+                    )
                     self._assign_analysis = self._assign_analysis[:-1]
-                    frequency_analysis_commands += '\n'
+                    frequency_analysis_commands += "\n"
 
-                frequency_analysis_commands += 'AIRL, AUTO\n'
+                frequency_analysis_commands += "AIRL, AUTO\n"
         if (
             "MODAL DYNAMIC" in self._analysis_sequence
             or "STEADY STATE DYNAMICS" in self._analysis_sequence
         ):
-            frequency_analysis_commands += f'MODCONT, ON\n'
-        frequency_analysis_commands += f'MXPAND,,,,'
+            frequency_analysis_commands += f"MODCONT, ON\n"
+        frequency_analysis_commands += f"MXPAND,,,,"
         if self.store_element_results():
-            frequency_analysis_commands += f'YES,,'
-        frequency_analysis_commands += f'\n'
-        frequency_analysis_commands += f'\n'
+            frequency_analysis_commands += f"YES,,"
+        frequency_analysis_commands += f"\n"
+        frequency_analysis_commands += f"\n"
         self._previous_analysis = "FREQUENCY"
         self._nrm_key = nrm_key
 
         if self.is_base_motion_present():
             frequency_analysis_commands = frequency_analysis_commands.replace(
-                'RESVEC, ON', '! RESVEC, ON'
+                "RESVEC, ON", "! RESVEC, ON"
             )
             frequency_analysis_commands = frequency_analysis_commands.replace(
-                'MODCONT, ON', 'MODCONT, ON, ON'
+                "MODCONT, ON", "MODCONT, ON, ON"
             )
 
         return frequency_analysis_commands
@@ -3705,66 +3886,72 @@ class _StepProcessor:
     def get_steady_state_dynamics_data(self, steady_state_dynamics_data):
         """Get steady state dynamic details."""
         self._step_MSUP = False
-        steady_state_dynamics_analysis_commands = ''
+        steady_state_dynamics_analysis_commands = ""
         if type(steady_state_dynamics_data) == list:
             steady_state_dynamics_data = steady_state_dynamics_data[0]
         npoints = 1
-        min_frequency = ''
-        max_frequency = ''
-        hropt = 'MSUP'
+        min_frequency = ""
+        max_frequency = ""
+        hropt = "MSUP"
         res_modes = None
         if self._previous_modal_resvec:
-            res_modes = 'ON'
+            res_modes = "ON"
         if (
-            'Data' in steady_state_dynamics_data
-            and type(steady_state_dynamics_data['Data']) == list
+            "Data" in steady_state_dynamics_data
+            and type(steady_state_dynamics_data["Data"]) == list
         ):
-            data = steady_state_dynamics_data['Data']
+            data = steady_state_dynamics_data["Data"]
             first_line = data[0]
-            if 'num_points' in first_line:
-                npoints = int(first_line['num_points'])
-            if 'min_frequency' in first_line:
-                min_frequency = float(first_line['min_frequency'])
-            if 'max_frequency' in first_line:
-                max_frequency = float(first_line['max_frequency'])
-        steady_state_dynamics_analysis_commands += (
-            f'! --------------------------- STEP: {self._step_counter} -----------------------\n'
-        )
+            if "num_points" in first_line:
+                npoints = int(first_line["num_points"])
+            if "min_frequency" in first_line:
+                min_frequency = float(first_line["min_frequency"])
+            if "max_frequency" in first_line:
+                max_frequency = float(first_line["max_frequency"])
+        steady_state_dynamics_analysis_commands += f"! --------------------------- STEP: {self._step_counter} -----------------------\n"
         if self._previous_analysis == "FREQUENCY":
-            steady_state_dynamics_analysis_commands += f'FINISH\n'
-            steady_state_dynamics_analysis_commands += f'\n'
+            steady_state_dynamics_analysis_commands += f"FINISH\n"
+            steady_state_dynamics_analysis_commands += f"\n"
             steady_state_dynamics_analysis_commands += (
-                f'/ASSIGN, rst, step_{self._step_counter}_harmonic_analysis, rst\n'
+                f"/ASSIGN, rst, step_{self._step_counter}_harmonic_analysis, rst\n"
             )
-            self._assign_analysis.append(f'step_{self._step_counter}_harmonic_analysis')
-            steady_state_dynamics_analysis_commands += f'/SOLU\n'
+            self._assign_analysis.append(f"step_{self._step_counter}_harmonic_analysis")
+            steady_state_dynamics_analysis_commands += f"/SOLU\n"
         if self._previous_analysis != "STEADY STATE DYNAMICS":
-            steady_state_dynamics_analysis_commands += f'ANTYPE, HARMIC\n'
-        steady_state_dynamics_analysis_commands += f'HARFRQ, {min_frequency}, {max_frequency}\n'
-        steady_state_dynamics_analysis_commands += f'NSUB, {npoints-1}\n'
+            steady_state_dynamics_analysis_commands += f"ANTYPE, HARMIC\n"
+        steady_state_dynamics_analysis_commands += (
+            f"HARFRQ, {min_frequency}, {max_frequency}\n"
+        )
+        steady_state_dynamics_analysis_commands += f"NSUB, {npoints - 1}\n"
         if "FREQUENCY" in self._analysis_sequence[: self._step_counter]:
             self._step_MSUP = True
         if self._previous_analysis != "STEADY STATE DYNAMICS":
-            steady_state_dynamics_analysis_commands += f'HROUT, OFF\n'
-            steady_state_dynamics_analysis_commands += f'KBC, 1\n'
-            steady_state_dynamics_analysis_commands += f'HROPT, '
+            steady_state_dynamics_analysis_commands += f"HROUT, OFF\n"
+            steady_state_dynamics_analysis_commands += f"KBC, 1\n"
+            steady_state_dynamics_analysis_commands += f"HROPT, "
             if "FREQUENCY" in self._analysis_sequence[: self._step_counter]:
-                steady_state_dynamics_analysis_commands += f'MSUP\n'
+                steady_state_dynamics_analysis_commands += f"MSUP\n"
                 has_modal_output, has_velocities = self.check_modal_output()
                 if has_modal_output:
-                    steady_state_dynamics_analysis_commands += f' , , , YES'
+                    steady_state_dynamics_analysis_commands += f" , , , YES"
             else:
-                steady_state_dynamics_analysis_commands += f'FULL\n'
+                steady_state_dynamics_analysis_commands += f"FULL\n"
             if res_modes:
-                steady_state_dynamics_analysis_commands += f'RESVEC, {res_modes}\n'
+                steady_state_dynamics_analysis_commands += f"RESVEC, {res_modes}\n"
         if self._analysis_sequence.count("STEADY STATE DYNAMICS") > 1:
-            rpm = self._step_counter - self._analysis_sequence.index("STEADY STATE DYNAMICS") + 1
-            steady_state_dynamics_analysis_commands += f'MRPM, {rpm}\n'
-        steady_state_dynamics_analysis_commands += f'\n'
+            rpm = (
+                self._step_counter
+                - self._analysis_sequence.index("STEADY STATE DYNAMICS")
+                + 1
+            )
+            steady_state_dynamics_analysis_commands += f"MRPM, {rpm}\n"
+        steady_state_dynamics_analysis_commands += f"\n"
         self._previous_analysis = "STEADY STATE DYNAMICS"
         if self.is_base_motion_present():
             steady_state_dynamics_analysis_commands = (
-                steady_state_dynamics_analysis_commands.replace('RESVEC, ON', '! RESVEC, ON')
+                steady_state_dynamics_analysis_commands.replace(
+                    "RESVEC, ON", "! RESVEC, ON"
+                )
             )
         return steady_state_dynamics_analysis_commands
 
@@ -3775,12 +3962,12 @@ class _StepProcessor:
             if not isinstance(output_data, list):
                 return time_interval
             for output in output_data:
-                if 'Parameters' in output:
+                if "Parameters" in output:
                     # self._logger.info(output)
-                    parameters = output['Parameters']
-                    if 'TIME INTERVAL' in parameters:
+                    parameters = output["Parameters"]
+                    if "TIME INTERVAL" in parameters:
                         # self._logger.info(parameters['TIME INTERVAL'])
-                        new_time_interval = float(parameters['TIME INTERVAL'])
+                        new_time_interval = float(parameters["TIME INTERVAL"])
                         # old_time_interval = time_interval
                         if new_time_interval < time_interval or time_interval == 0.0:
                             # self._logger.info(f'new_time_interval: {new_time_interval}')
@@ -3801,12 +3988,21 @@ class _StepProcessor:
             if not isinstance(output_data, list):
                 return has_modal_output, has_velocities
             for output in output_data:
-                if 'Data' in output and output['Data'] is not None:
-                    if 'ModalOutput' in output['Data']:
+                if "Data" in output and output["Data"] is not None:
+                    if "ModalOutput" in output["Data"]:
                         has_modal_output = True
-                        for modal_ouput in output['Data']['ModalOutput']:
-                            for key in modal_ouput['Data']['keys']:
-                                if key in ["GV", "GA", "GPV", "GPA", 'A', "A1", "A2", "A3"]:
+                        for modal_ouput in output["Data"]["ModalOutput"]:
+                            for key in modal_ouput["Data"]["keys"]:
+                                if key in [
+                                    "GV",
+                                    "GA",
+                                    "GPV",
+                                    "GPA",
+                                    "A",
+                                    "A1",
+                                    "A2",
+                                    "A3",
+                                ]:
                                     has_velocities = True
         return has_modal_output, has_velocities
 
@@ -3817,10 +4013,10 @@ class _StepProcessor:
             if not isinstance(output_data, list):
                 return ninterval
             for output in output_data:
-                if 'Parameters' in output:
-                    parameters = output['Parameters']
-                    if 'NUMBER INTERVAL' in parameters:
-                        new_ninterval = int(parameters['NUMBER INTERVAL'])
+                if "Parameters" in output:
+                    parameters = output["Parameters"]
+                    if "NUMBER INTERVAL" in parameters:
+                        new_ninterval = int(parameters["NUMBER INTERVAL"])
                         if new_ninterval > ninterval:
                             ninterval = new_ninterval
         return ninterval
@@ -3830,11 +4026,11 @@ class _StepProcessor:
         if "Output" in self._curr_step:
             output_data = self._curr_step["Output"]
             for output in output_data:
-                if 'Data' in output and output['Data'] is not None:
-                    if 'ElementOutput' in output['Data']:
-                        for elemout in output['Data']['ElementOutput']:
-                            if elemout is not None and elemout['Data'] is not None:
-                                for key in elemout['Data']['keys']:
+                if "Data" in output and output["Data"] is not None:
+                    if "ElementOutput" in output["Data"]:
+                        for elemout in output["Data"]["ElementOutput"]:
+                            if elemout is not None and elemout["Data"] is not None:
+                                for key in elemout["Data"]["keys"]:
                                     if key in ["S"]:
                                         store_el_results = True
         return store_el_results
@@ -3844,27 +4040,33 @@ class _StepProcessor:
 
     def get_output_analysis_data(self, output_data):
         """Get analysis output settings."""
-        output_analysis_commands = ''
+        output_analysis_commands = ""
         if not isinstance(output_data, list):
             return output_analysis_commands
         time_points = None
         for output in output_data:
-            if 'Parameters' in output:
-                parameters = output['Parameters']
-                if 'TIME POINT' in parameters:
-                    if time_points is not None and time_points != parameters['TIME POINT']:
+            if "Parameters" in output:
+                parameters = output["Parameters"]
+                if "TIME POINT" in parameters:
+                    if (
+                        time_points is not None
+                        and time_points != parameters["TIME POINT"]
+                    ):
                         self._logger.warning(
                             f"Warning: There are multiple TIME POINT arrays "
                             f"used in *OUTPUT commands. Only first one will be used"
                         )
-                    time_points = parameters['TIME POINT']
-                if 'TIME POINTS' in parameters:
-                    if time_points is not None and time_points != parameters['TIME POINTS']:
+                    time_points = parameters["TIME POINT"]
+                if "TIME POINTS" in parameters:
+                    if (
+                        time_points is not None
+                        and time_points != parameters["TIME POINTS"]
+                    ):
                         self._logger.warning(
                             f"Warning: There are multiple TIME POINT arrays "
                             f"used in *OUTPUT commands. Only first one will be used"
                         )
-                    time_points = parameters['TIME POINTS']
+                    time_points = parameters["TIME POINTS"]
         # above lines to be checked because of limitation on ansys OUTRES commands.
         if time_points is not None:
             time_points = get_modified_component_name(time_points)
@@ -3883,9 +4085,9 @@ class _StepProcessor:
         for output in output_data:
             minimum_time_interval = self.get_output_time_interval()
             ninterval = None
-            if 'Parameters' in output:
-                parameters = output['Parameters']
-                if 'NUMBER INTERVAL' in parameters:
+            if "Parameters" in output:
+                parameters = output["Parameters"]
+                if "NUMBER INTERVAL" in parameters:
                     self._ninterval_counter += 1
                     if number_interval_to_table:
                         sc = self._step_counter
@@ -3896,65 +4098,67 @@ class _StepProcessor:
                             self._model
                         ).get_commands(
                             ninterval,
-                            int(parameters['NUMBER INTERVAL']),
+                            int(parameters["NUMBER INTERVAL"]),
                             delta_time,
                             self._step_start_time,
                         )
                         self._ninterval_mapdl_commands += ninterval_mapdl_commands
                     else:
-                        ninterval = int(parameters['NUMBER INTERVAL'])
+                        ninterval = int(parameters["NUMBER INTERVAL"])
             nfreq = None
-            if 'Parameters' in output:
-                parameters = output['Parameters']
-                if 'FREQUENCY' in parameters:
-                    nfreq = parameters['FREQUENCY']
+            if "Parameters" in output:
+                parameters = output["Parameters"]
+                if "FREQUENCY" in parameters:
+                    nfreq = parameters["FREQUENCY"]
             time_interval = None
-            if 'Parameters' in output:
-                parameters = output['Parameters']
-                if 'TIME INTERVAL' in parameters:
-                    time_interval = float(parameters['TIME INTERVAL'])
+            if "Parameters" in output:
+                parameters = output["Parameters"]
+                if "TIME INTERVAL" in parameters:
+                    time_interval = float(parameters["TIME INTERVAL"])
             if time_interval and minimum_time_interval:
                 nfreq = int(time_interval / minimum_time_interval)
-            if 'Data' in output and output['Data'] is not None:
-                if 'ModalOutput' in output['Data']:
+            if "Data" in output and output["Data"] is not None:
+                if "ModalOutput" in output["Data"]:
                     output_analysis_commands += "MCFOPT, 1, , "
                     if self._nrm_key is not None:
                         if self._nrm_key == "OFF":
                             output_analysis_commands += "0\n"
                         else:
                             output_analysis_commands += "1\n"
-                if 'EnergyOutput' in output['Data']:
-                    for enrgout in output['Data']['EnergyOutput']:
-                        if enrgout is not None and enrgout['Data'] is not None:
+                if "EnergyOutput" in output["Data"]:
+                    for enrgout in output["Data"]["EnergyOutput"]:
+                        if enrgout is not None and enrgout["Data"] is not None:
                             output_analysis_commands += "OUTRES, "
                             output_analysis_commands += "VENG, "
                             if time_points is not None:
-                                output_analysis_commands += f'%{time_points}%, '
+                                output_analysis_commands += f"%{time_points}%, "
                             else:
                                 if ninterval:
                                     if number_interval_to_table:
-                                        output_analysis_commands += f'%{ninterval}%, '
+                                        output_analysis_commands += f"%{ninterval}%, "
                                     else:
-                                        output_analysis_commands += f'-{ninterval}, '
+                                        output_analysis_commands += f"-{ninterval}, "
                                 elif nfreq:
-                                    output_analysis_commands += f'{nfreq}, '
+                                    output_analysis_commands += f"{nfreq}, "
                                 else:
-                                    output_analysis_commands += 'ALL, '
-                            if 'Parameters' in enrgout:
+                                    output_analysis_commands += "ALL, "
+                            if "Parameters" in enrgout:
                                 if (
-                                    enrgout['Parameters'] is not None
-                                    and 'ELSET' in enrgout['Parameters']
+                                    enrgout["Parameters"] is not None
+                                    and "ELSET" in enrgout["Parameters"]
                                 ):
-                                    output_analysis_commands += get_modified_component_name(
-                                        enrgout['Parameters']['ELSET'],
-                                        'ELSET',
-                                        self._simulation_data,
+                                    output_analysis_commands += (
+                                        get_modified_component_name(
+                                            enrgout["Parameters"]["ELSET"],
+                                            "ELSET",
+                                            self._simulation_data,
+                                        )
                                     )
-                            output_analysis_commands += ', ,\n'
-                if 'NodeOutput' in output['Data']:
-                    for nodeout in output['Data']['NodeOutput']:
-                        if nodeout is not None and nodeout['Data'] is not None:
-                            for key in nodeout['Data']['keys']:
+                            output_analysis_commands += ", ,\n"
+                if "NodeOutput" in output["Data"]:
+                    for nodeout in output["Data"]["NodeOutput"]:
+                        if nodeout is not None and nodeout["Data"] is not None:
+                            for key in nodeout["Data"]["keys"]:
                                 if key in [
                                     "RF",
                                     "U",
@@ -3969,16 +4173,16 @@ class _StepProcessor:
                                     "CF",
                                 ]:
                                     if key == "CF":
-                                        if 'Parameters' in nodeout:
+                                        if "Parameters" in nodeout:
                                             if (
-                                                nodeout['Parameters'] is not None
-                                                and 'NSET' in nodeout['Parameters']
+                                                nodeout["Parameters"] is not None
+                                                and "NSET" in nodeout["Parameters"]
                                             ):
                                                 output_analysis_commands += (
                                                     "CMSEL,S,"
                                                     + get_modified_component_name(
-                                                        nodeout['Parameters']['NSET'],
-                                                        'NSET',
+                                                        nodeout["Parameters"]["NSET"],
+                                                        "NSET",
                                                         self._simulation_data,
                                                     )
                                                     + ",NODE\n"
@@ -3989,106 +4193,130 @@ class _StepProcessor:
                                                 output_analysis_commands += (
                                                     "CM,"
                                                     + get_modified_component_name(
-                                                        nodeout['Parameters']['NSET'],
-                                                        'NSET',
+                                                        nodeout["Parameters"]["NSET"],
+                                                        "NSET",
                                                         self._simulation_data,
                                                     )
                                                     + "_CONTACT, ELEM\n"
                                                 )
                                                 output_analysis_commands += "ALLSEL\n"
                                             else:
-                                                output_analysis_commands += "ESEL,S,ENAME,,174\n"
-                                                output_analysis_commands += "CM,All_CONTACT,ELEM\n"
+                                                output_analysis_commands += (
+                                                    "ESEL,S,ENAME,,174\n"
+                                                )
+                                                output_analysis_commands += (
+                                                    "CM,All_CONTACT,ELEM\n"
+                                                )
                                                 output_analysis_commands += "ALLSEL\n"
                                     output_analysis_commands += "OUTRES, "
                                     if key == "RF":
                                         output_analysis_commands += "RSOL, "
                                         if time_points is not None:
-                                            output_analysis_commands += f'%{time_points}%, '
+                                            output_analysis_commands += (
+                                                f"%{time_points}%, "
+                                            )
                                         else:
                                             if ninterval:
                                                 if number_interval_to_table:
-                                                    output_analysis_commands += f'%{ninterval}%, '
+                                                    output_analysis_commands += (
+                                                        f"%{ninterval}%, "
+                                                    )
                                                 else:
-                                                    output_analysis_commands += f'-{ninterval}, '
+                                                    output_analysis_commands += (
+                                                        f"-{ninterval}, "
+                                                    )
                                             elif nfreq:
-                                                output_analysis_commands += f'{nfreq}, '
+                                                output_analysis_commands += f"{nfreq}, "
                                             else:
-                                                output_analysis_commands += 'ALL, '
+                                                output_analysis_commands += "ALL, "
                                     elif key in [
                                         "U",
                                         "UT",
                                         "U1",
                                         "U2",
                                         "U3",
-                                        'A',
+                                        "A",
                                         "A1",
                                         "A2",
                                         "A3",
                                     ]:
                                         output_analysis_commands += "NSOL, "
                                         if time_points is not None:
-                                            output_analysis_commands += f'%{time_points}%, '
+                                            output_analysis_commands += (
+                                                f"%{time_points}%, "
+                                            )
                                         else:
                                             if ninterval:
                                                 if number_interval_to_table:
-                                                    output_analysis_commands += f'%{ninterval}%, '
+                                                    output_analysis_commands += (
+                                                        f"%{ninterval}%, "
+                                                    )
                                                 else:
-                                                    output_analysis_commands += f'-{ninterval}, '
+                                                    output_analysis_commands += (
+                                                        f"-{ninterval}, "
+                                                    )
                                             elif nfreq:
-                                                output_analysis_commands += f'{nfreq}, '
+                                                output_analysis_commands += f"{nfreq}, "
                                             else:
-                                                output_analysis_commands += 'ALL, '
-                                        if 'Parameters' in nodeout:
+                                                output_analysis_commands += "ALL, "
+                                        if "Parameters" in nodeout:
                                             if (
-                                                nodeout['Parameters'] is not None
-                                                and 'NSET' in nodeout['Parameters']
+                                                nodeout["Parameters"] is not None
+                                                and "NSET" in nodeout["Parameters"]
                                             ):
                                                 output_analysis_commands += (
                                                     get_modified_component_name(
-                                                        nodeout['Parameters']['NSET'],
-                                                        'NSET',
+                                                        nodeout["Parameters"]["NSET"],
+                                                        "NSET",
                                                         self._simulation_data,
                                                     )
                                                 )
                                     elif key == "CF":
                                         output_analysis_commands += "MISC, "
                                         if time_points is not None:
-                                            output_analysis_commands += f'%{time_points}%, '
+                                            output_analysis_commands += (
+                                                f"%{time_points}%, "
+                                            )
                                         else:
                                             if ninterval:
                                                 if number_interval_to_table:
-                                                    output_analysis_commands += f'%{ninterval}%, '
+                                                    output_analysis_commands += (
+                                                        f"%{ninterval}%, "
+                                                    )
                                                 else:
-                                                    output_analysis_commands += f'-{ninterval}, '
+                                                    output_analysis_commands += (
+                                                        f"-{ninterval}, "
+                                                    )
                                             elif nfreq:
-                                                output_analysis_commands += f'{nfreq}, '
+                                                output_analysis_commands += f"{nfreq}, "
                                             else:
-                                                output_analysis_commands += 'ALL, '
-                                        if 'Parameters' in nodeout:
+                                                output_analysis_commands += "ALL, "
+                                        if "Parameters" in nodeout:
                                             if (
-                                                nodeout['Parameters'] is not None
-                                                and 'NSET' in nodeout['Parameters']
+                                                nodeout["Parameters"] is not None
+                                                and "NSET" in nodeout["Parameters"]
                                             ):
                                                 output_analysis_commands += (
                                                     get_modified_component_name(
-                                                        nodeout['Parameters']['NSET'],
-                                                        'NSET',
+                                                        nodeout["Parameters"]["NSET"],
+                                                        "NSET",
                                                         self._simulation_data,
                                                     )
                                                     + "_CONTACT"
                                                 )
                                             else:
-                                                output_analysis_commands += "All_CONTACT"
-                                    output_analysis_commands += ', ,\n'
+                                                output_analysis_commands += (
+                                                    "All_CONTACT"
+                                                )
+                                    output_analysis_commands += ", ,\n"
                                 else:
                                     self._logger.warning(
                                         f"warning: node output key '{key}' is not processed."
                                     )
-                if 'ElementOutput' in output['Data']:
-                    for elemout in output['Data']['ElementOutput']:
-                        if elemout is not None and elemout['Data'] is not None:
-                            for key in elemout['Data']['keys']:
+                if "ElementOutput" in output["Data"]:
+                    for elemout in output["Data"]["ElementOutput"]:
+                        if elemout is not None and elemout["Data"] is not None:
+                            for key in elemout["Data"]["keys"]:
                                 if key in [
                                     "S",
                                     "CTF",
@@ -4106,52 +4334,64 @@ class _StepProcessor:
                                     if key in ["S", "SINV", "MISESMAX"]:
                                         output_analysis_commands += "STRS, "
                                         if time_points is not None:
-                                            output_analysis_commands += f'%{time_points}%, '
+                                            output_analysis_commands += (
+                                                f"%{time_points}%, "
+                                            )
                                         else:
                                             if ninterval:
                                                 if number_interval_to_table:
-                                                    output_analysis_commands += f'%{ninterval}%, '
+                                                    output_analysis_commands += (
+                                                        f"%{ninterval}%, "
+                                                    )
                                                 else:
-                                                    output_analysis_commands += f'-{ninterval}, '
+                                                    output_analysis_commands += (
+                                                        f"-{ninterval}, "
+                                                    )
                                             elif nfreq:
-                                                output_analysis_commands += f'{nfreq}, '
+                                                output_analysis_commands += f"{nfreq}, "
                                             else:
-                                                output_analysis_commands += 'ALL, '
-                                        if 'Parameters' in elemout:
+                                                output_analysis_commands += "ALL, "
+                                        if "Parameters" in elemout:
                                             if (
-                                                elemout['Parameters'] is not None
-                                                and 'ELSET' in elemout['Parameters']
+                                                elemout["Parameters"] is not None
+                                                and "ELSET" in elemout["Parameters"]
                                             ):
                                                 output_analysis_commands += (
                                                     get_modified_component_name(
-                                                        elemout['Parameters']['ELSET'],
-                                                        'ELSET',
+                                                        elemout["Parameters"]["ELSET"],
+                                                        "ELSET",
                                                         self._simulation_data,
                                                     )
                                                 )
                                     elif key in ["PEEQ", "PEEQMAX"]:
                                         output_analysis_commands += "NLDAT, "
                                         if time_points is not None:
-                                            output_analysis_commands += f'%{time_points}%, '
+                                            output_analysis_commands += (
+                                                f"%{time_points}%, "
+                                            )
                                         else:
                                             if ninterval:
                                                 if number_interval_to_table:
-                                                    output_analysis_commands += f'%{ninterval}%, '
+                                                    output_analysis_commands += (
+                                                        f"%{ninterval}%, "
+                                                    )
                                                 else:
-                                                    output_analysis_commands += f'-{ninterval}, '
+                                                    output_analysis_commands += (
+                                                        f"-{ninterval}, "
+                                                    )
                                             elif nfreq:
-                                                output_analysis_commands += f'{nfreq}, '
+                                                output_analysis_commands += f"{nfreq}, "
                                             else:
-                                                output_analysis_commands += 'ALL, '
-                                        if 'Parameters' in elemout:
+                                                output_analysis_commands += "ALL, "
+                                        if "Parameters" in elemout:
                                             if (
-                                                elemout['Parameters'] is not None
-                                                and 'ELSET' in elemout['Parameters']
+                                                elemout["Parameters"] is not None
+                                                and "ELSET" in elemout["Parameters"]
                                             ):
                                                 output_analysis_commands += (
                                                     get_modified_component_name(
-                                                        elemout['Parameters']['ELSET'],
-                                                        'ELSET',
+                                                        elemout["Parameters"]["ELSET"],
+                                                        "ELSET",
                                                         self._simulation_data,
                                                     )
                                                 )
@@ -4159,30 +4399,30 @@ class _StepProcessor:
                                         out_cmds = ""
                                         out_cmds += "EPPL, "
                                         if time_points is not None:
-                                            out_cmds += f'%{time_points}%, '
+                                            out_cmds += f"%{time_points}%, "
                                         else:
                                             if ninterval:
                                                 if number_interval_to_table:
-                                                    out_cmds += f'%{ninterval}%, '
+                                                    out_cmds += f"%{ninterval}%, "
                                                 else:
-                                                    out_cmds += f'-{ninterval}, '
+                                                    out_cmds += f"-{ninterval}, "
                                             elif nfreq:
-                                                out_cmds += f'{nfreq}, '
+                                                out_cmds += f"{nfreq}, "
                                             else:
-                                                out_cmds += 'ALL, '
-                                        if 'Parameters' in elemout:
+                                                out_cmds += "ALL, "
+                                        if "Parameters" in elemout:
                                             if (
-                                                elemout['Parameters'] is not None
-                                                and 'ELSET' in elemout['Parameters']
+                                                elemout["Parameters"] is not None
+                                                and "ELSET" in elemout["Parameters"]
                                             ):
                                                 out_cmds += get_modified_component_name(
-                                                    elemout['Parameters']['ELSET'],
-                                                    'ELSET',
+                                                    elemout["Parameters"]["ELSET"],
+                                                    "ELSET",
                                                     self._simulation_data,
                                                 )
                                         output_analysis_commands += (
                                             out_cmds
-                                            + ', ,\n'
+                                            + ", ,\n"
                                             + "OUTRES, "
                                             + out_cmds.replace("EPPL", "NLDAT")
                                         )
@@ -4190,119 +4430,150 @@ class _StepProcessor:
                                         comp_name = ""
                                         out_cmds = ""
                                         if (
-                                            'Parameters' in elemout
-                                            and elemout['Parameters'] is not None
-                                            and 'ELSET' in elemout['Parameters']
+                                            "Parameters" in elemout
+                                            and elemout["Parameters"] is not None
+                                            and "ELSET" in elemout["Parameters"]
                                         ):
                                             comp_name += get_modified_component_name(
-                                                elemout['Parameters']['ELSET'],
-                                                'ELSET',
+                                                elemout["Parameters"]["ELSET"],
+                                                "ELSET",
                                                 self._simulation_data,
                                             )
                                         else:
                                             out_cmds += "ESEL, S, ENAME, , 181\n"
                                             out_cmds += "ESEL, A, ENAME, , 281\n"
-                                            out_cmds += "CM, SHELL_THICKNESS_STORAGE, ELEM\n"
+                                            out_cmds += (
+                                                "CM, SHELL_THICKNESS_STORAGE, ELEM\n"
+                                            )
                                             out_cmds += "ALLSEL\n"
                                             comp_name += "SHELL_THICKNESS_STORAGE"
-                                        output_analysis_commands = output_analysis_commands[:-8]
+                                        output_analysis_commands = (
+                                            output_analysis_commands[:-8]
+                                        )
                                         output_analysis_commands += out_cmds
                                         output_analysis_commands += "OUTRES, "
                                         output_analysis_commands += "MISC, "
                                         if time_points is not None:
-                                            output_analysis_commands += f'%{time_points}%, '
+                                            output_analysis_commands += (
+                                                f"%{time_points}%, "
+                                            )
                                         else:
                                             if ninterval:
                                                 if number_interval_to_table:
-                                                    output_analysis_commands += f'%{ninterval}%, '
+                                                    output_analysis_commands += (
+                                                        f"%{ninterval}%, "
+                                                    )
                                                 else:
-                                                    output_analysis_commands += f'-{ninterval}, '
+                                                    output_analysis_commands += (
+                                                        f"-{ninterval}, "
+                                                    )
                                             elif nfreq:
-                                                output_analysis_commands += f'{nfreq}, '
+                                                output_analysis_commands += f"{nfreq}, "
                                             else:
-                                                output_analysis_commands += 'ALL, '
+                                                output_analysis_commands += "ALL, "
                                         output_analysis_commands += comp_name
                                     elif key == "LE":
                                         output_analysis_commands += "EPEL, "
                                         if time_points is not None:
-                                            output_analysis_commands += f'%{time_points}%, '
+                                            output_analysis_commands += (
+                                                f"%{time_points}%, "
+                                            )
                                         else:
                                             if ninterval:
                                                 if number_interval_to_table:
-                                                    output_analysis_commands += f'%{ninterval}%, '
+                                                    output_analysis_commands += (
+                                                        f"%{ninterval}%, "
+                                                    )
                                                 else:
-                                                    output_analysis_commands += f'-{ninterval}, '
+                                                    output_analysis_commands += (
+                                                        f"-{ninterval}, "
+                                                    )
                                             elif nfreq:
-                                                output_analysis_commands += f'{nfreq}, '
+                                                output_analysis_commands += f"{nfreq}, "
                                             else:
-                                                output_analysis_commands += 'ALL, '
-                                        if 'Parameters' in elemout:
+                                                output_analysis_commands += "ALL, "
+                                        if "Parameters" in elemout:
                                             if (
-                                                elemout['Parameters'] is not None
-                                                and 'ELSET' in elemout['Parameters']
+                                                elemout["Parameters"] is not None
+                                                and "ELSET" in elemout["Parameters"]
                                             ):
                                                 output_analysis_commands += (
                                                     get_modified_component_name(
-                                                        elemout['Parameters']['ELSET'],
-                                                        'ELSET',
+                                                        elemout["Parameters"]["ELSET"],
+                                                        "ELSET",
                                                         self._simulation_data,
                                                     )
                                                 )
                                     elif key == "CTF":
                                         output_analysis_commands += "MISC, "
                                         if time_points is not None:
-                                            output_analysis_commands += f'%{time_points}%, '
+                                            output_analysis_commands += (
+                                                f"%{time_points}%, "
+                                            )
                                         else:
                                             if ninterval:
                                                 if number_interval_to_table:
-                                                    output_analysis_commands += f'%{ninterval}%, '
+                                                    output_analysis_commands += (
+                                                        f"%{ninterval}%, "
+                                                    )
                                                 else:
-                                                    output_analysis_commands += f'-{ninterval}, '
+                                                    output_analysis_commands += (
+                                                        f"-{ninterval}, "
+                                                    )
                                             elif nfreq:
-                                                output_analysis_commands += f'{nfreq}, '
+                                                output_analysis_commands += f"{nfreq}, "
                                             else:
-                                                output_analysis_commands += 'ALL, '
-                                        if 'Parameters' in elemout:
+                                                output_analysis_commands += "ALL, "
+                                        if "Parameters" in elemout:
                                             if (
-                                                elemout['Parameters'] is not None
-                                                and 'ELSET' in elemout['Parameters']
+                                                elemout["Parameters"] is not None
+                                                and "ELSET" in elemout["Parameters"]
                                             ):
                                                 output_analysis_commands += (
                                                     get_modified_component_name(
-                                                        elemout['Parameters']['ELSET'],
-                                                        'ELSET',
+                                                        elemout["Parameters"]["ELSET"],
+                                                        "ELSET",
                                                         self._simulation_data,
                                                     )
                                                 )
                                     elif key == "NFORC":
                                         output_analysis_commands += "NLOAD, "
                                         if time_points is not None:
-                                            output_analysis_commands += f'%{time_points}%, '
+                                            output_analysis_commands += (
+                                                f"%{time_points}%, "
+                                            )
                                         else:
                                             if ninterval:
                                                 if number_interval_to_table:
-                                                    output_analysis_commands += f'%{ninterval}%, '
+                                                    output_analysis_commands += (
+                                                        f"%{ninterval}%, "
+                                                    )
                                                 else:
-                                                    output_analysis_commands += f'-{ninterval}, '
+                                                    output_analysis_commands += (
+                                                        f"-{ninterval}, "
+                                                    )
                                             elif nfreq:
-                                                output_analysis_commands += f'{nfreq}, '
+                                                output_analysis_commands += f"{nfreq}, "
                                             else:
-                                                output_analysis_commands += 'ALL, '
-                                        if 'Parameters' in elemout:
+                                                output_analysis_commands += "ALL, "
+                                        if "Parameters" in elemout:
                                             if (
-                                                elemout['Parameters'] is not None
-                                                and 'ELSET' in elemout['Parameters']
+                                                elemout["Parameters"] is not None
+                                                and "ELSET" in elemout["Parameters"]
                                             ):
                                                 output_analysis_commands += (
                                                     get_modified_component_name(
-                                                        elemout['Parameters']['ELSET'],
-                                                        'ELSET',
+                                                        elemout["Parameters"]["ELSET"],
+                                                        "ELSET",
                                                         self._simulation_data,
                                                     )
                                                 )
-                                    output_analysis_commands += ', ,\n'
+                                    output_analysis_commands += ", ,\n"
                                     last_line = output_analysis_commands.split("\n")[-2]
-                                    if "STRS" in last_line and ", SEAM_WELD," in last_line:
+                                    if (
+                                        "STRS" in last_line
+                                        and ", SEAM_WELD," in last_line
+                                    ):
                                         new_line = last_line.replace("STRS", "EANGL")
                                         output_analysis_commands += new_line + "\n"
                                 else:
@@ -4310,31 +4581,33 @@ class _StepProcessor:
                                         f"warning: element output key '{key}' is not processed."
                                     )
                         if (
-                            elemout['Parameters'] is not None
-                            and 'POSITION' in elemout['Parameters']
+                            elemout["Parameters"] is not None
+                            and "POSITION" in elemout["Parameters"]
                         ):
-                            if elemout['Parameters']['POSITION'] == "CENTROIDAL":
+                            if elemout["Parameters"]["POSITION"] == "CENTROIDAL":
                                 output_analysis_commands += "RSTC, AUTO, "
                             if (
-                                elemout['Parameters'] is not None
-                                and 'ELSET' in elemout['Parameters']
+                                elemout["Parameters"] is not None
+                                and "ELSET" in elemout["Parameters"]
                             ):
                                 output_analysis_commands += get_modified_component_name(
-                                    elemout['Parameters']['ELSET'], 'ELSET', self._simulation_data
+                                    elemout["Parameters"]["ELSET"],
+                                    "ELSET",
+                                    self._simulation_data,
                                 )
                             output_analysis_commands += "\n"
         return output_analysis_commands
 
     def create_modal_vectors(self):
-        vector_commands = ''
+        vector_commands = ""
         steps_data = self._steps_data
         dof_map = {
-            1: 'FX',
-            2: 'FY',
-            3: 'FZ',
-            4: 'MX',
-            5: 'MY',
-            6: 'MZ',
+            1: "FX",
+            2: "FY",
+            3: "FZ",
+            4: "MX",
+            5: "MY",
+            6: "MZ",
         }
         if (
             "STEADY STATE DYNAMICS" in self._analysis_sequence
@@ -4345,47 +4618,47 @@ class _StepProcessor:
             for step_data in steps_data[self._step_counter :]:
                 if self._previous_modal_resvec is None:
                     if temp_count != 0:
-                        vector_commands += 'SOLVE\n'
-                        vector_commands += '\n'
-                    vector_commands += f'FDELE, ALL, ALL \n'
-                    vector_commands += f'SFDELE, ALL, ALL \n'
-                    vector_commands += f'SFEDELE, ALL, ALL, ALL \n'
-                    vector_commands += f'ACEL, 0, 0, 0 \n'
-                    vector_commands += f'\n'
+                        vector_commands += "SOLVE\n"
+                        vector_commands += "\n"
+                    vector_commands += f"FDELE, ALL, ALL \n"
+                    vector_commands += f"SFDELE, ALL, ALL \n"
+                    vector_commands += f"SFEDELE, ALL, ALL, ALL \n"
+                    vector_commands += f"ACEL, 0, 0, 0 \n"
+                    vector_commands += f"\n"
                 temp_count = 1
                 if "Cload" in step_data:
-                    cloads_data = step_data['Cload']
+                    cloads_data = step_data["Cload"]
                     for cload_data in cloads_data:
-                        data_lines = cload_data['Data']
+                        data_lines = cload_data["Data"]
                         for data_line in data_lines:
                             if len(data_line) == 0:
                                 continue
-                            dof = int(data_line['degree_of_freedom'])
+                            dof = int(data_line["degree_of_freedom"])
                             mag = 0
-                            if 'magnitude' in data_line:
-                                mag = float(data_line['magnitude'])
+                            if "magnitude" in data_line:
+                                mag = float(data_line["magnitude"])
                             if self._previous_modal_resvec:
                                 if count_load_vectors != 0:
-                                    vector_commands += 'SOLVE\n'
-                                    vector_commands += '\n'
-                                vector_commands += f'FDELE, ALL, ALL \n'
-                                vector_commands += f'SFDELE, ALL, ALL \n'
-                                vector_commands += f'SFEDELE, ALL, ALL, ALL \n'
-                                vector_commands += f'ACEL, 0, 0, 0 \n'
-                                vector_commands += f'\n'
-                            if data_line['node_set'].isnumeric():
-                                cmname = data_line['node_set']
+                                    vector_commands += "SOLVE\n"
+                                    vector_commands += "\n"
+                                vector_commands += f"FDELE, ALL, ALL \n"
+                                vector_commands += f"SFDELE, ALL, ALL \n"
+                                vector_commands += f"SFEDELE, ALL, ALL, ALL \n"
+                                vector_commands += f"ACEL, 0, 0, 0 \n"
+                                vector_commands += f"\n"
+                            if data_line["node_set"].isnumeric():
+                                cmname = data_line["node_set"]
                                 vector_commands += (
-                                    f"F, " f"{data_line['node_set']}, " f"{dof_map[dof]}, 1\n"
+                                    f"F, {data_line['node_set']}, {dof_map[dof]}, 1\n"
                                 )
                             else:
                                 cmname = get_modified_component_name(
-                                    data_line['node_set'], 'NSET', self._simulation_data
+                                    data_line["node_set"], "NSET", self._simulation_data
                                 )
-                                vector_commands += f"F, " f"{cmname}, " f"{dof_map[dof]}, 1\n"
+                                vector_commands += f"F, {cmname}, {dof_map[dof]}, 1\n"
                             count_load_vectors += 1
                             self._modal_load_vectors[count_load_vectors] = {
-                                'SET': cmname,
+                                "SET": cmname,
                                 "COMP": dof_map[dof],
                             }
         return vector_commands
@@ -4403,55 +4676,64 @@ class _StepProcessor:
     def get_select_eigenmodes(self):
         steps_data = self._steps_data
 
-        min_frequency = ''
-        max_frequency = ''
+        min_frequency = ""
+        max_frequency = ""
 
         for step_data in steps_data:
-            if 'SelectEigenmodes' in step_data:
-                eigen_mode_data = step_data['SelectEigenmodes'][0]
+            if "SelectEigenmodes" in step_data:
+                eigen_mode_data = step_data["SelectEigenmodes"][0]
                 if (
-                    'Parameters' in eigen_mode_data
-                    and eigen_mode_data['Parameters'] is not None
-                    and eigen_mode_data['Parameters']
+                    "Parameters" in eigen_mode_data
+                    and eigen_mode_data["Parameters"] is not None
+                    and eigen_mode_data["Parameters"]
                 ):
                     if (
-                        'DEFINITION' in eigen_mode_data['Parameters']
-                        and eigen_mode_data['Parameters']['DEFINITION'] == 'FREQUENCY RANGE'
+                        "DEFINITION" in eigen_mode_data["Parameters"]
+                        and eigen_mode_data["Parameters"]["DEFINITION"]
+                        == "FREQUENCY RANGE"
                     ):
                         if (
-                            'Data' in eigen_mode_data
-                            and eigen_mode_data['Data'] is not None
-                            and eigen_mode_data['Data']
+                            "Data" in eigen_mode_data
+                            and eigen_mode_data["Data"] is not None
+                            and eigen_mode_data["Data"]
                         ):
-                            data = eigen_mode_data['Data'][0]
-                            if 'Lower' in data and data['Lower'] and data['Lower'] is not None:
-                                min_frequency = float(data['Lower'])
-                            if 'Upper' in data and data['Upper'] and data['Upper'] is not None:
-                                max_frequency = float(data['Upper'])
+                            data = eigen_mode_data["Data"][0]
+                            if (
+                                "Lower" in data
+                                and data["Lower"]
+                                and data["Lower"] is not None
+                            ):
+                                min_frequency = float(data["Lower"])
+                            if (
+                                "Upper" in data
+                                and data["Upper"]
+                                and data["Upper"] is not None
+                            ):
+                                max_frequency = float(data["Upper"])
         return min_frequency, max_frequency
 
     def check_base_motion_relative_or_absolute(self):
         steps_data = self._steps_data
 
-        min_frequency = ''
-        max_frequency = ''
+        min_frequency = ""
+        max_frequency = ""
 
         for step_data in steps_data:
-            if 'Frequency' in step_data:
-                frequency_data = step_data['Frequency']
+            if "Frequency" in step_data:
+                frequency_data = step_data["Frequency"]
                 if type(frequency_data) == list:
                     frequency_data = frequency_data[0]
 
-                data = frequency_data['Data'] if 'Data' in frequency_data else None
+                data = frequency_data["Data"] if "Data" in frequency_data else None
                 if data is not None and isinstance(data, list):
                     first_line = data[0]
                 else:
                     first_line = data
                 if first_line is not None:
-                    if 'min_frequency' in first_line:
-                        min_frequency = float(first_line['min_frequency'])
-                    if 'max_frequency' in first_line:
-                        max_frequency = float(first_line['max_frequency'])
+                    if "min_frequency" in first_line:
+                        min_frequency = float(first_line["min_frequency"])
+                    if "max_frequency" in first_line:
+                        max_frequency = float(first_line["max_frequency"])
 
         mn, mx = self.get_select_eigenmodes()
 
@@ -4479,7 +4761,7 @@ class _StepProcessor:
             base_id_mapping=self._base_id_mapping,
             is_relative=is_relative,
         )
-        base_motion_commands = ''
+        base_motion_commands = ""
         base_motion_commands += base_motion_processor.get_all_base_motion_commands()
         self._base_motion_ampl_commands += base_motion_processor.get_ampl_commands()
         return base_motion_commands
@@ -4492,9 +4774,13 @@ class _StepProcessor:
             self._step_end_time,
             sim_data=self._simulation_data,
         )
-        connector_motion_commands = ''
-        connector_motion_commands += connector_motion_processor.get_all_connector_motion_commands()
-        self._connector_motion_ampl_commands += connector_motion_processor.get_ampl_commands()
+        connector_motion_commands = ""
+        connector_motion_commands += (
+            connector_motion_processor.get_all_connector_motion_commands()
+        )
+        self._connector_motion_ampl_commands += (
+            connector_motion_processor.get_ampl_commands()
+        )
         return connector_motion_commands
 
     def get_step_cload_data(self, cloads_data):
@@ -4507,7 +4793,7 @@ class _StepProcessor:
             self._modal_load_vectors,
             sim_data=self._simulation_data,
         )
-        cload_commands = ''
+        cload_commands = ""
         cload_commands += cload_processor.get_all_cload_commands()
         self._cload_ampl_commands += cload_processor.get_ampl_commands()
         return cload_commands
@@ -4520,13 +4806,13 @@ class _StepProcessor:
             self._step_end_time,
             sim_data=self._simulation_data,
         )
-        dload_commands = ''
+        dload_commands = ""
         dload_commands += dload_processor.get_all_dload_commands()
         return dload_commands
 
     def get_step_boundary_data(self, boundaries_data):
         need_base_id = False
-        if 'Frequency' in self._curr_step and self.is_base_motion_present():
+        if "Frequency" in self._curr_step and self.is_base_motion_present():
             need_base_id = True
         boundary_processor = _BoundaryProcessor(
             self._model,
@@ -4536,7 +4822,7 @@ class _StepProcessor:
             sim_data=self._simulation_data,
             need_base_id=need_base_id,
         )
-        boundary_commands = ''
+        boundary_commands = ""
         boundary_commands += boundary_processor.get_all_boundary_commands()
         self._boundary_ampl_commands += boundary_processor.get_ampl_commands()
         self._base_id_mapping = boundary_processor._base_id_mapping
@@ -4551,11 +4837,15 @@ class _StepProcessor:
             sim_data=self._simulation_data,
         )
         comp_names = []
-        comp_names.extend(boundary_processor.get_boundary_comp_name_with_base_motion(base_name))
+        comp_names.extend(
+            boundary_processor.get_boundary_comp_name_with_base_motion(base_name)
+        )
         return comp_names
 
     def get_global_damping_commnads(self, global_damping_data):
-        global_damping_processor = _GlobalDampingProcessing(self._model, global_damping_data)
+        global_damping_processor = _GlobalDampingProcessing(
+            self._model, global_damping_data
+        )
         (
             global_damping_commands,
             global_structural_damping,
@@ -4563,19 +4853,21 @@ class _StepProcessor:
             self._previous_analysis, self._step_MSUP
         )
         if (
-            'Frequency' in self._curr_step
+            "Frequency" in self._curr_step
             or self._analysis_sequence[self._step_counter - 1] == "FREQUENCY"
         ):
             self._global_structural_damping_value += global_structural_damping
         return global_damping_commands
 
     def get_monitor_commands(self, monitor_data):
-        monitor_processor = _MonitorProcessor(self._model, monitor_data, self._simulation_data)
+        monitor_processor = _MonitorProcessor(
+            self._model, monitor_data, self._simulation_data
+        )
         monitor_commands = monitor_processor.get_monitor_commands()
         return monitor_commands
 
     def _get_current_step_analysis_type(self, step_data):
-        mapdl_step_commands = '/solu\n'
+        mapdl_step_commands = "/solu\n"
         return mapdl_step_commands
 
     def _process_step(self, step_data):
@@ -4586,36 +4878,36 @@ class _StepProcessor:
             self._step_end_time = 1.0
 
         function_maps = {
-            'Cload': self.get_step_cload_data,
-            'ConnectorMotion': self.get_step_connector_motion_data,
-            'BaseMotion': self.get_step_base_motion_data,
-            'Boundary': self.get_step_boundary_data,
-            'Static': self.get_static_analysis_data,
-            'Dynamic': self.get_dynamic_analysis_data,
-            'ModalDynamic': self.get_modal_dynamic_analysis_data,
-            'Output': self.get_output_analysis_data,
-            'Dload': self.get_step_dload_data,
-            'Frequency': self.get_frequency_analysis_data,
-            'SteadyStateDynamics': self.get_steady_state_dynamics_data,
-            'GlobalDamping': self.get_global_damping_commnads,
-            'Monitor': self.get_monitor_commands,
+            "Cload": self.get_step_cload_data,
+            "ConnectorMotion": self.get_step_connector_motion_data,
+            "BaseMotion": self.get_step_base_motion_data,
+            "Boundary": self.get_step_boundary_data,
+            "Static": self.get_static_analysis_data,
+            "Dynamic": self.get_dynamic_analysis_data,
+            "ModalDynamic": self.get_modal_dynamic_analysis_data,
+            "Output": self.get_output_analysis_data,
+            "Dload": self.get_step_dload_data,
+            "Frequency": self.get_frequency_analysis_data,
+            "SteadyStateDynamics": self.get_steady_state_dynamics_data,
+            "GlobalDamping": self.get_global_damping_commnads,
+            "Monitor": self.get_monitor_commands,
         }
         keys = [
-            'Static',
-            'Dynamic',
-            'ModalDynamic',
-            'Frequency',
-            'SteadyStateDynamics',
-            'GlobalDamping',
-            'Cload',
-            'Boundary',
-            'ConnectorMotion',
-            'BaseMotion',
-            'Dload',
-            'Monitor',
-            'Output',
+            "Static",
+            "Dynamic",
+            "ModalDynamic",
+            "Frequency",
+            "SteadyStateDynamics",
+            "GlobalDamping",
+            "Cload",
+            "Boundary",
+            "ConnectorMotion",
+            "BaseMotion",
+            "Dload",
+            "Monitor",
+            "Output",
         ]
-        mapdl_step_commands = ''
+        mapdl_step_commands = ""
         for key in keys:
             if key in step_data:
                 function = function_maps[key]
@@ -4626,91 +4918,99 @@ class _StepProcessor:
                 if (
                     key == "GlobalDamping"
                     and global_damp_value
-                    and 'SteadyStateDynamics' in step_data
+                    and "SteadyStateDynamics" in step_data
                 ):
                     key_commands = ""
-                if key == "GlobalDamping" and 'Frequency' in step_data:
+                if key == "GlobalDamping" and "Frequency" in step_data:
                     key_commands = "Placeholder_GlobalDamping\n"
                 mapdl_step_commands += key_commands
                 if key == "Output" and "Dynamic" in step_data:
-                    if "STATIC" in self._analysis_sequence and "DYNAMIC" in self._analysis_sequence:
+                    if (
+                        "STATIC" in self._analysis_sequence
+                        and "DYNAMIC" in self._analysis_sequence
+                    ):
                         self._transient_output_controls = key_commands
                         self._transient_output_controls += "\nNROPT,FULL\n"
                 if key == "Output" and "Static" in step_data:
-                    if "STATIC" in self._analysis_sequence and "DYNAMIC" in self._analysis_sequence:
+                    if (
+                        "STATIC" in self._analysis_sequence
+                        and "DYNAMIC" in self._analysis_sequence
+                    ):
                         mapdl_step_commands += "Placeholder_Transient_Outres\n"
-        step_name = ''
-        if 'Parameters' in step_data:
-            step_params = step_data['Parameters']
+        step_name = ""
+        if "Parameters" in step_data:
+            step_params = step_data["Parameters"]
             if step_params:
-                if 'NLGEOM' in step_params:
+                if "NLGEOM" in step_params:
                     mapdl_step_commands += "NLGEOM, "
-                    if step_params['NLGEOM'] == "YES":
+                    if step_params["NLGEOM"] == "YES":
                         mapdl_step_commands += "ON\n"
                     else:
                         mapdl_step_commands += "OFF\n"
-                if 'UNSYMM' in step_params:
-                    if step_params['UNSYMM'] == "YES":
+                if "UNSYMM" in step_params:
+                    if step_params["UNSYMM"] == "YES":
                         mapdl_step_commands += "NROPT, UNSYM\n"
-                if 'NAME' in step_params:
-                    step_name = step_params['NAME']
-        mapdl_step_commands += 'RESCONTROL,,NONE,NONE\n'
-        mapdl_step_commands += '\n'
-        mapdl_step_commands += 'DMPOPT,  RST, YES \n'
-        mapdl_step_commands += 'DMPOPT, ESAV,  NO \n'
-        mapdl_step_commands += 'DMPOPT, EMAT,  NO \n'
-        mapdl_step_commands += 'DMPOPT, FULL,  NO \n'
-        mapdl_step_commands += 'DMPOPT, MODE,  YES \n'
-        mapdl_step_commands += 'DMPOPT,  MLV,  NO \n'
-        mapdl_step_commands += '\n'
-        if self._step_counter == 1 or 'AIRL, AUTO' in mapdl_step_commands:
-            mapdl_step_commands += '/GST, ON, ON\n'
-            mapdl_step_commands += '! Compress contact printout\n'
-            mapdl_step_commands += 'CNTR, OUT, yes\n'
-            mapdl_step_commands += '! Compress element type printout\n'
-            mapdl_step_commands += 'OUTPR, ETYP, COMP\n'
-            mapdl_step_commands += '! option to delete distributed files even in case of failure\n'
-            mapdl_step_commands += 'NCNV, 2\n'
-            mapdl_step_commands += '\n'
-            mapdl_step_commands += 'CNCH,DMP\n'
-            mapdl_step_commands += '\n'
-        if 'Frequency' in step_data:
+                if "NAME" in step_params:
+                    step_name = step_params["NAME"]
+        mapdl_step_commands += "RESCONTROL,,NONE,NONE\n"
+        mapdl_step_commands += "\n"
+        mapdl_step_commands += "DMPOPT,  RST, YES \n"
+        mapdl_step_commands += "DMPOPT, ESAV,  NO \n"
+        mapdl_step_commands += "DMPOPT, EMAT,  NO \n"
+        mapdl_step_commands += "DMPOPT, FULL,  NO \n"
+        mapdl_step_commands += "DMPOPT, MODE,  YES \n"
+        mapdl_step_commands += "DMPOPT,  MLV,  NO \n"
+        mapdl_step_commands += "\n"
+        if self._step_counter == 1 or "AIRL, AUTO" in mapdl_step_commands:
+            mapdl_step_commands += "/GST, ON, ON\n"
+            mapdl_step_commands += "! Compress contact printout\n"
+            mapdl_step_commands += "CNTR, OUT, yes\n"
+            mapdl_step_commands += "! Compress element type printout\n"
+            mapdl_step_commands += "OUTPR, ETYP, COMP\n"
+            mapdl_step_commands += (
+                "! option to delete distributed files even in case of failure\n"
+            )
+            mapdl_step_commands += "NCNV, 2\n"
+            mapdl_step_commands += "\n"
+            mapdl_step_commands += "CNCH,DMP\n"
+            mapdl_step_commands += "\n"
+        if "Frequency" in step_data:
             mapdl_step_commands += self.create_modal_vectors()
 
-        if 'ModalDynamic' in step_data:
+        if "ModalDynamic" in step_data:
             mapdl_step_commands = self.add_modal_dynamic_zero_step(mapdl_step_commands)
         if step_name:
-            mapdl_step_commands += f'!STEP_NAME {step_name}\n'
-        mapdl_step_commands += 'SOLVE\n'
+            mapdl_step_commands += f"!STEP_NAME {step_name}\n"
+        mapdl_step_commands += "SOLVE\n"
         return mapdl_step_commands
 
     def add_modal_dynamic_zero_step(self, cmd_string):
-        cmd_string_lines = cmd_string.split('\n')
+        cmd_string_lines = cmd_string.split("\n")
         final_lines = []
         additional_lines = []
         duplicate_lines = False
         for line in cmd_string_lines:
             if duplicate_lines:
                 additional_lines.append(line)
-            if '/SOLU' in line:
+            if "/SOLU" in line:
                 duplicate_lines = True
-            if 'TIME' in line:
+            if "TIME" in line:
                 line = "TIME, 0"
             if "DVAL" in line:
-                line_data = line.split(',')
+                line_data = line.split(",")
                 line_data[3] = " 0"
-                line = ','.join(line_data)
-            if 'LVSCALE' in line:
-                line_data = line.split(',')
+                line = ",".join(line_data)
+            if "LVSCALE" in line:
+                line_data = line.split(",")
                 line_data[1] = " 0"
-                line = ','.join(line_data)
+                line = ",".join(line_data)
 
             final_lines.append(line)
 
         final_lines.append("SOLVE\n")
         final_lines.extend(additional_lines)
 
-        return '\n'.join(final_lines)
+        return "\n".join(final_lines)
 
     def get_all_steps(self):
         mapdl_commands = []
@@ -4719,19 +5019,27 @@ class _StepProcessor:
         for step_data in self._steps_data:
             self._step_counter += 1
             current_step_data = self._process_step(step_data)
-            if 'AIRL, AUTO' in current_step_data:
+            if "AIRL, AUTO" in current_step_data:
                 mapdl_commands = []
             mapdl_commands.append(current_step_data)
 
-        steps_commands = '\n'.join(mapdl_commands)
+        steps_commands = "\n".join(mapdl_commands)
         if "Placeholder_GlobalDamping" in steps_commands:
             steps_commands = steps_commands.replace(
-                "Placeholder_GlobalDamping", f"DMPSTR, {self._global_structural_damping_value}"
+                "Placeholder_GlobalDamping",
+                f"DMPSTR, {self._global_structural_damping_value}",
             )
-        if "Placeholder_Transient_Outres" in steps_commands and not self._transient_output_controls:
-            updated_steps_commands = steps_commands.replace("Placeholder_Transient_Outres", "")
-        elif "Placeholder_Transient_Outres" in steps_commands and self._transient_output_controls:
-
+        if (
+            "Placeholder_Transient_Outres" in steps_commands
+            and not self._transient_output_controls
+        ):
+            updated_steps_commands = steps_commands.replace(
+                "Placeholder_Transient_Outres", ""
+            )
+        elif (
+            "Placeholder_Transient_Outres" in steps_commands
+            and self._transient_output_controls
+        ):
             all_lines = self._transient_output_controls.strip().split("\n")
             new_lines = []
 
@@ -4754,25 +5062,25 @@ class _StepProcessor:
         return updated_steps_commands
 
     def get_step_by_step_id(self, step_id):
-        mapdl_commands = ''
+        mapdl_commands = ""
         self._step_counter = 1
         self._time = 0.0
         self._previous_analysis = None
         self.get_analysis_sequence()
         for step_data in self._steps_data:
-            if step_data['id'] == step_id:
+            if step_data["id"] == step_id:
                 mapdl_commands += self._process_step(step_data)
         return mapdl_commands
 
 
 class _AxialTempCorrection:
     __slots__ = (
-        '_connector_sections',
-        '_connector_behavior',
-        '_element_wise_csys',
-        '_enable_hm_comments',
-        '_model',
-        '_logger',
+        "_connector_sections",
+        "_connector_behavior",
+        "_element_wise_csys",
+        "_enable_hm_comments",
+        "_model",
+        "_logger",
     )
 
     def __init__(
@@ -4793,18 +5101,24 @@ class _AxialTempCorrection:
     def process_axial_connectors(self):
         axial_modification_string = ""
         for section in self._connector_sections:
-            if self._connector_sections[section]['Data']['connection_type'] == 'AXIAL':
-                if 'BEHAVIOR' in self._connector_sections[section]['Parameters']:
+            if self._connector_sections[section]["Data"]["connection_type"] == "AXIAL":
+                if "BEHAVIOR" in self._connector_sections[section]["Parameters"]:
                     behavior_data = self._connector_behavior[
-                        self._connector_sections[section]['Parameters']['BEHAVIOR']
+                        self._connector_sections[section]["Parameters"]["BEHAVIOR"]
                     ]
                     axial_modification_string += f"\n"
                     axial_modification_string += f"esel,s,mat,,{behavior_data['id']}\n"
                     axial_modification_string += f"eid = ELNEXT(0)\n"
-                    axial_modification_string += self._modify_element_type(behavior_data)
-                    axial_modification_string += self._modify_section_type(behavior_data)
-                    axial_modification_string += self._modify_section_data(behavior_data)
-                    axial_modification_string += 'allsel\n'
+                    axial_modification_string += self._modify_element_type(
+                        behavior_data
+                    )
+                    axial_modification_string += self._modify_section_type(
+                        behavior_data
+                    )
+                    axial_modification_string += self._modify_section_data(
+                        behavior_data
+                    )
+                    axial_modification_string += "allsel\n"
                 else:
                     axial_modification_string += f"\n! Warning: the connector section "
                     f"'{section}' does not have behavior associated with it. "
@@ -4812,23 +5126,23 @@ class _AxialTempCorrection:
         return axial_modification_string
 
     def _modify_element_type(self, behavior_data):
-        et_string = ''
-        et_string += '*GET,type_id,ELEM,eid,ATTR,TYPE\n'
-        et_string += 'ET,type_id,184\n'
-        et_string += 'KEYOPT,type_id,1,16\n'
-        et_string += 'KEYOPT,type_id,4,1\n'
+        et_string = ""
+        et_string += "*GET,type_id,ELEM,eid,ATTR,TYPE\n"
+        et_string += "ET,type_id,184\n"
+        et_string += "KEYOPT,type_id,1,16\n"
+        et_string += "KEYOPT,type_id,4,1\n"
         return et_string
 
     def _modify_section_type(self, behavior_data):
-        sec_string = ''
-        sec_string += '*GET,sec_id,ELEM,eid,ATTR,SECN\n'
-        sec_string += 'SECTYPE,sec_id,JOINT,GENE\n'
-        sec_string += 'SECJOINT,LSYS,IJX\n'
-        sec_string += 'SECJOINT,RDOF,\n'
+        sec_string = ""
+        sec_string += "*GET,sec_id,ELEM,eid,ATTR,SECN\n"
+        sec_string += "SECTYPE,sec_id,JOINT,GENE\n"
+        sec_string += "SECJOINT,LSYS,IJX\n"
+        sec_string += "SECJOINT,RDOF,\n"
         return sec_string
 
     def _modify_section_data(self, behavior_data):
-        secdata_string = ''
+        secdata_string = ""
         if "CONNECTOR CONSTITUTIVE REFERENCE" in behavior_data:
             secdata_string += self._modify_section_type(behavior_data)
             joint_a_processor = _JointMaterialProcessor(
@@ -4837,10 +5151,10 @@ class _AxialTempCorrection:
             ref_lens = joint_a_processor._precess_ref_length(
                 behavior_data["CONNECTOR CONSTITUTIVE REFERENCE"]
             )
-            secdata_string += 'SECDATA'
+            secdata_string += "SECDATA"
             for ref_len in ref_lens:
-                secdata_string += f',{ref_len}'
-            secdata_string += '\n'
+                secdata_string += f",{ref_len}"
+            secdata_string += "\n"
         return secdata_string
 
 
@@ -4873,20 +5187,26 @@ def get_modified_component_name(name: str, set_type: str = None, sim_data=None) 
     where restrictions might exist on allowed characters and initial characters.
     """
     modified_name = re.sub(r"[^\w]", "_", name)
-    if set_type == 'NSET':
+    if set_type == "NSET":
         has_surface = (
-            'Surface' in sim_data
+            "Surface" in sim_data
             and sim_data["Surface"] is not None
-            and name in sim_data['Surface']
+            and name in sim_data["Surface"]
         )
-        has_nset = 'Nset' in sim_data and sim_data["Nset"] is not None and name in sim_data['Nset']
+        has_nset = (
+            "Nset" in sim_data
+            and sim_data["Nset"] is not None
+            and name in sim_data["Nset"]
+        )
         has_elset = (
-            'Elset' in sim_data and sim_data["Elset"] is not None and name in sim_data['Elset']
+            "Elset" in sim_data
+            and sim_data["Elset"] is not None
+            and name in sim_data["Elset"]
         )
         has_element = (
-            'Element' in sim_data
+            "Element" in sim_data
             and sim_data["Element"] is not None
-            and name in sim_data['Element']
+            and name in sim_data["Element"]
         )
 
         count = has_nset + (has_surface or has_elset or has_element)
@@ -4923,14 +5243,17 @@ def generate_mapdl_commands(
     -----
     **This is a beta API**. **The behavior and implementation may change in future**.
     """
-    all_mat_cmds = ''
-    analysis_settings = ''
+    all_mat_cmds = ""
+    analysis_settings = ""
     json_simulation_data = json.loads(simulation_data)
     if json_simulation_data is None:
-        if not simulation_data == 'null':
+        if not simulation_data == "null":
             model.python_logger.warning("Simulation data is empty")
         return all_mat_cmds, analysis_settings
-    if "Materials" in json_simulation_data and json_simulation_data["Materials"] is not None:
+    if (
+        "Materials" in json_simulation_data
+        and json_simulation_data["Materials"] is not None
+    ):
         mp = _MaterialProcessor(
             model,
             json_simulation_data["Materials"],
@@ -4952,28 +5275,32 @@ def generate_mapdl_commands(
         )
         joint_all_mat_cmds = jmp.get_all_material_commands()
         all_mat_cmds += joint_all_mat_cmds
-    general_contact_cmds = ''
-    ampl_cmds = ''
+    general_contact_cmds = ""
+    ampl_cmds = ""
     if "TimePoint" in json_simulation_data:
-        timepoint_processor = _TimePointsProcessor(model, json_simulation_data["TimePoint"])
+        timepoint_processor = _TimePointsProcessor(
+            model, json_simulation_data["TimePoint"]
+        )
         ampl_cmds += timepoint_processor.get_all_timepoints_commands()
     if "TimePoints" in json_simulation_data:
-        timepoints_processor = _TimePointsProcessor(model, json_simulation_data["TimePoints"])
+        timepoints_processor = _TimePointsProcessor(
+            model, json_simulation_data["TimePoints"]
+        )
         ampl_cmds += timepoints_processor.get_all_timepoints_commands()
-    pre_step_boun_cmds = ''
-    boundary_ampl_cmds = ''
+    pre_step_boun_cmds = ""
+    boundary_ampl_cmds = ""
     if "Boundary" in json_simulation_data:
         boundary_processor = _BoundaryProcessor(
             model, json_simulation_data["Boundary"], sim_data=json_simulation_data
         )
         pre_step_boun_cmds = boundary_processor.get_all_boundary_commands()
         boundary_ampl_cmds = boundary_processor.get_ampl_commands()
-    step_settings = ''
-    ninterval_mapdl_commands = ''
-    cload_ampl_commands = ''
-    step_boundary_ampl_commands = ''
-    connector_motion_ampl_commands = ''
-    base_motion_ampl_commands = ''
+    step_settings = ""
+    ninterval_mapdl_commands = ""
+    cload_ampl_commands = ""
+    step_boundary_ampl_commands = ""
+    connector_motion_ampl_commands = ""
+    base_motion_ampl_commands = ""
     if "Step" in json_simulation_data:
         steps_data = _StepProcessor(
             model,
@@ -4996,46 +5323,47 @@ def generate_mapdl_commands(
     all_mat_cmds += connector_motion_ampl_commands
     all_mat_cmds += base_motion_ampl_commands
     all_mat_cmds += ampl_cmds
-    all_mat_cmds += 'allsel\n'
-    analysis_settings += '\nALLSEL\n'
+    all_mat_cmds += "allsel\n"
+    analysis_settings += "\nALLSEL\n"
     if general_contact_cmds:
         analysis_settings += general_contact_cmds
-        analysis_settings += '!-------------------------------------------------\n'
+        analysis_settings += "!-------------------------------------------------\n"
     if params.pre_solution_settings is not None:
         analysis_settings += params.pre_solution_settings
-        analysis_settings += '\n'
+        analysis_settings += "\n"
     analysis_settings += pre_step_boun_cmds
-    analysis_settings += '\nFINISH\n'
-    analysis_settings += '\n/SOLU\n'
+    analysis_settings += "\nFINISH\n"
+    analysis_settings += "\n/SOLU\n"
     analysis_settings += step_settings
-    analysis_settings += '\nFINISH\n'
+    analysis_settings += "\nFINISH\n"
     if params.analysis_settings is not None:
         analysis_settings += params.analysis_settings
         if "Step" in json_simulation_data and json_simulation_data["Step"]:
             analysis_settings += (
-                '!--------------------------------------------------------------' '------------\n'
+                "!--------------------------------------------------------------"
+                "------------\n"
             )
-            analysis_settings += '/delete,,cnm,,1\n'
-            analysis_settings += '/delete,,DSP,,\n'
-            analysis_settings += '! /delete,,mcf,,\n'
-            analysis_settings += '/delete,,rfrq,,1\n'
-            analysis_settings += '/delete,,rdsp,,1\n'
-            analysis_settings += '/delete,,log,,1\n'
-            analysis_settings += '/delete,,emat,,1\n'
-            analysis_settings += '/delete,,esav,,1\n'
-            analysis_settings += '/delete,,err,,1\n'
-            analysis_settings += '/delete,,full,,1\n'
-            analysis_settings += '/delete,,mlv,,1\n'
-            analysis_settings += '/delete,,mode,,1\n'
-            analysis_settings += '/delete,,out,,1\n'
-            analysis_settings += '!/delete,,mntr,,\n'
-            analysis_settings += '/delete,,ldhi,,\n'
-            analysis_settings += '/delete,,r001,,1\n'
-            analysis_settings += '/delete,,rst,,1\n'
-            analysis_settings += '/delete,,stat,,1\n'
-            analysis_settings += '/delete,,db,,\n'
-            analysis_settings += '/delete,,rdb,,\n'
+            analysis_settings += "/delete,,cnm,,1\n"
+            analysis_settings += "/delete,,DSP,,\n"
+            analysis_settings += "! /delete,,mcf,,\n"
+            analysis_settings += "/delete,,rfrq,,1\n"
+            analysis_settings += "/delete,,rdsp,,1\n"
+            analysis_settings += "/delete,,log,,1\n"
+            analysis_settings += "/delete,,emat,,1\n"
+            analysis_settings += "/delete,,esav,,1\n"
+            analysis_settings += "/delete,,err,,1\n"
+            analysis_settings += "/delete,,full,,1\n"
+            analysis_settings += "/delete,,mlv,,1\n"
+            analysis_settings += "/delete,,mode,,1\n"
+            analysis_settings += "/delete,,out,,1\n"
+            analysis_settings += "!/delete,,mntr,,\n"
+            analysis_settings += "/delete,,ldhi,,\n"
+            analysis_settings += "/delete,,r001,,1\n"
+            analysis_settings += "/delete,,rst,,1\n"
+            analysis_settings += "/delete,,stat,,1\n"
+            analysis_settings += "/delete,,db,,\n"
+            analysis_settings += "/delete,,rdb,,\n"
             for an_name in steps_data._assign_analysis:
-                analysis_settings += f'/delete,{an_name},rst,,1\n'
-            analysis_settings += '/exit,nosave\n'
+                analysis_settings += f"/delete,{an_name},rst,,1\n"
+            analysis_settings += "/exit,nosave\n"
     return all_mat_cmds, analysis_settings

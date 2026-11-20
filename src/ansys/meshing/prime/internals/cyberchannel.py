@@ -1,5 +1,6 @@
-# Copyright (C) 2024 - 2026 ANSYS, Inc. and/or its affiliates.
+# Copyright (C) 2025 - 2026 Synopsys, Inc. and ANSYS, Inc. All rights reserved.
 # SPDX-License-Identifier: MIT
+#
 #
 # Permission is hereby granted, free of charge, to any person obtaining a copy
 # of this software and associated documentation files (the "Software"), to deal
@@ -224,7 +225,9 @@ def create_uds_channel(
         )
 
     if not uds_service:
-        raise ValueError("When using UDS transport mode, 'uds_service' must be provided.")
+        raise ValueError(
+            "When using UDS transport mode, 'uds_service' must be provided."
+        )
 
     # Determine UDS folder
     uds_folder = determine_uds_folder(uds_dir)
@@ -233,7 +236,9 @@ def create_uds_channel(
     uds_folder.mkdir(parents=True, exist_ok=True)
 
     # Generate socket filename with optional ID
-    socket_filename = f"{uds_service}-{uds_id}.sock" if uds_id else f"{uds_service}.sock"
+    socket_filename = (
+        f"{uds_service}-{uds_id}.sock" if uds_id else f"{uds_service}.sock"
+    )
     target = f"unix:{uds_folder / socket_filename}"
 
     # Set default authority to "localhost" for UDS connection
@@ -273,7 +278,9 @@ def create_wnua_channel(
 
     """
     if not _IS_WINDOWS:
-        raise ValueError("Windows Named User Authentication (WNUA) is only supported on Windows.")
+        raise ValueError(
+            "Windows Named User Authentication (WNUA) is only supported on Windows."
+        )
     if host not in LOOPBACK_HOSTS:
         raise ValueError("Remote host connections are not supported with WNUA.")
 
@@ -366,7 +373,9 @@ def create_mtls_channel(
 
     # Create SSL credentials
     credentials = grpc.ssl_channel_credentials(
-        root_certificates=trusted_certs, private_key=client_key, certificate_chain=client_cert
+        root_certificates=trusted_certs,
+        private_key=client_key,
+        certificate_chain=client_cert,
     )
 
     target = f"{host}:{port}"
@@ -476,7 +485,9 @@ def verify_transport_mode(transport_mode: str, mode: str | None = None) -> None:
     elif mode == "all" or mode is None:
         valid_modes = {"insecure", "uds", "wnua", "mtls"}
     else:
-        raise ValueError(f"Invalid mode: {mode}. Valid options are: 'all', 'local', 'remote'.")
+        raise ValueError(
+            f"Invalid mode: {mode}. Valid options are: 'all', 'local', 'remote'."
+        )
 
     if transport_mode.lower() not in valid_modes:
         raise ValueError(

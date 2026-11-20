@@ -24,7 +24,7 @@ from ansys.meshing.prime import __version__
 viz_interface.DOCUMENTATION_BUILD = True
 
 # Project information
-project = 'ansys-meshing-prime'
+project = "ansys-meshing-prime"
 copyright = f"(c) {datetime.now().year} ANSYS, Inc. All rights reserved"
 author = "Ansys Inc."
 release = version = __version__
@@ -33,7 +33,7 @@ cname = os.getenv("DOCUMENTATION_CNAME", default="nocname.com")
 # HTML options
 html_short_title = html_title = "PyPrimeMesh"
 html_logo = pyansys_logo_black
-html_theme = 'ansys_sphinx_theme'
+html_theme = "ansys_sphinx_theme"
 
 html_favicon = ansys_favicon
 
@@ -77,8 +77,8 @@ html_theme_options = {
 
 # Sphinx extensions
 extensions = [
-    'sphinx.ext.autodoc',
-    'sphinx.ext.autosummary',
+    "sphinx.ext.autodoc",
+    "sphinx.ext.autosummary",
     "numpydoc",
     "sphinx.ext.intersphinx",
     "sphinx_copybutton",
@@ -143,10 +143,10 @@ html_static_path = ["_static"]
 templates_path = ["_templates"]
 
 # The suffix(es) of source filenames.
-source_suffix = '.rst'
+source_suffix = ".rst"
 
 # The master toctree document.
-master_doc = 'index'
+master_doc = "index"
 
 autosummary_generate = True
 autosummary_imported_members = True
@@ -184,7 +184,9 @@ sphinx_gallery_conf = {
     "backreferences_dir": "api/_gallery_backreferences",
     # Modules for which function level galleries are created.  In
     "doc_module": ("ansys.meshing.prime"),
-    "exclude_implicit_doc": {"ansys\\.meshing\\.prime\\._.*"},  # ignore private submodules
+    "exclude_implicit_doc": {
+        "ansys\\.meshing\\.prime\\._.*"
+    },  # ignore private submodules
     "image_scrapers": (DynamicScraper(), "matplotlib"),
     "thumbnail_size": (350, 350),
     "parallel": True,
@@ -227,7 +229,9 @@ def run_all_examples_in_parallel():
         recursive=True,
     )
     # Exclude any scripts in 'examples/other'
-    example_scripts = [f for f in example_scripts if "examples/other" not in f.replace("\\", "/")]
+    example_scripts = [
+        f for f in example_scripts if "examples/other" not in f.replace("\\", "/")
+    ]
     # Exclude flycheck files if needed
     example_scripts = [f for f in example_scripts if "flycheck" not in f]
     Parallel(n_jobs=-1)(delayed(run_example)(script) for script in example_scripts)

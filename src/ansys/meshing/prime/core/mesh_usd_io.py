@@ -1,5 +1,6 @@
-# Copyright (C) 2024 - 2026 ANSYS, Inc. and/or its affiliates.
+# Copyright (C) 2025 - 2026 Synopsys, Inc. and ANSYS, Inc. All rights reserved.
 # SPDX-License-Identifier: MIT
+#
 #
 # Permission is hereby granted, free of charge, to any person obtaining a copy
 # of this software and associated documentation files (the "Software"), to deal
@@ -87,14 +88,22 @@ def face_geometry_to_usd(face_geom, stage, part_path: str, face_index: int):
 
     # Add custom attributes for metadata
     prim = mesh_prim.GetPrim()
-    prim.CreateAttribute("primMeshId", Sdf.ValueTypeNames.Int).Set(int(face_geom.mesh_id))
-    prim.CreateAttribute("primZoneId", Sdf.ValueTypeNames.Int).Set(int(face_geom.zone_id))
+    prim.CreateAttribute("primMeshId", Sdf.ValueTypeNames.Int).Set(
+        int(face_geom.mesh_id)
+    )
+    prim.CreateAttribute("primZoneId", Sdf.ValueTypeNames.Int).Set(
+        int(face_geom.zone_id)
+    )
     if face_geom.zone_name:
         prim.CreateAttribute("primZoneName", Sdf.ValueTypeNames.String).Set(
             str(face_geom.zone_name)
         )
-    prim.CreateAttribute("primPartId", Sdf.ValueTypeNames.Int).Set(int(face_geom.part_id))
-    prim.CreateAttribute("primHasMesh", Sdf.ValueTypeNames.Bool).Set(bool(face_geom.has_mesh))
+    prim.CreateAttribute("primPartId", Sdf.ValueTypeNames.Int).Set(
+        int(face_geom.part_id)
+    )
+    prim.CreateAttribute("primHasMesh", Sdf.ValueTypeNames.Bool).Set(
+        bool(face_geom.has_mesh)
+    )
     prim.CreateAttribute("primDisplayMeshType", Sdf.ValueTypeNames.Int).Set(
         int(face_geom.display_mesh_type)
     )
@@ -151,8 +160,12 @@ def edge_geometry_to_usd(edge_geom, stage, part_path: str, edge_index: int):
 
     # Add custom attributes for metadata
     prim = curves_prim.GetPrim()
-    prim.CreateAttribute("primMeshId", Sdf.ValueTypeNames.Int).Set(int(edge_geom.mesh_id))
-    prim.CreateAttribute("primPartId", Sdf.ValueTypeNames.Int).Set(int(edge_geom.part_id))
+    prim.CreateAttribute("primMeshId", Sdf.ValueTypeNames.Int).Set(
+        int(edge_geom.mesh_id)
+    )
+    prim.CreateAttribute("primPartId", Sdf.ValueTypeNames.Int).Set(
+        int(edge_geom.part_id)
+    )
     prim.CreateAttribute("primDisplayMeshType", Sdf.ValueTypeNames.Int).Set(
         int(edge_geom.display_mesh_type)
     )
@@ -201,8 +214,12 @@ def spline_geometry_to_usd(spline_geom, stage, part_path: str, spline_index: int
         color_attr.Set([norm_color])
 
         prim = points_prim.GetPrim()
-        prim.CreateAttribute("primSplineId", Sdf.ValueTypeNames.Int).Set(int(spline_geom.spline_id))
-        prim.CreateAttribute("primPartId", Sdf.ValueTypeNames.Int).Set(int(spline_geom.part_id))
+        prim.CreateAttribute("primSplineId", Sdf.ValueTypeNames.Int).Set(
+            int(spline_geom.spline_id)
+        )
+        prim.CreateAttribute("primPartId", Sdf.ValueTypeNames.Int).Set(
+            int(spline_geom.part_id)
+        )
 
         return points_prim
     else:  # SPLINESURFACE
@@ -217,8 +234,12 @@ def spline_geometry_to_usd(spline_geom, stage, part_path: str, spline_index: int
         color_attr.Set([norm_color])
 
         prim = mesh_prim.GetPrim()
-        prim.CreateAttribute("primSplineId", Sdf.ValueTypeNames.Int).Set(int(spline_geom.spline_id))
-        prim.CreateAttribute("primPartId", Sdf.ValueTypeNames.Int).Set(int(spline_geom.part_id))
+        prim.CreateAttribute("primSplineId", Sdf.ValueTypeNames.Int).Set(
+            int(spline_geom.spline_id)
+        )
+        prim.CreateAttribute("primPartId", Sdf.ValueTypeNames.Int).Set(
+            int(spline_geom.part_id)
+        )
 
         return mesh_prim
 
@@ -328,4 +349,6 @@ def export_usd_viewer_html(
 
     usd_path = Path(usd_path).expanduser().resolve()
     export_to_usd(usd_geom_dict, str(usd_path))
-    return export_usd_to_html(usd_path, html_path, line_color=line_color, line_opacity=line_opacity)
+    return export_usd_to_html(
+        usd_path, html_path, line_color=line_color, line_opacity=line_opacity
+    )

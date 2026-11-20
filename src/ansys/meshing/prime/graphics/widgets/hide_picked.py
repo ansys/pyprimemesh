@@ -1,5 +1,6 @@
-# Copyright (C) 2024 - 2026 ANSYS, Inc. and/or its affiliates.
+# Copyright (C) 2025 - 2026 Synopsys, Inc. and ANSYS, Inc. All rights reserved.
 # SPDX-License-Identifier: MIT
+#
 #
 # Permission is hereby granted, free of charge, to any person obtaining a copy
 # of this software and associated documentation files (the "Software"), to deal
@@ -105,7 +106,9 @@ class HidePicked(ToolbarButton, PlotterWidget):
             Description of the current and next visibility state.
         """
         if self._hidden_entities:
-            return f"{len(self._hidden_entities)} entities hidden.\nClick to restore them."
+            return (
+                f"{len(self._hidden_entities)} entities hidden.\nClick to restore them."
+            )
         return "Selected entities are visible.\nClick to hide the selection."
 
     def update(self) -> None:

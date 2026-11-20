@@ -1,5 +1,6 @@
-# Copyright (C) 2024 - 2026 ANSYS, Inc. and/or its affiliates.
+# Copyright (C) 2025 - 2026 Synopsys, Inc. and ANSYS, Inc. All rights reserved.
 # SPDX-License-Identifier: MIT
+#
 #
 # Permission is hereby granted, free of charge, to any person obtaining a copy
 # of this software and associated documentation files (the "Software"), to deal
@@ -20,6 +21,7 @@
 # SOFTWARE.
 
 """Module for general utilities of the project."""
+
 import logging
 import os
 import shutil
@@ -40,7 +42,9 @@ FileName = Union[str, os.PathLike]
 FileNameList = Sequence[FileName]
 
 
-def _make_stage_dirs(local_root: Optional[str] = None, container_root: Optional[str] = None):
+def _make_stage_dirs(
+    local_root: Optional[str] = None, container_root: Optional[str] = None
+):
     """Create a staging directory shared with the container for one file transfer.
 
     Examples are staged by base name, so parallel callers reading different copies
@@ -98,7 +102,7 @@ def make_unique_container_name(name: str):
     str
         Unique name with a numeric integer added as suffix.
     """
-    return f'{name}-' + str(uuid.uuid4())
+    return f"{name}-" + str(uuid.uuid4())
 
 
 def to_camel_case(snake_str):
@@ -114,10 +118,10 @@ def to_camel_case(snake_str):
     str
         String converted to camelCase.
     """
-    components = snake_str.split('_')
+    components = snake_str.split("_")
     # We capitalize the first letter of each component except the first one
     # with the 'title' method and join them together.
-    return components[0] + ''.join(x.title() for x in components[1:])
+    return components[0] + "".join(x.title() for x in components[1:])
 
 
 def get_child_processes(process):
@@ -136,18 +140,16 @@ def get_child_processes(process):
     children = []
     # Resolve full executable paths to avoid starting a process via a partial
     # path that could be hijacked through a manipulated PATH environment variable.
-    pgrep_path = shutil.which('pgrep') or 'pgrep'
-    ps_path = shutil.which('ps') or 'ps'
-    cmd = subprocess.Popen(
-        [pgrep_path, '-P', str(process)], stdout=subprocess.PIPE
-    )  # nosec B603 - args are a resolved executable path and str(process); shell=False.
+    pgrep_path = shutil.which("pgrep") or "pgrep"
+    ps_path = shutil.which("ps") or "ps"
+    cmd = subprocess.Popen([pgrep_path, "-P", str(process)], stdout=subprocess.PIPE)  # nosec B603 - args are a resolved executable path and str(process); shell=False.
     out = cmd.stdout.read().decode("utf-8")
     cmd.wait()
     for pid in out.split("\n")[:1]:
-        if pid.strip() == '':
+        if pid.strip() == "":
             break
         ps_cmd = subprocess.Popen(
-            [ps_path, '-o', 'cmd=', str(int(pid))], stdout=subprocess.PIPE
+            [ps_path, "-o", "cmd=", str(int(pid))], stdout=subprocess.PIPE
         )  # nosec B603 - args are a resolved executable path and an int-validated pid; shell=False.
         ps_out = ps_cmd.stdout.read().decode("utf-8")
         ps_cmd.wait()
@@ -170,7 +172,7 @@ def terminate_process(process: subprocess):
     import signal
     import sys
 
-    if sys.platform.startswith('win32'):
+    if sys.platform.startswith("win32"):
         process.send_signal(signal.CTRL_BREAK_EVENT)
     else:
         for child in get_child_processes(process.pid):
@@ -206,9 +208,9 @@ def print_logs_before_command(logger: logging.Logger, command: str, args):
             logger.debug("    " + key + ":")
             val = args[key]
             printable_str = ""
-            if hasattr(val, '__str__'):
+            if hasattr(val, "__str__"):
                 printable_str = val.__str__()
-            elif type(val) == 'str':
+            elif type(val) == "str":
                 printable_str = val
             else:
                 printable_str = str(val)
@@ -233,9 +235,9 @@ def print_logs_after_command(logger: logging.Logger, command: str, ret):
     if logger.isEnabledFor(logging.DEBUG):
         logger.debug("Return: ")
         printable_str = ""
-        if hasattr(ret, '__str__'):
+        if hasattr(ret, "__str__"):
             printable_str = ret.__str__()
-        elif type(ret) == 'str':
+        elif type(ret) == "str":
             printable_str = ret
         else:
             printable_str = str(ret)
@@ -266,7 +268,7 @@ def launch_prime_github_container(
     port: int = defaults.port(),
     name: str = "ansys-prime-server",
     version: Optional[str] = None,
-    connection_type: Optional['config.ConnectionType'] = None,
+    connection_type: Optional["config.ConnectionType"] = None,
 ):
     """Launch a container.
 
@@ -292,26 +294,26 @@ def launch_prime_github_container(
     ValueError
         License is not available.
     """
-    license_file = os.environ.get('ANSYSLMD_LICENSE_FILE', None)
-    image_name = os.environ.get('PYPRIMEMESH_IMAGE_NAME', 'ghcr.io/ansys/prime')
+    license_file = os.environ.get("ANSYSLMD_LICENSE_FILE", None)
+    image_name = os.environ.get("PYPRIMEMESH_IMAGE_NAME", "ghcr.io/ansys/prime")
     if license_file is None:
-        raise ValueError('Licensing information to launch container not found')
+        raise ValueError("Licensing information to launch container not found")
     if version is None:
-        version = os.environ.get('PYPRIMEMESH_IMAGE_TAG', 'latest')
+        version = os.environ.get("PYPRIMEMESH_IMAGE_TAG", "latest")
     # Prepare port mappings
-    ports = {f'{port}/tcp': port}
-    graphics_port = int(os.environ.get('PRIME_GRAPHICS_PORT', '0'))
+    ports = {f"{port}/tcp": port}
+    graphics_port = int(os.environ.get("PRIME_GRAPHICS_PORT", "0"))
     if graphics_port > 0:
-        ports[f'{graphics_port}/tcp'] = graphics_port
+        ports[f"{graphics_port}/tcp"] = graphics_port
 
     # Prepare volumes
-    volumes = {mount_host: {'bind': mount_image, 'mode': 'rw'}}
+    volumes = {mount_host: {"bind": mount_image, "mode": "rw"}}
 
     # Prepare environment variables
-    environment = {'ANSYSLMD_LICENSE_FILE': license_file}
+    environment = {"ANSYSLMD_LICENSE_FILE": license_file}
 
     # Prepare command arguments
-    command = ['--port', str(port)]
+    command = ["--port", str(port)]
 
     # Set default connection type if not provided
     if connection_type is None:
@@ -320,13 +322,13 @@ def launch_prime_github_container(
     # Handle connection type
     if (
         connection_type == config.ConnectionType.GRPC_INSECURE
-        or os.environ.get('PRIME_MODE', '').upper() == "GRPC_INSECURE"
+        or os.environ.get("PRIME_MODE", "").upper() == "GRPC_INSECURE"
     ):
-        command.append('--secure=no')
+        command.append("--secure=no")
 
     # Create and start container using Docker Python library
     client = docker.from_env()
-    full_image_name = f'{image_name}:{version}'
+    full_image_name = f"{image_name}:{version}"
     container = client.containers.run(
         full_image_name,
         command=command,
@@ -352,20 +354,18 @@ def launch_prime_github_container(
         container.reload()
 
         # Check if container is still running
-        if container.status != 'running':
-            logs = container.logs().decode('utf-8')
-            print(f"\n{'='*80}")
+        if container.status != "running":
+            logs = container.logs().decode("utf-8")
+            print(f"\n{'=' * 80}")
             print(f"Docker container '{name}' logs:")
-            print(f"{'='*80}")
+            print(f"{'=' * 80}")
             print(logs)
-            print(f"{'='*80}\n")
-            error_msg = (
-                f"Container '{name}' failed to start or exited immediately. Check logs above."
-            )
+            print(f"{'=' * 80}\n")
+            error_msg = f"Container '{name}' failed to start or exited immediately. Check logs above."
             raise RuntimeError(error_msg)
 
         # Get container logs
-        logs = container.logs().decode('utf-8')
+        logs = container.logs().decode("utf-8")
 
         # Check for welcome message
         if welcome_message in logs:
@@ -421,14 +421,16 @@ def file_read_context(model, file_name: FileName):
     """
     file_name = to_path_str(file_name)
     if config.file_existence_check_enabled() and not os.path.exists(file_name):
-        raise FileNotFoundError(f'Given file name "{file_name}" is not found on local disk')
+        raise FileNotFoundError(
+            f'Given file name "{file_name}" is not found on local disk'
+        )
     if config.using_container():
         base_file_name = os.path.basename(file_name)
         stage_dir, container_dir = _make_stage_dirs()
         temp_file_name = os.path.join(stage_dir, base_file_name)
         shutil.copyfile(file_name, temp_file_name)
         container_file_name = os.path.join(container_dir, base_file_name)
-        container_file_name = container_file_name.replace(os.path.sep, '/')
+        container_file_name = container_file_name.replace(os.path.sep, "/")
         try:
             yield container_file_name
         finally:
@@ -527,7 +529,7 @@ def file_read_context_list(model, file_names: FileNameList):
         for file, temp in zip(file_names, temp_names):
             shutil.copyfile(file, temp)
         container_files = [os.path.join(container_dir, base) for base in base_names]
-        container_files = [file.replace(os.path.sep, '/') for file in container_files]
+        container_files = [file.replace(os.path.sep, "/") for file in container_files]
         try:
             yield container_files
         finally:
@@ -566,7 +568,7 @@ def file_write_context(model, file_name: FileName):
             defaults.get_output_path(), defaults.get_output_path_for_containers()
         )
         temp_file_name = os.path.join(container_dir, base_file_name)
-        temp_file_name = temp_file_name.replace(os.path.sep, '/')
+        temp_file_name = temp_file_name.replace(os.path.sep, "/")
         try:
             yield temp_file_name
             # Copy what the server wrote to the directory which was asked

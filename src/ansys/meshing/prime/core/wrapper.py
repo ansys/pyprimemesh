@@ -1,5 +1,6 @@
-# Copyright (C) 2024 - 2026 ANSYS, Inc. and/or its affiliates.
+# Copyright (C) 2025 - 2026 Synopsys, Inc. and ANSYS, Inc. All rights reserved.
 # SPDX-License-Identifier: MIT
+#
 #
 # Permission is hereby granted, free of charge, to any person obtaining a copy
 # of this software and associated documentation files (the "Software"), to deal
@@ -20,6 +21,7 @@
 # SOFTWARE.
 
 """Module for the wrapper class."""
+
 from typing import List
 
 import numpy as np
@@ -170,7 +172,8 @@ class Wrapper(_Wrapper):
             modified_zonelets = np.append(modified_zonelets, with_face_zonelet_ids)
         surf_utils = SurfaceUtilities(self._model)
         surf_utils.resolve_intersections(
-            face_zonelet_ids=modified_zonelets, params=ResolveIntersectionsParams(model=self._model)
+            face_zonelet_ids=modified_zonelets,
+            params=ResolveIntersectionsParams(model=self._model),
         )
 
     def close_gaps(

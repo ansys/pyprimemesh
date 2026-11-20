@@ -1,5 +1,6 @@
-# Copyright (C) 2024 - 2026 ANSYS, Inc. and/or its affiliates.
+# Copyright (C) 2025 - 2026 Synopsys, Inc. and ANSYS, Inc. All rights reserved.
 # SPDX-License-Identifier: MIT
+#
 #
 # Permission is hereby granted, free of charge, to any person obtaining a copy
 # of this software and associated documentation files (the "Software"), to deal
@@ -22,15 +23,15 @@
 """Default configuration for PyPrimeMesh."""
 
 __all__ = [
-    'ip',
-    'port',
-    'connection_timeout',
-    'print_communicator_stats',
-    'max_message_length',
-    'get_examples_path',
-    'get_examples_path_for_containers',
-    'get_output_path',
-    'get_output_path_for_containers',
+    "ip",
+    "port",
+    "connection_timeout",
+    "print_communicator_stats",
+    "max_message_length",
+    "get_examples_path",
+    "get_examples_path_for_containers",
+    "get_output_path",
+    "get_output_path_for_containers",
 ]
 
 import os
@@ -39,39 +40,40 @@ try:
     import appdirs
 
     USER_DATA_PATH = os.getenv(
-        'PYPRIMEMESH_USER_DATA', appdirs.user_data_dir(appname='pyprimemesh', appauthor=False)
+        "PYPRIMEMESH_USER_DATA",
+        appdirs.user_data_dir(appname="pyprimemesh", appauthor=False),
     )
 except ModuleNotFoundError:
     # If appdirs is not installed, then try with tempfile.
     # NOTE: This only occurs for ADO ARM Test runs
     import tempfile
 
-    USER_NAME = os.getenv('USERNAME', os.getenv('USER', 'pyprimemesh'))
+    USER_NAME = os.getenv("USERNAME", os.getenv("USER", "pyprimemesh"))
     USER_DATA_PATH = os.getenv(
-        'PYPRIMEMESH_USER_DATA', os.path.join(tempfile.gettempdir(), USER_NAME)
+        "PYPRIMEMESH_USER_DATA", os.path.join(tempfile.gettempdir(), USER_NAME)
     )
 
 os.makedirs(USER_DATA_PATH, exist_ok=True)
 
-EXAMPLES_PATH = os.path.join(USER_DATA_PATH, 'examples')
+EXAMPLES_PATH = os.path.join(USER_DATA_PATH, "examples")
 if not os.path.exists(EXAMPLES_PATH):  # pragma: no cover
     os.makedirs(EXAMPLES_PATH)
 
-LOCAL_OUTDIR = os.path.join(USER_DATA_PATH, 'output')
+LOCAL_OUTDIR = os.path.join(USER_DATA_PATH, "output")
 if not os.path.exists(LOCAL_OUTDIR):  # pragma: no cover
     os.makedirs(LOCAL_OUTDIR)
 
-CONTAINER_USER_DATA = os.getenv('PYPRIMEMESH_CONTAINER_USER_DATA ', '/data')
-CONTAINER_EXAMPLES = os.path.join(CONTAINER_USER_DATA, 'examples')
-CONTAINER_OUTDIR = os.path.join(CONTAINER_USER_DATA, 'output')
+CONTAINER_USER_DATA = os.getenv("PYPRIMEMESH_CONTAINER_USER_DATA ", "/data")
+CONTAINER_EXAMPLES = os.path.join(CONTAINER_USER_DATA, "examples")
+CONTAINER_OUTDIR = os.path.join(CONTAINER_USER_DATA, "output")
 
-__DEFAULT_IP = '127.0.0.1'
+__DEFAULT_IP = "127.0.0.1"
 __DEFAULT_PORT = 50055
 __DEFAULT_CONNECTION_TIMEOUT = 20.0
 __DEFAULT_COMM_LOG = False
 __MAX_MESSAGE_LENGTH = 4194310
 
-SPHINX_BUILD = bool(int(os.getenv('PYPRIMEMESH_SPHINX_BUILD', 0)))
+SPHINX_BUILD = bool(int(os.getenv("PYPRIMEMESH_SPHINX_BUILD", 0)))
 
 
 def ip():

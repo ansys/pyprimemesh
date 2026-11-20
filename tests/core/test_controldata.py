@@ -1,4 +1,4 @@
-# Copyright (C) 2024 - 2026 ANSYS, Inc. and/or its affiliates.
+# Copyright (C) 2025 - 2026 Synopsys, Inc. and ANSYS, Inc. All rights reserved.
 # SPDX-License-Identifier: MIT
 #
 #
@@ -21,6 +21,7 @@
 # SOFTWARE.
 
 """Tests for all control modules."""
+
 from ansys.meshing.prime import Model, SizingType
 
 
@@ -33,8 +34,8 @@ def test_empty_control_data(get_remote_client):
 
     size_control = model.control_data.create_size_control(sizing_type=SizingType.SOFT)
 
-    result = size_control.set_suggested_name('bar')
-    assert result.assigned_name != ''
+    result = size_control.set_suggested_name("bar")
+    assert result.assigned_name != ""
     assert result.assigned_name == size_control.name
 
 
@@ -49,8 +50,10 @@ def test_periodic_control(initialized_model_elbow):
     assert periodic_control_test is None
 
     periodic_control = test_control_data.create_periodic_control()
-    periodic_control_test = test_control_data.get_periodic_control_by_name(periodic_control.name)
-    assert periodic_control_test.name != ('' or None)
+    periodic_control_test = test_control_data.get_periodic_control_by_name(
+        periodic_control.name
+    )
+    assert periodic_control_test.name != ("" or None)
     assert periodic_control.name == periodic_control_test.name
 
     periodic_control_test.set_suggested_name("foo")
@@ -61,7 +64,9 @@ def test_periodic_control(initialized_model_elbow):
     # delete controls
     controls_ids = [periodic_control.id]
     test_control_data.delete_controls(controls_ids)
-    assert model.control_data.get_periodic_control_by_name(periodic_control.name) is None
+    assert (
+        model.control_data.get_periodic_control_by_name(periodic_control.name) is None
+    )
 
 
 def test_wrapper_control(initialized_model_elbow):
@@ -75,8 +80,10 @@ def test_wrapper_control(initialized_model_elbow):
     assert wrapper_control_test is None
 
     wrapper_control = test_control_data.create_wrapper_control()
-    wrapper_control_test = test_control_data.get_wrapper_control_by_name(wrapper_control.name)
-    assert wrapper_control_test.name != ('' or None)
+    wrapper_control_test = test_control_data.get_wrapper_control_by_name(
+        wrapper_control.name
+    )
+    assert wrapper_control_test.name != ("" or None)
     assert wrapper_control_test.name == wrapper_control.name
 
     wrapper_control_test.set_suggested_name("foo")
@@ -100,7 +107,7 @@ def test_size_control(initialized_model_elbow):
 
     size_control = test_control_data.create_size_control(SizingType.BOI)
     size_control_test = test_control_data.get_size_control_by_name(size_control.name)
-    assert size_control_test.name != ('' or None)
+    assert size_control_test.name != ("" or None)
     assert size_control.name == size_control_test.name
 
     size_control_test.set_suggested_name("foo")
@@ -123,7 +130,7 @@ def test_prism_control(initialized_model_elbow):
 
     prism_control = test_control_data.create_prism_control()
     prism_control_test = test_control_data.get_prism_control_by_name(prism_control.name)
-    assert prism_control_test.name != ('' or None)
+    assert prism_control_test.name != ("" or None)
     assert prism_control.name == prism_control_test.name
 
     assert test_control_data.prism_controls == [prism_control]
@@ -144,8 +151,10 @@ def test_volume_control(initialized_model_elbow):
     assert volume_control_test is None
 
     volume_control = test_control_data.create_volume_control()
-    volume_control_test = test_control_data.get_volume_control_by_name(volume_control.name)
-    assert volume_control_test.name != ('' or None)
+    volume_control_test = test_control_data.get_volume_control_by_name(
+        volume_control.name
+    )
+    assert volume_control_test.name != ("" or None)
     assert volume_control.name == volume_control_test.name
 
     volume_control_test.set_suggested_name("bar")

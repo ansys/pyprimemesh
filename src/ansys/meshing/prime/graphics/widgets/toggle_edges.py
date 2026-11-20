@@ -1,5 +1,6 @@
-# Copyright (C) 2024 - 2026 ANSYS, Inc. and/or its affiliates.
+# Copyright (C) 2025 - 2026 Synopsys, Inc. and ANSYS, Inc. All rights reserved.
 # SPDX-License-Identifier: MIT
+#
 #
 # Permission is hereby granted, free of charge, to any person obtaining a copy
 # of this software and associated documentation files (the "Software"), to deal
@@ -86,7 +87,9 @@ class ToggleEdges(ToolbarButton, PlotterWidget):
                 return "Showing topology.\nClick to show the CAD faceting."
             return "Showing the CAD faceting.\nClick to show topology."
         if showing_mesh:
-            return "Showing mesh edges.\nClick to show the CAD faceting of unmeshed faces."
+            return (
+                "Showing mesh edges.\nClick to show the CAD faceting of unmeshed faces."
+            )
         return "Showing the CAD faceting of unmeshed faces.\nClick to show mesh edges."
 
     def update(self) -> None:

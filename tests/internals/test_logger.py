@@ -1,4 +1,4 @@
-# Copyright (C) 2024 - 2026 ANSYS, Inc. and/or its affiliates.
+# Copyright (C) 2025 - 2026 Synopsys, Inc. and ANSYS, Inc. All rights reserved.
 # SPDX-License-Identifier: MIT
 #
 #
@@ -44,7 +44,7 @@ def test_logger(tmp_path):
     logger_2.error(msg_2)
 
     # Assert we are using a singleton.
-    with open(logs_path + '/log_' + now.strftime("%Y-%m-%d") + '.log', 'r') as file:
+    with open(logs_path + "/log_" + now.strftime("%Y-%m-%d") + ".log", "r") as file:
         line_1 = file.readline()
         assert msg in line_1
         line_2 = file.readline()

@@ -1,4 +1,4 @@
-# Copyright (C) 2024 - 2026 ANSYS, Inc. and/or its affiliates.
+# Copyright (C) 2025 - 2026 Synopsys, Inc. and ANSYS, Inc. All rights reserved.
 # SPDX-License-Identifier: MIT
 #
 #
@@ -21,6 +21,7 @@
 # SOFTWARE.
 
 """Examples module for PyPrimeMesh."""
+
 import os
 from enum import Enum
 from typing import Optional, Union
@@ -28,7 +29,7 @@ from typing import Optional, Union
 from ansys.tools.common.example_download import DownloadManager
 
 __all__ = [
-    'get_file',
+    "get_file",
     "download_bracket_dsco",
     "download_bracket_fmd",
     "download_bracket_scdoc",
@@ -80,9 +81,18 @@ class Examples(Enum):
     ELBOW_FMD = {"filename": "mixing_elbow.fmd", "git_folder": "mixing_elbow"}
     ELBOW_SCDOC = {"filename": "mixing_elbow.scdoc", "git_folder": "mixing_elbow"}
     ELBOW_DSCO = {"filename": "mixing_elbow.dsco", "git_folder": "mixing_elbow"}
-    BRACKET_FMD = {"filename": "bracket_mid_surface.fmd", "git_folder": "bracket_scaffold"}
-    BRACKET_SCDOC = {"filename": "bracket_mid_surface.scdoc", "git_folder": "bracket_scaffold"}
-    BRACKET_DSCO = {"filename": "bracket_mid_surface.dsco", "git_folder": "bracket_scaffold"}
+    BRACKET_FMD = {
+        "filename": "bracket_mid_surface.fmd",
+        "git_folder": "bracket_scaffold",
+    }
+    BRACKET_SCDOC = {
+        "filename": "bracket_mid_surface.scdoc",
+        "git_folder": "bracket_scaffold",
+    }
+    BRACKET_DSCO = {
+        "filename": "bracket_mid_surface.dsco",
+        "git_folder": "bracket_scaffold",
+    }
     TOY_CAR_PMDAT = {"filename": "toy_car.pmdat", "git_folder": "toy_car"}
     TOY_CAR_FMD = {"filename": "toy_car.fmd", "git_folder": "toy_car"}
     TOY_CAR_SCDOC = {"filename": "toy_car.scdoc", "git_folder": "toy_car"}
@@ -91,19 +101,46 @@ class Examples(Enum):
     PIPE_TEE_FMD = {"filename": "pipe_tee.fmd", "git_folder": "pipe_tee"}
     PIPE_TEE_SCDOC = {"filename": "pipe_tee.scdoc", "git_folder": "pipe_tee"}
     PIPE_TEE_DSCO = {"filename": "pipe_tee.dsco", "git_folder": "pipe_tee"}
-    DEFORMED_BLADE_FMD = {"filename": "blade_deformed.fmd", "git_folder": "turbine_blade"}
-    DEFORMED_BLADE_SCDOC = {"filename": "blade_deformed.scdoc", "git_folder": "turbine_blade"}
-    DEFORMED_BLADE_DSCO = {"filename": "blade_deformed.dsco", "git_folder": "turbine_blade"}
+    DEFORMED_BLADE_FMD = {
+        "filename": "blade_deformed.fmd",
+        "git_folder": "turbine_blade",
+    }
+    DEFORMED_BLADE_SCDOC = {
+        "filename": "blade_deformed.scdoc",
+        "git_folder": "turbine_blade",
+    }
+    DEFORMED_BLADE_DSCO = {
+        "filename": "blade_deformed.dsco",
+        "git_folder": "turbine_blade",
+    }
     TURBINE_BLADE_CDB = {"filename": "blade.cdb", "git_folder": "turbine_blade"}
     PCB_PMDAT = {"filename": "pcb_stacker.pmdat", "git_folder": "pcb"}
     PCB_SCDOC = {"filename": "pcb_stacker.scdoc", "git_folder": "pcb"}
-    SADDLE_BRACKET_FMD = {"filename": "saddle_bracket.fmd", "git_folder": "saddle_bracket"}
-    SADDLE_BRACKET_SCDOC = {"filename": "saddle_bracket.scdoc", "git_folder": "saddle_bracket"}
-    SADDLE_BRACKET_DSCO = {"filename": "saddle_bracket.dsco", "git_folder": "saddle_bracket"}
+    SADDLE_BRACKET_FMD = {
+        "filename": "saddle_bracket.fmd",
+        "git_folder": "saddle_bracket",
+    }
+    SADDLE_BRACKET_SCDOC = {
+        "filename": "saddle_bracket.scdoc",
+        "git_folder": "saddle_bracket",
+    }
+    SADDLE_BRACKET_DSCO = {
+        "filename": "saddle_bracket.dsco",
+        "git_folder": "saddle_bracket",
+    }
     F1_RW_DRS_STL = {"filename": "f1_rw_drs.stl", "git_folder": "f1_rear_wing"}
-    F1_RW_END_PLATES_STL = {"filename": "f1_rw_enclosure.stl", "git_folder": "f1_rear_wing"}
-    F1_RW_ENCLOSURE_STL = {"filename": "f1_rw_end_plates.stl", "git_folder": "f1_rear_wing"}
-    F1_RW_MAIN_PLANE_STL = {"filename": "f1_rw_main_plane.stl", "git_folder": "f1_rear_wing"}
+    F1_RW_END_PLATES_STL = {
+        "filename": "f1_rw_enclosure.stl",
+        "git_folder": "f1_rear_wing",
+    }
+    F1_RW_ENCLOSURE_STL = {
+        "filename": "f1_rw_end_plates.stl",
+        "git_folder": "f1_rear_wing",
+    }
+    F1_RW_MAIN_PLANE_STL = {
+        "filename": "f1_rw_main_plane.stl",
+        "git_folder": "f1_rear_wing",
+    }
     MULTI_LAYER_MESH_PCB_DSCO = {
         "filename": "multi_layer_quad_mesh_pcb.dsco",
         "git_folder": "multi_layer_quad_mesh_pcb",
@@ -124,14 +161,29 @@ class Examples(Enum):
         "filename": "multi_layer_quad_mesh_pcb.pmdat",
         "git_folder": "multi_layer_quad_mesh_pcb",
     }
-    BLOCK_MODEL_SCDOC = {"filename": "pyprime_block_import.scdoc", "git_folder": "block_model"}
-    BLOCK_MODEL_FMD = {"filename": "pyprime_block_import.fmd", "git_folder": "block_model"}
-    BLOCK_MODEL_PMDAT = {"filename": "pyprime_block_import.pmdat", "git_folder": "block_model"}
-    WHEEL_GROUND_SCDOC = {"filename": "wheel_ground.scdoc", "git_folder": "wheel_ground"}
+    BLOCK_MODEL_SCDOC = {
+        "filename": "pyprime_block_import.scdoc",
+        "git_folder": "block_model",
+    }
+    BLOCK_MODEL_FMD = {
+        "filename": "pyprime_block_import.fmd",
+        "git_folder": "block_model",
+    }
+    BLOCK_MODEL_PMDAT = {
+        "filename": "pyprime_block_import.pmdat",
+        "git_folder": "block_model",
+    }
+    WHEEL_GROUND_SCDOC = {
+        "filename": "wheel_ground.scdoc",
+        "git_folder": "wheel_ground",
+    }
     WHEEL_GROUND_FMD = {"filename": "wheel_ground.fmd", "git_folder": "wheel_ground"}
     WHEEL_GROUND_DSCO = {"filename": "wheel_ground.dsco", "git_folder": "wheel_ground"}
     SOLDER_BALL_FMD = {"filename": "solder_ball.fmd", "git_folder": "solder_ball"}
-    SOLDER_BALL_TARGET_FMD = {"filename": "solder_ball_target.fmd", "git_folder": "solder_ball"}
+    SOLDER_BALL_TARGET_FMD = {
+        "filename": "solder_ball_target.fmd",
+        "git_folder": "solder_ball",
+    }
 
 
 _DOWNLOADS = []
@@ -171,7 +223,7 @@ def get_file(
     if destination is not None:
         destination = os.fspath(destination)
         if not os.path.isdir(destination):
-            raise ValueError('destination directory provided does not exist')
+            raise ValueError("destination directory provided does not exist")
     directory = f"pyprimemesh/{example.value['git_folder']}"
     file = download_manager.download_file(
         example.value["filename"],

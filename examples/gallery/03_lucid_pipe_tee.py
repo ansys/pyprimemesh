@@ -1,4 +1,4 @@
-# Copyright (C) 2024 - 2026 ANSYS, Inc. and/or its affiliates.
+# Copyright (C) 2025 - 2026 Synopsys, Inc. and ANSYS, Inc. All rights reserved.
 # SPDX-License-Identifier: MIT
 #
 #
@@ -183,7 +183,9 @@ mesh_util.volume_mesh(
 print(model)
 display = PrimePlotter()
 display.add_scope(
-    model, scope=prime.ScopeDefinition(model=model, label_expression="* !*__*"), update=True
+    model,
+    scope=prime.ScopeDefinition(model=model, label_expression="* !*__*"),
+    update=True,
 )
 display.show()
 

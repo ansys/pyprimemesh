@@ -1,5 +1,6 @@
-# Copyright (C) 2024 - 2026 ANSYS, Inc. and/or its affiliates.
+# Copyright (C) 2025 - 2026 Synopsys, Inc. and ANSYS, Inc. All rights reserved.
 # SPDX-License-Identifier: MIT
+#
 #
 # Permission is hereby granted, free of charge, to any person obtaining a copy
 # of this software and associated documentation files (the "Software"), to deal
@@ -131,8 +132,12 @@ def test_connectivity_requests_are_chunked_and_combined():
             self.calls.append((part_ids, params))
             return SimpleNamespace(
                 part_ids=part_ids,
-                face_connectivity_result_per_part=[f"face-{part_id}" for part_id in part_ids],
-                edge_connectivity_result_per_part=[f"edge-{part_id}" for part_id in part_ids],
+                face_connectivity_result_per_part=[
+                    f"face-{part_id}" for part_id in part_ids
+                ],
+                edge_connectivity_result_per_part=[
+                    f"edge-{part_id}" for part_id in part_ids
+                ],
             )
 
     fake = FakeMesh()
@@ -153,8 +158,12 @@ def _legacy_model_batches(model_pd):
     face_entries = []
     edge_entries = []
     for part_data in model_pd.values():
-        face_entries.extend(entry for entry in part_data.get("faces", []) if entry is not None)
-        edge_entries.extend(entry for entry in part_data.get("edges", []) if entry is not None)
+        face_entries.extend(
+            entry for entry in part_data.get("faces", []) if entry is not None
+        )
+        edge_entries.extend(
+            entry for entry in part_data.get("edges", []) if entry is not None
+        )
     return {
         "faces": build_face_render_batches(face_entries),
         "edges": build_edge_render_batches(edge_entries),
@@ -174,5 +183,7 @@ def test_build_render_data_matches_legacy_merge(get_remote_client):
 
     for key in ("faces", "edges", "element_edges"):
         legacy_cells = sum(batch.mesh.n_cells for batch in legacy[key].values())
-        fast_cells = sum(batch.mesh.n_cells for batch in render_data.batches[key].values())
+        fast_cells = sum(
+            batch.mesh.n_cells for batch in render_data.batches[key].values()
+        )
         assert legacy_cells == fast_cells

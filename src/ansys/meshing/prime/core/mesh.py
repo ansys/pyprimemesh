@@ -1,5 +1,6 @@
-# Copyright (C) 2024 - 2026 ANSYS, Inc. and/or its affiliates.
+# Copyright (C) 2025 - 2026 Synopsys, Inc. and ANSYS, Inc. All rights reserved.
 # SPDX-License-Identifier: MIT
+#
 #
 # Permission is hereby granted, free of charge, to any person obtaining a copy
 # of this software and associated documentation files (the "Software"), to deal
@@ -155,8 +156,12 @@ def _get_face_and_edge_connectivity(mesh_info, part_ids, params):
             part_ids[start : start + CONNECTIVITY_PART_CHUNK_SIZE], params
         )
         combined.part_ids.extend(result.part_ids)
-        combined.face_connectivity_result_per_part.extend(result.face_connectivity_result_per_part)
-        combined.edge_connectivity_result_per_part.extend(result.edge_connectivity_result_per_part)
+        combined.face_connectivity_result_per_part.extend(
+            result.face_connectivity_result_per_part
+        )
+        combined.edge_connectivity_result_per_part.extend(
+            result.edge_connectivity_result_per_part
+        )
     return combined
 
 
@@ -344,7 +349,9 @@ class RenderBatch:
         # the mesh's own cell data, so writing recolored cells back onto the mesh would
         # silently corrupt this snapshot too. An explicit copy keeps it independent.
         self.base_colors = (
-            None if base_colors is None else np.array(base_colors, dtype=np.uint8, copy=True)
+            None
+            if base_colors is None
+            else np.array(base_colors, dtype=np.uint8, copy=True)
         )
         self._validate()
 
@@ -359,7 +366,8 @@ class RenderBatch:
         ]
         if missing:
             raise ValueError(
-                "The render batch is missing required cell arrays: " + ", ".join(missing)
+                "The render batch is missing required cell arrays: "
+                + ", ".join(missing)
             )
         render_ids = np.asarray(
             self.mesh.cell_data[RENDER_ENTITY_ID_ARRAY],
@@ -613,7 +621,11 @@ def _facet_edge_pairs(block: np.ndarray, n_cells: int) -> np.ndarray:
     """
     width = int(block[0])
     stride = width + 1
-    if width >= 3 and block.size == n_cells * stride and bool(np.all(block[::stride] == width)):
+    if (
+        width >= 3
+        and block.size == n_cells * stride
+        and bool(np.all(block[::stride] == width))
+    ):
         nodes = block.reshape(n_cells, stride)[:, 1:]
         pairs = np.stack((nodes, np.roll(nodes, -1, axis=1)), axis=2)
         return pairs.reshape(-1, 2)
@@ -842,7 +854,9 @@ def connectivity_color(info: DisplayMeshInfo) -> List[int]:
         # classification is available.
         return list(UNKNOWN_CONNECTIVITY_COLOR)
     if info.display_mesh_type == DisplayMeshType.TOPOEDGE:
-        return list(TOPO_EDGE_TYPE_COLORS.get(info.connectivity, UNKNOWN_CONNECTIVITY_COLOR))
+        return list(
+            TOPO_EDGE_TYPE_COLORS.get(info.connectivity, UNKNOWN_CONNECTIVITY_COLOR)
+        )
     capped = min(info.connectivity, int(FaceConnectivity.SHARED))
     return list(FACE_CONNECTIVITY_COLORS[FaceConnectivity(capped)])
 
@@ -880,7 +894,10 @@ def classify_face_connectivity(model, infos: Iterable[DisplayMeshInfo]) -> None:
     """
     pending: Dict[int, List[DisplayMeshInfo]] = defaultdict(list)
     for info in infos:
-        if info.display_mesh_type in FACE_DISPLAY_MESH_TYPES and info.connectivity is None:
+        if (
+            info.display_mesh_type in FACE_DISPLAY_MESH_TYPES
+            and info.connectivity is None
+        ):
             pending[info.part_id].append(info)
 
     for part_id, part_infos in pending.items():
@@ -962,7 +979,9 @@ def compute_entity_colors(
         return np.empty((0, 3), dtype=np.uint8)
 
     unique_ids, inverse = np.unique(render_entity_ids, return_inverse=True)
-    missing = [int(render_id) for render_id in unique_ids if int(render_id) not in infos]
+    missing = [
+        int(render_id) for render_id in unique_ids if int(render_id) not in infos
+    ]
     if missing:
         raise KeyError(f"No DisplayMeshInfo exists for render entity IDs {missing}.")
 
@@ -991,19 +1010,27 @@ def _attach_entity_metadata(
     output.cell_data[RENDER_ENTITY_ID_ARRAY] = np.full(
         number_of_cells, int(render_entity_id), dtype=np.int64
     )
-    output.cell_data[PART_ID_ARRAY] = np.full(number_of_cells, info.part_id, dtype=np.int64)
-    output.cell_data[ENTITY_ID_ARRAY] = np.full(number_of_cells, info.id, dtype=np.int64)
+    output.cell_data[PART_ID_ARRAY] = np.full(
+        number_of_cells, info.part_id, dtype=np.int64
+    )
+    output.cell_data[ENTITY_ID_ARRAY] = np.full(
+        number_of_cells, info.id, dtype=np.int64
+    )
     output.cell_data[ENTITY_TYPE_ARRAY] = np.full(
         number_of_cells, int(info.display_mesh_type), dtype=np.int16
     )
-    output.cell_data[ZONE_ID_ARRAY] = np.full(number_of_cells, info.zone_id, dtype=np.int64)
+    output.cell_data[ZONE_ID_ARRAY] = np.full(
+        number_of_cells, info.zone_id, dtype=np.int64
+    )
     return output
 
 
 def _validate_merged_metadata(mesh: "pv.PolyData") -> None:
     """Ensure a merge has preserved all picking arrays."""
     missing = [
-        array_name for array_name in REQUIRED_PICKING_ARRAYS if array_name not in mesh.cell_data
+        array_name
+        for array_name in REQUIRED_PICKING_ARRAYS
+        if array_name not in mesh.cell_data
     ]
     if missing:
         raise RuntimeError(
@@ -1012,7 +1039,9 @@ def _validate_merged_metadata(mesh: "pv.PolyData") -> None:
         )
     for array_name in REQUIRED_PICKING_ARRAYS:
         if len(mesh.cell_data[array_name]) != mesh.n_cells:
-            raise RuntimeError(f"Cell array {array_name!r} does not match the merged cell count.")
+            raise RuntimeError(
+                f"Cell array {array_name!r} does not match the merged cell count."
+            )
 
 
 def _finalize_typed_batches(
@@ -1038,7 +1067,9 @@ def _finalize_typed_batches(
         _validate_merged_metadata(merged)
         base_colors = None
         if keep_colors and ENTITY_COLOR_ARRAY in merged.cell_data:
-            base_colors = np.asarray(merged.cell_data[ENTITY_COLOR_ARRAY], dtype=np.uint8)
+            base_colors = np.asarray(
+                merged.cell_data[ENTITY_COLOR_ARRAY], dtype=np.uint8
+            )
         batch = RenderBatch(
             mesh=merged,
             infos=infos,
@@ -1103,7 +1134,9 @@ def _attach_raw_metadata(
         np.fromiter((info.id for info in infos), np.int64, len(infos)), cell_counts
     )
     mesh.cell_data[ENTITY_TYPE_ARRAY] = np.repeat(
-        np.fromiter((int(info.display_mesh_type) for info in infos), np.int16, len(infos)),
+        np.fromiter(
+            (int(info.display_mesh_type) for info in infos), np.int16, len(infos)
+        ),
         cell_counts,
     )
     mesh.cell_data[ZONE_ID_ARRAY] = np.repeat(
@@ -1161,7 +1194,9 @@ def _build_batch_from_raw(
 
 
 def _build_batches_from_raw_faces(
-    grouped_raw: Dict[DisplayMeshType, List[Tuple[np.ndarray, np.ndarray, int, DisplayMeshInfo]]],
+    grouped_raw: Dict[
+        DisplayMeshType, List[Tuple[np.ndarray, np.ndarray, int, DisplayMeshInfo]]
+    ],
 ) -> Dict[DisplayMeshType, RenderBatch]:
     """Build face batches from array-level connectivity grouped by entity type."""
     batches: Dict[DisplayMeshType, RenderBatch] = {}
@@ -1218,7 +1253,9 @@ def build_face_render_batches(
         if entry is None:
             continue
         mesh_object, info = entry
-        geometry = info.render_mesh if info.render_mesh is not None else mesh_object.mesh
+        geometry = (
+            info.render_mesh if info.render_mesh is not None else mesh_object.mesh
+        )
         if geometry is None or geometry.n_cells == 0:
             continue
         grouped[info.display_mesh_type].append((geometry, info))
@@ -1334,7 +1371,9 @@ def build_edge_render_batches(
             or len(entity_types) != 1
             or len(zone_ids) != 1
         ):
-            raise ValueError("One edge entry must represent exactly one Prime edge entity.")
+            raise ValueError(
+                "One edge entry must represent exactly one Prime edge entity."
+            )
         if info is None:
             part = mesh_object.custom_object
             info = DisplayMeshInfo(
@@ -1373,7 +1412,9 @@ def _merge_geometry(
 ) -> Optional["pv.PolyData"]:
     """Concatenate geometry without merging points."""
     valid_pieces = [
-        _as_polydata(piece) for piece in pieces if piece is not None and piece.n_cells > 0
+        _as_polydata(piece)
+        for piece in pieces
+        if piece is not None and piece.n_cells > 0
     ]
     if not valid_pieces:
         return None
@@ -1729,7 +1770,9 @@ class Mesh(MeshInfo):
         vertices = connectivity_results.node_coords[
             node_start : node_start + num_node_coords
         ].reshape((-1, 3))
-        faces = connectivity_results.face_list[face_list_start : face_list_start + num_face_list]
+        faces = connectivity_results.face_list[
+            face_list_start : face_list_start + num_face_list
+        ]
         return vertices, faces
 
     def _get_vertices_and_surf_edges(
@@ -1761,7 +1804,9 @@ class Mesh(MeshInfo):
         vertices = connectivity_results.node_coords[
             node_start : node_start + num_node_coords
         ].reshape((-1, 3))
-        faces = connectivity_results.edge_list[edge_list_start : edge_list_start + num_edge_list]
+        faces = connectivity_results.edge_list[
+            edge_list_start : edge_list_start + num_edge_list
+        ]
         return vertices, faces
 
     def get_face_polydata(
@@ -1883,21 +1928,33 @@ class Mesh(MeshInfo):
             entity_id = int(edge_facet_res.edge_zonelet_ids[index])
 
         zone_ids = getattr(edge_facet_res, "edge_zone_ids", None)
-        zone_id = int(zone_ids[index]) if zone_ids is not None and len(zone_ids) > index else 0
+        zone_id = (
+            int(zone_ids[index])
+            if zone_ids is not None and len(zone_ids) > index
+            else 0
+        )
 
         if edge.n_cells > 0:
-            edge.cell_data[PART_ID_ARRAY] = np.full(edge.n_cells, part_id, dtype=np.int64)
-            edge.cell_data[ENTITY_ID_ARRAY] = np.full(edge.n_cells, entity_id, dtype=np.int64)
+            edge.cell_data[PART_ID_ARRAY] = np.full(
+                edge.n_cells, part_id, dtype=np.int64
+            )
+            edge.cell_data[ENTITY_ID_ARRAY] = np.full(
+                edge.n_cells, entity_id, dtype=np.int64
+            )
             edge.cell_data[ENTITY_TYPE_ARRAY] = np.full(
                 edge.n_cells, int(display_mesh_type), dtype=np.int16
             )
-            edge.cell_data[ZONE_ID_ARRAY] = np.full(edge.n_cells, zone_id, dtype=np.int64)
+            edge.cell_data[ZONE_ID_ARRAY] = np.full(
+                edge.n_cells, zone_id, dtype=np.int64
+            )
             edge.set_active_scalars(ENTITY_COLOR_ARRAY, preference="cell")
 
         if edge.n_points > 0:
             zone_names = getattr(edge_facet_res, "edge_zone_names", None)
             zone_name = (
-                zone_names[index] if zone_names is not None and len(zone_names) > index else None
+                zone_names[index]
+                if zone_names is not None and len(zone_names) > index
+                else None
             )
             return MeshObjectPlot(part, edge)
 
@@ -1928,7 +1985,9 @@ class Mesh(MeshInfo):
         if surf.n_points > 0:
             return MeshObjectPlot(part, surf)
 
-    def get_spline_surface_polydata(self, part_id: int, spline_id: int) -> MeshObjectPlot:
+    def get_spline_surface_polydata(
+        self, part_id: int, spline_id: int
+    ) -> MeshObjectPlot:
         """Get the polydata object of the spline surface.
 
         Parameters
@@ -2051,7 +2110,12 @@ class Mesh(MeshInfo):
                     part_id, facet_result.face_connectivity_result_per_part[i], j
                 )
                 for j in range(
-                    0, len(facet_result.face_connectivity_result_per_part[i].face_zonelet_ids)
+                    0,
+                    len(
+                        facet_result.face_connectivity_result_per_part[
+                            i
+                        ].face_zonelet_ids
+                    ),
                 )
             ]
 
@@ -2060,11 +2124,18 @@ class Mesh(MeshInfo):
                     part_id, facet_result.edge_connectivity_result_per_part[i], j
                 )
                 for j in range(
-                    0, len(facet_result.edge_connectivity_result_per_part[i].edge_zonelet_ids)
+                    0,
+                    len(
+                        facet_result.edge_connectivity_result_per_part[
+                            i
+                        ].edge_zonelet_ids
+                    ),
                 )
             ]
 
-            spline_cp_polydata_list = [self.get_spline_cp_polydata(part_ids[i], j) for j in splines]
+            spline_cp_polydata_list = [
+                self.get_spline_cp_polydata(part_ids[i], j) for j in splines
+            ]
 
             spline_surface_polydata_list = [
                 self.get_spline_surface_polydata(part_ids[i], j) for j in splines
@@ -2106,11 +2177,17 @@ class Mesh(MeshInfo):
             entity_id = int(edge_res.edge_zonelet_ids[index])
 
         zone_ids = getattr(edge_res, "edge_zone_ids", None)
-        zone_id = int(zone_ids[index]) if zone_ids is not None and len(zone_ids) > index else 0
+        zone_id = (
+            int(zone_ids[index])
+            if zone_ids is not None and len(zone_ids) > index
+            else 0
+        )
 
         edge.cell_data[PART_ID_ARRAY] = np.full(n_cells, part_id, dtype=np.int64)
         edge.cell_data[ENTITY_ID_ARRAY] = np.full(n_cells, entity_id, dtype=np.int64)
-        edge.cell_data[ENTITY_TYPE_ARRAY] = np.full(n_cells, int(display_mesh_type), dtype=np.int16)
+        edge.cell_data[ENTITY_TYPE_ARRAY] = np.full(
+            n_cells, int(display_mesh_type), dtype=np.int16
+        )
         edge.cell_data[ZONE_ID_ARRAY] = np.full(n_cells, zone_id, dtype=np.int64)
         edge.set_active_scalars(ENTITY_COLOR_ARRAY, preference="cell")
         return MeshObjectPlot(part, edge)
@@ -2121,7 +2198,9 @@ class Mesh(MeshInfo):
         part: Part,
         edge_res: EdgeConnectivityResults,
         index: int,
-    ) -> Optional[Tuple[Tuple[np.ndarray, np.ndarray, int, DisplayMeshInfo], np.ndarray]]:
+    ) -> Optional[
+        Tuple[Tuple[np.ndarray, np.ndarray, int, DisplayMeshInfo], np.ndarray]
+    ]:
         """Return array-level line geometry and color for one edge entity."""
         vertices, edge_list = self._get_vertices_and_surf_edges(edge_res, index)
         if vertices.size == 0:
@@ -2142,7 +2221,11 @@ class Mesh(MeshInfo):
             # so they render in the neutral unknown color under connectivity mode.
 
         zone_ids = getattr(edge_res, "edge_zone_ids", None)
-        zone_id = int(zone_ids[index]) if zone_ids is not None and len(zone_ids) > index else 0
+        zone_id = (
+            int(zone_ids[index])
+            if zone_ids is not None and len(zone_ids) > index
+            else 0
+        )
 
         info = DisplayMeshInfo(
             id=entity_id,
@@ -2185,10 +2268,14 @@ class Mesh(MeshInfo):
             face_res = facet_result.face_connectivity_result_per_part[index]
             edge_res = facet_result.edge_connectivity_result_per_part[index]
             part = self._model.get_part(part_id)
-            entity_filter = None if entity_filters is None else entity_filters.get(part_id)
+            entity_filter = (
+                None if entity_filters is None else entity_filters.get(part_id)
+            )
 
             for face_index in range(len(face_res.face_zonelet_ids)):
-                vertices, faces = self._get_vertices_and_surf_faces(face_res, face_index)
+                vertices, faces = self._get_vertices_and_surf_faces(
+                    face_res, face_index
+                )
                 if vertices.size == 0:
                     continue
 
@@ -2231,7 +2318,9 @@ class Mesh(MeshInfo):
                             (vertices, lines, n_lines, info)
                         )
                 else:
-                    grouped_raw[display_mesh_type].append((vertices, block, n_cells, info))
+                    grouped_raw[display_mesh_type].append(
+                        (vertices, block, n_cells, info)
+                    )
                     # Unmeshed faces contribute their facets, so the show-edges button
                     # can reveal the tessellation approximating the CAD surface.
                     lines, n_lines = _facet_edge_lines(block, n_cells, len(vertices))
@@ -2244,7 +2333,9 @@ class Mesh(MeshInfo):
             # would show, and let the user pick, entities the scope never asked for.
             if entity_filter is None:
                 for edge_index in range(len(edge_res.edge_zonelet_ids)):
-                    raw_edge = self._build_raw_edge_piece(part_id, part, edge_res, edge_index)
+                    raw_edge = self._build_raw_edge_piece(
+                        part_id, part, edge_res, edge_index
+                    )
                     if raw_edge is None:
                         continue
                     piece, color = raw_edge
@@ -2266,7 +2357,9 @@ class Mesh(MeshInfo):
 
         return {
             "faces": _build_batches_from_raw_faces(grouped_raw),
-            "edges": _build_batches_from_raw_edges(grouped_raw_edges, grouped_edge_colors),
+            "edges": _build_batches_from_raw_edges(
+                grouped_raw_edges, grouped_edge_colors
+            ),
             "element_edges": build_outline_batches(grouped_raw_outlines),
             "facet_edges": build_outline_batches(grouped_raw_facets),
         }
@@ -2879,7 +2972,9 @@ class MeshUSD(MeshInfo):
         vertices = connectivity_results.node_coords[
             node_start : node_start + num_node_coords
         ].reshape((-1, 3))
-        faces = connectivity_results.face_list[face_list_start : face_list_start + num_face_list]
+        faces = connectivity_results.face_list[
+            face_list_start : face_list_start + num_face_list
+        ]
         return vertices, faces
 
     def _get_vertices_and_surf_edges(
@@ -2911,7 +3006,9 @@ class MeshUSD(MeshInfo):
         vertices = connectivity_results.node_coords[
             node_start : node_start + num_node_coords
         ].reshape((-1, 3))
-        edges = connectivity_results.edge_list[edge_list_start : edge_list_start + num_edge_list]
+        edges = connectivity_results.edge_list[
+            edge_list_start : edge_list_start + num_edge_list
+        ]
         return vertices, edges
 
     def update_usd(self, part_ids: List[int]) -> Dict[int, Dict[str, list]]:
@@ -2943,7 +3040,12 @@ class MeshUSD(MeshInfo):
                     part_id, facet_result.face_connectivity_result_per_part[i], j
                 )
                 for j in range(
-                    0, len(facet_result.face_connectivity_result_per_part[i].face_zonelet_ids)
+                    0,
+                    len(
+                        facet_result.face_connectivity_result_per_part[
+                            i
+                        ].face_zonelet_ids
+                    ),
                 )
             ]
 
@@ -2952,7 +3054,12 @@ class MeshUSD(MeshInfo):
                     part_id, facet_result.edge_connectivity_result_per_part[i], j
                 )
                 for j in range(
-                    0, len(facet_result.edge_connectivity_result_per_part[i].edge_zonelet_ids)
+                    0,
+                    len(
+                        facet_result.edge_connectivity_result_per_part[
+                            i
+                        ].edge_zonelet_ids
+                    ),
                 )
             ]
 
@@ -2964,7 +3071,9 @@ class MeshUSD(MeshInfo):
             ]
 
             spline_surface_geom_list = [
-                self._extract_spline_geometry(part_id, spline_id, DisplayMeshType.SPLINESURFACE)
+                self._extract_spline_geometry(
+                    part_id, spline_id, DisplayMeshType.SPLINESURFACE
+                )
                 for spline_id in splines
             ]
 

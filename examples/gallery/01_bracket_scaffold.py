@@ -1,4 +1,4 @@
-# Copyright (C) 2024 - 2026 ANSYS, Inc. and/or its affiliates.
+# Copyright (C) 2025 - 2026 Synopsys, Inc. and ANSYS, Inc. All rights reserved.
 # SPDX-License-Identifier: MIT
 #
 #
@@ -106,7 +106,7 @@ file_io.import_cad(
 # - Black: double
 # - Purple: triple
 
-part = model.get_part_by_name('bracket_mid_surface-3')
+part = model.get_part_by_name("bracket_mid_surface-3")
 part_summary_res = part.get_summary(prime.PartSummaryParams(model, print_mesh=False))
 print(part_summary_res)
 
@@ -154,7 +154,9 @@ surfer_params = prime.SurferParams(
     generate_quads=True,
 )
 
-surfer_result = prime.Surfer(model).mesh_topo_faces(part.id, topo_faces=faces, params=surfer_params)
+surfer_result = prime.Surfer(model).mesh_topo_faces(
+    part.id, topo_faces=faces, params=surfer_params
+)
 
 # Display the mesh
 pl = PrimePlotter()
@@ -168,10 +170,10 @@ pl.show()
 # Write a CDB file for use in the APDL solver.
 
 with tempfile.TemporaryDirectory() as temp_folder:
-    mapdl_cdb = os.path.join(temp_folder, 'bracket_scaffold.cdb')
+    mapdl_cdb = os.path.join(temp_folder, "bracket_scaffold.cdb")
     file_io.export_mapdl_cdb(mapdl_cdb, params=prime.ExportMapdlCdbParams(model))
     assert os.path.exists(mapdl_cdb)
-    print(f'MAPDL case exported at {mapdl_cdb}')
+    print(f"MAPDL case exported at {mapdl_cdb}")
 
 ###############################################################################
 # Exit the PyPrimeMesh session

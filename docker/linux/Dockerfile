@@ -29,7 +29,7 @@ RUN yum -y install glibc-langpack-en
 # Set locale environment variables
 ENV LANG=en_US.utf-8 \
     LC_ALL=en_US.utf-8
-	
+
 # Set env for image
 ENV AWP_ROOT261="/prime"
 

@@ -30,7 +30,7 @@
 
 {% block classes %}
 {% if classes %}
-.. autosummary:: 
+.. autosummary::
    :toctree:
    :caption: Classes
 
@@ -42,7 +42,7 @@
 
 {% block exceptions %}
 {% if exceptions %}
-.. autosummary:: 
+.. autosummary::
    :toctree:
    :caption: Classes
 

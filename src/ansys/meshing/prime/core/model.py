@@ -1,5 +1,6 @@
-# Copyright (C) 2024 - 2026 ANSYS, Inc. and/or its affiliates.
+# Copyright (C) 2025 - 2026 Synopsys, Inc. and ANSYS, Inc. All rights reserved.
 # SPDX-License-Identifier: MIT
+#
 #
 # Permission is hereby granted, free of charge, to any person obtaining a copy
 # of this software and associated documentation files (the "Software"), to deal
@@ -20,6 +21,7 @@
 # SOFTWARE.
 
 """Module containing the managing logic of the Prime model."""
+
 from typing import Iterable, List, Union
 
 # isort: split
@@ -93,7 +95,9 @@ class Model(_Model):
         >>> model._sync_up_model()
         """
         res = json.loads(
-            self._comm.serve(self, "PrimeMesh::Model/GetChildObjectsJson", self._object_id, args={})
+            self._comm.serve(
+                self, "PrimeMesh::Model/GetChildObjectsJson", self._object_id, args={}
+            )
         )
         part_data = res["Parts"]
         sc_data = res["SizeControl"]
@@ -126,7 +130,9 @@ class Model(_Model):
         self._topo_data = TopoData(self, -1, res["TopoData"], "")
         if "PeriodicControl" in res:
             self._control_data._update_periodic_controls(percon_data)
-        self._material_point_data = MaterialPointManager(self, -1, res["MaterialPointData"], "")
+        self._material_point_data = MaterialPointManager(
+            self, -1, res["MaterialPointData"], ""
+        )
 
     def _add_part(self, id: int):
         """Add a part that is present on the server.
@@ -142,7 +148,9 @@ class Model(_Model):
             Raise if unable to create the part.
         """
         res = json.loads(
-            self._comm.serve(self, "PrimeMesh::Model/GetChildObjectsJson", self._object_id, args={})
+            self._comm.serve(
+                self, "PrimeMesh::Model/GetChildObjectsJson", self._object_id, args={}
+            )
         )
         part_data = res["Parts"]
         new_part = None
@@ -202,7 +210,9 @@ class Model(_Model):
                 return part
         return None
 
-    def merge_parts(self, part_ids: Iterable[int], params: MergePartsParams) -> MergePartsResults:
+    def merge_parts(
+        self, part_ids: Iterable[int], params: MergePartsParams
+    ) -> MergePartsResults:
         """Merge multiple parts into a single part.
 
         Parameters

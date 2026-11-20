@@ -1,4 +1,4 @@
-# Copyright (C) 2024 - 2026 ANSYS, Inc. and/or its affiliates.
+# Copyright (C) 2025 - 2026 Synopsys, Inc. and ANSYS, Inc. All rights reserved.
 # SPDX-License-Identifier: MIT
 #
 #
@@ -32,13 +32,17 @@ from ansys.meshing.prime import ErrorCode, PrimeRuntimeError
 def test_io_file_not_found_error(get_remote_client, get_examples):
     model = get_remote_client.model
     with prime.FileIO(model) as io:
-        file_name = r'/doesnotexist/file.pmdat'
+        file_name = r"/doesnotexist/file.pmdat"
         with pytest.raises(FileNotFoundError) as error:
             _ = io.read_pmdat(file_name, prime.FileReadParams(model=model))
-            assert f'Given file name "{file_name}" is not found on local disk' in str(error.value)
+            assert f'Given file name "{file_name}" is not found on local disk' in str(
+                error.value
+            )
 
-        files = [r'/doesnotexist/file.pmdat', get_examples["elbow_lucid"]]
-        error_msg = "File /doesnotexist/file.pmdat given for read is missing from local disk."
+        files = [r"/doesnotexist/file.pmdat", get_examples["elbow_lucid"]]
+        error_msg = (
+            "File /doesnotexist/file.pmdat given for read is missing from local disk."
+        )
         with pytest.raises(FileNotFoundError, match=error_msg) as error:
             _ = io.import_fluent_meshing_meshes(
                 files, prime.ImportFluentMeshingMeshParams(model=model)
@@ -169,12 +173,16 @@ def test_io_fluent_mesh(get_remote_client, get_testfiles, tmp_path):
     file_io = prime.FileIO(model=model)
 
     import_params = prime.ImportFluentMeshingMeshParams(model=model)
-    results = file_io.import_fluent_meshing_meshes([get_testfiles["hex.msh"]], import_params)
+    results = file_io.import_fluent_meshing_meshes(
+        [get_testfiles["hex.msh"]], import_params
+    )
     assert results.error_code == ErrorCode.NOERROR
 
     import_params = prime.ExportFluentMeshingMeshParams(model=model)
     export_path = str(tmp_path) + "/hex_test.msh"
-    results = file_io.export_fluent_meshing_mesh(os.path.abspath(export_path), import_params)
+    results = file_io.export_fluent_meshing_mesh(
+        os.path.abspath(export_path), import_params
+    )
     assert results.error_code == ErrorCode.NOERROR
 
 

@@ -1,4 +1,4 @@
-# Copyright (C) 2024 - 2026 ANSYS, Inc. and/or its affiliates.
+# Copyright (C) 2025 - 2026 Synopsys, Inc. and ANSYS, Inc. All rights reserved.
 # SPDX-License-Identifier: MIT
 #
 #
@@ -21,27 +21,28 @@
 # SOFTWARE.
 
 """Implementation of JSOnEncoder that can handle byte arrays."""
+
 import re
 
 import numpy as np
 
 ESCAPE = re.compile(r'[\x00-\x1f\\"\b\f\n\r\t]')
 ESCAPE_ASCII = re.compile(r'([\\"]|[^\ -~])')
-HAS_UTF8 = re.compile(b'[\x80-\xff]')
+HAS_UTF8 = re.compile(b"[\x80-\xff]")
 ESCAPE_DCT = {
-    '\\': '\\\\',
+    "\\": "\\\\",
     '"': '\\"',
-    '\b': '\\b',
-    '\f': '\\f',
-    '\n': '\\n',
-    '\r': '\\r',
-    '\t': '\\t',
+    "\b": "\\b",
+    "\f": "\\f",
+    "\n": "\\n",
+    "\r": "\\r",
+    "\t": "\\t",
 }
 for i in range(0x20):
-    ESCAPE_DCT.setdefault(chr(i), '\\u{0:04x}'.format(i))
+    ESCAPE_DCT.setdefault(chr(i), "\\u{0:04x}".format(i))
     # ESCAPE_DCT.setdefault(chr(i), '\\u%04x' % (i,))
 
-INFINITY = float('inf')
+INFINITY = float("inf")
 
 NUMPY_TYPEMAP = {
     np.int8: 0x11,
@@ -79,7 +80,9 @@ def _get_numpy_dtype(current_dtype):
     elif np.issubdtype(current_dtype, np.float64):
         return np.float64
     else:
-        raise ValueError(f'Unsupported dtype {current_dtype}for ' f'numpy array optimizaation')
+        raise ValueError(
+            f"Unsupported dtype {current_dtype}for numpy array optimizaation"
+        )
 
 
 def _check_if_byteorder_needs_to_change(dtype_: np.dtype):
@@ -92,9 +95,9 @@ def _check_if_byteorder_needs_to_change(dtype_: np.dtype):
     """
     import sys
 
-    if dtype_.byteorder == '<' or dtype_.byteorder == '|':
+    if dtype_.byteorder == "<" or dtype_.byteorder == "|":
         return True
-    if dtype_.byteorder == '=' and sys.byteorder == 'little':
+    if dtype_.byteorder == "=" and sys.byteorder == "little":
         return True
     return False
 
@@ -105,7 +108,7 @@ def py_encode_basestring(s):
     def replace(match):
         return ESCAPE_DCT[match.group(0)]
 
-    return str('"' + ESCAPE.sub(replace, s) + '"').encode('utf-8')
+    return str('"' + ESCAPE.sub(replace, s) + '"').encode("utf-8")
 
 
 encode_basestring = py_encode_basestring
@@ -121,16 +124,16 @@ def py_encode_basestring_ascii(s):
         except KeyError:
             n = ord(s)
             if n < 0x10000:
-                return '\\u{0:04x}'.format(n)
+                return "\\u{0:04x}".format(n)
                 # return '\\u%04x' % (n,)
             else:
                 # surrogate pair
                 n -= 0x10000
                 s1 = 0xD800 | ((n >> 10) & 0x3FF)
                 s2 = 0xDC00 | (n & 0x3FF)
-                return '\\u{0:04x}\\u{1:04x}'.format(s1, s2)
+                return "\\u{0:04x}\\u{1:04x}".format(s1, s2)
 
-    return str('"' + ESCAPE_ASCII.sub(replace, s) + '"').encode('utf-8')
+    return str('"' + ESCAPE_ASCII.sub(replace, s) + '"').encode("utf-8")
 
 
 encode_basestring_ascii = py_encode_basestring_ascii
@@ -157,8 +160,8 @@ class JSONEncoder:
         Default error message, by default None.
     """
 
-    item_separator = b','
-    key_separator = b':'
+    item_separator = b","
+    key_separator = b":"
 
     def __init__(
         self,
@@ -195,7 +198,7 @@ class JSONEncoder:
         TypeError
             Raise the error with the proper type
         """
-        raise TypeError(f'Object of type {type(obj)} is not JSON serializable')
+        raise TypeError(f"Object of type {type(obj)} is not JSON serializable")
 
     def encode(self, obj):
         """Return a bytearray containing JSON.
@@ -214,7 +217,7 @@ class JSONEncoder:
         if not isinstance(chunks, (list, tuple)):
             chunks = list(chunks)
 
-        return b''.join(chunks)
+        return b"".join(chunks)
 
     def iterencode(self, obj):
         """Encode the given object and yield the bytearray representationas available."""
@@ -228,40 +231,46 @@ class JSONEncoder:
             _encoder = encode_basestring
 
         def floatstr(
-            o, allow_nan=self.allow_nan, _repr=float.__repr__, _inf=INFINITY, _neginf=-INFINITY
+            o,
+            allow_nan=self.allow_nan,
+            _repr=float.__repr__,
+            _inf=INFINITY,
+            _neginf=-INFINITY,
         ):
             # Check for specials.  Note that this type of test is processor
             # and/or platform-specific, so do tests which don't depend on the
             # internals.
 
             if o != o:
-                text = b'NaN'
+                text = b"NaN"
             elif o == _inf:
-                text = b'Infinity'
+                text = b"Infinity"
             elif o == _neginf:
-                text = b'-Infinity'
+                text = b"-Infinity"
             else:
-                return _repr(o).encode('utf-8')
+                return _repr(o).encode("utf-8")
 
             if not allow_nan:
-                raise ValueError("Out of range float values are not JSON compliant: " + repr(o))
+                raise ValueError(
+                    "Out of range float values are not JSON compliant: " + repr(o)
+                )
 
             return text
 
         def intstr(o, _repr=int.__repr__):
-            return _repr(o).encode('utf-8')
+            return _repr(o).encode("utf-8")
 
         def vectorstr(o: np.ndarray, _map_dtype=NUMPY_TYPEMAP):
             dtype_: np.dtype = _get_numpy_dtype(o.dtype)
             value_type = _map_dtype.get(dtype_)
-            buffer = b'<'
-            buffer += int(o.size * o.itemsize).to_bytes(8, byteorder='big')
-            buffer += _map_dtype.get(dtype_).to_bytes(1, byteorder='big')
+            buffer = b"<"
+            buffer += int(o.size * o.itemsize).to_bytes(8, byteorder="big")
+            buffer += _map_dtype.get(dtype_).to_bytes(1, byteorder="big")
             if _check_if_byteorder_needs_to_change(o.dtype):
-                buffer += o.astype(o.dtype.newbyteorder('>')).tobytes()
+                buffer += o.astype(o.dtype.newbyteorder(">")).tobytes()
             else:
                 buffer += o.tobytes()
-            buffer += b'>'
+            buffer += b">"
             return buffer
 
         _iterencode = _make_iterencode(
@@ -293,7 +302,7 @@ def _make_iterencode(
 ):
     def _iterencode_list(lst):
         if not lst:
-            yield b'[]'
+            yield b"[]"
             return
         if markers is not None:
             markerid = id(lst)
@@ -301,7 +310,7 @@ def _make_iterencode(
                 raise ValueError("Circular reference detected")
             markers[markerid] = lst
         buf = bytearray()
-        buf += b'['
+        buf += b"["
         separator = _item_separator
         first = True
         for value in lst:
@@ -312,11 +321,11 @@ def _make_iterencode(
             if isinstance(value, str):
                 yield buf + _encoder(value)
             elif value is None:
-                yield buf + b'null'
+                yield buf + b"null"
             elif value is True:
-                yield buf + b'true'
+                yield buf + b"true"
             elif value is False:
-                yield buf + b'false'
+                yield buf + b"false"
             elif isinstance(value, int):
                 # Subclasses of int/float may override __repr__, but we still
                 # want to encode them as integers/floats in JSON. One example
@@ -334,20 +343,20 @@ def _make_iterencode(
                 else:
                     chunks = _iterencode(value)
                 yield from chunks
-        yield b']'
+        yield b"]"
         if markers is not None:
             del markers[markerid]
 
     def _iterencode_dict(dct):
         if not dct:
-            yield b'{}'
+            yield b"{}"
             return
         if markers is not None:
             markerid = id(dct)
             if markerid in markers:
                 raise ValueError("Circular reference detected")
             markers[markerid] = dct
-        yield b'{'
+        yield b"{"
         item_separator = _item_separator
         first = True
         if _sort_keys:
@@ -363,11 +372,11 @@ def _make_iterencode(
                 # see comment for int/float in _make_iterencode
                 key = _floatstr(key)
             elif key is True:
-                key = b'true'
+                key = b"true"
             elif key is False:
-                key = b'false'
+                key = b"false"
             elif key is None:
-                key = b'null'
+                key = b"null"
             elif isinstance(key, int):
                 # see comment for int/float in _make_iterencode
                 key = _intstr(key)
@@ -375,7 +384,8 @@ def _make_iterencode(
                 continue
             else:
                 raise TypeError(
-                    f'keys must be str, int, float, bool or None, ' f'not {key.__class__.__name__}'
+                    f"keys must be str, int, float, bool or None, "
+                    f"not {key.__class__.__name__}"
                 )
             if first:
                 first = False
@@ -386,11 +396,11 @@ def _make_iterencode(
             if isinstance(value, str):
                 yield _encoder(value)
             elif value is None:
-                yield b'null'
+                yield b"null"
             elif value is True:
-                yield b'true'
+                yield b"true"
             elif value is False:
-                yield b'false'
+                yield b"false"
             elif isinstance(value, int):
                 # see comment for int/float in _make_iterencode
                 yield _intstr(value)
@@ -405,7 +415,7 @@ def _make_iterencode(
                 else:
                     chunks = _iterencode(value)
                 yield from chunks
-        yield b'}'
+        yield b"}"
         if markers is not None:
             del markers[markerid]
 
@@ -413,11 +423,11 @@ def _make_iterencode(
         if isinstance(o, str):
             yield _encoder(o)
         elif o is None:
-            yield b'null'
+            yield b"null"
         elif o is True:
-            yield b'true'
+            yield b"true"
         elif o is False:
-            yield b'false'
+            yield b"false"
         elif isinstance(o, int):
             # see comment for int/float in _make_iterencode
             yield _intstr(o)

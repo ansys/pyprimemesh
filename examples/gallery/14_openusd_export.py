@@ -1,4 +1,4 @@
-# Copyright (C) 2026 ANSYS, Inc. and/or its affiliates.
+# Copyright (C) 2025 - 2026 Synopsys, Inc. and ANSYS, Inc. All rights reserved.
 # SPDX-License-Identifier: MIT
 #
 #
@@ -76,7 +76,7 @@ file_io.import_cad(
     ),
 )
 
-part = model.get_part_by_name('bracket_mid_surface-3')
+part = model.get_part_by_name("bracket_mid_surface-3")
 
 ###########################
 # Scaffold and surface mesh
@@ -107,7 +107,9 @@ surfer_params = prime.SurferParams(
     generate_quads=True,
 )
 
-surfer_result = prime.Surfer(model).mesh_topo_faces(part.id, topo_faces=faces, params=surfer_params)
+surfer_result = prime.Surfer(model).mesh_topo_faces(
+    part.id, topo_faces=faces, params=surfer_params
+)
 
 ##################
 # Display the mesh

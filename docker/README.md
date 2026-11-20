@@ -1,7 +1,7 @@
 Create your own Ansys Prime Server Docker container
 ===================================================
 
-To learn how to build your own Ansys Server Docker container, see 
+To learn how to build your own Ansys Server Docker container, see
 [Guide to building the Linux Docker container](https://prime.docs.pyansys.com/version/dev/getting_started/index.html).
 
 If you have your own Ansys installation, you can build a Docker container that uses your installation.

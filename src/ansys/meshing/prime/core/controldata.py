@@ -1,5 +1,6 @@
-# Copyright (C) 2024 - 2026 ANSYS, Inc. and/or its affiliates.
+# Copyright (C) 2025 - 2026 Synopsys, Inc. and ANSYS, Inc. All rights reserved.
 # SPDX-License-Identifier: MIT
+#
 #
 # Permission is hereby granted, free of charge, to any person obtaining a copy
 # of this software and associated documentation files (the "Software"), to deal
@@ -20,6 +21,7 @@
 # SOFTWARE.
 
 """Module for control data."""
+
 from typing import Iterable, List
 
 # isort: split
@@ -387,25 +389,39 @@ class ControlData(_ControlData):
         return res
 
     def _update_size_controls(self, c_data: List):
-        self._size_controls = [SizeControl(self._model, c[0], c[1], c[2]) for c in c_data]
+        self._size_controls = [
+            SizeControl(self._model, c[0], c[1], c[2]) for c in c_data
+        ]
 
     def _update_prism_controls(self, c_data: List):
-        self._prism_controls = [PrismControl(self._model, c[0], c[1], c[2]) for c in c_data]
+        self._prism_controls = [
+            PrismControl(self._model, c[0], c[1], c[2]) for c in c_data
+        ]
 
     def _update_shell_bl_controls(self, c_data: List):
-        self._shell_bl_controls = [ShellBLControl(self._model, c[0], c[1], c[2]) for c in c_data]
+        self._shell_bl_controls = [
+            ShellBLControl(self._model, c[0], c[1], c[2]) for c in c_data
+        ]
 
     def _update_wrapper_controls(self, c_data: List):
-        self._wrapper_controls = [WrapperControl(self._model, c[0], c[1], c[2]) for c in c_data]
+        self._wrapper_controls = [
+            WrapperControl(self._model, c[0], c[1], c[2]) for c in c_data
+        ]
 
     def _update_multi_zone_controls(self, c_data: List):
-        self._mz_controls = [MultiZoneControl(self._model, c[0], c[1], c[2]) for c in c_data]
+        self._mz_controls = [
+            MultiZoneControl(self._model, c[0], c[1], c[2]) for c in c_data
+        ]
 
     def _update_volume_controls(self, c_data: List):
-        self._volume_controls = [VolumeControl(self._model, c[0], c[1], c[2]) for c in c_data]
+        self._volume_controls = [
+            VolumeControl(self._model, c[0], c[1], c[2]) for c in c_data
+        ]
 
     def _update_periodic_controls(self, c_data: List):
-        self._periodic_controls = [PeriodicControl(self._model, c[0], c[1], c[2]) for c in c_data]
+        self._periodic_controls = [
+            PeriodicControl(self._model, c[0], c[1], c[2]) for c in c_data
+        ]
 
     def _update_thin_volume_controls(self, c_data: List):
         self._thin_volume_controls = [

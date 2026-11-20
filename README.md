@@ -33,7 +33,7 @@ On the [PyPrimeMesh Issues](https://github.com/ansys/pyprimemesh/issues) page,
 you can create issues to report bugs and request new features. On the
 [PyPrimeMesh Discussions](https://github.com/ansys/pyprimemesh/discussions) page or the
 [Discussions](https://discuss.ansys.com/) page on the Ansys Developer portal,
-you can post questions, share ideas, and get community feedback. 
+you can post questions, share ideas, and get community feedback.
 
 To reach the project support team, email [pyansys.core@ansys.com](mailto:pyansys.core@ansys.com).
 
@@ -68,10 +68,10 @@ pip install -e .
 
 ## Dependencies
 
-You must have Ansys 2023 R1 or later installed to have access to Ansys Prime Server. 
+You must have Ansys 2023 R1 or later installed to have access to Ansys Prime Server.
 Optionally, CAD readers can be configured.
 
-Ansys Prime Server requires one of the following licenses to run. 
+Ansys Prime Server requires one of the following licenses to run.
 The system checks out the first available license from the list in the following order:
 
 1. CFD PrepPost

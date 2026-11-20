@@ -1,4 +1,4 @@
-# Copyright (C) 2024 - 2026 ANSYS, Inc. and/or its affiliates.
+# Copyright (C) 2025 - 2026 Synopsys, Inc. and ANSYS, Inc. All rights reserved.
 # SPDX-License-Identifier: MIT
 #
 #
@@ -21,6 +21,7 @@
 # SOFTWARE.
 
 """Integration test for the toy car example."""
+
 import math
 
 import ansys.meshing.prime as prime
@@ -122,7 +123,9 @@ def test_toycar_tutorial(get_remote_client, get_examples):
     # mesh check
     part = model.get_part_by_name("__wrap__.3")
     vtool = prime.VolumeMeshTool(model=model)
-    result = vtool.check_mesh(part_id=part.id, params=prime.CheckMeshParams(model=model))
+    result = vtool.check_mesh(
+        part_id=part.id, params=prime.CheckMeshParams(model=model)
+    )
 
     # Validate quality check error code
     assert result.error_code is prime.ErrorCode.NOERROR

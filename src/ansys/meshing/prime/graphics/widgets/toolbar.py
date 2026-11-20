@@ -1,5 +1,6 @@
-# Copyright (C) 2024 - 2026 ANSYS, Inc. and/or its affiliates.
+# Copyright (C) 2025 - 2026 Synopsys, Inc. and ANSYS, Inc. All rights reserved.
 # SPDX-License-Identifier: MIT
+#
 #
 # Permission is hereby granted, free of charge, to any person obtaining a copy
 # of this software and associated documentation files (the "Software"), to deal
@@ -54,12 +55,14 @@ class ToolbarButton:
             Button that was added to the scene.
         """
         self._button_position = position
-        return self.prime_plotter._backend.pv_interface.scene.add_checkbox_button_widget(
-            self.callback,
-            position=position,
-            size=BUTTON_SIZE,
-            border_size=BUTTON_BORDER,
-            **options,
+        return (
+            self.prime_plotter._backend.pv_interface.scene.add_checkbox_button_widget(
+                self.callback,
+                position=position,
+                size=BUTTON_SIZE,
+                border_size=BUTTON_BORDER,
+                **options,
+            )
         )
 
     def contains(self, x: int, y: int) -> bool:

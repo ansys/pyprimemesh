@@ -1,4 +1,4 @@
-# Copyright (C) 2024 - 2026 ANSYS, Inc. and/or its affiliates.
+# Copyright (C) 2025 - 2026 Synopsys, Inc. and ANSYS, Inc. All rights reserved.
 # SPDX-License-Identifier: MIT
 #
 #
@@ -21,6 +21,7 @@
 # SOFTWARE.
 
 """Integration test for the bracket scaffold example."""
+
 import math
 
 import ansys.meshing.prime as prime
@@ -41,8 +42,10 @@ def test_bracket_scaffold(get_remote_client, get_examples):
             part_creation_type=prime.PartCreationType.MODEL,
         ),
     )
-    part = model.get_part_by_name('bracket_mid_surface-3')
-    part_summary_res = part.get_summary(prime.PartSummaryParams(model, print_mesh=False))
+    part = model.get_part_by_name("bracket_mid_surface-3")
+    part_summary_res = part.get_summary(
+        prime.PartSummaryParams(model, print_mesh=False)
+    )
     # Validate topo faces and edges
     assert math.isclose(67, float(part_summary_res.n_topo_edges), rel_tol=0.05)
     assert math.isclose(9, float(part_summary_res.n_topo_faces), rel_tol=0.02)

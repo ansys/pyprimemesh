@@ -9,7 +9,7 @@ Model
 =====
 
 The :class:`Model <ansys.meshing.prime.Model>` class is the top-level container for PyPrimeMesh.
-It contains all information about the PyPrimeMesh session.  
+It contains all information about the PyPrimeMesh session.
 
 .. figure:: ../images/model_structure.png
     :width: 200pt

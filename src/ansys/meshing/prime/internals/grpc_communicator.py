@@ -1,5 +1,6 @@
-# Copyright (C) 2024 - 2026 ANSYS, Inc. and/or its affiliates.
+# Copyright (C) 2025 - 2026 Synopsys, Inc. and ANSYS, Inc. All rights reserved.
 # SPDX-License-Identifier: MIT
+#
 #
 # Permission is hereby granted, free of charge, to any person obtaining a copy
 # of this software and associated documentation files (the "Software"), to deal
@@ -20,7 +21,8 @@
 # SOFTWARE.
 
 """Module for communications with the gRPC server."""
-__all__ = ['GRPCCommunicator']
+
+__all__ = ["GRPCCommunicator"]
 import logging
 import os
 from typing import Optional
@@ -62,17 +64,19 @@ def get_secure_channel(client_certs_dir: str, server_host: str, server_port: int
     target = f"{server_host}:{server_port}"
 
     if not os.path.exists(client_certs_dir):
-        raise FileNotFoundError(f"Client certificates directory does not exist: {client_certs_dir}")
+        raise FileNotFoundError(
+            f"Client certificates directory does not exist: {client_certs_dir}"
+        )
 
     cert_file = f"{client_certs_dir}/client.crt"
     key_file = f"{client_certs_dir}/client.key"
     ca_file = f"{client_certs_dir}/ca.crt"
 
-    with open(cert_file, 'rb') as f:
+    with open(cert_file, "rb") as f:
         certificate_chain = f.read()
-    with open(key_file, 'rb') as f:
+    with open(key_file, "rb") as f:
         private_key = f.read()
-    with open(ca_file, 'rb') as f:
+    with open(ca_file, "rb") as f:
         root_certificates = f.read()
 
     try:
@@ -93,7 +97,9 @@ def make_chunks(data, chunk_size):
     return (data[i : i + n] for i in range(0, len(data), n))
 
 
-def request_iterator(model_id, data, message_cls, model_cls, content_cls, completion_cls):
+def request_iterator(
+    model_id, data, message_cls, model_cls, content_cls, completion_cls
+):
     yield message_cls(model=model_cls(object_id=model_id))
     for chunk in make_chunks(data, BUFFER_MESSAGE_LENGTH):
         yield message_cls(content=content_cls(data=chunk))
@@ -102,16 +108,18 @@ def request_iterator(model_id, data, message_cls, model_cls, content_cls, comple
 
 def get_response_messages(response_generator):
     for response in response_generator:
-        if response.HasField('completion_token'):
+        if response.HasField("completion_token"):
             break
 
-        if not response.HasField('content'):
-            raise PrimeRuntimeError('Bad response from server')
+        if not response.HasField("content"):
+            raise PrimeRuntimeError("Bad response from server")
         yield response.content
 
 
 def get_response(response_iterator, separator):
-    return separator.join(response.data for response in get_response_messages(response_iterator))
+    return separator.join(
+        response.data for response in get_response_messages(response_iterator)
+    )
 
 
 class GRPCCommunicator(Communicator):
@@ -159,7 +167,7 @@ class GRPCCommunicator(Communicator):
         self._models = []
         self._logger = logging.getLogger("PyPrimeMesh")
 
-        self._channel = kwargs.get('channel', None)
+        self._channel = kwargs.get("channel", None)
         if self._channel is None:
             self._logger.debug("Creating cyber channel...")
             self._channel = cyberchannel.create_channel(
@@ -172,39 +180,49 @@ class GRPCCommunicator(Communicator):
             )
             self._logger.debug("Cyber channel created.")
 
-        if 'PYPRIMEMESH_DEVELOPER_MODE' not in os.environ:
+        if "PYPRIMEMESH_DEVELOPER_MODE" not in os.environ:
             timeout = 60.0
 
         # Health check: If using Unix Domain Socket, verify the socket file exists
         if transport_mode == "uds":
             # Determine socket path using same logic as cyberchannel
-            if os.name == 'nt':
+            if os.name == "nt":
                 uds_folder = Path(os.environ["USERPROFILE"]) / ".conn"
             else:
                 uds_folder = Path(os.environ["HOME"]) / ".conn"
 
-            socket_filename = f"pyprimemesh-{uds_id}.sock" if uds_id else "pyprimemesh.sock"
+            socket_filename = (
+                f"pyprimemesh-{uds_id}.sock" if uds_id else "pyprimemesh.sock"
+            )
             socket_path = uds_folder / socket_filename
 
-            self._logger.debug(f"Health check: Verifying Unix socket at {socket_path}...")
+            self._logger.debug(
+                f"Health check: Verifying Unix socket at {socket_path}..."
+            )
             max_wait = 30.0  # Wait up to 30 seconds for socket to appear
             wait_interval = 0.5
             elapsed = 0.0
 
             while elapsed < max_wait:
                 if socket_path.exists():
-                    self._logger.debug(f"Health check: Socket file found at {socket_path}")
+                    self._logger.debug(
+                        f"Health check: Socket file found at {socket_path}"
+                    )
                     # Additional check: try to stat the socket to ensure it's accessible
                     try:
                         socket_path.stat()
                         self._logger.debug("Health check: Socket is accessible")
                     except Exception as e:
-                        self._logger.warning(f"Health check: Socket exists but not accessible: {e}")
+                        self._logger.warning(
+                            f"Health check: Socket exists but not accessible: {e}"
+                        )
                     break
                 time.sleep(wait_interval)
                 elapsed += wait_interval
             else:
-                self._logger.warning(f"Socket file not found at {socket_path} after {max_wait}s")
+                self._logger.warning(
+                    f"Socket file not found at {socket_path} after {max_wait}s"
+                )
                 self._logger.debug(f"Health check: Listing contents of {uds_folder}...")
                 try:
                     if uds_folder.exists():
@@ -213,7 +231,9 @@ class GRPCCommunicator(Communicator):
                             f"Health check: Found {len(files)} files: {[f.name for f in files]}"
                         )
                     else:
-                        self._logger.debug(f"Health check: Directory {uds_folder} does not exist")
+                        self._logger.debug(
+                            f"Health check: Directory {uds_folder} does not exist"
+                        )
                 except Exception as e:
                     self._logger.debug(f"Health check: Error listing directory: {e}")
 
@@ -243,18 +263,18 @@ class GRPCCommunicator(Communicator):
                     )
                 else:
                     raise ConnectionError(
-                        f'Failed to connect to Server in given timeout of {timeout} secs '
-                        f'after {max_retries} attempts'
+                        f"Failed to connect to Server in given timeout of {timeout} secs "
+                        f"after {max_retries} attempts"
                     ) from err
 
         self._stub = prime_pb2_grpc.PrimeStub(self._channel)
         try:
             response = self._stub.Initialize(prime_pb2.InitializeRequest())
             message = json.loads(response.data)
-            if 'ServerError' in message:
-                raise ConnectionError(message['ServerError'])
-            elif 'Results' in message:
-                self._models = message['Results']
+            if "ServerError" in message:
+                raise ConnectionError(message["ServerError"])
+            elif "Results" in message:
+                self._models = message["Results"]
         except ConnectionError:
             raise
         except Exception as e:
@@ -302,7 +322,7 @@ class GRPCCommunicator(Communicator):
                         prime_pb2.MessageCompletionToken,
                     )
                 )
-                message = get_response(response, b'')
+                message = get_response(response, b"")
             else:
                 response = self._stub.ServeJson(
                     request_iterator(
@@ -314,10 +334,10 @@ class GRPCCommunicator(Communicator):
                         prime_pb2.MessageCompletionToken,
                     )
                 )
-                message = get_response(response, '')
+                message = get_response(response, "")
             if defaults.print_communicator_stats():
                 logging.getLogger("PyPrimeMesh").info(
-                    f'Data Transfer: Received {len(message)} bytes'
+                    f"Data Transfer: Received {len(message)} bytes"
                 )
             return json.loads(message)
         else:
@@ -356,7 +376,7 @@ class GRPCCommunicator(Communicator):
                         prime_pb2.MessageCompletionToken,
                     )
                 )
-                message = get_response(response, '')
+                message = get_response(response, "")
                 result = json.loads(message)
             return result
         else:
@@ -398,11 +418,11 @@ class GRPCCommunicator(Communicator):
                     prime_pb2.MessageCompletionToken,
                 )
             )
-            message = get_response(response, '')
+            message = get_response(response, "")
             with config.numpy_array_optimization_disabled():
                 result = json.loads(message)
             if "Error" in result:
-                raise RuntimeError(result['Error'])
+                raise RuntimeError(result["Error"])
             return result
         else:
             raise RuntimeError("No connection with server")
@@ -418,7 +438,7 @@ class GRPCCommunicator(Communicator):
         if self._stub is not None:
             try:
                 response = self._stub.Finalize(prime_pb2.FinalizeRequest())
-                message = get_response(response, '')
+                message = get_response(response, "")
             except Exception:
                 # It is possible that the server is already down
                 # when this is called.

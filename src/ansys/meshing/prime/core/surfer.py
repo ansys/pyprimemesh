@@ -1,5 +1,6 @@
-# Copyright (C) 2024 - 2026 ANSYS, Inc. and/or its affiliates.
+# Copyright (C) 2025 - 2026 Synopsys, Inc. and ANSYS, Inc. All rights reserved.
 # SPDX-License-Identifier: MIT
+#
 #
 # Permission is hereby granted, free of charge, to any person obtaining a copy
 # of this software and associated documentation files (the "Software"), to deal
@@ -20,6 +21,7 @@
 # SOFTWARE.
 
 """Module for surfer data."""
+
 from typing import Iterable
 
 # isort: split
@@ -86,7 +88,10 @@ class Surfer(CoreObject):
             return surfer.mesh_topo_faces(topo_faces, params)
 
     def create_shell_bl_using_controls(
-        self, part_id: int, shell_bl_control_ids: Iterable[int], shell_bl_params: ShellBLParams
+        self,
+        part_id: int,
+        shell_bl_control_ids: Iterable[int],
+        shell_bl_params: ShellBLParams,
     ) -> CreateShellBLResults:
         """Create ShellBL using data stored in controls.
 

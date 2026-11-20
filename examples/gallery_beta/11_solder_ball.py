@@ -1,4 +1,4 @@
-# Copyright (C) 2024 - 2026 ANSYS, Inc. and/or its affiliates.
+# Copyright (C) 2025 - 2026 Synopsys, Inc. and ANSYS, Inc. All rights reserved.
 # SPDX-License-Identifier: MIT
 #
 #
@@ -122,7 +122,10 @@ for part in model.parts:
 
 display = PrimePlotter()
 display.plot(
-    model, scope=prime.ScopeDefinition(model=model, label_expression="solder_cyl*,pad*,layer*")
+    model,
+    scope=prime.ScopeDefinition(
+        model=model, label_expression="solder_cyl*,pad*,layer*"
+    ),
 )
 display.show()
 
@@ -137,7 +140,9 @@ display.show()
 # between connected volumes.
 
 part_ids = [part.id for part in model.parts if part.get_topo_faces()]
-merge_result = model.merge_parts(part_ids=part_ids, params=prime.MergePartsParams(model))
+merge_result = model.merge_parts(
+    part_ids=part_ids, params=prime.MergePartsParams(model)
+)
 print(model)
 
 merged_part = model.get_part(merge_result.merged_part_id)
@@ -162,7 +167,9 @@ prime.Scaffolder(model, merged_part.id).split_topo_faces_by_mesh_region(
 # This is a beta API. The behavior and implementation may change in future.
 delete_mesh_params = prime.DeleteMeshParams(model=model)
 delete_mesh_params.delete_mesh_on_connected_topo_edges = True
-result = model.topo_data.delete_mesh_on_topo_faces(merged_part.get_topo_faces(), delete_mesh_params)
+result = model.topo_data.delete_mesh_on_topo_faces(
+    merged_part.get_topo_faces(), delete_mesh_params
+)
 
 scaffolder.merge_overlapping_topo_faces(merged_part.get_topo_faces(), params)
 
@@ -185,7 +192,9 @@ model.set_global_sizing_params(prime.GlobalSizingParams(model, min=0.1, max=0.4)
 
 size_control = model.control_data.create_size_control(prime.SizingType.SOFT)
 size_control.set_scope(
-    prime.ScopeDefinition(model, part_expression=merged_part.name, label_expression="*solder*")
+    prime.ScopeDefinition(
+        model, part_expression=merged_part.name, label_expression="*solder*"
+    )
 )
 size_control.set_soft_sizing_params(prime.SoftSizingParams(model, max=0.1))
 
@@ -234,7 +243,9 @@ stackbase_results = sweeper.stack_base_face(
 )
 
 merged_part.delete_topo_entities(
-    prime.DeleteTopoEntitiesParams(model, delete_geom_zonelets=True, delete_mesh_zonelets=False)
+    prime.DeleteTopoEntitiesParams(
+        model, delete_geom_zonelets=True, delete_mesh_zonelets=False
+    )
 )
 
 merged_part._print_mesh = True
@@ -252,7 +263,9 @@ display.show()
 
 solder_ball_target = prime.examples.download_solder_ball_target_fmd()
 
-params = prime.ImportCadParams(model, append=True, part_creation_type=prime.PartCreationType.MODEL)
+params = prime.ImportCadParams(
+    model, append=True, part_creation_type=prime.PartCreationType.MODEL
+)
 
 prime.FileIO(model).import_cad(file_name=solder_ball_target, params=params)
 
@@ -260,13 +273,17 @@ imported_cad_part_ids = [part.id for part in model.parts if part.get_topo_faces(
 target_part = model.get_part(imported_cad_part_ids[0])
 
 display = PrimePlotter()
-display.plot(model, scope=prime.ScopeDefinition(model, part_expression=target_part.name))
+display.plot(
+    model, scope=prime.ScopeDefinition(model, part_expression=target_part.name)
+)
 display.show()
 
 print(model)
 
 target_part.delete_topo_entities(
-    prime.DeleteTopoEntitiesParams(model, delete_geom_zonelets=False, delete_mesh_zonelets=False)
+    prime.DeleteTopoEntitiesParams(
+        model, delete_geom_zonelets=False, delete_mesh_zonelets=False
+    )
 )
 
 ###############################################################################
@@ -310,7 +327,9 @@ tolerance = 0.2
 for face in cylinder_faces:
     box = prime.SurfaceUtilities(model).get_bounding_box_of_zonelets([face])
     for i in range(len(sphere_faces)):
-        sphere_box = prime.SurfaceUtilities(model).get_bounding_box_of_zonelets([sphere_faces[i]])
+        sphere_box = prime.SurfaceUtilities(model).get_bounding_box_of_zonelets(
+            [sphere_faces[i]]
+        )
         if (
             (abs(sphere_box.xmin - box.xmin) < tolerance)
             and (abs(sphere_box.ymin - box.ymin) < tolerance)
@@ -379,7 +398,9 @@ model.delete_parts([target_part.id])
 
 display = PrimePlotter()
 display.plot(
-    model, scope=prime.ScopeDefinition(model=model, label_expression="solder*"), update=True
+    model,
+    scope=prime.ScopeDefinition(model=model, label_expression="solder*"),
+    update=True,
 )
 display.show()
 
