@@ -1,5 +1,7 @@
-# Copyright (C) 2024 - 2026 ANSYS, Inc. and/or its affiliates.
+# Copyright (C) 2024 - 2026 Synopsys, Inc. and ANSYS, Inc. All rights reserved.
 # SPDX-License-Identifier: MIT
+#
+#
 #
 # Permission is hereby granted, free of charge, to any person obtaining a copy
 # of this software and associated documentation files (the "Software"), to deal
@@ -20,25 +22,26 @@
 # SOFTWARE.
 
 """Module for communications with the gRPC server."""
-__all__ = ['GRPCCommunicator']
+
+__all__ = ["GRPCCommunicator"]
 import logging
 import os
 from typing import Optional
 
 import grpc
-from ansys.api.meshing.prime.v1 import prime_pb2, prime_pb2_grpc
 
-import ansys.meshing.prime.internals.config as config
-import ansys.meshing.prime.internals.defaults as defaults
-import ansys.meshing.prime.internals.json_utils as json
+from ansys.api.meshing.prime.v1 import prime_pb2, prime_pb2_grpc
 from ansys.meshing.prime.core.model import Model
 from ansys.meshing.prime.internals import cyberchannel
 from ansys.meshing.prime.internals.communicator import Communicator
+import ansys.meshing.prime.internals.config as config
+import ansys.meshing.prime.internals.defaults as defaults
 from ansys.meshing.prime.internals.error_handling import (
     PrimeRuntimeError,
     communicator_error_handler,
     error_code_handler,
 )
+import ansys.meshing.prime.internals.json_utils as json
 
 # Keep some buffer for gRPC metadata that it may want to send
 BUFFER_MESSAGE_LENGTH = defaults.max_message_length() - 100
@@ -54,6 +57,7 @@ def get_secure_channel(client_certs_dir: str, server_host: str, server_port: int
         - client certificate file path
         - client key file path
         - CA certificate file path
+
     Returns
     -------
     grpc.Channel
@@ -68,11 +72,11 @@ def get_secure_channel(client_certs_dir: str, server_host: str, server_port: int
     key_file = f"{client_certs_dir}/client.key"
     ca_file = f"{client_certs_dir}/ca.crt"
 
-    with open(cert_file, 'rb') as f:
+    with open(cert_file, "rb") as f:
         certificate_chain = f.read()
-    with open(key_file, 'rb') as f:
+    with open(key_file, "rb") as f:
         private_key = f.read()
-    with open(ca_file, 'rb') as f:
+    with open(ca_file, "rb") as f:
         root_certificates = f.read()
 
     try:
@@ -102,11 +106,11 @@ def request_iterator(model_id, data, message_cls, model_cls, content_cls, comple
 
 def get_response_messages(response_generator):
     for response in response_generator:
-        if response.HasField('completion_token'):
+        if response.HasField("completion_token"):
             break
 
-        if not response.HasField('content'):
-            raise PrimeRuntimeError('Bad response from server')
+        if not response.HasField("content"):
+            raise PrimeRuntimeError("Bad response from server")
         yield response.content
 
 
@@ -131,6 +135,7 @@ class GRPCCommunicator(Communicator):
         Id for the Unix Domain Socket (UDS). The default is ``None``.
     client_certs_dir : Optional[str], optional
         Directory containing client certificates for mutual TLS. The default is ``None``.
+
     Raises
     ------
     ConnectionError
@@ -150,8 +155,8 @@ class GRPCCommunicator(Communicator):
     ):
         """Initialize the server connection."""
         import os
-        import time
         from pathlib import Path
+        import time
 
         # Initialize attributes early to avoid AttributeError in __del__
         self._channel = None
@@ -159,7 +164,7 @@ class GRPCCommunicator(Communicator):
         self._models = []
         self._logger = logging.getLogger("PyPrimeMesh")
 
-        self._channel = kwargs.get('channel', None)
+        self._channel = kwargs.get("channel", None)
         if self._channel is None:
             self._logger.debug("Creating cyber channel...")
             self._channel = cyberchannel.create_channel(
@@ -172,13 +177,13 @@ class GRPCCommunicator(Communicator):
             )
             self._logger.debug("Cyber channel created.")
 
-        if 'PYPRIMEMESH_DEVELOPER_MODE' not in os.environ:
+        if "PYPRIMEMESH_DEVELOPER_MODE" not in os.environ:
             timeout = 60.0
 
         # Health check: If using Unix Domain Socket, verify the socket file exists
         if transport_mode == "uds":
             # Determine socket path using same logic as cyberchannel
-            if os.name == 'nt':
+            if os.name == "nt":
                 uds_folder = Path(os.environ["USERPROFILE"]) / ".conn"
             else:
                 uds_folder = Path(os.environ["HOME"]) / ".conn"
@@ -243,18 +248,18 @@ class GRPCCommunicator(Communicator):
                     )
                 else:
                     raise ConnectionError(
-                        f'Failed to connect to Server in given timeout of {timeout} secs '
-                        f'after {max_retries} attempts'
+                        f"Failed to connect to Server in given timeout of {timeout} secs "
+                        f"after {max_retries} attempts"
                     ) from err
 
         self._stub = prime_pb2_grpc.PrimeStub(self._channel)
         try:
             response = self._stub.Initialize(prime_pb2.InitializeRequest())
             message = json.loads(response.data)
-            if 'ServerError' in message:
-                raise ConnectionError(message['ServerError'])
-            elif 'Results' in message:
-                self._models = message['Results']
+            if "ServerError" in message:
+                raise ConnectionError(message["ServerError"])
+            elif "Results" in message:
+                self._models = message["Results"]
         except ConnectionError:
             raise
         except Exception as e:
@@ -302,7 +307,7 @@ class GRPCCommunicator(Communicator):
                         prime_pb2.MessageCompletionToken,
                     )
                 )
-                message = get_response(response, b'')
+                message = get_response(response, b"")
             else:
                 response = self._stub.ServeJson(
                     request_iterator(
@@ -314,10 +319,10 @@ class GRPCCommunicator(Communicator):
                         prime_pb2.MessageCompletionToken,
                     )
                 )
-                message = get_response(response, '')
+                message = get_response(response, "")
             if defaults.print_communicator_stats():
                 logging.getLogger("PyPrimeMesh").info(
-                    f'Data Transfer: Received {len(message)} bytes'
+                    f"Data Transfer: Received {len(message)} bytes"
                 )
             return json.loads(message)
         else:
@@ -356,7 +361,7 @@ class GRPCCommunicator(Communicator):
                         prime_pb2.MessageCompletionToken,
                     )
                 )
-                message = get_response(response, '')
+                message = get_response(response, "")
                 result = json.loads(message)
             return result
         else:
@@ -398,11 +403,11 @@ class GRPCCommunicator(Communicator):
                     prime_pb2.MessageCompletionToken,
                 )
             )
-            message = get_response(response, '')
+            message = get_response(response, "")
             with config.numpy_array_optimization_disabled():
                 result = json.loads(message)
             if "Error" in result:
-                raise RuntimeError(result['Error'])
+                raise RuntimeError(result["Error"])
             return result
         else:
             raise RuntimeError("No connection with server")
@@ -418,7 +423,7 @@ class GRPCCommunicator(Communicator):
         if self._stub is not None:
             try:
                 response = self._stub.Finalize(prime_pb2.FinalizeRequest())
-                message = get_response(response, '')
+                message = get_response(response, "")
             except Exception:
                 # It is possible that the server is already down
                 # when this is called.

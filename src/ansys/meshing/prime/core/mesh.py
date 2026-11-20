@@ -1,5 +1,7 @@
-# Copyright (C) 2024 - 2026 ANSYS, Inc. and/or its affiliates.
+# Copyright (C) 2024 - 2026 Synopsys, Inc. and ANSYS, Inc. All rights reserved.
 # SPDX-License-Identifier: MIT
+#
+#
 #
 # Permission is hereby granted, free of charge, to any person obtaining a copy
 # of this software and associated documentation files (the "Software"), to deal
@@ -21,16 +23,15 @@
 
 """Process the mesh for visualization in the GUI."""
 
-import enum
-import weakref
 from collections import defaultdict
 from dataclasses import dataclass, field
+import enum
 from types import SimpleNamespace
 from typing import Dict, Iterable, List, Mapping, Optional, Sequence, Tuple, Union
+import weakref
 
 import numpy as np
 import pyvista as pv
-from ansys.tools.visualization_interface import MeshObjectPlot
 
 import ansys.meshing.prime as prime
 from ansys.meshing.prime.autogen.meshinfo import MeshInfo
@@ -41,6 +42,7 @@ from ansys.meshing.prime.autogen.meshinfostructs import (
 )
 from ansys.meshing.prime.core.part import Part
 from ansys.meshing.prime.internals.comm_manager import CommunicationManager
+from ansys.tools.visualization_interface import MeshObjectPlot
 
 
 class ColorByType(enum.IntEnum):
@@ -2051,7 +2053,8 @@ class Mesh(MeshInfo):
                     part_id, facet_result.face_connectivity_result_per_part[i], j
                 )
                 for j in range(
-                    0, len(facet_result.face_connectivity_result_per_part[i].face_zonelet_ids)
+                    0,
+                    len(facet_result.face_connectivity_result_per_part[i].face_zonelet_ids),
                 )
             ]
 
@@ -2060,7 +2063,8 @@ class Mesh(MeshInfo):
                     part_id, facet_result.edge_connectivity_result_per_part[i], j
                 )
                 for j in range(
-                    0, len(facet_result.edge_connectivity_result_per_part[i].edge_zonelet_ids)
+                    0,
+                    len(facet_result.edge_connectivity_result_per_part[i].edge_zonelet_ids),
                 )
             ]
 
@@ -2228,7 +2232,12 @@ class Mesh(MeshInfo):
                     lines, n_lines = _facet_edge_lines(block, n_cells, len(vertices))
                     if n_lines:
                         grouped_raw_outlines[display_mesh_type].append(
-                            (vertices, lines, n_lines, info)
+                            (
+                                vertices,
+                                lines,
+                                n_lines,
+                                info,
+                            )
                         )
                 else:
                     grouped_raw[display_mesh_type].append((vertices, block, n_cells, info))
@@ -2237,7 +2246,12 @@ class Mesh(MeshInfo):
                     lines, n_lines = _facet_edge_lines(block, n_cells, len(vertices))
                     if n_lines:
                         grouped_raw_facets[display_mesh_type].append(
-                            (vertices, lines, n_lines, info)
+                            (
+                                vertices,
+                                lines,
+                                n_lines,
+                                info,
+                            )
                         )
 
             # A face scope selects faces only, so drawing the rest of the part's edges
@@ -2943,7 +2957,8 @@ class MeshUSD(MeshInfo):
                     part_id, facet_result.face_connectivity_result_per_part[i], j
                 )
                 for j in range(
-                    0, len(facet_result.face_connectivity_result_per_part[i].face_zonelet_ids)
+                    0,
+                    len(facet_result.face_connectivity_result_per_part[i].face_zonelet_ids),
                 )
             ]
 
@@ -2952,7 +2967,8 @@ class MeshUSD(MeshInfo):
                     part_id, facet_result.edge_connectivity_result_per_part[i], j
                 )
                 for j in range(
-                    0, len(facet_result.edge_connectivity_result_per_part[i].edge_zonelet_ids)
+                    0,
+                    len(facet_result.edge_connectivity_result_per_part[i].edge_zonelet_ids),
                 )
             ]
 

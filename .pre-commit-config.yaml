@@ -1,57 +1,60 @@
 exclude: |
-    (?x)^(
-      src/ansys/meshing/prime/autogen/|
-      src/ansys/meshing/prime/__init__.py
-    )
+  (?x)^(
+    src/ansys/meshing/prime/autogen/|
+    src/ansys/meshing/prime/__init__.py
+  )
 
 repos:
 
-- repo: https://github.com/psf/black
-  rev: 25.12.0  # IF VERSION CHANGES --> MODIFY "blacken-docs" MANUALLY AS WELL!!
-  hooks:
-  - id: black
+  - repo: https://github.com/google/yamlfmt
+    rev: b5ca1890231d5e1e5181fef75a1be609d1e25029 # frozen: v0.21.0
+    hooks:
+      - id: yamlfmt
+        args:
+          - "-formatter"
+          - "max_line_length=80,retain_line_breaks=true,retain_line_breaks_single=true"
 
-- repo: https://github.com/adamchainz/blacken-docs
-  rev: 1.20.0
-  hooks:
-  - id: blacken-docs
-    additional_dependencies: [black==22.12.0]
+  - repo: https://github.com/tox-dev/pyproject-fmt
+    rev: 02ef6d1c28994054a843e58604e1a343faa42987 # frozen: v2.31.2
+    hooks:
+      - id: pyproject-fmt
+        args: [--keep-full-version]
 
-- repo: https://github.com/PyCQA/flake8
-  rev: 7.3.0
-  hooks:
-  - id: flake8
+  - repo: https://github.com/adamchainz/blacken-docs
+    rev: dda8db18cfc68df532abf33b185ecd12d5b7b326 # frozen: 1.20.0
+    hooks:
+      - id: blacken-docs
+        additional_dependencies: [black==26.10.1]
 
-- repo: https://github.com/pycqa/isort
-  rev: 7.0.0
-  hooks:
-  - id: isort
-    args: ["--profile", "black"]
+  - repo: https://github.com/codespell-project/codespell
+    rev: 57b21406f092110c18776e39b0bda50d37c945c8 # v2.4.3
+    hooks:
+      - id: codespell
+        args: [--ignore-words, doc/styles/config/vocabularies/ANSYS/accept.txt]
 
-- repo: https://github.com/codespell-project/codespell
-  rev: v2.4.1
-  hooks:
-  - id: codespell
-    args: ["--ignore-words", "doc/styles/config/vocabularies/ANSYS/accept.txt"]
+  - repo: https://github.com/pre-commit/pre-commit-hooks
+    rev: 3e8a8703264a2f4a69428a0aa4dcb512790b2c8c # v6.0.0
+    hooks:
+      - id: check-merge-conflict
+      - id: debug-statements
+      - id: check-yaml
+      - id: trailing-whitespace
 
-- repo: https://github.com/pre-commit/pre-commit-hooks
-  rev: v6.0.0
-  hooks:
-  - id: check-merge-conflict
-  - id: debug-statements
+  - repo: https://github.com/ansys/pre-commit-hooks
+    rev: e55c4e315cb8ce98e3b81c63b5e869cfc3114039 # frozen: v0.8.2
+    hooks:
+      - id: add-license-headers
+        files: (src|examples|tests|docker)/.*\.(py)|\.(proto)
+        args:
+          - --start_year=2024
 
-# To be activated after quick dev cycles
-#
-- repo: https://github.com/pycqa/pydocstyle
-  rev: 6.3.0
-  hooks:
-  - id: pydocstyle
-    additional_dependencies: [toml]
-    exclude: "tests/|examples/|__init__.py"
+  - repo: https://github.com/python-jsonschema/check-jsonschema
+    rev: 39478bf2c099a58683d3f1aedf675105318b078d # frozen: 0.39.0
+    hooks:
+      - id: check-github-workflows
 
-- repo: https://github.com/ansys/pre-commit-hooks
-  rev: v0.2.8
-  hooks:
-    - id: add-license-headers
-      args:
-          - LICENSE
+  - repo: https://github.com/astral-sh/ruff-pre-commit
+    rev: 9026c9127e153371d7a78dfcb0c45ae2046a3d10 # frozen: v0.17.6
+    hooks:
+      - id: ruff-check
+      - id: ruff-format

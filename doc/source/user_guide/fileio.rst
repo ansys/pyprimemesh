@@ -37,7 +37,7 @@ and :class:`FileWriteParams <ansys.meshing.prime.FileWriteParams>` classes respe
 
 .. tip::
     Files can be read or imported based on file extension using the :func:`Mesh.read() <ansys.meshing.prime.lucid.Mesh.read>`
-    method in the Lucid API. The method supports PyPrimeMesh's native format, various CAD formats, and solver mesh files. 
+    method in the Lucid API. The method supports PyPrimeMesh's native format, various CAD formats, and solver mesh files.
 
 
 ================
@@ -46,7 +46,7 @@ Import CAD files
 
 The :func:`FileIO.import_cad() <ansys.meshing.prime.FileIO.import_cad>` method allows
 you to import CAD files and set parameters for importing files using the
-:class:`ImportCadParams <ansys.meshing.prime.ImportCadParams>` class.  
+:class:`ImportCadParams <ansys.meshing.prime.ImportCadParams>` class.
 
 
 CAD reader routes
@@ -80,26 +80,26 @@ Five CAD import routes are available in PyPrimeMesh:
    Parasolid (X_T and X_B), JTOpen (JT and PLMXML), and STL.
 
  * ``SpaceClaim``: Uses SpaceClaim to import supported CAD files from the SpaceClaim reader. Only the
-   Windows platform supports importing files using the SpaceClaim reader. Ensure to install 
+   Windows platform supports importing files using the SpaceClaim reader. Ensure to install
    SpaceClaim for SpaceClaim reader.
 
  * ``Discovery``: Uses Discovery to import supported CAD files from the Discovery reader. Only the
    Windows platform supports importing files using the Discovery reader.
-   Ensure to install Discovery for Discovery reader. 
+   Ensure to install Discovery for Discovery reader.
 
  * ``Workbench``: Uses Workbench to import supported CAD files from the Workbench reader.
    Ensure to install Workbench for Workbench reader.
 
 .. note:
     * When you import CAD using the SpaceClaim or Discovery reader routes the user import options in those applications are ignored.
-    
+
     * If the options are required then you can import CAD in the application stand-alone with the options defined and export it to a native format (FMD or PMDB) to import into Ansys Prime Server.
-    
+
 To view the CAD files supported for the Workbench route on different platforms, see
-`CAD Support <https://www.ansys.com/it-solutions/platform-support>`_ on the Ansys website. 
+`CAD Support <https://www.ansys.com/it-solutions/platform-support>`_ on the Ansys website.
 
 .. note::
-    * Program controlled supports faceted data. Workbench supports BRep geometry(non-faceted) data. 
+    * Program controlled supports faceted data. Workbench supports BRep geometry(non-faceted) data.
       Discovery or SpaceClaim supports both BRep geometry and faceted data.
 
     * When deploying scripts using the Workbench CAD reader route, ensure that the user options for the installed
@@ -123,7 +123,7 @@ Append CAD files
 ----------------
 
 The :attr:`ImportCadParams.append <ansys.meshing.prime.ImportCadParams.append>` parameter allows
-you to append a CAD file to the model: 
+you to append a CAD file to the model:
 
 .. code-block:: python
 
@@ -142,7 +142,7 @@ Parametric CAD update
 ---------------------
 
 Parametric CAD update can be used while importing CAD files that have parameters defined that
-can be accessed by Workbench CAD readers.  
+can be accessed by Workbench CAD readers.
 
 This code gets existing CAD parameters while importing:
 
@@ -177,7 +177,7 @@ This code sets the parameters that are used for the import:
 Part management and creation
 ----------------------------
 
-PyPrimeMesh has options for part management within the product structure while importing a CAD (Computer Aided Design) model. 
+PyPrimeMesh has options for part management within the product structure while importing a CAD (Computer Aided Design) model.
 The CAD model is the top in product hierarchy. A CAD model can have one or more CAD assemblies. The CAD assembly or
 subassembly has different CAD parts. The CAD part has bodies or other geometric entities. Here is a typical CAD product
 structure from SpaceClaim:
@@ -306,12 +306,12 @@ Export solver mesh files
    splines using the :class:`ExportBoundaryFittedSplineParams <ansys.meshing.prime.ExportBoundaryFittedSplineParams>` class.
 
  - The :func:`FileIO.export_lsdyna_keyword_file() <ansys.meshing.prime.FileIO.export_lsdyna_keyword_file>`
-   function allows you to write out an LS-DYNA Keyword ``(*.k)`` file that contains the mesh definition and other 
-   necessary information to carry out the analysis run by the LS-DYNA solver. 
-   The :class:`ExportLSDynaKeywordFileParams <ansys.meshing.prime.ExportLSDynaKeywordFileParams>` class allows 
+   function allows you to write out an LS-DYNA Keyword ``(*.k)`` file that contains the mesh definition and other
+   necessary information to carry out the analysis run by the LS-DYNA solver.
+   The :class:`ExportLSDynaKeywordFileParams <ansys.meshing.prime.ExportLSDynaKeywordFileParams>` class allows
    you to specify the application type (``SEATBELT, DOORSLAM``), indicate whether to compute
    the spot weld thickness, append the material cards in the K file, provide the database cards
-   to append in the K file, and specify the LS-DYNA data field format. You should specify the material 
+   to append in the K file, and specify the LS-DYNA data field format. You should specify the material
    properties card and the database keywords card in LS-DYNA format.
 
  .. note::

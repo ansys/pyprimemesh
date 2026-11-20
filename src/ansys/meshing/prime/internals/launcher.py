@@ -1,5 +1,7 @@
-# Copyright (C) 2024 - 2026 ANSYS, Inc. and/or its affiliates.
+# Copyright (C) 2024 - 2026 Synopsys, Inc. and ANSYS, Inc. All rights reserved.
 # SPDX-License-Identifier: MIT
+#
+#
 #
 # Permission is hereby granted, free of charge, to any person obtaining a copy
 # of this software and associated documentation files (the "Software"), to deal
@@ -20,36 +22,37 @@
 # SOFTWARE.
 
 """Helper module for launching the server."""
+
 import logging
 import os
 import subprocess
 import sys
-import uuid
 from typing import Optional, Union
+import uuid
 
+from ansys.meshing.prime.internals.client import Client
 import ansys.meshing.prime.internals.config as config
 import ansys.meshing.prime.internals.defaults as defaults
 import ansys.meshing.prime.internals.utils as utils
-from ansys.meshing.prime.internals.client import Client
 
 try:
-    import ansys.platform.instancemanagement as pypim
     from simple_upload_server.client import Client as FileClient
 
     from ansys.meshing.prime.internals import cyberchannel
+    import ansys.platform.instancemanagement as pypim
 
     config.set_has_pim(pypim.is_configured())
 except:
     pass
 
-__all__ = ['launch_prime', 'launch_server_process']
+__all__ = ["launch_prime", "launch_server_process"]
 
 
 def get_install_locations():
-    supported_versions = ['261']
-    awp_roots = {ver: os.environ.get(f'AWP_ROOT{ver}', '') for ver in supported_versions}
+    supported_versions = ["261"]
+    awp_roots = {ver: os.environ.get(f"AWP_ROOT{ver}", "") for ver in supported_versions}
     installed_versions = {
-        ver: os.path.join(path, 'meshing', 'Prime')
+        ver: os.path.join(path, "meshing", "Prime")
         for ver, path in awp_roots.items()
         if path and os.path.isdir(path)
     }
@@ -110,74 +113,74 @@ def launch_server_process(
     if prime_root is None:
         prime_root = get_ansys_prime_server_root()
         if prime_root is None:
-            raise FileNotFoundError('No valid Ansys Prime Server found to launch.')
+            raise FileNotFoundError("No valid Ansys Prime Server found to launch.")
     else:  # verify if the file exists
         prime_root = os.fspath(prime_root)
         if not os.path.isdir(prime_root):
-            raise FileNotFoundError('Invalid exec_file path.')
+            raise FileNotFoundError("Invalid exec_file path.")
 
     if server_certs_dir is not None:
         server_certs_dir = os.fspath(server_certs_dir)
 
-    script_ext = 'bat' if os.name == 'nt' else 'sh'
-    run_prime_script = f'runPrime.{script_ext}'
+    script_ext = "bat" if os.name == "nt" else "sh"
+    run_prime_script = f"runPrime.{script_ext}"
 
     exec_path = os.path.join(prime_root, run_prime_script)
-    logging.getLogger('PyPrimeMesh').info(f'Launching Ansys Prime Server from {prime_root}')
-    logging.getLogger('PyPrimeMesh').info('Using server from %s', prime_root)
+    logging.getLogger("PyPrimeMesh").info(f"Launching Ansys Prime Server from {prime_root}")
+    logging.getLogger("PyPrimeMesh").info("Using server from %s", prime_root)
     if not os.path.isfile(exec_path):
-        raise FileNotFoundError(f'{run_prime_script} not found in {prime_root}')
+        raise FileNotFoundError(f"{run_prime_script} not found in {prime_root}")
 
-    server_args = [exec_path, 'server']
+    server_args = [exec_path, "server"]
 
     if kw is None:
         kw = {}
 
-    enable_python_server = kw.get('server', 'release')
-    communicator_type = kw.get('communicator_type', 'grpc')
-    scheduler = kw.get('scheduler', None)
+    enable_python_server = kw.get("server", "release")
+    communicator_type = kw.get("communicator_type", "grpc")
+    scheduler = kw.get("scheduler", None)
 
     if not isinstance(enable_python_server, str):
         raise ValueError(
-            'Hidden option to run python server needs to be a string.'
-            'Potential options are: release (default), debug and python'
+            "Hidden option to run python server needs to be a string."
+            "Potential options are: release (default), debug and python"
         )
 
     enable_python_server = enable_python_server.lower()
-    if enable_python_server not in ('python', 'release', 'debug'):
-        raise ValueError('server option needs to be one of release, debug or python.')
+    if enable_python_server not in ("python", "release", "debug"):
+        raise ValueError("server option needs to be one of release, debug or python.")
 
-    if enable_python_server == 'python':
-        script_dir = os.path.join(prime_root, 'scripts')
-        server_path = os.path.join(script_dir, 'PrimeGRPC.py')
+    if enable_python_server == "python":
+        script_dir = os.path.join(prime_root, "scripts")
+        server_path = os.path.join(script_dir, "PrimeGRPC.py")
         if not os.path.isfile(server_path):
-            raise FileNotFoundError(f'PrimeGRPC.py not found in {script_dir}')
-        server_args.append('-python')
+            raise FileNotFoundError(f"PrimeGRPC.py not found in {script_dir}")
+        server_args.append("-python")
 
-    if enable_python_server == 'debug':
-        server_args.append('-debug')
+    if enable_python_server == "debug":
+        server_args.append("-debug")
 
-    server_args.append(f'--type={communicator_type}')
-    server_args.append(f'--ip={ip}')
-    server_args.append(f'--port={port}')
+    server_args.append(f"--type={communicator_type}")
+    server_args.append(f"--ip={ip}")
+    server_args.append(f"--port={port}")
     if n_procs is not None and isinstance(n_procs, int):
-        server_args.append(f'-np')
-        server_args.append(f'{n_procs}')
+        server_args.append(f"-np")
+        server_args.append(f"{n_procs}")
         if scheduler is not None:
-            server_args.append(f'--scheduler')
-            server_args.append(f'{scheduler}')
+            server_args.append(f"--scheduler")
+            server_args.append(f"{scheduler}")
 
-    if os.name != 'nt' and connection_type == config.ConnectionType.GRPC_SECURE:
-        server_args.append(f'--uds={kw.get("uds_file", "")}')
+    if os.name != "nt" and connection_type == config.ConnectionType.GRPC_SECURE:
+        server_args.append(f"--uds={kw.get('uds_file', '')}")
 
     kwargs = {
-        'stdin': subprocess.DEVNULL,
+        "stdin": subprocess.DEVNULL,
     }
     if "PRIME_ENABLE_VERBOSITY" not in os.environ:
-        kwargs['stdout'] = subprocess.DEVNULL
-        kwargs['stderr'] = subprocess.DEVNULL
-    if sys.platform.startswith('win32'):
-        kwargs['creationflags'] = subprocess.CREATE_NEW_PROCESS_GROUP
+        kwargs["stdout"] = subprocess.DEVNULL
+        kwargs["stderr"] = subprocess.DEVNULL
+    if sys.platform.startswith("win32"):
+        kwargs["creationflags"] = subprocess.CREATE_NEW_PROCESS_GROUP
 
     if connection_type == config.ConnectionType.GRPC_SECURE:
         server_args.append("--secure=yes")
@@ -187,7 +190,7 @@ def launch_server_process(
     if server_certs_dir is not None:
         server_args.append(f"--server_cert_dir={server_certs_dir}")
 
-    logging.getLogger('PyPrimeMesh').info('Launching Ansys Prime Server')
+    logging.getLogger("PyPrimeMesh").info("Launching Ansys Prime Server")
     # server_args is built entirely from validated internal values (checked file
     # paths and a restricted set of option strings), not from untrusted external
     # input, and shell=False (the default) is used, so shell injection is not
@@ -205,32 +208,32 @@ def launch_remote_prime(
     This method creates a file transfer service that is available on Ansys Lab.
     """
     if version is None:
-        version = 'latest'
+        version = "latest"
 
     pim = pypim.connect()
-    instance = pim.create_instance(product_name='prime', product_version=version)
+    instance = pim.create_instance(product_name="prime", product_version=version)
     instance.wait_for_ready()
 
     channel = instance.build_grpc_channel(
         options=[
-            ('grpc.max_send_message_length', defaults.max_message_length()),
-            ('grpc.max_receive_message_length', defaults.max_message_length()),
+            ("grpc.max_send_message_length", defaults.max_message_length()),
+            ("grpc.max_receive_message_length", defaults.max_message_length()),
         ]
     )
 
     client = Client(channel=channel, timeout=timeout)
     file_service = FileClient(
-        token='token',  # nosec B106 - placeholder value, not a real credential;
+        token="token",  # nosec B106 - placeholder value, not a real credential;
         # the http-simple-upload-server service does not use this for authentication.
-        url=instance.services['http-simple-upload-server'].uri,
-        headers=instance.services['http-simple-upload-server'].headers,
+        url=instance.services["http-simple-upload-server"].uri,
+        headers=instance.services["http-simple-upload-server"].headers,
     )
 
     client.pim_client = pim
     client.remote_instance = instance
     model = client.model
     model._unfreeze()
-    setattr(model, 'file_service', file_service)
+    setattr(model, "file_service", file_service)
     model._freeze()
 
     return client
@@ -283,7 +286,7 @@ def launch_prime(
     ConnectionError
         When there is an error in connecting to the gRPC server.
     """
-    logging.getLogger('PyPrimeMesh').info("Launching Ansys Prime Server...")
+    logging.getLogger("PyPrimeMesh").info("Launching Ansys Prime Server...")
     if config.has_pim():
         return launch_remote_prime(version=version, timeout=timeout)
 
@@ -319,11 +322,11 @@ def launch_prime(
                 f"Missing required client TLS file(s) for mutual TLS: {', '.join(missing)}"
             )
 
-    launch_container = bool(int(os.environ.get('PYPRIMEMESH_LAUNCH_CONTAINER', '0')))
-    logging.getLogger('PyPrimeMesh').info(f'Launch container: {launch_container}')
+    launch_container = bool(int(os.environ.get("PYPRIMEMESH_LAUNCH_CONTAINER", "0")))
+    logging.getLogger("PyPrimeMesh").info(f"Launch container: {launch_container}")
     if launch_container:
-        logging.getLogger('PyPrimeMesh').info("Launching container...")
-        container_name = utils.make_unique_container_name('ansys-prime-server')
+        logging.getLogger("PyPrimeMesh").info("Launching container...")
+        container_name = utils.make_unique_container_name("ansys-prime-server")
         utils.launch_prime_github_container(
             port=port,
             name=container_name,
@@ -337,19 +340,19 @@ def launch_prime(
             client_certs_dir=client_certs_dir,
             connection_type=config.ConnectionType.GRPC_INSECURE,
         )
-        logging.getLogger('PyPrimeMesh').info("Client created.")
+        logging.getLogger("PyPrimeMesh").info("Client created.")
         client.container_name = container_name
-        logging.getLogger('PyPrimeMesh').info(
-            f'Using server from docker: container name {container_name}'
+        logging.getLogger("PyPrimeMesh").info(
+            f"Using server from docker: container name {container_name}"
         )
         return client
 
     uds_id = None
     uds_folder = None
     socket_filename = None
-    if os.name != 'nt' and client_certs_dir is None:
+    if os.name != "nt" and client_certs_dir is None:
         uds_folder = cyberchannel.determine_uds_folder()
-        uds_id = f'{uuid.uuid4()}'
+        uds_id = f"{uuid.uuid4()}"
         socket_filename = "pyprimemesh-" + uds_id + ".sock"
 
     server = launch_server_process(
@@ -358,7 +361,7 @@ def launch_prime(
         port=port,
         n_procs=n_procs,
         connection_type=connection_type,
-        uds_file=None if os.name == 'nt' else f"unix:{uds_folder / socket_filename}",
+        uds_file=None if os.name == "nt" else f"unix:{uds_folder / socket_filename}",
         server_certs_dir=server_certs_dir,
         **kwargs,
     )

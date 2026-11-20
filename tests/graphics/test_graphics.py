@@ -1,5 +1,7 @@
-# Copyright (C) 2024 - 2026 ANSYS, Inc. and/or its affiliates.
+# Copyright (C) 2024 - 2026 Synopsys, Inc. and ANSYS, Inc. All rights reserved.
 # SPDX-License-Identifier: MIT
+#
+#
 #
 # Permission is hereby granted, free of charge, to any person obtaining a copy
 # of this software and associated documentation files (the "Software"), to deal
@@ -27,10 +29,6 @@ from types import SimpleNamespace
 import numpy as np
 import pytest
 import pyvista as pv
-from ansys.tools.visualization_interface.backends.pyvista.widgets.mesh_slider import (
-    MeshSliderWidget,
-)
-from ansys.tools.visualization_interface.utils.color import Color
 
 import ansys.meshing.prime as prime
 from ansys.meshing.prime.core.mesh import (
@@ -59,6 +57,10 @@ from ansys.meshing.prime.graphics.widgets.color_by_type import ColorByTypeWidget
 from ansys.meshing.prime.graphics.widgets.hide_picked import HidePicked
 from ansys.meshing.prime.graphics.widgets.toggle_edges import ToggleEdges
 from ansys.meshing.prime.graphics.widgets.toolbar import BUTTON_SIZE
+from ansys.tools.visualization_interface.backends.pyvista.widgets.mesh_slider import (
+    MeshSliderWidget,
+)
+from ansys.tools.visualization_interface.utils.color import Color
 
 pv.OFF_SCREEN = True
 IMAGE_RESULTS_DIR = Path(Path(__file__).parent, "image_cache", "results")

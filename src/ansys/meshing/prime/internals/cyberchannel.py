@@ -1,5 +1,7 @@
-# Copyright (C) 2024 - 2026 ANSYS, Inc. and/or its affiliates.
+# Copyright (C) 2024 - 2026 Synopsys, Inc. and ANSYS, Inc. All rights reserved.
 # SPDX-License-Identifier: MIT
+#
+#
 #
 # Permission is hereby granted, free of charge, to any person obtaining a copy
 # of this software and associated documentation files (the "Software"), to deal
@@ -41,9 +43,9 @@ Example
 # Only the create_channel function is exposed for external use
 __all__ = ["create_channel", "verify_transport_mode", "verify_uds_socket"]
 
+from dataclasses import dataclass
 import logging
 import os
-from dataclasses import dataclass
 from pathlib import Path
 from typing import cast
 from warnings import warn
@@ -366,7 +368,9 @@ def create_mtls_channel(
 
     # Create SSL credentials
     credentials = grpc.ssl_channel_credentials(
-        root_certificates=trusted_certs, private_key=client_key, certificate_chain=client_cert
+        root_certificates=trusted_certs,
+        private_key=client_key,
+        certificate_chain=client_cert,
     )
 
     target = f"{host}:{port}"

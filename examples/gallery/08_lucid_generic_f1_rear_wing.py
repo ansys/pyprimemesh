@@ -1,5 +1,6 @@
-# Copyright (C) 2024 - 2026 ANSYS, Inc. and/or its affiliates.
+# Copyright (C) 2024 - 2026 Synopsys, Inc. and ANSYS, Inc. All rights reserved.
 # SPDX-License-Identifier: MIT
+#
 #
 #
 # Permission is hereby granted, free of charge, to any person obtaining a copy
@@ -109,14 +110,18 @@ display.show()
 # Merge all individual parts into a unified part named ``f1_car_rear_wing``.
 
 # Define global sizes
-model.set_global_sizing_params(prime.GlobalSizingParams(model, min=4, max=32, growth_rate=1.2))
+model.set_global_sizing_params(
+    prime.GlobalSizingParams(model, min=4, max=32, growth_rate=1.2)
+)
 
 # Create label per part
 for part in model.parts:
     part.add_labels_on_zonelets([part.name.split(".")[0]], part.get_face_zonelets())
 
 # Merge parts
-merge_params = prime.MergePartsParams(model, merged_part_suggested_name="f1_car_rear_wing")
+merge_params = prime.MergePartsParams(
+    model, merged_part_suggested_name="f1_car_rear_wing"
+)
 merge_result = model.merge_parts([part.id for part in model.parts], merge_params)
 part = model.get_part_by_name(merge_result.merged_part_assigned_name)
 
@@ -130,7 +135,9 @@ part = model.get_part_by_name(merge_result.merged_part_assigned_name)
 # Afterward, inspect the mesh to detect any edges that are not connected.
 
 # Connect faces
-mesh_util.connect_faces(part.name, face_labels="*", target_face_labels="*", tolerance=0.02)
+mesh_util.connect_faces(
+    part.name, face_labels="*", target_face_labels="*", tolerance=0.02
+)
 
 # Diagnostics
 surf_diag = prime.SurfaceSearch(model)
@@ -171,7 +178,9 @@ curv_size_control.set_scope(curv_scope)
 curv_size_control.set_suggested_name("curvature_drs")
 
 # Global curvature size control on all face zones of the rear wing
-curv_size_control_global = model.control_data.create_size_control(prime.SizingType.CURVATURE)
+curv_size_control_global = model.control_data.create_size_control(
+    prime.SizingType.CURVATURE
+)
 curv_size_params_global = prime.CurvatureSizingParams(model, normal_angle=18, min=8)
 curv_size_control_global.set_curvature_sizing_params(curv_size_params_global)
 curv_scope = prime.ScopeDefinition(
@@ -186,7 +195,8 @@ curv_size_control_global.set_suggested_name("curvature_global")
 compute_size = prime.SizeField(model)
 vol_sf_params = prime.VolumetricSizeFieldComputeParams(model)
 compute_size.compute_volumetric(
-    [curv_size_control.id, curv_size_control_global.id], volumetric_sizefield_params=vol_sf_params
+    [curv_size_control.id, curv_size_control_global.id],
+    volumetric_sizefield_params=vol_sf_params,
 )
 
 ###############################################################################
@@ -233,7 +243,9 @@ volume_control.set_params(
 )
 volume_control.set_scope(
     prime.ScopeDefinition(
-        model, evaluation_type=prime.ScopeEvaluationType.ZONES, zone_expression="* !f1_rw_enclosure"
+        model,
+        evaluation_type=prime.ScopeEvaluationType.ZONES,
+        zone_expression="* !f1_rw_enclosure",
     )
 )
 
@@ -316,10 +328,14 @@ print(
 )
 
 # Mesh check
-result = prime.VolumeMeshTool(model).check_mesh(part.id, params=prime.CheckMeshParams(model))
+result = prime.VolumeMeshTool(model).check_mesh(
+    part.id, params=prime.CheckMeshParams(model)
+)
 print("\nMesh check", result, sep="\n")
 
-scope = prime.ScopeDefinition(model, part_expression="*", label_expression="* !*enclosure*")
+scope = prime.ScopeDefinition(
+    model, part_expression="*", label_expression="* !*enclosure*"
+)
 display = PrimePlotter()
 display.plot(model, scope, update=True)
 display.show()

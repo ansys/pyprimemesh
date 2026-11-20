@@ -1,5 +1,7 @@
-# Copyright (C) 2024 - 2026 ANSYS, Inc. and/or its affiliates.
+# Copyright (C) 2024 - 2026 Synopsys, Inc. and ANSYS, Inc. All rights reserved.
 # SPDX-License-Identifier: MIT
+#
+#
 #
 # Permission is hereby granted, free of charge, to any person obtaining a copy
 # of this software and associated documentation files (the "Software"), to deal
@@ -20,6 +22,7 @@
 # SOFTWARE.
 
 """Module for JSON utility functions."""
+
 import json
 from typing import Union
 
@@ -28,7 +31,7 @@ import numpy as np
 import ansys.meshing.prime.internals.config as config
 import ansys.meshing.prime.relaxed_json as relaxed_json
 
-__all__ = ['loads', 'dumps']
+__all__ = ["loads", "dumps"]
 
 
 def try_process_as_iterable(obj):
@@ -122,8 +125,8 @@ def dumps(obj, *args, **kwargs):
         JSON converted to an object.
     """
     if config.is_optimizing_numpy_arrays():
-        kwargs.setdefault('cls', _CustomBinaryJSONEncoder)
+        kwargs.setdefault("cls", _CustomBinaryJSONEncoder)
         return relaxed_json.dumps(obj, *args, **kwargs)
 
-    kwargs.setdefault('cls', _CustomJSONEncoder)
+    kwargs.setdefault("cls", _CustomJSONEncoder)
     return json.dumps(obj, *args, **kwargs)

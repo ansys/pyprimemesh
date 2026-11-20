@@ -85,7 +85,7 @@ Dependencies
 ------------
 
 You must have Ansys 2023 R1 or later installed to have access to Ansys Prime
-Server. Optionally, CAD readers can be configured. 
+Server. Optionally, CAD readers can be configured.
 
 Ansys Prime Server requires one of the following licenses to run. The system
 checks out the first available license from the list in the following order:
@@ -113,7 +113,7 @@ To launch PyPrimeMesh, use this code:
 Launching PyPrimeMesh through docker
 ------------------------------------
 
-Ansys Prime Server is capable of being launched through docker. 
+Ansys Prime Server is capable of being launched through docker.
 Docker is an open platform for developing, shipping, and running apps in a containerized way.
 Containers are standard units of software that package the code and all its dependencies.
 Hence, the app runs quickly and reliably from one computing environment to another.
@@ -125,7 +125,7 @@ Hence, you should have a linux machine to run the Ansys Prime Server.
 
 Docker for Linux containers
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-To run the Linux Docker container for the Ansys Prime Server, 
+To run the Linux Docker container for the Ansys Prime Server,
 ensure that you follow these steps when installing the Docker:
 
 1.	Install `Docker Engine <https://docs.docker.com/engine/install/rhel/>`_.
@@ -169,12 +169,12 @@ for the Ansys Prime Server and install this image.
 
       echo XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX > GH_TOKEN.txt
 
-4.	Authorize Docker to access the repository and run the commands for your OS. 
+4.	Authorize Docker to access the repository and run the commands for your OS.
 
    **Linux:**
 
       .. code-block:: pycon
-         
+
          setenv GH_USERNAME <your_github_username>
          cat GH_TOKEN.txt | docker login ghcr.io -u $GH_USERNAME --password-stdin
 
@@ -186,7 +186,7 @@ for the Ansys Prime Server and install this image.
 
 
 Build the Ansys Prime Server linux container
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^   
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 You can build the Ansys Prime Server Docker containers from the PyPrimeMesh repository docker folder.
 The docker folder has the linux/Dockerfile that builds the Linux-based Docker image.
@@ -194,7 +194,7 @@ The docker folder has the linux/Dockerfile that builds the Linux-based Docker im
 .. note::
    Ansys Prime Server does not support building windows-based docker images.
 
-You can build the docker image file as follows: 
+You can build the docker image file as follows:
 
 •	**Build from available Ansys installation**: Builds the Docker image using the Ansys installation available in the machine where the Docker image is being built.
 
@@ -223,7 +223,7 @@ For example,
 
       $AWP_ROOT252/commonfiles/CPython/3_10/linx64/Release/python/bin/python  build_docker_linux.py $AWP_ROOT252
 
-3. Check that the image has been created successfully. 
+3. Check that the image has been created successfully.
 
 You can view the docker image created with latest tag as follows:
 
@@ -246,7 +246,7 @@ You should set the following mandatory environment variable for launching the An
 Setting the environment variable
 '''''''''''''''''''''''''''''''''
 
-Define the following general environment variables prior to using the Ansys Prime Server launcher. 
+Define the following general environment variables prior to using the Ansys Prime Server launcher.
 
 **Linux**
 
@@ -259,9 +259,9 @@ Define the following general environment variables prior to using the Ansys Prim
 .. note::
    PyPrimeMesh supports Docker image creation from 2025 R1 version.
 
-Launching Ansys Prime Server 
+Launching Ansys Prime Server
 ''''''''''''''''''''''''''''''
-Ensure that you have installed ``ansys-meshing-prime`` package before launching Ansys Prime Server. 
+Ensure that you have installed ``ansys-meshing-prime`` package before launching Ansys Prime Server.
 To install ``ansys-meshing-prime`` package, refer :ref:`Installation`.
 Ansys Prime Server can be launched as follows:
 

@@ -1,163 +1,131 @@
 [build-system]
-requires = ["flit_core >=3.2,<5"]
 build-backend = "flit_core.buildapi"
+requires = [ "flit-core>=3.2,<5" ]
 
 [project]
 name = "ansys-meshing-prime"
 version = "0.10.0.dev30"
 description = "PyPrimeMesh is a Python client to Ansys Prime Server, which delivers core Ansys meshing technology."
 readme = "README.md"
-requires-python = ">=3.12,<4"
 license = "MIT"
-license-files = ["LICENSE"]
-authors = [{name = "ANSYS, Inc.", email = "pyansys.core@ansys.com"}]
-maintainers =  [{name = "ANSYS, Inc.", email = "pyansys.core@ansys.com"}]
+license-files = [ "LICENSE" ]
+maintainers = [ { name = "ANSYS, Inc.", email = "pyansys.core@ansys.com" } ]
+authors = [ { name = "ANSYS, Inc.", email = "pyansys.core@ansys.com" } ]
+requires-python = ">=3.12,<4"
 classifiers = [
-    "Development Status :: 4 - Beta",
-    "Operating System :: OS Independent",
-    "Programming Language :: Python :: 3.12",
-    "Programming Language :: Python :: 3.13",
-    "Programming Language :: Python :: 3.14"
+  "Development Status :: 4 - Beta",
+  "Operating System :: OS Independent",
+  "Programming Language :: Python :: 3 :: Only",
+  "Programming Language :: Python :: 3.12",
+  "Programming Language :: Python :: 3.13",
+  "Programming Language :: Python :: 3.14",
+  "Programming Language :: Python :: 3.15",
 ]
-
 dependencies = [
-  "docker>=7.1.0", # TODO: Discuss if this should be optional
   "ansys-api-meshing-prime==0.2.0",
   "ansys-tools-common>=0.5.0,<1",
-  "numpy>=1.14.0,<3",
   "appdirs>=1.4.0",
+  "docker",
+  "docker>=7.1.0",                                     # TODO: Discuss if this should be optional
   "importlib-metadata>=4.0,<5; python_version<='3.8'",
-  "docker"
+  "numpy>=1.14.0,<3"
 ]
+urls.Discussions = "https://github.com/ansys/pyprimemesh/discussions"
+urls.Documentation = "https://prime.docs.pyansys.com"
+urls.Issues = "https://github.com/ansys/pyprimemesh/issues"
+urls.Releases = "https://github.com/ansys/pyprimemesh/releases"
+urls.Source = "https://github.com/ansys/pyprimemesh"
 
 [project.optional-dependencies]
-graphics = [
-  "ansys-tools-visualization-interface[usd]>=0.14.0,<1"
-]
-pygeometry = [
-  "ansys-geometry-core>=0.7.6,<1"
-]
+graphics = [ "ansys-tools-visualization-interface[usd]>=0.14.0,<1" ]
+pygeometry = [ "ansys-geometry-core>=0.7.6,<1" ]
 tests = [
+  "ansys-geometry-core>=0.7.6,<1",
   "ansys-tools-visualization-interface[usd]==0.14.1",
   "pytest==9.2.0",
   "pytest-cov==7.1.0",
   "pytest-pyvista==0.3.3",
   "pytest-xvfb==3.1.1",
-  "ansys-geometry-core>=0.7.6,<1",
   "pyvista[trame]==0.49.2"
 ]
 doc = [
+  "ansys-sphinx-theme[autoapi]==1.12.1",
   "ansys-tools-visualization-interface[usd]==0.14.1",
-  "ansys-sphinx-theme[autoapi]==1.11.0",
   "joblib==1.6.0",
   "jupyter-sphinx==0.5.3",
   "nest-asyncio2==1.7.4",
   "numpydoc==1.11.0",
   "pyvista==0.49.2",
-  "sphinx-autodoc-typehints==3.13.9",
+  "sphinx-autodoc-typehints==3.17.4",
   "sphinx-copybutton==0.5.2",
   "sphinx-gallery==0.22.1",
   "sphinx-jinja==2.0.2",
   "sphinx-notfound-page==1.1.0",
   "sphinxemoji==0.3.2"
 ]
-all = [
-  "ansys-tools-visualization-interface>=0.14.0,<1",
-  "ansys-geometry-core>=0.7.6,<1"
-]
+all = [ "ansys-geometry-core>=0.7.6,<1", "ansys-tools-visualization-interface>=0.14.0,<1" ]
 
-[project.urls]
-Source = "https://github.com/ansys/pyprimemesh"
-Issues = "https://github.com/ansys/pyprimemesh/issues"
-Discussions = "https://github.com/ansys/pyprimemesh/discussions"
-Documentation = "https://prime.docs.pyansys.com"
-Releases = "https://github.com/ansys/pyprimemesh/releases"
+[tool.flit]
+module.name = "ansys.meshing.prime"
 
-[tool.flit.module]
-name = "ansys.meshing.prime"
-
-[tool.black]
+[tool.ruff]
 line-length = 100
-skip-string-normalization = true
-exclude = '''
-/(
-    \.eggs
-  | \.git
-  | \.hg
-  | \.mypy_cache
-  | \.tox
-  | \.venv
-  | _build
-  | buck-out
-  | build
-  | dist
-  # The following are specific to Black, you probably don't want those.
-  | blib2to3
-  | tests
-  | profiling
-  | src/ansys/meshing/prime/autogen
-  | .md
-  | doc
-)/
-'''
-[tool.pytest.ini_options]
-minversion = "7.1"
-addopts = "-ra -s --cov=ansys.meshing.prime.core --cov=ansys.meshing.prime.internals --cov=ansys.meshing.prime.lucid --cov=ansys.meshing.prime.graphics --cov-report=term --cov-report=html:.cov/html --image_cache_dir tests/graphics/image_cache --add_missing_images"
-testpaths = [
-    "tests"
+extend-exclude = [ "examples/**/*.py" ]
+fix = true
+format.indent-style = "space"
+format.quote-style = "double"
+format.line-ending = "auto"
+format.docstring-code-line-length = "dynamic"
+format.docstring-code-format = true
+lint.select = [
+  "D",
+  "E501",
+  "F401",
+  "F403",
+  "I",
+  "W191",
+  "W291",
+  "W293",
 ]
+lint.ignore = []
+lint.per-file-ignores."**/__init__.py" = [ "D", "F401" ]
+lint.per-file-ignores."src/ansys/meshing/prime/internals/error_handling.py" = [ "E501" ]
+lint.per-file-ignores."src/ansys/meshing/prime/params/primestructs.py" = [ "F401", "F403" ]
+lint.per-file-ignores."tests/**/*.py" = [ "D" ]
+lint.isort.combine-as-imports = true
+lint.isort.force-sort-within-sections = true
+lint.isort.known-first-party = [ "ansys" ]
+lint.pydocstyle.convention = "numpy"
+
+[tool.pyproject-fmt]
+expand_tables = [ "project.optional-dependencies" ]
+
+[tool.pytest]
+ini_options.minversion = "7.1"
+ini_options.testpaths = [ "tests" ]
+ini_options.addopts = """\
+  -ra -s --cov=ansys.meshing.prime.core --cov=ansys.meshing.prime.internals --cov=ansys.meshing.prime.lucid \
+  --cov=ansys.meshing.prime.graphics --cov-report=term --cov-report=html:.cov/html --image_cache_dir \
+  tests/graphics/image_cache --add_missing_images\
+  """
 
 [tool.towncrier]
 directory = "doc/changelog.d"
 filename = "CHANGELOG.md"
 start_string = "<!-- towncrier release notes start -->\n"
-underlines = ["", "", ""]
 template = "doc/changelog.d/changelog_template.jinja"
 title_format = "## [{version}](https://github.com/ansys/pyprimemesh/releases/tag/v{version}) - {project_date}"
 issue_format = "[#{issue}](https://github.com/ansys/pyprimemesh/pull/{issue})"
-
-[[tool.towncrier.type]]
-directory = "breaking"
-name = "Breaking"
-showcontent = true
-
-[[tool.towncrier.type]]
-directory = "added"
-name = "Added"
-showcontent = true
-
-[[tool.towncrier.type]]
-directory = "fixed"
-name = "Fixed"
-showcontent = true
-
-[[tool.towncrier.type]]
-directory = "documentation"
-name = "Documentation"
-showcontent = true
-
-[[tool.towncrier.type]]
-directory = "dependencies"
-name = "Dependencies"
-showcontent = true
-
-[[tool.towncrier.type]]
-directory = "maintenance"
-name = "Maintenance"
-showcontent = true
-
-[[tool.towncrier.type]]
-directory = "miscellaneous"
-name = "Miscellaneous"
-showcontent = true
-
-[[tool.towncrier.type]]
-directory = "test"
-name = "Test"
-showcontent = true
-
-[[tool.towncrier.type]]
-directory = "changed"
-name = "Changed"
-showcontent = true
+underlines = [ "", "", "" ]
+type = [
+  { directory = "breaking", name = "Breaking", showcontent = true },
+  { directory = "added", name = "Added", showcontent = true },
+  { directory = "fixed", name = "Fixed", showcontent = true },
+  { directory = "documentation", name = "Documentation", showcontent = true },
+  { directory = "dependencies", name = "Dependencies", showcontent = true },
+  { directory = "maintenance", name = "Maintenance", showcontent = true },
+  { directory = "miscellaneous", name = "Miscellaneous", showcontent = true },
+  { directory = "test", name = "Test", showcontent = true },
+  { directory = "changed", name = "Changed", showcontent = true },
+]
 

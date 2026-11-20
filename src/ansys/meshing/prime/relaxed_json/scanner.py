@@ -1,5 +1,6 @@
-# Copyright (C) 2024 - 2026 ANSYS, Inc. and/or its affiliates.
+# Copyright (C) 2024 - 2026 Synopsys, Inc. and ANSYS, Inc. All rights reserved.
 # SPDX-License-Identifier: MIT
+#
 #
 #
 # Permission is hereby granted, free of charge, to any person obtaining a copy
@@ -21,11 +22,12 @@
 # SOFTWARE.
 
 """Implementation of Scanner for scanning bytes or bytearrays."""
+
 import re
 from typing import Callable, Tuple
 
 NUMBER_RE = re.compile(
-    b'(-?(?:0|[1-9]\d*))(\.\d+)?([eE][-+]?\d+)?', re.VERBOSE | re.MULTILINE | re.DOTALL
+    b"(-?(?:0|[1-9]\d*))(\.\d+)?([eE][-+]?\d+)?", re.VERBOSE | re.MULTILINE | re.DOTALL
 )
 
 
@@ -69,17 +71,17 @@ def make_scanner(context) -> Callable[[str, int], Tuple[str, int]]:
 
         if nextchar == b'"':
             return parse_string(string, idx + 1)
-        elif nextchar == b'{':
+        elif nextchar == b"{":
             return parse_object((string, idx + 1), _scan_once, object_hook, object_pairs_hook, memo)
-        elif nextchar == b'[':
+        elif nextchar == b"[":
             return parse_array((string, idx + 1), _scan_once)
-        elif nextchar == b'<':
+        elif nextchar == b"<":
             return parse_bytes(string, idx + 1)
-        elif nextchar == b'n' and string[idx : idx + 4] == b'null':
+        elif nextchar == b"n" and string[idx : idx + 4] == b"null":
             return None, idx + 4
-        elif nextchar == b't' and string[idx : idx + 4] == b'true':
+        elif nextchar == b"t" and string[idx : idx + 4] == b"true":
             return True, idx + 4
-        elif nextchar == b'f' and string[idx : idx + 5] == b'false':
+        elif nextchar == b"f" and string[idx : idx + 5] == b"false":
             return False, idx + 5
 
         m = match_number(string, idx)
@@ -87,19 +89,19 @@ def make_scanner(context) -> Callable[[str, int], Tuple[str, int]]:
             integer, frac, exp = m.groups()
             if frac or exp:
                 res = parse_float(
-                    integer.decode('utf-8')
-                    + (frac or b'').decode('utf-8')
-                    + (exp or b'').decode('utf-8')
+                    integer.decode("utf-8")
+                    + (frac or b"").decode("utf-8")
+                    + (exp or b"").decode("utf-8")
                 )
             else:
                 res = parse_int(integer)
             return res, m.end()
-        elif nextchar == b'N' and string[idx : idx + 3] == b'NaN':
-            return parse_constant('NaN'), idx + 3
-        elif nextchar == b'I' and string[idx : idx + 8] == b'Infinity':
-            return parse_constant('Infinity'), idx + 8
-        elif nextchar == b'-' and string[idx : idx + 9] == b'-Infinity':
-            return parse_constant('-Infinity'), idx + 9
+        elif nextchar == b"N" and string[idx : idx + 3] == b"NaN":
+            return parse_constant("NaN"), idx + 3
+        elif nextchar == b"I" and string[idx : idx + 8] == b"Infinity":
+            return parse_constant("Infinity"), idx + 8
+        elif nextchar == b"-" and string[idx : idx + 9] == b"-Infinity":
+            return parse_constant("-Infinity"), idx + 9
         else:
             raise StopIteration(idx)
 

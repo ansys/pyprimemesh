@@ -1,5 +1,7 @@
-# Copyright (C) 2024 - 2026 ANSYS, Inc. and/or its affiliates.
+# Copyright (C) 2024 - 2026 Synopsys, Inc. and ANSYS, Inc. All rights reserved.
 # SPDX-License-Identifier: MIT
+#
+#
 #
 # Permission is hereby granted, free of charge, to any person obtaining a copy
 # of this software and associated documentation files (the "Software"), to deal
@@ -24,7 +26,6 @@
 import os
 from typing import TYPE_CHECKING
 
-from ansys.tools.visualization_interface.backends.pyvista.widgets import PlotterWidget
 from vtk import vtkPNGReader
 
 from ansys.meshing.prime.core.mesh import (
@@ -33,6 +34,7 @@ from ansys.meshing.prime.core.mesh import (
     entity_color,
 )
 from ansys.meshing.prime.graphics.widgets.toolbar import ToolbarButton
+from ansys.tools.visualization_interface.backends.pyvista.widgets import PlotterWidget
 
 if TYPE_CHECKING:
     from ansys.meshing.prime.graphics.plotter import PrimePlotter

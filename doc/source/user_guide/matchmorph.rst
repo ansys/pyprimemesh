@@ -6,7 +6,7 @@ Match morphing
 **************
 
 :func:`Morpher.match_morph() <ansys.meshing.prime.Morpher.match_morph>` method performs face to face entity matching, providing the ability to match face pairs using match pairs.
-The method allows the source face to match with the corresponding target face. :class:`MatchPair <ansys.meshing.prime.MatchPair>` allows you to specify sources and targets for 
+The method allows the source face to match with the corresponding target face. :class:`MatchPair <ansys.meshing.prime.MatchPair>` allows you to specify sources and targets for
 match morphing.
 
 .. note::

@@ -1,5 +1,6 @@
-# Copyright (C) 2024 - 2026 ANSYS, Inc. and/or its affiliates.
+# Copyright (C) 2024 - 2026 Synopsys, Inc. and ANSYS, Inc. All rights reserved.
 # SPDX-License-Identifier: MIT
+#
 #
 #
 # Permission is hereby granted, free of charge, to any person obtaining a copy
@@ -106,7 +107,9 @@ print(model)
 # ~~~~~~~~~~~~~~~~~~~~~~
 
 display = PrimePlotter()
-display.plot(model, scope=prime.ScopeDefinition(model, label_expression="ground, wheel"))
+display.plot(
+    model, scope=prime.ScopeDefinition(model, label_expression="ground, wheel")
+)
 display.show()
 
 ###############################################################################
@@ -118,7 +121,10 @@ display.show()
 wheel_part = model.get_part_by_name("wheel_body")
 enclosure_part = model.get_part_by_name("enclosure")
 
-[part.delete_topo_entities(prime.DeleteTopoEntitiesParams(model)) for part in model.parts]
+[
+    part.delete_topo_entities(prime.DeleteTopoEntitiesParams(model))
+    for part in model.parts
+]
 
 ###############################################################################
 # Create a contact patch
@@ -176,7 +182,9 @@ display.show()
 # Intersection loops are created to capture the features at the corners between the
 # patch, ground, and wheel.
 
-model.set_global_sizing_params(prime.GlobalSizingParams(model, min=4.0, max=100.0, growth_rate=1.4))
+model.set_global_sizing_params(
+    prime.GlobalSizingParams(model, min=4.0, max=100.0, growth_rate=1.4)
+)
 
 # Create a size control to limit the size of mesh on the wheel.
 size_control = model.control_data.create_size_control(prime.SizingType.SOFT)
@@ -209,7 +217,9 @@ display.show()
 # ~~~~~~~~~~~
 # Apply five layers of prisms to the wheel, patch, and ground. Mesh with polyhedrals.
 
-model.set_global_sizing_params(prime.GlobalSizingParams(model, min=4.0, max=100.0, growth_rate=1.4))
+model.set_global_sizing_params(
+    prime.GlobalSizingParams(model, min=4.0, max=100.0, growth_rate=1.4)
+)
 mesh_util.volume_mesh(
     volume_fill_type=prime.VolumeFillType.POLY,
     prism_layers=5.0,

@@ -1,5 +1,7 @@
-# Copyright (C) 2024 - 2026 ANSYS, Inc. and/or its affiliates.
+# Copyright (C) 2024 - 2026 Synopsys, Inc. and ANSYS, Inc. All rights reserved.
 # SPDX-License-Identifier: MIT
+#
+#
 #
 # Permission is hereby granted, free of charge, to any person obtaining a copy
 # of this software and associated documentation files (the "Software"), to deal
@@ -20,6 +22,7 @@
 # SOFTWARE.
 
 """Module containing the ``Part`` class."""
+
 from typing import Any
 
 # isort: split
@@ -103,9 +106,9 @@ class Part(_Part):
         )
         for key, value in kwds.items():
             setattr(params, key, value)
-            if key == 'print_mesh':
+            if key == "print_mesh":
                 params.print_mesh = value
-            if key == 'print_id':
+            if key == "print_id":
                 params.print_id = value
         result = _Part.get_summary(self, params)
         return result.message

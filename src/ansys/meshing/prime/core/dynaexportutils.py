@@ -1,5 +1,7 @@
-# Copyright (C) 2024 - 2026 ANSYS, Inc. and/or its affiliates.
+# Copyright (C) 2024 - 2026 Synopsys, Inc. and ANSYS, Inc. All rights reserved.
 # SPDX-License-Identifier: MIT
+#
+#
 #
 # Permission is hereby granted, free of charge, to any person obtaining a copy
 # of this software and associated documentation files (the "Software"), to deal
@@ -23,7 +25,7 @@
 
 import ansys.meshing.prime as prime
 
-__all__ = ['MaterialProcessor', 'DatabaseProcessor']
+__all__ = ["MaterialProcessor", "DatabaseProcessor"]
 
 # class _TractionProperties:
 #     DAMAGE_EVOLUTION_ENERGY = 1000
@@ -33,7 +35,7 @@ __all__ = ['MaterialProcessor', 'DatabaseProcessor']
 
 
 class _FormatDynaCards:
-    __slots__ = ('_card_format', '_format_map')
+    __slots__ = ("_card_format", "_format_map")
 
     def __init__(self, card_format):
         self._card_format = card_format
@@ -43,7 +45,7 @@ class _FormatDynaCards:
         field_len = self._format_map[self._card_format]
         if len(str(num)) <= field_len:
             blank_space = field_len - len(str(num))
-            field = ' ' * blank_space + str(num)
+            field = " " * blank_space + str(num)
         else:
             field = self.field_exp(num)
         return field
@@ -53,10 +55,10 @@ class _FormatDynaCards:
         if field_len < 7:
             field_len = 7
         s = "%.*e" % (field_len - 7, f)
-        mantissa, exp = s.split('e')
-        sign = ' '
+        mantissa, exp = s.split("e")
+        sign = " "
         if f < 0:
-            sign = ''
+            sign = ""
         # add 1 to digits as 1 is taken by sign +/-
         return sign + "%se%+0*d" % (mantissa, 2 + 1, int(exp))
 
@@ -64,7 +66,7 @@ class _FormatDynaCards:
         field_len = self._format_map[self._card_format]
         if len(str(num)) <= field_len:
             blank_space = field_len - len(str(num))
-            field = ' ' * blank_space + str(num)
+            field = " " * blank_space + str(num)
         else:
             if abs(float(num)) < 1e-3:
                 field = self.field_exp(num)
@@ -92,7 +94,7 @@ class _FormatDynaCards:
         field_len = self._format_map[self._card_format]
         if len(string) <= field_len:
             blank_space = field_len - len(string)
-            field = ' ' * blank_space + str(string)
+            field = " " * blank_space + str(string)
         else:
             field = string[0:field_len]
         return field
@@ -101,7 +103,7 @@ class _FormatDynaCards:
         field_len = self._format_map[self._card_format]
         if len(string) <= field_len - 1:
             blank_space = field_len - 1 - len(string)
-            field = ' ' * blank_space + str(string)
+            field = " " * blank_space + str(string)
         else:
             field = string[0 : field_len - 1]
         return field
@@ -109,14 +111,14 @@ class _FormatDynaCards:
 
 class _MatGlass:
     __slots__ = (
-        '_card_format',
-        '_formatter',
-        '_format_map',
-        '_header_title',
-        '_header',
-        '_data_line',
-        '_model',
-        '_logger',
+        "_card_format",
+        "_formatter",
+        "_format_map",
+        "_header_title",
+        "_header",
+        "_data_line",
+        "_model",
+        "_logger",
     )
 
     def __init__(self, model: prime.Model, card_format="SHORT"):
@@ -126,8 +128,8 @@ class _MatGlass:
         self._header_title = ["mid", "ro", "e", "pr", "-", "-", "imod", "ilaw"]
         self._header = [1, 1.000e-09, 0.0, 0.0]
         self._data_line = {
-            "D1_TITLE": ["fmod", "ft", "fc", "at", "bt", "ac", "bc", 'ftscl'],
-            "D1_DATA": ['', 0.0, 0.0, '', '', '', '', 1],
+            "D1_TITLE": ["fmod", "ft", "fc", "at", "bt", "ac", "bc", "ftscl"],
+            "D1_DATA": ["", 0.0, 0.0, "", "", "", "", 1],
             "D2_TITLE": ["sfsti", "sfstr", "crin", "ecrcl", "ncycr", "nipf"],
             "D2_DATA": [0.0001, 0.01, 1, 0.002, 5.0, 5],
             "D3_TITLE": ["epscr", "engcrt", "radcrt", "raten1", "rfiltf"],
@@ -209,14 +211,14 @@ class _MatGlass:
 
 class _MatHyperelasticYeoh:
     __slots__ = (
-        '_card_format',
-        '_formatter',
-        '_format_map',
-        '_header_title',
-        '_header',
-        '_data_line',
-        '_model',
-        '_logger',
+        "_card_format",
+        "_formatter",
+        "_format_map",
+        "_header_title",
+        "_header",
+        "_data_line",
+        "_model",
+        "_logger",
     )
 
     def __init__(self, model: prime.Model, card_format="SHORT"):
@@ -235,14 +237,14 @@ class _MatHyperelasticYeoh:
 
 class _MatOgdenRubber:
     __slots__ = (
-        '_card_format',
-        '_formatter',
-        '_format_map',
-        '_header_title',
-        '_header',
-        '_data_line',
-        '_model',
-        '_logger',
+        "_card_format",
+        "_formatter",
+        "_format_map",
+        "_header_title",
+        "_header",
+        "_data_line",
+        "_model",
+        "_logger",
     )
 
     def __init__(self, model: prime.Model, card_format="SHORT"):
@@ -271,7 +273,7 @@ class _MatOgdenRubber:
 
 
 class _MatHyperelastic:
-    __slots__ = ('_card_format', '_formatter', '_format_map', '_model', '_logger')
+    __slots__ = ("_card_format", "_formatter", "_format_map", "_model", "_logger")
 
     def __init__(self, model: prime.Model, card_format="SHORT"):
         self._card_format = card_format
@@ -287,7 +289,13 @@ class _MatHyperelastic:
         self._logger = model.python_logger
 
     def define_hyper_elastic(
-        self, mat_id, mat_name, all_mat_props, weight=1, density=1e-9, poisson_ratio=0.497
+        self,
+        mat_id,
+        mat_name,
+        all_mat_props,
+        weight=1,
+        density=1e-9,
+        poisson_ratio=0.497,
     ):
         # self._logger.info("hyper elastic")
         mat_props = all_mat_props["HYPERELASTIC"]
@@ -374,7 +382,7 @@ class _MatHyperelastic:
             if "TEST DATA INPUT" not in mat_props["Parameters"]:
                 N = 1
                 if "N" in mat_props["Parameters"]:
-                    N = int(mat_props["Parameters"]['N'])
+                    N = int(mat_props["Parameters"]["N"])
                 temperature = "" if "Temperature" not in mat_fields else mat_fields["Temperature"]
                 if len(temperature) > 1:
                     self._logger.warning(
@@ -480,14 +488,12 @@ class _MatHyperelastic:
                 )
         else:
             self._logger.warning(
-                f"Material {mat_name} (ID {mat_id}) "
-                f"with hyperelastic property is not translated "
+                f"Material {mat_name} (ID {mat_id}) with hyperelastic property is not translated "
             )
             translated = True
         if not translated:
             self._logger.warning(
-                f"Material {mat_name} (ID {mat_id}) "
-                f"with hyperelastic property is not translated "
+                f"Material {mat_name} (ID {mat_id}) with hyperelastic property is not translated "
             )
             # mat_string += "! UnTranslated Hyper Elastic Part
             # of the material MAT ID {0}".format(abq_mat._id)
@@ -496,13 +502,13 @@ class _MatHyperelastic:
 
 class _DefineCurve:
     __slots__ = (
-        '_card_format',
-        '_formatter',
-        '_format_map',
-        '_header_title',
-        '_header',
-        '_model',
-        '_logger',
+        "_card_format",
+        "_formatter",
+        "_format_map",
+        "_header_title",
+        "_header",
+        "_model",
+        "_logger",
     )
     _curve_id_list = []
 
@@ -510,7 +516,16 @@ class _DefineCurve:
         self._card_format = card_format
         self._formatter = _FormatDynaCards(self._card_format)
         self._format_map = {"SHORT": 10, "LONG": 20}
-        self._header_title = ["lcid", "sidr", "sfa", "sfo", "offa", "offo", "dattyp", "lcint"]
+        self._header_title = [
+            "lcid",
+            "sidr",
+            "sfa",
+            "sfo",
+            "offa",
+            "offo",
+            "dattyp",
+            "lcint",
+        ]
         self._header = [1, 0, 1.0, 1.0, 0.0, 0.0, 0, 0]
         self._model = model
         self._logger = model.python_logger
@@ -524,7 +539,7 @@ class _DefineCurve:
         return _id
 
     def write_uniaxial_data_curve_card(self, mat_id, mat_name, curve_data):
-        self._formatter._card_format = 'SHORT'
+        self._formatter._card_format = "SHORT"
         mat_string = ""
         mat_string += "*DEFINE_CURVE_TITLE\n"
         mat_string += f"UNIAXIAL TEST DATA: {mat_name}\n"
@@ -538,28 +553,31 @@ class _DefineCurve:
         # mat_string += "".join([self._formatter.field_float(i) for i in header_data[1:5]])
         # mat_string += "".join([self._formatter.field_int(i) for i in header_data[5:]])
         mat_string += "\n"
-        self._formatter._card_format = 'LONG'
+        self._formatter._card_format = "LONG"
         mat_string += (
-            "$#" + "".join([self._formatter.field_str('a1'), self._formatter.field_str('o1')])[2:]
+            "$#" + "".join([self._formatter.field_str("a1"), self._formatter.field_str("o1")])[2:]
         )
         mat_string += "\n"
-        if 'Data' in curve_data and curve_data['Data'] is not None:
-            stress = reversed(curve_data['Data']['Nominal stress'])
-            strain = reversed(curve_data['Data']['Nominal strain'])
-            nominal_lat_strain = curve_data['Data'][
+        if "Data" in curve_data and curve_data["Data"] is not None:
+            stress = reversed(curve_data["Data"]["Nominal stress"])
+            strain = reversed(curve_data["Data"]["Nominal strain"])
+            nominal_lat_strain = curve_data["Data"][
                 f"Nominal lateral strain, . Default is zero. "
                 f"Not needed if the POISSON parameter is specified on the *HYPERFOAM option"
             ]
             for e, s in zip(strain, stress):
-                mat_string += ''.join(
-                    [self._formatter.field_float(float(e)), self._formatter.field_float(float(s))]
+                mat_string += "".join(
+                    [
+                        self._formatter.field_float(float(e)),
+                        self._formatter.field_float(float(s)),
+                    ]
                 )
                 mat_string += "\n"
         _DefineCurve._curve_id_list.append(curve_id)
         return curve_id, mat_string
 
     def write_uniaxial_data_curve_card_for_low_density_foam(self, mat_id, mat_name, curve_data):
-        self._formatter._card_format = 'SHORT'
+        self._formatter._card_format = "SHORT"
         mat_string = ""
         mat_string += "*DEFINE_CURVE_TITLE\n"
         mat_string += f"UNIAXIAL TEST DATA: {mat_name}\n"
@@ -573,28 +591,28 @@ class _DefineCurve:
         # mat_string += "".join([self._formatter.field_float(i) for i in header_data[1:5]])
         # mat_string += "".join([self._formatter.field_int(i) for i in header_data[5:]])
         mat_string += "\n"
-        self._formatter._card_format = 'LONG'
+        self._formatter._card_format = "LONG"
         mat_string += (
-            "$#" + "".join([self._formatter.field_str('a1'), self._formatter.field_str('o1')])[2:]
+            "$#" + "".join([self._formatter.field_str("a1"), self._formatter.field_str("o1")])[2:]
         )
         mat_string += "\n"
-        if 'Data' in curve_data and curve_data['Data'] is not None:
-            stress = curve_data['Data']['Nominal stress']
-            strain = curve_data['Data']['Nominal strain']
-            nominal_lat_strain = curve_data['Data'][
+        if "Data" in curve_data and curve_data["Data"] is not None:
+            stress = curve_data["Data"]["Nominal stress"]
+            strain = curve_data["Data"]["Nominal strain"]
+            nominal_lat_strain = curve_data["Data"][
                 "Nominal lateral strain, . Default is zero. "
                 f"Not needed if the POISSON parameter is specified on the *HYPERFOAM option"
             ]
             for e, s in zip(strain, stress):
                 if float(e) != 0.0 or float(s) != 0.0:
-                    mat_string += ''.join(
+                    mat_string += "".join(
                         [
                             self._formatter.field_float(-1 * float(e)),
                             self._formatter.field_float(-1 * float(s)),
                         ]
                     )
                 else:
-                    mat_string += ''.join(
+                    mat_string += "".join(
                         [
                             self._formatter.field_float(float(e)),
                             self._formatter.field_float(float(s)),
@@ -605,7 +623,7 @@ class _DefineCurve:
         return curve_id, mat_string
 
     def write_plastic_curve_card(self, mat_id, mat_name, curve_data):
-        self._formatter._card_format = 'SHORT'
+        self._formatter._card_format = "SHORT"
         mat_string = ""
         mat_string += "*DEFINE_CURVE_TITLE\n"
         mat_string += f"PLASTIC CURVE: {mat_name}\n"
@@ -619,27 +637,27 @@ class _DefineCurve:
         # mat_string += "".join([self._formatter.field_float(i) for i in header_data[1:5]])
         # mat_string += "".join([self._formatter.field_int(i) for i in header_data[5:]])
         mat_string += "\n"
-        self._formatter._card_format = 'LONG'
+        self._formatter._card_format = "LONG"
         mat_string += (
-            "$#" + "".join([self._formatter.field_str('a1'), self._formatter.field_str('o1')])[2:]
+            "$#" + "".join([self._formatter.field_str("a1"), self._formatter.field_str("o1")])[2:]
         )
         mat_string += "\n"
-        if 'Data' in curve_data and curve_data['Data'] is not None:
+        if "Data" in curve_data and curve_data["Data"] is not None:
             stress = []
             strain = []
-            stress = curve_data['Data']['Yield stress']
-            strain = curve_data['Data']['Plastic strain']
+            stress = curve_data["Data"]["Yield stress"]
+            strain = curve_data["Data"]["Plastic strain"]
             sigy = float(stress[0])
             temperature = []
-            if "Temperature" in curve_data['Data']:
-                temperature = curve_data['Data']['Temperature']
+            if "Temperature" in curve_data["Data"]:
+                temperature = curve_data["Data"]["Temperature"]
             if temperature:
                 t_old = None
                 for e, s, t in zip(strain, stress, temperature):
                     if t_old is None:
                         t_old = float(t)
                     if t_old == float(t):
-                        mat_string += ''.join(
+                        mat_string += "".join(
                             [
                                 self._formatter.field_float(float(e)),
                                 self._formatter.field_float(float(s)),
@@ -654,7 +672,7 @@ class _DefineCurve:
                         break
             else:
                 for e, s in zip(strain, stress):
-                    mat_string += ''.join(
+                    mat_string += "".join(
                         [
                             self._formatter.field_float(float(e)),
                             self._formatter.field_float(float(s)),
@@ -665,7 +683,7 @@ class _DefineCurve:
         return curve_id, mat_string, sigy
 
     def write_damage_curve(self, mat_id, mat_name, curve_data):
-        self._formatter._card_format = 'SHORT'
+        self._formatter._card_format = "SHORT"
         mat_string = ""
         mat_string += "*DEFINE_CURVE_TITLE\n"
         mat_string += f"DAMAGE CURVE: {mat_name}\n"
@@ -679,14 +697,14 @@ class _DefineCurve:
         # mat_string += "".join([self._formatter.field_float(i) for i in header_data[1:5]])
         # mat_string += "".join([self._formatter.field_int(i) for i in header_data[5:]])
         mat_string += "\n"
-        self._formatter._card_format = 'LONG'
+        self._formatter._card_format = "LONG"
         mat_string += (
-            "$#" + "".join([self._formatter.field_str('a1'), self._formatter.field_str('o1')])[2:]
+            "$#" + "".join([self._formatter.field_str("a1"), self._formatter.field_str("o1")])[2:]
         )
         mat_string += "\n"
         # self._logger.info(curve_data)
         mat_string += (
-            ''.join(
+            "".join(
                 [
                     self._formatter.field_float(float(curve_data[0])),
                     self._formatter.field_float(float(curve_data[1])),
@@ -695,7 +713,7 @@ class _DefineCurve:
             + "\n"
         )
         mat_string += (
-            ''.join(
+            "".join(
                 [
                     self._formatter.field_float(-1 * float(curve_data[0])),
                     self._formatter.field_float(float(curve_data[1])),
@@ -707,7 +725,7 @@ class _DefineCurve:
         return curve_id, mat_string
 
     def create_damage_curve_for_cohesive_mixed_mode(self, mat_id, mat_name, thickness, gic):
-        self._formatter._card_format = 'SHORT'
+        self._formatter._card_format = "SHORT"
         mat_string = ""
         mat_string += "*DEFINE_CURVE_TITLE\n"
         mat_string += f"THICK vs {mat_name}\n"
@@ -721,14 +739,14 @@ class _DefineCurve:
         # mat_string += "".join([self._formatter.field_float(i) for i in header_data[1:5]])
         # mat_string += "".join([self._formatter.field_int(i) for i in header_data[5:]])
         mat_string += "\n"
-        self._formatter._card_format = 'LONG'
+        self._formatter._card_format = "LONG"
         mat_string += (
-            "$#" + "".join([self._formatter.field_str('a1'), self._formatter.field_str('o1')])[2:]
+            "$#" + "".join([self._formatter.field_str("a1"), self._formatter.field_str("o1")])[2:]
         )
         mat_string += "\n"
         # self._logger.info(curve_data)
         mat_string += (
-            ''.join(
+            "".join(
                 [
                     self._formatter.field_float(float(0.1 * thickness)),
                     self._formatter.field_float(float(0.1 * gic)),
@@ -737,7 +755,7 @@ class _DefineCurve:
             + "\n"
         )
         mat_string += (
-            ''.join(
+            "".join(
                 [
                     self._formatter.field_float(float(thickness)),
                     self._formatter.field_float(float(gic)),
@@ -746,7 +764,7 @@ class _DefineCurve:
             + "\n"
         )
         mat_string += (
-            ''.join(
+            "".join(
                 [
                     self._formatter.field_float(float(10 * thickness)),
                     self._formatter.field_float(float(10 * gic)),
@@ -758,7 +776,7 @@ class _DefineCurve:
         return curve_id, mat_string
 
     def create_damage_curve_for_traction(self, mat_id, mat_name, k, e, fe, thickness):
-        self._formatter._card_format = 'SHORT'
+        self._formatter._card_format = "SHORT"
         t = k * e
         u_tot = e * thickness + 2 * fe / t
         peak = e * thickness / u_tot
@@ -776,14 +794,14 @@ class _DefineCurve:
         # mat_string += "".join([self._formatter.field_float(i) for i in header_data[1:5]])
         # mat_string += "".join([self._formatter.field_int(i) for i in header_data[5:]])
         mat_string += "\n"
-        self._formatter._card_format = 'LONG'
+        self._formatter._card_format = "LONG"
         mat_string += (
-            "$#" + "".join([self._formatter.field_str('a1'), self._formatter.field_str('o1')])[2:]
+            "$#" + "".join([self._formatter.field_str("a1"), self._formatter.field_str("o1")])[2:]
         )
         mat_string += "\n"
         # self._logger.info(curve_data)
         mat_string += (
-            ''.join(
+            "".join(
                 [
                     self._formatter.field_float(float(curve[0][0])),
                     self._formatter.field_float(float(curve[0][1])),
@@ -792,7 +810,7 @@ class _DefineCurve:
             + "\n"
         )
         mat_string += (
-            ''.join(
+            "".join(
                 [
                     self._formatter.field_float(float(curve[1][0])),
                     self._formatter.field_float(float(curve[1][1])),
@@ -801,7 +819,7 @@ class _DefineCurve:
             + "\n"
         )
         mat_string += (
-            ''.join(
+            "".join(
                 [
                     self._formatter.field_float(float(curve[2][0])),
                     self._formatter.field_float(float(curve[2][1])),
@@ -816,18 +834,18 @@ class _DefineCurve:
         self, mat_id, mat_name, young, damage_len, curve_data, thickness
     ):
         # mat = ((0.0, 1e20), (1.0, 1e20))
-        self._formatter._card_format = 'SHORT'
+        self._formatter._card_format = "SHORT"
         curve = []
         T_tract = 0.0
-        if 'Data' in curve_data and curve_data['Data'] is not None:
+        if "Data" in curve_data and curve_data["Data"] is not None:
             stress = []
             strain = []
-            stress = curve_data['Data']['Yield stress']
-            strain = curve_data['Data']['Plastic strain']
+            stress = curve_data["Data"]["Yield stress"]
+            strain = curve_data["Data"]["Plastic strain"]
             sigy = float(stress[0])
             temperature = []
-            if "Temperature" in curve_data['Data']:
-                temperature = curve_data['Data']['Temperature']
+            if "Temperature" in curve_data["Data"]:
+                temperature = curve_data["Data"]["Temperature"]
             if temperature:
                 t_old = None
                 for e, s, t in zip(strain, stress, temperature):
@@ -848,7 +866,10 @@ class _DefineCurve:
         updated_curve = [[0, 0]]
         for item in curve:
             updated_curve.append(
-                [(float(item[1]) + float(item[0]) / float(young)) * thickness, item[0]]
+                [
+                    (float(item[1]) + float(item[0]) / float(young)) * thickness,
+                    item[0],
+                ]
             )
 
         norm_strain = updated_curve[-1][0] + damage_len
@@ -884,16 +905,19 @@ class _DefineCurve:
         # mat_string += "".join([self._formatter.field_float(i) for i in header_data[1:5]])
         # mat_string += "".join([self._formatter.field_int(i) for i in header_data[5:]])
         mat_string += "\n"
-        self._formatter._card_format = 'LONG'
+        self._formatter._card_format = "LONG"
         mat_string += (
-            "$#" + "".join([self._formatter.field_str('a1'), self._formatter.field_str('o1')])[2:]
+            "$#" + "".join([self._formatter.field_str("a1"), self._formatter.field_str("o1")])[2:]
         )
         mat_string += "\n"
         # self._logger.info(curve_data)
         for a, b in updated_curve_2:
             mat_string += (
-                ''.join(
-                    [self._formatter.field_float(float(a)), self._formatter.field_float(float(b))]
+                "".join(
+                    [
+                        self._formatter.field_float(float(a)),
+                        self._formatter.field_float(float(b)),
+                    ]
                 )
                 + "\n"
             )
@@ -903,14 +927,14 @@ class _DefineCurve:
 
 class _MatSimplifiedRubberFoam:
     __slots__ = (
-        '_card_format',
-        '_formatter',
-        '_format_map',
-        '_header_title',
-        '_header',
-        '_data_line',
-        '_model',
-        '_logger',
+        "_card_format",
+        "_formatter",
+        "_format_map",
+        "_header_title",
+        "_header",
+        "_data_line",
+        "_model",
+        "_logger",
     )
 
     def __init__(self, model: prime.Model, card_format="SHORT"):
@@ -920,7 +944,16 @@ class _MatSimplifiedRubberFoam:
         self._header_title = ["mid", "ro", "km", "mu", "g", "sigf", "ref", "prten"]
         self._header = [1, 1.000e-09, 0.0, 0.1, 0.0, 0.0, 0.0, 0.0]
         self._data_line = {
-            "D1_TITLE": ["sg1", "sw", "st", "lc/tbid", "tension", "rtype", "avgopt", "pr/beta"],
+            "D1_TITLE": [
+                "sg1",
+                "sw",
+                "st",
+                "lc/tbid",
+                "tension",
+                "rtype",
+                "avgopt",
+                "pr/beta",
+            ],
             "D1_DATA": [1.0, 1.0, 1.0, 1, 1.0, 0.0, 0.0, 0.01],
             "D2_TITLE": ["lcunld", "hu", "shape", "stol", "visco", "hisout"],
             "D2_DATA": [0, 1.0, 0.0, 0, 0.0, 0.0],
@@ -942,32 +975,32 @@ class _MatSimplifiedRubberFoam:
         mat_string += "\n"
         curve_obj = _DefineCurve(self._model, self._card_format)
         curve_id, curve_card = curve_obj.write_uniaxial_data_curve_card(
-            mat_id, mat_name, all_mat_props['UNIAXIAL TEST DATA']
+            mat_id, mat_name, all_mat_props["UNIAXIAL TEST DATA"]
         )
-        self._data_line['D1_DATA'][3] = curve_id
+        self._data_line["D1_DATA"][3] = curve_id
         mat_string += (
-            "$#" + "".join([self._formatter.field_str(i) for i in self._data_line['D1_TITLE']])[2:]
+            "$#" + "".join([self._formatter.field_str(i) for i in self._data_line["D1_TITLE"]])[2:]
         )
         mat_string += "\n"
         mat_string += "".join(
-            [self._formatter.field_float(i) for i in self._data_line['D1_DATA'][:3]]
+            [self._formatter.field_float(i) for i in self._data_line["D1_DATA"][:3]]
         )
-        mat_string += self._formatter.field_int(self._data_line['D1_DATA'][3])
+        mat_string += self._formatter.field_int(self._data_line["D1_DATA"][3])
         mat_string += "".join(
-            [self._formatter.field_float(i) for i in self._data_line['D1_DATA'][4:]]
+            [self._formatter.field_float(i) for i in self._data_line["D1_DATA"][4:]]
         )
         mat_string += "\n"
         mat_string += (
-            "$#" + "".join([self._formatter.field_str(i) for i in self._data_line['D2_TITLE']])[2:]
+            "$#" + "".join([self._formatter.field_str(i) for i in self._data_line["D2_TITLE"]])[2:]
         )
         mat_string += "\n"
-        mat_string += self._formatter.field_int(self._data_line['D2_DATA'][0])
+        mat_string += self._formatter.field_int(self._data_line["D2_DATA"][0])
         mat_string += "".join(
-            [self._formatter.field_float(i) for i in self._data_line['D2_DATA'][1:3]]
+            [self._formatter.field_float(i) for i in self._data_line["D2_DATA"][1:3]]
         )
-        mat_string += self._formatter.field_int(self._data_line['D2_DATA'][3])
+        mat_string += self._formatter.field_int(self._data_line["D2_DATA"][3])
         mat_string += "".join(
-            [self._formatter.field_float(i) for i in self._data_line['D2_DATA'][4:]]
+            [self._formatter.field_float(i) for i in self._data_line["D2_DATA"][4:]]
         )
         mat_string += "\n"
         mat_string += curve_card
@@ -976,14 +1009,14 @@ class _MatSimplifiedRubberFoam:
 
 class _MatLowDensityFoam:
     __slots__ = (
-        '_card_format',
-        '_formatter',
-        '_format_map',
-        '_header_title',
-        '_header',
-        '_data_line',
-        '_model',
-        '_logger',
+        "_card_format",
+        "_formatter",
+        "_format_map",
+        "_header_title",
+        "_header",
+        "_data_line",
+        "_model",
+        "_logger",
     )
 
     def __init__(self, model: prime.Model, card_format="SHORT"):
@@ -1007,7 +1040,7 @@ class _MatLowDensityFoam:
         mat_string += "\n"
         curve_obj = _DefineCurve(self._model, self._card_format)
         curve_id, curve_card = curve_obj.write_uniaxial_data_curve_card_for_low_density_foam(
-            mat_id, mat_name, all_mat_props['UNIAXIAL TEST DATA']
+            mat_id, mat_name, all_mat_props["UNIAXIAL TEST DATA"]
         )
         header_data = self._header
         header_data[0] = mat_id
@@ -1020,10 +1053,10 @@ class _MatLowDensityFoam:
         mat_string += "".join([self._formatter.field_float(i) for i in header_data[4:]])
         mat_string += "\n"
         mat_string += (
-            "$#" + "".join([self._formatter.field_str(i) for i in self._data_line['D1_TITLE']])[2:]
+            "$#" + "".join([self._formatter.field_str(i) for i in self._data_line["D1_TITLE"]])[2:]
         )
         mat_string += "\n"
-        mat_string += "".join([self._formatter.field_float(i) for i in self._data_line['D1_DATA']])
+        mat_string += "".join([self._formatter.field_float(i) for i in self._data_line["D1_DATA"]])
         mat_string += "\n"
         mat_string += curve_card
         return mat_string
@@ -1031,14 +1064,14 @@ class _MatLowDensityFoam:
 
 class _MatViscoelasticHillFoam:
     __slots__ = (
-        '_card_format',
-        '_formatter',
-        '_format_map',
-        '_header_title',
-        '_header',
-        '_data_line',
-        '_model',
-        '_logger',
+        "_card_format",
+        "_formatter",
+        "_format_map",
+        "_header_title",
+        "_header",
+        "_data_line",
+        "_model",
+        "_logger",
     )
 
     def __init__(self, model: prime.Model, card_format="SHORT"):
@@ -1068,9 +1101,15 @@ class _MatViscoelasticHillFoam:
     # return temp_str
 
     def define_visco_hill_foam(
-        self, mat_id, mat_name, all_mat_props, density=1e-9, weight=1, write_low_density_foam=True
+        self,
+        mat_id,
+        mat_name,
+        all_mat_props,
+        density=1e-9,
+        weight=1,
+        write_low_density_foam=True,
     ):
-        mat_props = all_mat_props['HYPERFOAM']
+        mat_props = all_mat_props["HYPERFOAM"]
         mat_string = ""
         para_dict = {}
         DYNA_COEFFICIENT = {}
@@ -1123,12 +1162,18 @@ class _MatViscoelasticHillFoam:
                 current_data_line = self._data_line
                 for i in range(1, int(number_of_coeff) + 1):
                     current_data_line["D2_DATA"][i - 1] = (
-                        round(DYNA_COEFFICIENT[f"c{i}"], self._format_map[self._card_format])
+                        round(
+                            DYNA_COEFFICIENT[f"c{i}"],
+                            self._format_map[self._card_format],
+                        )
                         if DYNA_COEFFICIENT[f"c{i}"] is not None
                         else 0.0
                     )
                     current_data_line["D3_DATA"][i - 1] = (
-                        round(DYNA_COEFFICIENT[f"b{i}"], self._format_map[self._card_format])
+                        round(
+                            DYNA_COEFFICIENT[f"b{i}"],
+                            self._format_map[self._card_format],
+                        )
                         if DYNA_COEFFICIENT[f"b{i}"] is not None
                         else 0.0
                     )
@@ -1184,15 +1229,15 @@ class _MatViscoelasticHillFoam:
 
 class _MatPiecewiseLinearPlasticity:
     __slots__ = (
-        '_card_format',
-        '_data_dict',
-        '_formatter',
-        '_format_map',
-        '_header_title',
-        '_header',
-        '_data_line',
-        '_model',
-        '_logger',
+        "_card_format",
+        "_data_dict",
+        "_formatter",
+        "_format_map",
+        "_header_title",
+        "_header",
+        "_data_line",
+        "_model",
+        "_logger",
     )
 
     def __init__(self, model: prime.Model, card_format="SHORT"):
@@ -1233,7 +1278,7 @@ class _MatPiecewiseLinearPlasticity:
         mat_string += "\n"
         curve_obj = _DefineCurve(self._model, self._card_format)
         curve_id, curve_card, sigy = curve_obj.write_plastic_curve_card(
-            mat_id, mat_name, all_mat_props['PLASTIC']
+            mat_id, mat_name, all_mat_props["PLASTIC"]
         )
         header_data = self._header
         header_data[0] = mat_id
@@ -1245,18 +1290,18 @@ class _MatPiecewiseLinearPlasticity:
         mat_string += self._formatter.field_int(header_data[0])
         mat_string += "".join([self._formatter.field_float(i) for i in header_data[1:]])
         mat_string += "\n"
-        self._data_line['D1_DATA'][2] = curve_id
+        self._data_line["D1_DATA"][2] = curve_id
         mat_string += (
-            "$#" + "".join([self._formatter.field_str(i) for i in self._data_line['D1_TITLE']])[2:]
+            "$#" + "".join([self._formatter.field_str(i) for i in self._data_line["D1_TITLE"]])[2:]
         )
         mat_string += "\n"
         mat_string += "".join(
-            [self._formatter.field_float(i) for i in self._data_line['D1_DATA'][:2]]
+            [self._formatter.field_float(i) for i in self._data_line["D1_DATA"][:2]]
         )
-        mat_string += self._formatter.field_int(self._data_line['D1_DATA'][2])
-        mat_string += self._formatter.field_str(self._data_line['D1_DATA'][3])
+        mat_string += self._formatter.field_int(self._data_line["D1_DATA"][2])
+        mat_string += self._formatter.field_str(self._data_line["D1_DATA"][3])
         mat_string += "".join(
-            [self._formatter.field_float(i) for i in self._data_line['D1_DATA'][4:]]
+            [self._formatter.field_float(i) for i in self._data_line["D1_DATA"][4:]]
         )
         mat_string += "\n"
         mat_string += (
@@ -1275,13 +1320,14 @@ class _MatPiecewiseLinearPlasticity:
         mat_string += (
             "".join([self._formatter.field_float(i) for i in self._data_line["D3_DATA"]]) + "\n"
         )
-        str_2d = ''
+        str_2d = ""
         if material_used_with_shell:
             str_2d = mat_string.replace(
                 "*MAT_PIECEWISE_LINEAR_PLASTICITY_TITLE",
                 "*MAT_PIECEWISE_LINEAR_PLASTICITY_2D_TITLE",
             ).replace(
-                self._formatter.field_int(mat_id), self._formatter.field_int(max_id * 3 + mat_id)
+                self._formatter.field_int(mat_id),
+                self._formatter.field_int(max_id * 3 + mat_id),
             )
         mat_string += curve_card
         return mat_string + str_2d
@@ -1289,15 +1335,15 @@ class _MatPiecewiseLinearPlasticity:
 
 class _MatFabric:
     __slots__ = (
-        '_card_format',
-        '_data_dict',
-        '_formatter',
-        '_format_map',
-        '_header_title',
-        '_header',
-        '_data_line',
-        '_model',
-        '_logger',
+        "_card_format",
+        "_data_dict",
+        "_formatter",
+        "_format_map",
+        "_header_title",
+        "_header",
+        "_data_line",
+        "_model",
+        "_logger",
     )
 
     def __init__(self, model: prime.Model, card_format="SHORT"):
@@ -1310,7 +1356,16 @@ class _MatFabric:
         self._data_line = {
             "D1_TITLE": ["gab", "-", "-", "cse", "el", "prl", "lratio", "damp"],
             "D1_DATA": [0.0, " ", " ", 0.0, 0.0, 0.0, 0.0, 0.05],
-            "D2_TITLE": ["aopt", "flc", "fac", "ela", "inrc", "form", "fvopt", "tsrfac"],
+            "D2_TITLE": [
+                "aopt",
+                "flc",
+                "fac",
+                "ela",
+                "inrc",
+                "form",
+                "fvopt",
+                "tsrfac",
+            ],
             "D2_DATA": [0.0, 0.0, 0.0, 0.0, 0.0, -14, 0, 0.0],
             "D3_TITLE": ["unused", "rgbrth", "a0ref", "a1", "a2", "a3", "x0", "x1"],
             "D3_DATA": [" ", 0.0, 0, 0.0, 0.0, 0.0, 0.0, 0.0],
@@ -1347,7 +1402,7 @@ class _MatFabric:
         mat_string += "\n"
         mat_string += (
             "$#"
-            + "".join([self._formatter.field_str(i) for i in self._data_line['D1_TITLE']])[2:]
+            + "".join([self._formatter.field_str(i) for i in self._data_line["D1_TITLE"]])[2:]
             + "\n"
         )
         mat_string += (
@@ -1371,7 +1426,7 @@ class _MatFabric:
         )
         mat_string += (
             "$#"
-            + "".join([self._formatter.field_str(i) for i in self._data_line['D4_TITLE']])[2:]
+            + "".join([self._formatter.field_str(i) for i in self._data_line["D4_TITLE"]])[2:]
             + "\n"
         )
         mat_string += (
@@ -1399,23 +1454,23 @@ class _MatFabric:
 
 class _CohesiveMaterialMapper:
     __slots__ = (
-        '_card_format',
-        '_data_dict',
-        '_formatter',
-        '_format_map',
-        '_damage_length',
-        '_fracture_energy',
-        '_curve_id',
-        '_strain_at_dmg_ini',
-        '_strs_tria',
-        '_strn_rate',
-        '_dyna_commands',
-        '_en',
-        '_es1',
-        '_es2',
-        '_d_type',
-        '_model',
-        '_logger',
+        "_card_format",
+        "_data_dict",
+        "_formatter",
+        "_format_map",
+        "_damage_length",
+        "_fracture_energy",
+        "_curve_id",
+        "_strain_at_dmg_ini",
+        "_strs_tria",
+        "_strn_rate",
+        "_dyna_commands",
+        "_en",
+        "_es1",
+        "_es2",
+        "_d_type",
+        "_model",
+        "_logger",
     )
 
     def __init__(self, model: prime.Model, card_format="SHORT"):
@@ -1439,7 +1494,7 @@ class _CohesiveMaterialMapper:
 
     def damage_evolution(self, mat_id, mat_name, all_mat_props):
         dmg_evol_props = all_mat_props["DAMAGE EVOLUTION"]
-        params = dmg_evol_props['Parameters']
+        params = dmg_evol_props["Parameters"]
         degrade = "MAXIMUM"
         softening = "LINEAR"
         d_type = "DISPLACEMENT"
@@ -1470,7 +1525,7 @@ class _CohesiveMaterialMapper:
 
     def damage_initiation(self, mat_id, mat_name, all_mat_props):
         dmg_ini_props = all_mat_props["DAMAGE INITIATION"]
-        params = dmg_ini_props['Parameters']
+        params = dmg_ini_props["Parameters"]
         criterion = "DUCTILE"
         if "CRITERION" in params:
             criterion = params["CRITERION"]
@@ -1536,7 +1591,16 @@ class _CohesiveMaterialMapper:
             mat_obj._es2 = self._es2
             mat_obj._d_type = self._d_type
             mat_string = mat_obj.get_all_commands(
-                mat_id, mat_name, all_mat_props, e, pr, sigy, etan, elastic_type, density, thickness
+                mat_id,
+                mat_name,
+                all_mat_props,
+                e,
+                pr,
+                sigy,
+                etan,
+                elastic_type,
+                density,
+                thickness,
             )
         else:
             if elastic_type == "ISOTROPIC":
@@ -1595,27 +1659,27 @@ class _CohesiveMaterialMapper:
 
 class _MatPlasticityWithDamage:
     __slots__ = (
-        '_section_thickness',
-        '_card_format',
-        '_data_dict',
-        '_formatter',
-        '_format_map',
-        '_header_title',
-        '_header',
-        '_data_line',
-        '_damage_length',
-        '_fracture_energy',
-        '_curve_id',
-        '_strain_at_dmg_ini',
-        '_strs_tria',
-        '_strn_rate',
-        '_dyna_commands',
-        '_en',
-        '_es1',
-        '_es2',
-        '_d_type',
-        '_model',
-        '_logger',
+        "_section_thickness",
+        "_card_format",
+        "_data_dict",
+        "_formatter",
+        "_format_map",
+        "_header_title",
+        "_header",
+        "_data_line",
+        "_damage_length",
+        "_fracture_energy",
+        "_curve_id",
+        "_strain_at_dmg_ini",
+        "_strs_tria",
+        "_strn_rate",
+        "_dyna_commands",
+        "_en",
+        "_es1",
+        "_es2",
+        "_d_type",
+        "_model",
+        "_logger",
     )
 
     def __init__(self, model: prime.Model, card_format="SHORT"):
@@ -1629,7 +1693,16 @@ class _MatPlasticityWithDamage:
         self._data_line = {
             "D1_TITLE": ["c", "p", "lcss", "lcsr", "eppfr", "vp", "lcdm", "numint"],
             "D1_DATA": [0.0, 0.0, 0, 0, 0.0, 0.0, 0.0, 0.0],
-            "D2_TITLE": ["eps1", "eps2", "eps3", "eps4", "eps5", "eps6", "eps7", "eps8"],
+            "D2_TITLE": [
+                "eps1",
+                "eps2",
+                "eps3",
+                "eps4",
+                "eps5",
+                "eps6",
+                "eps7",
+                "eps8",
+            ],
             "D2_DATA": [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0],
             "D3_TITLE": ["es1", "es2", "es3", "es4", "es5", "es6", "es7", "es8"],
             "D3_DATA": [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0],
@@ -1649,7 +1722,17 @@ class _MatPlasticityWithDamage:
         self._logger = model.python_logger
 
     def get_all_commands(
-        self, mat_id, mat_name, all_mat_props, e, pr, sigy, etan, elastic_type, density, thickness
+        self,
+        mat_id,
+        mat_name,
+        all_mat_props,
+        e,
+        pr,
+        sigy,
+        etan,
+        elastic_type,
+        density,
+        thickness,
     ):
         self._section_thickness = thickness
         mat_string = ""
@@ -1662,7 +1745,7 @@ class _MatPlasticityWithDamage:
         curve_card = ""
         if "PLASTIC" in all_mat_props:
             curve_id, curve_card, sigy = curve_obj.write_plastic_curve_card(
-                mat_id, mat_name, all_mat_props['PLASTIC']
+                mat_id, mat_name, all_mat_props["PLASTIC"]
             )
         gic = 0.0
         giic = 0.0
@@ -1677,34 +1760,34 @@ class _MatPlasticityWithDamage:
         header_data[3] = pr
         header_data[5] = etan
         header_data[6] = eppf
-        self._data_line['D1_DATA'][2] = curve_id
-        self._data_line['D1_DATA'][4] = eppfr
+        self._data_line["D1_DATA"][2] = curve_id
+        self._data_line["D1_DATA"][4] = eppfr
         mat_string += self._formatter.field_int(header_data[0])
         mat_string += "".join([self._formatter.field_float(i) for i in header_data[1:]])
         mat_string += "\n"
         mat_string += (
-            "$#" + "".join([self._formatter.field_str(i) for i in self._data_line['D1_TITLE']])[2:]
+            "$#" + "".join([self._formatter.field_str(i) for i in self._data_line["D1_TITLE"]])[2:]
         )
         mat_string += "\n"
-        mat_string += self._formatter.field_float(self._data_line['D1_DATA'][0])
-        mat_string += self._formatter.field_float(self._data_line['D1_DATA'][1])
-        mat_string += self._formatter.field_int(self._data_line['D1_DATA'][2])
-        mat_string += self._formatter.field_int(self._data_line['D1_DATA'][3])
+        mat_string += self._formatter.field_float(self._data_line["D1_DATA"][0])
+        mat_string += self._formatter.field_float(self._data_line["D1_DATA"][1])
+        mat_string += self._formatter.field_int(self._data_line["D1_DATA"][2])
+        mat_string += self._formatter.field_int(self._data_line["D1_DATA"][3])
         mat_string += "".join(
-            [self._formatter.field_float(i) for i in self._data_line['D1_DATA'][4:]]
+            [self._formatter.field_float(i) for i in self._data_line["D1_DATA"][4:]]
         )
         mat_string += "\n"
         mat_string += (
-            "$#" + "".join([self._formatter.field_str(i) for i in self._data_line['D2_TITLE']])[2:]
+            "$#" + "".join([self._formatter.field_str(i) for i in self._data_line["D2_TITLE"]])[2:]
         )
         mat_string += "\n"
-        mat_string += "".join([self._formatter.field_float(i) for i in self._data_line['D2_DATA']])
+        mat_string += "".join([self._formatter.field_float(i) for i in self._data_line["D2_DATA"]])
         mat_string += "\n"
         mat_string += (
-            "$#" + "".join([self._formatter.field_str(i) for i in self._data_line['D3_TITLE']])[2:]
+            "$#" + "".join([self._formatter.field_str(i) for i in self._data_line["D3_TITLE"]])[2:]
         )
         mat_string += "\n"
-        mat_string += "".join([self._formatter.field_float(i) for i in self._data_line['D3_DATA']])
+        mat_string += "".join([self._formatter.field_float(i) for i in self._data_line["D3_DATA"]])
         mat_string += "\n"
         mat_string += curve_card
         return mat_string
@@ -1712,27 +1795,27 @@ class _MatPlasticityWithDamage:
 
 class _MatCohesiveMixedModeElastoplasticRate:
     __slots__ = (
-        '_section_thickness',
-        '_card_format',
-        '_data_dict',
-        '_formatter',
-        '_format_map',
-        '_header_title',
-        '_header',
-        '_data_line',
-        '_damage_length',
-        '_fracture_energy',
-        '_curve_id',
-        '_strain_at_dmg_ini',
-        '_strs_tria',
-        '_strn_rate',
-        '_dyna_commands',
-        '_en',
-        '_es1',
-        '_es2',
-        '_d_type',
-        '_model',
-        '_logger',
+        "_section_thickness",
+        "_card_format",
+        "_data_dict",
+        "_formatter",
+        "_format_map",
+        "_header_title",
+        "_header",
+        "_data_line",
+        "_damage_length",
+        "_fracture_energy",
+        "_curve_id",
+        "_strain_at_dmg_ini",
+        "_strs_tria",
+        "_strn_rate",
+        "_dyna_commands",
+        "_en",
+        "_es1",
+        "_es2",
+        "_d_type",
+        "_model",
+        "_logger",
     )
 
     def __init__(self, model: prime.Model, card_format="SHORT"):
@@ -1764,7 +1847,17 @@ class _MatCohesiveMixedModeElastoplasticRate:
         self._logger = model.python_logger
 
     def get_all_commands(
-        self, mat_id, mat_name, all_mat_props, kn, ks1, ks2, etan, elastic_type, density, thickness
+        self,
+        mat_id,
+        mat_name,
+        all_mat_props,
+        kn,
+        ks1,
+        ks2,
+        etan,
+        elastic_type,
+        density,
+        thickness,
     ):
         self._section_thickness = thickness
         mat_string = ""
@@ -1803,29 +1896,29 @@ class _MatCohesiveMixedModeElastoplasticRate:
         mat_string += "".join([self._formatter.field_float(i) for i in header_data[1:]])
         mat_string += "\n"
 
-        self._data_line['D1_DATA'][0] = gic
-        self._data_line['D1_DATA'][3] = t
-        self._data_line['D1_DATA'][7] = curve_id_1
+        self._data_line["D1_DATA"][0] = gic
+        self._data_line["D1_DATA"][3] = t
+        self._data_line["D1_DATA"][7] = curve_id_1
         mat_string += (
-            "$#" + "".join([self._formatter.field_str(i) for i in self._data_line['D1_TITLE']])[2:]
+            "$#" + "".join([self._formatter.field_str(i) for i in self._data_line["D1_TITLE"]])[2:]
         )
         mat_string += "\n"
         mat_string += "".join(
-            [self._formatter.field_float(i) for i in self._data_line['D1_DATA'][:7]]
+            [self._formatter.field_float(i) for i in self._data_line["D1_DATA"][:7]]
         )
-        mat_string += self._formatter.field_int(self._data_line['D1_DATA'][7])
+        mat_string += self._formatter.field_int(self._data_line["D1_DATA"][7])
         mat_string += "\n"
-        self._data_line['D2_DATA'][0] = giic
-        self._data_line['D2_DATA'][3] = s
-        self._data_line['D2_DATA'][7] = curve_id_2
+        self._data_line["D2_DATA"][0] = giic
+        self._data_line["D2_DATA"][3] = s
+        self._data_line["D2_DATA"][7] = curve_id_2
         mat_string += (
-            "$#" + "".join([self._formatter.field_str(i) for i in self._data_line['D2_TITLE']])[2:]
+            "$#" + "".join([self._formatter.field_str(i) for i in self._data_line["D2_TITLE"]])[2:]
         )
         mat_string += "\n"
         mat_string += "".join(
-            [self._formatter.field_float(i) for i in self._data_line['D2_DATA'][:7]]
+            [self._formatter.field_float(i) for i in self._data_line["D2_DATA"][:7]]
         )
-        mat_string += self._formatter.field_int(self._data_line['D2_DATA'][7])
+        mat_string += self._formatter.field_int(self._data_line["D2_DATA"][7])
         mat_string += "\n"
         mat_string += curve_card_1
         mat_string += curve_card_2
@@ -1835,27 +1928,27 @@ class _MatCohesiveMixedModeElastoplasticRate:
 
 class _MatCohesiveGeneral:
     __slots__ = (
-        '_section_thickness',
-        '_card_format',
-        '_data_dict',
-        '_formatter',
-        '_format_map',
-        '_header_title',
-        '_header',
-        '_data_line',
-        '_damage_length',
-        '_fracture_energy',
-        '_curve_id',
-        '_strain_at_dmg_ini',
-        '_strs_tria',
-        '_strn_rate',
-        '_dyna_commands',
-        '_en',
-        '_es1',
-        '_es2',
-        '_d_type',
-        '_model',
-        '_logger',
+        "_section_thickness",
+        "_card_format",
+        "_data_dict",
+        "_formatter",
+        "_format_map",
+        "_header_title",
+        "_header",
+        "_data_line",
+        "_damage_length",
+        "_fracture_energy",
+        "_curve_id",
+        "_strain_at_dmg_ini",
+        "_strs_tria",
+        "_strn_rate",
+        "_dyna_commands",
+        "_en",
+        "_es1",
+        "_es2",
+        "_d_type",
+        "_model",
+        "_logger",
     )
 
     def __init__(self, model: prime.Model, card_format="SHORT"):
@@ -1864,10 +1957,19 @@ class _MatCohesiveGeneral:
         self._data_dict = {}
         self._formatter = _FormatDynaCards(self._card_format)
         self._format_map = {"SHORT": 10, "LONG": 20}
-        self._header_title = ["mid", "ro", "roflg", "intfail", "tes", "tslc", "gic", "giic"]
+        self._header_title = [
+            "mid",
+            "ro",
+            "roflg",
+            "intfail",
+            "tes",
+            "tslc",
+            "gic",
+            "giic",
+        ]
         self._header = [1, 1e-9, 0.0, 0.0, 0.0, 0, 0.0, 0.0]
         self._data_line = {
-            "D1_TITLE": ['xmu', 't', 's', 'stfsf', 'tslc2'],
+            "D1_TITLE": ["xmu", "t", "s", "stfsf", "tslc2"],
             "D1_DATA": [1.0, 0.0, 0.0, 0.0, 0],
         }
         self._damage_length = 0.0
@@ -1885,7 +1987,17 @@ class _MatCohesiveGeneral:
         self._logger = model.python_logger
 
     def get_all_commands(
-        self, mat_id, mat_name, all_mat_props, kn, ks1, ks2, etan, elastic_type, density, thickness
+        self,
+        mat_id,
+        mat_name,
+        all_mat_props,
+        kn,
+        ks1,
+        ks2,
+        etan,
+        elastic_type,
+        density,
+        thickness,
     ):
         self._section_thickness = thickness
         mat_string = ""
@@ -1942,23 +2054,23 @@ class _MatCohesiveGeneral:
         mat_string += "".join([self._formatter.field_float(i) for i in header_data[6:]])
         mat_string += "\n"
         if elastic_type == "ISOTROPIC":
-            self._data_line['D1_DATA'][1] = t
-            self._data_line['D1_DATA'][2] = 0.0
+            self._data_line["D1_DATA"][1] = t
+            self._data_line["D1_DATA"][2] = 0.0
         elif elastic_type == "TRACTION":
-            self._data_line['D1_DATA'][1] = kn * self._en
-            self._data_line['D1_DATA'][2] = ks1 * self._es1
-        self._data_line['D1_DATA'][4] = curve_id_2
+            self._data_line["D1_DATA"][1] = kn * self._en
+            self._data_line["D1_DATA"][2] = ks1 * self._es1
+        self._data_line["D1_DATA"][4] = curve_id_2
         mat_string += (
-            "$#" + "".join([self._formatter.field_str(i) for i in self._data_line['D1_TITLE']])[2:]
+            "$#" + "".join([self._formatter.field_str(i) for i in self._data_line["D1_TITLE"]])[2:]
         )
         mat_string += "\n"
         mat_string += "".join(
-            [self._formatter.field_float(i) for i in self._data_line['D1_DATA'][:4]]
+            [self._formatter.field_float(i) for i in self._data_line["D1_DATA"][:4]]
         )
         if curve_id_2 != "":
-            mat_string += self._formatter.field_int(self._data_line['D1_DATA'][4])
+            mat_string += self._formatter.field_int(self._data_line["D1_DATA"][4])
         else:
-            mat_string += self._formatter.field_str(self._data_line['D1_DATA'][4])
+            mat_string += self._formatter.field_str(self._data_line["D1_DATA"][4])
         mat_string += "\n"
         mat_string += curve_card_1
         mat_string += curve_card_2
@@ -1968,21 +2080,21 @@ class _MatCohesiveGeneral:
 
 class _MatAddDamageDiem:
     __slots__ = (
-        '_card_format',
-        '_data_dict',
-        '_formatter',
-        '_format_map',
-        '_header_title',
-        '_header',
-        '_data_line',
-        '_damage_length',
-        '_curve_id',
-        '_strain_at_dmg_ini',
-        '_strs_tria',
-        '_strn_rate',
-        '_dyna_commands',
-        '_model',
-        '_logger',
+        "_card_format",
+        "_data_dict",
+        "_formatter",
+        "_format_map",
+        "_header_title",
+        "_header",
+        "_data_line",
+        "_damage_length",
+        "_curve_id",
+        "_strain_at_dmg_ini",
+        "_strs_tria",
+        "_strn_rate",
+        "_dyna_commands",
+        "_model",
+        "_logger",
     )
 
     def __init__(self, model: prime.Model, card_format="SHORT"):
@@ -1993,9 +2105,9 @@ class _MatAddDamageDiem:
         self._header_title = ["mid", "ndiemc", "dinit", "deps", "numfip"]
         self._header = [1, 1.0, 0.0, 0.00001, -100]
         self._data_line = {
-            "D1_TITLE": ['dityp', 'p1', 'p2', 'p3', 'p4', 'p5'],
+            "D1_TITLE": ["dityp", "p1", "p2", "p3", "p4", "p5"],
             "D1_DATA": [0.0, 0, 0.0, 0.0, 1.0, 0.0],
-            "D2_TITLE": ['detyp', 'dctyp', 'q1', 'q2', 'q3', 'q4'],
+            "D2_TITLE": ["detyp", "dctyp", "q1", "q2", "q3", "q4"],
             "D2_DATA": [0.0, 0.0, 0.0, 1.0, 0.0, 0.0],
         }
         self._damage_length = 0.0
@@ -2009,7 +2121,7 @@ class _MatAddDamageDiem:
 
     def damage_evolution(self, mat_id, mat_name, all_mat_props):
         dmg_evol_props = all_mat_props["DAMAGE EVOLUTION"]
-        params = dmg_evol_props['Parameters']
+        params = dmg_evol_props["Parameters"]
         degrade = "MAXIMUM"
         softening = "LINEAR"
         d_type = "DISPLACEMENT"
@@ -2034,7 +2146,7 @@ class _MatAddDamageDiem:
 
     def damage_initiation(self, mat_id, mat_name, all_mat_props):
         dmg_ini_props = all_mat_props["DAMAGE INITIATION"]
-        params = dmg_ini_props['Parameters']
+        params = dmg_ini_props["Parameters"]
         criterion = "DUCTILE"
         if "CRITERION" in params:
             criterion = params["CRITERION"]
@@ -2069,18 +2181,18 @@ class _MatAddDamageDiem:
         mat_string += "".join([self._formatter.field_float(i) for i in header_data[1:4]])
         mat_string += self._formatter.field_int(header_data[4])
         mat_string += "\n"
-        self._data_line['D1_DATA'][1] = curve_id
+        self._data_line["D1_DATA"][1] = curve_id
         mat_string += (
-            "$#" + "".join([self._formatter.field_str(i) for i in self._data_line['D1_TITLE']])[2:]
+            "$#" + "".join([self._formatter.field_str(i) for i in self._data_line["D1_TITLE"]])[2:]
         )
         mat_string += "\n"
-        mat_string += self._formatter.field_float(self._data_line['D1_DATA'][0])
-        mat_string += self._formatter.field_int(self._data_line['D1_DATA'][1])
+        mat_string += self._formatter.field_float(self._data_line["D1_DATA"][0])
+        mat_string += self._formatter.field_int(self._data_line["D1_DATA"][1])
         mat_string += "".join(
-            [self._formatter.field_float(i) for i in self._data_line['D1_DATA'][2:]]
+            [self._formatter.field_float(i) for i in self._data_line["D1_DATA"][2:]]
         )
         mat_string += "\n"
-        self._data_line['D2_DATA'][2] = self._damage_length
+        self._data_line["D2_DATA"][2] = self._damage_length
         mat_string += (
             "$#"
             + "".join([self._formatter.field_str(i) for i in self._data_line["D2_TITLE"]])[2:]
@@ -2104,17 +2216,17 @@ class _MatAddDamageDiem:
 
 class _MatAddInelasticity:
     __slots__ = (
-        '_card_format',
-        '_data_dict',
-        '_formatter',
-        '_format_map',
-        '_header_title',
-        '_header',
-        '_data_line',
-        '_neilinks',
-        '_neilinks_count',
-        '_model',
-        '_logger',
+        "_card_format",
+        "_data_dict",
+        "_formatter",
+        "_format_map",
+        "_header_title",
+        "_header",
+        "_data_line",
+        "_neilinks",
+        "_neilinks_count",
+        "_model",
+        "_logger",
     )
 
     def __init__(self, model: prime.Model, card_format="SHORT"):
@@ -2156,12 +2268,12 @@ class _MatAddInelasticity:
             and "TIME" in mat_props["Parameters"]
             and mat_props["Parameters"]["TIME"] == "PRONY"
         ):
-            g = mat_props["Data"]['g']
-            if 'k' in mat_props["Data"]:
-                k = mat_props["Data"]['k']
+            g = mat_props["Data"]["g"]
+            if "k" in mat_props["Data"]:
+                k = mat_props["Data"]["k"]
             else:
                 k = [0.0] * len(g)
-            t = mat_props["Data"]['t']
+            t = mat_props["Data"]["t"]
             plastic_data = {}
             for pnt in zip(g, k, t):
                 if float(pnt[1]) in plastic_data.keys():
@@ -2231,7 +2343,10 @@ class _MatAddInelasticity:
                     data_dict[f"D{i}_Weight"]
                     if len("{0}".format(data_dict[f"D{i}_Weight"]))
                     <= self._format_map[self._card_format]
-                    else round(data_dict[f"D{i}_Weight"], self._format_map[self._card_format] - 2)
+                    else round(
+                        data_dict[f"D{i}_Weight"],
+                        self._format_map[self._card_format] - 2,
+                    )
                 )
                 current_data_line["D3_DATA"][0] = float(
                     data_dict[f"D{i}_P1"]
@@ -2302,20 +2417,20 @@ class MaterialProcessor:
     """
 
     __slots__ = (
-        '_card_format',
-        '_sim_data',
-        '_raw_materials_data',
-        '_zone_data',
-        '_part_data',
-        '_mat_id',
-        '_wt_factor',
-        '_material_assignedTo_zones',
-        '_material_dyna_cards',
-        '_set_part_dyna_cards',
-        '_damping_dyna_cards',
-        '_formatter',
-        '_model',
-        '_logger',
+        "_card_format",
+        "_sim_data",
+        "_raw_materials_data",
+        "_zone_data",
+        "_part_data",
+        "_mat_id",
+        "_wt_factor",
+        "_material_assignedTo_zones",
+        "_material_dyna_cards",
+        "_set_part_dyna_cards",
+        "_damping_dyna_cards",
+        "_formatter",
+        "_model",
+        "_logger",
     )
 
     def __init__(
@@ -2327,9 +2442,9 @@ class MaterialProcessor:
         """Initialize class variables and the superclass."""
         self._card_format = card_format
         self._sim_data = sim_data
-        self._raw_materials_data = sim_data['Materials']
-        self._zone_data = sim_data['Zones']
-        self._part_data = sim_data['Parts']
+        self._raw_materials_data = sim_data["Materials"]
+        self._zone_data = sim_data["Zones"]
+        self._part_data = sim_data["Parts"]
         self._mat_id = 0
         self._wt_factor = 1.0
         self._material_assignedTo_zones = {}
@@ -2361,7 +2476,7 @@ class MaterialProcessor:
         )
         if mats_not_in_zones:
             self._logger.warning(
-                f'the materials that are not in any zones {str(mats_not_in_zones)}'
+                f"the materials that are not in any zones {str(mats_not_in_zones)}"
             )
         # self._logger.info(self._material_assignedTo_zones)
         # for mat_name in self._material_assignedTo_zones:
@@ -2378,7 +2493,7 @@ class MaterialProcessor:
         # return ''.join(
         # self._material_dyna_cards+self._set_part_dyna_cards+self._damping_dyna_cards
         # )
-        return ''.join(self._material_dyna_cards)
+        return "".join(self._material_dyna_cards)
 
     def get_material_commands_by_material_name(self, mat_name: str) -> str:
         """Generate and return the material commands for a specific material given it's name.
@@ -2406,7 +2521,7 @@ class MaterialProcessor:
         dyna_mat_card, dyna_set_part, dyna_damping_card = self._get_mat_comands(mat_name)
         mat_data = self._raw_materials_data[mat_name]
         # self._logger.info(mat_data)
-        dyna_text_data = ''.join([dyna_mat_card, dyna_set_part, dyna_damping_card])
+        dyna_text_data = "".join([dyna_mat_card, dyna_set_part, dyna_damping_card])
         return dyna_text_data
 
     def get_material_commands_by_material_id(self, id: int) -> str:
@@ -2430,23 +2545,23 @@ class MaterialProcessor:
         """
         if not self._material_assignedTo_zones:
             self._map_zone_type_with_material()
-        dyna_text_data = ''
+        dyna_text_data = ""
         for mat_name in self._raw_materials_data:
             mat_data = self._raw_materials_data[mat_name]
-            if mat_data['id'] == id:
+            if mat_data["id"] == id:
                 if mat_name not in self._material_assignedTo_zones:
                     self._material_assignedTo_zones[mat_name] = []
                 mat_data = self._raw_materials_data[mat_name]
                 # self._logger.info(mat_data)
                 dyna_mat_card, dyna_set_part, dyna_damping_card = self._get_mat_comands(mat_name)
-                dyna_text_data = ''.join([dyna_mat_card, dyna_set_part, dyna_damping_card])
+                dyna_text_data = "".join([dyna_mat_card, dyna_set_part, dyna_damping_card])
                 break
         return dyna_text_data
 
     def _get_max_id(self):
         part = self._model.parts[0]
         fileio = prime.FileIO(self._model)
-        max_id = self._sim_data['SimulationData']['max_id']
+        max_id = self._sim_data["SimulationData"]["max_id"]
         return int(max_id)
 
     def _get_zone_with_id(self, _id):
@@ -2454,7 +2569,7 @@ class MaterialProcessor:
             for zone in self._zone_data:
                 zone_details = self._zone_data[zone]
                 try:
-                    if zone_details['id'] == _id:
+                    if zone_details["id"] == _id:
                         zone_name = zone
                         zone_details = zone_details
                         return zone_name, zone_details
@@ -2463,11 +2578,11 @@ class MaterialProcessor:
         elif self._part_data is not None:
             for part in self._part_data:
                 part_info = self._part_data[part]
-                if part_info is not None and part_info['Zones'] is not None:
-                    for zone in part_info['Zones']:
-                        zone_details = part_info['Zones'][zone]
+                if part_info is not None and part_info["Zones"] is not None:
+                    for zone in part_info["Zones"]:
+                        zone_details = part_info["Zones"][zone]
                         try:
-                            if zone_details['id'] == _id:
+                            if zone_details["id"] == _id:
                                 zone_name = zone
                                 zone_details = zone_details
                                 return zone_name, zone_details
@@ -2476,7 +2591,7 @@ class MaterialProcessor:
         return None, {}
 
     def _is_material_used_with_shell(self, mat_name):
-        zone_types_for_2d_plasticity = ['Membrane', 'Shell']
+        zone_types_for_2d_plasticity = ["Membrane", "Shell"]
         zone_type = None
         zone_details = {}
         used_with_shell = False
@@ -2486,14 +2601,14 @@ class MaterialProcessor:
             if self._material_assignedTo_zones[mat_name]:
                 for zone_id in self._material_assignedTo_zones[mat_name]:
                     zone_name, zone_details = self._get_zone_with_id(zone_id)
-                    if zone_details and zone_details['Type'] in zone_types_for_2d_plasticity:
+                    if zone_details and zone_details["Type"] in zone_types_for_2d_plasticity:
                         used_with_shell = True
                         break
 
         return used_with_shell
 
     def _is_material_used_with_membrane(self, mat_name):
-        zone_types_for_2d_plasticity = ['Membrane']
+        zone_types_for_2d_plasticity = ["Membrane"]
         zone_details = {}
         used_with_shell = False
         if mat_name not in self._material_assignedTo_zones:
@@ -2502,7 +2617,7 @@ class MaterialProcessor:
             if self._material_assignedTo_zones[mat_name]:
                 for zone_id in self._material_assignedTo_zones[mat_name]:
                     _zone_name, zone_details = self._get_zone_with_id(zone_id)
-                    if zone_details and zone_details['Type'] in zone_types_for_2d_plasticity:
+                    if zone_details and zone_details["Type"] in zone_types_for_2d_plasticity:
                         used_with_shell = True
                         break
 
@@ -2520,7 +2635,7 @@ class MaterialProcessor:
                 )
             else:
                 zone_name, zone_details = None, {}
-        if zone_name is not None and zone_details['Type'] == 'Cohesive':
+        if zone_name is not None and zone_details["Type"] == "Cohesive":
             return True, zone_details, zone_name
         else:
             return False, zone_details, zone_name
@@ -2528,13 +2643,13 @@ class MaterialProcessor:
     def _get_cohesive_section_thickness(self, zone_details, zone_name):
         thickness = 0.1
         if "ThicknessMode" in zone_details:
-            if zone_details['ThicknessMode'] != 'SPECIFIED':
+            if zone_details["ThicknessMode"] != "SPECIFIED":
                 self._logger.warning(
-                    f'Cohesive zone {zone_name} does not have specified thickness.'
+                    f"Cohesive zone {zone_name} does not have specified thickness."
                 )
         else:
             self._logger.warning(
-                f'Cohesive zone {zone_name} does not have Thickness Mode specified.'
+                f"Cohesive zone {zone_name} does not have Thickness Mode specified."
             )
         if "Thickness" in zone_details:
             thickness = zone_details["Thickness"]
@@ -2551,59 +2666,59 @@ class MaterialProcessor:
                 zone_details = self._zone_data[zone]
                 # self._logger.info(zone)
                 # self._logger.info(zone_details)
-                if 'Material' not in zone_details:
-                    self._logger.warning(f'Warning: Material is not specified for zone {zone}')
+                if "Material" not in zone_details:
+                    self._logger.warning(f"Warning: Material is not specified for zone {zone}")
                     continue
-                if zone_details['Material'] in self._material_assignedTo_zones:
+                if zone_details["Material"] in self._material_assignedTo_zones:
                     try:
-                        zoneId = zone_details['id']
-                        self._material_assignedTo_zones[zone_details['Material']].append(zoneId)
+                        zoneId = zone_details["id"]
+                        self._material_assignedTo_zones[zone_details["Material"]].append(zoneId)
                     except:
-                        self._logger.warning(f'Zone {zone} does not have id for it ')
+                        self._logger.warning(f"Zone {zone} does not have id for it ")
                         pass
                 else:
                     try:
-                        zoneId = zone_details['id']
-                        self._material_assignedTo_zones[zone_details['Material']] = [zoneId]
+                        zoneId = zone_details["id"]
+                        self._material_assignedTo_zones[zone_details["Material"]] = [zoneId]
                     except:
-                        self._material_assignedTo_zones[zone_details['Material']] = []
-                        self._logger.warning(f'Zone {zone} does not have id for it ')
+                        self._material_assignedTo_zones[zone_details["Material"]] = []
+                        self._logger.warning(f"Zone {zone} does not have id for it ")
         elif self._part_data is not None:
             for part in self._part_data:
                 part_info = self._part_data[part]
-                if part_info is not None and part_info['Zones'] is not None:
-                    for zone in part_info['Zones']:
-                        zone_details = part_info['Zones'][zone]
+                if part_info is not None and part_info["Zones"] is not None:
+                    for zone in part_info["Zones"]:
+                        zone_details = part_info["Zones"][zone]
                         # self._logger.info(zone)
                         # self._logger.info(zone_details)
-                        if 'Material' not in zone_details:
+                        if "Material" not in zone_details:
                             self._logger.warning(
-                                f'Warning: Material is not specified for zone {zone}'
+                                f"Warning: Material is not specified for zone {zone}"
                             )
                             continue
-                        if zone_details['Material'] in self._material_assignedTo_zones:
+                        if zone_details["Material"] in self._material_assignedTo_zones:
                             try:
-                                zoneId = zone_details['id']
-                                self._material_assignedTo_zones[zone_details['Material']].append(
+                                zoneId = zone_details["id"]
+                                self._material_assignedTo_zones[zone_details["Material"]].append(
                                     zoneId
                                 )
                             except:
-                                self._logger.warning(f'Zone {zone} does not have id for it ')
+                                self._logger.warning(f"Zone {zone} does not have id for it ")
                                 pass
                         else:
                             try:
-                                zoneId = zone_details['id']
-                                self._material_assignedTo_zones[zone_details['Material']] = [zoneId]
+                                zoneId = zone_details["id"]
+                                self._material_assignedTo_zones[zone_details["Material"]] = [zoneId]
                             except:
-                                self._material_assignedTo_zones[zone_details['Material']] = []
-                                self._logger.warning(f'Zone {zone} does not have id for it ')
+                                self._material_assignedTo_zones[zone_details["Material"]] = []
+                                self._logger.warning(f"Zone {zone} does not have id for it ")
 
     def _get_mat_comands(self, mat_name):
         mat_data = self._raw_materials_data[mat_name]
-        self._mat_id = mat_data['id']
+        self._mat_id = mat_data["id"]
         processed_entities = [
-            'PLASTIC',
-            'ELASTIC',
+            "PLASTIC",
+            "ELASTIC",
             "VISCOELASTIC",
             "HYPERFOAM",
             "DAMPING",
@@ -2613,9 +2728,9 @@ class MaterialProcessor:
             "BRITTLE CRACKING",
         ]
         # self._logger.info(mat_data)
-        dyna_mat_card = ''
-        dyna_set_part = ''
-        dyna_damping_card = ''
+        dyna_mat_card = ""
+        dyna_set_part = ""
+        dyna_damping_card = ""
         if "Parameters" in mat_data:
             self._logger.warning(f"Parameter on Material {mat_name} are not processed.")
         hyperelast = _MatHyperelastic(self._model, card_format=self._card_format)
@@ -2636,16 +2751,16 @@ class MaterialProcessor:
         e, pr, sigy, etan = 0.0, 0.0, 0.0, 0.0
         density = 1e-9
         for prop in mat_data:
-            if prop == 'id':
+            if prop == "id":
                 continue
             elif prop not in processed_entities:
-                if prop != 'DENSITY' and prop != "UNIAXIAL TEST DATA":
+                if prop != "DENSITY" and prop != "UNIAXIAL TEST DATA":
                     self._logger.warning(
                         f"The property {prop} for Material {mat_name} is not processed."
                     )
                 continue
             # self._logger.info("Next")
-            if 'DENSITY' in self._raw_materials_data[mat_name]:
+            if "DENSITY" in self._raw_materials_data[mat_name]:
                 mat_props = self._raw_materials_data[mat_name]
                 density = self._process_density(mat_props, mat_name)
             if prop == "ELASTIC":
@@ -2720,7 +2835,11 @@ class MaterialProcessor:
                 if "VISCOELASTIC" in mat_data:
                     self._wt_factor = visco.get_weight_factor(self._mat_id, mat_name, mat_data)
                 dyna_mat_card += hyperelast.define_hyper_elastic(
-                    self._mat_id, mat_name, mat_data, weight=self._wt_factor, density=density
+                    self._mat_id,
+                    mat_name,
+                    mat_data,
+                    weight=self._wt_factor,
+                    density=density,
                 )
             elif prop == "HYPERFOAM":
                 if "VISCOELASTIC" in mat_data:
@@ -2771,20 +2890,20 @@ class MaterialProcessor:
 
     def _process_damping_data(self, property_dict, mat_name, mat_id):
         alpha_damping = 0.0
-        alpha_str = ''
+        alpha_str = ""
         beta_damping = 0.0
-        beta_str = ''
-        damping_commands = ''
-        damping_set = ''
-        if property_dict['Parameters'] is None:
+        beta_str = ""
+        damping_commands = ""
+        damping_set = ""
+        if property_dict["Parameters"] is None:
             self._logger.warning(f"*DAMPING does not have parameters to process.")
-        if 'ALPHA' in property_dict['Parameters']:
-            alpha_damping = float(property_dict['Parameters']['ALPHA'])
-        if 'BETA' in property_dict['Parameters']:
-            beta_damping = float(property_dict['Parameters']['BETA'])
+        if "ALPHA" in property_dict["Parameters"]:
+            alpha_damping = float(property_dict["Parameters"]["ALPHA"])
+        if "BETA" in property_dict["Parameters"]:
+            beta_damping = float(property_dict["Parameters"]["BETA"])
         if (
-            'COMPOSITE' in property_dict['Parameters']
-            and float(property_dict['Parameters']['COMPOSITE']) != 0.0
+            "COMPOSITE" in property_dict["Parameters"]
+            and float(property_dict["Parameters"]["COMPOSITE"]) != 0.0
         ):
             self._logger.warning(
                 f"Parameter {'COMPOSITE'} on *DAMPING is not processed for {mat_name}."
@@ -2792,34 +2911,34 @@ class MaterialProcessor:
         if alpha_damping == 0.0 and beta_damping == 0.0:
             return damping_commands, damping_set
         if alpha_damping != 0.0:
-            alpha_str += '*DAMPING_PART_MASS_SET\n'
+            alpha_str += "*DAMPING_PART_MASS_SET\n"
             alpha_str += self._formatter.field_str(
-                '9' + '0' * (8 - len(str(mat_id)) - 1) + str(mat_id)
+                "9" + "0" * (8 - len(str(mat_id)) - 1) + str(mat_id)
             )
             alpha_str += self._formatter.field_float(alpha_damping)
-            alpha_str += self._formatter.field_str('1.')
-            alpha_str += self._formatter.field_str('0\n')
+            alpha_str += self._formatter.field_str("1.")
+            alpha_str += self._formatter.field_str("0\n")
             damping_commands += alpha_str
         if beta_damping != 0.0:
-            beta_str += '*DAMPING_PART_STIFFNESS_SET\n'
+            beta_str += "*DAMPING_PART_STIFFNESS_SET\n"
             beta_str += self._formatter.field_str(
-                '9' + '0' * (8 - len(str(mat_id)) - 1) + str(mat_id)
+                "9" + "0" * (8 - len(str(mat_id)) - 1) + str(mat_id)
             )
             beta_str += self._formatter.field_float(beta_damping)
-            beta_str += self._formatter.field_str('\n')
+            beta_str += self._formatter.field_str("\n")
             damping_commands += beta_str
         # if not self._material_assignedTo_zones[mat_name]:
         damping_set += "*SET_PART_TITLE\n"
         damping_set += f"DAMP_SET_PART_FOR_MATERIAL_{mat_name}\n"
         damping_set += (
-            self._formatter.field_str('9' + '0' * (8 - len(str(mat_id)) - 1) + str(mat_id)) + '\n'
+            self._formatter.field_str("9" + "0" * (8 - len(str(mat_id)) - 1) + str(mat_id)) + "\n"
         )
         for i, val in enumerate(self._material_assignedTo_zones[mat_name]):
             damping_set += self._formatter.field_int(val)
             if (i + 1) % 8 == 0:
-                damping_set += '\n'
+                damping_set += "\n"
         if len(self._material_assignedTo_zones[mat_name]) % 8 != 0:
-            damping_set += '\n'
+            damping_set += "\n"
         # if self._material_assignedTo_zones[mat_name]:
         #     self._logger.warning(
         # f"material {mat_name} is not used for any parts in the model."
@@ -2828,12 +2947,12 @@ class MaterialProcessor:
         return damping_commands, damping_set
 
     def _process_density(self, mat_props, mat_name):
-        property_dict = mat_props['DENSITY']
-        if "Parameters" in property_dict and property_dict['Parameters'] is not None:
+        property_dict = mat_props["DENSITY"]
+        if "Parameters" in property_dict and property_dict["Parameters"] is not None:
             self._logger.warning(f"Parameter on *DENSITY are not processed.")
-        density = property_dict['Data']['Mass density']
-        if 'Temperature' in property_dict['Data']:
-            temperature = property_dict['Data']['Temperature']
+        density = property_dict["Data"]["Mass density"]
+        if "Temperature" in property_dict["Data"]:
+            temperature = property_dict["Data"]["Temperature"]
             if len(density) != len(temperature):
                 self._logger.warning(
                     f"data values on *DENSITY are not consistent for material {mat_name}."
@@ -2850,8 +2969,8 @@ class MaterialProcessor:
         return density_data
 
     def _process_elastic_modulus(self, mat_props, mat_name, mat_id, density):
-        property_dict = mat_props['ELASTIC']
-        mat_elastic_card = ''
+        property_dict = mat_props["ELASTIC"]
+        mat_elastic_card = ""
         elastic_type = property_dict["Parameters"]["TYPE"]
         if elastic_type == "ISOTROPIC" or elastic_type == "ISO":
             # self._logger.warning(
@@ -2860,11 +2979,11 @@ class MaterialProcessor:
             #       f"is not processed."
             # )
             # return ''
-            youngs_mod = property_dict['Data']['E']
-            nu = property_dict['Data']['V']
+            youngs_mod = property_dict["Data"]["E"]
+            nu = property_dict["Data"]["V"]
             # temperature = property_dict['Data']['Temperature']
-            if 'Temperature' in property_dict['Data']:
-                temperature = property_dict['Data']['Temperature']
+            if "Temperature" in property_dict["Data"]:
+                temperature = property_dict["Data"]["Temperature"]
                 if len(youngs_mod) != len(temperature):
                     self._logger.warning(
                         f"data values on *ELASTIC are not consistent for material {mat_name}."
@@ -2891,7 +3010,7 @@ class MaterialProcessor:
                         self._material_assignedTo_zones[mat_name][0]
                     )
                 else:
-                    zone_name, zone_details = None, ''
+                    zone_name, zone_details = None, ""
             # if zone_name is not None and zone_details['Type'] == 'Cohesive':
             # self._logger.warning(
             # f"The material {mat_name} is assigned to cohesive component "
@@ -2905,14 +3024,14 @@ class MaterialProcessor:
                 f"{self._formatter.field_str('RO|')}"
                 f"{self._formatter.field_str('E|')}"
                 f"{self._formatter.field_str('PR|')}"
-                f"{''.join([self._formatter.field_str('|')]*4)}\n"
+                f"{''.join([self._formatter.field_str('|')] * 4)}\n"
             )
             mat_elastic_card += (
                 f"{self._formatter.field_int(mat_id)}"
                 f"{self._formatter.field_exp(density)}"
                 f"{self._formatter.field_float(elastic_modulus)}"
                 f"{self._formatter.field_exp(nu)}"
-                f"{''.join([self._formatter.field_str('0.')]*4)}\n"
+                f"{''.join([self._formatter.field_str('0.')] * 4)}\n"
             )
             if self._is_material_used_with_membrane(mat_name):
                 max_id = self._get_max_id()
@@ -2921,11 +3040,11 @@ class MaterialProcessor:
                     mat_name, mat_id, nu, density, max_id=max_id
                 )
         elif elastic_type == "TRACTION":
-            kn = property_dict['Data']['E/Knn']
-            ks1 = property_dict['Data']['G1/Kss']
-            ks2 = property_dict['Data']['G2/Ktt']
-            if 'Temperature' in property_dict['Data']:
-                temperature = property_dict['Data']['Temperature']
+            kn = property_dict["Data"]["E/Knn"]
+            ks1 = property_dict["Data"]["G1/Kss"]
+            ks2 = property_dict["Data"]["G2/Ktt"]
+            if "Temperature" in property_dict["Data"]:
+                temperature = property_dict["Data"]["Temperature"]
                 if len(kn) != len(temperature):
                     self._logger.warning(
                         f"data values on *ELASTIC are not consistent for material {mat_name}."
@@ -2953,22 +3072,22 @@ class MaterialProcessor:
                 f"Elastic Modulus with type = {property_dict['Parameters']['TYPE']} "
                 f"is not processed."
             )
-            return '', elastic_type
+            return "", elastic_type
         return mat_elastic_card, elastic_type
 
     def _get_elastic_modulus(self, mat_props, mat_name, mat_id):
-        property_dict = mat_props['ELASTIC']
+        property_dict = mat_props["ELASTIC"]
         elastic_type = property_dict["Parameters"]["TYPE"]
         if elastic_type == "ISOTROPIC" or elastic_type == "ISO":
             # self._logger.warning(f"Only isotropic elastic modulus is processed, "
             # f"Elastic Modulus for the material {material} "
             #       f"is not processed.")
             # return ''
-            youngs_mod = property_dict['Data']['E']
-            nu = property_dict['Data']['V']
+            youngs_mod = property_dict["Data"]["E"]
+            nu = property_dict["Data"]["V"]
             # temperature = property_dict['Data']['Temperature']
-            if 'Temperature' in property_dict['Data']:
-                temperature = property_dict['Data']['Temperature']
+            if "Temperature" in property_dict["Data"]:
+                temperature = property_dict["Data"]["Temperature"]
                 if len(youngs_mod) != len(temperature):
                     self._logger.warning(
                         f"data values on *ELASTIC are not consistent for material {mat_name}."
@@ -2989,11 +3108,11 @@ class MaterialProcessor:
             nu = float(nu[0])
             return elastic_modulus, nu, 0.0, 0.0, elastic_type
         elif elastic_type == "TRACTION":
-            kn = property_dict['Data']['E/Knn']
-            ks1 = property_dict['Data']['G1/Kss']
-            ks2 = property_dict['Data']['G2/Ktt']
-            if 'Temperature' in property_dict['Data']:
-                temperature = property_dict['Data']['Temperature']
+            kn = property_dict["Data"]["E/Knn"]
+            ks1 = property_dict["Data"]["G1/Kss"]
+            ks2 = property_dict["Data"]["G2/Ktt"]
+            if "Temperature" in property_dict["Data"]:
+                temperature = property_dict["Data"]["Temperature"]
                 if len(kn) != len(temperature):
                     self._logger.warning(
                         f"data values on *ELASTIC are not consistent for material {mat_name}."
@@ -3031,19 +3150,19 @@ class DatabaseProcessor:
     """
 
     __slots__ = (
-        '_steps_data',
-        '_time',
-        '_card_format',
-        '_formatter',
-        '_format_map',
-        '_header_title',
-        '_header_title4',
-        '_header_title5',
-        '_header',
-        '_header4',
-        '_header5',
-        '_model',
-        '_logger',
+        "_steps_data",
+        "_time",
+        "_card_format",
+        "_formatter",
+        "_format_map",
+        "_header_title",
+        "_header_title4",
+        "_header_title5",
+        "_header",
+        "_header4",
+        "_header5",
+        "_model",
+        "_logger",
     )
 
     def __init__(self, model: prime.Model, steps_data: dict, card_format: str = "SHORT"):
@@ -3086,20 +3205,20 @@ class DatabaseProcessor:
         time = self._get_dynamic_analysis_time_period()
         database_keyword = ""
         database_maps = [
-            'DATABASE_BNDOUT',
-            'DATABASE_DISBOUT',
-            'DATABASE_DEFORC',
-            'DATABASE_ELOUT',
-            'DATABASE_GLSTAT',
-            'DATABASE_JNTFORC',
-            'DATABASE_MATSUM',
-            'DATABASE_NCFORC',
-            'DATABASE_NODOUT',
-            'DATABASE_RBDOUT',
-            'DATABASE_RCFORC',
-            'DATABASE_SLEOUT',
-            'DATABASE_SPCFORC',
-            'DATABASE_SWFORC',
+            "DATABASE_BNDOUT",
+            "DATABASE_DISBOUT",
+            "DATABASE_DEFORC",
+            "DATABASE_ELOUT",
+            "DATABASE_GLSTAT",
+            "DATABASE_JNTFORC",
+            "DATABASE_MATSUM",
+            "DATABASE_NCFORC",
+            "DATABASE_NODOUT",
+            "DATABASE_RBDOUT",
+            "DATABASE_RCFORC",
+            "DATABASE_SLEOUT",
+            "DATABASE_SPCFORC",
+            "DATABASE_SWFORC",
         ]
         for i in range(len(database_maps)):
             database_keyword += "*" + str(database_maps[i]) + "\n"
@@ -3130,13 +3249,13 @@ class DatabaseProcessor:
     def _get_dynamic_analysis_time_period(self):
         step_data = self._steps_data
         for i in range(len(step_data)):
-            if 'Dynamic' in step_data[i]:
-                dynamic_data = step_data[i]['Dynamic']
+            if "Dynamic" in step_data[i]:
+                dynamic_data = step_data[i]["Dynamic"]
                 if type(dynamic_data) == list:
                     dynamic_data = dynamic_data[0]
-                if 'Data' in dynamic_data:
-                    data = dynamic_data['Data']
-                    if 'time_period' in data:
-                        time_period = float(data['time_period'])
+                if "Data" in dynamic_data:
+                    data = dynamic_data["Data"]
+                    if "time_period" in data:
+                        time_period = float(data["time_period"])
                 self._time += time_period
         return self._time

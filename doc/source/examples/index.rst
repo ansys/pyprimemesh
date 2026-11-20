@@ -1,5 +1,5 @@
 .. _ref_index_examples:
-   
+
 .. === EXAMPLES Gallery ===
 
 

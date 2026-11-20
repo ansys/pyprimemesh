@@ -63,7 +63,7 @@ PyPrimeMesh is part of the `PyAnsys <https://docs.pyansys.com>`_ effort to facil
 from Python. PyPrimeMesh consists of various Python modules that help you to acquire geometry and
 prepare surface and volume meshes for multiple solvers. Its primary package is ``ansys-meshing-prime``.
 
-PyPrimeMesh enables you to perform these tasks: 
+PyPrimeMesh enables you to perform these tasks:
 
 * Generate quad dominant and triangular surface meshes.
 * Generate surface meshes with various sizing options like volumetric and constant.
@@ -76,7 +76,7 @@ PyPrimeMesh enables you to perform these tasks:
   in the model.
 * Modularize meshing algorithms, components, and services for easier reuse in other applications.
 * Expose microservices and APIs for meshing operations to promote meshing workflow prototyping.
- 
+
 PyPrimeMesh integrates the meshing capabilities of Ansys Prime Server directly into client apps.
 PyPrimeMesh provides a Python-friendly interface to drive the software that manages the
 submission of low-level Prime commands, while exchanging data through high-performance gRPC
@@ -92,7 +92,7 @@ PyPrimeMesh features
 PyPrimeMesh consists of many robust APIs. Some APIs do many jobs when called once. Some APIs
 do only one job when called. These APIs also enable you to query the model and allow you to
 build complex models based on the underlying queries. PyPrimeMesh, which is easy to set up
-and execute, has some distinct features: 
+and execute, has some distinct features:
 
 * Supports simple and complex models
 * Supports CAD import
@@ -140,11 +140,11 @@ development version or previously released versions.
 You can also `view <https://cheatsheets.docs.pyansys.com/pyprimemesh_cheat_sheet.png>`_ or
 `download <https://cheatsheets.docs.pyansys.com/pyprimemesh_cheat_sheet.pdf>`_ the
 PyPrimeMesh cheat sheet. This one-page reference provides syntax rules and commands
-for using PyPrimeMesh. 
+for using PyPrimeMesh.
 
 On the `PyPrimeMesh Issues <https://github.com/ansys/pyprimemesh/issues>`_ page,
 you can create issues to report bugs and request new features. On the `PyPrimeMesh Discussions
 <https://github.com/ansys/pyprimemesh/discussions>`_ page or the `Discussions <https://discuss.ansys.com/>`_
-page on the Ansys Developer portal, you can post questions, share ideas, and get community feedback. 
+page on the Ansys Developer portal, you can post questions, share ideas, and get community feedback.
 
 To reach the project support team, email `pyansys.core@ansys.com <pyansys.core@ansys.com>`_.

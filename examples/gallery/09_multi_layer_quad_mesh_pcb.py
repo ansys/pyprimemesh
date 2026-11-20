@@ -1,5 +1,6 @@
-# Copyright (C) 2024 - 2026 ANSYS, Inc. and/or its affiliates.
+# Copyright (C) 2024 - 2026 Synopsys, Inc. and ANSYS, Inc. All rights reserved.
 # SPDX-License-Identifier: MIT
+#
 #
 #
 # Permission is hereby granted, free of charge, to any person obtaining a copy
@@ -160,14 +161,18 @@ ids = []
 part = model.parts[0]
 for label in part.get_labels():
     # Check whether the named selection's name starts with the string "edge"
-    if label.startswith('edge'):
+    if label.startswith("edge"):
         # Extract the edge's length, splitting its name at every "_" string
         # Collect the second to last number
         length = float(label.split("_")[-2])  # get 0.27 from "edge_23_0.27_mm"
         # Initialize a constant-size mesh control (SOFT)
-        soft_size_control = model.control_data.create_size_control(prime.SizingType.SOFT)
+        soft_size_control = model.control_data.create_size_control(
+            prime.SizingType.SOFT
+        )
         # Assign a mesh size equal to the edge's length/number of mesh layers
-        soft_size_params = prime.SoftSizingParams(model=model, max=length / layers_per_solid)
+        soft_size_params = prime.SoftSizingParams(
+            model=model, max=length / layers_per_solid
+        )
         # Finalize the creation of mesh sizing
         soft_size_control.set_soft_sizing_params(soft_size_params)
         soft_size_scope = prime.ScopeDefinition(
@@ -228,7 +233,9 @@ createbase_results = sweeper.create_base_face(
     params=stacker_params,
 )
 base_faces = createbase_results.base_face_ids
-model.get_part_by_name(part.name).add_labels_on_topo_entities(["base_faces"], base_faces)
+model.get_part_by_name(part.name).add_labels_on_topo_entities(
+    ["base_faces"], base_faces
+)
 scope = prime.ScopeDefinition(model=model, label_expression="base_faces")
 base_scope = prime.lucid.SurfaceScope(
     entity_expression="base_faces",
@@ -292,7 +299,9 @@ part.delete_topo_entities(deletion_params)
 # ``wall_`` to the solid's name. For example, if the solid is named ``my_solid``, then
 # name the walls surrounding the solid ``wall_my_solid``.
 for volume in part.get_volumes():
-    volume_zone_name = "wall_" + model.get_zone_name(part.get_volume_zone_of_volume(volume))
+    volume_zone_name = "wall_" + model.get_zone_name(
+        part.get_volume_zone_of_volume(volume)
+    )
     label_zonelets = part.get_face_zonelets_of_volumes([volume])
     part.add_labels_on_zonelets([volume_zone_name], label_zonelets)
 # Convert labels into mesh zones to use in the solver.
@@ -304,7 +313,7 @@ mesh_util_create_zones = mesh_util.create_zones_from_labels()
 # Create a temporary folder and use it to output the mesh to a CAS file.
 
 with tempfile.TemporaryDirectory() as temp_folder:
-    mesh_file = os.path.join(temp_folder, 'multi_layer_quad_mesh_pcb.cas')
+    mesh_file = os.path.join(temp_folder, "multi_layer_quad_mesh_pcb.cas")
     mesh_util.write(mesh_file)
     assert os.path.exists(mesh_file)
     print("\nExported file:\n", mesh_file)

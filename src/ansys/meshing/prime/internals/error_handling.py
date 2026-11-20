@@ -1,5 +1,7 @@
-# Copyright (C) 2024 - 2026 ANSYS, Inc. and/or its affiliates.
+# Copyright (C) 2024 - 2026 Synopsys, Inc. and ANSYS, Inc. All rights reserved.
 # SPDX-License-Identifier: MIT
+#
+#
 #
 # Permission is hereby granted, free of charge, to any person obtaining a copy
 # of this software and associated documentation files (the "Software"), to deal
@@ -20,8 +22,9 @@
 # SOFTWARE.
 
 """Module for error handling in PyPrimeMesh."""
-import re
+
 from functools import wraps
+import re
 
 from ansys.meshing.prime.autogen.primeconfig import ErrorCode, WarningCode
 
@@ -523,7 +526,7 @@ class PrimeRuntimeError(Exception):
             output_message = "Invalid Parameter Type: " + param_names[0]
             if len(param_names) > 1:
                 for name in param_names[1:]:
-                    output_message += "." + re.sub(r'(?<!^)(?=[A-Z])', '_', name).lower()
+                    output_message += "." + re.sub(r"(?<!^)(?=[A-Z])", "_", name).lower()
         return output_message
 
     @property
@@ -570,8 +573,8 @@ def process_and_handle_results(result: dict):
     """Process and handle results."""
     if result is not None:
         if isinstance(result, dict):
-            error_code = result.get('errorCode', None)
-            error_location_arr = result.get('errorLocations', None)
+            error_code = result.get("errorCode", None)
+            error_location_arr = result.get("errorLocations", None)
             error_locations = (
                 [error_location_arr[i : i + 3] for i in range(0, len(error_location_arr), 3)]
                 if error_location_arr is not None
@@ -580,11 +583,12 @@ def process_and_handle_results(result: dict):
             if error_code is not None:
                 if error_code > 0:
                     error_location_msg = (
-                        f'\nError Locations: {error_locations}' if len(error_locations) > 0 else f''
+                        f"\nError Locations: {error_locations}" if len(error_locations) > 0 else f""
                     )
                     raise PrimeRuntimeError(
                         prime_error_messages.get(
-                            ErrorCode(error_code), f'Unrecogonized error code {error_code}'
+                            ErrorCode(error_code),
+                            f"Unrecogonized error code {error_code}",
                         )
                         + error_location_msg,
                         ErrorCode(error_code),
@@ -592,11 +596,11 @@ def process_and_handle_results(result: dict):
                     )
 
             prime_warnings = []
-            single_warning = result.get('warningCode', None)
+            single_warning = result.get("warningCode", None)
             if single_warning is not None and single_warning > 0:
                 prime_warnings.append(single_warning)
 
-            multiple_warnings = result.get('warningCodes', None)
+            multiple_warnings = result.get("warningCodes", None)
             if multiple_warnings:  # Note that this will filter out empty list as well
                 [prime_warnings.append(w) for w in multiple_warnings]
 
@@ -605,7 +609,7 @@ def process_and_handle_results(result: dict):
 
                 [
                     warnings.warn(
-                        prime_warning_messages.get(WarningCode(w), f'Unrecogonized warning {w}'),
+                        prime_warning_messages.get(WarningCode(w), f"Unrecogonized warning {w}"),
                         PrimeRuntimeWarning,
                         stacklevel=4,
                     )

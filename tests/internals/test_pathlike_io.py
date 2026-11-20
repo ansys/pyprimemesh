@@ -1,5 +1,6 @@
-# Copyright (C) 2024 - 2026 ANSYS, Inc. and/or its affiliates.
+# Copyright (C) 2024 - 2026 Synopsys, Inc. and ANSYS, Inc. All rights reserved.
 # SPDX-License-Identifier: MIT
+#
 #
 #
 # Permission is hereby granted, free of charge, to any person obtaining a copy
@@ -21,14 +22,14 @@
 # SOFTWARE.
 
 """Tests for pathlib.Path support on file I/O helpers."""
+
 from pathlib import Path
 
-from ansys.tools.common.example_download import DownloadManager
-
+from ansys.meshing.prime.internals.client import Client
 import ansys.meshing.prime.internals.config as config
 import ansys.meshing.prime.internals.defaults as defaults
 import ansys.meshing.prime.internals.utils as utils
-from ansys.meshing.prime.internals.client import Client
+from ansys.tools.common.example_download import DownloadManager
 
 
 def test_to_path_str_accepts_str_and_path(tmp_path):
@@ -98,7 +99,11 @@ def test_container_staging_is_isolated_per_reader(tmp_path):
             with utils.file_read_context(None, second) as inner:
                 assert outer != inner
             # the inner reader's cleanup must leave the outer staged copy alone
-            staged = Path(defaults.get_examples_path(), Path(outer).parent.name, "mixing_elbow.fmd")
+            staged = Path(
+                defaults.get_examples_path(),
+                Path(outer).parent.name,
+                "mixing_elbow.fmd",
+            )
             assert staged.is_file()
             assert staged.read_text() == "one"
         assert not staged.parent.exists()
