@@ -738,8 +738,6 @@ def test_hiding_an_entity_leaves_the_rest_drawn(get_remote_client, get_examples)
         mask = _cells_for_key(batch, key)
         hidden_cells = int(np.count_nonzero(mask))
         assert 0 < hidden_cells < batch.mesh.n_cells
-        display.scene.screenshot()
-        everything = _drawn_pixels(display)
 
         display.set_entities_visible([key], False)
         drawn = display._drawn_geometry[actor]
