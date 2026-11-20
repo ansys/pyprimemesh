@@ -112,11 +112,12 @@ def test_size_control(mesh):
 
 @pytest.mark.skipif(not os.getenv("CI"), reason="Only run in CI environment")
 def test_from_geometry(mesh):
+    from pint import Quantity
+
     from ansys.geometry.core import launch_modeler
     from ansys.geometry.core.math import Point2D
     from ansys.geometry.core.misc import UNITS
     from ansys.geometry.core.sketch import Sketch
-    from pint import Quantity
 
     modeler = launch_modeler(transport_mode="insecure", port=654)
     design_name = "ExtrudeProfile"

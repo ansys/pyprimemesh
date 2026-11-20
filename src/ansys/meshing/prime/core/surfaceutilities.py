@@ -31,20 +31,10 @@ from typing import Iterable
 
 from ansys.meshing.prime.autogen.surfaceutilitystructs import (
     AddThicknessParams as AddThicknessParams,
-)
-from ansys.meshing.prime.autogen.surfaceutilitystructs import (
     AddThicknessResults as AddThicknessResults,
-)
-from ansys.meshing.prime.autogen.surfaceutilitystructs import (
     CreateBOIParams as CreateBOIParams,
-)
-from ansys.meshing.prime.autogen.surfaceutilitystructs import (
     CreateBOIResults as CreateBOIResults,
-)
-from ansys.meshing.prime.autogen.surfaceutilitystructs import (
     CreateContactPatchParams as CreateContactPatchParams,
-)
-from ansys.meshing.prime.autogen.surfaceutilitystructs import (
     CreateContactPatchResults as CreateContactPatchResults,
 )
 from ansys.meshing.prime.core.model import Model

@@ -24,12 +24,11 @@
 
 from pathlib import Path
 
-from ansys.tools.common.example_download import DownloadManager
-
+from ansys.meshing.prime.internals.client import Client
 import ansys.meshing.prime.internals.config as config
 import ansys.meshing.prime.internals.defaults as defaults
 import ansys.meshing.prime.internals.utils as utils
-from ansys.meshing.prime.internals.client import Client
+from ansys.tools.common.example_download import DownloadManager
 
 
 def test_to_path_str_accepts_str_and_path(tmp_path):

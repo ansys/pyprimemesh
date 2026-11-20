@@ -63,9 +63,7 @@ def test_wrapper_control(get_remote_client):
     con_prev_params2 = prime.ContactPreventionParams(
         model=model, source_scope=sscope2, target_scope=tscope2, size=0.1
     )
-    res_con_prev = wrapper_control.set_contact_preventions(
-        [con_prev_params1, con_prev_params2]
-    )
+    res_con_prev = wrapper_control.set_contact_preventions([con_prev_params1, con_prev_params2])
     # Validate number of controls set
     assert len(res_con_prev.ids) == 2
 
@@ -79,9 +77,7 @@ def test_wrapper_control(get_remote_client):
     leak_prev_params2 = prime.LeakPreventionParams(
         model=model, scope=scope2, max_hole_size=0.1, material_points=["cargo"]
     )
-    res_leak_prev = wrapper_control.set_leak_preventions(
-        [leak_prev_params1, leak_prev_params2]
-    )
+    res_leak_prev = wrapper_control.set_leak_preventions([leak_prev_params1, leak_prev_params2])
     # Validate number of controls set
     assert len(res_leak_prev.ids) == 2
 
@@ -104,9 +100,7 @@ def test_wrapper_control(get_remote_client):
 
     wrapper_control = model.control_data.create_wrapper_control()
     wrapper_control.set_geometry_scope(
-        prime.ScopeDefinition(
-            model=model, entity_type=prime.ScopeEntity.FACEANDEDGEZONELETS
-        )
+        prime.ScopeDefinition(model=model, entity_type=prime.ScopeEntity.FACEANDEDGEZONELETS)
     )
     scope = wrapper_control.get_geometry_scope()
     # Validate entity type for default scope

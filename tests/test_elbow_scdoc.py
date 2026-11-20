@@ -31,8 +31,7 @@ from ansys.meshing.prime.graphics import PrimePlotter
 
 
 @pytest.mark.skipif(
-    platform.system() != "Windows"
-    or os.environ.get("PYPRIMEMESH_LAUNCH_CONTAINER", "0") == "1",
+    platform.system() != "Windows" or os.environ.get("PYPRIMEMESH_LAUNCH_CONTAINER", "0") == "1",
     reason="Windows specific test.",
 )
 def test_elbow_lucid(get_remote_client, get_examples):

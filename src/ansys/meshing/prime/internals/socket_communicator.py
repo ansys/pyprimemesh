@@ -28,13 +28,13 @@ from typing import Optional
 
 import numpy as np
 
-import ansys.meshing.prime.internals.json_utils as json
 from ansys.meshing.prime.core.model import Model
 from ansys.meshing.prime.internals.communicator import Communicator
 from ansys.meshing.prime.internals.error_handling import (
     communicator_error_handler,
     error_code_handler,
 )
+import ansys.meshing.prime.internals.json_utils as json
 
 
 class NumpyEncoder(json.JSONEncoder):

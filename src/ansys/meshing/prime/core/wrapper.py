@@ -39,14 +39,14 @@ from ansys.meshing.prime.autogen.modelstructs import MergePartsParams
 from ansys.meshing.prime.autogen.partstructs import NamePatternParams
 from ansys.meshing.prime.autogen.surfaceutilities import SurfaceUtilities
 from ansys.meshing.prime.autogen.surfaceutilitystructs import ResolveIntersectionsParams
-from ansys.meshing.prime.autogen.wrapperstructs import WrapParams as WrapParams
 from ansys.meshing.prime.autogen.wrapperstructs import (
+    WrapParams as WrapParams,
     WrapperCloseGapsParams,
     WrapperCloseGapsResult,
     WrapperPatchFlowRegionsParams,
     WrapperPatchFlowRegionsResult,
+    WrapResult as WrapResult,
 )
-from ansys.meshing.prime.autogen.wrapperstructs import WrapResult as WrapResult
 from ansys.meshing.prime.core.model import Model
 from ansys.meshing.prime.core.part import Part
 from ansys.meshing.prime.params.primestructs import ErrorCode as ErrorCode

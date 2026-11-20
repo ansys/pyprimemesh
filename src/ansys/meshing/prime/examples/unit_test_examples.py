@@ -20,6 +20,8 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Provide example files used by the test suite."""
+
 import os
 from typing import Optional, Union
 
@@ -69,15 +71,12 @@ def download_test_examples(
 
 
     """
-
     download_manager = DownloadManager()
     if destination is not None:
         destination = os.fspath(destination)
     directory = "pyprimemesh/unit_test_examples"
     unit_test_paths = [
-        download_manager.download_file(
-            file, directory, destination=destination, force=force
-        )
+        download_manager.download_file(file, directory, destination=destination, force=force)
         for file in FILE_NAMES
     ]
     return unit_test_paths

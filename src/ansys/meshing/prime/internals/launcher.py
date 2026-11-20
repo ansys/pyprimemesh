@@ -26,19 +26,19 @@ import logging
 import os
 import subprocess
 import sys
-import uuid
 from typing import Optional, Union
+import uuid
 
+from ansys.meshing.prime.internals.client import Client
 import ansys.meshing.prime.internals.config as config
 import ansys.meshing.prime.internals.defaults as defaults
 import ansys.meshing.prime.internals.utils as utils
-from ansys.meshing.prime.internals.client import Client
 
 try:
-    import ansys.platform.instancemanagement as pypim
     from simple_upload_server.client import Client as FileClient
 
     from ansys.meshing.prime.internals import cyberchannel
+    import ansys.platform.instancemanagement as pypim
 
     config.set_has_pim(pypim.is_configured())
 except:
@@ -49,18 +49,14 @@ __all__ = ["launch_prime", "launch_server_process"]
 
 def get_install_locations():
     supported_versions = ["261"]
-    awp_roots = {
-        ver: os.environ.get(f"AWP_ROOT{ver}", "") for ver in supported_versions
-    }
+    awp_roots = {ver: os.environ.get(f"AWP_ROOT{ver}", "") for ver in supported_versions}
     installed_versions = {
         ver: os.path.join(path, "meshing", "Prime")
         for ver, path in awp_roots.items()
         if path and os.path.isdir(path)
     }
     installed_versions = {
-        ver: path
-        for ver, path in installed_versions.items()
-        if path and os.path.isdir(path)
+        ver: path for ver, path in installed_versions.items() if path and os.path.isdir(path)
     }
     if installed_versions:
         return installed_versions
@@ -129,9 +125,7 @@ def launch_server_process(
     run_prime_script = f"runPrime.{script_ext}"
 
     exec_path = os.path.join(prime_root, run_prime_script)
-    logging.getLogger("PyPrimeMesh").info(
-        f"Launching Ansys Prime Server from {prime_root}"
-    )
+    logging.getLogger("PyPrimeMesh").info(f"Launching Ansys Prime Server from {prime_root}")
     logging.getLogger("PyPrimeMesh").info("Using server from %s", prime_root)
     if not os.path.isfile(exec_path):
         raise FileNotFoundError(f"{run_prime_script} not found in {prime_root}")
@@ -312,9 +306,7 @@ def launch_prime(
         and connection_type == config.ConnectionType.GRPC_SECURE
     ):
         if client_certs_dir is None or server_certs_dir is None:
-            raise RuntimeError(
-                f"Please provide certificate directory for remote connections."
-            )
+            raise RuntimeError(f"Please provide certificate directory for remote connections.")
         missing = [
             f
             for f in [

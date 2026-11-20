@@ -43,9 +43,7 @@ def test_bracket_scaffold(get_remote_client, get_examples):
         ),
     )
     part = model.get_part_by_name("bracket_mid_surface-3")
-    part_summary_res = part.get_summary(
-        prime.PartSummaryParams(model, print_mesh=False)
-    )
+    part_summary_res = part.get_summary(prime.PartSummaryParams(model, print_mesh=False))
     # Validate topo faces and edges
     assert math.isclose(67, float(part_summary_res.n_topo_edges), rel_tol=0.05)
     assert math.isclose(9, float(part_summary_res.n_topo_faces), rel_tol=0.02)

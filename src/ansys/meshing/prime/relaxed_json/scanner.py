@@ -71,9 +71,7 @@ def make_scanner(context) -> Callable[[str, int], Tuple[str, int]]:
         if nextchar == b'"':
             return parse_string(string, idx + 1)
         elif nextchar == b"{":
-            return parse_object(
-                (string, idx + 1), _scan_once, object_hook, object_pairs_hook, memo
-            )
+            return parse_object((string, idx + 1), _scan_once, object_hook, object_pairs_hook, memo)
         elif nextchar == b"[":
             return parse_array((string, idx + 1), _scan_once)
         elif nextchar == b"<":

@@ -24,13 +24,13 @@
 
 import PrimePyAnsysPrimeServer as Prime
 
-import ansys.meshing.prime.internals.config as config
-import ansys.meshing.prime.internals.json_utils as json
 from ansys.meshing.prime.internals.communicator import Communicator
+import ansys.meshing.prime.internals.config as config
 from ansys.meshing.prime.internals.error_handling import (
     communicator_error_handler,
     error_code_handler,
 )
+import ansys.meshing.prime.internals.json_utils as json
 
 global return_value
 return_value = ""
@@ -100,9 +100,7 @@ class PrimeCommunicator(Communicator):
         }
 
         with config.numpy_array_optimization_disabled():
-            res = json.loads(
-                Prime.GetParamDefaultJson(model._object_id, json.dumps(command)).Get()
-            )
+            res = json.loads(Prime.GetParamDefaultJson(model._object_id, json.dumps(command)).Get())
 
         return res
 

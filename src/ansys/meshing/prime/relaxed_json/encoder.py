@@ -80,9 +80,7 @@ def _get_numpy_dtype(current_dtype):
     elif np.issubdtype(current_dtype, np.float64):
         return np.float64
     else:
-        raise ValueError(
-            f"Unsupported dtype {current_dtype}for numpy array optimizaation"
-        )
+        raise ValueError(f"Unsupported dtype {current_dtype}for numpy array optimizaation")
 
 
 def _check_if_byteorder_needs_to_change(dtype_: np.dtype):
@@ -251,9 +249,7 @@ class JSONEncoder:
                 return _repr(o).encode("utf-8")
 
             if not allow_nan:
-                raise ValueError(
-                    "Out of range float values are not JSON compliant: " + repr(o)
-                )
+                raise ValueError("Out of range float values are not JSON compliant: " + repr(o))
 
             return text
 
@@ -384,8 +380,7 @@ def _make_iterencode(
                 continue
             else:
                 raise TypeError(
-                    f"keys must be str, int, float, bool or None, "
-                    f"not {key.__class__.__name__}"
+                    f"keys must be str, int, float, bool or None, not {key.__class__.__name__}"
                 )
             if first:
                 first = False

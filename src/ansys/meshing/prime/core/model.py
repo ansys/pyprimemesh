@@ -30,7 +30,6 @@ from ansys.meshing.prime.autogen.model import Model as _Model
 # isort: split
 import os
 
-import ansys.meshing.prime.internals.json_utils as json
 from ansys.meshing.prime.autogen.commonstructs import DeleteResults
 from ansys.meshing.prime.autogen.materialpointmanager import MaterialPointManager
 from ansys.meshing.prime.autogen.modelstructs import (
@@ -44,6 +43,7 @@ from ansys.meshing.prime.core.controldata import ControlData
 from ansys.meshing.prime.core.part import Part
 from ansys.meshing.prime.internals.communicator import Communicator
 from ansys.meshing.prime.internals.error_handling import PrimeRuntimeError
+import ansys.meshing.prime.internals.json_utils as json
 from ansys.meshing.prime.internals.logger import PrimeLogger
 
 
@@ -95,9 +95,7 @@ class Model(_Model):
         >>> model._sync_up_model()
         """
         res = json.loads(
-            self._comm.serve(
-                self, "PrimeMesh::Model/GetChildObjectsJson", self._object_id, args={}
-            )
+            self._comm.serve(self, "PrimeMesh::Model/GetChildObjectsJson", self._object_id, args={})
         )
         part_data = res["Parts"]
         sc_data = res["SizeControl"]
@@ -130,9 +128,7 @@ class Model(_Model):
         self._topo_data = TopoData(self, -1, res["TopoData"], "")
         if "PeriodicControl" in res:
             self._control_data._update_periodic_controls(percon_data)
-        self._material_point_data = MaterialPointManager(
-            self, -1, res["MaterialPointData"], ""
-        )
+        self._material_point_data = MaterialPointManager(self, -1, res["MaterialPointData"], "")
 
     def _add_part(self, id: int):
         """Add a part that is present on the server.
@@ -148,9 +144,7 @@ class Model(_Model):
             Raise if unable to create the part.
         """
         res = json.loads(
-            self._comm.serve(
-                self, "PrimeMesh::Model/GetChildObjectsJson", self._object_id, args={}
-            )
+            self._comm.serve(self, "PrimeMesh::Model/GetChildObjectsJson", self._object_id, args={})
         )
         part_data = res["Parts"]
         new_part = None
@@ -210,9 +204,7 @@ class Model(_Model):
                 return part
         return None
 
-    def merge_parts(
-        self, part_ids: Iterable[int], params: MergePartsParams
-    ) -> MergePartsResults:
+    def merge_parts(self, part_ids: Iterable[int], params: MergePartsParams) -> MergePartsResults:
         """Merge multiple parts into a single part.
 
         Parameters
@@ -230,7 +222,7 @@ class Model(_Model):
 
         Examples
         --------
-        >>> params = prime.MergePartsParams(model = model)
+        >>> params = prime.MergePartsParams(model=model)
         >>> results = model.merge_parts(part_ids, params)
 
         """
@@ -299,10 +291,9 @@ class Model(_Model):
         Examples
         --------
         >>> model = client.model
-        >>> model.set_global_sizing_params(GlobalSizingParams(model=model,
-        ...                                          min=0.1,
-        ...                                          max=1.0,
-        ...                                          growth_rate=1.2))
+        >>> model.set_global_sizing_params(
+        ...     GlobalSizingParams(model=model, min=0.1, max=1.0, growth_rate=1.2)
+        ... )
         """
         _Model.set_global_sizing_params(self, params)
         self._global_sf_params = params
@@ -380,7 +371,7 @@ class Model(_Model):
 
         Examples
         --------
-            >>> topo_data=model.topo_data
+            >>> topo_data = model.topo_data
         """
         return self._topo_data
 

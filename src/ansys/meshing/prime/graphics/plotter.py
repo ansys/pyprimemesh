@@ -22,23 +22,16 @@
 
 """Module for the Prime plotter."""
 
-import warnings
 from typing import Any, Dict, Iterable, List, Optional, Sequence
+import warnings
 
 import numpy as np
 import pyvista as pv
-from ansys.tools.visualization_interface import Plotter
-from ansys.tools.visualization_interface.backends.pyvista import PyVistaBackend
-from ansys.tools.visualization_interface.backends.pyvista.widgets.mesh_slider import (
-    MeshSliderWidget,
-)
-from ansys.tools.visualization_interface.utils.color import Color
 from vtk import vtkPlane, vtkTextActor
 
 import ansys.meshing.prime as prime
 
 # Kept importable from here for callers that build their own coloring.
-from ansys.meshing.prime.core.mesh import color_matrix  # noqa: F401
 from ansys.meshing.prime.core.mesh import (
     ENTITY_COLOR_ARRAY,
     RENDER_ENTITY_ID_ARRAY,
@@ -53,6 +46,7 @@ from ansys.meshing.prime.core.mesh import (
     build_element_edge_batches,
     build_face_render_batches,
     classify_face_connectivity,
+    color_matrix,  # noqa: F401
     entity_color,
     selectable_display_types,
 )
@@ -64,6 +58,12 @@ from ansys.meshing.prime.graphics.widgets.picked_info import PickedInfo
 from ansys.meshing.prime.graphics.widgets.reset_display import ResetDisplay
 from ansys.meshing.prime.graphics.widgets.selection_target import SelectionTargetWidget
 from ansys.meshing.prime.graphics.widgets.toggle_edges import ToggleEdges
+from ansys.tools.visualization_interface import Plotter
+from ansys.tools.visualization_interface.backends.pyvista import PyVistaBackend
+from ansys.tools.visualization_interface.backends.pyvista.widgets.mesh_slider import (
+    MeshSliderWidget,
+)
+from ansys.tools.visualization_interface.utils.color import Color
 
 # Depth-buffer offset applied to a face actor when element outlines are drawn as
 # separate line geometry.
@@ -459,9 +459,7 @@ class PrimePlotter(Plotter):
         """Collect one stored geometry category across all parts."""
         output = []
         for part_polydata in model_pd.values():
-            output.extend(
-                entry for entry in part_polydata.get(key, []) if entry is not None
-            )
+            output.extend(entry for entry in part_polydata.get(key, []) if entry is not None)
         return output
 
     def add_model_pd(self, model_pd: Dict) -> None:
@@ -550,9 +548,7 @@ class PrimePlotter(Plotter):
         # to be reapplied or an out-of-scope display entity type (usually edges,
         # which visually sit in front of faces) would still be pickable in VTK.
         selectable = selectable_display_types(self._selection_target)
-        actor.SetPickable(
-            bool(batch.pickable and batch.display_mesh_type in selectable)
-        )
+        actor.SetPickable(bool(batch.pickable and batch.display_mesh_type in selectable))
 
     def _add_face_batches(self, face_entries: Sequence) -> None:
         """Add at most one shaded actor for each face entity type."""
@@ -595,9 +591,7 @@ class PrimePlotter(Plotter):
             ),
         )
         for meshed, group, style in groups:
-            for batch in build_element_edge_batches(
-                face_entries, meshed=meshed
-            ).values():
+            for batch in build_element_edge_batches(face_entries, meshed=meshed).values():
                 actor = self.scene.add_mesh(
                     batch.mesh,
                     line_width=1,
@@ -672,9 +666,7 @@ class PrimePlotter(Plotter):
         if batch is None or not batch.pickable or point is None:
             return False
 
-        if batch.display_mesh_type not in selectable_display_types(
-            self._selection_target
-        ):
+        if batch.display_mesh_type not in selectable_display_types(self._selection_target):
             return True
 
         mesh = self._drawn_geometry.get(actor)
@@ -744,16 +736,10 @@ class PrimePlotter(Plotter):
             self._add_entity_label(key)
 
     @staticmethod
-    def _render_ids_for_keys(
-        batch: RenderBatch, keys: Iterable[DisplayEntityKey]
-    ) -> set[int]:
+    def _render_ids_for_keys(batch: RenderBatch, keys: Iterable[DisplayEntityKey]) -> set[int]:
         """Return batch-local render IDs corresponding to model entity keys."""
         wanted = set(keys)
-        return {
-            int(render_id)
-            for render_id, info in batch.infos.items()
-            if info.key in wanted
-        }
+        return {int(render_id) for render_id, info in batch.infos.items() if info.key in wanted}
 
     def refresh_colors(self) -> None:
         """Recolor every shared actor from current mode and selection."""
@@ -859,13 +845,9 @@ class PrimePlotter(Plotter):
         for actor, batch in self._batches.items():
             # Dropping pickability keeps VTK from returning a face actor that sits
             # in front of the edge the user is aiming at.
-            actor.SetPickable(
-                bool(batch.pickable and batch.display_mesh_type in selectable)
-            )
+            actor.SetPickable(bool(batch.pickable and batch.display_mesh_type in selectable))
         self.render()
-        self._sync_widget_state(
-            SelectionTargetWidget, "_target", self._selection_target
-        )
+        self._sync_widget_state(SelectionTargetWidget, "_target", self._selection_target)
 
     def _sync_widget_state(self, widget_cls: type, attribute: str, value) -> None:
         """Keep a toolbar button in step with state changed through the script API.
@@ -885,9 +867,7 @@ class PrimePlotter(Plotter):
             New state, as an ``IntEnum`` member matching the button representation
             state it corresponds to.
         """
-        widget = next(
-            (w for w in self._prime_widget_list if isinstance(w, widget_cls)), None
-        )
+        widget = next((w for w in self._prime_widget_list if isinstance(w, widget_cls)), None)
         if widget is None:
             return
         widget._button.GetRepresentation().SetState(int(value))
@@ -908,9 +888,7 @@ class PrimePlotter(Plotter):
                 integer_ids.add(int(entity))
 
         if integer_ids:
-            keys.update(
-                key for key in self._entity_infos if key.entity_id in integer_ids
-            )
+            keys.update(key for key in self._entity_infos if key.entity_id in integer_ids)
         return keys
 
     def set_entities_visible(self, entities, visible: bool) -> None:
@@ -1080,9 +1058,7 @@ class PrimePlotter(Plotter):
         self._selection_target = SelectionTarget.FACES
         selectable = selectable_display_types(self._selection_target)
         for actor, batch in self._batches.items():
-            actor.SetPickable(
-                bool(batch.pickable and batch.display_mesh_type in selectable)
-            )
+            actor.SetPickable(bool(batch.pickable and batch.display_mesh_type in selectable))
 
         self._remove_clipping()
         self._reset_widget_buttons()

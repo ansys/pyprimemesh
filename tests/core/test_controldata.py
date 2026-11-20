@@ -50,9 +50,7 @@ def test_periodic_control(initialized_model_elbow):
     assert periodic_control_test is None
 
     periodic_control = test_control_data.create_periodic_control()
-    periodic_control_test = test_control_data.get_periodic_control_by_name(
-        periodic_control.name
-    )
+    periodic_control_test = test_control_data.get_periodic_control_by_name(periodic_control.name)
     assert periodic_control_test.name != ("" or None)
     assert periodic_control.name == periodic_control_test.name
 
@@ -64,9 +62,7 @@ def test_periodic_control(initialized_model_elbow):
     # delete controls
     controls_ids = [periodic_control.id]
     test_control_data.delete_controls(controls_ids)
-    assert (
-        model.control_data.get_periodic_control_by_name(periodic_control.name) is None
-    )
+    assert model.control_data.get_periodic_control_by_name(periodic_control.name) is None
 
 
 def test_wrapper_control(initialized_model_elbow):
@@ -80,9 +76,7 @@ def test_wrapper_control(initialized_model_elbow):
     assert wrapper_control_test is None
 
     wrapper_control = test_control_data.create_wrapper_control()
-    wrapper_control_test = test_control_data.get_wrapper_control_by_name(
-        wrapper_control.name
-    )
+    wrapper_control_test = test_control_data.get_wrapper_control_by_name(wrapper_control.name)
     assert wrapper_control_test.name != ("" or None)
     assert wrapper_control_test.name == wrapper_control.name
 
@@ -151,9 +145,7 @@ def test_volume_control(initialized_model_elbow):
     assert volume_control_test is None
 
     volume_control = test_control_data.create_volume_control()
-    volume_control_test = test_control_data.get_volume_control_by_name(
-        volume_control.name
-    )
+    volume_control_test = test_control_data.get_volume_control_by_name(volume_control.name)
     assert volume_control_test.name != ("" or None)
     assert volume_control.name == volume_control_test.name
 

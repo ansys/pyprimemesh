@@ -43,18 +43,12 @@ if len(sys.argv) < 2:
 
 AWP_ROOT = sys.argv[1]
 if not os.path.exists(AWP_ROOT):
-    print(
-        "Could not find Ansys installation folder '{}'. Please try again.".format(
-            AWP_ROOT
-        )
-    )
+    print("Could not find Ansys installation folder '{}'. Please try again.".format(AWP_ROOT))
     sys.exit(1)
 
 # -------------------------------------------------------------------------------
 # Globals
-MANIFEST_SYMLINKS = os.path.join(
-    AWP_ROOT, "meshing", "Prime", "Manifest_PyPrimeSymlinks.json"
-)
+MANIFEST_SYMLINKS = os.path.join(AWP_ROOT, "meshing", "Prime", "Manifest_PyPrimeSymlinks.json")
 MANIFEST_FOUND_IN_UNIFIED = os.path.join(
     AWP_ROOT, "meshing", "Prime", "Manifest_AnsysInstallation.json"
 )
@@ -87,9 +81,7 @@ def load_manifest():
 def create_symlink(link, target):
     """Create symlinks as specified in PyPrimeMesh package manifest."""
     cmd = ["ln", "-s", target, link]
-    p = subprocess.Popen(
-        cmd, stdin=subprocess.PIPE, stdout=subprocess.PIPE, stderr=subprocess.PIPE
-    )
+    p = subprocess.Popen(cmd, stdin=subprocess.PIPE, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
     (stdoutdata, stderrdata) = p.communicate()
 
 

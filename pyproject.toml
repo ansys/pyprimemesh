@@ -66,30 +66,34 @@ urls.Source = "https://github.com/ansys/pyprimemesh"
 [tool.flit]
 module.name = "ansys.meshing.prime"
 
-[tool.black]
+[tool.ruff]
 line-length = 100
-exclude = '''
-/(
-    \.eggs
-  | \.git
-  | \.hg
-  | \.mypy_cache
-  | \.tox
-  | \.venv
-  | _build
-  | buck-out
-  | build
-  | dist
-  # The following are specific to Black, you probably don't want those.
-  | blib2to3
-  | tests
-  | profiling
-  | src/ansys/meshing/prime/autogen
-  | .md
-  | doc
-)/
-'''
-skip-string-normalization = true
+extend-exclude = [ "examples/**/*.py" ]
+fix = true
+format.indent-style = "space"
+format.quote-style = "double"
+format.line-ending = "auto"
+format.docstring-code-line-length = "dynamic"
+format.docstring-code-format = true
+lint.select = [
+  "D",
+  "E501",
+  "F401",
+  "F403",
+  "I",
+  "W191",
+  "W291",
+  "W293",
+]
+lint.ignore = []
+lint.per-file-ignores."**/__init__.py" = [ "D", "F401" ]
+lint.per-file-ignores."src/ansys/meshing/prime/internals/error_handling.py" = [ "E501" ]
+lint.per-file-ignores."src/ansys/meshing/prime/params/primestructs.py" = [ "F401", "F403" ]
+lint.per-file-ignores."tests/**/*.py" = [ "D" ]
+lint.isort.combine-as-imports = true
+lint.isort.force-sort-within-sections = true
+lint.isort.known-first-party = [ "ansys" ]
+lint.pydocstyle.convention = "numpy"
 
 [tool.pytest]
 ini_options.minversion = "7.1"

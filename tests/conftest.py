@@ -26,11 +26,11 @@ import os
 import shutil
 import xml.etree.ElementTree as ET
 
-import ansys.tools.visualization_interface as viz_interface
 import pytest
 
 import ansys.meshing.prime as prime
 from ansys.meshing.prime.examples import download_test_examples
+import ansys.tools.visualization_interface as viz_interface
 
 viz_interface.TESTING_MODE = True
 
@@ -43,9 +43,7 @@ class RemoteClientManager:
     def __init__(self) -> None:
         self.client = None
 
-    def start_ansys_prime_server(
-        self, prime_root=None, ip="127.0.0.1", port=50055, n_procs=1
-    ):
+    def start_ansys_prime_server(self, prime_root=None, ip="127.0.0.1", port=50055, n_procs=1):
         """Initialization of Ansys Prime Server.
 
         Parameters
@@ -195,9 +193,7 @@ def write_arm_scenarios(result, scenarioLogName="scenario.log"):
         try:
             import xml.dom.minidom as minidom
 
-            xmlstr = minidom.parseString(ET.tostring(scenario)).toprettyxml(
-                indent="   "
-            )
+            xmlstr = minidom.parseString(ET.tostring(scenario)).toprettyxml(indent="   ")
         except:
             xmlstr = ET.tostring(scenario)
 

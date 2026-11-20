@@ -28,19 +28,19 @@ import os
 from typing import Optional
 
 import grpc
-from ansys.api.meshing.prime.v1 import prime_pb2, prime_pb2_grpc
 
-import ansys.meshing.prime.internals.config as config
-import ansys.meshing.prime.internals.defaults as defaults
-import ansys.meshing.prime.internals.json_utils as json
+from ansys.api.meshing.prime.v1 import prime_pb2, prime_pb2_grpc
 from ansys.meshing.prime.core.model import Model
 from ansys.meshing.prime.internals import cyberchannel
 from ansys.meshing.prime.internals.communicator import Communicator
+import ansys.meshing.prime.internals.config as config
+import ansys.meshing.prime.internals.defaults as defaults
 from ansys.meshing.prime.internals.error_handling import (
     PrimeRuntimeError,
     communicator_error_handler,
     error_code_handler,
 )
+import ansys.meshing.prime.internals.json_utils as json
 
 # Keep some buffer for gRPC metadata that it may want to send
 BUFFER_MESSAGE_LENGTH = defaults.max_message_length() - 100
@@ -56,6 +56,7 @@ def get_secure_channel(client_certs_dir: str, server_host: str, server_port: int
         - client certificate file path
         - client key file path
         - CA certificate file path
+
     Returns
     -------
     grpc.Channel
@@ -64,9 +65,7 @@ def get_secure_channel(client_certs_dir: str, server_host: str, server_port: int
     target = f"{server_host}:{server_port}"
 
     if not os.path.exists(client_certs_dir):
-        raise FileNotFoundError(
-            f"Client certificates directory does not exist: {client_certs_dir}"
-        )
+        raise FileNotFoundError(f"Client certificates directory does not exist: {client_certs_dir}")
 
     cert_file = f"{client_certs_dir}/client.crt"
     key_file = f"{client_certs_dir}/client.key"
@@ -97,9 +96,7 @@ def make_chunks(data, chunk_size):
     return (data[i : i + n] for i in range(0, len(data), n))
 
 
-def request_iterator(
-    model_id, data, message_cls, model_cls, content_cls, completion_cls
-):
+def request_iterator(model_id, data, message_cls, model_cls, content_cls, completion_cls):
     yield message_cls(model=model_cls(object_id=model_id))
     for chunk in make_chunks(data, BUFFER_MESSAGE_LENGTH):
         yield message_cls(content=content_cls(data=chunk))
@@ -117,9 +114,7 @@ def get_response_messages(response_generator):
 
 
 def get_response(response_iterator, separator):
-    return separator.join(
-        response.data for response in get_response_messages(response_iterator)
-    )
+    return separator.join(response.data for response in get_response_messages(response_iterator))
 
 
 class GRPCCommunicator(Communicator):
@@ -139,6 +134,7 @@ class GRPCCommunicator(Communicator):
         Id for the Unix Domain Socket (UDS). The default is ``None``.
     client_certs_dir : Optional[str], optional
         Directory containing client certificates for mutual TLS. The default is ``None``.
+
     Raises
     ------
     ConnectionError
@@ -158,8 +154,8 @@ class GRPCCommunicator(Communicator):
     ):
         """Initialize the server connection."""
         import os
-        import time
         from pathlib import Path
+        import time
 
         # Initialize attributes early to avoid AttributeError in __del__
         self._channel = None
@@ -191,38 +187,28 @@ class GRPCCommunicator(Communicator):
             else:
                 uds_folder = Path(os.environ["HOME"]) / ".conn"
 
-            socket_filename = (
-                f"pyprimemesh-{uds_id}.sock" if uds_id else "pyprimemesh.sock"
-            )
+            socket_filename = f"pyprimemesh-{uds_id}.sock" if uds_id else "pyprimemesh.sock"
             socket_path = uds_folder / socket_filename
 
-            self._logger.debug(
-                f"Health check: Verifying Unix socket at {socket_path}..."
-            )
+            self._logger.debug(f"Health check: Verifying Unix socket at {socket_path}...")
             max_wait = 30.0  # Wait up to 30 seconds for socket to appear
             wait_interval = 0.5
             elapsed = 0.0
 
             while elapsed < max_wait:
                 if socket_path.exists():
-                    self._logger.debug(
-                        f"Health check: Socket file found at {socket_path}"
-                    )
+                    self._logger.debug(f"Health check: Socket file found at {socket_path}")
                     # Additional check: try to stat the socket to ensure it's accessible
                     try:
                         socket_path.stat()
                         self._logger.debug("Health check: Socket is accessible")
                     except Exception as e:
-                        self._logger.warning(
-                            f"Health check: Socket exists but not accessible: {e}"
-                        )
+                        self._logger.warning(f"Health check: Socket exists but not accessible: {e}")
                     break
                 time.sleep(wait_interval)
                 elapsed += wait_interval
             else:
-                self._logger.warning(
-                    f"Socket file not found at {socket_path} after {max_wait}s"
-                )
+                self._logger.warning(f"Socket file not found at {socket_path} after {max_wait}s")
                 self._logger.debug(f"Health check: Listing contents of {uds_folder}...")
                 try:
                     if uds_folder.exists():
@@ -231,9 +217,7 @@ class GRPCCommunicator(Communicator):
                             f"Health check: Found {len(files)} files: {[f.name for f in files]}"
                         )
                     else:
-                        self._logger.debug(
-                            f"Health check: Directory {uds_folder} does not exist"
-                        )
+                        self._logger.debug(f"Health check: Directory {uds_folder} does not exist")
                 except Exception as e:
                     self._logger.debug(f"Health check: Error listing directory: {e}")
 

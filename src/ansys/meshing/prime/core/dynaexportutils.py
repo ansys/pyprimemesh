@@ -137,9 +137,7 @@ class _MatGlass:
         self._model = model
         self._logger = model.python_logger
 
-    def get_britle_glass_commands(
-        self, mat_id, mat_name, all_mat_props, e, pr, density
-    ):
+    def get_britle_glass_commands(self, mat_id, mat_name, all_mat_props, e, pr, density):
         mat_props = all_mat_props["BRITTLE CRACKING"]
         mat_fields = mat_props["Data"]
         params = mat_props["Parameters"]
@@ -169,19 +167,14 @@ class _MatGlass:
         self._data_line["D1_DATA"][2] = 20 * stress
         mat_string += "*MAT_GLASS_TITLE\n"
         mat_string += f"{mat_name}\n"
-        mat_string += (
-            "$#"
-            + "".join([self._formatter.field_str(i) for i in self._header_title])[2:]
-        )
+        mat_string += "$#" + "".join([self._formatter.field_str(i) for i in self._header_title])[2:]
         mat_string += "\n"
         mat_string += self._formatter.field_int(header_data[0])
         mat_string += "".join([self._formatter.field_float(i) for i in header_data[1:]])
         mat_string += "\n"
         mat_string += (
             "$#"
-            + "".join(
-                [self._formatter.field_str(i) for i in self._data_line["D1_TITLE"]]
-            )[2:]
+            + "".join([self._formatter.field_str(i) for i in self._data_line["D1_TITLE"]])[2:]
             + "\n"
         )
         mat_string += self._formatter.field_str(self._data_line["D1_DATA"][0])
@@ -195,9 +188,7 @@ class _MatGlass:
         mat_string += "\n"
         mat_string += (
             "$#"
-            + "".join(
-                [self._formatter.field_str(i) for i in self._data_line["D2_TITLE"]]
-            )[2:]
+            + "".join([self._formatter.field_str(i) for i in self._data_line["D2_TITLE"]])[2:]
             + "\n"
         )
         mat_string += self._formatter.field_float(self._data_line["D2_DATA"][0])
@@ -209,9 +200,7 @@ class _MatGlass:
         mat_string += "\n"
         mat_string += (
             "$#"
-            + "".join(
-                [self._formatter.field_str(i) for i in self._data_line["D3_TITLE"]]
-            )[2:]
+            + "".join([self._formatter.field_str(i) for i in self._data_line["D3_TITLE"]])[2:]
             + "\n"
         )
         mat_string += self._formatter.field_float(self._data_line["D3_DATA"][0])
@@ -314,18 +303,14 @@ class _MatHyperelastic:
         translated = False
         if mat_props["Parameters"] and "YEOH" in mat_props["Parameters"]:
             if "TEST DATA INPUT" not in mat_props["Parameters"]:
-                mat_yeoh = _MatHyperelasticYeoh(
-                    self._model, card_format=self._card_format
-                )
+                mat_yeoh = _MatHyperelasticYeoh(self._model, card_format=self._card_format)
                 C10 = "" if "C10" not in mat_fields else mat_fields["C10"][0]
                 C20 = "" if "C20" not in mat_fields else mat_fields["C20"][0]
                 C30 = "" if "C30" not in mat_fields else mat_fields["C30"][0]
                 D1 = "" if "D1" not in mat_fields else mat_fields["D1"][0]
                 D2 = "" if "D2" not in mat_fields else mat_fields["D2"][0]
                 D3 = "" if "D3" not in mat_fields else mat_fields["D3"][0]
-                temperature = (
-                    "" if "Temperature" not in mat_fields else mat_fields["Temperature"]
-                )
+                temperature = "" if "Temperature" not in mat_fields else mat_fields["Temperature"]
                 if len(temperature) > 1:
                     self._logger.warning(
                         f"Multiple temperatures for material "
@@ -354,9 +339,7 @@ class _MatHyperelastic:
                 mat_string += f"{mat_name}\n"
                 mat_string += (
                     "$#"
-                    + "".join(
-                        [self._formatter.field_str(i) for i in mat_yeoh._header_title]
-                    )[2:]
+                    + "".join([self._formatter.field_str(i) for i in mat_yeoh._header_title])[2:]
                 )
                 mat_string += "\n"
                 mat_string += self._formatter.field_int(header_data[0])
@@ -370,31 +353,16 @@ class _MatHyperelastic:
                 mat_string += (
                     "$#"
                     + "".join(
-                        [
-                            self._formatter.field_str(i)
-                            for i in mat_yeoh._data_line["D1_TITLE"]
-                        ]
+                        [self._formatter.field_str(i) for i in mat_yeoh._data_line["D1_TITLE"]]
                     )[2:]
                     + "\n"
                 )
-                mat_string += self._formatter.field_float(
-                    mat_yeoh._data_line["D1_DATA"][0]
-                )
-                mat_string += self._formatter.field_str(
-                    mat_yeoh._data_line["D1_DATA"][1]
-                )
-                mat_string += self._formatter.field_str(
-                    mat_yeoh._data_line["D1_DATA"][2]
-                )
-                mat_string += self._formatter.field_float(
-                    mat_yeoh._data_line["D1_DATA"][3]
-                )
-                mat_string += self._formatter.field_str(
-                    mat_yeoh._data_line["D1_DATA"][4]
-                )
-                mat_string += self._formatter.field_float(
-                    mat_yeoh._data_line["D1_DATA"][5]
-                )
+                mat_string += self._formatter.field_float(mat_yeoh._data_line["D1_DATA"][0])
+                mat_string += self._formatter.field_str(mat_yeoh._data_line["D1_DATA"][1])
+                mat_string += self._formatter.field_str(mat_yeoh._data_line["D1_DATA"][2])
+                mat_string += self._formatter.field_float(mat_yeoh._data_line["D1_DATA"][3])
+                mat_string += self._formatter.field_str(mat_yeoh._data_line["D1_DATA"][4])
+                mat_string += self._formatter.field_float(mat_yeoh._data_line["D1_DATA"][5])
                 mat_string += "\n"
                 # *MAT_HYPERELASTIC_RUBBER_TITLE
                 # New_44_MAT_OS_BUMPER_YEOH_H60_VISCO
@@ -414,9 +382,7 @@ class _MatHyperelastic:
                 N = 1
                 if "N" in mat_props["Parameters"]:
                     N = int(mat_props["Parameters"]["N"])
-                temperature = (
-                    "" if "Temperature" not in mat_fields else mat_fields["Temperature"]
-                )
+                temperature = "" if "Temperature" not in mat_fields else mat_fields["Temperature"]
                 if len(temperature) > 1:
                     self._logger.warning(
                         f"Multiple temperatures for material {mat_name} (ID {mat_id}) "
@@ -429,15 +395,9 @@ class _MatHyperelastic:
                     # self._logger.info(f"D{i} = {mat_fields[f'D{i}'][0]}")
                     # self._logger.info(f"u{i} = {mat_fields[f'u{i}'][0]}")
                     # self._logger.info(f"a{i} = {mat_fields[f'a{i}'][0]}")
-                    D.append(
-                        "" if f"D{i}" not in mat_fields else mat_fields[f"D{i}"][0]
-                    )
-                    u.append(
-                        "" if f"u{i}" not in mat_fields else mat_fields[f"u{i}"][0]
-                    )
-                    alpha.append(
-                        "" if f"a{i}" not in mat_fields else mat_fields[f"a{i}"][0]
-                    )
+                    D.append("" if f"D{i}" not in mat_fields else mat_fields[f"D{i}"][0])
+                    u.append("" if f"u{i}" not in mat_fields else mat_fields[f"u{i}"][0])
+                    alpha.append("" if f"a{i}" not in mat_fields else mat_fields[f"a{i}"][0])
                 U0 = 0
                 MU = []
                 for i in range(N):
@@ -468,9 +428,7 @@ class _MatHyperelastic:
                 mat_string += f"{mat_name}\n"
                 mat_string += (
                     "$#"
-                    + "".join(
-                        [self._formatter.field_str(i) for i in mat_ogden._header_title]
-                    )[2:]
+                    + "".join([self._formatter.field_str(i) for i in mat_ogden._header_title])[2:]
                 )
                 mat_string += "\n"
                 mat_string += self._formatter.field_int(header_data[0])
@@ -484,18 +442,13 @@ class _MatHyperelastic:
                 mat_string += (
                     "$#"
                     + "".join(
-                        [
-                            self._formatter.field_str(i)
-                            for i in mat_ogden._data_line["D1_TITLE"]
-                        ]
+                        [self._formatter.field_str(i) for i in mat_ogden._data_line["D1_TITLE"]]
                     )[2:]
                     + "\n"
                 )
                 for j in range(len(MU)):
                     mat_ogden._data_line["D1_DATA"][j] = MU[j]
-                    mat_string += self._formatter.field_float(
-                        mat_ogden._data_line["D1_DATA"][j]
-                    )
+                    mat_string += self._formatter.field_float(mat_ogden._data_line["D1_DATA"][j])
                 mat_string += (
                     "".join(
                         [
@@ -508,19 +461,14 @@ class _MatHyperelastic:
                 mat_string += (
                     "$#"
                     + "".join(
-                        [
-                            self._formatter.field_str(i)
-                            for i in mat_ogden._data_line["D1_TITLE"]
-                        ]
+                        [self._formatter.field_str(i) for i in mat_ogden._data_line["D1_TITLE"]]
                     )[2:]
                     + "\n"
                 )
                 for j in range(len(alpha)):
                     # self._logger.info(f"alpha[{j}] = {alpha[j]}")
                     mat_ogden._data_line["D2_DATA"][j] = alpha[j]
-                    mat_string += self._formatter.field_float(
-                        mat_ogden._data_line["D2_DATA"][j]
-                    )
+                    mat_string += self._formatter.field_float(mat_ogden._data_line["D2_DATA"][j])
                 mat_string += (
                     "".join(
                         [
@@ -539,14 +487,12 @@ class _MatHyperelastic:
                 )
         else:
             self._logger.warning(
-                f"Material {mat_name} (ID {mat_id}) "
-                f"with hyperelastic property is not translated "
+                f"Material {mat_name} (ID {mat_id}) with hyperelastic property is not translated "
             )
             translated = True
         if not translated:
             self._logger.warning(
-                f"Material {mat_name} (ID {mat_id}) "
-                f"with hyperelastic property is not translated "
+                f"Material {mat_name} (ID {mat_id}) with hyperelastic property is not translated "
             )
             # mat_string += "! UnTranslated Hyper Elastic Part
             # of the material MAT ID {0}".format(abq_mat._id)
@@ -596,10 +542,7 @@ class _DefineCurve:
         mat_string = ""
         mat_string += "*DEFINE_CURVE_TITLE\n"
         mat_string += f"UNIAXIAL TEST DATA: {mat_name}\n"
-        mat_string += (
-            "$#"
-            + "".join([self._formatter.field_str(i) for i in self._header_title])[2:]
-        )
+        mat_string += "$#" + "".join([self._formatter.field_str(i) for i in self._header_title])[2:]
         mat_string += "\n"
         curve_id = self.get_valid_curve_id(mat_id)
         header_data = self._header
@@ -611,10 +554,7 @@ class _DefineCurve:
         mat_string += "\n"
         self._formatter._card_format = "LONG"
         mat_string += (
-            "$#"
-            + "".join(
-                [self._formatter.field_str("a1"), self._formatter.field_str("o1")]
-            )[2:]
+            "$#" + "".join([self._formatter.field_str("a1"), self._formatter.field_str("o1")])[2:]
         )
         mat_string += "\n"
         if "Data" in curve_data and curve_data["Data"] is not None:
@@ -635,17 +575,12 @@ class _DefineCurve:
         _DefineCurve._curve_id_list.append(curve_id)
         return curve_id, mat_string
 
-    def write_uniaxial_data_curve_card_for_low_density_foam(
-        self, mat_id, mat_name, curve_data
-    ):
+    def write_uniaxial_data_curve_card_for_low_density_foam(self, mat_id, mat_name, curve_data):
         self._formatter._card_format = "SHORT"
         mat_string = ""
         mat_string += "*DEFINE_CURVE_TITLE\n"
         mat_string += f"UNIAXIAL TEST DATA: {mat_name}\n"
-        mat_string += (
-            "$#"
-            + "".join([self._formatter.field_str(i) for i in self._header_title])[2:]
-        )
+        mat_string += "$#" + "".join([self._formatter.field_str(i) for i in self._header_title])[2:]
         mat_string += "\n"
         curve_id = self.get_valid_curve_id(mat_id)
         header_data = self._header
@@ -657,10 +592,7 @@ class _DefineCurve:
         mat_string += "\n"
         self._formatter._card_format = "LONG"
         mat_string += (
-            "$#"
-            + "".join(
-                [self._formatter.field_str("a1"), self._formatter.field_str("o1")]
-            )[2:]
+            "$#" + "".join([self._formatter.field_str("a1"), self._formatter.field_str("o1")])[2:]
         )
         mat_string += "\n"
         if "Data" in curve_data and curve_data["Data"] is not None:
@@ -694,10 +626,7 @@ class _DefineCurve:
         mat_string = ""
         mat_string += "*DEFINE_CURVE_TITLE\n"
         mat_string += f"PLASTIC CURVE: {mat_name}\n"
-        mat_string += (
-            "$#"
-            + "".join([self._formatter.field_str(i) for i in self._header_title])[2:]
-        )
+        mat_string += "$#" + "".join([self._formatter.field_str(i) for i in self._header_title])[2:]
         mat_string += "\n"
         curve_id = self.get_valid_curve_id(mat_id)
         header_data = self._header
@@ -709,10 +638,7 @@ class _DefineCurve:
         mat_string += "\n"
         self._formatter._card_format = "LONG"
         mat_string += (
-            "$#"
-            + "".join(
-                [self._formatter.field_str("a1"), self._formatter.field_str("o1")]
-            )[2:]
+            "$#" + "".join([self._formatter.field_str("a1"), self._formatter.field_str("o1")])[2:]
         )
         mat_string += "\n"
         if "Data" in curve_data and curve_data["Data"] is not None:
@@ -760,10 +686,7 @@ class _DefineCurve:
         mat_string = ""
         mat_string += "*DEFINE_CURVE_TITLE\n"
         mat_string += f"DAMAGE CURVE: {mat_name}\n"
-        mat_string += (
-            "$#"
-            + "".join([self._formatter.field_str(i) for i in self._header_title])[2:]
-        )
+        mat_string += "$#" + "".join([self._formatter.field_str(i) for i in self._header_title])[2:]
         mat_string += "\n"
         curve_id = self.get_valid_curve_id(mat_id)
         header_data = self._header
@@ -775,10 +698,7 @@ class _DefineCurve:
         mat_string += "\n"
         self._formatter._card_format = "LONG"
         mat_string += (
-            "$#"
-            + "".join(
-                [self._formatter.field_str("a1"), self._formatter.field_str("o1")]
-            )[2:]
+            "$#" + "".join([self._formatter.field_str("a1"), self._formatter.field_str("o1")])[2:]
         )
         mat_string += "\n"
         # self._logger.info(curve_data)
@@ -803,17 +723,12 @@ class _DefineCurve:
         _DefineCurve._curve_id_list.append(curve_id)
         return curve_id, mat_string
 
-    def create_damage_curve_for_cohesive_mixed_mode(
-        self, mat_id, mat_name, thickness, gic
-    ):
+    def create_damage_curve_for_cohesive_mixed_mode(self, mat_id, mat_name, thickness, gic):
         self._formatter._card_format = "SHORT"
         mat_string = ""
         mat_string += "*DEFINE_CURVE_TITLE\n"
         mat_string += f"THICK vs {mat_name}\n"
-        mat_string += (
-            "$#"
-            + "".join([self._formatter.field_str(i) for i in self._header_title])[2:]
-        )
+        mat_string += "$#" + "".join([self._formatter.field_str(i) for i in self._header_title])[2:]
         mat_string += "\n"
         curve_id = self.get_valid_curve_id(mat_id)
         header_data = self._header
@@ -825,10 +740,7 @@ class _DefineCurve:
         mat_string += "\n"
         self._formatter._card_format = "LONG"
         mat_string += (
-            "$#"
-            + "".join(
-                [self._formatter.field_str("a1"), self._formatter.field_str("o1")]
-            )[2:]
+            "$#" + "".join([self._formatter.field_str("a1"), self._formatter.field_str("o1")])[2:]
         )
         mat_string += "\n"
         # self._logger.info(curve_data)
@@ -871,10 +783,7 @@ class _DefineCurve:
         mat_string = ""
         mat_string += "*DEFINE_CURVE_TITLE\n"
         mat_string += f"TRACTION DAMAGE CURVE: {mat_name}\n"
-        mat_string += (
-            "$#"
-            + "".join([self._formatter.field_str(i) for i in self._header_title])[2:]
-        )
+        mat_string += "$#" + "".join([self._formatter.field_str(i) for i in self._header_title])[2:]
         mat_string += "\n"
         curve_id = self.get_valid_curve_id(mat_id)
         header_data = self._header
@@ -886,10 +795,7 @@ class _DefineCurve:
         mat_string += "\n"
         self._formatter._card_format = "LONG"
         mat_string += (
-            "$#"
-            + "".join(
-                [self._formatter.field_str("a1"), self._formatter.field_str("o1")]
-            )[2:]
+            "$#" + "".join([self._formatter.field_str("a1"), self._formatter.field_str("o1")])[2:]
         )
         mat_string += "\n"
         # self._logger.info(curve_data)
@@ -959,7 +865,10 @@ class _DefineCurve:
         updated_curve = [[0, 0]]
         for item in curve:
             updated_curve.append(
-                [(float(item[1]) + float(item[0]) / float(young)) * thickness, item[0]]
+                [
+                    (float(item[1]) + float(item[0]) / float(young)) * thickness,
+                    item[0],
+                ]
             )
 
         norm_strain = updated_curve[-1][0] + damage_len
@@ -985,10 +894,7 @@ class _DefineCurve:
         mat_string = ""
         mat_string += "*DEFINE_CURVE_TITLE\n"
         mat_string += f"COHESIVE DAMAGE CURVE: {mat_name}\n"
-        mat_string += (
-            "$#"
-            + "".join([self._formatter.field_str(i) for i in self._header_title])[2:]
-        )
+        mat_string += "$#" + "".join([self._formatter.field_str(i) for i in self._header_title])[2:]
         mat_string += "\n"
         curve_id = self.get_valid_curve_id(mat_id)
         header_data = self._header
@@ -1000,10 +906,7 @@ class _DefineCurve:
         mat_string += "\n"
         self._formatter._card_format = "LONG"
         mat_string += (
-            "$#"
-            + "".join(
-                [self._formatter.field_str("a1"), self._formatter.field_str("o1")]
-            )[2:]
+            "$#" + "".join([self._formatter.field_str("a1"), self._formatter.field_str("o1")])[2:]
         )
         mat_string += "\n"
         # self._logger.info(curve_data)
@@ -1057,16 +960,11 @@ class _MatSimplifiedRubberFoam:
         self._model = model
         self._logger = model.python_logger
 
-    def write_simplified_rubber_foam(
-        self, mat_id, mat_name, all_mat_props, density=1e-9
-    ):
+    def write_simplified_rubber_foam(self, mat_id, mat_name, all_mat_props, density=1e-9):
         mat_string = ""
         mat_string += "*MAT_SIMPLIFIED_RUBBER/FOAM_TITLE\n"
         mat_string += f"{mat_name}\n"
-        mat_string += (
-            "$#"
-            + "".join([self._formatter.field_str(i) for i in self._header_title])[2:]
-        )
+        mat_string += "$#" + "".join([self._formatter.field_str(i) for i in self._header_title])[2:]
         mat_string += "\n"
         header_data = self._header
         header_data[0] = mat_id
@@ -1080,10 +978,7 @@ class _MatSimplifiedRubberFoam:
         )
         self._data_line["D1_DATA"][3] = curve_id
         mat_string += (
-            "$#"
-            + "".join(
-                [self._formatter.field_str(i) for i in self._data_line["D1_TITLE"]]
-            )[2:]
+            "$#" + "".join([self._formatter.field_str(i) for i in self._data_line["D1_TITLE"]])[2:]
         )
         mat_string += "\n"
         mat_string += "".join(
@@ -1095,10 +990,7 @@ class _MatSimplifiedRubberFoam:
         )
         mat_string += "\n"
         mat_string += (
-            "$#"
-            + "".join(
-                [self._formatter.field_str(i) for i in self._data_line["D2_TITLE"]]
-            )[2:]
+            "$#" + "".join([self._formatter.field_str(i) for i in self._data_line["D2_TITLE"]])[2:]
         )
         mat_string += "\n"
         mat_string += self._formatter.field_int(self._data_line["D2_DATA"][0])
@@ -1143,16 +1035,11 @@ class _MatLowDensityFoam:
         mat_string = ""
         mat_string += "*MAT_LOW_DENSITY_FOAM_TITLE\n"
         mat_string += f"{mat_name}\n"
-        mat_string += (
-            "$#"
-            + "".join([self._formatter.field_str(i) for i in self._header_title])[2:]
-        )
+        mat_string += "$#" + "".join([self._formatter.field_str(i) for i in self._header_title])[2:]
         mat_string += "\n"
         curve_obj = _DefineCurve(self._model, self._card_format)
-        curve_id, curve_card = (
-            curve_obj.write_uniaxial_data_curve_card_for_low_density_foam(
-                mat_id, mat_name, all_mat_props["UNIAXIAL TEST DATA"]
-            )
+        curve_id, curve_card = curve_obj.write_uniaxial_data_curve_card_for_low_density_foam(
+            mat_id, mat_name, all_mat_props["UNIAXIAL TEST DATA"]
         )
         header_data = self._header
         header_data[0] = mat_id
@@ -1165,15 +1052,10 @@ class _MatLowDensityFoam:
         mat_string += "".join([self._formatter.field_float(i) for i in header_data[4:]])
         mat_string += "\n"
         mat_string += (
-            "$#"
-            + "".join(
-                [self._formatter.field_str(i) for i in self._data_line["D1_TITLE"]]
-            )[2:]
+            "$#" + "".join([self._formatter.field_str(i) for i in self._data_line["D1_TITLE"]])[2:]
         )
         mat_string += "\n"
-        mat_string += "".join(
-            [self._formatter.field_float(i) for i in self._data_line["D1_DATA"]]
-        )
+        mat_string += "".join([self._formatter.field_float(i) for i in self._data_line["D1_DATA"]])
         mat_string += "\n"
         mat_string += curve_card
         return mat_string
@@ -1256,17 +1138,12 @@ class _MatViscoelasticHillFoam:
                     )
                     DYNA_COEFFICIENT[f"b{i + 1}"] = float(mat_fields[f"a{i + 1}"][0])
                     # DYNA_COEFFICIENT[f"D{i + 1}"] = mat_fields[f"n{i + 1}"]
-                    mu_value += (
-                        DYNA_COEFFICIENT[f"c{i + 1}"] * DYNA_COEFFICIENT[f"b{i + 1}"]
-                    )
+                    mu_value += DYNA_COEFFICIENT[f"c{i + 1}"] * DYNA_COEFFICIENT[f"b{i + 1}"]
                 mu_value = 0.5 * mu_value
                 k = 2 * mu_value / 3.0
                 mat_string += "*MAT_VISCOELASTIC_HILL_FOAM\n"
                 mat_string += (
-                    "$#"
-                    + "".join(
-                        [self._formatter.field_str(i) for i in self._header_title]
-                    )[2:]
+                    "$#" + "".join([self._formatter.field_str(i) for i in self._header_title])[2:]
                 )
                 mat_string += "\n"
                 header_data = self._header
@@ -1305,58 +1182,34 @@ class _MatViscoelasticHillFoam:
                 mat_string += (
                     "$#"
                     + "".join(
-                        [
-                            self._formatter.field_str(i)
-                            for i in current_data_line["D1_TITLE"]
-                        ]
+                        [self._formatter.field_str(i) for i in current_data_line["D1_TITLE"]]
                     )[2:]
                     + "\n"
                 )
                 mat_string += (
-                    "".join(
-                        [
-                            self._formatter.field_float(i)
-                            for i in current_data_line["D1_DATA"]
-                        ]
-                    )
+                    "".join([self._formatter.field_float(i) for i in current_data_line["D1_DATA"]])
                     + "\n"
                 )
                 mat_string += (
                     "$#"
                     + "".join(
-                        [
-                            self._formatter.field_str(i)
-                            for i in current_data_line["D2_TITLE"]
-                        ]
+                        [self._formatter.field_str(i) for i in current_data_line["D2_TITLE"]]
                     )[2:]
                     + "\n"
                 )
                 mat_string += (
-                    "".join(
-                        [
-                            self._formatter.field_float(i)
-                            for i in current_data_line["D2_DATA"]
-                        ]
-                    )
+                    "".join([self._formatter.field_float(i) for i in current_data_line["D2_DATA"]])
                     + "\n"
                 )
                 mat_string += (
                     "$#"
                     + "".join(
-                        [
-                            self._formatter.field_str(i)
-                            for i in current_data_line["D3_TITLE"]
-                        ]
+                        [self._formatter.field_str(i) for i in current_data_line["D3_TITLE"]]
                     )[2:]
                     + "\n"
                 )
                 mat_string += (
-                    "".join(
-                        [
-                            self._formatter.field_float(i)
-                            for i in current_data_line["D3_DATA"]
-                        ]
-                    )
+                    "".join([self._formatter.field_float(i) for i in current_data_line["D3_DATA"]])
                     + "\n"
                 )
         else:
@@ -1366,9 +1219,7 @@ class _MatViscoelasticHillFoam:
                     mat_id, mat_name, all_mat_props, density=density
                 )
             else:
-                simplified_foam = _MatSimplifiedRubberFoam(
-                    self._model, self._card_format
-                )
+                simplified_foam = _MatSimplifiedRubberFoam(self._model, self._card_format)
                 mat_string += simplified_foam.write_simplified_rubber_foam(
                     mat_id, mat_name, all_mat_props, density=density
                 )
@@ -1422,10 +1273,7 @@ class _MatPiecewiseLinearPlasticity:
         mat_string = ""
         mat_string += "*MAT_PIECEWISE_LINEAR_PLASTICITY_TITLE\n"
         mat_string += f"{mat_name}\n"
-        mat_string += (
-            "$#"
-            + "".join([self._formatter.field_str(i) for i in self._header_title])[2:]
-        )
+        mat_string += "$#" + "".join([self._formatter.field_str(i) for i in self._header_title])[2:]
         mat_string += "\n"
         curve_obj = _DefineCurve(self._model, self._card_format)
         curve_id, curve_card, sigy = curve_obj.write_plastic_curve_card(
@@ -1443,10 +1291,7 @@ class _MatPiecewiseLinearPlasticity:
         mat_string += "\n"
         self._data_line["D1_DATA"][2] = curve_id
         mat_string += (
-            "$#"
-            + "".join(
-                [self._formatter.field_str(i) for i in self._data_line["D1_TITLE"]]
-            )[2:]
+            "$#" + "".join([self._formatter.field_str(i) for i in self._data_line["D1_TITLE"]])[2:]
         )
         mat_string += "\n"
         mat_string += "".join(
@@ -1460,29 +1305,19 @@ class _MatPiecewiseLinearPlasticity:
         mat_string += "\n"
         mat_string += (
             "$#"
-            + "".join(
-                [self._formatter.field_str(i) for i in self._data_line["D2_TITLE"]]
-            )[2:]
+            + "".join([self._formatter.field_str(i) for i in self._data_line["D2_TITLE"]])[2:]
             + "\n"
         )
         mat_string += (
-            "".join(
-                [self._formatter.field_float(i) for i in self._data_line["D2_DATA"]]
-            )
-            + "\n"
+            "".join([self._formatter.field_float(i) for i in self._data_line["D2_DATA"]]) + "\n"
         )
         mat_string += (
             "$#"
-            + "".join(
-                [self._formatter.field_str(i) for i in self._data_line["D3_TITLE"]]
-            )[2:]
+            + "".join([self._formatter.field_str(i) for i in self._data_line["D3_TITLE"]])[2:]
             + "\n"
         )
         mat_string += (
-            "".join(
-                [self._formatter.field_float(i) for i in self._data_line["D3_DATA"]]
-            )
-            + "\n"
+            "".join([self._formatter.field_float(i) for i in self._data_line["D3_DATA"]]) + "\n"
         )
         str_2d = ""
         if material_used_with_shell:
@@ -1554,10 +1389,7 @@ class _MatFabric:
         mat_string = ""
         mat_string += "*MAT_FABRIC_TITLE\n"
         mat_string += f"{mat_name}_FABRIC\n"
-        mat_string += (
-            "$#"
-            + "".join([self._formatter.field_str(i) for i in self._header_title])[2:]
-        )
+        mat_string += "$#" + "".join([self._formatter.field_str(i) for i in self._header_title])[2:]
         mat_string += "\n"
 
         header_data = self._header
@@ -1569,81 +1401,51 @@ class _MatFabric:
         mat_string += "\n"
         mat_string += (
             "$#"
-            + "".join(
-                [self._formatter.field_str(i) for i in self._data_line["D1_TITLE"]]
-            )[2:]
+            + "".join([self._formatter.field_str(i) for i in self._data_line["D1_TITLE"]])[2:]
             + "\n"
         )
         mat_string += (
-            "".join(
-                [self._formatter.field_str(str(i)) for i in self._data_line["D1_DATA"]]
-            )
-            + "\n"
+            "".join([self._formatter.field_str(str(i)) for i in self._data_line["D1_DATA"]]) + "\n"
         )
         mat_string += (
             "$#"
-            + "".join(
-                [self._formatter.field_str(i) for i in self._data_line["D2_TITLE"]]
-            )[2:]
+            + "".join([self._formatter.field_str(i) for i in self._data_line["D2_TITLE"]])[2:]
             + "\n"
         )
         mat_string += (
-            "".join(
-                [self._formatter.field_str(str(i)) for i in self._data_line["D2_DATA"]]
-            )
-            + "\n"
+            "".join([self._formatter.field_str(str(i)) for i in self._data_line["D2_DATA"]]) + "\n"
         )
         mat_string += (
             "$#"
-            + "".join(
-                [self._formatter.field_str(i) for i in self._data_line["D3_TITLE"]]
-            )[2:]
+            + "".join([self._formatter.field_str(i) for i in self._data_line["D3_TITLE"]])[2:]
             + "\n"
         )
         mat_string += (
-            "".join(
-                [self._formatter.field_str(str(i)) for i in self._data_line["D3_DATA"]]
-            )
-            + "\n"
+            "".join([self._formatter.field_str(str(i)) for i in self._data_line["D3_DATA"]]) + "\n"
         )
         mat_string += (
             "$#"
-            + "".join(
-                [self._formatter.field_str(i) for i in self._data_line["D4_TITLE"]]
-            )[2:]
+            + "".join([self._formatter.field_str(i) for i in self._data_line["D4_TITLE"]])[2:]
             + "\n"
         )
         mat_string += (
-            "".join(
-                [self._formatter.field_str(str(i)) for i in self._data_line["D4_DATA"]]
-            )
-            + "\n"
+            "".join([self._formatter.field_str(str(i)) for i in self._data_line["D4_DATA"]]) + "\n"
         )
         mat_string += (
             "$#"
-            + "".join(
-                [self._formatter.field_str(i) for i in self._data_line["D5_TITLE"]]
-            )[2:]
+            + "".join([self._formatter.field_str(i) for i in self._data_line["D5_TITLE"]])[2:]
             + "\n"
         )
         mat_string += (
-            "".join(
-                [self._formatter.field_str(str(i)) for i in self._data_line["D5_DATA"]]
-            )
-            + "\n"
+            "".join([self._formatter.field_str(str(i)) for i in self._data_line["D5_DATA"]]) + "\n"
         )
         mat_string += (
             "$#"
-            + "".join(
-                [self._formatter.field_str(i) for i in self._data_line["D6_TITLE"]]
-            )[2:]
+            + "".join([self._formatter.field_str(i) for i in self._data_line["D6_TITLE"]])[2:]
             + "\n"
         )
         mat_string += (
-            "".join(
-                [self._formatter.field_str(str(i)) for i in self._data_line["D6_DATA"]]
-            )
-            + "\n"
+            "".join([self._formatter.field_str(str(i)) for i in self._data_line["D6_DATA"]]) + "\n"
         )
 
         return mat_string
@@ -1713,9 +1515,7 @@ class _CohesiveMaterialMapper:
         elif degrade == "MAXIMUM" and softening == "LINEAR" and d_type == "ENERGY":
             if "Data" in dmg_evol_props and dmg_evol_props["Data"] is not None:
                 if "Fracture energy" in dmg_evol_props["Data"]:
-                    self._fracture_energy = float(
-                        dmg_evol_props["Data"]["Fracture energy"][0]
-                    )
+                    self._fracture_energy = float(dmg_evol_props["Data"]["Fracture energy"][0])
         else:
             self._logger.warning(
                 f"Warning: Parameter on Damage Evolution (MAT:{mat_name} ID: {mat_id}) "
@@ -1730,19 +1530,12 @@ class _CohesiveMaterialMapper:
             criterion = params["CRITERION"]
         if criterion == "DUCTILE":
             if "Data" in dmg_ini_props and dmg_ini_props["Data"] is not None:
-                if (
-                    "Equivalent fracture strain at damage initiation"
-                    in dmg_ini_props["Data"]
-                ):
+                if "Equivalent fracture strain at damage initiation" in dmg_ini_props["Data"]:
                     self._strain_at_dmg_ini = float(
-                        dmg_ini_props["Data"][
-                            "Equivalent fracture strain at damage initiation"
-                        ][0]
+                        dmg_ini_props["Data"]["Equivalent fracture strain at damage initiation"][0]
                     )
                 if "Stress triaxiality" in dmg_ini_props["Data"]:
-                    self._strs_tria = float(
-                        dmg_ini_props["Data"]["Stress triaxiality"][0]
-                    )
+                    self._strs_tria = float(dmg_ini_props["Data"]["Stress triaxiality"][0])
                 if "Strain rate" in dmg_ini_props["Data"]:
                     self._strn_rate = float(dmg_ini_props["Data"]["Strain rate"][0])
         elif criterion == "MAXE":
@@ -1835,9 +1628,7 @@ class _CohesiveMaterialMapper:
                     thickness,
                 )
             if elastic_type == "TRACTION":
-                mat_obj = _MatCohesiveMixedModeElastoplasticRate(
-                    self._model, self._card_format
-                )
+                mat_obj = _MatCohesiveMixedModeElastoplasticRate(self._model, self._card_format)
                 mat_obj._damage_length = self._damage_length
                 mat_obj._fracture_energy = self._fracture_energy
                 mat_obj._curve_id = self._curve_id
@@ -1946,10 +1737,7 @@ class _MatPlasticityWithDamage:
         mat_string = ""
         mat_string += "*MAT_PLASTICITY_WITH_DAMAGE_TITLE\n"
         mat_string += f"{mat_name}\n"
-        mat_string += (
-            "$#"
-            + "".join([self._formatter.field_str(i) for i in self._header_title])[2:]
-        )
+        mat_string += "$#" + "".join([self._formatter.field_str(i) for i in self._header_title])[2:]
         mat_string += "\n"
         curve_obj = _DefineCurve(self._model, self._card_format)
         curve_id = 0
@@ -1977,10 +1765,7 @@ class _MatPlasticityWithDamage:
         mat_string += "".join([self._formatter.field_float(i) for i in header_data[1:]])
         mat_string += "\n"
         mat_string += (
-            "$#"
-            + "".join(
-                [self._formatter.field_str(i) for i in self._data_line["D1_TITLE"]]
-            )[2:]
+            "$#" + "".join([self._formatter.field_str(i) for i in self._data_line["D1_TITLE"]])[2:]
         )
         mat_string += "\n"
         mat_string += self._formatter.field_float(self._data_line["D1_DATA"][0])
@@ -1992,26 +1777,16 @@ class _MatPlasticityWithDamage:
         )
         mat_string += "\n"
         mat_string += (
-            "$#"
-            + "".join(
-                [self._formatter.field_str(i) for i in self._data_line["D2_TITLE"]]
-            )[2:]
+            "$#" + "".join([self._formatter.field_str(i) for i in self._data_line["D2_TITLE"]])[2:]
         )
         mat_string += "\n"
-        mat_string += "".join(
-            [self._formatter.field_float(i) for i in self._data_line["D2_DATA"]]
-        )
+        mat_string += "".join([self._formatter.field_float(i) for i in self._data_line["D2_DATA"]])
         mat_string += "\n"
         mat_string += (
-            "$#"
-            + "".join(
-                [self._formatter.field_str(i) for i in self._data_line["D3_TITLE"]]
-            )[2:]
+            "$#" + "".join([self._formatter.field_str(i) for i in self._data_line["D3_TITLE"]])[2:]
         )
         mat_string += "\n"
-        mat_string += "".join(
-            [self._formatter.field_float(i) for i in self._data_line["D3_DATA"]]
-        )
+        mat_string += "".join([self._formatter.field_float(i) for i in self._data_line["D3_DATA"]])
         mat_string += "\n"
         mat_string += curve_card
         return mat_string
@@ -2089,10 +1864,7 @@ class _MatCohesiveMixedModeElastoplasticRate:
         curve_card_2 = ""
         mat_string += "*MAT_COHESIVE_MIXED_MODE_ELASTOPLASTIC_RATE_TITLE\n"
         mat_string += f"{mat_name}\n"
-        mat_string += (
-            "$#"
-            + "".join([self._formatter.field_str(i) for i in self._header_title])[2:]
-        )
+        mat_string += "$#" + "".join([self._formatter.field_str(i) for i in self._header_title])[2:]
         mat_string += "\n"
         curve_obj = _DefineCurve(self._model, self._card_format)
         gic = 0.0
@@ -2105,15 +1877,11 @@ class _MatCohesiveMixedModeElastoplasticRate:
         t = kn * self._en
         s = ks1 * self._es1
 
-        curve_id_1, curve_card_1 = (
-            curve_obj.create_damage_curve_for_cohesive_mixed_mode(
-                mat_id, "GIC " + mat_name, self._section_thickness, gic
-            )
+        curve_id_1, curve_card_1 = curve_obj.create_damage_curve_for_cohesive_mixed_mode(
+            mat_id, "GIC " + mat_name, self._section_thickness, gic
         )
-        curve_id_2, curve_card_2 = (
-            curve_obj.create_damage_curve_for_cohesive_mixed_mode(
-                mat_id, "GIIC " + mat_name, self._section_thickness, giic
-            )
+        curve_id_2, curve_card_2 = curve_obj.create_damage_curve_for_cohesive_mixed_mode(
+            mat_id, "GIIC " + mat_name, self._section_thickness, giic
         )
 
         header_data = self._header
@@ -2131,10 +1899,7 @@ class _MatCohesiveMixedModeElastoplasticRate:
         self._data_line["D1_DATA"][3] = t
         self._data_line["D1_DATA"][7] = curve_id_1
         mat_string += (
-            "$#"
-            + "".join(
-                [self._formatter.field_str(i) for i in self._data_line["D1_TITLE"]]
-            )[2:]
+            "$#" + "".join([self._formatter.field_str(i) for i in self._data_line["D1_TITLE"]])[2:]
         )
         mat_string += "\n"
         mat_string += "".join(
@@ -2146,10 +1911,7 @@ class _MatCohesiveMixedModeElastoplasticRate:
         self._data_line["D2_DATA"][3] = s
         self._data_line["D2_DATA"][7] = curve_id_2
         mat_string += (
-            "$#"
-            + "".join(
-                [self._formatter.field_str(i) for i in self._data_line["D2_TITLE"]]
-            )[2:]
+            "$#" + "".join([self._formatter.field_str(i) for i in self._data_line["D2_TITLE"]])[2:]
         )
         mat_string += "\n"
         mat_string += "".join(
@@ -2242,10 +2004,7 @@ class _MatCohesiveGeneral:
         curve_card_2 = ""
         mat_string += "*MAT_COHESIVE_GENERAL_TITLE\n"
         mat_string += f"{mat_name}\n"
-        mat_string += (
-            "$#"
-            + "".join([self._formatter.field_str(i) for i in self._header_title])[2:]
-        )
+        mat_string += "$#" + "".join([self._formatter.field_str(i) for i in self._header_title])[2:]
         mat_string += "\n"
         curve_obj = _DefineCurve(self._model, self._card_format)
         gic = 0.0
@@ -2254,15 +2013,13 @@ class _MatCohesiveGeneral:
         t = 0.0
         if elastic_type == "ISOTROPIC":
             if "PLASTIC" in all_mat_props:
-                curve_id_1, curve_card_1, gic, t = (
-                    curve_obj.create_damage_normalized_curve(
-                        mat_id,
-                        mat_name,
-                        young=kn,
-                        damage_len=self._damage_length,
-                        curve_data=all_mat_props["PLASTIC"],
-                        thickness=self._section_thickness,
-                    )
+                curve_id_1, curve_card_1, gic, t = curve_obj.create_damage_normalized_curve(
+                    mat_id,
+                    mat_name,
+                    young=kn,
+                    damage_len=self._damage_length,
+                    curve_data=all_mat_props["PLASTIC"],
+                    thickness=self._section_thickness,
                 )
             curve_id_2, curve_card_2 = "", ""
         elif elastic_type == "TRACTION":
@@ -2291,9 +2048,7 @@ class _MatCohesiveGeneral:
         header_data[6] = gic
         header_data[7] = giic
         mat_string += self._formatter.field_int(header_data[0])
-        mat_string += "".join(
-            [self._formatter.field_float(i) for i in header_data[1:5]]
-        )
+        mat_string += "".join([self._formatter.field_float(i) for i in header_data[1:5]])
         mat_string += self._formatter.field_int(header_data[5])
         mat_string += "".join([self._formatter.field_float(i) for i in header_data[6:]])
         mat_string += "\n"
@@ -2305,10 +2060,7 @@ class _MatCohesiveGeneral:
             self._data_line["D1_DATA"][2] = ks1 * self._es1
         self._data_line["D1_DATA"][4] = curve_id_2
         mat_string += (
-            "$#"
-            + "".join(
-                [self._formatter.field_str(i) for i in self._data_line["D1_TITLE"]]
-            )[2:]
+            "$#" + "".join([self._formatter.field_str(i) for i in self._data_line["D1_TITLE"]])[2:]
         )
         mat_string += "\n"
         mat_string += "".join(
@@ -2403,10 +2155,7 @@ class _MatAddDamageDiem:
                 f"is not processed. check the material definition"
             )
         if "Data" in dmg_ini_props and dmg_ini_props["Data"] is not None:
-            if (
-                "Equivalent fracture strain at damage initiation"
-                in dmg_ini_props["Data"]
-            ):
+            if "Equivalent fracture strain at damage initiation" in dmg_ini_props["Data"]:
                 self._strain_at_dmg_ini = dmg_ini_props["Data"][
                     "Equivalent fracture strain at damage initiation"
                 ][0]
@@ -2415,16 +2164,11 @@ class _MatAddDamageDiem:
             if "Strain rate" in dmg_ini_props["Data"]:
                 self._strn_rate = dmg_ini_props["Data"]["Strain rate"][0]
 
-    def get_all_commands(
-        self, mat_id, mat_name, all_mat_props, material_used_with_shell, max_id
-    ):
+    def get_all_commands(self, mat_id, mat_name, all_mat_props, material_used_with_shell, max_id):
         mat_string = ""
         mat_string += "*MAT_ADD_DAMAGE_DIEM_TITLE\n"
         mat_string += f"{mat_name}\n"
-        mat_string += (
-            "$#"
-            + "".join([self._formatter.field_str(i) for i in self._header_title])[2:]
-        )
+        mat_string += "$#" + "".join([self._formatter.field_str(i) for i in self._header_title])[2:]
         mat_string += "\n"
         curve_obj = _DefineCurve(self._model, self._card_format)
         curve_id, curve_card = curve_obj.write_damage_curve(
@@ -2433,17 +2177,12 @@ class _MatAddDamageDiem:
         header_data = self._header
         header_data[0] = mat_id
         mat_string += self._formatter.field_int(header_data[0])
-        mat_string += "".join(
-            [self._formatter.field_float(i) for i in header_data[1:4]]
-        )
+        mat_string += "".join([self._formatter.field_float(i) for i in header_data[1:4]])
         mat_string += self._formatter.field_int(header_data[4])
         mat_string += "\n"
         self._data_line["D1_DATA"][1] = curve_id
         mat_string += (
-            "$#"
-            + "".join(
-                [self._formatter.field_str(i) for i in self._data_line["D1_TITLE"]]
-            )[2:]
+            "$#" + "".join([self._formatter.field_str(i) for i in self._data_line["D1_TITLE"]])[2:]
         )
         mat_string += "\n"
         mat_string += self._formatter.field_float(self._data_line["D1_DATA"][0])
@@ -2455,23 +2194,14 @@ class _MatAddDamageDiem:
         self._data_line["D2_DATA"][2] = self._damage_length
         mat_string += (
             "$#"
-            + "".join(
-                [self._formatter.field_str(i) for i in self._data_line["D2_TITLE"]]
-            )[2:]
+            + "".join([self._formatter.field_str(i) for i in self._data_line["D2_TITLE"]])[2:]
             + "\n"
         )
         mat_string += (
-            "".join(
-                [self._formatter.field_float(i) for i in self._data_line["D2_DATA"]]
-            )
-            + "\n"
+            "".join([self._formatter.field_float(i) for i in self._data_line["D2_DATA"]]) + "\n"
         )
 
-        if (
-            self._damage_length == 0.0
-            and self._strain_at_dmg_ini == 0.0
-            and self._strs_tria == 0.0
-        ):
+        if self._damage_length == 0.0 and self._strain_at_dmg_ini == 0.0 and self._strs_tria == 0.0:
             return ""
         else:
             str_2d = ""
@@ -2590,10 +2320,7 @@ class _MatAddInelasticity:
         ):
             mat_string += "*MAT_ADD_INELASTICITY\n"
             mat_string += (
-                "$#"
-                + "".join([self._formatter.field_str(i) for i in self._header_title])[
-                    2:
-                ]
+                "$#" + "".join([self._formatter.field_str(i) for i in self._header_title])[2:]
             )
             mat_string += "\n"
             header_data = self._header
@@ -2624,24 +2351,17 @@ class _MatAddInelasticity:
                     data_dict[f"D{i}_P1"]
                     if len("{0}".format(data_dict[f"D{i}_P1"]))
                     <= self._format_map[self._card_format]
-                    else round(
-                        data_dict[f"D{i}_P1"], self._format_map[self._card_format] - 2
-                    )
+                    else round(data_dict[f"D{i}_P1"], self._format_map[self._card_format] - 2)
                 )
                 mat_string += (
                     "$#"
                     + "".join(
-                        [
-                            self._formatter.field_str(i)
-                            for i in current_data_line["D1_TITLE"]
-                        ]
+                        [self._formatter.field_str(i) for i in current_data_line["D1_TITLE"]]
                     )[2:]
                     + "\n"
                 )
                 mat_string += self._formatter.field_int(current_data_line["D1_DATA"][0])
-                mat_string += (
-                    self._formatter.field_exp(current_data_line["D1_DATA"][1]) + "\n"
-                )
+                mat_string += self._formatter.field_exp(current_data_line["D1_DATA"][1]) + "\n"
                 # mat_string += \
                 # "".join(
                 # [self._formatter.field_float(i) for i in current_data_line["D1_DATA"][1:]]
@@ -2649,10 +2369,7 @@ class _MatAddInelasticity:
                 mat_string += (
                     "$#"
                     + "".join(
-                        [
-                            self._formatter.field_str(i)
-                            for i in current_data_line["D2_TITLE"]
-                        ]
+                        [self._formatter.field_str(i) for i in current_data_line["D2_TITLE"]]
                     )[2:]
                     + "\n"
                 )
@@ -2661,28 +2378,18 @@ class _MatAddInelasticity:
                 # [self._formatter.field_float(i) for i in current_data_line["D2_DATA"]]
                 # ) + "\n"
                 mat_string += self._formatter.field_int(current_data_line["D2_DATA"][0])
-                mat_string += (
-                    self._formatter.field_int(current_data_line["D2_DATA"][1]) + "\n"
-                )
+                mat_string += self._formatter.field_int(current_data_line["D2_DATA"][1]) + "\n"
                 mat_string += (
                     "$#"
                     + "".join(
-                        [
-                            self._formatter.field_str(i)
-                            for i in current_data_line["D3_TITLE"]
-                        ]
+                        [self._formatter.field_str(i) for i in current_data_line["D3_TITLE"]]
                     )[2:]
                     + "\n"
                 )
-                mat_string += self._formatter.field_float(
-                    current_data_line["D3_DATA"][0]
-                )
+                mat_string += self._formatter.field_float(current_data_line["D3_DATA"][0])
                 mat_string += (
                     "".join(
-                        [
-                            self._formatter.field_float(i)
-                            for i in current_data_line["D3_DATA"][1:]
-                        ]
+                        [self._formatter.field_float(i) for i in current_data_line["D3_DATA"][1:]]
                     )
                     + "\n"
                 )
@@ -2773,9 +2480,7 @@ class MaterialProcessor:
         # self._logger.info(self._material_assignedTo_zones)
         # for mat_name in self._material_assignedTo_zones:
         for mat_name in self._raw_materials_data:
-            dyna_mat_card, dyna_set_part, dyna_damping_card = self._get_mat_comands(
-                mat_name
-            )
+            dyna_mat_card, dyna_set_part, dyna_damping_card = self._get_mat_comands(mat_name)
             # self._logger.info("start")
             # self._logger.info(dyna_mat_card)
             # self._logger.info(dyna_set_part)
@@ -2812,9 +2517,7 @@ class MaterialProcessor:
             self._map_zone_type_with_material()
         if mat_name not in self._material_assignedTo_zones:
             self._material_assignedTo_zones[mat_name] = []
-        dyna_mat_card, dyna_set_part, dyna_damping_card = self._get_mat_comands(
-            mat_name
-        )
+        dyna_mat_card, dyna_set_part, dyna_damping_card = self._get_mat_comands(mat_name)
         mat_data = self._raw_materials_data[mat_name]
         # self._logger.info(mat_data)
         dyna_text_data = "".join([dyna_mat_card, dyna_set_part, dyna_damping_card])
@@ -2849,12 +2552,8 @@ class MaterialProcessor:
                     self._material_assignedTo_zones[mat_name] = []
                 mat_data = self._raw_materials_data[mat_name]
                 # self._logger.info(mat_data)
-                dyna_mat_card, dyna_set_part, dyna_damping_card = self._get_mat_comands(
-                    mat_name
-                )
-                dyna_text_data = "".join(
-                    [dyna_mat_card, dyna_set_part, dyna_damping_card]
-                )
+                dyna_mat_card, dyna_set_part, dyna_damping_card = self._get_mat_comands(mat_name)
+                dyna_text_data = "".join([dyna_mat_card, dyna_set_part, dyna_damping_card])
                 break
         return dyna_text_data
 
@@ -2901,10 +2600,7 @@ class MaterialProcessor:
             if self._material_assignedTo_zones[mat_name]:
                 for zone_id in self._material_assignedTo_zones[mat_name]:
                     zone_name, zone_details = self._get_zone_with_id(zone_id)
-                    if (
-                        zone_details
-                        and zone_details["Type"] in zone_types_for_2d_plasticity
-                    ):
+                    if zone_details and zone_details["Type"] in zone_types_for_2d_plasticity:
                         used_with_shell = True
                         break
 
@@ -2920,10 +2616,7 @@ class MaterialProcessor:
             if self._material_assignedTo_zones[mat_name]:
                 for zone_id in self._material_assignedTo_zones[mat_name]:
                     _zone_name, zone_details = self._get_zone_with_id(zone_id)
-                    if (
-                        zone_details
-                        and zone_details["Type"] in zone_types_for_2d_plasticity
-                    ):
+                    if zone_details and zone_details["Type"] in zone_types_for_2d_plasticity:
                         used_with_shell = True
                         break
 
@@ -2973,25 +2666,19 @@ class MaterialProcessor:
                 # self._logger.info(zone)
                 # self._logger.info(zone_details)
                 if "Material" not in zone_details:
-                    self._logger.warning(
-                        f"Warning: Material is not specified for zone {zone}"
-                    )
+                    self._logger.warning(f"Warning: Material is not specified for zone {zone}")
                     continue
                 if zone_details["Material"] in self._material_assignedTo_zones:
                     try:
                         zoneId = zone_details["id"]
-                        self._material_assignedTo_zones[
-                            zone_details["Material"]
-                        ].append(zoneId)
+                        self._material_assignedTo_zones[zone_details["Material"]].append(zoneId)
                     except:
                         self._logger.warning(f"Zone {zone} does not have id for it ")
                         pass
                 else:
                     try:
                         zoneId = zone_details["id"]
-                        self._material_assignedTo_zones[zone_details["Material"]] = [
-                            zoneId
-                        ]
+                        self._material_assignedTo_zones[zone_details["Material"]] = [zoneId]
                     except:
                         self._material_assignedTo_zones[zone_details["Material"]] = []
                         self._logger.warning(f"Zone {zone} does not have id for it ")
@@ -3011,27 +2698,19 @@ class MaterialProcessor:
                         if zone_details["Material"] in self._material_assignedTo_zones:
                             try:
                                 zoneId = zone_details["id"]
-                                self._material_assignedTo_zones[
-                                    zone_details["Material"]
-                                ].append(zoneId)
-                            except:
-                                self._logger.warning(
-                                    f"Zone {zone} does not have id for it "
+                                self._material_assignedTo_zones[zone_details["Material"]].append(
+                                    zoneId
                                 )
+                            except:
+                                self._logger.warning(f"Zone {zone} does not have id for it ")
                                 pass
                         else:
                             try:
                                 zoneId = zone_details["id"]
-                                self._material_assignedTo_zones[
-                                    zone_details["Material"]
-                                ] = [zoneId]
+                                self._material_assignedTo_zones[zone_details["Material"]] = [zoneId]
                             except:
-                                self._material_assignedTo_zones[
-                                    zone_details["Material"]
-                                ] = []
-                                self._logger.warning(
-                                    f"Zone {zone} does not have id for it "
-                                )
+                                self._material_assignedTo_zones[zone_details["Material"]] = []
+                                self._logger.warning(f"Zone {zone} does not have id for it ")
 
     def _get_mat_comands(self, mat_name):
         mat_data = self._raw_materials_data[mat_name]
@@ -3057,15 +2736,11 @@ class MaterialProcessor:
         visco = _MatAddInelasticity(self._model, card_format=self._card_format)
         write_low_density_foam = True
         hyperfoam = _MatViscoelasticHillFoam(self._model, card_format=self._card_format)
-        linear_plastic = _MatPiecewiseLinearPlasticity(
-            self._model, card_format=self._card_format
-        )
+        linear_plastic = _MatPiecewiseLinearPlasticity(self._model, card_format=self._card_format)
         damage = _MatAddDamageDiem(self._model, card_format=self._card_format)
         britle_glass = _MatGlass(self._model, card_format=self._card_format)
         mat_cohesive_general = False
-        damage_cohesive = _CohesiveMaterialMapper(
-            self._model, card_format=self._card_format
-        )
+        damage_cohesive = _CohesiveMaterialMapper(self._model, card_format=self._card_format)
         damage_in_mat = False
         is_cohesive, zone_details, zone_name = self._material_is_cohesive(mat_name)
         thickness = 0.1
@@ -3100,10 +2775,7 @@ class MaterialProcessor:
                         dyna_mat_card += mapdl_str
                 else:
                     function = self._process_elastic_modulus
-                    if (
-                        "PLASTIC" not in mat_data
-                        and "DAMAGE INITIATION" not in mat_data
-                    ):
+                    if "PLASTIC" not in mat_data and "DAMAGE INITIATION" not in mat_data:
                         mapdl_str, elastic_type = function(
                             mat_data, mat_name, self._mat_id, density
                         )
@@ -3115,9 +2787,7 @@ class MaterialProcessor:
                     )
                 if is_cohesive is False:
                     max_id = self._get_max_id()
-                    material_used_with_shell = self._is_material_used_with_shell(
-                        mat_name
-                    )
+                    material_used_with_shell = self._is_material_used_with_shell(mat_name)
                     dyna_mat_card += linear_plastic.write_piecewise_linear_plasticity(
                         mat_data,
                         mat_name,
@@ -3132,19 +2802,17 @@ class MaterialProcessor:
                     )
                 else:
                     if "DAMAGE INITIATION" not in mat_data:
-                        dyna_mat_card += (
-                            linear_plastic.write_piecewise_linear_plasticity(
-                                mat_data,
-                                mat_name,
-                                self._mat_id,
-                                e,
-                                pr,
-                                sigy,
-                                etan,
-                                density,
-                                False,
-                                max_id=0,
-                            )
+                        dyna_mat_card += linear_plastic.write_piecewise_linear_plasticity(
+                            mat_data,
+                            mat_name,
+                            self._mat_id,
+                            e,
+                            pr,
+                            sigy,
+                            etan,
+                            density,
+                            False,
+                            max_id=0,
                         )
             elif prop == "DAMAGE EVOLUTION":
                 if is_cohesive:
@@ -3159,16 +2827,12 @@ class MaterialProcessor:
                     damage.damage_initiation(self._mat_id, mat_name, mat_data)
                 damage_in_mat = True
             elif prop == "VISCOELASTIC":
-                self._wt_factor = visco.get_weight_factor(
-                    self._mat_id, mat_name, mat_data
-                )
+                self._wt_factor = visco.get_weight_factor(self._mat_id, mat_name, mat_data)
                 # self._logger.info(f"self._wt_factor 1 =  {self._wt_factor}")
                 dyna_mat_card += visco.visco_elasticity(self._mat_id, mat_data)
             elif prop == "HYPERELASTIC":
                 if "VISCOELASTIC" in mat_data:
-                    self._wt_factor = visco.get_weight_factor(
-                        self._mat_id, mat_name, mat_data
-                    )
+                    self._wt_factor = visco.get_weight_factor(self._mat_id, mat_name, mat_data)
                 dyna_mat_card += hyperelast.define_hyper_elastic(
                     self._mat_id,
                     mat_name,
@@ -3178,9 +2842,7 @@ class MaterialProcessor:
                 )
             elif prop == "HYPERFOAM":
                 if "VISCOELASTIC" in mat_data:
-                    self._wt_factor = visco.get_weight_factor(
-                        self._mat_id, mat_name, mat_data
-                    )
+                    self._wt_factor = visco.get_weight_factor(self._mat_id, mat_name, mat_data)
                 # self._logger.info(f"self._wt_factor 2 =  {self._wt_factor}")
                 dyna_mat_card += hyperfoam.define_visco_hill_foam(
                     self._mat_id,
@@ -3268,10 +2930,7 @@ class MaterialProcessor:
         damping_set += "*SET_PART_TITLE\n"
         damping_set += f"DAMP_SET_PART_FOR_MATERIAL_{mat_name}\n"
         damping_set += (
-            self._formatter.field_str(
-                "9" + "0" * (8 - len(str(mat_id)) - 1) + str(mat_id)
-            )
-            + "\n"
+            self._formatter.field_str("9" + "0" * (8 - len(str(mat_id)) - 1) + str(mat_id)) + "\n"
         )
         for i, val in enumerate(self._material_assignedTo_zones[mat_name]):
             damping_set += self._formatter.field_int(val)
@@ -3505,9 +3164,7 @@ class DatabaseProcessor:
         "_logger",
     )
 
-    def __init__(
-        self, model: prime.Model, steps_data: dict, card_format: str = "SHORT"
-    ):
+    def __init__(self, model: prime.Model, steps_data: dict, card_format: str = "SHORT"):
         """Initialize class variables and the superclass."""
         self._steps_data = steps_data
         self._time = 0.0
@@ -3566,9 +3223,7 @@ class DatabaseProcessor:
             database_keyword += "*" + str(database_maps[i]) + "\n"
             database_keyword += (
                 "$#"
-                + "".join([self._formatter.field_str(i) for i in self._header_title])[
-                    2:
-                ]
+                + "".join([self._formatter.field_str(i) for i in self._header_title])[2:]
                 + "\n"
             )
             header_data = self._header
@@ -3583,9 +3238,7 @@ class DatabaseProcessor:
             database_keyword += "\n"
         database_keyword += "*DATABASE_FORMAT\n"
         database_keyword += (
-            "$#"
-            + "".join([self._formatter.field_str(i) for i in self._header_title5])[2:]
-            + "\n"
+            "$#" + "".join([self._formatter.field_str(i) for i in self._header_title5])[2:] + "\n"
         )
         database_keyword += self._formatter.field_int(self._header5[0])
         database_keyword += self._formatter.field_int(self._header5[1])

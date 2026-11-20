@@ -22,13 +22,13 @@
 
 """Module for general utilities of the project."""
 
+from contextlib import contextmanager
 import logging
 import os
 import shutil
 import subprocess
-import uuid
-from contextlib import contextmanager
 from typing import Optional, Sequence, Union
+import uuid
 
 import ansys.meshing.prime.internals.config as config
 import ansys.meshing.prime.internals.defaults as defaults
@@ -42,9 +42,7 @@ FileName = Union[str, os.PathLike]
 FileNameList = Sequence[FileName]
 
 
-def _make_stage_dirs(
-    local_root: Optional[str] = None, container_root: Optional[str] = None
-):
+def _make_stage_dirs(local_root: Optional[str] = None, container_root: Optional[str] = None):
     """Create a staging directory shared with the container for one file transfer.
 
     Examples are staged by base name, so parallel callers reading different copies
@@ -148,9 +146,7 @@ def get_child_processes(process):
     for pid in out.split("\n")[:1]:
         if pid.strip() == "":
             break
-        ps_cmd = subprocess.Popen(
-            [ps_path, "-o", "cmd=", str(int(pid))], stdout=subprocess.PIPE
-        )  # nosec B603 - args are a resolved executable path and an int-validated pid; shell=False.
+        ps_cmd = subprocess.Popen([ps_path, "-o", "cmd=", str(int(pid))], stdout=subprocess.PIPE)  # nosec B603 - args are a resolved executable path and an int-validated pid; shell=False.
         ps_out = ps_cmd.stdout.read().decode("utf-8")
         ps_cmd.wait()
         ps_parts = ps_out.split()
@@ -361,7 +357,9 @@ def launch_prime_github_container(
             print(f"{'=' * 80}")
             print(logs)
             print(f"{'=' * 80}\n")
-            error_msg = f"Container '{name}' failed to start or exited immediately. Check logs above."
+            error_msg = (
+                f"Container '{name}' failed to start or exited immediately. Check logs above."
+            )
             raise RuntimeError(error_msg)
 
         # Get container logs
@@ -421,9 +419,7 @@ def file_read_context(model, file_name: FileName):
     """
     file_name = to_path_str(file_name)
     if config.file_existence_check_enabled() and not os.path.exists(file_name):
-        raise FileNotFoundError(
-            f'Given file name "{file_name}" is not found on local disk'
-        )
+        raise FileNotFoundError(f'Given file name "{file_name}" is not found on local disk')
     if config.using_container():
         base_file_name = os.path.basename(file_name)
         stage_dir, container_dir = _make_stage_dirs()

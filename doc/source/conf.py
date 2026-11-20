@@ -1,10 +1,10 @@
 """Sphinx documentation configuration file."""
 
+from datetime import datetime
 import glob
 import os
 import subprocess
 import sys
-from datetime import datetime
 
 # Set PRIME_MODE if not already set (to avoid warnings during doc build)
 if "PRIME_MODE" not in os.environ:
@@ -12,14 +12,14 @@ if "PRIME_MODE" not in os.environ:
 
 os.environ["SPHINX_GALLERY_CONF_FORCE_FRESH"] = "0"
 
-import ansys.tools.visualization_interface as viz_interface
-import pyvista
 from ansys_sphinx_theme import ansys_favicon, get_version_match, pyansys_logo_black
 from joblib import Parallel, delayed
+import pyvista
 from pyvista.plotting.utilities.sphinx_gallery import DynamicScraper
 from sphinx_gallery.sorting import FileNameSortKey
 
 from ansys.meshing.prime import __version__
+import ansys.tools.visualization_interface as viz_interface
 
 viz_interface.DOCUMENTATION_BUILD = True
 
@@ -184,9 +184,7 @@ sphinx_gallery_conf = {
     "backreferences_dir": "api/_gallery_backreferences",
     # Modules for which function level galleries are created.  In
     "doc_module": ("ansys.meshing.prime"),
-    "exclude_implicit_doc": {
-        "ansys\\.meshing\\.prime\\._.*"
-    },  # ignore private submodules
+    "exclude_implicit_doc": {"ansys\\.meshing\\.prime\\._.*"},  # ignore private submodules
     "image_scrapers": (DynamicScraper(), "matplotlib"),
     "thumbnail_size": (350, 350),
     "parallel": True,
@@ -229,9 +227,7 @@ def run_all_examples_in_parallel():
         recursive=True,
     )
     # Exclude any scripts in 'examples/other'
-    example_scripts = [
-        f for f in example_scripts if "examples/other" not in f.replace("\\", "/")
-    ]
+    example_scripts = [f for f in example_scripts if "examples/other" not in f.replace("\\", "/")]
     # Exclude flycheck files if needed
     example_scripts = [f for f in example_scripts if "flycheck" not in f]
     Parallel(n_jobs=-1)(delayed(run_example)(script) for script in example_scripts)

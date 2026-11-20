@@ -55,14 +55,12 @@ class ToolbarButton:
             Button that was added to the scene.
         """
         self._button_position = position
-        return (
-            self.prime_plotter._backend.pv_interface.scene.add_checkbox_button_widget(
-                self.callback,
-                position=position,
-                size=BUTTON_SIZE,
-                border_size=BUTTON_BORDER,
-                **options,
-            )
+        return self.prime_plotter._backend.pv_interface.scene.add_checkbox_button_widget(
+            self.callback,
+            position=position,
+            size=BUTTON_SIZE,
+            border_size=BUTTON_BORDER,
+            **options,
         )
 
     def contains(self, x: int, y: int) -> bool:

@@ -25,10 +25,10 @@
 import os
 from typing import TYPE_CHECKING
 
-from ansys.tools.visualization_interface.backends.pyvista.widgets import PlotterWidget
 from vtk import vtkPNGReader
 
 from ansys.meshing.prime.graphics.widgets.toolbar import ToolbarButton
+from ansys.tools.visualization_interface.backends.pyvista.widgets import PlotterWidget
 
 if TYPE_CHECKING:
     from ansys.meshing.prime.graphics.plotter import PrimePlotter
@@ -87,9 +87,7 @@ class ToggleEdges(ToolbarButton, PlotterWidget):
                 return "Showing topology.\nClick to show the CAD faceting."
             return "Showing the CAD faceting.\nClick to show topology."
         if showing_mesh:
-            return (
-                "Showing mesh edges.\nClick to show the CAD faceting of unmeshed faces."
-            )
+            return "Showing mesh edges.\nClick to show the CAD faceting of unmeshed faces."
         return "Showing the CAD faceting of unmeshed faces.\nClick to show mesh edges."
 
     def update(self) -> None:

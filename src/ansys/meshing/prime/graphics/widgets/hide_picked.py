@@ -20,16 +20,16 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
-"""This module contains the HidePicked class."""
+"""Provide the HidePicked class."""
 
 import os
 from typing import TYPE_CHECKING, List
 
-from ansys.tools.visualization_interface.backends.pyvista.widgets import PlotterWidget
 from vtk import vtkPNGReader
 
 from ansys.meshing.prime.core.mesh import DisplayEntityKey
 from ansys.meshing.prime.graphics.widgets.toolbar import ToolbarButton
+from ansys.tools.visualization_interface.backends.pyvista.widgets import PlotterWidget
 
 if TYPE_CHECKING:
     from ansys.meshing.prime.graphics.plotter import PrimePlotter
@@ -106,9 +106,7 @@ class HidePicked(ToolbarButton, PlotterWidget):
             Description of the current and next visibility state.
         """
         if self._hidden_entities:
-            return (
-                f"{len(self._hidden_entities)} entities hidden.\nClick to restore them."
-            )
+            return f"{len(self._hidden_entities)} entities hidden.\nClick to restore them."
         return "Selected entities are visible.\nClick to hide the selection."
 
     def update(self) -> None:

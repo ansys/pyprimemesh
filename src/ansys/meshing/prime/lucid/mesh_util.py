@@ -150,20 +150,12 @@ class Mesh:
         """
         file_name = to_path_str(file_name)
         filename, fileext = os.path.splitext(file_name)
-        if (
-            fileext == ".msh"
-            or file_name.endswith(".msh.gz")
-            or file_name.endswith(".msh.h5")
-        ):
+        if fileext == ".msh" or file_name.endswith(".msh.gz") or file_name.endswith(".msh.h5"):
             prime.FileIO(self._model).import_fluent_meshing_meshes(
                 [file_name],
                 prime.ImportFluentMeshingMeshParams(self._model, append=append),
             )
-        elif (
-            fileext == ".cas"
-            or file_name.endswith(".cas.gz")
-            or file_name.endswith(".cas.h5")
-        ):
+        elif fileext == ".cas" or file_name.endswith(".cas.gz") or file_name.endswith(".cas.h5"):
             prime.FileIO(self._model).import_fluent_case(
                 file_name, prime.ImportFluentCaseParams(self._model, append=append)
             )
@@ -233,9 +225,7 @@ class Mesh:
                 file_name, prime.ExportSTLParams(self._model, part_ids)
             )
         else:
-            prime.FileIO(self._model).write_pmdat(
-                file_name, prime.FileWriteParams(self._model)
-            )
+            prime.FileIO(self._model).write_pmdat(file_name, prime.FileWriteParams(self._model))
 
     def create_zones_from_labels(
         self,
@@ -302,24 +292,16 @@ class Mesh:
                         )
                         if len(in_topo_faces) > 0:
                             if face_zone == None:
-                                face_zone = self._model.create_zone(
-                                    label, prime.ZoneType.FACE
-                                )
-                            part.add_topo_entities_to_zone(
-                                face_zone.zone_id, in_topo_faces
-                            )
+                                face_zone = self._model.create_zone(label, prime.ZoneType.FACE)
+                            part.add_topo_entities_to_zone(face_zone.zone_id, in_topo_faces)
                     else:
                         in_face_zonelets = part.get_face_zonelets_of_label_name_pattern(
                             label, prime.NamePatternParams(model=self._model)
                         )
                         if len(in_face_zonelets) > 0:
                             if face_zone == None:
-                                face_zone = self._model.create_zone(
-                                    label, prime.ZoneType.FACE
-                                )
-                            part.add_zonelets_to_zone(
-                                face_zone.zone_id, in_face_zonelets
-                            )
+                                face_zone = self._model.create_zone(label, prime.ZoneType.FACE)
+                            part.add_zonelets_to_zone(face_zone.zone_id, in_face_zonelets)
         else:
             labels = []
             for part in self._model.parts:
@@ -378,16 +360,12 @@ class Mesh:
                         if face in all_topo and face in part.get_topo_faces():
                             part.add_topo_entities_to_zone(
                                 topo_entities=[face],
-                                zone_id=self._model.get_zone_by_name(
-                                    zone_name=zone_name
-                                ),
+                                zone_id=self._model.get_zone_by_name(zone_name=zone_name),
                             )
                         elif face not in all_topo and face in part.get_face_zonelets():
                             part.add_zonelets_to_zone(
                                 zonelets=[face],
-                                zone_id=self._model.get_zone_by_name(
-                                    zone_name=zone_name
-                                ),
+                                zone_id=self._model.get_zone_by_name(zone_name=zone_name),
                             )
 
     def merge_parts(self, parts_expression: str = "*", new_name: str = "merged_part"):
@@ -409,9 +387,7 @@ class Mesh:
 
         self._model.merge_parts(
             part_ids=part_ids,
-            params=prime.MergePartsParams(
-                self._model, merged_part_suggested_name=new_name
-            ),
+            params=prime.MergePartsParams(self._model, merged_part_suggested_name=new_name),
         )
 
     def __surface_mesh_on_active_sf(self, generate_quads: bool, scope: SurfaceScope):
@@ -425,9 +401,7 @@ class Mesh:
                 generate_quads=generate_quads,
             )
             if len(topofaces) > 0:
-                surfer.mesh_topo_faces(
-                    part_id=part_id, topo_faces=topofaces, params=params
-                )
+                surfer.mesh_topo_faces(part_id=part_id, topo_faces=topofaces, params=params)
             else:
                 tf = scope.get_face_zonelets(self._model, part_id)
                 if len(tf) > 0:
@@ -442,9 +416,7 @@ class Mesh:
         scope: SurfaceScope,
     ):
         self._model.set_global_sizing_params(
-            prime.GlobalSizingParams(
-                model=self._model, min=min_size, max=max_size, growth_rate=1.2
-            )
+            prime.GlobalSizingParams(model=self._model, min=min_size, max=max_size, growth_rate=1.2)
         )
         surfer = prime.Surfer(self._model)
         params = prime.SurferParams(
@@ -479,9 +451,7 @@ class Mesh:
                         model=self._model, enable_multi_threading=False
                     ),
                 )
-                surfer.mesh_topo_faces(
-                    part_id=part.id, topo_faces=topofaces, params=params
-                )
+                surfer.mesh_topo_faces(part_id=part.id, topo_faces=topofaces, params=params)
                 self._model.delete_volumetric_size_fields([res.size_field_id])
             else:
                 tf = scope.get_face_zonelets(self._model, part_id)
@@ -526,9 +496,7 @@ class Mesh:
                 self._model, constant_size=min_size, generate_quads=generate_quads
             )
             if len(topofaces) > 0:
-                surfer.mesh_topo_faces(
-                    part_id=part_id, topo_faces=topofaces, params=params
-                )
+                surfer.mesh_topo_faces(part_id=part_id, topo_faces=topofaces, params=params)
             else:
                 tf = scope.get_face_zonelets(self._model, part_id)
                 te = []
@@ -623,9 +591,7 @@ class Mesh:
         if global_sizes.min > size or global_sizes.min <= 0:
             global_sizes.min = size
         self._model.set_global_sizing_params(global_sizes)
-        sizecontrol = self._model.control_data.create_size_control(
-            prime.SizingType.SOFT
-        )
+        sizecontrol = self._model.control_data.create_size_control(prime.SizingType.SOFT)
         sizecontrol.set_soft_sizing_params(
             prime.SoftSizingParams(
                 model=self._model, max=size, growth_rate=global_sizes.growth_rate
@@ -665,9 +631,7 @@ class Mesh:
         if global_sizes.min > min or global_sizes.min <= 0:
             global_sizes.min = min
         self._model.set_global_sizing_params(global_sizes)
-        sizecontrol = self._model.control_data.create_size_control(
-            prime.SizingType.CURVATURE
-        )
+        sizecontrol = self._model.control_data.create_size_control(prime.SizingType.CURVATURE)
         sizecontrol.set_curvature_sizing_params(
             prime.CurvatureSizingParams(
                 model=self._model,
@@ -768,9 +732,7 @@ class Mesh:
                         params=prime.JoinParams(self._model, tolerance=tolerance),
                     )
 
-    def compute_volumes(
-        self, part_expression: str = "*", create_zones_per_volume: bool = True
-    ):
+    def compute_volumes(self, part_expression: str = "*", create_zones_per_volume: bool = True):
         """Compute volumes in the parts defined by the part expression.
 
         Parameters
@@ -786,9 +748,7 @@ class Mesh:
         create_zones_type = prime.CreateVolumeZonesType.NONE
         if create_zones_per_volume:
             create_zones_type = prime.CreateVolumeZonesType.PERVOLUME
-        params = prime.ComputeVolumesParams(
-            model=self._model, create_zones_type=create_zones_type
-        )
+        params = prime.ComputeVolumesParams(model=self._model, create_zones_type=create_zones_type)
         for part in self._model.parts:
             if check_name_pattern(part_expression, part.name):
                 if len(part.get_topo_faces()) > 0:
@@ -863,15 +823,11 @@ class Mesh:
         """
         parts = cap_scope.get_parts(self._model)
         for part in parts:
-            caps = self.__create_cap(
-                part, cap_scope.get_face_zonelets(self._model, part)
-            )
+            caps = self.__create_cap(part, cap_scope.get_face_zonelets(self._model, part))
             if len(caps) > 0:
                 self.__compute_flow_volume(part, caps, flow_volume_zone_name)
 
-    def __create_volume_controls(
-        self, part: prime.Part, scope: VolumeScope
-    ) -> Iterable[int]:
+    def __create_volume_controls(self, part: prime.Part, scope: VolumeScope) -> Iterable[int]:
         volume_control_ids = []
         if scope._evaluation_type == prime.ScopeEvaluationType.ZONES:
             volume_zones_all = part.get_volume_zones()
@@ -882,12 +838,8 @@ class Mesh:
                 ):
                     volume_zones_to_mesh.append(volume_zone)
 
-            volume_zones_to_avoid = [
-                v for v in volume_zones_all if v not in volume_zones_to_mesh
-            ]
-            scope_str = ",".join(
-                [self._model.get_zone_name(v) for v in volume_zones_to_avoid]
-            )
+            volume_zones_to_avoid = [v for v in volume_zones_all if v not in volume_zones_to_mesh]
+            scope_str = ",".join([self._model.get_zone_name(v) for v in volume_zones_to_avoid])
 
             if len(scope_str) > 0:
                 volume_control_param_dead = prime.VolumeControlParams(
@@ -902,9 +854,7 @@ class Mesh:
                     evaluation_type=prime.ScopeEvaluationType.ZONES,
                 )
                 volume_control_dead = self._model.control_data.create_volume_control()
-                volume_control_dead.set_params(
-                    volume_control_params=volume_control_param_dead
-                )
+                volume_control_dead.set_params(volume_control_params=volume_control_param_dead)
                 volume_control_dead.set_scope(scope=volume_control_scope_dead)
                 volume_control_ids.append(volume_control_dead.id)
 
@@ -920,9 +870,7 @@ class Mesh:
                 evaluation_type=prime.ScopeEvaluationType.ZONES,
             )
             volume_control_fluid = self._model.control_data.create_volume_control()
-            volume_control_fluid.set_params(
-                volume_control_params=volume_control_param_fluid
-            )
+            volume_control_fluid.set_params(volume_control_params=volume_control_param_fluid)
             volume_control_fluid.set_scope(scope=volume_control_scope_fluid)
             volume_control_ids.append(volume_control_fluid.id)
 
@@ -1145,9 +1093,7 @@ class Mesh:
         """Check if the size field type is geodesic."""
         geodesic = True
         geodesic_types = ["Curvature", "Soft"]
-        self._logger.info(
-            "Size controls: " + str([control.name for control in controls])
-        )
+        self._logger.info("Size controls: " + str([control.name for control in controls]))
         for control in controls:
             result = control.get_summary(prime.SizeControlSummaryParams(self._model))
             message = str(result.message)
@@ -1164,14 +1110,10 @@ class Mesh:
         self, size_controls: List[prime.SizeControl], field: prime.SizeField
     ) -> int:
         """Compute size field using the helper method."""
-        self._model.delete_volumetric_size_fields(
-            self._model.get_volumetric_size_fields()
-        )
+        self._model.delete_volumetric_size_fields(self._model.get_volumetric_size_fields())
         result = field.compute_volumetric(
             [size_control.id for size_control in size_controls],
-            prime.VolumetricSizeFieldComputeParams(
-                model=self._model, enable_multi_threading=False
-            ),
+            prime.VolumetricSizeFieldComputeParams(model=self._model, enable_multi_threading=False),
         )
         return result.size_field_id
 
@@ -1214,9 +1156,7 @@ class Mesh:
         self._logger.info(
             "Contact prevention enabled for:"
             + str([part.name for part in self._model.parts])
-            + str(
-                [part.get_labels() for part in self._model.parts if part.get_labels()]
-            )
+            + str([part.get_labels() for part in self._model.parts if part.get_labels()])
         )
 
         if all_parts_labels > 1:
@@ -1236,9 +1176,7 @@ class Mesh:
             geo_prox_size_control.set_scope(scope)
             geodesic_global_size_controls.append(geo_prox_size_control)
             for part in self._model.parts:
-                source = prime.ScopeDefinition(
-                    model=self._model, part_expression=part.name
-                )
+                source = prime.ScopeDefinition(model=self._model, part_expression=part.name)
                 contact_prevention_params.append(
                     prime.ContactPreventionParams(
                         model=self._model,
@@ -1251,9 +1189,7 @@ class Mesh:
                         label_name_pattern=label,
                         name_pattern_params=prime.NamePatternParams(self._model),
                     ):
-                        source = prime.ScopeDefinition(
-                            model=self._model, label_expression=label
-                        )
+                        source = prime.ScopeDefinition(model=self._model, label_expression=label)
                         contact_prevention_params.append(
                             prime.ContactPreventionParams(
                                 model=self._model,
@@ -1280,9 +1216,7 @@ class Mesh:
         features = prime.FeatureExtraction(self._model)
         extracted_features = dict()
         if extract_features:
-            face_zonelets_prime_array = self._model.control_data.get_part_zonelets(
-                scope=scope
-            )
+            face_zonelets_prime_array = self._model.control_data.get_part_zonelets(scope=scope)
             for item in face_zonelets_prime_array:
                 res = features.extract_features_on_face_zonelets(
                     part_id=item.part_id,
@@ -1306,19 +1240,11 @@ class Mesh:
             feature_recovery_params.append(extracted_feature_params)
         if create_intersection_loops:
             for part in self._model.parts:
-                others = [
-                    item.name for item in self._model.parts if item.name != part.name
-                ]
+                others = [item.name for item in self._model.parts if item.name != part.name]
                 scope1 = prime.ScopeDefinition(self._model, part_expression=part.name)
-                scope2 = prime.ScopeDefinition(
-                    self._model, part_expression=",".join(others)
-                )
-                scope1_zonelets_array = self._model.control_data.get_part_zonelets(
-                    scope=scope1
-                )
-                scope2_zonelets_array = self._model.control_data.get_part_zonelets(
-                    scope=scope2
-                )
+                scope2 = prime.ScopeDefinition(self._model, part_expression=",".join(others))
+                scope1_zonelets_array = self._model.control_data.get_part_zonelets(scope=scope1)
+                scope2_zonelets_array = self._model.control_data.get_part_zonelets(scope=scope2)
                 intersect_loops_params = prime.CreateIntersectionEdgeLoopsParams(
                     model=self._model, label_name="__intersect_loops__"
                 )
@@ -1360,9 +1286,7 @@ class Mesh:
 
         created_size_fields = []
         field = prime.SizeField(self._model)
-        is_geodesic = self.__is_size_field_type_geodesic(
-            global_size_controls + wrap_size_controls
-        )
+        is_geodesic = self.__is_size_field_type_geodesic(global_size_controls + wrap_size_controls)
         if (
             is_geodesic
             and remesh_postwrap
@@ -1370,19 +1294,13 @@ class Mesh:
             and not use_existing_size_fields
         ):
             created_size_fields.append(
-                self.__compute_size_field(
-                    geodesic_global_size_controls + wrap_size_controls, field
-                )
+                self.__compute_size_field(geodesic_global_size_controls + wrap_size_controls, field)
             )
 
         if not use_existing_size_fields and (global_size_controls + wrap_size_controls):
             if is_geodesic:
-                size_control_ids = [
-                    i.id for i in (global_size_controls + wrap_size_controls)
-                ]
-                self._logger.info(
-                    "Geodesic size controls used for wrap:" + str(size_control_ids)
-                )
+                size_control_ids = [i.id for i in (global_size_controls + wrap_size_controls)]
+                self._logger.info("Geodesic size controls used for wrap:" + str(size_control_ids))
                 wrap_params.sizing_method = prime.SizeFieldType.GEODESIC
                 wrap_params.size_control_ids = size_control_ids
             else:
@@ -1399,17 +1317,14 @@ class Mesh:
         else:
             if size_fields:
                 self._logger.info(
-                    "Using size fields provided for wrap:"
-                    + str([i for i in size_fields])
+                    "Using size fields provided for wrap:" + str([i for i in size_fields])
                 )
                 wrap_params.sizing_method = prime.SizeFieldType.VOLUMETRIC
                 wrap_params.size_field_ids = size_fields
             else:
                 size_field_ids = self._model.get_active_volumetric_size_fields()
                 if size_field_ids:
-                    self._logger.info(
-                        "Existing size field used for wrap:" + str(size_field_ids)
-                    )
+                    self._logger.info("Existing size field used for wrap:" + str(size_field_ids))
                     wrap_params.sizing_method = prime.SizeFieldType.VOLUMETRIC
                     wrap_params.size_field_ids = size_field_ids
                 else:
@@ -1433,14 +1348,10 @@ class Mesh:
 
         created_size_fields = []
         field = prime.SizeField(self._model)
-        is_geodesic = self.__is_size_field_type_geodesic(
-            global_size_controls + wrap_size_controls
-        )
+        is_geodesic = self.__is_size_field_type_geodesic(global_size_controls + wrap_size_controls)
         features = prime.FeatureExtraction(self._model)
         if remesh_postwrap and wrapped_part:
-            if not use_existing_size_fields and (
-                global_size_controls + remesh_size_controls
-            ):
+            if not use_existing_size_fields and (global_size_controls + remesh_size_controls):
                 if recompute_remesh_sizes:
                     if is_geodesic:
                         self._logger.info(
@@ -1448,10 +1359,7 @@ class Mesh:
                             + str(
                                 [
                                     i.name
-                                    for i in (
-                                        geodesic_global_size_controls
-                                        + remesh_size_controls
-                                    )
+                                    for i in (geodesic_global_size_controls + remesh_size_controls)
                                 ]
                             )
                         )
@@ -1468,14 +1376,7 @@ class Mesh:
                     else:
                         self._logger.info(
                             "Recomputing sizing for remesh after volumetric wrap:"
-                            + str(
-                                [
-                                    i.name
-                                    for i in (
-                                        global_size_controls + remesh_size_controls
-                                    )
-                                ]
-                            )
+                            + str([i.name for i in (global_size_controls + remesh_size_controls)])
                         )
                         for i in range(len(global_size_controls)):
                             control = global_size_controls[i]
@@ -1492,10 +1393,7 @@ class Mesh:
                             + str(
                                 [
                                     i.name
-                                    for i in (
-                                        geodesic_global_size_controls
-                                        + wrap_size_controls
-                                    )
+                                    for i in (geodesic_global_size_controls + wrap_size_controls)
                                 ]
                             )
                         )
@@ -1671,9 +1569,7 @@ class Mesh:
                 )
 
         params = prime.ScopeZoneletParams(model=self._model)
-        zonelets = self._model.control_data.get_scope_face_zonelets(
-            scope=scope, params=params
-        )
+        zonelets = self._model.control_data.get_scope_face_zonelets(scope=scope, params=params)
         part_ids = self._model.control_data.get_scope_parts(scope=scope)
 
         global_size_controls = []
@@ -1707,9 +1603,7 @@ class Mesh:
                 mp_name = mp_result.assigned_name
                 wrapper_control.set_live_material_points([mp_name])
             else:
-                prime.PrimeRuntimeError(
-                    "Error: No material point provided. No wrap done."
-                )
+                prime.PrimeRuntimeError("Error: No material point provided. No wrap done.")
                 return None
 
         wrapper_control.set_geometry_scope(scope)
@@ -1762,9 +1656,7 @@ class Mesh:
             wrap_params.number_of_threads = number_of_threads
         res = wrapper.wrap(wrapper_control_id=wrapper_control.id, params=wrap_params)
         wrapped_part = self._model.get_part(res.id)
-        remesh_scope = prime.ScopeDefinition(
-            model=self._model, part_expression=wrapped_part.name
-        )
+        remesh_scope = prime.ScopeDefinition(model=self._model, part_expression=wrapped_part.name)
 
         # Post Wrap Processing
         self.__process_after_wrap(

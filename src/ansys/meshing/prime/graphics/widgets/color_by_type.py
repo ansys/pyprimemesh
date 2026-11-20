@@ -25,7 +25,6 @@
 import os
 from typing import TYPE_CHECKING
 
-from ansys.tools.visualization_interface.backends.pyvista.widgets import PlotterWidget
 from vtk import vtkPNGReader
 
 from ansys.meshing.prime.core.mesh import (
@@ -34,6 +33,7 @@ from ansys.meshing.prime.core.mesh import (
     entity_color,
 )
 from ansys.meshing.prime.graphics.widgets.toolbar import ToolbarButton
+from ansys.tools.visualization_interface.backends.pyvista.widgets import PlotterWidget
 
 if TYPE_CHECKING:
     from ansys.meshing.prime.graphics.plotter import PrimePlotter

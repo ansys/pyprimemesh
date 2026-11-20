@@ -30,9 +30,6 @@ import traceback
 from ansys.meshing.prime.autogen.fileio import FileIO as _FileIO
 
 # isort: split
-import ansys.meshing.prime.core.dynaexportutils as dynaexportutils
-import ansys.meshing.prime.core.mapdlcdbexportutils as mapdlcdbexportutils
-import ansys.meshing.prime.internals.utils as utils
 from ansys.meshing.prime.autogen.fileiostructs import (
     ExportBoundaryFittedSplineParams,
     ExportFluentCaseParams,
@@ -63,7 +60,10 @@ from ansys.meshing.prime.autogen.fileiostructs import (
     SizeFieldFileReadResults,
     WriteSizeFieldParams,
 )
+import ansys.meshing.prime.core.dynaexportutils as dynaexportutils
+import ansys.meshing.prime.core.mapdlcdbexportutils as mapdlcdbexportutils
 from ansys.meshing.prime.core.model import Model
+import ansys.meshing.prime.internals.utils as utils
 from ansys.meshing.prime.params.primestructs import ErrorCode
 
 
@@ -83,9 +83,7 @@ class FileIO(_FileIO):
         self._model = model
         super().__init__(model)
 
-    def read_pmdat(
-        self, file_name: str, file_read_params: FileReadParams
-    ) -> FileReadResults:
+    def read_pmdat(self, file_name: str, file_read_params: FileReadParams) -> FileReadResults:
         """Read a PyPrimeMesh data (PMDAT) file.
 
         Parameters
@@ -107,7 +105,7 @@ class FileIO(_FileIO):
         Examples
         --------
         >>> import ansys.meshing.prime as prime
-        >>> #connect client to server and get model from it
+        >>> # connect client to server and get model from it
         >>> client = prime.Client(ip="localhost", port=50060)
         >>> model = client.model
         >>> file_io = prime.FileIO(model=model)
@@ -121,9 +119,7 @@ class FileIO(_FileIO):
                 self._model._sync_up_model()
         return result
 
-    def write_pmdat(
-        self, file_name: str, file_write_params: FileWriteParams
-    ) -> FileWriteResults:
+    def write_pmdat(self, file_name: str, file_write_params: FileWriteParams) -> FileWriteResults:
         """Write a PyPrimeMesh data (PMDAT) file.
 
         Parameters
@@ -147,9 +143,7 @@ class FileIO(_FileIO):
             result = super().write_pmdat(temp_file_name, file_write_params)
         return result
 
-    def import_abaqus_inp(
-        self, file_name: str, params: ImportAbaqusParams
-    ) -> ImportAbaqusResults:
+    def import_abaqus_inp(self, file_name: str, params: ImportAbaqusParams) -> ImportAbaqusResults:
         """(BETA FEATURE) Import a Abaqus file.
 
         This is a beta feature to import abaqus files as dead mesh and also store
@@ -179,9 +173,7 @@ class FileIO(_FileIO):
                 self._model._sync_up_model()
         return result
 
-    def import_fluent_meshing_size_field(
-        self, file_name: str
-    ) -> SizeFieldFileReadResults:
+    def import_fluent_meshing_size_field(self, file_name: str) -> SizeFieldFileReadResults:
         """Import a Fluent Meshing size field (SF and SF.GZ) file from disk.
 
         Parameters
@@ -238,9 +230,7 @@ class FileIO(_FileIO):
             result = super().read_size_field(temp_file_name, params)
         return result
 
-    def write_size_field(
-        self, file_name: str, params: WriteSizeFieldParams
-    ) -> FileWriteResults:
+    def write_size_field(self, file_name: str, params: WriteSizeFieldParams) -> FileWriteResults:
         """Write a PyPrimeMesh size field (PSF) file to a file on disk.
 
         Parameters
@@ -330,7 +320,7 @@ class FileIO(_FileIO):
         Examples
         --------
         >>> import ansys.meshing.prime as prime
-        >>> #connect client to server and get model from it
+        >>> # connect client to server and get model from it
         >>> client = prime.Client(ip="localhost", port=50060)
         >>> model = client.model
         >>> file_io = prime.FileIO(model=model)
@@ -344,18 +334,14 @@ class FileIO(_FileIO):
             #    part_id = self._model.parts[0].id
             args = {"partId": 0}
             command_name = "PrimeMesh::FileIO/GetAbaqusSimulationData"
-            sim_data_str = self._comm.serve(
-                self._model, command_name, self._object_id, args=args
-            )
+            sim_data_str = self._comm.serve(self._model, command_name, self._object_id, args=args)
             if params.config_settings is None:
                 params.config_settings = ""
             generate_mapdl_commands_error = None
             generate_mapdl_commands_traceback = None
             try:
-                all_mat_cmds, analysis_settings = (
-                    mapdlcdbexportutils.generate_mapdl_commands(
-                        self._model, sim_data_str, params
-                    )
+                all_mat_cmds, analysis_settings = mapdlcdbexportutils.generate_mapdl_commands(
+                    self._model, sim_data_str, params
                 )
             except Exception as e:
                 generate_mapdl_commands_error = e
@@ -512,9 +498,7 @@ class FileIO(_FileIO):
 
         """
         with utils.file_read_context(self._model, file_name) as temp_file_name:
-            result = super().import_fluent_case(
-                temp_file_name, import_fluent_case_params
-            )
+            result = super().import_fluent_case(temp_file_name, import_fluent_case_params)
             if result.error_code == ErrorCode.NOERROR:
                 self._model._sync_up_model()
         return result
@@ -544,9 +528,7 @@ class FileIO(_FileIO):
                         prime.ExportFluentCaseParams(model=model))
         """
         with utils.file_write_context(self._model, file_name) as temp_file_name:
-            result = super().export_fluent_case(
-                temp_file_name, export_fluent_case_params
-            )
+            result = super().export_fluent_case(temp_file_name, export_fluent_case_params)
         return result
 
     def export_fluent_meshing_mesh(
@@ -573,9 +555,7 @@ class FileIO(_FileIO):
                         ExportFluentMeshingMeshParams(model=model))
         """
         with utils.file_write_context(self._model, file_name) as temp_file_name:
-            result = super().export_fluent_meshing_mesh(
-                temp_file_name, export_fluent_mesh_params
-            )
+            result = super().export_fluent_meshing_mesh(temp_file_name, export_fluent_mesh_params)
         return result
 
     def export_lsdyna_keyword_file(
@@ -613,9 +593,7 @@ class FileIO(_FileIO):
             #    part_id = self._model.parts[0].id
             args = {"partId": 0}
             command_name = "PrimeMesh::FileIO/GetAbaqusSimulationData"
-            sim_data = self._comm.serve(
-                self._model, command_name, self._object_id, args=args
-            )
+            sim_data = self._comm.serve(self._model, command_name, self._object_id, args=args)
             sim_data = json.loads(sim_data)
             if sim_data is not None:
                 mp = dynaexportutils.MaterialProcessor(self._model, sim_data)
@@ -680,9 +658,7 @@ class FileIO(_FileIO):
                         ExportBoundaryFittedSplineParams(model=model))
         """
         with utils.file_write_context(self._model, file_name) as temp_file_name:
-            result = super().export_boundary_fitted_spline_kfile(
-                temp_file_name, export_params
-            )
+            result = super().export_boundary_fitted_spline_kfile(temp_file_name, export_params)
         return result
 
     def import_cad(self, file_name: str, params: ImportCadParams) -> ImportCadResults:
@@ -759,8 +735,8 @@ class FileIO(_FileIO):
         >>> fileio = prime.FileIO(model=model)
         >>> out_file_path = r"/tmp/output.stl"
         >>> part_ids = [part.id for part in model.parts]
-        >>> export_stl_params=prime.ExportSTLParams(model=model,part_ids=part_ids)
-        >>> results = fileio.export_stl(out_file_path,export_stl_params)
+        >>> export_stl_params = prime.ExportSTLParams(model=model, part_ids=part_ids)
+        >>> results = fileio.export_stl(out_file_path, export_stl_params)
 
         """
         with utils.file_write_context(self._model, file_name) as temp_file_name:
