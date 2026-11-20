@@ -18,7 +18,6 @@ repos:
     rev: 02ef6d1c28994054a843e58604e1a343faa42987 # frozen: v2.31.2
     hooks:
       - id: pyproject-fmt
-        additional_dependencies: [toml-fmt-common<1.3.3]
         args: [--keep-full-version]
 
   - repo: https://github.com/adamchainz/blacken-docs
