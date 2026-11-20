@@ -1,0 +1,11 @@
+download\_dcb\_bonding\_shared\_topology\_pmdat
+===============================================
+
+.. currentmodule:: ansys.meshing.prime.examples
+
+.. autofunction:: ansys.meshing.prime.examples.download_dcb_bonding_shared_topology_pmdat
+
+.. minigallery::
+    :add-heading: Examples using download_dcb_bonding_shared_topology_pmdat
+
+    ansys.meshing.prime.examples.download_dcb_bonding_shared_topology_pmdat

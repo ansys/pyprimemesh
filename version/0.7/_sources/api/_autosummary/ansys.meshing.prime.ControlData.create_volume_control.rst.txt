@@ -1,0 +1,11 @@
+create\_volume\_control
+=======================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. automethod:: ansys.meshing.prime.ControlData.create_volume_control
+
+.. minigallery::
+   :add-heading: Examples using ControlData.create_volume_control
+
+   ansys.meshing.prime.ControlData.create_volume_control

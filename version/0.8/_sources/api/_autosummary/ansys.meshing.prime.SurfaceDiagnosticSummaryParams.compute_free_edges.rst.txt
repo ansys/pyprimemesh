@@ -1,0 +1,6 @@
+compute\_free\_edges
+====================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoproperty:: SurfaceDiagnosticSummaryParams.compute_free_edges

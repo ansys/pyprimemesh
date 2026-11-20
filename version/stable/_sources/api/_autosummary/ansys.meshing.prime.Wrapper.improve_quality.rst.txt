@@ -1,0 +1,11 @@
+improve\_quality
+================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. automethod:: ansys.meshing.prime.Wrapper.improve_quality
+
+.. minigallery::
+   :add-heading: Examples using Wrapper.improve_quality
+
+   ansys.meshing.prime.Wrapper.improve_quality

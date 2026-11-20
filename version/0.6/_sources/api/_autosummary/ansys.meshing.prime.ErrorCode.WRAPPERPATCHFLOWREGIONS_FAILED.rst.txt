@@ -1,0 +1,6 @@
+WRAPPERPATCHFLOWREGIONS\_FAILED
+===============================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoattribute:: ErrorCode.WRAPPERPATCHFLOWREGIONS_FAILED

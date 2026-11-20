@@ -1,0 +1,6 @@
+INVALIDSHELLBLCONTROLS\_INCORRECTSCOPEENTITY
+============================================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoattribute:: ErrorCode.INVALIDSHELLBLCONTROLS_INCORRECTSCOPEENTITY

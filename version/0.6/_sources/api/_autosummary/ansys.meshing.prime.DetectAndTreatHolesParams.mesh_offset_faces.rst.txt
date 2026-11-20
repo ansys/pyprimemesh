@@ -1,0 +1,6 @@
+mesh\_offset\_faces
+===================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoproperty:: DetectAndTreatHolesParams.mesh_offset_faces

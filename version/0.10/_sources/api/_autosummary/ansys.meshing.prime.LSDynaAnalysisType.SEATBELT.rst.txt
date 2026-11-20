@@ -1,0 +1,6 @@
+SEATBELT
+========
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoattribute:: LSDynaAnalysisType.SEATBELT

@@ -1,0 +1,6 @@
+scene
+=====
+
+.. currentmodule:: ansys.meshing.prime.graphics
+
+.. autoproperty:: PrimePlotter.scene

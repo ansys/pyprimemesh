@@ -1,0 +1,6 @@
+side\_tolerance
+===============
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoproperty:: FuseParams.side_tolerance

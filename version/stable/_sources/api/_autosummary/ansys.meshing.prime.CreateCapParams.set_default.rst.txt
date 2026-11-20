@@ -1,0 +1,11 @@
+set\_default
+============
+
+.. currentmodule:: ansys.meshing.prime
+
+.. automethod:: ansys.meshing.prime.CreateCapParams.set_default
+
+.. minigallery::
+   :add-heading: Examples using CreateCapParams.set_default
+
+   ansys.meshing.prime.CreateCapParams.set_default

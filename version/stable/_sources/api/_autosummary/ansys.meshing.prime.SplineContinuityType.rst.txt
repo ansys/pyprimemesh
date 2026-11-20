@@ -1,0 +1,50 @@
+.. vale off
+
+SplineContinuityType
+====================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoclass:: SplineContinuityType
+
+   
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+      :toctree:
+   
+      SplineContinuityType.conjugate
+      SplineContinuityType.bit_length
+      SplineContinuityType.bit_count
+      SplineContinuityType.to_bytes
+      SplineContinuityType.from_bytes
+      SplineContinuityType.as_integer_ratio
+      SplineContinuityType.is_integer
+      
+   
+   
+
+   
+   
+   .. rubric:: Attributes
+
+   .. autosummary::
+      :toctree:
+   
+      SplineContinuityType.real
+      SplineContinuityType.imag
+      SplineContinuityType.numerator
+      SplineContinuityType.denominator
+      SplineContinuityType.CUBICC0
+      SplineContinuityType.CUBICC1
+      SplineContinuityType.QUADRATICC0
+   
+   
+
+.. minigallery::
+    :add-heading: Examples using SplineContinuityType
+
+    ansys.meshing.prime.SplineContinuityType
+
+.. vale on

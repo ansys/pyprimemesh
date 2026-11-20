@@ -1,0 +1,6 @@
+EDGEEDGE
+========
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoattribute:: IntersectionMask.EDGEEDGE

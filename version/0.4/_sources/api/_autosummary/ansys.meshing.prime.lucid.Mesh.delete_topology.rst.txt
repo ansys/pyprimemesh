@@ -1,0 +1,6 @@
+﻿delete\_topology
+================
+
+.. currentmodule:: ansys.meshing.prime.lucid
+
+.. automethod:: Mesh.delete_topology

@@ -1,0 +1,11 @@
+print\_default
+==============
+
+.. currentmodule:: ansys.meshing.prime
+
+.. automethod:: ansys.meshing.prime.SearchBySpikeResults.print_default
+
+.. minigallery::
+   :add-heading: Examples using SearchBySpikeResults.print_default
+
+   ansys.meshing.prime.SearchBySpikeResults.print_default

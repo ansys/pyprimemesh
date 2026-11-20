@@ -1,0 +1,11 @@
+print\_default
+==============
+
+.. currentmodule:: ansys.meshing.prime
+
+.. automethod:: ansys.meshing.prime.DeleteTopoEntitiesResults.print_default
+
+.. minigallery::
+   :add-heading: Examples using DeleteTopoEntitiesResults.print_default
+
+   ansys.meshing.prime.DeleteTopoEntitiesResults.print_default

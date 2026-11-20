@@ -1,0 +1,6 @@
+﻿get\_edge\_zonelets
+===================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. automethod:: Part.get_edge_zonelets

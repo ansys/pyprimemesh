@@ -1,0 +1,6 @@
+detect\_non\_circular\_holes
+============================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoproperty:: DetectAndTreatHolesParams.detect_non_circular_holes

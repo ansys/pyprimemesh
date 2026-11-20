@@ -1,0 +1,6 @@
+quality\_results\_part
+======================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoproperty:: VolumeQualitySummaryResults.quality_results_part

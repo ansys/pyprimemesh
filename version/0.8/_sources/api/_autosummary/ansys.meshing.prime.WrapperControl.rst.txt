@@ -1,0 +1,48 @@
+.. vale off
+
+WrapperControl
+==============
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoclass:: WrapperControl
+   
+   
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+      :toctree:
+   
+      
+      WrapperControl.get_geometry_scope
+      WrapperControl.get_live_material_points
+      WrapperControl.set_contact_preventions
+      WrapperControl.set_feature_recoveries
+      WrapperControl.set_geometry_scope
+      WrapperControl.set_leak_preventions
+      WrapperControl.set_live_material_points
+      WrapperControl.set_shadow_geometry_scope
+      WrapperControl.set_suggested_name
+      WrapperControl.set_suggested_wrapper_part_name
+   
+   
+
+   
+   
+   .. rubric:: Attributes
+
+   .. autosummary::
+      :toctree:
+   
+      WrapperControl.id
+      WrapperControl.name
+   
+   
+
+.. minigallery::
+    :add-heading: Examples using WrapperControl
+
+    ansys.meshing.prime.WrapperControl
+
+.. vale on

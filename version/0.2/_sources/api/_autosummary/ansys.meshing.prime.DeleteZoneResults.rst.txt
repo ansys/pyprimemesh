@@ -1,0 +1,30 @@
+DeleteZoneResults
+=================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoclass:: DeleteZoneResults
+   
+   
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+      :toctree:
+   
+      
+      DeleteZoneResults.print_default
+      DeleteZoneResults.set_default
+   
+   
+
+   
+   
+   .. rubric:: Attributes
+
+   .. autosummary::
+      :toctree:
+   
+      DeleteZoneResults.error_code
+   
+   

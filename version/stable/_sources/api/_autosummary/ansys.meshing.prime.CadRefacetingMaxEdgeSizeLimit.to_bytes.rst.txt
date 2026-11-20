@@ -1,0 +1,11 @@
+to\_bytes
+=========
+
+.. currentmodule:: ansys.meshing.prime
+
+.. automethod:: ansys.meshing.prime.CadRefacetingMaxEdgeSizeLimit.to_bytes
+
+.. minigallery::
+   :add-heading: Examples using CadRefacetingMaxEdgeSizeLimit.to_bytes
+
+   ansys.meshing.prime.CadRefacetingMaxEdgeSizeLimit.to_bytes

@@ -1,0 +1,6 @@
+﻿topo\_volumes
+=============
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoproperty:: ComputeTopoVolumesResults.topo_volumes

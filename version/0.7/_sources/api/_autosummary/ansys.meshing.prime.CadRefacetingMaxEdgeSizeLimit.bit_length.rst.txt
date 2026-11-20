@@ -1,0 +1,11 @@
+bit\_length
+===========
+
+.. currentmodule:: ansys.meshing.prime
+
+.. automethod:: ansys.meshing.prime.CadRefacetingMaxEdgeSizeLimit.bit_length
+
+.. minigallery::
+   :add-heading: Examples using CadRefacetingMaxEdgeSizeLimit.bit_length
+
+   ansys.meshing.prime.CadRefacetingMaxEdgeSizeLimit.bit_length

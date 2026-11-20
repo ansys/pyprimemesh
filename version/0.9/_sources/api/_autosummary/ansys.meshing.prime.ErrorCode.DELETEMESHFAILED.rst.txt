@@ -1,0 +1,6 @@
+DELETEMESHFAILED
+================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoattribute:: ErrorCode.DELETEMESHFAILED

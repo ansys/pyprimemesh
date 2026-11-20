@@ -1,0 +1,6 @@
+﻿spline\_ids
+===========
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoproperty:: IGAResults.spline_ids

@@ -1,0 +1,6 @@
+new\_edge\_zonelets
+===================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoproperty:: ExtractFeatureResults.new_edge_zonelets

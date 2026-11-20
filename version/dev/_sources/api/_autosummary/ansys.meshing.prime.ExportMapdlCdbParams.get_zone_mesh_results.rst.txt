@@ -1,0 +1,6 @@
+get\_zone\_mesh\_results
+========================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoproperty:: ExportMapdlCdbParams.get_zone_mesh_results

@@ -1,0 +1,6 @@
+enable\_periodicity
+===================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoproperty:: VolumetricSizeFieldComputeParams.enable_periodicity

@@ -1,0 +1,6 @@
+consider\_general\_connectors\_as\_spot\_weld
+=============================================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoproperty:: ExportMapdlCdbParams.consider_general_connectors_as_spot_weld

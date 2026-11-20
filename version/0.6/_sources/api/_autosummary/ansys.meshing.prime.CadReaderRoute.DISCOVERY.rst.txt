@@ -1,0 +1,6 @@
+DISCOVERY
+=========
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoattribute:: CadReaderRoute.DISCOVERY

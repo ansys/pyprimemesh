@@ -1,0 +1,6 @@
+degree
+======
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoproperty:: IGAUnstructuredSplineSolid.degree

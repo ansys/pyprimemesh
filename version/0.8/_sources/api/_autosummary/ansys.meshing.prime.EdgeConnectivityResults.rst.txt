@@ -1,0 +1,48 @@
+.. vale off
+
+EdgeConnectivityResults
+=======================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoclass:: EdgeConnectivityResults
+   
+   
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+      :toctree:
+   
+      
+      EdgeConnectivityResults.print_default
+      EdgeConnectivityResults.set_default
+   
+   
+
+   
+   
+   .. rubric:: Attributes
+
+   .. autosummary::
+      :toctree:
+   
+      EdgeConnectivityResults.edge_list
+      EdgeConnectivityResults.edge_zonelet_ids
+      EdgeConnectivityResults.error_code
+      EdgeConnectivityResults.mesh_edge_ids
+      EdgeConnectivityResults.node_coords
+      EdgeConnectivityResults.num_edge_list_per_edge_zonelet
+      EdgeConnectivityResults.num_edges_per_edge_zonelet
+      EdgeConnectivityResults.num_nodes_per_edge_zonelet
+      EdgeConnectivityResults.topo_edge_ids
+      EdgeConnectivityResults.topo_edge_types
+   
+   
+
+.. minigallery::
+    :add-heading: Examples using EdgeConnectivityResults
+
+    ansys.meshing.prime.EdgeConnectivityResults
+
+.. vale on

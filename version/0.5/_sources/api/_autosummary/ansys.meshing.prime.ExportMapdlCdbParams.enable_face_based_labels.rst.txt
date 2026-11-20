@@ -1,0 +1,6 @@
+enable\_face\_based\_labels
+===========================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoproperty:: ExportMapdlCdbParams.enable_face_based_labels

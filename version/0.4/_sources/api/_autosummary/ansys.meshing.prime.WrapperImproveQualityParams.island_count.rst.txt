@@ -1,0 +1,6 @@
+﻿island\_count
+=============
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoproperty:: WrapperImproveQualityParams.island_count

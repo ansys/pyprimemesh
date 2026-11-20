@@ -1,0 +1,27 @@
+.. vale off
+
+TriangulateParams
+=================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoclass:: TriangulateParams
+   
+   
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+      :toctree:
+   
+      
+      TriangulateParams.print_default
+      TriangulateParams.set_default
+   
+   
+
+   
+   
+   
+
+.. vale on

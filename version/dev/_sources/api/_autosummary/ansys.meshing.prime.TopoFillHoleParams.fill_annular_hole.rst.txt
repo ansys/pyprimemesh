@@ -1,0 +1,6 @@
+fill\_annular\_hole
+===================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoproperty:: TopoFillHoleParams.fill_annular_hole

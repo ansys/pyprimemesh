@@ -1,0 +1,6 @@
+﻿SPHEREATINVALIDNORMALNODESFAILED
+================================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoattribute:: ErrorCode.SPHEREATINVALIDNORMALNODESFAILED

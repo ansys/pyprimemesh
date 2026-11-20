@@ -1,0 +1,31 @@
+SearchByQualityParams
+=====================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoclass:: SearchByQualityParams
+   
+   
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+      :toctree:
+   
+      
+      SearchByQualityParams.print_default
+      SearchByQualityParams.set_default
+   
+   
+
+   
+   
+   .. rubric:: Attributes
+
+   .. autosummary::
+      :toctree:
+   
+      SearchByQualityParams.face_quality_measure
+      SearchByQualityParams.quality_limit
+   
+   

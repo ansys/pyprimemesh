@@ -1,0 +1,6 @@
+resolve\_spikes
+===============
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoproperty:: WrapperImproveQualityParams.resolve_spikes

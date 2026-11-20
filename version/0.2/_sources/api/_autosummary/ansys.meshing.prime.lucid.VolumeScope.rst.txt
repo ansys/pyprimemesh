@@ -1,0 +1,22 @@
+VolumeScope
+===========
+
+.. currentmodule:: ansys.meshing.prime.lucid
+
+.. autoclass:: VolumeScope
+   
+   
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+      :toctree:
+   
+      
+      VolumeScope.get_scope_definition
+   
+   
+
+   
+   
+   

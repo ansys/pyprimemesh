@@ -1,0 +1,11 @@
+conjugate
+=========
+
+.. currentmodule:: ansys.meshing.prime
+
+.. automethod:: ansys.meshing.prime.ScopeEvaluationType.conjugate
+
+.. minigallery::
+   :add-heading: Examples using ScopeEvaluationType.conjugate
+
+   ansys.meshing.prime.ScopeEvaluationType.conjugate

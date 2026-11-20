@@ -1,0 +1,11 @@
+is\_integer
+===========
+
+.. currentmodule:: ansys.meshing.prime
+
+.. automethod:: ansys.meshing.prime.AdvancedSurferSetup.is_integer
+
+.. minigallery::
+   :add-heading: Examples using AdvancedSurferSetup.is_integer
+
+   ansys.meshing.prime.AdvancedSurferSetup.is_integer

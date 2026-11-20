@@ -1,0 +1,6 @@
+hole\_size
+==========
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoproperty:: DeadRegion.hole_size

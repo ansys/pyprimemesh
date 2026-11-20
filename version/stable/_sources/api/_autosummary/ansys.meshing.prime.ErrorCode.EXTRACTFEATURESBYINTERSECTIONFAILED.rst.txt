@@ -1,0 +1,6 @@
+EXTRACTFEATURESBYINTERSECTIONFAILED
+===================================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoattribute:: ErrorCode.EXTRACTFEATURESBYINTERSECTIONFAILED

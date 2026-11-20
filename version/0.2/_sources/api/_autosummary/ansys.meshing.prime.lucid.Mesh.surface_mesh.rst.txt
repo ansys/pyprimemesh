@@ -1,0 +1,6 @@
+surface\_mesh
+=============
+
+.. currentmodule:: ansys.meshing.prime.lucid
+
+.. automethod:: Mesh.surface_mesh

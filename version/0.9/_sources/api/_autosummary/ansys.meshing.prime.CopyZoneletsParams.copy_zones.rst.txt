@@ -1,0 +1,6 @@
+copy\_zones
+===========
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoproperty:: CopyZoneletsParams.copy_zones

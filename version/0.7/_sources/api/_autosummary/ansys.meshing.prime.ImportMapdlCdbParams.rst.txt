@@ -1,0 +1,40 @@
+.. vale off
+
+ImportMapdlCdbParams
+====================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoclass:: ImportMapdlCdbParams
+   
+   
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+      :toctree:
+   
+      
+      ImportMapdlCdbParams.print_default
+      ImportMapdlCdbParams.set_default
+   
+   
+
+   
+   
+   .. rubric:: Attributes
+
+   .. autosummary::
+      :toctree:
+   
+      ImportMapdlCdbParams.append
+      ImportMapdlCdbParams.drop_mid_nodes
+   
+   
+
+.. minigallery::
+    :add-heading: Examples using ImportMapdlCdbParams
+
+    ansys.meshing.prime.ImportMapdlCdbParams
+
+.. vale on

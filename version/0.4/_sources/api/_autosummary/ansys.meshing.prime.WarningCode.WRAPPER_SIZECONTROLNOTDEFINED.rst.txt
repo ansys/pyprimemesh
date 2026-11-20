@@ -1,0 +1,6 @@
+﻿WRAPPER\_SIZECONTROLNOTDEFINED
+==============================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoattribute:: WarningCode.WRAPPER_SIZECONTROLNOTDEFINED

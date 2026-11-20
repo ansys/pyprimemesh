@@ -1,0 +1,11 @@
+set\_default
+============
+
+.. currentmodule:: ansys.meshing.prime
+
+.. automethod:: ansys.meshing.prime.FeatureRecoveryParams.set_default
+
+.. minigallery::
+   :add-heading: Examples using FeatureRecoveryParams.set_default
+
+   ansys.meshing.prime.FeatureRecoveryParams.set_default

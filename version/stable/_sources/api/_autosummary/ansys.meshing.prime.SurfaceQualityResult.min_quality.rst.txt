@@ -1,0 +1,6 @@
+min\_quality
+============
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoproperty:: SurfaceQualityResult.min_quality

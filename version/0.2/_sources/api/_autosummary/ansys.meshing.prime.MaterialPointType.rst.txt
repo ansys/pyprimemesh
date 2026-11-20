@@ -1,0 +1,22 @@
+MaterialPointType
+=================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoclass:: MaterialPointType
+   
+   
+   
+   
+
+   
+   
+   .. rubric:: Attributes
+
+   .. autosummary::
+      :toctree:
+   
+      MaterialPointType.DEAD
+      MaterialPointType.LIVE
+   
+   

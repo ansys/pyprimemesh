@@ -1,0 +1,40 @@
+.. vale off
+
+SetScopeResults
+===============
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoclass:: SetScopeResults
+   
+   
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+      :toctree:
+   
+      
+      SetScopeResults.print_default
+      SetScopeResults.set_default
+   
+   
+
+   
+   
+   .. rubric:: Attributes
+
+   .. autosummary::
+      :toctree:
+   
+      SetScopeResults.error_code
+      SetScopeResults.warning_code
+   
+   
+
+.. minigallery::
+    :add-heading: Examples using SetScopeResults
+
+    ansys.meshing.prime.SetScopeResults
+
+.. vale on

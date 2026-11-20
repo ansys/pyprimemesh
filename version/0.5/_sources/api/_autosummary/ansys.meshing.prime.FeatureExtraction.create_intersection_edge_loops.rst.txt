@@ -1,0 +1,6 @@
+create\_intersection\_edge\_loops
+=================================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. automethod:: FeatureExtraction.create_intersection_edge_loops

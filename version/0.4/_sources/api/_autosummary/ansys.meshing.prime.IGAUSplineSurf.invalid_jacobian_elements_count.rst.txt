@@ -1,0 +1,6 @@
+﻿invalid\_jacobian\_elements\_count
+==================================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoproperty:: IGAUSplineSurf.invalid_jacobian_elements_count

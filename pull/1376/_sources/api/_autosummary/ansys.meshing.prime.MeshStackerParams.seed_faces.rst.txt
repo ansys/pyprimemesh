@@ -1,0 +1,6 @@
+seed\_faces
+===========
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoproperty:: MeshStackerParams.seed_faces

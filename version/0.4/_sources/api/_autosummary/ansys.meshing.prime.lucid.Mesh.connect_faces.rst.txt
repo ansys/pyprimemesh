@@ -1,0 +1,6 @@
+﻿connect\_faces
+==============
+
+.. currentmodule:: ansys.meshing.prime.lucid
+
+.. automethod:: Mesh.connect_faces

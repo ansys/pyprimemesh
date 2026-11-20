@@ -1,0 +1,11 @@
+set\_surface\_scope
+===================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. automethod:: ansys.meshing.prime.PrismControl.set_surface_scope
+
+.. minigallery::
+   :add-heading: Examples using PrismControl.set_surface_scope
+
+   ansys.meshing.prime.PrismControl.set_surface_scope

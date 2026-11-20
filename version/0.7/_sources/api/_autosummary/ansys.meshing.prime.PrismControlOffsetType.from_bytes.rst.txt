@@ -1,0 +1,11 @@
+from\_bytes
+===========
+
+.. currentmodule:: ansys.meshing.prime
+
+.. automethod:: ansys.meshing.prime.PrismControlOffsetType.from_bytes
+
+.. minigallery::
+   :add-heading: Examples using PrismControlOffsetType.from_bytes
+
+   ansys.meshing.prime.PrismControlOffsetType.from_bytes

@@ -1,0 +1,6 @@
+VT\_MERGETHINEXTFAILED
+======================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoattribute:: ErrorCode.VT_MERGETHINEXTFAILED

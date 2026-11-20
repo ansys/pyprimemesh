@@ -1,0 +1,33 @@
+.. vale off
+
+MultizonePrismType
+==================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoclass:: MultizonePrismType
+
+   
+   
+   
+   
+
+   
+   
+   .. rubric:: Attributes
+
+   .. autosummary::
+      :toctree:
+   
+      MultizonePrismType.UNIFORM
+      MultizonePrismType.LASTASPECTRATIO
+      MultizonePrismType.FIRSTASPECTRATIO
+   
+   
+
+.. minigallery::
+    :add-heading: Examples using MultizonePrismType
+
+    ansys.meshing.prime.MultizonePrismType
+
+.. vale on

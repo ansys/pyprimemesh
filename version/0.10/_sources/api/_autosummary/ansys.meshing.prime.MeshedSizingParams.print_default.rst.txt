@@ -1,0 +1,11 @@
+print\_default
+==============
+
+.. currentmodule:: ansys.meshing.prime
+
+.. automethod:: ansys.meshing.prime.MeshedSizingParams.print_default
+
+.. minigallery::
+   :add-heading: Examples using MeshedSizingParams.print_default
+
+   ansys.meshing.prime.MeshedSizingParams.print_default

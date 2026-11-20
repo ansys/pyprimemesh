@@ -1,0 +1,6 @@
+SURFER\_QUADCLEANUP\_MULTITHREADINGNOTSUPPORTED
+===============================================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoattribute:: WarningCode.SURFER_QUADCLEANUP_MULTITHREADINGNOTSUPPORTED

@@ -1,0 +1,11 @@
+export\_lsdyna\_iga\_keyword\_file
+==================================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. automethod:: ansys.meshing.prime.FileIO.export_lsdyna_iga_keyword_file
+
+.. minigallery::
+   :add-heading: Examples using FileIO.export_lsdyna_iga_keyword_file
+
+   ansys.meshing.prime.FileIO.export_lsdyna_iga_keyword_file

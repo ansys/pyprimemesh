@@ -1,0 +1,6 @@
+connect\_faces
+==============
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoproperty:: RepairTopologyParams.connect_faces

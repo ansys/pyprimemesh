@@ -1,0 +1,6 @@
+MATERIALPOINTWITHSAMENAMEEXISTS
+===============================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoattribute:: WarningCode.MATERIALPOINTWITHSAMENAMEEXISTS

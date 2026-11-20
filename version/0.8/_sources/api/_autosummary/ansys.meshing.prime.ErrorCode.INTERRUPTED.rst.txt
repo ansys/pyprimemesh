@@ -1,0 +1,6 @@
+INTERRUPTED
+===========
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoattribute:: ErrorCode.INTERRUPTED

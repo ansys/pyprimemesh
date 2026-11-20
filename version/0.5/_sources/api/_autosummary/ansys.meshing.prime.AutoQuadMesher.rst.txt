@@ -1,0 +1,30 @@
+.. vale off
+
+AutoQuadMesher
+==============
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoclass:: AutoQuadMesher
+   
+   
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+      :toctree:
+   
+      
+      AutoQuadMesher.check_topology
+      AutoQuadMesher.defeature_topology
+      AutoQuadMesher.detect_and_treat_features
+      AutoQuadMesher.optimize_quad_mesh
+      AutoQuadMesher.repair_topology
+   
+   
+
+   
+   
+   
+
+.. vale on

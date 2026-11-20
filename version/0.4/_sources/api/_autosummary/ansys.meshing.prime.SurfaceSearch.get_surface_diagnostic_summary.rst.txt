@@ -1,0 +1,6 @@
+﻿get\_surface\_diagnostic\_summary
+=================================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. automethod:: SurfaceSearch.get_surface_diagnostic_summary

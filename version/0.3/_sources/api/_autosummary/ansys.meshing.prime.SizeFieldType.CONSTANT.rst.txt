@@ -1,0 +1,6 @@
+CONSTANT
+========
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoattribute:: SizeFieldType.CONSTANT

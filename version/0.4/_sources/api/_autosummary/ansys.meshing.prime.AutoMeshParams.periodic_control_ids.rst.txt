@@ -1,0 +1,6 @@
+﻿periodic\_control\_ids
+======================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoproperty:: AutoMeshParams.periodic_control_ids

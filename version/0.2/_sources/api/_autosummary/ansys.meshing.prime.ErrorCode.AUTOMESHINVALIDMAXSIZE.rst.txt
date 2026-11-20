@@ -1,0 +1,6 @@
+AUTOMESHINVALIDMAXSIZE
+======================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoattribute:: ErrorCode.AUTOMESHINVALIDMAXSIZE

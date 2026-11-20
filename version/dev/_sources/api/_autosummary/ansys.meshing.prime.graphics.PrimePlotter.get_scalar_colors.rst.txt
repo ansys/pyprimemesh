@@ -1,0 +1,11 @@
+get\_scalar\_colors
+===================
+
+.. currentmodule:: ansys.meshing.prime.graphics
+
+.. automethod:: ansys.meshing.prime.graphics.PrimePlotter.get_scalar_colors
+
+.. minigallery::
+   :add-heading: Examples using PrimePlotter.get_scalar_colors
+
+   ansys.meshing.prime.graphics.PrimePlotter.get_scalar_colors

@@ -1,0 +1,6 @@
+patch\_at\_live
+===============
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoproperty:: WrapperPatchFlowRegionsParams.patch_at_live

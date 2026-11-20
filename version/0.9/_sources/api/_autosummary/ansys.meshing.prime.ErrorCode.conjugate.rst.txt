@@ -1,0 +1,11 @@
+conjugate
+=========
+
+.. currentmodule:: ansys.meshing.prime
+
+.. automethod:: ansys.meshing.prime.ErrorCode.conjugate
+
+.. minigallery::
+   :add-heading: Examples using ErrorCode.conjugate
+
+   ansys.meshing.prime.ErrorCode.conjugate

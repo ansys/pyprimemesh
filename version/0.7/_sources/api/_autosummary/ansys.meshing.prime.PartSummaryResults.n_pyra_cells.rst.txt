@@ -1,0 +1,6 @@
+n\_pyra\_cells
+==============
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoproperty:: PartSummaryResults.n_pyra_cells

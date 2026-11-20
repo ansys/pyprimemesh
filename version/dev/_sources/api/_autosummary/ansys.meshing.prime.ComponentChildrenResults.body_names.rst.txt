@@ -1,0 +1,6 @@
+body\_names
+===========
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoproperty:: ComponentChildrenResults.body_names
