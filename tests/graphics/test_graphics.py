@@ -648,9 +648,17 @@ def _plot_model(model_pd):
 
 
 def _drawn_pixels(display):
-    """Count non-background pixels without moving the camera."""
-    image = np.asarray(display.scene.screenshot())
-    return int(np.count_nonzero((image != 255).any(axis=2)))
+    """Count model pixels without moving the camera or including plane widgets."""
+    plane_widgets = tuple(display.scene.widgets.plane_widgets)
+    enabled_widgets = [widget for widget in plane_widgets if widget.GetEnabled()]
+    for widget in enabled_widgets:
+        widget.Off()
+    try:
+        image = np.asarray(display.scene.screenshot())
+        return int(np.count_nonzero((image[..., :3] != 255).any(axis=2)))
+    finally:
+        for widget in enabled_widgets:
+            widget.On()
 
 
 def test_model_uses_actor_per_entity_type(get_remote_client, get_examples):
