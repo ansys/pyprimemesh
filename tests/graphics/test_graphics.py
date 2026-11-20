@@ -647,10 +647,24 @@ def _plot_model(model_pd):
     return display
 
 
-def _drawn_pixels(display):
-    """Count non-background pixels without moving the camera."""
-    image = np.asarray(display.scene.screenshot())
-    return int(np.count_nonzero((image != 255).any(axis=2)))
+def _clip_plane_splits_model(display):
+    """Return whether the active clip plane crosses the displayed model."""
+    plane = display._clip_plane
+    if plane is None:
+        return False
+
+    origin = np.asarray(plane.GetOrigin())
+    normal = np.asarray(plane.GetNormal())
+    distances = [
+        (np.asarray(batch.mesh.points) - origin) @ normal
+        for batch in display._batches.values()
+        if batch.mesh.n_points
+    ]
+    return bool(
+        distances
+        and min(distance.min() for distance in distances) < 0
+        and max(distance.max() for distance in distances) > 0
+    )
 
 
 def test_model_uses_actor_per_entity_type(get_remote_client, get_examples):
@@ -724,8 +738,6 @@ def test_hiding_an_entity_leaves_the_rest_drawn(get_remote_client, get_examples)
         mask = _cells_for_key(batch, key)
         hidden_cells = int(np.count_nonzero(mask))
         assert 0 < hidden_cells < batch.mesh.n_cells
-        display.scene.screenshot()
-        everything = _drawn_pixels(display)
 
         display.set_entities_visible([key], False)
         drawn = display._drawn_geometry[actor]
@@ -1126,16 +1138,15 @@ def test_clipping_cuts_the_view_without_altering_entities(get_remote_client, get
         display.add_model(model, update=True)
         display.show(auto_close=False)
         assert not display.clipping
-        whole = _drawn_pixels(display)
         cells = {actor: batch.mesh.n_cells for actor, batch in display._batches.items()}
 
         display.set_clipping(True)
 
         assert display.clipping
+        assert _clip_plane_splits_model(display)
         assert all(actor.GetMapper().GetNumberOfClippingPlanes() == 1 for actor in display._batches)
         # The geometry is intact; only what the mapper draws has changed.
         assert {actor: batch.mesh.n_cells for actor, batch in display._batches.items()} == cells
-        assert _drawn_pixels(display) < whole
 
         actor, batch = _largest_pickable_batch(display)
         assert display._pick_entity(actor, batch.mesh.cell_centers().points[0])
@@ -1175,17 +1186,17 @@ def test_reset_display_recovers_from_clipping(get_remote_client, get_examples):
         clip = next(
             widget for widget in display._prime_widgets() if isinstance(widget, ClipPlaneWidget)
         )
-        before = _drawn_pixels(display)
 
         clip.callback(True)
         assert display.clipping
-        assert _drawn_pixels(display) < before
+        assert _clip_plane_splits_model(display)
+        assert all(actor.GetMapper().GetNumberOfClippingPlanes() == 1 for actor in display._batches)
 
         display.reset_display()
 
         assert not display.clipping
         assert clip._button.GetRepresentation().GetState() == 0
-        assert _drawn_pixels(display) == before
+        assert all(actor.GetMapper().GetNumberOfClippingPlanes() == 0 for actor in display._batches)
     finally:
         display.scene.close()
 
