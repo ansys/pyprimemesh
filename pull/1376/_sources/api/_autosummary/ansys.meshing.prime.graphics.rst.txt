@@ -1,0 +1,41 @@
+﻿.. vale off
+
+ansys.meshing.prime.graphics
+============================
+
+.. module:: ansys.meshing.prime.graphics
+
+
+
+
+
+
+
+
+
+
+
+.. autosummary:: 
+   :toctree:
+   :caption: Classes
+
+
+   Graphics
+   PrimePlotter
+
+
+
+
+
+
+
+
+
+
+
+.. minigallery::
+   :add-heading: Examples using ansys.meshing.prime.graphics
+
+   ansys.meshing.prime.graphics.ansys.meshing.prime.graphics
+
+.. vale on

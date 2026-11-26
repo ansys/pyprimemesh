@@ -1,0 +1,6 @@
+RELATIVE
+========
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoattribute:: CadRefacetingMaxEdgeSizeLimit.RELATIVE

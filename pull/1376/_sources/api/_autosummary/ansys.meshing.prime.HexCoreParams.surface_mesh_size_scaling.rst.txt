@@ -1,0 +1,6 @@
+surface\_mesh\_size\_scaling
+============================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoproperty:: HexCoreParams.surface_mesh_size_scaling

@@ -1,0 +1,6 @@
+detect\_and\_treat\_features
+============================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. automethod:: AutoQuadMesher.detect_and_treat_features

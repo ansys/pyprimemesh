@@ -1,0 +1,6 @@
+MICROSTRUCTUREINVALIDSHAPETYPE
+==============================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoattribute:: ErrorCode.MICROSTRUCTUREINVALIDSHAPETYPE

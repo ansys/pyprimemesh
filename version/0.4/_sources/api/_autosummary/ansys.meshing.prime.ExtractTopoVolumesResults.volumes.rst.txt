@@ -1,0 +1,6 @@
+﻿volumes
+=======
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoproperty:: ExtractTopoVolumesResults.volumes

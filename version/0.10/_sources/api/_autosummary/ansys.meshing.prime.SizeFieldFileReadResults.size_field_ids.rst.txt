@@ -1,0 +1,6 @@
+size\_field\_ids
+================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoproperty:: SizeFieldFileReadResults.size_field_ids

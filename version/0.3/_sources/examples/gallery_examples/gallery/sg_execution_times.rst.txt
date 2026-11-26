@@ -1,0 +1,19 @@
+
+:orphan:
+
+.. _sphx_glr_examples_gallery_examples_gallery_sg_execution_times:
+
+
+Computation times
+=================
+**04:49.236** total execution time for **examples_gallery_examples_gallery** files:
+
++-----------------------------------------------------------------------------------------------------+-----------+--------+
+| :ref:`sphx_glr_examples_gallery_examples_gallery_lucid_toy_car.py` (``lucid_toy_car.py``)           | 03:15.836 | 0.0 MB |
++-----------------------------------------------------------------------------------------------------+-----------+--------+
+| :ref:`sphx_glr_examples_gallery_examples_gallery_lucid_pipe_tee.py` (``lucid_pipe_tee.py``)         | 00:56.465 | 0.0 MB |
++-----------------------------------------------------------------------------------------------------+-----------+--------+
+| :ref:`sphx_glr_examples_gallery_examples_gallery_bracket_scaffold.py` (``bracket_scaffold.py``)     | 00:20.721 | 0.0 MB |
++-----------------------------------------------------------------------------------------------------+-----------+--------+
+| :ref:`sphx_glr_examples_gallery_examples_gallery_lucid_mixing_elbow.py` (``lucid_mixing_elbow.py``) | 00:16.214 | 0.0 MB |
++-----------------------------------------------------------------------------------------------------+-----------+--------+

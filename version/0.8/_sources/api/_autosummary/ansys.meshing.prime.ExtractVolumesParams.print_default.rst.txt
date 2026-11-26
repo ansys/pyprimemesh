@@ -1,0 +1,11 @@
+print\_default
+==============
+
+.. currentmodule:: ansys.meshing.prime
+
+.. automethod:: ansys.meshing.prime.ExtractVolumesParams.print_default
+
+.. minigallery::
+   :add-heading: Examples using ExtractVolumesParams.print_default
+
+   ansys.meshing.prime.ExtractVolumesParams.print_default

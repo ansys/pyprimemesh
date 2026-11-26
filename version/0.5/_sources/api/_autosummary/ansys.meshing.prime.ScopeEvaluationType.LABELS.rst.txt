@@ -1,0 +1,6 @@
+LABELS
+======
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoattribute:: ScopeEvaluationType.LABELS

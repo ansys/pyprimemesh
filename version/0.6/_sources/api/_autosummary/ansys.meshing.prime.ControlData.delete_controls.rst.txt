@@ -1,0 +1,6 @@
+delete\_controls
+================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. automethod:: ControlData.delete_controls

@@ -1,0 +1,6 @@
+set\_suggested\_name
+====================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. automethod:: SizeControl.set_suggested_name

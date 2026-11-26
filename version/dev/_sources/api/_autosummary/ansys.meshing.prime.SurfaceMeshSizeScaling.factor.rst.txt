@@ -1,0 +1,6 @@
+factor
+======
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoproperty:: SurfaceMeshSizeScaling.factor

@@ -1,0 +1,6 @@
+allow\_curved\_topo\_faces
+==========================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoproperty:: DetectHolesParams.allow_curved_topo_faces

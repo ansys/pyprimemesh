@@ -1,0 +1,39 @@
+.. vale off
+
+OptimizeQuadMeshParams
+======================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoclass:: OptimizeQuadMeshParams
+   
+   
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+      :toctree:
+   
+      
+      OptimizeQuadMeshParams.print_default
+      OptimizeQuadMeshParams.set_default
+   
+   
+
+   
+   
+   .. rubric:: Attributes
+
+   .. autosummary::
+      :toctree:
+   
+      OptimizeQuadMeshParams.delete_interior_nodes_params
+      OptimizeQuadMeshParams.edge_mesh_constant_size
+      OptimizeQuadMeshParams.generate_quads
+      OptimizeQuadMeshParams.project_on_geometry
+      OptimizeQuadMeshParams.suppress_topo_edge_and_mesh_cleanup
+      OptimizeQuadMeshParams.surface_mesh_constant_size
+   
+   
+
+.. vale on

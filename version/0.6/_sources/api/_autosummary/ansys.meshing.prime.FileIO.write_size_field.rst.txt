@@ -1,0 +1,6 @@
+write\_size\_field
+==================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. automethod:: FileIO.write_size_field

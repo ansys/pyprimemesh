@@ -1,0 +1,44 @@
+.. vale off
+
+SurfaceQualityResult
+====================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoclass:: SurfaceQualityResult
+   
+   
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+      :toctree:
+   
+      
+      SurfaceQualityResult.print_default
+      SurfaceQualityResult.set_default
+   
+   
+
+   
+   
+   .. rubric:: Attributes
+
+   .. autosummary::
+      :toctree:
+   
+      SurfaceQualityResult.face_quality_measure
+      SurfaceQualityResult.max_quality
+      SurfaceQualityResult.measure_name
+      SurfaceQualityResult.min_quality
+      SurfaceQualityResult.n_found
+      SurfaceQualityResult.quality_limit
+   
+   
+
+.. minigallery::
+    :add-heading: Examples using SurfaceQualityResult
+
+    ansys.meshing.prime.SurfaceQualityResult
+
+.. vale on

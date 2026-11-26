@@ -1,0 +1,31 @@
+AddThicknessResults
+===================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoclass:: AddThicknessResults
+   
+   
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+      :toctree:
+   
+      
+      AddThicknessResults.print_default
+      AddThicknessResults.set_default
+   
+   
+
+   
+   
+   .. rubric:: Attributes
+
+   .. autosummary::
+      :toctree:
+   
+      AddThicknessResults.error_code
+      AddThicknessResults.part_id
+   
+   

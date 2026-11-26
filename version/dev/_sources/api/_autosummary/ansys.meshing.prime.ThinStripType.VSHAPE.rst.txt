@@ -1,0 +1,6 @@
+VSHAPE
+======
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoattribute:: ThinStripType.VSHAPE

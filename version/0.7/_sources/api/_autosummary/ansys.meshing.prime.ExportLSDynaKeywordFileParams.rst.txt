@@ -1,0 +1,44 @@
+.. vale off
+
+ExportLSDynaKeywordFileParams
+=============================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoclass:: ExportLSDynaKeywordFileParams
+   
+   
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+      :toctree:
+   
+      
+      ExportLSDynaKeywordFileParams.print_default
+      ExportLSDynaKeywordFileParams.set_default
+   
+   
+
+   
+   
+   .. rubric:: Attributes
+
+   .. autosummary::
+      :toctree:
+   
+      ExportLSDynaKeywordFileParams.analysis_type
+      ExportLSDynaKeywordFileParams.compute_spotweld_thickness
+      ExportLSDynaKeywordFileParams.database_keywords
+      ExportLSDynaKeywordFileParams.material_properties
+      ExportLSDynaKeywordFileParams.output_format
+      ExportLSDynaKeywordFileParams.write_thickness_file
+   
+   
+
+.. minigallery::
+    :add-heading: Examples using ExportLSDynaKeywordFileParams
+
+    ansys.meshing.prime.ExportLSDynaKeywordFileParams
+
+.. vale on

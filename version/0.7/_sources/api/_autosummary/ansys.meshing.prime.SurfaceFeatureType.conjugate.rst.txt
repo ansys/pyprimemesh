@@ -1,0 +1,11 @@
+conjugate
+=========
+
+.. currentmodule:: ansys.meshing.prime
+
+.. automethod:: ansys.meshing.prime.SurfaceFeatureType.conjugate
+
+.. minigallery::
+   :add-heading: Examples using SurfaceFeatureType.conjugate
+
+   ansys.meshing.prime.SurfaceFeatureType.conjugate

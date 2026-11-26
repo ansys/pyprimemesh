@@ -1,0 +1,6 @@
+﻿maximum\_deviation
+==================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoproperty:: CheckFaceDeviationResults.maximum_deviation

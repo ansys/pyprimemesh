@@ -1,0 +1,6 @@
+OCTREELIMITREACHED
+==================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoattribute:: ErrorCode.OCTREELIMITREACHED

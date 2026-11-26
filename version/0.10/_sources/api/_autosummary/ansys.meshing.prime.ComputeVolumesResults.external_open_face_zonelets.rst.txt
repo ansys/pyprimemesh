@@ -1,0 +1,6 @@
+external\_open\_face\_zonelets
+==============================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoproperty:: ComputeVolumesResults.external_open_face_zonelets

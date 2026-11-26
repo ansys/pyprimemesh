@@ -1,0 +1,11 @@
+set\_growth\_params
+===================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. automethod:: ansys.meshing.prime.ShellBLControl.set_growth_params
+
+.. minigallery::
+   :add-heading: Examples using ShellBLControl.set_growth_params
+
+   ansys.meshing.prime.ShellBLControl.set_growth_params

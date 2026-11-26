@@ -1,0 +1,6 @@
+perform\_initial\_wrap
+======================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoproperty:: CreateBOIParams.perform_initial_wrap

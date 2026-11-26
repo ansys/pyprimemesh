@@ -1,0 +1,11 @@
+build\_render\_data
+===================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. automethod:: ansys.meshing.prime.Model.build_render_data
+
+.. minigallery::
+   :add-heading: Examples using Model.build_render_data
+
+   ansys.meshing.prime.Model.build_render_data

@@ -1,0 +1,42 @@
+.. vale off
+
+CreateMaterialPointResults
+==========================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoclass:: CreateMaterialPointResults
+   
+   
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+      :toctree:
+   
+      
+      CreateMaterialPointResults.print_default
+      CreateMaterialPointResults.set_default
+   
+   
+
+   
+   
+   .. rubric:: Attributes
+
+   .. autosummary::
+      :toctree:
+   
+      CreateMaterialPointResults.assigned_name
+      CreateMaterialPointResults.error_code
+      CreateMaterialPointResults.id
+      CreateMaterialPointResults.warning_codes
+   
+   
+
+.. minigallery::
+    :add-heading: Examples using CreateMaterialPointResults
+
+    ansys.meshing.prime.CreateMaterialPointResults
+
+.. vale on

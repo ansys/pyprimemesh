@@ -1,0 +1,11 @@
+get\_scoped\_usd
+================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. automethod:: ansys.meshing.prime.Model.get_scoped_usd
+
+.. minigallery::
+   :add-heading: Examples using Model.get_scoped_usd
+
+   ansys.meshing.prime.Model.get_scoped_usd

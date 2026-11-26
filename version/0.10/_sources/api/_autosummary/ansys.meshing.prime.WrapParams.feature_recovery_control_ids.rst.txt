@@ -1,0 +1,6 @@
+feature\_recovery\_control\_ids
+===============================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoproperty:: WrapParams.feature_recovery_control_ids

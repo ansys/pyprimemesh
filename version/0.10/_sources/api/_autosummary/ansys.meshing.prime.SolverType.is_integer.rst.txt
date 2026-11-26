@@ -1,0 +1,11 @@
+is\_integer
+===========
+
+.. currentmodule:: ansys.meshing.prime
+
+.. automethod:: ansys.meshing.prime.SolverType.is_integer
+
+.. minigallery::
+   :add-heading: Examples using SolverType.is_integer
+
+   ansys.meshing.prime.SolverType.is_integer

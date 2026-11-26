@@ -1,0 +1,6 @@
+target\_ansys\_version
+======================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoproperty:: ExportMapdlCdbParams.target_ansys_version

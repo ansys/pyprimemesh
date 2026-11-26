@@ -1,0 +1,6 @@
+feature\_angle
+==============
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoproperty:: QuadToSplineParams.feature_angle

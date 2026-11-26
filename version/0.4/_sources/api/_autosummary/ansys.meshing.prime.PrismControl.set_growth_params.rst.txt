@@ -1,0 +1,6 @@
+﻿set\_growth\_params
+===================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. automethod:: PrismControl.set_growth_params

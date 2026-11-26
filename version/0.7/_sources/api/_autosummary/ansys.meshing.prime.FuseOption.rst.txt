@@ -1,0 +1,48 @@
+.. vale off
+
+FuseOption
+==========
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoclass:: FuseOption
+   
+   
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+      :toctree:
+   
+      FuseOption.conjugate
+      FuseOption.bit_length
+      FuseOption.bit_count
+      FuseOption.to_bytes
+      FuseOption.from_bytes
+      FuseOption.as_integer_ratio
+   
+   
+
+   
+   
+   .. rubric:: Attributes
+
+   .. autosummary::
+      :toctree:
+   
+      FuseOption.real
+      FuseOption.imag
+      FuseOption.numerator
+      FuseOption.denominator
+      FuseOption.NONE
+      FuseOption.TRIMONESIDE
+      FuseOption.TRIMTWOSIDES
+   
+   
+
+.. minigallery::
+    :add-heading: Examples using FuseOption
+
+    ansys.meshing.prime.FuseOption
+
+.. vale on

@@ -1,0 +1,6 @@
+get\_face\_zonelets
+===================
+
+.. currentmodule:: ansys.meshing.prime.lucid
+
+.. automethod:: SurfaceScope.get_face_zonelets

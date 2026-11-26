@@ -1,0 +1,49 @@
+.. vale off
+
+AutoMeshParams
+==============
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoclass:: AutoMeshParams
+   
+   
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+      :toctree:
+   
+      
+      AutoMeshParams.print_default
+      AutoMeshParams.set_default
+   
+   
+
+   
+   
+   .. rubric:: Attributes
+
+   .. autosummary::
+      :toctree:
+   
+      AutoMeshParams.hexcore
+      AutoMeshParams.max_size
+      AutoMeshParams.multi_zone_control_ids
+      AutoMeshParams.periodic_control_ids
+      AutoMeshParams.prism
+      AutoMeshParams.prism_control_ids
+      AutoMeshParams.size_field_type
+      AutoMeshParams.tet
+      AutoMeshParams.thin_volume_control_ids
+      AutoMeshParams.volume_control_ids
+      AutoMeshParams.volume_fill_type
+   
+   
+
+.. minigallery::
+    :add-heading: Examples using AutoMeshParams
+
+    ansys.meshing.prime.AutoMeshParams
+
+.. vale on

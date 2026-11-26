@@ -1,0 +1,23 @@
+NamePatternParams
+=================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoclass:: NamePatternParams
+   
+   
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+      :toctree:
+   
+      
+      NamePatternParams.print_default
+      NamePatternParams.set_default
+   
+   
+
+   
+   
+   

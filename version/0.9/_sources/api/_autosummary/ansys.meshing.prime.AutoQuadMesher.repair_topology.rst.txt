@@ -1,0 +1,11 @@
+repair\_topology
+================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. automethod:: ansys.meshing.prime.AutoQuadMesher.repair_topology
+
+.. minigallery::
+   :add-heading: Examples using AutoQuadMesher.repair_topology
+
+   ansys.meshing.prime.AutoQuadMesher.repair_topology

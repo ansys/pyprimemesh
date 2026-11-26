@@ -1,0 +1,6 @@
+get\_topo\_edges\_of\_topo\_faces
+=================================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. automethod:: TopoData.get_topo_edges_of_topo_faces

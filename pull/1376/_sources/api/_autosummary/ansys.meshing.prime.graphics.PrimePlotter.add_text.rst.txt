@@ -1,0 +1,11 @@
+add\_text
+=========
+
+.. currentmodule:: ansys.meshing.prime.graphics
+
+.. automethod:: ansys.meshing.prime.graphics.PrimePlotter.add_text
+
+.. minigallery::
+   :add-heading: Examples using PrimePlotter.add_text
+
+   ansys.meshing.prime.graphics.PrimePlotter.add_text

@@ -1,0 +1,46 @@
+.. vale off
+
+ComputeTopoVolumesResults
+=========================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoclass:: ComputeTopoVolumesResults
+   
+   
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+      :toctree:
+   
+      
+      ComputeTopoVolumesResults.print_default
+      ComputeTopoVolumesResults.set_default
+   
+   
+
+   
+   
+   .. rubric:: Attributes
+
+   .. autosummary::
+      :toctree:
+   
+      ComputeTopoVolumesResults.deleted_topo_volumes
+      ComputeTopoVolumesResults.error_code
+      ComputeTopoVolumesResults.error_locations
+      ComputeTopoVolumesResults.external_open_topo_faces
+      ComputeTopoVolumesResults.material_point_topo_volumes
+      ComputeTopoVolumesResults.new_topo_volumes
+      ComputeTopoVolumesResults.topo_volumes
+      ComputeTopoVolumesResults.warning_codes
+   
+   
+
+.. minigallery::
+    :add-heading: Examples using ComputeTopoVolumesResults
+
+    ansys.meshing.prime.ComputeTopoVolumesResults
+
+.. vale on

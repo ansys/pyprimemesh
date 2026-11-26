@@ -1,0 +1,6 @@
+QUADRATICC0
+===========
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoattribute:: SplineContinuityType.QUADRATICC0

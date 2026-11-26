@@ -1,0 +1,11 @@
+set\_contact\_preventions
+=========================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. automethod:: ansys.meshing.prime.WrapperControl.set_contact_preventions
+
+.. minigallery::
+   :add-heading: Examples using WrapperControl.set_contact_preventions
+
+   ansys.meshing.prime.WrapperControl.set_contact_preventions

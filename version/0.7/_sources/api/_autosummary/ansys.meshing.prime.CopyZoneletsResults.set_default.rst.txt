@@ -1,0 +1,11 @@
+set\_default
+============
+
+.. currentmodule:: ansys.meshing.prime
+
+.. automethod:: ansys.meshing.prime.CopyZoneletsResults.set_default
+
+.. minigallery::
+   :add-heading: Examples using CopyZoneletsResults.set_default
+
+   ansys.meshing.prime.CopyZoneletsResults.set_default

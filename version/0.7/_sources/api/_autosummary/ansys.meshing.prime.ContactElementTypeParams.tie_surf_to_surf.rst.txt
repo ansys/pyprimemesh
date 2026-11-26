@@ -1,0 +1,6 @@
+tie\_surf\_to\_surf
+===================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoproperty:: ContactElementTypeParams.tie_surf_to_surf

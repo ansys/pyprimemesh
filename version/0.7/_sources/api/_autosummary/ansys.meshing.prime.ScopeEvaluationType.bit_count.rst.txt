@@ -1,0 +1,11 @@
+bit\_count
+==========
+
+.. currentmodule:: ansys.meshing.prime
+
+.. automethod:: ansys.meshing.prime.ScopeEvaluationType.bit_count
+
+.. minigallery::
+   :add-heading: Examples using ScopeEvaluationType.bit_count
+
+   ansys.meshing.prime.ScopeEvaluationType.bit_count

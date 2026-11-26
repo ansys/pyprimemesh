@@ -1,0 +1,6 @@
+﻿WRAPPERCONTROL\_MATERIALPOINTWITHGIVENNAMEDOESNTEXIST
+=====================================================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoattribute:: ErrorCode.WRAPPERCONTROL_MATERIALPOINTWITHGIVENNAMEDOESNTEXIST

@@ -1,0 +1,6 @@
+cell\_zonelet\_type
+===================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoproperty:: VolumeControlParams.cell_zonelet_type

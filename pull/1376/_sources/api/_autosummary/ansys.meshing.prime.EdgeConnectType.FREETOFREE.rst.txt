@@ -1,0 +1,6 @@
+FREETOFREE
+==========
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoattribute:: EdgeConnectType.FREETOFREE

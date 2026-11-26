@@ -1,0 +1,6 @@
+decimation\_factor
+==================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoproperty:: TetMeshSplineParams.decimation_factor

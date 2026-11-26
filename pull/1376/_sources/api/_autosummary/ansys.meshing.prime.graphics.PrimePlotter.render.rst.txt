@@ -1,0 +1,11 @@
+render
+======
+
+.. currentmodule:: ansys.meshing.prime.graphics
+
+.. automethod:: ansys.meshing.prime.graphics.PrimePlotter.render
+
+.. minigallery::
+   :add-heading: Examples using PrimePlotter.render
+
+   ansys.meshing.prime.graphics.PrimePlotter.render

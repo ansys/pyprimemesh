@@ -1,0 +1,6 @@
+source\_scope
+=============
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoproperty:: ContactPreventionParams.source_scope

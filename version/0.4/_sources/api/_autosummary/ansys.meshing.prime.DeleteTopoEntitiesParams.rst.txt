@@ -1,0 +1,35 @@
+.. vale off
+
+DeleteTopoEntitiesParams
+========================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoclass:: DeleteTopoEntitiesParams
+   
+   
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+      :toctree:
+   
+      
+      DeleteTopoEntitiesParams.print_default
+      DeleteTopoEntitiesParams.set_default
+   
+   
+
+   
+   
+   .. rubric:: Attributes
+
+   .. autosummary::
+      :toctree:
+   
+      DeleteTopoEntitiesParams.delete_geom_zonelets
+      DeleteTopoEntitiesParams.delete_mesh_zonelets
+   
+   
+
+.. vale on

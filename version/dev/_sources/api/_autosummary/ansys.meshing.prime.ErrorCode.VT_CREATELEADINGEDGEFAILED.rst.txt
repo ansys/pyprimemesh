@@ -1,0 +1,6 @@
+VT\_CREATELEADINGEDGEFAILED
+===========================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoattribute:: ErrorCode.VT_CREATELEADINGEDGEFAILED

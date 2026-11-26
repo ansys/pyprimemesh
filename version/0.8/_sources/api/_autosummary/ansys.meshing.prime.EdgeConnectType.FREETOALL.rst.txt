@@ -1,0 +1,6 @@
+FREETOALL
+=========
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoattribute:: EdgeConnectType.FREETOALL

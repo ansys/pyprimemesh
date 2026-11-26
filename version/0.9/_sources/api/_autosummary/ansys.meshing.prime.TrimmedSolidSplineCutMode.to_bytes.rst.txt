@@ -1,0 +1,11 @@
+to\_bytes
+=========
+
+.. currentmodule:: ansys.meshing.prime
+
+.. automethod:: ansys.meshing.prime.TrimmedSolidSplineCutMode.to_bytes
+
+.. minigallery::
+   :add-heading: Examples using TrimmedSolidSplineCutMode.to_bytes
+
+   ansys.meshing.prime.TrimmedSolidSplineCutMode.to_bytes

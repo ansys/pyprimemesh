@@ -1,0 +1,11 @@
+bit\_length
+===========
+
+.. currentmodule:: ansys.meshing.prime
+
+.. automethod:: ansys.meshing.prime.FaceQualityMeasure.bit_length
+
+.. minigallery::
+   :add-heading: Examples using FaceQualityMeasure.bit_length
+
+   ansys.meshing.prime.FaceQualityMeasure.bit_length

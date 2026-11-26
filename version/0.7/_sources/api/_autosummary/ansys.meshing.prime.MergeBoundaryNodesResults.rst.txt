@@ -1,0 +1,39 @@
+.. vale off
+
+MergeBoundaryNodesResults
+=========================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoclass:: MergeBoundaryNodesResults
+   
+   
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+      :toctree:
+   
+      
+      MergeBoundaryNodesResults.print_default
+      MergeBoundaryNodesResults.set_default
+   
+   
+
+   
+   
+   .. rubric:: Attributes
+
+   .. autosummary::
+      :toctree:
+   
+      MergeBoundaryNodesResults.error_code
+   
+   
+
+.. minigallery::
+    :add-heading: Examples using MergeBoundaryNodesResults
+
+    ansys.meshing.prime.MergeBoundaryNodesResults
+
+.. vale on

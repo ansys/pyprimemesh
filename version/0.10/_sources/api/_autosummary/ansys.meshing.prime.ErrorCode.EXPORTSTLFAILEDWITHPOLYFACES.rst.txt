@@ -1,0 +1,6 @@
+EXPORTSTLFAILEDWITHPOLYFACES
+============================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoattribute:: ErrorCode.EXPORTSTLFAILEDWITHPOLYFACES

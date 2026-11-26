@@ -1,0 +1,6 @@
+MULTIZONEMESHER\_INVALIDPRISMPARAMETERS
+=======================================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoattribute:: ErrorCode.MULTIZONEMESHER_INVALIDPRISMPARAMETERS

@@ -1,0 +1,6 @@
+﻿merged\_part\_id
+================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoproperty:: MergePartsResults.merged_part_id

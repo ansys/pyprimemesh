@@ -1,0 +1,11 @@
+conjugate
+=========
+
+.. currentmodule:: ansys.meshing.prime
+
+.. automethod:: ansys.meshing.prime.CadReaderRoute.conjugate
+
+.. minigallery::
+   :add-heading: Examples using CadReaderRoute.conjugate
+
+   ansys.meshing.prime.CadReaderRoute.conjugate

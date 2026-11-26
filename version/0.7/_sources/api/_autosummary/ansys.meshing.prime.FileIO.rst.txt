@@ -1,0 +1,49 @@
+.. vale off
+
+FileIO
+======
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoclass:: FileIO
+   
+   
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+      :toctree:
+   
+      
+      FileIO.export_boundary_fitted_spline_kfile
+      FileIO.export_fluent_case
+      FileIO.export_fluent_meshing_mesh
+      FileIO.export_lsdyna_iga_keyword_file
+      FileIO.export_lsdyna_keyword_file
+      FileIO.export_mapdl_cdb
+      FileIO.export_stl
+      FileIO.get_abaqus_simulation_data
+      FileIO.import_abaqus_inp
+      FileIO.import_cad
+      FileIO.import_fluent_case
+      FileIO.import_fluent_meshing_meshes
+      FileIO.import_fluent_meshing_size_field
+      FileIO.import_mapdl_cdb
+      FileIO.initialize_cdb_export_params
+      FileIO.read_pmdat
+      FileIO.read_size_field
+      FileIO.write_pmdat
+      FileIO.write_size_field
+   
+   
+
+   
+   
+   
+
+.. minigallery::
+    :add-heading: Examples using FileIO
+
+    ansys.meshing.prime.FileIO
+
+.. vale on

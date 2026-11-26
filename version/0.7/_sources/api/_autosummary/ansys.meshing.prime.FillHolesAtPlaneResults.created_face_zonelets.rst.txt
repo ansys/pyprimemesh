@@ -1,0 +1,6 @@
+created\_face\_zonelets
+=======================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoproperty:: FillHolesAtPlaneResults.created_face_zonelets

@@ -1,0 +1,6 @@
+MEDIALAXIS
+==========
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoattribute:: SweepType.MEDIALAXIS

@@ -1,0 +1,31 @@
+LocalSurferResults
+==================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoclass:: LocalSurferResults
+   
+   
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+      :toctree:
+   
+      
+      LocalSurferResults.print_default
+      LocalSurferResults.set_default
+   
+   
+
+   
+   
+   .. rubric:: Attributes
+
+   .. autosummary::
+      :toctree:
+   
+      LocalSurferResults.error_code
+      LocalSurferResults.warning_codes
+   
+   

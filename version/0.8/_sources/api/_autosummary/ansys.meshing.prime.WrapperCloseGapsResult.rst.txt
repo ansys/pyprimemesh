@@ -1,0 +1,40 @@
+.. vale off
+
+WrapperCloseGapsResult
+======================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoclass:: WrapperCloseGapsResult
+   
+   
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+      :toctree:
+   
+      
+      WrapperCloseGapsResult.print_default
+      WrapperCloseGapsResult.set_default
+   
+   
+
+   
+   
+   .. rubric:: Attributes
+
+   .. autosummary::
+      :toctree:
+   
+      WrapperCloseGapsResult.error_code
+      WrapperCloseGapsResult.part_id
+   
+   
+
+.. minigallery::
+    :add-heading: Examples using WrapperCloseGapsResult
+
+    ansys.meshing.prime.WrapperCloseGapsResult
+
+.. vale on

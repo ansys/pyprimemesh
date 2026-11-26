@@ -1,0 +1,11 @@
+get\_num\_compute\_nodes
+========================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. automethod:: ansys.meshing.prime.Model.get_num_compute_nodes
+
+.. minigallery::
+   :add-heading: Examples using Model.get_num_compute_nodes
+
+   ansys.meshing.prime.Model.get_num_compute_nodes

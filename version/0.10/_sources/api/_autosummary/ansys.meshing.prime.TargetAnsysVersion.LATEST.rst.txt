@@ -1,0 +1,6 @@
+LATEST
+======
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoattribute:: TargetAnsysVersion.LATEST

@@ -1,0 +1,11 @@
+print\_default
+==============
+
+.. currentmodule:: ansys.meshing.prime
+
+.. automethod:: ansys.meshing.prime.CurvatureSizingParams.print_default
+
+.. minigallery::
+   :add-heading: Examples using CurvatureSizingParams.print_default
+
+   ansys.meshing.prime.CurvatureSizingParams.print_default

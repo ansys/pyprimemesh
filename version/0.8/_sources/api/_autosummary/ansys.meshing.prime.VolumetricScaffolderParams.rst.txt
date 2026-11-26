@@ -1,0 +1,40 @@
+.. vale off
+
+VolumetricScaffolderParams
+==========================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoclass:: VolumetricScaffolderParams
+   
+   
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+      :toctree:
+   
+      
+      VolumetricScaffolderParams.print_default
+      VolumetricScaffolderParams.set_default
+   
+   
+
+   
+   
+   .. rubric:: Attributes
+
+   .. autosummary::
+      :toctree:
+   
+      VolumetricScaffolderParams.absolute_dist_tol
+      VolumetricScaffolderParams.only_check_exact_overlaps
+   
+   
+
+.. minigallery::
+    :add-heading: Examples using VolumetricScaffolderParams
+
+    ansys.meshing.prime.VolumetricScaffolderParams
+
+.. vale on

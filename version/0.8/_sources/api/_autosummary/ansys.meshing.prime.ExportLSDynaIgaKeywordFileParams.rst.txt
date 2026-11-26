@@ -1,0 +1,32 @@
+.. vale off
+
+ExportLSDynaIgaKeywordFileParams
+================================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoclass:: ExportLSDynaIgaKeywordFileParams
+   
+   
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+      :toctree:
+   
+      
+      ExportLSDynaIgaKeywordFileParams.print_default
+      ExportLSDynaIgaKeywordFileParams.set_default
+   
+   
+
+   
+   
+   
+
+.. minigallery::
+    :add-heading: Examples using ExportLSDynaIgaKeywordFileParams
+
+    ansys.meshing.prime.ExportLSDynaIgaKeywordFileParams
+
+.. vale on

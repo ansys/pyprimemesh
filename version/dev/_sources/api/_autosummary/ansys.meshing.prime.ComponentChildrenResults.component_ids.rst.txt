@@ -1,0 +1,6 @@
+component\_ids
+==============
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoproperty:: ComponentChildrenResults.component_ids

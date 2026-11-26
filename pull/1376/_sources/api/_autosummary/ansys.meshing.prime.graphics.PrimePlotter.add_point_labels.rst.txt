@@ -1,0 +1,11 @@
+add\_point\_labels
+==================
+
+.. currentmodule:: ansys.meshing.prime.graphics
+
+.. automethod:: ansys.meshing.prime.graphics.PrimePlotter.add_point_labels
+
+.. minigallery::
+   :add-heading: Examples using PrimePlotter.add_point_labels
+
+   ansys.meshing.prime.graphics.PrimePlotter.add_point_labels

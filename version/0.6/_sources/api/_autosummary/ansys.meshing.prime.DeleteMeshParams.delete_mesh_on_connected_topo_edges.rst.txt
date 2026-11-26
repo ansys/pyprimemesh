@@ -1,0 +1,6 @@
+delete\_mesh\_on\_connected\_topo\_edges
+========================================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoproperty:: DeleteMeshParams.delete_mesh_on_connected_topo_edges

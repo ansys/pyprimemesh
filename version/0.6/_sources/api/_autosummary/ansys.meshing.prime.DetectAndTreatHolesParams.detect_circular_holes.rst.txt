@@ -1,0 +1,6 @@
+detect\_circular\_holes
+=======================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoproperty:: DetectAndTreatHolesParams.detect_circular_holes

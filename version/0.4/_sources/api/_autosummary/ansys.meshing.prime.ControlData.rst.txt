@@ -1,0 +1,55 @@
+.. vale off
+
+ControlData
+===========
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoclass:: ControlData
+   
+   
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+      :toctree:
+   
+      
+      ControlData.create_periodic_control
+      ControlData.create_prism_control
+      ControlData.create_size_control
+      ControlData.create_thin_volume_control
+      ControlData.create_volume_control
+      ControlData.create_wrapper_control
+      ControlData.delete_controls
+      ControlData.get_part_zonelets
+      ControlData.get_periodic_control_by_name
+      ControlData.get_prism_control_by_name
+      ControlData.get_scope_face_zonelets
+      ControlData.get_scope_parts
+      ControlData.get_size_control_by_name
+      ControlData.get_thin_volume_control_by_name
+      ControlData.get_volume_control_by_name
+      ControlData.get_wrapper_control_by_name
+   
+   
+
+   
+   
+   .. rubric:: Attributes
+
+   .. autosummary::
+      :toctree:
+   
+      ControlData.id
+      ControlData.name
+      ControlData.periodic_controls
+      ControlData.prism_controls
+      ControlData.size_controls
+      ControlData.thin_volume_controls
+      ControlData.volume_controls
+      ControlData.wrapper_controls
+   
+   
+
+.. vale on

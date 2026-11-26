@@ -1,0 +1,6 @@
+fuse\_edges\_only
+=================
+
+.. currentmodule:: ansys.meshing.prime
+
+.. autoproperty:: FuseParams.fuse_edges_only
