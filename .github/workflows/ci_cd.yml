@@ -38,7 +38,7 @@ jobs:
     permissions:
       pull-requests: read # Required to read the pull request title
     steps:
-      - uses: ansys/actions/check-pr-title@f5e1481b9c128197a30d1dc1dfc52b8cd6865555 # v11.1.5
+      - uses: ansys/actions/check-pr-title@5a91d7c2c4da2e86f2b3b62ba62daad189a6b77c # v11.2.0
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
 
@@ -49,7 +49,7 @@ jobs:
     permissions:
       contents: read # Read the dependencies and source code of the library
     steps:
-      - uses: ansys/actions/check-vulnerabilities@f5e1481b9c128197a30d1dc1dfc52b8cd6865555 # v11.1.5
+      - uses: ansys/actions/check-vulnerabilities@5a91d7c2c4da2e86f2b3b62ba62daad189a6b77c # v11.2.0
         with:
           python-version: ${{ env.MAIN_PYTHON_VERSION }}
           token: ${{ secrets.PYANSYS_CI_BOT_TOKEN }}
@@ -63,7 +63,7 @@ jobs:
     permissions:
       contents: read # Read the workflow files in the project
     steps:
-      - uses: ansys/actions/check-actions-security@f5e1481b9c128197a30d1dc1dfc52b8cd6865555 # v11.1.5
+      - uses: ansys/actions/check-actions-security@5a91d7c2c4da2e86f2b3b62ba62daad189a6b77c # v11.2.0
         with:
           generate-summary: true
           token: ${{ secrets.GITHUB_TOKEN }}
@@ -77,7 +77,7 @@ jobs:
       contents: write # Update the changelog on the release branch
       pull-requests: write # Create the changelog pull request
     steps:
-      - uses: ansys/actions/doc-deploy-changelog@f5e1481b9c128197a30d1dc1dfc52b8cd6865555 # v11.1.5
+      - uses: ansys/actions/doc-deploy-changelog@5a91d7c2c4da2e86f2b3b62ba62daad189a6b77c # v11.2.0
         with:
           token: ${{ secrets.PYANSYS_CI_BOT_TOKEN }}
           bot-user: ${{ secrets.PYANSYS_CI_BOT_USERNAME }}
@@ -91,7 +91,7 @@ jobs:
       contents: read # Read the source files checked by the action
     steps:
       - name: PyAnsys code style checks
-        uses: ansys/actions/code-style@f5e1481b9c128197a30d1dc1dfc52b8cd6865555 # v11.1.5
+        uses: ansys/actions/code-style@5a91d7c2c4da2e86f2b3b62ba62daad189a6b77c # v11.2.0
         with:
           python-version: ${{ env.MAIN_PYTHON_VERSION }}
           vale-config: "doc/.vale.ini"
@@ -105,7 +105,7 @@ jobs:
       contents: read # Read the documentation files checked by the action
     steps:
       - name: PyAnsys documentation style checks
-        uses: ansys/actions/doc-style@f5e1481b9c128197a30d1dc1dfc52b8cd6865555 # v11.1.5
+        uses: ansys/actions/doc-style@5a91d7c2c4da2e86f2b3b62ba62daad189a6b77c # v11.2.0
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
 
@@ -128,7 +128,7 @@ jobs:
             os: macos-latest
     steps:
       - name: Build wheelhouse and perform smoke test
-        uses: ansys/actions/build-wheelhouse@f5e1481b9c128197a30d1dc1dfc52b8cd6865555 # v11.1.5
+        uses: ansys/actions/build-wheelhouse@5a91d7c2c4da2e86f2b3b62ba62daad189a6b77c # v11.2.0
         with:
           library-name: ${{ env.PACKAGE_NAME }}
           operating-system: ${{ matrix.os }}
@@ -159,7 +159,7 @@ jobs:
         uses: pyvista/setup-headless-display-action@10e6efb97af3cd1523828f0e22c39f0e4567f3e4 # v5.2.0
 
       - name: "Run Ansys documentation building action"
-        uses: ansys/actions/doc-build@f5e1481b9c128197a30d1dc1dfc52b8cd6865555 # v11.1.5
+        uses: ansys/actions/doc-build@5a91d7c2c4da2e86f2b3b62ba62daad189a6b77c # v11.2.0
         with:
           python-version: ${{ env.MAIN_PYTHON_VERSION }}
           check-links: false
@@ -186,7 +186,7 @@ jobs:
       contents: write # Deploy the pull-request documentation
       pull-requests: write # Update the pull request with deployment details
     steps:
-      - uses: ansys/actions/doc-deploy-pr@f5e1481b9c128197a30d1dc1dfc52b8cd6865555 # v11.1.5
+      - uses: ansys/actions/doc-deploy-pr@5a91d7c2c4da2e86f2b3b62ba62daad189a6b77c # v11.2.0
         with:
           cname: ${{ env.DOCUMENTATION_CNAME }}
           token: ${{ secrets.GITHUB_TOKEN }}
@@ -232,7 +232,7 @@ jobs:
           lookup-only: false # zizmor: ignore[cache-poisoning]
 
       - name: "Run pytest"
-        uses: ansys/actions/tests-pytest@f5e1481b9c128197a30d1dc1dfc52b8cd6865555 # v11.1.5
+        uses: ansys/actions/tests-pytest@5a91d7c2c4da2e86f2b3b62ba62daad189a6b77c # v11.2.0
         env:
           PYPRIMEMESH_LAUNCH_CONTAINER: 1
           PYPRIMEMESH_IMAGE_TAG: ${{ env.DOCKER_IMAGE_TAG }}
@@ -259,7 +259,7 @@ jobs:
       contents: read # Read the source files used to build the package
     steps:
       - name: Build library source and wheel artifacts
-        uses: ansys/actions/build-library@f5e1481b9c128197a30d1dc1dfc52b8cd6865555 # v11.1.5
+        uses: ansys/actions/build-library@5a91d7c2c4da2e86f2b3b62ba62daad189a6b77c # v11.2.0
         with:
           library-name: ${{ env.PACKAGE_NAME }}
           python-version: ${{ env.MAIN_PYTHON_VERSION }}
@@ -287,7 +287,7 @@ jobs:
           packages-dir: ${{ env.PACKAGE_NAME }}-artifacts
 
       - name: Release to GitHub
-        uses: ansys/actions/release-github@f5e1481b9c128197a30d1dc1dfc52b8cd6865555 # v11.1.5
+        uses: ansys/actions/release-github@5a91d7c2c4da2e86f2b3b62ba62daad189a6b77c # v11.2.0
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
           library-name: ${{ env.PACKAGE_NAME }}
@@ -301,7 +301,7 @@ jobs:
       contents: write # Deploy the development documentation
     steps:
       - name: Deploy the latest documentation
-        uses: ansys/actions/doc-deploy-dev@f5e1481b9c128197a30d1dc1dfc52b8cd6865555 # v11.1.5
+        uses: ansys/actions/doc-deploy-dev@5a91d7c2c4da2e86f2b3b62ba62daad189a6b77c # v11.2.0
         with:
           cname: ${{ env.DOCUMENTATION_CNAME }}
           token: ${{ secrets.PYANSYS_CI_BOT_TOKEN }}
@@ -318,7 +318,7 @@ jobs:
       contents: write # Deploy the stable documentation
     steps:
       - name: Deploy the stable documentation
-        uses: ansys/actions/doc-deploy-stable@f5e1481b9c128197a30d1dc1dfc52b8cd6865555 # v11.1.5
+        uses: ansys/actions/doc-deploy-stable@5a91d7c2c4da2e86f2b3b62ba62daad189a6b77c # v11.2.0
         with:
           cname: ${{ env.DOCUMENTATION_CNAME }}
           token: ${{ secrets.PYANSYS_CI_BOT_TOKEN }}
